@@ -4,7 +4,15 @@
 
 export const environment = {
     production: false,
-    hmr       : false
+    hmr: false,
+    qa: false,
+    dev: false,
+    local: true,
+    pubNubChannelPrefix: 'dev_',
+    staging: false,
+    // appUrl: 'http://appUrlpi.dss.luezoid.com/',
+    appUrl: 'http://api.dss.luezoid.com/',
+    // appUrl: 'http://api2.dss.luezoid.com/',
 };
 
 /*

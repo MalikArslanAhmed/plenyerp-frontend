@@ -1,7 +1,7 @@
 <div id="login" class="inner-scroll" fxLayout="row" fxLayoutAlign="start">
     <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
         <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
-            <img src="http://angular-material.fusetheme.com/assets/images/logos/fuse.svg">
+            <img src="assets/images/logos/fuse.svg">
         </div>
         <div class="title" [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
             Welcome to the Value Scale ERP!
@@ -16,21 +16,16 @@
          [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
         <div id="login-form">
             <div class="logo" fxHide.gt-xs>
-                <img src="http://angular-material.fusetheme.com/assets/images/logos/fuse.svg">
+                <img src="assets/images/logos/fuse.svg">
             </div>
             <div class="title">LOGIN TO YOUR ACCOUNT</div>
             <form name="loginForm" [formGroup]="loginForm" novalidate>
                 <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email">
-                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
-                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
-                        Email is required
-                    </mat-error>
-                    <mat-error
-                        *ngIf="!loginForm.get('email').hasError('required') &&
-                                loginForm.get('email').hasError('email')">
-                        Please enter a valid email address
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                    <mat-error *ngIf="loginForm.get('username').hasError('required')">
+                        Username is required
                     </mat-error>
                 </mat-form-field>
 
