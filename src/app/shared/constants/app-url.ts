@@ -22,4 +22,20 @@ export class AppUrl {
     static get SELF(): string {
         return AppUrl.API_URL + 'self';
     }
+
+    static QUALIFICATION(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'qualifications/' + id;
+        } else {
+            return AppUrl.API_URL + 'qualifications';
+        }
+    }
+
+    static GET_QUALIFICATIONS(): string {
+        return AppUrl.API_URL + `qualifications`;
+    }
+
+    static DELETE_QUALIFICATION(id?): string {
+        return AppUrl.API_URL + 'qualifications/' + id;
+    }
 }

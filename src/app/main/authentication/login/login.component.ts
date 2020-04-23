@@ -79,7 +79,6 @@ export class LoginComponent implements OnInit {
     }
 
     proceedLogin() {
-        console.log('this.loginForm.getRawValue()', this.loginForm.getRawValue());
         this.authService.authenticate(this.loginForm.getRawValue()).subscribe(data => {
             console.log('data', data);
             this.globalService.setAccessToken(data.token);
@@ -92,13 +91,14 @@ export class LoginComponent implements OnInit {
                 this.isBusy = false;
             });
         }, error => {
+            console.log('error', error);
             this.isBusy = false;
             this.loginPressed = false;
         });
     }
 
     navigateToUserPage() {
-        const navUrl = '/dashboard';
+        const navUrl = '/dashboard/qualification';
         this.router.navigateByUrl(navUrl);
     }
 

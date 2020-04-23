@@ -5,24 +5,28 @@
 <!-- VERTICAL LAYOUT 1 -->
 <ng-container *ngIf="fuseConfig.layout.style === 'vertical-layout-1'">
     <vertical-layout-1></vertical-layout-1>
+    <ng-snotify></ng-snotify>
 </ng-container>
 <!-- / VERTICAL LAYOUT 1 -->
 
 <!-- VERTICAL LAYOUT 2 -->
 <ng-container *ngIf="fuseConfig.layout.style === 'vertical-layout-2'">
     <vertical-layout-2></vertical-layout-2>
+    <ng-snotify></ng-snotify>
 </ng-container>
 <!-- / VERTICAL LAYOUT 2 -->
 
 <!-- VERTICAL LAYOUT 3 -->
 <ng-container *ngIf="fuseConfig.layout.style === 'vertical-layout-3'">
     <vertical-layout-3></vertical-layout-3>
+    <ng-snotify></ng-snotify>
 </ng-container>
 <!-- / VERTICAL LAYOUT 3 -->
 
 <!-- HORIZONTAL LAYOUT 1 -->
 <ng-container *ngIf="fuseConfig.layout.style === 'horizontal-layout-1'">
     <horizontal-layout-1></horizontal-layout-1>
+    <ng-snotify></ng-snotify>
 </ng-container>
 <!-- / HORIZONTAL LAYOUT 1 -->
 
@@ -34,5 +38,6 @@
 
 <fuse-sidebar name="themeOptionsPanel" class="theme-options-sidebar" position="right" [invisibleOverlay]="true">
     <fuse-theme-options></fuse-theme-options>
+    <ng-snotify></ng-snotify>
 </fuse-sidebar>
 <!-- / THEME OPTIONS PANEL -->

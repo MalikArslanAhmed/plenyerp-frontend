@@ -11,8 +11,9 @@ export const environment = {
     pubNubChannelPrefix: 'dev_',
     staging: false,
     // appUrl: 'http://appUrlpi.dss.luezoid.com/',
-    appUrl: 'http://api.dss.luezoid.com/',
+    // appUrl: 'http://api.dss.luezoid.com/',
     // appUrl: 'http://api2.dss.luezoid.com/',
+    appUrl: 'http://api.erp.valuescale.co.in/',
 };
 
 /*

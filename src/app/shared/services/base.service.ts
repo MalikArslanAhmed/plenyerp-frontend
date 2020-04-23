@@ -27,14 +27,12 @@ export class BaseService {
     }
 
     public postRequestWithoutDataDeletion(url, data = {}, handler = {success: null, failure: null}) {
-        return this.http.post(url, data).pipe(takeUntil(this.globalService.isSessionExist),
-            map(res => {
+        return this.http.post(url, data).pipe(takeUntil(this.globalService.isSessionExist), map(res => {
                 if (res['message']) {
                     this.alertService.showSuccess({title: 'Success', message: res['message']});
                 }
                 return res['data'];
-            }),
-            catchError(err => {
+            }), catchError(err => {
                 return this.handleError(err);
             })
         );

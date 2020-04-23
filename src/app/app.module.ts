@@ -22,7 +22,7 @@ import {AuthService} from "./shared/services/auth.service";
 import { GlobalService } from './shared/services/global.service';
 import {AppUrl} from "./shared/constants/app-url";
 import {AlertService} from "./shared/services/alert.service";
-import {SnotifyService, ToastDefaults} from "ng-snotify";
+import {SnotifyModule, SnotifyService, ToastDefaults} from "ng-snotify";
 import {HtpInterceptor} from "./shared/services/interceptor.service";
 // import {DashboardModule} from './main/dashboard/dashboard.module';
 
@@ -69,7 +69,8 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule
+        SampleModule,
+        SnotifyModule
     ],
     providers: [
         AuthService,
