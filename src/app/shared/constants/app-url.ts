@@ -38,4 +38,20 @@ export class AppUrl {
     static DELETE_QUALIFICATION(id?): string {
         return AppUrl.API_URL + 'qualifications/' + id;
     }
+
+    static SKILL(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'skills/' + id;
+        } else {
+            return AppUrl.API_URL + 'skills';
+        }
+    }
+
+    static GET_SKILLS(): string {
+        return AppUrl.API_URL + `skills`;
+    }
+
+    static DELETE_SKILL(id?): string {
+        return AppUrl.API_URL + 'skills/' + id;
+    }
 }
