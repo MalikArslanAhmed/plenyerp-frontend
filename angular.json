@@ -36,6 +36,7 @@
                     },
                     "configurations": {
                         "production": {
+                            "outputPath": "../prod_build/dist",
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
