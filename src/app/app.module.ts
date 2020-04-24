@@ -19,7 +19,7 @@ import {AppComponent} from 'app/app.component';
 import {LayoutModule} from 'app/layout/layout.module';
 import {SampleModule} from 'app/main/sample/sample.module';
 import {AuthService} from "./shared/services/auth.service";
-import { GlobalService } from './shared/services/global.service';
+import {GlobalService} from './shared/services/global.service';
 import {AppUrl} from "./shared/constants/app-url";
 import {AlertService} from "./shared/services/alert.service";
 import {SnotifyModule, SnotifyService, ToastDefaults} from "ng-snotify";

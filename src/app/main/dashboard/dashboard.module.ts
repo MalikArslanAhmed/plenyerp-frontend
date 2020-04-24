@@ -18,10 +18,23 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {SkillCreateComponent} from './skills/skill-create/skill-create.component';
-import { SkillListComponent } from './skills/skill-list/skill-list.component';
+import {SkillListComponent} from './skills/skill-list/skill-list.component';
+import {WorkLocationsComponent} from './work-locations/work-locations.component';
+import {MatTreeModule} from "@angular/material/tree";
+import { UpdateWorkLocationsComponent } from './work-locations/update-work-locations/update-work-locations.component';
 
 @NgModule({
-    declarations: [DashboardComponent, QualificationComponent, SkillsComponent, QualificationListComponent, QualificationCreateComponent, SkillCreateComponent, SkillListComponent],
+    declarations: [
+        DashboardComponent,
+        QualificationComponent,
+        SkillsComponent,
+        QualificationListComponent,
+        QualificationCreateComponent,
+        SkillCreateComponent,
+        SkillListComponent,
+        WorkLocationsComponent,
+        UpdateWorkLocationsComponent
+    ],
     imports: [
         CommonModule,
         DashboardRoutingModule,
@@ -36,7 +49,8 @@ import { SkillListComponent } from './skills/skill-list/skill-list.component';
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatTreeModule
     ]
 })
 export class DashboardModule {

@@ -13,7 +13,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Employees Management',
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
-                icon: 'dashboard',
+                icon: 'supervisor_account',
                 children: [
                     {
                         id: 'employee-list',
@@ -34,7 +34,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Training Management',
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
-                icon: 'today',
+                icon: 'watch_later',
                 url: '/apps/calendar'
             },
             {
@@ -42,7 +42,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Access Control',
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
-                icon: 'today',
+                icon: 'settings_applications',
                 url: '/apps/calendar'
             }
         ]
@@ -58,13 +58,13 @@ export const navigation: FuseNavigation[] = [
                 title: 'Company Information',
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
-                icon: 'dashboard',
+                icon: 'account_balance',
                 children: [
                     {
                         id: 'work-location',
                         title: 'Work Locations',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/work-locations'
                     },
                     {
                         id: 'structure',
@@ -85,7 +85,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Job Info',
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
-                icon: 'dashboard',
+                icon: 'work',
                 children: [
                     {
                         id: 'designations',
@@ -118,7 +118,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Qualifications',
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
-                icon: 'dashboard',
+                icon: 'school',
                 children: [
                     {
                         id: 'qualification',

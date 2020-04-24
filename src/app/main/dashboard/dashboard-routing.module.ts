@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 import {QualificationComponent} from "./qualification/qualification.component";
 import {SkillsComponent} from "./skills/skills.component";
+import {WorkLocationsComponent} from "./work-locations/work-locations.component";
 
 const routes: Routes = [
     {
@@ -24,6 +25,13 @@ const routes: Routes = [
         component: SkillsComponent,
         data: {
             title: 'Skills'
+        },
+    },
+    {
+        path: 'work-locations',
+        component: WorkLocationsComponent,
+        data: {
+            title: 'Work Locations'
         },
     }
 ];

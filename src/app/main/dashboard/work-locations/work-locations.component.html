@@ -1,0 +1,59 @@
+<div id="work-locations" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">place
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Work Locations
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+            <div class="content">
+                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                        <button mat-icon-button disabled></button>
+                        <mat-checkbox class="checklist-leaf-node"
+                                      [checked]="checklistSelection.isSelected(node)"
+                                      (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                    </mat-tree-node>
+
+                    <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+                        <button mat-icon-button disabled></button>
+                        <mat-form-field>
+                            <mat-label>Add New ...</mat-label>
+                            <input matInput #itemValue placeholder="Add...">
+                        </mat-form-field>
+                        <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
+                    </mat-tree-node>
+
+                    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                        <button mat-icon-button matTreeNodeToggle
+                                [attr.aria-label]="'toggle ' + node.filename">
+                            <mat-icon class="mat-icon-rtl-mirror">
+                                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                            </mat-icon>
+                        </button>
+                        <mat-checkbox [checked]="descendantsAllSelected(node)"
+                                      [indeterminate]="descendantsPartiallySelected(node)"
+                                      (change)="todoItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                        <button mat-icon-button (click)="addNewItem(node)" title="Add">
+                            <mat-icon class="addBtn">add</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="editItem(node)" title="Edit">
+                            <mat-icon class="editBtn">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteItem(node)" title="Delete">
+                            <mat-icon class="deleteBtn">delete</mat-icon>
+                        </button>
+                    </mat-tree-node>
+                </mat-tree>
+            </div>
+        </div>
+    </div>
+</div>

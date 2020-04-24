@@ -54,4 +54,56 @@ export class AppUrl {
     static DELETE_SKILL(id?): string {
         return AppUrl.API_URL + 'skills/' + id;
     }
+
+    static GET_WORK_LOCATIONS(): string {
+        return AppUrl.API_URL + `locations`;
+    }
+
+    static COUNTRIES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'countries/' + id;
+        } else {
+            return AppUrl.API_URL + 'countries';
+        }
+    }
+
+    static REGIONS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'regions/' + id;
+        } else {
+            return AppUrl.API_URL + 'regions';
+        }
+    }
+
+    static STATES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'states/' + id;
+        } else {
+            return AppUrl.API_URL + 'states';
+        }
+    }
+
+    static LGAS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'lgas/' + id;
+        } else {
+            return AppUrl.API_URL + 'lgas';
+        }
+    }
+
+    static DELETE_COUNTRY(id?): string {
+        return AppUrl.API_URL + 'countries/' + id;
+    }
+
+    static DELETE_REGION(id?): string {
+        return AppUrl.API_URL + 'regions/' + id;
+    }
+
+    static DELETE_STATE(id?): string {
+        return AppUrl.API_URL + 'states/' + id;
+    }
+
+    static DELETE_LGA(id?): string {
+        return AppUrl.API_URL + 'lgas/' + id;
+    }
 }
