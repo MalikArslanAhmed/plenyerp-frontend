@@ -1,13 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {FormGroup} from "@angular/forms";
 import {ScheduleService} from "../../../../shared/services/schedule.service";
 import {ScheduleCreateComponent} from '../schedule-create/schedule-create.component';
+import {fuseAnimations} from "../../../../../@fuse/animations";
 
 @Component({
     selector: 'app-schedule-list',
     templateUrl: './schedule-list.component.html',
-    styleUrls: ['./schedule-list.component.scss']
+    styleUrls: ['./schedule-list.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
 })
 export class ScheduleListComponent implements OnInit {
     schedules = [];

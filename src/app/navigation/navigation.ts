@@ -148,7 +148,7 @@ export const navigation: FuseNavigation[] = [
                         id: 'academic-major',
                         title: 'Academic Major',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/academic-major'
                     }
                 ]
             },

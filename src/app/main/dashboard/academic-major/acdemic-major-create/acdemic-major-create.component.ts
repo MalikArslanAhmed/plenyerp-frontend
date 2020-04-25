@@ -1,35 +1,35 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ScheduleService} from 'app/shared/services/schedule.service';
+import {AcademicMajorService} from "../../../../shared/services/academic-major.service";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 
 @Component({
-    selector: 'app-schedule-create',
-    templateUrl: './schedule-create.component.html',
-    styleUrls: ['./schedule-create.component.scss'],
+    selector: 'app-acdemic-major-create',
+    templateUrl: './acdemic-major-create.component.html',
+    styleUrls: ['./acdemic-major-create.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class ScheduleCreateComponent implements OnInit {
+export class AcdemicMajorCreateComponent implements OnInit {
     action: any;
     dialogTitle: any;
-    scheduleForm: FormGroup;
+    academicMajorForm: FormGroup;
     isSubmitted = false;
     updateData: any;
 
-    constructor(public matDialogRef: MatDialogRef<ScheduleCreateComponent>,
+    constructor(public matDialogRef: MatDialogRef<AcdemicMajorCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-                private scheduleService: ScheduleService) {
+                private academicMajorService: AcademicMajorService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit Schedule';
-            if (_data.schedule) {
+            this.dialogTitle = 'Edit Academic Major';
+            if (_data.academicMajor) {
                 this.updateData = _data;
             }
         } else {
-            this.dialogTitle = 'Add Schedule';
+            this.dialogTitle = 'Add Academic Major';
         }
     }
 
@@ -39,44 +39,44 @@ export class ScheduleCreateComponent implements OnInit {
     }
 
     refresh() {
-        this.scheduleForm = this.fb.group({
+        this.academicMajorForm = this.fb.group({
             'name': ['', Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
-            this.scheduleForm.patchValue({
-                'name': this.updateData.schedule.name
+            this.academicMajorForm.patchValue({
+                'name': this.updateData.academicMajor.name
             });
         }
     }
 
-    saveSchedule() {
+    saveAcademicMajor() {
         this.isSubmitted = true;
-        if (!this.scheduleForm.valid) {
+        if (!this.academicMajorForm.valid) {
             this.isSubmitted = false;
             return;
         }
 
         if (this.isSubmitted) {
-            this.scheduleService.addSchedule(this.scheduleForm.value).subscribe(data => {
-                this.scheduleForm.reset();
+            this.academicMajorService.addAcademicMajor(this.academicMajorForm.value).subscribe(data => {
+                this.academicMajorForm.reset();
                 this.isSubmitted = false;
             });
         }
     }
 
-    updateSchedule() {
+    updateAcademicMajor() {
         this.isSubmitted = true;
-        if (!this.scheduleForm.valid) {
+        if (!this.academicMajorForm.valid) {
             this.isSubmitted = false;
             return;
         }
         if (this.isSubmitted) {
-            this.scheduleService.updateSchedule(this.updateData.schedule.id, this.scheduleForm.value).subscribe(data => {
+            this.academicMajorService.updateAcademicMajor(this.updateData.academicMajor.id, this.academicMajorForm.value).subscribe(data => {
                 this.updateData = undefined;
-                this.scheduleForm.reset();
+                this.academicMajorForm.reset();
                 this.isSubmitted = false;
             });
         }

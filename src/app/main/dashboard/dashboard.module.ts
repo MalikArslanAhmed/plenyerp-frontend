@@ -26,8 +26,11 @@ import {LanguagesComponent} from './languages/languages.component';
 import {LanguageCreateComponent} from './languages/language-create/language-create.component';
 import {LanguageListComponent} from './languages/language-list/language-list.component';
 import {ScheduleComponent} from './schedule/schedule.component';
-import { ScheduleCreateComponent } from './schedule/schedule-create/schedule-create.component';
-import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.component';
+import {ScheduleCreateComponent} from './schedule/schedule-create/schedule-create.component';
+import {ScheduleListComponent} from './schedule/schedule-list/schedule-list.component';
+import {AcademicMajorComponent} from './academic-major/academic-major.component';
+import {AcdemicMajorCreateComponent} from './academic-major/acdemic-major-create/acdemic-major-create.component';
+import {AcdemicMajorListComponent} from './academic-major/acdemic-major-list/acdemic-major-list.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +48,10 @@ import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.co
         LanguageListComponent,
         ScheduleComponent,
         ScheduleCreateComponent,
-        ScheduleListComponent
+        ScheduleListComponent,
+        AcademicMajorComponent,
+        AcdemicMajorCreateComponent,
+        AcdemicMajorListComponent
     ],
     imports: [
         CommonModule,

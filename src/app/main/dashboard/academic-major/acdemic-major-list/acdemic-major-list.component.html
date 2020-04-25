@@ -1,0 +1,42 @@
+<mat-table [@animateStagger]="{value:'50'}" [dataSource]="academicMajors">
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let academicMajor">
+            <p class="email text-truncate">
+                {{academicMajor.sno}}.
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let academicMajor">
+            <p class="phone text-truncate">
+                {{academicMajor.name}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let academicMajor">
+            <div fxFlex="row" fxLayoutAlign="end center">
+                <button mat-icon-button aria-label="Toggle star" (click)="editAcademicMajor(academicMajor)"
+                        style="color: blue">
+                    <mat-icon class="material-icons">edit</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Toggle star" (click)="deleteAcademicMajor(academicMajor?.id)"
+                        style="color: red">
+                    <mat-icon class="material-icons">delete</mat-icon>
+                </button>
+            </div>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let language; columns: displayedColumns;" class="contact"
+             [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+</mat-table>
