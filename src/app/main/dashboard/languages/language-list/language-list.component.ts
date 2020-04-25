@@ -31,8 +31,8 @@ export class LanguageListComponent implements OnInit {
 
             if (this.languages && this.languages.length > 0) {
                 let i = 1;
-                this.languages.forEach(skill => {
-                    skill['sno'] = i;
+                this.languages.forEach(language => {
+                    language['sno'] = i;
                     i++;
                 });
             }
@@ -47,10 +47,10 @@ export class LanguageListComponent implements OnInit {
         })
     }
 
-    editLanguage(skill) {
+    editLanguage(language) {
         this.dialogRef = this._matDialog.open(LanguageCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', skill: skill},
+            data: {action: 'EDIT', language: language},
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {

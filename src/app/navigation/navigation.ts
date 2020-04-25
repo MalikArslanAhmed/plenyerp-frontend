@@ -152,6 +152,66 @@ export const navigation: FuseNavigation[] = [
                     }
                 ]
             },
+            {
+                id: 'extended-profile',
+                title: 'Extended profile',
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'school',
+                children: [
+                    {
+                        id: 'relationship',
+                        title: 'Relationship',
+                        type: 'item',
+                        url: 'dashboard/relationship'
+                    },
+                    {
+                        id: 'categories',
+                        title: 'Categories',
+                        type: 'item',
+                        url: 'dashboard/categories'
+                    },
+                    {
+                        id: 'status',
+                        title: 'Status',
+                        type: 'item',
+                        url: 'dashboard/status'
+                    },
+                    {
+                        id: 'disengagement',
+                        title: 'Disengagement',
+                        type: 'item',
+                        url: 'dashboard/disengagement'
+                    },
+                    {
+                        id: 'censures',
+                        title: 'Censures',
+                        type: 'item',
+                        url: 'dashboard/censures'
+                    },
+                ]
+            },
+            {
+                id: 'organizations',
+                title: 'Organizations',
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'school',
+                children: [
+                    {
+                        id: 'arm-of-service',
+                        title: 'Arm Of Service',
+                        type: 'item',
+                        url: 'dashboard/arm-of-service'
+                    },
+                    {
+                        id: 'membership',
+                        title: 'Membership',
+                        type: 'item',
+                        url: 'dashboard/membership'
+                    }
+                ]
+            }
         ]
     }
 ];

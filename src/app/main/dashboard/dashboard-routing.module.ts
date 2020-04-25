@@ -7,6 +7,7 @@ import {WorkLocationsComponent} from "./work-locations/work-locations.component"
 import {LanguagesComponent} from "./languages/languages.component";
 import {ScheduleComponent} from "./schedule/schedule.component";
 import {AcademicMajorComponent} from "./academic-major/academic-major.component";
+import {RelationshipComponent} from "./relationship/relationship.component";
 
 const routes: Routes = [
     {
@@ -56,6 +57,13 @@ const routes: Routes = [
         component: AcademicMajorComponent,
         data: {
             title: 'Academic Major'
+        },
+    },
+    {
+        path: 'relationship',
+        component: RelationshipComponent,
+        data: {
+            title: 'Relationship'
         },
     }
 ];
