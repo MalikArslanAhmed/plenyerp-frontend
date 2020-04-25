@@ -26,7 +26,7 @@ export class CategoriesListComponent implements OnInit {
     }
 
     getCategories() {
-        this.categoriesService.getcategories({'page': -1}).subscribe(data => {
+        this.categoriesService.getCategories({'page': -1}).subscribe(data => {
             this.categories = data.items;
 
             if (this.categories && this.categories.length > 0) {
@@ -40,7 +40,7 @@ export class CategoriesListComponent implements OnInit {
     }
 
     deleteCategory(id) {
-        this.categoriesService.deletecategory(id).subscribe(data => {
+        this.categoriesService.deleteCategory(id).subscribe(data => {
             if (data) {
                 this.getCategories();
             }

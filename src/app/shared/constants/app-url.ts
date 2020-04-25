@@ -106,4 +106,20 @@ export class AppUrl {
     static DELETE_LGA(id?): string {
         return AppUrl.API_URL + 'lgas/' + id;
     }
+
+    static LANGUAGES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'languages/' + id;
+        } else {
+            return AppUrl.API_URL + 'languages';
+        }
+    }
+
+    static GET_LANGUAGES(): string {
+        return AppUrl.API_URL + `languages`;
+    }
+
+    static DELETE_LANGUAGE(id?): string {
+        return AppUrl.API_URL + 'languages/' + id;
+    }
 }

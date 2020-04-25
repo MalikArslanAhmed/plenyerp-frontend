@@ -9,24 +9,24 @@ import {Injectable} from "@angular/core";
 @Injectable({
     providedIn: 'root'
 })
-export class CategoriesService extends BaseService {
+export class DisengagementsService extends BaseService {
     constructor(public http: HttpClient, public alertService: AlertService, public globalService: GlobalService) {
         super(http, alertService, globalService);
     }
 
-    addCategory(data): Observable<any> {
-        return this.postRequest(AppUrl.SKILL(), data);
+    addDisengagement(data): Observable<any> {
+        return this.postRequest(AppUrl.LANGUAGES(), data);
     }
 
-    getCategories(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_SKILLS(), data);
+    getDisengagements(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LANGUAGES(), data);
     }
 
-    deleteCategory(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_SKILL(id));
+    deleteDisengagement(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LANGUAGE(id));
     }
 
-    updateCategory(id, data): Observable<any> {
-        return this.putRequest(AppUrl.SKILL(id), data);
+    updateDisengagement(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LANGUAGES(id), data);
     }
 }

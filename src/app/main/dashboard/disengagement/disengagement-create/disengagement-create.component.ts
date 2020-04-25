@@ -2,34 +2,34 @@ import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {fuseAnimations} from "../../../../../@fuse/animations";
-import {CategoriesService} from "../../../../shared/services/categories.service";
+import {DisengagementsService} from "../../../../shared/services/disengagements.service";
 
 @Component({
-    selector: 'app-categories-create',
-    templateUrl: './categories-create.component.html',
-    styleUrls: ['./categories-create.component.scss'],
+    selector: 'app-disengagement-create',
+    templateUrl: './disengagement-create.component.html',
+    styleUrls: ['./disengagement-create.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class CategoriesCreateComponent implements OnInit {
+export class DisengagementCreateComponent implements OnInit {
     action: any;
     dialogTitle: any;
-    categoriesForm: FormGroup;
+    disengagementForm: FormGroup;
     isSubmitted = false;
     updateData: any;
 
-    constructor(public matDialogRef: MatDialogRef<CategoriesCreateComponent>,
+    constructor(public matDialogRef: MatDialogRef<DisengagementCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-                private categoriesService: CategoriesService) {
+                private disengagementsService: DisengagementsService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit Categories';
-            if (_data.category) {
+            this.dialogTitle = 'Edit Disengagements';
+            if (_data.disengagement) {
                 this.updateData = _data;
             }
         } else {
-            this.dialogTitle = 'Add Category';
+            this.dialogTitle = 'Add Disengagement';
         }
     }
 
@@ -39,44 +39,44 @@ export class CategoriesCreateComponent implements OnInit {
     }
 
     refresh() {
-        this.categoriesForm = this.fb.group({
+        this.disengagementForm = this.fb.group({
             'name': ['', Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
-            this.categoriesForm.patchValue({
-                'name': this.updateData.category.name
+            this.disengagementForm.patchValue({
+                'name': this.updateData.disengagement.name
             });
         }
     }
 
-    saveCategory() {
+    saveDisengagement() {
         this.isSubmitted = true;
-        if (!this.categoriesForm.valid) {
+        if (!this.disengagementForm.valid) {
             this.isSubmitted = false;
             return;
         }
 
         if (this.isSubmitted) {
-            this.categoriesService.addCategory(this.categoriesForm.value).subscribe(data => {
-                this.categoriesForm.reset();
+            this.disengagementsService.addDisengagement(this.disengagementForm.value).subscribe(data => {
+                this.disengagementForm.reset();
                 this.isSubmitted = false;
             });
         }
     }
 
-    updatecategory() {
+    updateDisengagement() {
         this.isSubmitted = true;
-        if (!this.categoriesForm.valid) {
+        if (!this.disengagementForm.valid) {
             this.isSubmitted = false;
             return;
         }
         if (this.isSubmitted) {
-            this.categoriesService.updateCategory(this.updateData.category.id, this.categoriesForm.value).subscribe(data => {
+            this.disengagementsService.updateDisengagement(this.updateData.disengagement.id, this.disengagementForm.value).subscribe(data => {
                 this.updateData = undefined;
-                this.categoriesForm.reset();
+                this.disengagementForm.reset();
                 this.isSubmitted = false;
             });
         }

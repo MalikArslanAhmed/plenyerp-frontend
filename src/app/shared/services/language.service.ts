@@ -15,18 +15,18 @@ export class LanguageService extends BaseService {
     }
 
     addLanguage(data): Observable<any> {
-        return this.postRequest(AppUrl.SKILL(), data);
+        return this.postRequest(AppUrl.LANGUAGES(), data);
     }
 
     getLanguages(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_SKILLS(), data);
+        return this.getRequest(AppUrl.GET_LANGUAGES(), data);
     }
 
     deleteLanguage(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_SKILL(id));
+        return this.deleteRequest(AppUrl.DELETE_LANGUAGE(id));
     }
 
     updateLanguage(id, data): Observable<any> {
-        return this.putRequest(AppUrl.SKILL(id), data);
+        return this.putRequest(AppUrl.LANGUAGES(id), data);
     }
 }

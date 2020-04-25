@@ -40,6 +40,9 @@ import {CategoriesCreateComponent} from './categories/categories-create/categori
 import {StatusComponent} from './status/status.component';
 import {StatusListComponent} from './status/status-list/status-list.component';
 import {StatusCreateComponent} from './status/status-create/status-create.component';
+import { DisengagementComponent } from './disengagement/disengagement.component';
+import { DisengagementListComponent } from './disengagement/disengagement-list/disengagement-list.component';
+import { DisengagementCreateComponent } from './disengagement/disengagement-create/disengagement-create.component';
 
 @NgModule({
     declarations: [
@@ -69,7 +72,10 @@ import {StatusCreateComponent} from './status/status-create/status-create.compon
         CategoriesCreateComponent,
         StatusComponent,
         StatusListComponent,
-        StatusCreateComponent
+        StatusCreateComponent,
+        DisengagementComponent,
+        DisengagementListComponent,
+        DisengagementCreateComponent
     ],
     imports: [
         CommonModule,

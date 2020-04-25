@@ -10,6 +10,7 @@ import {AcademicMajorComponent} from "./academic-major/academic-major.component"
 import {RelationshipComponent} from "./relationship/relationship.component";
 import {CategoriesComponent} from "./categories/categories.component";
 import {StatusComponent} from "./status/status.component";
+import {DisengagementComponent} from "./disengagement/disengagement.component";
 
 const routes: Routes = [
     {
@@ -80,6 +81,13 @@ const routes: Routes = [
         component: StatusComponent,
         data: {
             title: 'Status'
+        },
+    },
+    {
+        path: 'disengagement',
+        component: DisengagementComponent,
+        data: {
+            title: 'Disengagement'
         },
     }
 ];
