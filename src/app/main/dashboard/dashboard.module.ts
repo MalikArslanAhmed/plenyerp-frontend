@@ -31,9 +31,12 @@ import {ScheduleListComponent} from './schedule/schedule-list/schedule-list.comp
 import {AcademicMajorComponent} from './academic-major/academic-major.component';
 import {AcdemicMajorCreateComponent} from './academic-major/acdemic-major-create/acdemic-major-create.component';
 import {AcdemicMajorListComponent} from './academic-major/acdemic-major-list/acdemic-major-list.component';
-import { RelationshipComponent } from './relationship/relationship.component';
-import { RelationshipCreateComponent } from './relationship/relationship-create/relationship-create.component';
-import { RelationshipListComponent } from './relationship/relationship-list/relationship-list.component';
+import {RelationshipComponent} from './relationship/relationship.component';
+import {RelationshipCreateComponent} from './relationship/relationship-create/relationship-create.component';
+import {RelationshipListComponent} from './relationship/relationship-list/relationship-list.component';
+import {CategoriesComponent} from './categories/categories.component';
+import {CategoriesListComponent} from './categories/categories-list/categories-list.component';
+import {CategoriesCreateComponent} from './categories/categories-create/categories-create.component';
 
 @NgModule({
     declarations: [
@@ -57,7 +60,10 @@ import { RelationshipListComponent } from './relationship/relationship-list/rela
         AcdemicMajorListComponent,
         RelationshipComponent,
         RelationshipCreateComponent,
-        RelationshipListComponent
+        RelationshipListComponent,
+        CategoriesComponent,
+        CategoriesListComponent,
+        CategoriesCreateComponent
     ],
     imports: [
         CommonModule,
