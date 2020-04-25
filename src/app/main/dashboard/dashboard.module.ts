@@ -49,6 +49,9 @@ import {CensuresCreateComponent} from './censures/censures-create/censures-creat
 import {ArmOfServiceComponent} from './arm-of-service/arm-of-service.component';
 import {ArmOfServiceCreateComponent} from './arm-of-service/arm-of-service-create/arm-of-service-create.component';
 import {ArmOfServiceListComponent} from './arm-of-service/arm-of-service-list/arm-of-service-list.component';
+import {MembershipComponent} from './membership/membership.component';
+import {MembershipListComponent} from './membership/membership-list/membership-list.component';
+import {MembershipCreateComponent} from './membership/membership-create/membership-create.component';
 
 @NgModule({
     declarations: [
@@ -87,7 +90,10 @@ import {ArmOfServiceListComponent} from './arm-of-service/arm-of-service-list/ar
         CensuresCreateComponent,
         ArmOfServiceComponent,
         ArmOfServiceCreateComponent,
-        ArmOfServiceListComponent
+        ArmOfServiceListComponent,
+        MembershipComponent,
+        MembershipListComponent,
+        MembershipCreateComponent
     ],
     imports: [
         CommonModule,

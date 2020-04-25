@@ -9,24 +9,24 @@ import {Injectable} from "@angular/core";
 @Injectable({
     providedIn: 'root'
 })
-export class ScheduleService extends BaseService {
+export class MembershipService extends BaseService {
     constructor(public http: HttpClient, public alertService: AlertService, public globalService: GlobalService) {
         super(http, alertService, globalService);
     }
 
-    addSchedule(data): Observable<any> {
-        return this.postRequest(AppUrl.SCHEDULES(), data);
+    addMembership(data): Observable<any> {
+        return this.postRequest(AppUrl.LANGUAGES(), data);
     }
 
-    getSchedule(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_SCHEDULES(), data);
+    getMemberships(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LANGUAGES(), data);
     }
 
-    deleteSchedule(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_SCHEDULE(id));
+    deleteMembership(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LANGUAGE(id));
     }
 
-    updateSchedule(id, data): Observable<any> {
-        return this.putRequest(AppUrl.SCHEDULES(id), data);
+    updateMembership(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LANGUAGES(id), data);
     }
 }

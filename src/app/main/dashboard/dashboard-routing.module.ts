@@ -13,6 +13,7 @@ import {StatusComponent} from "./status/status.component";
 import {DisengagementComponent} from "./disengagement/disengagement.component";
 import {CensuresComponent} from "./censures/censures.component";
 import {ArmOfServiceComponent} from "./arm-of-service/arm-of-service.component";
+import {MembershipComponent} from "./membership/membership.component";
 
 const routes: Routes = [
     {
@@ -104,6 +105,13 @@ const routes: Routes = [
         component: ArmOfServiceComponent,
         data: {
             title: 'Arm Of Service'
+        },
+    },
+    {
+        path: 'membership',
+        component: MembershipComponent,
+        data: {
+            title: 'Membership'
         },
     }
 ];

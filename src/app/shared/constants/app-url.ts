@@ -122,4 +122,20 @@ export class AppUrl {
     static DELETE_LANGUAGE(id?): string {
         return AppUrl.API_URL + 'languages/' + id;
     }
+
+    static SCHEDULES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'schedules/' + id;
+        } else {
+            return AppUrl.API_URL + 'schedules';
+        }
+    }
+
+    static GET_SCHEDULES(): string {
+        return AppUrl.API_URL + `schedules`;
+    }
+
+    static DELETE_SCHEDULE(id?): string {
+        return AppUrl.API_URL + 'schedules/' + id;
+    }
 }
