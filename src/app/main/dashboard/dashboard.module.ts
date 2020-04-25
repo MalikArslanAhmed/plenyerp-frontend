@@ -46,6 +46,9 @@ import {DisengagementCreateComponent} from './disengagement/disengagement-create
 import {CensuresComponent} from './censures/censures.component';
 import {CensuresListComponent} from './censures/censures-list/censures-list.component';
 import {CensuresCreateComponent} from './censures/censures-create/censures-create.component';
+import {ArmOfServiceComponent} from './arm-of-service/arm-of-service.component';
+import {ArmOfServiceCreateComponent} from './arm-of-service/arm-of-service-create/arm-of-service-create.component';
+import {ArmOfServiceListComponent} from './arm-of-service/arm-of-service-list/arm-of-service-list.component';
 
 @NgModule({
     declarations: [
@@ -81,7 +84,10 @@ import {CensuresCreateComponent} from './censures/censures-create/censures-creat
         DisengagementCreateComponent,
         CensuresComponent,
         CensuresListComponent,
-        CensuresCreateComponent
+        CensuresCreateComponent,
+        ArmOfServiceComponent,
+        ArmOfServiceCreateComponent,
+        ArmOfServiceListComponent
     ],
     imports: [
         CommonModule,

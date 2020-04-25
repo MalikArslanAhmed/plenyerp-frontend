@@ -12,6 +12,7 @@ import {CategoriesComponent} from "./categories/categories.component";
 import {StatusComponent} from "./status/status.component";
 import {DisengagementComponent} from "./disengagement/disengagement.component";
 import {CensuresComponent} from "./censures/censures.component";
+import {ArmOfServiceComponent} from "./arm-of-service/arm-of-service.component";
 
 const routes: Routes = [
     {
@@ -96,6 +97,13 @@ const routes: Routes = [
         component: CensuresComponent,
         data: {
             title: 'Censures'
+        },
+    },
+    {
+        path: 'arm-of-service',
+        component: ArmOfServiceComponent,
+        data: {
+            title: 'Arm Of Service'
         },
     }
 ];
