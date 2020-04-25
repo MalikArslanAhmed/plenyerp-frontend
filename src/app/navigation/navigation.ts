@@ -133,10 +133,10 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/skills'
                     },
                     {
-                        id: 'language',
+                        id: 'languages',
                         title: 'Languages',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/languages'
                     },
                     {
                         id: 'schedule',

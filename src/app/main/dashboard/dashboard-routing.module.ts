@@ -4,6 +4,7 @@ import {DashboardComponent} from './dashboard.component';
 import {QualificationComponent} from "./qualification/qualification.component";
 import {SkillsComponent} from "./skills/skills.component";
 import {WorkLocationsComponent} from "./work-locations/work-locations.component";
+import {LanguagesComponent} from "./languages/languages.component";
 
 const routes: Routes = [
     {
@@ -32,6 +33,13 @@ const routes: Routes = [
         component: WorkLocationsComponent,
         data: {
             title: 'Work Locations'
+        },
+    },
+    {
+        path: 'languages',
+        component: LanguagesComponent,
+        data: {
+            title: 'Languages'
         },
     }
 ];

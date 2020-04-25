@@ -21,7 +21,10 @@ import {SkillCreateComponent} from './skills/skill-create/skill-create.component
 import {SkillListComponent} from './skills/skill-list/skill-list.component';
 import {WorkLocationsComponent} from './work-locations/work-locations.component';
 import {MatTreeModule} from "@angular/material/tree";
-import { UpdateWorkLocationsComponent } from './work-locations/update-work-locations/update-work-locations.component';
+import {UpdateWorkLocationsComponent} from './work-locations/update-work-locations/update-work-locations.component';
+import {LanguagesComponent} from './languages/languages.component';
+import {LanguageCreateComponent} from './languages/language-create/language-create.component';
+import {LanguageListComponent} from './languages/language-list/language-list.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +36,10 @@ import { UpdateWorkLocationsComponent } from './work-locations/update-work-locat
         SkillCreateComponent,
         SkillListComponent,
         WorkLocationsComponent,
-        UpdateWorkLocationsComponent
+        UpdateWorkLocationsComponent,
+        LanguagesComponent,
+        LanguageCreateComponent,
+        LanguageListComponent
     ],
     imports: [
         CommonModule,
