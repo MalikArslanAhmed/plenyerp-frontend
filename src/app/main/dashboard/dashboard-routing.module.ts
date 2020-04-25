@@ -9,6 +9,7 @@ import {ScheduleComponent} from "./schedule/schedule.component";
 import {AcademicMajorComponent} from "./academic-major/academic-major.component";
 import {RelationshipComponent} from "./relationship/relationship.component";
 import {CategoriesComponent} from "./categories/categories.component";
+import {StatusComponent} from "./status/status.component";
 
 const routes: Routes = [
     {
@@ -72,6 +73,13 @@ const routes: Routes = [
         component: CategoriesComponent,
         data: {
             title: 'Categories'
+        },
+    },
+    {
+        path: 'status',
+        component: StatusComponent,
+        data: {
+            title: 'Status'
         },
     }
 ];

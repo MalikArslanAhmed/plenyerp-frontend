@@ -37,6 +37,9 @@ import {RelationshipListComponent} from './relationship/relationship-list/relati
 import {CategoriesComponent} from './categories/categories.component';
 import {CategoriesListComponent} from './categories/categories-list/categories-list.component';
 import {CategoriesCreateComponent} from './categories/categories-create/categories-create.component';
+import {StatusComponent} from './status/status.component';
+import {StatusListComponent} from './status/status-list/status-list.component';
+import {StatusCreateComponent} from './status/status-create/status-create.component';
 
 @NgModule({
     declarations: [
@@ -63,7 +66,10 @@ import {CategoriesCreateComponent} from './categories/categories-create/categori
         RelationshipListComponent,
         CategoriesComponent,
         CategoriesListComponent,
-        CategoriesCreateComponent
+        CategoriesCreateComponent,
+        StatusComponent,
+        StatusListComponent,
+        StatusCreateComponent
     ],
     imports: [
         CommonModule,
