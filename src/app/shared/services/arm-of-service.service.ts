@@ -15,18 +15,18 @@ export class ArmOfServiceService extends BaseService {
     }
 
     addArmOfService(data): Observable<any> {
-        return this.postRequest(AppUrl.LANGUAGES(), data);
+        return this.postRequest(AppUrl.ARM_OF_SERVICE(), data);
     }
 
     getArmOfServices(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_LANGUAGES(), data);
+        return this.getRequest(AppUrl.GET_ARM_OF_SERVICES(), data);
     }
 
     deleteArmOfService(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_LANGUAGE(id));
+        return this.deleteRequest(AppUrl.DELETE_ARM_OF_SERVICE(id));
     }
 
     updateArmOfService(id, data): Observable<any> {
-        return this.putRequest(AppUrl.LANGUAGES(id), data);
+        return this.putRequest(AppUrl.ARM_OF_SERVICE(id), data);
     }
 }

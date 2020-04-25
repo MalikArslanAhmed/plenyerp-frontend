@@ -15,7 +15,7 @@ import {MembershipCreateComponent} from "./membership-create/membership-create.c
 })
 export class MembershipComponent implements OnInit {
     dialogRef: any;
-    @ViewChild(MembershipListComponent) getMemberships: MembershipListComponent;
+    @ViewChild(MembershipListComponent) getMemberData: MembershipListComponent;
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -34,7 +34,7 @@ export class MembershipComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getMemberships.getMemberships();
+            this.getMemberData.getMemberships();
         });
     }
 }

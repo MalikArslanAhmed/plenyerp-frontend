@@ -15,18 +15,18 @@ export class RelationshipService extends BaseService {
     }
 
     addRelationship(data): Observable<any> {
-        return this.postRequest(AppUrl.SKILL(), data);
+        return this.postRequest(AppUrl.RELATIONSHIP(), data);
     }
 
     getRelationship(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_SKILLS(), data);
+        return this.getRequest(AppUrl.GET_RELATIONSHIPS(), data);
     }
 
     deleteRelationship(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_SKILL(id));
+        return this.deleteRequest(AppUrl.DELETE_RELATIONSHIP(id));
     }
 
     updateRelationship(id, data): Observable<any> {
-        return this.putRequest(AppUrl.SKILL(id), data);
+        return this.putRequest(AppUrl.RELATIONSHIP(id), data);
     }
 }

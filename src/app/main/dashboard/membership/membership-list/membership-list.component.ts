@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
-import { MembershipCreateComponent } from '../membership-create/membership-create.component';
+import {MembershipCreateComponent} from '../membership-create/membership-create.component';
 import {MembershipService} from "../../../../shared/services/membership.service";
 
 @Component({

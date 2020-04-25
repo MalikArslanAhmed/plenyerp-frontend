@@ -16,7 +16,7 @@ export class StatusCreateComponent implements OnInit {
     dialogTitle: any;
     statusForm: FormGroup;
     isSubmitted = false;
-    skills: any = [];
+    status: any = [];
     updateData: any;
 
     constructor(public matDialogRef: MatDialogRef<StatusCreateComponent>,
@@ -26,7 +26,7 @@ export class StatusCreateComponent implements OnInit {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Status';
-            if (_data.skill) {
+            if (_data.status) {
                 this.updateData = _data;
             }
         } else {
@@ -53,7 +53,7 @@ export class StatusCreateComponent implements OnInit {
         }
     }
 
-    saveSkill() {
+    saveStatus() {
         this.isSubmitted = true;
         if (!this.statusForm.valid) {
             this.isSubmitted = false;
@@ -68,7 +68,7 @@ export class StatusCreateComponent implements OnInit {
         }
     }
 
-    updateSkill() {
+    updateStatus() {
         this.isSubmitted = true;
         if (!this.statusForm.valid) {
             this.isSubmitted = false;

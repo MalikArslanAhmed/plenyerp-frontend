@@ -15,18 +15,18 @@ export class StatusService extends BaseService {
     }
 
     addStatus(data): Observable<any> {
-        return this.postRequest(AppUrl.SKILL(), data);
+        return this.postRequest(AppUrl.STATUS(), data);
     }
 
     getStatus(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_SKILLS(), data);
+        return this.getRequest(AppUrl.GET_STATUSES(), data);
     }
 
     deleteStatus(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_SKILL(id));
+        return this.deleteRequest(AppUrl.DELETE_STATUS(id));
     }
 
     updateStatus(id, data): Observable<any> {
-        return this.putRequest(AppUrl.SKILL(id), data);
+        return this.putRequest(AppUrl.STATUS(id), data);
     }
 }

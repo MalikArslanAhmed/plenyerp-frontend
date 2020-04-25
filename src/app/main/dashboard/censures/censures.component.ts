@@ -15,7 +15,7 @@ import {CensuresCreateComponent} from './censures-create/censures-create.compone
 })
 export class CensuresComponent implements OnInit {
     dialogRef: any;
-    @ViewChild(CensuresListComponent) getDisengagements: CensuresListComponent;
+    @ViewChild(CensuresListComponent) getCensures: CensuresListComponent;
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -34,7 +34,7 @@ export class CensuresComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getDisengagements.getCensures();
+            this.getCensures.getCensures();
         });
     }
 }

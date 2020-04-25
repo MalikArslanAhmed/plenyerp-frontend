@@ -138,4 +138,132 @@ export class AppUrl {
     static DELETE_SCHEDULE(id?): string {
         return AppUrl.API_URL + 'schedules/' + id;
     }
+
+    static ACAMEDIC_MAJOR(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'academics/' + id;
+        } else {
+            return AppUrl.API_URL + 'academics';
+        }
+    }
+
+    static GET_ACAMEDIC_MAJORS(): string {
+        return AppUrl.API_URL + `academics`;
+    }
+
+    static DELETE_ACAMEDIC_MAJOR(id?): string {
+        return AppUrl.API_URL + 'academics/' + id;
+    }
+
+    static RELATIONSHIP(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'relationships/' + id;
+        } else {
+            return AppUrl.API_URL + 'relationships';
+        }
+    }
+
+    static GET_RELATIONSHIPS(): string {
+        return AppUrl.API_URL + `relationships`;
+    }
+
+    static DELETE_RELATIONSHIP(id?): string {
+        return AppUrl.API_URL + 'relationships/' + id;
+    }
+
+    static CATEGORY(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'categories/' + id;
+        } else {
+            return AppUrl.API_URL + 'categories';
+        }
+    }
+
+    static GET_CATEGORIES(): string {
+        return AppUrl.API_URL + `categories`;
+    }
+
+    static DELETE_CATEGORY(id?): string {
+        return AppUrl.API_URL + 'categories/' + id;
+    }
+
+    static STATUS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'status/' + id;
+        } else {
+            return AppUrl.API_URL + 'status';
+        }
+    }
+
+    static GET_STATUSES(): string {
+        return AppUrl.API_URL + `status`;
+    }
+
+    static DELETE_STATUS(id?): string {
+        return AppUrl.API_URL + 'status/' + id;
+    }
+
+    static DISENGAGEMENT(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'disengagements/' + id;
+        } else {
+            return AppUrl.API_URL + 'disengagements';
+        }
+    }
+
+    static GET_DISENGAGEMENTS(): string {
+        return AppUrl.API_URL + `disengagements`;
+    }
+
+    static DELETE_DISENGAGEMENT(id?): string {
+        return AppUrl.API_URL + 'disengagements/' + id;
+    }
+
+    static CENSURE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'censures/' + id;
+        } else {
+            return AppUrl.API_URL + 'censures';
+        }
+    }
+
+    static GET_CENSURES(): string {
+        return AppUrl.API_URL + `censures`;
+    }
+
+    static DELETE_CENSURE(id?): string {
+        return AppUrl.API_URL + 'censures/' + id;
+    }
+
+    static ARM_OF_SERVICE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'arm-of-services/' + id;
+        } else {
+            return AppUrl.API_URL + 'arm-of-services';
+        }
+    }
+
+    static GET_ARM_OF_SERVICES(): string {
+        return AppUrl.API_URL + `arm-of-services`;
+    }
+
+    static DELETE_ARM_OF_SERVICE(id?): string {
+        return AppUrl.API_URL + 'arm-of-services/' + id;
+    }
+
+    static MEMBERSHIP(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'memberships/' + id;
+        } else {
+            return AppUrl.API_URL + 'memberships';
+        }
+    }
+
+    static GET_MEMBERSHIPS(): string {
+        return AppUrl.API_URL + `memberships`;
+    }
+
+    static DELETE_MEMBERSHIP(id?): string {
+        return AppUrl.API_URL + 'memberships/' + id;
+    }
 }

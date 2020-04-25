@@ -15,18 +15,18 @@ export class MembershipService extends BaseService {
     }
 
     addMembership(data): Observable<any> {
-        return this.postRequest(AppUrl.LANGUAGES(), data);
+        return this.postRequest(AppUrl.MEMBERSHIP(), data);
     }
 
     getMemberships(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_LANGUAGES(), data);
+        return this.getRequest(AppUrl.GET_MEMBERSHIPS(), data);
     }
 
     deleteMembership(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_LANGUAGE(id));
+        return this.deleteRequest(AppUrl.DELETE_MEMBERSHIP(id));
     }
 
     updateMembership(id, data): Observable<any> {
-        return this.putRequest(AppUrl.LANGUAGES(id), data);
+        return this.putRequest(AppUrl.MEMBERSHIP(id), data);
     }
 }

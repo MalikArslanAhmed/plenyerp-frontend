@@ -20,10 +20,10 @@
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" (click)="matDialogRef.close(statusForm); saveSkill()"
+        <button mat-button class="save-button" (click)="matDialogRef.close(statusForm); saveStatus()"
                 [disabled]="statusForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
         </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(statusForm); updateSkill()"
+        <button mat-button class="save-button" (click)="matDialogRef.close(statusForm); updateStatus()"
                 [disabled]="statusForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
         </button>
     </div>

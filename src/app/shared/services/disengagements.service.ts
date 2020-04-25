@@ -15,18 +15,18 @@ export class DisengagementsService extends BaseService {
     }
 
     addDisengagement(data): Observable<any> {
-        return this.postRequest(AppUrl.LANGUAGES(), data);
+        return this.postRequest(AppUrl.DISENGAGEMENT(), data);
     }
 
     getDisengagements(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_LANGUAGES(), data);
+        return this.getRequest(AppUrl.GET_DISENGAGEMENTS(), data);
     }
 
     deleteDisengagement(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_LANGUAGE(id));
+        return this.deleteRequest(AppUrl.DELETE_DISENGAGEMENT(id));
     }
 
     updateDisengagement(id, data): Observable<any> {
-        return this.putRequest(AppUrl.LANGUAGES(id), data);
+        return this.putRequest(AppUrl.DISENGAGEMENT(id), data);
     }
 }

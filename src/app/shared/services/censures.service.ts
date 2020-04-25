@@ -15,18 +15,18 @@ export class CensuresService extends BaseService {
     }
 
     addCensure(data): Observable<any> {
-        return this.postRequest(AppUrl.LANGUAGES(), data);
+        return this.postRequest(AppUrl.CENSURE(), data);
     }
 
     getCensures(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_LANGUAGES(), data);
+        return this.getRequest(AppUrl.GET_CENSURES(), data);
     }
 
     deleteCensure(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_LANGUAGE(id));
+        return this.deleteRequest(AppUrl.DELETE_CENSURE(id));
     }
 
     updateCensure(id, data): Observable<any> {
-        return this.putRequest(AppUrl.LANGUAGES(id), data);
+        return this.putRequest(AppUrl.CENSURE(id), data);
     }
 }

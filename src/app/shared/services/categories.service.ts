@@ -15,18 +15,18 @@ export class CategoriesService extends BaseService {
     }
 
     addCategory(data): Observable<any> {
-        return this.postRequest(AppUrl.SKILL(), data);
+        return this.postRequest(AppUrl.CATEGORY(), data);
     }
 
     getCategories(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_SKILLS(), data);
+        return this.getRequest(AppUrl.GET_CATEGORIES(), data);
     }
 
     deleteCategory(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_SKILL(id));
+        return this.deleteRequest(AppUrl.DELETE_CATEGORY(id));
     }
 
     updateCategory(id, data): Observable<any> {
-        return this.putRequest(AppUrl.SKILL(id), data);
+        return this.putRequest(AppUrl.CATEGORY(id), data);
     }
 }
