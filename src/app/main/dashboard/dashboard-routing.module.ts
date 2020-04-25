@@ -5,6 +5,7 @@ import {QualificationComponent} from "./qualification/qualification.component";
 import {SkillsComponent} from "./skills/skills.component";
 import {WorkLocationsComponent} from "./work-locations/work-locations.component";
 import {LanguagesComponent} from "./languages/languages.component";
+import {ScheduleComponent} from "./schedule/schedule.component";
 
 const routes: Routes = [
     {
@@ -40,6 +41,13 @@ const routes: Routes = [
         component: LanguagesComponent,
         data: {
             title: 'Languages'
+        },
+    },
+    {
+        path: 'schedule',
+        component: ScheduleComponent,
+        data: {
+            title: 'Schedule'
         },
     }
 ];

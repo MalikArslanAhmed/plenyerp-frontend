@@ -142,7 +142,7 @@ export const navigation: FuseNavigation[] = [
                         id: 'schedule',
                         title: 'Schedule',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/schedule'
                     },
                     {
                         id: 'academic-major',

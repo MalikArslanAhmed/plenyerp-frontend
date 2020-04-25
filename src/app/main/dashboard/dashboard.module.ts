@@ -25,6 +25,9 @@ import {UpdateWorkLocationsComponent} from './work-locations/update-work-locatio
 import {LanguagesComponent} from './languages/languages.component';
 import {LanguageCreateComponent} from './languages/language-create/language-create.component';
 import {LanguageListComponent} from './languages/language-list/language-list.component';
+import {ScheduleComponent} from './schedule/schedule.component';
+import { ScheduleCreateComponent } from './schedule/schedule-create/schedule-create.component';
+import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +42,10 @@ import {LanguageListComponent} from './languages/language-list/language-list.com
         UpdateWorkLocationsComponent,
         LanguagesComponent,
         LanguageCreateComponent,
-        LanguageListComponent
+        LanguageListComponent,
+        ScheduleComponent,
+        ScheduleCreateComponent,
+        ScheduleListComponent
     ],
     imports: [
         CommonModule,
