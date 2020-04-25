@@ -40,9 +40,12 @@ import {CategoriesCreateComponent} from './categories/categories-create/categori
 import {StatusComponent} from './status/status.component';
 import {StatusListComponent} from './status/status-list/status-list.component';
 import {StatusCreateComponent} from './status/status-create/status-create.component';
-import { DisengagementComponent } from './disengagement/disengagement.component';
-import { DisengagementListComponent } from './disengagement/disengagement-list/disengagement-list.component';
-import { DisengagementCreateComponent } from './disengagement/disengagement-create/disengagement-create.component';
+import {DisengagementComponent} from './disengagement/disengagement.component';
+import {DisengagementListComponent} from './disengagement/disengagement-list/disengagement-list.component';
+import {DisengagementCreateComponent} from './disengagement/disengagement-create/disengagement-create.component';
+import {CensuresComponent} from './censures/censures.component';
+import {CensuresListComponent} from './censures/censures-list/censures-list.component';
+import {CensuresCreateComponent} from './censures/censures-create/censures-create.component';
 
 @NgModule({
     declarations: [
@@ -75,7 +78,10 @@ import { DisengagementCreateComponent } from './disengagement/disengagement-crea
         StatusCreateComponent,
         DisengagementComponent,
         DisengagementListComponent,
-        DisengagementCreateComponent
+        DisengagementCreateComponent,
+        CensuresComponent,
+        CensuresListComponent,
+        CensuresCreateComponent
     ],
     imports: [
         CommonModule,

@@ -11,6 +11,7 @@ import {RelationshipComponent} from "./relationship/relationship.component";
 import {CategoriesComponent} from "./categories/categories.component";
 import {StatusComponent} from "./status/status.component";
 import {DisengagementComponent} from "./disengagement/disengagement.component";
+import {CensuresComponent} from "./censures/censures.component";
 
 const routes: Routes = [
     {
@@ -88,6 +89,13 @@ const routes: Routes = [
         component: DisengagementComponent,
         data: {
             title: 'Disengagement'
+        },
+    },
+    {
+        path: 'censures',
+        component: CensuresComponent,
+        data: {
+            title: 'Censures'
         },
     }
 ];
