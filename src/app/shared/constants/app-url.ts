@@ -67,6 +67,10 @@ export class AppUrl {
         }
     }
 
+    static DELETE_WORK_LOCATION(id): string {
+        return AppUrl.API_URL + `work-locations/` + id;
+    }
+
     static COUNTRIES(id?): string {
         if (id) {
             return AppUrl.API_URL + 'countries/' + id;

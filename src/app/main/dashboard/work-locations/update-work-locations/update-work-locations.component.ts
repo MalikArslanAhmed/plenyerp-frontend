@@ -30,10 +30,10 @@ export class UpdateWorkLocationsComponent implements OnInit {
                 this.updateData = _data;
             }
         } else {
-            console.log('_data', _data);
-            this.dialogTitle = 'Add Work Location at ' + _data.node.name + '\'s level';
-            if (_data.node) {
-                this.updateData = _data;
+            if (_data.node.level === 0) {
+                this.dialogTitle = 'Add New Work Location';
+            } else {
+                this.dialogTitle = 'Add Work Location inside ' + _data.node.name;
             }
         }
     }
@@ -60,9 +60,6 @@ export class UpdateWorkLocationsComponent implements OnInit {
     }
 
     updateLocation() {
-        this.workLocationForm.value['parentId'] = this.updateData.node.parentId;
-        console.log('this.workLocationForm.value', this.workLocationForm.value);
-        console.log('this.updateData', this.updateData.node.id);
         this.isSubmitted = true;
         if (!this.workLocationForm.valid) {
             this.isSubmitted = false;
@@ -78,10 +75,11 @@ export class UpdateWorkLocationsComponent implements OnInit {
     }
 
     createLocation() {
-        console.log('aaaaaaa', this.workLocationForm.value);
-        console.log('this.updateData', this.updateData);
-        this.workLocationForm.value['parentId'] = this.updateData.node.parentId;
-        console.log('this.workLocationForm', this.workLocationForm.value);
+        if (this._data.node.parentId === 0) {
+            this.workLocationForm.value['parentId'] = null;
+        } else {
+            this.workLocationForm.value['parentId'] = this._data.node.id;
+        }
         this.isSubmitted = true;
         if (!this.workLocationForm.valid) {
             this.isSubmitted = false;

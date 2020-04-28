@@ -26,51 +26,7 @@ export class WorkLocationService extends BaseService {
         return this.putRequest(AppUrl.WORK_LOCATIONS(id), data);
     }
 
-    addCountry(data): Observable<any> {
-        return this.postRequest(AppUrl.COUNTRIES(), data);
-    }
-
-    addRegion(data): Observable<any> {
-        return this.postRequest(AppUrl.REGIONS(), data);
-    }
-
-    addState(data): Observable<any> {
-        return this.postRequest(AppUrl.STATES(), data);
-    }
-
-    addLga(data): Observable<any> {
-        return this.postRequest(AppUrl.LGAS(), data);
-    }
-
-    deleteCountry(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_COUNTRY(id));
-    }
-
-    deleteRegion(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_REGION(id));
-    }
-
-    deleteState(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_STATE(id));
-    }
-
-    deleteLga(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_LGA(id));
-    }
-
-    updateCountry(id, data): Observable<any> {
-        return this.putRequest(AppUrl.COUNTRIES(id), data);
-    }
-
-    updateRegion(id, data): Observable<any> {
-        return this.putRequest(AppUrl.REGIONS(id), data);
-    }
-
-    updateState(id, data): Observable<any> {
-        return this.putRequest(AppUrl.STATES(id), data);
-    }
-
-    updateLga(id, data): Observable<any> {
-        return this.putRequest(AppUrl.LGAS(id), data);
+    deleteWorkLocation(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_WORK_LOCATION(id));
     }
 }

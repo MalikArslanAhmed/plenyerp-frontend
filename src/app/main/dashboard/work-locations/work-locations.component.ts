@@ -20,44 +20,6 @@ interface WorkLocationNode {
     children?: WorkLocationNode[];
 }
 
-/*const TREE_DATA: WorkLocationNode[] = [
-    {
-        id: 1,
-        isChildEnabled: true,
-        name: 'Fruit',
-        children: [
-            {name: 'Apple', id: 1, isChildEnabled: true},
-            {name: 'Banana', id: 1, isChildEnabled: true},
-            {name: 'Fruit loops', id: 1, isChildEnabled: true}
-        ]
-    },
-    {
-        id: 2,
-        isChildEnabled: true,
-        name: 'Vegetables',
-        children: [
-            {
-                id: 2,
-                isChildEnabled: true,
-                name: 'Green',
-                children: [
-                    {name: 'Broccoli', id: 1, isChildEnabled: true},
-                    {name: 'Brussels sprouts', id: 1, isChildEnabled: true},
-                ]
-            },
-            {
-                id: 2,
-                isChildEnabled: true,
-                name: 'Orange',
-                children: [
-                    {name: 'Pumpkins', id: 1, isChildEnabled: true},
-                    {name: 'Carrots', id: 1, isChildEnabled: true}
-                ]
-            },
-        ]
-    },
-];*/
-// console.log('this.getWorkLocations()', this.workLocations);
 const TREE_DATA: WorkLocationNode[] = [];
 
 /** Flat node with expandable and level information */
@@ -105,25 +67,26 @@ export class WorkLocationsComponent implements OnInit {
     getWorkLocations() {
         this.workLocationService.getWorkLocations({'page': -1}).subscribe(data => {
             this.dataSource.data = [{
-                id: 1,
+                id: 0,
                 isChildEnabled: true,
-                parentId: 1,
+                parentId: 0,
                 name: 'Work Locations',
-                children: this.workLocationData(data.items)
+                children: this.workLocationData(data)
             }];
         });
     }
 
     workLocationData(data) {
-        data.forEach(workLocation => {
-            workLocation['children'] = workLocation['subCategories'];
-            this.workLocationData(workLocation['children']);
-        });
-        return data;
+        if (data && data.length > 0) {
+            data.forEach(workLocation => {
+                workLocation['children'] = workLocation['subCategories'];
+                this.workLocationData(workLocation['children']);
+            });
+            return data;
+        }
     }
 
     addItem(node) {
-        console.log(node);
         this.dialogRef = this._matDialog.open(UpdateWorkLocationsComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE', node: node}
@@ -137,7 +100,6 @@ export class WorkLocationsComponent implements OnInit {
     }
 
     editItem(node) {
-        console.log('node', node);
         this.dialogRef = this._matDialog.open(UpdateWorkLocationsComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', node: node}
@@ -151,6 +113,10 @@ export class WorkLocationsComponent implements OnInit {
     }
 
     deleteItem(node) {
-        console.log('node', node);
+        this.workLocationService.deleteWorkLocation(node.id).subscribe(data => {
+            if (data) {
+                this.getWorkLocations();
+            }
+        })
     }
 }
