@@ -18,6 +18,10 @@ export class WorkLocationService extends BaseService {
         return this.getRequest(AppUrl.GET_WORK_LOCATIONS(), data);
     }
 
+    addWorkLocations(data): Observable<any> {
+        return this.postRequest(AppUrl.WORK_LOCATIONS(), data);
+    }
+
     addCountry(data): Observable<any> {
         return this.postRequest(AppUrl.COUNTRIES(), data);
     }

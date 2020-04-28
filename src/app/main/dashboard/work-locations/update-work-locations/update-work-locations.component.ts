@@ -25,7 +25,13 @@ export class UpdateWorkLocationsComponent implements OnInit {
                 private workLocationService: WorkLocationService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit Work Location';
+            this.dialogTitle = 'Edit Work Location ' + _data.node.name;
+            if (_data.node) {
+                this.updateData = _data;
+            }
+        } else {
+            console.log('_data', _data);
+            this.dialogTitle = 'Add Work Location in ' + _data.node.name;
             if (_data.node) {
                 this.updateData = _data;
             }
@@ -52,7 +58,7 @@ export class UpdateWorkLocationsComponent implements OnInit {
     }
 
     updateLocation() {
-        if (this.updateData.updationType === 'COUNTRY') {
+        /*if (this.updateData.updationType === 'COUNTRY') {
             this.workLocationService.updateCountry(this.updateData.selectedId, this.workLocationForm.value).subscribe(data => {
                 console.log('data', data);
             })
@@ -68,6 +74,23 @@ export class UpdateWorkLocationsComponent implements OnInit {
             this.workLocationService.updateLga(this.updateData.selectedId, this.workLocationForm.value).subscribe(data => {
                 console.log('data', data);
             })
+        }*/
+    }
+
+    createLocation() {
+        console.log('aaaaaaa', this.workLocationForm.value.name);
+        console.log('this.updateData', this.updateData);
+        this.isSubmitted = true;
+        if (!this.workLocationForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.workLocationService.addWorkLocations(this.workLocationForm.value).subscribe(data => {
+                this.updateData = undefined;
+                this.workLocationForm.reset();
+                this.isSubmitted = false;
+            });
         }
     }
 }

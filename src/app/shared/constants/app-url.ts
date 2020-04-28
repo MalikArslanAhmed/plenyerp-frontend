@@ -56,7 +56,11 @@ export class AppUrl {
     }
 
     static GET_WORK_LOCATIONS(): string {
-        return AppUrl.API_URL + `locations`;
+        return AppUrl.API_URL + `work-locations`;
+    }
+
+    static WORK_LOCATIONS(): string {
+        return AppUrl.API_URL + `work-locations`;
     }
 
     static COUNTRIES(id?): string {
