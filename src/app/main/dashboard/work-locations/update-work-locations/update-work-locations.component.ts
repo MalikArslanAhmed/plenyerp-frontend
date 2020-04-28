@@ -31,7 +31,7 @@ export class UpdateWorkLocationsComponent implements OnInit {
             }
         } else {
             console.log('_data', _data);
-            this.dialogTitle = 'Add Work Location in ' + _data.node.name;
+            this.dialogTitle = 'Add Work Location at ' + _data.node.name + '\'s level';
             if (_data.node) {
                 this.updateData = _data;
             }
@@ -45,41 +45,43 @@ export class UpdateWorkLocationsComponent implements OnInit {
 
     refresh() {
         this.workLocationForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isChildEnabled': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.workLocationForm.patchValue({
-                'name': this.updateData.node.item
+                'name': this.updateData.node.name,
+                'isChildEnabled': this.updateData.node.isChildEnabled,
             });
         }
     }
 
     updateLocation() {
-        /*if (this.updateData.updationType === 'COUNTRY') {
-            this.workLocationService.updateCountry(this.updateData.selectedId, this.workLocationForm.value).subscribe(data => {
-                console.log('data', data);
-            })
-        } else if (this.updateData.updationType === 'REGION') {
-            this.workLocationService.updateRegion(this.updateData.selectedId, this.workLocationForm.value).subscribe(data => {
-                console.log('data', data);
-            })
-        } else if (this.updateData.updationType === 'STATE') {
-            this.workLocationService.updateState(this.updateData.selectedId, this.workLocationForm.value).subscribe(data => {
-                console.log('data', data);
-            })
-        } else if (this.updateData.updationType === 'LGA') {
-            this.workLocationService.updateLga(this.updateData.selectedId, this.workLocationForm.value).subscribe(data => {
-                console.log('data', data);
-            })
-        }*/
+        this.workLocationForm.value['parentId'] = this.updateData.node.parentId;
+        console.log('this.workLocationForm.value', this.workLocationForm.value);
+        console.log('this.updateData', this.updateData.node.id);
+        this.isSubmitted = true;
+        if (!this.workLocationForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.workLocationService.updateWorkLocations(this.updateData.node.id, this.workLocationForm.value).subscribe(data => {
+                this.updateData = undefined;
+                this.workLocationForm.reset();
+                this.isSubmitted = false;
+            });
+        }
     }
 
     createLocation() {
-        console.log('aaaaaaa', this.workLocationForm.value.name);
+        console.log('aaaaaaa', this.workLocationForm.value);
         console.log('this.updateData', this.updateData);
+        this.workLocationForm.value['parentId'] = this.updateData.node.parentId;
+        console.log('this.workLocationForm', this.workLocationForm.value);
         this.isSubmitted = true;
         if (!this.workLocationForm.valid) {
             this.isSubmitted = false;

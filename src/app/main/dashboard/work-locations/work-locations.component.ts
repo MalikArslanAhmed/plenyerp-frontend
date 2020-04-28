@@ -15,6 +15,7 @@ import {UpdateWorkLocationsComponent} from './update-work-locations/update-work-
 interface WorkLocationNode {
     id: number;
     isChildEnabled: boolean;
+    parentId: number;
     name: string;
     children?: WorkLocationNode[];
 }
@@ -74,12 +75,14 @@ interface ExampleFlatNode {
     animations: fuseAnimations
 })
 export class WorkLocationsComponent implements OnInit {
-    checkLevel = 0;
     private _transformer = (node: WorkLocationNode, level: number) => {
         return {
             expandable: !!node.children && node.children.length > 0,
             name: node.name,
-            level: level
+            level: level,
+            id: node.id,
+            isChildEnabled: node.isChildEnabled,
+            parentId: node.parentId
         };
     }
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);
@@ -88,7 +91,6 @@ export class WorkLocationsComponent implements OnInit {
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
     dialogRef: any;
-    workLocations = [];
 
     constructor(private workLocationService: WorkLocationService,
                 private _fuseSidebarService: FuseSidebarService,
@@ -98,14 +100,17 @@ export class WorkLocationsComponent implements OnInit {
 
     ngOnInit(): void {
         this.getWorkLocations();
-        // this.dataSource.data = TREE_DATA;
     }
 
     getWorkLocations() {
         this.workLocationService.getWorkLocations({'page': -1}).subscribe(data => {
-            this.dataSource.data = this.workLocationData(data.items);
-            // console.log('this.dataSource', this.dataSource);
-            // console.log('this.dataSource.data', this.dataSource.data);
+            this.dataSource.data = [{
+                id: 1,
+                isChildEnabled: true,
+                parentId: 1,
+                name: 'Work Locations',
+                children: this.workLocationData(data.items)
+            }];
         });
     }
 
@@ -118,7 +123,6 @@ export class WorkLocationsComponent implements OnInit {
     }
 
     addItem(node) {
-        const data = this.getSelectedItem(node);
         console.log(node);
         this.dialogRef = this._matDialog.open(UpdateWorkLocationsComponent, {
             panelClass: 'contact-form-dialog',
@@ -128,7 +132,7 @@ export class WorkLocationsComponent implements OnInit {
             if (!response) {
                 return;
             }
-            // this.getWorkLocations();
+            this.getWorkLocations();
         });
     }
 
@@ -142,31 +146,11 @@ export class WorkLocationsComponent implements OnInit {
             if (!response) {
                 return;
             }
-            // this.getWorkLocations();
+            this.getWorkLocations();
         });
     }
 
     deleteItem(node) {
         console.log('node', node);
     }
-
-    getSelectedItem(node) {
-        console.log('data', node.level);
-        console.log('this.dataSource.data', this.dataSource.data);
-        if (this.dataSource.data && this.dataSource.data.length > 0) {
-            // console.log('this.dataSource.data', this.dataSource.data[node.level]);
-            // this.getSelectedLevelData(node.level, this.dataSource.data);
-        }
-        return node;
-    }
-
-    /*getSelectedLevelData(level) {
-        let selectedLevelData = [];
-        this.dataSource.data.forEach(data => {
-            console.log('data1111111', data);
-            // console.log('11111111', this.workLocationData(data['children']));
-            selectedLevelData.push(this.workLocationData(data['children']));
-        });
-        console.log('selectedLevelData', selectedLevelData);
-    }*/
 }

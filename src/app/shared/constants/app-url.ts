@@ -59,8 +59,12 @@ export class AppUrl {
         return AppUrl.API_URL + `work-locations`;
     }
 
-    static WORK_LOCATIONS(): string {
-        return AppUrl.API_URL + `work-locations`;
+    static WORK_LOCATIONS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `work-locations/` + id;
+        } else {
+            return AppUrl.API_URL + `work-locations`;
+        }
     }
 
     static COUNTRIES(id?): string {

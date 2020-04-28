@@ -22,6 +22,10 @@ export class WorkLocationService extends BaseService {
         return this.postRequest(AppUrl.WORK_LOCATIONS(), data);
     }
 
+    updateWorkLocations(id, data): Observable<any> {
+        return this.putRequest(AppUrl.WORK_LOCATIONS(id), data);
+    }
+
     addCountry(data): Observable<any> {
         return this.postRequest(AppUrl.COUNTRIES(), data);
     }

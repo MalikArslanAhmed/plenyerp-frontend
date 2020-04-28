@@ -17,6 +17,10 @@
                     <input name="name" formControlName="name" matInput required>
                 </mat-form-field>
             </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-label style="margin-right: 20px">Child Enabled</mat-label>
+                <mat-slide-toggle formControlName="isChildEnabled"></mat-slide-toggle>
+            </div>
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
@@ -24,7 +28,7 @@
                 [disabled]="workLocationForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
         </button>
         <button mat-button class="save-button" (click)="matDialogRef.close(workLocationForm); createLocation()"
-                [disabled]="workLocationForm.invalid" aria-label="Update" *ngIf="this.action === 'CREATE'">ADD
+                [disabled]="workLocationForm.invalid" aria-label="Add" *ngIf="this.action === 'CREATE'">ADD
         </button>
     </div>
 </div>

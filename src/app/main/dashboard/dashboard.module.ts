@@ -52,6 +52,7 @@ import {ArmOfServiceListComponent} from './arm-of-service/arm-of-service-list/ar
 import {MembershipComponent} from './membership/membership.component';
 import {MembershipListComponent} from './membership/membership-list/membership-list.component';
 import {MembershipCreateComponent} from './membership/membership-create/membership-create.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
     declarations: [
@@ -110,7 +111,8 @@ import {MembershipCreateComponent} from './membership/membership-create/membersh
         MatFormFieldModule,
         MatInputModule,
         MatTooltipModule,
-        MatTreeModule
+        MatTreeModule,
+        MatSlideToggleModule
     ]
 })
 export class DashboardModule {
