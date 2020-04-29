@@ -1,11 +1,11 @@
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {WorkLocationService} from "../../../shared/services/work-location.service";
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {FormGroup} from "@angular/forms";
-import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.service";
-import {MatDialog} from "@angular/material/dialog";
+import {WorkLocationService} from '../../../shared/services/work-location.service';
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {FormGroup} from '@angular/forms';
+import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
+import {MatDialog} from '@angular/material/dialog';
 import {UpdateWorkLocationsComponent} from './update-work-locations/update-work-locations.component';
 
 /**

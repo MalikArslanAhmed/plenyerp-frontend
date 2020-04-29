@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
 import {SkillService} from 'app/shared/services/skill.service';
 import {SkillCreateComponent} from '../skill-create/skill-create.component';
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {fuseAnimations} from '../../../../../@fuse/animations';
 
 @Component({
     selector: 'app-skill-list',

@@ -278,4 +278,19 @@ export class AppUrl {
     static DELETE_MEMBERSHIP(id?): string {
         return AppUrl.API_URL + 'memberships/' + id;
     }
+    static SALARY_SCALES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'salary-scales/' + id;
+        } else {
+            return AppUrl.API_URL + 'salary-scales';
+        }
+    }
+
+    static GET_SALARY_SCALES(): string {
+        return AppUrl.API_URL + `salary-scales`;
+    }
+
+    static DELETE_SALARY_SCALES(id?): string {
+        return AppUrl.API_URL + 'salary-scales/' + id;
+    }
 }

@@ -4,23 +4,23 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
 import {QualificationComponent} from './qualification/qualification.component';
 import {SkillsComponent} from './skills/skills.component';
-import {FuseSharedModule} from "../../../@fuse/shared.module";
+import {FuseSharedModule} from '../../../@fuse/shared.module';
 import {QualificationListComponent} from './qualification/qualification-list/qualification-list.component';
-import {MatTableModule} from "@angular/material/table";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
-import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
+import {MatTableModule} from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {QualificationCreateComponent} from './qualification/qualification-create/qualification-create.component';
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {SkillCreateComponent} from './skills/skill-create/skill-create.component';
 import {SkillListComponent} from './skills/skill-list/skill-list.component';
 import {WorkLocationsComponent} from './work-locations/work-locations.component';
-import {MatTreeModule} from "@angular/material/tree";
+import {MatTreeModule} from '@angular/material/tree';
 import {UpdateWorkLocationsComponent} from './work-locations/update-work-locations/update-work-locations.component';
 import {LanguagesComponent} from './languages/languages.component';
 import {LanguageCreateComponent} from './languages/language-create/language-create.component';
@@ -52,7 +52,10 @@ import {ArmOfServiceListComponent} from './arm-of-service/arm-of-service-list/ar
 import {MembershipComponent} from './membership/membership.component';
 import {MembershipListComponent} from './membership/membership-list/membership-list.component';
 import {MembershipCreateComponent} from './membership/membership-create/membership-create.component';
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {SalaryScalesComponent} from './salary-scales/salary-scales.component';
+import {SalaryScalesListComponent} from './salary-scales/salary-scales-list/salary-scales-list.component';
+import {SalaryScalesCreateComponent} from './salary-scales/salary-scales-create/salary-scales-create.component';
 
 @NgModule({
     declarations: [
@@ -94,7 +97,11 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
         ArmOfServiceListComponent,
         MembershipComponent,
         MembershipListComponent,
-        MembershipCreateComponent
+        MembershipCreateComponent,
+        SalaryScalesComponent,
+        SalaryScalesListComponent,
+        SalaryScalesCreateComponent
+
     ],
     imports: [
         CommonModule,

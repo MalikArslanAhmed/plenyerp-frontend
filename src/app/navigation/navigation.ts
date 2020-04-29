@@ -91,25 +91,25 @@ export const navigation: FuseNavigation[] = [
                         id: 'designations',
                         title: 'Designations',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/analytics'
                     },
                     {
                         id: 'salary-scales',
                         title: 'Salary Scales',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/salary-scales'
                     },
                     {
                         id: 'grade-level',
                         title: 'Grade Level',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/analytics'
                     },
                     {
                         id: 'gl-step',
                         title: 'GL Step',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/analytics'
                     }
                 ]
             },

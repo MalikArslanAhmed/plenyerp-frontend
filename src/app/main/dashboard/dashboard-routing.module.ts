@@ -1,19 +1,20 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
-import {QualificationComponent} from "./qualification/qualification.component";
-import {SkillsComponent} from "./skills/skills.component";
-import {WorkLocationsComponent} from "./work-locations/work-locations.component";
-import {LanguagesComponent} from "./languages/languages.component";
-import {ScheduleComponent} from "./schedule/schedule.component";
-import {AcademicMajorComponent} from "./academic-major/academic-major.component";
-import {RelationshipComponent} from "./relationship/relationship.component";
-import {CategoriesComponent} from "./categories/categories.component";
-import {StatusComponent} from "./status/status.component";
-import {DisengagementComponent} from "./disengagement/disengagement.component";
-import {CensuresComponent} from "./censures/censures.component";
-import {ArmOfServiceComponent} from "./arm-of-service/arm-of-service.component";
-import {MembershipComponent} from "./membership/membership.component";
+import {QualificationComponent} from './qualification/qualification.component';
+import {SkillsComponent} from './skills/skills.component';
+import {WorkLocationsComponent} from './work-locations/work-locations.component';
+import {LanguagesComponent} from './languages/languages.component';
+import {ScheduleComponent} from './schedule/schedule.component';
+import {AcademicMajorComponent} from './academic-major/academic-major.component';
+import {RelationshipComponent} from './relationship/relationship.component';
+import {CategoriesComponent} from './categories/categories.component';
+import {StatusComponent} from './status/status.component';
+import {DisengagementComponent} from './disengagement/disengagement.component';
+import {CensuresComponent} from './censures/censures.component';
+import {ArmOfServiceComponent} from './arm-of-service/arm-of-service.component';
+import {MembershipComponent} from './membership/membership.component';
+import {SalaryScalesComponent} from './salary-scales/salary-scales.component';
 
 const routes: Routes = [
     {
@@ -113,7 +114,15 @@ const routes: Routes = [
         data: {
             title: 'Membership'
         },
+    },
+    {
+        path: 'salary-scales',
+        component: SalaryScalesComponent,
+        data: {
+            title: 'Salary Scales'
+        },
     }
+
 ];
 
 @NgModule({
