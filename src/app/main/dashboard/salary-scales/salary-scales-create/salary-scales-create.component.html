@@ -10,13 +10,44 @@
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
         <form [formGroup]="salaryScalesForm">
-            <div fxLayout="row" fxLayoutAlign="start start">
+            <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Salary Scales</mat-label>
-                    <mat-icon matSuffix class="secondary-text">build</mat-icon>
-                    <input name="name" formControlName="name" matInput required>
+                    <mat-label>Title</mat-label>
+                    <input matInput formControlName="name" name="name" required>
                 </mat-form-field>
             </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Levels</mat-label>
+                    <input matInput formControlName="numberOfLevels" name="numberOfLevels" required>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Steps/Levels</mat-label>
+                    <input matInput formControlName="numberOfSteps" name="numberOfSteps" required>
+                </mat-form-field>
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-checkbox name="active" formControlName="active">Active ?</mat-checkbox>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-checkbox name="isAutomaticCreate" formControlName="isAutomaticCreate">Auto create levels and steps</mat-checkbox>
+            </div>
+            <ng-container *ngIf="salaryScalesForm.get('isAutomaticCreate').value === true ? salaryScalesForm.get('isAutomaticCreate').value === true : salaryScalesForm.get('retireType').patchValue('')">
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Select Retire Types</mat-label>
+                        <select  name="retireType" formControlName="retireType" matNativeControl>
+                            <option *ngFor="let retireTypeData of retireTypesData" [value]="retireTypeData.value">
+                                {{retireTypeData.name}}
+                            </option>
+                        </select>
+                    </mat-form-field>
+                </div>
+            </ng-container>
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">

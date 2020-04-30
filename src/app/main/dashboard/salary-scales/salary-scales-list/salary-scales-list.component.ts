@@ -29,7 +29,7 @@ export class SalaryScalesListComponent implements OnInit {
     getSalaryScales() {
         this.salaryScalesService.getSalaryScales({'page': -1}).subscribe(data => {
             this.salaryScales = data;
-            console.log('---->>>', this.salaryScales);
+            // console.log('---->>>', this.salaryScales);
 
             if (this.salaryScales && this.salaryScales.length > 0) {
                 let i = 1;
