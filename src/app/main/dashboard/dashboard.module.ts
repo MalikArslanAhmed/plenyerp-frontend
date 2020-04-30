@@ -56,6 +56,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {SalaryScalesComponent} from './salary-scales/salary-scales.component';
 import {SalaryScalesListComponent} from './salary-scales/salary-scales-list/salary-scales-list.component';
 import {SalaryScalesCreateComponent} from './salary-scales/salary-scales-create/salary-scales-create.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
     declarations: [
@@ -119,7 +121,9 @@ import {SalaryScalesCreateComponent} from './salary-scales/salary-scales-create/
         MatInputModule,
         MatTooltipModule,
         MatTreeModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatGridListModule,
+        MatTabsModule
     ]
 })
 export class DashboardModule {

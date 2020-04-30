@@ -17,13 +17,18 @@ export class SalaryScalesListComponent implements OnInit {
     salaryScales = [];
     displayedColumns = ['id', 'name', 'actions'];
     dialogRef: any;
-
+    gradeLevels = [];
+    displayedGradeLevelColumns = ['id', 'name', 'actions'];
+    stepsLevels = [];
+    displayedStepsLevelColumns = ['id', 'name', 'actions'];
+    selectedIndex = 0;
     constructor(private salaryScalesService: SalaryScalesService,
                 private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
         this.getSalaryScales();
+
     }
 
     getSalaryScales() {
@@ -38,6 +43,7 @@ export class SalaryScalesListComponent implements OnInit {
                     i++;
                 });
             }
+            this.goToGradeLevel(this.salaryScales[this.selectedIndex]);
         });
     }
 
@@ -60,5 +66,65 @@ export class SalaryScalesListComponent implements OnInit {
             }
             this.getSalaryScales();
         });
+    }
+    goToGradeLevel(value) {
+        this.gradeLevels = [];
+        this.salaryScales.forEach( v => {
+            if (value.id === v.id) {
+                v['isSelected'] = true;
+            }
+            if (value.id !== v.id) {
+                v['isSelected'] = false;
+            }
+            this.gradeLevels = value.gradeLevels ;
+            if (this.gradeLevels && this.gradeLevels.length > 0) {
+                let i = 1;
+                this.gradeLevels.forEach(gradeL => {
+                    gradeL['sno'] = i;
+                    i++;
+                });
+            }
+            this.goToStepLevel(this.gradeLevels[this.selectedIndex]);
+        });
+    }
+    goToStepLevel(value) {
+        this.stepsLevels = []
+        this.gradeLevels.forEach( v => {
+            if (value.id === v.id) {
+                v['isSelected'] = true;
+            }
+            if (value.id !== v.id) {
+                v['isSelected'] = false;
+            }
+            this.stepsLevels = value.gradeLevelSteps;
+            if (this.stepsLevels && this.stepsLevels.length > 0) {
+                let i = 1;
+                this.stepsLevels.forEach(stepL => {
+                    stepL['sno'] = i;
+                    i++;
+                });
+            }
+            console.log('-->>step value', this.stepsLevels);
+        });
+    }
+
+    editGradeLevel(salaryScale) {
+        // this.dialogRef = this._matDialog.open(SalaryScalesCreateComponent, {
+        //     panelClass: 'contact-form-dialog',
+        //     data: {action: 'EDIT', salaryScale: salaryScale},
+        // });
+        // this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+        //     if (!response) {
+        //         return;
+        //     }
+        //     this.getSalaryScales();
+        // });
+    }
+    deleteGradeLevel(id) {
+        // this.salaryScalesService.deleteSalaryScales(id).subscribe(data => {
+        //     if (data) {
+        //         this.getSalaryScales();
+        //     }
+        // });
     }
 }

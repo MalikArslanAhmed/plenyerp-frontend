@@ -43,3 +43,32 @@ app-skill-list {
         }
     }
 }
+.salary-scales{
+    display: flex;
+    flex-flow: row;
+    .salary-scales-list{
+        width: 50%;
+        &:first-child{
+            box-shadow: 1px 1px 0 0 #eee;
+        }
+    }
+    .salary-scales-grade-list{
+
+    }
+    .salary-scales-grade-step-list{
+
+    }
+    .grade-levels {
+        position: relative!important;
+        margin-top: 0.8rem;
+        .add-grade-level-btn{
+            position: absolute!important;
+            right: 10px;
+            top: 5px;
+        }
+    }
+
+}
+.blueColor{
+    color: blue;
+}
