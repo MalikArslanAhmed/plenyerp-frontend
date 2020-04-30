@@ -52,7 +52,7 @@
 
         <mat-tab-group animationDuration="0ms">
             <mat-tab label="Grade">
-               <mat-table [dataSource]="gradeLevels" style="margin: 2rem 1rem 0 1rem">
+               <mat-table [dataSource]="gradeLevels" style="margin: -8px 1rem 0 1rem">
                    <ng-container matColumnDef="id">
                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
@@ -93,7 +93,7 @@
                </mat-table>
             </mat-tab>
             <mat-tab label="Steps">
-                <mat-table [dataSource]="stepsLevels" style="margin: 2rem 1rem 0 1rem">
+                <mat-table [dataSource]="stepsLevels" style="margin: -8px 1rem 0 1rem">
                     <ng-container matColumnDef="id">
                         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
                         <mat-cell fxHide fxShow.gt-sm *matCellDef="let stepsLevel">
