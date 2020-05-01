@@ -47,8 +47,9 @@ app-skill-list {
     display: flex;
     flex-flow: row;
     .salary-scales-list{
-        width: 50%;
+        width: 60%;
         &:first-child{
+            width: 40%;
             box-shadow: 1px 1px 0 0 #eee;
         }
     }
@@ -61,10 +62,23 @@ app-skill-list {
     .grade-levels {
         position: relative!important;
         margin-top: 0.8rem;
+        button{
+            background-color: #fff!important;
+        }
         .add-grade-level-btn{
             position: absolute!important;
             right: 10px;
             top: 5px;
+            background-color: #fff!important;
+            z-index: 3;
+            &:hover{
+                background-color: white!important;
+            }
+        }
+        mat-table{
+            mat-header-cell{
+                padding-right: 10px!important;
+            }
         }
     }
 

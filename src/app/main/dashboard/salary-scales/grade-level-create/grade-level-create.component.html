@@ -1,0 +1,65 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="gradeLevelForm">
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Title</mat-label>
+                    <input matInput formControlName="name" name="name" required>
+                </mat-form-field>
+            </div>
+            <ng-container>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Select Retire Types</mat-label>
+                        <select  name="retireType" formControlName="retireType" matNativeControl required>
+                            <option *ngFor="let retireTypeData of retireTypesData" [value]="retireTypeData.value">
+                                {{retireTypeData.name}}
+                            </option>
+                        </select>
+                    </mat-form-field>
+                </div>
+            </ng-container>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Increment Due</mat-label>
+                    <input matInput formControlName="incrementDue" name="incrementDue" required>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Promotion Due</mat-label>
+                    <input matInput formControlName="promotionDue" name="promotionDue" required>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Confirm After</mat-label>
+                    <input matInput formControlName="confirmAfter" name="confirmAfter" required>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Retire After</mat-label>
+                    <input matInput formControlName="retireAfter" name="retireAfter" required>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close(gradeLevelForm); saveGradeLevel()"
+                [disabled]="gradeLevelForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(gradeLevelForm); updateGradeLevel()"
+                [disabled]="gradeLevelForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

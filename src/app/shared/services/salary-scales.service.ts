@@ -29,4 +29,23 @@ export class SalaryScalesService extends BaseService {
     updateSalaryScales(id, data): Observable<any> {
         return this.putRequest(AppUrl.SALARY_SCALES(id), data);
     }
+    addGradeLevel(data): Observable<any> {
+        return this.postRequest(AppUrl.GRADE_LEVEL(), data);
+    }
+    updateGradeLevel(id, data): Observable<any> {
+        return this.putRequest(AppUrl.GRADE_LEVEL(id), data);
+    }
+    deleteGradeLevel(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_GRADE_LEVEL(id));
+    }
+
+    addStepLevel(data): Observable<any> {
+        return this.postRequest(AppUrl.STEP_LEVEL(), data);
+    }
+    updateStepLevel(id, data): Observable<any> {
+        return this.putRequest(AppUrl.STEP_LEVEL(id), data);
+    }
+    deleteStepLevel(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_STEP_LEVEL(id));
+    }
 }

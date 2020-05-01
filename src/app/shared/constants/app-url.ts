@@ -293,4 +293,25 @@ export class AppUrl {
     static DELETE_SALARY_SCALES(id?): string {
         return AppUrl.API_URL + 'salary-scales/' + id;
     }
+    static GRADE_LEVEL(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'grade-levels/' + id;
+        } else {
+            return AppUrl.API_URL + 'grade-levels';
+        }
+    }
+    static DELETE_GRADE_LEVEL(id?): string {
+        return AppUrl.API_URL + 'grade-levels/' + id;
+    }
+
+    static STEP_LEVEL(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'grade-levels-steps/' + id;
+        } else {
+            return AppUrl.API_URL + 'grade-levels-steps';
+        }
+    }
+    static DELETE_STEP_LEVEL(id?): string {
+        return AppUrl.API_URL + 'grade-levels-steps/' + id;
+    }
 }
