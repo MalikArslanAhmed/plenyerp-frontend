@@ -40,14 +40,16 @@ export class AcdemicMajorCreateComponent implements OnInit {
 
     refresh() {
         this.academicMajorForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.academicMajorForm.patchValue({
-                'name': this.updateData.academicMajor.name
+                'name': this.updateData.academicMajor.name,
+                'isActive': this.updateData.academicMajor.isActive
             });
         }
     }

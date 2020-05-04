@@ -41,14 +41,16 @@ export class StatusCreateComponent implements OnInit {
 
     refresh() {
         this.statusForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.statusForm.patchValue({
-                'name': this.updateData.status.name
+                'name': this.updateData.status.name,
+                'isActive': this.updateData.status.isActive
             });
         }
     }

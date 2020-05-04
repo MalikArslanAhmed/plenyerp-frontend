@@ -14,7 +14,7 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 })
 export class ArmOfServiceListComponent implements OnInit {
     armOfServices = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private armOfServiceService: ArmOfServiceService,

@@ -14,7 +14,7 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 })
 export class ScheduleListComponent implements OnInit {
     schedules = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private scheduleService: ScheduleService,

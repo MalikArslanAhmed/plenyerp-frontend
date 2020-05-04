@@ -14,7 +14,7 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 })
 export class DisengagementListComponent implements OnInit {
     disengagements = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private disengagementService: DisengagementsService,

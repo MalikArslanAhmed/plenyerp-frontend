@@ -14,7 +14,7 @@ import {CategoriesCreateComponent} from '../categories-create/categories-create.
 })
 export class CategoriesListComponent implements OnInit {
     categories = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private categoriesService: CategoriesService,

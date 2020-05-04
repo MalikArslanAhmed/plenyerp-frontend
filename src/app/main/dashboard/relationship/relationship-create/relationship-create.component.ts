@@ -37,14 +37,16 @@ export class RelationshipCreateComponent implements OnInit {
 
     refresh() {
         this.relationshipForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.relationshipForm.patchValue({
-                'name': this.updateData.relationship.name
+                'name': this.updateData.relationship.name,
+                'isActive': this.updateData.relationship.isActive
             });
         }
     }

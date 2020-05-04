@@ -14,7 +14,7 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 })
 export class CensuresListComponent implements OnInit {
     censures = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private censuresService: CensuresService,

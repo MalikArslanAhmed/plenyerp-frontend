@@ -14,7 +14,7 @@ import {MembershipService} from "../../../../shared/services/membership.service"
 })
 export class MembershipListComponent implements OnInit {
     memberships = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private membershipService: MembershipService,

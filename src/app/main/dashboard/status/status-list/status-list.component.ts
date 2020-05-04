@@ -14,7 +14,7 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 })
 export class StatusListComponent implements OnInit {
     statuses = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private statusService: StatusService,

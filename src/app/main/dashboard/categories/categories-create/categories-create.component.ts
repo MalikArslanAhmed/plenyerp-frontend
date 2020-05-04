@@ -40,14 +40,16 @@ export class CategoriesCreateComponent implements OnInit {
 
     refresh() {
         this.categoriesForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.categoriesForm.patchValue({
-                'name': this.updateData.category.name
+                'name': this.updateData.category.name,
+                'isActive': this.updateData.category.isActive
             });
         }
     }

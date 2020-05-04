@@ -41,14 +41,16 @@ export class SkillCreateComponent implements OnInit {
 
     refresh() {
         this.skillForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.skillForm.patchValue({
-                'name': this.updateData.skill.name
+                'name': this.updateData.skill.name,
+                'isActive': this.updateData.skill.isActive
             });
         }
     }

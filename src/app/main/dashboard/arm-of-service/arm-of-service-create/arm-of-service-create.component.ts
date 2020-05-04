@@ -40,14 +40,16 @@ export class ArmOfServiceCreateComponent implements OnInit {
 
     refresh() {
         this.armOfServiceForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.armOfServiceForm.patchValue({
-                'name': this.updateData.armOfService.name
+                'name': this.updateData.armOfService.name,
+                'isActive': this.updateData.armOfService.isActive
             });
         }
     }

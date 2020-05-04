@@ -40,14 +40,16 @@ export class ScheduleCreateComponent implements OnInit {
 
     refresh() {
         this.scheduleForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.scheduleForm.patchValue({
-                'name': this.updateData.schedule.name
+                'name': this.updateData.schedule.name,
+                'isActive': this.updateData.schedule.isActive
             });
         }
     }
