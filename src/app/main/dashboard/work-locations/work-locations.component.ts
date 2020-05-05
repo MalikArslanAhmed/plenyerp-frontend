@@ -1,5 +1,5 @@
 import {FlatTreeControl} from '@angular/cdk/tree';
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {WorkLocationService} from '../../../shared/services/work-location.service';
 import {fuseAnimations} from '../../../../@fuse/animations';
@@ -52,6 +52,7 @@ export class WorkLocationsComponent implements OnInit {
     dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
     dialogRef: any;
+    @ViewChild('tree') tree;
 
     constructor(private workLocationService: WorkLocationService,
                 private _fuseSidebarService: FuseSidebarService,
@@ -72,6 +73,7 @@ export class WorkLocationsComponent implements OnInit {
                 name: 'Work Locations',
                 children: this.workLocationData(data)
             }];
+            this.tree.treeControl.expandAll();
         });
     }
 
