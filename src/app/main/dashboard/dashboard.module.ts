@@ -60,6 +60,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {GradeLevelCreateComponent} from './salary-scales/grade-level-create/grade-level-create.component';
 import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-level-create.component';
+import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeAddComponent } from './employees/employee-add/employee-add.component';
+import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
 
 @NgModule({
     declarations: [
@@ -106,7 +109,10 @@ import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-l
         SalaryScalesListComponent,
         SalaryScalesCreateComponent,
         GradeLevelCreateComponent,
-        StepLevelCreateComponent
+        StepLevelCreateComponent,
+        EmployeesComponent,
+        EmployeeAddComponent,
+        EmployeeListComponent
 
     ],
     imports: [

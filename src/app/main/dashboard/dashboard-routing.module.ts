@@ -15,6 +15,8 @@ import {CensuresComponent} from './censures/censures.component';
 import {ArmOfServiceComponent} from './arm-of-service/arm-of-service.component';
 import {MembershipComponent} from './membership/membership.component';
 import {SalaryScalesComponent} from './salary-scales/salary-scales.component';
+import {EmployeesComponent} from "./employees/employees.component";
+import {EmployeeAddComponent} from "./employees/employee-add/employee-add.component";
 
 const routes: Routes = [
     {
@@ -121,8 +123,21 @@ const routes: Routes = [
         data: {
             title: 'Salary Scales'
         },
+    },
+    {
+        path: 'employees',
+        component: EmployeesComponent,
+        data: {
+            title: 'Employees'
+        },
+    },
+    {
+        path: 'add-employee',
+        component: EmployeeAddComponent,
+        data: {
+            title: 'Add Employees'
+        },
     }
-
 ];
 
 @NgModule({

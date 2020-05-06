@@ -19,13 +19,13 @@ export const navigation: FuseNavigation[] = [
                         id: 'employee-list',
                         title: 'Employee List',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/employees'
                     },
                     {
                         id: 'add-employee',
                         title: 'Add Employee / Enrolments',
                         type: 'item',
-                        url: '/apps/dashboards/project'
+                        url: 'dashboard/add-employee'
                     }
                 ]
             },
