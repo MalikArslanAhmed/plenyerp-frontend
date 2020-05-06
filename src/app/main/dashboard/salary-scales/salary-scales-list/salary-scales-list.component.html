@@ -47,12 +47,12 @@
 
     <div class="salary-scales-list grade-levels">
         <button mat-icon-button  aria-label="button with a plus one icon"
-                *ngIf="!isNotAutoCreate && selectTab === 0 && salaryScales && salaryScales.length"
+                *ngIf="selectTab === 0 && salaryScales && salaryScales.length"
                 class="add-grade-level-btn" (click)="addGradeLevel()">
             <mat-icon color="accent">add_circle</mat-icon>
         </button>
         <button mat-icon-button  aria-label="button with a plus one icon"
-                *ngIf="!isNotAutoCreate && selectTab === 1 && gradeLevels && gradeLevels.length"
+                *ngIf="selectTab === 1 && gradeLevels && gradeLevels.length"
                 class="add-grade-level-btn" (click)="addStepLevel()">
             <mat-icon color="accent">add_circle</mat-icon>
         </button>
