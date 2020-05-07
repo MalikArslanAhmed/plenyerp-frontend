@@ -103,13 +103,13 @@ export const navigation: FuseNavigation[] = [
                         id: 'grade-level',
                         title: 'Grade Level',
                         type: 'item',
-                        url: 'dashboard/analytics'
+                        url: 'dashboard/grade-level'
                     },
                     {
                         id: 'gl-step',
                         title: 'GL Step',
                         type: 'item',
-                        url: 'dashboard/analytics'
+                        url: 'dashboard/gl-step'
                     }
                 ]
             },

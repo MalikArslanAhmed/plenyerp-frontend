@@ -125,6 +125,20 @@ const routes: Routes = [
         },
     },
     {
+        path: 'grade-level',
+        component: SalaryScalesComponent,
+        data: {
+            title: 'Grade Level'
+        },
+    },
+    {
+        path: 'gl-step',
+        component: SalaryScalesComponent,
+        data: {
+            title: 'GL Step'
+        },
+    },
+    {
         path: 'employees',
         component: EmployeesComponent,
         data: {
