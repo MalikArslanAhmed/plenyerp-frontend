@@ -162,7 +162,7 @@ const routes: Routes = [
         },
     },
     {
-        path: 'admin-segment-detail',
+        path: 'admin-segment-detail/:segmentId',
         component: SegmentDetailsComponent,
         data: {
             title: 'Segment Details'

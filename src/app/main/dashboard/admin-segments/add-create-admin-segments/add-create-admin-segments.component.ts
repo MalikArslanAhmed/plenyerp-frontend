@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {AdminSegmentServices} from '../../../../shared/services/admin-segment.services';
 
 @Component({
     selector: 'add-create-admin-segments',
@@ -20,6 +21,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
 
     constructor(public matDialogRef: MatDialogRef<AddCreateAdminSegmentsComponent>,
                    @Inject(MAT_DIALOG_DATA) private _data: any, private fb: FormBuilder,
+                  private segmentServices: AdminSegmentServices
                 ){
         this.action = _data.action;
         this.segment = _data.node;
@@ -55,24 +57,42 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
 
     updateFormFields(nextIndividualCode) {
         let isEdit = this.action === 'EDIT';
-        this.segmentForm = this.fb.group({
-            'name': this.segment.name,
-            'characterCount': {value: this.segment.characterCount, disabled: isEdit},
-            'individualCode': {value: nextIndividualCode, disabled: true},
-            'isActive': {value: this.segment.isActive, disabled: isEdit}
-        });
+        let controlConfig = {};
+        const {name, characterCount, isActive} = this.segment;
+
+        if (isEdit) {
+            controlConfig = {
+                'name': name,
+                'characterCount': {value: characterCount, disabled: isEdit},
+                'individualCode': {value: nextIndividualCode, disabled: true},
+                'isActive': {value: isActive, disabled: isEdit}
+            }
+        } else {
+            controlConfig = {
+                'name': '',
+                'characterCount': {value: '', disabled: isEdit},
+                'individualCode': {value: nextIndividualCode, disabled: true},
+                'isActive': {value: true, disabled: isEdit}
+            }
+        }
+        this.segmentForm = this.fb.group(controlConfig);
     }
 
     handleSegmentAddOrUpdate() {
-        console.log(this.segmentForm, this.segmentForm.getRawValue(), 'handleSegment');
         let formValues = this.segmentForm.getRawValue();
-        let parentId = this.segment.parentId;
+        const { id, maxLevel } = this.segment;
 
         let payloadToCreate = {
             ...formValues,
-            parentId: !parentId ? undefined : parentId,
-        }
-        console.log(payloadToCreate, 'payloadToCreate');
+            maxLevel: maxLevel - 1,
+            parentId: !id ? undefined : id,
+        };
+
+       if (this.action ==='EDIT') payloadToCreate.id = id;
+
+        console.log(this.action, payloadToCreate, 'handle segment');
+        this.action === 'EDIT' ? this.segmentServices.updateSegment(id, payloadToCreate).subscribe() :
+            this.segmentServices.addSegment(payloadToCreate).subscribe();
     }
 
 }

@@ -13,15 +13,10 @@ import {AdminSegmentServices} from '../../../shared/services/admin-segment.servi
 })
 
 export class AdminSegmentsComponent implements OnInit{
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
     constructor(
-        private _fuseSidebarService: FuseSidebarService, private adminSegmentServices: AdminSegmentServices
+        private _fuseSidebarService: FuseSidebarService
     ) {}
 
     ngOnInit(): void {
-        console.log('segments');
-        this.adminSegmentServices.getAllSegments().subscribe(data => {
-            console.log(data);
-        })
     }
 }

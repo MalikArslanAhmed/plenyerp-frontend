@@ -1,11 +1,14 @@
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import {MatDialog} from '@angular/material/dialog';
+
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
-import {MatDialog} from '@angular/material/dialog';
 import {AddCreateAdminSegmentsComponent} from '../add-create-admin-segments/add-create-admin-segments.component';
 import {AdminSegmentServices} from '../../../../shared/services/admin-segment.services';
+import {FormGroup} from '@angular/forms';
 
 /**
  * Food data with nested structure.
@@ -63,8 +66,10 @@ export class SegmentDetailsComponent implements OnInit {
     dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
     dialogRef: any;
+    segmentName: string;
+    segmentId: number;
 
-    constructor(private _fuseSidebarService: FuseSidebarService,
+    constructor(private _fuseSidebarService: FuseSidebarService, private route: ActivatedRoute,
                 private _matDialog: MatDialog, private adminSegmentServices: AdminSegmentServices) {
         this.dataSource.data = TREE_DATA;
     }
@@ -72,12 +77,16 @@ export class SegmentDetailsComponent implements OnInit {
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
     ngOnInit(): void {
+        this.route.paramMap.subscribe(params => {
+            this.segmentId = +params.get('segmentId');
+        });
         this.getSegmentList();
     }
 
     getSegmentList(){
-        this.adminSegmentServices.getAllSegments().subscribe(data => {
-            this.dataSource.data = data.items;
+        this.adminSegmentServices.getAllSegments(this.segmentId).subscribe(data => {
+            this.segmentName = data.name;
+            this.dataSource.data = [data];
         })
     }
 
@@ -86,12 +95,26 @@ export class SegmentDetailsComponent implements OnInit {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE', node: node}
         });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            console.log(response);
+            if (!response) {
+                return;
+            }
+            this.getSegmentList();
+        });
     }
 
     editItem(node) {
         this.dialogRef = this._matDialog.open(AddCreateAdminSegmentsComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', node: node}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            console.log(response);
+            if (!response) {
+                return;
+            }
+            this.getSegmentList();
         });
     }
 }
