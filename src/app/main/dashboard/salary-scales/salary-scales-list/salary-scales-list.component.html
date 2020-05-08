@@ -77,7 +77,7 @@
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="incrementDue">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Increment Due</mat-header-cell>
+                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Increment Due(Months)</mat-header-cell>
                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
                            <p class="phone text-truncate">
                                {{gradeLevel.incrementDue}}
@@ -85,7 +85,7 @@
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="promotionDue">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Promotion Due</mat-header-cell>
+                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Promotion Due(Months)</mat-header-cell>
                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
                            <p class="phone text-truncate">
                                {{gradeLevel.promotionDue}}
@@ -93,7 +93,7 @@
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="confirmAfter">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Confirm After</mat-header-cell>
+                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Confirm After(Months)</mat-header-cell>
                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
                            <p class="phone text-truncate">
                                {{gradeLevel.confirmAfter}}
@@ -101,7 +101,7 @@
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="retireAfter">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Retire After</mat-header-cell>
+                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Retire After(Years)</mat-header-cell>
                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
                            <p class="phone text-truncate">
                                {{gradeLevel.retireAfter}}
@@ -139,7 +139,7 @@
                    </mat-row>
                </mat-table>
             </mat-tab>
-            <mat-tab label="Step Level">
+            <mat-tab label="GL Step">
                 <mat-table [dataSource]="stepsLevels" style="margin: -8px 1rem 0 1rem">
                     <ng-container matColumnDef="id">
                         <mat-header-cell *matHeaderCellDef  fxHide fxShow.gt-sm>S.No</mat-header-cell>
