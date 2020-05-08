@@ -317,11 +317,11 @@ export class AppUrl {
 
     static GET_ALL_SEGMENTS(id?): string {
         const path = id ? `admin/${id}` : 'admin';
-        return 'http://localhost:8000/api/' + path;
+        return AppUrl.API_URL + path;
     }
 
     static ADD_SEGMENT(id?): string {
         const path = id ? `admin/${id}` : 'admin';
-        return 'http://localhost:8000/api/' + path;
+        return AppUrl.API_URL + path;
     }
 }
