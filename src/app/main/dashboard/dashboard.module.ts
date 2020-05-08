@@ -60,13 +60,20 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {GradeLevelCreateComponent} from './salary-scales/grade-level-create/grade-level-create.component';
 import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-level-create.component';
-import { EmployeesComponent } from './employees/employees.component';
-import { EmployeeAddComponent } from './employees/employee-add/employee-add.component';
-import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import {EmployeesComponent} from './employees/employees.component';
+import {EmployeeAddComponent} from './employees/employee-add/employee-add.component';
+import {EmployeeListComponent} from './employees/employee-list/employee-list.component';
 import {AdminSegmentsComponent} from './admin-segments/admin-segments.component';
 import {SegmentsListComponent} from './admin-segments/segments-list/segments-list.component';
 import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
 import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin-segments/add-create-admin-segments.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatRadioModule} from "@angular/material/radio";
+import {StructureComponent} from './structure/structure.component';
+import {DepartmentsComponent} from './departments/departments.component';
 
 @NgModule({
     declarations: [
@@ -117,12 +124,13 @@ import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin
         EmployeesComponent,
         EmployeeAddComponent,
         EmployeeListComponent,
-
         StepLevelCreateComponent,
         AdminSegmentsComponent,
         SegmentsListComponent,
         SegmentDetailsComponent,
-        AddCreateAdminSegmentsComponent
+        AddCreateAdminSegmentsComponent,
+        StructureComponent,
+        DepartmentsComponent
     ],
     imports: [
         CommonModule,
@@ -142,7 +150,12 @@ import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin
         MatTreeModule,
         MatSlideToggleModule,
         MatGridListModule,
-        MatTabsModule
+        MatTabsModule,
+        MatStepperModule,
+        MatDatepickerModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatRadioModule
     ]
 })
 export class DashboardModule {

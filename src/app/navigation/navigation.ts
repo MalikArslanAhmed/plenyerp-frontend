@@ -78,13 +78,13 @@ export const navigation: FuseNavigation[] = [
                         id: 'structure',
                         title: 'Structure',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/structure'
                     },
                     {
                         id: 'depratments',
                         title: 'Departments',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/departments'
                     }
                 ]
             },

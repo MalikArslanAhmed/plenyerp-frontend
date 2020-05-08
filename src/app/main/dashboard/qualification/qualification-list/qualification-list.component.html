@@ -24,7 +24,7 @@
         <mat-cell fxHide fxShow.gt-md *matCellDef="let qualification">
             <div fxFlex="row" fxLayoutAlign="end center">
                 <p *ngIf="qualification.isActive">Active</p>
-                <p *ngIf="!qualification.isActive">In Active</p>
+                <p *ngIf="!qualification.isActive">Inactive</p>
             </div>
         </mat-cell>
     </ng-container>
