@@ -30,12 +30,12 @@ export class StepLevelCreateComponent implements OnInit {
         this.action = _data.action;
         this.gradeLevelId = _data.gradeLevelId;
         if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit Step Level';
+            this.dialogTitle = 'Edit GL Step';
             if (_data.stepLevel) {
                 this.updateData = _data;
             }
         } else {
-            this.dialogTitle = 'Add Step Level';
+            this.dialogTitle = 'Add GL Step';
         }
     }
 

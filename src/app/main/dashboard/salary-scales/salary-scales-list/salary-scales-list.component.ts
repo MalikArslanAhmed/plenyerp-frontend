@@ -21,7 +21,7 @@ export class SalaryScalesListComponent implements OnInit {
     displayedColumns = ['id', 'name', 'actions'];
     dialogRef: any;
     gradeLevels = [];
-    displayedGradeLevelColumns = ['id', 'name', 'incrementDue', 'promotionDue', 'confirmAfter', 'retireAfter', 'retireType', 'actions'];
+    displayedGradeLevelColumns = ['id', 'name', 'incrementDue', 'promotionDue', 'confirmAfter', 'actions'];
     stepsLevels = [];
     displayedStepsLevelColumns = ['id', 'name', 'actions'];
     selectIndex = 0;

@@ -30,6 +30,14 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
+                id: 'admin-segments',
+                title: 'Charts of Accounts',
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'watch_later',
+                url: '/dashboard/admin-segments'
+            },
+            {
                 id: 'training-management',
                 title: 'Training Management',
                 // translate: 'NAV.CALENDAR',
@@ -103,13 +111,13 @@ export const navigation: FuseNavigation[] = [
                         id: 'grade-level',
                         title: 'Grade Level',
                         type: 'item',
-                        url: 'dashboard/analytics'
+                        url: 'dashboard/grade-level'
                     },
                     {
                         id: 'gl-step',
                         title: 'GL Step',
                         type: 'item',
-                        url: 'dashboard/analytics'
+                        url: 'dashboard/gl-step'
                     }
                 ]
             },

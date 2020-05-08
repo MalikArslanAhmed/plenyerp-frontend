@@ -75,11 +75,17 @@ app-skill-list {
                 background-color: white!important;
             }
         }
-        mat-table{
-            mat-header-cell{
-                padding-right: 10px!important;
-            }
-        }
+        //mat-table{
+        //    mat-header-cell{
+        //        //padding-right: 10px!important;
+        //    }
+        //    mat-cell{
+        //       p{
+        //           color: red;
+        //       }
+        //    }
+        //}
+
     }
 
 }

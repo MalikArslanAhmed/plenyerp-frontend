@@ -15,6 +15,8 @@ import {CensuresComponent} from './censures/censures.component';
 import {ArmOfServiceComponent} from './arm-of-service/arm-of-service.component';
 import {MembershipComponent} from './membership/membership.component';
 import {SalaryScalesComponent} from './salary-scales/salary-scales.component';
+import {AdminSegmentsComponent} from './admin-segments/admin-segments.component';
+import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
 import {EmployeesComponent} from "./employees/employees.component";
 import {EmployeeAddComponent} from "./employees/employee-add/employee-add.component";
 
@@ -125,6 +127,20 @@ const routes: Routes = [
         },
     },
     {
+        path: 'grade-level',
+        component: SalaryScalesComponent,
+        data: {
+            title: 'Grade Level'
+        },
+    },
+    {
+        path: 'gl-step',
+        component: SalaryScalesComponent,
+        data: {
+            title: 'GL Step'
+        },
+    },
+    {
         path: 'employees',
         component: EmployeesComponent,
         data: {
@@ -136,6 +152,20 @@ const routes: Routes = [
         component: EmployeeAddComponent,
         data: {
             title: 'Add Employees'
+        },
+    },
+    {
+        path: 'admin-segments',
+        component: AdminSegmentsComponent,
+        data: {
+            title: 'Admin Segment'
+        },
+    },
+    {
+        path: 'admin-segment-detail',
+        component: SegmentDetailsComponent,
+        data: {
+            title: 'Segment Details'
         },
     }
 ];

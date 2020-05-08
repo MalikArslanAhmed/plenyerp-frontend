@@ -63,6 +63,10 @@ import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-l
 import {EmployeesComponent} from './employees/employees.component';
 import {EmployeeAddComponent} from './employees/employee-add/employee-add.component';
 import {EmployeeListComponent} from './employees/employee-list/employee-list.component';
+import {AdminSegmentsComponent} from './admin-segments/admin-segments.component';
+import {SegmentsListComponent} from './admin-segments/segments-list/segments-list.component';
+import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
+import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin-segments/add-create-admin-segments.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatOptionModule} from "@angular/material/core";
@@ -117,8 +121,12 @@ import {MatRadioModule} from "@angular/material/radio";
         StepLevelCreateComponent,
         EmployeesComponent,
         EmployeeAddComponent,
-        EmployeeListComponent
-
+        EmployeeListComponent,
+        StepLevelCreateComponent,
+        AdminSegmentsComponent,
+        SegmentsListComponent,
+        SegmentDetailsComponent,
+        AddCreateAdminSegmentsComponent
     ],
     imports: [
         CommonModule,

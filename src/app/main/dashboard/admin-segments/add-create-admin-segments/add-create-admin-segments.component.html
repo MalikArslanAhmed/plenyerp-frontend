@@ -1,0 +1,38 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog" class="close-popup">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="segmentForm">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-form-field appearance="outline" fxFlex class="formInput">
+                    <mat-label>Segment name</mat-label>
+                    <input name="name" formControlName="name" matInput required placeholder="Enter Segment Name">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex class="formInput">
+                    <mat-label>Character Count</mat-label>
+                    <input name="characterCount" formControlName="characterCount" matInput required placeholder="Enter Character Count">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex class="formInput">
+                    <mat-label>Segment Code</mat-label>
+                    <input name="individualCode" formControlName="individualCode" matInput [disabled]=true >
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-label style="margin-right: 20px">Child Enabled</mat-label>
+                <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="handleSegmentAddOrUpdate()"
+                [disabled]="segmentForm.invalid" aria-label="Update">{{this.action === 'EDIT' ? 'UPDATE' : 'ADD' }}
+        </button>
+    </div>
+</div>
