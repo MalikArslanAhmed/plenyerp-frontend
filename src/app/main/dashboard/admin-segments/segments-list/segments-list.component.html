@@ -43,7 +43,7 @@
             <div fxFlex="row" fxLayoutAlign="end center">
                 <button mat-icon-button aria-label="Toggle star"
                         style="color: blue">
-                    <a routerLink="/dashboard/admin-segment-detail">
+                    <a [routerLink]="['/dashboard/admin-segment-detail', segment.id]">
                     <mat-icon class="material-icons">edit</mat-icon>
                     </a>
                 </button>

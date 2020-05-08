@@ -31,7 +31,7 @@
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" (click)="handleSegmentAddOrUpdate()"
+        <button mat-button class="save-button" (click)="handleSegmentAddOrUpdate(); matDialogRef.close(segmentForm)"
                 [disabled]="segmentForm.invalid" aria-label="Update">{{this.action === 'EDIT' ? 'UPDATE' : 'ADD' }}
         </button>
     </div>

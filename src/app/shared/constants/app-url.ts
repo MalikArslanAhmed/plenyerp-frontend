@@ -315,7 +315,13 @@ export class AppUrl {
         return AppUrl.API_URL + 'grade-levels-steps/' + id;
     }
 
-    static GET_ALL_SEGMENTS() {
-        return AppUrl.API_URL + 'admin';
+    static GET_ALL_SEGMENTS(id?): string {
+        const path = id ? `admin/${id}` : 'admin';
+        return 'http://localhost:8000/api/' + path;
+    }
+
+    static ADD_SEGMENT(id?): string {
+        const path = id ? `admin/${id}` : 'admin';
+        return 'http://localhost:8000/api/' + path;
     }
 }
