@@ -24,7 +24,7 @@
         <mat-cell fxHide fxShow.gt-md *matCellDef="let skill">
             <div fxFlex="row" fxLayoutAlign="end center">
                 <p *ngIf="skill.isActive">Active</p>
-                <p *ngIf="!skill.isActive">In Active</p>
+                <p *ngIf="!skill.isActive">Inactive</p>
             </div>
         </mat-cell>
     </ng-container>

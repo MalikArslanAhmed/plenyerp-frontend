@@ -30,6 +30,14 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
+                id: 'admin-segments',
+                title: 'Charts of Accounts',
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'watch_later',
+                url: '/dashboard/admin-segments'
+            },
+            {
                 id: 'training-management',
                 title: 'Training Management',
                 // translate: 'NAV.CALENDAR',
@@ -70,13 +78,13 @@ export const navigation: FuseNavigation[] = [
                         id: 'structure',
                         title: 'Structure',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/structure'
                     },
                     {
                         id: 'depratments',
                         title: 'Departments',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/departments'
                     }
                 ]
             },

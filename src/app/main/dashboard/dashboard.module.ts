@@ -60,9 +60,19 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {GradeLevelCreateComponent} from './salary-scales/grade-level-create/grade-level-create.component';
 import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-level-create.component';
-import { EmployeesComponent } from './employees/employees.component';
-import { EmployeeAddComponent } from './employees/employee-add/employee-add.component';
-import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import {EmployeesComponent} from './employees/employees.component';
+import {EmployeeAddComponent} from './employees/employee-add/employee-add.component';
+import {EmployeeListComponent} from './employees/employee-list/employee-list.component';
+import {AdminSegmentsComponent} from './admin-segments/admin-segments.component';
+import {SegmentsListComponent} from './admin-segments/segments-list/segments-list.component';
+import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
+import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin-segments/add-create-admin-segments.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatOptionModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {StructureComponent} from './structure/structure.component';
+import {DepartmentsComponent} from './departments/departments.component';
 import {CountryCreateComponent} from './contact-info/country/country-create/country-create.component';
 import {CountryListComponent} from './contact-info/country/country-list/country-list.component';
 import {CountryComponent} from './contact-info/country/country.component';
@@ -126,6 +136,14 @@ import {MatSelectModule} from '@angular/material/select';
         EmployeesComponent,
         EmployeeAddComponent,
         EmployeeListComponent,
+        StepLevelCreateComponent,
+        AdminSegmentsComponent,
+        SegmentsListComponent,
+        SegmentDetailsComponent,
+        AddCreateAdminSegmentsComponent,
+        StructureComponent,
+        DepartmentsComponent,
+        EmployeeListComponent,
         CountryComponent,
         CountryCreateComponent,
         CountryListComponent,
@@ -159,7 +177,11 @@ import {MatSelectModule} from '@angular/material/select';
         MatSlideToggleModule,
         MatGridListModule,
         MatTabsModule,
-        MatSelectModule
+        MatSelectModule,
+        MatStepperModule,
+        MatDatepickerModule,
+        MatOptionModule,
+        MatRadioModule
     ]
 })
 export class DashboardModule {

@@ -24,7 +24,7 @@
         <mat-cell fxHide fxShow.gt-md *matCellDef="let relationship">
             <div fxFlex="row" fxLayoutAlign="end center">
                 <p *ngIf="relationship.isActive">Active</p>
-                <p *ngIf="!relationship.isActive">In Active</p>
+                <p *ngIf="!relationship.isActive">Inactive</p>
             </div>
         </mat-cell>
     </ng-container>
