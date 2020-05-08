@@ -60,9 +60,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {GradeLevelCreateComponent} from './salary-scales/grade-level-create/grade-level-create.component';
 import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-level-create.component';
-import { EmployeesComponent } from './employees/employees.component';
-import { EmployeeAddComponent } from './employees/employee-add/employee-add.component';
-import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import {EmployeesComponent} from './employees/employees.component';
+import {EmployeeAddComponent} from './employees/employee-add/employee-add.component';
+import {EmployeeListComponent} from './employees/employee-list/employee-list.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
     declarations: [
@@ -133,7 +138,12 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
         MatTreeModule,
         MatSlideToggleModule,
         MatGridListModule,
-        MatTabsModule
+        MatTabsModule,
+        MatStepperModule,
+        MatDatepickerModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatRadioModule
     ]
 })
 export class DashboardModule {

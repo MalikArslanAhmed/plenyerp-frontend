@@ -24,6 +24,8 @@ import {AppUrl} from "./shared/constants/app-url";
 import {AlertService} from "./shared/services/alert.service";
 import {SnotifyModule, SnotifyService, ToastDefaults} from "ng-snotify";
 import {HtpInterceptor} from "./shared/services/interceptor.service";
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 // import {DashboardModule} from './main/dashboard/dashboard.module';
 
 const appRoutes: Routes = [
@@ -70,7 +72,9 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         SampleModule,
-        SnotifyModule
+        SnotifyModule,
+        MatStepperModule,
+        MatDatepickerModule
     ],
     providers: [
         AuthService,
