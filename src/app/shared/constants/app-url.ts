@@ -341,5 +341,14 @@ export class AppUrl {
     static GET_LGA_LIST(): string {
         return AppUrl.API_URL + `lgas`;
     }
+    static GET_COUNTRY(): string {
+        return AppUrl.API_URL + `countries`;
+    }
+    static GET_REGION(): string {
+        return AppUrl.API_URL + `regions`;
+    }
+    static GET_STATE(): string {
+        return AppUrl.API_URL + `states`;
+    }
 
 }

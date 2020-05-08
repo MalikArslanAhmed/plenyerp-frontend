@@ -38,6 +38,7 @@ export class LgaCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
+        this.getCountry();
         this.checkForUpdate();
     }
 
@@ -48,14 +49,24 @@ export class LgaCreateComponent implements OnInit {
             stateId: ['', Validators.required],
             name: ['', Validators.required]
         });
+        this.lgaForm.get('countryId').valueChanges.subscribe(val => {
+            if (val) {
+                this.getRegion(val);
+            }
+        });
+        this.lgaForm.get('regionId').valueChanges.subscribe(val => {
+            if (val) {
+                this.getState(val);
+            }
+        });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.lgaForm.patchValue({
-                countryId: this.updateData.lga.countryId,
-                regionId: this.updateData.lga.regionId,
-                stateId: this.updateData.lga.stateId,
+                countryId: this.updateData.lga.state.region.country.id,
+                regionId: this.updateData.lga.state.region.id,
+                stateId: this.updateData.lga.state.id,
                 name: this.updateData.lga.name,
             });
         }
@@ -92,5 +103,25 @@ export class LgaCreateComponent implements OnInit {
             });
 
         }
+    }
+
+    getCountry() {
+        this.contactInfoService.country().subscribe(data => {
+            this.countries = data.items;
+        });
+    }
+    getRegion(countryId) {
+        this.regions = [];
+        console.log(countryId);
+        this.contactInfoService.region({countryId: countryId}).subscribe(data => {
+            this.regions = data.items;
+        });
+    }
+    getState(regionId) {
+        this.states = [];
+        console.log(regionId);
+        this.contactInfoService.state({regionId: regionId}).subscribe(data => {
+            this.states = data.items;
+        });
     }
 }

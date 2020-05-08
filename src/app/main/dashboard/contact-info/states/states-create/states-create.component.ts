@@ -37,6 +37,7 @@ export class StatesCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
+        this.getCountry();
         this.checkForUpdate();
     }
 
@@ -47,14 +48,19 @@ export class StatesCreateComponent implements OnInit {
             name: ['', Validators.required]
 
         });
+        this.statesForm.get('countryId').valueChanges.subscribe(val => {
+            if (val) {
+                this.getRegion(val);
+            }
+        });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.statesForm.patchValue({
                 name: this.updateData.state.name,
-                countryId: this.updateData.state.countryId,
-                regionId: this.updateData.state.regionId,
+                countryId: this.updateData.state.region.country.id,
+                regionId: this.updateData.state.region.id,
             });
         }
     }
@@ -90,5 +96,17 @@ export class StatesCreateComponent implements OnInit {
             });
 
         }
+    }
+
+    getCountry() {
+        this.contactInfoService.country().subscribe(data => {
+            this.countries = data.items;
+        });
+    }
+    getRegion(countryId) {
+        this.regions = [];
+        this.contactInfoService.region({countryId: countryId}).subscribe(data => {
+            this.regions = data.items;
+        });
     }
 }

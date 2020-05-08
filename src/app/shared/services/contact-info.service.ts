@@ -65,4 +65,13 @@ export class ContactInfoService extends BaseService {
     deleteLga(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_LGA(id));
     }
+    country(): Observable<any> {
+        return this.getRequest(AppUrl.GET_COUNTRY());
+    }
+    region(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_REGION(), data);
+    }
+    state(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_STATE(), data);
+    }
 }

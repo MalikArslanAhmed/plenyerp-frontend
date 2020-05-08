@@ -50,10 +50,10 @@ export class StatesListComponent implements OnInit {
         });
     }
 
-    editStates(country) {
+    editStates(state) {
         this.dialogRef = this._matDialog.open(StatesCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', country: country},
+            data: {action: 'EDIT', state: state},
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {

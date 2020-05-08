@@ -36,6 +36,7 @@ export class RegionCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
+        this.getCountry();
         this.checkForUpdate();
     }
 
@@ -50,7 +51,7 @@ export class RegionCreateComponent implements OnInit {
         if (this.updateData) {
             this.regionForm.patchValue({
                 name: this.updateData.region.name,
-                country: this.updateData.region.countryId,
+                countryId: this.updateData.region.country.id,
             });
         }
     }
@@ -87,4 +88,11 @@ export class RegionCreateComponent implements OnInit {
 
         }
     }
+
+    getCountry() {
+        this.contactInfoService.country().subscribe(data => {
+            this.countries = data.items;
+        });
+    }
+
 }

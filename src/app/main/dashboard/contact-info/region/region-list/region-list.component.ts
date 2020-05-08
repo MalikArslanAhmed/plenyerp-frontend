@@ -50,10 +50,10 @@ export class RegionListComponent implements OnInit {
         });
     }
 
-    editRegion(state) {
+    editRegion(region) {
         this.dialogRef = this._matDialog.open(RegionCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', state: state},
+            data: {action: 'EDIT', region: region},
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
