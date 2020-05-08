@@ -72,6 +72,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
+import {StructureComponent} from './structure/structure.component';
+import {DepartmentsComponent} from './departments/departments.component';
 
 @NgModule({
     declarations: [
@@ -126,7 +128,9 @@ import {MatRadioModule} from "@angular/material/radio";
         AdminSegmentsComponent,
         SegmentsListComponent,
         SegmentDetailsComponent,
-        AddCreateAdminSegmentsComponent
+        AddCreateAdminSegmentsComponent,
+        StructureComponent,
+        DepartmentsComponent
     ],
     imports: [
         CommonModule,

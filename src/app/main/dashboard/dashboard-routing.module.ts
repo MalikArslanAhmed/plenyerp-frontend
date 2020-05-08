@@ -19,6 +19,8 @@ import {AdminSegmentsComponent} from './admin-segments/admin-segments.component'
 import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
 import {EmployeesComponent} from "./employees/employees.component";
 import {EmployeeAddComponent} from "./employees/employee-add/employee-add.component";
+import {StructureComponent} from "./structure/structure.component";
+import {DepartmentsComponent} from "./departments/departments.component";
 
 const routes: Routes = [
     {
@@ -166,6 +168,20 @@ const routes: Routes = [
         component: SegmentDetailsComponent,
         data: {
             title: 'Segment Details'
+        },
+    },
+    {
+        path: 'departments',
+        component: DepartmentsComponent,
+        data: {
+            title: 'Departments'
+        },
+    },
+    {
+        path: 'structure',
+        component: StructureComponent,
+        data: {
+            title: 'Structure'
         },
     }
 ];
