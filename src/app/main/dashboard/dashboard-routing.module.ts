@@ -15,6 +15,8 @@ import {CensuresComponent} from './censures/censures.component';
 import {ArmOfServiceComponent} from './arm-of-service/arm-of-service.component';
 import {MembershipComponent} from './membership/membership.component';
 import {SalaryScalesComponent} from './salary-scales/salary-scales.component';
+import {AdminSegmentsComponent} from './admin-segments/admin-segments.component';
+import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
 
 const routes: Routes = [
     {
@@ -120,6 +122,20 @@ const routes: Routes = [
         component: SalaryScalesComponent,
         data: {
             title: 'Salary Scales'
+        },
+    },
+    {
+        path: 'admin-segments',
+        component: AdminSegmentsComponent,
+        data: {
+            title: 'Admin Segment'
+        },
+    },
+    {
+        path: 'admin-segment-detail',
+        component: SegmentDetailsComponent,
+        data: {
+            title: 'Segment Details'
         },
     }
 

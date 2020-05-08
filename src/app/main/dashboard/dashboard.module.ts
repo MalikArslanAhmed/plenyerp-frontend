@@ -60,6 +60,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {GradeLevelCreateComponent} from './salary-scales/grade-level-create/grade-level-create.component';
 import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-level-create.component';
+import {AdminSegmentsComponent} from './admin-segments/admin-segments.component';
+import {SegmentsListComponent} from './admin-segments/segments-list/segments-list.component';
+import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
+import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin-segments/add-create-admin-segments.component';
 
 @NgModule({
     declarations: [
@@ -106,8 +110,11 @@ import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-l
         SalaryScalesListComponent,
         SalaryScalesCreateComponent,
         GradeLevelCreateComponent,
-        StepLevelCreateComponent
-
+        StepLevelCreateComponent,
+        AdminSegmentsComponent,
+        SegmentsListComponent,
+        SegmentDetailsComponent,
+        AddCreateAdminSegmentsComponent
     ],
     imports: [
         CommonModule,

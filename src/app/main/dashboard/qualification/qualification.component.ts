@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, ViewEncapsulation, EventEmitter, ViewChild} from '@angular/core';
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.service";
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {MatDialog} from '@angular/material/dialog';
 import {QualificationCreateComponent} from './qualification-create/qualification-create.component';
 import {FormGroup} from '@angular/forms';
