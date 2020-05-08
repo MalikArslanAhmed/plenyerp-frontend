@@ -28,17 +28,17 @@ export class LgaListComponent implements OnInit {
     }
 
     getLgaList() {
-        // this.contactInfoService.getLgaList({'page': -1}).subscribe(data => {
-        //     this.lgaList = data.items;
-        //
-        //     if (this.lgaList && this.lgaList.length > 0) {
-        //         let i = 1;
-        //         this.lgaList.forEach(val => {
-        //             val['sno'] = i;
-        //             i++;
-        //         });
-        //     }
-        // });
+        this.contactInfoService.getLgaList({'page': -1}).subscribe(data => {
+            this.lgaList = data.items;
+
+            if (this.lgaList && this.lgaList.length > 0) {
+                let i = 1;
+                this.lgaList.forEach(val => {
+                    val['sno'] = i;
+                    i++;
+                });
+            }
+        });
     }
 
 
