@@ -314,4 +314,17 @@ export class AppUrl {
     static DELETE_STEP_LEVEL(id?): string {
         return AppUrl.API_URL + 'grade-levels-steps/' + id;
     }
+    static GET_COUNTRY_LIST(): string {
+        return AppUrl.API_URL + `countries`;
+    }
+    static GET_REGION_LIST(): string {
+        return AppUrl.API_URL + `regions`;
+    }
+    static GET_STATE_LIST(): string {
+        return AppUrl.API_URL + `states`;
+    }
+    static GET_LGA_LIST(): string {
+        return AppUrl.API_URL + `lgas`;
+    }
+
 }

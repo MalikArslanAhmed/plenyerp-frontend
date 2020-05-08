@@ -114,6 +114,39 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
+                id: 'contact-info',
+                title: 'Contact Info',
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'assignment_ind',
+                children: [
+                    {
+                        id: 'country',
+                        title: 'Country',
+                        type: 'item',
+                        url: 'dashboard/country'
+                    },
+                    {
+                        id: 'region',
+                        title: 'Region',
+                        type: 'item',
+                        url: 'dashboard/region'
+                    },
+                    {
+                        id: 'states',
+                        title: 'States ',
+                        type: 'item',
+                        url: 'dashboard/states'
+                    },
+                    {
+                        id: 'lga',
+                        title: 'LGA',
+                        type: 'item',
+                        url: 'dashboard/lga'
+                    }
+                ]
+            },
+            {
                 id: 'qualifications',
                 title: 'Qualifications',
                 // translate: 'NAV.DASHBOARDS',

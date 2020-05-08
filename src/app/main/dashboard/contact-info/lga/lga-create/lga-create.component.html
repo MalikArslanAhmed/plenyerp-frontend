@@ -1,0 +1,62 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="lgaForm">
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Country</mat-label>
+                    <mat-select formControlName="countryId">
+                        <mat-option *ngFor="let country of countries" [value]="country.value">
+                            {{country.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Region</mat-label>
+                    <mat-select formControlName="regionId">
+                        <mat-option *ngFor="let region of regions" [value]="region.value">
+                            {{region.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>State</mat-label>
+                    <mat-select formControlName="stateId">
+                        <mat-option *ngFor="let state of states" [value]="state.value">
+                            {{state.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>LGA</mat-label>
+                    <input matInput placeholder="Name" formControlName="name" name="name" required>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close(lgaForm); saveLga()"
+                [disabled]="lgaForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(lgaForm); updateLga()"
+                [disabled]="lgaForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

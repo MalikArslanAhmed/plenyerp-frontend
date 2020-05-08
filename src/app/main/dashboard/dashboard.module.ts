@@ -63,6 +63,19 @@ import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-l
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeAddComponent } from './employees/employee-add/employee-add.component';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import {CountryCreateComponent} from './contact-info/country/country-create/country-create.component';
+import {CountryListComponent} from './contact-info/country/country-list/country-list.component';
+import {CountryComponent} from './contact-info/country/country.component';
+import {RegionComponent} from './contact-info/region/region.component';
+import {RegionCreateComponent} from './contact-info/region/region-create/region-create.component';
+import {RegionListComponent} from './contact-info/region/region-list/region-list.component';
+import {StatesComponent} from './contact-info/states/states.component';
+import {StatesCreateComponent} from './contact-info/states/states-create/states-create.component';
+import {StatesListComponent} from './contact-info/states/states-list/states-list.component';
+import {LgaComponent} from './contact-info/lga/lga.component';
+import {LgaCreateComponent} from './contact-info/lga/lga-create/lga-create.component';
+import {LgaListComponent} from './contact-info/lga/lga-list/lga-list.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
     declarations: [
@@ -112,7 +125,19 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
         StepLevelCreateComponent,
         EmployeesComponent,
         EmployeeAddComponent,
-        EmployeeListComponent
+        EmployeeListComponent,
+        CountryComponent,
+        CountryCreateComponent,
+        CountryListComponent,
+        RegionComponent,
+        RegionCreateComponent,
+        RegionListComponent,
+        StatesComponent,
+        StatesCreateComponent,
+        StatesListComponent,
+        LgaComponent,
+        LgaCreateComponent,
+        LgaListComponent
 
     ],
     imports: [
@@ -133,7 +158,8 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
         MatTreeModule,
         MatSlideToggleModule,
         MatGridListModule,
-        MatTabsModule
+        MatTabsModule,
+        MatSelectModule
     ]
 })
 export class DashboardModule {

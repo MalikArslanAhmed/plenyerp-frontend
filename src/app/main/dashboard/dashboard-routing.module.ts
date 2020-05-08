@@ -17,6 +17,10 @@ import {MembershipComponent} from './membership/membership.component';
 import {SalaryScalesComponent} from './salary-scales/salary-scales.component';
 import {EmployeesComponent} from "./employees/employees.component";
 import {EmployeeAddComponent} from "./employees/employee-add/employee-add.component";
+import {CountryComponent} from './contact-info/country/country.component';
+import {RegionComponent} from './contact-info/region/region.component';
+import {StatesComponent} from './contact-info/states/states.component';
+import {LgaComponent} from './contact-info/lga/lga.component';
 
 const routes: Routes = [
     {
@@ -150,6 +154,34 @@ const routes: Routes = [
         component: EmployeeAddComponent,
         data: {
             title: 'Add Employees'
+        },
+    },
+    {
+        path: 'country',
+        component: CountryComponent,
+        data: {
+            title: 'Country'
+        },
+    },
+    {
+        path: 'region',
+        component: RegionComponent,
+        data: {
+            title: 'Region'
+        },
+    },
+    {
+        path: 'states',
+        component: StatesComponent,
+        data: {
+            title: 'States'
+        },
+    },
+    {
+        path: 'lga',
+        component: LgaComponent,
+        data: {
+            title: 'LGA'
         },
     }
 ];
