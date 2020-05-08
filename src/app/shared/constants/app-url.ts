@@ -314,4 +314,8 @@ export class AppUrl {
     static DELETE_STEP_LEVEL(id?): string {
         return AppUrl.API_URL + 'grade-levels-steps/' + id;
     }
+
+    static GET_ALL_SEGMENTS(): string {
+        return AppUrl.API_URL + 'admin';
+    }
 }

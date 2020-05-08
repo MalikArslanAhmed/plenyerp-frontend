@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {RelationshipService} from "../../../../shared/services/relationship.service";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {RelationshipService} from '../../../../shared/services/relationship.service';
 import {RelationshipCreateComponent} from '../relationship-create/relationship-create.component';
 
 @Component({
@@ -26,7 +26,7 @@ export class RelationshipListComponent implements OnInit {
     }
 
     getRelationships() {
-        this.relationshipService.getRelationship({'page': -1}).subscribe(data => {
+        this.relationshipService.getRelationship({page: -1}).subscribe(data => {
             this.relationships = data.items;
 
             if (this.relationships && this.relationships.length > 0) {
@@ -44,7 +44,7 @@ export class RelationshipListComponent implements OnInit {
             if (data) {
                 this.getRelationships();
             }
-        })
+        });
     }
 
     editRelationship(relationship) {

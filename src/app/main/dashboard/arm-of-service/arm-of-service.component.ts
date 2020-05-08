@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.service";
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../@fuse/animations";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+
+import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
+import {fuseAnimations} from '../../../../@fuse/animations';
 import {ArmOfServiceListComponent} from './arm-of-service-list/arm-of-service-list.component';
-import {ArmOfServiceCreateComponent} from "./arm-of-service-create/arm-of-service-create.component";
+import {ArmOfServiceCreateComponent} from './arm-of-service-create/arm-of-service-create.component';
 
 @Component({
     selector: 'app-arm-of-service',
