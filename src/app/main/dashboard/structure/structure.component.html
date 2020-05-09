@@ -1,1 +1,163 @@
-<p>structure works!</p>
+<div id="structure" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">place
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Structure
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+            <div class="content">
+                <mat-grid-list cols="2" rowHeight="1570px">
+                    <mat-grid-tile class="grid-tree">
+                        <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl" class="mt-30px">
+                            <!-- This is the tree node template for leaf nodes -->
+                            <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
+                                <!-- use a disabled button to provide padding for tree leaf -->
+                                <button mat-icon-button disabled></button>
+                                {{node.name}}
+                                <button mat-icon-button title="Add" (click)="addItem(node)">
+                                    <mat-icon class="addBtn">add</mat-icon>
+                                </button>
+                                <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
+                                    <mat-icon class="editBtn">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button title="Delete" (click)="deleteItem(node)"
+                                        *ngIf="node.level !== 0">
+                                    <mat-icon class="deleteBtn">delete</mat-icon>
+                                </button>
+                            </mat-tree-node>
+                            <!-- This is the tree node template for expandable nodes -->
+                            <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
+                                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+                                    <mat-icon class="mat-icon-rtl-mirror">
+                                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                    </mat-icon>
+                                </button>
+                                {{node.name}}
+                                <button mat-icon-button title="Add" (click)="addItem(node)">
+                                    <mat-icon class="addBtn">add</mat-icon>
+                                </button>
+                                <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
+                                    <mat-icon class="editBtn">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button title="Delete" (click)="deleteItem(node)"
+                                        *ngIf="node.level !== 0">
+                                    <mat-icon class="deleteBtn">delete</mat-icon>
+                                </button>
+                            </mat-tree-node>
+                        </mat-tree>
+                    </mat-grid-tile>
+                    <form fxLayout="column" [formGroup]="jobPositionForm">
+                        <mat-grid-tile class="mt-30px">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <h3 class="job-position-header text-bold">Add Job Position</h3>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Title</mat-label>
+                                    <input matInput formControlName="name" required>
+                                    <mat-error>Title is required!</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Department</mat-label>
+                                    <input matInput formControlName="departmentId" required>
+                                    <mat-error>Department is required!</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Designation</mat-label>
+                                    <mat-select formControlName="designationId" required>
+                                        <mat-option [value]="designation.id"
+                                                    *ngFor="let designation of designations">{{designation.name}}</mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix class="secondary-text">work</mat-icon>
+                                    <mat-error>Designation is required!</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Salary Scale</mat-label>
+                                    <mat-select formControlName="salaryScaleId" required>
+                                        <mat-option [value]="salaryScale.id"
+                                                    *ngFor="let salaryScale of salaryScales">{{salaryScale.name}}</mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix class="secondary-text">attach_money</mat-icon>
+                                    <mat-error>Salry scale is required!</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Skill</mat-label>
+                                    <mat-select formControlName="skillId" required>
+                                        <mat-option [value]="skill.id"
+                                                    *ngFor="let skill of skills">{{skill.name}}</mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix class="secondary-text">star</mat-icon>
+                                    <mat-error>Skill is required!</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Grade Level</mat-label>
+                                    <mat-select formControlName="gradeLevelId" required>
+                                        <mat-option [value]="maritalStatus.value"
+                                                    *ngFor="let maritalStatus of maritalStatuses">{{maritalStatus.name}}</mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix class="secondary-text">keyboard_arrow_up</mat-icon>
+                                    <mat-error>Grade Level is required!</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>GL Step</mat-label>
+                                    <mat-select formControlName="gradeLevelStepId" required>
+                                        <mat-option [value]="maritalStatus.value"
+                                                    *ngFor="let maritalStatus of maritalStatuses">{{maritalStatus.name}}</mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix class="secondary-text">toys</mat-icon>
+                                    <mat-error>GL is required!</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Cost center</mat-label>
+                                    <input matInput formControlName="costCenter" required>
+                                    <mat-error>Cost center is required!</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Job family</mat-label>
+                                    <input matInput formControlName="jobFamily" required>
+                                    <mat-error>Job family is required!</mat-error>
+                                </mat-form-field>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="isApprovedPosition">Position approved</mat-checkbox>
+                                </div>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="isActive">Active</mat-checkbox>
+                                </div>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Activities</mat-label>
+                                    <textarea matInput formControlName="activities" style="resize: none"></textarea>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Competences</mat-label>
+                                    <textarea matInput formControlName="competences" style="resize: none"></textarea>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Job Description Summary</mat-label>
+                                    <textarea matInput formControlName="jobDescriptionSummary"
+                                              style="resize: none"></textarea>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Experience</mat-label>
+                                    <textarea matInput formControlName="experience" style="resize: none"></textarea>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Education</mat-label>
+                                    <textarea matInput formControlName="education" style="resize: none"></textarea>
+                                </mat-form-field>
+                                <button mat-raised-button type="button" color="accent" (click)="saveStructure()">Save
+                                </button>
+                            </div>
+                        </mat-grid-tile>
+                    </form>
+                </mat-grid-list>
+            </div>
+        </div>
+    </div>
+</div>

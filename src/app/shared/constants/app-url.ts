@@ -59,6 +59,14 @@ export class AppUrl {
         return AppUrl.API_URL + `work-locations`;
     }
 
+    static GET_JOB_LOCATIONS(): string {
+        return AppUrl.API_URL + `job-positions`;
+    }
+
+    static GET_DESIGNATIONS(): string {
+        return AppUrl.API_URL + `designations`;
+    }
+
     static WORK_LOCATIONS(id?): string {
         if (id) {
             return AppUrl.API_URL + `work-locations/` + id;
