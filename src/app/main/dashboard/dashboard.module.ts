@@ -67,13 +67,25 @@ import {AdminSegmentsComponent} from './admin-segments/admin-segments.component'
 import {SegmentsListComponent} from './admin-segments/segments-list/segments-list.component';
 import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
 import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin-segments/add-create-admin-segments.component';
-import {MatStepperModule} from "@angular/material/stepper";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatOptionModule} from "@angular/material/core";
-import {MatSelectModule} from "@angular/material/select";
-import {MatRadioModule} from "@angular/material/radio";
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatOptionModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
 import {StructureComponent} from './structure/structure.component';
 import {DepartmentsComponent} from './departments/departments.component';
+import {CountryCreateComponent} from './contact-info/country/country-create/country-create.component';
+import {CountryListComponent} from './contact-info/country/country-list/country-list.component';
+import {CountryComponent} from './contact-info/country/country.component';
+import {RegionComponent} from './contact-info/region/region.component';
+import {RegionCreateComponent} from './contact-info/region/region-create/region-create.component';
+import {RegionListComponent} from './contact-info/region/region-list/region-list.component';
+import {StatesComponent} from './contact-info/states/states.component';
+import {StatesCreateComponent} from './contact-info/states/states-create/states-create.component';
+import {StatesListComponent} from './contact-info/states/states-list/states-list.component';
+import {LgaComponent} from './contact-info/lga/lga.component';
+import {LgaCreateComponent} from './contact-info/lga/lga-create/lga-create.component';
+import {LgaListComponent} from './contact-info/lga/lga-list/lga-list.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
     declarations: [
@@ -130,7 +142,21 @@ import {DepartmentsComponent} from './departments/departments.component';
         SegmentDetailsComponent,
         AddCreateAdminSegmentsComponent,
         StructureComponent,
-        DepartmentsComponent
+        DepartmentsComponent,
+        EmployeeListComponent,
+        CountryComponent,
+        CountryCreateComponent,
+        CountryListComponent,
+        RegionComponent,
+        RegionCreateComponent,
+        RegionListComponent,
+        StatesComponent,
+        StatesCreateComponent,
+        StatesListComponent,
+        LgaComponent,
+        LgaCreateComponent,
+        LgaListComponent
+
     ],
     imports: [
         CommonModule,
@@ -151,10 +177,10 @@ import {DepartmentsComponent} from './departments/departments.component';
         MatSlideToggleModule,
         MatGridListModule,
         MatTabsModule,
+        MatSelectModule,
         MatStepperModule,
         MatDatepickerModule,
         MatOptionModule,
-        MatSelectModule,
         MatRadioModule
     ]
 })

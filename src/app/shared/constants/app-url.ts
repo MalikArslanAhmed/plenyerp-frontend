@@ -337,4 +337,26 @@ export class AppUrl {
         const path = id ? `admin/${id}` : 'admin';
         return AppUrl.API_URL + path;
     }
+    static GET_COUNTRY_LIST(): string {
+        return AppUrl.API_URL + `countries`;
+    }
+    static GET_REGION_LIST(): string {
+        return AppUrl.API_URL + `regions`;
+    }
+    static GET_STATE_LIST(): string {
+        return AppUrl.API_URL + `states`;
+    }
+    static GET_LGA_LIST(): string {
+        return AppUrl.API_URL + `lgas`;
+    }
+    static GET_COUNTRY(): string {
+        return AppUrl.API_URL + `countries`;
+    }
+    static GET_REGION(): string {
+        return AppUrl.API_URL + `regions`;
+    }
+    static GET_STATE(): string {
+        return AppUrl.API_URL + `states`;
+    }
+
 }
