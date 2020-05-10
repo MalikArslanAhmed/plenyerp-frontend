@@ -401,4 +401,18 @@ export class AppUrl {
         return AppUrl.API_URL + 'public-holidays/' + id;
     }
 
+    static GET_DESIGNATION_LIST(): string {
+        return AppUrl.API_URL + `designations`;
+    }
+    static DESIGNATION(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'designations/' + id;
+        } else {
+            return AppUrl.API_URL + 'designations';
+        }
+    }
+    static DELETE_DESIGNATION(id?): string {
+        return AppUrl.API_URL + 'designations/' + id;
+    }
+
 }

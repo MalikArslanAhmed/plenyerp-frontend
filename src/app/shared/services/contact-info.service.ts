@@ -114,4 +114,17 @@ export class ContactInfoService extends BaseService {
         return this.deleteRequest(AppUrl.DELETE_PUBLIC_HOLIDAY(id));
     }
 
+    getDesignationList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_DESIGNATION_LIST(), data);
+    }
+    addDesignation(data): Observable<any> {
+        return this.postRequest(AppUrl.DESIGNATION(), data);
+    }
+    updateDesignation(id, data): Observable<any> {
+        return this.putRequest(AppUrl.DESIGNATION(id), data);
+    }
+    deleteDesignation(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_DESIGNATION(id));
+    }
+
 }

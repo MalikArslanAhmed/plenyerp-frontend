@@ -44,7 +44,7 @@ export class LeaveTypeCreateComponent implements OnInit {
             shortName: ['', Validators.required],
             isCarryOverUnusedLeave: [false, Validators.required],
             isPaidLeave: [false, Validators.required],
-            isCalender_days: [false, Validators.required],
+            isCalenderDays: [false, Validators.required],
             isActive: [false, Validators.required],
             autoCreate: [false, Validators.required]
         });
@@ -57,7 +57,7 @@ export class LeaveTypeCreateComponent implements OnInit {
                 shortName: this.updateData.leave.shortName,
                 isCarryOverUnusedLeave: this.updateData.leave.isCarryOverUnusedLeave,
                 isPaidLeave: this.updateData.leave.isPaidLeave,
-                isCalender_days: this.updateData.leave.isCalender_days,
+                isCalenderDays: this.updateData.leave.isCalenderDays,
                 isActive: this.updateData.leave.isActive,
                 autoCreate: this.updateData.leave.autoCreate,
             });
