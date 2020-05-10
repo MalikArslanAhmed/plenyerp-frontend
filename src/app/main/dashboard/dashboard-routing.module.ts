@@ -28,6 +28,8 @@ import {DepartmentsComponent} from "./departments/departments.component";
 import {LeaveTypeComponent} from './holidays/leave-type/leave-type.component';
 import {LeaveGroupComponent} from './holidays/leave- group/leave-group.component';
 import {PublicHolidaysComponent} from './holidays/public-holidays/public-holidays.component';
+import {DesignationListComponent} from './designation/designation-list/designation-list.component';
+import {DesignationComponent} from './designation/designation.component';
 
 const routes: Routes = [
     {
@@ -238,6 +240,13 @@ const routes: Routes = [
         component: PublicHolidaysComponent,
         data: {
             title: 'Public Holidays'
+        },
+    },
+    {
+        path: 'designation',
+        component: DesignationComponent,
+        data: {
+            title: 'Designations'
         },
     }
 ];

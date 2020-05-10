@@ -95,6 +95,9 @@ import {LeaveGroupListComponent} from './holidays/leave- group/leave-group-list/
 import {PublicHolidayCreateComponent} from './holidays/public-holidays/public-holiday-create/public-holiday-create.component';
 import {PublicHolidaysComponent} from './holidays/public-holidays/public-holidays.component';
 import {PublicHolidayListComponent} from './holidays/public-holidays/public-holiday-list/public-holiday-list.component';
+import {DesignationComponent} from './designation/designation.component';
+import {DesignationCreateComponent} from './designation/designation-create/designation-create.component';
+import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 
 @NgModule({
     declarations: [
@@ -173,7 +176,10 @@ import {PublicHolidayListComponent} from './holidays/public-holidays/public-holi
         LeaveGroupListComponent,
         PublicHolidayCreateComponent,
         PublicHolidaysComponent,
-        PublicHolidayListComponent
+        PublicHolidayListComponent,
+        DesignationComponent,
+        DesignationCreateComponent,
+        DesignationListComponent
 
 
     ],

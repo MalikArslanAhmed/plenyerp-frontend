@@ -1,36 +1,36 @@
 import {Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {fuseAnimations} from '../../../../../../@fuse/animations';
-import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {ContactInfoService} from '../../../../shared/services/contact-info.service';
 
 @Component({
-    selector: 'leave-group-create',
-    templateUrl: './leave-group-create.component.html',
-    styleUrls: ['./leave-group-create.component.scss'],
+    selector: 'app-designation-create',
+    templateUrl: './designation-create.component.html',
+    styleUrls: ['./designation-create.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LeaveGroupCreateComponent implements OnInit {
+export class DesignationCreateComponent implements OnInit {
     action: any;
     dialogTitle: any;
-    leaveGroup: FormGroup;
+    designationForm: FormGroup;
     isSubmitted = false;
     salaryScales: any = [];
     updateData: any;
     countries = [];
-    constructor(public matDialogRef: MatDialogRef<LeaveGroupCreateComponent>,
+    constructor(public matDialogRef: MatDialogRef<DesignationCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
                 private contactInfoService: ContactInfoService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit Leave Group';
-            if (_data.leaveGroup) {
+            this.dialogTitle = 'Edit Designation';
+            if (_data.designation) {
                 this.updateData = _data;
             }
         } else {
-            this.dialogTitle = 'Add Leave Group';
+            this.dialogTitle = 'Add Designation';
         }
     }
 
@@ -40,7 +40,7 @@ export class LeaveGroupCreateComponent implements OnInit {
     }
 
     refresh() {
-        this.leaveGroup = this.fb.group({
+        this.designationForm = this.fb.group({
             name: ['', Validators.required],
             isActive: [false, Validators.required],
         });
@@ -48,23 +48,23 @@ export class LeaveGroupCreateComponent implements OnInit {
 
     checkForUpdate() {
         if (this.updateData) {
-            this.leaveGroup.patchValue({
-                name: this.updateData.leaveGroup.name,
-                isActive: this.updateData.leaveGroup.isActive,
+            this.designationForm.patchValue({
+                name: this.updateData.designation.name,
+                isActive: this.updateData.designation.isActive,
             });
         }
     }
 
-    saveRegion() {
+    saveDesignation() {
         this.isSubmitted = true;
-        if (!this.leaveGroup.valid) {
+        if (!this.designationForm.valid) {
             this.isSubmitted = false;
             return;
         }
 
         if (this.isSubmitted) {
-            this.contactInfoService.addLeavesGroup(this.leaveGroup.value).subscribe(data => {
-                this.leaveGroup.reset();
+            this.contactInfoService.addDesignation(this.designationForm.value).subscribe(data => {
+                this.designationForm.reset();
                 this.isSubmitted = false;
             });
 
@@ -72,16 +72,16 @@ export class LeaveGroupCreateComponent implements OnInit {
         }
     }
 
-    updateRegion() {
+    updateDesignation() {
         this.isSubmitted = true;
-        if (!this.leaveGroup.valid) {
+        if (!this.designationForm.valid) {
             this.isSubmitted = false;
             return;
         }
         if (this.isSubmitted) {
-            this.contactInfoService.updateLeavesGroup(this.updateData.leaveGroup.id, this.leaveGroup.value).subscribe(data => {
+            this.contactInfoService.updateDesignation(this.updateData.designation.id, this.designationForm.value).subscribe(data => {
                 this.updateData = undefined;
-                this.leaveGroup.reset();
+                this.designationForm.reset();
                 this.isSubmitted = false;
             });
 

@@ -96,10 +96,10 @@ export const navigation: FuseNavigation[] = [
                 icon: 'work',
                 children: [
                     {
-                        id: 'designations',
+                        id: 'designation',
                         title: 'Designations',
                         type: 'item',
-                        url: 'dashboard/analytics'
+                        url: 'dashboard/designation'
                     },
                     {
                         id: 'salary-scales',

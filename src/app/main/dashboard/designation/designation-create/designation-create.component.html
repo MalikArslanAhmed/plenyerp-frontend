@@ -9,10 +9,10 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
-        <form [formGroup]="leaveGroup">
+        <form [formGroup]="designationForm">
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Title of leave group</mat-label>
+                    <mat-label>Designation</mat-label>
                     <input matInput placeholder="Name" formControlName="name" name="name" required>
                 </mat-form-field>
             </div>
@@ -22,11 +22,11 @@
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" (click)="matDialogRef.close(leaveGroup); saveRegion()"
-                [disabled]="leaveGroup.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        <button mat-button class="save-button" (click)="matDialogRef.close(designationForm); saveDesignation()"
+                [disabled]="designationForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
         </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(leaveGroup); updateRegion()"
-                [disabled]="leaveGroup.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        <button mat-button class="save-button" (click)="matDialogRef.close(designationForm); updateDesignation()"
+                [disabled]="designationForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
         </button>
     </div>
 </div>
