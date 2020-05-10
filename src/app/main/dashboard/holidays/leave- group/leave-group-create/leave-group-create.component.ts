@@ -1,0 +1,92 @@
+import {Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {fuseAnimations} from '../../../../../../@fuse/animations';
+import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+
+@Component({
+    selector: 'leave-group-create',
+    templateUrl: './leave-group-create.component.html',
+    styleUrls: ['./leave-group-create.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
+})
+export class LeaveGroupCreateComponent implements OnInit {
+    action: any;
+    dialogTitle: any;
+    regionForm: FormGroup;
+    isSubmitted = false;
+    salaryScales: any = [];
+    updateData: any;
+    countries = [];
+    constructor(public matDialogRef: MatDialogRef<LeaveGroupCreateComponent>,
+                @Inject(MAT_DIALOG_DATA) private _data: any,
+                private fb: FormBuilder,
+                private contactInfoService: ContactInfoService) {
+        this.action = _data.action;
+        if (this.action === 'EDIT') {
+            this.dialogTitle = 'Edit Leave Group';
+            if (_data.leaveGroup) {
+                this.updateData = _data;
+            }
+        } else {
+            this.dialogTitle = 'Add Leave Group';
+        }
+    }
+
+    ngOnInit(): void {
+        this.refresh();
+        this.checkForUpdate();
+    }
+
+    refresh() {
+        this.regionForm = this.fb.group({
+            name: ['', Validators.required],
+            isActive: [false, Validators.required],
+        });
+    }
+
+    checkForUpdate() {
+        if (this.updateData) {
+            this.regionForm.patchValue({
+                name: this.updateData.leaveGroup.name,
+                isActive: this.updateData.leaveGroup.isActive,
+            });
+        }
+    }
+
+    saveRegion() {
+        this.isSubmitted = true;
+        if (!this.regionForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.isSubmitted) {
+            this.contactInfoService.addLeavesGroup(this.regionForm.value).subscribe(data => {
+                this.regionForm.reset();
+                this.isSubmitted = false;
+            });
+
+
+        }
+    }
+
+    updateRegion() {
+        this.isSubmitted = true;
+        if (!this.regionForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.contactInfoService.updateLeavesGroup(this.updateData.leaveGroup.id, this.regionForm.value).subscribe(data => {
+                this.updateData = undefined;
+                this.regionForm.reset();
+                this.isSubmitted = false;
+            });
+
+        }
+    }
+
+
+}

@@ -86,6 +86,15 @@ import {LgaComponent} from './contact-info/lga/lga.component';
 import {LgaCreateComponent} from './contact-info/lga/lga-create/lga-create.component';
 import {LgaListComponent} from './contact-info/lga/lga-list/lga-list.component';
 import {MatSelectModule} from '@angular/material/select';
+import {LeaveTypeComponent} from './holidays/leave-type/leave-type.component';
+import {LeaveTypeCreateComponent} from './holidays/leave-type/leave-type-create/leave-type-create.component';
+import {LeaveTypeListComponent} from './holidays/leave-type/leave-type-list/leave-type-list.component';
+import {LeaveGroupComponent} from './holidays/leave- group/leave-group.component';
+import {LeaveGroupCreateComponent} from './holidays/leave- group/leave-group-create/leave-group-create.component';
+import {LeaveGroupListComponent} from './holidays/leave- group/leave-group-list/leave-group-list.component';
+import {PublicHolidayCreateComponent} from './holidays/public-holidays/public-holiday-create/public-holiday-create.component';
+import {PublicHolidaysComponent} from './holidays/public-holidays/public-holidays.component';
+import {PublicHolidayListComponent} from './holidays/public-holidays/public-holiday-list/public-holiday-list.component';
 
 @NgModule({
     declarations: [
@@ -155,7 +164,17 @@ import {MatSelectModule} from '@angular/material/select';
         StatesListComponent,
         LgaComponent,
         LgaCreateComponent,
-        LgaListComponent
+        LgaListComponent,
+        LeaveTypeComponent,
+        LeaveTypeCreateComponent,
+        LeaveTypeListComponent,
+        LeaveGroupComponent,
+        LeaveGroupCreateComponent,
+        LeaveGroupListComponent,
+        PublicHolidayCreateComponent,
+        PublicHolidaysComponent,
+        PublicHolidayListComponent
+
 
     ],
     imports: [

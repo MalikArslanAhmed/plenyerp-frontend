@@ -74,4 +74,44 @@ export class ContactInfoService extends BaseService {
     state(data): Observable<any> {
         return this.getRequest(AppUrl.GET_STATE(), data);
     }
+
+    getLeavesTypeList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVES_TYPE_LIST(), data);
+    }
+    addLeaves(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVES_TYPE(), data);
+    }
+    updateLeaves(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVES_TYPE(id), data);
+    }
+    deleteLeaves(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVES(id));
+    }
+
+    getLeavesGroupList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_GROUP_LIST(), data);
+    }
+    addLeavesGroup(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVES_GROUP(), data);
+    }
+    updateLeavesGroup(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVES_GROUP(id), data);
+    }
+    deleteLeavesGroup(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVES_GROUP(id));
+    }
+
+    getPublicHolidayList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_PUBLIC_HOLIDAY_LIST(), data);
+    }
+    addPublicHoliday(data): Observable<any> {
+        return this.postRequest(AppUrl.PUBLIC_HOLIDAY(), data);
+    }
+    updatePublicHoliday(id, data): Observable<any> {
+        return this.putRequest(AppUrl.PUBLIC_HOLIDAY(id), data);
+    }
+    deletePublicHoliday(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_PUBLIC_HOLIDAY(id));
+    }
+
 }

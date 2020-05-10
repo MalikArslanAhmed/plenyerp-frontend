@@ -155,6 +155,33 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
+                id: 'holiday',
+                title: 'Holidays',
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'calendar_today',
+                children: [
+                    {
+                        id: 'leaves-type',
+                        title: 'Type of leaves',
+                        type: 'item',
+                        url: 'dashboard/leaves-type'
+                    },
+                    {
+                        id: 'leave-group',
+                        title: 'Leave Group',
+                        type: 'item',
+                        url: 'dashboard/leave-group'
+                    },
+                    {
+                        id: 'public-holiday',
+                        title: 'Public Holidays ',
+                        type: 'item',
+                        url: 'dashboard/public-holiday'
+                    }
+                ]
+            },
+            {
                 id: 'qualifications',
                 title: 'Qualifications',
                 // translate: 'NAV.DASHBOARDS',

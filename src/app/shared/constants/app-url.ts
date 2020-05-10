@@ -97,7 +97,7 @@ export class AppUrl {
 
     static STATES(id?): string {
         if (id) {
-            return AppUrl.API_URL + 'states/' + id;
+            return AppUrl.API_URL + 'public-holidays/' + id;
         } else {
             return AppUrl.API_URL + 'states';
         }
@@ -120,7 +120,7 @@ export class AppUrl {
     }
 
     static DELETE_STATE(id?): string {
-        return AppUrl.API_URL + 'states/' + id;
+        return AppUrl.API_URL + 'public-holidays/' + id;
     }
 
     static DELETE_LGA(id?): string {
@@ -357,6 +357,48 @@ export class AppUrl {
     }
     static GET_STATE(): string {
         return AppUrl.API_URL + `states`;
+    }
+
+    static GET_LEAVES_TYPE_LIST(): string {
+        return AppUrl.API_URL + `leaves`;
+    }
+    static LEAVES_TYPE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leaves/' + id;
+        } else {
+            return AppUrl.API_URL + 'leaves';
+        }
+    }
+    static DELETE_LEAVES(id?): string {
+        return AppUrl.API_URL + 'leaves/' + id;
+    }
+
+    static GET_LEAVE_GROUP_LIST(): string {
+        return AppUrl.API_URL + `leave-groups`;
+    }
+    static LEAVES_GROUP(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-groups/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-groups';
+        }
+    }
+    static DELETE_LEAVES_GROUP(id?): string {
+        return AppUrl.API_URL + 'leave-groups/' + id;
+    }
+
+    static GET_PUBLIC_HOLIDAY_LIST(): string {
+        return AppUrl.API_URL + `public-holidays`;
+    }
+    static PUBLIC_HOLIDAY(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'public-holidays/' + id;
+        } else {
+            return AppUrl.API_URL + 'public-holidays';
+        }
+    }
+    static DELETE_PUBLIC_HOLIDAY(id?): string {
+        return AppUrl.API_URL + 'public-holidays/' + id;
     }
 
 }

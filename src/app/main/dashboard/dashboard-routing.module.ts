@@ -25,6 +25,9 @@ import {StatesComponent} from './contact-info/states/states.component';
 import {LgaComponent} from './contact-info/lga/lga.component';
 import {StructureComponent} from "./structure/structure.component";
 import {DepartmentsComponent} from "./departments/departments.component";
+import {LeaveTypeComponent} from './holidays/leave-type/leave-type.component';
+import {LeaveGroupComponent} from './holidays/leave- group/leave-group.component';
+import {PublicHolidaysComponent} from './holidays/public-holidays/public-holidays.component';
 
 const routes: Routes = [
     {
@@ -214,6 +217,27 @@ const routes: Routes = [
         component: LgaComponent,
         data: {
             title: 'LGA'
+        },
+    },
+    {
+        path: 'leaves-type',
+        component: LeaveTypeComponent,
+        data: {
+            title: 'Type of leaves'
+        },
+    },
+    {
+        path: 'leave-group',
+        component: LeaveGroupComponent,
+        data: {
+            title: 'Leave Group'
+        },
+    },
+    {
+        path: 'public-holiday',
+        component: PublicHolidaysComponent,
+        data: {
+            title: 'Public Holidays'
         },
     }
 ];
