@@ -14,7 +14,7 @@ export const environment = {
     // appUrl: 'http://api.dss.luezoid.com/',
     // appUrl: 'http://api2.dss.luezoid.com/',
     appUrl: 'http://api.erp.valuescale.co.in/',
-    // appUrl: 'http://api.erp.valuescale.co.in/',
+    // appUrl: 'http://localhost:8000/',
 };
 
 /*

@@ -46,6 +46,7 @@ interface ExampleFlatNode {
 })
 
 export class SegmentDetailsComponent implements OnInit {
+
     private _transformer = (node: SegmentNode, level: number) => {
         return {
             expandable: !!node.children && node.children.length > 0,
@@ -57,9 +58,15 @@ export class SegmentDetailsComponent implements OnInit {
             maxLevel: node.maxLevel,
             individualCode: node.individualCode,
             characterCount: node.characterCount,
-            children: node.children
+            children: node.children,
+            showDelete: node.children.length === 0
         };
-    };
+    }
+
+    constructor(private _fuseSidebarService: FuseSidebarService, private route: ActivatedRoute,
+                private _matDialog: MatDialog, private adminSegmentServices: AdminSegmentServices) {
+        this.dataSource.data = TREE_DATA;
+    }
 
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);
     treeFlattener = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.children);
@@ -68,11 +75,6 @@ export class SegmentDetailsComponent implements OnInit {
     dialogRef: any;
     segmentName: string;
     segmentId: number;
-
-    constructor(private _fuseSidebarService: FuseSidebarService, private route: ActivatedRoute,
-                private _matDialog: MatDialog, private adminSegmentServices: AdminSegmentServices) {
-        this.dataSource.data = TREE_DATA;
-    }
 
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
@@ -87,7 +89,7 @@ export class SegmentDetailsComponent implements OnInit {
         this.adminSegmentServices.getAllSegments(this.segmentId).subscribe(data => {
             this.segmentName = data.name;
             this.dataSource.data = [data];
-        })
+        });
     }
 
     addItem(node){
@@ -116,5 +118,11 @@ export class SegmentDetailsComponent implements OnInit {
             }
             this.getSegmentList();
         });
+    }
+
+    deleteItem(node) {
+       this.adminSegmentServices.deleteSegment(node.id).subscribe(data => {
+           this.getSegmentList();
+       });
     }
 }

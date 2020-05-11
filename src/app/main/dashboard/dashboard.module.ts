@@ -67,6 +67,7 @@ import {AdminSegmentsComponent} from './admin-segments/admin-segments.component'
 import {SegmentsListComponent} from './admin-segments/segments-list/segments-list.component';
 import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
 import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin-segments/add-create-admin-segments.component';
+import {EditSegmentListComponent} from './admin-segments/edit-segment-list/edit-segment-list';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatOptionModule} from '@angular/material/core';
@@ -153,6 +154,7 @@ import {DesignationListComponent} from './designation/designation-list/designati
         SegmentsListComponent,
         SegmentDetailsComponent,
         AddCreateAdminSegmentsComponent,
+        EditSegmentListComponent,
         StructureComponent,
         DepartmentsComponent,
         EmployeeListComponent,
@@ -180,8 +182,6 @@ import {DesignationListComponent} from './designation/designation-list/designati
         DesignationComponent,
         DesignationCreateComponent,
         DesignationListComponent
-
-
     ],
     imports: [
         CommonModule,

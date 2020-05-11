@@ -41,10 +41,14 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let segment">
             <div fxFlex="row" fxLayoutAlign="end center">
+                <button mat-icon-button aria-label="Toggle star" (click)="editSegmentList(segment)"
+                        style="color: blue">
+                    <mat-icon class="editBtn">edit</mat-icon>
+                </button>
                 <button mat-icon-button aria-label="Toggle star"
                         style="color: blue">
                     <a [routerLink]="['/dashboard/admin-segment-detail', segment.id]">
-                    <mat-icon class="material-icons">edit</mat-icon>
+                        <mat-icon class="material-icons">device_hub</mat-icon>
                     </a>
                 </button>
             </div>

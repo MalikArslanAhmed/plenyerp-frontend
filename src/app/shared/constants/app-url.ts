@@ -328,21 +328,27 @@ export class AppUrl {
     }
 
 
-    static GET_ALL_SEGMENTS(id?): string {
-        if (id) {
-            return AppUrl.API_URL + 'admin/' + id;
-        } else {
-            return AppUrl.API_URL + 'admin';
-        }
+    // static GET_ALL_SEGMENTS(id?): string {
+    //     if (id) {
+    //         return AppUrl.API_URL + 'admin/' + id;
+    //     } else {
+    //         return AppUrl.API_URL + 'admin';
+    //     }
+    // }
+    //
+    // static ADD_SEGMENT(id?): string {
+    //     if (id) {
+    //         return AppUrl.API_URL + 'admin/' + id;
+    //     } else {
+    //         return AppUrl.API_URL + 'admin';
+    //     }
+    // }
+
+    static SEGMENT(id?): string {
+        const path = id ? 'admin/' + id : 'admin';
+        return AppUrl.API_URL + path;
     }
 
-    static ADD_SEGMENT(id?): string {
-        if (id) {
-            return AppUrl.API_URL + 'admin/' + id;
-        } else {
-            return AppUrl.API_URL + 'admin';
-        }
-    }
     static GET_COUNTRY_LIST(): string {
         return AppUrl.API_URL + `countries`;
     }
