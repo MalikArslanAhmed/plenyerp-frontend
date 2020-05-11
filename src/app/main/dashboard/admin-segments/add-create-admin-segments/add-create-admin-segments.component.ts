@@ -59,7 +59,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
         const isEdit = this.action === 'EDIT';
         let controlConfig = {};
         const {name, characterCount, isActive} = this.segment;
-
+        console.log(nextIndividualCode)
         if (isEdit) {
             controlConfig = {
                 name: name,
@@ -71,7 +71,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
             controlConfig = {
                 name: '',
                 characterCount: {value: '', disabled: isEdit},
-                individualCode: {value: nextIndividualCode, disabled: true},
+                individualCode: [nextIndividualCode],
                 isActive: {value: true, disabled: isEdit}
             };
         }
@@ -90,7 +90,6 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
 
         if (this.action === 'EDIT') { payloadToCreate.id = id; }
 
-        console.log(this.action, payloadToCreate, 'handle segment');
         this.action === 'EDIT' ? this.segmentServices.updateSegment(id, payloadToCreate).subscribe() :
             this.segmentServices.addSegment(payloadToCreate).subscribe();
     }

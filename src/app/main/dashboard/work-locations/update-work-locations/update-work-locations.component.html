@@ -17,8 +17,8 @@
                     <input name="name" formControlName="name" matInput required>
                 </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-label style="margin-right: 20px">Child Enabled</mat-label>
+            <div fxLayout="row" fxLayoutAlign="start start" *ngIf="!this.updateData">
+                <mat-label style="margin-right: 20px">Is a Parent</mat-label>
                 <mat-slide-toggle formControlName="isChildEnabled"></mat-slide-toggle>
             </div>
         </form>

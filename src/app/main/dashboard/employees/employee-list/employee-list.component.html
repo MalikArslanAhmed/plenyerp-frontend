@@ -1,0 +1,69 @@
+<mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+            <p class="email text-truncate">
+                {{employee.sno}}.
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+            <p class="phone text-truncate">
+                {{employee.name}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+            <p class="phone text-truncate">
+                {{employee.phone}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Department</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+            <p class="phone text-truncate">
+                {{employee.department}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Position</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+            <p class="phone text-truncate">
+                {{employee.position}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let employee">
+            <div fxFlex="row" fxLayoutAlign="end center">
+                <button mat-icon-button aria-label="Toggle star" (click)="editCategory(employee)"
+                        style="color: blue">
+                    <mat-icon class="material-icons">edit</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Toggle star" (click)="deleteCategory(employee?.id)"
+                        style="color: red">
+                    <mat-icon class="material-icons">delete</mat-icon>
+                </button>
+            </div>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let employee; columns: displayedColumns;" class="contact"
+             [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+</mat-table>

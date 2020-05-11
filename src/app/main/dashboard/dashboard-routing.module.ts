@@ -17,6 +17,19 @@ import {MembershipComponent} from './membership/membership.component';
 import {SalaryScalesComponent} from './salary-scales/salary-scales.component';
 import {AdminSegmentsComponent} from './admin-segments/admin-segments.component';
 import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
+import {EmployeesComponent} from "./employees/employees.component";
+import {EmployeeAddComponent} from "./employees/employee-add/employee-add.component";
+import {CountryComponent} from './contact-info/country/country.component';
+import {RegionComponent} from './contact-info/region/region.component';
+import {StatesComponent} from './contact-info/states/states.component';
+import {LgaComponent} from './contact-info/lga/lga.component';
+import {StructureComponent} from "./structure/structure.component";
+import {DepartmentsComponent} from "./departments/departments.component";
+import {LeaveTypeComponent} from './holidays/leave-type/leave-type.component';
+import {LeaveGroupComponent} from './holidays/leave- group/leave-group.component';
+import {PublicHolidaysComponent} from './holidays/public-holidays/public-holidays.component';
+import {DesignationListComponent} from './designation/designation-list/designation-list.component';
+import {DesignationComponent} from './designation/designation.component';
 
 const routes: Routes = [
     {
@@ -125,6 +138,34 @@ const routes: Routes = [
         },
     },
     {
+        path: 'grade-level',
+        component: SalaryScalesComponent,
+        data: {
+            title: 'Grade Level'
+        },
+    },
+    {
+        path: 'gl-step',
+        component: SalaryScalesComponent,
+        data: {
+            title: 'GL Step'
+        },
+    },
+    {
+        path: 'employees',
+        component: EmployeesComponent,
+        data: {
+            title: 'Employees'
+        },
+    },
+    {
+        path: 'add-employee',
+        component: EmployeeAddComponent,
+        data: {
+            title: 'Add Employees'
+        },
+    },
+    {
         path: 'admin-segments',
         component: AdminSegmentsComponent,
         data: {
@@ -137,8 +178,77 @@ const routes: Routes = [
         data: {
             title: 'Segment Details'
         },
+    },
+    {
+        path: 'departments',
+        component: DepartmentsComponent,
+        data: {
+            title: 'Departments'
+        },
+    },
+    {
+        path: 'structure',
+        component: StructureComponent,
+        data: {
+            title: 'Structure'
+        },
+    },
+    {
+        path: 'country',
+        component: CountryComponent,
+        data: {
+            title: 'Country'
+        },
+    },
+    {
+        path: 'region',
+        component: RegionComponent,
+        data: {
+            title: 'Region'
+        },
+    },
+    {
+        path: 'states',
+        component: StatesComponent,
+        data: {
+            title: 'States'
+        },
+    },
+    {
+        path: 'lga',
+        component: LgaComponent,
+        data: {
+            title: 'LGA'
+        },
+    },
+    {
+        path: 'leaves-type',
+        component: LeaveTypeComponent,
+        data: {
+            title: 'Type of leaves'
+        },
+    },
+    {
+        path: 'leave-group',
+        component: LeaveGroupComponent,
+        data: {
+            title: 'Leave Group'
+        },
+    },
+    {
+        path: 'public-holiday',
+        component: PublicHolidaysComponent,
+        data: {
+            title: 'Public Holidays'
+        },
+    },
+    {
+        path: 'designation',
+        component: DesignationComponent,
+        data: {
+            title: 'Designations'
+        },
     }
-
 ];
 
 @NgModule({

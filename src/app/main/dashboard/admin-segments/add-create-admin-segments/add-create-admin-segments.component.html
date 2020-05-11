@@ -21,11 +21,11 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex class="formInput">
                     <mat-label>Segment Code</mat-label>
-                    <input name="individualCode" formControlName="individualCode" matInput [disabled]=true >
+                    <input name="individualCode" formControlName="individualCode" matInput>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-label style="margin-right: 20px">Child Enabled</mat-label>
+                <mat-label style="margin-right: 20px">Is a parent</mat-label>
                 <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
             </div>
         </form>

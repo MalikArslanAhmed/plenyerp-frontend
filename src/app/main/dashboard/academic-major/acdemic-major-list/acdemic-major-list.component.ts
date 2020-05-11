@@ -14,7 +14,7 @@ import {AcademicMajorService} from "../../../../shared/services/academic-major.s
 })
 export class AcdemicMajorListComponent implements OnInit {
     academicMajors = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private academicMajorService: AcademicMajorService,

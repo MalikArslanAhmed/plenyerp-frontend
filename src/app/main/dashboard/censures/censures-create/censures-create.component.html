@@ -17,6 +17,10 @@
                     <input name="name" formControlName="name" matInput required>
                 </mat-form-field>
             </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-label style="margin-right: 20px">Is Active</mat-label>
+                <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+            </div>
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">

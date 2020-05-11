@@ -41,14 +41,16 @@ export class LanguageCreateComponent implements OnInit {
 
     refresh() {
         this.languageForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.languageForm.patchValue({
-                'name': this.updateData.language.name
+                'name': this.updateData.language.name,
+                'isActive': this.updateData.language.isActive
             });
         }
     }

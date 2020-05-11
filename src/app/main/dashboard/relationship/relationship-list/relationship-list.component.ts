@@ -14,7 +14,7 @@ import {RelationshipCreateComponent} from '../relationship-create/relationship-c
 })
 export class RelationshipListComponent implements OnInit {
     relationships = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private relationshipService: RelationshipService,

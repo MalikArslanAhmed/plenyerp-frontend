@@ -14,7 +14,7 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class QualificationListComponent implements OnInit {
     qualifications = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private qualificationService: QualificationService,

@@ -14,7 +14,7 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 })
 export class SkillListComponent implements OnInit {
     skills = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private skillService: SkillService,

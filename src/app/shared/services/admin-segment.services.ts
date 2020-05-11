@@ -16,16 +16,18 @@ export class AdminSegmentServices extends BaseService{
     }
 
     getAllSegments(id?): Observable<any> {
-        return this.getRequest(AppUrl.GET_ALL_SEGMENTS(id));
+        return this.getRequest(AppUrl.SEGMENT(id));
     }
 
     addSegment(data): Observable<any> {
-        return this.postRequest(AppUrl.ADD_SEGMENT(), data);
+        return this.postRequest(AppUrl.SEGMENT(), data);
     }
 
     updateSegment(id, data): Observable<any> {
-        const path = AppUrl.ADD_SEGMENT(id);
-        console.log(path, 'path');
-        return this.putRequest(AppUrl.ADD_SEGMENT(id), data);
+        return this.putRequest(AppUrl.SEGMENT(id), data);
+    }
+
+    deleteSegment(id): Observable<any> {
+        return this.deleteRequest(AppUrl.SEGMENT(id));
     }
 }

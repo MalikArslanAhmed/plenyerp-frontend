@@ -41,14 +41,16 @@ export class MembershipCreateComponent implements OnInit {
 
     refresh() {
         this.membershipsForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.membershipsForm.patchValue({
-                'name': this.updateData.membership.name
+                'name': this.updateData.membership.name,
+                'isActive': this.updateData.membership.isActive
             });
         }
     }

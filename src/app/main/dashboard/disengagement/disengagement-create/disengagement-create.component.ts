@@ -40,14 +40,16 @@ export class DisengagementCreateComponent implements OnInit {
 
     refresh() {
         this.disengagementForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.disengagementForm.patchValue({
-                'name': this.updateData.disengagement.name
+                'name': this.updateData.disengagement.name,
+                'isActive': this.updateData.disengagement.isActive
             });
         }
     }

@@ -60,11 +60,45 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {GradeLevelCreateComponent} from './salary-scales/grade-level-create/grade-level-create.component';
 import {StepLevelCreateComponent} from './salary-scales/step-level-create/step-level-create.component';
+import {EmployeesComponent} from './employees/employees.component';
+import {EmployeeAddComponent} from './employees/employee-add/employee-add.component';
+import {EmployeeListComponent} from './employees/employee-list/employee-list.component';
 import {AdminSegmentsComponent} from './admin-segments/admin-segments.component';
 import {SegmentsListComponent} from './admin-segments/segments-list/segments-list.component';
 import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
 import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin-segments/add-create-admin-segments.component';
 import {EditSegmentListComponent} from './admin-segments/edit-segment-list/edit-segment-list';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatOptionModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {StructureComponent} from './structure/structure.component';
+import {DepartmentsComponent} from './departments/departments.component';
+import {CountryCreateComponent} from './contact-info/country/country-create/country-create.component';
+import {CountryListComponent} from './contact-info/country/country-list/country-list.component';
+import {CountryComponent} from './contact-info/country/country.component';
+import {RegionComponent} from './contact-info/region/region.component';
+import {RegionCreateComponent} from './contact-info/region/region-create/region-create.component';
+import {RegionListComponent} from './contact-info/region/region-list/region-list.component';
+import {StatesComponent} from './contact-info/states/states.component';
+import {StatesCreateComponent} from './contact-info/states/states-create/states-create.component';
+import {StatesListComponent} from './contact-info/states/states-list/states-list.component';
+import {LgaComponent} from './contact-info/lga/lga.component';
+import {LgaCreateComponent} from './contact-info/lga/lga-create/lga-create.component';
+import {LgaListComponent} from './contact-info/lga/lga-list/lga-list.component';
+import {MatSelectModule} from '@angular/material/select';
+import {LeaveTypeComponent} from './holidays/leave-type/leave-type.component';
+import {LeaveTypeCreateComponent} from './holidays/leave-type/leave-type-create/leave-type-create.component';
+import {LeaveTypeListComponent} from './holidays/leave-type/leave-type-list/leave-type-list.component';
+import {LeaveGroupComponent} from './holidays/leave- group/leave-group.component';
+import {LeaveGroupCreateComponent} from './holidays/leave- group/leave-group-create/leave-group-create.component';
+import {LeaveGroupListComponent} from './holidays/leave- group/leave-group-list/leave-group-list.component';
+import {PublicHolidayCreateComponent} from './holidays/public-holidays/public-holiday-create/public-holiday-create.component';
+import {PublicHolidaysComponent} from './holidays/public-holidays/public-holidays.component';
+import {PublicHolidayListComponent} from './holidays/public-holidays/public-holiday-list/public-holiday-list.component';
+import {DesignationComponent} from './designation/designation.component';
+import {DesignationCreateComponent} from './designation/designation-create/designation-create.component';
+import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 
 @NgModule({
     declarations: [
@@ -112,11 +146,42 @@ import {EditSegmentListComponent} from './admin-segments/edit-segment-list/edit-
         SalaryScalesCreateComponent,
         GradeLevelCreateComponent,
         StepLevelCreateComponent,
+        EmployeesComponent,
+        EmployeeAddComponent,
+        EmployeeListComponent,
+        StepLevelCreateComponent,
         AdminSegmentsComponent,
         SegmentsListComponent,
         SegmentDetailsComponent,
         AddCreateAdminSegmentsComponent,
-        EditSegmentListComponent
+        EditSegmentListComponent,
+        StructureComponent,
+        DepartmentsComponent,
+        EmployeeListComponent,
+        CountryComponent,
+        CountryCreateComponent,
+        CountryListComponent,
+        RegionComponent,
+        RegionCreateComponent,
+        RegionListComponent,
+        StatesComponent,
+        StatesCreateComponent,
+        StatesListComponent,
+        LgaComponent,
+        LgaCreateComponent,
+        LgaListComponent,
+        LeaveTypeComponent,
+        LeaveTypeCreateComponent,
+        LeaveTypeListComponent,
+        LeaveGroupComponent,
+        LeaveGroupCreateComponent,
+        LeaveGroupListComponent,
+        PublicHolidayCreateComponent,
+        PublicHolidaysComponent,
+        PublicHolidayListComponent,
+        DesignationComponent,
+        DesignationCreateComponent,
+        DesignationListComponent
     ],
     imports: [
         CommonModule,
@@ -136,7 +201,12 @@ import {EditSegmentListComponent} from './admin-segments/edit-segment-list/edit-
         MatTreeModule,
         MatSlideToggleModule,
         MatGridListModule,
-        MatTabsModule
+        MatTabsModule,
+        MatSelectModule,
+        MatStepperModule,
+        MatDatepickerModule,
+        MatOptionModule,
+        MatRadioModule
     ]
 })
 export class DashboardModule {

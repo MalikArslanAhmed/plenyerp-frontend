@@ -28,6 +28,9 @@
                         <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
                             <mat-icon class="editBtn">edit</mat-icon>
                         </button>
+                        <button mat-icon-button title="Delete" *ngIf="node.level !== 0" (click)="deleteItem(node)">
+                            <mat-icon class="editBtn">delete</mat-icon>
+                        </button>
                     </mat-tree-node>
                     <!-- This is the tree node template for expandable nodes -->
                     <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
@@ -44,6 +47,9 @@
                         </button>
                         <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
                             <mat-icon class="editBtn">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button title="Delete" *ngIf="node.showDelete" (click)="deleteItem(node)">
+                            <mat-icon class="editBtn">delete</mat-icon>
                         </button>
                     </mat-tree-node>
                 </mat-tree>

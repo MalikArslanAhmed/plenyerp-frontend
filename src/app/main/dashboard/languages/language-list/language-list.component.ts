@@ -14,7 +14,7 @@ import {LanguageService} from "../../../../shared/services/language.service";
 })
 export class LanguageListComponent implements OnInit {
     languages = [];
-    displayedColumns = ['id', 'name', 'actions'];
+    displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
     constructor(private languageService: LanguageService,

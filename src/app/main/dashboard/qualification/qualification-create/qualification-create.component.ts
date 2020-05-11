@@ -38,14 +38,16 @@ export class QualificationCreateComponent implements OnInit {
 
     refresh() {
         this.qualificationForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.qualificationForm.patchValue({
-                'name': this.updateData.qualification.name
+                'name': this.updateData.qualification.name,
+                'isActive': this.updateData.qualification.isActive
             });
         }
     }

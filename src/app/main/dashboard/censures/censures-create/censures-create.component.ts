@@ -40,14 +40,16 @@ export class CensuresCreateComponent implements OnInit {
 
     refresh() {
         this.censuresForm = this.fb.group({
-            'name': ['', Validators.required]
+            'name': ['', Validators.required],
+            'isActive': [true, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.censuresForm.patchValue({
-                'name': this.updateData.censure.name
+                'name': this.updateData.censure.name,
+                'isActive': this.updateData.censure.isActive
             });
         }
     }

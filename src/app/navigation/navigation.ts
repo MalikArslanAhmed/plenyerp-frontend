@@ -19,13 +19,13 @@ export const navigation: FuseNavigation[] = [
                         id: 'employee-list',
                         title: 'Employee List',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/employees'
                     },
                     {
                         id: 'add-employee',
                         title: 'Add Employee / Enrolments',
                         type: 'item',
-                        url: '/apps/dashboards/project'
+                        url: 'dashboard/add-employee'
                     }
                 ]
             },
@@ -78,13 +78,13 @@ export const navigation: FuseNavigation[] = [
                         id: 'structure',
                         title: 'Structure',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/structure'
                     },
                     {
                         id: 'depratments',
                         title: 'Departments',
                         type: 'item',
-                        url: '/apps/dashboards/analytics'
+                        url: 'dashboard/departments'
                     }
                 ]
             },
@@ -96,10 +96,10 @@ export const navigation: FuseNavigation[] = [
                 icon: 'work',
                 children: [
                     {
-                        id: 'designations',
+                        id: 'designation',
                         title: 'Designations',
                         type: 'item',
-                        url: 'dashboard/analytics'
+                        url: 'dashboard/designation'
                     },
                     {
                         id: 'salary-scales',
@@ -111,13 +111,73 @@ export const navigation: FuseNavigation[] = [
                         id: 'grade-level',
                         title: 'Grade Level',
                         type: 'item',
-                        url: 'dashboard/analytics'
+                        url: 'dashboard/grade-level'
                     },
                     {
                         id: 'gl-step',
                         title: 'GL Step',
                         type: 'item',
-                        url: 'dashboard/analytics'
+                        url: 'dashboard/gl-step'
+                    }
+                ]
+            },
+            {
+                id: 'contact-info',
+                title: 'Contact Info',
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'assignment_ind',
+                children: [
+                    {
+                        id: 'country',
+                        title: 'Country',
+                        type: 'item',
+                        url: 'dashboard/country'
+                    },
+                    {
+                        id: 'region',
+                        title: 'Region',
+                        type: 'item',
+                        url: 'dashboard/region'
+                    },
+                    {
+                        id: 'states',
+                        title: 'States ',
+                        type: 'item',
+                        url: 'dashboard/states'
+                    },
+                    {
+                        id: 'lga',
+                        title: 'LGA',
+                        type: 'item',
+                        url: 'dashboard/lga'
+                    }
+                ]
+            },
+            {
+                id: 'holiday',
+                title: 'Holidays',
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'calendar_today',
+                children: [
+                    {
+                        id: 'leaves-type',
+                        title: 'Type of leaves',
+                        type: 'item',
+                        url: 'dashboard/leaves-type'
+                    },
+                    {
+                        id: 'leave-group',
+                        title: 'Leave Group',
+                        type: 'item',
+                        url: 'dashboard/leave-group'
+                    },
+                    {
+                        id: 'public-holiday',
+                        title: 'Public Holidays ',
+                        type: 'item',
+                        url: 'dashboard/public-holiday'
                     }
                 ]
             },

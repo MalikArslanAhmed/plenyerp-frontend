@@ -44,15 +44,15 @@ export class WorkLocationsComponent implements OnInit {
             level: level,
             id: node.id,
             isChildEnabled: node.isChildEnabled,
-            parentId: node.parentId
+            parentId: node.parentId,
         };
-    }
+    };
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);
     treeFlattener = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.children);
     dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
-
     dialogRef: any;
+    @ViewChild('tree') tree;
 
     constructor(private workLocationService: WorkLocationService,
                 private _fuseSidebarService: FuseSidebarService,
@@ -73,6 +73,7 @@ export class WorkLocationsComponent implements OnInit {
                 name: 'Work Locations',
                 children: this.workLocationData(data)
             }];
+            this.tree.treeControl.expandAll();
         });
     }
 
