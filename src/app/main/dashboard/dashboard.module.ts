@@ -64,6 +64,7 @@ import {AdminSegmentsComponent} from './admin-segments/admin-segments.component'
 import {SegmentsListComponent} from './admin-segments/segments-list/segments-list.component';
 import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
 import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin-segments/add-create-admin-segments.component';
+import {EditSegmentListComponent} from './admin-segments/edit-segment-list/edit-segment-list';
 
 @NgModule({
     declarations: [
@@ -114,7 +115,8 @@ import {AddCreateAdminSegmentsComponent} from './admin-segments/add-create-admin
         AdminSegmentsComponent,
         SegmentsListComponent,
         SegmentDetailsComponent,
-        AddCreateAdminSegmentsComponent
+        AddCreateAdminSegmentsComponent,
+        EditSegmentListComponent
     ],
     imports: [
         CommonModule,

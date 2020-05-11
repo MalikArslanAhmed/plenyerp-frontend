@@ -87,7 +87,7 @@ export class SegmentDetailsComponent implements OnInit {
         this.adminSegmentServices.getAllSegments(this.segmentId).subscribe(data => {
             this.segmentName = data.name;
             this.dataSource.data = [data];
-        })
+        });
     }
 
     addItem(node){

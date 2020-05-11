@@ -16,7 +16,7 @@ export class AdminSegmentServices extends BaseService{
     }
 
     getAllSegments(id?): Observable<any> {
-        return this.getRequest(AppUrl.GET_ALL_SEGMENTS(id))
+        return this.getRequest(AppUrl.GET_ALL_SEGMENTS(id));
     }
 
     addSegment(data): Observable<any> {
@@ -24,6 +24,8 @@ export class AdminSegmentServices extends BaseService{
     }
 
     updateSegment(id, data): Observable<any> {
+        const path = AppUrl.ADD_SEGMENT(id);
+        console.log(path, 'path');
         return this.putRequest(AppUrl.ADD_SEGMENT(id), data);
     }
 }
