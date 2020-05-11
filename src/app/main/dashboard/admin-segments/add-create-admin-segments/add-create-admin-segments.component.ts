@@ -50,6 +50,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
         this.segmentForm = this.fb.group({
             name: ['', Validators.required],
             characterCount: ['', Validators.required],
+            parentCode: {value: this.segment.individualCode, disabled: true},
             individualCode: [''],
             isActive: [true, Validators.required]
         });
@@ -65,6 +66,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
                 name: name,
                 characterCount: {value: characterCount, disabled: isEdit},
                 individualCode: {value: nextIndividualCode, disabled: true},
+                parentCode: {value: this.segment.individualCode, disabled: true},
                 isActive: {value: isActive, disabled: isEdit}
             };
         } else {
@@ -72,7 +74,8 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
                 name: '',
                 characterCount: {value: '', disabled: isEdit},
                 individualCode: [nextIndividualCode],
-                isActive: {value: true, disabled: isEdit}
+                isActive: {value: true, disabled: isEdit},
+                parentCode: {value: this.segment.individualCode, disabled: true},
             };
         }
         this.segmentForm = this.fb.group(controlConfig);
