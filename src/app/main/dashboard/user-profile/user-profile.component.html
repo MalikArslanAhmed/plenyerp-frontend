@@ -1,0 +1,69 @@
+<div id="skills" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">person
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                  Profile
+                </span>
+            </div>
+        </div>
+<!--        <div fxLayout="row" fxLayoutAlign="end center">-->
+<!--            <button mat-fab class="accent" id="add-button" aria-label="add salary scales"-->
+<!--                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addDesignation()">-->
+<!--                <mat-icon>add_circle</mat-icon>-->
+<!--            </button>-->
+<!--        </div>        -->
+    </div>
+
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content" style="padding: 20px;">
+                <form [formGroup] = "profileForm">
+                    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start">
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <div class="profile-image">
+                                <img class="avatar" src="https://www.instituteofphotography.in/wp-content/uploads/2015/05/dummy-profile-pic.jpg">
+                            </div>
+                            <button mat-icon-button class="edit-image">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
+
+                        <div fxLayout="column" fxLayoutAlign="start start">
+                            <div fxLayout="row" fxLayoutAlign="start">
+                                <mat-form-field appearance="legacy">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput formControlName="name" name="name">
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="legacy">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput formControlName="email" name="email">
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="legacy">
+                                    <mat-label>Username</mat-label>
+                                    <input matInput readonly formControlName="username" name="username">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+
+                        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start">
+                            <button mat-stroked-button>
+                                <mat-icon>vpn_key</mat-icon>
+                                Change Password</button>
+                            <button mat-stroked-button color="primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

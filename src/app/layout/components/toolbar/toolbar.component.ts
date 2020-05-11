@@ -7,6 +7,9 @@ import {FuseConfigService} from '@fuse/services/config.service';
 import {FuseSidebarService} from '@fuse/components/sidebar/sidebar.service';
 import {navigation} from 'app/navigation/navigation';
 import {AuthService} from "../../../shared/services/auth.service";
+import {Router} from '@angular/router';
+import {UserProfileComponent} from '../../../main/dashboard/user-profile/user-profile.component';
+import {url} from 'inspector';
 
 @Component({
     selector: 'toolbar',
@@ -34,12 +37,14 @@ export class ToolbarComponent implements OnInit, OnDestroy {
      * @param {FuseConfigService} _fuseConfigService
      * @param {FuseSidebarService} _fuseSidebarService
      * @param {TranslateService} _translateService
+     * @param router
      * @param authService
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
+        private router: Router,
         private authService: AuthService
     ) {
         this.getUser();
@@ -171,5 +176,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
     logout() {
         this.authService.logout();
+    }
+    userProfile(){
+        this.router.navigateByUrl('dashboard/profile');
     }
 }
