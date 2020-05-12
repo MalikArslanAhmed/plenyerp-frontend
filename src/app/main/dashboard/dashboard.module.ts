@@ -99,6 +99,7 @@ import {DesignationComponent} from './designation/designation.component';
 import {DesignationCreateComponent} from './designation/designation-create/designation-create.component';
 import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
+import {PasswordUpdateComponent} from './user-profile/password-update/password-update.component.';
 
 @NgModule({
     declarations: [
@@ -181,7 +182,8 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
         DesignationComponent,
         DesignationCreateComponent,
         DesignationListComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        PasswordUpdateComponent
 
 
     ],

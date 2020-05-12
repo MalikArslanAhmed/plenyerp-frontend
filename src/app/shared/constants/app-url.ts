@@ -439,5 +439,9 @@ export class AppUrl {
     static DELETE_DESIGNATION(id?): string {
         return AppUrl.API_URL + 'designations/' + id;
     }
+    static USER_UPDATE(id): string {
+        return AppUrl.API_URL + 'users/' + id;
+    }
+
 
 }
