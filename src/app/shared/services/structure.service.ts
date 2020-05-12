@@ -33,4 +33,8 @@ export class StructureService extends BaseService {
     getDesignations(data): Observable<any> {
         return this.getRequest(AppUrl.GET_DESIGNATIONS(), data);
     }
+
+    addJobPosition(data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_JOB_POSITIONS(), data);
+    }
 }

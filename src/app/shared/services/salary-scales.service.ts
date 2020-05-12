@@ -30,9 +30,9 @@ export class SalaryScalesService extends BaseService {
         return this.putRequest(AppUrl.SALARY_SCALES(id), data);
     }
 
-    getGradeLevels(data): Observable<any> {
+    /*getGradeLevels(data): Observable<any> {
         return this.getRequest(AppUrl.GRADE_LEVEL(), data);
-    }
+    }*/
 
     addGradeLevel(data): Observable<any> {
         return this.postRequest(AppUrl.GRADE_LEVEL(), data);
