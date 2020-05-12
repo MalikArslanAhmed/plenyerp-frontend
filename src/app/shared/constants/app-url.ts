@@ -333,13 +333,19 @@ export class AppUrl {
 
 
     static GET_ALL_SEGMENTS(id?): string {
-        const path = id ? `admin/${id}` : 'admin';
-        return AppUrl.API_URL + path;
+        if (id) {
+            return AppUrl.API_URL + 'admin/' + id;
+        } else {
+            return AppUrl.API_URL + 'admin';
+        }
     }
 
     static ADD_SEGMENT(id?): string {
-        const path = id ? `admin/${id}` : 'admin';
-        return AppUrl.API_URL + path;
+        if (id) {
+            return AppUrl.API_URL + 'admin/' + id;
+        } else {
+            return AppUrl.API_URL + 'admin';
+        }
     }
 
     static GET_COUNTRY_LIST(): string {
