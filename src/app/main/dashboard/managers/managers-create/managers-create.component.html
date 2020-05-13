@@ -48,7 +48,7 @@
             </div> -->
         </form>
     </div>
-{{managerForm.get('password').errors | json}}
+<!-- {{managerForm.get('password').errors | json}} -->
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button" (click)="matDialogRef.close(managerForm); saveManager()"
                 [disabled]="managerForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
