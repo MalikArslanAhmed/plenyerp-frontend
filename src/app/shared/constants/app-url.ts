@@ -75,8 +75,16 @@ export class AppUrl {
         }
     }
 
-    static ADD_JOB_POSITIONS(): string {
-        return AppUrl.API_URL + `job-positions`;
+    static JOB_POSITIONS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `job-positions/` + id;
+        } else {
+            return AppUrl.API_URL + `job-positions`;
+        }
+    }
+
+    static DELETE_JOB_POSTIONS(id): string {
+        return AppUrl.API_URL + `job-positions/` + id;
     }
 
     static DELETE_WORK_LOCATION(id): string {

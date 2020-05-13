@@ -18,9 +18,7 @@
                 <mat-grid-list cols="2" rowHeight="1570px">
                     <mat-grid-tile class="grid-tree">
                         <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
-                            <!-- This is the tree node template for leaf nodes -->
                             <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
-                                <!-- use a disabled button to provide padding for tree leaf -->
                                 <button mat-icon-button disabled></button>
                                 {{node.name}}
                                 <button mat-icon-button title="Add" (click)="addItem(node)"
@@ -30,11 +28,11 @@
                                 <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
                                     <mat-icon class="editBtn">edit</mat-icon>
                                 </button>
-                                <button mat-icon-button title="Delete" (click)="deleteItem(node)" *ngIf="node.level !== 0">
+                                <button mat-icon-button title="Delete" (click)="deleteItem(node)"
+                                        *ngIf="node.level !== 0">
                                     <mat-icon class="deleteBtn">delete</mat-icon>
                                 </button>
                             </mat-tree-node>
-                            <!-- This is the tree node template for expandable nodes -->
                             <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
                                 <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
                                     <mat-icon class="mat-icon-rtl-mirror">
@@ -49,61 +47,30 @@
                                 <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
                                     <mat-icon class="editBtn">edit</mat-icon>
                                 </button>
-                                <button mat-icon-button title="Delete" (click)="deleteItem(node)" *ngIf="node.level !== 0">
+                                <button mat-icon-button title="Delete" (click)="deleteItem(node)"
+                                        *ngIf="node.level !== 0">
                                     <mat-icon class="deleteBtn">delete</mat-icon>
                                 </button>
                             </mat-tree-node>
                         </mat-tree>
-                        <!--<mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl" class="mt-30px">
-                            &lt;!&ndash; This is the tree node template for leaf nodes &ndash;&gt;
-                            <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
-                                &lt;!&ndash; use a disabled button to provide padding for tree leaf &ndash;&gt;
-                                <button mat-icon-button disabled></button>
-                                {{node.name}}
-                                <button mat-icon-button title="Add" (click)="addItem(node)">
-                                    <mat-icon class="addBtn">add</mat-icon>
-                                </button>
-                                <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
-                                    <mat-icon class="editBtn">edit</mat-icon>
-                                </button>
-                                <button mat-icon-button title="Delete" (click)="deleteItem(node)"
-                                        *ngIf="node.level !== 0">
-                                    <mat-icon class="deleteBtn">delete</mat-icon>
-                                </button>
-                            </mat-tree-node>
-                            &lt;!&ndash; This is the tree node template for expandable nodes &ndash;&gt;
-                            <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
-                                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
-                                    <mat-icon class="mat-icon-rtl-mirror">
-                                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                                    </mat-icon>
-                                </button>
-                                {{node.name}}
-                                <button mat-icon-button title="Add" (click)="addItem(node)">
-                                    <mat-icon class="addBtn">add</mat-icon>
-                                </button>
-                                <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
-                                    <mat-icon class="editBtn">edit</mat-icon>
-                                </button>
-                                <button mat-icon-button title="Delete" (click)="deleteItem(node)"
-                                        *ngIf="node.level !== 0">
-                                    <mat-icon class="deleteBtn">delete</mat-icon>
-                                </button>
-                            </mat-tree-node>
-                        </mat-tree>-->
                     </mat-grid-tile>
                     <form fxLayout="column" [formGroup]="jobPositionForm">
                         <mat-grid-tile class="mt-30px">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <h3 class="job-position-header text-bold">Add Job Position <span *ngIf="selectedNodeName">in {{selectedNodeName}}</span></h3>
+                                <h3 class="job-position-header text-bold">{{jobPostionInitText}} <span
+                                    *ngIf="selectedNodeName"> {{selectedNodeName}}</span></h3>
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Title</mat-label>
                                     <input matInput formControlName="name" required>
                                     <mat-error>Title is required!</mat-error>
                                 </mat-form-field>
-                                <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-form-field appearance="outline" fxFlex="100" (click)="departmentSelect()">
                                     <mat-label>Department</mat-label>
-                                    <input matInput formControlName="departmentId" required>
+                                    <mat-select formControlName="departmentId" required [disabled]="true">
+                                        <mat-option [value]="department.id"
+                                                    *ngFor="let department of departments">{{department.name}}</mat-option>
+                                    </mat-select>
+                                    <!--<input matInput formControlName="departmentId" required [disabled]="departments && departments.length === 0">-->
                                     <mat-error>Department is required!</mat-error>
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex="100">
@@ -192,7 +159,11 @@
                                     <mat-label>Education</mat-label>
                                     <textarea matInput formControlName="education" style="resize: none"></textarea>
                                 </mat-form-field>
-                                <button mat-raised-button type="button" color="accent" (click)="saveStructure()">Save
+                                <button mat-raised-button type="button" color="accent" (click)="saveStructure()"
+                                        *ngIf="!updateId">Save
+                                </button>
+                                <button mat-raised-button type="button" color="accent" (click)="updateStructure()"
+                                        *ngIf="updateId">Update
                                 </button>
                             </div>
                         </mat-grid-tile>
