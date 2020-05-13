@@ -99,6 +99,12 @@ import {DesignationComponent} from './designation/designation.component';
 import {DesignationCreateComponent} from './designation/designation-create/designation-create.component';
 import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
+import { ManagersComponent } from './managers/managers.component';
+import { ManagersListComponent } from './managers/managers-list/managers-list.component';
+import { ManagersCreateComponent } from './managers/managers-create/managers-create.component';
+import { RolesComponent } from './managers/roles/roles.component';
+import { RolesListComponent } from './managers/roles/roles-list/roles-list.component';
+import { RolesCreateComponent } from './managers/roles/roles-create/roles-create.component';
 
 @NgModule({
     declarations: [
@@ -181,7 +187,13 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
         DesignationComponent,
         DesignationCreateComponent,
         DesignationListComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        ManagersComponent,
+        ManagersListComponent,
+        ManagersCreateComponent,
+        RolesComponent,
+        RolesListComponent,
+        RolesCreateComponent
 
 
     ],
