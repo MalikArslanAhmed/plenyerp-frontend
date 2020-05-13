@@ -99,6 +99,8 @@ import {PublicHolidayListComponent} from './holidays/public-holidays/public-holi
 import {DesignationComponent} from './designation/designation.component';
 import {DesignationCreateComponent} from './designation/designation-create/designation-create.component';
 import {DesignationListComponent} from './designation/designation-list/designation-list.component';
+import {UserProfileComponent} from './user-profile/user-profile.component';
+import {PasswordUpdateComponent} from './user-profile/password-update/password-update.component.';
 
 @NgModule({
     declarations: [
@@ -181,7 +183,11 @@ import {DesignationListComponent} from './designation/designation-list/designati
         PublicHolidayListComponent,
         DesignationComponent,
         DesignationCreateComponent,
-        DesignationListComponent
+        DesignationListComponent,
+        UserProfileComponent,
+        PasswordUpdateComponent
+
+
     ],
     imports: [
         CommonModule,

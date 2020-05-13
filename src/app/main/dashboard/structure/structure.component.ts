@@ -13,13 +13,13 @@ import {SkillService} from "../../../shared/services/skill.service";
 
 /**
  * Food data with nested structure.
- * Each node has a name and an optional list of children.
+ * Each node has a name and an optional list of subCategories.
  */
 interface StructureNode {
     id: number;
+    isChildEnabled: boolean;
     parentId: number;
     name: string;
-    level: number;
     departmentId: number;
     designationId: number;
     salaryScaleId: number;
@@ -35,6 +35,7 @@ interface StructureNode {
     jobDescriptionSummary: string;
     experience: string;
     education: string;
+    level: number;
     children?: StructureNode[];
 }
 
@@ -45,21 +46,6 @@ interface ExampleFlatNode {
     expandable: boolean;
     name: string;
     level: number;
-    departmentId: number;
-    designationId: number;
-    salaryScaleId: number;
-    gradeLevelId: number;
-    gradeLevelStepId: number;
-    skillId: number;
-    costCenter: string;
-    jobFamily: string;
-    isApprovedPosition: boolean;
-    isActive: boolean;
-    activities: string;
-    competences: string;
-    jobDescriptionSummary: string;
-    experience: string;
-    education: string;
 }
 
 @Component({
@@ -74,8 +60,9 @@ export class StructureComponent implements OnInit {
         return {
             expandable: !!node.children && node.children.length > 0,
             name: node.name,
-            level: node.level,
+            level: level,
             id: node.id,
+            isChildEnabled: node.isChildEnabled,
             parentId: node.parentId,
             departmentId: node.departmentId,
             designationId: node.designationId,
@@ -100,12 +87,15 @@ export class StructureComponent implements OnInit {
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
     dialogRef: any;
     @ViewChild('tree') tree;
-    maritalStatuses = AppConstants.maritalStatuses;
     jobPositionForm: FormGroup;
     designations = [];
     salaryScales = [];
     skills = [];
     gradeLevels = [];
+    gradeLevelSteps = [];
+    isSubmitted = false;
+    parentId: any;
+    selectedNodeName: any;
 
     constructor(private structureService: StructureService,
                 private _fuseSidebarService: FuseSidebarService,
@@ -120,7 +110,6 @@ export class StructureComponent implements OnInit {
         this.getDesignations();
         this.getSalaryScales();
         this.getSkills();
-        this.getGradeLevel();
         this.getStructures();
         this.refresh();
     }
@@ -138,11 +127,11 @@ export class StructureComponent implements OnInit {
             jobFamily: ['', Validators.required],
             isApprovedPosition: ['', Validators.required],
             isActive: ['', Validators.required],
-            activities: ['', Validators.required],
-            competences: ['', Validators.required],
-            jobDescriptionSummary: ['', Validators.required],
-            experience: ['', Validators.required],
-            education: ['', Validators.required]
+            activities: [''],
+            competences: [''],
+            jobDescriptionSummary: [''],
+            experience: [''],
+            education: ['']
         });
     }
 
@@ -168,7 +157,8 @@ export class StructureComponent implements OnInit {
                 jobDescriptionSummary: '',
                 experience: '',
                 education: '',
-                children: this.structureData(data)
+                isChildEnabled: true,
+                children: this.structureData(data),
             }];
             this.tree.treeControl.expandAll();
         });
@@ -178,7 +168,7 @@ export class StructureComponent implements OnInit {
         if (data && data.length > 0) {
             data.forEach(structure => {
                 structure['children'] = structure['subCategories'];
-                this.structureData(structure['children']);
+                this.structureData(structure['subCategories']);
             });
             return data;
         }
@@ -202,24 +192,36 @@ export class StructureComponent implements OnInit {
         });
     }
 
-    getGradeLevel() {
-        this.salaryScalesService.getGradeLevels({'page': -1}).subscribe(data => {
-            this.gradeLevels = data.items;
-        });
+    chooseScale(event) {
+        if (this.salaryScales && this.salaryScales.length > 0) {
+            this.salaryScales.forEach(salaryScale => {
+                if (salaryScale.id === event) {
+                    this.gradeLevels = salaryScale['gradeLevels'];
+                }
+            });
+        }
+    }
+
+    chooseGradeLevel(event) {
+        if (this.gradeLevels && this.gradeLevels.length > 0) {
+            this.gradeLevels.forEach(gradeLevel => {
+                if (gradeLevel.id === event) {
+                    this.gradeLevelSteps = gradeLevel['gradeLevelSteps'];
+                }
+            });
+        }
     }
 
     addItem(node) {
         console.log('node', node);
-        /*this.dialogRef = this._matDialog.open(UpdateWorkLocationsComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', node: node}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-            this.getStructures();
-        });*/
+        if (!node.id) {
+            this.selectedNodeName = '';
+            this.parentId = undefined
+        } else {
+            this.selectedNodeName = node.name;
+            this.parentId = node.id;
+        }
+        console.log('this.parentId', this.parentId);
     }
 
     editItem(node) {
@@ -244,6 +246,23 @@ export class StructureComponent implements OnInit {
     }
 
     saveStructure() {
-        console.log('this.jobPositionForm', this.jobPositionForm.value);
+        this.isSubmitted = true;
+        if (!this.jobPositionForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.isSubmitted) {
+            if (this.parentId) {
+                this.jobPositionForm.value['parentId'] = this.parentId;
+            }
+            this.structureService.addJobPosition(this.jobPositionForm.value).subscribe(data => {
+                this.jobPositionForm.reset();
+                this.isSubmitted = false;
+                this.getStructures();
+                this.selectedNodeName = '';
+                this.parentId = undefined
+            });
+        }
     }
 }

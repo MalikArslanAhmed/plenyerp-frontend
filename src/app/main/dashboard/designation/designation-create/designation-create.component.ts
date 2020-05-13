@@ -67,8 +67,6 @@ export class DesignationCreateComponent implements OnInit {
                 this.designationForm.reset();
                 this.isSubmitted = false;
             });
-
-
         }
     }
 

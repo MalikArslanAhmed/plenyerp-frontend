@@ -30,6 +30,7 @@ import {LeaveGroupComponent} from './holidays/leave- group/leave-group.component
 import {PublicHolidaysComponent} from './holidays/public-holidays/public-holidays.component';
 import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 import {DesignationComponent} from './designation/designation.component';
+import {UserProfileComponent} from './user-profile/user-profile.component';
 
 const routes: Routes = [
     {
@@ -247,6 +248,13 @@ const routes: Routes = [
         component: DesignationComponent,
         data: {
             title: 'Designations'
+        },
+    },
+    {
+        path: 'profile',
+        component: UserProfileComponent,
+        data: {
+            title: 'Profile'
         },
     }
 ];

@@ -75,6 +75,10 @@ export class AppUrl {
         }
     }
 
+    static ADD_JOB_POSITIONS(): string {
+        return AppUrl.API_URL + `job-positions`;
+    }
+
     static DELETE_WORK_LOCATION(id): string {
         return AppUrl.API_URL + `work-locations/` + id;
     }
@@ -352,21 +356,27 @@ export class AppUrl {
     static GET_COUNTRY_LIST(): string {
         return AppUrl.API_URL + `countries`;
     }
+
     static GET_REGION_LIST(): string {
         return AppUrl.API_URL + `regions`;
     }
+
     static GET_STATE_LIST(): string {
         return AppUrl.API_URL + `states`;
     }
+
     static GET_LGA_LIST(): string {
         return AppUrl.API_URL + `lgas`;
     }
+
     static GET_COUNTRY(): string {
         return AppUrl.API_URL + `countries`;
     }
+
     static GET_REGION(): string {
         return AppUrl.API_URL + `regions`;
     }
+
     static GET_STATE(): string {
         return AppUrl.API_URL + `states`;
     }
@@ -374,6 +384,7 @@ export class AppUrl {
     static GET_LEAVES_TYPE_LIST(): string {
         return AppUrl.API_URL + `leaves`;
     }
+
     static LEAVES_TYPE(id?): string {
         if (id) {
             return AppUrl.API_URL + 'leaves/' + id;
@@ -381,6 +392,7 @@ export class AppUrl {
             return AppUrl.API_URL + 'leaves';
         }
     }
+
     static DELETE_LEAVES(id?): string {
         return AppUrl.API_URL + 'leaves/' + id;
     }
@@ -388,6 +400,7 @@ export class AppUrl {
     static GET_LEAVE_GROUP_LIST(): string {
         return AppUrl.API_URL + `leave-groups`;
     }
+
     static LEAVES_GROUP(id?): string {
         if (id) {
             return AppUrl.API_URL + 'leave-groups/' + id;
@@ -395,6 +408,7 @@ export class AppUrl {
             return AppUrl.API_URL + 'leave-groups';
         }
     }
+
     static DELETE_LEAVES_GROUP(id?): string {
         return AppUrl.API_URL + 'leave-groups/' + id;
     }
@@ -402,6 +416,7 @@ export class AppUrl {
     static GET_PUBLIC_HOLIDAY_LIST(): string {
         return AppUrl.API_URL + `public-holidays`;
     }
+
     static PUBLIC_HOLIDAY(id?): string {
         if (id) {
             return AppUrl.API_URL + 'public-holidays/' + id;
@@ -409,6 +424,7 @@ export class AppUrl {
             return AppUrl.API_URL + 'public-holidays';
         }
     }
+
     static DELETE_PUBLIC_HOLIDAY(id?): string {
         return AppUrl.API_URL + 'public-holidays/' + id;
     }
@@ -416,6 +432,7 @@ export class AppUrl {
     static GET_DESIGNATION_LIST(): string {
         return AppUrl.API_URL + `designations`;
     }
+
     static DESIGNATION(id?): string {
         if (id) {
             return AppUrl.API_URL + 'designations/' + id;
@@ -423,8 +440,13 @@ export class AppUrl {
             return AppUrl.API_URL + 'designations';
         }
     }
+
     static DELETE_DESIGNATION(id?): string {
         return AppUrl.API_URL + 'designations/' + id;
     }
+    static USER_UPDATE(id): string {
+        return AppUrl.API_URL + 'users/' + id;
+    }
+
 
 }
