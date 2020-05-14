@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        console.log('loginForm', this.loginForm.value);
+        // console.log('loginForm', this.loginForm.value);
         if (this.isBusy) {
             return;
         }
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         this.loginPressed = true;
         const accessToken = StorageService.getItem('accessToken');
         if (accessToken && accessToken !== 'null') {
-            console.log('here', typeof accessToken);
+            // console.log('here', typeof accessToken);
             this.globalService.setAccessToken(accessToken);
             this.authService.self({all: true}).subscribe((userDetails) => {
                 this.isBusy = false;
@@ -80,10 +80,10 @@ export class LoginComponent implements OnInit {
 
     proceedLogin() {
         this.authService.authenticate(this.loginForm.getRawValue()).subscribe(data => {
-            console.log('data', data);
+            // console.log('data', data);
             this.globalService.setAccessToken(data.token);
             this.authService.self({all: true}).subscribe((userDetails) => {
-                console.log('userDetails', userDetails);
+                // console.log('userDetails', userDetails);
                 this.isBusy = false;
                 this.globalService.setSelf(userDetails);
                 this.navigateToUserPage();

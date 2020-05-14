@@ -78,16 +78,15 @@ export class UserProfileComponent implements OnInit {
             // console.log('user--', data);
             this.user = data;
             if (this.user) {
-               this.profileForm.patchValue({
-                   name: this.user.name,
-                   email: this.user.email,
-                   username: this.user.username
-               });
-               if (this.user.url) {
-                   this.profileImage = this.user.url;
-               }
+                this.profileForm.patchValue({
+                    name: this.user.name,
+                    email: this.user.email,
+                    username: this.user.username
+                });
 
+                this.profileImage = this.user.file;
             }
+
         });
     }
 

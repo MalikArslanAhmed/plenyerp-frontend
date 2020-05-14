@@ -30,7 +30,7 @@
         <div class="h3 username">{{users.name ? users.name : 'Guest'}}</div>
         <div class="h5 email hint-text mt-8">{{users.email ? users.email : 'guest@guest.com'}}</div>
         <div class="avatar-container" [ngClass]="fuseConfig.layout.navbar.primaryBackground">
-            <img class="avatar" src="https://www.instituteofphotography.in/wp-content/uploads/2015/05/dummy-profile-pic.jpg">
+            <img class="avatar" [src]="users.file ? users.file.url : 'https://www.instituteofphotography.in/wp-content/uploads/2015/05/dummy-profile-pic.jpg'">
         </div>
 
     </div>
