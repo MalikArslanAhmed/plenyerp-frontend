@@ -16,7 +16,9 @@ import {UserProfileService} from '../../../shared/services/user-profile.service'
 export class UserProfileComponent implements OnInit {
     dialogRef: any;
     profileForm: FormGroup;
-   user;
+    user;
+    isEditProfileImage = false;
+    profileImage;
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private fb: FormBuilder,
@@ -28,11 +30,34 @@ export class UserProfileComponent implements OnInit {
         this.profileForm = this.fb.group({
             name: ['', Validators.required],
             email: ['', Validators.required],
-            username: ['', Validators.required]
+            username: ['', Validators.required],
+            fileId: [],
         });
 
         this.getUser();
 
+    }
+
+    fileUpload(event) {
+        const file = event && event.target.files[0];
+        const obj = {
+            type: 'USER_IMAGE',
+            fileType: 'Normal',
+        };
+        obj['file'] = file;
+        this.userProfileService.uploadFile(obj).subscribe((fileData: any) => {
+                this.profileImage = fileData.data;
+                this.isEditProfileImage = false;
+                // console.log('---->>>', this.profileImage);
+                if (this.profileImage) {
+                    this.profileForm.patchValue({
+                        fileId:   this.profileImage.id
+                    });
+                }
+
+
+            }
+        );
     }
 
     changePassword() {
@@ -50,7 +75,7 @@ export class UserProfileComponent implements OnInit {
 
     getUser() {
         this.userProfileService.getSelf().subscribe(data => {
-            console.log('user--', data);
+            // console.log('user--', data);
             this.user = data;
             if (this.user) {
                this.profileForm.patchValue({
@@ -58,17 +83,27 @@ export class UserProfileComponent implements OnInit {
                    email: this.user.email,
                    username: this.user.username
                });
+               if (this.user.url) {
+                   this.profileImage = this.user.url;
+               }
 
             }
         });
     }
 
     updateUser() {
+        // console.log('------->>>>', this.profileForm.value);
         if (this.profileForm.valid) {
-            this.userProfileService.getUpdate(this.user.id, this.profileForm.value).subscribe(val => {
+            this.userProfileService.getUpdate(this.profileForm.value).subscribe(val => {
                 this.getUser();
             });
         }
+
+    }
+    removeProfileImage() {
+            this.userProfileService.getRemoveProfileImg({fileId: null}).subscribe(val => {
+                this.getUser();
+            });
 
     }
 }

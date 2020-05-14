@@ -101,7 +101,7 @@ import {DesignationCreateComponent} from './designation/designation-create/desig
 import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {PasswordUpdateComponent} from './user-profile/password-update/password-update.component.';
-
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -212,7 +212,8 @@ import {PasswordUpdateComponent} from './user-profile/password-update/password-u
         MatStepperModule,
         MatDatepickerModule,
         MatOptionModule,
-        MatRadioModule
+        MatRadioModule,
+        MaterialFileInputModule
     ]
 })
 export class DashboardModule {

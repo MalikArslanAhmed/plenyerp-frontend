@@ -444,8 +444,11 @@ export class AppUrl {
     static DELETE_DESIGNATION(id?): string {
         return AppUrl.API_URL + 'designations/' + id;
     }
-    static USER_UPDATE(id): string {
-        return AppUrl.API_URL + 'users/' + id;
+    static USER_UPDATE(id?): string {
+        return AppUrl.API_URL + 'profile';
+    }
+    static USER_IMAGE_UPLOAD(): string {
+        return AppUrl.API_URL + 'files';
     }
 
 

@@ -22,18 +22,38 @@
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content" style="padding: 20px;">
-                <div fxLayout="row wrap" style="margin-top: 3rem;">
-                    <div  fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100" fxLayoutAlign="center center">
-                        <div class="profile-image" fxLayoutAlign="center center">
-                            <img class="avatar" src="https://www.instituteofphotography.in/wp-content/uploads/2015/05/dummy-profile-pic.jpg">
+                <form [formGroup]="profileForm" novalidate>
+                <div fxLayout="column" style="margin-top: 3rem; margin-bottom: 1rem;">
+                    <div fxLayout="row wrap" style="margin-bottom: 1rem;">
+                        <div  fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100" fxLayoutAlign="center center">
+                            <div class="profile-image" fxLayoutAlign="center center">
+                                <img class="avatar" [src]="profileImage  ? profileImage.url :'https://www.instituteofphotography.in/wp-content/uploads/2015/05/dummy-profile-pic.jpg'">
+                            </div>
+                            <button mat-icon-button class="edit-image" (click)="isEditProfileImage = ! isEditProfileImage">
+                                <mat-icon>edit</mat-icon>
+                            </button>
                         </div>
-                        <button mat-icon-button class="edit-image">
-                            <mat-icon>edit</mat-icon>
-                        </button>
+                    </div>
+                    <div fxLayout="row  wrap" *ngIf="isEditProfileImage" style="margin-top: 2rem;">
+                        <div fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="100"
+                             fxFlex.xs="100" fxLayoutAlign="center center" fxLayoutGap="20px">
+
+                                <mat-form-field>
+                                    <mat-label>
+                                        Select Image
+                                    </mat-label>
+                                    <ngx-mat-file-input (change)="fileUpload($event)">
+
+                                    </ngx-mat-file-input>
+                                </mat-form-field>
+
+<!--                            <button mat-stroked-button color="accent">Upload</button>-->
+                            <button mat-stroked-button color="warn" (click)="removeProfileImage()">Remove</button>
+                        </div>
                     </div>
                 </div>
-                <div style="margin-top: 4rem">
-                    <form [formGroup] = "profileForm">
+                <div style="margin-top: 3rem">
+                    <div fxLayout="row">
                         <div fxLayout="column" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="100"  fxLayoutAlign="start start">
                             <div class="width-100-per">
                                 <mat-form-field appearance="legacy" class="width-100-per">
@@ -55,7 +75,7 @@
                             </div>
 
                         </div>
-                    </form>
+                    </div>
                     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start" style="margin-top: 2rem">
                         <button mat-stroked-button color="primary" (click)="changePassword()">
                             <mat-icon>vpn_key</mat-icon>
@@ -63,6 +83,7 @@
                         <button mat-stroked-button color="accent" [disabled]="profileForm.invalid" (click)="updateUser()">Update</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

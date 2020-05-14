@@ -63,7 +63,7 @@ export class PasswordUpdateComponent implements OnInit {
             }
             if (this.changePasswordForm.value.newPassword === this.changePasswordForm.value.confirmPassword) {
                 // console.log(this.userId, this.changePasswordForm.value);
-                this.userProfileService.getUpdate(this.userId, this.changePasswordForm.value).subscribe(data => {
+                this.userProfileService.getUpdate(this.changePasswordForm.value).subscribe(data => {
                     this.updateData = undefined;
                     this.changePasswordForm.reset();
                     this.isSubmitted = false;
