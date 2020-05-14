@@ -101,6 +101,13 @@ import {DesignationCreateComponent} from './designation/designation-create/desig
 import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {PasswordUpdateComponent} from './user-profile/password-update/password-update.component.';
+import { ManagersComponent } from './managers/managers.component';
+import { ManagersListComponent } from './managers/managers-list/managers-list.component';
+import { ManagersCreateComponent } from './managers/managers-create/managers-create.component';
+import { RolesComponent } from './managers/roles/roles.component';
+import { RolesListComponent } from './managers/roles/roles-list/roles-list.component';
+import { RolesCreateComponent } from './managers/roles/roles-create/roles-create.component';
+
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 @NgModule({
     declarations: [
@@ -185,7 +192,13 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
         DesignationCreateComponent,
         DesignationListComponent,
         UserProfileComponent,
-        PasswordUpdateComponent
+        PasswordUpdateComponent,
+        ManagersComponent,
+        ManagersListComponent,
+        ManagersCreateComponent,
+        RolesComponent,
+        RolesListComponent,
+        RolesCreateComponent
 
 
     ],

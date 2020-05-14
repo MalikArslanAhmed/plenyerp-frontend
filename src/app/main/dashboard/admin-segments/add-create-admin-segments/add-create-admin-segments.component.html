@@ -19,9 +19,12 @@
                     <mat-label>Character Count</mat-label>
                     <input name="characterCount" formControlName="characterCount" matInput required placeholder="Enter Character Count">
                 </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex class="parentCode">
+                    <input name="parentCode" matInput formControlName="parentCode" >
+                </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex class="formInput">
                     <mat-label>Segment Code</mat-label>
-                    <input name="individualCode" formControlName="individualCode" matInput>
+                    <input class="individualCode" name="individualCode" formControlName="individualCode" matInput>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">

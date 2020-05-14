@@ -23,6 +23,40 @@ export class AppUrl {
         return AppUrl.API_URL + 'self';
     }
 
+
+    static ROLES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'users/' + id;
+        } else {
+            return AppUrl.API_URL + 'users';
+        }
+    }
+
+    static GET_ROLES(): string {
+        return AppUrl.API_URL + `users`;
+    }
+
+    static DELETE_ROLE(id?): string {
+        return AppUrl.API_URL + 'users/' + id;
+    }
+
+
+    static MANAGERS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'users/' + id;
+        } else {
+            return AppUrl.API_URL + 'users';
+        }
+    }
+
+    static GET_MANAGERS(): string {
+        return AppUrl.API_URL + `users`;
+    }
+
+    static DELETE_MANAGER(id?): string {
+        return AppUrl.API_URL + 'users/' + id;
+    }
+
     static QUALIFICATION(id?): string {
         if (id) {
             return AppUrl.API_URL + 'qualifications/' + id;
