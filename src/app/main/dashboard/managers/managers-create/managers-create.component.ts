@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ManagersService } from "../../../../shared/services/managers.service";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ManagersService} from "../../../../shared/services/managers.service";
 
 @Component({
     selector: 'app-managers-create',
@@ -17,9 +17,9 @@ export class ManagersCreateComponent implements OnInit {
     updateData: any;
 
     constructor(public matDialogRef: MatDialogRef<ManagersCreateComponent>,
-        @Inject(MAT_DIALOG_DATA) private _data: any,
-        private fb: FormBuilder,
-        private managersService: ManagersService) {
+                @Inject(MAT_DIALOG_DATA) private _data: any,
+                private fb: FormBuilder,
+                private managersService: ManagersService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Managers';
@@ -36,18 +36,23 @@ export class ManagersCreateComponent implements OnInit {
         this.checkForUpdate();
     }
 
-    refresh() {
-        this.managerForm = this.fb.group({
-            'name': ['', Validators.required],
-            'email': ['', Validators.required],
-            'username': ['', Validators.required],
-            'password': ['']
-            /*'isActive': [true, Validators.required]*/
-        });
+    refresh(): void {
+        const config: any = {
+            name: ['', Validators.required],
+            email: ['', Validators.required],
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        };
+        if (this.action !== 'EDIT') {
+            config.password = [''];
+        }
+        this.managerForm = this.fb.group(config);
+
     }
 
-    checkForUpdate() {
-        if (this.updateData) {
+    checkForUpdate(): void {
+        if (this.updateData
+        ) {
             // console.log('=>>> updating', this.managerForm.getError);
             this.managerForm.controls['password'].clearValidators();
             this.managerForm.patchValue({
