@@ -36,7 +36,7 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let manager">
             <div fxFlex="row" fxLayoutAlign="end center">
-                <button mat-icon-button aria-label="Toggle star" (click)="navigateToRoles(manager)"
+                <button mat-icon-button aria-label="Toggle star" routerLink="{{manager?.id}}/roles"
                         style="color: green">
                     <mat-icon class="material-icons">lock_open</mat-icon>
                 </button>

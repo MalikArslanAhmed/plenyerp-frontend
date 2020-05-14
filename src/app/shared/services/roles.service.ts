@@ -15,19 +15,23 @@ export class RolesService extends BaseService {
     super(http, alertService, globalService);
   }
 
-  addRole(data): Observable<any> {
-    return this.postRequest(AppUrl.ROLES(), data);
+  addRole(mId,data): Observable<any> {
+    return this.postRequest(AppUrl.ROLES(mId), data);
   }
 
-  getRoles(data): Observable<any> {
-    return this.getRequest(AppUrl.GET_ROLES(), data);
+  getRoles(id,data): Observable<any> {
+    return this.getRequest(AppUrl.GET_ROLES(id), data);
   }
 
-  deleteRoles(id): Observable<any> {
-    return this.deleteRequest(AppUrl.DELETE_ROLE(id));
+  deleteRoles(mId, roleId): Observable<any> {
+    return this.deleteRequest(AppUrl.DELETE_ROLE(mId,roleId));
   }
 
   updateRoles(id, data): Observable<any> {
     return this.putRequest(AppUrl.ROLES(id), data);
+  }
+
+  getAvailableRoles(): Observable<any> {
+    return this.getRequest(AppUrl.GET_AVAILABLE_ROLES());
   }
 }

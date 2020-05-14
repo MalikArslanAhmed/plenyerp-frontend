@@ -24,20 +24,24 @@ export class AppUrl {
     }
 
 
-    static ROLES(id?): string {
-        if (id) {
-            return AppUrl.API_URL + 'users/' + id;
+    static ROLES(mId,roleId?): string {
+        if (roleId) {
+            return AppUrl.API_URL + 'user/' + mId + '/role/' + roleId;
         } else {
-            return AppUrl.API_URL + 'users';
+            return AppUrl.API_URL + 'user/' + mId + '/role';
         }
     }
 
-    static GET_ROLES(): string {
-        return AppUrl.API_URL + `users`;
+    static GET_ROLES(id): string {
+        return AppUrl.API_URL + `users/` + id;
     }
 
-    static DELETE_ROLE(id?): string {
-        return AppUrl.API_URL + 'users/' + id;
+    static DELETE_ROLE(mId,roleId): string {
+        return AppUrl.API_URL + 'user/' + mId + '/role/' + roleId;
+    }
+
+    static GET_AVAILABLE_ROLES(): string {
+        return AppUrl.API_URL + `roles`;
     }
 
 

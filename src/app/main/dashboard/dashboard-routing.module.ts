@@ -264,14 +264,15 @@ const routes: Routes = [
         component: ManagersComponent,
         data: {
             title: 'Managers'
+        }
+    },
+    {
+        path: 'managers/:id/roles',
+        component: RolesComponent,
+        data: {
+            title: 'Roles'
         },
-        children: [
-            {
-                path: 'roles',
-                component: RolesComponent
-            }
-        ]
-    }
+    },
 ];
 
 @NgModule({

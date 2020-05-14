@@ -4,7 +4,6 @@ import {ManagersService} from "../../../../shared/services/managers.service";
 import {ManagersCreateComponent} from "../managers-create/managers-create.component";
 import {FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-managers-list',
@@ -20,8 +19,7 @@ export class ManagersListComponent implements OnInit {
   dialogRef: any;
 
   constructor(private managersService: ManagersService,
-    private _matDialog: MatDialog,
-    private router: Router) { }
+    private _matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getManagers();
@@ -61,10 +59,6 @@ editManagers(manager) {
         }
         this.getManagers();
     });
-}
-
-navigateToRoles(id?){  
-    this.router.navigateByUrl(id + "/roles");
 }
 
 }

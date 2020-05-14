@@ -90,7 +90,6 @@ export class ManagersCreateComponent implements OnInit {
         //     return;
         // }
         if (this.isSubmitted) {
-            console.log('update waala data ------>', this.updateData);
             this.managersService.updateManager(this.updateData.manager.id, this.managerForm.value).subscribe(data => {
                 this.updateData = undefined;
                 this.managerForm.reset();
