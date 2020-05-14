@@ -8,7 +8,7 @@
         </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="role">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Role</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let role">
             <p class="phone text-truncate">
@@ -36,11 +36,11 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let role">
             <div fxFlex="row" fxLayoutAlign="end center">
-                <button mat-icon-button aria-label="Toggle star" (click)="editRole(role)"
+                <!-- <button mat-icon-button aria-label="Toggle star" (click)="editRole(role)"
                         style="color: blue">
                     <mat-icon class="material-icons">edit</mat-icon>
-                </button>
-                <button mat-icon-button aria-label="Toggle star" (click)="deleteRole(role?.id)"
+                </button> -->
+                <button mat-icon-button aria-label="Toggle star" (click)="deleteRole(managerId,role?.id)"
                         style="color: red">
                     <mat-icon class="material-icons">delete</mat-icon>
                 </button>
@@ -49,7 +49,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let manager; columns: displayedColumns;" class="contact"
+    <mat-row *matRowDef="let role; columns: displayedColumns;" class="contact"
              [@animate]="{value:'*',params:{y:'100%'}}">
     </mat-row>
 </mat-table>

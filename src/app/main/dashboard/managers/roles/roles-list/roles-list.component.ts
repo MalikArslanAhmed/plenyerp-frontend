@@ -4,6 +4,7 @@ import {RolesService} from "../../../../../shared/services/roles.service";
 import {RolesCreateComponent} from "../roles-create/roles-create.component";
 import {FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-roles-list',
@@ -18,16 +19,20 @@ export class RolesListComponent implements OnInit {
   displayedColumns = ['id', 'role', 'actions'];
   dialogRef: any;
 
+  managerId:any;
+
   constructor(private rolesService: RolesService,
-    private _matDialog: MatDialog) { }
+    private _matDialog: MatDialog,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getRoles();
+    this.managerId = this.activatedRoute.snapshot.params.id;
+    this.getRoles(this.managerId);
   }
 
-  getRoles() {
-    this.rolesService.getRoles({'page': -1}).subscribe(data => {
-        this.roles = data.items;
+  getRoles(id) {
+    this.rolesService.getRoles(id,{'page': -1}).subscribe(data => {
+        this.roles = data.roles;
 
         if (this.roles && this.roles.length > 0) {
             let i = 1;
@@ -39,16 +44,15 @@ export class RolesListComponent implements OnInit {
     });
 }
 
-deleteRoles(id) {
-    this.rolesService.deleteRoles(id).subscribe(data => {
+deleteRole(mId, roleId) {
+    this.rolesService.deleteRoles(mId, roleId).subscribe(data => {
         if (data) {
-            this.getRoles();
+            this.getRoles(this.managerId);
         }
     })
 }
 
-editRoles(role) {
-    console.log('id', role);
+editRole(role) {
     this.dialogRef = this._matDialog.open(RolesCreateComponent, {
         panelClass: 'contact-form-dialog',
         data: {action: 'EDIT', role: role},
@@ -57,7 +61,7 @@ editRoles(role) {
         if (!response) {
             return;
         }
-        this.getRoles();
+        this.getRoles(this.managerId);
     });
 }
 
