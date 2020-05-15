@@ -7,6 +7,7 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import {AuthService} from '../../../../../shared/services/auth.service';
 
 @Component({
     selector     : 'navbar-vertical-style-1',
@@ -31,16 +32,20 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
      * @param {FuseNavigationService} _fuseNavigationService
      * @param {FuseSidebarService} _fuseSidebarService
      * @param {Router} _router
+     * @param authService
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _fuseNavigationService: FuseNavigationService,
         private _fuseSidebarService: FuseSidebarService,
-        private _router: Router
+        private _router: Router,
+        private authService: AuthService,
     )
     {
         this.users = localStorage.getItem('self') ? JSON.parse(localStorage.getItem('self')) : '';
-
+        this.authService.self().subscribe(data => {
+            this.users = data;
+        });
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();

@@ -38,6 +38,14 @@ export const navigation: FuseNavigation[] = [
                 url: '/dashboard/admin-segments'
             },
             {
+                id: 'managers',
+                title: 'Managers',
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'user',
+                url: '/dashboard/managers'
+            },
+            {
                 id: 'training-management',
                 title: 'Training Management',
                 // translate: 'NAV.CALENDAR',

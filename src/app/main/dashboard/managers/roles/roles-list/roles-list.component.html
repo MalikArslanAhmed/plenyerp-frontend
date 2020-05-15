@@ -1,0 +1,55 @@
+<mat-table [@animateStagger]="{value:'50'}" [dataSource]="roles">
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let role">
+            <p class="email text-truncate">
+                {{role.sno}}.
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Role</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let role">
+            <p class="phone text-truncate">
+                {{role.role}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef>
+            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Username</div>
+        </mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let manager">
+            <div fxFlex="row" fxLayoutAlign="end center">
+                <p class="text-truncate">
+                    {{manager.username}}
+                </p>
+            </div>
+        </mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let role">
+            <div fxFlex="row" fxLayoutAlign="end center">
+                <!-- <button mat-icon-button aria-label="Toggle star" (click)="editRole(role)"
+                        style="color: blue">
+                    <mat-icon class="material-icons">edit</mat-icon>
+                </button> -->
+                <button mat-icon-button aria-label="Toggle star" (click)="deleteRole(managerId,role?.id)"
+                        style="color: red">
+                    <mat-icon class="material-icons">delete</mat-icon>
+                </button>
+            </div>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let role; columns: displayedColumns;" class="contact"
+             [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+</mat-table>

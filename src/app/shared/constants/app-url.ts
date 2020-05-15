@@ -23,6 +23,44 @@ export class AppUrl {
         return AppUrl.API_URL + 'self';
     }
 
+
+    static ROLES(mId,roleId?): string {
+        if (roleId) {
+            return AppUrl.API_URL + 'user/' + mId + '/role/' + roleId;
+        } else {
+            return AppUrl.API_URL + 'user/' + mId + '/role';
+        }
+    }
+
+    static GET_ROLES(id): string {
+        return AppUrl.API_URL + `users/` + id;
+    }
+
+    static DELETE_ROLE(mId,roleId): string {
+        return AppUrl.API_URL + 'user/' + mId + '/role/' + roleId;
+    }
+
+    static GET_AVAILABLE_ROLES(): string {
+        return AppUrl.API_URL + `roles`;
+    }
+
+
+    static MANAGERS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'users/' + id;
+        } else {
+            return AppUrl.API_URL + 'users';
+        }
+    }
+
+    static GET_MANAGERS(): string {
+        return AppUrl.API_URL + `users`;
+    }
+
+    static DELETE_MANAGER(id?): string {
+        return AppUrl.API_URL + 'users/' + id;
+    }
+
     static QUALIFICATION(id?): string {
         if (id) {
             return AppUrl.API_URL + 'qualifications/' + id;
@@ -340,20 +378,25 @@ export class AppUrl {
     }
 
 
-    static GET_ALL_SEGMENTS(id?): string {
-        if (id) {
-            return AppUrl.API_URL + 'admin/' + id;
-        } else {
-            return AppUrl.API_URL + 'admin';
-        }
-    }
+    // static GET_ALL_SEGMENTS(id?): string {
+    //     if (id) {
+    //         return AppUrl.API_URL + 'admin/' + id;
+    //     } else {
+    //         return AppUrl.API_URL + 'admin';
+    //     }
+    // }
+    //
+    // static ADD_SEGMENT(id?): string {
+    //     if (id) {
+    //         return AppUrl.API_URL + 'admin/' + id;
+    //     } else {
+    //         return AppUrl.API_URL + 'admin';
+    //     }
+    // }
 
-    static ADD_SEGMENT(id?): string {
-        if (id) {
-            return AppUrl.API_URL + 'admin/' + id;
-        } else {
-            return AppUrl.API_URL + 'admin';
-        }
+    static SEGMENT(id?): string {
+        const path = id ? 'admin/' + id : 'admin';
+        return AppUrl.API_URL + path;
     }
 
     static GET_COUNTRY_LIST(): string {
@@ -447,5 +490,12 @@ export class AppUrl {
     static DELETE_DESIGNATION(id?): string {
         return AppUrl.API_URL + 'designations/' + id;
     }
+    static USER_UPDATE(id?): string {
+        return AppUrl.API_URL + 'profile';
+    }
+    static USER_IMAGE_UPLOAD(): string {
+        return AppUrl.API_URL + 'files';
+    }
+
 
 }

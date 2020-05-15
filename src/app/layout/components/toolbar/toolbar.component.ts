@@ -27,6 +27,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     selectedLanguage: any;
     userStatusOptions: any[];
     userName;
+    userImage;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -167,12 +168,14 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     getUser() {
-        const user = localStorage.getItem('self') ? JSON.parse(localStorage.getItem('self')) : '';
-        this.userName = user.username;
         const token = localStorage.getItem('accessToken');
         if (token === null){
             this.authService.logout();
         }
+        this.authService.self().subscribe(data => {
+            this.userName = data.username;
+            this.userImage = data.file;
+        });
     }
     logout() {
         this.authService.logout();

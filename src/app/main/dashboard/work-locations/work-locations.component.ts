@@ -44,7 +44,7 @@ export class WorkLocationsComponent implements OnInit {
             level: level,
             id: node.id,
             isChildEnabled: node.isChildEnabled,
-            parentId: node.parentId
+            parentId: node.parentId,
         };
     };
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);

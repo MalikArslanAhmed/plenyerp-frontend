@@ -31,6 +31,8 @@ import {PublicHolidaysComponent} from './holidays/public-holidays/public-holiday
 import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 import {DesignationComponent} from './designation/designation.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
+import { ManagersComponent } from './managers/managers.component';
+import { RolesComponent } from './managers/roles/roles.component';
 
 const routes: Routes = [
     {
@@ -256,7 +258,21 @@ const routes: Routes = [
         data: {
             title: 'Profile'
         },
-    }
+    },
+    {
+        path: 'managers',
+        component: ManagersComponent,
+        data: {
+            title: 'Managers'
+        }
+    },
+    {
+        path: 'managers/:id/roles',
+        component: RolesComponent,
+        data: {
+            title: 'Roles'
+        },
+    },
 ];
 
 @NgModule({
