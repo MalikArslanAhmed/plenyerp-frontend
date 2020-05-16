@@ -35,6 +35,7 @@ export class EditSegmentListComponent implements OnInit {
     refresh() {
         this.segmentListForm = this.fb.group({
             name: [this.segment.name, Validators.required],
+            maxLevel: [this.segment.maxLevel, Validators.required],
         });
     }
 
