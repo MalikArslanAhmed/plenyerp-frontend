@@ -1,8 +1,8 @@
-<div id="segment-details-component" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+<div id="job-position-list-select-component" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
          fxLayoutAlign.gt-xs="space-between center" style="min-height: 10px !important; height: 70px !important;">
         <mat-toolbar-row fxLayout="row theme-default accent" fxLayoutAlign="space-between center">
-            <span class="title dialog-title"><h2>Choose Department</h2></span>
+            <span class="title dialog-title"><h2>Choose Job Position</h2></span>
             <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog" class="close-popup">
                 <mat-icon>close</mat-icon>
             </button>
@@ -19,8 +19,7 @@
                 </button>
             </mat-tree-node>
             <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
-                <button mat-icon-button matTreeNodeToggle
-                        [attr.aria-label]="'toggle ' + node.name">
+                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
                     <mat-icon class="mat-icon-rtl-mirror">
                         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                     </mat-icon>

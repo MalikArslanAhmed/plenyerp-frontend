@@ -9,11 +9,11 @@ export class AppConstants {
         },
         {
             'name': 'Married',
-            'value': 'MARRIES'
+            'value': 'MARRIED'
         },
         {
             'name': 'Unmarried',
-            'value': 'UNMARRIED'
+            'value': 'SINGLE'
         }
     ];
 

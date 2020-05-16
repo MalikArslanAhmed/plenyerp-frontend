@@ -101,6 +101,22 @@ export class AppUrl {
         return AppUrl.API_URL + `job-positions`;
     }
 
+    static GET_COUNTRIES(): string {
+        return AppUrl.API_URL + `countries`;
+    }
+
+    static GET_REGIONS(): string {
+        return AppUrl.API_URL + `regions`;
+    }
+
+    static GET_STATES(): string {
+        return AppUrl.API_URL + `states`;
+    }
+
+    static GET_LGAS(): string {
+        return AppUrl.API_URL + `lgas`;
+    }
+
     static GET_DESIGNATIONS(): string {
         return AppUrl.API_URL + `designations`;
     }
@@ -118,6 +134,32 @@ export class AppUrl {
             return AppUrl.API_URL + `job-positions/` + id;
         } else {
             return AppUrl.API_URL + `job-positions`;
+        }
+    }
+
+    static ADD_EMPLOYEE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `employees/` + id;
+        } else {
+            return AppUrl.API_URL + `employees`;
+        }
+    }
+
+    static ADD_PERSONAL_DETAILS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `employees/` + id + '/details';
+        }
+    }
+
+    static ADD_JOB_POSITIONS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `employees/` + id + '/job-profile';
+        }
+    }
+
+    static ADD_CONTACT_DETAILS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `employees/` + id + '/location';
         }
     }
 

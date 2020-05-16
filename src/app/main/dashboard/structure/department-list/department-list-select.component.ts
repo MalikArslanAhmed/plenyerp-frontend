@@ -32,13 +32,13 @@ interface ExampleFlatNode {
 }
 
 @Component({
-    selector: 'app-department-list',
-    templateUrl: './department-list.component.html',
-    styleUrls: ['./department-list.component.scss'],
+    selector: 'app-department-list-select',
+    templateUrl: './department-list-select.component.html',
+    styleUrls: ['./department-list-select.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class DepartmentListComponent implements OnInit {
+export class DepartmentListSelectComponent implements OnInit {
     private _transformer = (node: SegmentNode, level: number) => {
         return {
             expandable: !!node.children && node.children.length > 0,
@@ -62,7 +62,7 @@ export class DepartmentListComponent implements OnInit {
     segmentId: number;
     @ViewChild('tree') tree;
 
-    constructor(public matDialogRef: MatDialogRef<DepartmentListComponent>,
+    constructor(public matDialogRef: MatDialogRef<DepartmentListSelectComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private _fuseSidebarService: FuseSidebarService,
                 private route: ActivatedRoute,

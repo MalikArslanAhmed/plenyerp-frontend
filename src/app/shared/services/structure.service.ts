@@ -33,4 +33,20 @@ export class StructureService extends BaseService {
     deleteJobPosition(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_JOB_POSTIONS(id));
     }
+
+    getCountries(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_COUNTRIES(), data);
+    }
+
+    getRegions(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_REGIONS(), data);
+    }
+
+    getStates(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_STATES(), data);
+    }
+
+    getLga(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LGAS(), data);
+    }
 }

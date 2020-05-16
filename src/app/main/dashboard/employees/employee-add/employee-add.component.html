@@ -29,30 +29,15 @@
         <!-- / SEARCH -->
     </div>
     <div class="content">
+
+        <!--<app-job-positions-list-select></app-job-positions-list-select>-->
+
         <div class="horizontal-stepper-wrapper hor-wrap">
             <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true">
                 <mat-step [stepControl]="employeeForm">
                     <form fxLayout="column" [formGroup]="employeeForm">
                         <ng-template matStepLabel>Employee</ng-template>
                         <mat-grid-list cols="2" rowHeight="100px">
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>ID</mat-label>
-                                        <input matInput formControlName="id" required>
-                                        <mat-error>ID is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>P / File No</mat-label>
-                                        <input matInput formControlName="pfile" required>
-                                        <mat-error>P / File No is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
@@ -66,7 +51,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Maiden Name (Female)</mat-label>
-                                        <input matInput formControlName="maiden">
+                                        <input matInput formControlName="maidenName">
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
@@ -96,10 +81,19 @@
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>P / File No</mat-label>
+                                        <input matInput formControlName="personnelFileNumber" required>
+                                        <mat-error>P / File No is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent">
-                                Next
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveEmployee()">
+                                Save & Next
                             </button>
                         </div>
                     </form>
@@ -113,7 +107,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date of Birth</mat-label>
-                                        <input matInput [matDatepicker]="dob" formControlName="dob">
+                                        <input matInput [matDatepicker]="dob" formControlName="dateOfBirth">
                                         <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
                                         <mat-datepicker #dob></mat-datepicker>
                                         <mat-error>Date of birth is required!</mat-error>
@@ -181,7 +175,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Appointed</mat-label>
-                                        <input matInput [matDatepicker]="appointed" formControlName="appointed">
+                                        <input matInput [matDatepicker]="appointed" formControlName="appointedOn">
                                         <mat-datepicker-toggle matSuffix [for]="appointed"></mat-datepicker-toggle>
                                         <mat-datepicker #appointed></mat-datepicker>
                                         <mat-error>Appointed is required!</mat-error>
@@ -192,7 +186,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Assumed Duty</mat-label>
-                                        <input matInput [matDatepicker]="assumedDuty" formControlName="assumedDuty">
+                                        <input matInput [matDatepicker]="assumedDuty" formControlName="assumedDutyOn">
                                         <mat-datepicker-toggle matSuffix [for]="assumedDuty"></mat-datepicker-toggle>
                                         <mat-datepicker #assumedDuty></mat-datepicker>
                                         <mat-error>Assumed Duty is required!</mat-error>
@@ -214,13 +208,13 @@
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-checkbox formControlName="permanentStaff">Permanent Staff</mat-checkbox>
+                                    <mat-checkbox formControlName="isPermanentStaff">Permanent Staff</mat-checkbox>
                                 </div>
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent">
-                                Next
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="savePersonalDetail()">
+                                Save & Next
                             </button>
                         </div>
                     </form>
@@ -236,7 +230,7 @@
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Current Appt</mat-label>
                                         <input matInput [matDatepicker]="dateCurrentAppt"
-                                               formControlName="dateCurrentAppt">
+                                               formControlName="currentAppointment">
                                         <mat-datepicker-toggle matSuffix
                                                                [for]="dateCurrentAppt"></mat-datepicker-toggle>
                                         <mat-datepicker #dateCurrentAppt></mat-datepicker>
@@ -248,7 +242,11 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Job Position</mat-label>
-                                        <input matInput formControlName="jobPosition" required>
+                                        <mat-select formControlName="jobPositionId" required [disabled]="true"
+                                                    (click)="jobPositionListSelect()">
+                                            <mat-option [value]="jobPosition.id"
+                                                        *ngFor="let jobPosition of jobPositions">{{jobPosition.name}}</mat-option>
+                                        </mat-select>
                                         <mat-error>Job Position is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -257,7 +255,11 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Admin Unit</mat-label>
-                                        <input matInput formControlName="adminUnit" required>
+                                        <mat-select formControlName="departmentId" required [disabled]="true"
+                                                    (click)="adminUnitListSelect()">
+                                            <mat-option [value]="department.id"
+                                                        *ngFor="let department of departments">{{department.name}}</mat-option>
+                                        </mat-select>
                                         <mat-error>Admin Unit is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -266,7 +268,11 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Work Location</mat-label>
-                                        <input matInput formControlName="workLocation" required>
+                                        <mat-select formControlName="workLocationId" required [disabled]="true"
+                                                    (click)="workLocationListSelect()">
+                                            <mat-option [value]="workLocation.id"
+                                                        *ngFor="let workLocation of workLocations">{{workLocation.name}}</mat-option>
+                                        </mat-select>
                                         <mat-error>Work Location is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -275,8 +281,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Designation</mat-label>
-                                        <mat-select formControlName="designation" required>
-                                            <mat-option [value]="designation.value"
+                                        <mat-select formControlName="designationId" required>
+                                            <mat-option [value]="designation.id"
                                                         *ngFor="let designation of designations">{{designation.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
@@ -293,9 +299,9 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>S / Scale</mat-label>
-                                        <mat-select formControlName="sScale" required>
-                                            <mat-option [value]="designation.value"
-                                                        *ngFor="let designation of designations">{{designation.name}}</mat-option>
+                                        <mat-select formControlName="salaryScaleId" required [disabled]="true">
+                                            <mat-option [value]="salaryScale.id"
+                                                        *ngFor="let salaryScale of salaryScales">{{salaryScale.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
                                         <mat-error>S / Scale is required!</mat-error>
@@ -306,9 +312,9 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>G / Scale</mat-label>
-                                        <mat-select formControlName="gScale" required>
-                                            <mat-option [value]="designation.value"
-                                                        *ngFor="let designation of designations">{{designation.name}}</mat-option>
+                                        <mat-select formControlName="gradeLevelId" required [disabled]="true">
+                                            <mat-option [value]="gradeLevel.id"
+                                                        *ngFor="let gradeLevel of gradeLevels">{{gradeLevel.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
                                         <mat-error>G / Scale is required!</mat-error>
@@ -319,9 +325,9 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>GL / Step</mat-label>
-                                        <mat-select formControlName="glScale" required>
-                                            <mat-option [value]="designation.value"
-                                                        *ngFor="let designation of designations">{{designation.name}}</mat-option>
+                                        <mat-select formControlName="gradeLevelStepId" required [disabled]="true">
+                                            <mat-option [value]="gradeLevelStep.id"
+                                                        *ngFor="let gradeLevelStep of gradeLevelSteps">{{gradeLevelStep.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
                                         <mat-error>GL / Step is required!</mat-error>
@@ -330,8 +336,8 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent">
-                                Next
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveJobProfile()">
+                                Save & Next
                             </button>
                         </div>
                     </form>
@@ -345,8 +351,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Country</mat-label>
-                                        <mat-select formControlName="citizenshipCountry" required>
-                                            <mat-option [value]="country.value"
+                                        <mat-select formControlName="countryId" required (selectionChange)="chooseRegion($event.value)">
+                                            <mat-option [value]="country.id"
                                                         *ngFor="let country of countries">{{country.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
@@ -358,8 +364,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Region</mat-label>
-                                        <mat-select formControlName="citizenshipRegion" required>
-                                            <mat-option [value]="region.value"
+                                        <mat-select formControlName="regionId" required (selectionChange)="chooseState($event.value)">
+                                            <mat-option [value]="region.id"
                                                         *ngFor="let region of regions">{{region.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
@@ -371,8 +377,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>State</mat-label>
-                                        <mat-select formControlName="citizenshipState" required>
-                                            <mat-option [value]="state.value"
+                                        <mat-select formControlName="stateId" required (selectionChange)="chooseLga($event.value)">
+                                            <mat-option [value]="state.id"
                                                         *ngFor="let state of states">{{state.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
@@ -384,8 +390,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>LGA</mat-label>
-                                        <mat-select formControlName="citizenshipLga" required>
-                                            <mat-option [value]="lga.value"
+                                        <mat-select formControlName="lgaId" required>
+                                            <mat-option [value]="lga.id"
                                                         *ngFor="let lga of lgas">{{lga.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
@@ -402,7 +408,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Address Line 1</mat-label>
-                                        <input matInput formControlName="address1" required>
+                                        <input matInput formControlName="addressLine1" required>
                                         <mat-error>Address Line 1 is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -411,7 +417,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Address Line 2</mat-label>
-                                        <input matInput formControlName="address2" required>
+                                        <input matInput formControlName="addressLine2" required>
                                         <mat-error>Address Line 2 is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -420,7 +426,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>City</mat-label>
-                                        <input matInput formControlName="contactInfoCity" required>
+                                        <input matInput formControlName="city" required>
                                         <mat-error>City is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -429,7 +435,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Zip Code</mat-label>
-                                        <input matInput formControlName="contactInfoZipCode" required>
+                                        <input matInput formControlName="zipCode" required>
                                         <mat-error>Zip Code is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -438,8 +444,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Country</mat-label>
-                                        <mat-select formControlName="contactInfoCountry" required>
-                                            <mat-option [value]="country.value"
+                                        <mat-select formControlName="otherCountryId" required (selectionChange)="chooseRegionOther($event.value)">
+                                            <mat-option [value]="country.id"
                                                         *ngFor="let country of countries">{{country.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
@@ -450,22 +456,9 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>State</mat-label>
-                                        <mat-select formControlName="contactInfoState" required>
-                                            <mat-option [value]="state.value"
-                                                        *ngFor="let state of states">{{state.name}}</mat-option>
-                                        </mat-select>
-                                        <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
-                                        <mat-error>State is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>State</mat-label>
-                                        <mat-select formControlName="contactInfoRegion" required>
-                                            <mat-option [value]="region.value"
+                                        <mat-label>Region</mat-label>
+                                        <mat-select formControlName="otherRegionId" required (selectionChange)="chooseStateOther($event.value)">
+                                            <mat-option [value]="region.id"
                                                         *ngFor="let region of regions">{{region.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
@@ -476,9 +469,22 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>State</mat-label>
+                                        <mat-select formControlName="otherStateId" required (selectionChange)="chooseLgaOther($event.value)">
+                                            <mat-option [value]="state.id"
+                                                        *ngFor="let state of states">{{state.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
+                                        <mat-error>State is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>LGA</mat-label>
-                                        <mat-select formControlName="contactInfoLga" required>
-                                            <mat-option [value]="lga.value"
+                                        <mat-select formControlName="otherLgaId" required>
+                                            <mat-option [value]="lga.id"
                                                         *ngFor="let lga of lgas">{{lga.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
@@ -488,7 +494,7 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="save()">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()">
                                 Save
                             </button>
                         </div>

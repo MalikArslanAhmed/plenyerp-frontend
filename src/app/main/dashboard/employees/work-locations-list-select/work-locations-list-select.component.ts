@@ -1,18 +1,18 @@
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {WorkLocationService} from '../../../shared/services/work-location.service';
-import {fuseAnimations} from '../../../../@fuse/animations';
-import {FormGroup} from '@angular/forms';
-import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
-import {MatDialog} from '@angular/material/dialog';
-import {UpdateWorkLocationsComponent} from './update-work-locations/update-work-locations.component';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {FlatTreeControl} from "@angular/cdk/tree";
+import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
+import {WorkLocationService} from "../../../../shared/services/work-location.service";
+import {FuseSidebarService} from "../../../../../@fuse/components/sidebar/sidebar.service";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {UpdateWorkLocationsComponent} from "../../work-locations/update-work-locations/update-work-locations.component";
+import {FormGroup} from "@angular/forms";
 
 interface WorkLocationNode {
     id: number;
     isChildEnabled: boolean;
     parentId: number;
     name: string;
+    isActive: boolean;
     children?: WorkLocationNode[];
 }
 
@@ -25,13 +25,11 @@ interface ExampleFlatNode {
 }
 
 @Component({
-    selector: 'app-work-locations',
-    templateUrl: './work-locations.component.html',
-    styleUrls: ['./work-locations.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    animations: fuseAnimations
+    selector: 'app-work-locations-list-select',
+    templateUrl: './work-locations-list-select.component.html',
+    styleUrls: ['./work-locations-list-select.component.scss']
 })
-export class WorkLocationsComponent implements OnInit {
+export class WorkLocationsListSelectComponent implements OnInit {
     private _transformer = (node: WorkLocationNode, level: number) => {
         return {
             expandable: !!node.children && node.children.length > 0,
@@ -40,6 +38,7 @@ export class WorkLocationsComponent implements OnInit {
             id: node.id,
             isChildEnabled: node.isChildEnabled,
             parentId: node.parentId,
+            isActive: node.isActive
         };
     };
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);
@@ -49,7 +48,9 @@ export class WorkLocationsComponent implements OnInit {
     dialogRef: any;
     @ViewChild('tree') tree;
 
-    constructor(private workLocationService: WorkLocationService,
+    constructor(public matDialogRef: MatDialogRef<WorkLocationsListSelectComponent>,
+                @Inject(MAT_DIALOG_DATA) private _data: any,
+                private workLocationService: WorkLocationService,
                 private _fuseSidebarService: FuseSidebarService,
                 private _matDialog: MatDialog) {
         this.dataSource.data = TREE_DATA;
@@ -66,6 +67,7 @@ export class WorkLocationsComponent implements OnInit {
                 isChildEnabled: true,
                 parentId: 0,
                 name: 'Work Locations',
+                isActive: false,
                 children: this.workLocationData(data)
             }];
             this.tree.treeControl.expandAll();
@@ -80,39 +82,5 @@ export class WorkLocationsComponent implements OnInit {
             });
             return data;
         }
-    }
-
-    addItem(node) {
-        this.dialogRef = this._matDialog.open(UpdateWorkLocationsComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', node: node}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-            this.getWorkLocations();
-        });
-    }
-
-    editItem(node) {
-        this.dialogRef = this._matDialog.open(UpdateWorkLocationsComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', node: node}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-            this.getWorkLocations();
-        });
-    }
-
-    deleteItem(node) {
-        this.workLocationService.deleteWorkLocation(node.id).subscribe(data => {
-            if (data) {
-                this.getWorkLocations();
-            }
-        })
     }
 }

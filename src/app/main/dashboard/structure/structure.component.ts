@@ -8,7 +8,7 @@ import {StructureService} from "../../../shared/services/structure.service";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {SalaryScalesService} from "../../../shared/services/salary-scales.service";
 import {SkillService} from "../../../shared/services/skill.service";
-import {DepartmentListComponent} from "./department-list/department-list.component";
+import {DepartmentListSelectComponent} from "./department-list/department-list-select.component";
 
 interface StructureNode {
     id: number;
@@ -168,6 +168,9 @@ export class StructureComponent implements OnInit {
     structureData(data) {
         if (data && data.length > 0) {
             data.forEach(structure => {
+                if (structure && structure['department'] && structure['department'].name) {
+                    structure['departmentName'] = structure['department'].name;
+                }
                 structure['children'] = structure['subCategories'];
                 this.structureData(structure['subCategories']);
             });
@@ -214,7 +217,6 @@ export class StructureComponent implements OnInit {
     }
 
     addItem(node) {
-        console.log('node', node);
         if (this.updateId) {
             this.jobPositionForm.reset();
             this.jobPostionInitText = "Add Job Position";
@@ -227,7 +229,6 @@ export class StructureComponent implements OnInit {
             this.selectedNodeName = node.name;
             this.parentId = node.id;
         }
-        console.log('this.parentId', this.parentId);
     }
 
     editItem(node) {
@@ -265,6 +266,13 @@ export class StructureComponent implements OnInit {
         this.structureService.deleteJobPosition(node.id).subscribe(data => {
             if (data) {
                 this.getStructures();
+                this.jobPositionForm.reset();
+                this.isSubmitted = false;
+                this.getStructures();
+                this.selectedNodeName = '';
+                this.parentId = undefined;
+                this.jobPostionInitText = "Add Job Position";
+                this.updateId = undefined;
             }
         })
     }
@@ -314,11 +322,10 @@ export class StructureComponent implements OnInit {
     }
 
     departmentSelect() {
-        this.dialogRef = this._matDialog.open(DepartmentListComponent, {
+        this.dialogRef = this._matDialog.open(DepartmentListSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            console.log('response', response);
             if (!response) {
                 return;
             }

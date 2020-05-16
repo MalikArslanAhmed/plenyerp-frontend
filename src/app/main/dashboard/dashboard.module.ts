@@ -107,8 +107,10 @@ import {ManagersCreateComponent} from './managers/managers-create/managers-creat
 import {RolesComponent} from './managers/roles/roles.component';
 import {RolesListComponent} from './managers/roles/roles-list/roles-list.component';
 import {RolesCreateComponent} from './managers/roles/roles-create/roles-create.component';
-import {DepartmentListComponent} from './structure/department-list/department-list.component';
+import {DepartmentListSelectComponent} from './structure/department-list/department-list-select.component';
 import {MaterialFileInputModule} from 'ngx-material-file-input';
+import {JobPositionsListSelectComponent} from './employees/job-positions-list-select/job-positions-list-select.component';
+import { WorkLocationsListSelectComponent } from './employees/work-locations-list-select/work-locations-list-select.component';
 
 @NgModule({
     declarations: [
@@ -201,7 +203,9 @@ import {MaterialFileInputModule} from 'ngx-material-file-input';
         RolesListComponent,
         RolesCreateComponent,
         UserProfileComponent,
-        DepartmentListComponent
+        DepartmentListSelectComponent,
+        JobPositionsListSelectComponent,
+        WorkLocationsListSelectComponent
     ],
     imports: [
         CommonModule,
