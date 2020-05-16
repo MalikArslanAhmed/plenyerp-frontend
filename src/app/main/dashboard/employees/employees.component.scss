@@ -40,4 +40,26 @@
             }
         }
     }
+
+    .content {
+        .custom-row{
+            width: 100%;
+            padding-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            .col{
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .list-col{
+                width: 75%;
+                flex-basis: 75%;
+                flex: 1;
+            }
+            .preview-col{
+                width: 25%;
+                flex-basis: 25%;
+            }
+        }
+    }
 }

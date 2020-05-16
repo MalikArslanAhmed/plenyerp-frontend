@@ -1,27 +1,62 @@
 <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
+
+    <ng-container matColumnDef="check">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Select All</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+            <input type="checkbox" name="" id="">
+        </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
             <p class="email text-truncate">
-                {{employee.sno}}.
+                {{employee.sno}}
             </p>
         </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+    <ng-container matColumnDef="id2">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>ID</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+            <p class="email text-truncate">
+                {{employee.id}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fileId">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>File No</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+            <p class="email text-truncate">
+                {{employee.file?.id}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lName">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Last Name</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
             <p class="phone text-truncate">
-                {{employee.name}}
+                {{employee.lastName}}
             </p>
         </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="phone">
+    <ng-container matColumnDef="fName">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>First Name</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+            <p class="phone text-truncate">
+                {{employee.firstName}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="phone">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
             <p class="phone text-truncate">
-                {{employee.phone}}
+                {{employee.employeePersonalDetails?.phone}}
             </p>
         </mat-cell>
     </ng-container>
@@ -30,16 +65,16 @@
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Department</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
             <p class="phone text-truncate">
-                {{employee.department}}
+                {{employee.employeeJobProfiles?.department?.name}}
             </p>
         </mat-cell>
-    </ng-container>
+    </ng-container> -->
 
-    <ng-container matColumnDef="position">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Position</mat-header-cell>
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
             <p class="phone text-truncate">
-                {{employee.position}}
+                {{employee.employeeJobProfiles?.designation?.name}}
             </p>
         </mat-cell>
     </ng-container>

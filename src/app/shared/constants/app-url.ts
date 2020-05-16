@@ -283,6 +283,10 @@ export class AppUrl {
         return AppUrl.API_URL + 'relationships/' + id;
     }
 
+    static GET_EMPLOYEES(): string {
+        return AppUrl.API_URL + `employees`;
+    }
+
     static CATEGORY(id?): string {
         if (id) {
             return AppUrl.API_URL + 'categories/' + id;
