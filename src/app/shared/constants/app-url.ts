@@ -24,7 +24,7 @@ export class AppUrl {
     }
 
 
-    static ROLES(mId,roleId?): string {
+    static ROLES(mId, roleId?): string {
         if (roleId) {
             return AppUrl.API_URL + 'user/' + mId + '/role/' + roleId;
         } else {
@@ -36,7 +36,7 @@ export class AppUrl {
         return AppUrl.API_URL + `users/` + id;
     }
 
-    static DELETE_ROLE(mId,roleId): string {
+    static DELETE_ROLE(mId, roleId): string {
         return AppUrl.API_URL + 'user/' + mId + '/role/' + roleId;
     }
 
@@ -160,6 +160,18 @@ export class AppUrl {
     static ADD_CONTACT_DETAILS(id?): string {
         if (id) {
             return AppUrl.API_URL + `employees/` + id + '/location';
+        }
+    }
+
+    static ADD_PROGRESSION(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `employees/` + id + '/progression';
+        }
+    }
+
+    static ADD_ID_NOS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `employees/` + id + '/id-nos';
         }
     }
 
@@ -536,9 +548,11 @@ export class AppUrl {
     static DELETE_DESIGNATION(id?): string {
         return AppUrl.API_URL + 'designations/' + id;
     }
+
     static USER_UPDATE(id?): string {
         return AppUrl.API_URL + 'profile';
     }
+
     static USER_IMAGE_UPLOAD(): string {
         return AppUrl.API_URL + 'files';
     }

@@ -26,6 +26,7 @@ export class EmployeeAddComponent implements OnInit {
     jobProfileSalaryPlacementForm: FormGroup;
     citizenshipContactDetailsForm: FormGroup;
     progressionForm: FormGroup;
+    idNosForm: FormGroup;
     maritalStatuses = AppConstants.maritalStatuses;
     genders = AppConstants.genders;
     religions = AppConstants.religions;
@@ -122,15 +123,34 @@ export class EmployeeAddComponent implements OnInit {
         });
 
         this.progressionForm = this.fb.group({
-            lastIncrDate: [''],
-            nextIncrMonths: [''],
-            confrDueDate: [''],
-            confrimed: [false],
+            lastIncrement: [''],
+            nextIncrement: [''],
+            confirmationDueDate: [''],
+            isConfirmed: [false],
             lastPromoted: [''],
-            nextPromotionMonths: [''],
-            expExitDate: [''],
-            exited: [false],
-            pensionStarted: [false]
+            nextPromotion: [''],
+            expectedExitDate: [''],
+            isExited: [false],
+            isPensionStarted: [false],
+            dateStarted: [''],
+            gratuity: [''],
+            monthlyPension: [''],
+            otherPension: ['']
+        });
+
+        this.idNosForm = this.fb.group({
+            nhfNumber: [''],
+            tinNumber: [''],
+            nationalIdNumber: [''],
+            driverLicenseNumber: [''],
+            bankVersionNumber: [''],
+            pensionFundAdministration: [''],
+            pfaNumber: [''],
+            passportNumber: [''],
+            issuedAt: [''],
+            issuedDate: [''],
+            workPermitNumber: [''],
+            expiryDate: ['']
         });
     }
 
@@ -261,7 +281,7 @@ export class EmployeeAddComponent implements OnInit {
 
     saveEmployee() {
         console.log('this.employeeForm', this.employeeForm.value);
-        /*this.isSubmitted = true;
+        this.isSubmitted = true;
         if (!this.employeeForm.valid) {
             this.isSubmitted = false;
             return;
@@ -272,12 +292,12 @@ export class EmployeeAddComponent implements OnInit {
                 this.employeeId = data.id;
                 this.isSubmitted = false;
             });
-        }*/
+        }
     }
 
     savePersonalDetail() {
         console.log('this.personalDetailsForm', this.personalDetailsForm.value);
-        /*this.isSubmitted = true;
+        this.isSubmitted = true;
         if (!this.personalDetailsForm.valid) {
             this.isSubmitted = false;
             return;
@@ -290,12 +310,12 @@ export class EmployeeAddComponent implements OnInit {
             this.employeeService.addPersonalDetails(this.employeeId, this.personalDetailsForm.value).subscribe(data => {
                 this.isSubmitted = false;
             });
-        }*/
+        }
     }
 
     saveJobProfile() {
         console.log('this.jobProfileSalaryPlacementForm', this.jobProfileSalaryPlacementForm.value);
-        /*this.isSubmitted = true;
+        this.isSubmitted = true;
         if (!this.jobProfileSalaryPlacementForm.valid) {
             this.isSubmitted = false;
             return;
@@ -307,12 +327,12 @@ export class EmployeeAddComponent implements OnInit {
             this.employeeService.addJobProfile(this.employeeId, this.jobProfileSalaryPlacementForm.value).subscribe(data => {
                 this.isSubmitted = false;
             });
-        }*/
+        }
     }
 
     saveContactDetails() {
         console.log('this.citizenshipContactDetailsForm', this.citizenshipContactDetailsForm.value);
-        /*this.isSubmitted = true;
+        this.isSubmitted = true;
         if (!this.citizenshipContactDetailsForm.valid) {
             this.isSubmitted = false;
             return;
@@ -321,25 +341,46 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             this.employeeService.addContactDetails(this.employeeId, this.citizenshipContactDetailsForm.value).subscribe(data => {
                 this.isSubmitted = false;
-                this.router.navigateByUrl(`/dashboard/employees`);
             });
-        }*/
+        }
     }
 
     saveProgression() {
-        console.log('this.citizenshipContactDetailsForm', this.citizenshipContactDetailsForm.value);
-        /*this.isSubmitted = true;
-        if (!this.citizenshipContactDetailsForm.valid) {
+        console.log('this.progressionForm', this.progressionForm.value);
+        this.isSubmitted = true;
+        if (!this.progressionForm.valid) {
             this.isSubmitted = false;
             return;
         }
 
         if (this.isSubmitted) {
-            this.employeeService.addContactDetails(this.employeeId, this.citizenshipContactDetailsForm.value).subscribe(data => {
+            this.progressionForm.value['lastIncrement'] = this.progressionForm.value['lastIncrement'].format('YYYY-MM-DD');
+            this.progressionForm.value['confirmationDueDate'] = this.progressionForm.value['confirmationDueDate'].format('YYYY-MM-DD');
+            this.progressionForm.value['lastPromoted'] = this.progressionForm.value['lastPromoted'].format('YYYY-MM-DD');
+            this.progressionForm.value['expectedExitDate'] = this.progressionForm.value['expectedExitDate'].format('YYYY-MM-DD');
+            this.progressionForm.value['dateStarted'] = this.progressionForm.value['dateStarted'].format('YYYY-MM-DD');
+            this.employeeService.addProgression(this.employeeId, this.progressionForm.value).subscribe(data => {
+                this.isSubmitted = false;
+            });
+        }
+    }
+
+    saveIdNos() {
+        console.log('this.idNosForm', this.idNosForm.value);
+        this.isSubmitted = true;
+        if (!this.idNosForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.isSubmitted) {
+            this.idNosForm.value['issuedDate'] = this.idNosForm.value['issuedDate'].format('YYYY-MM-DD');
+            this.idNosForm.value['expiryDate'] = this.idNosForm.value['expiryDate'].format('YYYY-MM-DD');
+            this.employeeService.addIdNos(this.employeeId, this.idNosForm.value).subscribe(data => {
                 this.isSubmitted = false;
                 this.router.navigateByUrl(`/dashboard/employees`);
             });
-        }*/
+        }
     }
 
     chooseRegion(event) {

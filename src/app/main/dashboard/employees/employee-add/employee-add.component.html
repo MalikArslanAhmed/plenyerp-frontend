@@ -29,102 +29,9 @@
         <!-- / SEARCH -->
     </div>
     <div class="content">
-
-        <!--<app-job-positions-list-select></app-job-positions-list-select>-->
-
         <div class="horizontal-stepper-wrapper hor-wrap">
             <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true">
-                <mat-step [stepControl]="progressionForm">
-                    <form fxLayout="column" [formGroup]="progressionForm">
-                        <ng-template matStepLabel>Progression</ng-template>
-                        <h5>Increment Details</h5>
-                        <mat-grid-list cols="2" rowHeight="100px">
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Last Incr. Date</mat-label>
-                                        <input matInput [matDatepicker]="lastIncrDate" formControlName="lastIncrDate">
-                                        <mat-datepicker-toggle matSuffix [for]="lastIncrDate"></mat-datepicker-toggle>
-                                        <mat-datepicker #lastIncrDate></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-checkbox formControlName="nextIncrMonths">Next Increment (Months)</mat-checkbox>
-                                </div>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                        <h5>Confirmation Details</h5>
-                        <mat-grid-list cols="2" rowHeight="100px">
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Confr. Due Date</mat-label>
-                                        <input matInput [matDatepicker]="confrDueDate" formControlName="confrDueDate">
-                                        <mat-datepicker-toggle matSuffix [for]="confrDueDate"></mat-datepicker-toggle>
-                                        <mat-datepicker #confrDueDate></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-checkbox formControlName="confrimed">Confirmed</mat-checkbox>
-                                </div>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                        <h5>Promotion Details</h5>
-                        <mat-grid-list cols="2" rowHeight="100px">
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Last Promoted</mat-label>
-                                        <input matInput [matDatepicker]="lastPromoted" formControlName="lastPromoted">
-                                        <mat-datepicker-toggle matSuffix [for]="lastPromoted"></mat-datepicker-toggle>
-                                        <mat-datepicker #lastPromoted></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-checkbox formControlName="nextPromotionMonths">Next Promotion (Months)</mat-checkbox>
-                                </div>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                        <h5>Exit Details</h5>
-                        <mat-grid-list cols="2" rowHeight="100px">
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Exp. Exit Date</mat-label>
-                                        <input matInput [matDatepicker]="expExitDate" formControlName="expExitDate">
-                                        <mat-datepicker-toggle matSuffix [for]="expExitDate"></mat-datepicker-toggle>
-                                        <mat-datepicker #expExitDate></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-checkbox formControlName="exited">Exited</mat-checkbox>
-                                </div>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                        <h5>Pension Details</h5>
-                        <mat-grid-list cols="2" rowHeight="100px">
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-checkbox formControlName="pensionStarted">Pension Started</mat-checkbox>
-                                </div>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                        <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()">
-                                Save & Next
-                            </button>
-                        </div>
-                    </form>
-                </mat-step>
-                <!--<mat-step [stepControl]="employeeForm">
+                <mat-step [stepControl]="employeeForm">
                     <form fxLayout="column" [formGroup]="employeeForm">
                         <ng-template matStepLabel>Employee</ng-template>
                         <mat-grid-list cols="2" rowHeight="100px">
@@ -187,7 +94,7 @@
                             </button>
                         </div>
                     </form>
-                </mat-step>-->
+                </mat-step>
 
                 <mat-step [stepControl]="personalDetailsForm">
                     <form fxLayout="column" [formGroup]="personalDetailsForm">
@@ -432,6 +339,7 @@
                         </div>
                     </form>
                 </mat-step>
+
                 <mat-step [stepControl]="citizenshipContactDetailsForm">
                     <form fxLayout="column" [formGroup]="citizenshipContactDetailsForm">
                         <ng-template matStepLabel>Citizenship Contact Details</ng-template>
@@ -590,29 +498,272 @@
                         </div>
                     </form>
                 </mat-step>
-                <!--<mat-step [stepControl]="progressionForm">
+
+                <mat-step [stepControl]="progressionForm">
                     <form fxLayout="column" [formGroup]="progressionForm">
                         <ng-template matStepLabel>Progression</ng-template>
-                        <h5>Progression</h5>
+                        <h5>Increment Details</h5>
                         <mat-grid-list cols="2" rowHeight="100px">
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Increment Details</mat-label>
-                                        <input matInput [matDatepicker]="lastIncrDate" formControlName="dateOfBirth">
-                                        <mat-datepicker-toggle matSuffix [for]="lastIncrDate"></mat-datepicker-toggle>
-                                        <mat-datepicker #lastIncrDate></mat-datepicker>
+                                        <mat-label>Last Incr. Date</mat-label>
+                                        <input matInput [matDatepicker]="lastIncrement" formControlName="lastIncrement">
+                                        <mat-datepicker-toggle matSuffix [for]="lastIncrement"></mat-datepicker-toggle>
+                                        <mat-datepicker #lastIncrement></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Next Increment</mat-label>
+                                        <input matInput formControlName="nextIncrement" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h5>Confirmation Details</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Confr. Due Date</mat-label>
+                                        <input matInput [matDatepicker]="confirmationDueDate" formControlName="confirmationDueDate">
+                                        <mat-datepicker-toggle matSuffix [for]="confirmationDueDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #confirmationDueDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="isConfirmed">Confirmed</mat-checkbox>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h5>Promotion Details</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Last Promoted</mat-label>
+                                        <input matInput [matDatepicker]="lastPromoted" formControlName="lastPromoted">
+                                        <mat-datepicker-toggle matSuffix [for]="lastPromoted"></mat-datepicker-toggle>
+                                        <mat-datepicker #lastPromoted></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Next Promotion (Months)</mat-label>
+                                        <input matInput formControlName="nextPromotion" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h5>Exit Details</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Exp. Exit Date</mat-label>
+                                        <input matInput [matDatepicker]="expectedExitDate" formControlName="expectedExitDate">
+                                        <mat-datepicker-toggle matSuffix [for]="expectedExitDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #expectedExitDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="isExited">Exited</mat-checkbox>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h5>Pension Details</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="isPensionStarted">Pension Started</mat-checkbox>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Date started</mat-label>
+                                        <input matInput [matDatepicker]="dateStarted" formControlName="dateStarted">
+                                        <mat-datepicker-toggle matSuffix [for]="dateStarted"></mat-datepicker-toggle>
+                                        <mat-datepicker #dateStarted></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Gratuity</mat-label>
+                                        <input matInput formControlName="gratuity" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Monthly Pension</mat-label>
+                                        <input matInput formControlName="monthlyPension" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Other Pension</mat-label>
+                                        <input matInput formControlName="otherPension" required>
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()">
                                 Save & Next
                             </button>
                         </div>
                     </form>
-                </mat-step>-->
+                </mat-step>
+
+                <mat-step [stepControl]="idNosForm">
+                    <form fxLayout="column" [formGroup]="idNosForm">
+                        <ng-template matStepLabel>Id Nos.</ng-template>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>NHF No.</mat-label>
+                                        <input matInput formControlName="nhfNumber" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>TIN No.</mat-label>
+                                        <input matInput formControlName="tinNumber" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>National Id No.</mat-label>
+                                        <input matInput formControlName="nationalIdNumber" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Drivers License No.</mat-label>
+                                        <input matInput formControlName="driverLicenseNumber" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Bank verification No.</mat-label>
+                                        <input matInput formControlName="bankVersionNumber" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>PFA</mat-label>
+                                        <input matInput formControlName="pensionFundAdministration" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>PFA No.</mat-label>
+                                        <input matInput formControlName="pfaNumber" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h5>Passport</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Passport Number</mat-label>
+                                        <input matInput formControlName="passportNumber" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Issued At</mat-label>
+                                        <mat-select formControlName="issuedAt" required>
+                                            <mat-option [value]="issued.id"
+                                                        *ngFor="let issued of countries">{{issued.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
+                                        <mat-error>Issued at is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Issued Date</mat-label>
+                                        <input matInput [matDatepicker]="issuedDate" formControlName="issuedDate">
+                                        <mat-datepicker-toggle matSuffix [for]="issuedDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #issuedDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Expiry Date</mat-label>
+                                        <input matInput [matDatepicker]="expiryDate" formControlName="expiryDate">
+                                        <mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #expiryDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Work permit Number</mat-label>
+                                        <input matInput formControlName="workPermitNumber" required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveIdNos()">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
             </mat-horizontal-stepper>
         </div>
     </div>

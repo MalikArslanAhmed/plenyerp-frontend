@@ -29,4 +29,12 @@ export class EmployeeService extends BaseService {
     addContactDetails(id, data): Observable<any> {
         return this.postRequest(AppUrl.ADD_CONTACT_DETAILS(id), data);
     }
+
+    addProgression(id, data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_PROGRESSION(id), data);
+    }
+
+    addIdNos(id, data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_ID_NOS(id), data);
+    }
 }
