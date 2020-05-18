@@ -28,7 +28,7 @@
         }
         #add-button {
             background-color: white !important;
-            color: #106CC8 !important;
+            color: #106cc8 !important;
         }
     }
 
@@ -42,24 +42,73 @@
     }
 
     .content {
-        .custom-row{
+        padding-top: 15px;
+        .custom-container-fluid {
             width: 100%;
-            padding-top: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            .col{
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-            .list-col{
-                width: 75%;
-                flex-basis: 75%;
-                flex: 1;
-            }
-            .preview-col{
-                width: 25%;
-                flex-basis: 25%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            .custom-row {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
+                .col {
+                    position: relative;
+                    width: 100%;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                }
+                .list-col {
+                    -ms-flex: 0 0 75%;
+                    flex: 0 0 75%;
+                    max-width: 75%;
+                }
+                .preview-col {
+                    -ms-flex: 0 0 25%;
+                    flex: 0 0 25%;
+                    max-width: 25%;
+
+                    .preview-wrapper {
+                        background-color: #fff;
+                        transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+                        display: block;
+                        position: relative;
+                        padding: 15px;
+                        box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+                        .profile-image {
+                            width: 30%;
+                            img {
+                                max-width: 100%;
+                            }
+                        }
+                        .profile-image-desc {
+                            padding-left: 15px;
+                        }
+
+                        .nameField{width: 30%; margin-bottom: 0;}
+                        .dataField{padding-left: 15px; margin-bottom: 0;}
+                    }
+                }
             }
         }
     }
+}
+
+.d-flex {
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+.d-inline-flex {
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+}
+
+.align-items-end {
+    -ms-flex-align: end !important;
+    align-items: flex-end !important;
 }

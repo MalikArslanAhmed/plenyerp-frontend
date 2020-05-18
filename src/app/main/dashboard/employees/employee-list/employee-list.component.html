@@ -9,7 +9,7 @@
 
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee" (click)="selectEmployee(employee)">
             <p class="email text-truncate">
                 {{employee.sno}}
             </p>

@@ -28,6 +28,8 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 // import {DashboardModule} from './main/dashboard/dashboard.module';
 
+import { MomentDatePipe } from "./shared/pipes/moment-date.pipe";
+
 const appRoutes: Routes = [
     {
         path: 'dashboard',
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        MomentDatePipe
     ],
     imports: [
         BrowserModule,

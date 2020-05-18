@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, EventEmitter, Output} from '@angular/core';
 import {EmployeesService} from "../../../../shared/services/employees.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoriesCreateComponent} from "../../categories/categories-create/categories-create.component";
@@ -13,26 +13,12 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
     animations: fuseAnimations
 })
 export class EmployeeListComponent implements OnInit {
-    // employees = [
-    //     {
-    //         'sno': 1,
-    //         'name': 'John Doe',
-    //         'phone': '+91 9988778899',
-    //         'department': 'Technical',
-    //         'position': 'Engineer',
-    //     },
-    //     {
-    //         'sno': 2,
-    //         'name': 'Mary Doe',
-    //         'phone': '+91 6677889988',
-    //         'department': 'Management',
-    //         'position': 'Manager',
-    //     }
-    // ];
 
     employees = [];
     displayedColumns = ['check','id', 'id2', 'fileId', 'lName', 'fName', 'title', 'actions'];
     dialogRef: any;
+
+    @Output() selectedEmployee = new EventEmitter<any>();
 
     constructor(private employeesService: EmployeesService,
                 private _matDialog: MatDialog) {
@@ -40,6 +26,10 @@ export class EmployeeListComponent implements OnInit {
 
     ngOnInit(): void {
         this.getEmployees();
+    }
+
+    selectEmployee(employeeData){
+        this.selectedEmployee.emit(employeeData);
     }
 
     getEmployees() {
