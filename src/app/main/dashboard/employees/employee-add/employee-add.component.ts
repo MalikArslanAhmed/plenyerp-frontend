@@ -25,6 +25,7 @@ export class EmployeeAddComponent implements OnInit {
     personalDetailsForm: FormGroup;
     jobProfileSalaryPlacementForm: FormGroup;
     citizenshipContactDetailsForm: FormGroup;
+    progressionForm: FormGroup;
     maritalStatuses = AppConstants.maritalStatuses;
     genders = AppConstants.genders;
     religions = AppConstants.religions;
@@ -118,6 +119,18 @@ export class EmployeeAddComponent implements OnInit {
             otherRegionId: [''],
             otherStateId: [''],
             otherLgaId: ['']
+        });
+
+        this.progressionForm = this.fb.group({
+            lastIncrDate: [''],
+            nextIncrMonths: [''],
+            confrDueDate: [''],
+            confrimed: [false],
+            lastPromoted: [''],
+            nextPromotionMonths: [''],
+            expExitDate: [''],
+            exited: [false],
+            pensionStarted: [false]
         });
     }
 
@@ -248,7 +261,7 @@ export class EmployeeAddComponent implements OnInit {
 
     saveEmployee() {
         console.log('this.employeeForm', this.employeeForm.value);
-        this.isSubmitted = true;
+        /*this.isSubmitted = true;
         if (!this.employeeForm.valid) {
             this.isSubmitted = false;
             return;
@@ -259,12 +272,12 @@ export class EmployeeAddComponent implements OnInit {
                 this.employeeId = data.id;
                 this.isSubmitted = false;
             });
-        }
+        }*/
     }
 
     savePersonalDetail() {
         console.log('this.personalDetailsForm', this.personalDetailsForm.value);
-        this.isSubmitted = true;
+        /*this.isSubmitted = true;
         if (!this.personalDetailsForm.valid) {
             this.isSubmitted = false;
             return;
@@ -277,12 +290,12 @@ export class EmployeeAddComponent implements OnInit {
             this.employeeService.addPersonalDetails(this.employeeId, this.personalDetailsForm.value).subscribe(data => {
                 this.isSubmitted = false;
             });
-        }
+        }*/
     }
 
     saveJobProfile() {
         console.log('this.jobProfileSalaryPlacementForm', this.jobProfileSalaryPlacementForm.value);
-        this.isSubmitted = true;
+        /*this.isSubmitted = true;
         if (!this.jobProfileSalaryPlacementForm.valid) {
             this.isSubmitted = false;
             return;
@@ -294,12 +307,12 @@ export class EmployeeAddComponent implements OnInit {
             this.employeeService.addJobProfile(this.employeeId, this.jobProfileSalaryPlacementForm.value).subscribe(data => {
                 this.isSubmitted = false;
             });
-        }
+        }*/
     }
 
     saveContactDetails() {
         console.log('this.citizenshipContactDetailsForm', this.citizenshipContactDetailsForm.value);
-        this.isSubmitted = true;
+        /*this.isSubmitted = true;
         if (!this.citizenshipContactDetailsForm.valid) {
             this.isSubmitted = false;
             return;
@@ -310,7 +323,23 @@ export class EmployeeAddComponent implements OnInit {
                 this.isSubmitted = false;
                 this.router.navigateByUrl(`/dashboard/employees`);
             });
+        }*/
+    }
+
+    saveProgression() {
+        console.log('this.citizenshipContactDetailsForm', this.citizenshipContactDetailsForm.value);
+        /*this.isSubmitted = true;
+        if (!this.citizenshipContactDetailsForm.valid) {
+            this.isSubmitted = false;
+            return;
         }
+
+        if (this.isSubmitted) {
+            this.employeeService.addContactDetails(this.employeeId, this.citizenshipContactDetailsForm.value).subscribe(data => {
+                this.isSubmitted = false;
+                this.router.navigateByUrl(`/dashboard/employees`);
+            });
+        }*/
     }
 
     chooseRegion(event) {

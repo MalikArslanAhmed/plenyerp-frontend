@@ -34,7 +34,97 @@
 
         <div class="horizontal-stepper-wrapper hor-wrap">
             <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true">
-                <mat-step [stepControl]="employeeForm">
+                <mat-step [stepControl]="progressionForm">
+                    <form fxLayout="column" [formGroup]="progressionForm">
+                        <ng-template matStepLabel>Progression</ng-template>
+                        <h5>Increment Details</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Last Incr. Date</mat-label>
+                                        <input matInput [matDatepicker]="lastIncrDate" formControlName="lastIncrDate">
+                                        <mat-datepicker-toggle matSuffix [for]="lastIncrDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #lastIncrDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="nextIncrMonths">Next Increment (Months)</mat-checkbox>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h5>Confirmation Details</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Confr. Due Date</mat-label>
+                                        <input matInput [matDatepicker]="confrDueDate" formControlName="confrDueDate">
+                                        <mat-datepicker-toggle matSuffix [for]="confrDueDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #confrDueDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="confrimed">Confirmed</mat-checkbox>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h5>Promotion Details</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Last Promoted</mat-label>
+                                        <input matInput [matDatepicker]="lastPromoted" formControlName="lastPromoted">
+                                        <mat-datepicker-toggle matSuffix [for]="lastPromoted"></mat-datepicker-toggle>
+                                        <mat-datepicker #lastPromoted></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="nextPromotionMonths">Next Promotion (Months)</mat-checkbox>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h5>Exit Details</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Exp. Exit Date</mat-label>
+                                        <input matInput [matDatepicker]="expExitDate" formControlName="expExitDate">
+                                        <mat-datepicker-toggle matSuffix [for]="expExitDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #expExitDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="exited">Exited</mat-checkbox>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <h5>Pension Details</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="pensionStarted">Pension Started</mat-checkbox>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()">
+                                Save & Next
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <!--<mat-step [stepControl]="employeeForm">
                     <form fxLayout="column" [formGroup]="employeeForm">
                         <ng-template matStepLabel>Employee</ng-template>
                         <mat-grid-list cols="2" rowHeight="100px">
@@ -97,7 +187,7 @@
                             </button>
                         </div>
                     </form>
-                </mat-step>
+                </mat-step>-->
 
                 <mat-step [stepControl]="personalDetailsForm">
                     <form fxLayout="column" [formGroup]="personalDetailsForm">
@@ -495,11 +585,34 @@
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()">
-                                Save
+                                Save & Next
                             </button>
                         </div>
                     </form>
                 </mat-step>
+                <!--<mat-step [stepControl]="progressionForm">
+                    <form fxLayout="column" [formGroup]="progressionForm">
+                        <ng-template matStepLabel>Progression</ng-template>
+                        <h5>Progression</h5>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Increment Details</mat-label>
+                                        <input matInput [matDatepicker]="lastIncrDate" formControlName="dateOfBirth">
+                                        <mat-datepicker-toggle matSuffix [for]="lastIncrDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #lastIncrDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()">
+                                Save & Next
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>-->
             </mat-horizontal-stepper>
         </div>
     </div>
