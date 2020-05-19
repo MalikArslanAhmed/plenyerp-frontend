@@ -22,10 +22,10 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/employees'
                     },
                     {
-                        id: 'add-employee',
+                        id: 'employee-action',
                         title: 'Add Employee / Enrolments',
                         type: 'item',
-                        url: 'dashboard/add-employee'
+                        url: 'dashboard/employee-action'
                     }
                 ]
             },

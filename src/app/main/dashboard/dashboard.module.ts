@@ -111,6 +111,7 @@ import {DepartmentListSelectComponent} from './structure/department-list/departm
 import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {JobPositionsListSelectComponent} from './employees/job-positions-list-select/job-positions-list-select.component';
 import { WorkLocationsListSelectComponent } from './employees/work-locations-list-select/work-locations-list-select.component';
+import { EmployeeActionComponent } from './employees/employee-action/employee-action.component';
 
 @NgModule({
     declarations: [
@@ -205,7 +206,8 @@ import { WorkLocationsListSelectComponent } from './employees/work-locations-lis
         UserProfileComponent,
         DepartmentListSelectComponent,
         JobPositionsListSelectComponent,
-        WorkLocationsListSelectComponent
+        WorkLocationsListSelectComponent,
+        EmployeeActionComponent
     ],
     imports: [
         CommonModule,

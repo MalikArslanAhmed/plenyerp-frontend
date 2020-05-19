@@ -33,6 +33,7 @@ import {DesignationComponent} from './designation/designation.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import { ManagersComponent } from './managers/managers.component';
 import { RolesComponent } from './managers/roles/roles.component';
+import { EmployeeActionComponent } from './employees/employee-action/employee-action.component';
 
 const routes: Routes = [
     {
@@ -166,6 +167,20 @@ const routes: Routes = [
         component: EmployeeAddComponent,
         data: {
             title: 'Add Employees'
+        },
+    },
+    {
+        path: 'employee/edit/:id',
+        component: EmployeeAddComponent,
+        data: {
+            title: 'Employee Edit'
+        },
+    },
+    {
+        path: 'employee-action',
+        component: EmployeeActionComponent,
+        data: {
+            title: 'Employee Action'
         },
     },
     {

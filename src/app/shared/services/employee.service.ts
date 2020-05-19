@@ -15,11 +15,19 @@ export class EmployeeService extends BaseService {
     }
 
     addEmployee(data): Observable<any> {
-        return this.postRequest(AppUrl.ADD_EMPLOYEE(), data);
+        return this.postRequest(AppUrl.ADD_UPDATE_EMPLOYEE(), data);
+    }
+
+    updateEmployee(id, data): Observable<any> {
+        return this.putRequest(AppUrl.ADD_UPDATE_EMPLOYEE(id), data);
     }
 
     addPersonalDetails(id, data): Observable<any> {
-        return this.postRequest(AppUrl.ADD_PERSONAL_DETAILS(id), data);
+        return this.postRequest(AppUrl.ADD_UPDATE_PERSONAL_DETAILS(id), data);
+    }
+
+    updatePersonalDetails(id, data): Observable<any> {
+        return this.putRequest(AppUrl.ADD_UPDATE_PERSONAL_DETAILS(id), data);
     }
 
     addJobProfile(id, data): Observable<any> {
@@ -36,5 +44,9 @@ export class EmployeeService extends BaseService {
 
     addIdNos(id, data): Observable<any> {
         return this.postRequest(AppUrl.ADD_ID_NOS(id), data);
+    }
+
+    getEmployees(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEES(), data);
     }
 }

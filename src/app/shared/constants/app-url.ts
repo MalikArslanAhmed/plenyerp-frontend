@@ -137,7 +137,7 @@ export class AppUrl {
         }
     }
 
-    static ADD_EMPLOYEE(id?): string {
+    static ADD_UPDATE_EMPLOYEE(id?): string {
         if (id) {
             return AppUrl.API_URL + `employees/` + id;
         } else {
@@ -145,7 +145,7 @@ export class AppUrl {
         }
     }
 
-    static ADD_PERSONAL_DETAILS(id?): string {
+    static ADD_UPDATE_PERSONAL_DETAILS(id?): string {
         if (id) {
             return AppUrl.API_URL + `employees/` + id + '/details';
         }

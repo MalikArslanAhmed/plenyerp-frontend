@@ -1,0 +1,125 @@
+<div id="employees" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    supervisor_account
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Add Enrollments
+                </span>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button mat-fab class="accent" id="add-button" aria-label="add categories"
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addEmployee()">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </div>
+    <!--<div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">person_add
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Add Enrollments
+                </span>
+            </div>
+        </div>
+    </div>-->
+
+    <div class="content">
+        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+            <div class="content">
+                <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
+                    <ng-container matColumnDef="select">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Select</mat-header-cell>
+                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                            <input type="checkbox" (click)="checkEmployee(employee)">
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                            <p class="email text-truncate">
+                                {{employee.sno}}.
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="empId">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>ID</mat-header-cell>
+                        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                            <p class="phone text-truncate">
+                                {{employee?.id}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fileNo">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>File No.</mat-header-cell>
+                        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                            <p class="phone text-truncate">
+                                {{employee?.personnelFileNumber}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastName">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Last name</mat-header-cell>
+                        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                            <p class="phone text-truncate">
+                                {{employee?.lastName}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="firstName">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>First name</mat-header-cell>
+                        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                            <p class="phone text-truncate">
+                                {{employee?.firstName}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
+                        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                            <p class="phone text-truncate">
+                                {{employee?.title}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef>
+                            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let employee">
+                            <div fxFlex="row" fxLayoutAlign="end center">
+                                <button mat-icon-button aria-label="Toggle star" style="color: blue; margin-right: 20px" (click)="editEmployee(employee)">
+                                    <mat-icon class="material-icons">edit</mat-icon>
+                                </button>
+                                <!--<button mat-icon-button aria-label="Toggle star" (click)="deleteMembership(membership?.id)"
+                                        style="color: red">
+                                    <mat-icon class="material-icons">delete</mat-icon>
+                                </button>-->
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let employee; columns: displayedColumns;" class="contact"
+                             [@animate]="{value:'*',params:{y:'100%'}}">
+                    </mat-row>
+                </mat-table>
+            </div>
+        </div>
+    </div>
+</div>

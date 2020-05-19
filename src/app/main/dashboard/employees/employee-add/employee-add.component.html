@@ -7,7 +7,8 @@
                           [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">person_add
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Add Employee
+                    <p *ngIf="!this.selectedEmployeeId">Add Employee</p>
+                    <p *ngIf="this.selectedEmployeeId && this.selectedEmployee">Edit Employee - {{this.selectedEmployee.firstName}}</p>
                 </span>
             </div>
         </div>
@@ -89,8 +90,11 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveEmployee()">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveEmployee()" *ngIf="!this.selectedEmployeeId">
                                 Save & Next
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="updateEmployee()" *ngIf="this.selectedEmployeeId">
+                                Update & Next
                             </button>
                         </div>
                     </form>
@@ -210,8 +214,11 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="savePersonalDetail()">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="savePersonalDetail()" *ngIf="!this.selectedEmployeeId">
                                 Save & Next
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="savePersonalDetail()" *ngIf="this.selectedEmployeeId">
+                                Update & Next
                             </button>
                         </div>
                     </form>
