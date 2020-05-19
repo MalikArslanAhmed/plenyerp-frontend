@@ -3,6 +3,9 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 import {MatDialog} from "@angular/material/dialog";
 import {EmployeeService} from "../../../../shared/services/employee.service";
 import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {EmployeePreviewComponent} from '../employee-preview/employee-preview.component';
+import {DepartmentListSelectComponent} from "../../structure/department-list/department-list-select.component";
 
 @Component({
     selector: 'app-employee-action',
@@ -16,14 +19,36 @@ export class EmployeeActionComponent implements OnInit {
     displayedColumns = ['select', 'id', 'empId', 'fileNo', 'lastName', 'firstName', 'title', 'actions'];
     dialogRef: any;
     selectedEmployee = [];
+    statuses = [
+        {
+            'id': 1,
+            'name': 'New'
+        },
+        {
+            'id': 2,
+            'name': 'Activated'
+        }
+    ];
+    departments = [];
+    employeeFilterForm: FormGroup;
 
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
-                private router: Router) {
+                private router: Router,
+                private fb: FormBuilder) {
     }
 
     ngOnInit(): void {
+        this.refresh();
         this.getEmployees();
+    }
+
+    refresh() {
+        this.employeeFilterForm = this.fb.group({
+            'departmentId': ['', Validators.required],
+            'search': ['', Validators.required],
+            'statusId': ['', Validators.required]
+        });
     }
 
     getEmployees() {
@@ -41,8 +66,19 @@ export class EmployeeActionComponent implements OnInit {
     }
 
     editEmployee(employee) {
-        console.log(employee);
         this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);
+    }
+
+    previewEmployee(employee) {
+        this.dialogRef = this._matDialog.open(EmployeePreviewComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'PREVIEW', employee: employee},
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+        });
     }
 
     checkEmployee(employee) {
@@ -66,5 +102,24 @@ export class EmployeeActionComponent implements OnInit {
 
     addEmployee() {
         this.router.navigateByUrl(`/dashboard/add-employee`);
+    }
+
+    adminUnitListSelect() {
+        this.dialogRef = this._matDialog.open(DepartmentListSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.departments = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.employeeFilterForm.patchValue({
+                departmentId: response.id,
+                disabled: true
+            });
+        });
     }
 }
