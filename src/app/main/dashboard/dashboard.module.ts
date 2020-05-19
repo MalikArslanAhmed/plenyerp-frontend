@@ -113,6 +113,7 @@ import {JobPositionsListSelectComponent} from './employees/job-positions-list-se
 import { WorkLocationsListSelectComponent } from './employees/work-locations-list-select/work-locations-list-select.component';
 import { EmployeeActionComponent } from './employees/employee-action/employee-action.component';
 import {AddLevelCharCount} from './admin-segments/add-level-char-count/add-level-char-count';
+import { EmployeePreviewComponent } from './employees/employee-preview/employee-preview.component';
 
 @NgModule({
     declarations: [
@@ -209,6 +210,7 @@ import {AddLevelCharCount} from './admin-segments/add-level-char-count/add-level
         JobPositionsListSelectComponent,
         WorkLocationsListSelectComponent,
         EmployeeActionComponent,
+        EmployeePreviewComponent,
         AddLevelCharCount,
     ],
     imports: [

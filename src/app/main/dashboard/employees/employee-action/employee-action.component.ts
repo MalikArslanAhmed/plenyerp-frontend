@@ -3,6 +3,9 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 import {MatDialog} from "@angular/material/dialog";
 import {EmployeeService} from "../../../../shared/services/employee.service";
 import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {EmployeePreviewComponent} from '../employee-preview/employee-preview.component';
+import {DepartmentListSelectComponent} from "../../structure/department-list/department-list-select.component";
 
 @Component({
     selector: 'app-employee-action',
@@ -16,18 +19,73 @@ export class EmployeeActionComponent implements OnInit {
     displayedColumns = ['select', 'id', 'empId', 'fileNo', 'lastName', 'firstName', 'title', 'actions'];
     dialogRef: any;
     selectedEmployee = [];
+    statuses = [
+        {
+            'value': 'NEW',
+            'name': 'New'
+        },
+        {
+            'value': 'ACTIVE',
+            'name': 'Activated'
+        },
+        {
+            'value': 'RETIRE',
+            'name': 'Retire'
+        },
+        {
+            'value': 'RETIREMENT_DUE',
+            'name': 'Retirement Due'
+        },
+        {
+            'value': 'CONFIRMED',
+            'name': 'Confirmed'
+        },
+        {
+            'value': 'CONFIRMATION_DUE',
+            'name': 'Confirmtion Due'
+        },
+        {
+            'value': 'INCREMENT',
+            'name': 'Increment'
+        },
+        {
+            'value': 'INCREMENT_DUE',
+            'name': 'Increment Due'
+        },
+        {
+            'value': 'PROMOTION',
+            'name': 'Promotion'
+        },
+        {
+            'value': 'PROMOTION_DUE',
+            'name': 'Promotion Due'
+        }
+    ];
+    departments = [];
+    employeeFilterForm: FormGroup;
+    isSubmitted = false;
 
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
-                private router: Router) {
+                private router: Router,
+                private fb: FormBuilder) {
     }
 
     ngOnInit(): void {
-        this.getEmployees();
+        this.refresh();
+        this.getEmployees({});
     }
 
-    getEmployees() {
-        this.employeesService.getEmployees({'page': -1}).subscribe(data => {
+    refresh() {
+        this.employeeFilterForm = this.fb.group({
+            'departmentId': [''],
+            'search': [''],
+            'statusId': ['']
+        });
+    }
+
+    getEmployees(params) {
+        this.employeesService.getEmployees(params).subscribe(data => {
             this.employees = data.items;
 
             if (this.employees && this.employees.length > 0) {
@@ -41,8 +99,19 @@ export class EmployeeActionComponent implements OnInit {
     }
 
     editEmployee(employee) {
-        console.log(employee);
         this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);
+    }
+
+    previewEmployee(employee) {
+        this.dialogRef = this._matDialog.open(EmployeePreviewComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'PREVIEW', employee: employee},
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+        });
     }
 
     checkEmployee(employee) {
@@ -61,10 +130,42 @@ export class EmployeeActionComponent implements OnInit {
         if (!found) {
             this.selectedEmployee.push(employee);
         }
-        console.log('this.selectedEmployee', this.selectedEmployee);
     }
 
     addEmployee() {
         this.router.navigateByUrl(`/dashboard/add-employee`);
+    }
+
+    adminUnitListSelect() {
+        this.dialogRef = this._matDialog.open(DepartmentListSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.departments = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.employeeFilterForm.patchValue({
+                departmentId: response.id,
+                disabled: true
+            });
+            this.getEmployees({'departmentId': response.id})
+        });
+    }
+
+    activateEmployee() {
+        this.isSubmitted = true;
+        if (this.isSubmitted) {
+            const params = {
+                'status': 'ACTIVE',
+                'employeeIds': this.selectedEmployee.map(i => i.id)
+            };
+            this.employeesService.setStatusEmployee(params).subscribe(data => {
+                this.isSubmitted = false;
+            });
+        }
     }
 }

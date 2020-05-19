@@ -26,27 +26,27 @@ export class EmployeeService extends BaseService {
         return this.postRequest(AppUrl.ADD_UPDATE_PERSONAL_DETAILS(id), data);
     }
 
-    updatePersonalDetails(id, data): Observable<any> {
-        return this.putRequest(AppUrl.ADD_UPDATE_PERSONAL_DETAILS(id), data);
-    }
-
     addJobProfile(id, data): Observable<any> {
-        return this.postRequest(AppUrl.ADD_JOB_POSITIONS(id), data);
+        return this.postRequest(AppUrl.ADD_UPDATE_JOB_POSITIONS(id), data);
     }
 
     addContactDetails(id, data): Observable<any> {
-        return this.postRequest(AppUrl.ADD_CONTACT_DETAILS(id), data);
+        return this.postRequest(AppUrl.ADD_UPDATE_CONTACT_DETAILS(id), data);
     }
 
     addProgression(id, data): Observable<any> {
-        return this.postRequest(AppUrl.ADD_PROGRESSION(id), data);
+        return this.postRequest(AppUrl.ADD_UPDATE_PROGRESSION(id), data);
     }
 
     addIdNos(id, data): Observable<any> {
-        return this.postRequest(AppUrl.ADD_ID_NOS(id), data);
+        return this.postRequest(AppUrl.ADD_UPDATE_ID_NOS(id), data);
     }
 
     getEmployees(data): Observable<any> {
         return this.getRequest(AppUrl.GET_EMPLOYEES(), data);
+    }
+
+    setStatusEmployee(data): Observable<any> {
+        return this.postRequest(AppUrl.SET_EMPLOYEE_STATUS(), data);
     }
 }

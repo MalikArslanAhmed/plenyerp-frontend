@@ -151,28 +151,32 @@ export class AppUrl {
         }
     }
 
-    static ADD_JOB_POSITIONS(id?): string {
+    static ADD_UPDATE_JOB_POSITIONS(id?): string {
         if (id) {
             return AppUrl.API_URL + `employees/` + id + '/job-profile';
         }
     }
 
-    static ADD_CONTACT_DETAILS(id?): string {
+    static ADD_UPDATE_CONTACT_DETAILS(id?): string {
         if (id) {
             return AppUrl.API_URL + `employees/` + id + '/location';
         }
     }
 
-    static ADD_PROGRESSION(id?): string {
+    static ADD_UPDATE_PROGRESSION(id?): string {
         if (id) {
             return AppUrl.API_URL + `employees/` + id + '/progression';
         }
     }
 
-    static ADD_ID_NOS(id?): string {
+    static ADD_UPDATE_ID_NOS(id?): string {
         if (id) {
             return AppUrl.API_URL + `employees/` + id + '/id-nos';
         }
+    }
+
+    static SET_EMPLOYEE_STATUS(): string {
+        return AppUrl.API_URL + `employees/status`;
     }
 
     static DELETE_JOB_POSTIONS(id): string {
