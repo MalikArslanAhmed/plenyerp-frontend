@@ -27,7 +27,8 @@ export class AddLevelCharCount implements OnInit {
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Char Count Config';
             if (_data.levelConfig) {
-                 _data.levelConfig.forEach(v => {
+                this.dataSource.levels = [];
+                _data.levelConfig.forEach(v => {
                      this.dataSource.levels.push({
                          level: v.level,
                          value: v.count,
