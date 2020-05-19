@@ -1,5 +1,15 @@
-<mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
+<div class="d-flex justify-content-end list-actions">
+    <button mat-button class="save-button" (click)="updateList()">
+        Add Columns
+    </button>
 
+    <button mat-button class="save-button">
+        Export To Excel
+    </button>
+</div>
+
+
+<mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
     <ng-container matColumnDef="check">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Select All</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
@@ -52,7 +62,7 @@
         </mat-cell>
     </ng-container>
 
-    <!-- <ng-container matColumnDef="phone">
+    <ng-container matColumnDef="phone">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
             <p class="phone text-truncate">
@@ -68,7 +78,7 @@
                 {{employee.employeeJobProfiles?.department?.name}}
             </p>
         </mat-cell>
-    </ng-container> -->
+    </ng-container>
 
     <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
@@ -85,12 +95,11 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let employee">
             <div fxFlex="row" fxLayoutAlign="end center">
-                <button mat-icon-button aria-label="Toggle star" (click)="editCategory(employee)"
-                        style="color: blue">
+                <button mat-icon-button aria-label="Toggle star" (click)="editCategory(employee)" style="color: blue">
                     <mat-icon class="material-icons">edit</mat-icon>
                 </button>
                 <button mat-icon-button aria-label="Toggle star" (click)="deleteCategory(employee?.id)"
-                        style="color: red">
+                    style="color: red">
                     <mat-icon class="material-icons">delete</mat-icon>
                 </button>
             </div>
@@ -99,6 +108,6 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let employee; columns: displayedColumns;" class="contact"
-             [@animate]="{value:'*',params:{y:'100%'}}">
+        [@animate]="{value:'*',params:{y:'100%'}}">
     </mat-row>
 </mat-table>

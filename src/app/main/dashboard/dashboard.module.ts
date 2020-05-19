@@ -109,6 +109,7 @@ import { RolesListComponent } from './managers/roles/roles-list/roles-list.compo
 import { RolesCreateComponent } from './managers/roles/roles-create/roles-create.component';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { EmpListHeadersComponent } from './employees/employee-list/emp-list-headers/emp-list-headers.component';
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -198,7 +199,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
         ManagersCreateComponent,
         RolesComponent,
         RolesListComponent,
-        RolesCreateComponent
+        RolesCreateComponent,
+        EmpListHeadersComponent
 
 
     ],

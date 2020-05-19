@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CategoriesCreateComponent} from "../../categories/categories-create/categories-create.component";
 import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
+import {EmpListHeadersComponent} from "./emp-list-headers/emp-list-headers.component";
 
 @Component({
     selector: 'app-employee-list',
@@ -26,6 +27,21 @@ export class EmployeeListComponent implements OnInit {
 
     ngOnInit(): void {
         this.getEmployees();
+    }
+
+    updateList(){
+        this.dialogRef = this._matDialog.open(EmpListHeadersComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'CREATE', selectedCol: this.displayedColumns}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // this.getEmployees();
+            const formData = response.getRawValue();
+            this.displayedColumns = formData.headers;
+        });
     }
 
     selectEmployee(employeeData){
