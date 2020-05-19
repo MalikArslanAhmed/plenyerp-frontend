@@ -39,7 +39,7 @@
                         <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Search</mat-label>
-                                <input matInput required formControlName="search">
+                                <input matInput required formControlName="search" (keyup)="getEmployees({'search': this.employeeFilterForm.value.search})">
                             </mat-form-field>
                         </div>
                     </mat-grid-tile>
@@ -47,8 +47,9 @@
                         <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Status</mat-label>
-                                <mat-select formControlName="statusId">
-                                    <mat-option [value]="statuse.id"
+                                <mat-select formControlName="statusId" (selectionChange)="getEmployees({'status': $event.value})">
+                                    <mat-option [value]="">Choose Status</mat-option>
+                                    <mat-option [value]="statuse.value"
                                                 *ngFor="let statuse of statuses">{{statuse.name}}</mat-option>
                                 </mat-select>
                                 <mat-icon matSuffix class="secondary-text">flag</mat-icon>
@@ -58,7 +59,8 @@
                     <mat-grid-tile>
                         <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <button mat-button class="save-button" aria-label="Save" style="margin-top: -15px">Activate</button>
+                                <button mat-button class="save-button" aria-label="Save" style="margin-top: -15px" *ngIf="selectedEmployee && selectedEmployee.length > 0" (click)="activateEmployee()">Activate</button>
+                                <button mat-button class="save-disabled-button" aria-label="Save" style="margin-top: -15px" *ngIf="!selectedEmployee || selectedEmployee.length === 0">Activate</button>
                             </div>
                         </div>
                     </mat-grid-tile>

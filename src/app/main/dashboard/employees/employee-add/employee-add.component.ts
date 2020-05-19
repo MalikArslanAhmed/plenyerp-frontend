@@ -259,7 +259,7 @@ export class EmployeeAddComponent implements OnInit {
 
                     if (gradeLevels && gradeLevels['gradeLevelSteps'].length > 0) {
                         let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function (gradeLevelStep) {
-                            return (gradeLevelStep.id === 5);
+                            return (gradeLevelStep.id === selectedEmployee.employeeJobProfiles.jobPosition.gradeLevelStepId);
                         });
 
                         this.gradeLevelSteps = [{
@@ -276,12 +276,30 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     patchCitizenshipContactDetailsForm() {
-        this.chooseRegion(this.selectedEmployee.employeeContactDetails.countryId);
-        this.chooseState(this.selectedEmployee.employeeContactDetails.regionId);
-        this.chooseLga(this.selectedEmployee.employeeContactDetails.lgaId);
-        this.chooseRegionOther(this.selectedEmployee.employeeContactDetails.otherCountryId);
-        this.chooseStateOther(this.selectedEmployee.employeeContactDetails.otherRegionId);
-        this.chooseLgaOther(this.selectedEmployee.employeeContactDetails.otherLgaId);
+        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.countryId) {
+            this.chooseRegion(this.selectedEmployee.employeeContactDetails.countryId);
+        }
+
+        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.regionId) {
+            this.chooseState(this.selectedEmployee.employeeContactDetails.regionId);
+        }
+
+        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.lgaId) {
+            this.chooseLga(this.selectedEmployee.employeeContactDetails.lgaId);
+        }
+
+        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.otherCountryId) {
+            this.chooseRegionOther(this.selectedEmployee.employeeContactDetails.otherCountryId);
+        }
+
+        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.otherRegionId) {
+            this.chooseStateOther(this.selectedEmployee.employeeContactDetails.otherRegionId);
+        }
+
+        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.otherLgaId) {
+            this.chooseLgaOther(this.selectedEmployee.employeeContactDetails.otherLgaId);
+        }
+
         this.citizenshipContactDetailsForm.patchValue({
             'countryId': this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.countryId ? this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.countryId : '',
             'regionId': this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.regionId ? this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.regionId : '',
@@ -508,6 +526,7 @@ export class EmployeeAddComponent implements OnInit {
         }
     }
 
+
     saveJobProfile() {
         console.log('this.jobProfileSalaryPlacementForm', this.jobProfileSalaryPlacementForm.value);
         this.isSubmitted = true;
@@ -518,7 +537,7 @@ export class EmployeeAddComponent implements OnInit {
 
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
-                this.employeeId = this.selectedEmployeeId
+                this.employeeId = this.selectedEmployeeId;
             } else {
                 this.jobProfileSalaryPlacementForm.value['currentAppointment'] = this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD');
             }
@@ -537,6 +556,11 @@ export class EmployeeAddComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
+            if (this.selectedEmployeeId) {
+                this.employeeId = this.selectedEmployeeId;
+            } else {
+                this.jobProfileSalaryPlacementForm.value['currentAppointment'] = this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD');
+            }
             this.employeeService.addContactDetails(this.employeeId, this.citizenshipContactDetailsForm.value).subscribe(data => {
                 this.isSubmitted = false;
             });
@@ -544,7 +568,6 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     saveProgression() {
-        console.log('this.progressionForm', this.progressionForm.value);
         this.isSubmitted = true;
         if (!this.progressionForm.valid) {
             this.isSubmitted = false;
@@ -552,11 +575,15 @@ export class EmployeeAddComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            this.progressionForm.value['lastIncrement'] = this.progressionForm.value['lastIncrement'].format('YYYY-MM-DD');
-            this.progressionForm.value['confirmationDueDate'] = this.progressionForm.value['confirmationDueDate'].format('YYYY-MM-DD');
-            this.progressionForm.value['lastPromoted'] = this.progressionForm.value['lastPromoted'].format('YYYY-MM-DD');
-            this.progressionForm.value['expectedExitDate'] = this.progressionForm.value['expectedExitDate'].format('YYYY-MM-DD');
-            this.progressionForm.value['dateStarted'] = this.progressionForm.value['dateStarted'].format('YYYY-MM-DD');
+            if (this.selectedEmployeeId) {
+                this.employeeId = this.selectedEmployeeId;
+            } else {
+                this.progressionForm.value['lastIncrement'] = this.progressionForm.value['lastIncrement'].format('YYYY-MM-DD');
+                this.progressionForm.value['confirmationDueDate'] = this.progressionForm.value['confirmationDueDate'].format('YYYY-MM-DD');
+                this.progressionForm.value['lastPromoted'] = this.progressionForm.value['lastPromoted'].format('YYYY-MM-DD');
+                this.progressionForm.value['expectedExitDate'] = this.progressionForm.value['expectedExitDate'].format('YYYY-MM-DD');
+                this.progressionForm.value['dateStarted'] = this.progressionForm.value['dateStarted'].format('YYYY-MM-DD');
+            }
             this.employeeService.addProgression(this.employeeId, this.progressionForm.value).subscribe(data => {
                 this.isSubmitted = false;
             });
@@ -572,8 +599,12 @@ export class EmployeeAddComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            this.idNosForm.value['issuedDate'] = this.idNosForm.value['issuedDate'].format('YYYY-MM-DD');
-            this.idNosForm.value['expiryDate'] = this.idNosForm.value['expiryDate'].format('YYYY-MM-DD');
+            if (this.selectedEmployeeId) {
+                this.employeeId = this.selectedEmployeeId;
+            } else {
+                this.idNosForm.value['issuedDate'] = this.idNosForm.value['issuedDate'].format('YYYY-MM-DD');
+                this.idNosForm.value['expiryDate'] = this.idNosForm.value['expiryDate'].format('YYYY-MM-DD');
+            }
             this.employeeService.addIdNos(this.employeeId, this.idNosForm.value).subscribe(data => {
                 this.isSubmitted = false;
                 this.router.navigateByUrl(`/dashboard/employees`);

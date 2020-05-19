@@ -21,16 +21,49 @@ export class EmployeeActionComponent implements OnInit {
     selectedEmployee = [];
     statuses = [
         {
-            'id': 1,
+            'value': 'NEW',
             'name': 'New'
         },
         {
-            'id': 2,
+            'value': 'ACTIVE',
             'name': 'Activated'
+        },
+        {
+            'value': 'RETIRE',
+            'name': 'Retire'
+        },
+        {
+            'value': 'RETIREMENT_DUE',
+            'name': 'Retirement Due'
+        },
+        {
+            'value': 'CONFIRMED',
+            'name': 'Confirmed'
+        },
+        {
+            'value': 'CONFIRMATION_DUE',
+            'name': 'Confirmtion Due'
+        },
+        {
+            'value': 'INCREMENT',
+            'name': 'Increment'
+        },
+        {
+            'value': 'INCREMENT_DUE',
+            'name': 'Increment Due'
+        },
+        {
+            'value': 'PROMOTION',
+            'name': 'Promotion'
+        },
+        {
+            'value': 'PROMOTION_DUE',
+            'name': 'Promotion Due'
         }
     ];
     departments = [];
     employeeFilterForm: FormGroup;
+    isSubmitted = false;
 
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
@@ -40,19 +73,19 @@ export class EmployeeActionComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.getEmployees();
+        this.getEmployees({});
     }
 
     refresh() {
         this.employeeFilterForm = this.fb.group({
-            'departmentId': ['', Validators.required],
-            'search': ['', Validators.required],
-            'statusId': ['', Validators.required]
+            'departmentId': [''],
+            'search': [''],
+            'statusId': ['']
         });
     }
 
-    getEmployees() {
-        this.employeesService.getEmployees({'page': -1}).subscribe(data => {
+    getEmployees(params) {
+        this.employeesService.getEmployees(params).subscribe(data => {
             this.employees = data.items;
 
             if (this.employees && this.employees.length > 0) {
@@ -97,7 +130,6 @@ export class EmployeeActionComponent implements OnInit {
         if (!found) {
             this.selectedEmployee.push(employee);
         }
-        console.log('this.selectedEmployee', this.selectedEmployee);
     }
 
     addEmployee() {
@@ -120,6 +152,20 @@ export class EmployeeActionComponent implements OnInit {
                 departmentId: response.id,
                 disabled: true
             });
+            this.getEmployees({'departmentId': response.id})
         });
+    }
+
+    activateEmployee() {
+        this.isSubmitted = true;
+        if (this.isSubmitted) {
+            const params = {
+                'status': 'ACTIVE',
+                'employeeIds': this.selectedEmployee.map(i => i.id)
+            };
+            this.employeesService.setStatusEmployee(params).subscribe(data => {
+                this.isSubmitted = false;
+            });
+        }
     }
 }

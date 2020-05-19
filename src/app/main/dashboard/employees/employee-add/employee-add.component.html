@@ -340,8 +340,11 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveJobProfile()">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveJobProfile()" *ngIf="!this.selectedEmployeeId">
                                 Save & Next
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveJobProfile()" *ngIf="this.selectedEmployeeId">
+                                Update & Next
                             </button>
                         </div>
                     </form>
@@ -499,8 +502,11 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()" *ngIf="!this.selectedEmployeeId">
                                 Save & Next
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()" *ngIf="this.selectedEmployeeId">
+                                Update & Next
                             </button>
                         </div>
                     </form>
@@ -634,8 +640,11 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()" *ngIf="!this.selectedEmployeeId">
                                 Save & Next
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()" *ngIf="this.selectedEmployeeId">
+                                Update & Next
                             </button>
                         </div>
                     </form>
@@ -765,8 +774,11 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveIdNos()">
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveIdNos()" *ngIf="!this.selectedEmployeeId">
                                 Save
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveIdNos()" *ngIf="this.selectedEmployeeId">
+                                Update
                             </button>
                         </div>
                     </form>
