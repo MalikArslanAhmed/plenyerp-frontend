@@ -556,6 +556,7 @@ export class AppUrl {
     static USER_IMAGE_UPLOAD(): string {
         return AppUrl.API_URL + 'files';
     }
-
-
+    static UPDATE_LEVEL_COUNTS(id?): string {
+        return AppUrl.API_URL + 'admin-segments/' + id + '/levels';
+    }
 }

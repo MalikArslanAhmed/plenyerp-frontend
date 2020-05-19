@@ -6,6 +6,7 @@ import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sideba
 import {AdminSegmentServices} from '../../../../shared/services/admin-segment.services';
 import {EditSegmentListComponent} from '../edit-segment-list/edit-segment-list';
 import {FormGroup} from '@angular/forms';
+import {AddLevelCharCount} from '../add-level-char-count/add-level-char-count';
 
 @Component({
     selector: 'segments-list',
@@ -25,6 +26,10 @@ export class SegmentsListComponent implements OnInit{
     ) {}
 
     ngOnInit(): void {
+        this. getAllSegmentsList();
+    }
+
+    getAllSegmentsList() {
         this.adminSegmentServices.getAllSegments().subscribe(data => {
             this.segments = data.items;
         });
@@ -46,4 +51,20 @@ export class SegmentsListComponent implements OnInit{
             }
         });
     }
+    addLevel(segmentData) {
+        if (segmentData.levelConfig.length > 0) {
+            this.dialogRef = this._matDialog.open(AddLevelCharCount, {
+                panelClass: 'contact-form-dialog',
+                data: {action: 'EDIT', levelConfig: segmentData.levelConfig, adminSegmentId: segmentData.id},
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+                this.getAllSegmentsList();
+            });
+        }
+    }
 }
+
+

@@ -1,0 +1,40 @@
+<!--<h2 mat-dialog-title>Char Count Config</h2>-->
+<div class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent m-0" matDialogTitle>
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button (click)="matDialogRef.close()" aria-label="Close dialog" class="close-popup" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-dialog-content >
+        <table [dataSource]="dataSource.levels" mat-table>
+            <ng-container matColumnDef="level">
+                <th *matHeaderCellDef mat-header-cell  class="width-100"> Levels</th>
+                <td *matCellDef="let level" mat-cell> {{level.level}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="charCount">
+                <th *matHeaderCellDef mat-header-cell  class="width-100" style="text-align: center"> Char Count</th>
+                <td *matCellDef="let level" mat-cell>
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input matInput [value]="level.value" name="charCount"  [(ngModel)]="level.value" style="text-align: center">
+                        </mat-form-field>
+                    </form>
+                </td>
+            </ng-container>
+
+
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button [mat-dialog-close]="true" cdkFocusInitial mat-button (click)="updateLevelCharCount()">Update</button>
+    </mat-dialog-actions>
+</div>

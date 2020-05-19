@@ -112,6 +112,7 @@ import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {JobPositionsListSelectComponent} from './employees/job-positions-list-select/job-positions-list-select.component';
 import { WorkLocationsListSelectComponent } from './employees/work-locations-list-select/work-locations-list-select.component';
 import { EmployeeActionComponent } from './employees/employee-action/employee-action.component';
+import {AddLevelCharCount} from './admin-segments/add-level-char-count/add-level-char-count';
 
 @NgModule({
     declarations: [
@@ -207,7 +208,8 @@ import { EmployeeActionComponent } from './employees/employee-action/employee-ac
         DepartmentListSelectComponent,
         JobPositionsListSelectComponent,
         WorkLocationsListSelectComponent,
-        EmployeeActionComponent
+        EmployeeActionComponent,
+        AddLevelCharCount,
     ],
     imports: [
         CommonModule,

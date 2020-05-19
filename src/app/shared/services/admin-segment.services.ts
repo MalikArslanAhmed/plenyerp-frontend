@@ -30,4 +30,8 @@ export class AdminSegmentServices extends BaseService{
     deleteSegment(id): Observable<any> {
         return this.deleteRequest(AppUrl.SEGMENT(id));
     }
+
+    updateCharCount(id, data): Observable<any> {
+        return this.postRequest(AppUrl.UPDATE_LEVEL_COUNTS(id), data);
+    }
 }
