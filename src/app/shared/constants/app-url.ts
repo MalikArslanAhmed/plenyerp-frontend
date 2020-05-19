@@ -233,6 +233,10 @@ export class AppUrl {
         return AppUrl.API_URL + 'relationships/' + id;
     }
 
+    static DOWNLOAD_REPORT(): string {
+        return AppUrl.API_URL + `employees/report-download`;
+    }
+
     static GET_EMPLOYEES(): string {
         return AppUrl.API_URL + `employees`;
     }

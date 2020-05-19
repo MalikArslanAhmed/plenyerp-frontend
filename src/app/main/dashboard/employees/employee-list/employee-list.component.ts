@@ -29,6 +29,13 @@ export class EmployeeListComponent implements OnInit {
         this.getEmployees();
     }
 
+    downloadReport(data){
+        let reqObj=JSON.stringify(data);
+        this.employeesService.downloadReport(reqObj).subscribe((success)=>{
+            window.location.href = success;
+        });
+    }
+
     updateList(){
         this.dialogRef = this._matDialog.open(EmpListHeadersComponent, {
             panelClass: 'contact-form-dialog',

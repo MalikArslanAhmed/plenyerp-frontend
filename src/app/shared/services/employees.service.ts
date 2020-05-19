@@ -29,4 +29,8 @@ export class EmployeesService extends BaseService {
     updateCategory(id, data): Observable<any> {
         return this.putRequest(AppUrl.CATEGORY(id), data);
     }
+
+    downloadReport(data): Observable<any> {
+        return this.getRequest(AppUrl.DOWNLOAD_REPORT(), data);
+    }
 }
