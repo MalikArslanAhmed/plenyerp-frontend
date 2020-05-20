@@ -35,6 +35,7 @@ export class SalaryScalesListComponent implements OnInit {
     };
     gradeLevelId;
     isEditSalary = false;
+    isGlSteps = false;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private salaryScalesService: SalaryScalesService,
@@ -149,7 +150,8 @@ export class SalaryScalesListComponent implements OnInit {
                 v['isSelected'] = true;
                 this.isNotAutoCreate = v.isAutomaticCreate;
                 this.salaryScalesId = v.id;
-                this.selectTab = 0;
+                // this.selectTab = 0;
+                this.isGlSteps = false;
                 this.gradeLevels = v.gradeLevels;
                 if (item !== 'gradeL' || (item === 'gradeL' && this.isEditSalary)) {
                     this.goToStepLevel(this.gradeLevels[this.selectIndex]);
@@ -282,6 +284,7 @@ export class SalaryScalesListComponent implements OnInit {
                 return;
             }
             this.getSalaryScales();
+            this.isGlSteps = true;
         });
     }
 
