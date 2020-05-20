@@ -16,7 +16,7 @@ import {EmpListHeadersComponent} from "./emp-list-headers/emp-list-headers.compo
 export class EmployeeListComponent implements OnInit {
 
     employees = [];
-    displayedColumns = ['check','id', 'id2', 'fileId', 'lName', 'fName', 'title', 'actions'];
+    displayedColumns = ['check', 'id', 'id2', 'fileId', 'lName', 'fName', 'title', 'actions'];
     dialogRef: any;
 
     @Output() selectedEmployee = new EventEmitter<any>();
@@ -29,14 +29,14 @@ export class EmployeeListComponent implements OnInit {
         this.getEmployees();
     }
 
-    downloadReport(data){
-        let reqObj=JSON.stringify(data);
-        this.employeesService.downloadReport(reqObj).subscribe((success)=>{
-            window.location.href = success;
+    downloadReport(data): void {
+
+        this.employeesService.downloadReport({columns: JSON.stringify(data)}).subscribe((success) => {
+            window.location.href = success.url;
         });
     }
 
-    updateList(){
+    updateList(): void {
         this.dialogRef = this._matDialog.open(EmpListHeadersComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE', selectedCol: this.displayedColumns}
@@ -51,12 +51,12 @@ export class EmployeeListComponent implements OnInit {
         });
     }
 
-    selectEmployee(employeeData){
+    selectEmployee(employeeData): void {
         this.selectedEmployee.emit(employeeData);
     }
 
-    getEmployees() {
-        this.employeesService.getEmployees({'page': -1}).subscribe(data => {
+    getEmployees(): void {
+        this.employeesService.getEmployees({page: -1}).subscribe(data => {
             this.employees = data.items;
 
             if (this.employees && this.employees.length > 0) {
@@ -104,11 +104,11 @@ export class EmployeeListComponent implements OnInit {
         });
     }*/
 
-    editCategory(employee) {
+    editCategory(employee): void {
         console.log(employee);
     }
 
-    deleteCategory(employee) {
+    deleteCategory(employee): void {
         console.log(employee);
     }
 }
