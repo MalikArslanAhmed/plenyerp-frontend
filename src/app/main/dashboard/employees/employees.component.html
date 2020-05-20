@@ -37,12 +37,63 @@
     </div> -->
 
     <div class="content">
-        <div class="custom-row">
-            <div class="list-col col">
-                <app-employee-list></app-employee-list>
-            </div>
-            <div class="preview-col col">
-                
+        <div class="custom-container-fluid">
+            <div class="custom-row">
+                <div class="list-col col">
+                    <app-employee-list (selectedEmployee)="getSelectedEmployee($event)"></app-employee-list>
+                </div>
+                <div class="preview-col col" *ngIf="selectedEmployee">
+                    <div class="preview-wrapper">
+                        <div class="custom-container-fluid">
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex align-items-end">
+                                    <figure class="profile-image m-0">
+                                        <img src="https://dummyimage.com/200x200/000/fff" alt="image" />
+                                    </figure>
+
+                                    <div class="profile-image-desc h2">
+                                        <p class="text-truncate">{{selectedEmployee.firstName}}</p>
+                                        <p class="m-0 text-truncate">{{selectedEmployee.lastName}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h2 nameField text-truncate text-right">ID :</p>
+                                    <p class="h2 dataField text-truncate">{{selectedEmployee.id}}</p>
+                                </div>
+                            </div>
+
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h2 nameField text-truncate text-right">File No :</p>
+                                    <p class="h2 dataField text-truncate">{{selectedEmployee.file?.id}}</p>
+                                </div>
+                            </div>
+
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h2 nameField text-truncate text-right">Gender :</p>
+                                    <p class="h2 dataField text-truncate">{{selectedEmployee.employeePersonalDetails?.gender}}</p>
+                                </div>
+                            </div>
+
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h2 nameField text-truncate text-right">DOB :</p>
+                                    <p class="h2 dataField text-truncate">{{selectedEmployee.employeePersonalDetails?.dateOfBirth}}</p>
+                                </div>
+                            </div>
+
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h2 nameField text-truncate text-right">M. Status :</p>
+                                    <p class="h2 dataField text-truncate">{{selectedEmployee.employeePersonalDetails?.maritalStatus}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
