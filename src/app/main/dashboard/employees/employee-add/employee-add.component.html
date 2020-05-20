@@ -29,7 +29,7 @@
         </div>-->
         <!-- / SEARCH -->
     </div>
-    <div class="content">
+    <div class="content" fusePerfectScrollbar>
         <div class="horizontal-stepper-wrapper hor-wrap">
             <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true">
                 <mat-step [stepControl]="employeeForm">
@@ -425,8 +425,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Address Line 2</mat-label>
-                                        <input matInput formControlName="addressLine2" required>
-                                        <mat-error>Address Line 2 is required!</mat-error>
+                                        <input matInput formControlName="addressLine2">
+                                        <!-- <mat-error>Address Line 2 is required!</mat-error> -->
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
@@ -616,7 +616,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Gratuity</mat-label>
-                                        <input matInput formControlName="gratuity" required>
+                                        <input matInput formControlName="gratuity">
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
@@ -626,7 +626,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Monthly Pension</mat-label>
-                                        <input matInput formControlName="monthlyPension" required>
+                                        <input matInput formControlName="monthlyPension">
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
@@ -634,7 +634,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Other Pension</mat-label>
-                                        <input matInput formControlName="otherPension" required>
+                                        <input matInput formControlName="otherPension">
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>

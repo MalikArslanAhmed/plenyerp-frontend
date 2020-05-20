@@ -4,16 +4,24 @@ import {Injectable} from '@angular/core';
 export class AppConstants {
     static maritalStatuses = [
         {
-            'name': 'Others',
-            'value': 'OTHERS'
+            'name': 'Unmarried',
+            'value': 'SINGLE'
         },
         {
             'name': 'Married',
             'value': 'MARRIED'
         },
         {
-            'name': 'Unmarried',
-            'value': 'SINGLE'
+            'name': 'Divorced',
+            'value': 'DIVORCED'
+        },
+        {
+            'name': 'Widowed',
+            'value': 'WIDOWED'
+        },
+        {
+            'name': 'Others',
+            'value': 'OTHERS'
         }
     ];
 
@@ -48,6 +56,49 @@ export class AppConstants {
         {
             'name': 'Others',
             'value': 'OTHERS',
+        }
+    ];
+
+    static typeOfAppointments = [
+        {
+            'name': 'Permanent Staff',
+            'value': 'PERMANENT_STAFF',
+        },
+        {
+            'name': 'Tenured',
+            'value': 'TENURED',
+        },
+        {
+            'name': 'Sabbatical',
+            'value': 'SABBATICAL',
+        },
+        {
+            'name': 'Visiting',
+            'value': 'VISITING',
+        },
+        {
+            'name': 'Contract',
+            'value': 'CONTRACT',
+        },
+        {
+            'name': 'Adjunct',
+            'value': 'ADJUNCT',
+        },
+        {
+            'name': 'Month To Month',
+            'value': 'MONTH_TO_MONTH',
+        },
+        {
+            'name': 'Temporary',
+            'value': 'TEMPORARY',
+        },
+        {
+            'name': 'Full Time',
+            'value': 'FULL_TIME',
+        },
+        {
+            'name': 'Not Applicable',
+            'value': 'NOT_APPLICABLE',
         }
     ];
 }

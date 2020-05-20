@@ -30,12 +30,8 @@ export class EmployeeAddComponent implements OnInit {
     maritalStatuses = AppConstants.maritalStatuses;
     genders = AppConstants.genders;
     religions = AppConstants.religions;
-    typeOfAppointments = [
-        {
-            'name': 'Tenured',
-            'value': 'TENURED',
-        }
-    ];
+    typeOfAppointments = AppConstants.typeOfAppointments;
+
     designations = [];
     countries = [];
     countriesOther = [];
@@ -117,7 +113,7 @@ export class EmployeeAddComponent implements OnInit {
             stateId: ['', Validators.required],
             lgaId: ['', Validators.required],
             addressLine1: ['', Validators.required],
-            addressLine2: ['', Validators.required],
+            addressLine2: [''],
             city: ['', Validators.required],
             zipCode: ['', Validators.required],
             otherCountryId: [''],
