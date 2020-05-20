@@ -9,3 +9,12 @@
 .line-height-0{
     line-height: 0!important;
 }
+.mat-form-field-appearance-outline{
+    .mat-form-field-flex {
+        margin-top: 0.25em!important;
+    }
+    .mat-form-field-wrapper {
+        margin: 1.25em 0!important;
+        padding-bottom: 0!important;
+    }
+}

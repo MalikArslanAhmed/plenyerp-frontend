@@ -19,7 +19,7 @@
                 <th *matHeaderCellDef mat-header-cell  class="width-100" style="text-align: center"> Char Count</th>
                 <td *matCellDef="let level" mat-cell>
                     <form class="example-form">
-                        <mat-form-field class="example-full-width">
+                        <mat-form-field class="example-full-width" appearance="outline">
                             <input matInput [value]="level.value" name="charCount"  [(ngModel)]="level.value" style="text-align: center">
                         </mat-form-field>
                     </form>

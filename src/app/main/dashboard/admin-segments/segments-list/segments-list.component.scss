@@ -8,3 +8,16 @@
     line-height: 1!important;
     //color: blue;
 }
+.mat-form-field{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    .mat-form-field-wrapper{
+        padding-bottom: 0;
+    }
+    .mat-form-field-infix{
+        padding: 0;
+        input{
+            margin-bottom: 10px;
+        }
+    }
+}
