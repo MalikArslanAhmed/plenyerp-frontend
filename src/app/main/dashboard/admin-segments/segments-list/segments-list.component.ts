@@ -48,6 +48,7 @@ export class SegmentsListComponent implements OnInit{
             const index = this.segments.findIndex(item => item.id === segment.id);
             if (index > -1) {
                 this.segments[index].name = formData.name;
+                this.segments[index].maxLevel = formData.maxLevel;
             }
         });
     }
