@@ -34,6 +34,7 @@ export class SalaryScalesListComponent implements OnInit {
         stepId: '',
     };
     gradeLevelId;
+    isEditSalary = false;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private salaryScalesService: SalaryScalesService,
@@ -60,7 +61,7 @@ export class SalaryScalesListComponent implements OnInit {
                 this.salaryScales.forEach(v => {
                     if (this.selectedId.salScaleId === v.id) {
                         v['isSelected'] = true;
-                        this.goToGradeLevel(v);
+                        this.goToGradeLevel(v, 'gradeL');
                         if (this.selectedId.gradeLeId && this.gradeLevels) {
                             this.gradeLevels.forEach(gl => {
                                 if (this.selectedId.gradeLeId === gl.id) {
@@ -135,10 +136,11 @@ export class SalaryScalesListComponent implements OnInit {
                 return;
             }
             this.getSalaryScales();
+            this.isEditSalary = true;
         });
     }
 
-    goToGradeLevel(value) {
+    goToGradeLevel(value, item?) {
         this.selectedId.salScaleId = value.id;
         this.gradeLevels = [];
         this.stepsLevels = [];
@@ -147,12 +149,17 @@ export class SalaryScalesListComponent implements OnInit {
                 v['isSelected'] = true;
                 this.isNotAutoCreate = v.isAutomaticCreate;
                 this.salaryScalesId = v.id;
-                this.selectTab = 0;
+                // this.selectTab = 0;
                 this.gradeLevels = v.gradeLevels;
+                if (item !== 'gradeL' || (item === 'gradeL' && this.isEditSalary)) {
+                    this.goToStepLevel(this.gradeLevels[this.selectIndex]);
+                }
+
             } else {
                 v['isSelected'] = false;
             }
         });
+
         if (this.gradeLevels && this.gradeLevels.length > 0) {
             let i = 1;
             this.gradeLevels.forEach(gradeL => {
@@ -160,16 +167,18 @@ export class SalaryScalesListComponent implements OnInit {
                 i++;
             });
         }
+
     }
 
     goToStepLevel(value) {
+        this.isEditSalary = false;
         this.selectedId.gradeLeId = value.id;
         this.stepsLevels = [];
         this.gradeLevels.forEach(v => {
             if (value.id === v.id) {
                 v['isSelected'] = true;
                 this.gradeLevelId = v.id;
-                this.selectTab = 1;
+                // this.selectTab = 1;
                 this.stepsLevels = v['gradeLevelSteps'];
             } else {
                 v['isSelected'] = false;
