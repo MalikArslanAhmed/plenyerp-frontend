@@ -31,8 +31,9 @@ export class EmployeeListComponent implements OnInit {
 
     downloadReport(data){
         let reqObj=JSON.stringify(data);
-        this.employeesService.downloadReport(reqObj).subscribe((success)=>{
-            window.location.href = success;
+        console.log('data--->', data, reqObj);
+        this.employeesService.downloadReport({headers: reqObj}).subscribe((success)=>{
+            window.location.href = success.url;
         });
     }
 
