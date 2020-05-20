@@ -147,6 +147,7 @@ export class SalaryScalesListComponent implements OnInit {
                 v['isSelected'] = true;
                 this.isNotAutoCreate = v.isAutomaticCreate;
                 this.salaryScalesId = v.id;
+                this.selectTab = 0;
                 this.gradeLevels = v.gradeLevels;
             } else {
                 v['isSelected'] = false;
