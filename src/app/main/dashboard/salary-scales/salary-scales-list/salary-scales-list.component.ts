@@ -28,6 +28,11 @@ export class SalaryScalesListComponent implements OnInit {
     selectTab = 0;
     isNotAutoCreate = true;
     salaryScalesId;
+    selectedId = {
+        salScaleId: '',
+        gradeLeId: '',
+        stepId: '',
+    };
     gradeLevelId;
     @Output() selectedIndexChange: EventEmitter<number>;
 
@@ -50,12 +55,56 @@ export class SalaryScalesListComponent implements OnInit {
                     i++;
                 });
             }
-            this.goToGradeLevel(this.salaryScales[this.selectIndex]);
+
+            if (this.selectedId.salScaleId && data && data.length) {
+                this.salaryScales.forEach(v => {
+                    if (this.selectedId.salScaleId === v.id) {
+                        v['isSelected'] = true;
+                        this.goToGradeLevel(v);
+                        if (this.selectedId.gradeLeId && this.gradeLevels) {
+                            this.gradeLevels.forEach(gl => {
+                                if (this.selectedId.gradeLeId === gl.id) {
+                                    gl['isSelected'] = true;
+                                    this.gradeLevelId = gl.id;
+                                    this.stepsLevels = gl['gradeLevelSteps'];
+                                    this.goToStepLevel(gl);
+
+                                    if (this.selectedId.stepId && this.stepsLevels) {
+                                        this.stepsLevels.forEach(sl => {
+                                            if (this.selectedId.stepId === sl.id) {
+                                                sl['isSelected'] = true;
+                                            } else {
+                                                sl['isSelected'] = false;
+                                            }
+                                        });
+                                    }
+                                } else {
+                                    gl['isSelected'] = false;
+                                }
+                            });
+                        }
+                    } else {
+                        v['isSelected'] = false;
+                    }
+                });
+            } else {
+                this.goToGradeLevel(this.salaryScales[this.selectIndex]);
+            }
         });
     }
 
 
     deleteSalaryScales(id) {
+        this.salaryScales.forEach(v => {
+            if (id === v.id) {
+                v['isSelected'] = true;
+                this.isNotAutoCreate = v.isAutomaticCreate;
+                this.salaryScalesId = v.id;
+                this.gradeLevels = v.gradeLevels;
+            } else {
+                v['isSelected'] = false;
+            }
+        });
         this.salaryScalesService.deleteSalaryScales(id).subscribe(data => {
             if (data) {
                 this.getSalaryScales();
@@ -64,6 +113,19 @@ export class SalaryScalesListComponent implements OnInit {
     }
 
     editSalaryScales(salaryScale) {
+        this.salaryScales.forEach(v => {
+            if (salaryScale.id === v.id) {
+                v['isSelected'] = true;
+                this.isNotAutoCreate = v.isAutomaticCreate;
+                this.salaryScalesId = v.id;
+                this.gradeLevels = v.gradeLevels;
+            } else {
+                v['isSelected'] = false;
+            }
+        });
+        this.selectedId.salScaleId = salaryScale.id;
+        this.selectedId.gradeLeId = '';
+        this.selectedId.stepId = '';
         this.dialogRef = this._matDialog.open(SalaryScalesCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', salaryScale: salaryScale},
@@ -77,8 +139,9 @@ export class SalaryScalesListComponent implements OnInit {
     }
 
     goToGradeLevel(value) {
+        this.selectedId.salScaleId = value.id;
         this.gradeLevels = [];
-        this.selectTab = 0;
+        this.stepsLevels = [];
         this.salaryScales.forEach(v => {
             if (value.id === v.id) {
                 v['isSelected'] = true;
@@ -96,10 +159,10 @@ export class SalaryScalesListComponent implements OnInit {
                 i++;
             });
         }
-        this.goToStepLevel(this.gradeLevels[this.selectIndex]);
     }
 
     goToStepLevel(value) {
+        this.selectedId.gradeLeId = value.id;
         this.stepsLevels = [];
         this.gradeLevels.forEach(v => {
             if (value.id === v.id) {
@@ -135,6 +198,18 @@ export class SalaryScalesListComponent implements OnInit {
     }
 
     editGradeLevel(gradeLevel) {
+        this.selectedId.gradeLeId = gradeLevel.id;
+        this.selectedId.stepId = '';
+        // console.log('----->>>>', this.selectedId);
+        this.gradeLevels.forEach(v => {
+            if (gradeLevel.id === v.id) {
+                v['isSelected'] = true;
+                this.gradeLevelId = v.id;
+                this.stepsLevels = v['gradeLevelSteps'];
+            } else {
+                v['isSelected'] = false;
+            }
+        });
         this.dialogRef = this._matDialog.open(GradeLevelCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', gradeLevel: gradeLevel},
@@ -148,6 +223,16 @@ export class SalaryScalesListComponent implements OnInit {
     }
 
     deleteGradeLevel(id) {
+        this.gradeLevels.forEach(v => {
+            if (id === v.id) {
+                v['isSelected'] = true;
+                this.gradeLevelId = v.id;
+                this.stepsLevels = v['gradeLevelSteps'];
+            } else {
+                v['isSelected'] = false;
+            }
+        });
+        // console.log('----->>>>', this.selectedId);
         this.salaryScalesService.deleteGradeLevel(id).subscribe(data => {
             if (data) {
                 this.getSalaryScales();
@@ -169,6 +254,14 @@ export class SalaryScalesListComponent implements OnInit {
     }
 
     editStepLevel(stepLevel) {
+        this.selectedId.stepId = stepLevel.id;
+        this.stepsLevels.forEach(v => {
+            if (stepLevel.id === v.id) {
+                v['isSelected'] = true;
+            } else {
+                v['isSelected'] = false;
+            }
+        });
         this.dialogRef = this._matDialog.open(StepLevelCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', stepLevel: stepLevel},
@@ -185,6 +278,17 @@ export class SalaryScalesListComponent implements OnInit {
         this.salaryScalesService.deleteStepLevel(id).subscribe(data => {
             if (data) {
                 this.getSalaryScales();
+            }
+        });
+    }
+
+    glStepLevel(value) {
+        this.selectedId.stepId = value.id;
+        this.stepsLevels.forEach(v => {
+            if (value.id === v.id) {
+                v['isSelected'] = true;
+            } else {
+                v['isSelected'] = false;
             }
         });
     }

@@ -151,8 +151,8 @@
                     </ng-container>
                     <ng-container matColumnDef="name">
                         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Name</mat-header-cell>
-                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let stepsLevel">
-                            <p class="phone text-truncate">
+                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let stepsLevel" class="cursor-pointer" (click)="glStepLevel(stepsLevel)">
+                            <p class="phone text-truncate " [ngClass]=" stepsLevel['isSelected'] ? 'blueColor' : ''">
                                 {{stepsLevel.name}}
                             </p>
                         </mat-cell>
