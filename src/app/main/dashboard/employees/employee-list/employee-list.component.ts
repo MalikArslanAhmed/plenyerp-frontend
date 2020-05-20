@@ -16,7 +16,7 @@ import {EmpListHeadersComponent} from "./emp-list-headers/emp-list-headers.compo
 export class EmployeeListComponent implements OnInit {
 
     employees = [];
-    displayedColumns = ['check', 'id', 'id2', 'fileId', 'lName', 'fName', 'title', 'actions'];
+    displayedColumns = ['SN', 'id', 'fileId', 'lName', 'fName', 'title'];
     dialogRef: any;
 
     @Output() selectedEmployee = new EventEmitter<any>();

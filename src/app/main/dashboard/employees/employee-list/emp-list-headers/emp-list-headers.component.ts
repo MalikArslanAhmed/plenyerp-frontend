@@ -15,7 +15,7 @@ export class EmpListHeadersComponent implements OnInit {
   // managers: any = [];
   updateData: any;
 
-  availableColumns = ['check','id', 'id2', 'fileId', 'lName', 'fName', 'phone', 'department', 'title', 'actions'];
+  availableColumns = ['SN', 'id', 'fileId', 'lName', 'fName', 'phone', 'department', 'title'];
   selectedColumns = [];
   
 
