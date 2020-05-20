@@ -168,6 +168,7 @@ export class SalaryScalesListComponent implements OnInit {
             if (value.id === v.id) {
                 v['isSelected'] = true;
                 this.gradeLevelId = v.id;
+                this.selectTab = 1;
                 this.stepsLevels = v['gradeLevelSteps'];
             } else {
                 v['isSelected'] = false;
