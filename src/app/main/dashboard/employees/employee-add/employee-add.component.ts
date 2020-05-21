@@ -28,9 +28,9 @@ export class EmployeeAddComponent implements OnInit {
     progressionForm: FormGroup;
     idNosForm: FormGroup;
     maritalStatuses = AppConstants.maritalStatuses;
-    genders = AppConstants.genders;
-    religions = AppConstants.religions;
-    typeOfAppointments = AppConstants.typeOfAppointments;
+    genders;
+    religions;
+    typeOfAppointments;
 
     designations = [];
     countries = [];
@@ -71,6 +71,25 @@ export class EmployeeAddComponent implements OnInit {
         this.getCountries();
         this.getCountriesOther();
         this.getEmployeeId();
+        this.getAppointmentsType();
+        this.getReligions();
+        this.getMaritialStatus();
+    }
+
+    getAppointmentsType(){
+        this.employeeService.getAppointmentsType().subscribe((data) =>{
+            this.typeOfAppointments = data.items;
+        });
+    }
+    getReligions(){
+        this.employeeService.getReligions().subscribe((data) =>{
+            this.religions = data.items;
+        });
+    }
+    getMaritialStatus(){
+        this.employeeService.getMaritialStatus().subscribe((data) =>{
+            this.maritalStatuses = data.items;
+        });
     }
 
     refresh() {

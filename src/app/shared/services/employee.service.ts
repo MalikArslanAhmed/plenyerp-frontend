@@ -49,4 +49,16 @@ export class EmployeeService extends BaseService {
     setStatusEmployee(data): Observable<any> {
         return this.postRequest(AppUrl.SET_EMPLOYEE_STATUS(), data);
     }
+
+    getAppointmentsType(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_APPOINTMENTS_TYPE(), data);
+    }
+
+    getReligions(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_RELIGIONS(), data);
+    }
+
+    getMaritialStatus(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_MARITIAL_STATUS(), data);
+    }
 }

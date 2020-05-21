@@ -307,6 +307,18 @@ export class AppUrl {
         return AppUrl.API_URL + `employees`;
     }
 
+    static GET_APPOINTMENTS_TYPE(): string {
+        return AppUrl.API_URL + `type-of-appointments`;
+    }
+
+    static GET_RELIGIONS(): string {
+        return AppUrl.API_URL + `religions`;
+    }
+
+    static GET_MARITIAL_STATUS(): string {
+        return AppUrl.API_URL + `marriages`;
+    }
+
     static CATEGORY(id?): string {
         if (id) {
             return AppUrl.API_URL + 'categories/' + id;
