@@ -42,7 +42,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Managers',
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
-                icon: 'user',
+                icon: 'assignment_ind',
                 url: '/dashboard/managers'
             },
             {
@@ -134,7 +134,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Contact Info',
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
-                icon: 'assignment_ind',
+                icon: 'perm_contact_calendar',
                 children: [
                     {
                         id: 'country',
@@ -233,7 +233,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Extended profile',
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
-                icon: 'school',
+                icon: 'person_pin',
                 children: [
                     {
                         id: 'relationship',
@@ -272,7 +272,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'Organizations',
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
-                icon: 'school',
+                icon: 'business',
                 children: [
                     {
                         id: 'arm-of-service',
