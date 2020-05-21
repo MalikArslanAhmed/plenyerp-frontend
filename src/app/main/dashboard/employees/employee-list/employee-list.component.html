@@ -73,11 +73,20 @@
         </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="designation">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Designation</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee" (click)="selectEmployee(employee)">
+            <p class="phone text-truncate">
+                {{employee.employeeJobProfiles?.designation?.name}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let employee" (click)="selectEmployee(employee)">
             <p class="phone text-truncate">
-                {{employee.employeeJobProfiles?.designation?.name}}
+                {{employee.title}}
             </p>
         </mat-cell>
     </ng-container>
