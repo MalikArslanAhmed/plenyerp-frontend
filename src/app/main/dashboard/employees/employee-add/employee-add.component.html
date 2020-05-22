@@ -606,7 +606,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date started</mat-label>
-                                        <input matInput [matDatepicker]="dateStarted" formControlName="dateStarted" [disabled]="!pensionCheck">
+                                        <input matInput [matDatepicker]="dateStarted" formControlName="dateStarted">
                                         <mat-datepicker-toggle matSuffix [for]="dateStarted"></mat-datepicker-toggle>
                                         <mat-datepicker #dateStarted></mat-datepicker>
                                     </mat-form-field>
