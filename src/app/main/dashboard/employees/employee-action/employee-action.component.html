@@ -39,7 +39,7 @@
                         <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Search</mat-label>
-                                <input matInput required formControlName="search" (keyup)="getEmployees({'search': this.employeeFilterForm.value.search})">
+                                <input matInput formControlName="search" (keyup)="getEmployees({'search': this.employeeFilterForm.value.search})">
                             </mat-form-field>
                         </div>
                     </mat-grid-tile>
@@ -59,8 +59,8 @@
                     <mat-grid-tile>
                         <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <button mat-button class="save-button" aria-label="Save" style="margin-top: -15px" *ngIf="selectedEmployee && selectedEmployee.length > 0" (click)="activateEmployee()">Activate</button>
-                                <button mat-button class="save-disabled-button" aria-label="Save" style="margin-top: -15px" *ngIf="!selectedEmployee || selectedEmployee.length === 0">Activate</button>
+                                <button mat-button class="save-button" aria-label="Save" style="margin-top: -15px" *ngIf="selectedEmployee && selectedEmployee.length > 0" (click)="activateEmployee()">{{nextStatus}}</button>
+                                <button mat-button class="save-disabled-button" aria-label="Save" style="margin-top: -15px" *ngIf="!selectedEmployee || selectedEmployee.length === 0">{{nextStatus}}</button>
                             </div>
                         </div>
                     </mat-grid-tile>
@@ -89,7 +89,7 @@
                         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>ID</mat-header-cell>
                         <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
                             <p class="phone text-truncate">
-                                {{employee?.employeeJobProfiles?.employeeId}}
+                                {{employee?.id}}
                             </p>
                         </mat-cell>
                     </ng-container>
