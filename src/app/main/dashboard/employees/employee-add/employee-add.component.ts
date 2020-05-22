@@ -78,7 +78,15 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     pensionChecked(data){
-        this.pensionCheck = data;
+        (!data) ?  this.progressionForm.controls['dateStarted'].disable() : this.progressionForm.controls['dateStarted'].enable();
+        (!data) ?  this.progressionForm.controls['gratuity'].disable() : this.progressionForm.controls['gratuity'].enable();
+        (!data) ?  this.progressionForm.controls['monthlyPension'].disable() : this.progressionForm.controls['monthlyPension'].enable();
+        (!data) ?  this.progressionForm.controls['otherPension'].disable() : this.progressionForm.controls['otherPension'].enable();
+        // if(!data){
+        //     this.progressionForm.controls['gratuity'].disable();
+        // }else{
+        //     this.progressionForm.controls['gratuity'].enable();
+        // }
     }
 
     getAppointmentsType(){
@@ -156,10 +164,10 @@ export class EmployeeAddComponent implements OnInit {
             expectedExitDate: [''],
             isExited: [false],
             isPensionStarted: [false],
-            dateStarted: [''],
-            gratuity: [''],
-            monthlyPension: [''],
-            otherPension: ['']
+            dateStarted: [{value: '', disabled: true}],
+            gratuity: [{value: '', disabled: true}],
+            monthlyPension: [{value: '', disabled: true}],
+            otherPension: [{value: '', disabled: true}]
         });
 
         this.idNosForm = this.fb.group({
