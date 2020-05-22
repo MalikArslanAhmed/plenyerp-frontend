@@ -303,7 +303,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>S / Scale</mat-label>
-                                        <mat-select formControlName="salaryScaleId" required [disabled]="true">
+                                        <mat-select formControlName="salaryScaleId" required (selectionChange)="salaryScaleChange($event.value)">
                                             <mat-option [value]="salaryScale.id"
                                                         *ngFor="let salaryScale of salaryScales">{{salaryScale.name}}</mat-option>
                                         </mat-select>
@@ -316,7 +316,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>G / Scale</mat-label>
-                                        <mat-select formControlName="gradeLevelId" required [disabled]="true">
+                                        <mat-select formControlName="gradeLevelId" required (selectionChange)="gradeScaleChange($event.value)">
                                             <mat-option [value]="gradeLevel.id"
                                                         *ngFor="let gradeLevel of gradeLevels">{{gradeLevel.name}}</mat-option>
                                         </mat-select>
@@ -329,7 +329,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>GL / Step</mat-label>
-                                        <mat-select formControlName="gradeLevelStepId" required [disabled]="true">
+                                        <mat-select formControlName="gradeLevelStepId" required>
                                             <mat-option [value]="gradeLevelStep.id"
                                                         *ngFor="let gradeLevelStep of gradeLevelSteps">{{gradeLevelStep.name}}</mat-option>
                                         </mat-select>
@@ -597,7 +597,7 @@
                         <mat-grid-list cols="2" rowHeight="100px">
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-checkbox formControlName="isPensionStarted">Pension Started</mat-checkbox>
+                                    <mat-checkbox formControlName="isPensionStarted" (change)="pensionChecked($event.checked)">Pension Started</mat-checkbox>
                                 </div>
                             </mat-grid-tile>
                         </mat-grid-list>
@@ -606,7 +606,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date started</mat-label>
-                                        <input matInput [matDatepicker]="dateStarted" formControlName="dateStarted">
+                                        <input matInput [matDatepicker]="dateStarted" formControlName="dateStarted" [disabled]="!pensionCheck">
                                         <mat-datepicker-toggle matSuffix [for]="dateStarted"></mat-datepicker-toggle>
                                         <mat-datepicker #dateStarted></mat-datepicker>
                                     </mat-form-field>
