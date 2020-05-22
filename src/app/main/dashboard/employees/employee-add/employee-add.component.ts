@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../../@fuse/animations";
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormControl ,FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AppConstants} from "../../../../shared/constants/app-constants";
 import {DepartmentListSelectComponent} from "../../structure/department-list/department-list-select.component";
 import {JobPositionsListSelectComponent} from "../job-positions-list-select/job-positions-list-select.component";
@@ -27,8 +27,8 @@ export class EmployeeAddComponent implements OnInit {
     citizenshipContactDetailsForm: FormGroup;
     progressionForm: FormGroup;
     idNosForm: FormGroup;
-    maritalStatuses = AppConstants.maritalStatuses;
-    genders;
+    genders = AppConstants.genders;
+    maritalStatuses;
     religions;
     typeOfAppointments;
 
@@ -52,6 +52,7 @@ export class EmployeeAddComponent implements OnInit {
     employeeId: any;
     selectedEmployeeId: any;
     selectedEmployee: any;
+    pensionCheck:boolean;
 
     constructor(private structureService: StructureService,
                 private _fuseSidebarService: FuseSidebarService,
@@ -74,6 +75,10 @@ export class EmployeeAddComponent implements OnInit {
         this.getAppointmentsType();
         this.getReligions();
         this.getMaritialStatus();
+    }
+
+    pensionChecked(data){
+        this.pensionCheck = data;
     }
 
     getAppointmentsType(){
@@ -152,7 +157,7 @@ export class EmployeeAddComponent implements OnInit {
             isExited: [false],
             isPensionStarted: [false],
             dateStarted: [''],
-            gratuity: [''],
+            gratuity: new FormControl({value: '', disabled: this.pensionCheck}),
             monthlyPension: [''],
             otherPension: ['']
         });
@@ -235,6 +240,10 @@ export class EmployeeAddComponent implements OnInit {
             'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name : '',
             'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId : '',
         }];
+        
+        this.salaryScaleChange(this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId, 'edit');
+
+        this.gradeScaleChange(this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId);
 
         this.jobProfileSalaryPlacementForm.patchValue({
             'currentAppointment': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.currentAppointment ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.currentAppointment : '',
@@ -247,47 +256,48 @@ export class EmployeeAddComponent implements OnInit {
             'gradeLevelStepId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId : ''
         });
 
-        if (this.salaryScales && this.salaryScales.length > 0) {
-            let selectedEmployee = this.selectedEmployee;
-            let salaryScales = this.salaryScales.find(function (salaryScale) {
-                return (salaryScale.id === selectedEmployee.employeeJobProfiles.jobPosition.salaryScaleId);
-            });
-            this.salaryScales = [{
-                'id': salaryScales.id,
-                'name': salaryScales.name
-            }];
-            this.jobProfileSalaryPlacementForm.patchValue({
-                'salaryScaleId': salaryScales.id
-            });
-            if (salaryScales) {
-                if (salaryScales['gradeLevels'] && salaryScales['gradeLevels'].length > 0) {
-                    let gradeLevels = salaryScales['gradeLevels'].find(function (gradeLevel) {
-                        return (gradeLevel.id === selectedEmployee.employeeJobProfiles.jobPosition.salaryScaleId);
-                    });
-                    this.gradeLevels = [{
-                        'id': gradeLevels.id ? gradeLevels.id : '',
-                        'name': gradeLevels.name ? gradeLevels.name : ''
-                    }];
-                    this.jobProfileSalaryPlacementForm.patchValue({
-                        'gradeLevelId': gradeLevels.id ? gradeLevels.id : ''
-                    });
 
-                    if (gradeLevels && gradeLevels['gradeLevelSteps'].length > 0) {
-                        let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function (gradeLevelStep) {
-                            return (gradeLevelStep.id === selectedEmployee.employeeJobProfiles.jobPosition.gradeLevelStepId);
-                        });
+        // if (this.salaryScales && this.salaryScales.length > 0) {
+        //     let selectedEmployee = this.selectedEmployee;
+        //     let salaryScales = this.salaryScales.find(function (salaryScale) {
+        //         return (salaryScale.id === selectedEmployee.employeeJobProfiles.jobPosition.salaryScaleId);
+        //     });
+        //     this.salaryScales = [{
+        //         'id': salaryScales.id,
+        //         'name': salaryScales.name
+        //     }];
+        //     this.jobProfileSalaryPlacementForm.patchValue({
+        //         'salaryScaleId': salaryScales.id
+        //     });
+        //     if (salaryScales) {
+        //         if (salaryScales['gradeLevels'] && salaryScales['gradeLevels'].length > 0) {
+        //             let gradeLevels = salaryScales['gradeLevels'].find(function (gradeLevel) {
+        //                 return (gradeLevel.id === selectedEmployee.employeeJobProfiles.jobPosition.salaryScaleId);
+        //             });
+        //             this.gradeLevels = [{
+        //                 'id': gradeLevels.id ? gradeLevels.id : '',
+        //                 'name': gradeLevels.name ? gradeLevels.name : ''
+        //             }];
+        //             this.jobProfileSalaryPlacementForm.patchValue({
+        //                 'gradeLevelId': gradeLevels.id ? gradeLevels.id : ''
+        //             });
 
-                        this.gradeLevelSteps = [{
-                            'id': gradeLevelSteps.id ? gradeLevelSteps.id : '',
-                            'name': gradeLevelSteps.name ? gradeLevelSteps.name : ''
-                        }];
-                        this.jobProfileSalaryPlacementForm.patchValue({
-                            'gradeLevelStepId': gradeLevelSteps.id
-                        });
-                    }
-                }
-            }
-        }
+        //             if (gradeLevels && gradeLevels['gradeLevelSteps'].length > 0) {
+        //                 let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function (gradeLevelStep) {
+        //                     return (gradeLevelStep.id === selectedEmployee.employeeJobProfiles.jobPosition.gradeLevelStepId);
+        //                 });
+
+        //                this.gradeLevelSteps = [{
+        //                    'id': gradeLevelSteps.id ? gradeLevelSteps.id : '',
+        //                    'name': gradeLevelSteps.name ? gradeLevelSteps.name : ''
+        //                }];
+        //                 this.jobProfileSalaryPlacementForm.patchValue({
+        //                     'gradeLevelStepId': gradeLevelSteps.id
+        //                 });
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     patchCitizenshipContactDetailsForm() {
@@ -383,6 +393,9 @@ export class EmployeeAddComponent implements OnInit {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
+            console.log('response job---->', response);
+            console.log('salary scale---->', this.salaryScales);
+            console.log('gradelevels---->', this.gradeLevels);
             if (!response) {
                 return;
             }
@@ -398,35 +411,47 @@ export class EmployeeAddComponent implements OnInit {
                 let salaryScales = this.salaryScales.find(function (salaryScale) {
                     return (salaryScale.id === response.salaryScaleId);
                 });
-                this.salaryScales = [{
-                    'id': salaryScales.id,
-                    'name': salaryScales.name
-                }];
+                
+                console.log('let salary scale---->', salaryScales);
+                
+                // this.salaryScales = [{
+                //     'id': salaryScales.id,
+                //     'name': salaryScales.name
+                // }];
+                // console.log('new salary scale---->', this.salaryScales);
                 this.jobProfileSalaryPlacementForm.patchValue({
                     'salaryScaleId': salaryScales.id
                 });
                 if (salaryScales) {
                     if (salaryScales['gradeLevels'] && salaryScales['gradeLevels'].length > 0) {
+                        this.gradeLevels = salaryScales['gradeLevels'];
                         let gradeLevels = salaryScales['gradeLevels'].find(function (gradeLevel) {
                             return (gradeLevel.id === response.gradeLevelId);
                         });
-                        this.gradeLevels = [{
-                            'id': gradeLevels.id,
-                            'name': gradeLevels.name
-                        }];
+
+                        console.log('this gradelevels---->', this.gradeLevels);
+                        console.log('let gradelevels---->', gradeLevels);
+                        // this.gradeLevels = [{
+                        //     'id': gradeLevels.id,
+                        //     'name': gradeLevels.name
+                        // }];
                         this.jobProfileSalaryPlacementForm.patchValue({
                             'gradeLevelId': gradeLevels.id
                         });
 
                         if (gradeLevels && gradeLevels['gradeLevelSteps'].length > 0) {
+                            this.gradeLevelSteps = gradeLevels['gradeLevelSteps'];
                             let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function (gradeLevelStep) {
                                 return (gradeLevelStep.id === response.gradeLevelStepId);
                             });
 
-                            this.gradeLevelSteps = [{
-                                'id': gradeLevelSteps.id,
-                                'name': gradeLevelSteps.name
-                            }];
+                            console.log('this gradelevelsteps---->', this.gradeLevelSteps);
+                            console.log('let gradelevelsteps---->', gradeLevelSteps);
+
+                            // this.gradeLevelSteps = [{
+                            //     'id': gradeLevelSteps.id,
+                            //     'name': gradeLevelSteps.name
+                            // }];
                             this.jobProfileSalaryPlacementForm.patchValue({
                                 'gradeLevelStepId': gradeLevelSteps.id
                             });
@@ -435,6 +460,29 @@ export class EmployeeAddComponent implements OnInit {
                 }
             }
         });
+    }
+
+    salaryScaleChange(data, action?){
+        let salaryScales = this.salaryScales.find(function (salaryScale) {
+            return (salaryScale.id === data);
+        });
+        this.gradeLevels = salaryScales['gradeLevels'];
+
+        if(!action){
+            this.gradeScaleChange();
+        }
+    }
+
+    gradeScaleChange(data?){
+        if(data){
+            let gradeScales = this.gradeLevels.find(function (gradeLevel) {
+                return (gradeLevel.id === data);
+            });
+            this.gradeLevelSteps = gradeScales['gradeLevelSteps'];
+        }else{
+            this.gradeLevelSteps = [];
+        }
+
     }
 
     workLocationListSelect() {
