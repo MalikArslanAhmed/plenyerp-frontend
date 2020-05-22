@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../../@fuse/animations";
-import {FormControl ,FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AppConstants} from "../../../../shared/constants/app-constants";
 import {DepartmentListSelectComponent} from "../../structure/department-list/department-list-select.component";
 import {JobPositionsListSelectComponent} from "../job-positions-list-select/job-positions-list-select.component";
@@ -157,7 +157,7 @@ export class EmployeeAddComponent implements OnInit {
             isExited: [false],
             isPensionStarted: [false],
             dateStarted: [''],
-            gratuity: new FormControl({value: '', disabled: this.pensionCheck}),
+            gratuity: [''],
             monthlyPension: [''],
             otherPension: ['']
         });
