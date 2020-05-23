@@ -31,7 +31,7 @@
     </div>
     <div class="content" fusePerfectScrollbar>
         <div class="horizontal-stepper-wrapper hor-wrap">
-            <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true">
+            <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true" #stepper>
                 <mat-step [stepControl]="employeeForm" [editable]="false">
                     <form fxLayout="column" [formGroup]="employeeForm">
                         <ng-template matStepLabel>Employee</ng-template>
@@ -90,17 +90,14 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveEmployee()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="updateEmployee()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="saveEmployee()">
+                                {{this.selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
                 </mat-step>
 
-                <mat-step [stepControl]="personalDetailsForm" [editable]="false">
+                <mat-step [stepControl]="personalDetailsForm">
                     <form fxLayout="column" [formGroup]="personalDetailsForm">
                         <ng-template matStepLabel>Personal Details</ng-template>
                         <mat-grid-list cols="2" rowHeight="100px">
@@ -214,17 +211,14 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="savePersonalDetail()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="savePersonalDetail()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="savePersonalDetail()">
+                                {{this.selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
                 </mat-step>
 
-                <mat-step [stepControl]="jobProfileSalaryPlacementForm" [editable]="false">
+                <mat-step [stepControl]="jobProfileSalaryPlacementForm">
                     <form fxLayout="column" [formGroup]="jobProfileSalaryPlacementForm">
                         <ng-template matStepLabel>Job Profile & Salary Placement</ng-template>
                         <h5>Job Profile</h5>
@@ -303,7 +297,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>S / Scale</mat-label>
-                                        <mat-select formControlName="salaryScaleId" required (selectionChange)="salaryScaleChange($event.value)">
+                                        <mat-select formControlName="salaryScaleId" required
+                                                    (selectionChange)="salaryScaleChange($event.value)">
                                             <mat-option [value]="salaryScale.id"
                                                         *ngFor="let salaryScale of salaryScales">{{salaryScale.name}}</mat-option>
                                         </mat-select>
@@ -316,7 +311,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>G / Scale</mat-label>
-                                        <mat-select formControlName="gradeLevelId" required (selectionChange)="gradeScaleChange($event.value)">
+                                        <mat-select formControlName="gradeLevelId" required
+                                                    (selectionChange)="gradeScaleChange($event.value)">
                                             <mat-option [value]="gradeLevel.id"
                                                         *ngFor="let gradeLevel of gradeLevels">{{gradeLevel.name}}</mat-option>
                                         </mat-select>
@@ -340,17 +336,14 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveJobProfile()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveJobProfile()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="saveJobProfile()">
+                                {{this.selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
                 </mat-step>
 
-                <mat-step [stepControl]="citizenshipContactDetailsForm" [editable]="false">
+                <mat-step [stepControl]="citizenshipContactDetailsForm">
                     <form fxLayout="column" [formGroup]="citizenshipContactDetailsForm">
                         <ng-template matStepLabel>Citizenship Contact Details</ng-template>
                         <h5>Citizenship</h5>
@@ -359,7 +352,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Country</mat-label>
-                                        <mat-select formControlName="countryId" required (selectionChange)="chooseRegion($event.value)">
+                                        <mat-select formControlName="countryId" required
+                                                    (selectionChange)="chooseRegion($event.value)">
                                             <mat-option [value]="country.id"
                                                         *ngFor="let country of countries">{{country.name}}</mat-option>
                                         </mat-select>
@@ -372,7 +366,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Region</mat-label>
-                                        <mat-select formControlName="regionId" required (selectionChange)="chooseState($event.value)">
+                                        <mat-select formControlName="regionId" required
+                                                    (selectionChange)="chooseState($event.value)">
                                             <mat-option [value]="region.id"
                                                         *ngFor="let region of regions">{{region.name}}</mat-option>
                                         </mat-select>
@@ -385,7 +380,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>State</mat-label>
-                                        <mat-select formControlName="stateId" required (selectionChange)="chooseLga($event.value)">
+                                        <mat-select formControlName="stateId" required
+                                                    (selectionChange)="chooseLga($event.value)">
                                             <mat-option [value]="state.id"
                                                         *ngFor="let state of states">{{state.name}}</mat-option>
                                         </mat-select>
@@ -452,7 +448,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Country</mat-label>
-                                        <mat-select formControlName="otherCountryId" required (selectionChange)="chooseRegionOther($event.value)">
+                                        <mat-select formControlName="otherCountryId" required
+                                                    (selectionChange)="chooseRegionOther($event.value)">
                                             <mat-option [value]="country.id"
                                                         *ngFor="let country of countries">{{country.name}}</mat-option>
                                         </mat-select>
@@ -465,7 +462,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Region</mat-label>
-                                        <mat-select formControlName="otherRegionId" required (selectionChange)="chooseStateOther($event.value)">
+                                        <mat-select formControlName="otherRegionId" required
+                                                    (selectionChange)="chooseStateOther($event.value)">
                                             <mat-option [value]="region.id"
                                                         *ngFor="let region of regions">{{region.name}}</mat-option>
                                         </mat-select>
@@ -478,7 +476,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>State</mat-label>
-                                        <mat-select formControlName="otherStateId" required (selectionChange)="chooseLgaOther($event.value)">
+                                        <mat-select formControlName="otherStateId" required
+                                                    (selectionChange)="chooseLgaOther($event.value)">
                                             <mat-option [value]="state.id"
                                                         *ngFor="let state of states">{{state.name}}</mat-option>
                                         </mat-select>
@@ -502,17 +501,14 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="saveContactDetails()">
+                                {{selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
                 </mat-step>
 
-                <mat-step [stepControl]="progressionForm" [editable]="false">
+                <mat-step [stepControl]="progressionForm">
                     <form fxLayout="column" [formGroup]="progressionForm">
                         <ng-template matStepLabel>Progression</ng-template>
                         <h5>Increment Details</h5>
@@ -542,8 +538,10 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Confr. Due Date</mat-label>
-                                        <input matInput [matDatepicker]="confirmationDueDate" formControlName="confirmationDueDate">
-                                        <mat-datepicker-toggle matSuffix [for]="confirmationDueDate"></mat-datepicker-toggle>
+                                        <input matInput [matDatepicker]="confirmationDueDate"
+                                               formControlName="confirmationDueDate">
+                                        <mat-datepicker-toggle matSuffix
+                                                               [for]="confirmationDueDate"></mat-datepicker-toggle>
                                         <mat-datepicker #confirmationDueDate></mat-datepicker>
                                     </mat-form-field>
                                 </div>
@@ -581,8 +579,10 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Exp. Exit Date</mat-label>
-                                        <input matInput [matDatepicker]="expectedExitDate" formControlName="expectedExitDate">
-                                        <mat-datepicker-toggle matSuffix [for]="expectedExitDate"></mat-datepicker-toggle>
+                                        <input matInput [matDatepicker]="expectedExitDate"
+                                               formControlName="expectedExitDate">
+                                        <mat-datepicker-toggle matSuffix
+                                                               [for]="expectedExitDate"></mat-datepicker-toggle>
                                         <mat-datepicker #expectedExitDate></mat-datepicker>
                                     </mat-form-field>
                                 </div>
@@ -597,7 +597,9 @@
                         <mat-grid-list cols="2" rowHeight="100px">
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-checkbox formControlName="isPensionStarted" (change)="pensionChecked($event.checked)">Pension Started</mat-checkbox>
+                                    <mat-checkbox formControlName="isPensionStarted"
+                                                  (change)="pensionChecked($event.checked)">Pension Started
+                                    </mat-checkbox>
                                 </div>
                             </mat-grid-tile>
                         </mat-grid-list>
@@ -640,17 +642,14 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="saveProgression()">
+                                {{selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
                 </mat-step>
 
-                <mat-step [stepControl]="idNosForm" [editable]="false">
+                <mat-step [stepControl]="idNosForm">
                     <form fxLayout="column" [formGroup]="idNosForm">
                         <ng-template matStepLabel>Id Nos.</ng-template>
                         <mat-grid-list cols="2" rowHeight="100px">
@@ -774,11 +773,8 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveIdNos()" *ngIf="!this.selectedEmployeeId">
-                                Save
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveIdNos()" *ngIf="this.selectedEmployeeId">
-                                Update
+                            <button mat-raised-button type="button" color="accent" (click)="saveIdNos()">
+                                {{selectedEmployeeId ? 'Update' : 'Save'}}
                             </button>
                         </div>
                     </form>
