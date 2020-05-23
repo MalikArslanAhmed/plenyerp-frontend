@@ -70,8 +70,8 @@
             <div class="content">
                 <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
                     <ng-container matColumnDef="select">
-                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Select</mat-header-cell>
-                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm class="select-cell">Select</mat-header-cell>
+                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee" [ngClass]="select-cell">
                             <input type="checkbox" (click)="checkEmployee(employee)">
                         </mat-cell>
                     </ng-container>
