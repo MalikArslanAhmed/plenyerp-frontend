@@ -29,6 +29,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 // import {DashboardModule} from './main/dashboard/dashboard.module';
 
 import { MomentDatePipe } from "./shared/pipes/moment-date.pipe";
+import {SharedModule} from './shared/shared.module';
 
 const appRoutes: Routes = [
     {
@@ -77,7 +78,10 @@ const appRoutes: Routes = [
         SampleModule,
         SnotifyModule,
         MatStepperModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+
+        // Custom Module
+        SharedModule
     ],
     providers: [
         AuthService,
