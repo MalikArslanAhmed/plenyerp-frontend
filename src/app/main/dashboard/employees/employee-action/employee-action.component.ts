@@ -114,6 +114,7 @@ export class EmployeeActionComponent implements OnInit {
     }
 
     editEmployee(employee) {
+        console.log(3);
         this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);
     }
 

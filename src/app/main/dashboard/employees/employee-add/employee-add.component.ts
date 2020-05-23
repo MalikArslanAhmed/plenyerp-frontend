@@ -639,7 +639,7 @@ export class EmployeeAddComponent implements OnInit {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
             } else {
-                this.jobProfileSalaryPlacementForm.value['currentAppointment'] = this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD');
+                // this.jobProfileSalaryPlacementForm.value['currentAppointment'] = this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD');
             }
             this.employeeService.addContactDetails(this.employeeId, this.citizenshipContactDetailsForm.value).subscribe(data => {
                 this.isSubmitted = false;
@@ -663,7 +663,7 @@ export class EmployeeAddComponent implements OnInit {
                 this.progressionForm.value['confirmationDueDate'] = this.progressionForm.value['confirmationDueDate'].format('YYYY-MM-DD');
                 this.progressionForm.value['lastPromoted'] = this.progressionForm.value['lastPromoted'].format('YYYY-MM-DD');
                 this.progressionForm.value['expectedExitDate'] = this.progressionForm.value['expectedExitDate'].format('YYYY-MM-DD');
-                this.progressionForm.value['dateStarted'] = this.progressionForm.value['dateStarted'].format('YYYY-MM-DD');
+                // this.progressionForm.value['dateStarted'] = this.progressionForm.value['dateStarted'] ? this.progressionForm.value['dateStarted'].format('YYYY-MM-DD') : '';
             }
             this.employeeService.addProgression(this.employeeId, this.progressionForm.value).subscribe(data => {
                 this.isSubmitted = false;
