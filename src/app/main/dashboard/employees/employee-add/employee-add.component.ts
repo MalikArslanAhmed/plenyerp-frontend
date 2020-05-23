@@ -1,17 +1,18 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {AppConstants} from "../../../../shared/constants/app-constants";
-import {DepartmentListSelectComponent} from "../../structure/department-list/department-list-select.component";
-import {JobPositionsListSelectComponent} from "../job-positions-list-select/job-positions-list-select.component";
-import {StructureService} from "../../../../shared/services/structure.service";
-import {FuseSidebarService} from "../../../../../@fuse/components/sidebar/sidebar.service";
-import {MatDialog} from "@angular/material/dialog";
-import {SalaryScalesService} from "../../../../shared/services/salary-scales.service";
-import {SkillService} from "../../../../shared/services/skill.service";
-import {WorkLocationsListSelectComponent} from "../work-locations-list-select/work-locations-list-select.component";
-import {EmployeeService} from "../../../../shared/services/employee.service";
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AppConstants} from '../../../../shared/constants/app-constants';
+import {DepartmentListSelectComponent} from '../../structure/department-list/department-list-select.component';
+import {JobPositionsListSelectComponent} from '../job-positions-list-select/job-positions-list-select.component';
+import {StructureService} from '../../../../shared/services/structure.service';
+import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
+import {MatDialog} from '@angular/material/dialog';
+import {SalaryScalesService} from '../../../../shared/services/salary-scales.service';
+import {SkillService} from '../../../../shared/services/skill.service';
+import {WorkLocationsListSelectComponent} from '../work-locations-list-select/work-locations-list-select.component';
+import {EmployeeService} from '../../../../shared/services/employee.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
     selector: 'app-employee-add',
@@ -21,6 +22,7 @@ import {ActivatedRoute, Router} from '@angular/router';
     animations: fuseAnimations
 })
 export class EmployeeAddComponent implements OnInit {
+    @ViewChild('stepper') private employeeStepper: MatStepper;
     employeeForm: FormGroup;
     personalDetailsForm: FormGroup;
     jobProfileSalaryPlacementForm: FormGroup;
@@ -52,7 +54,7 @@ export class EmployeeAddComponent implements OnInit {
     employeeId: any;
     selectedEmployeeId: any;
     selectedEmployee: any;
-    pensionCheck:boolean;
+    pensionCheck: boolean;
 
     constructor(private structureService: StructureService,
                 private _fuseSidebarService: FuseSidebarService,
@@ -77,11 +79,11 @@ export class EmployeeAddComponent implements OnInit {
         this.getMaritialStatus();
     }
 
-    pensionChecked(data){
-        (!data) ?  this.progressionForm.controls['dateStarted'].disable() : this.progressionForm.controls['dateStarted'].enable();
-        (!data) ?  this.progressionForm.controls['gratuity'].disable() : this.progressionForm.controls['gratuity'].enable();
-        (!data) ?  this.progressionForm.controls['monthlyPension'].disable() : this.progressionForm.controls['monthlyPension'].enable();
-        (!data) ?  this.progressionForm.controls['otherPension'].disable() : this.progressionForm.controls['otherPension'].enable();
+    pensionChecked(data) {
+        (!data) ? this.progressionForm.controls['dateStarted'].disable() : this.progressionForm.controls['dateStarted'].enable();
+        (!data) ? this.progressionForm.controls['gratuity'].disable() : this.progressionForm.controls['gratuity'].enable();
+        (!data) ? this.progressionForm.controls['monthlyPension'].disable() : this.progressionForm.controls['monthlyPension'].enable();
+        (!data) ? this.progressionForm.controls['otherPension'].disable() : this.progressionForm.controls['otherPension'].enable();
         // if(!data){
         //     this.progressionForm.controls['gratuity'].disable();
         // }else{
@@ -89,18 +91,20 @@ export class EmployeeAddComponent implements OnInit {
         // }
     }
 
-    getAppointmentsType(){
-        this.employeeService.getAppointmentsType().subscribe((data) =>{
+    getAppointmentsType() {
+        this.employeeService.getAppointmentsType().subscribe((data) => {
             this.typeOfAppointments = data.items;
         });
     }
-    getReligions(){
-        this.employeeService.getReligions().subscribe((data) =>{
+
+    getReligions() {
+        this.employeeService.getReligions().subscribe((data) => {
             this.religions = data.items;
         });
     }
-    getMaritialStatus(){
-        this.employeeService.getMaritialStatus().subscribe((data) =>{
+
+    getMaritialStatus() {
+        this.employeeService.getMaritialStatus().subscribe((data) => {
             this.maritalStatuses = data.items;
         });
     }
@@ -125,7 +129,7 @@ export class EmployeeAddComponent implements OnInit {
             appointedOn: ['', Validators.required],
             assumedDutyOn: ['', Validators.required],
             typeOfAppointment: ['TENURED', Validators.required],
-            isPermanentStaff: ['', Validators.required]
+            isPermanentStaff: [false, Validators.required]
         });
 
         this.jobProfileSalaryPlacementForm = this.fb.group({
@@ -248,7 +252,7 @@ export class EmployeeAddComponent implements OnInit {
             'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name : '',
             'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId : '',
         }];
-        
+
         this.salaryScaleChange(this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId, 'edit');
 
         this.gradeScaleChange(this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId);
@@ -386,13 +390,13 @@ export class EmployeeAddComponent implements OnInit {
 
     getCountries() {
         this.structureService.getCountries({'page': -1}).subscribe(data => {
-            this.countries = data.items
+            this.countries = data.items;
         });
     }
 
     getCountriesOther() {
         this.structureService.getCountries({'page': -1}).subscribe(data => {
-            this.countriesOther = data.items
+            this.countriesOther = data.items;
         });
     }
 
@@ -416,12 +420,12 @@ export class EmployeeAddComponent implements OnInit {
                 disabled: true
             });
             if (this.salaryScales && this.salaryScales.length > 0) {
-                let salaryScales = this.salaryScales.find(function (salaryScale) {
+                let salaryScales = this.salaryScales.find(function(salaryScale) {
                     return (salaryScale.id === response.salaryScaleId);
                 });
-                
+
                 console.log('let salary scale---->', salaryScales);
-                
+
                 // this.salaryScales = [{
                 //     'id': salaryScales.id,
                 //     'name': salaryScales.name
@@ -433,7 +437,7 @@ export class EmployeeAddComponent implements OnInit {
                 if (salaryScales) {
                     if (salaryScales['gradeLevels'] && salaryScales['gradeLevels'].length > 0) {
                         this.gradeLevels = salaryScales['gradeLevels'];
-                        let gradeLevels = salaryScales['gradeLevels'].find(function (gradeLevel) {
+                        let gradeLevels = salaryScales['gradeLevels'].find(function(gradeLevel) {
                             return (gradeLevel.id === response.gradeLevelId);
                         });
 
@@ -449,7 +453,7 @@ export class EmployeeAddComponent implements OnInit {
 
                         if (gradeLevels && gradeLevels['gradeLevelSteps'].length > 0) {
                             this.gradeLevelSteps = gradeLevels['gradeLevelSteps'];
-                            let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function (gradeLevelStep) {
+                            let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function(gradeLevelStep) {
                                 return (gradeLevelStep.id === response.gradeLevelStepId);
                             });
 
@@ -470,24 +474,24 @@ export class EmployeeAddComponent implements OnInit {
         });
     }
 
-    salaryScaleChange(data, action?){
-        let salaryScales = this.salaryScales.find(function (salaryScale) {
+    salaryScaleChange(data, action?) {
+        let salaryScales = this.salaryScales.find(function(salaryScale) {
             return (salaryScale.id === data);
         });
         this.gradeLevels = salaryScales['gradeLevels'];
 
-        if(!action){
+        if (!action) {
             this.gradeScaleChange();
         }
     }
 
-    gradeScaleChange(data?){
-        if(data){
-            let gradeScales = this.gradeLevels.find(function (gradeLevel) {
+    gradeScaleChange(data?) {
+        if (data) {
+            let gradeScales = this.gradeLevels.find(function(gradeLevel) {
                 return (gradeLevel.id === data);
             });
             this.gradeLevelSteps = gradeScales['gradeLevelSteps'];
-        }else{
+        } else {
             this.gradeLevelSteps = [];
         }
 
@@ -533,13 +537,13 @@ export class EmployeeAddComponent implements OnInit {
 
     getDesignations() {
         this.structureService.getDesignations({'page': -1}).subscribe(data => {
-            this.designations = data.items
+            this.designations = data.items;
         });
     }
 
     getSalaryScales() {
         this.salaryScalesService.getSalaryScales({'page': -1}).subscribe(data => {
-            this.salaryScales = data
+            this.salaryScales = data;
         });
     }
 
@@ -555,6 +559,7 @@ export class EmployeeAddComponent implements OnInit {
             this.employeeService.addEmployee(this.employeeForm.value).subscribe(data => {
                 this.employeeId = data.id;
                 this.isSubmitted = false;
+                this.goForward();
             });
         }
     }
@@ -593,6 +598,7 @@ export class EmployeeAddComponent implements OnInit {
             }
             this.employeeService.addPersonalDetails(this.employeeId, this.personalDetailsForm.value).subscribe(data => {
                 this.isSubmitted = false;
+                this.goForward();
             });
         }
     }
@@ -614,6 +620,7 @@ export class EmployeeAddComponent implements OnInit {
             }
             this.employeeService.addJobProfile(this.employeeId, this.jobProfileSalaryPlacementForm.value).subscribe(data => {
                 this.isSubmitted = false;
+                this.goForward();
             });
         }
     }
@@ -634,6 +641,7 @@ export class EmployeeAddComponent implements OnInit {
             }
             this.employeeService.addContactDetails(this.employeeId, this.citizenshipContactDetailsForm.value).subscribe(data => {
                 this.isSubmitted = false;
+                this.goForward();
             });
         }
     }
@@ -657,6 +665,7 @@ export class EmployeeAddComponent implements OnInit {
             }
             this.employeeService.addProgression(this.employeeId, this.progressionForm.value).subscribe(data => {
                 this.isSubmitted = false;
+                this.goForward();
             });
         }
     }
@@ -685,38 +694,47 @@ export class EmployeeAddComponent implements OnInit {
 
     chooseRegion(event) {
         this.structureService.getRegions({'page': -1, 'countryId': event}).subscribe(data => {
-            this.regions = data.items
+            this.regions = data.items;
         });
     }
 
     chooseState(event) {
         this.structureService.getStates({'page': -1, 'regionId': event}).subscribe(data => {
-            this.states = data.items
+            this.states = data.items;
         });
     }
 
     chooseLga(event) {
         this.structureService.getLga({'page': -1, 'lgaId': event}).subscribe(data => {
-            this.lgas = data.items
+            this.lgas = data.items;
         });
     }
 
 
     chooseRegionOther(event) {
         this.structureService.getRegions({'page': -1, 'countryId': event}).subscribe(data => {
-            this.regionsOther = data.items
+            this.regionsOther = data.items;
         });
     }
 
     chooseStateOther(event) {
         this.structureService.getStates({'page': -1, 'regionId': event}).subscribe(data => {
-            this.statesOther = data.items
+            this.statesOther = data.items;
         });
     }
 
     chooseLgaOther(event) {
         this.structureService.getLga({'page': -1, 'lgaId': event}).subscribe(data => {
-            this.lgasOthers = data.items
+            this.lgasOthers = data.items;
         });
+    }
+
+
+    goBack() {
+        this.employeeStepper.previous();
+    }
+
+    goForward() {
+        this.employeeStepper.next();
     }
 }

@@ -31,7 +31,7 @@
     </div>
     <div class="content" fusePerfectScrollbar>
         <div class="horizontal-stepper-wrapper hor-wrap">
-            <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true">
+            <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true" #stepper>
                 <mat-step [stepControl]="employeeForm" [editable]="false">
                     <form fxLayout="column" [formGroup]="employeeForm">
                         <ng-template matStepLabel>Employee</ng-template>
@@ -90,11 +90,8 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveEmployee()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="updateEmployee()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="saveEmployee()">
+                                {{this.selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
@@ -214,11 +211,8 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="savePersonalDetail()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="savePersonalDetail()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="savePersonalDetail()">
+                                {{this.selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
@@ -340,11 +334,8 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveJobProfile()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveJobProfile()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="saveJobProfile()">
+                                {{this.selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
@@ -502,11 +493,8 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveContactDetails()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="saveContactDetails()">
+                                {{selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
@@ -640,11 +628,8 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()" *ngIf="!this.selectedEmployeeId">
-                                Save & Next
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveProgression()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                            <button mat-raised-button type="button" color="accent" (click)="saveProgression()">
+                                {{selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
@@ -774,11 +759,8 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveIdNos()" *ngIf="!this.selectedEmployeeId">
-                                Save
-                            </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveIdNos()" *ngIf="this.selectedEmployeeId">
-                                Update
+                            <button mat-raised-button type="button" color="accent" (click)="saveIdNos()">
+                                {{selectedEmployeeId ? 'Update' : 'Save'}}
                             </button>
                         </div>
                     </form>
