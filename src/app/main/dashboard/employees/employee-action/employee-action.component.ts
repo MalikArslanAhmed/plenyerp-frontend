@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {MatDialog} from "@angular/material/dialog";
-import {EmployeeService} from "../../../../shared/services/employee.service";
-import {Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {MatDialog} from '@angular/material/dialog';
+import {EmployeeService} from '../../../../shared/services/employee.service';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EmployeePreviewComponent} from '../employee-preview/employee-preview.component';
-import {DepartmentListSelectComponent} from "../../structure/department-list/department-list-select.component";
+import {DepartmentListSelectComponent} from '../../structure/department-list/department-list-select.component';
 
 @Component({
     selector: 'app-employee-action',
@@ -19,6 +19,8 @@ export class EmployeeActionComponent implements OnInit {
     displayedColumns = ['select', 'id', 'empId', 'fileNo', 'lastName', 'firstName', 'title', 'actions'];
     dialogRef: any;
     selectedEmployee = [];
+    selectedStatus;
+    nextStatus;
     statuses = [
         {
             'value': 'NEW',
@@ -85,6 +87,19 @@ export class EmployeeActionComponent implements OnInit {
     }
 
     getEmployees(params) {
+        if (params.status === 'NEW') {
+            this.nextStatus = 'ACTIVE';
+        } else if (params.status === 'RETIREMENT_DUE') {
+            this.nextStatus = 'RETIRE';
+        } else if (params.status === 'CONFIRMATION_DUE') {
+            this.nextStatus = 'CONFIRMED';
+        } else if (params.status === 'INCREMENT_DUE') {
+            this.nextStatus = 'INCREMENT';
+        } else if (params.status === 'PROMOTION_DUE') {
+            this.nextStatus = 'PROMOTION';
+        }else {
+            this.nextStatus = '';
+        }
         this.employeesService.getEmployees(params).subscribe(data => {
             this.employees = data.items;
 
@@ -152,17 +167,20 @@ export class EmployeeActionComponent implements OnInit {
                 departmentId: response.id,
                 disabled: true
             });
-            this.getEmployees({'departmentId': response.id})
+            this.getEmployees({'departmentId': response.id});
         });
     }
 
     activateEmployee() {
+        console.log(this.nextStatus);
         this.isSubmitted = true;
         if (this.isSubmitted) {
             const params = {
-                'status': 'ACTIVE',
+                'status': this.nextStatus,
                 'employeeIds': this.selectedEmployee.map(i => i.id)
             };
+
+            console.log(params);
             this.employeesService.setStatusEmployee(params).subscribe(data => {
                 this.isSubmitted = false;
             });
