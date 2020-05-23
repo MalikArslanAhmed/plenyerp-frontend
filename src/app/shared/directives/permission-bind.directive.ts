@@ -83,21 +83,23 @@ export class PermissionBindDirective implements OnInit {
             }
         }*/
 
-        for (let i = 0; i < this.globalService.getSelf().roleUsers.length; i++) {
-            if (this.globalService.getSelf().roleUsers[i].roleId === 1) {
-                hasPermission = true;
-                break;
-            }
-            for (let j = 0; j < this.permission.length; j++) {
-                if (this.globalService.getSelf().roles[i].id === this.roles[j]) {
+        if ( this.globalService.getSelf()) {
+            for (let i = 0; i < this.globalService.getSelf().roles.length; i++) {
+                if (this.globalService.getSelf().roles[i].roleId === 1) {
                     hasPermission = true;
                     break;
                 }
+                for (let j = 0; j < this.roles.length; j++) {
+                    if (this.globalService.getSelf().roles[i].id === this.roles[j]) {
+                        hasPermission = true;
+                        break;
+                    }
+                }
             }
-        }
 
-        if (!(this.permission && this.permission.length)) {
-            hasPermission = true;
+            if (!(this.roles && this.roles.length)) {
+                hasPermission = true;
+            }
         }
 
         if (hasPermission) {

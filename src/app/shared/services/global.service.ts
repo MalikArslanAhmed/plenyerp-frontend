@@ -26,6 +26,9 @@ export class GlobalService {
         if (StorageService.getItem('accessToken')) {
             this.setAccessToken(StorageService.getItem('accessToken'));
         }
+        if (StorageService.getItem('self')) {
+            this.setSelf(StorageService.getItem('self'));
+        }
     }
 
     setSelf(self) {
