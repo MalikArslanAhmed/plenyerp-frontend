@@ -90,8 +90,11 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button type="button" color="accent" (click)="saveEmployee()">
-                                {{this.selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveEmployee()" *ngIf="!this.selectedEmployeeId">
+                                Save & Next
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="updateEmployee()" *ngIf="this.selectedEmployeeId">
+                                Update & Next
                             </button>
                         </div>
                     </form>
