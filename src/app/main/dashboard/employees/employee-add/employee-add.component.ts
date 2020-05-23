@@ -350,6 +350,8 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     patchProgressionForm() {
+        this.pensionChecked(this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.isPensionStarted);
+
         this.progressionForm.patchValue({
             'lastIncrement': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.lastIncrement ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.lastIncrement : '',
             'nextIncrement': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.nextIncrement ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.nextIncrement : '',
@@ -359,11 +361,11 @@ export class EmployeeAddComponent implements OnInit {
             'nextPromotion': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.nextPromotion ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.nextPromotion : '',
             'expectedExitDate': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.expectedExitDate ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.expectedExitDate : '',
             'isExited': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.isExited ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.isExited : '',
-            'isPensionStarted': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.isPensionStarted ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.isPensionStarted : '',
-            'dateStarted': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.dateStarted ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.dateStarted : '',
-            'gratuity': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.gratuity ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.gratuity : '',
-            'monthlyPension': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.monthlyPension ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.monthlyPension : '',
-            'otherPension': this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.otherPension ? this.selectedEmployee.employeeProgressions && this.selectedEmployee.employeeProgressions.otherPension : '',
+            'isPensionStarted': this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.isPensionStarted ? this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.isPensionStarted : '',
+            'dateStarted': this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.dateStarted ? this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.dateStarted : '',
+            'gratuity': this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.gratuity ? this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.gratuity : '',
+            'monthlyPension': this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.monthlyPension ? this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.monthlyPension : '',
+            'otherPension': this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.otherPension ? this.selectedEmployee.employeePensions && this.selectedEmployee.employeePensions.otherPension : '',
         });
     }
 
