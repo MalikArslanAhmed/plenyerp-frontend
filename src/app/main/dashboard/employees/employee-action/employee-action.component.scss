@@ -5,6 +5,10 @@ app-employee-action {
     flex: 1 1 auto;
     width: 100%;
 
+    mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type{
+        max-width: 125px;
+    }
+
     .mat-table {
         width: 100%;
         background: transparent;
