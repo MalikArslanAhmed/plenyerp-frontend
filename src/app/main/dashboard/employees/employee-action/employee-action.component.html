@@ -1,6 +1,6 @@
 <div id="employees" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
-         fxLayoutAlign.gt-xs="space-between center">
+        fxLayoutAlign.gt-xs="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
             <div class="logo" fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
@@ -13,13 +13,13 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <button mat-fab class="accent" id="add-button" aria-label="add categories"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addEmployee()">
+                [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addEmployee()">
                 <mat-icon>add_circle</mat-icon>
             </button>
         </div>
     </div>
 
-    <div class="content">
+    <!-- <div class="content">
         <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
             <mat-grid-list cols="4" rowHeight="100px" class="header-title">
                 <form [formGroup]="employeeFilterForm">
@@ -153,6 +153,231 @@
                              [@animate]="{value:'*',params:{y:'100%'}}">
                     </mat-row>
                 </mat-table>
+            </div>
+        </div>
+    </div> -->
+
+
+    <div class="content" fusePerfectScrollbar>
+        <div class="custom-container-fluid">
+            <div class="custom-row">
+                <div class="list-col col">
+                    <mat-grid-list cols="4" rowHeight="100px" class="header-title">
+                        <form [formGroup]="employeeFilterForm">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Department</mat-label>
+                                        <mat-select (click)="adminUnitListSelect()" formControlName="departmentId"
+                                            disabled>
+                                            <mat-option [value]="department.id" *ngFor="let department of departments">
+                                                {{department.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-icon matSuffix class="secondary-text">flag</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Search</mat-label>
+                                        <input matInput formControlName="search"
+                                            (keyup)="getEmployees({'search': this.employeeFilterForm.value.search})">
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Status</mat-label>
+                                        <mat-select formControlName="statusId"
+                                            (selectionChange)="getEmployees({'status': $event.value})">
+                                            <mat-option [value]="">Choose Status</mat-option>
+                                            <mat-option [value]="statuse.value" *ngFor="let statuse of statuses">
+                                                {{statuse.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-icon matSuffix class="secondary-text">flag</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+                                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                        <button mat-button class="save-button" aria-label="Save"
+                                            style="margin-top: -15px"
+                                            *ngIf="selectedEmployee && selectedEmployee.length > 0"
+                                            (click)="activateEmployee()">{{nextStatus}}</button>
+                                        <button mat-button class="save-disabled-button" aria-label="Save"
+                                            style="margin-top: -15px"
+                                            *ngIf="!selectedEmployee || selectedEmployee.length === 0">{{nextStatus}}</button>
+                                    </div>
+                                </div>
+                            </mat-grid-tile>
+                        </form>
+                    </mat-grid-list>
+
+                    <div>
+                        <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
+                            <ng-container matColumnDef="select">
+                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm class="select-cell">Select
+                                </mat-header-cell>
+                                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee" [ngClass]="select-cell">
+                                    <input type="checkbox" (click)="checkEmployee(employee)">
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="id">
+                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+                                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                                    <p class="email text-truncate">
+                                        {{employee.sno}}.
+                                    </p>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="empId">
+                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>ID</mat-header-cell>
+                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                    <p class="phone text-truncate">
+                                        {{employee?.id}}
+                                    </p>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="fileNo">
+                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>File No.</mat-header-cell>
+                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                    <p class="phone text-truncate">
+                                        {{employee?.personnelFileNumber}}
+                                    </p>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="lastName">
+                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Last name</mat-header-cell>
+                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                    <p class="phone text-truncate">
+                                        {{employee?.lastName}}
+                                    </p>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="firstName">
+                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>First name</mat-header-cell>
+                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                    <p class="phone text-truncate">
+                                        {{employee?.firstName}}
+                                    </p>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="title">
+                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
+                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                    <p class="phone text-truncate">
+                                        {{employee?.title}}
+                                    </p>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="actions">
+                                <mat-header-cell *matHeaderCellDef>
+                                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions
+                                    </div>
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let employee">
+                                    <div fxFlex="row" fxLayoutAlign="end center">
+                                        <button mat-icon-button aria-label="Toggle star" style="color: blue;"
+                                            (click)="previewEmployee(employee)">
+                                            <mat-icon class="material-icons">remove_red_eye</mat-icon>
+                                        </button>
+                                        <button mat-icon-button aria-label="Toggle star" style="color: blue;"
+                                            (click)="editEmployee(employee)">
+                                            <mat-icon class="material-icons">edit</mat-icon>
+                                        </button>
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let employee; columns: displayedColumns;" class="contact"
+                                [@animate]="{value:'*',params:{y:'100%'}}">
+                            </mat-row>
+                        </mat-table>
+                    </div>
+                </div>
+                <div class="preview-col col" *ngIf="previewEmp">
+                    <div class="preview-wrapper">
+                        <div class="custom-container-fluid">
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex align-items-end">
+                                    <figure class="profile-image m-0">
+                                        <img [src]="previewEmp.file ? previewEmp.file.url :'https://dummyimage.com/200x200/000/fff'" alt="image" />
+                                        <mat-form-field>
+                                            <ngx-mat-file-input (change)="fileUpload($event, previewEmp)"></ngx-mat-file-input>
+                                            <mat-icon class="material-icons">edit</mat-icon>
+                                        </mat-form-field>
+                                        <!-- <label for="profilePic">
+                                            <button mat-icon-button aria-label="Toggle star" style="color: #fff;">
+                                            </button>
+                                        </label>
+                                        <input type="file" name="" id="profilePic" style="display: none;">
+                                        <mat-form-field>
+                                            <mat-label>
+                                                Select Image
+                                            </mat-label>
+                                            <ngx-mat-file-input (change)="fileUpload($event)">
+
+                                            </ngx-mat-file-input>
+                                        </mat-form-field> -->
+                                    </figure>
+
+                                    <div class="profile-image-desc h2">
+                                        <p class="text-truncate">{{previewEmp.firstName | titlecase}}</p>
+                                        <p class="m-0 text-truncate">{{previewEmp.lastName | titlecase}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h3 nameField text-truncate text-right">ID :</p>
+                                    <p class="h3 dataField text-truncate">{{previewEmp.id}}</p>
+                                </div>
+                            </div>
+
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h3 nameField text-truncate text-right">File No :</p>
+                                    <p class="h3 dataField text-truncate">{{previewEmp.file?.id}}</p>
+                                </div>
+                            </div>
+
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h3 nameField text-truncate text-right">Gender :</p>
+                                    <p class="h3 dataField text-truncate">
+                                        {{previewEmp.employeePersonalDetails?.gender | titlecase}}</p>
+                                </div>
+                            </div>
+
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h3 nameField text-truncate text-right">DOB :</p>
+                                    <p class="h3 dataField text-truncate">
+                                        {{previewEmp.employeePersonalDetails?.dateOfBirth}}</p>
+                                </div>
+                            </div>
+
+                            <div class="custom-row">
+                                <div class="col p-0 d-flex">
+                                    <p class="h3 nameField text-truncate text-right">M. Status :</p>
+                                    <p class="h3 dataField text-truncate">
+                                        {{previewEmp.employeePersonalDetails?.maritalStatus | titlecase}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
