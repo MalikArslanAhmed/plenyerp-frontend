@@ -1,19 +1,14 @@
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {MatDialog} from '@angular/material/dialog';
-
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
 import {AddCreateAdminSegmentsComponent} from '../add-create-admin-segments/add-create-admin-segments.component';
 import {AdminSegmentServices} from '../../../../shared/services/admin-segment.services';
 import {FormGroup} from '@angular/forms';
 
-/**
- * Food data with nested structure.
- * Each node has a name and an optional list of children.
- */
 interface SegmentNode {
     id: number;
     parentId: number;
@@ -30,7 +25,6 @@ interface SegmentNode {
 
 const TREE_DATA: SegmentNode[] = [];
 
-/** Flat node with expandable and level information */
 interface ExampleFlatNode {
     expandable: boolean;
     name: string;
@@ -46,7 +40,6 @@ interface ExampleFlatNode {
 })
 
 export class SegmentDetailsComponent implements OnInit {
-
     private _transformer = (node: SegmentNode, level: number) => {
         return {
             expandable: !!node.children && node.children.length > 0,
@@ -61,7 +54,8 @@ export class SegmentDetailsComponent implements OnInit {
             children: node.children,
             showDelete: node.children.length === 0
         };
-    }
+    };
+    @ViewChild('tree') tree;
 
     constructor(private _fuseSidebarService: FuseSidebarService, private route: ActivatedRoute,
                 private _matDialog: MatDialog, private adminSegmentServices: AdminSegmentServices) {
@@ -85,14 +79,15 @@ export class SegmentDetailsComponent implements OnInit {
         this.getSegmentList();
     }
 
-    getSegmentList(){
+    getSegmentList() {
         this.adminSegmentServices.getAllSegments(this.segmentId).subscribe(data => {
             this.segmentName = data.name;
             this.dataSource.data = [data];
+            this.tree.treeControl.expandAll();
         });
     }
 
-    addItem(node){
+    addItem(node) {
         this.dialogRef = this._matDialog.open(AddCreateAdminSegmentsComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE', node: node}
@@ -121,8 +116,8 @@ export class SegmentDetailsComponent implements OnInit {
     }
 
     deleteItem(node) {
-       this.adminSegmentServices.deleteSegment(node.id).subscribe(data => {
-           this.getSegmentList();
-       });
+        this.adminSegmentServices.deleteSegment(node.id).subscribe(data => {
+            this.getSegmentList();
+        });
     }
 }
