@@ -137,6 +137,10 @@ export class AppUrl {
         }
     }
 
+    static EDIT_EMPLOYEE_PROFILE_PIC(id?): string {
+            return AppUrl.API_URL + `employees/` + id;
+    }
+
     static ADD_UPDATE_EMPLOYEE(id?): string {
         if (id) {
             return AppUrl.API_URL + `employees/` + id;

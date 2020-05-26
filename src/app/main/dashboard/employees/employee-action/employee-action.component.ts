@@ -67,6 +67,8 @@ export class EmployeeActionComponent implements OnInit {
     employeeFilterForm: FormGroup;
     isSubmitted = false;
 
+    previewEmp;
+
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
                 private router: Router,
@@ -118,16 +120,43 @@ export class EmployeeActionComponent implements OnInit {
         this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);
     }
 
-    previewEmployee(employee) {
-        this.dialogRef = this._matDialog.open(EmployeePreviewComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {action: 'PREVIEW', employee: employee},
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-        });
+
+    fileUpload(event, previewEmp) {
+        const file = event && event.target.files[0];
+        const obj = {
+            type: 'USER_IMAGE',
+            fileType: 'Normal',
+        };
+        obj['file'] = file;
+        this.employeesService.uploadFile(obj).subscribe((fileData: any) => {
+                this.previewEmp.file = fileData.data;
+                this.afterFileUpload(fileData.data, previewEmp);
+            });
+        }
+
+        afterFileUpload(image, employee){
+            this.employeesService.editEmployeeProfilePic(employee.id, {profileImageId: image.id}).subscribe((data)=>{
+                
+            });
+        }
+        
+
+    // previewEmployee(employee) {
+    //     this.dialogRef = this._matDialog.open(EmployeePreviewComponent, {
+    //         panelClass: 'contact-form-dialog',
+    //         data: {action: 'PREVIEW', employee: employee},
+    //     });
+    //     this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+    //         if (!response) {
+    //             return;
+    //         }
+    //     });
+    // }
+
+    previewEmployee(selected) {
+        if(selected){
+            this.previewEmp = selected;
+        }
     }
 
     checkEmployee(employee) {

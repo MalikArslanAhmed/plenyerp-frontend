@@ -1,5 +1,5 @@
 import {BaseService} from './base.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AlertService} from './alert.service';
 import {GlobalService} from './global.service';
 import {Observable} from 'rxjs';
@@ -61,4 +61,28 @@ export class EmployeeService extends BaseService {
     getMaritialStatus(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_MARITIAL_STATUS(), data);
     }
+
+    editEmployeeProfilePic(id, data): Observable<any> {
+        return this.putRequest(AppUrl.EDIT_EMPLOYEE_PROFILE_PIC(id), data);
+    }
+    
+    public uploadFile(obj): Observable<any>  {
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'multipart/form-data');
+
+        return this.http.post(AppUrl.USER_IMAGE_UPLOAD(), toFormData(obj), {
+            headers: headers
+        });
+    }
+}
+
+export function toFormData<T>( formValue: T ) {
+    const formData = new FormData();
+
+    for ( const key of Object.keys(formValue) ) {
+        const value = formValue[key];
+        formData.append(key, value);
+    }
+
+    return formData;
 }

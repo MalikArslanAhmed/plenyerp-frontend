@@ -129,7 +129,7 @@ export class EmployeeAddComponent implements OnInit {
             appointedOn: ['', Validators.required],
             assumedDutyOn: ['', Validators.required],
             typeOfAppointment: ['TENURED', Validators.required],
-            isPermanentStaff: [false, Validators.required]
+            isPermanentStaff: [false]
         });
 
         this.jobProfileSalaryPlacementForm = this.fb.group({
