@@ -15,7 +15,7 @@
     <div class="content">
         <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
             <div class="content">
-                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
                     <!-- This is the tree node template for leaf nodes -->
                     <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
                         <!-- use a disabled button to provide padding for tree leaf -->
@@ -29,7 +29,7 @@
                             <mat-icon class="editBtn">edit</mat-icon>
                         </button>
                         <button mat-icon-button title="Delete" *ngIf="node.level !== 0" (click)="deleteItem(node)">
-                            <mat-icon class="editBtn">delete</mat-icon>
+                            <mat-icon class="deleteBtn">delete</mat-icon>
                         </button>
                     </mat-tree-node>
                     <!-- This is the tree node template for expandable nodes -->
@@ -49,7 +49,7 @@
                             <mat-icon class="editBtn">edit</mat-icon>
                         </button>
                         <button mat-icon-button title="Delete" *ngIf="node.showDelete" (click)="deleteItem(node)">
-                            <mat-icon class="editBtn">delete</mat-icon>
+                            <mat-icon class="deleteBtn">delete</mat-icon>
                         </button>
                     </mat-tree-node>
                 </mat-tree>
