@@ -375,6 +375,32 @@
                                         {{previewEmp.employeePersonalDetails?.maritalStatus | titlecase}}</p>
                                 </div>
                             </div>
+                            <div class="custom-row" style="margin-top: 1rem">
+                                <div class="col p-0 d-flex">
+                                    <button mat-button color="accent">Bank Details</button>
+                                    <button mat-button color="accent">Export Summary</button>
+                                </div>
+                            </div>
+                            <div class="custom-row" style="margin-top: 1rem">
+                                <div class="col p-0 d-flex">
+                                    <div class="display-contents">
+                                        <form [formGroup]="otherDetailForm" fxFlex="100">
+                                        <mat-form-field appearance="outline" fxFlex="100">
+                                            <mat-label>Add Other Details</mat-label>
+                                            <mat-select formControlName="otherDetail">
+                                                <mat-option [value]="">Select</mat-option>
+                                                <mat-option [value]="otherDetails.value"
+                                                            *ngFor="let otherDetails of otherDetailsList">
+                                                    {{otherDetails.name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </form>
+                                    </div>
+                                    <div class="d-flex justify-content-center" style="align-items: center">
+                                        <button mat-button color="accent" (click)="addOtherDetails()">Add</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

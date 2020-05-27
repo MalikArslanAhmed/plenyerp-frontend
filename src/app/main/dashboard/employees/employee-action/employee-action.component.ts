@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EmployeePreviewComponent} from '../employee-preview/employee-preview.component';
 import {DepartmentListSelectComponent} from '../../structure/department-list/department-list-select.component';
+import {EmployeeOtherDetails} from './employee-other-details/employee-other-details';
+import {DesignationCreateComponent} from '../../designation/designation-create/designation-create.component';
 
 @Component({
     selector: 'app-employee-action',
@@ -68,7 +70,49 @@ export class EmployeeActionComponent implements OnInit {
     isSubmitted = false;
 
     previewEmp;
-
+    otherDetailsList = [
+        {
+            name: 'Address',
+            value: 'ADDRESS'
+        },
+        {
+            name: 'Censure',
+            value: 'CENSURE'
+        },
+        {
+            name: 'Employment History',
+            value: 'EMPLOYMENT_HISTORY'
+        },
+        {
+            name: 'Languages',
+            value: 'LANGUAGES'
+        },
+        {
+            name: 'Membership',
+            value: 'MEMBERSHIP'
+        },
+        {
+            name: 'Military Service',
+            value: 'MILITARY_SERVICE'
+        },
+        {
+            name: 'Phone Number',
+            value: 'PHONE_NUMBER'
+        },
+        {
+            name: 'Qualifications',
+            value: 'QUALIFICATIONS'
+        },
+        {
+            name: 'Relations',
+            value: 'RELATIONS'
+        },
+        {
+            name: 'Schools Attended',
+            value: 'SCHOOLS_ATTENDED'
+        }
+    ];
+    otherDetailForm: FormGroup;
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
                 private router: Router,
@@ -85,6 +129,9 @@ export class EmployeeActionComponent implements OnInit {
             'departmentId': [''],
             'search': [''],
             'statusId': ['']
+        });
+        this.otherDetailForm = this.fb.group({
+            otherDetail: '',
         });
     }
 
@@ -215,5 +262,22 @@ export class EmployeeActionComponent implements OnInit {
                 this.isSubmitted = false;
             });
         }
+    }
+
+    addOtherDetails() {
+        console.log(this.otherDetailForm.value);
+        if (this.otherDetailForm.get('otherDetail').value) {
+            this.dialogRef = this._matDialog.open(EmployeeOtherDetails, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: this.otherDetailForm.get('otherDetail').value,
+                }
+            });
+        }
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+        });
     }
 }

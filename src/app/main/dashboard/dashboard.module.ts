@@ -116,6 +116,7 @@ import {AddLevelCharCount} from './admin-segments/add-level-char-count/add-level
 import { EmployeePreviewComponent } from './employees/employee-preview/employee-preview.component';
 
 import { EmpListHeadersComponent } from './employees/employee-list/emp-list-headers/emp-list-headers.component';
+import {EmployeeOtherDetails} from './employees/employee-action/employee-other-details/employee-other-details';
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -213,7 +214,8 @@ import { EmpListHeadersComponent } from './employees/employee-list/emp-list-head
         EmployeeActionComponent,
         EmployeePreviewComponent,
         AddLevelCharCount,
-        EmpListHeadersComponent
+        EmpListHeadersComponent,
+        EmployeeOtherDetails
 
 
     ],
