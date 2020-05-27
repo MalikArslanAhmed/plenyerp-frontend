@@ -223,6 +223,22 @@ export class AppUrl {
         }
     }
 
+    static ADDRESS_TYPE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'lgas/' + id;
+        } else {
+            return AppUrl.API_URL + 'lgas';
+        }
+    }
+
+    static PHONE_TYPE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'lgas/' + id;
+        } else {
+            return AppUrl.API_URL + 'lgas';
+        }
+    }
+
     static DELETE_COUNTRY(id?): string {
         return AppUrl.API_URL + 'countries/' + id;
     }
@@ -236,6 +252,14 @@ export class AppUrl {
     }
 
     static DELETE_LGA(id?): string {
+        return AppUrl.API_URL + 'lgas/' + id;
+    }
+
+    static DELETE_ADDRESS_TYPE(id?): string {
+        return AppUrl.API_URL + 'lgas/' + id;
+    }
+
+    static DELETE_PHONE_TYPE(id?): string {
         return AppUrl.API_URL + 'lgas/' + id;
     }
 
@@ -494,6 +518,14 @@ export class AppUrl {
     }
 
     static GET_LGA_LIST(): string {
+        return AppUrl.API_URL + `lgas`;
+    }
+
+    static GET_ADDRESS_TYPE_LIST(): string {
+        return AppUrl.API_URL + `lgas`;
+    }
+
+    static GET_PHONE_TYPE_LIST(): string {
         return AppUrl.API_URL + `lgas`;
     }
 

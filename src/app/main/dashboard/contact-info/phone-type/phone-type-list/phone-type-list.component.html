@@ -1,0 +1,47 @@
+<div class="country-list">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="phoneTypeList">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-sm *matCellDef="let phoneType">
+                <p class="email text-truncate">
+                    {{phoneType.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone Type</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let phoneType" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{phoneType.name}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let phoneType">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-icon-button aria-label="Toggle star" (click)="editPhoneType(phoneType)"
+                            style="color: blue">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star" (click)="deletePhoneType(phoneType?.id)"
+                            style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedPhoneTypeColumns"></mat-header-row>
+        <mat-row *matRowDef="let phoneType; columns: displayedPhoneTypeColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+</div>
+
+
+
