@@ -8,7 +8,7 @@
         </mat-toolbar-row>
     </mat-toolbar>
     <div mat-dialog-content  fusePerfectScrollbar>
-   <div *ngIf="data.title === 'ADDRESS'" class="margin-top-1rem">
+   <div class="margin-top-1rem">
      <ng-container>
          <form [formGroup]="employeeOtherDetailsForm">
              <div fxLayout="column">
@@ -106,27 +106,6 @@
          </form>
      </ng-container>
    </div>
-    <div *ngIf="data.title === 'CENSURE'" class="margin-top-1rem">
-        CENSURE
-    </div>
-    <div *ngIf="data.title === 'EMPLOYMENT_HISTORY'" class="margin-top-1rem">
-        EMPLOYMENT_HISTORY
-    </div>
-    <div *ngIf="data.title === 'LANGUAGES'" class="margin-top-1rem">
-        LANGUAGES
-    </div>
-    <div *ngIf="data.title === 'MILITARY_SERVICE'" class="margin-top-1rem">
-        MILITARY_SERVICE
-    </div>
-    <div *ngIf="data.title === 'PHONE_NUMBER'" class="margin-top-1rem">
-        PHONE_NUMBER
-    </div>
-    <div *ngIf="data.title === 'RELATIONS'" class="margin-top-1rem">
-        RELATIONS
-    </div>
-    <div *ngIf="data.title === 'SCHOOLS_ATTENDED'" class="margin-top-1rem">
-        SCHOOLS_ATTENDED
-    </div>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button" aria-label="Save">ADD

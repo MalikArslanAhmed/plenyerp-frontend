@@ -6,8 +6,17 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EmployeePreviewComponent} from '../employee-preview/employee-preview.component';
 import {DepartmentListSelectComponent} from '../../structure/department-list/department-list-select.component';
-import {EmployeeOtherDetails} from './employee-other-details/employee-other-details';
+import {EmployeeAddress} from '../employee-other-details/employee-address/employee-address';
 import {DesignationCreateComponent} from '../../designation/designation-create/designation-create.component';
+import {EmployeeCensure} from '../employee-other-details/employee-censure/employee-censure';
+import {EmployeeHistory} from '../employee-other-details/employee-history/employee-history';
+import {EmployeeLanguages} from '../employee-other-details/employee-languages/employee-languages';
+import {EmployeeMembership} from '../employee-other-details/employee-membership/employee-membership';
+import {EmployeeMilitaryService} from '../employee-other-details/employee-military-service/employee-military-service';
+import {EmployeePhoneNumber} from '../employee-other-details/employee-phone-number/employee-phone-number';
+import {EmployeeQualifications} from '../employee-other-details/employee-qualifications/employee-qualifications';
+import {EmployeeRelations} from '../employee-other-details/employee-relations/employee-relations';
+import {EmployeeSchoolAttended} from '../employee-other-details/employee-school-attended/employee-school-attended';
 
 @Component({
     selector: 'app-employee-action',
@@ -266,18 +275,127 @@ export class EmployeeActionComponent implements OnInit {
 
     addOtherDetails() {
         console.log(this.otherDetailForm.value);
-        if (this.otherDetailForm.get('otherDetail').value) {
-            this.dialogRef = this._matDialog.open(EmployeeOtherDetails, {
+        const od = this.otherDetailForm.get('otherDetail').value;
+        if (od === 'ADDRESS') {
+            this.dialogRef = this._matDialog.open(EmployeeAddress, {
                 panelClass: 'contact-form-dialog',
                 data: {
-                    title: this.otherDetailForm.get('otherDetail').value,
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+            });
+        } else if (od === 'CENSURE') {
+            this.dialogRef = this._matDialog.open(EmployeeCensure, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+            });
+        }else if (od === 'EMPLOYMENT_HISTORY') {
+            this.dialogRef = this._matDialog.open(EmployeeHistory, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+            });
+        }else if (od === 'LANGUAGES') {
+            this.dialogRef = this._matDialog.open(EmployeeLanguages, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+            });
+        }else if (od === 'MEMBERSHIP') {
+            this.dialogRef = this._matDialog.open(EmployeeMembership, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+            });
+        }else if (od === 'MILITARY_SERVICE') {
+            this.dialogRef = this._matDialog.open(EmployeeMilitaryService, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+            });
+        }else if (od === 'PHONE_NUMBER') {
+            this.dialogRef = this._matDialog.open(EmployeePhoneNumber, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+            });
+        }else if (od === 'QUALIFICATIONS') {
+            this.dialogRef = this._matDialog.open(EmployeeQualifications, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+            });
+        }else if (od === 'RELATIONS') {
+            this.dialogRef = this._matDialog.open(EmployeeRelations, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+            });
+        }else if (od === 'SCHOOLS_ATTENDED') {
+            this.dialogRef = this._matDialog.open(EmployeeSchoolAttended, {
+                panelClass: 'contact-form-dialog',
+                data: {
+                    title: od,
+                }
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
                 }
             });
         }
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-        });
     }
 }

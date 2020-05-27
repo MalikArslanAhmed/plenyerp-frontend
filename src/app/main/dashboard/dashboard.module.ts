@@ -116,7 +116,16 @@ import {AddLevelCharCount} from './admin-segments/add-level-char-count/add-level
 import { EmployeePreviewComponent } from './employees/employee-preview/employee-preview.component';
 
 import { EmpListHeadersComponent } from './employees/employee-list/emp-list-headers/emp-list-headers.component';
-import {EmployeeOtherDetails} from './employees/employee-action/employee-other-details/employee-other-details';
+import {EmployeeAddress} from './employees/employee-other-details/employee-address/employee-address';
+import {EmployeeCensure} from './employees/employee-other-details/employee-censure/employee-censure';
+import {EmployeeHistory} from './employees/employee-other-details/employee-history/employee-history';
+import {EmployeeLanguages} from './employees/employee-other-details/employee-languages/employee-languages';
+import {EmployeeMembership} from './employees/employee-other-details/employee-membership/employee-membership';
+import {EmployeeMilitaryService} from './employees/employee-other-details/employee-military-service/employee-military-service';
+import {EmployeePhoneNumber} from './employees/employee-other-details/employee-phone-number/employee-phone-number';
+import {EmployeeQualifications} from './employees/employee-other-details/employee-qualifications/employee-qualifications';
+import {EmployeeRelations} from './employees/employee-other-details/employee-relations/employee-relations';
+import {EmployeeSchoolAttended} from './employees/employee-other-details/employee-school-attended/employee-school-attended';
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -215,7 +224,16 @@ import {EmployeeOtherDetails} from './employees/employee-action/employee-other-d
         EmployeePreviewComponent,
         AddLevelCharCount,
         EmpListHeadersComponent,
-        EmployeeOtherDetails
+        EmployeeAddress,
+        EmployeeCensure,
+        EmployeeHistory,
+        EmployeeLanguages,
+        EmployeeMembership,
+        EmployeeMilitaryService,
+        EmployeePhoneNumber,
+        EmployeeQualifications,
+        EmployeeRelations,
+        EmployeeSchoolAttended
 
 
     ],
