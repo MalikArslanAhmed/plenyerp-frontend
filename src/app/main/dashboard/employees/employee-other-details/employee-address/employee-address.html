@@ -98,17 +98,64 @@
                          </mat-form-field>
                      </div>
                  </div>
-                 <div style="width: 100%; min-height: 300px; border: 1px solid #e2e2e2">
-                     address listing
-                 </div>
 
              </div>
          </form>
+         <div class="employee-address">
+             <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeAddressList">
+                 <ng-container matColumnDef="sno">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeAddress">
+                         <p class="email text-truncate">
+                             {{employeeAddress.sno}}.
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="name">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeAddress.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="actions">
+                     <mat-header-cell *matHeaderCellDef>
+                         <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+                     </mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
+                         <div fxFlex="row" fxLayoutAlign="end center">
+                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeAddress(employeeAddress)"
+                                     style="color: blue">
+                                 <mat-icon class="material-icons">edit</mat-icon>
+                             </button>
+                             <button mat-icon-button aria-label="Toggle star" (click)="deleteEmployeeAddress(employeeAddress?.id)"
+                                     style="color: red">
+                                 <mat-icon class="material-icons">delete</mat-icon>
+                             </button>
+                         </div>
+                     </mat-cell>
+                 </ng-container>
+
+                 <mat-header-row *matHeaderRowDef="employeeAddressColumns"></mat-header-row>
+                 <mat-row *matRowDef="let employeeAddress; columns: employeeAddressColumns;" class="contact"
+                          [@animate]="{value:'*',params:{y:'100%'}}">
+                 </mat-row>
+             </mat-table>
+         </div>
      </ng-container>
    </div>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" aria-label="Save">ADD
+        <button mat-button class="save-button"
+                [disabled]="employeeOtherDetailsForm.invalid"
+                (click)="matDialogRef.close(employeeOtherDetailsForm);"
+                aria-label="Save">ADD
         </button>
+<!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeeOtherDetailsForm); updateDesignation()"-->
+<!--                [disabled]="employeeOtherDetailsForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
+<!--        </button>-->
     </div>
 </div>

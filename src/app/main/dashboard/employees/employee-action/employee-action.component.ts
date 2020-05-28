@@ -278,7 +278,7 @@ export class EmployeeActionComponent implements OnInit {
         const od = this.otherDetailForm.get('otherDetail').value;
         if (od === 'ADDRESS') {
             this.dialogRef = this._matDialog.open(EmployeeAddress, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }
@@ -290,7 +290,7 @@ export class EmployeeActionComponent implements OnInit {
             });
         } else if (od === 'CENSURE') {
             this.dialogRef = this._matDialog.open(EmployeeCensure, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }
@@ -302,7 +302,7 @@ export class EmployeeActionComponent implements OnInit {
             });
         }else if (od === 'EMPLOYMENT_HISTORY') {
             this.dialogRef = this._matDialog.open(EmployeeHistory, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }
@@ -314,7 +314,7 @@ export class EmployeeActionComponent implements OnInit {
             });
         }else if (od === 'LANGUAGES') {
             this.dialogRef = this._matDialog.open(EmployeeLanguages, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }
@@ -326,7 +326,7 @@ export class EmployeeActionComponent implements OnInit {
             });
         }else if (od === 'MEMBERSHIP') {
             this.dialogRef = this._matDialog.open(EmployeeMembership, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }
@@ -338,7 +338,7 @@ export class EmployeeActionComponent implements OnInit {
             });
         }else if (od === 'MILITARY_SERVICE') {
             this.dialogRef = this._matDialog.open(EmployeeMilitaryService, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }
@@ -350,7 +350,7 @@ export class EmployeeActionComponent implements OnInit {
             });
         }else if (od === 'PHONE_NUMBER') {
             this.dialogRef = this._matDialog.open(EmployeePhoneNumber, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }
@@ -362,7 +362,7 @@ export class EmployeeActionComponent implements OnInit {
             });
         }else if (od === 'QUALIFICATIONS') {
             this.dialogRef = this._matDialog.open(EmployeeQualifications, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }
@@ -374,7 +374,7 @@ export class EmployeeActionComponent implements OnInit {
             });
         }else if (od === 'RELATIONS') {
             this.dialogRef = this._matDialog.open(EmployeeRelations, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }
@@ -386,7 +386,7 @@ export class EmployeeActionComponent implements OnInit {
             });
         }else if (od === 'SCHOOLS_ATTENDED') {
             this.dialogRef = this._matDialog.open(EmployeeSchoolAttended, {
-                panelClass: 'contact-form-dialog',
+                panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
                 }

@@ -30,6 +30,17 @@ export class EmployeeAddress implements OnInit {
     states = [];
     regions = [];
     lgas = [];
+    employeeAddressList = [
+        {
+            sno: 1,
+            name: 'abcd',
+        },
+        {
+            sno: 2,
+            name: 'abcd1',
+        }
+        ];
+    employeeAddressColumns = ['sno', 'name', 'actions'];
 
     constructor(public matDialogRef: MatDialogRef<EmployeeAddress>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -61,4 +72,11 @@ export class EmployeeAddress implements OnInit {
     }
 
 
+    editEmployeeAddress(employeeAddress: any) {
+
+    }
+
+    deleteEmployeeAddress(id: any) {
+
+    }
 }

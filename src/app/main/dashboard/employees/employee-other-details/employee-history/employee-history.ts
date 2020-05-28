@@ -15,7 +15,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 export class EmployeeHistory implements OnInit {
     data: any;
     dialogTitle: any;
-    employeeOtherDetailsForm: FormGroup;
+    employeeHistoryForm: FormGroup;
     typeOfAddress = [
         {
             name: 'abcd',
@@ -26,10 +26,17 @@ export class EmployeeHistory implements OnInit {
             value: 'XYZ'
         }
     ];
-    countries = [];
-    states = [];
-    regions = [];
-    lgas = [];
+    employeeHistoryList = [
+        {
+            sno: 1,
+            name: 'abcd',
+        },
+        {
+            sno: 2,
+            name: 'abcd1',
+        } 
+    ];
+    employeeHistoryColumns = ['sno', 'name', 'actions'];
     constructor(public matDialogRef: MatDialogRef<EmployeeHistory>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -46,18 +53,21 @@ export class EmployeeHistory implements OnInit {
     }
 
     refresh() {
-        this.employeeOtherDetailsForm = this.fb.group({
-            typeOfAddress: ['', Validators.required],
-            addressLine1: ['', Validators.required],
-            addressLine2: [''],
-            city: ['', Validators.required],
-            zip: ['', Validators.required],
-            country: ['', Validators.required],
-            state: ['', Validators.required],
-            region: ['', Validators.required],
-            lga: ['', Validators.required],
+        this.employeeHistoryForm = this.fb.group({
+            employer: ['', Validators.required],
+            dateEngaged: ['', Validators.required],
+            dateDisEngaged: ['', Validators.required],
+            totalRenumeration: ['', Validators.required],
+            filePage: ['', Validators.required],
         });
     }
 
 
+    editEmployeeHistory(employeeHistory: any) {
+        
+    }
+
+    deleteEmployeeHistory(id: any) {
+        
+    }
 }
