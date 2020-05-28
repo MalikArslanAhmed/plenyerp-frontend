@@ -10,47 +10,33 @@
     <div mat-dialog-content  fusePerfectScrollbar>
    <div class="margin-top-1rem">
      <ng-container>
-         <form [formGroup]="employeeOtherDetailsForm">
+         <form [formGroup]="employeeSchoolAttendedForm">
              <div fxLayout="column">
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
-                         <mat-label>Type Of Address</mat-label>
-                         <mat-select formControlName="typeOfAddress">
-                             <mat-option [value]="">Select</mat-option>
-                             <mat-option [value]="toa.value"
-                                         *ngFor="let toa of typeOfAddress">
-                                 {{toa.name}}</mat-option>
-                         </mat-select>
+                         <mat-label>School</mat-label>
+                         <input matInput formControlName="school">
                      </mat-form-field>
                  </div>
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
-                         <mat-label>Address Line 1</mat-label>
-                         <input matInput formControlName="addressLine1">
+                         <mat-label>Address</mat-label>
+                         <input matInput formControlName="address">
                      </mat-form-field>
-                 </div>
-                 <div>
-                     <mat-form-field appearance="outline" fxFlex="100">
-                         <mat-label>Address Line 2</mat-label>
-                         <input matInput formControlName="addressLine2">
-                     </mat-form-field>
-                 </div>
-                 <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
-                     <div fxFlex="50">
-                         <mat-form-field appearance="outline" fxFlex="100">
-                             <mat-label>City</mat-label>
-                             <input matInput formControlName="city">
-                         </mat-form-field>
-                     </div>
-                     <div fxFlex="50">
-                         <mat-form-field appearance="outline" fxFlex="100">
-                             <mat-label>ZIP Code</mat-label>
-                             <input matInput formControlName="zip">
-                         </mat-form-field>
-                     </div>
                  </div>
 
                  <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
+                     <div fxFlex="50">
+                         <mat-form-field appearance="outline" fxFlex="100">
+                             <mat-label>Category</mat-label>
+                             <mat-select formControlName="category">
+                                 <mat-option [value]="">Select</mat-option>
+                                 <mat-option [value]="category.value"
+                                             *ngFor="let category of categories">
+                                     {{category.name}}</mat-option>
+                             </mat-select>
+                         </mat-form-field>
+                     </div>
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Country</mat-label>
@@ -62,53 +48,87 @@
                              </mat-select>
                          </mat-form-field>
                      </div>
-                     <div fxFlex="50">
-                         <mat-form-field appearance="outline" fxFlex="100">
-                             <mat-label>State</mat-label>
-                             <mat-select formControlName="state">
-                                 <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="state.value"
-                                             *ngFor="let state of states">
-                                     {{state.name}}</mat-option>
-                             </mat-select>
-                         </mat-form-field>
-                     </div>
                  </div>
                  <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
-                             <mat-label>Region</mat-label>
-                             <mat-select formControlName="region">
-                                 <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="region.value"
-                                             *ngFor="let region of regions">
-                                     {{region.name}}</mat-option>
-                             </mat-select>
+                             <mat-label>Date Entered</mat-label>
+                             <input matInput [matDatepicker]="picker" formControlName="dateEntered" name="dateEntered" placeholder="Choose a date">
+                             <mat-datepicker-toggle matSuffix [for]="picker">
+                                 <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                             </mat-datepicker-toggle>
+                             <mat-datepicker #picker></mat-datepicker>
                          </mat-form-field>
                      </div>
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
-                             <mat-label>LGA</mat-label>
-                             <mat-select formControlName="lga">
-                                 <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="lga.value"
-                                             *ngFor="let lga of lgas">
-                                     {{lga.name}}</mat-option>
-                             </mat-select>
+                             <mat-label>Date Exited</mat-label>
+                             <input matInput [matDatepicker]="picker1" formControlName="dateExited" name="dateExited" placeholder="Choose a date">
+                             <mat-datepicker-toggle matSuffix [for]="picker1">
+                                 <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                             </mat-datepicker-toggle>
+                             <mat-datepicker #picker1></mat-datepicker>
                          </mat-form-field>
                      </div>
-                 </div>
-                 <div style="width: 100%; min-height: 300px; border: 1px solid #e2e2e2">
-                     address listing
                  </div>
 
              </div>
          </form>
+         <div class="employee-address">
+             <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeSchoolAttendedList">
+                 <ng-container matColumnDef="sno">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeSchoolAttended">
+                         <p class="email text-truncate">
+                             {{employeeSchoolAttended.sno}}.
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="name">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeSchoolAttended">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeSchoolAttended.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="actions">
+                     <mat-header-cell *matHeaderCellDef>
+                         <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+                     </mat-header-cell>
+                     <mat-cell *matCellDef="let employeeSchoolAttended">
+                         <div fxFlex="row" fxLayoutAlign="end center">
+                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeSchoolAttended(employeeSchoolAttended)"
+                                     style="color: blue">
+                                 <mat-icon class="material-icons">edit</mat-icon>
+                             </button>
+                             <button mat-icon-button aria-label="Toggle star" (click)="deleteEmployeeSchoolAttended(employeeSchoolAttended?.id)"
+                                     style="color: red">
+                                 <mat-icon class="material-icons">delete</mat-icon>
+                             </button>
+                         </div>
+                     </mat-cell>
+                 </ng-container>
+
+                 <mat-header-row *matHeaderRowDef="employeeSchoolAttendedColumns"></mat-header-row>
+                 <mat-row *matRowDef="let employeeSchoolAttended; columns: employeeSchoolAttendedColumns;" class="contact"
+                          [@animate]="{value:'*',params:{y:'100%'}}">
+                 </mat-row>
+             </mat-table>
+         </div>
      </ng-container>
    </div>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" aria-label="Save">ADD
+        <button mat-button class="save-button"
+                [disabled]="employeeSchoolAttendedForm.invalid"
+                (click)="matDialogRef.close(employeeSchoolAttendedForm);"
+                aria-label="Save">ADD
         </button>
+        <!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeeSchoolAttendedForm); updateDesignation()"-->
+        <!--                [disabled]="employeeOtherDetailsForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
+        <!--        </button>-->
     </div>
 </div>

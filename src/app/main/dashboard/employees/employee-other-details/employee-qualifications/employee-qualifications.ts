@@ -15,7 +15,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 export class EmployeeQualifications implements OnInit {
     data: any;
     dialogTitle: any;
-    employeeOtherDetailsForm: FormGroup;
+    employeeQualificationForm: FormGroup;
     typeOfAddress = [
         {
             name: 'abcd',
@@ -26,10 +26,20 @@ export class EmployeeQualifications implements OnInit {
             value: 'XYZ'
         }
     ];
-    countries = [];
-    states = [];
-    regions = [];
-    lgas = [];
+    employeeQualificationList = [
+        {
+            sno: 1,
+            name: 'abcd',
+        },
+        {
+            sno: 2,
+            name: 'abcd1',
+        }
+    ];
+    employeeQualificationColumns = ['sno', 'name', 'actions'];
+    certifications = [];
+    majors = [];
+    countryOfIssues = [];
     constructor(public matDialogRef: MatDialogRef<EmployeeQualifications>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -46,18 +56,21 @@ export class EmployeeQualifications implements OnInit {
     }
 
     refresh() {
-        this.employeeOtherDetailsForm = this.fb.group({
-            typeOfAddress: ['', Validators.required],
-            addressLine1: ['', Validators.required],
-            addressLine2: [''],
-            city: ['', Validators.required],
-            zip: ['', Validators.required],
-            country: ['', Validators.required],
-            state: ['', Validators.required],
-            region: ['', Validators.required],
-            lga: ['', Validators.required],
+        this.employeeQualificationForm = this.fb.group({
+            institution: ['', Validators.required],
+            certification: ['', Validators.required],
+            major: ['',  Validators.required],
+            countryOfIssue: ['', Validators.required],
+            yearObtained: ['', Validators.required],
         });
     }
 
 
+    editEmployeeQualification(employeeQualification: any) {
+
+    }
+
+    deleteEmployeeQualification(id: any) {
+
+    }
 }

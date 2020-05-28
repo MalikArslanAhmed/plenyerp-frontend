@@ -15,7 +15,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 export class EmployeeSchoolAttended implements OnInit {
     data: any;
     dialogTitle: any;
-    employeeOtherDetailsForm: FormGroup;
+    employeeSchoolAttendedForm: FormGroup;
     typeOfAddress = [
         {
             name: 'abcd',
@@ -26,10 +26,19 @@ export class EmployeeSchoolAttended implements OnInit {
             value: 'XYZ'
         }
     ];
+    employeeSchoolAttendedList = [
+        {
+            sno: 1,
+            name: 'abcd',
+        },
+        {
+            sno: 2,
+            name: 'abcd1',
+        }
+    ];
+    employeeSchoolAttendedColumns = ['sno', 'name', 'actions'];
     countries = [];
-    states = [];
-    regions = [];
-    lgas = [];
+    categories = [];
 
     constructor(public matDialogRef: MatDialogRef<EmployeeSchoolAttended>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -47,16 +56,21 @@ export class EmployeeSchoolAttended implements OnInit {
     }
 
     refresh() {
-        this.employeeOtherDetailsForm = this.fb.group({
-            typeOfAddress: ['', Validators.required],
-            addressLine1: ['', Validators.required],
-            addressLine2: [''],
-            city: ['', Validators.required],
-            zip: ['', Validators.required],
+        this.employeeSchoolAttendedForm = this.fb.group({
+            school: ['', Validators.required],
+            address: ['', Validators.required],
+            category: ['', Validators.required],
             country: ['', Validators.required],
-            state: ['', Validators.required],
-            region: ['', Validators.required],
-            lga: ['', Validators.required],
+            dateEntered: ['', Validators.required],
+            dateExited: ['', Validators.required],
         });
+    }
+
+    editEmployeeSchoolAttended(employeeSchoolAttended: any) {
+
+    }
+
+    deleteEmployeeSchoolAttended(id: any) {
+
     }
 }

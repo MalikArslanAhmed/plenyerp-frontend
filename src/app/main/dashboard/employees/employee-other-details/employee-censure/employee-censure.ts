@@ -15,8 +15,8 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 export class EmployeeCensure implements OnInit {
     data: any;
     dialogTitle: any;
-    employeeOtherDetailsForm: FormGroup;
-    typeOfAddress = [
+    employeeCensureForm: FormGroup;
+    issuedBy = [
         {
             name: 'abcd',
             value: 'ABCD'
@@ -26,7 +26,18 @@ export class EmployeeCensure implements OnInit {
             value: 'XYZ'
         }
     ];
-    countries = [];
+    employeeCensureList = [
+        {
+            sno: 1,
+            name: 'abcd',
+        },
+        {
+            sno: 2,
+            name: 'abcd1',
+        }
+    ];
+    employeeCensureColumns = ['sno', 'name', 'actions'];
+    Censures = [];
     states = [];
     regions = [];
     lgas = [];
@@ -46,18 +57,46 @@ export class EmployeeCensure implements OnInit {
     }
 
     refresh() {
-        this.employeeOtherDetailsForm = this.fb.group({
-            typeOfAddress: ['', Validators.required],
-            addressLine1: ['', Validators.required],
-            addressLine2: [''],
-            city: ['', Validators.required],
-            zip: ['', Validators.required],
-            country: ['', Validators.required],
-            state: ['', Validators.required],
-            region: ['', Validators.required],
-            lga: ['', Validators.required],
+        this.employeeCensureForm = this.fb.group({
+            censure: ['', Validators.required],
+            dateIssued: ['', Validators.required],
+            issuedBy: [''],
+            file: ['', Validators.required],
+            docType: ['', Validators.required],
+            filePage: ['', Validators.required],
+            summary: ['', Validators.required],
         });
     }
 
+
+    editEmployeeCensure(employeeCensure: any) {
+
+    }
+
+    deleteEmployeeCensure(id: any) {
+
+    }
+
+    fileUpload(event) {
+        // const file = event && event.target.files[0];
+        // const obj = {
+        //     type: 'USER_IMAGE',
+        //     fileType: 'Normal',
+        // };
+        // obj['file'] = file;
+        // this.userProfileService.uploadFile(obj).subscribe((fileData: any) => {
+        //         this.profileImage = fileData.data;
+        //         this.isEditProfileImage = false;
+        //         // console.log('---->>>', this.profileImage);
+        //         if (this.profileImage) {
+        //             this.profileForm.patchValue({
+        //                 fileId:   this.profileImage.id
+        //             });
+        //         }
+        //
+        //
+        //     }
+        // );
+    }
 
 }
