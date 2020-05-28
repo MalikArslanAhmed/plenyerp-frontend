@@ -15,8 +15,8 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 export class EmployeeLanguages implements OnInit {
     data: any;
     dialogTitle: any;
-    employeeOtherDetailsForm: FormGroup;
-    typeOfAddress = [
+    employeeLanguageForm: FormGroup;
+    languages = [
         {
             name: 'abcd',
             value: 'ABCD'
@@ -26,10 +26,19 @@ export class EmployeeLanguages implements OnInit {
             value: 'XYZ'
         }
     ];
-    countries = [];
-    states = [];
-    regions = [];
-    lgas = [];
+    employeeLanguageList = [
+        {
+            sno: 1,
+            name: 'abcd',
+        },
+        {
+            sno: 2,
+            name: 'abcd1',
+        }
+    ];
+    writtenProficiency = [];
+    spokenProficiency = [];
+    employeeLanguageColumns = ['sno', 'name', 'actions'];
     constructor(public matDialogRef: MatDialogRef<EmployeeLanguages>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -46,18 +55,20 @@ export class EmployeeLanguages implements OnInit {
     }
 
     refresh() {
-        this.employeeOtherDetailsForm = this.fb.group({
-            typeOfAddress: ['', Validators.required],
-            addressLine1: ['', Validators.required],
-            addressLine2: [''],
-            city: ['', Validators.required],
-            zip: ['', Validators.required],
-            country: ['', Validators.required],
-            state: ['', Validators.required],
-            region: ['', Validators.required],
-            lga: ['', Validators.required],
+        this.employeeLanguageForm = this.fb.group({
+            language: ['', Validators.required],
+            written: ['', Validators.required],
+            spoken: [''],
+            certification: ['', Validators.required],
         });
     }
 
 
+    editEmployeeLanguage(employeeLanguage: any) {
+        
+    }
+
+    deleteEmployeeLanguage(id: any) {
+        
+    }
 }

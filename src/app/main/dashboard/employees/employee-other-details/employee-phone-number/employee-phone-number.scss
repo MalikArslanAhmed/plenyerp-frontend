@@ -7,3 +7,24 @@
 .margin-top-1rem {
     margin-top: 1rem;
 }
+.example-tel-input-container {
+    display: flex;
+}
+
+.example-tel-input-element {
+    border: none;
+    background: none;
+    padding: 0;
+    outline: none;
+    font: inherit;
+    text-align: center;
+}
+
+.example-tel-input-spacer {
+    opacity: 0;
+    transition: opacity 200ms;
+}
+
+:host.example-floating .example-tel-input-spacer {
+    opacity: 1;
+}

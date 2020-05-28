@@ -15,8 +15,8 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 export class EmployeeMilitaryService implements OnInit {
     data: any;
     dialogTitle: any;
-    employeeOtherDetailsForm: FormGroup;
-    typeOfAddress = [
+    employeeMilitaryServiceForm: FormGroup;
+    armOfServices = [
         {
             name: 'abcd',
             value: 'ABCD'
@@ -26,10 +26,17 @@ export class EmployeeMilitaryService implements OnInit {
             value: 'XYZ'
         }
     ];
-    countries = [];
-    states = [];
-    regions = [];
-    lgas = [];
+    employeeMilitaryServiceList = [
+        {
+            sno: 1,
+            name: 'abcd',
+        },
+        {
+            sno: 2,
+            name: 'abcd1',
+        }
+    ];
+    employeeMilitaryServiceColumns = ['sno', 'name', 'actions'];
     constructor(public matDialogRef: MatDialogRef<EmployeeMilitaryService>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -46,18 +53,22 @@ export class EmployeeMilitaryService implements OnInit {
     }
 
     refresh() {
-        this.employeeOtherDetailsForm = this.fb.group({
-            typeOfAddress: ['', Validators.required],
-            addressLine1: ['', Validators.required],
-            addressLine2: [''],
-            city: ['', Validators.required],
-            zip: ['', Validators.required],
-            country: ['', Validators.required],
-            state: ['', Validators.required],
-            region: ['', Validators.required],
-            lga: ['', Validators.required],
+        this.employeeMilitaryServiceForm = this.fb.group({
+            armOfService: ['', Validators.required],
+            serviceNumber: ['', Validators.required],
+            lastUnit: ['', Validators.required],
+            dateOfEngagement: ['', Validators.required],
+            dateOfDischarge: ['', Validators.required],
+            reasonForLeaving: ['', Validators.required],
         });
     }
 
 
+    editEmployeeMilitaryService(employeeMilitaryService: any) {
+
+    }
+
+    deleteEmployeeMilitaryService(id: any) {
+
+    }
 }
