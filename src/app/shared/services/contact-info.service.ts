@@ -135,16 +135,16 @@ export class ContactInfoService extends BaseService {
         return this.deleteRequest(AppUrl.DELETE_DESIGNATION(id));
     }
 
-    addAddressType(data): Observable<any> {
-        return this.postRequest(AppUrl.ADDRESS_TYPE(), data);
-    }
-
     getAddressTypeList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_ADDRESS_TYPE_LIST(), data);
     }
 
     deleteAddressType(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_ADDRESS_TYPE(id));
+    }
+
+    addAddressType(data): Observable<any> {
+        return this.postRequest(AppUrl.ADDRESS_TYPE(), data);
     }
 
     updateAddressType(id, data): Observable<any> {

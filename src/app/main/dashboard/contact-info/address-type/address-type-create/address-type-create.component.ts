@@ -40,7 +40,8 @@ export class AddressTypeCreateComponent implements OnInit {
 
   refresh() {
     this.addressTypeForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      isActive: [false]
     });
   }
 
@@ -48,6 +49,7 @@ export class AddressTypeCreateComponent implements OnInit {
     if (this.updateData) {
       this.addressTypeForm.patchValue({
         name: this.updateData.addressType.name,
+        isActive: this.updateData.addressType.isActive
       });
     }
   }

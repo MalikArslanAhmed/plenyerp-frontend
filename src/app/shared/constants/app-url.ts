@@ -225,17 +225,17 @@ export class AppUrl {
 
     static ADDRESS_TYPE(id?): string {
         if (id) {
-            return AppUrl.API_URL + 'lgas/' + id;
+            return AppUrl.API_URL + 'address-type/' + id;
         } else {
-            return AppUrl.API_URL + 'lgas';
+            return AppUrl.API_URL + 'address-type';
         }
     }
 
     static PHONE_TYPE(id?): string {
         if (id) {
-            return AppUrl.API_URL + 'lgas/' + id;
+            return AppUrl.API_URL + 'phone-type/' + id;
         } else {
-            return AppUrl.API_URL + 'lgas';
+            return AppUrl.API_URL + 'phone-type';
         }
     }
 
@@ -256,11 +256,11 @@ export class AppUrl {
     }
 
     static DELETE_ADDRESS_TYPE(id?): string {
-        return AppUrl.API_URL + 'lgas/' + id;
+        return AppUrl.API_URL + 'address-type/' + id;
     }
 
     static DELETE_PHONE_TYPE(id?): string {
-        return AppUrl.API_URL + 'lgas/' + id;
+        return AppUrl.API_URL + 'phone-type/' + id;
     }
 
     static LANGUAGES(id?): string {
@@ -522,11 +522,11 @@ export class AppUrl {
     }
 
     static GET_ADDRESS_TYPE_LIST(): string {
-        return AppUrl.API_URL + `lgas`;
+        return AppUrl.API_URL + `address-type`;
     }
 
     static GET_PHONE_TYPE_LIST(): string {
-        return AppUrl.API_URL + `lgas`;
+        return AppUrl.API_URL + `phone-type`;
     }
 
     static GET_COUNTRY(): string {
@@ -614,5 +614,30 @@ export class AppUrl {
     }
     static UPDATE_LEVEL_COUNTS(id?): string {
         return AppUrl.API_URL + 'admin-segments/' + id + '/levels';
+    }
+
+    
+    static GET_BANKS_NAME(): string {
+        return AppUrl.API_URL + `banks`;
+    }
+
+    static GET_BANK_BRANCH_NAME(id): string {
+        return AppUrl.API_URL + `bank/` + id + '/branches';
+    }
+
+    static GET_BANK_DETAILS_LIST(empId): string {
+        return AppUrl.API_URL + `employee/` + empId +'/banks';
+    }
+
+    static ADD_BANK_DETAILS(empId): string {
+        return AppUrl.API_URL + `employee/` + empId + '/banks';
+    }
+
+    static UPDATE_BANK_DETAILS(empId, bankListId): string {
+        return AppUrl.API_URL + `employee/` + empId + '/banks/' + bankListId;
+    }
+
+    static DELETE_BANK_DETAILS(bankId): string {
+        return AppUrl.API_URL + `employee-banks/` + bankId;
     }
 }

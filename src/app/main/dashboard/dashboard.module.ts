@@ -122,6 +122,7 @@ import { AddressTypeListComponent } from './contact-info/address-type/address-ty
 import { PhoneTypeComponent } from './contact-info/phone-type/phone-type.component';
 import { PhoneTypeCreateComponent } from './contact-info/phone-type/phone-type-create/phone-type-create.component';
 import { PhoneTypeListComponent } from './contact-info/phone-type/phone-type-list/phone-type-list.component';
+import { EmployeeBankDetailsComponent } from './employees/employee-action/employee-bank-details/employee-bank-details.component';
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -225,7 +226,8 @@ import { PhoneTypeListComponent } from './contact-info/phone-type/phone-type-lis
         AddressTypeListComponent,
         PhoneTypeComponent,
         PhoneTypeCreateComponent,
-        PhoneTypeListComponent
+        PhoneTypeListComponent,
+        EmployeeBankDetailsComponent
 
 
     ],

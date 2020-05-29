@@ -40,7 +40,8 @@ export class PhoneTypeCreateComponent implements OnInit {
 
   refresh() {
     this.phoneTypeForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      isActive : [false]
     });
   }
 
@@ -48,6 +49,7 @@ export class PhoneTypeCreateComponent implements OnInit {
     if (this.updateData) {
       this.phoneTypeForm.patchValue({
         name: this.updateData.phoneType.name,
+        isActive: this.updateData.phoneType.isActive
       });
     }
   }

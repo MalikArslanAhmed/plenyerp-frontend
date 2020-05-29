@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EmployeePreviewComponent} from '../employee-preview/employee-preview.component';
 import {DepartmentListSelectComponent} from '../../structure/department-list/department-list-select.component';
+import {EmployeeBankDetailsComponent} from './employee-bank-details/employee-bank-details.component';
 
 @Component({
     selector: 'app-employee-action',
@@ -69,6 +70,8 @@ export class EmployeeActionComponent implements OnInit {
 
     previewEmp;
 
+    
+
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
                 private router: Router,
@@ -112,6 +115,19 @@ export class EmployeeActionComponent implements OnInit {
                     i++;
                 });
             }
+        });
+    }
+
+    addBankDetails(previewEmp) {
+        this.dialogRef = this._matDialog.open(EmployeeBankDetailsComponent, {
+            panelClass: 'bank-details-dialog',
+            data: {action: 'CREATE', selectedEmployee: previewEmp}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // this.getAddressTypeList.getAddressTypeList();
         });
     }
 
