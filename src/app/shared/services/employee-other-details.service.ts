@@ -81,6 +81,22 @@ export class EmployeeOtherDetailsService extends BaseService {
         return this.putRequest(AppUrl.UPDATE_EMPLOYEE_HISTORY(employeeId, historyId), data);
     }
 
+    armOfService(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_ARM_OF_SERVICES(), data);
+    }
+    employeeMilitaryServiceList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_MILITARY_SERVICE(id), data);
+    }
+    addEmployeeMilitaryService(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_MILITARY_SERVICE(id), data);
+    }
+    deleteMilitaryService(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_MILITARY_SERVICE(id));
+    }
+    updateMilitaryService(employeeId, militaryId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_MILITARY_SERVICE(employeeId, militaryId), data);
+    }
+
 }
 
 export function toFormData<T>( formValue: T ) {

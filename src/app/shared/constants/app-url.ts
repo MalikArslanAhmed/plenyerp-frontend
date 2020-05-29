@@ -624,5 +624,14 @@ export class AppUrl {
     static UPDATE_EMPLOYEE_HISTORY(employeeId, historyId): string {
         return AppUrl.API_URL + 'employee/' + employeeId + '/histories/' + historyId ;
     }
+    static EMPLOYEE_MILITARY_SERVICE(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/military';
+    }
+    static DELETE_MILITARY_SERVICE(id): string {
+        return AppUrl.API_URL + 'employee-military/' + id ;
+    }
+    static UPDATE_MILITARY_SERVICE(employeeId, militaryId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/histories/' + militaryId ;
+    }
 
 }
