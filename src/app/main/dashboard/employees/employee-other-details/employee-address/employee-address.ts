@@ -24,7 +24,7 @@ export class EmployeeAddress implements OnInit {
     lgas = [];
     employeeAddressList = [];
     employeeAddressColumns = ['sno', 'addressType', 'address', 'city', 'zipCode', 'country', 'region', 'state', 'lga', 'actions'];
-
+    addressId = null;
     constructor(public matDialogRef: MatDialogRef<EmployeeAddress>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -86,13 +86,40 @@ export class EmployeeAddress implements OnInit {
 
     }
 
+    editEmployeeAddress(addressId: any) {
+        this.addressId = addressId;
+        this.employeeAddressList.forEach(val => {
+            if (val.id === addressId) {
+                this.employeeAddressForm.patchValue({
+                    addressTypeId: val.addressTypeId,
+                    addressLine1: val.addressLine1,
+                    addressLine2: val.addressLine2,
+                    city: val.city,
+                    zipCode: val.zipCode,
+                    countryId: val.country.id,
+                    regionId: val.region.id ,
+                    stateId: val.state.id,
+                    lgaId: val.lga.id,
+                });
+            }
+        });
+    }
 
-    editEmployeeAddress(employeeAddress: any) {
-
+    updateEmployeeAddress() {
+        this.employeeOtherDetailsService.updateAddress(this.data.employeeId, this.addressId, this.employeeAddressForm.value).subscribe(data => {
+            this.addressId = null;
+            this.employeeAddressForm.reset();
+            this.getAddressList();
+        });
+    }
+    cancelUpdate() {
+        this.addressId = null;
+        this.employeeAddressForm.reset();
     }
 
     deleteEmployeeAddress(id: any) {
         this.employeeOtherDetailsService.deleteAddress(id).subscribe(data => {
+            this.employeeAddressForm.reset();
             this.getAddressList();
         });
     }
@@ -123,9 +150,9 @@ export class EmployeeAddress implements OnInit {
     }
 
     addAddress() {
-      console.log('submit-address---', this.employeeAddressForm.value);
       this.employeeOtherDetailsService.addEmployeeAddress(this.data.employeeId, this.employeeAddressForm.value).subscribe(v => {
           console.log(v);
+          this.employeeAddressForm.reset();
           this.getAddressList();
       });
     }

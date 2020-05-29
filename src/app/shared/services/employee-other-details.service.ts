@@ -64,6 +64,9 @@ export class EmployeeOtherDetailsService extends BaseService {
         return this.deleteRequest(AppUrl.DELETE_EMPLOYEE_SCHOOL_ATTENDED(id));
     }
 
+    updateAddress(employeeId, addressId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_EMPLOYEE_ADDRESS(employeeId, addressId), data);
+    }
 }
 
 export function toFormData<T>( formValue: T ) {

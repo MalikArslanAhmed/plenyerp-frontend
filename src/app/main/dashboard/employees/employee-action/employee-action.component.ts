@@ -278,134 +278,94 @@ export class EmployeeActionComponent implements OnInit {
         const od = this.otherDetailForm.get('otherDetail').value;
         if (od === 'ADDRESS') {
             this.dialogRef = this._matDialog.open(EmployeeAddress, {
-                panelClass: 'employee-other-details-form-dialog',
-                data: {
-                    title: od,
-                    employeeId: employeeDetails.id,
-                }
-            });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
-                }
-            });
-        } else if (od === 'CENSURE') {
-            this.dialogRef = this._matDialog.open(EmployeeCensure, {
-                panelClass: 'employee-other-details-form-dialog',
-                data: {
-                    title: od,
-                    employeeId: employeeDetails.id,
-                }
-            });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
-                }
-            });
-        }else if (od === 'EMPLOYMENT_HISTORY') {
-            this.dialogRef = this._matDialog.open(EmployeeHistory, {
-                panelClass: 'employee-other-details-form-dialog',
-                data: {
-                    title: od,
-                    employeeId: employeeDetails.id,
-                }
-            });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
-                }
-            });
-        }else if (od === 'LANGUAGES') {
-            this.dialogRef = this._matDialog.open(EmployeeLanguages, {
-                panelClass: 'employee-other-details-form-dialog',
-                data: {
-                    title: od,
-                    employeeId: employeeDetails.id,
-                }
-            });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
-                }
-            });
-        }else if (od === 'MEMBERSHIP') {
-            this.dialogRef = this._matDialog.open(EmployeeMembership, {
-                panelClass: 'employee-other-details-form-dialog',
-                data: {
-                    title: od,
-                    employeeId: employeeDetails.id,
-                }
-            });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
-                }
-            });
-        }else if (od === 'MILITARY_SERVICE') {
-            this.dialogRef = this._matDialog.open(EmployeeMilitaryService, {
-                panelClass: 'employee-other-details-form-dialog',
-                data: {
-                    title: od,
-                    employeeId: employeeDetails.id,
-                }
-            });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
-                }
-            });
-        }else if (od === 'PHONE_NUMBER') {
-            this.dialogRef = this._matDialog.open(EmployeePhoneNumber, {
-                panelClass: 'employee-other-details-form-dialog',
-                data: {
-                    title: od,
-                    employeeId: employeeDetails.id,
-                }
-            });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
-                }
-            });
-        }else if (od === 'QUALIFICATIONS') {
-            this.dialogRef = this._matDialog.open(EmployeeQualifications, {
                 panelClass: 'employee-address-details-form-dialog',
                 data: {
                     title: od,
                     employeeId: employeeDetails.id,
                 }
             });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
+
+        } else if (od === 'CENSURE') {
+            this.dialogRef = this._matDialog.open(EmployeeCensure, {
+                panelClass: 'employee-censure-details-form-dialog',
+                data: {
+                    title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
+
+        }else if (od === 'EMPLOYMENT_HISTORY') {
+            this.dialogRef = this._matDialog.open(EmployeeHistory, {
+                panelClass: 'employee-history-details-form-dialog',
+                data: {
+                    title: od,
+                    employeeId: employeeDetails.id,
+                }
+            });
+
+        }else if (od === 'LANGUAGES') {
+            this.dialogRef = this._matDialog.open(EmployeeLanguages, {
+                panelClass: 'employee-language-details-form-dialog',
+                data: {
+                    title: od,
+                    employeeId: employeeDetails.id,
+                }
+            });
+
+        }else if (od === 'MEMBERSHIP') {
+            this.dialogRef = this._matDialog.open(EmployeeMembership, {
+                panelClass: 'employee-membership-details-form-dialog',
+                data: {
+                    title: od,
+                    employeeId: employeeDetails.id,
+                }
+            });
+
+        }else if (od === 'MILITARY_SERVICE') {
+            this.dialogRef = this._matDialog.open(EmployeeMilitaryService, {
+                panelClass: 'employee-military-service-details-form-dialog',
+                data: {
+                    title: od,
+                    employeeId: employeeDetails.id,
+                }
+            });
+
+        }else if (od === 'PHONE_NUMBER') {
+            this.dialogRef = this._matDialog.open(EmployeePhoneNumber, {
+                panelClass: 'employee-phone-number-details-form-dialog',
+                data: {
+                    title: od,
+                    employeeId: employeeDetails.id,
+                }
+            });
+
+        }else if (od === 'QUALIFICATIONS') {
+            this.dialogRef = this._matDialog.open(EmployeeQualifications, {
+                panelClass: 'employee-qualification-details-form-dialog',
+                data: {
+                    title: od,
+                    employeeId: employeeDetails.id,
+                }
+            });
+
         }else if (od === 'RELATIONS') {
             this.dialogRef = this._matDialog.open(EmployeeRelations, {
-                panelClass: 'employee-other-details-form-dialog',
+                panelClass: 'employee-relations-details-form-dialog',
                 data: {
                     title: od,
                     employeeId: employeeDetails.id,
                 }
             });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
-                }
-            });
+
         }else if (od === 'SCHOOLS_ATTENDED') {
             this.dialogRef = this._matDialog.open(EmployeeSchoolAttended, {
-                panelClass: 'employee-other-details-form-dialog',
+                panelClass: 'employee-school-attended-details-form-dialog',
                 data: {
                     title: od,
                     employeeId: employeeDetails.id,
                 }
             });
-            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                if (!response) {
-                    return;
-                }
-            });
+
         }
     }
 }
