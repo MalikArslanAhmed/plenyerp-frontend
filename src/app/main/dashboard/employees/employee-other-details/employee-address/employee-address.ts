@@ -2,6 +2,7 @@ import {Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
+import {EmployeeOtherDetailsService} from '../../../../../shared/services/employee-other-details.service';
 
 @Component({
     selector: 'app-employee-address',
@@ -15,36 +16,19 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 export class EmployeeAddress implements OnInit {
     data: any;
     dialogTitle: any;
-    employeeOtherDetailsForm: FormGroup;
-    typeOfAddress = [
-        {
-            name: 'abcd',
-            value: 'ABCD'
-        },
-        {
-            name: 'xyz',
-            value: 'XYZ'
-        }
-    ];
+    employeeAddressForm: FormGroup;
+    typeOfAddress = [];
     countries = [];
     states = [];
     regions = [];
     lgas = [];
-    employeeAddressList = [
-        {
-            sno: 1,
-            name: 'abcd',
-        },
-        {
-            sno: 2,
-            name: 'abcd1',
-        }
-        ];
-    employeeAddressColumns = ['sno', 'name', 'actions'];
+    employeeAddressList = [];
+    employeeAddressColumns = ['sno', 'addressType', 'address', 'city', 'zipCode', 'country', 'region', 'state', 'lga', 'actions'];
 
     constructor(public matDialogRef: MatDialogRef<EmployeeAddress>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
+                private employeeOtherDetailsService: EmployeeOtherDetailsService,
                 ) {
         this.data = _data;
         if ( _data.title === 'ADDRESS') {
@@ -55,20 +39,51 @@ export class EmployeeAddress implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
+        this.getTypeOfAddress();
+        this. getCountry();
+        this.getAddressList();
     }
 
     refresh() {
-        this.employeeOtherDetailsForm = this.fb.group({
-            typeOfAddress: ['', Validators.required],
+        this.employeeAddressForm = this.fb.group({
+            addressTypeId: ['', Validators.required],
             addressLine1: ['', Validators.required],
             addressLine2: [''],
             city: ['', Validators.required],
-            zip: ['', Validators.required],
-            country: ['', Validators.required],
-            state: ['', Validators.required],
-            region: ['', Validators.required],
-            lga: ['', Validators.required],
+            zipCode: ['', Validators.required],
+            countryId: ['', Validators.required],
+            stateId: ['', Validators.required],
+            regionId: ['', Validators.required],
+            lgaId: ['', Validators.required],
         });
+        this.employeeAddressForm.get('countryId').valueChanges.subscribe(val => {
+            this.states = [];
+            this.regions = [];
+            this.lgas = [];
+            this.employeeAddressForm.get('regionId').patchValue('');
+            this.employeeAddressForm.get('stateId').patchValue('');
+            this.employeeAddressForm.get('lgaId').patchValue('');
+            if (val) {
+                this.getRegion(val);
+            }
+        });
+        this.employeeAddressForm.get('regionId').valueChanges.subscribe(val => {
+            this.states = [];
+            this.lgas = [];
+            this.employeeAddressForm.get('stateId').patchValue('');
+            this.employeeAddressForm.get('lgaId').patchValue('');
+            if (val) {
+                this.getState(val);
+            }
+        });
+        this.employeeAddressForm.get('stateId').valueChanges.subscribe(val => {
+            this.lgas = [];
+            this.employeeAddressForm.get('lgaId').patchValue('');
+            if (val) {
+                this.getLga(val);
+            }
+        });
+
     }
 
 
@@ -77,6 +92,52 @@ export class EmployeeAddress implements OnInit {
     }
 
     deleteEmployeeAddress(id: any) {
+        this.employeeOtherDetailsService.deleteAddress(id).subscribe(data => {
+            this.getAddressList();
+        });
+    }
+    getTypeOfAddress() {
+      this.employeeOtherDetailsService.typeOfAddress({}).subscribe(data => {
+          this.typeOfAddress = data.items;
+      });
+    }
+    getCountry() {
+        this.employeeOtherDetailsService.allCountry().subscribe(data => {
+            this.countries = data.items;
+        });
+    }
+    getRegion(countryId) {
+        this.employeeOtherDetailsService.allRegion({countryId: countryId}).subscribe(data => {
+            this.regions = data.items;
+        });
+    }
+    getState(regionId) {
+        this.employeeOtherDetailsService.allState({regionId: regionId}).subscribe(data => {
+            this.states = data.items;
+        });
+    }
+    getLga(stateId) {
+        this.employeeOtherDetailsService.allLga({stateId: stateId}).subscribe(data => {
+            this.lgas = data.items;
+        });
+    }
 
+    addAddress() {
+      console.log('submit-address---', this.employeeAddressForm.value);
+      this.employeeOtherDetailsService.addEmployeeAddress(this.data.employeeId, this.employeeAddressForm.value).subscribe(v => {
+          console.log(v);
+          this.getAddressList();
+      });
+    }
+    getAddressList() {
+        this.employeeOtherDetailsService.employeeAddressList(this.data.employeeId).subscribe(data => {
+            this.employeeAddressList = data.items;
+            let index = 0;
+            this.employeeAddressList.forEach(value => {
+                index += 1;
+                value['sno'] = index;
+            });
+            console.log( this.employeeAddressList);
+        });
     }
 }

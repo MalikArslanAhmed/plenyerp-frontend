@@ -583,4 +583,18 @@ export class AppUrl {
     static UPDATE_LEVEL_COUNTS(id?): string {
         return AppUrl.API_URL + 'admin-segments/' + id + '/levels';
     }
+
+    static GET_TYPE_OF_ADDRESS(): string {
+        return AppUrl.API_URL + `address-type`;
+    }
+    static SET_EMPLOYEE_ADDRESS(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/addresses';
+    }
+    static GET_EMPLOYEE_ADDRESS(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/addresses';
+    }
+    static DELETE_EMPLOYEE_ADDRESS(id): string {
+        return AppUrl.API_URL + 'employee-addresses/' + id ;
+    }
+
 }

@@ -273,14 +273,15 @@ export class EmployeeActionComponent implements OnInit {
         }
     }
 
-    addOtherDetails() {
-        console.log(this.otherDetailForm.value);
+    addOtherDetails(employeeDetails) {
+        console.log('---------->>>', employeeDetails.id);
         const od = this.otherDetailForm.get('otherDetail').value;
         if (od === 'ADDRESS') {
             this.dialogRef = this._matDialog.open(EmployeeAddress, {
                 panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
@@ -293,6 +294,7 @@ export class EmployeeActionComponent implements OnInit {
                 panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
@@ -305,6 +307,7 @@ export class EmployeeActionComponent implements OnInit {
                 panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
@@ -317,6 +320,7 @@ export class EmployeeActionComponent implements OnInit {
                 panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
@@ -329,6 +333,7 @@ export class EmployeeActionComponent implements OnInit {
                 panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
@@ -341,6 +346,7 @@ export class EmployeeActionComponent implements OnInit {
                 panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
@@ -353,6 +359,7 @@ export class EmployeeActionComponent implements OnInit {
                 panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
@@ -362,9 +369,10 @@ export class EmployeeActionComponent implements OnInit {
             });
         }else if (od === 'QUALIFICATIONS') {
             this.dialogRef = this._matDialog.open(EmployeeQualifications, {
-                panelClass: 'employee-other-details-form-dialog',
+                panelClass: 'employee-address-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
@@ -377,6 +385,7 @@ export class EmployeeActionComponent implements OnInit {
                 panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
@@ -389,6 +398,7 @@ export class EmployeeActionComponent implements OnInit {
                 panelClass: 'employee-other-details-form-dialog',
                 data: {
                     title: od,
+                    employeeId: employeeDetails.id,
                 }
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {

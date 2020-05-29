@@ -10,14 +10,14 @@
     <div mat-dialog-content  fusePerfectScrollbar>
    <div class="margin-top-1rem">
      <ng-container>
-         <form [formGroup]="employeeOtherDetailsForm">
+         <form [formGroup]="employeeAddressForm">
              <div fxLayout="column">
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
                          <mat-label>Type Of Address</mat-label>
-                         <mat-select formControlName="typeOfAddress">
+                         <mat-select formControlName="addressTypeId">
                              <mat-option [value]="">Select</mat-option>
-                             <mat-option [value]="toa.value"
+                             <mat-option [value]="toa.id"
                                          *ngFor="let toa of typeOfAddress">
                                  {{toa.name}}</mat-option>
                          </mat-select>
@@ -45,7 +45,7 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>ZIP Code</mat-label>
-                             <input matInput formControlName="zip">
+                             <input matInput formControlName="zipCode">
                          </mat-form-field>
                      </div>
                  </div>
@@ -54,9 +54,9 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Country</mat-label>
-                             <mat-select formControlName="country">
+                             <mat-select formControlName="countryId">
                                  <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="country.value"
+                                 <mat-option [value]="country.id"
                                              *ngFor="let country of countries">
                                      {{country.name}}</mat-option>
                              </mat-select>
@@ -64,12 +64,12 @@
                      </div>
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
-                             <mat-label>State</mat-label>
-                             <mat-select formControlName="state">
+                             <mat-label>Region</mat-label>
+                             <mat-select formControlName="regionId">
                                  <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="state.value"
-                                             *ngFor="let state of states">
-                                     {{state.name}}</mat-option>
+                                 <mat-option [value]="region.id"
+                                             *ngFor="let region of regions">
+                                     {{region.name}}</mat-option>
                              </mat-select>
                          </mat-form-field>
                      </div>
@@ -77,21 +77,21 @@
                  <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
-                             <mat-label>Region</mat-label>
-                             <mat-select formControlName="region">
+                             <mat-label>State</mat-label>
+                             <mat-select formControlName="stateId">
                                  <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="region.value"
-                                             *ngFor="let region of regions">
-                                     {{region.name}}</mat-option>
+                                 <mat-option [value]="state.id"
+                                             *ngFor="let state of states">
+                                     {{state.name}}</mat-option>
                              </mat-select>
                          </mat-form-field>
                      </div>
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>LGA</mat-label>
-                             <mat-select formControlName="lga">
+                             <mat-select formControlName="lgaId">
                                  <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="lga.value"
+                                 <mat-option [value]="lga.id"
                                              *ngFor="let lga of lgas">
                                      {{lga.name}}</mat-option>
                              </mat-select>
@@ -112,11 +112,75 @@
                      </mat-cell>
                  </ng-container>
 
-                 <ng-container matColumnDef="name">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+
+                 <ng-container matColumnDef="addressType">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Address Type</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
                          <p class="phone text-truncate cursor-pointer">
-                             {{employeeAddress.name}}
+                             {{employeeAddress?.addressType?.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="address">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Address</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeAddress.addressLine1}} <br> {{employeeAddress.addressLine2}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="city">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>City</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeAddress.city}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="zipCode">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>ZIP Code</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeAddress?.zipCode}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="country">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Country</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeAddress?.country?.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="region">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Region</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeAddress?.region?.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="state">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>State</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeAddress?.state?.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="lga">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>LGA</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeAddress?.lga?.name}}
                          </p>
                      </mat-cell>
                  </ng-container>
@@ -150,12 +214,12 @@
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
-                [disabled]="employeeOtherDetailsForm.invalid"
-                (click)="matDialogRef.close(employeeOtherDetailsForm);"
+                [disabled]="employeeAddressForm.invalid"
+                (click)="addAddress()"
                 aria-label="Save">ADD
         </button>
-<!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeeOtherDetailsForm); updateDesignation()"-->
-<!--                [disabled]="employeeOtherDetailsForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
+<!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeeAddressForm); updateDesignation()"-->
+<!--                [disabled]="employeeAddressForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
 <!--        </button>-->
     </div>
 </div>
