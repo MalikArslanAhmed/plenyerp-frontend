@@ -22,7 +22,7 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Date Engaged</mat-label>
-                             <input matInput [matDatepicker]="picker" formControlName="dateEngaged" name="dateEngaged" placeholder="Choose a date">
+                             <input matInput [matDatepicker]="picker" formControlName="engaged" name="engaged" placeholder="Choose a date">
                              <mat-datepicker-toggle matSuffix [for]="picker">
                                  <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                              </mat-datepicker-toggle>
@@ -32,7 +32,7 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Date Disengaged</mat-label>
-                             <input matInput [matDatepicker]="picker1" formControlName="dateDisEngaged" name="dateDisEngaged" placeholder="Choose a date">
+                             <input matInput [matDatepicker]="picker1" formControlName="disengaged" name="disengaged" placeholder="Choose a date">
                              <mat-datepicker-toggle matSuffix [for]="picker1">
                                  <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                              </mat-datepicker-toggle>
@@ -45,13 +45,13 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Total Renumeration</mat-label>
-                             <input matInput formControlName="totalRenumeration">
+                             <input matInput type="number" formControlName="totalRemuneration">
                          </mat-form-field>
                      </div>
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>File Page</mat-label>
-                             <input matInput formControlName="filePage">
+                             <input matInput type="number" formControlName="filePage">
                          </mat-form-field>
                      </div>
                  </div>
@@ -64,16 +64,52 @@
                      <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeHistory">
                          <p class="email text-truncate">
-                             {{employeeHistory.sno}}.
+                             {{employeeHistory?.sno}}.
                          </p>
                      </mat-cell>
                  </ng-container>
 
-                 <ng-container matColumnDef="name">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+                 <ng-container matColumnDef="employer">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Employer</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
                          <p class="phone text-truncate cursor-pointer">
-                             {{employeeHistory.name}}
+                             {{employeeHistory?.employer}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="engaged">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Engaged</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeHistory.engaged}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="disengaged">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Disengaged</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeHistory?.disengaged}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="totalRemuneration">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Total Remuneration</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeHistory?.totalRemuneration}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="filePage">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>File Page</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeHistory?.filePage}}
                          </p>
                      </mat-cell>
                  </ng-container>
@@ -84,7 +120,7 @@
                      </mat-header-cell>
                      <mat-cell *matCellDef="let employeeHistory">
                          <div fxFlex="row" fxLayoutAlign="end center">
-                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeHistory(employeeHistory)"
+                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeHistory(employeeHistory?.id)"
                                      style="color: blue">
                                  <mat-icon class="material-icons">edit</mat-icon>
                              </button>
@@ -106,13 +142,17 @@
    </div>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="cancelUpdate()"
+                aria-label="Update" *ngIf="employeeHistoryId">Cancel
+        </button>
         <button mat-button class="save-button"
                 [disabled]="employeeHistoryForm.invalid"
-                (click)="matDialogRef.close(employeeHistoryForm);"
+                *ngIf="employeeHistoryId === null "
+                (click)="addAddress()"
                 aria-label="Save">ADD
         </button>
-        <!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeeHistoryForm); updateDesignation()"-->
-        <!--                [disabled]="employeeOtherDetailsForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
-        <!--        </button>-->
+        <button mat-button class="save-button" (click)="updateEmployeeAddress()"
+                [disabled]="employeeHistoryForm.invalid" aria-label="Update" *ngIf="employeeHistoryId">Apply Changes
+        </button>
     </div>
 </div>

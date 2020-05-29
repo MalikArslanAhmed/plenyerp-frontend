@@ -151,7 +151,7 @@ export class EmployeeAddress implements OnInit {
 
     addAddress() {
       this.employeeOtherDetailsService.addEmployeeAddress(this.data.employeeId, this.employeeAddressForm.value).subscribe(v => {
-          console.log(v);
+          // console.log(v);
           this.employeeAddressForm.reset();
           this.getAddressList();
       });
@@ -164,7 +164,7 @@ export class EmployeeAddress implements OnInit {
                 index += 1;
                 value['sno'] = index;
             });
-            console.log( this.employeeAddressList);
+            // console.log( this.employeeAddressList);
         });
     }
 }

@@ -612,5 +612,17 @@ export class AppUrl {
     static DELETE_EMPLOYEE_SCHOOL_ATTENDED(id): string {
         return AppUrl.API_URL + 'employee-schools/' + id ;
     }
+    static GET_EMPLOYEE_HISTORY(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/histories';
+    }
+    static SET_EMPLOYEE_HISTORY(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/histories';
+    }
+    static DELETE_EMPLOYEE_HISTORY(id): string {
+        return AppUrl.API_URL + 'employee-histories/' + id ;
+    }
+    static UPDATE_EMPLOYEE_HISTORY(employeeId, historyId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/histories/' + historyId ;
+    }
 
 }

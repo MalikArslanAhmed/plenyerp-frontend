@@ -67,6 +67,20 @@ export class EmployeeOtherDetailsService extends BaseService {
     updateAddress(employeeId, addressId, data?): Observable<any> {
         return this.putRequest(AppUrl.UPDATE_EMPLOYEE_ADDRESS(employeeId, addressId), data);
     }
+    employeeHistoryList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEE_HISTORY(id), data);
+    }
+    addEmployeeHistory(id, data): Observable<any> {
+        return this.postRequest(AppUrl.SET_EMPLOYEE_HISTORY(id), data);
+    }
+    deleteHistory(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_EMPLOYEE_HISTORY(id));
+    }
+
+    updateHistory(employeeId, historyId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_EMPLOYEE_HISTORY(employeeId, historyId), data);
+    }
+
 }
 
 export function toFormData<T>( formValue: T ) {

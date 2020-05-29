@@ -3,6 +3,17 @@
         width: 1200px !important;
         min-height: 500px !important;
     }
+    .mat-dialog-actions{
+        .save-button {
+            background-color: #106CC8 !important;
+            color: white !important;
+        }
+
+        .save-disabled-button {
+            background-color: #e0e0e0 !important;
+            color: white !important;
+        }
+    }
 }
 .margin-top-1rem {
     margin-top: 1rem;
