@@ -597,4 +597,17 @@ export class AppUrl {
         return AppUrl.API_URL + 'employee-addresses/' + id ;
     }
 
+    static ADD_EMPLOYEE_SCHOOL_ATTENDED(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/schools';
+    }
+    static UPDATE_EMPLOYEE_SCHOOL_ATTENDED(empId, schoolId): string {
+        return AppUrl.API_URL + 'employee/' + empId + '/schools/' + schoolId;
+    }
+    static GET_EMPLOYEE_SCHOOL_ATTENDED(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/schools/';
+    }
+    static DELETE_EMPLOYEE_SCHOOL_ATTENDED(id): string {
+        return AppUrl.API_URL + 'employee-schools/' + id ;
+    }
+
 }

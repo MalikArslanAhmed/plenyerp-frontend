@@ -30,6 +30,9 @@ export class EmployeeOtherDetailsService extends BaseService {
     allCountry(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_COUNTRIES(), data);
     }
+    getSchedule(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_SCHEDULES(), data);
+    }
     allRegion(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_REGION(), data);
     }
@@ -48,6 +51,19 @@ export class EmployeeOtherDetailsService extends BaseService {
     deleteAddress(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_EMPLOYEE_ADDRESS(id));
     }
+    addEmployeeSchoolAttended(id, data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_EMPLOYEE_SCHOOL_ATTENDED(id), data);
+    }
+    updateEmployeeSchoolAttended(empId, schoolId, data): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_EMPLOYEE_SCHOOL_ATTENDED(empId, schoolId), data);
+    }
+    getSchoolAttendedList(empId, data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEE_SCHOOL_ATTENDED(empId), data);
+    }
+    deleteEmployeeSchoolAttended(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_EMPLOYEE_SCHOOL_ATTENDED(id));
+    }
+
 }
 
 export function toFormData<T>( formValue: T ) {
