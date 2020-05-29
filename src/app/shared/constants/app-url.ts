@@ -596,5 +596,8 @@ export class AppUrl {
     static DELETE_EMPLOYEE_ADDRESS(id): string {
         return AppUrl.API_URL + 'employee-addresses/' + id ;
     }
+    static UPDATE_EMPLOYEE_ADDRESS(employeeId, addressId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/addresses/' + addressId ;
+    }
 
 }

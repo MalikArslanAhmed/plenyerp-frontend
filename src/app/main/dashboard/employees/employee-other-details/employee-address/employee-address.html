@@ -191,7 +191,7 @@
                      </mat-header-cell>
                      <mat-cell *matCellDef="let employeeAddress">
                          <div fxFlex="row" fxLayoutAlign="end center">
-                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeAddress(employeeAddress)"
+                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeAddress(employeeAddress?.id)"
                                      style="color: blue">
                                  <mat-icon class="material-icons">edit</mat-icon>
                              </button>
@@ -213,13 +213,17 @@
    </div>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="cancelUpdate()"
+                aria-label="Update" *ngIf="addressId">Cancel
+        </button>
         <button mat-button class="save-button"
                 [disabled]="employeeAddressForm.invalid"
+                *ngIf="addressId === null "
                 (click)="addAddress()"
                 aria-label="Save">ADD
         </button>
-<!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeeAddressForm); updateDesignation()"-->
-<!--                [disabled]="employeeAddressForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
-<!--        </button>-->
+        <button mat-button class="save-button" (click)="updateEmployeeAddress()"
+                [disabled]="employeeAddressForm.invalid" aria-label="Update" *ngIf="addressId">Apply Changes
+        </button>
     </div>
 </div>
