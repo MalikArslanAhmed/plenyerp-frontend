@@ -634,4 +634,14 @@ export class AppUrl {
         return AppUrl.API_URL + 'employee/' + employeeId + '/military/' + militaryId ;
     }
 
+    static EMPLOYEE_MEMBERSHIP(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/memberships';
+    }
+    static EMPLOYEE_DELETE_MEMBERSHIP(id): string {
+        return AppUrl.API_URL + 'employee-memberships/' + id ;
+    }
+    static UPDATE_MEMBERSHIP(employeeId, membershipId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/memberships/' + membershipId ;
+    }
+
 }
