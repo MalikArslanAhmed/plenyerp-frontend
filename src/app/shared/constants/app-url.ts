@@ -631,7 +631,7 @@ export class AppUrl {
         return AppUrl.API_URL + 'employee-military/' + id ;
     }
     static UPDATE_MILITARY_SERVICE(employeeId, militaryId): string {
-        return AppUrl.API_URL + 'employee/' + employeeId + '/histories/' + militaryId ;
+        return AppUrl.API_URL + 'employee/' + employeeId + '/military/' + militaryId ;
     }
 
 }
