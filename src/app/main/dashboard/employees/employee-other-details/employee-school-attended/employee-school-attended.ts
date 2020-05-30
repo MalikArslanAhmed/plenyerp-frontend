@@ -28,9 +28,10 @@ export class EmployeeSchoolAttended implements OnInit {
         }
     ];
     employeeSchoolAttendedList: any;
-    employeeSchoolAttendedColumns = ['sno', 'name', 'actions'];
+    employeeSchoolAttendedColumns = ['sno', 'name', 'country', 'dateEntered', 'dateExited', 'actions'];
     countries = [];
     schedules;
+    schoolAttendedId = null;
 
     constructor(public matDialogRef: MatDialogRef<EmployeeSchoolAttended>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -93,6 +94,7 @@ export class EmployeeSchoolAttended implements OnInit {
 
 
     editEmployeeSchoolAttended(employeeSchoolAttended: any) {
+        this.schoolAttendedId = employeeSchoolAttended.id;
         this.employeeSchoolAttendedForm.patchValue({
             school: employeeSchoolAttended.school,
             address: employeeSchoolAttended.address,
@@ -101,8 +103,13 @@ export class EmployeeSchoolAttended implements OnInit {
             enteredAt: employeeSchoolAttended.enteredAt,
             exitedAt: employeeSchoolAttended.exitedAt
         });
-        this.employeeOtherDetailsService.updateEmployeeSchoolAttended(this.data.employeeId, employeeSchoolAttended.id, this.employeeSchoolAttendedForm.value).subscribe(data => {
+    }
+
+    updateEmployeeSchoolAttended(){
+        this.employeeOtherDetailsService.updateEmployeeSchoolAttended(this.data.employeeId, this.schoolAttendedId, this.employeeSchoolAttendedForm.value).subscribe(data => {
+            this.schoolAttendedId = null;
             this.getSchoolAttendedList();
+            this.employeeSchoolAttendedForm.reset();
         });
     }
 
