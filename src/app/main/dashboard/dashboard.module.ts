@@ -126,6 +126,13 @@ import {EmployeePhoneNumber} from './employees/employee-other-details/employee-p
 import {EmployeeQualifications} from './employees/employee-other-details/employee-qualifications/employee-qualifications';
 import {EmployeeRelations} from './employees/employee-other-details/employee-relations/employee-relations';
 import {EmployeeSchoolAttended} from './employees/employee-other-details/employee-school-attended/employee-school-attended';
+import { AddressTypeComponent } from './contact-info/address-type/address-type.component';
+import { AddressTypeCreateComponent } from './contact-info/address-type/address-type-create/address-type-create.component';
+import { AddressTypeListComponent } from './contact-info/address-type/address-type-list/address-type-list.component';
+import { PhoneTypeComponent } from './contact-info/phone-type/phone-type.component';
+import { PhoneTypeCreateComponent } from './contact-info/phone-type/phone-type-create/phone-type-create.component';
+import { PhoneTypeListComponent } from './contact-info/phone-type/phone-type-list/phone-type-list.component';
+import { EmployeeBankDetailsComponent } from './employees/employee-action/employee-bank-details/employee-bank-details.component';
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -223,6 +230,14 @@ import {EmployeeSchoolAttended} from './employees/employee-other-details/employe
         EmployeeActionComponent,
         EmployeePreviewComponent,
         AddLevelCharCount,
+        EmpListHeadersComponent,
+        AddressTypeComponent,
+        AddressTypeCreateComponent,
+        AddressTypeListComponent,
+        PhoneTypeComponent,
+        PhoneTypeCreateComponent,
+        PhoneTypeListComponent,
+        EmployeeBankDetailsComponent,
         EmpListHeadersComponent,
         EmployeeAddress,
         EmployeeCensure,

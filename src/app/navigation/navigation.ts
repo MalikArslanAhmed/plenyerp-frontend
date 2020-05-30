@@ -183,6 +183,20 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/lga'
+                    },
+                    {
+                        id: 'address-type',
+                        title: 'Address Type',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/address-type'
+                    },
+                    {
+                        id: 'phone-type',
+                        title: 'Phone Type',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/phone-type'
                     }
                 ]
             },

@@ -29,6 +29,8 @@ export class ContactInfoService extends BaseService {
     updateCountry(id, data): Observable<any> {
         return this.putRequest(AppUrl.COUNTRIES(id), data);
     }
+
+
     deleteRegion(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_REGION(id));
     }
@@ -41,6 +43,8 @@ export class ContactInfoService extends BaseService {
     updateRegion(id, data): Observable<any> {
         return this.putRequest(AppUrl.REGIONS(id), data);
     }
+
+
     getStateList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_STATE_LIST(), data);
     }
@@ -53,6 +57,8 @@ export class ContactInfoService extends BaseService {
     deleteStates(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_STATE(id));
     }
+
+
     getLgaList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_LGA_LIST(), data);
     }
@@ -65,6 +71,8 @@ export class ContactInfoService extends BaseService {
     deleteLga(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_LGA(id));
     }
+
+
     country(): Observable<any> {
         return this.getRequest(AppUrl.GET_COUNTRY());
     }
@@ -125,6 +133,39 @@ export class ContactInfoService extends BaseService {
     }
     deleteDesignation(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_DESIGNATION(id));
+    }
+
+    getAddressTypeList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_ADDRESS_TYPE_LIST(), data);
+    }
+
+    deleteAddressType(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_ADDRESS_TYPE(id));
+    }
+
+    addAddressType(data): Observable<any> {
+        return this.postRequest(AppUrl.ADDRESS_TYPE(), data);
+    }
+
+    updateAddressType(id, data): Observable<any> {
+        return this.putRequest(AppUrl.ADDRESS_TYPE(id), data);
+    }
+
+
+    addPhoneType(data): Observable<any> {
+        return this.postRequest(AppUrl.PHONE_TYPE(), data);
+    }
+
+    getPhoneTypeList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_PHONE_TYPE_LIST(), data);
+    }
+
+    deletePhoneType(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_PHONE_TYPE(id));
+    }
+
+    updatePhoneType(id, data): Observable<any> {
+        return this.putRequest(AppUrl.PHONE_TYPE(id), data);
     }
 
 }

@@ -17,6 +17,7 @@ import {EmployeePhoneNumber} from '../employee-other-details/employee-phone-numb
 import {EmployeeQualifications} from '../employee-other-details/employee-qualifications/employee-qualifications';
 import {EmployeeRelations} from '../employee-other-details/employee-relations/employee-relations';
 import {EmployeeSchoolAttended} from '../employee-other-details/employee-school-attended/employee-school-attended';
+import {EmployeeBankDetailsComponent} from './employee-bank-details/employee-bank-details.component';
 
 @Component({
     selector: 'app-employee-action',
@@ -122,6 +123,9 @@ export class EmployeeActionComponent implements OnInit {
         }
     ];
     otherDetailForm: FormGroup;
+
+
+
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
                 private router: Router,
@@ -171,6 +175,19 @@ export class EmployeeActionComponent implements OnInit {
         });
     }
 
+    addBankDetails(previewEmp) {
+        this.dialogRef = this._matDialog.open(EmployeeBankDetailsComponent, {
+            panelClass: 'bank-details-dialog',
+            data: {action: 'CREATE', selectedEmployee: previewEmp}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // this.getAddressTypeList.getAddressTypeList();
+        });
+    }
+
     editEmployee(employee) {
         console.log(3);
         this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);
@@ -192,10 +209,10 @@ export class EmployeeActionComponent implements OnInit {
 
         afterFileUpload(image, employee){
             this.employeesService.editEmployeeProfilePic(employee.id, {profileImageId: image.id}).subscribe((data)=>{
-                
+
             });
         }
-        
+
 
     // previewEmployee(employee) {
     //     this.dialogRef = this._matDialog.open(EmployeePreviewComponent, {
