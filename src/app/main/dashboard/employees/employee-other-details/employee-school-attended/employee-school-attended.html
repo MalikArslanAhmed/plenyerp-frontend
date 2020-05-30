@@ -31,7 +31,7 @@
                              <mat-label>Category</mat-label>
                              <mat-select formControlName="scheduleId">
                                  <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="schedule.value"
+                                 <mat-option [value]="schedule.name"
                                              *ngFor="let schedule of schedules">
                                      {{schedule.name}}</mat-option>
                              </mat-select>
@@ -42,7 +42,7 @@
                              <mat-label>Country</mat-label>
                              <mat-select formControlName="countryId">
                                  <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="country.value"
+                                 <mat-option [value]="country.name"
                                              *ngFor="let country of countries">
                                      {{country.name}}</mat-option>
                              </mat-select>
