@@ -26,13 +26,13 @@
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
                          <mat-label>Membership Reg. No.</mat-label>
-                         <input matInput formControlName="membershipRegistrationNumber">
+                         <input matInput type="number" formControlName="membershipRegistrationNumber">
                      </mat-form-field>
                  </div>
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
                          <mat-label>Membership Rank</mat-label>
-                         <input matInput formControlName="membershipRank">
+                         <input matInput type="number" formControlName="membershipRank">
                      </mat-form-field>
                  </div>
                  <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
@@ -133,7 +133,7 @@
                 (click)="addMilitaryService()"
                 aria-label="Save">ADD
         </button>
-        <button mat-button class="save-button" (click)="updateEmployeeAddress()"
+        <button mat-button class="save-button" (click)="updateEmployeeMembership()"
                 [disabled]="employeeMembershipForm.invalid" aria-label="Update" *ngIf="employeeMembershipId">Apply Changes
         </button>
     </div>

@@ -37,6 +37,7 @@ export class EmployeeMembership implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this. getMembership();
+        this. getMembershipList();
     }
 
     refresh() {
@@ -98,7 +99,7 @@ export class EmployeeMembership implements OnInit {
             this.getMembershipList();
         });
     }
-    updateEmployeeAddress() {
+    updateEmployeeMembership() {
         const f = this.employeeMembershipForm.value;
         const joinDate = moment(f.joinAt).format('YYYY-MM-DD');
         const obj = {
