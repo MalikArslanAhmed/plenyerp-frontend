@@ -23,6 +23,8 @@ import {CountryComponent} from './contact-info/country/country.component';
 import {RegionComponent} from './contact-info/region/region.component';
 import {StatesComponent} from './contact-info/states/states.component';
 import {LgaComponent} from './contact-info/lga/lga.component';
+import {AddressTypeComponent} from './contact-info/address-type/address-type.component';
+import {PhoneTypeComponent} from './contact-info/phone-type/phone-type.component';
 import {StructureComponent} from "./structure/structure.component";
 import {DepartmentsComponent} from "./departments/departments.component";
 import {LeaveTypeComponent} from './holidays/leave-type/leave-type.component';
@@ -237,6 +239,20 @@ const routes: Routes = [
         component: LgaComponent,
         data: {
             title: 'LGA'
+        },
+    },
+    {
+        path: 'address-type',
+        component: AddressTypeComponent,
+        data: {
+            title: 'Address Type'
+        },
+    },
+    {
+        path: 'phone-type',
+        component: PhoneTypeComponent,
+        data: {
+            title: 'Phone Type'
         },
     },
     {

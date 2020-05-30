@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EmployeePreviewComponent} from '../employee-preview/employee-preview.component';
 import {DepartmentListSelectComponent} from '../../structure/department-list/department-list-select.component';
+import {EmployeeBankDetailsComponent} from './employee-bank-details/employee-bank-details.component';
 
 @Component({
     selector: 'app-employee-action',
@@ -67,6 +68,10 @@ export class EmployeeActionComponent implements OnInit {
     employeeFilterForm: FormGroup;
     isSubmitted = false;
 
+    previewEmp;
+
+    
+
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
                 private router: Router,
@@ -113,21 +118,61 @@ export class EmployeeActionComponent implements OnInit {
         });
     }
 
-    editEmployee(employee) {
-        console.log(3);
-        this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);
-    }
-
-    previewEmployee(employee) {
-        this.dialogRef = this._matDialog.open(EmployeePreviewComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {action: 'PREVIEW', employee: employee},
+    addBankDetails(previewEmp) {
+        this.dialogRef = this._matDialog.open(EmployeeBankDetailsComponent, {
+            panelClass: 'bank-details-dialog',
+            data: {action: 'CREATE', selectedEmployee: previewEmp}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
                 return;
             }
+            // this.getAddressTypeList.getAddressTypeList();
         });
+    }
+
+    editEmployee(employee) {
+        console.log(3);
+        this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);
+    }
+
+
+    fileUpload(event, previewEmp) {
+        const file = event && event.target.files[0];
+        const obj = {
+            type: 'USER_IMAGE',
+            fileType: 'Normal',
+        };
+        obj['file'] = file;
+        this.employeesService.uploadFile(obj).subscribe((fileData: any) => {
+                this.previewEmp.file = fileData.data;
+                this.afterFileUpload(fileData.data, previewEmp);
+            });
+        }
+
+        afterFileUpload(image, employee){
+            this.employeesService.editEmployeeProfilePic(employee.id, {profileImageId: image.id}).subscribe((data)=>{
+                
+            });
+        }
+        
+
+    // previewEmployee(employee) {
+    //     this.dialogRef = this._matDialog.open(EmployeePreviewComponent, {
+    //         panelClass: 'contact-form-dialog',
+    //         data: {action: 'PREVIEW', employee: employee},
+    //     });
+    //     this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+    //         if (!response) {
+    //             return;
+    //         }
+    //     });
+    // }
+
+    previewEmployee(selected) {
+        if(selected){
+            this.previewEmp = selected;
+        }
     }
 
     checkEmployee(employee) {

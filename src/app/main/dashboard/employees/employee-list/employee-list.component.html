@@ -12,7 +12,7 @@
 <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
     <ng-container matColumnDef="SN">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee" (click)="selectEmployee(employee)">
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
             <p class="email text-truncate">
                 {{employee.sno}}
             </p>
@@ -21,7 +21,7 @@
 
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>ID</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee" (click)="selectEmployee(employee)">
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
             <p class="email text-truncate">
                 {{employee.id}}
             </p>
@@ -30,7 +30,7 @@
 
     <ng-container matColumnDef="fileId">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>File No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee" (click)="selectEmployee(employee)">
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
             <p class="email text-truncate">
                 {{employee.personnelFileNumber}}
             </p>
@@ -39,7 +39,7 @@
 
     <ng-container matColumnDef="lName">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Last Name</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee" (click)="selectEmployee(employee)">
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
             <p class="phone text-truncate">
                 {{employee.lastName}}
             </p>
@@ -48,7 +48,7 @@
 
     <ng-container matColumnDef="fName">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>First Name</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee" (click)="selectEmployee(employee)">
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
             <p class="phone text-truncate">
                 {{employee.firstName}}
             </p>
@@ -75,7 +75,7 @@
 
     <ng-container matColumnDef="designation">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Designation</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee" (click)="selectEmployee(employee)">
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
             <p class="phone text-truncate">
                 {{employee.employeeJobProfiles?.designation?.name}}
             </p>
@@ -84,7 +84,7 @@
 
     <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee" (click)="selectEmployee(employee)">
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
             <p class="phone text-truncate">
                 {{employee.title}}
             </p>

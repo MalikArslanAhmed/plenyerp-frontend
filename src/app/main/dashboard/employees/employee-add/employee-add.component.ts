@@ -129,7 +129,7 @@ export class EmployeeAddComponent implements OnInit {
             appointedOn: ['', Validators.required],
             assumedDutyOn: ['', Validators.required],
             typeOfAppointment: ['TENURED', Validators.required],
-            isPermanentStaff: [false, Validators.required]
+            isPermanentStaff: [false]
         });
 
         this.jobProfileSalaryPlacementForm = this.fb.group({
@@ -382,11 +382,11 @@ export class EmployeeAddComponent implements OnInit {
             'bankVersionNumber': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.bankVersionNumber ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.bankVersionNumber : '',
             'pensionFundAdministration': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.pensionFundAdministration ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.pensionFundAdministration : '',
             'pfaNumber': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.pfaNumber ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.pfaNumber : '',
-            'passportNumber': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.passportNumber ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.passportNumber : '',
-            'issuedAt': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.issuedAt ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.issuedAt : '',
-            'issuedDate': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.issuedDate ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.issuedDate : '',
-            'workPermitNumber': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.workPermitNumber ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.workPermitNumber : '',
-            'expiryDate': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.expiryDate ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.expiryDate : '',
+            'passportNumber': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.passportNumber ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.passportNumber : '',
+            'issuedAt': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedAt ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedAt : '',
+            'issuedDate': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedDate ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedDate : '',
+            'workPermitNumber': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber : '',
+            'expiryDate': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate : '',
         });
     }
 
