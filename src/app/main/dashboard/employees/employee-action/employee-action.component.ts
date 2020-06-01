@@ -17,6 +17,7 @@ import {EmployeePhoneNumber} from '../employee-other-details/employee-phone-numb
 import {EmployeeQualifications} from '../employee-other-details/employee-qualifications/employee-qualifications';
 import {EmployeeRelations} from '../employee-other-details/employee-relations/employee-relations';
 import {EmployeeSchoolAttended} from '../employee-other-details/employee-school-attended/employee-school-attended';
+import {EmployeeBackground} from '../employee-other-details/employee-background/employee-background';
 
 @Component({
     selector: 'app-employee-action',
@@ -119,6 +120,10 @@ export class EmployeeActionComponent implements OnInit {
         {
             name: 'Schools Attended',
             value: 'SCHOOLS_ATTENDED'
+        },
+        {
+            name: 'Background',
+            value: 'BACKGROUND'
         }
     ];
     otherDetailForm: FormGroup;
@@ -360,6 +365,15 @@ export class EmployeeActionComponent implements OnInit {
         }else if (od === 'SCHOOLS_ATTENDED') {
             this.dialogRef = this._matDialog.open(EmployeeSchoolAttended, {
                 panelClass: 'employee-school-attended-details-form-dialog',
+                data: {
+                    title: od,
+                    employeeId: employeeDetails.id,
+                }
+            });
+
+        }else if (od === 'BACKGROUND') {
+            this.dialogRef = this._matDialog.open(EmployeeBackground, {
+                panelClass: 'employee-background-details-form-dialog',
                 data: {
                     title: od,
                     employeeId: employeeDetails.id,

@@ -686,4 +686,13 @@ export class AppUrl {
     static UPDATE_CENSURE(employeeId, censureId): string {
         return AppUrl.API_URL + 'employee/' + employeeId + '/censures/' + censureId ;
     }
+    static EMPLOYEE_BACKGROUND(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/background';
+    }
+    static EMPLOYEE_DELETE_BACKGROUND(id): string {
+        return AppUrl.API_URL + 'employee-background/' + id ;
+    }
+    static UPDATE_BACKGROUND(employeeId, backgroundId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/background/' + backgroundId ;
+    }
 }

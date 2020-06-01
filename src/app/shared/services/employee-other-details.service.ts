@@ -179,6 +179,18 @@ export class EmployeeOtherDetailsService extends BaseService {
     addEmployeeCensure(id, data): Observable<any> {
         return this.postRequest(AppUrl.EMPLOYEE_CENSURE(id), data);
     }
+    employeeBackgroundList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_BACKGROUND(id), data);
+    }
+    deleteBackground(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_BACKGROUND(id));
+    }
+    addEmployeeBackground(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_BACKGROUND(id), data);
+    }
+    updateBackground(employeeId, backgroundId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_BACKGROUND(employeeId, backgroundId), data);
+    }
 }
 
 export function toFormData<T>( formValue: T ) {
