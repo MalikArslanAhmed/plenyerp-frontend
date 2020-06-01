@@ -33,6 +33,12 @@ export class EmployeeOtherDetailsService extends BaseService {
     getSchedule(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_SCHEDULES(), data);
     }
+    getCertifications(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_QUALIFICATIONS(), data);
+    }
+    getMajors(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_ACAMEDIC_MAJORS(), data);
+    }
     allRegion(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_REGION(), data);
     }
@@ -96,6 +102,20 @@ export class EmployeeOtherDetailsService extends BaseService {
     updateMilitaryService(employeeId, militaryId, data?): Observable<any> {
         return this.putRequest(AppUrl.UPDATE_MILITARY_SERVICE(employeeId, militaryId), data);
     }
+
+    addEmployeeQualification(id, data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_EMPLOYEE_QUALIFICATION(id), data);
+    }
+    updateEmployeeQualification(empId, qId, data): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_EMPLOYEE_QUALIFICATION(empId, qId), data);
+    }
+    getEmployeeQualificationList(empId, data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEE_QUALIFICATION(empId), data);
+    }
+    deleteEmployeeQualification(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_EMPLOYEE_QUALIFICATION(id));
+    }
+
     membership(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_MEMBERSHIPS(), data);
     }
