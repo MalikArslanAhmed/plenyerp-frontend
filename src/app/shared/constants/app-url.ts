@@ -634,4 +634,17 @@ export class AppUrl {
         return AppUrl.API_URL + 'employee/' + employeeId + '/military/' + militaryId ;
     }
 
+    static ADD_EMPLOYEE_QUALIFICATION(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/qualifications';
+    }
+    static UPDATE_EMPLOYEE_QUALIFICATION(empId, qId): string {
+        return AppUrl.API_URL + 'employee/' + empId + '/qualifications/' + qId;
+    }
+    static GET_EMPLOYEE_QUALIFICATION(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/qualifications';
+    }
+    static DELETE_EMPLOYEE_QUALIFICATION(id): string {
+        return AppUrl.API_URL + 'employee-qualifications/' + id ;
+    }
+
 }

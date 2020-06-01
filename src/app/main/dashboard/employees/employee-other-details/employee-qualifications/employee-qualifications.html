@@ -15,16 +15,16 @@
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
                          <mat-label>Institution</mat-label>
-                         <input matInput formControlName="institution">
+                         <input matInput formControlName="instituteName">
                      </mat-form-field>
                  </div>
                  <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Certification</mat-label>
-                             <mat-select formControlName="certification">
+                             <mat-select formControlName="qualificationId">
                                  <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="certification.value"
+                                 <mat-option [value]="certification.id"
                                              *ngFor="let certification of certifications">
                                      {{certification.name}}</mat-option>
                              </mat-select>
@@ -33,9 +33,9 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Major</mat-label>
-                             <mat-select formControlName="major">
+                             <mat-select formControlName="academicId">
                                  <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="major.value"
+                                 <mat-option [value]="major.id"
                                              *ngFor="let major of majors">
                                      {{major.name}}</mat-option>
                              </mat-select>
@@ -46,9 +46,9 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Country of Issue</mat-label>
-                             <mat-select formControlName="countryOfIssue">
+                             <mat-select formControlName="countryId">
                                  <mat-option [value]="">Select</mat-option>
-                                 <mat-option [value]="coi.value"
+                                 <mat-option [value]="coi.id"
                                              *ngFor="let coi of countryOfIssues">
                                      {{coi.name}}</mat-option>
                              </mat-select>
@@ -57,14 +57,37 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Year Obtained</mat-label>
-                             <input matInput [matDatepicker]="picker" formControlName="yearObtained" name="yearObtained" placeholder="Choose a date">
+                             <!-- <input matInput [matDatepicker]="picker" formControlName="year" name="year" placeholder="Choose a date">
                              <mat-datepicker-toggle matSuffix [for]="picker">
                                  <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                              </mat-datepicker-toggle>
-                             <mat-datepicker #picker></mat-datepicker>
+                             <mat-datepicker #picker></mat-datepicker> -->
+
+                             <!-- <mat-select formControlName="year">
+                                <mat-option [value]="">Select</mat-option>
+                                <mat-option [value]="year"
+                                            *ngFor="let year of years">
+                                    {{year}}</mat-option>
+                            </mat-select> -->
                          </mat-form-field>
                      </div>
                  </div>
+
+                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="start center">
+                    <button mat-button class="save-button" type="button"
+                            [disabled]="employeeQualificationForm.invalid"
+                            *ngIf="!employeeQualificationId"
+                            (click)="addEmployeeQualification()"
+                            aria-label="Save">ADD
+                    </button>
+
+                    <button mat-button class="save-button" type="button"
+                            [disabled]="employeeQualificationForm.invalid"
+                            *ngIf="employeeQualificationId"
+                            (click)="updateEmployeeQualification()"
+                            aria-label="Save">UPDATE
+                    </button>
+                </div>
 
              </div>
          </form>
@@ -115,14 +138,11 @@
      </ng-container>
    </div>
     </div>
-    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+    <!-- <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
                 [disabled]="employeeQualificationForm.invalid"
                 (click)="matDialogRef.close(employeeQualificationForm);"
                 aria-label="Save">ADD
         </button>
-        <!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeeQualificationForm); updateDesignation()"-->
-        <!--                [disabled]="employeeOtherDetailsForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
-        <!--        </button>-->
-    </div>
+    </div> -->
 </div>
