@@ -116,6 +116,36 @@ export class EmployeeOtherDetailsService extends BaseService {
         return this.deleteRequest(AppUrl.DELETE_EMPLOYEE_QUALIFICATION(id));
     }
 
+    membership(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_MEMBERSHIPS(), data);
+    }
+    employeeMembershipList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_MEMBERSHIP(id), data);
+    }
+    deleteMembership(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_MEMBERSHIP(id));
+    }
+    addEmployeeMembership(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_MEMBERSHIP(id), data);
+    }
+    updateMembership(employeeId, membershipId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_MEMBERSHIP(employeeId, membershipId), data);
+    }
+    phoneNumberTypes(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_PHONE_NUMBER_TYPE(), data);
+    }
+    employeePhoneNumberList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_PHONE_NUMBER(id), data);
+    }
+    deletePhoneNumber(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_PHONE_NUMBER(id));
+    }
+    addEmployeePhoneNumber(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_PHONE_NUMBER(id), data);
+    }
+    updatePhoneNumber(employeeId, phoneNumberId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_PHONE_NUMBER(employeeId, phoneNumberId), data);
+    }
 }
 
 export function toFormData<T>( formValue: T ) {

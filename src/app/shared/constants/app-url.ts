@@ -647,4 +647,25 @@ export class AppUrl {
         return AppUrl.API_URL + 'employee-qualifications/' + id ;
     }
 
+    static EMPLOYEE_MEMBERSHIP(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/memberships';
+    }
+    static EMPLOYEE_DELETE_MEMBERSHIP(id): string {
+        return AppUrl.API_URL + 'employee-memberships/' + id ;
+    }
+    static UPDATE_MEMBERSHIP(employeeId, membershipId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/memberships/' + membershipId ;
+    }
+    static EMPLOYEE_PHONE_NUMBER(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/phones';
+    }
+    static EMPLOYEE_DELETE_PHONE_NUMBER(id): string {
+        return AppUrl.API_URL + 'employee-phones/' + id ;
+    }
+    static GET_PHONE_NUMBER_TYPE(): string {
+        return AppUrl.API_URL + 'phone-type';
+    }
+    static UPDATE_PHONE_NUMBER(employeeId, phoneNumberId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/phones/' + phoneNumberId ;
+    }
 }
