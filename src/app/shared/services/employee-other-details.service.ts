@@ -126,6 +126,21 @@ export class EmployeeOtherDetailsService extends BaseService {
     updatePhoneNumber(employeeId, phoneNumberId, data?): Observable<any> {
         return this.putRequest(AppUrl.UPDATE_PHONE_NUMBER(employeeId, phoneNumberId), data);
     }
+    language(data?): Observable<any> {
+        return this.getRequest(AppUrl.LANGUAGES(), data);
+    }
+     employeeLanguageList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_LANGUAGE(id), data);
+    }
+    deleteLanguage(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_LANGUAGE(id));
+    }
+    addEmployeeLanguage(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_LANGUAGE(id), data);
+    }
+    updateLanguage(employeeId, languageId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_LANGUAGE(employeeId, languageId), data);
+    }
 }
 
 export function toFormData<T>( formValue: T ) {

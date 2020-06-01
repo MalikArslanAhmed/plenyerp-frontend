@@ -655,4 +655,13 @@ export class AppUrl {
     static UPDATE_PHONE_NUMBER(employeeId, phoneNumberId): string {
         return AppUrl.API_URL + 'employee/' + employeeId + '/phones/' + phoneNumberId ;
     }
+    static EMPLOYEE_LANGUAGE(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/languages';
+    }
+    static EMPLOYEE_DELETE_LANGUAGE(id): string {
+        return AppUrl.API_URL + 'employee-languages/' + id ;
+    }
+    static UPDATE_LANGUAGE(employeeId, languageId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/languages/' + languageId ;
+    }
 }
