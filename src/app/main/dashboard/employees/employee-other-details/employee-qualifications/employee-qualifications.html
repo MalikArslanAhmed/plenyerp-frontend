@@ -63,31 +63,31 @@
                              </mat-datepicker-toggle>
                              <mat-datepicker #picker></mat-datepicker> -->
 
-                             <!-- <mat-select formControlName="year">
+                              <mat-select formControlName="year">
                                 <mat-option [value]="">Select</mat-option>
                                 <mat-option [value]="year"
                                             *ngFor="let year of years">
                                     {{year}}</mat-option>
-                            </mat-select> -->
+                            </mat-select>
                          </mat-form-field>
                      </div>
                  </div>
 
-                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="start center">
-                    <button mat-button class="save-button" type="button"
-                            [disabled]="employeeQualificationForm.invalid"
-                            *ngIf="!employeeQualificationId"
-                            (click)="addEmployeeQualification()"
-                            aria-label="Save">ADD
-                    </button>
+<!--                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="start center">-->
+<!--                    <button mat-button class="save-button" type="button"-->
+<!--                            [disabled]="employeeQualificationForm.invalid"-->
+<!--                            *ngIf="!employeeQualificationId"-->
+<!--                            (click)="addEmployeeQualification()"-->
+<!--                            aria-label="Save">ADD-->
+<!--                    </button>-->
 
-                    <button mat-button class="save-button" type="button"
-                            [disabled]="employeeQualificationForm.invalid"
-                            *ngIf="employeeQualificationId"
-                            (click)="updateEmployeeQualification()"
-                            aria-label="Save">UPDATE
-                    </button>
-                </div>
+<!--                    <button mat-button class="save-button" type="button"-->
+<!--                            [disabled]="employeeQualificationForm.invalid"-->
+<!--                            *ngIf="employeeQualificationId"-->
+<!--                            (click)="updateEmployeeQualification()"-->
+<!--                            aria-label="Save">UPDATE-->
+<!--                    </button>-->
+<!--                </div>-->
 
              </div>
          </form>
@@ -102,11 +102,41 @@
                      </mat-cell>
                  </ng-container>
 
-                 <ng-container matColumnDef="name">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+                 <ng-container matColumnDef="institution">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Institution</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeQualification">
                          <p class="phone text-truncate cursor-pointer">
-                             {{employeeQualification.name}}
+                             {{employeeQualification?.instituteName}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+
+                 <ng-container matColumnDef="qualification">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Certification</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeQualification">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeQualification?.qualification?.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+
+                 <ng-container matColumnDef="country">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Country of Issue</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeQualification">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeQualification?.country?.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+
+                 <ng-container matColumnDef="year">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Year</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeQualification">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeQualification?.year}}
                          </p>
                      </mat-cell>
                  </ng-container>
@@ -138,11 +168,18 @@
      </ng-container>
    </div>
     </div>
-    <!-- <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="cancelUpdate()"
+                aria-label="Update" *ngIf="employeeQualificationId">Cancel
+        </button>
         <button mat-button class="save-button"
                 [disabled]="employeeQualificationForm.invalid"
-                (click)="matDialogRef.close(employeeQualificationForm);"
+                *ngIf="employeeQualificationId === null "
+                (click)="addEmployeeQualification()"
                 aria-label="Save">ADD
         </button>
-    </div> -->
+        <button mat-button class="save-button" (click)="updateEmployeeQualification()"
+                [disabled]="employeeQualificationForm.invalid" aria-label="Update" *ngIf="employeeQualificationId">Apply Changes
+        </button>
+    </div>
 </div>

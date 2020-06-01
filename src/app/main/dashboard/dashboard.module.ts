@@ -126,6 +126,7 @@ import {EmployeePhoneNumber} from './employees/employee-other-details/employee-p
 import {EmployeeQualifications} from './employees/employee-other-details/employee-qualifications/employee-qualifications';
 import {EmployeeRelations} from './employees/employee-other-details/employee-relations/employee-relations';
 import {EmployeeSchoolAttended} from './employees/employee-other-details/employee-school-attended/employee-school-attended';
+import {EmployeeBackground} from './employees/employee-other-details/employee-background/employee-background';
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -233,7 +234,8 @@ import {EmployeeSchoolAttended} from './employees/employee-other-details/employe
         EmployeePhoneNumber,
         EmployeeQualifications,
         EmployeeRelations,
-        EmployeeSchoolAttended
+        EmployeeSchoolAttended,
+        EmployeeBackground
 
 
     ],

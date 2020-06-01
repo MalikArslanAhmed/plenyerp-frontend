@@ -19,7 +19,7 @@ export class EmployeeQualifications implements OnInit {
     employeeQualificationForm: FormGroup;
     
     employeeQualificationList = [];
-    employeeQualificationColumns = ['sno', 'name', 'actions'];
+    employeeQualificationColumns = ['sno', 'institution', 'qualification', 'country', 'year', 'actions'];
     certifications = [];
     majors = [];
     countryOfIssues = [];
@@ -95,6 +95,8 @@ export class EmployeeQualifications implements OnInit {
     addEmployeeQualification() {
         this.employeeOtherDetailsService.addEmployeeQualification(this.data.employeeId, this.employeeQualificationForm.value).subscribe(data => {
             this.getEmployeeQualificationList();
+            this.employeeQualificationId = null;
+            this.employeeQualificationForm.reset();
         });
     }
 
@@ -122,5 +124,9 @@ export class EmployeeQualifications implements OnInit {
         this.employeeOtherDetailsService.deleteEmployeeQualification(id).subscribe(data => {
             this.getEmployeeQualificationList();
         });
+    }
+    cancelUpdate() {
+        this.employeeQualificationId = null;
+        this.employeeQualificationForm.reset();
     }
 }

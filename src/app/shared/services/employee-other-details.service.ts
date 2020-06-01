@@ -161,6 +161,50 @@ export class EmployeeOtherDetailsService extends BaseService {
     }
     getRelations(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_RELATIONSHIPS(), data);
+    language(data?): Observable<any> {
+        return this.getRequest(AppUrl.LANGUAGES(), data);
+    }
+     employeeLanguageList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_LANGUAGE(id), data);
+    }
+    deleteLanguage(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_LANGUAGE(id));
+    }
+    addEmployeeLanguage(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_LANGUAGE(id), data);
+    }
+    updateLanguage(employeeId, languageId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_LANGUAGE(employeeId, languageId), data);
+    }
+    employeeCensureList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_CENSURE(id), data);
+    }
+    censure(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_CENSURES(), data);
+    }
+    issuedBy(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEES(), data);
+    }
+    deleteCensure(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_CENSURE(id));
+    }
+    updateCensure(employeeId, censureId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_CENSURE(employeeId, censureId), data);
+    }
+    addEmployeeCensure(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_CENSURE(id), data);
+    }
+    employeeBackgroundList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_BACKGROUND(id), data);
+    }
+    deleteBackground(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_BACKGROUND(id));
+    }
+    addEmployeeBackground(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_BACKGROUND(id), data);
+    }
+    updateBackground(employeeId, backgroundId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_BACKGROUND(employeeId, backgroundId), data);
     }
 }
 

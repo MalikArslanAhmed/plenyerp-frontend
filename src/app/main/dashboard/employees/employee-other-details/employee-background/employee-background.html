@@ -1,0 +1,84 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Employee {{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div mat-dialog-content  fusePerfectScrollbar>
+   <div class="margin-top-1rem">
+     <ng-container>
+         <form [formGroup]="employeeBackgroundForm">
+             <div fxLayout="column">
+                 <div>
+                     <mat-form-field appearance="outline" fxFlex="100">
+                         <mat-label>Background</mat-label>
+                         <textarea matInput formControlName="details"></textarea>
+                     </mat-form-field>
+                 </div>
+             </div>
+         </form>
+         <div class="employee-address">
+             <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeBackgroundList">
+                 <ng-container matColumnDef="sno">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeBackground">
+                         <p class="email text-truncate">
+                             {{employeeBackground.sno}}.
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="background">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Background</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeBackground">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeBackground?.details}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="actions">
+                     <mat-header-cell *matHeaderCellDef>
+                         <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+                     </mat-header-cell>
+                     <mat-cell *matCellDef="let employeeBackground">
+                         <div fxFlex="row" fxLayoutAlign="end center">
+                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeBackground(employeeBackground?.id)"
+                                     style="color: blue">
+                                 <mat-icon class="material-icons">edit</mat-icon>
+                             </button>
+                             <button mat-icon-button aria-label="Toggle star" (click)="deleteEmployeeBackground(employeeBackground?.id)"
+                                     style="color: red">
+                                 <mat-icon class="material-icons">delete</mat-icon>
+                             </button>
+                         </div>
+                     </mat-cell>
+                 </ng-container>
+
+                 <mat-header-row *matHeaderRowDef="employeeBackgroundColumns"></mat-header-row>
+                 <mat-row *matRowDef="let employeeBackground; columns: employeeBackgroundColumns;" class="contact"
+                          [@animate]="{value:'*',params:{y:'100%'}}">
+                 </mat-row>
+             </mat-table>
+         </div>
+     </ng-container>
+   </div>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="cancelUpdate()"
+                aria-label="Update" *ngIf="employeeBackgroundId">Cancel
+        </button>
+        <button mat-button class="save-button"
+                [disabled]="employeeBackgroundForm.invalid"
+                *ngIf="employeeBackgroundId === null "
+                (click)="addBackground()"
+                aria-label="Save">ADD
+        </button>
+        <button mat-button class="save-button" (click)="updateEmployeeBackground()"
+                [disabled]="employeeBackgroundForm.invalid" aria-label="Update" *ngIf="employeeBackgroundId">Apply Changes
+        </button>
+    </div>
+</div>

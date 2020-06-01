@@ -680,5 +680,31 @@ export class AppUrl {
     }
     static DELETE_EMPLOYEE_RELATION(id): string {
         return AppUrl.API_URL + 'employee-relations/' + id ;
+    static EMPLOYEE_LANGUAGE(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/languages';
+    }
+    static EMPLOYEE_DELETE_LANGUAGE(id): string {
+        return AppUrl.API_URL + 'employee-languages/' + id ;
+    }
+    static UPDATE_LANGUAGE(employeeId, languageId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/languages/' + languageId ;
+    }
+    static EMPLOYEE_CENSURE(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/censures';
+    }
+    static EMPLOYEE_DELETE_CENSURE(id): string {
+        return AppUrl.API_URL + 'employee-censures/' + id ;
+    }
+    static UPDATE_CENSURE(employeeId, censureId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/censures/' + censureId ;
+    }
+    static EMPLOYEE_BACKGROUND(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/background';
+    }
+    static EMPLOYEE_DELETE_BACKGROUND(id): string {
+        return AppUrl.API_URL + 'employee-background/' + id ;
+    }
+    static UPDATE_BACKGROUND(employeeId, backgroundId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/background/' + backgroundId ;
     }
 }
