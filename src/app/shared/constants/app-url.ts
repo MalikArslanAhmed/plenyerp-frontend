@@ -668,4 +668,17 @@ export class AppUrl {
     static UPDATE_PHONE_NUMBER(employeeId, phoneNumberId): string {
         return AppUrl.API_URL + 'employee/' + employeeId + '/phones/' + phoneNumberId ;
     }
+
+    static ADD_EMPLOYEE_RELATION(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/relations';
+    }
+    static UPDATE_EMPLOYEE_RELATION(empId, relationId): string {
+        return AppUrl.API_URL + 'employee/' + empId + '/relations/' + relationId;
+    }
+    static GET_EMPLOYEE_RELATION(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/relations';
+    }
+    static DELETE_EMPLOYEE_RELATION(id): string {
+        return AppUrl.API_URL + 'employee-relations/' + id ;
+    }
 }
