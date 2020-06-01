@@ -108,7 +108,7 @@ export class EmployeeMilitaryService implements OnInit {
             this.getMilitaryServiceList();
         });
     }
-    updateEmployeeAddress() {
+    updateEmployeeMilitaryService() {
         const f = this.employeeMilitaryServiceForm.value;
         const engage = moment(f.engagedAt).format('YYYY-MM-DD');
         const disEngage = moment(f.dischargedAt).format('YYYY-MM-DD');

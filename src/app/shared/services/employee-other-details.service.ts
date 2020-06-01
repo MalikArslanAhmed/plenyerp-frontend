@@ -33,6 +33,12 @@ export class EmployeeOtherDetailsService extends BaseService {
     getSchedule(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_SCHEDULES(), data);
     }
+    getCertifications(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_QUALIFICATIONS(), data);
+    }
+    getMajors(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_ACAMEDIC_MAJORS(), data);
+    }
     allRegion(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_REGION(), data);
     }
@@ -97,6 +103,109 @@ export class EmployeeOtherDetailsService extends BaseService {
         return this.putRequest(AppUrl.UPDATE_MILITARY_SERVICE(employeeId, militaryId), data);
     }
 
+    addEmployeeQualification(id, data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_EMPLOYEE_QUALIFICATION(id), data);
+    }
+    updateEmployeeQualification(empId, qId, data): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_EMPLOYEE_QUALIFICATION(empId, qId), data);
+    }
+    getEmployeeQualificationList(empId, data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEE_QUALIFICATION(empId), data);
+    }
+    deleteEmployeeQualification(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_EMPLOYEE_QUALIFICATION(id));
+    }
+
+    membership(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_MEMBERSHIPS(), data);
+    }
+    employeeMembershipList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_MEMBERSHIP(id), data);
+    }
+    deleteMembership(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_MEMBERSHIP(id));
+    }
+    addEmployeeMembership(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_MEMBERSHIP(id), data);
+    }
+    updateMembership(employeeId, membershipId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_MEMBERSHIP(employeeId, membershipId), data);
+    }
+    phoneNumberTypes(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_PHONE_NUMBER_TYPE(), data);
+    }
+    employeePhoneNumberList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_PHONE_NUMBER(id), data);
+    }
+    deletePhoneNumber(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_PHONE_NUMBER(id));
+    }
+    addEmployeePhoneNumber(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_PHONE_NUMBER(id), data);
+    }
+    updatePhoneNumber(employeeId, phoneNumberId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_PHONE_NUMBER(employeeId, phoneNumberId), data);
+    }
+
+    addEmployeeRelation(id, data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_EMPLOYEE_RELATION(id), data);
+    }
+    updateEmployeeRelation(empId, relationId, data): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_EMPLOYEE_RELATION(empId, relationId), data);
+    }
+    getEmployeeRelationsList(empId, data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEE_RELATION(empId), data);
+    }
+    deleteEmployeeRelation(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_EMPLOYEE_RELATION(id));
+    }
+    getRelations(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_RELATIONSHIPS(), data);
+    language(data?): Observable<any> {
+        return this.getRequest(AppUrl.LANGUAGES(), data);
+    }
+     employeeLanguageList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_LANGUAGE(id), data);
+    }
+    deleteLanguage(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_LANGUAGE(id));
+    }
+    addEmployeeLanguage(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_LANGUAGE(id), data);
+    }
+    updateLanguage(employeeId, languageId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_LANGUAGE(employeeId, languageId), data);
+    }
+    employeeCensureList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_CENSURE(id), data);
+    }
+    censure(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_CENSURES(), data);
+    }
+    issuedBy(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEES(), data);
+    }
+    deleteCensure(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_CENSURE(id));
+    }
+    updateCensure(employeeId, censureId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_CENSURE(employeeId, censureId), data);
+    }
+    addEmployeeCensure(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_CENSURE(id), data);
+    }
+    employeeBackgroundList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_BACKGROUND(id), data);
+    }
+    deleteBackground(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_BACKGROUND(id));
+    }
+    addEmployeeBackground(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_BACKGROUND(id), data);
+    }
+    updateBackground(employeeId, backgroundId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_BACKGROUND(employeeId, backgroundId), data);
+    }
 }
 
 export function toFormData<T>( formValue: T ) {

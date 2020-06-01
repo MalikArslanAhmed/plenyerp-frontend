@@ -100,7 +100,7 @@ export class EmployeeHistory implements OnInit {
             this.getHistoryList();
         });
     }
-    updateEmployeeAddress() {
+    updateEmployeeHistory() {
         const f = this.employeeHistoryForm.value;
         const engage = moment(f.engaged).format('YYYY-MM-DD');
         const disEngage = moment(f.disengaged).format('YYYY-MM-DD');

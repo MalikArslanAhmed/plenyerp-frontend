@@ -690,4 +690,78 @@ export class AppUrl {
         return AppUrl.API_URL + `employee-banks/` + bankId;
     }
 
+    static ADD_EMPLOYEE_QUALIFICATION(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/qualifications';
+    }
+    static UPDATE_EMPLOYEE_QUALIFICATION(empId, qId): string {
+        return AppUrl.API_URL + 'employee/' + empId + '/qualifications/' + qId;
+    }
+    static GET_EMPLOYEE_QUALIFICATION(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/qualifications';
+    }
+    static DELETE_EMPLOYEE_QUALIFICATION(id): string {
+        return AppUrl.API_URL + 'employee-qualifications/' + id ;
+    }
+
+    static EMPLOYEE_MEMBERSHIP(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/memberships';
+    }
+    static EMPLOYEE_DELETE_MEMBERSHIP(id): string {
+        return AppUrl.API_URL + 'employee-memberships/' + id ;
+    }
+    static UPDATE_MEMBERSHIP(employeeId, membershipId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/memberships/' + membershipId ;
+    }
+    static EMPLOYEE_PHONE_NUMBER(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/phones';
+    }
+    static EMPLOYEE_DELETE_PHONE_NUMBER(id): string {
+        return AppUrl.API_URL + 'employee-phones/' + id ;
+    }
+    static GET_PHONE_NUMBER_TYPE(): string {
+        return AppUrl.API_URL + 'phone-type';
+    }
+    static UPDATE_PHONE_NUMBER(employeeId, phoneNumberId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/phones/' + phoneNumberId ;
+    }
+
+    static ADD_EMPLOYEE_RELATION(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/relations';
+    }
+    static UPDATE_EMPLOYEE_RELATION(empId, relationId): string {
+        return AppUrl.API_URL + 'employee/' + empId + '/relations/' + relationId;
+    }
+    static GET_EMPLOYEE_RELATION(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/relations';
+    }
+    static DELETE_EMPLOYEE_RELATION(id): string {
+        return AppUrl.API_URL + 'employee-relations/' + id;
+    }
+    static EMPLOYEE_LANGUAGE(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/languages';
+    }
+    static EMPLOYEE_DELETE_LANGUAGE(id): string {
+        return AppUrl.API_URL + 'employee-languages/' + id ;
+    }
+    static UPDATE_LANGUAGE(employeeId, languageId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/languages/' + languageId ;
+    }
+    static EMPLOYEE_CENSURE(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/censures';
+    }
+    static EMPLOYEE_DELETE_CENSURE(id): string {
+        return AppUrl.API_URL + 'employee-censures/' + id ;
+    }
+    static UPDATE_CENSURE(employeeId, censureId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/censures/' + censureId ;
+    }
+    static EMPLOYEE_BACKGROUND(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/background';
+    }
+    static EMPLOYEE_DELETE_BACKGROUND(id): string {
+        return AppUrl.API_URL + 'employee-background/' + id ;
+    }
+    static UPDATE_BACKGROUND(employeeId, backgroundId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/background/' + backgroundId ;
+    }
 }
