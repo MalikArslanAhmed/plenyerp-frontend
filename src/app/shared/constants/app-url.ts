@@ -679,7 +679,8 @@ export class AppUrl {
         return AppUrl.API_URL + 'employee/' + id + '/relations';
     }
     static DELETE_EMPLOYEE_RELATION(id): string {
-        return AppUrl.API_URL + 'employee-relations/' + id ;
+        return AppUrl.API_URL + 'employee-relations/' + id;
+    }
     static EMPLOYEE_LANGUAGE(id): string {
         return AppUrl.API_URL + 'employee/' + id + '/languages';
     }

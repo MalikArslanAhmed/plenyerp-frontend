@@ -18,27 +18,15 @@ export class EmployeeRelations implements OnInit {
     data: any;
     dialogTitle: any;
     employeeRelationsForm: FormGroup;
-    typeOfAddress = [
-        {
-            name: 'abcd',
-            value: 'ABCD'
-        },
-        {
-            name: 'xyz',
-            value: 'XYZ'
-        }
-    ];
     countries = [];
     states = [];
     regions = [];
     lgas = [];
     relations;
     genders = AppConstants.genders;
-
     employeeRelationsList: any;
-    employeeRelationsColumns = ['sno', 'lname', , 'fname', 'relationship', 'kin', 'actions'];
-    employeeRelationId;
-
+    employeeRelationsColumns = ['sno', 'lname', 'fname', 'relationship', 'kin', 'actions'];
+    employeeRelationId = null;
     constructor(public matDialogRef: MatDialogRef<EmployeeRelations>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private fb: FormBuilder,
@@ -54,26 +42,24 @@ export class EmployeeRelations implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.getRelations();
-        this.getTypeOfAddress();
         this.getCountry();
         this.getEmployeeRelationsList();
     }
 
     refresh() {
         this.employeeRelationsForm = this.fb.group({
-            lName: ['', Validators.required],
-            staffId: ['', Validators.required],
-            fName: [''],
+            firstName: ['', Validators.required],
+            relativeId: [''],
+            lastName: ['', Validators.required],
             gender: ['', Validators.required],
             nationalId: ['', Validators.required],
             dateOfBirth: ['', Validators.required],
-            relation: ['', Validators.required],
-            kin: ['', Validators.required],
-            typeOfAddress: ['', Validators.required],
+            relationshipId: ['', Validators.required],
+            isNextOfKin: ['', Validators.required],
             addressLine1: ['', Validators.required],
             addressLine2: [''],
             city: ['', Validators.required],
-            zip: ['', Validators.required],
+            zipCode: ['', Validators.required],
             countryId: ['', Validators.required],
             stateId: ['', Validators.required],
             regionId: ['', Validators.required],
@@ -117,12 +103,6 @@ export class EmployeeRelations implements OnInit {
         });
     }
 
-    getTypeOfAddress() {
-        this.employeeOtherDetailsService.typeOfAddress({}).subscribe(data => {
-            this.typeOfAddress = data.items;
-        });
-    }
-
     getCountry() {
         this.employeeOtherDetailsService.allCountry().subscribe(data => {
             this.countries = data.items;
@@ -159,6 +139,8 @@ export class EmployeeRelations implements OnInit {
     addEmployeeRelation() {
         this.employeeOtherDetailsService.addEmployeeRelation(this.data.employeeId, this.employeeRelationsForm.value).subscribe(data => {
             this.getEmployeeRelationsList();
+            this.employeeRelationId = null;
+            this.employeeRelationsForm.reset();
         });
     }
 
@@ -166,14 +148,14 @@ export class EmployeeRelations implements OnInit {
     editEmployeeRelation(employeeRelation: any) {
         this.employeeRelationId = employeeRelation.id;
         this.employeeRelationsForm.patchValue({
-            lName: employeeRelation.lName,
-            staffId: employeeRelation.staffId,
-            fName: employeeRelation.fName,
+            lastName: employeeRelation.lastName,
+            relativeId: employeeRelation.relativeId,
+            firstName: employeeRelation.firstName,
             gender: employeeRelation.gender,
             nationalId: employeeRelation.nationalId,
             dateOfBirth: employeeRelation.dateOfBirth,
-            relation: employeeRelation.relation,
-            kin: employeeRelation.kin,
+            relationshipId: employeeRelation.relationshipId,
+            isNextOfKin: employeeRelation.isNextOfKin,
             addressTypeId: employeeRelation.addressTypeId,
             addressLine1: employeeRelation.addressLine1,
             addressLine2: employeeRelation.addressLine2,
@@ -182,7 +164,10 @@ export class EmployeeRelations implements OnInit {
             countryId: employeeRelation.country.id,
             regionId: employeeRelation.region.id,
             stateId: employeeRelation.state.id,
-            lgaId: employeeRelation.lga.id
+            lgaId: employeeRelation.lga.id,
+            phone: employeeRelation.phone,
+            email: employeeRelation.email,
+
         });
     }
 
@@ -198,5 +183,9 @@ export class EmployeeRelations implements OnInit {
         this.employeeOtherDetailsService.deleteEmployeeRelation(id).subscribe(data => {
             this.getEmployeeRelationsList();
         });
+    }
+    cancelUpdate() {
+        this.employeeRelationId = null;
+        this.employeeRelationsForm.reset();
     }
 }
