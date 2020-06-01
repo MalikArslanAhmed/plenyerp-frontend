@@ -677,4 +677,13 @@ export class AppUrl {
     static UPDATE_LANGUAGE(employeeId, languageId): string {
         return AppUrl.API_URL + 'employee/' + employeeId + '/languages/' + languageId ;
     }
+    static EMPLOYEE_CENSURE(id): string {
+        return AppUrl.API_URL + 'employee/' + id + '/censures';
+    }
+    static EMPLOYEE_DELETE_CENSURE(id): string {
+        return AppUrl.API_URL + 'employee-censures/' + id ;
+    }
+    static UPDATE_CENSURE(employeeId, censureId): string {
+        return AppUrl.API_URL + 'employee/' + employeeId + '/censures/' + censureId ;
+    }
 }

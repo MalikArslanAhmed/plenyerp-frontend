@@ -161,6 +161,24 @@ export class EmployeeOtherDetailsService extends BaseService {
     updateLanguage(employeeId, languageId, data?): Observable<any> {
         return this.putRequest(AppUrl.UPDATE_LANGUAGE(employeeId, languageId), data);
     }
+    employeeCensureList(id, data?): Observable<any> {
+        return this.getRequest(AppUrl.EMPLOYEE_CENSURE(id), data);
+    }
+    censure(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_CENSURES(), data);
+    }
+    issuedBy(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEES(), data);
+    }
+    deleteCensure(id): Observable<any> {
+        return this.deleteRequest(AppUrl.EMPLOYEE_DELETE_CENSURE(id));
+    }
+    updateCensure(employeeId, censureId, data?): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_CENSURE(employeeId, censureId), data);
+    }
+    addEmployeeCensure(id, data): Observable<any> {
+        return this.postRequest(AppUrl.EMPLOYEE_CENSURE(id), data);
+    }
 }
 
 export function toFormData<T>( formValue: T ) {

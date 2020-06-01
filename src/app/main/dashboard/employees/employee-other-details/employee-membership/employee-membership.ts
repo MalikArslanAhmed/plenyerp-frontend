@@ -85,7 +85,7 @@ export class EmployeeMembership implements OnInit {
         });
     }
 
-    addMilitaryService() {
+    addMembership() {
         const f = this.employeeMembershipForm.value;
         const joinDate = moment(f.joinAt).format('YYYY-MM-DD');
         const obj = {
