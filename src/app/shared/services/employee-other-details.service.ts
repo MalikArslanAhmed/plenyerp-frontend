@@ -161,6 +161,7 @@ export class EmployeeOtherDetailsService extends BaseService {
     }
     getRelations(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_RELATIONSHIPS(), data);
+    }
     language(data?): Observable<any> {
         return this.getRequest(AppUrl.LANGUAGES(), data);
     }
