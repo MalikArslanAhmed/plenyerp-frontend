@@ -40,7 +40,8 @@ export class CountryCreateComponent implements OnInit {
 
     refresh() {
         this.countryForm = this.fb.group({
-            name: ['', Validators.required]
+            name: ['', Validators.required],
+            isActive: [true, Validators.required]
         });
     }
 
@@ -48,6 +49,7 @@ export class CountryCreateComponent implements OnInit {
         if (this.updateData) {
             this.countryForm.patchValue({
                 name: this.updateData.country.name,
+                isActive: this.updateData.country.isActive
             });
         }
     }

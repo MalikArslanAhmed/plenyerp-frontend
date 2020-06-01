@@ -45,7 +45,8 @@ export class StatesCreateComponent implements OnInit {
         this.statesForm = this.fb.group({
             countryId: ['', Validators.required],
             regionId: ['', Validators.required],
-            name: ['', Validators.required]
+            name: ['', Validators.required],
+            isActive: [true, Validators.required]
 
         });
         this.statesForm.get('countryId').valueChanges.subscribe(val => {
@@ -61,6 +62,7 @@ export class StatesCreateComponent implements OnInit {
                 name: this.updateData.state.name,
                 countryId: this.updateData.state.region.country.id,
                 regionId: this.updateData.state.region.id,
+                isActive: this.updateData.state.isActive
             });
         }
     }

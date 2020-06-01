@@ -14,7 +14,7 @@ import {ContactInfoService} from '../../../../../shared/services/contact-info.se
 })
 export class RegionListComponent implements OnInit {
     regionList = [];
-    displayedRegionColumns = ['id', 'country', 'name', 'actions'];
+    displayedRegionColumns = ['id', 'country', 'name', 'status', 'actions'];
     dialogRef: any;    
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;

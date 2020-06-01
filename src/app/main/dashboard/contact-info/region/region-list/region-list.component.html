@@ -1,56 +1,68 @@
 <div class="country-list">
-        <mat-table [@animateStagger]="{value:'50'}" [dataSource]="regionList">
-            <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-sm *matCellDef="let region">
-                    <p class="email text-truncate">
-                        {{region.sno}}.
-                    </p>
-                </mat-cell>
-            </ng-container>
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="regionList">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-sm *matCellDef="let region">
+                <p class="email text-truncate">
+                    {{region.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="country">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Country</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-md *matCellDef="let region">
-                    <p class="phone text-truncate cursor-pointer">
-                        {{region.country.name}}
-                    </p>
-                </mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="country">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Country</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let region">
+                <p class="phone text-truncate cursor-pointer">
+                    {{region.country.name}}
+                </p>
+            </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-md *matCellDef="let region">
-                    <p class="phone text-truncate cursor-pointer">
-                        {{region.name}}
-                    </p>
-                </mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let region">
+                <p class="phone text-truncate cursor-pointer">
+                    {{region.name}}
+                </p>
+            </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef>
-                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
-                </mat-header-cell>
-                <mat-cell *matCellDef="let region">
-                    <div fxFlex="row" fxLayoutAlign="end center">
-                        <button mat-icon-button aria-label="Toggle star" (click)="editRegion(region)"
-                                style="color: blue">
-                            <mat-icon class="material-icons">edit</mat-icon>
-                        </button>
-                        <button mat-icon-button aria-label="Toggle star" (click)="deleteRegion(region?.id)"
-                                style="color: red">
-                            <mat-icon class="material-icons">delete</mat-icon>
-                        </button>
-                    </div>
-                </mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
+            </mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let region">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="region.isActive">Active</p>
+                    <p *ngIf="!region.isActive">Inactive</p>
+                </div>
+            </mat-cell>
+        </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedRegionColumns"></mat-header-row>
-            <mat-row *matRowDef="let region; columns: displayedRegionColumns;" class="contact"
-                     [@animate]="{value:'*',params:{y:'100%'}}">
-            </mat-row>
-        </mat-table>
-    </div>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let region">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-icon-button aria-label="Toggle star" (click)="editRegion(region)"
+                            style="color: blue">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star" (click)="deleteRegion(region?.id)"
+                            style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedRegionColumns"></mat-header-row>
+        <mat-row *matRowDef="let region; columns: displayedRegionColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+</div>
 
 
 

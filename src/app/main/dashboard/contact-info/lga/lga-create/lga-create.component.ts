@@ -47,7 +47,8 @@ export class LgaCreateComponent implements OnInit {
             countryId: ['', Validators.required],
             regionId: ['', Validators.required],
             stateId: ['', Validators.required],
-            name: ['', Validators.required]
+            name: ['', Validators.required],
+            isActive: [true, Validators.required]
         });
         this.lgaForm.get('countryId').valueChanges.subscribe(val => {
             if (val) {
@@ -68,6 +69,7 @@ export class LgaCreateComponent implements OnInit {
                 regionId: this.updateData.lga.state.region.id,
                 stateId: this.updateData.lga.state.id,
                 name: this.updateData.lga.name,
+                isActive: this.updateData.lga.isActive
             });
         }
     }

@@ -14,8 +14,8 @@ import {ContactInfoService} from '../../../../../shared/services/contact-info.se
 })
 export class LgaListComponent implements OnInit {
     lgaList = [];
-    displayedLgaColumns = ['id', 'country', 'region', 'state', 'name', 'actions'];
-    dialogRef: any;    
+    displayedLgaColumns = ['id', 'country', 'region', 'state', 'name', 'status', 'actions'];
+    dialogRef: any;
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
 

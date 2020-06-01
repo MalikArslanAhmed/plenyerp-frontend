@@ -44,6 +44,7 @@ export class RegionCreateComponent implements OnInit {
         this.regionForm = this.fb.group({
             countryId: ['', Validators.required],
             name: ['', Validators.required],
+            isActive: [true, Validators.required]
         });
     }
 
@@ -52,6 +53,7 @@ export class RegionCreateComponent implements OnInit {
             this.regionForm.patchValue({
                 name: this.updateData.region.name,
                 countryId: this.updateData.region.country.id,
+                isActive: this.updateData.region.isActive
             });
         }
     }
