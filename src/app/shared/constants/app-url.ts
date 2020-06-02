@@ -336,7 +336,7 @@ export class AppUrl {
     }
 
     static GET_EMPLOYEES_DETAILS_DOWNLOAD(id): string {
-        return AppUrl.API_URL + `/employee/` + id + `/details-download`;
+        return AppUrl.API_URL + `employee/` + id + `/details-download`;
     }
 
     static GET_APPOINTMENTS_TYPE(): string {
