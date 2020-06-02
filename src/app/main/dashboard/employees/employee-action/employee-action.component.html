@@ -378,7 +378,13 @@
                             <div class="custom-row" style="margin-top: 1rem">
                                 <div class="col p-0 d-flex">
                                     <button mat-button color="accent">Bank Details</button>
-                                    <button mat-button color="accent">Export Summary</button>
+                                    <button mat-button color="accent" (click)="exportSummary()">Export Summary</button>
+                                </div>
+                            </div>
+                            <div class="custom-row" style="margin-top: 1rem" *ngIf="exportOpen">
+                                <div class="col p-0 d-flex">
+                                    <button mat-button color="accent" (click)="downloadSummary(previewEmp.id, 'extended')">Extended Summary</button>
+                                    <button mat-button color="accent" (click)="downloadSummary(previewEmp.id, 'short')">Short Summary</button>
                                 </div>
                             </div>
                             <div class="custom-row" style="margin-top: 1rem">

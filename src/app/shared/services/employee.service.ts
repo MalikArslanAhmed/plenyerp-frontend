@@ -46,6 +46,10 @@ export class EmployeeService extends BaseService {
         return this.getRequest(AppUrl.GET_EMPLOYEES(), data);
     }
 
+    getEmployeesDetailsDownload(id, data): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEES_DETAILS_DOWNLOAD(id), data);
+    }
+
     setStatusEmployee(data): Observable<any> {
         return this.postRequest(AppUrl.SET_EMPLOYEE_STATUS(), data);
     }

@@ -138,7 +138,7 @@ export class AppUrl {
     }
 
     static EDIT_EMPLOYEE_PROFILE_PIC(id?): string {
-            return AppUrl.API_URL + `employees/` + id;
+        return AppUrl.API_URL + `employees/` + id;
     }
 
     static ADD_UPDATE_EMPLOYEE(id?): string {
@@ -333,6 +333,10 @@ export class AppUrl {
 
     static GET_EMPLOYEES(): string {
         return AppUrl.API_URL + `employees`;
+    }
+
+    static GET_EMPLOYEES_DETAILS_DOWNLOAD(id): string {
+        return AppUrl.API_URL + `/employee/` + id + `/details-download`;
     }
 
     static GET_APPOINTMENTS_TYPE(): string {
@@ -612,6 +616,7 @@ export class AppUrl {
     static USER_IMAGE_UPLOAD(): string {
         return AppUrl.API_URL + 'files';
     }
+
     static UPDATE_LEVEL_COUNTS(id?): string {
         return AppUrl.API_URL + 'admin-segments/' + id + '/levels';
     }
@@ -619,51 +624,65 @@ export class AppUrl {
     static GET_TYPE_OF_ADDRESS(): string {
         return AppUrl.API_URL + `address-type`;
     }
+
     static SET_EMPLOYEE_ADDRESS(id): string {
         return AppUrl.API_URL + 'employee/' + id + '/addresses';
     }
+
     static GET_EMPLOYEE_ADDRESS(id): string {
         return AppUrl.API_URL + 'employee/' + id + '/addresses';
     }
+
     static DELETE_EMPLOYEE_ADDRESS(id): string {
-        return AppUrl.API_URL + 'employee-addresses/' + id ;
+        return AppUrl.API_URL + 'employee-addresses/' + id;
     }
+
     static UPDATE_EMPLOYEE_ADDRESS(employeeId, addressId): string {
-        return AppUrl.API_URL + 'employee/' + employeeId + '/addresses/' + addressId ;
+        return AppUrl.API_URL + 'employee/' + employeeId + '/addresses/' + addressId;
     }
 
     static ADD_EMPLOYEE_SCHOOL_ATTENDED(id): string {
         return AppUrl.API_URL + 'employee/' + id + '/schools';
     }
+
     static UPDATE_EMPLOYEE_SCHOOL_ATTENDED(empId, schoolId): string {
         return AppUrl.API_URL + 'employee/' + empId + '/schools/' + schoolId;
     }
+
     static GET_EMPLOYEE_SCHOOL_ATTENDED(id): string {
         return AppUrl.API_URL + 'employee/' + id + '/schools';
     }
+
     static DELETE_EMPLOYEE_SCHOOL_ATTENDED(id): string {
-        return AppUrl.API_URL + 'employee-schools/' + id ;
+        return AppUrl.API_URL + 'employee-schools/' + id;
     }
+
     static GET_EMPLOYEE_HISTORY(id): string {
         return AppUrl.API_URL + 'employee/' + id + '/histories';
     }
+
     static SET_EMPLOYEE_HISTORY(id): string {
         return AppUrl.API_URL + 'employee/' + id + '/histories';
     }
+
     static DELETE_EMPLOYEE_HISTORY(id): string {
-        return AppUrl.API_URL + 'employee-histories/' + id ;
+        return AppUrl.API_URL + 'employee-histories/' + id;
     }
+
     static UPDATE_EMPLOYEE_HISTORY(employeeId, historyId): string {
-        return AppUrl.API_URL + 'employee/' + employeeId + '/histories/' + historyId ;
+        return AppUrl.API_URL + 'employee/' + employeeId + '/histories/' + historyId;
     }
+
     static EMPLOYEE_MILITARY_SERVICE(id): string {
         return AppUrl.API_URL + 'employee/' + id + '/military';
     }
+
     static DELETE_MILITARY_SERVICE(id): string {
-        return AppUrl.API_URL + 'employee-military/' + id ;
+        return AppUrl.API_URL + 'employee-military/' + id;
     }
+
     static UPDATE_MILITARY_SERVICE(employeeId, militaryId): string {
-        return AppUrl.API_URL + 'employee/' + employeeId + '/military/' + militaryId ;
+        return AppUrl.API_URL + 'employee/' + employeeId + '/military/' + militaryId;
     }
 
     static GET_BANKS_NAME(): string {

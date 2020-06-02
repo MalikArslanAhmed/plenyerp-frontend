@@ -123,8 +123,7 @@ export class EmployeeActionComponent implements OnInit {
         }
     ];
     otherDetailForm: FormGroup;
-
-
+    exportOpen = false;
 
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
@@ -159,7 +158,7 @@ export class EmployeeActionComponent implements OnInit {
             this.nextStatus = 'INCREMENT';
         } else if (params.status === 'PROMOTION_DUE') {
             this.nextStatus = 'PROMOTION';
-        }else {
+        } else {
             this.nextStatus = '';
         }
         this.employeesService.getEmployees(params).subscribe(data => {
@@ -202,16 +201,16 @@ export class EmployeeActionComponent implements OnInit {
         };
         obj['file'] = file;
         this.employeesService.uploadFile(obj).subscribe((fileData: any) => {
-                this.previewEmp.file = fileData.data;
-                this.afterFileUpload(fileData.data, previewEmp);
-            });
-        }
+            this.previewEmp.file = fileData.data;
+            this.afterFileUpload(fileData.data, previewEmp);
+        });
+    }
 
-        afterFileUpload(image, employee){
-            this.employeesService.editEmployeeProfilePic(employee.id, {profileImageId: image.id}).subscribe((data)=>{
+    afterFileUpload(image, employee) {
+        this.employeesService.editEmployeeProfilePic(employee.id, {profileImageId: image.id}).subscribe((data) => {
 
-            });
-        }
+        });
+    }
 
 
     // previewEmployee(employee) {
@@ -227,7 +226,7 @@ export class EmployeeActionComponent implements OnInit {
     // }
 
     previewEmployee(selected) {
-        if(selected){
+        if (selected) {
             this.previewEmp = selected;
         }
     }
@@ -311,7 +310,7 @@ export class EmployeeActionComponent implements OnInit {
                 }
             });
 
-        }else if (od === 'EMPLOYMENT_HISTORY') {
+        } else if (od === 'EMPLOYMENT_HISTORY') {
             this.dialogRef = this._matDialog.open(EmployeeHistory, {
                 panelClass: 'employee-history-details-form-dialog',
                 data: {
@@ -320,7 +319,7 @@ export class EmployeeActionComponent implements OnInit {
                 }
             });
 
-        }else if (od === 'LANGUAGES') {
+        } else if (od === 'LANGUAGES') {
             this.dialogRef = this._matDialog.open(EmployeeLanguages, {
                 panelClass: 'employee-language-details-form-dialog',
                 data: {
@@ -329,7 +328,7 @@ export class EmployeeActionComponent implements OnInit {
                 }
             });
 
-        }else if (od === 'MEMBERSHIP') {
+        } else if (od === 'MEMBERSHIP') {
             this.dialogRef = this._matDialog.open(EmployeeMembership, {
                 panelClass: 'employee-membership-details-form-dialog',
                 data: {
@@ -338,7 +337,7 @@ export class EmployeeActionComponent implements OnInit {
                 }
             });
 
-        }else if (od === 'MILITARY_SERVICE') {
+        } else if (od === 'MILITARY_SERVICE') {
             this.dialogRef = this._matDialog.open(EmployeeMilitaryService, {
                 panelClass: 'employee-military-service-details-form-dialog',
                 data: {
@@ -347,7 +346,7 @@ export class EmployeeActionComponent implements OnInit {
                 }
             });
 
-        }else if (od === 'PHONE_NUMBER') {
+        } else if (od === 'PHONE_NUMBER') {
             this.dialogRef = this._matDialog.open(EmployeePhoneNumber, {
                 panelClass: 'employee-phone-number-details-form-dialog',
                 data: {
@@ -356,7 +355,7 @@ export class EmployeeActionComponent implements OnInit {
                 }
             });
 
-        }else if (od === 'QUALIFICATIONS') {
+        } else if (od === 'QUALIFICATIONS') {
             this.dialogRef = this._matDialog.open(EmployeeQualifications, {
                 panelClass: 'employee-qualification-details-form-dialog',
                 data: {
@@ -365,7 +364,7 @@ export class EmployeeActionComponent implements OnInit {
                 }
             });
 
-        }else if (od === 'RELATIONS') {
+        } else if (od === 'RELATIONS') {
             this.dialogRef = this._matDialog.open(EmployeeRelations, {
                 panelClass: 'employee-relations-details-form-dialog',
                 data: {
@@ -374,7 +373,7 @@ export class EmployeeActionComponent implements OnInit {
                 }
             });
 
-        }else if (od === 'SCHOOLS_ATTENDED') {
+        } else if (od === 'SCHOOLS_ATTENDED') {
             this.dialogRef = this._matDialog.open(EmployeeSchoolAttended, {
                 panelClass: 'employee-school-attended-details-form-dialog',
                 data: {
@@ -384,5 +383,19 @@ export class EmployeeActionComponent implements OnInit {
             });
 
         }
+    }
+
+    exportSummary () {
+        this.exportOpen = !this.exportOpen;
+    }
+
+    downloadSummary(id, type) {
+        const params = {
+          'type': type
+        };
+        this.employeesService.getEmployeesDetailsDownload(id, params).subscribe(data => {
+            console.log('data', data);
+            window.open(data.url, '_blank');
+        });
     }
 }
