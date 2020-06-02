@@ -14,8 +14,8 @@ import {ContactInfoService} from '../../../../../shared/services/contact-info.se
 })
 export class LeaveTypeListComponent implements OnInit {
     leavesList = [];
-    displayedLeavesTypeColumns = ['id', 'name', 'actions'];
-    dialogRef: any;    
+    displayedLeavesTypeColumns = ['id', 'name', 'status', 'actions'];
+    dialogRef: any;
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
 

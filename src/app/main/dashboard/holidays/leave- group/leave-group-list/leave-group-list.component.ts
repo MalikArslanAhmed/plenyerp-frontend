@@ -14,8 +14,8 @@ import {ContactInfoService} from '../../../../../shared/services/contact-info.se
 })
 export class LeaveGroupListComponent implements OnInit {
     leaveGroupList = [];
-    displayedLeaveGroupColumns = ['id', 'name', 'actions'];
-    dialogRef: any;    
+    displayedLeaveGroupColumns = ['id', 'name', 'status', 'actions'];
+    dialogRef: any;
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
 
