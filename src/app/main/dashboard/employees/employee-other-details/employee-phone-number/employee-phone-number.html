@@ -15,9 +15,9 @@
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
                          <mat-label>Phone Details</mat-label>
-                         <mat-select formControlName="phoneDetail">
+                         <mat-select formControlName="phoneNumberTypeId">
                              <mat-option [value]="">Select</mat-option>
-                             <mat-option [value]="phoneDetail.value"
+                             <mat-option [value]="phoneDetail.id"
                                          *ngFor="let phoneDetail of phoneDetails">
                                  {{phoneDetail.name}}</mat-option>
                          </mat-select>
@@ -34,7 +34,7 @@
                      <div fxFlex="80">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Phone No.</mat-label>
-                             <input matInput type="number" formControlName="phoneNumber">
+                             <input matInput type="number" formControlName="phone">
                          </mat-form-field>
                      </div>
                  </div>
@@ -51,11 +51,29 @@
                      </mat-cell>
                  </ng-container>
 
-                 <ng-container matColumnDef="name">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+                 <ng-container matColumnDef="phoneType">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone Number Type</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-md *matCellDef="let employeePhoneNumber">
                          <p class="phone text-truncate cursor-pointer">
-                             {{employeePhoneNumber.name}}
+                             {{employeePhoneNumber?.phoneNumberType?.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="extension">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Extension</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeePhoneNumber">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeePhoneNumber?.extension}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="phone">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone No.</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeePhoneNumber">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeePhoneNumber?.phone}}
                          </p>
                      </mat-cell>
                  </ng-container>
@@ -66,7 +84,7 @@
                      </mat-header-cell>
                      <mat-cell *matCellDef="let employeePhoneNumber">
                          <div fxFlex="row" fxLayoutAlign="end center">
-                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeePhoneNumber(employeePhoneNumber)"
+                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeePhoneNumber(employeePhoneNumber?.id)"
                                      style="color: blue">
                                  <mat-icon class="material-icons">edit</mat-icon>
                              </button>
@@ -89,14 +107,18 @@
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+            <button mat-button class="save-button" (click)="cancelUpdate()"
+                    aria-label="Update" *ngIf="employeePhoneNumberId">Cancel
+            </button>
             <button mat-button class="save-button"
                     [disabled]="employeePhoneNumberForm.invalid"
-                    (click)="matDialogRef.close(employeePhoneNumberForm);"
+                    *ngIf="employeePhoneNumberId === null "
+                    (click)="addPhoneNumber()"
                     aria-label="Save">ADD
             </button>
-            <!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeePhoneNumberForm); updateDesignation()"-->
-            <!--                [disabled]="employeeOtherDetailsForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
-            <!--        </button>-->
+            <button mat-button class="save-button" (click)="updateEmployeePhoneNumber()"
+                    [disabled]="employeePhoneNumberForm.invalid" aria-label="Update" *ngIf="employeePhoneNumberId">Apply Changes
+            </button>
         </div>
     </div>
 </div>

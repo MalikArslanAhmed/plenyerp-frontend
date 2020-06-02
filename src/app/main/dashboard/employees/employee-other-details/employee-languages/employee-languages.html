@@ -15,9 +15,9 @@
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
                          <mat-label>Language</mat-label>
-                         <mat-select formControlName="language">
+                         <mat-select formControlName="languageId">
                              <mat-option [value]="">Select</mat-option>
-                             <mat-option [value]="language.value"
+                             <mat-option [value]="language.id"
                                          *ngFor="let language of languages">
                                  {{language.name}}</mat-option>
                          </mat-select>
@@ -27,10 +27,10 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Proficiency(Written)</mat-label>
-                             <mat-select formControlName="written">
+                             <mat-select formControlName="writtenProficiency">
                                  <mat-option [value]="">Select</mat-option>
                                  <mat-option [value]="written.value"
-                                             *ngFor="let written of writtenProficiency">
+                                             *ngFor="let written of proficiency">
                                      {{written.name}}</mat-option>
                              </mat-select>
                          </mat-form-field>
@@ -38,10 +38,10 @@
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Proficiency(Spoken)</mat-label>
-                             <mat-select formControlName="spoken">
+                             <mat-select formControlName="spokenProficiency">
                                  <mat-option [value]="">Select</mat-option>
                                  <mat-option [value]="spoken.value"
-                                             *ngFor="let spoken of spokenProficiency">
+                                             *ngFor="let spoken of proficiency">
                                      {{spoken.name}}</mat-option>
                              </mat-select>
                          </mat-form-field>
@@ -67,11 +67,38 @@
                      </mat-cell>
                  </ng-container>
 
-                 <ng-container matColumnDef="name">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+                 <ng-container matColumnDef="language">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Language</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeLanguage">
                          <p class="phone text-truncate cursor-pointer">
-                             {{employeeLanguage.name}}
+                             {{employeeLanguage?.language?.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="written">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Proficiency(Written)</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeLanguage">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeLanguage?.writtenProficiency}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="spoken">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Proficiency(Spoken)</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeLanguage">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeLanguage?.spokenProficiency}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="certification">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Certification</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeLanguage">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeLanguage?.certification}}
                          </p>
                      </mat-cell>
                  </ng-container>
@@ -82,7 +109,7 @@
                      </mat-header-cell>
                      <mat-cell *matCellDef="let employeeLanguage">
                          <div fxFlex="row" fxLayoutAlign="end center">
-                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeLanguage(employeeLanguage)"
+                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeLanguage(employeeLanguage?.id)"
                                      style="color: blue">
                                  <mat-icon class="material-icons">edit</mat-icon>
                              </button>
@@ -104,13 +131,17 @@
    </div>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="cancelUpdate()"
+                aria-label="Update" *ngIf="employeeLanguageId">Cancel
+        </button>
         <button mat-button class="save-button"
                 [disabled]="employeeLanguageForm.invalid"
-                (click)="matDialogRef.close(employeeLanguageForm);"
+                *ngIf="employeeLanguageId === null "
+                (click)="addPhoneNumber()"
                 aria-label="Save">ADD
         </button>
-        <!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeeLanguageForm); updateDesignation()"-->
-        <!--                [disabled]="employeeOtherDetailsForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
-        <!--        </button>-->
+        <button mat-button class="save-button" (click)="updateEmployeeLanguage()"
+                [disabled]="employeeLanguageForm.invalid" aria-label="Update" *ngIf="employeeLanguageId">Apply Changes
+        </button>
     </div>
 </div>

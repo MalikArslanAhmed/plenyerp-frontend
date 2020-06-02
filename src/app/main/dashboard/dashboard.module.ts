@@ -133,6 +133,7 @@ import { PhoneTypeComponent } from './contact-info/phone-type/phone-type.compone
 import { PhoneTypeCreateComponent } from './contact-info/phone-type/phone-type-create/phone-type-create.component';
 import { PhoneTypeListComponent } from './contact-info/phone-type/phone-type-list/phone-type-list.component';
 import { EmployeeBankDetailsComponent } from './employees/employee-action/employee-bank-details/employee-bank-details.component';
+import {EmployeeBackground} from './employees/employee-other-details/employee-background/employee-background';
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -248,7 +249,8 @@ import { EmployeeBankDetailsComponent } from './employees/employee-action/employ
         EmployeePhoneNumber,
         EmployeeQualifications,
         EmployeeRelations,
-        EmployeeSchoolAttended
+        EmployeeSchoolAttended,
+        EmployeeBackground
 
 
     ],

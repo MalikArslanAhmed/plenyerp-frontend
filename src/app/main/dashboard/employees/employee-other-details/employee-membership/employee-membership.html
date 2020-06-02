@@ -15,9 +15,9 @@
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
                          <mat-label>Membership</mat-label>
-                         <mat-select formControlName="membership">
+                         <mat-select formControlName="membershipId">
                              <mat-option [value]="">Select</mat-option>
-                             <mat-option [value]="membership.value"
+                             <mat-option [value]="membership.id"
                                          *ngFor="let membership of memberships">
                                  {{membership.name}}</mat-option>
                          </mat-select>
@@ -26,20 +26,20 @@
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
                          <mat-label>Membership Reg. No.</mat-label>
-                         <input matInput formControlName="membershipRegNo">
+                         <input matInput type="number" formControlName="membershipRegistrationNumber">
                      </mat-form-field>
                  </div>
                  <div>
                      <mat-form-field appearance="outline" fxFlex="100">
                          <mat-label>Membership Rank</mat-label>
-                         <input matInput formControlName="membershipRank">
+                         <input matInput type="number" formControlName="membershipRank">
                      </mat-form-field>
                  </div>
                  <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
                      <div fxFlex="50">
                          <mat-form-field appearance="outline" fxFlex="100">
                              <mat-label>Date Joined</mat-label>
-                             <input matInput [matDatepicker]="picker" formControlName="dateJoin" name="dateJoin" placeholder="Choose a date">
+                             <input matInput [matDatepicker]="picker" formControlName="joinAt" name="joinAt" placeholder="Choose a date">
                              <mat-datepicker-toggle matSuffix [for]="picker">
                                  <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                              </mat-datepicker-toggle>
@@ -60,11 +60,38 @@
                      </mat-cell>
                  </ng-container>
 
-                 <ng-container matColumnDef="name">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+                 <ng-container matColumnDef="membership">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Membership</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMembership">
                          <p class="phone text-truncate cursor-pointer">
-                             {{employeeMembership.name}}
+                             {{employeeMembership?.membership?.name}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="membershipRegNumber">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Membership Reg. No.</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMembership">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeMembership?.membershipRegistrationNumber}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="membershipRank">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Membership Rank</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMembership">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeMembership.membershipRank}}
+                         </p>
+                     </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="joinAt">
+                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Date Joined</mat-header-cell>
+                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMembership">
+                         <p class="phone text-truncate cursor-pointer">
+                             {{employeeMembership?.joinAt}}
                          </p>
                      </mat-cell>
                  </ng-container>
@@ -75,7 +102,7 @@
                      </mat-header-cell>
                      <mat-cell *matCellDef="let employeeMembership">
                          <div fxFlex="row" fxLayoutAlign="end center">
-                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeMembership(employeeMembership)"
+                             <button mat-icon-button aria-label="Toggle star" (click)="editEmployeeMembership(employeeMembership?.id)"
                                      style="color: blue">
                                  <mat-icon class="material-icons">edit</mat-icon>
                              </button>
@@ -97,13 +124,17 @@
    </div>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="cancelUpdate()"
+                aria-label="Update" *ngIf="employeeMembershipId">Cancel
+        </button>
         <button mat-button class="save-button"
                 [disabled]="employeeMembershipForm.invalid"
-                (click)="matDialogRef.close(employeeMembershipForm);"
+                *ngIf="employeeMembershipId === null "
+                (click)="addMembership()"
                 aria-label="Save">ADD
         </button>
-        <!--        <button mat-button class="save-button" (click)="matDialogRef.close(employeeMembershipForm); updateDesignation()"-->
-        <!--                [disabled]="employeeOtherDetailsForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE-->
-        <!--        </button>-->
+        <button mat-button class="save-button" (click)="updateEmployeeMembership()"
+                [disabled]="employeeMembershipForm.invalid" aria-label="Update" *ngIf="employeeMembershipId">Apply Changes
+        </button>
     </div>
 </div>
