@@ -2,7 +2,7 @@
     <mat-toolbar matDialogTitle class="mat-accent m-0">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title dialog-title">{{dialogTitle}}</span>
-            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+            <button mat-icon-button (click)="matDialogRef.close()">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-toolbar-row>
@@ -13,7 +13,7 @@
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Designation</mat-label>
-                    <input matInput placeholder="Name" formControlName="name" name="name" required>
+                    <input matInput placeholder="Name" formControlName="name" name="name" required cdk-focus-start>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">

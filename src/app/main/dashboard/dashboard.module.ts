@@ -134,6 +134,7 @@ import { PhoneTypeCreateComponent } from './contact-info/phone-type/phone-type-c
 import { PhoneTypeListComponent } from './contact-info/phone-type/phone-type-list/phone-type-list.component';
 import { EmployeeBankDetailsComponent } from './employees/employee-action/employee-bank-details/employee-bank-details.component';
 import {EmployeeBackground} from './employees/employee-other-details/employee-background/employee-background';
+import {SharedModule} from "../../shared/shared.module";
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -278,7 +279,8 @@ import {EmployeeBackground} from './employees/employee-other-details/employee-ba
         MatDatepickerModule,
         MatOptionModule,
         MatRadioModule,
-        MaterialFileInputModule
+        MaterialFileInputModule,
+        SharedModule
     ]
 })
 export class DashboardModule {
