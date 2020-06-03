@@ -14,7 +14,7 @@ import {ContactInfoService} from '../../../../shared/services/contact-info.servi
 })
 export class DesignationListComponent implements OnInit {
     designationList = [];
-    displayedDesignationColumns = ['id', 'name', 'actions'];
+    displayedDesignationColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;    
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
