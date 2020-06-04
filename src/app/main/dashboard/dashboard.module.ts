@@ -110,12 +110,11 @@ import {RolesCreateComponent} from './managers/roles/roles-create/roles-create.c
 import {DepartmentListSelectComponent} from './structure/department-list/department-list-select.component';
 import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {JobPositionsListSelectComponent} from './employees/job-positions-list-select/job-positions-list-select.component';
-import { WorkLocationsListSelectComponent } from './employees/work-locations-list-select/work-locations-list-select.component';
-import { EmployeeActionComponent } from './employees/employee-action/employee-action.component';
+import {WorkLocationsListSelectComponent} from './employees/work-locations-list-select/work-locations-list-select.component';
+import {EmployeeActionComponent} from './employees/employee-action/employee-action.component';
 import {AddLevelCharCount} from './admin-segments/add-level-char-count/add-level-char-count';
-import { EmployeePreviewComponent } from './employees/employee-preview/employee-preview.component';
-
-import { EmpListHeadersComponent } from './employees/employee-list/emp-list-headers/emp-list-headers.component';
+import {EmployeePreviewComponent} from './employees/employee-preview/employee-preview.component';
+import {EmpListHeadersComponent} from './employees/employee-list/emp-list-headers/emp-list-headers.component';
 import {EmployeeAddress} from './employees/employee-other-details/employee-address/employee-address';
 import {EmployeeCensure} from './employees/employee-other-details/employee-censure/employee-censure';
 import {EmployeeHistory} from './employees/employee-other-details/employee-history/employee-history';
@@ -126,15 +125,27 @@ import {EmployeePhoneNumber} from './employees/employee-other-details/employee-p
 import {EmployeeQualifications} from './employees/employee-other-details/employee-qualifications/employee-qualifications';
 import {EmployeeRelations} from './employees/employee-other-details/employee-relations/employee-relations';
 import {EmployeeSchoolAttended} from './employees/employee-other-details/employee-school-attended/employee-school-attended';
-import { AddressTypeComponent } from './contact-info/address-type/address-type.component';
-import { AddressTypeCreateComponent } from './contact-info/address-type/address-type-create/address-type-create.component';
-import { AddressTypeListComponent } from './contact-info/address-type/address-type-list/address-type-list.component';
-import { PhoneTypeComponent } from './contact-info/phone-type/phone-type.component';
-import { PhoneTypeCreateComponent } from './contact-info/phone-type/phone-type-create/phone-type-create.component';
-import { PhoneTypeListComponent } from './contact-info/phone-type/phone-type-list/phone-type-list.component';
-import { EmployeeBankDetailsComponent } from './employees/employee-action/employee-bank-details/employee-bank-details.component';
+import {AddressTypeComponent} from './contact-info/address-type/address-type.component';
+import {AddressTypeCreateComponent} from './contact-info/address-type/address-type-create/address-type-create.component';
+import {AddressTypeListComponent} from './contact-info/address-type/address-type-list/address-type-list.component';
+import {PhoneTypeComponent} from './contact-info/phone-type/phone-type.component';
+import {PhoneTypeCreateComponent} from './contact-info/phone-type/phone-type-create/phone-type-create.component';
+import {PhoneTypeListComponent} from './contact-info/phone-type/phone-type-list/phone-type-list.component';
+import {EmployeeBankDetailsComponent} from './employees/employee-action/employee-bank-details/employee-bank-details.component';
 import {EmployeeBackground} from './employees/employee-other-details/employee-background/employee-background';
 import {SharedModule} from "../../shared/shared.module";
+import {StoreSetupItemsComponent} from './store-setup-items/store-setup-items.component';
+import {StoreSetupItemsListComponent} from './store-setup-items/store-setup-items-list/store-setup-items-list.component';
+import {StoreSetupItemsCreateComponent} from './store-setup-items/store-setup-items-create/store-setup-items-create.component';
+import {StoreSetupCategoriesComponent} from './store-setup-categories/store-setup-categories.component';
+import {StoreSetupCategoriesCreateComponent} from './store-setup-categories/store-setup-categories-create/store-setup-categories-create.component';
+import {StoreSetupStoresComponent} from './store-setup-stores/store-setup-stores.component';
+import {StoreSetupStoresCreateComponent} from './store-setup-stores/store-setup-stores-create/store-setup-stores-create.component';
+import {StoreSetupStoresListComponent} from './store-setup-stores/store-setup-stores-list/store-setup-stores-list.component';
+import {StoreSetupUnitOfMeasuresComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures.component';
+import {StoreSetupUnitOfMeasuresCreateComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures-create/store-setup-unit-of-measures-create.component';
+import {StoreSetupUnitOfMeasuresListComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures-list/store-setup-unit-of-measures-list.component';
+
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -251,9 +262,18 @@ import {SharedModule} from "../../shared/shared.module";
         EmployeeQualifications,
         EmployeeRelations,
         EmployeeSchoolAttended,
-        EmployeeBackground
-
-
+        EmployeeBackground,
+        StoreSetupItemsComponent,
+        StoreSetupItemsListComponent,
+        StoreSetupItemsCreateComponent,
+        StoreSetupCategoriesComponent,
+        StoreSetupCategoriesCreateComponent,
+        StoreSetupStoresComponent,
+        StoreSetupStoresCreateComponent,
+        StoreSetupStoresListComponent,
+        StoreSetupUnitOfMeasuresComponent,
+        StoreSetupUnitOfMeasuresCreateComponent,
+        StoreSetupUnitOfMeasuresListComponent
     ],
     imports: [
         CommonModule,

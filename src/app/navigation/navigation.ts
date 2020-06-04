@@ -344,6 +344,44 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/membership'
                     }
                 ]
+            },
+            {
+                id: 'store-setup',
+                title: 'Store Setup',
+                roles: [],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'store',
+                children: [
+                    {
+                        id: 'items',
+                        title: 'Items',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/store-setup-items'
+                    },
+                    {
+                        id: 'catergories',
+                        title: 'Categories',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/store-setup-categories'
+                    },
+                    {
+                        id: 'stores',
+                        title: 'Stores',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/store-setup-stores'
+                    },
+                    {
+                        id: 'unit-of-measures',
+                        title: 'Unit of Measures',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/store-setup-unit-of-measures'
+                    }
+                ]
             }
         ]
     }

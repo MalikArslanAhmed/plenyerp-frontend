@@ -36,6 +36,11 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
 import { ManagersComponent } from './managers/managers.component';
 import { RolesComponent } from './managers/roles/roles.component';
 import { EmployeeActionComponent } from './employees/employee-action/employee-action.component';
+import {ItemComponent} from "@swimlane/ngx-dnd";
+import {StoreSetupItemsComponent} from "./store-setup-items/store-setup-items.component";
+import {StoreSetupCategoriesComponent} from "./store-setup-categories/store-setup-categories.component";
+import {StoreSetupStoresComponent} from "./store-setup-stores/store-setup-stores.component";
+import {StoreSetupUnitOfMeasuresComponent} from "./store-setup-unit-of-measures/store-setup-unit-of-measures.component";
 
 const routes: Routes = [
     {
@@ -304,6 +309,34 @@ const routes: Routes = [
             title: 'Roles'
         },
     },
+    {
+        path: 'store-setup-items',
+        component: StoreSetupItemsComponent,
+        data: {
+            title: 'Items'
+        }
+    },
+    {
+        path: 'store-setup-categories',
+        component: StoreSetupCategoriesComponent,
+        data: {
+            title: 'Categories'
+        }
+    },
+    {
+        path: 'store-setup-stores',
+        component: StoreSetupStoresComponent,
+        data: {
+            title: 'Stores'
+        }
+    },
+    {
+        path: 'store-setup-unit-of-measures',
+        component: StoreSetupUnitOfMeasuresComponent,
+        data: {
+            title: 'Unit of Measures'
+        }
+    }
 ];
 
 @NgModule({
