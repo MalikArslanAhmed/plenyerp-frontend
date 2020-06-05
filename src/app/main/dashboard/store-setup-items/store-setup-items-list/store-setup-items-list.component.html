@@ -23,7 +23,7 @@
                 <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
                 <mat-cell fxHide fxShow.gt-sm *matCellDef="let item">
                     <p class="email text-truncate">
-                        {{item.sno}}.
+                        {{((pagination.page - 1) * pagination.perpage) + item.sno}}.
                     </p>
                 </mat-cell>
             </ng-container>

@@ -53,7 +53,7 @@ export class StoreSetupStoresListComponent implements OnInit {
             if (data) {
                 this.getStores();
             }
-        })
+        });
     }
 
     editStore(store) {

@@ -4,7 +4,6 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let store">
                 <p class="email text-truncate">
-<!--                    {{store.sno}}.-->
                     {{((pagination.page - 1) * pagination.perpage) + store.sno}}.
                 </p>
             </mat-cell>
