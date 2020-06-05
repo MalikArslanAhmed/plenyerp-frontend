@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {RelationshipService} from '../../../../shared/services/relationship.service';
 import {RelationshipCreateComponent} from '../relationship-create/relationship-create.component';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-relationship-list',
@@ -16,7 +17,13 @@ export class RelationshipListComponent implements OnInit {
     relationships = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private relationshipService: RelationshipService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class RelationshipListComponent implements OnInit {
     }
 
     getRelationships() {
-        this.relationshipService.getRelationship({page: -1}).subscribe(data => {
+        this.relationships = [];
+        this.relationshipService.getRelationship({page: this.pagination.page}).subscribe(data => {
             this.relationships = data.items;
 
             if (this.relationships && this.relationships.length > 0) {
@@ -36,6 +44,8 @@ export class RelationshipListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -58,5 +68,9 @@ export class RelationshipListComponent implements OnInit {
             }
             this.getRelationships();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getRelationships();
     }
 }

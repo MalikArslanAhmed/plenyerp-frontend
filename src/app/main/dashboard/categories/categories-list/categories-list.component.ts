@@ -4,6 +4,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {CategoriesService} from "../../../../shared/services/categories.service";
 import {CategoriesCreateComponent} from '../categories-create/categories-create.component';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-categories-list',
@@ -16,7 +17,13 @@ export class CategoriesListComponent implements OnInit {
     categories = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private categoriesService: CategoriesService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class CategoriesListComponent implements OnInit {
     }
 
     getCategories() {
-        this.categoriesService.getCategories({'page': -1}).subscribe(data => {
+        this.categories = [];
+        this.categoriesService.getCategories({page: this.pagination.page}).subscribe(data => {
             this.categories = data.items;
 
             if (this.categories && this.categories.length > 0) {
@@ -36,6 +44,8 @@ export class CategoriesListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -58,5 +68,9 @@ export class CategoriesListComponent implements OnInit {
             }
             this.getCategories();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getCategories();
     }
 }

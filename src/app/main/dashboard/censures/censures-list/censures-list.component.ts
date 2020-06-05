@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {CensuresService} from "../../../../shared/services/censures.service";
-import {CensuresCreateComponent} from "../censures-create/censures-create.component";
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+import {CensuresService} from '../../../../shared/services/censures.service';
+import {CensuresCreateComponent} from '../censures-create/censures-create.component';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-censures-list',
@@ -16,7 +17,13 @@ export class CensuresListComponent implements OnInit {
     censures = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private censuresService: CensuresService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class CensuresListComponent implements OnInit {
     }
 
     getCensures() {
-        this.censuresService.getCensures({'page': -1}).subscribe(data => {
+        this.censures = [];
+        this.censuresService.getCensures({page: this.pagination.page}).subscribe(data => {
             this.censures = data.items;
 
             if (this.censures && this.censures.length > 0) {
@@ -36,6 +44,8 @@ export class CensuresListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -44,7 +54,7 @@ export class CensuresListComponent implements OnInit {
             if (data) {
                 this.getCensures();
             }
-        })
+        });
     }
 
     editCensure(censure) {
@@ -58,5 +68,9 @@ export class CensuresListComponent implements OnInit {
             }
             this.getCensures();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getCensures();
     }
 }

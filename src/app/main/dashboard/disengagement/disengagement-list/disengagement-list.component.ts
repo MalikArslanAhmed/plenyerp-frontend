@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {DisengagementsService} from "../../../../shared/services/disengagements.service";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+import {DisengagementsService} from '../../../../shared/services/disengagements.service';
 import {DisengagementCreateComponent} from '../disengagement-create/disengagement-create.component';
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-disengagement-list',
@@ -16,7 +17,13 @@ export class DisengagementListComponent implements OnInit {
     disengagements = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private disengagementService: DisengagementsService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class DisengagementListComponent implements OnInit {
     }
 
     getDisengagements() {
-        this.disengagementService.getDisengagements({'page': -1}).subscribe(data => {
+        this.disengagements = [];
+        this.disengagementService.getDisengagements({page: this.pagination.page}).subscribe(data => {
             this.disengagements = data.items;
 
             if (this.disengagements && this.disengagements.length > 0) {
@@ -36,6 +44,8 @@ export class DisengagementListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -44,7 +54,7 @@ export class DisengagementListComponent implements OnInit {
             if (data) {
                 this.getDisengagements();
             }
-        })
+        });
     }
 
     editDisengagement(disengagement) {
@@ -58,5 +68,9 @@ export class DisengagementListComponent implements OnInit {
             }
             this.getDisengagements();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getDisengagements();
     }
 }

@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {StoreSetupStoresCreateComponent} from "../store-setup-stores-create/store-setup-stores-create.component";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {StoreSetupStoresCreateComponent} from '../store-setup-stores-create/store-setup-stores-create.component';
 import {StoreSetupStoresService} from 'app/shared/services/store-setup-stores.service';
 import {PageEvent} from '@angular/material/paginator';
 
