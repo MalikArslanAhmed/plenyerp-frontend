@@ -1,9 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {MatDialog} from '@angular/material/dialog';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../../@fuse/animations';
 import {StoreSetupItemsCreateComponent} from '../store-setup-items-create/store-setup-items-create.component';
-import {StoreSetupItemsService} from "../../../../shared/services/store-setup-items.service";
+import {StoreSetupItemsService} from '../../../../shared/services/store-setup-items.service';
+import {CategoriesListSelectComponent} from '../categories-list-select/categories-list-select.component';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-store-setup-items-list',
@@ -16,18 +18,36 @@ export class StoreSetupItemsListComponent implements OnInit {
     items = [];
     displayedColumns = ['sno', 'id', 'description', 'unit', 'category', 'actions'];
     dialogRef: any;
-
+    itemsFilterForm: FormGroup;
+    categories = [];
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private storeSetupItemsService: StoreSetupItemsService,
+                private fb: FormBuilder,
                 private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
+        this. refresh();
         this.getStores();
     }
+    refresh() {
+        this.itemsFilterForm = this.fb.group({
+            categoryId: [''],
+            search: [''],
+        });
+    }
 
-    getStores() {
-        this.storeSetupItemsService.getStoreSetupItems({'page': -1}).subscribe(data => {
+    getStores(params = {}) {
+        this.storeSetupItemsService.getStoreSetupItems(params).subscribe(data => {
             this.items = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.items && this.items.length > 0) {
                 let i = 1;
                 this.items.forEach(store => {
@@ -43,7 +63,7 @@ export class StoreSetupItemsListComponent implements OnInit {
             if (data) {
                 this.getStores();
             }
-        })
+        });
     }
 
     editStore(store) {
@@ -57,5 +77,33 @@ export class StoreSetupItemsListComponent implements OnInit {
             }
             this.getStores();
         });
+    }
+    getItems(params) {
+        this.getStores(params);
+    }
+
+    categorySelect() {
+        this.dialogRef = this._matDialog.open(CategoriesListSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.categories = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.itemsFilterForm.patchValue({
+                categoryId: response.id,
+            });
+            this.getStores({
+                categoryId: response.id,
+            });
+        });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getStores({page: this.pagination.page});
     }
 }

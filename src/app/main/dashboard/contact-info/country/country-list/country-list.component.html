@@ -1,10 +1,10 @@
-<div class="country-list">
+<div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
     <mat-table [@animateStagger]="{value:'50'}" [dataSource]="countryList">
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let country">
                 <p class="email text-truncate">
-                    {{country.sno}}.
+                    {{((pagination.page - 1) * pagination.perpage) + country.sno}}.
                 </p>
             </mat-cell>
         </ng-container>
@@ -53,6 +53,13 @@
                  [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
+    <mat-paginator #paginator *ngIf ="countryList.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="pageEvent = onPageChange($event)"
+    >
+    </mat-paginator>
 </div>
 
 

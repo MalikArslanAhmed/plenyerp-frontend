@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {RegionCreateComponent} from '../region-create/region-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-region-list',
@@ -17,6 +18,13 @@ export class RegionListComponent implements OnInit {
     displayedRegionColumns = ['id', 'country', 'name', 'status', 'actions'];
     dialogRef: any;    
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private contactInfoService: ContactInfoService,
@@ -28,9 +36,11 @@ export class RegionListComponent implements OnInit {
     }
 
     getRegionList() {
-        this.contactInfoService.getRegionList({'page': -1}).subscribe(data => {
+        this.regionList = [];
+        this.contactInfoService.getRegionList({page: this.pagination.page}).subscribe(data => {
             this.regionList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.regionList && this.regionList.length > 0) {
                 let i = 1;
                 this.regionList.forEach(val => {
@@ -62,5 +72,8 @@ export class RegionListComponent implements OnInit {
             this.getRegionList();
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getRegionList();
+    }
 }

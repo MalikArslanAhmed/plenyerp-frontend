@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {AddressTypeCreateComponent} from '../address-type-create/address-type-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-address-type-list',
@@ -17,6 +18,13 @@ export class AddressTypeListComponent implements OnInit {
     displayedAddressTypeColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private contactInfoService: ContactInfoService,
@@ -28,9 +36,11 @@ export class AddressTypeListComponent implements OnInit {
     }
 
     getAddressTypeList() {
-        this.contactInfoService.getAddressTypeList({'page': -1}).subscribe(data => {
+        this.addressTypeList = [];
+        this.contactInfoService.getAddressTypeList({page: this.pagination.page}).subscribe(data => {
             this.addressTypeList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.addressTypeList && this.addressTypeList.length > 0) {
                 let i = 1;
                 this.addressTypeList.forEach(val => {
@@ -62,6 +72,9 @@ export class AddressTypeListComponent implements OnInit {
             this.getAddressTypeList();
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getAddressTypeList();
+    }
 }
 

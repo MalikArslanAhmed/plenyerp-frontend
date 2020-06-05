@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {CountryCreateComponent} from '../country-create/country-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-country-list',
@@ -17,6 +18,13 @@ export class CountryListComponent implements OnInit {
     displayedCountryColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;    
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private contactInfoService: ContactInfoService,
@@ -28,9 +36,11 @@ export class CountryListComponent implements OnInit {
     }
 
     getCountryList() {
-        this.contactInfoService.getCountryList({'page': -1}).subscribe(data => {
+        this.countryList = [];
+        this.contactInfoService.getCountryList({page: this.pagination.page}).subscribe(data => {
             this.countryList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.countryList && this.countryList.length > 0) {
                 let i = 1;
                 this.countryList.forEach(val => {
@@ -62,5 +72,8 @@ export class CountryListComponent implements OnInit {
             this.getCountryList();
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getCountryList();
+    }
 }

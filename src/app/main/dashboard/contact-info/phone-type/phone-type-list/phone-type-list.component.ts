@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {PhoneTypeCreateComponent} from '../phone-type-create/phone-type-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-phone-type-list',
@@ -17,6 +18,13 @@ export class PhoneTypeListComponent implements OnInit {
     displayedPhoneTypeColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private contactInfoService: ContactInfoService,
@@ -28,9 +36,11 @@ export class PhoneTypeListComponent implements OnInit {
     }
 
     getPhoneTypeList() {
-        this.contactInfoService.getPhoneTypeList({'page': -1}).subscribe(data => {
+        this.phoneTypeList = []
+        this.contactInfoService.getPhoneTypeList({page: this.pagination.page}).subscribe(data => {
             this.phoneTypeList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.phoneTypeList && this.phoneTypeList.length > 0) {
                 let i = 1;
                 this.phoneTypeList.forEach(val => {
@@ -62,7 +72,10 @@ export class PhoneTypeListComponent implements OnInit {
             this.getPhoneTypeList();
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getPhoneTypeList();
+    }
 }
 
 

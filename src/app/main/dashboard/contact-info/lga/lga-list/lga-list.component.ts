@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {LgaCreateComponent} from '../lga-create/lga-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-lga-list',
@@ -17,6 +18,13 @@ export class LgaListComponent implements OnInit {
     displayedLgaColumns = ['id', 'country', 'region', 'state', 'name', 'status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private contactInfoService: ContactInfoService,
@@ -28,9 +36,11 @@ export class LgaListComponent implements OnInit {
     }
 
     getLgaList() {
-        this.contactInfoService.getLgaList({'page': -1}).subscribe(data => {
+        this.lgaList = [];
+        this.contactInfoService.getLgaList({page: this.pagination.page}).subscribe(data => {
             this.lgaList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.lgaList && this.lgaList.length > 0) {
                 let i = 1;
                 this.lgaList.forEach(val => {
@@ -61,6 +71,10 @@ export class LgaListComponent implements OnInit {
             }
             this.getLgaList();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLgaList();
     }
 
 }

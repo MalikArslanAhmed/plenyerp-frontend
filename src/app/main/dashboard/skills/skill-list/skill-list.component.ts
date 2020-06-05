@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {SkillService} from 'app/shared/services/skill.service';
 import {SkillCreateComponent} from '../skill-create/skill-create.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-skill-list',
@@ -16,7 +17,13 @@ export class SkillListComponent implements OnInit {
     skills = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private skillService: SkillService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class SkillListComponent implements OnInit {
     }
 
     getSkills() {
-        this.skillService.getSkills({'page': -1}).subscribe(data => {
+        this.skills = [];
+        this.skillService.getSkills({page: this.pagination.page}).subscribe(data => {
             this.skills = data.items;
 
             if (this.skills && this.skills.length > 0) {
@@ -36,6 +44,8 @@ export class SkillListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -44,7 +54,7 @@ export class SkillListComponent implements OnInit {
             if (data) {
                 this.getSkills();
             }
-        })
+        });
     }
 
     editSkill(skill) {
@@ -58,5 +68,9 @@ export class SkillListComponent implements OnInit {
             }
             this.getSkills();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getSkills();
     }
 }

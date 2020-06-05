@@ -4,7 +4,6 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let store">
                 <p class="email text-truncate">
-<!--                    {{store.sno}}.-->
                     {{((pagination.page - 1) * pagination.perpage) + store.sno}}.
                 </p>
             </mat-cell>
@@ -63,11 +62,11 @@
                  [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
-    <mat-paginator #paginator *ngIf ="stores.length > 0"
+    <mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
+                   *ngIf="stores.length > 0"
                    [length]="pagination.total"
-                   [pageSize]="pagination.perpage"
                    [pageIndex]="pagination.page-1"
-                   (page)="pageEvent = onPageChange($event)"
-                   >
+                   [pageSize]="pagination.perpage"
+    >
     </mat-paginator>
 </div>

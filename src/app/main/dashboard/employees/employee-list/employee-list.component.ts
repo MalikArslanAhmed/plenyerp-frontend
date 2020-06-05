@@ -5,6 +5,7 @@ import {CategoriesCreateComponent} from "../../categories/categories-create/cate
 import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {EmpListHeadersComponent} from "./emp-list-headers/emp-list-headers.component";
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-employee-list',
@@ -18,7 +19,13 @@ export class EmployeeListComponent implements OnInit {
     employees = [];
     displayedColumns = ['SN', 'id', 'fileId', 'lName', 'fName', 'title'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedEmployee = new EventEmitter<any>();
 
     constructor(private employeesService: EmployeesService,
@@ -56,7 +63,8 @@ export class EmployeeListComponent implements OnInit {
     }
 
     getEmployees(): void {
-        this.employeesService.getEmployees({page: -1}).subscribe(data => {
+        this.employees = [];
+        this.employeesService.getEmployees({page: this.pagination.page}).subscribe(data => {
             this.employees = data.items;
 
             if (this.employees && this.employees.length > 0) {
@@ -66,7 +74,13 @@ export class EmployeeListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getEmployees();
     }
 
     /*getCategories() {

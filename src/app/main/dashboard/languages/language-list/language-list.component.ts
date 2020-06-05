@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
 import {LanguageCreateComponent} from '../language-create/language-create.component';
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {LanguageService} from "../../../../shared/services/language.service";
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {LanguageService} from '../../../../shared/services/language.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-language-list',
@@ -16,6 +17,13 @@ export class LanguageListComponent implements OnInit {
     languages = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
 
     constructor(private languageService: LanguageService,
                 private _matDialog: MatDialog) {
@@ -26,7 +34,8 @@ export class LanguageListComponent implements OnInit {
     }
 
     getLanguages() {
-        this.languageService.getLanguages({'page': -1}).subscribe(data => {
+        this.languages = [];
+        this.languageService.getLanguages({page: this.pagination.page}).subscribe(data => {
             this.languages = data.items;
 
             if (this.languages && this.languages.length > 0) {
@@ -36,6 +45,8 @@ export class LanguageListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -44,7 +55,7 @@ export class LanguageListComponent implements OnInit {
             if (data) {
                 this.getLanguages();
             }
-        })
+        });
     }
 
     editLanguage(language) {
@@ -58,5 +69,9 @@ export class LanguageListComponent implements OnInit {
             }
             this.getLanguages();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLanguages();
     }
 }

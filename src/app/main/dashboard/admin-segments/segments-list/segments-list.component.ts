@@ -7,6 +7,7 @@ import {AdminSegmentServices} from '../../../../shared/services/admin-segment.se
 import {EditSegmentListComponent} from '../edit-segment-list/edit-segment-list';
 import {FormGroup} from '@angular/forms';
 import {AddLevelCharCount} from '../add-level-char-count/add-level-char-count';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'segments-list',
@@ -20,7 +21,13 @@ export class SegmentsListComponent implements OnInit{
     dialogRef: any;
     displayedColumns: string[] = ['id', 'name', 'characterCount', 'maxLevels', 'actions'];
     segments = [];
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(
         private _fuseSidebarService: FuseSidebarService, private _matDialog: MatDialog, private adminSegmentServices: AdminSegmentServices
     ) {}
@@ -30,8 +37,18 @@ export class SegmentsListComponent implements OnInit{
     }
 
     getAllSegmentsList() {
-        this.adminSegmentServices.getAllSegments().subscribe(data => {
+        this.segments = [];
+        this.adminSegmentServices.getAllSegments({page: this.pagination.page}).subscribe(data => {
             this.segments = data.items;
+            if (this.segments && this.segments.length > 0) {
+                let i = 1;
+                this.segments.forEach(segment => {
+                    segment['sno'] = i;
+                    i++;
+                });
+            }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -65,6 +82,10 @@ export class SegmentsListComponent implements OnInit{
                 this.getAllSegmentsList();
             });
         }
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getAllSegmentsList();
     }
 }
 

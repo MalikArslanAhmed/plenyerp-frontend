@@ -1,54 +1,63 @@
-<mat-table [@animateStagger]="{value:'50'}" [dataSource]="statuses">
-    <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let status">
-            <p class="email text-truncate">
-                {{status.sno}}.
-            </p>
-        </mat-cell>
-    </ng-container>
+<div fxFlex="100" fxLayout="column" fxLayoutGap="20px">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="statuses">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let status" fxHide fxShow.gt-sm>
+                <p class="email text-truncate">
+                    {{((pagination.page - 1) * pagination.perpage) + status.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let status">
-            <p class="phone text-truncate">
-                {{status.name}}
-            </p>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+            <mat-cell *matCellDef="let status" fxHide fxShow.gt-md>
+                <p class="phone text-truncate">
+                    {{status.name}}
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
-        </mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let status">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <p *ngIf="status.isActive">Active</p>
-                <p *ngIf="!status.isActive">Inactive</p>
-            </div>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let status" fxHide fxShow.gt-md>
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="status.isActive">Active</p>
+                    <p *ngIf="!status.isActive">Inactive</p>
+                </div>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let status">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <button mat-icon-button aria-label="Toggle star" (click)="editStatus(status)"
-                        style="color: blue">
-                    <mat-icon class="material-icons">edit</mat-icon>
-                </button>
-                <button mat-icon-button aria-label="Toggle star" (click)="deleteStatus(status?.id)"
-                        style="color: red">
-                    <mat-icon class="material-icons">delete</mat-icon>
-                </button>
-            </div>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let status">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button (click)="editStatus(status)" aria-label="Toggle star" mat-icon-button
+                            style="color: blue">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button (click)="deleteStatus(status?.id)" aria-label="Toggle star" mat-icon-button
+                            style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let status; columns: displayedColumns;" class="contact"
-             [@animate]="{value:'*',params:{y:'100%'}}">
-    </mat-row>
-</mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let status; columns: displayedColumns;" [@animate]="{value:'*',params:{y:'100%'}}"
+                 class="contact">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
+                   *ngIf="statuses.length > 0"
+                   [length]="pagination.total"
+                   [pageIndex]="pagination.page-1"
+                   [pageSize]="pagination.perpage"
+    >
+    </mat-paginator>
+</div>

@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../../@fuse/animations';
 import {AcdemicMajorCreateComponent} from '../acdemic-major-create/acdemic-major-create.component';
-import {AcademicMajorService} from "../../../../shared/services/academic-major.service";
+import {AcademicMajorService} from '../../../../shared/services/academic-major.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-acdemic-major-list',
@@ -16,7 +17,13 @@ export class AcdemicMajorListComponent implements OnInit {
     academicMajors = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private academicMajorService: AcademicMajorService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class AcdemicMajorListComponent implements OnInit {
     }
 
     getAcademicMajors() {
-        this.academicMajorService.getAcademicMajors({'page': -1}).subscribe(data => {
+        this.academicMajors = [];
+        this.academicMajorService.getAcademicMajors({page: this.pagination.page}).subscribe(data => {
             this.academicMajors = data.items;
             if (this.academicMajors && this.academicMajors.length > 0) {
                 let i = 1;
@@ -35,6 +43,8 @@ export class AcdemicMajorListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -43,7 +53,7 @@ export class AcdemicMajorListComponent implements OnInit {
             if (data) {
                 this.getAcademicMajors();
             }
-        })
+        });
     }
 
     editAcademicMajor(academicMajor) {
@@ -57,5 +67,9 @@ export class AcdemicMajorListComponent implements OnInit {
             }
             this.getAcademicMajors();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getAcademicMajors();
     }
 }

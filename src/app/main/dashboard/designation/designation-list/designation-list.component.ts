@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {DesignationCreateComponent} from '../designation-create/designation-create.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../shared/services/contact-info.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-designation-list',
@@ -17,6 +18,13 @@ export class DesignationListComponent implements OnInit {
     displayedDesignationColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;    
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private contactInfoService: ContactInfoService,
@@ -28,9 +36,11 @@ export class DesignationListComponent implements OnInit {
     }
 
     getDesignationList() {
-        this.contactInfoService.getDesignationList({'page': -1}).subscribe(data => {
+        this.designationList = [];
+        this.contactInfoService.getDesignationList({page: this.pagination.page}).subscribe(data => {
             this.designationList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.designationList && this.designationList.length > 0) {
                 let i = 1;
                 this.designationList.forEach(val => {
@@ -61,6 +71,10 @@ export class DesignationListComponent implements OnInit {
             }
             this.getDesignationList();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getDesignationList();
     }
 
 }

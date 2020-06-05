@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {ScheduleService} from "../../../../shared/services/schedule.service";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+import {ScheduleService} from '../../../../shared/services/schedule.service';
 import {ScheduleCreateComponent} from '../schedule-create/schedule-create.component';
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-schedule-list',
@@ -16,7 +17,13 @@ export class ScheduleListComponent implements OnInit {
     schedules = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private scheduleService: ScheduleService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class ScheduleListComponent implements OnInit {
     }
 
     getSchedule() {
-        this.scheduleService.getSchedule({'page': -1}).subscribe(data => {
+        this.schedules = [];
+        this.scheduleService.getSchedule({page: this.pagination.page}).subscribe(data => {
             this.schedules = data.items;
 
             if (this.schedules && this.schedules.length > 0) {
@@ -36,6 +44,8 @@ export class ScheduleListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -58,5 +68,9 @@ export class ScheduleListComponent implements OnInit {
             }
             this.getSchedule();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getSchedule();
     }
 }

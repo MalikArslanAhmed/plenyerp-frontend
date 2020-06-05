@@ -14,7 +14,7 @@
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
             <p class="email text-truncate">
-                {{employee.sno}}
+                {{((pagination.page - 1) * pagination.perpage) + employee.sno}}.
             </p>
         </mat-cell>
     </ng-container>
@@ -113,3 +113,10 @@
         [@animate]="{value:'*',params:{y:'100%'}}">
     </mat-row>
 </mat-table>
+<mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
+               *ngIf="employees.length > 0"
+               [length]="pagination.total"
+               [pageIndex]="pagination.page-1"
+               [pageSize]="pagination.perpage"
+>
+</mat-paginator>

@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {StatesCreateComponent} from '../states-create/states-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-states-list',
@@ -17,6 +18,13 @@ export class StatesListComponent implements OnInit {
     displayedStatesColumns = ['id', 'country', 'region', 'name', 'status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private contactInfoService: ContactInfoService,
@@ -28,9 +36,11 @@ export class StatesListComponent implements OnInit {
     }
 
     getStatesList() {
-        this.contactInfoService.getStateList({'page': -1}).subscribe(data => {
+        this.statesList = [];
+        this.contactInfoService.getStateList({page: this.pagination.page}).subscribe(data => {
             this.statesList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.statesList && this.statesList.length > 0) {
                 let i = 1;
                 this.statesList.forEach(val => {
@@ -62,5 +72,8 @@ export class StatesListComponent implements OnInit {
             this.getStatesList();
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getStatesList();
+    }
 }

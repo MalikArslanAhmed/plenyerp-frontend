@@ -1,9 +1,10 @@
+<div fxLayout="column" fxLayoutGap="20px" fxFlex="100">
 <mat-table [@animateStagger]="{value:'50'}" [dataSource]="schedules">
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let schedule">
             <p class="email text-truncate">
-                {{schedule.sno}}.
+                {{((pagination.page - 1) * pagination.perpage) + schedule.sno}}.
             </p>
         </mat-cell>
     </ng-container>
@@ -52,3 +53,11 @@
              [@animate]="{value:'*',params:{y:'100%'}}">
     </mat-row>
 </mat-table>
+    <mat-paginator #paginator *ngIf ="schedules.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="pageEvent = onPageChange($event)"
+    >
+    </mat-paginator>
+</div>
