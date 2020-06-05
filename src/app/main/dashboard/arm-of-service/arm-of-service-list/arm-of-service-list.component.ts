@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
 import {ArmOfServiceCreateComponent} from '../arm-of-service-create/arm-of-service-create.component';
-import {ArmOfServiceService} from "../../../../shared/services/arm-of-service.service";
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {ArmOfServiceService} from '../../../../shared/services/arm-of-service.service';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-arm-of-service-list',
@@ -16,7 +17,13 @@ export class ArmOfServiceListComponent implements OnInit {
     armOfServices = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private armOfServiceService: ArmOfServiceService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class ArmOfServiceListComponent implements OnInit {
     }
 
     getArmOfServices() {
-        this.armOfServiceService.getArmOfServices({'page': -1}).subscribe(data => {
+        this.armOfServices = [];
+        this.armOfServiceService.getArmOfServices({page: this.pagination.page}).subscribe(data => {
             this.armOfServices = data.items;
 
             if (this.armOfServices && this.armOfServices.length > 0) {
@@ -36,6 +44,8 @@ export class ArmOfServiceListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -44,7 +54,7 @@ export class ArmOfServiceListComponent implements OnInit {
             if (data) {
                 this.getArmOfServices();
             }
-        })
+        });
     }
 
     editArmOfService(armOfService) {
@@ -58,5 +68,9 @@ export class ArmOfServiceListComponent implements OnInit {
             }
             this.getArmOfServices();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getArmOfServices();
     }
 }

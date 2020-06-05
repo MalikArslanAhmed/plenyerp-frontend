@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../../@fuse/animations';
 import {MembershipCreateComponent} from '../membership-create/membership-create.component';
-import {MembershipService} from "../../../../shared/services/membership.service";
+import {MembershipService} from '../../../../shared/services/membership.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-membership-list',
@@ -16,7 +17,13 @@ export class MembershipListComponent implements OnInit {
     memberships = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private membershipService: MembershipService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class MembershipListComponent implements OnInit {
     }
 
     getMemberships() {
-        this.membershipService.getMemberships({'page': -1}).subscribe(data => {
+        this.memberships = [];
+        this.membershipService.getMemberships({page: this.pagination.page}).subscribe(data => {
             this.memberships = data.items;
 
             if (this.memberships && this.memberships.length > 0) {
@@ -36,6 +44,8 @@ export class MembershipListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -44,7 +54,7 @@ export class MembershipListComponent implements OnInit {
             if (data) {
                 this.getMemberships();
             }
-        })
+        });
     }
 
     editMembership(membership) {
@@ -58,5 +68,9 @@ export class MembershipListComponent implements OnInit {
             }
             this.getMemberships();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getMemberships();
     }
 }
