@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {QualificationService} from "../../../../shared/services/qualification.service";
-import {QualificationCreateComponent} from "../qualification-create/qualification-create.component";
-import {FormGroup} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {QualificationService} from '../../../../shared/services/qualification.service';
+import {QualificationCreateComponent} from '../qualification-create/qualification-create.component';
+import {FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-qualification-list',
@@ -16,7 +17,13 @@ export class QualificationListComponent implements OnInit {
     qualifications = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private qualificationService: QualificationService,
                 private _matDialog: MatDialog) {
     }
@@ -26,9 +33,11 @@ export class QualificationListComponent implements OnInit {
     }
 
     getQualifications() {
-        this.qualificationService.getQualifications({'page': -1}).subscribe(data => {
+        this.qualifications = [];
+        this.qualificationService.getQualifications({page: this.pagination.page}).subscribe(data => {
             this.qualifications = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.qualifications && this.qualifications.length > 0) {
                 let i = 1;
                 this.qualifications.forEach(qualification => {
@@ -59,5 +68,9 @@ export class QualificationListComponent implements OnInit {
             }
             this.getQualifications();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getQualifications();
     }
 }

@@ -1,54 +1,63 @@
-<mat-table [@animateStagger]="{value:'50'}" [dataSource]="qualifications">
-    <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let qualification">
-            <p class="email text-truncate">
-                {{qualification.sno}}.
-            </p>
-        </mat-cell>
-    </ng-container>
+<div fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="qualifications">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-sm *matCellDef="let qualification">
+                <p class="email text-truncate">
+                    {{((pagination.page - 1) * pagination.perpage) + qualification.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let qualification">
-            <p class="phone text-truncate">
-                {{qualification.name}}
-            </p>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let qualification">
+                <p class="phone text-truncate">
+                    {{qualification.name}}
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
-        </mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let qualification">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <p *ngIf="qualification.isActive">Active</p>
-                <p *ngIf="!qualification.isActive">Inactive</p>
-            </div>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
+            </mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let qualification">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="qualification.isActive">Active</p>
+                    <p *ngIf="!qualification.isActive">Inactive</p>
+                </div>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let qualification">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <button mat-icon-button aria-label="Toggle star" (click)="editQualification(qualification)"
-                        style="color: blue">
-                    <mat-icon class="material-icons">edit</mat-icon>
-                </button>
-                <button mat-icon-button aria-label="Toggle star" (click)="deleteQualification(qualification?.id)"
-                        style="color: red">
-                    <mat-icon class="material-icons">delete</mat-icon>
-                </button>
-            </div>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let qualification">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-icon-button aria-label="Toggle star" (click)="editQualification(qualification)"
+                            style="color: blue">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star" (click)="deleteQualification(qualification?.id)"
+                            style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let qualification; columns: displayedColumns;" class="contact"
-             [@animate]="{value:'*',params:{y:'100%'}}">
-    </mat-row>
-</mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let qualification; columns: displayedColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator *ngIf ="qualifications.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="pageEvent = onPageChange($event)"
+    >
+    </mat-paginator>
+</div>
