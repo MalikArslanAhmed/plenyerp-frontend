@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {QualificationService} from "../../../../shared/services/qualification.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {StoreSetupUnitOfMeasuresCreateComponent} from "../store-setup-unit-of-measures-create/store-setup-unit-of-measures-create.component";
+import { StoreSetupUnitOfMeasuresService } from 'app/shared/services/store-setup-unit-of-measures.service';
 
 @Component({
     selector: 'app-store-setup-unit-of-measures-list',
@@ -17,7 +17,7 @@ export class StoreSetupUnitOfMeasuresListComponent implements OnInit {
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
 
-    constructor(private qualificationService: QualificationService,
+    constructor(private storeSetupUnitOfMeasuresService: StoreSetupUnitOfMeasuresService,
                 private _matDialog: MatDialog) {
     }
 
@@ -26,7 +26,7 @@ export class StoreSetupUnitOfMeasuresListComponent implements OnInit {
     }
 
     getStoreSetupUnitOfMeasure() {
-        this.qualificationService.getQualifications({'page': -1}).subscribe(data => {
+        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
             this.unitOfMeasures = data.items;
 
             if (this.unitOfMeasures && this.unitOfMeasures.length > 0) {
@@ -40,7 +40,7 @@ export class StoreSetupUnitOfMeasuresListComponent implements OnInit {
     }
 
     deleteStore(id) {
-        this.qualificationService.deleteQualification(id).subscribe(data => {
+        this.storeSetupUnitOfMeasuresService.deleteStoreSetupUnitOfMeasures(id).subscribe(data => {
             if (data) {
                 this.getStoreSetupUnitOfMeasure();
             }

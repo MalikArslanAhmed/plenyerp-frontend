@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {fuseAnimations} from "../../../../../@fuse/animations";
 import {FlatTreeControl} from "@angular/cdk/tree";
 import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
-import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.service";
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {StoreSetupCategoriesCreateComponent} from './store-setup-categories-create/store-setup-categories-create.component';
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {FuseSidebarService} from "../../../../../@fuse/components/sidebar/sidebar.service";
 import {StoreSetupCategoriesService} from 'app/shared/services/store-setup-categories.service';
 
 interface CategoriesNode {
@@ -14,6 +12,7 @@ interface CategoriesNode {
     parentId: number;
     name: string;
     children?: CategoriesNode[];
+    isActive: boolean;
 }
 
 const TREE_DATA: CategoriesNode[] = [];
@@ -25,13 +24,13 @@ interface ExampleFlatNode {
 }
 
 @Component({
-    selector: 'app-store-setup-categories',
-    templateUrl: './store-setup-categories.component.html',
-    styleUrls: ['./store-setup-categories.component.scss'],
+    selector: 'app-categories-list-select',
+    templateUrl: './categories-list-select.component.html',
+    styleUrls: ['./categories-list-select.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class StoreSetupCategoriesComponent implements OnInit {
+export class CategoriesListSelectComponent implements OnInit {
     private _transformer = (node: CategoriesNode, level: number) => {
         return {
             expandable: !!node.children && node.children.length > 0,
@@ -40,6 +39,7 @@ export class StoreSetupCategoriesComponent implements OnInit {
             id: node.id,
             isChildEnabled: node.isChildEnabled,
             parentId: node.parentId,
+            isActive: node.isActive
         };
     };
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);
@@ -49,7 +49,8 @@ export class StoreSetupCategoriesComponent implements OnInit {
     dialogRef: any;
     @ViewChild('tree') tree;
 
-    constructor(private storeSetupCategoriesService: StoreSetupCategoriesService,
+    constructor(public matDialogRef: MatDialogRef<CategoriesListSelectComponent>,
+                private storeSetupCategoriesService: StoreSetupCategoriesService,
                 private _fuseSidebarService: FuseSidebarService,
                 private _matDialog: MatDialog) {
         this.dataSource.data = TREE_DATA;
@@ -66,7 +67,8 @@ export class StoreSetupCategoriesComponent implements OnInit {
                 isChildEnabled: true,
                 parentId: 0,
                 name: 'Categories',
-                children: this.storeSetupCategoriesData(data)
+                children: this.storeSetupCategoriesData(data),
+                isActive: false
             }];
             this.tree.treeControl.expandAll();
         });
@@ -80,39 +82,5 @@ export class StoreSetupCategoriesComponent implements OnInit {
             });
             return data;
         }
-    }
-
-    addItem(node) {
-        this.dialogRef = this._matDialog.open(StoreSetupCategoriesCreateComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', node: node}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-            this.getStoresCategories();
-        });
-    }
-
-    editItem(node) {
-        this.dialogRef = this._matDialog.open(StoreSetupCategoriesCreateComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', node: node}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-            this.getStoresCategories();
-        });
-    }
-
-    deleteItem(node) {
-        this.storeSetupCategoriesService.deleteStoreCategories(node.id).subscribe(data => {
-            if (data) {
-                this.getStoresCategories();
-            }
-        })
     }
 }

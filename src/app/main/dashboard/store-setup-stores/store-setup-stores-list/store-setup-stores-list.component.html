@@ -1,9 +1,18 @@
 <mat-table [@animateStagger]="{value:'50'}" [dataSource]="stores">
-    <ng-container matColumnDef="id">
+    <ng-container matColumnDef="sno">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let store">
             <p class="email text-truncate">
                 {{store.sno}}.
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Store Id</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let store">
+            <p class="phone text-truncate">
+                {{store.id}}
             </p>
         </mat-cell>
     </ng-container>

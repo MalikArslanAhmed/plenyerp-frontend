@@ -1,5 +1,5 @@
 <mat-table [@animateStagger]="{value:'50'}" [dataSource]="items">
-    <ng-container matColumnDef="id">
+    <ng-container matColumnDef="sno">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let item">
             <p class="email text-truncate">
@@ -8,24 +8,39 @@
         </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Item Id</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
             <p class="phone text-truncate">
-                {{item.name}}
+                {{item.id}}
             </p>
         </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
-        </mat-header-cell>
+    <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Description</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <p *ngIf="item.isActive">Active</p>
-                <p *ngIf="!item.isActive">Inactive</p>
-            </div>
+            <p class="phone text-truncate">
+                {{item.description}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unit">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Unit Price</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+            <p class="phone text-truncate ml-1">
+                {{item.unitPrice}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Category</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+            <p class="phone text-truncate">
+                {{item.categoryId}}
+            </p>
         </mat-cell>
     </ng-container>
 

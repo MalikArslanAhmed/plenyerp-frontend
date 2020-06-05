@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {QualificationService} from "../../../../shared/services/qualification.service";
+import {StoreSetupStoresService} from "../../../../shared/services/store-setup-stores.service";
 
 @Component({
     selector: 'app-store-setup-stores-create',
@@ -19,7 +19,7 @@ export class StoreSetupStoresCreateComponent implements OnInit {
     constructor(public matDialogRef: MatDialogRef<StoreSetupStoresCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-                private qualificationService: QualificationService) {
+                private storeSetupStoresService: StoreSetupStoresService,) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Store';
@@ -60,7 +60,7 @@ export class StoreSetupStoresCreateComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            this.qualificationService.addQualification(this.storeForm.value).subscribe(data => {
+            this.storeSetupStoresService.addStoreSetupStore(this.storeForm.value).subscribe(data => {
                 this.storeForm.reset();
                 this.isSubmitted = false;
             });
@@ -74,7 +74,7 @@ export class StoreSetupStoresCreateComponent implements OnInit {
             return;
         }
         if (this.isSubmitted) {
-            this.qualificationService.updateQualification(this.updateData.store.id, this.storeForm.value).subscribe(data => {
+            this.storeSetupStoresService.updateStoreSetupStore(this.updateData.store.id, this.storeForm.value).subscribe(data => {
                 this.updateData = undefined;
                 this.storeForm.reset();
                 this.isSubmitted = false;

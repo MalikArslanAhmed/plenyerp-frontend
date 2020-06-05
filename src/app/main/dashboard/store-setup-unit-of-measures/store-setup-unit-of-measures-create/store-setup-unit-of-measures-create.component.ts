@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {QualificationService} from "../../../../shared/services/qualification.service";
+import {StoreSetupUnitOfMeasuresService} from "../../../../shared/services/store-setup-unit-of-measures.service";
 
 @Component({
     selector: 'app-store-setup-unit-of-measures-create',
@@ -18,7 +18,7 @@ export class StoreSetupUnitOfMeasuresCreateComponent implements OnInit {
     constructor(public matDialogRef: MatDialogRef<StoreSetupUnitOfMeasuresCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-                private qualificationService: QualificationService) {
+                private storeSetupUnitOfMeasuresService: StoreSetupUnitOfMeasuresService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit unit of measures';
@@ -59,7 +59,7 @@ export class StoreSetupUnitOfMeasuresCreateComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            this.qualificationService.addQualification(this.storeSetupUnitOfMeasuresForm.value).subscribe(data => {
+            this.storeSetupUnitOfMeasuresService.addStoreSetupUnitOfMeasures(this.storeSetupUnitOfMeasuresForm.value).subscribe(data => {
                 this.storeSetupUnitOfMeasuresForm.reset();
                 this.isSubmitted = false;
             });
@@ -73,7 +73,7 @@ export class StoreSetupUnitOfMeasuresCreateComponent implements OnInit {
             return;
         }
         if (this.isSubmitted) {
-            this.qualificationService.updateQualification(this.updateData.store.id, this.storeSetupUnitOfMeasuresForm.value).subscribe(data => {
+            this.storeSetupUnitOfMeasuresService.updateStoreSetupUnitOfMeasures(this.updateData.store.id, this.storeSetupUnitOfMeasuresForm.value).subscribe(data => {
                 this.updateData = undefined;
                 this.storeSetupUnitOfMeasuresForm.reset();
                 this.isSubmitted = false;

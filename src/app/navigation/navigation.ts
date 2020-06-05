@@ -358,7 +358,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Items',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/store-setup-items'
+                        url: 'dashboard/store-setup-items.service.ts'
                     },
                     {
                         id: 'catergories',

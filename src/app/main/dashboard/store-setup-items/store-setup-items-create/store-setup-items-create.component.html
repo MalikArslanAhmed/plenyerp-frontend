@@ -1,5 +1,5 @@
-<div class="dialog-content-wrapper">
-    <mat-toolbar matDialogTitle class="mat-accent m-0">
+<div class="dialog-content-wrapper" id="items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title dialog-title">{{dialogTitle}}</span>
             <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
@@ -8,19 +8,107 @@
         </mat-toolbar-row>
     </mat-toolbar>
 
-    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+    <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar>
         <form [formGroup]="itemForm">
-            <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Item Name</mat-label>
-                    <mat-icon matSuffix class="secondary-text">collections</mat-icon>
-                    <input name="name" formControlName="name" matInput required cdk-focus-start>
-                </mat-form-field>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-label style="margin-right: 20px">Is Active</mat-label>
-                <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
-            </div>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Part No.</mat-label>
+                        <input name="partNumber" formControlName="partNumber" matInput required cdk-focus-start>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Item Description</mat-label>
+                        <input name="description" formControlName="description" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex="100" (click)="categorySelect()">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="categoryId" required [disabled]="true">
+                            <mat-option [value]="category.id"
+                                        *ngFor="let category of categories">{{category.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>Category is required!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Unit of measures</mat-label>
+                        <mat-select formControlName="measurementId" required>
+                            <mat-option [value]="measurement.id"
+                                        *ngFor="let measurement of unitOfMeasures">{{measurement.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>Unit of measures is required!</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <h3>Default</h3>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Unit Price</mat-label>
+                        <input name="unitPrice" formControlName="unitPrice" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Lead Days</mat-label>
+                        <input name="leadDays" formControlName="leadDays" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Sale Comission (%)</mat-label>
+                        <input name="salesCommission" formControlName="salesCommission" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Reorder Quantity</mat-label>
+                        <input name="reorderQuantity" formControlName="reorderQuantity" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Minimum Quantity</mat-label>
+                        <input name="minimumQuantity" formControlName="minimumQuantity" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Maximum Quantity</mat-label>
+                        <input name="maximumQuantity" formControlName="maximumQuantity" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Charge VAT</mat-label>
+                        <mat-slide-toggle formControlName="isChargedVat"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1 mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Charge Other Tax</mat-label>
+                        <mat-slide-toggle formControlName="isChargedOtherTax"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is a physical item</mat-label>
+                        <mat-slide-toggle formControlName="isPhysicalQuantity"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
         </form>
     </div>
 

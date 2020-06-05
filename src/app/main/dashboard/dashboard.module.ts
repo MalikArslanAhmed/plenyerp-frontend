@@ -145,6 +145,7 @@ import {StoreSetupStoresListComponent} from './store-setup-stores/store-setup-st
 import {StoreSetupUnitOfMeasuresComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures.component';
 import {StoreSetupUnitOfMeasuresCreateComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures-create/store-setup-unit-of-measures-create.component';
 import {StoreSetupUnitOfMeasuresListComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures-list/store-setup-unit-of-measures-list.component';
+import {CategoriesListSelectComponent} from './store-setup-items/categories-list-select/categories-list-select.component';
 
 @NgModule({
     declarations: [
@@ -273,7 +274,8 @@ import {StoreSetupUnitOfMeasuresListComponent} from './store-setup-unit-of-measu
         StoreSetupStoresListComponent,
         StoreSetupUnitOfMeasuresComponent,
         StoreSetupUnitOfMeasuresCreateComponent,
-        StoreSetupUnitOfMeasuresListComponent
+        StoreSetupUnitOfMeasuresListComponent,
+        CategoriesListSelectComponent
     ],
     imports: [
         CommonModule,

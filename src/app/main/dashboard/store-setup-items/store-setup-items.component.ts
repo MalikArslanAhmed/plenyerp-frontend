@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {StoreSetupStoresListComponent} from "../store-setup-stores/store-setup-stores-list/store-setup-stores-list.component";
 import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.service";
 import {MatDialog} from "@angular/material/dialog";
-import {StoreSetupStoresCreateComponent} from "../store-setup-stores/store-setup-stores-create/store-setup-stores-create.component";
 import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
+import {StoreSetupItemsCreateComponent} from './store-setup-items-create/store-setup-items-create.component';
+import {StoreSetupItemsListComponent} from './store-setup-items-list/store-setup-items-list.component';
 
 @Component({
     selector: 'app-store-setup-items',
@@ -15,7 +15,7 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 })
 export class StoreSetupItemsComponent implements OnInit {
     dialogRef: any;
-    @ViewChild(StoreSetupStoresListComponent) getStores: StoreSetupStoresListComponent;
+    @ViewChild(StoreSetupItemsListComponent) getStores: StoreSetupItemsListComponent;
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -26,7 +26,7 @@ export class StoreSetupItemsComponent implements OnInit {
     }
 
     addStore() {
-        this.dialogRef = this._matDialog.open(StoreSetupStoresCreateComponent, {
+        this.dialogRef = this._matDialog.open(StoreSetupItemsCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE'}
         });

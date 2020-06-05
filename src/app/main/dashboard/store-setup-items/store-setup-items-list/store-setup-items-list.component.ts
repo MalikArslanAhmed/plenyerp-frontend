@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {QualificationService} from "../../../../shared/services/qualification.service";
 import {MatDialog} from "@angular/material/dialog";
-import {StoreSetupStoresCreateComponent} from "../../store-setup-stores/store-setup-stores-create/store-setup-stores-create.component";
 import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
+import {StoreSetupItemsCreateComponent} from '../store-setup-items-create/store-setup-items-create.component';
+import {StoreSetupItemsService} from "../../../../shared/services/store-setup-items.service";
 
 @Component({
     selector: 'app-store-setup-items-list',
@@ -14,10 +14,10 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 })
 export class StoreSetupItemsListComponent implements OnInit {
     items = [];
-    displayedColumns = ['id', 'name', 'status', 'actions'];
+    displayedColumns = ['sno', 'id', 'description', 'unit', 'category', 'actions'];
     dialogRef: any;
 
-    constructor(private qualificationService: QualificationService,
+    constructor(private storeSetupItemsService: StoreSetupItemsService,
                 private _matDialog: MatDialog) {
     }
 
@@ -26,13 +26,12 @@ export class StoreSetupItemsListComponent implements OnInit {
     }
 
     getStores() {
-        this.qualificationService.getQualifications({'page': -1}).subscribe(data => {
+        this.storeSetupItemsService.getStoreSetupItems({'page': -1}).subscribe(data => {
             this.items = data.items;
-
             if (this.items && this.items.length > 0) {
                 let i = 1;
-                this.items.forEach(qualification => {
-                    qualification['sno'] = i;
+                this.items.forEach(store => {
+                    store['sno'] = i;
                     i++;
                 });
             }
@@ -40,7 +39,7 @@ export class StoreSetupItemsListComponent implements OnInit {
     }
 
     deleteStore(id) {
-        this.qualificationService.deleteQualification(id).subscribe(data => {
+        this.storeSetupItemsService.deleteStoreSetupItems(id).subscribe(data => {
             if (data) {
                 this.getStores();
             }
@@ -48,7 +47,7 @@ export class StoreSetupItemsListComponent implements OnInit {
     }
 
     editStore(store) {
-        this.dialogRef = this._matDialog.open(StoreSetupStoresCreateComponent, {
+        this.dialogRef = this._matDialog.open(StoreSetupItemsCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', store: store},
         });

@@ -310,7 +310,7 @@ const routes: Routes = [
         },
     },
     {
-        path: 'store-setup-items',
+        path: 'store-setup-items.service.ts',
         component: StoreSetupItemsComponent,
         data: {
             title: 'Items'

@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {WorkLocationService} from "../../../../shared/services/work-location.service";
 import {fuseAnimations} from "../../../../../@fuse/animations";
+import {StoreSetupCategoriesService} from 'app/shared/services/store-setup-categories.service';
 
 @Component({
     selector: 'app-store-setup-categories-create',
@@ -14,7 +14,7 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 export class StoreSetupCategoriesCreateComponent implements OnInit {
     action: any;
     dialogTitle: any;
-    workLocationForm: FormGroup;
+    categoriesForm: FormGroup;
     isSubmitted = false;
     skills: any = [];
     updateData: any;
@@ -22,18 +22,18 @@ export class StoreSetupCategoriesCreateComponent implements OnInit {
     constructor(public matDialogRef: MatDialogRef<StoreSetupCategoriesCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-                private workLocationService: WorkLocationService) {
+                private storeSetupCategoriesService: StoreSetupCategoriesService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit Work Location ' + _data.node.name;
+            this.dialogTitle = 'Edit Categories ' + _data.node.name;
             if (_data.node) {
                 this.updateData = _data;
             }
         } else {
             if (_data.node.level === 0) {
-                this.dialogTitle = 'Add New Work Location';
+                this.dialogTitle = 'Add Categories';
             } else {
-                this.dialogTitle = 'Add Work Location inside ' + _data.node.name;
+                this.dialogTitle = 'Add Categories inside ' + _data.node.name;
             }
         }
     }
@@ -44,7 +44,7 @@ export class StoreSetupCategoriesCreateComponent implements OnInit {
     }
 
     refresh() {
-        this.workLocationForm = this.fb.group({
+        this.categoriesForm = this.fb.group({
             'name': ['', Validators.required],
             'isChildEnabled': [true, Validators.required]
         });
@@ -52,7 +52,7 @@ export class StoreSetupCategoriesCreateComponent implements OnInit {
 
     checkForUpdate() {
         if (this.updateData) {
-            this.workLocationForm.patchValue({
+            this.categoriesForm.patchValue({
                 'name': this.updateData.node.name,
                 'isChildEnabled': this.updateData.node.isChildEnabled,
             });
@@ -61,14 +61,14 @@ export class StoreSetupCategoriesCreateComponent implements OnInit {
 
     updateLocation() {
         this.isSubmitted = true;
-        if (!this.workLocationForm.valid) {
+        if (!this.categoriesForm.valid) {
             this.isSubmitted = false;
             return;
         }
         if (this.isSubmitted) {
-            this.workLocationService.updateWorkLocations(this.updateData.node.id, this.workLocationForm.value).subscribe(data => {
+            this.storeSetupCategoriesService.updateStoreCategories(this.updateData.node.id, this.categoriesForm.value).subscribe(data => {
                 this.updateData = undefined;
-                this.workLocationForm.reset();
+                this.categoriesForm.reset();
                 this.isSubmitted = false;
             });
         }
@@ -76,19 +76,19 @@ export class StoreSetupCategoriesCreateComponent implements OnInit {
 
     createLocation() {
         if (this._data.node.parentId === 0) {
-            this.workLocationForm.value['parentId'] = null;
+            this.categoriesForm.value['parentId'] = null;
         } else {
-            this.workLocationForm.value['parentId'] = this._data.node.id;
+            this.categoriesForm.value['parentId'] = this._data.node.id;
         }
         this.isSubmitted = true;
-        if (!this.workLocationForm.valid) {
+        if (!this.categoriesForm.valid) {
             this.isSubmitted = false;
             return;
         }
         if (this.isSubmitted) {
-            this.workLocationService.addWorkLocations(this.workLocationForm.value).subscribe(data => {
+            this.storeSetupCategoriesService.addStoreCategories(this.categoriesForm.value).subscribe(data => {
                 this.updateData = undefined;
-                this.workLocationForm.reset();
+                this.categoriesForm.reset();
                 this.isSubmitted = false;
             });
         }

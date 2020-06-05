@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {QualificationService} from "../../../../shared/services/qualification.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {StoreSetupStoresCreateComponent} from "../store-setup-stores-create/store-setup-stores-create.component";
+import {StoreSetupStoresService} from 'app/shared/services/store-setup-stores.service';
 
 @Component({
     selector: 'app-store-setup-stores-list',
@@ -14,10 +14,10 @@ import {StoreSetupStoresCreateComponent} from "../store-setup-stores-create/stor
 })
 export class StoreSetupStoresListComponent implements OnInit {
     stores = [];
-    displayedColumns = ['id', 'name', 'status', 'actions'];
+    displayedColumns = ['sno', 'id', 'name', 'status', 'actions'];
     dialogRef: any;
 
-    constructor(private qualificationService: QualificationService,
+    constructor(private storeSetupStoresService: StoreSetupStoresService,
                 private _matDialog: MatDialog) {
     }
 
@@ -26,13 +26,12 @@ export class StoreSetupStoresListComponent implements OnInit {
     }
 
     getStores() {
-        this.qualificationService.getQualifications({'page': -1}).subscribe(data => {
+        this.storeSetupStoresService.getStoreSetupStores({'page': -1}).subscribe(data => {
             this.stores = data.items;
-
             if (this.stores && this.stores.length > 0) {
                 let i = 1;
-                this.stores.forEach(qualification => {
-                    qualification['sno'] = i;
+                this.stores.forEach(store => {
+                    store['sno'] = i;
                     i++;
                 });
             }
@@ -40,7 +39,7 @@ export class StoreSetupStoresListComponent implements OnInit {
     }
 
     deleteStore(id) {
-        this.qualificationService.deleteQualification(id).subscribe(data => {
+        this.storeSetupStoresService.deleteStoreSetupStore(id).subscribe(data => {
             if (data) {
                 this.getStores();
             }
