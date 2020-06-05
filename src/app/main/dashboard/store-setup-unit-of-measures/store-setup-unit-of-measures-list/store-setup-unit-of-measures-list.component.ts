@@ -4,6 +4,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {StoreSetupUnitOfMeasuresCreateComponent} from "../store-setup-unit-of-measures-create/store-setup-unit-of-measures-create.component";
 import { StoreSetupUnitOfMeasuresService } from 'app/shared/services/store-setup-unit-of-measures.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-store-setup-unit-of-measures-list',
@@ -16,6 +17,13 @@ export class StoreSetupUnitOfMeasuresListComponent implements OnInit {
     unitOfMeasures = [];
     displayedColumns = ['id', 'name', 'status', 'actions'];
     dialogRef: any;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
 
     constructor(private storeSetupUnitOfMeasuresService: StoreSetupUnitOfMeasuresService,
                 private _matDialog: MatDialog) {
@@ -26,8 +34,11 @@ export class StoreSetupUnitOfMeasuresListComponent implements OnInit {
     }
 
     getStoreSetupUnitOfMeasure() {
-        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
+        this.unitOfMeasures = [];
+        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({page: this.pagination.page}).subscribe(data => {
             this.unitOfMeasures = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
 
             if (this.unitOfMeasures && this.unitOfMeasures.length > 0) {
                 let i = 1;
@@ -58,5 +69,9 @@ export class StoreSetupUnitOfMeasuresListComponent implements OnInit {
             }
             this.getStoreSetupUnitOfMeasure();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getStoreSetupUnitOfMeasure();
     }
 }

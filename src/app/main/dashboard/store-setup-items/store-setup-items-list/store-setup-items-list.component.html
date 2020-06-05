@@ -88,4 +88,13 @@
             </mat-row>
         </mat-table>
     </div>
+    <div fxFlex="100" *ngIf ="items.length > 0">
+        <mat-paginator #paginator
+                       [length]="pagination.total"
+                       [pageSize]="pagination.perpage"
+                       [pageIndex]="pagination.page-1"
+                       (page)="pageEvent = onPageChange($event)"
+        >
+        </mat-paginator>
+    </div>
 </div>

@@ -5,6 +5,7 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 import {StoreSetupItemsCreateComponent} from '../store-setup-items-create/store-setup-items-create.component';
 import {StoreSetupItemsService} from "../../../../shared/services/store-setup-items.service";
 import {CategoriesListSelectComponent} from '../categories-list-select/categories-list-select.component';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-store-setup-items-list',
@@ -19,6 +20,13 @@ export class StoreSetupItemsListComponent implements OnInit {
     dialogRef: any;
     itemsFilterForm: FormGroup;
     categories = [];
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private storeSetupItemsService: StoreSetupItemsService,
                 private fb: FormBuilder,
                 private _matDialog: MatDialog) {
@@ -36,9 +44,11 @@ export class StoreSetupItemsListComponent implements OnInit {
     }
 
     getStores(params = {}) {
-        // params['page'] = -1;
+        params['page'] = this.pagination.page;
         this.storeSetupItemsService.getStoreSetupItems(params).subscribe(data => {
             this.items = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.items && this.items.length > 0) {
                 let i = 1;
                 this.items.forEach(store => {
@@ -92,5 +102,9 @@ export class StoreSetupItemsListComponent implements OnInit {
                 categoryId: response.id,
             });
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getStores();
     }
 }
