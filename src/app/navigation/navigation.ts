@@ -358,7 +358,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Items',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/store-setup-items.service.ts'
+                        url: 'dashboard/store-setup-items'
                     },
                     {
                         id: 'catergories',
@@ -380,6 +380,65 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/store-setup-unit-of-measures'
+                    }
+                ]
+            },
+            {
+                id: 'transaction',
+                title: 'Transaction',
+                roles: [],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'insert_chart',
+                children: [
+                    {
+                        id: 'srv-purchase-invoice',
+                        title: 'SRV - Purchase Invocie',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/transaction-srv-purchase-invoice'
+                    },
+                    {
+                        id: 'srv-purchase-return',
+                        title: 'SRV - Purchase Return',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/transaction-srv-purchase-return'
+                    },
+                    {
+                        id: 'sales-invoice',
+                        title: 'Sales Invoice',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/transaction-sales-invoice'
+                    },
+                    {
+                        id: 'sales-return-by-customer',
+                        title: 'Sales return by customer',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/transaction-sales-return-by-customer'
+                    },
+                    {
+                        id: 'stv-store-transfer',
+                        title: 'STV - Store Transfer',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/transaction-stv-store-transfer'
+                    },
+                    {
+                        id: 'store-adjustment',
+                        title: 'Store Adjustment',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/transaction-store-adjustment'
+                    },
+                    {
+                        id: 'donations',
+                        title: 'Donations',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/transaction-donations'
                     }
                 ]
             }

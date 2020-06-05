@@ -147,6 +147,13 @@ import {StoreSetupUnitOfMeasuresCreateComponent} from './store-setup-unit-of-mea
 import {StoreSetupUnitOfMeasuresListComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures-list/store-setup-unit-of-measures-list.component';
 import {CategoriesListSelectComponent} from './store-setup-items/categories-list-select/categories-list-select.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {TransactionSrvPurchaseInvoiceComponent} from './transaction-srv-purchase-invoice/transaction-srv-purchase-invoice.component';
+import {TransactionSrvPurchaseReturnComponent} from './transaction-srv-purchase-return/transaction-srv-purchase-return.component';
+import {TransactionSalesInvoiceComponent} from './transaction-sales-invoice/transaction-sales-invoice.component';
+import {TransactionSalesReturnByCustomerComponent} from './transaction-sales-return-by-customer/transaction-sales-return-by-customer.component';
+import {TransactionStvStoreTransferComponent} from './transaction-stv-store-transfer/transaction-stv-store-transfer.component';
+import { TransactionStoreAdjustmentComponent } from './transaction-store-adjustment/transaction-store-adjustment.component';
+import { TransactionDonationsComponent } from './transaction-donations/transaction-donations.component';
 
 @NgModule({
     declarations: [
@@ -276,7 +283,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
         StoreSetupUnitOfMeasuresComponent,
         StoreSetupUnitOfMeasuresCreateComponent,
         StoreSetupUnitOfMeasuresListComponent,
-        CategoriesListSelectComponent
+        CategoriesListSelectComponent,
+        TransactionSrvPurchaseInvoiceComponent,
+        TransactionSrvPurchaseReturnComponent,
+        TransactionSalesInvoiceComponent,
+        TransactionSalesReturnByCustomerComponent,
+        TransactionStvStoreTransferComponent,
+        TransactionStoreAdjustmentComponent,
+        TransactionDonationsComponent
     ],
     imports: [
         CommonModule,

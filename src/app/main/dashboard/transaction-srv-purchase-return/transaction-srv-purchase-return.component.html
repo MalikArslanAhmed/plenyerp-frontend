@@ -1,0 +1,262 @@
+<div id="items" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">insert_chart
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    SRV - Purchase Return
+                </span>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button mat-fab class="accent" id="add-button" aria-label="add qualification"
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="content" fusePerfectScrollbar>
+        <div class="center p-24 pb-56 pr-sm-92">
+            <div class="content p-24" fusePerfectScrollbar>
+                <form fxLayout="column" [formGroup]="srvPurchaseReturnForm">
+                    <mat-grid-list cols="2" rowHeight="100px">
+                        <mat-grid-tile class="mr-1">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Supplier ID</mat-label>
+                                    <input matInput formControlName="supplierId" required>
+                                    <mat-error>Title is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="ml-1">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Default line item store Id</mat-label>
+                                    <input matInput formControlName="storeId">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-grid-list cols="2" rowHeight="100px">
+                        <mat-grid-tile class="mr-1">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Customer Address</mat-label>
+                                    <input matInput formControlName="cutomerAddress" required>
+                                    <mat-error>Title is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="ml-1">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Store Name</mat-label>
+                                    <input matInput formControlName="storeName">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-grid-list cols="5" rowHeight="100px">
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Details</mat-label>
+                                    <input matInput formControlName="details" required>
+                                    <mat-error>Detail is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>PO No.</mat-label>
+                                    <input matInput formControlName="pono">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Sr. doc. ref. no.</mat-label>
+                                    <input matInput formControlName="srDocRefNo">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Date</mat-label>
+                                    <input matInput formControlName="date">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Ref. No.</mat-label>
+                                    <input matInput formControlName="refNo">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-grid-list cols="7" rowHeight="100px" class="m-10px">
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Item Id</mat-label>
+                                    <input matInput formControlName="itemId" required>
+                                    <mat-error>Item Id is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Description</mat-label>
+                                    <input matInput formControlName="description">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Unit of measures</mat-label>
+                                    <input matInput formControlName="unitOfMeasures">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Quantity</mat-label>
+                                    <input matInput formControlName="quantity">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Unit selling price</mat-label>
+                                    <input matInput formControlName="unitSellingPrice">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Unit Cost</mat-label>
+                                    <input matInput formControlName="unitCost">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
+                                <button mat-raised-button class="mat-accent mr-16 mt--20px">Add Item</button>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-grid-list cols="1" rowHeight="100px" class="p-10px">
+                        <table class="simple shadow-1px">
+                            <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Item Id</th>
+                                <th>Description</th>
+                                <th>Unit Of Measures</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Unit Cost</th>
+                                <th>Value (Price)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <span class="text-truncate">
+                                        1.
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">
+                                        1
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">
+                                        Abc New
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">
+                                        Kilogram
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">
+                                        10
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">
+                                        100
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">
+                                        100
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">
+                                        10000
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </mat-grid-list>
+                    <mat-grid-list cols="4" rowHeight="100px" class="mt-4">
+                        <mat-grid-tile [colspan]="2">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Total values in words</mat-label>
+                                    <input matInput formControlName="totalValuesInWords">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="1">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Sub Total</mat-label>
+                                    <input matInput formControlName="subTotal">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="1">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Total</mat-label>
+                                    <input matInput formControlName="total">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-grid-list cols="1" rowHeight="50px" class="mt-4">
+                        <div fxLayout="row" fxLayoutAlign="end end">
+                            <button mat-raised-button type="button" color="accent" class="pull-right mr-1">
+                                Cancel
+                            </button>
+                            <button mat-raised-button type="button" color="accent" class="pull-right">
+                                Save
+                            </button>
+                        </div>
+                    </mat-grid-list>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

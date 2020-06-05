@@ -12,22 +12,6 @@
                 </span>
             </div>
         </div>
-        <!--<div fxLayout="row" fxLayoutAlign="end center">
-            <button mat-fab class="accent" id="add-button" aria-label="add categories"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addEmployee()">
-                <mat-icon>add_circle</mat-icon>
-            </button>
-        </div>-->
-        <!-- SEARCH -->
-        <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
-            <div class="search-wrapper mt-16 mt-sm-0">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
-                    <input [formControl]="searchInput" placeholder="Search for a contact">
-                </div>
-            </div>
-        </div>-->
-        <!-- / SEARCH -->
     </div>
     <div class="content" fusePerfectScrollbar>
         <div class="horizontal-stepper-wrapper hor-wrap">
@@ -90,10 +74,12 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="saveEmployee()" *ngIf="!this.selectedEmployeeId">
+                            <button mat-raised-button matStepperNext type="button" color="accent"
+                                    (click)="saveEmployee()" *ngIf="!this.selectedEmployeeId">
                                 Save & Next
                             </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" (click)="updateEmployee()" *ngIf="this.selectedEmployeeId">
+                            <button mat-raised-button matStepperNext type="button" color="accent"
+                                    (click)="updateEmployee()" *ngIf="this.selectedEmployeeId">
                                 Update & Next
                             </button>
                         </div>

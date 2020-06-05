@@ -33,14 +33,21 @@ import {PublicHolidaysComponent} from './holidays/public-holidays/public-holiday
 import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 import {DesignationComponent} from './designation/designation.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
-import { ManagersComponent } from './managers/managers.component';
-import { RolesComponent } from './managers/roles/roles.component';
-import { EmployeeActionComponent } from './employees/employee-action/employee-action.component';
+import {ManagersComponent} from './managers/managers.component';
+import {RolesComponent} from './managers/roles/roles.component';
+import {EmployeeActionComponent} from './employees/employee-action/employee-action.component';
 import {ItemComponent} from "@swimlane/ngx-dnd";
 import {StoreSetupItemsComponent} from "./store-setup-items/store-setup-items.component";
 import {StoreSetupCategoriesComponent} from "./store-setup-categories/store-setup-categories.component";
 import {StoreSetupStoresComponent} from "./store-setup-stores/store-setup-stores.component";
 import {StoreSetupUnitOfMeasuresComponent} from "./store-setup-unit-of-measures/store-setup-unit-of-measures.component";
+import {TransactionSrvPurchaseInvoiceComponent} from './transaction-srv-purchase-invoice/transaction-srv-purchase-invoice.component';
+import {TransactionSrvPurchaseReturnComponent} from "./transaction-srv-purchase-return/transaction-srv-purchase-return.component";
+import {TransactionSalesInvoiceComponent} from "./transaction-sales-invoice/transaction-sales-invoice.component";
+import {TransactionSalesReturnByCustomerComponent} from "./transaction-sales-return-by-customer/transaction-sales-return-by-customer.component";
+import {TransactionStvStoreTransferComponent} from "./transaction-stv-store-transfer/transaction-stv-store-transfer.component";
+import {TransactionStoreAdjustmentComponent} from "./transaction-store-adjustment/transaction-store-adjustment.component";
+import {TransactionDonationsComponent} from "./transaction-donations/transaction-donations.component";
 
 const routes: Routes = [
     {
@@ -310,7 +317,7 @@ const routes: Routes = [
         },
     },
     {
-        path: 'store-setup-items.service.ts',
+        path: 'store-setup-items',
         component: StoreSetupItemsComponent,
         data: {
             title: 'Items'
@@ -335,6 +342,55 @@ const routes: Routes = [
         component: StoreSetupUnitOfMeasuresComponent,
         data: {
             title: 'Unit of Measures'
+        }
+    },
+    {
+        path: 'transaction-srv-purchase-invoice',
+        component: TransactionSrvPurchaseInvoiceComponent,
+        data: {
+            title: 'SRV - Purchase Invoice'
+        }
+    },
+    {
+        path: 'transaction-srv-purchase-return',
+        component: TransactionSrvPurchaseReturnComponent,
+        data: {
+            title: 'SRV - Purchase Return'
+        }
+    },
+    {
+        path: 'transaction-sales-invoice',
+        component: TransactionSalesInvoiceComponent,
+        data: {
+            title: 'Sales Invoice'
+        }
+    },
+    {
+        path: 'transaction-sales-return-by-customer',
+        component: TransactionSalesReturnByCustomerComponent,
+        data: {
+            title: 'Sales Return By Customer'
+        }
+    },
+    {
+        path: 'transaction-stv-store-transfer',
+        component: TransactionStvStoreTransferComponent,
+        data: {
+            title: 'STV - Store Transfer'
+        }
+    },
+    {
+        path: 'transaction-store-adjustment',
+        component: TransactionStoreAdjustmentComponent,
+        data: {
+            title: 'Store Adjustment'
+        }
+    },
+    {
+        path: 'transaction-donations',
+        component: TransactionDonationsComponent,
+        data: {
+            title: 'Donations'
         }
     }
 ];
