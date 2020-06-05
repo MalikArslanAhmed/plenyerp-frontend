@@ -1,63 +1,73 @@
-<mat-table [@animateStagger]="{value:'50'}" [dataSource]="stores">
-    <ng-container matColumnDef="sno">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let store">
-            <p class="email text-truncate">
-                {{store.sno}}.
-            </p>
-        </mat-cell>
-    </ng-container>
+<div fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="stores">
+        <ng-container matColumnDef="sno">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-sm *matCellDef="let store">
+                <p class="email text-truncate">
+<!--                    {{store.sno}}.-->
+                    {{((pagination.page - 1) * pagination.perpage) + store.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Store Id</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let store">
-            <p class="phone text-truncate">
-                {{store.id}}
-            </p>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Store Id</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let store">
+                <p class="phone text-truncate">
+                    {{store.id}}
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let store">
-            <p class="phone text-truncate">
-                {{store.name}}
-            </p>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let store">
+                <p class="phone text-truncate">
+                    {{store.name}}
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
-        </mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let store">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <p *ngIf="store.isActive">Active</p>
-                <p *ngIf="!store.isActive">Inactive</p>
-            </div>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
+            </mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let store">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="store.isActive">Active</p>
+                    <p *ngIf="!store.isActive">Inactive</p>
+                </div>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let store">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <button mat-icon-button aria-label="Toggle star" (click)="editStore(store)"
-                        style="color: blue">
-                    <mat-icon class="material-icons">edit</mat-icon>
-                </button>
-                <button mat-icon-button aria-label="Toggle star" (click)="deleteStore(store?.id)"
-                        style="color: red">
-                    <mat-icon class="material-icons">delete</mat-icon>
-                </button>
-            </div>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let store">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-icon-button aria-label="Toggle star" (click)="editStore(store)"
+                            style="color: blue">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star" (click)="deleteStore(store?.id)"
+                            style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let store; columns: displayedColumns;" class="contact"
-             [@animate]="{value:'*',params:{y:'100%'}}">
-    </mat-row>
-</mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let store; columns: displayedColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator *ngIf ="stores.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="pageEvent = onPageChange($event)"
+                   >
+    </mat-paginator>
+</div>

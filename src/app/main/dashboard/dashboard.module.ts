@@ -146,6 +146,7 @@ import {StoreSetupUnitOfMeasuresComponent} from './store-setup-unit-of-measures/
 import {StoreSetupUnitOfMeasuresCreateComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures-create/store-setup-unit-of-measures-create.component';
 import {StoreSetupUnitOfMeasuresListComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures-list/store-setup-unit-of-measures-list.component';
 import {CategoriesListSelectComponent} from './store-setup-items/categories-list-select/categories-list-select.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
     declarations: [
@@ -302,7 +303,8 @@ import {CategoriesListSelectComponent} from './store-setup-items/categories-list
         MatOptionModule,
         MatRadioModule,
         MaterialFileInputModule,
-        SharedModule
+        SharedModule,
+        MatPaginatorModule
     ]
 })
 export class DashboardModule {

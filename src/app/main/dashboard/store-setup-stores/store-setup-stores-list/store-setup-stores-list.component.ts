@@ -4,6 +4,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {StoreSetupStoresCreateComponent} from "../store-setup-stores-create/store-setup-stores-create.component";
 import {StoreSetupStoresService} from 'app/shared/services/store-setup-stores.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-store-setup-stores-list',
@@ -16,7 +17,13 @@ export class StoreSetupStoresListComponent implements OnInit {
     stores = [];
     displayedColumns = ['sno', 'id', 'name', 'status', 'actions'];
     dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private storeSetupStoresService: StoreSetupStoresService,
                 private _matDialog: MatDialog) {
     }
@@ -26,7 +33,8 @@ export class StoreSetupStoresListComponent implements OnInit {
     }
 
     getStores() {
-        this.storeSetupStoresService.getStoreSetupStores({'page': -1}).subscribe(data => {
+        this.stores = [];
+        this.storeSetupStoresService.getStoreSetupStores({page: this.pagination.page}).subscribe(data => {
             this.stores = data.items;
             if (this.stores && this.stores.length > 0) {
                 let i = 1;
@@ -35,6 +43,8 @@ export class StoreSetupStoresListComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
     }
 
@@ -57,5 +67,9 @@ export class StoreSetupStoresListComponent implements OnInit {
             }
             this.getStores();
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getStores();
     }
 }
