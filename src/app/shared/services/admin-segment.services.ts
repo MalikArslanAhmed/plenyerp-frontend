@@ -15,8 +15,8 @@ export class AdminSegmentServices extends BaseService{
         super(http, alertService, globalService);
     }
 
-    getAllSegments(id?): Observable<any> {
-        return this.getRequest(AppUrl.SEGMENT(id));
+    getAllSegments(data): Observable<any> {
+        return this.getRequest(AppUrl.SEGMENT(), data);
     }
 
     addSegment(data): Observable<any> {

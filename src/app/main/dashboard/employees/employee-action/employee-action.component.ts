@@ -19,6 +19,7 @@ import {EmployeeRelations} from '../employee-other-details/employee-relations/em
 import {EmployeeSchoolAttended} from '../employee-other-details/employee-school-attended/employee-school-attended';
 import {EmployeeBankDetailsComponent} from './employee-bank-details/employee-bank-details.component';
 import {EmployeeBackground} from '../employee-other-details/employee-background/employee-background';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-employee-action',
@@ -129,7 +130,13 @@ export class EmployeeActionComponent implements OnInit {
     ];
     otherDetailForm: FormGroup;
     exportOpen = false;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
                 private router: Router,
@@ -176,7 +183,13 @@ export class EmployeeActionComponent implements OnInit {
                     i++;
                 });
             }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
         });
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getEmployees({page: this.pagination.page});
     }
 
     addBankDetails(previewEmp) {
@@ -295,7 +308,7 @@ export class EmployeeActionComponent implements OnInit {
     }
 
     addOtherDetails(employeeDetails) {
-        console.log('---------->>>', employeeDetails.id);
+        // console.log('---------->>>', employeeDetails.id);
         const od = this.otherDetailForm.get('otherDetail').value;
         if (od === 'ADDRESS') {
             this.dialogRef = this._matDialog.open(EmployeeAddress, {

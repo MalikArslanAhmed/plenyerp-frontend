@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {fuseAnimations} from "../../../../../@fuse/animations";
+import {fuseAnimations} from '../../../../../@fuse/animations';
 import {StoreSetupItemsCreateComponent} from '../store-setup-items-create/store-setup-items-create.component';
-import {StoreSetupItemsService} from "../../../../shared/services/store-setup-items.service";
+import {StoreSetupItemsService} from '../../../../shared/services/store-setup-items.service';
 import {CategoriesListSelectComponent} from '../categories-list-select/categories-list-select.component';
 import {PageEvent} from '@angular/material/paginator';
 
@@ -44,7 +44,6 @@ export class StoreSetupItemsListComponent implements OnInit {
     }
 
     getStores(params = {}) {
-        params['page'] = this.pagination.page;
         this.storeSetupItemsService.getStoreSetupItems(params).subscribe(data => {
             this.items = data.items;
             this.pagination.page = data.page;
@@ -105,6 +104,6 @@ export class StoreSetupItemsListComponent implements OnInit {
     }
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
-        this.getStores();
+        this.getStores({page: this.pagination.page});
     }
 }

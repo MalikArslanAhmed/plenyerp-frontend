@@ -4,6 +4,7 @@ import {ManagersService} from "../../../../shared/services/managers.service";
 import {ManagersCreateComponent} from "../managers-create/managers-create.component";
 import {FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-managers-list',
@@ -17,7 +18,13 @@ export class ManagersListComponent implements OnInit {
   managers = [];
   displayedColumns = ['id', 'name', 'username', 'actions'];
   dialogRef: any;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
   constructor(private managersService: ManagersService,
     private _matDialog: MatDialog) { }
 
@@ -26,7 +33,8 @@ export class ManagersListComponent implements OnInit {
   }
 
   getManagers() {
-    this.managersService.getManagers({'page': -1}).subscribe(data => {
+      this.managers = [];
+    this.managersService.getManagers({page: this.pagination.page}).subscribe(data => {
         this.managers = data.items;
 
         if (this.managers && this.managers.length > 0) {
@@ -36,6 +44,8 @@ export class ManagersListComponent implements OnInit {
                 i++;
             });
         }
+        this.pagination.page = data.page;
+        this.pagination.total = data.total;
     });
 }
 
@@ -60,5 +70,9 @@ editManagers(manager) {
         this.getManagers();
     });
 }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getManagers();
+    }
 
 }

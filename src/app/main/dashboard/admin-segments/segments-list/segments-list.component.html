@@ -1,9 +1,10 @@
+<div fxLayout="column" fxLayoutGap="20px" fxFlex="100">
 <mat-table [@animateStagger]="{value:'50'}" [dataSource]="segments">
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let segment">
             <p class="email text-truncate">
-                {{segment.id}}.
+                {{((pagination.page - 1) * pagination.perpage) + segment.sno}}.
             </p>
         </mat-cell>
     </ng-container>
@@ -64,3 +65,11 @@
              [@animate]="{value:'*',params:{y:'100%'}}">
     </mat-row>
 </mat-table>
+    <mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
+                   *ngIf="segments.length > 0"
+                   [length]="pagination.total"
+                   [pageIndex]="pagination.page-1"
+                   [pageSize]="pagination.perpage"
+    >
+    </mat-paginator>
+</div>
