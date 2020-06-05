@@ -1,69 +1,91 @@
-<mat-table [@animateStagger]="{value:'50'}" [dataSource]="items">
-    <ng-container matColumnDef="sno">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let item">
-            <p class="email text-truncate">
-                {{item.sno}}.
-            </p>
-        </mat-cell>
-    </ng-container>
+<div fxLayout="column" fxLayoutGap="5px" fxFlex="100">
+    <div fxFlex="100" style="padding: 1rem">
+       <form [formGroup]="itemsFilterForm">
+           <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start" fxFlex="50">
+               <mat-form-field appearance="outline" fxFlex="100" (click)="categorySelect()">
+                   <mat-label>Choose Category</mat-label>
+                   <mat-select formControlName="categoryId" required [disabled]="true">
+                       <mat-option [value]="category.id"
+                                   *ngFor="let category of categories">{{category.name}}</mat-option>
+                   </mat-select>
+               </mat-form-field>
+               <mat-form-field appearance="outline" fxFlex="100">
+                   <mat-label>Search</mat-label>
+                   <input matInput formControlName="search" name="search"
+                          (keyup)="getItems({'search': this.itemsFilterForm.value.search})">
+               </mat-form-field>
+           </div>
+       </form>
+    </div>
+    <div fxFlex="100">
+        <mat-table [@animateStagger]="{value:'50'}" [dataSource]="items">
+            <ng-container matColumnDef="sno">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let item">
+                    <p class="email text-truncate">
+                        {{item.sno}}.
+                    </p>
+                </mat-cell>
+            </ng-container>
 
-    <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Item Id</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
-            <p class="phone text-truncate">
-                {{item.id}}
-            </p>
-        </mat-cell>
-    </ng-container>
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Item Id</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+                    <p class="phone text-truncate">
+                        {{item.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
 
-    <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Description</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
-            <p class="phone text-truncate">
-                {{item.description}}
-            </p>
-        </mat-cell>
-    </ng-container>
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Description</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+                    <p class="phone text-truncate">
+                        {{item.description}}
+                    </p>
+                </mat-cell>
+            </ng-container>
 
-    <ng-container matColumnDef="unit">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Unit Price</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
-            <p class="phone text-truncate ml-1">
-                {{item.unitPrice}}
-            </p>
-        </mat-cell>
-    </ng-container>
+            <ng-container matColumnDef="unit">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Unit Price</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item.unitPrice}}
+                    </p>
+                </mat-cell>
+            </ng-container>
 
-    <ng-container matColumnDef="category">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Category</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
-            <p class="phone text-truncate">
-                {{item.categoryId}}
-            </p>
-        </mat-cell>
-    </ng-container>
+            <ng-container matColumnDef="category">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Category</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+                    <p class="phone text-truncate">
+                        {{item.categoryId}}
+                    </p>
+                </mat-cell>
+            </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let item">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <button mat-icon-button aria-label="Toggle star" (click)="editStore(item)"
-                        style="color: blue">
-                    <mat-icon class="material-icons">edit</mat-icon>
-                </button>
-                <button mat-icon-button aria-label="Toggle star" (click)="deleteStore(item?.id)"
-                        style="color: red">
-                    <mat-icon class="material-icons">delete</mat-icon>
-                </button>
-            </div>
-        </mat-cell>
-    </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <div fxFlex="row" fxLayoutAlign="end center">
+                        <button mat-icon-button aria-label="Toggle star" (click)="editStore(item)"
+                                style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteStore(item?.id)"
+                                style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
+                </mat-cell>
+            </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let item; columns: displayedColumns;" class="contact"
-             [@animate]="{value:'*',params:{y:'100%'}}">
-    </mat-row>
-</mat-table>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let item; columns: displayedColumns;" class="contact"
+                     [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
+    </div>
+</div>
