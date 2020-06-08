@@ -154,6 +154,7 @@ import {TransactionSalesReturnByCustomerComponent} from './transaction-sales-ret
 import {TransactionStvStoreTransferComponent} from './transaction-stv-store-transfer/transaction-stv-store-transfer.component';
 import { TransactionStoreAdjustmentComponent } from './transaction-store-adjustment/transaction-store-adjustment.component';
 import { TransactionDonationsComponent } from './transaction-donations/transaction-donations.component';
+import {DeleteListModalComponent} from './delete-list-modal/delete-list-modal.component';
 
 @NgModule({
     declarations: [
@@ -290,7 +291,8 @@ import { TransactionDonationsComponent } from './transaction-donations/transacti
         TransactionSalesReturnByCustomerComponent,
         TransactionStvStoreTransferComponent,
         TransactionStoreAdjustmentComponent,
-        TransactionDonationsComponent
+        TransactionDonationsComponent,
+        DeleteListModalComponent
     ],
     imports: [
         CommonModule,

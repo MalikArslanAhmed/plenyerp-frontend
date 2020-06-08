@@ -5,6 +5,7 @@ import {DesignationCreateComponent} from '../designation-create/designation-crea
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../shared/services/contact-info.service';
 import {PageEvent} from '@angular/material/paginator';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-designation-list',
@@ -50,7 +51,18 @@ export class DesignationListComponent implements OnInit {
             }
         });
     }
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteDesignation(items.id);
+            }
+        });
 
+    }
 
     deleteDesignation(id) {
         this.contactInfoService.deleteDesignation(id).subscribe(data => {
