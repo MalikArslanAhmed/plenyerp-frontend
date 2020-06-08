@@ -27,8 +27,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Supplier ID</mat-label>
-                                    <input matInput formControlName="supplierId" required>
-                                    <mat-error>Title is required!</mat-error>
+                                    <input matInput formControlName="supplierId">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -46,8 +45,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Supplier Address</mat-label>
-                                    <input matInput formControlName="supplierAddress" required>
-                                    <mat-error>Title is required!</mat-error>
+                                    <input matInput formControlName="supplierAddress">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -65,8 +63,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Details</mat-label>
-                                    <input matInput formControlName="details" required>
-                                    <mat-error>Detail is required!</mat-error>
+                                    <input matInput formControlName="details">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -95,13 +92,12 @@
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="6" rowHeight="100px" class="m-10px">
+                    <mat-grid-list cols="6" rowHeight="100px">
                         <mat-grid-tile>
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Item Id</mat-label>
-                                    <input matInput formControlName="itemId" required>
-                                    <mat-error>Item Id is required!</mat-error>
+                                    <input matInput formControlName="itemId" #itemId>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -109,7 +105,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Description</mat-label>
-                                    <input matInput formControlName="description">
+                                    <input matInput formControlName="description" #description>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -117,7 +113,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Unit of measures</mat-label>
-                                    <input matInput formControlName="unitOfMeasures">
+                                    <input matInput formControlName="unitOfMeasures" #unitOfMeasures>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -125,7 +121,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Quantity</mat-label>
-                                    <input matInput formControlName="quantity">
+                                    <input matInput formControlName="quantity" #quantity>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -133,13 +129,16 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Unit Cost</mat-label>
-                                    <input matInput formControlName="unitCost">
+                                    <input matInput formControlName="unitCost" #unitCost>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile>
                             <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
-                                <button mat-raised-button class="mat-accent mr-16 mt--20px">Add Item</button>
+                                <button mat-raised-button class="mat-accent mr-16 mt--20px"
+                                        (click)="addItem(itemId.value, description.value, unitOfMeasures.value, quantity.value, unitCost.value)">
+                                    Add Item
+                                </button>
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list>
@@ -154,47 +153,46 @@
                                 <th>Quantity</th>
                                 <th>Unit Cost</th>
                                 <th>Value</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
+                            <tbody *ngIf="itemsArr && itemsArr.length > 0; else noItemToShow">
+                            <tr *ngFor="let item of itemsArr; let i = index">
                                 <td>
-                                    <span class="text-truncate">
-                                        1.
-                                    </span>
+                                    <span class="text-truncate">{{i + 1}}.</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">
-                                        1
-                                    </span>
+                                    <span class="text-truncate">{{item?.id}}</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">
-                                        Abc New
-                                    </span>
+                                    <span class="text-truncate">{{item?.description}}</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">
-                                        Kilogram
-                                    </span>
+                                    <span class="text-truncate">{{item?.unitOfMeasures}}</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">
-                                        10
-                                    </span>
+                                    <span class="text-truncate">{{item?.quantity}}</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">
-                                        10
-                                    </span>
+                                    <span class="text-truncate">{{item?.unitCost}}</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">
-                                        10
-                                    </span>
+                                    <span class="text-truncate">{{item?.value}}</span>
+                                </td>
+                                <td>
+                                    <span class="material-icons delete-item cursor-pointer" (click)="deleteItem(i)">delete</span>
                                 </td>
                             </tr>
                             </tbody>
+                            <ng-template #noItemToShow>
+                                <tbody>
+                                <tr>
+                                    <td colspan="10" class="text-center">
+                                        <span class="text-truncate">No data to show</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </ng-template>
                         </table>
                     </mat-grid-list>
                     <mat-grid-list cols="4" rowHeight="100px" class="mt-4">

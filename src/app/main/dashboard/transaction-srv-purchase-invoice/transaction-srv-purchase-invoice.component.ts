@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {AlertService} from "../../../shared/services/alert.service";
 
 @Component({
     selector: 'app-transaction-srv-purchase-invoice',
@@ -11,8 +12,9 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     srvPurchaseInvocieForm: FormGroup;
+    itemsArr = [];
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private alertService: AlertService) {
     }
 
     ngOnInit(): void {
@@ -34,10 +36,46 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             'description': [''],
             'unitOfMeasures': [''],
             'quantity': [''],
-            'unitSellingPrice': [''],
+            'unitCost': [''],
             'totalValuesInWords': [''],
             'subTotal': [''],
             'total': ['']
         });
+    }
+
+    addItem(itemId, description, unitOfMeasures, quantity, unitCost) {
+        let repeatItemFound = false;
+        if (this.itemsArr && this.itemsArr.length > 0) {
+            this.itemsArr.forEach(item => {
+                if (parseInt(item.id) === parseInt(itemId)) {
+                    repeatItemFound = true;
+                }
+            });
+        }
+        if (!repeatItemFound) {
+            this.itemsArr.push({
+                'id': itemId,
+                'description': description,
+                'unitOfMeasures': unitOfMeasures,
+                'quantity': quantity,
+                'unitCost': unitCost,
+                'value': parseInt(quantity) * parseInt(unitCost),
+                'totalValue': parseInt(quantity) * parseInt(unitCost)
+            });
+            this.srvPurchaseInvocieForm.patchValue({
+                'itemId': '',
+                'description': '',
+                'unitOfMeasures': '',
+                'quantity': '',
+                'unitCost': ''
+            });
+        } else {
+            this.alertService.showErrors('Item already added');
+        }
+        console.log('this.itemsArr', this.itemsArr);
+    }
+
+    deleteItem(index) {
+        this.itemsArr.splice(index, 1);
     }
 }

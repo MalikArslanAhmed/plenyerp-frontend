@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
+import {AlertService} from "../../../shared/services/alert.service";
 
 @Component({
     selector: 'app-transaction-sales-invoice',
@@ -11,8 +12,9 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 })
 export class TransactionSalesInvoiceComponent implements OnInit {
     salesInvoiceForm: FormGroup;
+    itemsArr = [];
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private alertService: AlertService) {
     }
 
     ngOnInit(): void {
@@ -39,5 +41,41 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             'subTotal': [''],
             'total': ['']
         });
+    }
+
+    addItem(itemId, description, unitOfMeasures, quantity, unitSellingPrice) {
+        let repeatItemFound = false;
+        if (this.itemsArr && this.itemsArr.length > 0) {
+            this.itemsArr.forEach(item => {
+                if (parseInt(item.id) === parseInt(itemId)) {
+                    repeatItemFound = true;
+                }
+            });
+        }
+        if (!repeatItemFound) {
+            this.itemsArr.push({
+                'id': itemId,
+                'description': description,
+                'unitOfMeasures': unitOfMeasures,
+                'quantity': quantity,
+                'unitSellingPrice': unitSellingPrice,
+                'value': parseInt(quantity) * parseInt(unitSellingPrice),
+                'totalValue': parseInt(quantity) * parseInt(unitSellingPrice)
+            });
+            this.salesInvoiceForm.patchValue({
+                'itemId': '',
+                'description': '',
+                'unitOfMeasures': '',
+                'quantity': '',
+                'unitSellingPrice': ''
+            });
+        } else {
+            this.alertService.showErrors('Item already added');
+        }
+        console.log('this.itemsArr', this.itemsArr);
+    }
+
+    deleteItem(index) {
+        this.itemsArr.splice(index, 1);
     }
 }

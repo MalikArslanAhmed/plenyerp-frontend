@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
+import {AlertService} from "../../../shared/services/alert.service";
 
 @Component({
     selector: 'app-transaction-sales-return-by-customer',
@@ -11,8 +12,8 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 })
 export class TransactionSalesReturnByCustomerComponent implements OnInit {
     salesReturnByCustomerForm: FormGroup;
-
-    constructor(private fb: FormBuilder) {
+    itemsArr = [];
+    constructor(private fb: FormBuilder, private alertService: AlertService) {
     }
 
     ngOnInit(): void {
@@ -34,11 +35,60 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
             'description': [''],
             'unitOfMeasures': [''],
             'quantity': [''],
-            'unitSellingPrice': [''],
+            'unitPrice': [''],
             'unitCost': [''],
             'totalValuesInWords': [''],
             'subTotal': [''],
             'total': ['']
+        });
+    }
+
+    addItem(itemId, description, unitOfMeasures, quantity, unitPrice, unitCost) {
+        let repeatItemFound = false;
+        if (this.itemsArr && this.itemsArr.length > 0) {
+            this.itemsArr.forEach(item => {
+                if (parseInt(item.id) === parseInt(itemId)) {
+                    repeatItemFound = true;
+                }
+            });
+        }
+        if (!repeatItemFound) {
+            this.itemsArr.push({
+                'id': itemId,
+                'description': description,
+                'unitOfMeasures': unitOfMeasures,
+                'quantity': quantity,
+                'unitPrice': unitPrice,
+                'unitCost': unitCost,
+                'totalValue': parseInt(quantity) * parseInt(unitPrice)
+            });
+            this.salesReturnByCustomerForm.patchValue({
+                'itemId': '',
+                'description': '',
+                'unitOfMeasures': '',
+                'quantity': '',
+                'unitPrice': '',
+                'unitCost': '',
+                'totalValue': '',
+            });
+        } else {
+            this.alertService.showErrors('Item already added');
+        }
+        console.log('this.itemsArr', this.itemsArr);
+    }
+
+    deleteItem(index) {
+        this.itemsArr.splice(index, 1);
+    }
+
+    editItem(index) {
+        this.salesReturnByCustomerForm.patchValue({
+            'itemId': this.itemsArr[index].id,
+            'description': this.itemsArr[index].description,
+            'unitOfMeasures': this.itemsArr[index].unitOfMeasures,
+            'quantity': this.itemsArr[index].quantity,
+            'unitPrice': this.itemsArr[index].unitPrice,
+            'unitCost': this.itemsArr[index].unitCost
         });
     }
 }
