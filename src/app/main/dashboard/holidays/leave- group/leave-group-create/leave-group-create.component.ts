@@ -42,7 +42,7 @@ export class LeaveGroupCreateComponent implements OnInit {
     refresh() {
         this.leaveGroup = this.fb.group({
             name: ['', Validators.required],
-            isActive: [false, Validators.required],
+            isActive: [true, Validators.required],
         });
     }
 

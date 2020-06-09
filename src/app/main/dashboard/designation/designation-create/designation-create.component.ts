@@ -42,7 +42,7 @@ export class DesignationCreateComponent implements OnInit {
     refresh() {
         this.designationForm = this.fb.group({
             name: ['', Validators.required],
-            isActive: [false, Validators.required],
+            isActive: [true, Validators.required],
         });
     }
 

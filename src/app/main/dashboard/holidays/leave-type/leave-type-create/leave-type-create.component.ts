@@ -45,7 +45,7 @@ export class LeaveTypeCreateComponent implements OnInit {
             isCarryOverUnusedLeave: [false, Validators.required],
             isPaidLeave: [false, Validators.required],
             isCalenderDays: [false, Validators.required],
-            isActive: [false, Validators.required],
+            isActive: [true, Validators.required],
             autoCreate: [false, Validators.required]
         });
     }

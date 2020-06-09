@@ -22,6 +22,10 @@
                     <input matInput placeholder="Short Name" formControlName="shortName" name="shortName" required>
                 </mat-form-field>
             </div>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+                <mat-label style="margin-right: 20px">Is Active</mat-label>
+            </div>
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-checkbox name="autoCreate" formControlName="autoCreate">Auto create in leave ?</mat-checkbox>
             </div>
@@ -33,9 +37,6 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-checkbox name="isCalenderDays" formControlName="isCalenderDays">Calender days ?</mat-checkbox>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-checkbox name="isActive" formControlName="isActive">Active ?</mat-checkbox>
             </div>
         </form>
     </div>
