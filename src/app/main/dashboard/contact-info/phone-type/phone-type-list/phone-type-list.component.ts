@@ -5,6 +5,7 @@ import {PhoneTypeCreateComponent} from '../phone-type-create/phone-type-create.c
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-phone-type-list',
@@ -51,6 +52,18 @@ export class PhoneTypeListComponent implements OnInit {
         });
     }
 
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deletePhoneType(items.id);
+            }
+        });
+
+    } 
 
     deletePhoneType(id) {
         this.contactInfoService.deletePhoneType(id).subscribe(data => {

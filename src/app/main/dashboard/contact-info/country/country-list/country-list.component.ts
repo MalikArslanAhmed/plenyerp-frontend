@@ -5,6 +5,7 @@ import {CountryCreateComponent} from '../country-create/country-create.component
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-country-list',
@@ -52,6 +53,18 @@ export class CountryListComponent implements OnInit {
     }
 
 
+    deleteItemModel(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteCountry(items.id);
+            }
+        });
+
+    } 
     deleteCountry(id) {
         this.contactInfoService.deleteCountry(id).subscribe(data => {
             if (data) {

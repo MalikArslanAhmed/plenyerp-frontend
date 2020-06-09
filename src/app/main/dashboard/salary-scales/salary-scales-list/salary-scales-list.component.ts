@@ -8,6 +8,7 @@ import {SalaryScalesService} from '../../../../shared/services/salary-scales.ser
 import {GradeLevelCreateComponent} from '../grade-level-create/grade-level-create.component';
 import {MatTabChangeEvent, MatTabGroup} from '@angular/material/tabs';
 import {StepLevelCreateComponent} from '../step-level-create/step-level-create.component';
+import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-salary-scales-list',
@@ -95,6 +96,18 @@ export class SalaryScalesListComponent implements OnInit {
         });
     }
 
+    deleteItemModalSalaryScale(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteSalaryScales(items.id);
+            }
+        });
+
+    } 
 
     deleteSalaryScales(id) {
         this.salaryScales.forEach(v => {
@@ -235,6 +248,19 @@ export class SalaryScalesListComponent implements OnInit {
         });
     }
 
+    deleteItemModalGradeLevel(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteGradeLevel(items.id);
+            }
+        });
+
+    } 
+
     deleteGradeLevel(id) {
         this.gradeLevels.forEach(v => {
             if (id === v.id) {
@@ -287,6 +313,19 @@ export class SalaryScalesListComponent implements OnInit {
             this.isGlSteps = true;
         });
     }
+
+    deleteItemModalStepLevel(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteStepLevel(items.id);
+            }
+        });
+
+    } 
 
     deleteStepLevel(id) {
         this.salaryScalesService.deleteStepLevel(id).subscribe(data => {

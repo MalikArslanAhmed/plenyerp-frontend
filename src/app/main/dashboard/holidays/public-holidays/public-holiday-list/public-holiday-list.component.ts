@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {PublicHolidayCreateComponent} from '../public-holiday-create/public-holiday-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-public-holiday-list',
@@ -40,6 +41,19 @@ export class PublicHolidayListComponent implements OnInit {
             }
         });
     }
+
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deletePublicHoliday(items.id);
+            }
+        });
+
+    } 
 
 
     deletePublicHoliday(id) {

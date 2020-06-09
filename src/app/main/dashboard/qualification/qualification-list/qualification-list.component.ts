@@ -5,6 +5,7 @@ import {QualificationCreateComponent} from '../qualification-create/qualificatio
 import {FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-qualification-list',
@@ -47,6 +48,19 @@ export class QualificationListComponent implements OnInit {
             }
         });
     }
+
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteQualification(items.id);
+            }
+        });
+
+    } 
 
     deleteQualification(id) {
         this.qualificationService.deleteQualification(id).subscribe(data => {

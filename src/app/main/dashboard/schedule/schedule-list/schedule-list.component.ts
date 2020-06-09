@@ -5,6 +5,7 @@ import {ScheduleService} from '../../../../shared/services/schedule.service';
 import {ScheduleCreateComponent} from '../schedule-create/schedule-create.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-schedule-list',
@@ -48,6 +49,20 @@ export class ScheduleListComponent implements OnInit {
             this.pagination.total = data.total;
         });
     }
+
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteSchedule(items.id);
+            }
+        });
+
+    } 
+
 
     deleteSchedule(id) {
         this.scheduleService.deleteSchedule(id).subscribe(data => {

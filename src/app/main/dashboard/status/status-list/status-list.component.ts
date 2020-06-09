@@ -5,6 +5,7 @@ import {StatusService} from '../../../../shared/services/status.service';
 import {StatusCreateComponent} from '../status-create/status-create.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-status-list',
@@ -48,6 +49,19 @@ export class StatusListComponent implements OnInit {
             this.pagination.total = data.total;
         });
     }
+
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteStatus(items.id);
+            }
+        });
+
+    } 
 
     deleteStatus(id) {
         this.statusService.deleteStatus(id).subscribe(data => {

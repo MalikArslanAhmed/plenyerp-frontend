@@ -5,6 +5,7 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 import {StoreSetupStoresCreateComponent} from '../store-setup-stores-create/store-setup-stores-create.component';
 import {StoreSetupStoresService} from 'app/shared/services/store-setup-stores.service';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-store-setup-stores-list',
@@ -48,6 +49,18 @@ export class StoreSetupStoresListComponent implements OnInit {
         });
     }
 
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteStore(items.id);
+            }
+        });
+
+    } 
     deleteStore(id) {
         this.storeSetupStoresService.deleteStoreSetupStore(id).subscribe(data => {
             if (data) {
