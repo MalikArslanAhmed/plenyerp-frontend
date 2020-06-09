@@ -27,8 +27,9 @@
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-checkbox name="isRepeatYearly" formControlName="isRepeatYearly">Repeat Yearly ?</mat-checkbox>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="isRepeatYearly"></mat-slide-toggle>
+                <mat-label>Repeat Yearly ?</mat-label>
             </div>
         </form>
     </div>
