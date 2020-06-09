@@ -5,6 +5,7 @@ import {ManagersCreateComponent} from "../managers-create/managers-create.compon
 import {FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {PageEvent} from '@angular/material/paginator';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
   selector: 'app-managers-list',
@@ -48,13 +49,25 @@ export class ManagersListComponent implements OnInit {
         this.pagination.total = data.total;
     });
 }
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteManagers(items.id);
+            }
+        });
+
+    }
 
 deleteManagers(id) {
     this.managersService.deleteManager(id).subscribe(data => {
         if (data) {
             this.getManagers();
         }
-    })
+    });
 }
 
 editManagers(manager) {
