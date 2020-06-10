@@ -31,6 +31,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MomentDatePipe} from "./shared/pipes/moment-date.pipe";
 import {SharedModule} from './shared/shared.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {NumberToWordsPipe} from './shared/pipes/number-to-word.pipe';
 
 const appRoutes: Routes = [
     {
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
-        MomentDatePipe
+        MomentDatePipe,
+        NumberToWordsPipe
     ],
     imports: [
         BrowserModule,

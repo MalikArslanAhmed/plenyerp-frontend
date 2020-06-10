@@ -8,6 +8,7 @@ import {ApplicableTaxesComponent} from '../applicable-taxes/applicable-taxes.com
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
 import {StoreSetupUnitOfMeasuresService} from "../../../shared/services/store-setup-unit-of-measures.service";
+import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
 
 @Component({
     selector: 'app-transaction-srv-purchase-invoice',
@@ -221,6 +222,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     }
 
     setTotals() {
+        let numberToWords = new NumberToWordsPipe();
         if (this.itemsArr && this.itemsArr.length > 0) {
             let subTotal = 0;
             let totalTaxes = 0;
@@ -231,13 +233,15 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             this.srvPurchaseInvocieForm.patchValue({
                 'subTotal': subTotal,
                 'totalTaxes': totalTaxes,
-                'total': subTotal + totalTaxes
+                'total': subTotal + totalTaxes,
+                'totalValuesInWords': numberToWords.transform(subTotal + totalTaxes)
             });
         } else {
             this.srvPurchaseInvocieForm.patchValue({
                 'subTotal': 0,
                 'totalTaxes': 0,
-                'total': 0
+                'total': 0,
+                'totalValuesInWords': '-'
             });
         }
     }

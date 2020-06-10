@@ -8,6 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
 import {StoreSetupUnitOfMeasuresService} from "../../../shared/services/store-setup-unit-of-measures.service";
+import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
 
 @Component({
     selector: 'app-transaction-sales-invoice',
@@ -219,6 +220,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
     }
 
     setTotals() {
+        let numberToWords = new NumberToWordsPipe();
         if (this.itemsArr && this.itemsArr.length > 0) {
             let subTotal = 0;
             let totalTaxes = 0;
@@ -229,13 +231,15 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             this.salesInvoiceForm.patchValue({
                 'subTotal': subTotal,
                 'totalTaxes': totalTaxes,
-                'total': subTotal + totalTaxes
+                'total': subTotal + totalTaxes,
+                'totalValuesInWords': numberToWords.transform(subTotal + totalTaxes)
             });
         } else {
             this.salesInvoiceForm.patchValue({
                 'subTotal': 0,
                 'totalTaxes': 0,
-                'total': 0
+                'total': 0,
+                'totalValuesInWords': '-'
             });
         }
     }

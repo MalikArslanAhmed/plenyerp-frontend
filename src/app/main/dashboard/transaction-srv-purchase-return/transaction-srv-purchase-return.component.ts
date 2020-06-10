@@ -6,6 +6,7 @@ import {TransactionService} from "../../../shared/services/transaction.service";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
 import {StoreSetupUnitOfMeasuresService} from "../../../shared/services/store-setup-unit-of-measures.service";
+import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
 
 @Component({
     selector: 'app-transaction-srv-purchase-return',
@@ -191,6 +192,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
     }
 
     setTotals() {
+        let numberToWords = new NumberToWordsPipe();
         if (this.itemsArr && this.itemsArr.length > 0) {
             let subTotal = 0;
             this.itemsArr.forEach(item => {
@@ -198,12 +200,14 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             });
             this.srvPurchaseReturnForm.patchValue({
                 'subTotal': subTotal,
-                'total': subTotal
+                'total': subTotal,
+                'totalValuesInWords': numberToWords.transform(subTotal)
             });
         } else {
             this.srvPurchaseReturnForm.patchValue({
                 'subTotal': 0,
-                'total': 0
+                'total': 0,
+                'totalValuesInWords': '-'
             });
         }
     }
