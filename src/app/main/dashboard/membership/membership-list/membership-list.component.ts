@@ -5,6 +5,7 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 import {MembershipCreateComponent} from '../membership-create/membership-create.component';
 import {MembershipService} from '../../../../shared/services/membership.service';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-membership-list',
@@ -48,6 +49,20 @@ export class MembershipListComponent implements OnInit {
             this.pagination.total = data.total;
         });
     }
+
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteMembership(items.id);
+            }
+        });
+
+    } 
+
 
     deleteMembership(id) {
         this.membershipService.deleteMembership(id).subscribe(data => {

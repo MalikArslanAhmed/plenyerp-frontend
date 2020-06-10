@@ -41,7 +41,7 @@ export class PhoneTypeCreateComponent implements OnInit {
   refresh() {
     this.phoneTypeForm = this.fb.group({
       name: ['', Validators.required],
-      isActive : [false]
+      isActive : [true, Validators.required]
     });
   }
 

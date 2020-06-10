@@ -5,6 +5,7 @@ import {LgaCreateComponent} from '../lga-create/lga-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-lga-list',
@@ -52,6 +53,18 @@ export class LgaListComponent implements OnInit {
     }
 
 
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteLga(items.id);
+            }
+        });
+
+    } 
     deleteLga(id) {
         this.contactInfoService.deleteLga(id).subscribe(data => {
             if (data) {

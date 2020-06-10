@@ -320,7 +320,7 @@ export class AppUrl {
     }
 
     static DELETE_STATE(id?): string {
-        return AppUrl.API_URL + 'public-holidays/' + id;
+        return AppUrl.API_URL + 'states/' + id;
     }
 
     static DELETE_LGA(id?): string {

@@ -28,23 +28,23 @@
                     <input matInput formControlName="numberOfSteps" name="numberOfSteps" required>
                 </mat-form-field>
             </div>
-
-
-            <div fxLayout="row" fxLayoutAlign="start start">
-                    <mat-checkbox name="active" formControlName="active">Active ?</mat-checkbox>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+                <mat-label>Is Active</mat-label>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-checkbox name="isAutomaticCreate" formControlName="isAutomaticCreate">Auto create levels and steps</mat-checkbox>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="isAutomaticCreate"></mat-slide-toggle>
+                <mat-label>Auto create levels and steps</mat-label>
             </div>
             <ng-container *ngIf="salaryScalesForm.get('isAutomaticCreate').value === true ? salaryScalesForm.get('isAutomaticCreate').value === true : salaryScalesForm.get('retireType').patchValue('')">
                 <div fxLayout="row" fxLayoutAlign="start start">
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>Select Retire Types</mat-label>
-                        <select  name="retireType" formControlName="retireType" matNativeControl>
-                            <option *ngFor="let retireTypeData of retireTypesData" [value]="retireTypeData.value">
+                        <mat-select  formControlName="retireType" matNativeControl>
+                            <mat-option *ngFor="let retireTypeData of retireTypesData" [value]="retireTypeData.value">
                                 {{retireTypeData.name}}
-                            </option>
-                        </select>
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </ng-container>

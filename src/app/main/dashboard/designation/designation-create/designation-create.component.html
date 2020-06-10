@@ -16,8 +16,9 @@
                     <input matInput placeholder="Name" formControlName="name" name="name" required cdk-focus-start>
                 </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-checkbox name="isActive" formControlName="isActive">Active ?</mat-checkbox>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+                <mat-label>Is Active</mat-label>
             </div>
         </form>
     </div>

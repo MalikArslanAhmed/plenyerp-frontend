@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class AppConstants {
     static ROLE_ID_ADMIN = 1;
+    static ROLE_ID_HR = 7;
+    static ROLE_ID_INVENTORY = 3;
 
     static maritalStatuses = [
         {

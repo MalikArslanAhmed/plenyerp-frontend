@@ -4,7 +4,8 @@ import {AppConstants} from '../shared/constants/app-constants';
 export const navigation: FuseNavigation[] = [
     {
         id: 'main-actions',
-        title: 'Main Actions',
+        // title: 'Main Actions',
+        title: '',
         // translate: 'NAV.APPLICATIONS',
         type: 'group',
         icon: 'apps',
@@ -13,7 +14,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'employees-management',
                 title: 'Employees Management',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'supervisor_account',
@@ -55,7 +56,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'training-management',
                 title: 'Training Management',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'watch_later',
@@ -64,7 +65,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'access-control',
                 title: 'Access Control',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'settings_applications',
@@ -74,10 +75,11 @@ export const navigation: FuseNavigation[] = [
     },
     {
         id: 'masters',
-        title: 'Masters (Definitions)',
+        // title: 'Masters (Definitions)',
+        title: '',
         // translate: 'NAV.APPLICATIONS',
         type: 'group',
-        roles: [],
+        roles: [AppConstants.ROLE_ID_HR],
         children: [
             {
                 id: 'company-information',
@@ -85,7 +87,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'account_balance',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 children: [
                     {
                         id: 'work-location',
@@ -116,7 +118,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'work',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 children: [
                     {
                         id: 'designation',
@@ -151,7 +153,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'contact-info',
                 title: 'Contact Info',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'perm_contact_calendar',
@@ -203,7 +205,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'holiday',
                 title: 'Holidays',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'calendar_today',
@@ -234,7 +236,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'qualifications',
                 title: 'Qualifications',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'school',
@@ -279,7 +281,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'extended-profile',
                 title: 'Extended profile',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'person_pin',
@@ -324,7 +326,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'organizations',
                 title: 'Organizations',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'business',
@@ -348,7 +350,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'store-setup',
                 title: 'Store Setup',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_INVENTORY],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'store',
@@ -386,7 +388,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'transaction',
                 title: 'Transaction',
-                roles: [],
+                roles: [AppConstants.ROLE_ID_INVENTORY],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'insert_chart',

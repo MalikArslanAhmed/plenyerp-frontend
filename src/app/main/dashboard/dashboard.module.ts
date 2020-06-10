@@ -154,8 +154,8 @@ import {TransactionSalesReturnByCustomerComponent} from './transaction-sales-ret
 import {TransactionStvStoreTransferComponent} from './transaction-stv-store-transfer/transaction-stv-store-transfer.component';
 import {TransactionStoreAdjustmentComponent} from './transaction-store-adjustment/transaction-store-adjustment.component';
 import {TransactionDonationsComponent} from './transaction-donations/transaction-donations.component';
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import { ApplicableTaxesComponent } from './applicable-taxes/applicable-taxes.component';
+import {ApplicableTaxesComponent} from './applicable-taxes/applicable-taxes.component';
+import {DeleteListModalComponent} from './delete-list-modal/delete-list-modal.component';
 
 @NgModule({
     declarations: [
@@ -293,7 +293,8 @@ import { ApplicableTaxesComponent } from './applicable-taxes/applicable-taxes.co
         TransactionStvStoreTransferComponent,
         TransactionStoreAdjustmentComponent,
         TransactionDonationsComponent,
-        ApplicableTaxesComponent
+        ApplicableTaxesComponent,
+        DeleteListModalComponent
     ],
     imports: [
         CommonModule,
@@ -321,8 +322,7 @@ import { ApplicableTaxesComponent } from './applicable-taxes/applicable-taxes.co
         MatRadioModule,
         MaterialFileInputModule,
         SharedModule,
-        MatPaginatorModule,
-        MatAutocompleteModule
+        MatPaginatorModule
     ]
 })
 export class DashboardModule {

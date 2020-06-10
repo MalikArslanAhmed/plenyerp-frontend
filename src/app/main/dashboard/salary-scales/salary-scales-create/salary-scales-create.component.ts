@@ -61,7 +61,7 @@ export class SalaryScalesCreateComponent implements OnInit {
             name: ['', Validators.required],
             numberOfLevels: ['', Validators.required],
             numberOfSteps: ['', Validators.required],
-            active: [''],
+            isActive: [true, Validators.required],
             isAutomaticCreate: [false],
             retireType: ['', Validators.required],
         });
@@ -81,12 +81,12 @@ export class SalaryScalesCreateComponent implements OnInit {
                 name: this.updateData.salaryScale.name,
                 numberOfLevels: this.updateData.salaryScale.numberOfLevels,
                 numberOfSteps: this.updateData.salaryScale.numberOfSteps,
-                active: this.updateData.salaryScale.active,
+                isActive: this.updateData.salaryScale.isActive,
                 isAutomaticCreate: this.updateData.salaryScale.isAutomaticCreate,
             });
             this.salaryScalesForm.get('numberOfLevels').disable();
             this.salaryScalesForm.get('numberOfSteps').disable();
-            this.salaryScalesForm.get('active').disable();
+            this.salaryScalesForm.get('isActive').disable();
             this.salaryScalesForm.get('isAutomaticCreate').disable();
             this.salaryScalesForm.get('retireType').disable();
         }

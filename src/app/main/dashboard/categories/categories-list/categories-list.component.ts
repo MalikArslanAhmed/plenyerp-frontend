@@ -5,6 +5,7 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 import {CategoriesService} from "../../../../shared/services/categories.service";
 import {CategoriesCreateComponent} from '../categories-create/categories-create.component';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-categories-list',
@@ -48,6 +49,19 @@ export class CategoriesListComponent implements OnInit {
             this.pagination.total = data.total;
         });
     }
+
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteCategory(items.id);
+            }
+        });
+
+    } 
 
     deleteCategory(id) {
         this.categoriesService.deleteCategory(id).subscribe(data => {

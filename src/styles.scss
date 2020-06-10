@@ -3,3 +3,10 @@
 
 // Import app.theme.scss
 @import "app/app.theme";
+
+.delete-items-dialog{
+    .mat-dialog-container{
+        width: 370px;
+        height: auto;
+    }
+}

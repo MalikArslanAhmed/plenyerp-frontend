@@ -7,6 +7,7 @@ import {FormGroup} from '@angular/forms';
 import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {MatDialog} from '@angular/material/dialog';
 import {UpdateWorkLocationsComponent} from './update-work-locations/update-work-locations.component';
+import {DeleteListModalComponent} from '../delete-list-modal/delete-list-modal.component';
 
 interface WorkLocationNode {
     id: number;
@@ -107,12 +108,24 @@ export class WorkLocationsComponent implements OnInit {
             this.getWorkLocations();
         });
     }
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteItem(items.id);
+            }
+        });
 
-    deleteItem(node) {
-        this.workLocationService.deleteWorkLocation(node.id).subscribe(data => {
+    }
+
+    deleteItem(nodeId) {
+        this.workLocationService.deleteWorkLocation(nodeId).subscribe(data => {
             if (data) {
                 this.getWorkLocations();
             }
-        })
+        });
     }
 }

@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {LeaveGroupCreateComponent} from '../leave-group-create/leave-group-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'leave-group-list',
@@ -41,6 +42,18 @@ export class LeaveGroupListComponent implements OnInit {
         });
     }
 
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteLeaveGroup(items.id);
+            }
+        });
+
+    } 
 
     deleteLeaveGroup(id) {
         this.contactInfoService.deleteLeavesGroup(id).subscribe(data => {

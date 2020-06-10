@@ -41,7 +41,7 @@ export class AddressTypeCreateComponent implements OnInit {
   refresh() {
     this.addressTypeForm = this.fb.group({
       name: ['', Validators.required],
-      isActive: [false]
+      isActive: [true, Validators.required]
     });
   }
 

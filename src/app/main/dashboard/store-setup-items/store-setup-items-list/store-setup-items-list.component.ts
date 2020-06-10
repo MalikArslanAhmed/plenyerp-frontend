@@ -6,6 +6,7 @@ import {StoreSetupItemsCreateComponent} from '../store-setup-items-create/store-
 import {StoreSetupItemsService} from '../../../../shared/services/store-setup-items.service';
 import {CategoriesListSelectComponent} from '../categories-list-select/categories-list-select.component';
 import {PageEvent} from '@angular/material/paginator';
+import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-store-setup-items-list',
@@ -58,6 +59,18 @@ export class StoreSetupItemsListComponent implements OnInit {
         });
     }
 
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteStore(items.id);
+            }
+        });
+
+    } 
     deleteStore(id) {
         this.storeSetupItemsService.deleteStoreSetupItems(id).subscribe(data => {
             if (data) {
