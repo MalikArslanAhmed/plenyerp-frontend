@@ -7,6 +7,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {StoreSetupCategoriesCreateComponent} from './store-setup-categories-create/store-setup-categories-create.component';
 import {StoreSetupCategoriesService} from 'app/shared/services/store-setup-categories.service';
+import { DeleteListModalComponent } from '../delete-list-modal/delete-list-modal.component';
 
 interface CategoriesNode {
     id: number;
@@ -107,9 +108,22 @@ export class StoreSetupCategoriesComponent implements OnInit {
             this.getStoresCategories();
         });
     }
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteItem(items.id);
+            }
+        });
 
-    deleteItem(node) {
-        this.storeSetupCategoriesService.deleteStoreCategories(node.id).subscribe(data => {
+    }
+ 
+
+    deleteItem(nodeId) {
+        this.storeSetupCategoriesService.deleteStoreCategories(nodeId).subscribe(data => {
             if (data) {
                 this.getStoresCategories();
             }
