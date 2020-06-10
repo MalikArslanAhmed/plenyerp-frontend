@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {AlertService} from "../../../shared/services/alert.service";
+import {TransactionService} from "../../../shared/services/transaction.service";
 
 @Component({
     selector: 'app-transaction-donations',
@@ -13,12 +14,14 @@ import {AlertService} from "../../../shared/services/alert.service";
 export class TransactionDonationsComponent implements OnInit {
     donationsForm: FormGroup;
     itemsArr = [];
+    companies = [];
 
-    constructor(private fb: FormBuilder, private alertService: AlertService) {
+    constructor(private fb: FormBuilder, private alertService: AlertService, private transactionService: TransactionService) {
     }
 
     ngOnInit(): void {
         this.refresh();
+        this.getCompanies();
     }
 
     refresh() {
@@ -77,5 +80,12 @@ export class TransactionDonationsComponent implements OnInit {
 
     deleteItem(index) {
         this.itemsArr.splice(index, 1);
+    }
+
+    getCompanies() {
+        this.transactionService.getCompanies({'page': -1}).subscribe(data => {
+            this.companies = data.items;
+            console.log('this.companies', this.companies);
+        });
     }
 }

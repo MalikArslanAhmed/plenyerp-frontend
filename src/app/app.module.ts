@@ -28,8 +28,9 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 // import {DashboardModule} from './main/dashboard/dashboard.module';
 
-import { MomentDatePipe } from "./shared/pipes/moment-date.pipe";
+import {MomentDatePipe} from "./shared/pipes/moment-date.pipe";
 import {SharedModule} from './shared/shared.module';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const appRoutes: Routes = [
     {

@@ -97,6 +97,14 @@ export class AppUrl {
         return AppUrl.API_URL + `qualifications`;
     }
 
+    static GET_COMPANIES(): string {
+        return AppUrl.API_URL + `companies`;
+    }
+
+    static GET_TAXES(): string {
+        return AppUrl.API_URL + `taxes`;
+    }
+
     static GET_STORE_SETUP_STORES(): string {
         return AppUrl.API_URL + `stores`;
     }

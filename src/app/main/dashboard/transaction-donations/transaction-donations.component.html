@@ -26,10 +26,20 @@
                         <mat-grid-tile class="mr-1">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Select Supplier Id</mat-label>
+                                    <select  name="retireType" formControlName="supplierId" matNativeControl>
+                                        <option *ngFor="let company of companies" [value]="company.id">
+                                            {{company.name}}
+                                        </option>
+                                    </select>
+                                </mat-form-field>
+                            </div>
+                            <!--<div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Supplier ID</mat-label>
                                     <input matInput formControlName="supplierId">
                                 </mat-form-field>
-                            </div>
+                            </div>-->
                         </mat-grid-tile>
                         <mat-grid-tile class="ml-1">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">

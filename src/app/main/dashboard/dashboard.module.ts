@@ -152,8 +152,10 @@ import {TransactionSrvPurchaseReturnComponent} from './transaction-srv-purchase-
 import {TransactionSalesInvoiceComponent} from './transaction-sales-invoice/transaction-sales-invoice.component';
 import {TransactionSalesReturnByCustomerComponent} from './transaction-sales-return-by-customer/transaction-sales-return-by-customer.component';
 import {TransactionStvStoreTransferComponent} from './transaction-stv-store-transfer/transaction-stv-store-transfer.component';
-import { TransactionStoreAdjustmentComponent } from './transaction-store-adjustment/transaction-store-adjustment.component';
-import { TransactionDonationsComponent } from './transaction-donations/transaction-donations.component';
+import {TransactionStoreAdjustmentComponent} from './transaction-store-adjustment/transaction-store-adjustment.component';
+import {TransactionDonationsComponent} from './transaction-donations/transaction-donations.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { ApplicableTaxesComponent } from './applicable-taxes/applicable-taxes.component';
 
 @NgModule({
     declarations: [
@@ -290,7 +292,8 @@ import { TransactionDonationsComponent } from './transaction-donations/transacti
         TransactionSalesReturnByCustomerComponent,
         TransactionStvStoreTransferComponent,
         TransactionStoreAdjustmentComponent,
-        TransactionDonationsComponent
+        TransactionDonationsComponent,
+        ApplicableTaxesComponent
     ],
     imports: [
         CommonModule,
@@ -318,7 +321,8 @@ import { TransactionDonationsComponent } from './transaction-donations/transacti
         MatRadioModule,
         MaterialFileInputModule,
         SharedModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatAutocompleteModule
     ]
 })
 export class DashboardModule {
