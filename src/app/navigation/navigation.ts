@@ -8,7 +8,7 @@ export const navigation: FuseNavigation[] = [
         // translate: 'NAV.APPLICATIONS',
         type: 'group',
         icon: 'apps',
-        roles: [AppConstants.ROLE_ID_HR, AppConstants.ROLE_ID_ADMIN],
+        roles: [],
         children: [
             {
                 id: 'employees-management',
@@ -77,7 +77,7 @@ export const navigation: FuseNavigation[] = [
         title: 'Masters (Definitions)',
         // translate: 'NAV.APPLICATIONS',
         type: 'group',
-        roles: [AppConstants.ROLE_ID_HR, AppConstants.ROLE_ID_INVENTORY],
+        roles: [],
         children: [
             {
                 id: 'company-information',

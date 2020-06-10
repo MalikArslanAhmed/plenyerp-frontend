@@ -581,6 +581,10 @@ export class AppUrl {
         return AppUrl.API_URL + path;
     }
 
+    static SEGMENT_WITH_PAGINATION(): string {
+        return AppUrl.API_URL + 'admin';
+    }
+
     static GET_COUNTRY_LIST(): string {
         return AppUrl.API_URL + `countries`;
     }

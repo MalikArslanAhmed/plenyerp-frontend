@@ -38,7 +38,7 @@ export class SegmentsListComponent implements OnInit{
 
     getAllSegmentsList() {
         this.segments = [];
-        this.adminSegmentServices.getAllSegments({page: this.pagination.page}).subscribe(data => {
+        this.adminSegmentServices.getAllSegmentsWithPagination({page: this.pagination.page}).subscribe(data => {
             this.segments = data.items;
             if (this.segments && this.segments.length > 0) {
                 let i = 1;

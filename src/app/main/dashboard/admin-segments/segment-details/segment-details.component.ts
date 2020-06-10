@@ -75,12 +75,14 @@ export class SegmentDetailsComponent implements OnInit {
     ngOnInit(): void {
         this.route.paramMap.subscribe(params => {
             this.segmentId = +params.get('segmentId');
+            console.log('this.segmentId', this.segmentId);
         });
         this.getSegmentList();
     }
 
     getSegmentList() {
         this.adminSegmentServices.getAllSegments(this.segmentId).subscribe(data => {
+            console.log('data', data);
             this.segmentName = data.name;
             this.dataSource.data = [data];
             this.tree.treeControl.expandAll();
