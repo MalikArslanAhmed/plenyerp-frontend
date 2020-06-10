@@ -95,6 +95,7 @@ export class UserProfileComponent implements OnInit {
         if (this.profileForm.valid) {
             this.userProfileService.getUpdate(this.profileForm.value).subscribe(val => {
                 this.getUser();
+                window.location.reload();
             });
         }
 
