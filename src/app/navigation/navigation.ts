@@ -4,12 +4,11 @@ import {AppConstants} from '../shared/constants/app-constants';
 export const navigation: FuseNavigation[] = [
     {
         id: 'main-actions',
-        // title: 'Main Actions',
-        title: '',
+        title: 'Main Actions',
         // translate: 'NAV.APPLICATIONS',
         type: 'group',
         icon: 'apps',
-        roles: [],
+        roles: [AppConstants.ROLE_ID_HR, AppConstants.ROLE_ID_ADMIN],
         children: [
             {
                 id: 'employees-management',
@@ -75,11 +74,10 @@ export const navigation: FuseNavigation[] = [
     },
     {
         id: 'masters',
-        // title: 'Masters (Definitions)',
-        title: '',
+        title: 'Masters (Definitions)',
         // translate: 'NAV.APPLICATIONS',
         type: 'group',
-        roles: [AppConstants.ROLE_ID_HR],
+        roles: [AppConstants.ROLE_ID_HR, AppConstants.ROLE_ID_INVENTORY],
         children: [
             {
                 id: 'company-information',
