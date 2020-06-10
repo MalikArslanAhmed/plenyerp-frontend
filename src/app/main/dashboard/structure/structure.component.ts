@@ -9,6 +9,7 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 import {SalaryScalesService} from "../../../shared/services/salary-scales.service";
 import {SkillService} from "../../../shared/services/skill.service";
 import {DepartmentListSelectComponent} from "./department-list/department-list-select.component";
+import { DeleteListModalComponent } from '../delete-list-modal/delete-list-modal.component';
 
 interface StructureNode {
     id: number;
@@ -261,9 +262,21 @@ export class StructureComponent implements OnInit {
             education: node.education ? node.education : '',
         });
     }
+    deleteItemModal(items) {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteItem(items.id);
+            }
+        });
 
-    deleteItem(node) {
-        this.structureService.deleteJobPosition(node.id).subscribe(data => {
+    }
+
+    deleteItem(nodeId) {
+        this.structureService.deleteJobPosition(nodeId).subscribe(data => {
             if (data) {
                 this.getStructures();
                 this.jobPositionForm.reset();
