@@ -64,19 +64,19 @@ export class EmployeeQualifications implements OnInit {
     }
 
     getCountry() {
-        this.employeeOtherDetailsService.allCountry().subscribe(data => {
+        this.employeeOtherDetailsService.allCountry({'isActive' : 1}).subscribe(data => {
             this.countryOfIssues = data.items;
         });
     }
 
     getCertifications() {
-        this.employeeOtherDetailsService.getCertifications().subscribe(data => {
+        this.employeeOtherDetailsService.getCertifications({'isActive' : 1}).subscribe(data => {
             this.certifications = data.items;
         });
     }
 
     getMajors() {
-        this.employeeOtherDetailsService.getMajors().subscribe(data => {
+        this.employeeOtherDetailsService.getMajors({'isActive' : 1}).subscribe(data => {
             this.majors = data.items;
         });
     }

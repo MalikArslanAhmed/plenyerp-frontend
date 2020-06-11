@@ -51,7 +51,7 @@ export class EmployeeMilitaryService implements OnInit {
         });
     }
    getArmOfService() {
-      this.employeeOtherDetailsService.armOfService().subscribe(data => {
+      this.employeeOtherDetailsService.armOfService({'isActive' : 1}).subscribe(data => {
           this.armOfServices = data.items;
       });
    }

@@ -85,7 +85,7 @@ export class EmployeeCensure implements OnInit {
         });
     }
     getCensure() {
-        this.employeeOtherDetailsService.censure().subscribe(val => {
+        this.employeeOtherDetailsService.censure({'isActive' : 1}).subscribe(val => {
             this.censures = val.items;
         });
     }

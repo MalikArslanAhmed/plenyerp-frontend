@@ -393,13 +393,13 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     getCountries() {
-        this.structureService.getCountries({'page': -1}).subscribe(data => {
+        this.structureService.getCountries({'page': -1, 'isActive' : 1}).subscribe(data => {
             this.countries = data.items;
         });
     }
 
     getCountriesOther() {
-        this.structureService.getCountries({'page': -1}).subscribe(data => {
+        this.structureService.getCountries({'page': -1 ,'isActive' : 1}).subscribe(data => {
             this.countriesOther = data.items;
         });
     }
@@ -546,7 +546,7 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     getSalaryScales() {
-        this.salaryScalesService.getSalaryScales({'page': -1}).subscribe(data => {
+        this.salaryScalesService.getSalaryScales({'page': -1, 'isActive': 1}).subscribe(data => {
             this.salaryScales = data;
         });
     }

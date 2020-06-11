@@ -49,7 +49,7 @@ export class EmployeeMembership implements OnInit {
         });
     }
     getMembership() {
-        this.employeeOtherDetailsService.membership().subscribe(val => {
+        this.employeeOtherDetailsService.membership({'isActive' : 1}).subscribe(val => {
             this.memberships = val.items;
         });
     }

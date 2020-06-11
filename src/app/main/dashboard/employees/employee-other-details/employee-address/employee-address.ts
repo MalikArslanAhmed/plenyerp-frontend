@@ -124,12 +124,12 @@ export class EmployeeAddress implements OnInit {
         });
     }
     getTypeOfAddress() {
-      this.employeeOtherDetailsService.typeOfAddress({}).subscribe(data => {
+      this.employeeOtherDetailsService.typeOfAddress({'isActive' : 1}).subscribe(data => {
           this.typeOfAddress = data.items;
       });
     }
     getCountry() {
-        this.employeeOtherDetailsService.allCountry().subscribe(data => {
+        this.employeeOtherDetailsService.allCountry({'isActive' : 1}).subscribe(data => {
             this.countries = data.items;
         });
     }

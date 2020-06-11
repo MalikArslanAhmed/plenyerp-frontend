@@ -98,13 +98,13 @@ export class EmployeeRelations implements OnInit {
     }
 
     getRelations() {
-        this.employeeOtherDetailsService.getRelations().subscribe(data => {
+        this.employeeOtherDetailsService.getRelations({'isActive' : 1}).subscribe(data => {
             this.relations = data.items;
         });
     }
 
     getCountry() {
-        this.employeeOtherDetailsService.allCountry().subscribe(data => {
+        this.employeeOtherDetailsService.allCountry({'isActive' : 1}).subscribe(data => {
             this.countries = data.items;
         });
     }
