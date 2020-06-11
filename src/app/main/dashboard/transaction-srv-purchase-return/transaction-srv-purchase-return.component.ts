@@ -53,7 +53,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             'refNo': [''],
             'itemId': [''],
             'description': [''],
-            'unitOfMeasures': [''],
+            'unitOfMeasures': [{value: '', disabled: true}],
             'quantity': [''],
             'unitPrice': [''],
             'unitCost': [''],
@@ -208,6 +208,18 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
                 'subTotal': 0,
                 'total': 0,
                 'totalValuesInWords': '-'
+            });
+        }
+    }
+
+    setItemQuantity(itemId) {
+        if (this.storeItems && this.storeItems.length > 0) {
+            this.storeItems.forEach(storeItem => {
+                if (parseInt(storeItem.id) === parseInt(itemId.value)) {
+                    this.srvPurchaseReturnForm.patchValue({
+                        'unitOfMeasures': storeItem.inventoryMeasurement.id
+                    })
+                }
             });
         }
     }

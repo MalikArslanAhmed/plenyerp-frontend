@@ -49,7 +49,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             'refNo': [''],
             'itemId': [''],
             'description': [''],
-            'unitOfMeasures': [''],
+            'unitOfMeasures': [{value: '', disabled: true}],
             'quantity': [''],
             'accountCode': ['']
         });
@@ -143,6 +143,18 @@ export class TransactionStvStoreTransferComponent implements OnInit {
 
     deleteItem(index) {
         this.itemsArr.splice(index, 1);
+    }
+
+    setItemQuantity(itemId) {
+        if (this.storeItems && this.storeItems.length > 0) {
+            this.storeItems.forEach(storeItem => {
+                if (parseInt(storeItem.id) === parseInt(itemId.value)) {
+                    this.stvStoreTransferForm.patchValue({
+                        'unitOfMeasures': storeItem.inventoryMeasurement.id
+                    })
+                }
+            });
+        }
     }
 
     saveStoreTransfer() {

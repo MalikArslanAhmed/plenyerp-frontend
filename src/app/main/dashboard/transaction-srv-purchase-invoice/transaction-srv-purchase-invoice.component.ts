@@ -60,7 +60,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             'refNo': [''],
             'itemId': [''],
             'description': [''],
-            'unitOfMeasures': [''],
+            'unitOfMeasures': [{value: '', disabled: true}],
             'quantity': [''],
             'unitCost': [''],
             'totalValuesInWords': [{value: '', disabled: true}],
@@ -108,9 +108,9 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             let unitOfMeasureName = '';
             if (this.unitOfMeasuresData && this.unitOfMeasuresData.length > 0) {
                 this.unitOfMeasuresData.forEach(unitOfMeasure => {
-                   if (parseInt(unitOfMeasure.id) === parseInt(unitOfMeasures)) {
-                       unitOfMeasureName = unitOfMeasure.name
-                   }
+                    if (parseInt(unitOfMeasure.id) === parseInt(unitOfMeasures)) {
+                        unitOfMeasureName = unitOfMeasure.name
+                    }
                 });
             }
             this.itemsArr.push({
@@ -242,6 +242,18 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 'totalTaxes': 0,
                 'total': 0,
                 'totalValuesInWords': '-'
+            });
+        }
+    }
+
+    setItemQuantity(itemId) {
+        if (this.storeItems && this.storeItems.length > 0) {
+            this.storeItems.forEach(storeItem => {
+                if (parseInt(storeItem.id) === parseInt(itemId.value)) {
+                    this.srvPurchaseInvocieForm.patchValue({
+                        'unitOfMeasures': storeItem.inventoryMeasurement.id
+                    })
+                }
             });
         }
     }

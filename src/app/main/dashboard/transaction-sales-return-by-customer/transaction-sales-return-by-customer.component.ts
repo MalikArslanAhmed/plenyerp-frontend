@@ -53,7 +53,7 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
             'refNo': [''],
             'itemId': [''],
             'description': [''],
-            'unitOfMeasures': [''],
+            'unitOfMeasures': [{value: '', disabled: true}],
             'quantity': [''],
             'unitPrice': [''],
             'unitCost': [''],
@@ -207,6 +207,18 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
                 'subTotal': 0,
                 'total': 0,
                 'totalValuesInWords': '-'
+            });
+        }
+    }
+
+    setItemQuantity(itemId) {
+        if (this.storeItems && this.storeItems.length > 0) {
+            this.storeItems.forEach(storeItem => {
+                if (parseInt(storeItem.id) === parseInt(itemId.value)) {
+                    this.salesReturnByCustomerForm.patchValue({
+                        'unitOfMeasures': storeItem.inventoryMeasurement.id
+                    })
+                }
             });
         }
     }

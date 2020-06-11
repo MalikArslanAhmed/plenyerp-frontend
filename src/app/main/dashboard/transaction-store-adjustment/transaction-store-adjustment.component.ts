@@ -52,7 +52,7 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             'refNo': [''],
             'itemId': [''],
             'description': [''],
-            'unitOfMeasures': [''],
+            'unitOfMeasures': [{value: '', disabled: true}],
             'quantityInSys': [''],
             'quantityPhyCount': [''],
             'quantitySysLessPhy': [''],
@@ -214,6 +214,18 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             'quantitySysLessPhy': this.itemsArr[index].quantitySysLessPhy,
             'unitCostOfDiff': this.itemsArr[index].unitCostOfDiff
         });
+    }
+
+    setItemQuantity(itemId) {
+        if (this.storeItems && this.storeItems.length > 0) {
+            this.storeItems.forEach(storeItem => {
+                if (parseInt(storeItem.id) === parseInt(itemId.value)) {
+                    this.storeAdjustmentForm.patchValue({
+                        'unitOfMeasures': storeItem.inventoryMeasurement.id
+                    })
+                }
+            });
+        }
     }
 
     saveStoreAdjustement() {
