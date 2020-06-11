@@ -5,7 +5,7 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 import {AcdemicMajorCreateComponent} from '../acdemic-major-create/acdemic-major-create.component';
 import {AcademicMajorService} from '../../../../shared/services/academic-major.service';
 import {PageEvent} from '@angular/material/paginator';
-import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-acdemic-major-list',
@@ -25,6 +25,7 @@ export class AcdemicMajorListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
     constructor(private academicMajorService: AcademicMajorService,
                 private _matDialog: MatDialog) {
     }
@@ -60,7 +61,8 @@ export class AcdemicMajorListComponent implements OnInit {
             }
         });
 
-    } 
+    }
+
     deleteAcademicMajor(id) {
         this.academicMajorService.deleteAcademicMajor(id).subscribe(data => {
             if (data) {
@@ -81,6 +83,7 @@ export class AcdemicMajorListComponent implements OnInit {
             this.getAcademicMajors();
         });
     }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getAcademicMajors();

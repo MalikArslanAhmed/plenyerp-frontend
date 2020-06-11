@@ -1,70 +1,70 @@
 <div fxLayout="column" fxLayoutGap="20px" fxFlex="100">
-<mat-table [@animateStagger]="{value:'50'}" [dataSource]="segments">
-    <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let segment">
-            <p class="email text-truncate">
-                {{((pagination.page - 1) * pagination.perpage) + segment.sno}}.
-            </p>
-        </mat-cell>
-    </ng-container>
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="segments">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-sm *matCellDef="let segment">
+                <p class="email text-truncate">
+                    {{((pagination.page - 1) * pagination.perpage) + segment.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let segment">
-            <p class="phone text-truncate">
-                {{segment.name}}
-            </p>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let segment">
+                <p class="phone text-truncate">
+                    {{segment.name}}
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="characterCount">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Character Count</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let segment">
-            <p class="phone text-truncate">
-                {{segment.characterCount}}
-            </p>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="characterCount">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Character Count</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let segment">
+                <p class="phone text-truncate">
+                    {{segment.characterCount}}
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="maxLevels">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Max Level</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let segment">
-            <p class="phone text-truncate">
-                {{segment.maxLevel}}
-            </p>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="maxLevels">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Max Level</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let segment">
+                <p class="phone text-truncate">
+                    {{segment.maxLevel}}
+                </p>
+            </mat-cell>
+        </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let segment">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <button mat-icon-button aria-label="Toggle star" (click)="editSegmentList(segment)"
-                        style="color: blue">
-                    <mat-icon class="editBtn">edit</mat-icon>
-                </button>
-                <button mat-icon-button aria-label="Toggle star"
-                        style="color: blue">
-                    <a [routerLink]="['/dashboard/admin-segment-detail', segment.id]">
-                        <mat-icon class="material-icons">device_hub</mat-icon>
-                    </a>
-                </button>
-                <button mat-icon-button aria-label="Toggle star" (click)="addLevel(segment)"
-                        >
-                    <mat-icon class="addLevelBtn" color="accent">add_circle</mat-icon>
-                </button>
-            </div>
-        </mat-cell>
-    </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let segment">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-icon-button aria-label="Toggle star" (click)="editSegmentList(segment)"
+                            style="color: blue">
+                        <mat-icon class="editBtn">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star"
+                            style="color: blue">
+                        <a [routerLink]="['/dashboard/admin-segment-detail', segment.id]">
+                            <mat-icon class="material-icons">device_hub</mat-icon>
+                        </a>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star" (click)="addLevel(segment)"
+                    >
+                        <mat-icon class="addLevelBtn" color="accent">add_circle</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let segment; columns: displayedColumns;" class="contact"
-             [@animate]="{value:'*',params:{y:'100%'}}">
-    </mat-row>
-</mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let segment; columns: displayedColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
     <mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
                    *ngIf="segments.length > 0"
                    [length]="pagination.total"

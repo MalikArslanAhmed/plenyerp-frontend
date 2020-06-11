@@ -14,20 +14,18 @@
         </span>
         <form [formGroup]="segmentForm">
             <div fxLayout="row" fxLayoutAlign="space-between center">
-                <mat-form-field appearance="outline" fxFlex class="formInput">
+                <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Segment name</mat-label>
                     <input name="name" formControlName="name" matInput required placeholder="Enter Segment Name">
                 </mat-form-field>
-                <!--<mat-form-field appearance="outline" fxFlex class="formInput">-->
-                    <!--<mat-label>Character Count</mat-label>-->
-                    <!--<input name="characterCount" formControlName="characterCount" matInput required placeholder="Enter Character Count">-->
-                <!--</mat-form-field>-->
-                <mat-form-field appearance="outline" fxFlex class="parentCode">
-                    <input name="parentCode" matInput formControlName="parentCode" >
+
+                <mat-form-field appearance="outline" fxFlex>
+                    <input name="parentCode" matInput formControlName="parentCode">
                 </mat-form-field>
-                <mat-form-field appearance="outline" fxFlex class="formInput">
+
+                <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Segment Code</mat-label>
-                    <input class="individualCode" name="individualCode" formControlName="individualCode" matInput>
+                    <input class="individualCode" name="individualCode" matInput formControlName="individualCode">
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start">
