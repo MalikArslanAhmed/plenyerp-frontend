@@ -55,7 +55,6 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             'pono': [''],
             'srDocRefNo': [''],
             'date': [''],
-            'refNo': [''],
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],

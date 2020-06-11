@@ -27,7 +27,8 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Select Supplier Id</mat-label>
-                                    <select formControlName="supplierId" matNativeControl (change)="setSupplierAddress($event.target.value)">
+                                    <select formControlName="supplierId" matNativeControl
+                                            (change)="setSupplierAddress($event.target.value)">
                                         <option *ngFor="let company of companies" [value]="company.id">
                                             {{company.id}}
                                         </option>
@@ -39,7 +40,8 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Default line item store Id</mat-label>
-                                    <select formControlName="storeId" matNativeControl (change)="setStoreName($event.target.value)">
+                                    <select formControlName="storeId" matNativeControl
+                                            (change)="setStoreName($event.target.value)">
                                         <option *ngFor="let stores of stores" [value]="stores.id">
                                             {{stores.id}}
                                         </option>
@@ -66,7 +68,7 @@
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="5" rowHeight="100px">
+                    <mat-grid-list cols="4" rowHeight="100px">
                         <mat-grid-tile>
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
@@ -103,21 +105,14 @@
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile>
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Ref. No.</mat-label>
-                                    <input matInput formControlName="refNo">
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="7" rowHeight="100px" class="m-10px">
-                        <mat-grid-tile>
+                    <mat-grid-list cols="4" rowHeight="80px" class="m-10px shadow-1px">
+                        <mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Item Id</mat-label>
-                                    <select formControlName="itemId" matNativeControl #itemId (change)="setItemQuantity(itemId)">
+                                    <select formControlName="itemId" matNativeControl #itemId
+                                            (change)="setItemQuantity(itemId)">
                                         <option *ngFor="let item of storeItems" [value]="item.id">
                                             {{item.id}}
                                         </option>
@@ -125,7 +120,7 @@
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile>
+                        <mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Description</mat-label>
@@ -133,19 +128,20 @@
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile>
+                        <mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Unit of measures</mat-label>
-                                    <select  formControlName="unitOfMeasures" matNativeControl #unitOfMeasures>
-                                        <option *ngFor="let unitOfMeasure of unitOfMeasuresData" [value]="unitOfMeasure.id">
+                                    <select formControlName="unitOfMeasures" matNativeControl #unitOfMeasures>
+                                        <option *ngFor="let unitOfMeasure of unitOfMeasuresData"
+                                                [value]="unitOfMeasure.id">
                                             {{unitOfMeasure.name}}
                                         </option>
                                     </select>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile>
+                        <mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Quantity</mat-label>
@@ -153,7 +149,7 @@
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile>
+                        <mat-grid-tile class="mt-1">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Unit selling price</mat-label>
@@ -161,14 +157,16 @@
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile>
-                            <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
-                                <button mat-raised-button class="mr-16 mt--20px" (click)="addApplicableTaxes()">Add Applicable Taxes</button>
+                        <mat-grid-tile class="mt-1">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <button mat-raised-button class="mt--20px" (click)="addApplicableTaxes()">
+                                    Add Applicable Taxes
+                                </button>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile>
-                            <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
-                                <button mat-raised-button class="mat-accent mr-16 mt--20px"
+                        <mat-grid-tile class="mt-1">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <button mat-raised-button class="mat-accent mt--20px"
                                         (click)="addItem(itemId.value, description.value, unitOfMeasures.value, quantity.value, unitCost.value)">
                                     Add Item
                                 </button>
@@ -275,7 +273,8 @@
                             <button mat-raised-button type="button" color="accent" class="pull-right mr-1">
                                 Cancel
                             </button>
-                            <button mat-raised-button type="button" color="accent" class="pull-right" (click)="savePurchaseInvoice()">
+                            <button mat-raised-button type="button" color="accent" class="pull-right"
+                                    (click)="savePurchaseInvoice()">
                                 Save
                             </button>
                         </div>

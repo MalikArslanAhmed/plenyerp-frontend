@@ -47,7 +47,6 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             'details': [''],
             'srDocRefNo': [''],
             'date': [''],
-            'refNo': [''],
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],
