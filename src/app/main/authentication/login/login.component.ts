@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {StorageService} from "../../../shared/services/storage.service";
 import {GlobalService} from "../../../shared/services/global.service";
 import {AuthService} from "../../../shared/services/auth.service";
+import {AppConstants} from "../../../shared/constants/app-constants";
 
 @Component({
     selector: 'app-login',
@@ -86,19 +87,36 @@ export class LoginComponent implements OnInit {
                 // console.log('userDetails', userDetails);
                 this.isBusy = false;
                 this.globalService.setSelf(userDetails);
-                this.navigateToUserPage();
+                // console.log('user', userDetails);
+                this.navigateToAuthorizePage(userDetails.roles);
             }, e => {
                 this.isBusy = false;
             });
         }, error => {
-            console.log('error', error);
+            // console.log('error', error);
             this.isBusy = false;
             this.loginPressed = false;
         });
     }
 
-    navigateToUserPage() {
-        const navUrl = '/dashboard/qualification';
+    navigateToAuthorizePage(roles) {
+        let roleArr = [];
+        if (roles && roles.length > 0) {
+            roles.forEach(role => {
+                roleArr.push(role.id);
+            });
+        }
+        let navUrl = '/dashboard/qualification';
+
+        if (roleArr.includes(AppConstants.ROLE_ID_HR)) {
+            navUrl = '/dashboard/employees';
+        } else if (roleArr.includes(AppConstants.ROLE_ID_ADMIN)) {
+            navUrl = '/dashboard/admin-segments';
+        } else if (roleArr.includes(AppConstants.ROLE_ID_INVENTORY)) {
+            navUrl = '/dashboard/store-setup-items';
+        }
+
+        // const navUrl = '/dashboard/qualification';
         this.router.navigateByUrl(navUrl);
     }
 
