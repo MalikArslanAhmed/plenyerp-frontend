@@ -4,7 +4,7 @@
            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start" fxFlex="50">
                <mat-form-field appearance="outline" fxFlex="100" (click)="categorySelect()">
                    <mat-label>Choose Category</mat-label>
-                   <mat-select formControlName="categoryId" required [disabled]="true">
+                   <mat-select formControlName="categoryId" [disabled]="true">
                        <mat-option [value]="category.id"
                                    *ngFor="let category of categories">{{category.name}}</mat-option>
                    </mat-select>
@@ -14,6 +14,7 @@
                    <input matInput formControlName="search" name="search"
                           (keyup)="getItems({'search': this.itemsFilterForm.value.search})">
                </mat-form-field>
+               <button mat-stroked-button class="reset-btn" (click)="resetEmployeeFilter()">Reset</button>
            </div>
        </form>
     </div>

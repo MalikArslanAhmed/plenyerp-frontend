@@ -6,7 +6,7 @@ import {StoreSetupItemsCreateComponent} from '../store-setup-items-create/store-
 import {StoreSetupItemsService} from '../../../../shared/services/store-setup-items.service';
 import {CategoriesListSelectComponent} from '../categories-list-select/categories-list-select.component';
 import {PageEvent} from '@angular/material/paginator';
-import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-store-setup-items-list',
@@ -28,15 +28,17 @@ export class StoreSetupItemsListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
     constructor(private storeSetupItemsService: StoreSetupItemsService,
                 private fb: FormBuilder,
                 private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
-        this. refresh();
+        this.refresh();
         this.getStores();
     }
+
     refresh() {
         this.itemsFilterForm = this.fb.group({
             categoryId: [''],
@@ -70,7 +72,8 @@ export class StoreSetupItemsListComponent implements OnInit {
             }
         });
 
-    } 
+    }
+
     deleteStore(id) {
         this.storeSetupItemsService.deleteStoreSetupItems(id).subscribe(data => {
             if (data) {
@@ -91,6 +94,7 @@ export class StoreSetupItemsListComponent implements OnInit {
             this.getStores();
         });
     }
+
     getItems(params) {
         this.getStores(params);
     }
@@ -115,6 +119,15 @@ export class StoreSetupItemsListComponent implements OnInit {
             });
         });
     }
+
+    resetEmployeeFilter() {
+        this.itemsFilterForm.patchValue({
+            'categoryId': '',
+            'search': ''
+        });
+        this.getStores();
+    }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getStores({page: this.pagination.page});
