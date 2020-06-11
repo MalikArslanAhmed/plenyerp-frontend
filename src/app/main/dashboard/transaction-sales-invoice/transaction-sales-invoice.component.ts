@@ -7,7 +7,6 @@ import {ApplicableTaxesComponent} from "../applicable-taxes/applicable-taxes.com
 import {MatDialog} from "@angular/material/dialog";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
-import {StoreSetupUnitOfMeasuresService} from "../../../shared/services/store-setup-unit-of-measures.service";
 import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
 
 @Component({
@@ -33,8 +32,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
                 private transactionService: TransactionService,
                 private _matDialog: MatDialog,
                 private storeSetupStoresService: StoreSetupStoresService,
-                private storeSetupItemsService: StoreSetupItemsService,
-                private storeSetupUnitOfMeasuresService: StoreSetupUnitOfMeasuresService) {
+                private storeSetupItemsService: StoreSetupItemsService) {
     }
 
     ngOnInit(): void {
@@ -42,7 +40,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         this.getCompanies();
         this.getStores();
         this.getStoreItems();
-        this.getStoreSetupUnitOfMeasure();
+        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
@@ -185,11 +183,11 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         });
     }
 
-    getStoreSetupUnitOfMeasure() {
+    /*getStoreSetupUnitOfMeasure() {
         this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
             this.unitOfMeasuresData = data.items;
         });
-    }
+    }*/
 
     setStoreName(storeId) {
         let selectedStoreName = '';
@@ -248,6 +246,10 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         if (this.storeItems && this.storeItems.length > 0) {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
+                    this.unitOfMeasuresData = [{
+                        'id': storeItem.inventoryMeasurement.id,
+                        'name': storeItem.inventoryMeasurement.name
+                    }];
                     this.salesInvoiceForm.patchValue({
                         'unitOfMeasures': storeItem.inventoryMeasurement.id
                     })

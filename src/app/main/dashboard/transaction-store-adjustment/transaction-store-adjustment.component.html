@@ -113,7 +113,8 @@
                             <div class="p-10px width-70-per" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Item Id</mat-label>
-                                    <select formControlName="itemId" matNativeControl #itemId (change)="setItemQuantity(itemId)">
+                                    <select formControlName="itemId" matNativeControl #itemId
+                                            (change)="setItemQuantity(itemId)">
                                         <option *ngFor="let item of storeItems" [value]="item.id">
                                             {{item.id}}
                                         </option>
@@ -154,7 +155,8 @@
                             <div class="p-10px width-70-per" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Quantity (<small>Phy Count</small>)</mat-label>
-                                    <input matInput formControlName="quantityPhyCount" #quantityPhyCount>
+                                    <input matInput formControlName="quantityPhyCount" #quantityPhyCount
+                                           (change)="setQuantitySysLessPhy(quantityPhyCount)">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -178,7 +180,8 @@
                             <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
                                 <button mat-raised-button class="mat-accent mr-16 mt--20px"
                                         (click)="addItem(itemId.value, description.value, unitOfMeasures.value, quantityInSys.value, quantityPhyCount.value, quantitySysLessPhy.value, unitCostOfDiff.value)">
-                                    <span *ngIf="editableIndex === undefined">Add Item</span><span *ngIf="editableIndex !== undefined">Update Item</span>
+                                    <span *ngIf="editableIndex === undefined">Add Item</span><span
+                                    *ngIf="editableIndex !== undefined">Update Item</span>
                                 </button>
                             </div>
                         </mat-grid-tile>
@@ -278,7 +281,8 @@
                             <button mat-raised-button type="button" color="accent" class="pull-right mr-1">
                                 Cancel
                             </button>
-                            <button mat-raised-button type="button" color="accent" class="pull-right" (click)="saveStoreAdjustement()">
+                            <button mat-raised-button type="button" color="accent" class="pull-right"
+                                    (click)="saveStoreAdjustement()">
                                 Save
                             </button>
                         </div>

@@ -5,7 +5,6 @@ import {AlertService} from "../../../shared/services/alert.service";
 import {TransactionService} from "../../../shared/services/transaction.service";
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
-import {StoreSetupUnitOfMeasuresService} from "../../../shared/services/store-setup-unit-of-measures.service";
 
 @Component({
     selector: 'app-transaction-stv-store-transfer',
@@ -26,15 +25,14 @@ export class TransactionStvStoreTransferComponent implements OnInit {
                 private alertService: AlertService,
                 private transactionService: TransactionService,
                 private storeSetupItemsService: StoreSetupItemsService,
-                private storeSetupStoresService: StoreSetupStoresService,
-                private storeSetupUnitOfMeasuresService: StoreSetupUnitOfMeasuresService) {
+                private storeSetupStoresService: StoreSetupStoresService) {
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getStores();
         this.getStoreItems();
-        this.getStoreSetupUnitOfMeasure();
+        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
@@ -68,11 +66,11 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         });
     }
 
-    getStoreSetupUnitOfMeasure() {
+    /*getStoreSetupUnitOfMeasure() {
         this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
             this.unitOfMeasuresData = data.items;
         });
-    }
+    }*/
 
     setGivingStoreName(storeId) {
         let selectedStoreName = '';
@@ -149,6 +147,10 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         if (this.storeItems && this.storeItems.length > 0) {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
+                    this.unitOfMeasuresData = [{
+                        'id': storeItem.inventoryMeasurement.id,
+                        'name': storeItem.inventoryMeasurement.name
+                    }];
                     this.stvStoreTransferForm.patchValue({
                         'unitOfMeasures': storeItem.inventoryMeasurement.id
                     })

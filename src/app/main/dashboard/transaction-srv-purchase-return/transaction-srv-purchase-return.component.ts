@@ -5,7 +5,6 @@ import {AlertService} from "../../../shared/services/alert.service";
 import {TransactionService} from "../../../shared/services/transaction.service";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
-import {StoreSetupUnitOfMeasuresService} from "../../../shared/services/store-setup-unit-of-measures.service";
 import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
 
 @Component({
@@ -28,8 +27,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
                 private alertService: AlertService,
                 private transactionService: TransactionService,
                 private storeSetupStoresService: StoreSetupStoresService,
-                private storeSetupItemsService: StoreSetupItemsService,
-                private storeSetupUnitOfMeasuresService: StoreSetupUnitOfMeasuresService) {
+                private storeSetupItemsService: StoreSetupItemsService) {
     }
 
     ngOnInit(): void {
@@ -37,7 +35,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
         this.getCompanies();
         this.getStores();
         this.getStoreItems();
-        this.getStoreSetupUnitOfMeasure();
+        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
@@ -82,11 +80,11 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
         });
     }
 
-    getStoreSetupUnitOfMeasure() {
+    /*getStoreSetupUnitOfMeasure() {
         this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
             this.unitOfMeasuresData = data.items;
         });
-    }
+    }*/
 
     addItem(itemId, description, unitOfMeasures, quantity, unitPrice, unitCost) {
         let repeatItemFound = false;
@@ -216,6 +214,10 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
         if (this.storeItems && this.storeItems.length > 0) {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
+                    this.unitOfMeasuresData = [{
+                        'id': storeItem.inventoryMeasurement.id,
+                        'name': storeItem.inventoryMeasurement.name
+                    }];
                     this.srvPurchaseReturnForm.patchValue({
                         'unitOfMeasures': storeItem.inventoryMeasurement.id
                     })

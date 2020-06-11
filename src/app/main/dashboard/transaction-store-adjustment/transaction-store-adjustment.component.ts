@@ -5,7 +5,6 @@ import {AlertService} from "../../../shared/services/alert.service";
 import {TransactionService} from "../../../shared/services/transaction.service";
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
-import {StoreSetupUnitOfMeasuresService} from "../../../shared/services/store-setup-unit-of-measures.service";
 import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
 
 @Component({
@@ -28,8 +27,7 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
                 private alertService: AlertService,
                 private transactionService: TransactionService,
                 private storeSetupItemsService: StoreSetupItemsService,
-                private storeSetupStoresService: StoreSetupStoresService,
-                private storeSetupUnitOfMeasuresService: StoreSetupUnitOfMeasuresService) {
+                private storeSetupStoresService: StoreSetupStoresService) {
     }
 
     ngOnInit(): void {
@@ -37,7 +35,7 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         this.getCompanies();
         this.getStores();
         this.getStoreItems();
-        this.getStoreSetupUnitOfMeasure();
+        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
@@ -53,9 +51,9 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],
-            'quantityInSys': [''],
+            'quantityInSys': [{value: '', disabled: true}],
             'quantityPhyCount': [''],
-            'quantitySysLessPhy': [''],
+            'quantitySysLessPhy': [{value: '', disabled: true}],
             'unitCostOfDiff': [''],
             'totalValuesInWords': [{value: '', disabled: true}],
             'subTotal': [{value: '', disabled: true}],
@@ -82,11 +80,11 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         });
     }
 
-    getStoreSetupUnitOfMeasure() {
+    /*getStoreSetupUnitOfMeasure() {
         this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
             this.unitOfMeasuresData = data.items;
         });
-    }
+    }*/
 
     setSupplierAddress(compId) {
         let selectedSupplierAddress = '';
@@ -220,12 +218,34 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         if (this.storeItems && this.storeItems.length > 0) {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
+                    this.unitOfMeasuresData = [{
+                        'id': storeItem.inventoryMeasurement.id,
+                        'name': storeItem.inventoryMeasurement.name
+                    }];
                     this.storeAdjustmentForm.patchValue({
                         'unitOfMeasures': storeItem.inventoryMeasurement.id
-                    })
+                    });
+                    this.storeAdjustmentForm.patchValue({
+                        'quantityInSys': storeItem.quantityAvailable
+                    });
                 }
             });
         }
+    }
+
+    setQuantitySysLessPhy(quantitySysLessPhy) {
+        const quant = parseInt(this.storeAdjustmentForm['controls']['quantityInSys'].value) - parseInt(quantitySysLessPhy.value);
+        if (quant < 0) {
+            this.alertService.showErrors('Quantity (Sys-less Phy) should be less than Quantity (Phy Count)');
+            this.storeAdjustmentForm.patchValue({
+               'quantityPhyCount': ''
+            });
+            return;
+        }
+        this.storeAdjustmentForm.patchValue({
+            'quantitySysLessPhy': quant
+        });
+        console.log('quant', quant);
     }
 
     saveStoreAdjustement() {
