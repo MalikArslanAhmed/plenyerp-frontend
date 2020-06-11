@@ -13,7 +13,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Country</mat-header-cell>
             <mat-cell fxHide fxShow.gt-md *matCellDef="let region">
                 <p class="phone text-truncate cursor-pointer">
-                    {{region.country.name}}
+                    {{region?.country?.name}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -22,7 +22,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
             <mat-cell fxHide fxShow.gt-md *matCellDef="let region">
                 <p class="phone text-truncate cursor-pointer">
-                    {{region.name}}
+                    {{region?.name}}
                 </p>
             </mat-cell>
         </ng-container>
