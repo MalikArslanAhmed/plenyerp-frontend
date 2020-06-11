@@ -192,6 +192,15 @@ export class EmployeeActionComponent implements OnInit {
         this.getEmployees({page: this.pagination.page});
     }
 
+    resetEmployeeFilter () {
+        this.employeeFilterForm.patchValue({
+          'departmentId': '',
+          'search': '',
+          'statusId': '',
+        });
+        this.getEmployees({});  
+      }
+      
     addBankDetails(previewEmp) {
         this.dialogRef = this._matDialog.open(EmployeeBankDetailsComponent, {
             panelClass: 'bank-details-dialog',
