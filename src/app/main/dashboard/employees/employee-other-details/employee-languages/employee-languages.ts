@@ -69,7 +69,7 @@ export class EmployeeLanguages implements OnInit {
         });
     }
     getLanguage() {
-        this.employeeOtherDetailsService.language().subscribe(val => {
+        this.employeeOtherDetailsService.language({'isActive' : 1}).subscribe(val => {
             this.languages = val.items;
         });
     }

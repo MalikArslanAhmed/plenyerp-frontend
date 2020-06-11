@@ -64,13 +64,13 @@ export class EmployeeSchoolAttended implements OnInit {
     }
 
     getCountry() {
-        this.employeeOtherDetailsService.allCountry().subscribe(data => {
+        this.employeeOtherDetailsService.allCountry({'isActive' : 1}).subscribe(data => {
             this.countries = data.items;
         });
     }
 
     getSchedule() {
-        this.employeeOtherDetailsService.getSchedule().subscribe(data => {
+        this.employeeOtherDetailsService.getSchedule({'isActive' : 1}).subscribe(data => {
             this.schedules = data.items;
         });
     }

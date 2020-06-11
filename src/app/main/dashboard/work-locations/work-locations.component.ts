@@ -120,7 +120,7 @@ export class WorkLocationsComponent implements OnInit {
         });
 
     }
-
+ 
     deleteItem(nodeId) {
         this.workLocationService.deleteWorkLocation(nodeId).subscribe(data => {
             if (data) {

@@ -69,7 +69,7 @@ export class EmployeePhoneNumber implements OnInit {
         });
     }
     getPhoneNumberTypes() {
-        this.employeeOtherDetailsService.phoneNumberTypes().subscribe(val => {
+        this.employeeOtherDetailsService.phoneNumberTypes({'isActive' : 1}).subscribe(val => {
             this.phoneDetails = val.items;
         });
     }

@@ -51,12 +51,14 @@ app-employee-action {
 
     .content {
         padding-top: 15px;
+
         .custom-container-fluid {
             width: 100%;
             padding-right: 15px;
             padding-left: 15px;
             margin-right: auto;
             margin-left: auto;
+
             .custom-row {
                 display: -ms-flexbox;
                 display: flex;
@@ -64,6 +66,7 @@ app-employee-action {
                 flex-wrap: wrap;
                 margin-right: -15px;
                 margin-left: -15px;
+
                 .col {
                     -ms-flex-preferred-size: 0;
                     flex-basis: 0;
@@ -76,10 +79,12 @@ app-employee-action {
                     padding-right: 15px;
                     padding-left: 15px;
                 }
+
                 .list-col {
                     height: calc(100vh - 205px);
                     overflow: auto;
                 }
+
                 .preview-col {
                     -ms-flex: 0 0 25%;
                     flex: 0 0 25%;
@@ -92,13 +97,16 @@ app-employee-action {
                         position: relative;
                         padding: 15px;
                         box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-                            0 1px 3px 0 rgba(0, 0, 0, 0.12);
+                        0 1px 3px 0 rgba(0, 0, 0, 0.12);
+
                         .profile-image {
                             width: 30%;
                             position: relative;
+
                             img {
                                 max-width: 100%;
                             }
+
                             .mat-form-field {
                                 position: absolute;
                                 bottom: 0;
@@ -117,11 +125,11 @@ app-employee-action {
                                             width: auto;
                                             cursor: pointer;
 
-                                            ngx-mat-file-input{
+                                            ngx-mat-file-input {
                                                 display: none;
                                             }
 
-                                            .mat-form-field-label-wrapper{
+                                            .mat-form-field-label-wrapper {
                                                 padding: 0;
                                             }
                                         }
@@ -129,6 +137,7 @@ app-employee-action {
                                 }
                             }
                         }
+
                         .profile-image-desc {
                             padding-left: 15px;
                         }
@@ -137,6 +146,7 @@ app-employee-action {
                             width: 30%;
                             margin-bottom: 0;
                         }
+
                         .dataField {
                             padding-left: 15px;
                             margin-bottom: 0;
@@ -148,7 +158,7 @@ app-employee-action {
     }
 }
 
-.bank-details-dialog{
+.bank-details-dialog {
     width: 70vw;
 }
 
@@ -163,6 +173,13 @@ app-employee-action {
 
 .header-title {
     background-color: white;
+}
+
+.reset-btn {
+    background-color: #106cc8 !important;
+    color: white !important;
+    margin-top: -20px;
+    margin-left: 10px
 }
 
 .save-button {
@@ -194,25 +211,31 @@ app-employee-action {
     -ms-flex-pack: end !important;
     justify-content: flex-end !important;
 }
+
 .justify-content-center {
     -ms-flex-pack: center !important;
-    justify-content: center!important;
+    justify-content: center !important;
 }
+
 .padding-0 {
     padding: 0;
 }
+
 .margin-left-1 {
     margin-left: 1rem;
 }
-.display-contents{
-    display: contents!important;
+
+.display-contents {
+    display: contents !important;
 }
-.employee-other-details-form-dialog{
-    .mat-dialog-container{
+
+.employee-other-details-form-dialog {
+    .mat-dialog-container {
         width: 800px !important;
         min-height: 500px !important;
     }
-    .mat-dialog-actions{
+
+    .mat-dialog-actions {
         .save-button {
             background-color: #106CC8 !important;
             color: white !important;

@@ -137,6 +137,7 @@ export class EmployeeActionComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
                 private router: Router,
@@ -187,9 +188,19 @@ export class EmployeeActionComponent implements OnInit {
             this.pagination.total = data.total;
         });
     }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getEmployees({page: this.pagination.page});
+    }
+
+    resetEmployeeFilter() {
+        this.employeeFilterForm.patchValue({
+            'departmentId': '',
+            'search': '',
+            'statusId': '',
+        });
+        this.getEmployees({});
     }
 
     addBankDetails(previewEmp) {
@@ -400,7 +411,7 @@ export class EmployeeActionComponent implements OnInit {
                 }
             });
 
-        }else if (od === 'BACKGROUND') {
+        } else if (od === 'BACKGROUND') {
             this.dialogRef = this._matDialog.open(EmployeeBackground, {
                 panelClass: 'employee-background-details-form-dialog',
                 data: {
@@ -412,13 +423,13 @@ export class EmployeeActionComponent implements OnInit {
         }
     }
 
-    exportSummary () {
+    exportSummary() {
         this.exportOpen = !this.exportOpen;
     }
 
     downloadSummary(id, type) {
         const params = {
-          'type': type
+            'type': type
         };
         this.employeesService.getEmployeesDetailsDownload(id, params).subscribe(data => {
             console.log('data', data);
