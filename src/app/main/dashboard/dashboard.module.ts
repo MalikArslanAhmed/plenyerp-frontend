@@ -156,6 +156,9 @@ import {TransactionStoreAdjustmentComponent} from './transaction-store-adjustmen
 import {TransactionDonationsComponent} from './transaction-donations/transaction-donations.component';
 import {ApplicableTaxesComponent} from './applicable-taxes/applicable-taxes.component';
 import {DeleteListModalComponent} from './delete-list-modal/delete-list-modal.component';
+import {TaxesComponent} from './taxes/taxes.component';
+import {TaxesListComponent} from './taxes/taxes-list/taxes-list.component';
+import {TaxesCreateComponent} from './taxes/taxes-create/taxes-create.component';
 
 @NgModule({
     declarations: [
@@ -294,7 +297,10 @@ import {DeleteListModalComponent} from './delete-list-modal/delete-list-modal.co
         TransactionStoreAdjustmentComponent,
         TransactionDonationsComponent,
         ApplicableTaxesComponent,
-        DeleteListModalComponent
+        DeleteListModalComponent,
+        TaxesComponent,
+        TaxesListComponent,
+        TaxesCreateComponent
     ],
     imports: [
         CommonModule,
