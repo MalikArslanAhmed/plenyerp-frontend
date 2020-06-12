@@ -22,6 +22,7 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     stores = [];
     unitOfMeasuresData = [];
     editableIndex: any;
+    isSubmitted = false;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
@@ -35,18 +36,17 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         this.getCompanies();
         this.getStores();
         this.getStoreItems();
-        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
         this.storeAdjustmentForm = this.fb.group({
-            'supplierId': [''],
+            'companyId': [''],
             'storeId': [''],
             'supplierAddress': [{value: '', disabled: true}],
             'storeName': [{value: '', disabled: true}],
-            'details': [''],
-            'srDocRefNo': [''],
-            'date': [''],
+            'detail': [''],
+            'sourceDocReferenceNumber': [''],
+            'dates': [''],
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],
@@ -78,12 +78,6 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             this.storeItems = data.items;
         });
     }
-
-    /*getStoreSetupUnitOfMeasure() {
-        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
-            this.unitOfMeasuresData = data.items;
-        });
-    }*/
 
     setSupplierAddress(compId) {
         let selectedSupplierAddress = '';
@@ -117,7 +111,7 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         let repeatItemFound = false;
         if (this.itemsArr && this.itemsArr.length > 0) {
             this.itemsArr.forEach(item => {
-                if (parseInt(item.id) === parseInt(itemId)) {
+                if (parseInt(item.itemId) === parseInt(itemId)) {
                     repeatItemFound = true;
                 }
             });
@@ -133,28 +127,28 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             }
             if (this.editableIndex !== undefined) {
                 this.itemsArr[this.editableIndex] = {
-                    'id': itemId,
+                    'itemId': itemId,
                     'description': description,
-                    'unitOfMeasures': unitOfMeasures,
+                    'measurementId': unitOfMeasures,
                     'unitOfMeasureName': unitOfMeasureName,
                     'quantityInSys': quantityInSys,
-                    'quantityPhyCount': quantityPhyCount,
+                    'quantity': quantityPhyCount,
                     'quantitySysLessPhy': quantitySysLessPhy,
-                    'unitCostOfDiff': unitCostOfDiff,
+                    'unitCost': unitCostOfDiff,
                     'value': parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
                     'totalValue': (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff)),
                 };
                 this.editableIndex = undefined;
             } else {
                 this.itemsArr.push({
-                    'id': itemId,
+                    'itemId': itemId,
                     'description': description,
-                    'unitOfMeasures': unitOfMeasures,
+                    'measurementId': unitOfMeasures,
                     'unitOfMeasureName': unitOfMeasureName,
                     'quantityInSys': quantityInSys,
-                    'quantityPhyCount': quantityPhyCount,
+                    'quantity': quantityPhyCount,
                     'quantitySysLessPhy': quantitySysLessPhy,
-                    'unitCostOfDiff': unitCostOfDiff,
+                    'unitCost': unitCostOfDiff,
                     'value': parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
                     'totalValue': (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff))
                 });
@@ -203,13 +197,13 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     editItem(index) {
         this.editableIndex = index;
         this.storeAdjustmentForm.patchValue({
-            'itemId': this.itemsArr[index].id,
+            'itemId': this.itemsArr[index].itemId,
             'description': this.itemsArr[index].description,
-            'unitOfMeasures': this.itemsArr[index].unitOfMeasures,
+            'unitOfMeasures': this.itemsArr[index].measurementId,
             'quantityInSys': this.itemsArr[index].quantityInSys,
-            'quantityPhyCount': this.itemsArr[index].quantityPhyCount,
+            'quantityPhyCount': this.itemsArr[index].quantity,
             'quantitySysLessPhy': this.itemsArr[index].quantitySysLessPhy,
-            'unitCostOfDiff': this.itemsArr[index].unitCostOfDiff
+            'unitCostOfDiff': this.itemsArr[index].unitCost
         });
     }
 
@@ -256,12 +250,27 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         delete this.storeAdjustmentForm.value['quantitySysLessPhy'];
         delete this.storeAdjustmentForm.value['unitCostOfDiff'];
         delete this.storeAdjustmentForm.value['unitOfMeasures'];
-        this.storeAdjustmentForm.value['date'] = this.storeAdjustmentForm.value['date'].format('YYYY-MM-DD');
+        this.storeAdjustmentForm.value['date'] = this.storeAdjustmentForm.value['dates'].format('YYYY-MM-DD');
         this.storeAdjustmentForm.value['supplierAddress'] = this.storeAdjustmentForm['controls']['supplierAddress'].value;
         this.storeAdjustmentForm.value['storeName'] = this.storeAdjustmentForm['controls']['storeName'].value;
         this.storeAdjustmentForm.value['totalValuesInWords'] = this.storeAdjustmentForm['controls']['totalValuesInWords'].value;
         this.storeAdjustmentForm.value['subTotal'] = this.storeAdjustmentForm['controls']['subTotal'].value;
         this.storeAdjustmentForm.value['total'] = this.storeAdjustmentForm['controls']['total'].value;
+        this.storeAdjustmentForm.value['companyType'] = 'STORE';
+        this.storeAdjustmentForm.value['type'] = 'IN';
         console.log('this.storeAdjustmentForm', this.storeAdjustmentForm.value);
+
+        this.isSubmitted = true;
+        if (!this.storeAdjustmentForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.transactionService.saveStoreAdjustment(this.storeAdjustmentForm.value).subscribe(data => {
+                this.storeAdjustmentForm.reset();
+                this.itemsArr = [];
+                this.isSubmitted = false;
+            });
+        }
     }
 }

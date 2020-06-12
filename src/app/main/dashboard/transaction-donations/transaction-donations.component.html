@@ -11,12 +11,6 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center">
-            <button mat-fab class="accent" id="add-button" aria-label="add qualification"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
-                <mat-icon>add_circle</mat-icon>
-            </button>
-        </div>
     </div>
     <div class="content" fusePerfectScrollbar>
         <div class="center p-24 pb-56 pr-sm-92">
@@ -27,7 +21,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Select Supplier Id</mat-label>
-                                    <select formControlName="supplierId" matNativeControl (change)="setSupplierAddress($event.target.value)">
+                                    <select formControlName="companyId" matNativeControl (change)="setSupplierAddress($event.target.value)">
                                         <option *ngFor="let company of companies" [value]="company.id">
                                             {{company.id}}
                                         </option>
@@ -71,7 +65,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Details</mat-label>
-                                    <input matInput formControlName="details">
+                                    <input matInput formControlName="detail">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -79,7 +73,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Sr. doc. ref. no.</mat-label>
-                                    <input matInput formControlName="srDocRefNo">
+                                    <input matInput formControlName="sourceDocReferenceNumber">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -87,7 +81,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Date</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Date">
+                                    <input matInput [matDatepicker]="picker" formControlName="dates" placeholder="Date">
                                     <mat-datepicker-toggle matSuffix [for]="picker">
                                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                                     </mat-datepicker-toggle>
@@ -175,7 +169,7 @@
                                     <span class="text-truncate">{{i + 1}}.</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">{{item?.id}}</span>
+                                    <span class="text-truncate">{{item?.itemId}}</span>
                                 </td>
                                 <td>
                                     <span class="text-truncate">{{item?.description}}</span>

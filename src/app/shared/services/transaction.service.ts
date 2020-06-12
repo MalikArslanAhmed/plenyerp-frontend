@@ -41,4 +41,12 @@ export class TransactionService extends BaseService {
     saveStoreTransfer(data): Observable<any> {
         return this.postRequest(AppUrl.SALES_STORE_TRANSFER(), data);
     }
+
+    saveStoreAdjustment(data): Observable<any> {
+        return this.postRequest(AppUrl.STORE_ADJUSTMENT(), data);
+    }
+
+    saveDonation(data): Observable<any> {
+        return this.postRequest(AppUrl.DONATIONS(), data);
+    }
 }

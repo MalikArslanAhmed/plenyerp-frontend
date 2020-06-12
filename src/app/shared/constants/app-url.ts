@@ -900,4 +900,12 @@ export class AppUrl {
     static SALES_STORE_TRANSFER(): string {
         return AppUrl.API_URL + `store-transfer`;
     }
+
+    static STORE_ADJUSTMENT(): string {
+        return AppUrl.API_URL + `store-adjustment`;
+    }
+
+    static DONATIONS(): string {
+        return AppUrl.API_URL + `srv-donation`;
+    }
 }

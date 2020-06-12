@@ -21,6 +21,7 @@ export class TransactionDonationsComponent implements OnInit {
     stores = [];
     storeItems = [];
     unitOfMeasuresData = [];
+    isSubmitted = false;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
@@ -34,18 +35,17 @@ export class TransactionDonationsComponent implements OnInit {
         this.getCompanies();
         this.getStores();
         this.getStoreItems();
-        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
         this.donationsForm = this.fb.group({
-            'supplierId': [''],
+            'companyId': [''],
             'storeId': [''],
             'supplierAddress': [{value: '', disabled: true}],
             'storeName': [{value: '', disabled: true}],
-            'details': [''],
-            'srDocRefNo': [''],
-            'date': [''],
+            'detail': [''],
+            'sourceDocReferenceNumber': [''],
+            'dates': [''],
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],
@@ -63,7 +63,7 @@ export class TransactionDonationsComponent implements OnInit {
         let repeatItemFound = false;
         if (this.itemsArr && this.itemsArr.length > 0) {
             this.itemsArr.forEach(item => {
-                if (parseInt(item.id) === parseInt(itemId)) {
+                if (parseInt(item.itemId) === parseInt(itemId)) {
                     repeatItemFound = true;
                 }
             });
@@ -78,9 +78,9 @@ export class TransactionDonationsComponent implements OnInit {
                 });
             }
             this.itemsArr.push({
-                'id': itemId,
+                'itemId': itemId,
                 'description': description,
-                'unitOfMeasures': unitOfMeasures,
+                'measurementId': unitOfMeasures,
                 'unitOfMeasureName': unitOfMeasureName,
                 'quantity': quantity,
                 'unitCost': unitCost,
@@ -111,12 +111,6 @@ export class TransactionDonationsComponent implements OnInit {
             this.storeItems = data.items;
         });
     }
-
-    /*getStoreSetupUnitOfMeasure() {
-        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
-            this.unitOfMeasuresData = data.items;
-        });
-    }*/
 
     deleteItem(index) {
         this.itemsArr.splice(index, 1);
@@ -203,12 +197,27 @@ export class TransactionDonationsComponent implements OnInit {
         delete this.donationsForm.value['unitOfMeasures'];
         delete this.donationsForm.value['unitCostOfDiff'];
         delete this.donationsForm.value['value'];
-        this.donationsForm.value['date'] = this.donationsForm.value['date'].format('YYYY-MM-DD');
+        this.donationsForm.value['date'] = this.donationsForm.value['dates'].format('YYYY-MM-DD');
         this.donationsForm.value['storeName'] = this.donationsForm['controls']['storeName'].value;
         this.donationsForm.value['totalValuesInWords'] = this.donationsForm['controls']['totalValuesInWords'].value;
         this.donationsForm.value['subTotal'] = this.donationsForm['controls']['subTotal'].value;
         this.donationsForm.value['total'] = this.donationsForm['controls']['total'].value;
         this.donationsForm.value['supplierAddress'] = this.donationsForm['controls']['supplierAddress'].value;
+        this.donationsForm.value['companyType'] = 'SUPPLIER';
+        this.donationsForm.value['type'] = 'IN';
         console.log('this.donationsForm', this.donationsForm.value);
+
+        this.isSubmitted = true;
+        if (!this.donationsForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.transactionService.saveDonation(this.donationsForm.value).subscribe(data => {
+                this.donationsForm.reset();
+                this.itemsArr = [];
+                this.isSubmitted = false;
+            });
+        }
     }
 }

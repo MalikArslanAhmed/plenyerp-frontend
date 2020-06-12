@@ -97,7 +97,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         let repeatItemFound = false;
         if (this.itemsArr && this.itemsArr.length > 0) {
             this.itemsArr.forEach(item => {
-                if (parseInt(item.id) === parseInt(itemId)) {
+                if (parseInt(item.itemId) === parseInt(itemId)) {
                     repeatItemFound = true;
                 }
             });
