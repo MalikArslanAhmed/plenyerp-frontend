@@ -110,50 +110,22 @@
                     </div>
                 </mat-grid-tile>
             </mat-grid-list>
-
-            <!-- <mat-grid-list>
-                <mat-grid-tile>
-                    
+            <mat-grid-list cols="1" rowHeight="80px">
+                <mat-grid-tile class="ml-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <button mat-stroked-button class="add-btn">Add Bank A/C Details</button>
+                    </div>
                 </mat-grid-tile>
-            </mat-grid-list> -->
-            <!-- <mat-grid-list cols="2" rowHeight="80px">
-                <mat-grid-tile class="mr-1">
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Is Active?</mat-label>
-                        <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
-                    </div>
-                </mat-grid-tile> 
-                <mat-grid-tile [rowspan]="2" class="ml-1">
-                    <mat-form-field appearance="outline" fxFlex>
-                        <mat-label>Country</mat-label>
-                        <input name="country" formControlName="country" matInput required>
-                    </mat-form-field>
-                </mat-grid-tile>     
             </mat-grid-list>
-            <mat-grid-list cols="2" rowHeight="80px">
-                <mat-grid-tile class="mr-1">
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Is Supplier?</mat-label>
-                        <mat-slide-toggle formControlName="isSupplier"></mat-slide-toggle>
-                    </div>
-                </mat-grid-tile> 
-    
-            </mat-grid-list> -->
-            
-            
         </form>
     </div>
 
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-stroked-button class="add-btn"  >Add Bank A/C Details</button>
         <button mat-button class="save-button" (click)="matDialogRef.close(itemForm); saveStore()"
                 [disabled]="itemForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
         </button>
         <button mat-button class="save-button" (click)="matDialogRef.close(itemForm); updateStore()"
                 [disabled]="itemForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
-        </button>
-        <button mat-button class="save-button" 
-                aria-label="Clear" >Clear
         </button>
     </div>
 </div>
