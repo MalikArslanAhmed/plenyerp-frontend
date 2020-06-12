@@ -27,6 +27,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     stores = [];
     unitOfMeasuresData = [];
     subTotal = 0;
+    isSubmitted = false;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
@@ -41,20 +42,19 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         this.getCompanies();
         this.getStores();
         this.getStoreItems();
-        // this.getStoreSetupUnitOfMeasure();
     }
 
 
     refresh() {
         this.srvPurchaseInvocieForm = this.fb.group({
-            'supplierId': [''],
+            'companyId': [''],
             'storeId': [''],
             'supplierAddress': [{value: '', disabled: true}],
             'storeName': [{value: '', disabled: true}],
-            'details': [''],
-            'pono': [''],
-            'srDocRefNo': [''],
-            'date': [''],
+            'detail': [''],
+            'poNumber': [''],
+            'sourceDocReferenceNumber': [''],
+            'dates': [''],
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],
@@ -62,7 +62,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             'unitCost': [''],
             'totalValuesInWords': [{value: '', disabled: true}],
             'subTotal': [{value: '', disabled: true}],
-            'totalTaxes': [{value: '', disabled: true}],
+            'totalTax': [{value: '', disabled: true}],
             'total': [{value: '', disabled: true}]
         });
     }
@@ -86,12 +86,6 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         });
     }
 
-    /*getStoreSetupUnitOfMeasure() {
-        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
-            this.unitOfMeasuresData = data.items;
-        });
-    }*/
-
     addItem(itemId, description, unitOfMeasures, quantity, unitCost) {
         let repeatItemFound = false;
         if (this.itemsArr && this.itemsArr.length > 0) {
@@ -111,9 +105,9 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 });
             }
             this.itemsArr.push({
-                'id': itemId,
+                'itemId': itemId,
                 'description': description,
-                'unitOfMeasures': unitOfMeasures,
+                'measurementId': unitOfMeasures,
                 'unitOfMeasuresName': unitOfMeasureName,
                 'quantity': quantity,
                 'unitCost': unitCost,
@@ -229,14 +223,14 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             });
             this.srvPurchaseInvocieForm.patchValue({
                 'subTotal': subTotal,
-                'totalTaxes': totalTaxes,
+                'totalTax': totalTaxes,
                 'total': subTotal + totalTaxes,
                 'totalValuesInWords': numberToWords.transform(subTotal + totalTaxes)
             });
         } else {
             this.srvPurchaseInvocieForm.patchValue({
                 'subTotal': 0,
-                'totalTaxes': 0,
+                'totalTax': 0,
                 'total': 0,
                 'totalValuesInWords': '-'
             });
@@ -260,19 +254,48 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     }
 
     savePurchaseInvoice() {
-        this.srvPurchaseInvocieForm.value['items'] = this.itemsArr;
+        const itemsArrCopy = JSON.parse(JSON.stringify(this.itemsArr));
+        if (itemsArrCopy && itemsArrCopy.length > 0) {
+            itemsArrCopy.forEach(item => {
+                if (item && item['taxes'] && item['taxes'].length > 0) {
+                    let i = 0;
+                    item['taxes'].forEach(tax => {
+                        if (tax && (!tax.hasOwnProperty('checked') || !tax.checked)) {
+                            item['taxes'].splice(i, 1);
+                        }
+                        i++;
+                    });
+                }
+            });
+        }
+        this.srvPurchaseInvocieForm.value['items'] = itemsArrCopy;
         delete this.srvPurchaseInvocieForm.value['description'];
         delete this.srvPurchaseInvocieForm.value['itemId'];
         delete this.srvPurchaseInvocieForm.value['quantity'];
         delete this.srvPurchaseInvocieForm.value['unitCost'];
         delete this.srvPurchaseInvocieForm.value['unitOfMeasures'];
-        this.srvPurchaseInvocieForm.value['date'] = this.srvPurchaseInvocieForm.value['date'].format('YYYY-MM-DD');
+        this.srvPurchaseInvocieForm.value['date'] = this.srvPurchaseInvocieForm.value['dates'].format('YYYY-MM-DD');
         this.srvPurchaseInvocieForm.value['storeName'] = this.srvPurchaseInvocieForm['controls']['storeName'].value;
         this.srvPurchaseInvocieForm.value['totalValuesInWords'] = this.srvPurchaseInvocieForm['controls']['totalValuesInWords'].value;
         this.srvPurchaseInvocieForm.value['subTotal'] = this.srvPurchaseInvocieForm['controls']['subTotal'].value;
-        this.srvPurchaseInvocieForm.value['totalTaxes'] = this.srvPurchaseInvocieForm['controls']['totalTaxes'].value;
+        this.srvPurchaseInvocieForm.value['totalTax'] = this.srvPurchaseInvocieForm['controls']['totalTax'].value;
         this.srvPurchaseInvocieForm.value['total'] = this.srvPurchaseInvocieForm['controls']['total'].value;
         this.srvPurchaseInvocieForm.value['supplierAddress'] = this.srvPurchaseInvocieForm['controls']['supplierAddress'].value;
+        this.srvPurchaseInvocieForm.value['companyType'] = 'SUPPLIER';
+        this.srvPurchaseInvocieForm.value['type'] = 'IN';
         console.log('this.srvPurchaseInvocieForm', this.srvPurchaseInvocieForm.value);
+
+        this.isSubmitted = true;
+        if (!this.srvPurchaseInvocieForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.transactionService.saveSrvPurchaseInvoice(this.srvPurchaseInvocieForm.value).subscribe(data => {
+                this.srvPurchaseInvocieForm.reset();
+                this.itemsArr = [];
+                this.isSubmitted = false;
+            });
+        }
     }
 }

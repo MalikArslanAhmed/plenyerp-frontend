@@ -26,6 +26,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
     stores = [];
     storeItems = [];
     unitOfMeasuresData = [];
+    isSubmitted = false;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
@@ -40,19 +41,18 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         this.getCompanies();
         this.getStores();
         this.getStoreItems();
-        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
         this.salesInvoiceForm = this.fb.group({
-            'supplierId': [''],
+            'companyId': [''],
             'storeId': [''],
             'supplierAddress': [{value: '', disabled: true}],
             'storeName': [{value: '', disabled: true}],
-            'details': [''],
-            'pono': [''],
-            'srDocRefNo': [''],
-            'date': [''],
+            'detail': [''],
+            'poNumber': [''],
+            'sourceDocReferenceNumber': [''],
+            'dates': [''],
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],
@@ -84,12 +84,12 @@ export class TransactionSalesInvoiceComponent implements OnInit {
                 });
             }
             this.itemsArr.push({
-                'id': itemId,
+                'itemId': itemId,
                 'description': description,
-                'unitOfMeasures': unitOfMeasures,
+                'measurementId': unitOfMeasures,
                 'unitOfMeasureName': unitOfMeasureName,
                 'quantity': quantity,
-                'unitSellingPrice': unitSellingPrice,
+                'sellingPrice': unitSellingPrice,
                 'value': parseInt(quantity) * parseInt(unitSellingPrice),
                 'totalValue': this.totalTaxes + (parseInt(quantity) * parseInt(unitSellingPrice)),
                 'taxes': this.taxes,
@@ -98,7 +98,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             this.salesInvoiceForm.patchValue({
                 'itemId': '',
                 'description': '',
-                'unitOfMeasures': '',
+                'measurementId': '',
                 'quantity': '',
                 'unitSellingPrice': ''
             });
@@ -182,12 +182,6 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         });
     }
 
-    /*getStoreSetupUnitOfMeasure() {
-        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
-            this.unitOfMeasuresData = data.items;
-        });
-    }*/
-
     setStoreName(storeId) {
         let selectedStoreName = '';
         if (this.stores && this.stores.length > 0) {
@@ -258,19 +252,48 @@ export class TransactionSalesInvoiceComponent implements OnInit {
     }
 
     saveSalesInvoice() {
-        this.salesInvoiceForm.value['items'] = this.itemsArr;
+        const itemsArrCopy = JSON.parse(JSON.stringify(this.itemsArr));
+        if (itemsArrCopy && itemsArrCopy.length > 0) {
+            itemsArrCopy.forEach(item => {
+                if (item && item['taxes'] && item['taxes'].length > 0) {
+                    let i = 0;
+                    item['taxes'].forEach(tax => {
+                        if (tax && (!tax.hasOwnProperty('checked') || !tax.checked)) {
+                            item['taxes'].splice(i, 1);
+                        }
+                        i++;
+                    });
+                }
+            });
+        }
+        this.salesInvoiceForm.value['items'] = itemsArrCopy;
         delete this.salesInvoiceForm.value['description'];
         delete this.salesInvoiceForm.value['itemId'];
         delete this.salesInvoiceForm.value['quantity'];
         delete this.salesInvoiceForm.value['unitSellingPrice'];
         delete this.salesInvoiceForm.value['unitOfMeasures'];
-        this.salesInvoiceForm.value['date'] = this.salesInvoiceForm.value['date'].format('YYYY-MM-DD');
+        this.salesInvoiceForm.value['date'] = this.salesInvoiceForm.value['dates'].format('YYYY-MM-DD');
         this.salesInvoiceForm.value['storeName'] = this.salesInvoiceForm['controls']['storeName'].value;
         this.salesInvoiceForm.value['totalValuesInWords'] = this.salesInvoiceForm['controls']['totalValuesInWords'].value;
         this.salesInvoiceForm.value['subTotal'] = this.salesInvoiceForm['controls']['subTotal'].value;
-        this.salesInvoiceForm.value['totalTaxes'] = this.salesInvoiceForm['controls']['totalTaxes'].value;
+        this.salesInvoiceForm.value['totalTax'] = this.salesInvoiceForm['controls']['totalTaxes'].value;
         this.salesInvoiceForm.value['total'] = this.salesInvoiceForm['controls']['total'].value;
         this.salesInvoiceForm.value['supplierAddress'] = this.salesInvoiceForm['controls']['supplierAddress'].value;
+        this.salesInvoiceForm.value['companyType'] = 'CUSTOMER';
+        this.salesInvoiceForm.value['type'] = 'OUT';
         console.log('this.salesInvoiceForm', this.salesInvoiceForm.value);
+
+        this.isSubmitted = true;
+        if (!this.salesInvoiceForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.transactionService.saveSalesInvocie(this.salesInvoiceForm.value).subscribe(data => {
+                this.salesInvoiceForm.reset();
+                this.itemsArr = [];
+                this.isSubmitted = false;
+            });
+        }
     }
 }

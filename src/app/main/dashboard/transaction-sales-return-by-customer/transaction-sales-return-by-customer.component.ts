@@ -22,6 +22,7 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
     storeItems = [];
     unitOfMeasuresData = [];
     editableIndex: any;
+    isSubmitted = false;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
@@ -35,19 +36,18 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
         this.getCompanies();
         this.getStores();
         this.getStoreItems();
-        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
         this.salesReturnByCustomerForm = this.fb.group({
-            'supplierId': [''],
+            'companyId': [''],
             'storeId': [''],
             'cutomerAddress': [{value: '', disabled: true}],
             'storeName': [{value: '', disabled: true}],
-            'details': [''],
-            'pono': [''],
-            'srDocRefNo': [''],
-            'date': [''],
+            'detail': [''],
+            'poNumber': [''],
+            'sourceDocReferenceNumber': [''],
+            'dates': [''],
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],
@@ -78,12 +78,6 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
             this.storeItems = data.items;
         });
     }
-
-    /*getStoreSetupUnitOfMeasure() {
-        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
-            this.unitOfMeasuresData = data.items;
-        });
-    }*/
 
     setSupplierAddress(compId) {
         let selectedSupplierAddress = '';
@@ -133,9 +127,9 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
             }
             if (this.editableIndex !== undefined) {
                 this.itemsArr[this.editableIndex] = {
-                    'id': itemId,
+                    'itemId': itemId,
                     'description': description,
-                    'unitOfMeasures': unitOfMeasures,
+                    'measurementId': unitOfMeasures,
                     'unitOfMeasureName': unitOfMeasureName,
                     'quantity': quantity,
                     'unitPrice': unitPrice,
@@ -145,9 +139,9 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
                 this.editableIndex = undefined;
             } else {
                 this.itemsArr.push({
-                    'id': itemId,
+                    'itemId': itemId,
                     'description': description,
-                    'unitOfMeasures': unitOfMeasures,
+                    'measurementId': unitOfMeasures,
                     'unitOfMeasureName': unitOfMeasureName,
                     'quantity': quantity,
                     'unitPrice': unitPrice,
@@ -178,9 +172,9 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
     editItem(index) {
         this.editableIndex = index;
         this.salesReturnByCustomerForm.patchValue({
-            'itemId': this.itemsArr[index].id,
+            'itemId': this.itemsArr[index].itemId,
             'description': this.itemsArr[index].description,
-            'unitOfMeasures': this.itemsArr[index].unitOfMeasures,
+            'unitOfMeasures': this.itemsArr[index].measurementId,
             'quantity': this.itemsArr[index].quantity,
             'unitPrice': this.itemsArr[index].unitPrice,
             'unitCost': this.itemsArr[index].unitCost
@@ -232,12 +226,27 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
         delete this.salesReturnByCustomerForm.value['unitCost'];
         delete this.salesReturnByCustomerForm.value['unitPrice'];
         delete this.salesReturnByCustomerForm.value['unitOfMeasures'];
-        this.salesReturnByCustomerForm.value['date'] = this.salesReturnByCustomerForm.value['date'].format('YYYY-MM-DD');
+        this.salesReturnByCustomerForm.value['date'] = this.salesReturnByCustomerForm.value['dates'].format('YYYY-MM-DD');
         this.salesReturnByCustomerForm.value['storeName'] = this.salesReturnByCustomerForm['controls']['storeName'].value;
         this.salesReturnByCustomerForm.value['totalValuesInWords'] = this.salesReturnByCustomerForm['controls']['totalValuesInWords'].value;
         this.salesReturnByCustomerForm.value['subTotal'] = this.salesReturnByCustomerForm['controls']['subTotal'].value;
         this.salesReturnByCustomerForm.value['total'] = this.salesReturnByCustomerForm['controls']['total'].value;
         this.salesReturnByCustomerForm.value['cutomerAddress'] = this.salesReturnByCustomerForm['controls']['cutomerAddress'].value;
+        this.salesReturnByCustomerForm.value['companyType'] = 'CUSTOMER';
+        this.salesReturnByCustomerForm.value['type'] = 'OUT';
         console.log('this.salesReturnByCustomerForm', this.salesReturnByCustomerForm.value);
+
+        this.isSubmitted = true;
+        if (!this.salesReturnByCustomerForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.transactionService.saveSalesReturnByCustomer(this.salesReturnByCustomerForm.value).subscribe(data => {
+                this.salesReturnByCustomerForm.reset();
+                this.itemsArr = [];
+                this.isSubmitted = false;
+            });
+        }
     }
 }

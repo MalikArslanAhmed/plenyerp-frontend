@@ -880,4 +880,24 @@ export class AppUrl {
     static UPDATE_BACKGROUND(employeeId, backgroundId): string {
         return AppUrl.API_URL + 'employee/' + employeeId + '/background/' + backgroundId;
     }
+
+    static SRV_PURCHASE_INVOICE(): string {
+        return AppUrl.API_URL + `srv-purchase`;
+    }
+
+    static SRV_PURCHASE_RETURN(): string {
+        return AppUrl.API_URL + `srv-return`;
+    }
+
+    static SALES_INVOICE(): string {
+        return AppUrl.API_URL + `sale-outwards`;
+    }
+
+    static SALES_RETURN_BY_CUSTOMER(): string {
+        return AppUrl.API_URL + `sale-inwards`;
+    }
+
+    static SALES_STORE_TRANSFER(): string {
+        return AppUrl.API_URL + `store-transfer`;
+    }
 }

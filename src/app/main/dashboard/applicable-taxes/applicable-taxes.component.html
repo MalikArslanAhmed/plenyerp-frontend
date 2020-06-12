@@ -21,12 +21,6 @@
                     <div fxLayout="row" fxLayoutAlign="start start">
                         <mat-label>{{grossAmount}}</mat-label>
                     </div>
-                    <!--<div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Gross Total</mat-label>
-                            <input value="{{grossAmount}}" matInput [attr.disabled]="true">
-                        </mat-form-field>
-                    </div>-->
                 </mat-grid-tile>
             </mat-grid-list>
             <mat-grid-list cols="3" rowHeight="100px" *ngFor="let tax of taxes; let i = index">
@@ -66,10 +60,6 @@
                         <div fxLayout="row" fxLayoutAlign="start start">
                             <mat-label>{{totalTaxes}}</mat-label>
                         </div>
-                        <!--<mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Total Taxes</mat-label>
-                            <input formControlName="totalTaxes" matInput [attr.disabled]="true">
-                        </mat-form-field>-->
                     </div>
                 </mat-grid-tile>
             </mat-grid-list>

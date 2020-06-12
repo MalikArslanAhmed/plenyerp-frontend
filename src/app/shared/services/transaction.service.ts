@@ -21,4 +21,24 @@ export class TransactionService extends BaseService {
     getTaxes(data): Observable<any> {
         return this.getRequest(AppUrl.GET_TAXES(), data);
     }
+
+    saveSrvPurchaseInvoice(data): Observable<any> {
+        return this.postRequest(AppUrl.SRV_PURCHASE_INVOICE(), data);
+    }
+
+    saveSrvPurchaseReturn(data): Observable<any> {
+        return this.postRequest(AppUrl.SRV_PURCHASE_RETURN(), data);
+    }
+
+    saveSalesInvocie(data): Observable<any> {
+        return this.postRequest(AppUrl.SALES_INVOICE(), data);
+    }
+
+    saveSalesReturnByCustomer(data): Observable<any> {
+        return this.postRequest(AppUrl.SALES_RETURN_BY_CUSTOMER(), data);
+    }
+
+    saveStoreTransfer(data): Observable<any> {
+        return this.postRequest(AppUrl.SALES_STORE_TRANSFER(), data);
+    }
 }

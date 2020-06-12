@@ -20,6 +20,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
     stores = [];
     storeItems = [];
     unitOfMeasuresData = [];
+    isSubmitted = false;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
@@ -32,18 +33,17 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         this.refresh();
         this.getStores();
         this.getStoreItems();
-        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
         this.stvStoreTransferForm = this.fb.group({
-            'givingStoreId': [''],
-            'receivingStoreId': [''],
+            'storeId': [''],
+            'receiveStoreId': [''],
             'givingStoreName': [{value: '', disabled: true}],
             'receivingStoreName': [{value: '', disabled: true}],
-            'details': [''],
-            'srDocRefNo': [''],
-            'date': [''],
+            'detail': [''],
+            'sourceDocReferenceNumber': [''],
+            'dates': [''],
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],
@@ -64,12 +64,6 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             this.storeItems = data.items;
         });
     }
-
-    /*getStoreSetupUnitOfMeasure() {
-        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
-            this.unitOfMeasuresData = data.items;
-        });
-    }*/
 
     setGivingStoreName(storeId) {
         let selectedStoreName = '';
@@ -118,9 +112,9 @@ export class TransactionStvStoreTransferComponent implements OnInit {
                 });
             }
             this.itemsArr.push({
-                'id': itemId,
+                'itemId': itemId,
                 'description': description,
-                'unitOfMeasures': unitOfMeasures,
+                'measurementId': unitOfMeasures,
                 'unitOfMeasureName': unitOfMeasureName,
                 'quantity': quantity,
                 'accountCode': accountCode,
@@ -129,7 +123,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             this.stvStoreTransferForm.patchValue({
                 'itemId': '',
                 'description': '',
-                'unitOfMeasures': '',
+                'measurementId': '',
                 'quantity': '',
                 'accountCode': ''
             });
@@ -165,9 +159,24 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         delete this.stvStoreTransferForm.value['quantity'];
         delete this.stvStoreTransferForm.value['accountCode'];
         delete this.stvStoreTransferForm.value['unitOfMeasures'];
-        this.stvStoreTransferForm.value['date'] = this.stvStoreTransferForm.value['date'].format('YYYY-MM-DD');
+        this.stvStoreTransferForm.value['date'] = this.stvStoreTransferForm.value['dates'].format('YYYY-MM-DD');
         this.stvStoreTransferForm.value['givingStoreName'] = this.stvStoreTransferForm['controls']['givingStoreName'].value;
         this.stvStoreTransferForm.value['receivingStoreName'] = this.stvStoreTransferForm['controls']['receivingStoreName'].value;
+        this.stvStoreTransferForm.value['companyType'] = 'STORE';
+        this.stvStoreTransferForm.value['type'] = 'OUT';
         console.log('this.stvStoreTransferForm', this.stvStoreTransferForm.value);
+
+        this.isSubmitted = true;
+        if (!this.stvStoreTransferForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.transactionService.saveStoreTransfer(this.stvStoreTransferForm.value).subscribe(data => {
+                this.stvStoreTransferForm.reset();
+                this.itemsArr = [];
+                this.isSubmitted = false;
+            });
+        }
     }
 }

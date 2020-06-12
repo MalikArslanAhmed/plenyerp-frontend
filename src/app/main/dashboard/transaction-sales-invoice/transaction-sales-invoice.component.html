@@ -27,9 +27,9 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Select Supplier Id</mat-label>
-                                    <select  name="retireType" formControlName="supplierId" matNativeControl (change)="setSupplierAddress($event.target.value)">
+                                    <select  name="retireType" formControlName="companyId" matNativeControl (change)="setSupplierAddress($event.target.value)">
                                         <option *ngFor="let company of companies" [value]="company.id">
-                                            {{company.name}}
+                                            {{company.id}}
                                         </option>
                                     </select>
                                 </mat-form-field>
@@ -71,7 +71,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Details</mat-label>
-                                    <input matInput formControlName="details">
+                                    <input matInput formControlName="detail">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -79,7 +79,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>PO No.</mat-label>
-                                    <input matInput formControlName="pono">
+                                    <input matInput formControlName="poNumber">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -87,7 +87,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Sr. doc. ref. no.</mat-label>
-                                    <input matInput formControlName="srDocRefNo">
+                                    <input matInput formControlName="sourceDocReferenceNumber">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -95,7 +95,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Date</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Date">
+                                    <input matInput [matDatepicker]="picker" formControlName="dates" placeholder="Date">
                                     <mat-datepicker-toggle matSuffix [for]="picker">
                                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                                     </mat-datepicker-toggle>
@@ -167,7 +167,7 @@
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="1" rowHeight="100px" class="p-10px">
+                    <mat-grid-list cols="1" class="p-10px">
                         <table class="simple shadow-1px">
                             <thead>
                             <tr>
@@ -189,7 +189,7 @@
                                     <span class="text-truncate">{{i + 1}}.</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">{{item?.id}}</span>
+                                    <span class="text-truncate">{{item?.itemId}}</span>
                                 </td>
                                 <td>
                                     <span class="text-truncate">{{item?.description}}</span>
@@ -204,7 +204,7 @@
                                     <span class="text-truncate">{{item?.value}}</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">{{item?.unitSellingPrice}}</span>
+                                    <span class="text-truncate">{{item?.sellingPrice}}</span>
                                 </td>
                                 <td>
                                     <span class="material-icons ml-1 cursor-pointer" (click)="editTaxes(i, item)">visibility</span>

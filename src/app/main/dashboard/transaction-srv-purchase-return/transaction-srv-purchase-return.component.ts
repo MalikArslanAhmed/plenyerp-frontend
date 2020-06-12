@@ -22,6 +22,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
     storeItems = [];
     unitOfMeasuresData = [];
     editableIndex: any;
+    isSubmitted = false;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
@@ -40,14 +41,14 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
 
     refresh() {
         this.srvPurchaseReturnForm = this.fb.group({
-            'supplierId': [''],
+            'companyId': [''],
             'storeId': [''],
             'cutomerAddress': [{value: '', disabled: true}],
             'storeName': [{value: '', disabled: true}],
-            'details': [''],
-            'pono': [''],
-            'srDocRefNo': [''],
-            'date': [''],
+            'detail': [''],
+            'poNumber': [''],
+            'sourceDocReferenceNumber': [''],
+            'dates': [''],
             'itemId': [''],
             'description': [''],
             'unitOfMeasures': [{value: '', disabled: true}],
@@ -79,12 +80,6 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
         });
     }
 
-    /*getStoreSetupUnitOfMeasure() {
-        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
-            this.unitOfMeasuresData = data.items;
-        });
-    }*/
-
     addItem(itemId, description, unitOfMeasures, quantity, unitPrice, unitCost) {
         let repeatItemFound = false;
         if (this.itemsArr && this.itemsArr.length > 0) {
@@ -105,9 +100,9 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             }
             if (this.editableIndex !== undefined) {
                 this.itemsArr[this.editableIndex] = {
-                    'id': itemId,
+                    'itemId': itemId,
                     'description': description,
-                    'unitOfMeasures': unitOfMeasures,
+                    'measurementId': unitOfMeasures,
                     'unitOfMeasureName': unitOfMeasureName,
                     'quantity': quantity,
                     'unitPrice': unitPrice,
@@ -117,9 +112,9 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
                 this.editableIndex = undefined;
             } else {
                 this.itemsArr.push({
-                    'id': itemId,
+                    'itemId': itemId,
                     'description': description,
-                    'unitOfMeasures': unitOfMeasures,
+                    'measurementId': unitOfMeasures,
                     'unitOfMeasureName': unitOfMeasureName,
                     'quantity': quantity,
                     'unitPrice': unitPrice,
@@ -131,7 +126,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             this.srvPurchaseReturnForm.patchValue({
                 'itemId': '',
                 'description': '',
-                'unitOfMeasures': '',
+                'measurementId': '',
                 'quantity': '',
                 'unitPrice': '',
                 'unitCost': ''
@@ -140,7 +135,6 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
         } else {
             this.alertService.showErrors('Item already added');
         }
-        console.log('this.itemsArr', this.itemsArr);
     }
 
     setSupplierAddress(compId) {
@@ -179,9 +173,9 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
     editItem(index) {
         this.editableIndex = index;
         this.srvPurchaseReturnForm.patchValue({
-            'itemId': this.itemsArr[index].id,
+            'itemId': this.itemsArr[index].itemId,
             'description': this.itemsArr[index].description,
-            'unitOfMeasures': this.itemsArr[index].unitOfMeasures,
+            'unitOfMeasures': this.itemsArr[index].measurementId,
             'quantity': this.itemsArr[index].quantity,
             'unitPrice': this.itemsArr[index].unitPrice,
             'unitCost': this.itemsArr[index].unitCost
@@ -233,11 +227,26 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
         delete this.srvPurchaseReturnForm.value['unitCost'];
         delete this.srvPurchaseReturnForm.value['unitPrice'];
         delete this.srvPurchaseReturnForm.value['unitOfMeasures'];
-        this.srvPurchaseReturnForm.value['date'] = this.srvPurchaseReturnForm.value['date'].format('YYYY-MM-DD');
+        this.srvPurchaseReturnForm.value['date'] = this.srvPurchaseReturnForm.value['dates'].format('YYYY-MM-DD');
         this.srvPurchaseReturnForm.value['storeName'] = this.srvPurchaseReturnForm['controls']['storeName'].value;
         this.srvPurchaseReturnForm.value['totalValuesInWords'] = this.srvPurchaseReturnForm['controls']['totalValuesInWords'].value;
         this.srvPurchaseReturnForm.value['subTotal'] = this.srvPurchaseReturnForm['controls']['subTotal'].value;
         this.srvPurchaseReturnForm.value['total'] = this.srvPurchaseReturnForm['controls']['total'].value;
+        this.srvPurchaseReturnForm.value['companyType'] = 'SUPPLIER';
+        this.srvPurchaseReturnForm.value['type'] = 'OUT';
         console.log('this.srvPurchaseReturnForm', this.srvPurchaseReturnForm.value);
+
+        this.isSubmitted = true;
+        if (!this.srvPurchaseReturnForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+            this.transactionService.saveSrvPurchaseReturn(this.srvPurchaseReturnForm.value).subscribe(data => {
+                this.srvPurchaseReturnForm.reset();
+                this.itemsArr = [];
+                this.isSubmitted = false;
+            });
+        }
     }
 }

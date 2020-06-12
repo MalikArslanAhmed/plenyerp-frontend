@@ -13,18 +13,20 @@ export class UserProfileService extends BaseService {
     constructor(public http: HttpClient, public alertService: AlertService, public globalService: GlobalService) {
         super(http, alertService, globalService);
     }
+
     getSelf(): Observable<any> {
         return this.getRequest(AppUrl.SELF);
     }
+
     getUpdate(data): Observable<any> {
         return this.putRequest(AppUrl.USER_UPDATE(), data);
     }
+
     getRemoveProfileImg(data): Observable<any> {
         return this.putRequestWithoutDataDeletion(AppUrl.USER_UPDATE(), data);
     }
 
-
-    public uploadFile(obj): Observable<any>  {
+    public uploadFile(obj): Observable<any> {
         let headers = new HttpHeaders();
         headers = headers.set('Content-Type', 'multipart/form-data');
 
@@ -33,11 +35,12 @@ export class UserProfileService extends BaseService {
         });
     }
 }
+
 // tslint:disable-next-line:typedef
-export function toFormData<T>( formValue: T ) {
+export function toFormData<T>(formValue: T) {
     const formData = new FormData();
 
-    for ( const key of Object.keys(formValue) ) {
+    for (const key of Object.keys(formValue)) {
         const value = formValue[key];
         formData.append(key, value);
     }

@@ -27,7 +27,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Giving Store Id</mat-label>
-                                    <select formControlName="givingStoreId" matNativeControl (change)="setGivingStoreName($event.target.value)">
+                                    <select formControlName="storeId" matNativeControl (change)="setGivingStoreName($event.target.value)">
                                         <option *ngFor="let stores of stores" [value]="stores.id">
                                             {{stores.id}}
                                         </option>
@@ -39,7 +39,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Receiving Store Id</mat-label>
-                                    <select formControlName="receivingStoreId" matNativeControl (change)="setReceivingStoreName($event.target.value)">
+                                    <select formControlName="receiveStoreId" matNativeControl (change)="setReceivingStoreName($event.target.value)">
                                         <option *ngFor="let stores of stores" [value]="stores.id">
                                             {{stores.id}}
                                         </option>
@@ -71,7 +71,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Details</mat-label>
-                                    <input matInput formControlName="details">
+                                    <input matInput formControlName="detail">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -79,7 +79,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Sr. doc. ref. no.</mat-label>
-                                    <input matInput formControlName="srDocRefNo">
+                                    <input matInput formControlName="sourceDocReferenceNumber">
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -87,7 +87,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Date</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Date">
+                                    <input matInput [matDatepicker]="picker" formControlName="dates" placeholder="Date">
                                     <mat-datepicker-toggle matSuffix [for]="picker">
                                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                                     </mat-datepicker-toggle>
@@ -154,65 +154,6 @@
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list>
-
-                    <mat-grid-list cols="6" rowHeight="100px">
-                        <!--<mat-grid-tile>
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Item Id</mat-label>
-                                    <select formControlName="itemId" matNativeControl #itemId (change)="setItemQuantity(itemId)">
-                                        <option *ngFor="let item of storeItems" [value]="item.id">
-                                            {{item.id}}
-                                        </option>
-                                    </select>
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Description</mat-label>
-                                    <input matInput formControlName="description" #description>
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Unit of measures</mat-label>
-                                    <select  formControlName="unitOfMeasures" matNativeControl #unitOfMeasures>
-                                        <option *ngFor="let unitOfMeasure of unitOfMeasuresData" [value]="unitOfMeasure.id">
-                                            {{unitOfMeasure.name}}
-                                        </option>
-                                    </select>
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>-->
-                        <mat-grid-tile>
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Quantity</mat-label>
-                                    <input matInput formControlName="quantity" #quantity>
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Cr - Account code</mat-label>
-                                    <input matInput formControlName="accountCode" #accountCode>
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                            <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
-                                <button mat-raised-button class="mat-accent mr-16 mt--20px"
-                                        (click)="addItem(itemId.value, description.value, unitOfMeasures.value, quantity.value, accountCode.value)">
-                                    Add Item
-                                </button>
-                            </div>
-                        </mat-grid-tile>
-                    </mat-grid-list>
                     <mat-grid-list cols="1" class="p-10px">
                         <table class="simple shadow-1px">
                             <thead>
@@ -231,7 +172,7 @@
                                     <span class="text-truncate">{{i + 1}}.</span>
                                 </td>
                                 <td>
-                                    <span class="text-truncate">{{item?.id}}</span>
+                                    <span class="text-truncate">{{item?.itemId}}</span>
                                 </td>
                                 <td>
                                     <span class="text-truncate">{{item?.description}}</span>
