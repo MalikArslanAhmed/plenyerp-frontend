@@ -1,1 +1,159 @@
-<p>companies-create works!</p>
+<div class="dialog-content-wrapper" id="items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar>
+        <form [formGroup]="itemForm">
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Company Name</mat-label>
+                        <input name="companyName" formControlName="companyName" matInput required cdk-focus-start>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>City</mat-label>
+                        <input name="city" formControlName="city" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Address</mat-label>
+                        <input name="address" rows="2" formControlName="address" matInput required cdk-focus-start>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>State</mat-label>
+                        <input name="state" formControlName="state" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>        
+            </mat-grid-list>
+
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Country</mat-label>
+                        <input name="country" formControlName="country" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Phone</mat-label>
+                        <input name="phone" formControlName="phone" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Email</mat-label>
+                        <input name="email" formControlName="email" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Website</mat-label>
+                        <input name="website" formControlName="website" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is Active?</mat-label>
+                        <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1 mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is Supplier?</mat-label>
+                        <mat-slide-toggle formControlName="isSupplier"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is Customer?</mat-label>
+                        <mat-slide-toggle formControlName="isCustomer"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is Cashbook A/C?</mat-label>
+                        <mat-slide-toggle formControlName="isCashbook"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1 mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is One-off?</mat-label>
+                        <mat-slide-toggle formControlName="isOneoff"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is PF?</mat-label>
+                        <mat-slide-toggle formControlName="isPF"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <!-- <mat-grid-list>
+                <mat-grid-tile>
+                    
+                </mat-grid-tile>
+            </mat-grid-list> -->
+            <!-- <mat-grid-list cols="2" rowHeight="80px">
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is Active?</mat-label>
+                        <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile> 
+                <mat-grid-tile [rowspan]="2" class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Country</mat-label>
+                        <input name="country" formControlName="country" matInput required>
+                    </mat-form-field>
+                </mat-grid-tile>     
+            </mat-grid-list>
+            <mat-grid-list cols="2" rowHeight="80px">
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is Supplier?</mat-label>
+                        <mat-slide-toggle formControlName="isSupplier"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile> 
+    
+            </mat-grid-list> -->
+            
+            
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-stroked-button class="add-btn"  >Add Bank A/C Details</button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(itemForm); saveStore()"
+                [disabled]="itemForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(itemForm); updateStore()"
+                [disabled]="itemForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+        <button mat-button class="save-button" 
+                aria-label="Clear" >Clear
+        </button>
+    </div>
+</div>
