@@ -159,6 +159,9 @@ import {DeleteListModalComponent} from './delete-list-modal/delete-list-modal.co
 import {TaxesComponent} from './taxes/taxes.component';
 import {TaxesListComponent} from './taxes/taxes-list/taxes-list.component';
 import {TaxesCreateComponent} from './taxes/taxes-create/taxes-create.component';
+import {CompaniesComponent} from "./companies/companies.component";
+import {CompaniesListComponent} from "./companies/companies-list/companies-list.component";
+import {CompaniesCreateComponent} from './companies/companies-create/companies-create.component';
 
 @NgModule({
     declarations: [
@@ -300,7 +303,10 @@ import {TaxesCreateComponent} from './taxes/taxes-create/taxes-create.component'
         DeleteListModalComponent,
         TaxesComponent,
         TaxesListComponent,
-        TaxesCreateComponent
+        TaxesCreateComponent,
+        CompaniesComponent,
+        CompaniesListComponent,
+        CompaniesCreateComponent
     ],
     imports: [
         CommonModule,

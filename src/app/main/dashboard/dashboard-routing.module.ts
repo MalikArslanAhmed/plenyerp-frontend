@@ -49,6 +49,7 @@ import {TransactionStvStoreTransferComponent} from './transaction-stv-store-tran
 import {TransactionStoreAdjustmentComponent} from './transaction-store-adjustment/transaction-store-adjustment.component';
 import {TransactionDonationsComponent} from './transaction-donations/transaction-donations.component';
 import {TaxesComponent} from "./taxes/taxes.component";
+import {CompaniesComponent} from "./companies/companies.component";
 
 const routes: Routes = [
     {
@@ -399,6 +400,13 @@ const routes: Routes = [
         component: TaxesComponent,
         data: {
             title: 'Taxes'
+        }
+    },
+    {
+        path: 'companies',
+        component: CompaniesComponent,
+        data: {
+            title: 'Companies'
         }
     }
 ];
