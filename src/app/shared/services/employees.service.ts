@@ -4,7 +4,7 @@ import {AlertService} from './alert.service';
 import {GlobalService} from './global.service';
 import {Observable} from 'rxjs';
 import {AppUrl} from '../constants/app-url';
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
 @Injectable({
     providedIn: 'root'

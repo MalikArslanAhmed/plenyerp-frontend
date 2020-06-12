@@ -80,6 +80,15 @@ export const navigation: FuseNavigation[] = [
         roles: [],
         children: [
             {
+                id: 'taxes',
+                title: 'Taxes',
+                roles: [AppConstants.ROLE_ID_ADMIN],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'money',
+                url: '/dashboard/taxes'
+            },
+            {
                 id: 'company-information',
                 title: 'Company Information',
                 // translate: 'NAV.DASHBOARDS',

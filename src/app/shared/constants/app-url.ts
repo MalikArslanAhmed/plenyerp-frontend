@@ -685,7 +685,7 @@ export class AppUrl {
         return AppUrl.API_URL + 'designations/' + id;
     }
 
-    static USER_UPDATE(id?): string {
+    static USER_UPDATE(): string {
         return AppUrl.API_URL + 'profile';
     }
 
@@ -907,5 +907,21 @@ export class AppUrl {
 
     static DONATIONS(): string {
         return AppUrl.API_URL + `srv-donation`;
+    }
+
+    static GET_TAXES_LIST(): string {
+        return AppUrl.API_URL + 'taxes';
+    }
+
+    static ADD_TAXES(): string {
+        return AppUrl.API_URL + 'taxes';
+    }
+
+    static UPDATE_TAXES(id): string {
+        return AppUrl.API_URL + 'taxes/' + id;
+    }
+
+    static DELETE_TAXES(id): string {
+        return AppUrl.API_URL + 'taxes/' + id;
     }
 }
