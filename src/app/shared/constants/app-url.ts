@@ -880,4 +880,20 @@ export class AppUrl {
     static UPDATE_BACKGROUND(employeeId, backgroundId): string {
         return AppUrl.API_URL + 'employee/' + employeeId + '/background/' + backgroundId;
     }
+
+    static GET_TAXES_LIST(): string {
+        return AppUrl.API_URL + 'taxes';
+    }
+
+    static ADD_TAXES(): string {
+        return AppUrl.API_URL + 'taxes';
+    }
+
+    static UPDATE_TAXES(id): string {
+        return AppUrl.API_URL + 'taxes/' + id;
+    }
+
+    static DELETE_TAXES(id): string {
+        return AppUrl.API_URL + 'taxes/' + id;
+    }
 }

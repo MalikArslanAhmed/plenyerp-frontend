@@ -1,1 +1,104 @@
-<p>taxes-list works!</p>
+<div class="d-flex list-actions" style="padding: 1rem; padding-bottom: 0;">
+    <form [formGroup]="itemsFilterForm">
+        <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Search</mat-label>
+            <input matInput formControlName="search" name="search"
+                   (keyup)="getItems({'search': this.itemsFilterForm.value.search})">
+        </mat-form-field>
+    </form>
+</div>
+
+
+<mat-table [@animateStagger]="{value:'50'}" [dataSource]="taxesList">
+    <ng-container matColumnDef="SN">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let tax">
+            <p class="email text-truncate">
+                {{((pagination.page - 1) * pagination.perpage) + tax.sno}}.
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Tax ID</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let tax">
+            <p class="email text-truncate">
+                {{tax.id}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="taxTitle">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Tax Title</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-sm *matCellDef="let tax">
+            <p class="email text-truncate">
+                {{tax.personnelFileNumber}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="taxPercentage">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Tax %age (default value)</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
+            <p class="phone text-truncate">
+                {{tax.lastName}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="GLCode">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>GL/Code</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
+            <p class="phone text-truncate">
+                {{tax.firstName}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="benCode">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Benificiary Code</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
+            <p class="phone text-truncate">
+                {{tax.employeePersonalDetails?.phone}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="benName">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Benificiary Name</mat-header-cell>
+        <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
+            <p class="phone text-truncate">
+                {{tax.employeeJobProfiles?.department?.name}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let tax">
+            <div fxFlex="row" fxLayoutAlign="end center">
+                <button mat-icon-button aria-label="Toggle star" (click)="editTax(tax)" style="color: blue">
+                    <mat-icon class="material-icons">edit</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(tax)"
+                    style="color: red">
+                    <mat-icon class="material-icons">delete</mat-icon>
+                </button>
+            </div>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let tax; columns: displayedColumns;" class="contact"
+             [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+</mat-table>
+<mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
+               *ngIf="taxesList.length > 0"
+               [length]="pagination.total"
+               [pageIndex]="pagination.page-1"
+               [pageSize]="pagination.perpage"
+>
+</mat-paginator>
