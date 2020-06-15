@@ -82,7 +82,8 @@
 // -----------------------------------------------------------------------------------------------------
 $carded-header-height: 200px !default;
 $carded-toolbar-height: 64px !default;
-$header-height: 120px !default;
+//$header-height: 120px !default;
+$header-height: auto !default;
 
 // Calculate toolbar-less carded header height
 $carded-header-height-without-toolbar: $carded-header-height - $carded-toolbar-height;
@@ -490,6 +491,7 @@ $carded-header-height-without-toolbar: $carded-header-height - $carded-toolbar-h
                 height: $header-height;
                 min-height: $header-height;
                 max-height: $header-height;
+                padding: 16px !important;
             }
         }
 
