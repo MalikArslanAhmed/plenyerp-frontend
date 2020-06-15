@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'app-report-inventory-ledger',
@@ -10,9 +11,47 @@ import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.s
     animations: fuseAnimations
 })
 export class ReportInventoryLedgerComponent implements OnInit {
-    constructor(private _fuseSidebarService: FuseSidebarService) {
+    binCardForm: FormGroup;
+    itemsArr = [
+        {
+            description: 'lorem ipsum',
+            quantityIn: 1221,
+            unitPriceIn: 100,
+            valueIn: 1000,
+            quantityOut: 1221,
+            unitPriceOut: 100,
+            valueOut: 1000,
+            quantityBalance: 1221,
+            unitPriceBalance: 100,
+            valueBalance: 1000,
+        },
+        {
+            description: 'lorem ipsum',
+            quantityIn: 1221,
+            unitPriceIn: 100,
+            valueIn: 1000,
+            quantityOut: 1221,
+            unitPriceOut: 100,
+            valueOut: 1000,
+            quantityBalance: 1221,
+            unitPriceBalance: 100,
+            valueBalance: 1000,
+        },
+    ];
+
+    constructor(private fb: FormBuilder) {
     }
 
     ngOnInit(): void {
+        this.refresh();
+    }
+
+    refresh() {
+        this.binCardForm = this.fb.group({
+            openingDate: [''],
+            closingDate: [''],
+            store: [''],
+            closingMethod: ['']
+        });
     }
 }

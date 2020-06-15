@@ -30,5 +30,4 @@ export class ReportQuantityBalanceComponent implements OnInit {
             closingMethod: ['']
         });
     }
-
 }
