@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {AlertService} from "../../../shared/services/alert.service";
-import {TransactionService} from "../../../shared/services/transaction.service";
-import {MatDialog} from "@angular/material/dialog";
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {AlertService} from '../../../shared/services/alert.service';
+import {TransactionService} from '../../../shared/services/transaction.service';
+import {MatDialog} from '@angular/material/dialog';
 import {ApplicableTaxesComponent} from '../applicable-taxes/applicable-taxes.component';
-import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
-import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
-import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
+import {StoreSetupItemsService} from '../../../shared/services/store-setup-items.service';
+import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
+import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 
 @Component({
     selector: 'app-transaction-srv-purchase-invoice',
@@ -47,28 +47,28 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
 
     refresh() {
         this.srvPurchaseInvocieForm = this.fb.group({
-            'companyId': [''],
-            'storeId': [''],
-            'supplierAddress': [{value: '', disabled: true}],
-            'storeName': [{value: '', disabled: true}],
-            'detail': [''],
-            'poNumber': [''],
-            'sourceDocReferenceNumber': [''],
-            'dates': [''],
-            'itemId': [''],
-            'description': [''],
-            'unitOfMeasures': [{value: '', disabled: true}],
-            'quantity': [''],
-            'unitCost': [''],
-            'totalValuesInWords': [{value: '', disabled: true}],
-            'subTotal': [{value: '', disabled: true}],
-            'totalTax': [{value: '', disabled: true}],
-            'total': [{value: '', disabled: true}]
+            companyId: [''],
+            storeId: [''],
+            supplierAddress: [{value: '', disabled: true}],
+            storeName: [{value: '', disabled: true}],
+            detail: [''],
+            poNumber: [''],
+            sourceDocReferenceNumber: [''],
+            dates: [''],
+            itemId: [''],
+            description: [''],
+            unitOfMeasures: [{value: '', disabled: true}],
+            quantity: [''],
+            unitCost: [''],
+            totalValuesInWords: [{value: '', disabled: true}],
+            subTotal: [{value: '', disabled: true}],
+            totalTax: [{value: '', disabled: true}],
+            total: [{value: '', disabled: true}]
         });
     }
 
     getCompanies() {
-        this.transactionService.getCompanies({'page': -1}).subscribe(data => {
+        this.transactionService.getCompanies({page: -1}).subscribe(data => {
             this.companies = data.items;
         });
     }
@@ -100,28 +100,28 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             if (this.unitOfMeasuresData && this.unitOfMeasuresData.length > 0) {
                 this.unitOfMeasuresData.forEach(unitOfMeasure => {
                     if (parseInt(unitOfMeasure.id) === parseInt(unitOfMeasures)) {
-                        unitOfMeasureName = unitOfMeasure.name
+                        unitOfMeasureName = unitOfMeasure.name;
                     }
                 });
             }
             this.itemsArr.push({
-                'itemId': itemId,
-                'description': description,
-                'measurementId': unitOfMeasures,
-                'unitOfMeasuresName': unitOfMeasureName,
-                'quantity': quantity,
-                'unitCost': unitCost,
-                'value': parseInt(quantity) * parseInt(unitCost),
-                'totalValue': this.totalTaxes + (parseInt(quantity) * parseInt(unitCost)),
-                'taxes': this.taxes,
-                'totalTaxes': this.totalTaxes
+                itemId: itemId,
+                description: description,
+                measurementId: unitOfMeasures,
+                unitOfMeasuresName: unitOfMeasureName,
+                quantity: quantity,
+                unitCost: unitCost,
+                value: parseInt(quantity) * parseInt(unitCost),
+                totalValue: this.totalTaxes + (parseInt(quantity) * parseInt(unitCost)),
+                taxes: this.taxes,
+                totalTaxes: this.totalTaxes
             });
             this.srvPurchaseInvocieForm.patchValue({
-                'itemId': '',
-                'description': '',
-                'unitOfMeasures': '',
-                'quantity': '',
-                'unitCost': ''
+                itemId: '',
+                description: '',
+                unitOfMeasures: '',
+                quantity: '',
+                unitCost: ''
             });
             this.setTotals();
         } else {
@@ -148,9 +148,9 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         this.dialogRef = this._matDialog.open(ApplicableTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                'action': 'CREATE',
-                'itemId': this.srvPurchaseInvocieForm.value.itemId,
-                'grossAmount': this.srvPurchaseInvocieForm.value.unitCost * this.srvPurchaseInvocieForm.value.quantity,
+                action: 'CREATE',
+                itemId: this.srvPurchaseInvocieForm.value.itemId,
+                grossAmount: this.srvPurchaseInvocieForm.value.unitCost * this.srvPurchaseInvocieForm.value.quantity,
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -166,12 +166,12 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         this.dialogRef = this._matDialog.open(ApplicableTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                'action': 'EDIT',
-                'id': index,
-                'itemId': item.id,
-                'taxes': item.taxes,
-                'totalTaxes': item.totalTaxes,
-                'grossAmount': item.unitCost * item.quantity,
+                action: 'EDIT',
+                id: index,
+                itemId: item.id,
+                taxes: item.taxes,
+                totalTaxes: item.totalTaxes,
+                grossAmount: item.unitCost * item.quantity,
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -189,12 +189,12 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         if (this.companies && this.companies.length > 0) {
             this.companies.forEach(company => {
                 if (parseInt(company.id) === parseInt(compId)) {
-                    selectedSupplierAddress = company.name
+                    selectedSupplierAddress = company.name;
                 }
             });
         }
         this.srvPurchaseInvocieForm.patchValue({
-            'supplierAddress': selectedSupplierAddress
+            supplierAddress: selectedSupplierAddress
         });
     }
 
@@ -203,17 +203,17 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         if (this.stores && this.stores.length > 0) {
             this.stores.forEach(store => {
                 if (parseInt(store.id) === parseInt(storeId)) {
-                    selectedStoreName = store.name
+                    selectedStoreName = store.name;
                 }
             });
         }
         this.srvPurchaseInvocieForm.patchValue({
-            'storeName': selectedStoreName
+            storeName: selectedStoreName
         });
     }
 
     setTotals() {
-        let numberToWords = new NumberToWordsPipe();
+        const numberToWords = new NumberToWordsPipe();
         if (this.itemsArr && this.itemsArr.length > 0) {
             let subTotal = 0;
             let totalTaxes = 0;
@@ -222,17 +222,17 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 totalTaxes = totalTaxes + parseInt(item.totalTaxes);
             });
             this.srvPurchaseInvocieForm.patchValue({
-                'subTotal': subTotal,
-                'totalTax': totalTaxes,
-                'total': subTotal + totalTaxes,
-                'totalValuesInWords': numberToWords.transform(subTotal + totalTaxes)
+                subTotal: subTotal,
+                totalTax: totalTaxes,
+                total: subTotal + totalTaxes,
+                totalValuesInWords: numberToWords.transform(subTotal + totalTaxes)
             });
         } else {
             this.srvPurchaseInvocieForm.patchValue({
-                'subTotal': 0,
-                'totalTax': 0,
-                'total': 0,
-                'totalValuesInWords': '-'
+                subTotal: 0,
+                totalTax: 0,
+                total: 0,
+                totalValuesInWords: '-'
             });
         }
     }
@@ -242,12 +242,12 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
                     this.unitOfMeasuresData = [{
-                        'id': storeItem.inventoryMeasurement.id,
-                        'name': storeItem.inventoryMeasurement.name
+                        id: storeItem.inventoryMeasurement.id,
+                        name: storeItem.inventoryMeasurement.name
                     }];
                     this.srvPurchaseInvocieForm.patchValue({
-                        'unitOfMeasures': storeItem.inventoryMeasurement.id
-                    })
+                        unitOfMeasures: storeItem.inventoryMeasurement.id
+                    });
                 }
             });
         }
