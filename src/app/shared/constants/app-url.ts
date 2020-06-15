@@ -924,4 +924,20 @@ export class AppUrl {
     static DELETE_TAXES(id): string {
         return AppUrl.API_URL + 'taxes/' + id;
     }
+
+    static GET_COMPANIES_LIST(): string {
+        return AppUrl.API_URL + 'companies';
+    }
+
+    static ADD_COMPANY(): string {
+        return AppUrl.API_URL + 'companies';
+    }
+
+    static UPDATE_COMPANY(id): string {
+        return AppUrl.API_URL + 'companies/' + id;
+    }
+
+    static DELETE_COMPANY(id): string {
+        return AppUrl.API_URL + 'companies/' + id;
+    }
 }

@@ -1,9 +1,11 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {fuseAnimations} from '../../../../@fuse/animations';
 import {FuseSidebarService} from '@fuse/components/sidebar/sidebar.service';
 import {MatDialog} from '@angular/material/dialog';
 import {FormGroup} from '@angular/forms';
 import {CompaniesCreateComponent} from './companies-create/companies-create.component';
-import {fuseAnimations} from "../../../../@fuse/animations";
+import {CompaniesListComponent} from './companies-list/companies-list.component';
+
 
 @Component({
     selector: 'app-companies',
@@ -14,6 +16,7 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 })
 export class CompaniesComponent implements OnInit {
     dialogRef: any;
+    @ViewChild(CompaniesListComponent) getCompaniesList: CompaniesListComponent;
 
     constructor(private _fuseSidebarService: FuseSidebarService,
                 private _matDialog: MatDialog) {
@@ -31,7 +34,7 @@ export class CompaniesComponent implements OnInit {
             if (!response) {
                 return;
             }
-            //this.getStores.getStores();
+            this.getCompaniesList.getCompaniesList();
         });
     }
 
