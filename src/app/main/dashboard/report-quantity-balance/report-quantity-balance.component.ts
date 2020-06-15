@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {fuseAnimations} from "../../../../@fuse/animations";
 
 @Component({
     selector: 'app-report-quantity-balance',
     templateUrl: './report-quantity-balance.component.html',
-    styleUrls: ['./report-quantity-balance.component.scss']
+    styleUrls: ['./report-quantity-balance.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
 })
 export class ReportQuantityBalanceComponent implements OnInit {
     binCardForm: FormGroup;
