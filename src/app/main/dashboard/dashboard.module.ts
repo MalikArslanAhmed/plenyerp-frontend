@@ -162,6 +162,10 @@ import {TaxesCreateComponent} from './taxes/taxes-create/taxes-create.component'
 import {CompaniesComponent} from "./companies/companies.component";
 import {CompaniesListComponent} from "./companies/companies-list/companies-list.component";
 import {CompaniesCreateComponent} from './companies/companies-create/companies-create.component';
+import {ReportBinCardComponent} from './report-bin-card/report-bin-card.component';
+import {ReportInventoryLedgerComponent} from './report-inventory-ledger/report-inventory-ledger.component';
+import { ReportQuantityBalanceComponent } from './report-quantity-balance/report-quantity-balance.component';
+import { ReportOffLevelComponent } from './report-off-level/report-off-level.component';
 
 @NgModule({
     declarations: [
@@ -306,7 +310,11 @@ import {CompaniesCreateComponent} from './companies/companies-create/companies-c
         TaxesCreateComponent,
         CompaniesComponent,
         CompaniesListComponent,
-        CompaniesCreateComponent
+        CompaniesCreateComponent,
+        ReportBinCardComponent,
+        ReportInventoryLedgerComponent,
+        ReportQuantityBalanceComponent,
+        ReportOffLevelComponent
     ],
     imports: [
         CommonModule,

@@ -50,6 +50,10 @@ import {TransactionStoreAdjustmentComponent} from './transaction-store-adjustmen
 import {TransactionDonationsComponent} from './transaction-donations/transaction-donations.component';
 import {TaxesComponent} from "./taxes/taxes.component";
 import {CompaniesComponent} from "./companies/companies.component";
+import {ReportBinCardComponent} from "./report-bin-card/report-bin-card.component";
+import {ReportInventoryLedgerComponent} from "./report-inventory-ledger/report-inventory-ledger.component";
+import {ReportQuantityBalanceComponent} from "./report-quantity-balance/report-quantity-balance.component";
+import {ReportOffLevelComponent} from "./report-off-level/report-off-level.component";
 
 const routes: Routes = [
     {
@@ -407,6 +411,34 @@ const routes: Routes = [
         component: CompaniesComponent,
         data: {
             title: 'Companies'
+        }
+    },
+    {
+        path: 'report-bin-card',
+        component: ReportBinCardComponent,
+        data: {
+            title: 'Report Bin Card'
+        }
+    },
+    {
+        path: 'report-inventory-ledger',
+        component: ReportInventoryLedgerComponent,
+        data: {
+            title: 'Report Inventory Ledger'
+        }
+    },
+    {
+        path: 'report-quantity-balance',
+        component: ReportQuantityBalanceComponent,
+        data: {
+            title: 'Report Quantity Balance'
+        }
+    },
+    {
+        path: 'report-off-level',
+        component: ReportOffLevelComponent,
+        data: {
+            title: 'Report Off Level'
         }
     }
 ];

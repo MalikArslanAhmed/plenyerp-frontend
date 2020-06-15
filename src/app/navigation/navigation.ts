@@ -459,6 +459,44 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/transaction-donations'
                     }
                 ]
+            },
+            {
+                id: 'report',
+                title: 'Report',
+                roles: [AppConstants.ROLE_ID_INVENTORY],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'report',
+                children: [
+                    {
+                        id: 'bin-card',
+                        title: 'Bin Card',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/report-bin-card'
+                    },
+                    {
+                        id: 'inventory-ledger',
+                        title: 'Inventory Ledger',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/report-inventory-ledger'
+                    },
+                    {
+                        id: 'quantity-balance',
+                        title: 'Quantity Balance',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/report-quantity-balance'
+                    },
+                    {
+                        id: 'off-level',
+                        title: 'Off Level',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/report-off-level'
+                    }
+                ]
             }
         ]
     }
