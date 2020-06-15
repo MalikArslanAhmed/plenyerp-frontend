@@ -1,1 +1,131 @@
-<p>report-quantity-balance works!</p>
+<div id="items" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">insert_chart
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Quantity Balance
+                </span>
+            </div>
+        </div>
+        <!--<div fxLayout="row" fxLayoutAlign="end center">
+            <button mat-fab class="accent" id="add-button" aria-label="add qualification"
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        </div>-->
+    </div>
+    <div class="content" fusePerfectScrollbar>
+        <div class="center p-24 pb-56 pr-sm-92">
+            <div class="content p-24" fusePerfectScrollbar>
+                <form fxLayout="column" [formGroup]="binCardForm">
+                    <!--<mat-grid-list cols="4" rowHeight="80px" class="m-10px shadow-1px">
+                        <mat-grid-tile class="mt-2">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Opening Date</mat-label>
+                                    <select formControlName="openingDate" matNativeControl #itemId
+                                            (change)="setItemQuantity(itemId)">
+                                        <option *ngFor="let item of storeItems" [value]="item.id">
+                                            {{item.id}}
+                                        </option>
+                                    </select>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="mt-2">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Closing Date</mat-label>
+                                    <input matInput formControlName="closingDate" #description>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="mt-2">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Store</mat-label>
+                                    <select formControlName="store" matNativeControl #unitOfMeasures>
+                                        <option *ngFor="let unitOfMeasure of unitOfMeasuresData"
+                                                [value]="unitOfMeasure.id">
+                                            {{unitOfMeasure.name}}
+                                        </option>
+                                    </select>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="mt-2">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Closing Method</mat-label>
+                                    <input matInput formControlName="closingMethod" #quantity>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="mt-1">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <button mat-raised-button class="mat-accent mt&#45;&#45;20px"
+                                        (click)="addItem(itemId.value, description.value, unitOfMeasures.value, quantity.value, unitCost.value)">
+                                    Filter
+                                </button>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>-->
+                    <mat-grid-list cols="1" class="p-10px">
+                        <table class="simple shadow-1px">
+                            <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Item Code</th>
+                                <th>Item Description</th>
+                                <th>Period Balance</th>
+                                <th>Stock Value</th>
+                                <th>Unit Of Measure</th>
+                                <!--<th>Action</th>-->
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="itemsArr && itemsArr.length > 0; else noItemToShow">
+                            <tr *ngFor="let item of itemsArr; let i = index">
+                                <td>
+                                    <span class="text-truncate">{{i + 1}}.</span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">{{item?.itemCode}}</span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">{{item?.description}}</span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">{{item?.periodBalance}}</span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">{{item?.stockValue}}</span>
+                                </td>
+                                <td>
+                                    <span class="text-truncate">{{item?.unitOfMeasure}}</span>
+                                </td>
+                                <!--<td>
+                                    <span class="material-icons ml-1 cursor-pointer" (click)="editTaxes(i, item)">visibility</span>
+                                    <span class="material-icons delete-item cursor-pointer" (click)="deleteItem(i)">delete</span>
+                                </td>-->
+                            </tr>
+                            </tbody>
+                            <ng-template #noItemToShow>
+                                <tbody>
+                                <tr>
+                                    <td colspan="10" class="text-center">
+                                        <span class="text-truncate">No data to show</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </ng-template>
+                        </table>
+                    </mat-grid-list>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
