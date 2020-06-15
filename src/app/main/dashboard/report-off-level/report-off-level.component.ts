@@ -10,24 +10,43 @@ import {FormBuilder, FormGroup} from "@angular/forms";
     animations: fuseAnimations
 })
 export class ReportOffLevelComponent implements OnInit {
-    binCardForm: FormGroup;
+    reportOffLevelForm: FormGroup;
     itemsArr = [
-        {description: 'lorem ipsum', minMaxReorderLevel: 10, onHand: 12, quantity: 1221, variance: 1221, unitOfMeasure: 'kg', store: 'New Store '},
-        {description: 'lorem ipsum2', minMaxReorderLevel: 20, onHand: 20, quantity: 221, variance: 221, unitOfMeasure: 'kg', store: 'New Store 1'}
+        {
+            description: 'New Item 1',
+            minMaxReorderLevel: 10,
+            onHand: 12,
+            quantity: 1221,
+            variance: 1221,
+            unitOfMeasure: 'kg',
+            store: 'New Store '
+        },
+        {
+            description: 'New Item 2',
+            minMaxReorderLevel: 20,
+            onHand: 20,
+            quantity: 221,
+            variance: 221,
+            unitOfMeasure: 'kg',
+            store: 'New Store 1'
+        }
     ];
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder) {
+    }
 
     ngOnInit(): void {
         this.refresh();
     }
 
     refresh() {
-        this.binCardForm = this.fb.group({
+        this.reportOffLevelForm = this.fb.group({
             openingDate: [''],
             closingDate: [''],
+            itemId: [''],
+            itemName: [''],
             store: [''],
-            closingMethod: ['']
+            costingMethod: []
         });
     }
 }

@@ -12,8 +12,8 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 export class ReportBinCardComponent implements OnInit {
     binCardForm: FormGroup;
     itemsArr = [
-        {date: '12-06-2020', description: 'lorem ipsum', in: 12, unitCost: '1221', out: 6, balance: 6},
-        {date: '13-06-2020', description: 'lorem ipsum2', in: 12, unitCost: '2221', out: 8, balance: 4}
+        {date: '12-06-2020', description: 'New Item 1', in: 12, unitCost: '1221', out: 6, balance: 6},
+        {date: '13-06-2020', description: 'New Item 2', in: 12, unitCost: '2221', out: 8, balance: 4}
     ];
 
     constructor(private fb: FormBuilder) {
@@ -29,7 +29,8 @@ export class ReportBinCardComponent implements OnInit {
             closingDate: [''],
             itemId: [''],
             itemName: [''],
-            store: ['']
+            store: [''],
+            costingMethod: []
         });
     }
 

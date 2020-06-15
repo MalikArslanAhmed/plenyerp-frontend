@@ -11,36 +11,49 @@
                 </span>
             </div>
         </div>
-        <!--<div fxLayout="row" fxLayoutAlign="end center">
-            <button mat-fab class="accent" id="add-button" aria-label="add qualification"
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button mat-fab class="accent" id="add-button" title="Download Report"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
-                <mat-icon>add_circle</mat-icon>
+                <mat-icon>cloud_download</mat-icon>
             </button>
-        </div>-->
+        </div>
     </div>
     <div class="content" fusePerfectScrollbar>
         <div class="center p-24 pb-56 pr-sm-92">
             <div class="content p-24" fusePerfectScrollbar>
-                <form fxLayout="column" [formGroup]="binCardForm">
-                    <!--<mat-grid-list cols="4" rowHeight="80px" class="m-10px shadow-1px">
+                <form fxLayout="column" [formGroup]="reportInventoryLedgerForm">
+                    <mat-grid-list cols="4" rowHeight="80px" class="m-10px shadow-1px">
                         <mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Opening Date</mat-label>
-                                    <select formControlName="openingDate" matNativeControl #itemId
-                                            (change)="setItemQuantity(itemId)">
-                                        <option *ngFor="let item of storeItems" [value]="item.id">
-                                            {{item.id}}
-                                        </option>
-                                    </select>
+                                    <mat-label>Date Current Appt</mat-label>
+                                    <input matInput [matDatepicker]="openingDate"
+                                           formControlName="openingDate">
+                                    <mat-datepicker-toggle matSuffix
+                                                           [for]="openingDate"></mat-datepicker-toggle>
+                                    <mat-datepicker #openingDate></mat-datepicker>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Closing Date</mat-label>
-                                    <input matInput formControlName="closingDate" #description>
+                                    <mat-label>Date Current Appt</mat-label>
+                                    <input matInput [matDatepicker]="closingDate"
+                                           formControlName="closingDate">
+                                    <mat-datepicker-toggle matSuffix
+                                                           [for]="closingDate"></mat-datepicker-toggle>
+                                    <mat-datepicker #closingDate></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="mt-2">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Item Id</mat-label>
+                                    <select formControlName="store" matNativeControl>
+                                        <option value="1">New Store</option>
+                                    </select>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -48,11 +61,8 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Store</mat-label>
-                                    <select formControlName="store" matNativeControl #unitOfMeasures>
-                                        <option *ngFor="let unitOfMeasure of unitOfMeasuresData"
-                                                [value]="unitOfMeasure.id">
-                                            {{unitOfMeasure.name}}
-                                        </option>
+                                    <select formControlName="itemId" matNativeControl>
+                                        <option value="1">New Store 1</option>
                                     </select>
                                 </mat-form-field>
                             </div>
@@ -60,112 +70,125 @@
                         <mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Closing Method</mat-label>
-                                    <input matInput formControlName="closingMethod" #quantity>
+                                    <mat-label>Item Name</mat-label>
+                                    <input matInput formControlName="itemName">
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile class="mt-2">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Preferred Costing Method</mat-label>
+                                    <select formControlName="costingMethod" matNativeControl>
+                                        <option value="1">W. Avg</option>
+                                        <option value="2">LIFO</option>
+                                        <option value="2">FIFO</option>
+                                    </select>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile class="mt-1">
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <button mat-raised-button class="mat-accent mt&#45;&#45;20px"
-                                        (click)="addItem(itemId.value, description.value, unitOfMeasures.value, quantity.value, unitCost.value)">
-                                    Filter
+                            <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
+                                <button mat-raised-button class="mat-accent">
+                                    Load Report
                                 </button>
                             </div>
                         </mat-grid-tile>
-                    </mat-grid-list>-->
-                    <mat-grid-list cols="1" class="p-10px">
-                        <table class="simple shadow-1px">
-                            <thead>
+                    </mat-grid-list>
+                </form>
+                <mat-grid-list cols="1" class="p-10px">
+                    <table class="simple shadow-1px">
+                        <thead>
+                        <tr>
+                            <th colspan="3"></th>
+                            <th class="mr-10px">In</th>
+                            <th colspan="2"></th>
+                            <th class="mr-10px">Out</th>
+                            <th colspan="2"></th>
+                            <th class="mr-10px">Balance</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Item Description</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Value</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Value</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Value</th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf="itemsArr && itemsArr.length > 0; else noItemToShow">
+                        <tr *ngFor="let item of itemsArr; let i = index">
+                            <td>
+                                <span class="text-truncate">{{i + 1}}.</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.description}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.quantityIn}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.unitPriceIn}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.valueIn}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.quantityOut}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.unitPriceOut}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.valueOut}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.quantityBalance}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.unitPriceBalance}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.valueBalance}}</span>
+                            </td>
+                        </tr>
+                        <tr class="background-color-grey">
+                            <td></td>
+                            <td>
+                                <span class="text-truncate">Total</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">1000</span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="text-truncate">2000</span>
+                            </td>
+                            <td colspan="2"></td>
+                            <td>
+                                <span class="text-truncate">2000</span>
+                            </td>
+                            <td colspan="2">
+                            </td>
+                        </tr>
+                        </tbody>
+                        <ng-template #noItemToShow>
+                            <tbody>
                             <tr>
-                                <th colspan="3"></th>
-                                <th class="mr-10px">In</th>
-                                <th colspan="2"></th>
-                                <th class="mr-10px">Out</th>
-                                <th colspan="2"></th>
-                                <th class="mr-10px">Balance</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Item Description</th>
-                                <th>Quantity</th>
-                                <th>Unit Price</th>
-                                <th>Value</th>
-                                <th>Quantity</th>
-                                <th>Unit Price</th>
-                                <th>Value</th>
-                                <th>Quantity</th>
-                                <th>Unit Price</th>
-                                <th>Value</th>
-                            </tr>
-                            </thead>
-                            <tbody *ngIf="itemsArr && itemsArr.length > 0; else noItemToShow">
-                            <tr *ngFor="let item of itemsArr; let i = index">
-                                <td>
-                                    <span class="text-truncate">{{i + 1}}.</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.description}}</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.quantityIn}}</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.unitPriceIn}}</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.valueIn}}</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.quantityOut}}</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.unitPriceOut}}</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.valueOut}}</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.quantityBalance}}</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.unitPriceBalance}}</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">{{item?.valueBalance}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <span class="text-truncate">Total</span>
-                                </td>
-                                <td>
-                                    <span class="text-truncate">1000</span>
-                                </td>
-                                <td colspan="2"></td>
-                                <td>
-                                    <span class="text-truncate">2000</span>
-                                </td>
-                                <td colspan="2"></td>
-                                <td>
-                                    <span class="text-truncate">2000</span>
+                                <td colspan="10" class="text-center">
+                                    <span class="text-truncate">No data to show</span>
                                 </td>
                             </tr>
                             </tbody>
-                            <ng-template #noItemToShow>
-                                <tbody>
-                                <tr>
-                                    <td colspan="10" class="text-center">
-                                        <span class="text-truncate">No data to show</span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </ng-template>
-                        </table>
-                    </mat-grid-list>
-                </form>
+                        </ng-template>
+                    </table>
+                </mat-grid-list>
             </div>
         </div>
     </div>

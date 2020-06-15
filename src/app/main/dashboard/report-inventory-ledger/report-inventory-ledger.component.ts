@@ -11,7 +11,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
     animations: fuseAnimations
 })
 export class ReportInventoryLedgerComponent implements OnInit {
-    binCardForm: FormGroup;
+    reportInventoryLedgerForm: FormGroup;
     itemsArr = [
         {
             description: 'lorem ipsum',
@@ -47,11 +47,13 @@ export class ReportInventoryLedgerComponent implements OnInit {
     }
 
     refresh() {
-        this.binCardForm = this.fb.group({
+        this.reportInventoryLedgerForm = this.fb.group({
             openingDate: [''],
             closingDate: [''],
+            itemId: [''],
+            itemName: [''],
             store: [''],
-            closingMethod: ['']
+            costingMethod: []
         });
     }
 }

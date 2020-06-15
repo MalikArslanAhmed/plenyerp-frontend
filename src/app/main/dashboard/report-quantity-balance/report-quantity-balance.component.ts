@@ -10,10 +10,10 @@ import {fuseAnimations} from "../../../../@fuse/animations";
     animations: fuseAnimations
 })
 export class ReportQuantityBalanceComponent implements OnInit {
-    binCardForm: FormGroup;
+    reportQuantityForm: FormGroup;
     itemsArr = [
-        {itemCode: 'ab123', description: 'lorem ipsum', periodBalance: 12, stockValue: '1221', unitOfMeasure: 'kg'},
-        {itemCode: 'jk123', description: 'lorem ipsum2', periodBalance: 5, stockValue: '221', unitOfMeasure: 'kg'}
+        {itemCode: 'ab123', description: 'New Item 1', periodBalance: 12, stockValue: '1221', unitOfMeasure: 'kg'},
+        {itemCode: 'jk123', description: 'New Item 2', periodBalance: 5, stockValue: '221', unitOfMeasure: 'kg'}
     ];
 
     constructor(private fb: FormBuilder) { }
@@ -23,11 +23,13 @@ export class ReportQuantityBalanceComponent implements OnInit {
     }
 
     refresh() {
-        this.binCardForm = this.fb.group({
+        this.reportQuantityForm = this.fb.group({
             openingDate: [''],
             closingDate: [''],
+            itemId: [''],
+            itemName: [''],
             store: [''],
-            closingMethod: ['']
+            costingMethod: []
         });
     }
 }
