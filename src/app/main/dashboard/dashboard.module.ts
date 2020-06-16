@@ -167,6 +167,8 @@ import {ReportInventoryLedgerComponent} from './report-inventory-ledger/report-i
 import { ReportQuantityBalanceComponent } from './report-quantity-balance/report-quantity-balance.component';
 import { ReportOffLevelComponent } from './report-off-level/report-off-level.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { TransactionSupplierSelectComponent } from './transaction-supplier-select/transaction-supplier-select.component';
+import { TransactionStoreSelectComponent } from './transaction-store-select/transaction-store-select.component';
 
 @NgModule({
     declarations: [
@@ -315,7 +317,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         ReportBinCardComponent,
         ReportInventoryLedgerComponent,
         ReportQuantityBalanceComponent,
-        ReportOffLevelComponent
+        ReportOffLevelComponent,
+        TransactionSupplierSelectComponent,
+        TransactionStoreSelectComponent
     ],
     imports: [
         CommonModule,

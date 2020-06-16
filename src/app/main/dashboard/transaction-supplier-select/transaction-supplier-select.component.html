@@ -1,0 +1,76 @@
+<div id="category-list-select-component" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Select Supllier Id</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
+        <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Search Supplier Id</mat-label>
+            <input matInput class="search">
+        </mat-form-field>
+    </div>
+
+    <div class="p-5px">
+        <mat-table [@animateStagger]="{value:'50'}" [dataSource]="companies">
+            <ng-container matColumnDef="sno">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let company">
+                    <p class="email text-truncate">
+                        {{((pagination.page - 1) * pagination.perpage) + company.sno}}.
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Supplier Id</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let company">
+                    <p class="phone text-truncate ml-3">
+                        {{company.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let company">
+                    <p class="phone text-truncate">
+                        {{company.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 5px">Actions</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let company">
+                    <div fxFlex="row" fxLayoutAlign="end center">
+                        <button mat-icon-button aria-label="Toggle star" style="color: green"
+                                (click)="matDialogRef.close(company)">
+                            <mat-icon class="material-icons">check_circle</mat-icon>
+                        </button>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let item; columns: displayedColumns;" class="contact"
+                     [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
+    </div>
+    <div fxFlex="100" *ngIf="companies.length > 0">
+        <mat-paginator #paginator
+                       [length]="pagination.total"
+                       [pageSize]="pagination.perpage"
+                       [pageIndex]="pagination.page-1"
+                       (page)="pageEvent = onPageChange($event)"
+        >
+        </mat-paginator>
+    </div>
+</div>

@@ -8,6 +8,8 @@ import {ApplicableTaxesComponent} from '../applicable-taxes/applicable-taxes.com
 import {StoreSetupItemsService} from '../../../shared/services/store-setup-items.service';
 import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
+import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
+import { TransactionStoreSelectComponent } from '../transaction-store-select/transaction-store-select.component';
 
 @Component({
     selector: 'app-transaction-srv-purchase-invoice',
@@ -39,7 +41,6 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.getCompanies();
         this.getStores();
         this.getStoreItems();
     }
@@ -64,12 +65,6 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             subTotal: [{value: '', disabled: true}],
             totalTax: [{value: '', disabled: true}],
             total: [{value: '', disabled: true}]
-        });
-    }
-
-    getCompanies() {
-        this.transactionService.getCompanies({page: -1}).subscribe(data => {
-            this.companies = data.items;
         });
     }
 
@@ -297,5 +292,41 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 this.isSubmitted = false;
             });
         }
+    }
+
+    supplierIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionSupplierSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.companies = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.srvPurchaseInvocieForm.patchValue({
+                companyId: response.id,
+            });
+        });
+    }
+
+    storeIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionStoreSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.stores = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.srvPurchaseInvocieForm.patchValue({
+                storeId: response.id,
+            });
+        });
     }
 }

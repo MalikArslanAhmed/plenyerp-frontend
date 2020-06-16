@@ -24,20 +24,29 @@
                 <form fxLayout="column" [formGroup]="srvPurchaseInvocieForm">
                     <mat-grid-list cols="2" rowHeight="100px">
                         <mat-grid-tile class="mr-1">
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                            <div class="p-10px cursor-pointer" fxFlex="1 0 auto" fxLayout="column"
+                                 (click)="supplierIdSelect()">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Select Supplier Id</mat-label>
-                                    <select formControlName="companyId" matNativeControl
-                                            (change)="setSupplierAddress($event.target.value)">
-                                        <option *ngFor="let company of companies" [value]="company.id">
-                                            {{company.id}}
-                                        </option>
-                                    </select>
+                                    <mat-select formControlName="companyId" [disabled]="true">
+                                        <mat-option [value]="company.id"
+                                                    *ngFor="let company of companies">{{company.name}}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile class="ml-1">
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                            <div class="p-10px cursor-pointer" fxFlex="1 0 auto" fxLayout="column"
+                                 (click)="storeIdSelect()">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Select Supplier Id</mat-label>
+                                    <mat-select formControlName="storeId" [disabled]="true">
+                                        <mat-option [value]="company.id"
+                                                    *ngFor="let company of companies">{{company.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!--<div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Default line item store Id</mat-label>
                                     <select formControlName="storeId" matNativeControl
@@ -47,7 +56,7 @@
                                         </option>
                                     </select>
                                 </mat-form-field>
-                            </div>
+                            </div>-->
                         </mat-grid-tile>
                     </mat-grid-list>
                     <mat-grid-list cols="2" rowHeight="100px">
