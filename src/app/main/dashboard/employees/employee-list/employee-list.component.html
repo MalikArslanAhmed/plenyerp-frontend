@@ -108,6 +108,15 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="Maiden Name">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Maiden Name</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                <p class="email text-truncate">
+                    {{employee.maidenName}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="Last Name">
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Last Name</mat-header-cell>
             <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
@@ -343,15 +352,6 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="Maiden Name">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Maiden Name</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.maidenName}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
         <ng-container matColumnDef="Job Position">
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Job Position</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
@@ -497,7 +497,7 @@
             </mat-cell>
         </ng-container>
 
-        <!--=========== not defined ============ -->
+        <!--=========== not defined ============-->
         <ng-container matColumnDef="Address LGA">
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Address LGA</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
