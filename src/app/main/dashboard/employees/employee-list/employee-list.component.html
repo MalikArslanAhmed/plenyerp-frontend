@@ -197,7 +197,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Salary Scale</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
                 <p class="email text-truncate">
-                    {{employee.jobPosition?.salaryScale?.name}}
+                    {{employee.employeeJobProfiles?.jobPosition?.salaryScale?.name}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -356,7 +356,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Job Position</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
                 <p class="email text-truncate">
-                    {{employee.jobPosition?.name}}
+                    {{employee.employeeJobProfiles?.jobPosition?.name}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -365,7 +365,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Grade Level Step</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
                 <p class="email text-truncate">
-                    {{employee.empGradeLevelStep?.name}}
+                    {{employee.employeeJobProfiles?.empGradeLevelStep?.name}}
                 </p>
             </mat-cell>
         </ng-container>
