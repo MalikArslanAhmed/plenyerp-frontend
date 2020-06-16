@@ -108,13 +108,21 @@
                         <mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
+                                    <input type="text" placeholder="Item Id" aria-label="Number" matInput formControlName="itemId" [matAutocomplete]="auto" #itemId>
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let item of storeItems" [value]="item.id">
+                                            {{item?.id}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                                <!--<mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Item Id</mat-label>
                                     <select formControlName="itemId" matNativeControl #itemId (change)="setItemQuantity(itemId)">
                                         <option *ngFor="let item of storeItems" [value]="item.id">
                                             {{item.id}}
                                         </option>
                                     </select>
-                                </mat-form-field>
+                                </mat-form-field>-->
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile class="mt-2">

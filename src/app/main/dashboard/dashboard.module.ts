@@ -166,6 +166,7 @@ import {ReportBinCardComponent} from './report-bin-card/report-bin-card.componen
 import {ReportInventoryLedgerComponent} from './report-inventory-ledger/report-inventory-ledger.component';
 import { ReportQuantityBalanceComponent } from './report-quantity-balance/report-quantity-balance.component';
 import { ReportOffLevelComponent } from './report-off-level/report-off-level.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
     declarations: [
@@ -342,7 +343,8 @@ import { ReportOffLevelComponent } from './report-off-level/report-off-level.com
         MatRadioModule,
         MaterialFileInputModule,
         SharedModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatAutocompleteModule
     ]
 })
 export class DashboardModule {
