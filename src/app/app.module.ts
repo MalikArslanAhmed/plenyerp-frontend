@@ -32,6 +32,7 @@ import {MomentDatePipe} from "./shared/pipes/moment-date.pipe";
 import {SharedModule} from './shared/shared.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {NumberToWordsPipe} from './shared/pipes/number-to-word.pipe';
+import {UnderscoreSeparatePipe} from './shared/pipes/underscore-separate.pipe';
 
 const appRoutes: Routes = [
     {
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
         MomentDatePipe,
-        NumberToWordsPipe
+        NumberToWordsPipe,
+        UnderscoreSeparatePipe
     ],
     imports: [
         BrowserModule,

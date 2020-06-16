@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeesService } from "../../../../../shared/services/employees.service";
+import { EmployeesService } from '../../../../../shared/services/employees.service';
 
 @Component({
   selector: 'app-emp-list-headers',
@@ -15,7 +15,7 @@ export class EmpListHeadersComponent implements OnInit {
   // managers: any = [];
   updateData: any;
 
-  availableColumns = ['SN', 'id', 'fileId', 'lName', 'fName', 'phone', 'department','designation', 'title'];
+  availableColumns = ['SN', 'Title', 'File No', 'Staff ID', 'Gender', 'Marital Status', 'Emp. Photo', 'Expected Exit Date', 'Exited', 'First Name', 'Last Name', 'Grade Level', 'Type of Exit', 'Type of Appointment', 'TIN No', 'Street', 'State', 'PFA No', 'Salary Scale', 'RefNo TypeOfExit', 'RefNo TypeOfAppointment', 'Qualifications', 'Permanent Staff', 'Pension Started', 'New Enrollment', 'Passport No', 'Passport Issued on', 'Passport Issued at', 'Passport Expires on', 'NHF No', 'Nature Of Exit', 'Nationality', 'National ID No', 'Mobile Phone', 'Maiden Name', 'Job Position', 'Grade Level Step', 'Department', 'Address', 'Address Country', 'Email', 'Drivers Licence No', 'Designation', 'Date Last Increment', 'Date Pension Started', 'Date of Birth', 'Date Last Promoted', 'Date Current Appt', 'Date Employed', 'Date Assumed Duty', 'Confirmed', 'Address LGA', 'City', 'Address State', 'Citizen Country', 'Citizen LGA', 'Citizen Region', 'Citizen State', 'Confirmation Due Date'];
   selectedColumns = [];
   
 
