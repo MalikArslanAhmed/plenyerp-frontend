@@ -6,6 +6,8 @@ import {TransactionService} from "../../../shared/services/transaction.service";
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
 import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
+import {TransactionsItemsComponent} from '../transactions-items/transactions-items.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
     selector: 'app-transaction-store-adjustment',
@@ -23,9 +25,11 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     unitOfMeasuresData = [];
     editableIndex: any;
     isSubmitted = false;
+    dialogRef: any;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
+                private _matDialog: MatDialog,
                 private transactionService: TransactionService,
                 private storeSetupItemsService: StoreSetupItemsService,
                 private storeSetupStoresService: StoreSetupStoresService) {
@@ -272,5 +276,22 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
                 this.isSubmitted = false;
             });
         }
+    }
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.storeAdjustmentForm.patchValue({
+                itemId: response.id,
+            });
+        });
     }
 }
