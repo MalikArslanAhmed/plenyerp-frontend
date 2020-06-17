@@ -5,8 +5,12 @@ import {CompaniesService} from '../../../../shared/services/companies.service';
 import {CompaniesCreateComponent} from '../companies-create/companies-create.component';
 import {MatDialog} from '@angular/material/dialog';
 import {PageEvent} from '@angular/material/paginator';
-import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';;
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
+
+;
 import {FormGroup} from '@angular/forms';
+import {EmployeeBankDetailsComponent} from "../../employees/employee-action/employee-bank-details/employee-bank-details.component";
+import { CompanyBankDetailsComponent } from '../company-bank-details/company-bank-details.component';
 
 @Component({
     selector: 'app-companies-list',
@@ -27,10 +31,10 @@ export class CompaniesListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
     constructor(private companiesService: CompaniesService,
                 private _matDialog: MatDialog) {
     }
-
 
 
     ngOnInit(): void {
@@ -95,4 +99,16 @@ export class CompaniesListComponent implements OnInit {
         this.getCompaniesList(params);
     }
 
+    addBankAccount(previewEmp) {
+        this.dialogRef = this._matDialog.open(CompanyBankDetailsComponent, {
+            panelClass: 'bank-details-dialog',
+            data: {action: 'CREATE', selectedEmployee: previewEmp}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // this.getAddressTypeList.getAddressTypeList();
+        });
+    }
 }

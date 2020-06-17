@@ -1,17 +1,17 @@
-import {Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {fuseAnimations} from '../../../../../../@fuse/animations';
-import {EmployeeService} from '../../../../../shared/services/employee.service';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {EmployeeService} from "../../../../shared/services/employee.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {fuseAnimations} from "../../../../../@fuse/animations";
 
 @Component({
-    selector: 'app-employee-bank-details',
-    templateUrl: './employee-bank-details.component.html',
-    styleUrls: ['./employee-bank-details.component.scss'],
+    selector: 'app-company-bank-details',
+    templateUrl: './company-bank-details.component.html',
+    styleUrls: ['./company-bank-details.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class EmployeeBankDetailsComponent implements OnInit {
+export class CompanyBankDetailsComponent implements OnInit {
     action: any;
     employeeBankDetailsForm: FormGroup;
     isSubmitted = false;
@@ -29,7 +29,7 @@ export class EmployeeBankDetailsComponent implements OnInit {
     editAction = false;
 
     constructor(private employeesService: EmployeeService,
-                public matDialogRef: MatDialogRef<EmployeeBankDetailsComponent>,
+                public matDialogRef: MatDialogRef<CompanyBankDetailsComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder) {
         this.action = _data.action;
