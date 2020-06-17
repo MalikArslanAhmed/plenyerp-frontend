@@ -18,6 +18,10 @@ export class TransactionService extends BaseService {
         return this.getRequest(AppUrl.GET_COMPANIES(), data);
     }
 
+    getStores(data): Observable<any> {
+        return this.getRequest(AppUrl.STORE_SETUP_STORES(), data);
+    }
+
     getTaxes(data): Observable<any> {
         return this.getRequest(AppUrl.GET_TAXES(), data);
     }

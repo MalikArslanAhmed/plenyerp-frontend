@@ -28,11 +28,11 @@ export class TransactionStoreSelectComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getCompanies();
+        this.getStores();
     }
 
-    getCompanies(params = {}) {
-        this.transactionService.getCompanies(params).subscribe(data => {
+    getStores(params = {}) {
+        this.transactionService.getStores(params).subscribe(data => {
             this.stores = data.items;
             console.log(this.stores);
             this.pagination.page = data.page;
@@ -49,6 +49,6 @@ export class TransactionStoreSelectComponent implements OnInit {
 
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
-        this.getCompanies();
+        this.getStores();
     }
 }
