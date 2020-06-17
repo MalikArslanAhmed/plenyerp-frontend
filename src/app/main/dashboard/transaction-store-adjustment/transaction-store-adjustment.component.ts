@@ -1,11 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {AlertService} from "../../../shared/services/alert.service";
-import {TransactionService} from "../../../shared/services/transaction.service";
-import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
-import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
-import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {AlertService} from '../../../shared/services/alert.service';
+import {TransactionService} from '../../../shared/services/transaction.service';
+import {StoreSetupItemsService} from '../../../shared/services/store-setup-items.service';
+import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
+import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
+import {MatDialog} from '@angular/material/dialog';
+import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
+import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
 
 @Component({
     selector: 'app-transaction-store-adjustment',
@@ -24,11 +27,14 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     editableIndex: any;
     isSubmitted = false;
 
+    dialogRef: any;
+
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
                 private transactionService: TransactionService,
                 private storeSetupItemsService: StoreSetupItemsService,
-                private storeSetupStoresService: StoreSetupStoresService) {
+                private storeSetupStoresService: StoreSetupStoresService,
+                private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -40,28 +46,28 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
 
     refresh() {
         this.storeAdjustmentForm = this.fb.group({
-            'companyId': [''],
-            'storeId': [''],
-            'supplierAddress': [{value: '', disabled: true}],
-            'storeName': [{value: '', disabled: true}],
-            'detail': [''],
-            'sourceDocReferenceNumber': [''],
-            'dates': [''],
-            'itemId': [''],
-            'description': [''],
-            'unitOfMeasures': [{value: '', disabled: true}],
-            'quantityInSys': [{value: '', disabled: true}],
-            'quantityPhyCount': [''],
-            'quantitySysLessPhy': [{value: '', disabled: true}],
-            'unitCostOfDiff': [''],
-            'totalValuesInWords': [{value: '', disabled: true}],
-            'subTotal': [{value: '', disabled: true}],
-            'total': [{value: '', disabled: true}]
+            companyId: [''],
+            storeId: [''],
+            supplierAddress: [{value: '', disabled: true}],
+            storeName: [{value: '', disabled: true}],
+            detail: [''],
+            sourceDocReferenceNumber: [''],
+            dates: [''],
+            itemId: [''],
+            description: [''],
+            unitOfMeasures: [{value: '', disabled: true}],
+            quantityInSys: [{value: '', disabled: true}],
+            quantityPhyCount: [''],
+            quantitySysLessPhy: [{value: '', disabled: true}],
+            unitCostOfDiff: [''],
+            totalValuesInWords: [{value: '', disabled: true}],
+            subTotal: [{value: '', disabled: true}],
+            total: [{value: '', disabled: true}]
         });
     }
 
     getCompanies() {
-        this.transactionService.getCompanies({'page': -1}).subscribe(data => {
+        this.transactionService.getCompanies({page: -1}).subscribe(data => {
             this.companies = data.items;
         });
     }
@@ -84,12 +90,12 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         if (this.companies && this.companies.length > 0) {
             this.companies.forEach(company => {
                 if (parseInt(company.id) === parseInt(compId)) {
-                    selectedSupplierAddress = company.name
+                    selectedSupplierAddress = company.name;
                 }
             });
         }
         this.storeAdjustmentForm.patchValue({
-            'supplierAddress': selectedSupplierAddress
+            supplierAddress: selectedSupplierAddress
         });
     }
 
@@ -98,12 +104,12 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         if (this.stores && this.stores.length > 0) {
             this.stores.forEach(store => {
                 if (parseInt(store.id) === parseInt(storeId)) {
-                    selectedStoreName = store.name
+                    selectedStoreName = store.name;
                 }
             });
         }
         this.storeAdjustmentForm.patchValue({
-            'storeName': selectedStoreName
+            storeName: selectedStoreName
         });
     }
 
@@ -121,46 +127,46 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             if (this.unitOfMeasuresData && this.unitOfMeasuresData.length > 0) {
                 this.unitOfMeasuresData.forEach(unitOfMeasure => {
                     if (parseInt(unitOfMeasure.id) === parseInt(unitOfMeasures)) {
-                        unitOfMeasureName = unitOfMeasure.name
+                        unitOfMeasureName = unitOfMeasure.name;
                     }
                 });
             }
             if (this.editableIndex !== undefined) {
                 this.itemsArr[this.editableIndex] = {
-                    'itemId': itemId,
-                    'description': description,
-                    'measurementId': unitOfMeasures,
-                    'unitOfMeasureName': unitOfMeasureName,
-                    'quantityInSys': quantityInSys,
-                    'quantity': quantityPhyCount,
-                    'quantitySysLessPhy': quantitySysLessPhy,
-                    'unitCost': unitCostOfDiff,
-                    'value': parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
-                    'totalValue': (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff)),
+                    itemId: itemId,
+                    description: description,
+                    measurementId: unitOfMeasures,
+                    unitOfMeasureName: unitOfMeasureName,
+                    quantityInSys: quantityInSys,
+                    quantity: quantityPhyCount,
+                    quantitySysLessPhy: quantitySysLessPhy,
+                    unitCost: unitCostOfDiff,
+                    value: parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
+                    totalValue: (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff)),
                 };
                 this.editableIndex = undefined;
             } else {
                 this.itemsArr.push({
-                    'itemId': itemId,
-                    'description': description,
-                    'measurementId': unitOfMeasures,
-                    'unitOfMeasureName': unitOfMeasureName,
-                    'quantityInSys': quantityInSys,
-                    'quantity': quantityPhyCount,
-                    'quantitySysLessPhy': quantitySysLessPhy,
-                    'unitCost': unitCostOfDiff,
-                    'value': parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
-                    'totalValue': (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff))
+                    itemId: itemId,
+                    description: description,
+                    measurementId: unitOfMeasures,
+                    unitOfMeasureName: unitOfMeasureName,
+                    quantityInSys: quantityInSys,
+                    quantity: quantityPhyCount,
+                    quantitySysLessPhy: quantitySysLessPhy,
+                    unitCost: unitCostOfDiff,
+                    value: parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
+                    totalValue: (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff))
                 });
             }
             this.storeAdjustmentForm.patchValue({
-                'itemId': '',
-                'description': '',
-                'unitOfMeasures': '',
-                'quantityInSys': '',
-                'quantityPhyCount': '',
-                'quantitySysLessPhy': '',
-                'unitCostOfDiff': ''
+                itemId: '',
+                description: '',
+                unitOfMeasures: '',
+                quantityInSys: '',
+                quantityPhyCount: '',
+                quantitySysLessPhy: '',
+                unitCostOfDiff: ''
             });
             this.setTotals();
         } else {
@@ -174,22 +180,22 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     }
 
     setTotals() {
-        let numberToWords = new NumberToWordsPipe();
+        const numberToWords = new NumberToWordsPipe();
         if (this.itemsArr && this.itemsArr.length > 0) {
             let subTotal = 0;
             this.itemsArr.forEach(item => {
                 subTotal = subTotal + parseInt(item.totalValue);
             });
             this.storeAdjustmentForm.patchValue({
-                'subTotal': subTotal,
-                'total': subTotal,
-                'totalValuesInWords': numberToWords.transform(subTotal)
+                subTotal: subTotal,
+                total: subTotal,
+                totalValuesInWords: numberToWords.transform(subTotal)
             });
         } else {
             this.storeAdjustmentForm.patchValue({
-                'subTotal': 0,
-                'total': 0,
-                'totalValuesInWords': '-'
+                subTotal: 0,
+                total: 0,
+                totalValuesInWords: '-'
             });
         }
     }
@@ -197,13 +203,13 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     editItem(index) {
         this.editableIndex = index;
         this.storeAdjustmentForm.patchValue({
-            'itemId': this.itemsArr[index].itemId,
-            'description': this.itemsArr[index].description,
-            'unitOfMeasures': this.itemsArr[index].measurementId,
-            'quantityInSys': this.itemsArr[index].quantityInSys,
-            'quantityPhyCount': this.itemsArr[index].quantity,
-            'quantitySysLessPhy': this.itemsArr[index].quantitySysLessPhy,
-            'unitCostOfDiff': this.itemsArr[index].unitCost
+            itemId: this.itemsArr[index].itemId,
+            description: this.itemsArr[index].description,
+            unitOfMeasures: this.itemsArr[index].measurementId,
+            quantityInSys: this.itemsArr[index].quantityInSys,
+            quantityPhyCount: this.itemsArr[index].quantity,
+            quantitySysLessPhy: this.itemsArr[index].quantitySysLessPhy,
+            unitCostOfDiff: this.itemsArr[index].unitCost
         });
     }
 
@@ -212,14 +218,14 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
                     this.unitOfMeasuresData = [{
-                        'id': storeItem.inventoryMeasurement.id,
-                        'name': storeItem.inventoryMeasurement.name
+                        id: storeItem.inventoryMeasurement.id,
+                        name: storeItem.inventoryMeasurement.name
                     }];
                     this.storeAdjustmentForm.patchValue({
-                        'unitOfMeasures': storeItem.inventoryMeasurement.id
+                        unitOfMeasures: storeItem.inventoryMeasurement.id
                     });
                     this.storeAdjustmentForm.patchValue({
-                        'quantityInSys': storeItem.quantityAvailable
+                        quantityInSys: storeItem.quantityAvailable
                     });
                 }
             });
@@ -231,12 +237,12 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         if (quant < 0) {
             this.alertService.showErrors('Quantity (Sys-less Phy) should be less than Quantity (Phy Count)');
             this.storeAdjustmentForm.patchValue({
-               'quantityPhyCount': ''
+               quantityPhyCount: ''
             });
             return;
         }
         this.storeAdjustmentForm.patchValue({
-            'quantitySysLessPhy': quant
+            quantitySysLessPhy: quant
         });
         console.log('quant', quant);
     }
@@ -272,5 +278,41 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
                 this.isSubmitted = false;
             });
         }
+    }
+
+    supplierIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionSupplierSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.companies = [{
+                name: response.name,
+                id: response.id
+            }];
+            this.storeAdjustmentForm.patchValue({
+                companyId: response.id,
+            });
+        });
+    }
+
+    storeIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionStoreSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.stores = [{
+                name: response.name,
+                id: response.id
+            }];
+            this.storeAdjustmentForm.patchValue({
+                storeId: response.id,
+            });
+        });
     }
 }

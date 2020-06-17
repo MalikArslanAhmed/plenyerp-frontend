@@ -1,10 +1,12 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {AlertService} from "../../../shared/services/alert.service";
-import {TransactionService} from "../../../shared/services/transaction.service";
-import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
-import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {AlertService} from '../../../shared/services/alert.service';
+import {TransactionService} from '../../../shared/services/transaction.service';
+import {StoreSetupItemsService} from '../../../shared/services/store-setup-items.service';
+import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
+import {MatDialog} from '@angular/material/dialog';
+import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
 
 @Component({
     selector: 'app-transaction-stv-store-transfer',
@@ -18,15 +20,19 @@ export class TransactionStvStoreTransferComponent implements OnInit {
     itemsArr = [];
     companies = [];
     stores = [];
+    receivingStores = [];
     storeItems = [];
     unitOfMeasuresData = [];
     isSubmitted = false;
+
+    dialogRef: any;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
                 private transactionService: TransactionService,
                 private storeSetupItemsService: StoreSetupItemsService,
-                private storeSetupStoresService: StoreSetupStoresService) {
+                private storeSetupStoresService: StoreSetupStoresService,
+                private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -37,18 +43,18 @@ export class TransactionStvStoreTransferComponent implements OnInit {
 
     refresh() {
         this.stvStoreTransferForm = this.fb.group({
-            'storeId': [''],
-            'receiveStoreId': [''],
-            'givingStoreName': [{value: '', disabled: true}],
-            'receivingStoreName': [{value: '', disabled: true}],
-            'detail': [''],
-            'sourceDocReferenceNumber': [''],
-            'dates': [''],
-            'itemId': [''],
-            'description': [''],
-            'unitOfMeasures': [{value: '', disabled: true}],
-            'quantity': [''],
-            'accountCode': ['']
+            storeId: [''],
+            receiveStoreId: [''],
+            givingStoreName: [{value: '', disabled: true}],
+            receivingStoreName: [{value: '', disabled: true}],
+            detail: [''],
+            sourceDocReferenceNumber: [''],
+            dates: [''],
+            itemId: [''],
+            description: [''],
+            unitOfMeasures: [{value: '', disabled: true}],
+            quantity: [''],
+            accountCode: ['']
         });
     }
 
@@ -56,6 +62,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         this.stores = [];
         this.storeSetupStoresService.getStoreSetupStores({page: '-1'}).subscribe(data => {
             this.stores = data.items;
+            this.receivingStores = data.items;
         });
     }
 
@@ -70,12 +77,12 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         if (this.stores && this.stores.length > 0) {
             this.stores.forEach(store => {
                 if (parseInt(store.id) === parseInt(storeId)) {
-                    selectedStoreName = store.name
+                    selectedStoreName = store.name;
                 }
             });
         }
         this.stvStoreTransferForm.patchValue({
-            'givingStoreName': selectedStoreName
+            givingStoreName: selectedStoreName
         });
     }
 
@@ -84,12 +91,12 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         if (this.stores && this.stores.length > 0) {
             this.stores.forEach(store => {
                 if (parseInt(store.id) === parseInt(storeId)) {
-                    selectedStoreName = store.name
+                    selectedStoreName = store.name;
                 }
             });
         }
         this.stvStoreTransferForm.patchValue({
-            'receivingStoreName': selectedStoreName
+            receivingStoreName: selectedStoreName
         });
     }
 
@@ -107,25 +114,25 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             if (this.unitOfMeasuresData && this.unitOfMeasuresData.length > 0) {
                 this.unitOfMeasuresData.forEach(unitOfMeasure => {
                     if (parseInt(unitOfMeasure.id) === parseInt(unitOfMeasures)) {
-                        unitOfMeasureName = unitOfMeasure.name
+                        unitOfMeasureName = unitOfMeasure.name;
                     }
                 });
             }
             this.itemsArr.push({
-                'itemId': itemId,
-                'description': description,
-                'measurementId': unitOfMeasures,
-                'unitOfMeasureName': unitOfMeasureName,
-                'quantity': quantity,
-                'accountCode': accountCode,
+                itemId: itemId,
+                description: description,
+                measurementId: unitOfMeasures,
+                unitOfMeasureName: unitOfMeasureName,
+                quantity: quantity,
+                accountCode: accountCode,
             });
 
             this.stvStoreTransferForm.patchValue({
-                'itemId': '',
-                'description': '',
-                'measurementId': '',
-                'quantity': '',
-                'accountCode': ''
+                itemId: '',
+                description: '',
+                measurementId: '',
+                quantity: '',
+                accountCode: ''
             });
         } else {
             this.alertService.showErrors('Item already added');
@@ -141,12 +148,12 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
                     this.unitOfMeasuresData = [{
-                        'id': storeItem.inventoryMeasurement.id,
-                        'name': storeItem.inventoryMeasurement.name
+                        id: storeItem.inventoryMeasurement.id,
+                        name: storeItem.inventoryMeasurement.name
                     }];
                     this.stvStoreTransferForm.patchValue({
-                        'unitOfMeasures': storeItem.inventoryMeasurement.id
-                    })
+                        unitOfMeasures: storeItem.inventoryMeasurement.id
+                    });
                 }
             });
         }
@@ -178,5 +185,41 @@ export class TransactionStvStoreTransferComponent implements OnInit {
                 this.isSubmitted = false;
             });
         }
+    }
+
+    GivingStoreIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionStoreSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.stores = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.stvStoreTransferForm.patchValue({
+                storeId: response.id,
+            });
+        });
+    }
+
+    ReceivingStoreIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionStoreSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.receivingStores = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.stvStoreTransferForm.patchValue({
+                receiveStoreId: response.id,
+            });
+        });
     }
 }

@@ -8,6 +8,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
 import {StoreSetupItemsService} from '../../../shared/services/store-setup-items.service';
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
+import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
+import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
 
 @Component({
     selector: 'app-transaction-sales-invoice',
@@ -295,5 +297,41 @@ export class TransactionSalesInvoiceComponent implements OnInit {
                 this.isSubmitted = false;
             });
         }
+    }
+
+    supplierIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionSupplierSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.companies = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.salesInvoiceForm.patchValue({
+                companyId: response.id,
+            });
+        });
+    }
+
+    storeIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionStoreSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.stores = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.salesInvoiceForm.patchValue({
+                storeId: response.id,
+            });
+        });
     }
 }
