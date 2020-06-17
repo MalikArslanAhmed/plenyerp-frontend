@@ -25,7 +25,7 @@
                     <mat-grid-list cols="2" rowHeight="100px">
                         <mat-grid-tile class="mr-1">
                             <div class="p-10px cursor-pointer" fxFlex="1 0 auto" fxLayout="column"
-                                 (click)="GivingStoreIdSelect()">
+                                 (click)="givingStoreIdSelect()">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Giving Store Id</mat-label>
                                     <mat-select formControlName="storeId" [disabled]="true">
@@ -37,7 +37,7 @@
                         </mat-grid-tile>
                         <mat-grid-tile class="ml-1">
                             <div class="p-10px cursor-pointer" fxFlex="1 0 auto" fxLayout="column"
-                                 (click)="ReceivingStoreIdSelect()">
+                                 (click)="receivingStoreIdSelect()">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Receiving Store Id</mat-label>
                                     <mat-select formControlName="receiveStoreId" [disabled]="true">

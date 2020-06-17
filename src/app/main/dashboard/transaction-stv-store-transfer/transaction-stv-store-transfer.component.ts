@@ -187,7 +187,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         }
     }
 
-    GivingStoreIdSelect() {
+    givingStoreIdSelect() {
         this.dialogRef = this._matDialog.open(TransactionStoreSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -205,7 +205,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         });
     }
 
-    ReceivingStoreIdSelect() {
+    receivingStoreIdSelect() {
         this.dialogRef = this._matDialog.open(TransactionStoreSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
