@@ -94,7 +94,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Exited</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
                 <p class="email text-truncate">
-                    {{employee.employeeProgressions?.isExited | titlecase}}
+                    {{employee.employeeProgressions?.isExited}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -291,7 +291,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Passport Issued at</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
                 <p class="email text-truncate">
-                    {{employee.employeeInternationalPassports?.issuedAt}}
+                    {{employee.employeeInternationalPassports?.country?.name}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -529,7 +529,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Citizen Country</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
                 <p class="email text-truncate">
-                    {{employee.employeeContactDetails?.country?.name}}
+                    {{employee.employeeContactDetails?.otherCountry?.name}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -538,7 +538,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Citizen LGA</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
                 <p class="email text-truncate">
-                    {{employee.employeeContactDetails?.lga?.name}}
+                    {{employee.employeeContactDetails?.otherLga?.name}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -547,7 +547,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Citizen Region</mat-header-cell>
             <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
                 <p class="phone text-truncate">
-                    {{employee.employeeContactDetails?.region?.name}}
+                    {{employee.employeeContactDetails?.otherRegion?.name}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -556,7 +556,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Citizen State</mat-header-cell>
             <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
                 <p class="phone text-truncate">
-                    {{employee.employeeContactDetails?.state?.name}}
+                    {{employee.employeeContactDetails?.otherState?.name}}
                 </p>
             </mat-cell>
         </ng-container>
