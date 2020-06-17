@@ -39,7 +39,7 @@
                             <div class="p-10px cursor-pointer" fxFlex="1 0 auto" fxLayout="column"
                                  (click)="storeIdSelect()">
                                 <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Select Supplier Id</mat-label>
+                                    <mat-label>Select Store Id</mat-label>
                                     <mat-select formControlName="storeId" [disabled]="true">
                                         <mat-option [value]="company.id"
                                                     *ngFor="let company of companies">{{company.name}}</mat-option>

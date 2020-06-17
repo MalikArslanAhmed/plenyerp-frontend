@@ -1,11 +1,13 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {AlertService} from "../../../shared/services/alert.service";
-import {TransactionService} from "../../../shared/services/transaction.service";
-import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
-import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
-import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {AlertService} from '../../../shared/services/alert.service';
+import {TransactionService} from '../../../shared/services/transaction.service';
+import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
+import {StoreSetupItemsService} from '../../../shared/services/store-setup-items.service';
+import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
+import {MatDialog} from '@angular/material/dialog';
+import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
 
 @Component({
     selector: 'app-transaction-srv-purchase-return',
@@ -24,11 +26,14 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
     editableIndex: any;
     isSubmitted = false;
 
+    dialogRef: any;
+
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
                 private transactionService: TransactionService,
                 private storeSetupStoresService: StoreSetupStoresService,
-                private storeSetupItemsService: StoreSetupItemsService) {
+                private storeSetupItemsService: StoreSetupItemsService,
+                private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -41,28 +46,28 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
 
     refresh() {
         this.srvPurchaseReturnForm = this.fb.group({
-            'companyId': [''],
-            'storeId': [''],
-            'cutomerAddress': [{value: '', disabled: true}],
-            'storeName': [{value: '', disabled: true}],
-            'detail': [''],
-            'poNumber': [''],
-            'sourceDocReferenceNumber': [''],
-            'dates': [''],
-            'itemId': [''],
-            'description': [''],
-            'unitOfMeasures': [{value: '', disabled: true}],
-            'quantity': [''],
-            'unitPrice': [''],
-            'unitCost': [''],
-            'totalValuesInWords': [{value: '', disabled: true}],
-            'subTotal': [{value: '', disabled: true}],
-            'total': [{value: '', disabled: true}]
+            companyId: [''],
+            storeId: [''],
+            cutomerAddress: [{value: '', disabled: true}],
+            storeName: [{value: '', disabled: true}],
+            detail: [''],
+            poNumber: [''],
+            sourceDocReferenceNumber: [''],
+            dates: [''],
+            itemId: [''],
+            description: [''],
+            unitOfMeasures: [{value: '', disabled: true}],
+            quantity: [''],
+            unitPrice: [''],
+            unitCost: [''],
+            totalValuesInWords: [{value: '', disabled: true}],
+            subTotal: [{value: '', disabled: true}],
+            total: [{value: '', disabled: true}]
         });
     }
 
     getCompanies() {
-        this.transactionService.getCompanies({'page': -1}).subscribe(data => {
+        this.transactionService.getCompanies({page: -1}).subscribe(data => {
             this.companies = data.items;
         });
     }
@@ -94,42 +99,42 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             if (this.unitOfMeasuresData && this.unitOfMeasuresData.length > 0) {
                 this.unitOfMeasuresData.forEach(unitOfMeasure => {
                     if (parseInt(unitOfMeasure.id) === parseInt(unitOfMeasures)) {
-                        unitOfMeasureName = unitOfMeasure.name
+                        unitOfMeasureName = unitOfMeasure.name;
                     }
                 });
             }
             if (this.editableIndex !== undefined) {
                 this.itemsArr[this.editableIndex] = {
-                    'itemId': itemId,
-                    'description': description,
-                    'measurementId': unitOfMeasures,
-                    'unitOfMeasureName': unitOfMeasureName,
-                    'quantity': quantity,
-                    'unitPrice': unitPrice,
-                    'unitCost': unitCost,
-                    'value': parseInt(quantity) * parseInt(unitPrice)
+                    itemId: itemId,
+                    description: description,
+                    measurementId: unitOfMeasures,
+                    unitOfMeasureName: unitOfMeasureName,
+                    quantity: quantity,
+                    unitPrice: unitPrice,
+                    unitCost: unitCost,
+                    value: parseInt(quantity) * parseInt(unitPrice)
                 };
                 this.editableIndex = undefined;
             } else {
                 this.itemsArr.push({
-                    'itemId': itemId,
-                    'description': description,
-                    'measurementId': unitOfMeasures,
-                    'unitOfMeasureName': unitOfMeasureName,
-                    'quantity': quantity,
-                    'unitPrice': unitPrice,
-                    'unitCost': unitCost,
-                    'value': parseInt(quantity) * parseInt(unitPrice)
+                    itemId: itemId,
+                    description: description,
+                    measurementId: unitOfMeasures,
+                    unitOfMeasureName: unitOfMeasureName,
+                    quantity: quantity,
+                    unitPrice: unitPrice,
+                    unitCost: unitCost,
+                    value: parseInt(quantity) * parseInt(unitPrice)
                 });
             }
 
             this.srvPurchaseReturnForm.patchValue({
-                'itemId': '',
-                'description': '',
-                'measurementId': '',
-                'quantity': '',
-                'unitPrice': '',
-                'unitCost': ''
+                itemId: '',
+                description: '',
+                measurementId: '',
+                quantity: '',
+                unitPrice: '',
+                unitCost: ''
             });
             this.setTotals();
         } else {
@@ -142,12 +147,12 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
         if (this.companies && this.companies.length > 0) {
             this.companies.forEach(company => {
                 if (parseInt(company.id) === parseInt(compId)) {
-                    selectedSupplierAddress = company.name
+                    selectedSupplierAddress = company.name;
                 }
             });
         }
         this.srvPurchaseReturnForm.patchValue({
-            'cutomerAddress': selectedSupplierAddress
+            cutomerAddress: selectedSupplierAddress
         });
     }
 
@@ -156,12 +161,12 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
         if (this.stores && this.stores.length > 0) {
             this.stores.forEach(store => {
                 if (parseInt(store.id) === parseInt(storeId)) {
-                    selectedStoreName = store.name
+                    selectedStoreName = store.name;
                 }
             });
         }
         this.srvPurchaseReturnForm.patchValue({
-            'storeName': selectedStoreName
+            storeName: selectedStoreName
         });
     }
 
@@ -173,32 +178,32 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
     editItem(index) {
         this.editableIndex = index;
         this.srvPurchaseReturnForm.patchValue({
-            'itemId': this.itemsArr[index].itemId,
-            'description': this.itemsArr[index].description,
-            'unitOfMeasures': this.itemsArr[index].measurementId,
-            'quantity': this.itemsArr[index].quantity,
-            'unitPrice': this.itemsArr[index].unitPrice,
-            'unitCost': this.itemsArr[index].unitCost
+            itemId: this.itemsArr[index].itemId,
+            description: this.itemsArr[index].description,
+            unitOfMeasures: this.itemsArr[index].measurementId,
+            quantity: this.itemsArr[index].quantity,
+            unitPrice: this.itemsArr[index].unitPrice,
+            unitCost: this.itemsArr[index].unitCost
         });
     }
 
     setTotals() {
-        let numberToWords = new NumberToWordsPipe();
+        const numberToWords = new NumberToWordsPipe();
         if (this.itemsArr && this.itemsArr.length > 0) {
             let subTotal = 0;
             this.itemsArr.forEach(item => {
                 subTotal = subTotal + parseInt(item.value);
             });
             this.srvPurchaseReturnForm.patchValue({
-                'subTotal': subTotal,
-                'total': subTotal,
-                'totalValuesInWords': numberToWords.transform(subTotal)
+                subTotal: subTotal,
+                total: subTotal,
+                totalValuesInWords: numberToWords.transform(subTotal)
             });
         } else {
             this.srvPurchaseReturnForm.patchValue({
-                'subTotal': 0,
-                'total': 0,
-                'totalValuesInWords': '-'
+                subTotal: 0,
+                total: 0,
+                totalValuesInWords: '-'
             });
         }
     }
@@ -208,12 +213,12 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
                     this.unitOfMeasuresData = [{
-                        'id': storeItem.inventoryMeasurement.id,
-                        'name': storeItem.inventoryMeasurement.name
+                        id: storeItem.inventoryMeasurement.id,
+                        name: storeItem.inventoryMeasurement.name
                     }];
                     this.srvPurchaseReturnForm.patchValue({
-                        'unitOfMeasures': storeItem.inventoryMeasurement.id
-                    })
+                        unitOfMeasures: storeItem.inventoryMeasurement.id
+                    });
                 }
             });
         }
@@ -248,5 +253,23 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
                 this.isSubmitted = false;
             });
         }
+    }
+
+    supplierIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionSupplierSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.companies = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.srvPurchaseReturnForm.patchValue({
+                companyId: response.id,
+            });
+        });
     }
 }

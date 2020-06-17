@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {AlertService} from "../../../shared/services/alert.service";
-import {TransactionService} from "../../../shared/services/transaction.service";
-import {ApplicableTaxesComponent} from "../applicable-taxes/applicable-taxes.component";
-import {MatDialog} from "@angular/material/dialog";
-import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
-import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
-import {NumberToWordsPipe} from "../../../shared/pipes/number-to-word.pipe";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {AlertService} from '../../../shared/services/alert.service';
+import {TransactionService} from '../../../shared/services/transaction.service';
+import {ApplicableTaxesComponent} from '../applicable-taxes/applicable-taxes.component';
+import {MatDialog} from '@angular/material/dialog';
+import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
+import {StoreSetupItemsService} from '../../../shared/services/store-setup-items.service';
+import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 
 @Component({
     selector: 'app-transaction-sales-invoice',
@@ -45,23 +45,23 @@ export class TransactionSalesInvoiceComponent implements OnInit {
 
     refresh() {
         this.salesInvoiceForm = this.fb.group({
-            'companyId': [''],
-            'storeId': [''],
-            'supplierAddress': [{value: '', disabled: true}],
-            'storeName': [{value: '', disabled: true}],
-            'detail': [''],
-            'poNumber': [''],
-            'sourceDocReferenceNumber': [''],
-            'dates': [''],
-            'itemId': [''],
-            'description': [''],
-            'unitOfMeasures': [{value: '', disabled: true}],
-            'quantity': [''],
-            'unitSellingPrice': [''],
-            'totalValuesInWords': [{value: '', disabled: true}],
-            'subTotal': [{value: '', disabled: true}],
-            'totalTaxes': [{value: '', disabled: true}],
-            'total': [{value: '', disabled: true}]
+            companyId: [''],
+            storeId: [''],
+            supplierAddress: [{value: '', disabled: true}],
+            storeName: [{value: '', disabled: true}],
+            detail: [''],
+            poNumber: [''],
+            sourceDocReferenceNumber: [''],
+            dates: [''],
+            itemId: [''],
+            description: [''],
+            unitOfMeasures: [{value: '', disabled: true}],
+            quantity: [''],
+            unitSellingPrice: [''],
+            totalValuesInWords: [{value: '', disabled: true}],
+            subTotal: [{value: '', disabled: true}],
+            totalTaxes: [{value: '', disabled: true}],
+            total: [{value: '', disabled: true}]
         });
     }
 
@@ -79,28 +79,28 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             if (this.unitOfMeasuresData && this.unitOfMeasuresData.length > 0) {
                 this.unitOfMeasuresData.forEach(unitOfMeasure => {
                     if (parseInt(unitOfMeasure.id) === parseInt(unitOfMeasures)) {
-                        unitOfMeasureName = unitOfMeasure.name
+                        unitOfMeasureName = unitOfMeasure.name;
                     }
                 });
             }
             this.itemsArr.push({
-                'itemId': itemId,
-                'description': description,
-                'measurementId': unitOfMeasures,
-                'unitOfMeasureName': unitOfMeasureName,
-                'quantity': quantity,
-                'sellingPrice': unitSellingPrice,
-                'value': parseInt(quantity) * parseInt(unitSellingPrice),
-                'totalValue': this.totalTaxes + (parseInt(quantity) * parseInt(unitSellingPrice)),
-                'taxes': this.taxes,
-                'totalTaxes': this.totalTaxes
+                itemId: itemId,
+                description: description,
+                measurementId: unitOfMeasures,
+                unitOfMeasureName: unitOfMeasureName,
+                quantity: quantity,
+                sellingPrice: unitSellingPrice,
+                value: parseInt(quantity) * parseInt(unitSellingPrice),
+                totalValue: this.totalTaxes + (parseInt(quantity) * parseInt(unitSellingPrice)),
+                taxes: this.taxes,
+                totalTaxes: this.totalTaxes
             });
             this.salesInvoiceForm.patchValue({
-                'itemId': '',
-                'description': '',
-                'measurementId': '',
-                'quantity': '',
-                'unitSellingPrice': ''
+                itemId: '',
+                description: '',
+                measurementId: '',
+                quantity: '',
+                unitSellingPrice: ''
             });
             this.setTotals();
         } else {
@@ -114,7 +114,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
     }
 
     getCompanies() {
-        this.transactionService.getCompanies({'page': -1}).subscribe(data => {
+        this.transactionService.getCompanies({page: -1}).subscribe(data => {
             this.companies = data.items;
         });
     }
@@ -133,9 +133,9 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         this.dialogRef = this._matDialog.open(ApplicableTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                'action': 'CREATE',
-                'itemId': this.salesInvoiceForm.value.itemId,
-                'grossAmount': this.salesInvoiceForm.value.unitSellingPrice * this.salesInvoiceForm.value.quantity,
+                action: 'CREATE',
+                itemId: this.salesInvoiceForm.value.itemId,
+                grossAmount: this.salesInvoiceForm.value.unitSellingPrice * this.salesInvoiceForm.value.quantity,
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -151,12 +151,12 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         this.dialogRef = this._matDialog.open(ApplicableTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                'action': 'EDIT',
-                'id': index,
-                'itemId': item.id,
-                'taxes': item.taxes,
-                'totalTaxes': item.totalTaxes,
-                'grossAmount': item.unitSellingPrice * item.quantity,
+                action: 'EDIT',
+                id: index,
+                itemId: item.id,
+                taxes: item.taxes,
+                totalTaxes: item.totalTaxes,
+                grossAmount: item.unitSellingPrice * item.quantity,
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -187,12 +187,12 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         if (this.stores && this.stores.length > 0) {
             this.stores.forEach(store => {
                 if (parseInt(store.id) === parseInt(storeId)) {
-                    selectedStoreName = store.name
+                    selectedStoreName = store.name;
                 }
             });
         }
         this.salesInvoiceForm.patchValue({
-            'storeName': selectedStoreName
+            storeName: selectedStoreName
         });
     }
 
@@ -201,17 +201,17 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         if (this.companies && this.companies.length > 0) {
             this.companies.forEach(company => {
                 if (parseInt(company.id) === parseInt(compId)) {
-                    selectedSupplierAddress = company.name
+                    selectedSupplierAddress = company.name;
                 }
             });
         }
         this.salesInvoiceForm.patchValue({
-            'supplierAddress': selectedSupplierAddress
+            supplierAddress: selectedSupplierAddress
         });
     }
 
     setTotals() {
-        let numberToWords = new NumberToWordsPipe();
+        const numberToWords = new NumberToWordsPipe();
         if (this.itemsArr && this.itemsArr.length > 0) {
             let subTotal = 0;
             let totalTaxes = 0;
@@ -220,17 +220,17 @@ export class TransactionSalesInvoiceComponent implements OnInit {
                 totalTaxes = totalTaxes + parseInt(item.totalTaxes);
             });
             this.salesInvoiceForm.patchValue({
-                'subTotal': subTotal,
-                'totalTaxes': totalTaxes,
-                'total': subTotal + totalTaxes,
-                'totalValuesInWords': numberToWords.transform(subTotal + totalTaxes)
+                subTotal: subTotal,
+                totalTaxes: totalTaxes,
+                total: subTotal + totalTaxes,
+                totalValuesInWords: numberToWords.transform(subTotal + totalTaxes)
             });
         } else {
             this.salesInvoiceForm.patchValue({
-                'subTotal': 0,
-                'totalTaxes': 0,
-                'total': 0,
-                'totalValuesInWords': '-'
+                subTotal: 0,
+                totalTaxes: 0,
+                total: 0,
+                totalValuesInWords: '-'
             });
         }
     }
@@ -240,12 +240,12 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
                     this.unitOfMeasuresData = [{
-                        'id': storeItem.inventoryMeasurement.id,
-                        'name': storeItem.inventoryMeasurement.name
+                        id: storeItem.inventoryMeasurement.id,
+                        name: storeItem.inventoryMeasurement.name
                     }];
                     this.salesInvoiceForm.patchValue({
-                        'unitOfMeasures': storeItem.inventoryMeasurement.id
-                    })
+                        unitOfMeasures: storeItem.inventoryMeasurement.id
+                    });
                 }
             });
         }
