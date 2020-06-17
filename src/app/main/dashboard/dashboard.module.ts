@@ -164,12 +164,13 @@ import {CompaniesListComponent} from "./companies/companies-list/companies-list.
 import {CompaniesCreateComponent} from './companies/companies-create/companies-create.component';
 import {ReportBinCardComponent} from './report-bin-card/report-bin-card.component';
 import {ReportInventoryLedgerComponent} from './report-inventory-ledger/report-inventory-ledger.component';
-import { ReportQuantityBalanceComponent } from './report-quantity-balance/report-quantity-balance.component';
-import { ReportOffLevelComponent } from './report-off-level/report-off-level.component';
+import {ReportQuantityBalanceComponent} from './report-quantity-balance/report-quantity-balance.component';
+import {ReportOffLevelComponent} from './report-off-level/report-off-level.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import { TransactionSupplierSelectComponent } from './transaction-supplier-select/transaction-supplier-select.component';
-import { TransactionStoreSelectComponent } from './transaction-store-select/transaction-store-select.component';
-import { CompanyBankDetailsComponent } from './companies/company-bank-details/company-bank-details.component';
+import {TransactionSupplierSelectComponent} from './transaction-supplier-select/transaction-supplier-select.component';
+import {TransactionStoreSelectComponent} from './transaction-store-select/transaction-store-select.component';
+import {CompanyBankDetailsComponent} from './companies/company-bank-details/company-bank-details.component';
+import {TransactionsItemsSelectComponent} from './transactions-items-select/transactions-items-select.component';
 
 @NgModule({
     declarations: [
@@ -321,7 +322,8 @@ import { CompanyBankDetailsComponent } from './companies/company-bank-details/co
         ReportOffLevelComponent,
         TransactionSupplierSelectComponent,
         TransactionStoreSelectComponent,
-        CompanyBankDetailsComponent
+        CompanyBankDetailsComponent,
+        TransactionsItemsSelectComponent
     ],
     imports: [
         CommonModule,

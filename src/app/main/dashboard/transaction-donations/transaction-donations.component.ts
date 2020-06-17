@@ -7,8 +7,9 @@ import {StoreSetupItemsService} from '../../../shared/services/store-setup-items
 import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 import {MatDialog} from '@angular/material/dialog';
-import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
 import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
+import { TransactionsItemsSelectComponent } from '../transactions-items-select/transactions-items-select.component';
+import {TransactionSupplierSelectComponent} from "../transaction-supplier-select/transaction-supplier-select.component";
 
 @Component({
     selector: 'app-transaction-donations',
@@ -29,10 +30,10 @@ export class TransactionDonationsComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
+                private _matDialog: MatDialog,
                 private transactionService: TransactionService,
                 private storeSetupItemsService: StoreSetupItemsService,
-                private storeSetupStoresService: StoreSetupStoresService,
-                private _matDialog: MatDialog) {
+                private storeSetupStoresService: StoreSetupStoresService) {
     }
 
     ngOnInit(): void {
@@ -44,23 +45,23 @@ export class TransactionDonationsComponent implements OnInit {
 
     refresh() {
         this.donationsForm = this.fb.group({
-            companyId: [''],
-            storeId: [''],
-            supplierAddress: [{value: '', disabled: true}],
-            storeName: [{value: '', disabled: true}],
-            detail: [''],
-            sourceDocReferenceNumber: [''],
-            dates: [''],
-            itemId: [''],
-            description: [''],
-            unitOfMeasures: [{value: '', disabled: true}],
-            quantity: [''],
-            unitCost: [''],
-            quantitySysLessPhy: [''],
-            unitCostOfDiff: [''],
-            totalValuesInWords: [{value: '', disabled: true}],
-            subTotal: [{value: '', disabled: true}],
-            total: [{value: '', disabled: true}]
+            'companyId': [''],
+            'storeId': [''],
+            'supplierAddress': [{value: '', disabled: true}],
+            'storeName': [{value: '', disabled: true}],
+            'detail': [''],
+            'sourceDocReferenceNumber': [''],
+            'dates': [''],
+            'itemId': [''],
+            'description': [''],
+            'unitOfMeasures': [{value: '', disabled: true}],
+            'quantity': [''],
+            'unitCost': [''],
+            'quantitySysLessPhy': [''],
+            'unitCostOfDiff': [''],
+            'totalValuesInWords': [{value: '', disabled: true}],
+            'subTotal': [{value: '', disabled: true}],
+            'total': [{value: '', disabled: true}]
         });
     }
 
@@ -83,20 +84,20 @@ export class TransactionDonationsComponent implements OnInit {
                 });
             }
             this.itemsArr.push({
-                itemId: itemId,
-                description: description,
-                measurementId: unitOfMeasures,
-                unitOfMeasureName: unitOfMeasureName,
-                quantity: quantity,
-                unitCost: unitCost,
-                value: parseInt(quantity) * parseInt(unitCost)
+                'itemId': itemId,
+                'description': description,
+                'measurementId': unitOfMeasures,
+                'unitOfMeasureName': unitOfMeasureName,
+                'quantity': quantity,
+                'unitCost': unitCost,
+                'value': parseInt(quantity) * parseInt(unitCost)
             });
             this.donationsForm.patchValue({
-                itemId: '',
-                description: '',
-                unitOfMeasures: '',
-                quantity: '',
-                unitCost: ''
+                'itemId': '',
+                'description': '',
+                'unitOfMeasures': '',
+                'quantity': '',
+                'unitCost': ''
             });
             this.setTotals();
         } else {
@@ -152,7 +153,7 @@ export class TransactionDonationsComponent implements OnInit {
             });
         }
         this.donationsForm.patchValue({
-            storeName: selectedStoreName
+            'storeName': selectedStoreName
         });
     }
 
@@ -164,15 +165,15 @@ export class TransactionDonationsComponent implements OnInit {
                 subTotal = subTotal + (parseInt(item.unitCost) * parseInt(item.quantity));
             });
             this.donationsForm.patchValue({
-                subTotal: subTotal,
-                total: subTotal,
-                totalValuesInWords: numberToWords.transform(subTotal)
+                'subTotal': subTotal,
+                'total': subTotal,
+                'totalValuesInWords': numberToWords.transform(subTotal)
             });
         } else {
             this.donationsForm.patchValue({
-                subTotal: 0,
-                total: 0,
-                totalValuesInWords: '-'
+                'subTotal': 0,
+                'total': 0,
+                'totalValuesInWords': '-'
             });
         }
     }
@@ -182,12 +183,12 @@ export class TransactionDonationsComponent implements OnInit {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
                     this.unitOfMeasuresData = [{
-                        id: storeItem.inventoryMeasurement.id,
-                        name: storeItem.inventoryMeasurement.name
+                        'id': storeItem.inventoryMeasurement.id,
+                        'name': storeItem.inventoryMeasurement.name
                     }];
                     this.donationsForm.patchValue({
-                        unitOfMeasures: storeItem.inventoryMeasurement.id
-                    });
+                        'unitOfMeasures': storeItem.inventoryMeasurement.id
+                    })
                 }
             });
         }
@@ -226,20 +227,27 @@ export class TransactionDonationsComponent implements OnInit {
         }
     }
 
-    supplierIdSelect() {
-        this.dialogRef = this._matDialog.open(TransactionSupplierSelectComponent, {
-            panelClass: 'contact-form-dialog',
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsSelectComponent, {
+            panelClass: 'transaction-items-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
                 return;
             }
-            this.companies = [{
+            this.storeItems = [{
                 'name': response.name,
                 'id': response.id
             }];
             this.donationsForm.patchValue({
-                companyId: response.id,
+                itemId: response.id,
+            });
+            this.unitOfMeasuresData = [{
+                'name': response['inventoryMeasurement'].name,
+                'id': response['inventoryMeasurement'].id
+            }];
+            this.donationsForm.patchValue({
+                'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
         });
     }
@@ -258,6 +266,24 @@ export class TransactionDonationsComponent implements OnInit {
             }];
             this.donationsForm.patchValue({
                 storeId: response.id,
+            });
+        });
+    }
+
+    supplierIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionSupplierSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.companies = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.donationsForm.patchValue({
+                companyId: response.id,
             });
         });
     }

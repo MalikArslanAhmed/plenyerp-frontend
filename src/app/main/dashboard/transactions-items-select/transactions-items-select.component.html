@@ -1,0 +1,139 @@
+<div class="page-layout simple left-sidebar inner-sidebar inner-scroll" id="items-list-select-component">
+    <mat-toolbar class="mat-accent m-0 items-data" matDialogTitle>
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Select Item ID</span>
+            <button (click)="matDialogRef.close()" aria-label="Close dialog" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div fxFlex="100" fxLayout="row" class="mt-20px">
+        <div class="margin-top-1rem" fxFlex="25">
+            <div class="center p-5px pb-56 pr-sm-92" fusePerfectScrollbar>
+                <div class="filter-title">Filter Items by Categories</div>
+                <div class="content">
+                    <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
+                        <!-- This is the tree node template for leaf nodes -->
+                        <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
+                            <!-- use a disabled button to provide padding for tree leaf -->
+                            <button mat-icon-button disabled></button>
+                            {{node.name}}
+                            <button mat-icon-button title="Choose" *ngIf="node.isActive" (click)="setCategory(node)">
+                                <mat-icon class="addBtn">check_circle</mat-icon>
+                            </button>
+                        </mat-tree-node>
+                        <!-- This is the tree node template for expandable nodes -->
+                        <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
+                            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+                                <mat-icon class="mat-icon-rtl-mirror">
+                                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                </mat-icon>
+                            </button>
+                            {{node.name}}
+                            <button mat-icon-button title="Choose" *ngIf="node.isActive" (click)="setCategory(node)">
+                                <mat-icon class="addBtn">check_circle</mat-icon>
+                            </button>
+                        </mat-tree-node>
+                    </mat-tree>
+                </div>
+            </div>
+        </div>
+        <div class="margin-top-1rem pl-1rem" fxFlex="74.9">
+            <div fxLayout="column" fxLayoutGap="20px">
+                <div fxFlex="100" style="padding: 1rem">
+                    <form [formGroup]="transactionItemsForm">
+                        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start" fxFlex="50">
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Search</mat-label>
+                                <input matInput formControlName="search" name="search"
+                                       (keyup)="getItemsBySearch({'search': this.transactionItemsForm.value.search})">
+                            </mat-form-field>
+                            <button mat-button class="save-button reset-btn" (click)="resetTransFilter()">Reset</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="p-2px d-flex mt--20px" fxFlex="1 0 auto" fxLayout="column" *ngIf="selectedCategory">
+                    <button mat-button class="save-button cancel-btn" style="background-color: blue; color: white"
+                            (click)="cancelSelectedCategory()">
+                        {{selectedCategory}} <span class="material-icons">cancel</span></button>
+                </div>
+                <div class="p-5px">
+                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="storeItems" class="border-2px-solid">
+                        <ng-container matColumnDef="sno">
+                            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+                            <mat-cell *matCellDef="let item" fxHide fxShow.gt-sm>
+                                <p class="email text-truncate">
+                                    {{((pagination.page - 1) * pagination.perpage) + item.sno}}.
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Item Id</mat-header-cell>
+                            <mat-cell *matCellDef="let item" fxHide fxShow.gt-md>
+                                <p class="phone text-truncate ml-3">
+                                    {{item.id}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="description">
+                            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Description</mat-header-cell>
+                            <mat-cell *matCellDef="let item" fxHide fxShow.gt-md>
+                                <p class="phone text-truncate">
+                                    {{item.description}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="unitPrice">
+                            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Unit Price</mat-header-cell>
+                            <mat-cell *matCellDef="let item" fxHide fxShow.gt-md>
+                                <p class="phone text-truncate">
+                                    {{item.unitPrice}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="category">
+                            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Category</mat-header-cell>
+                            <mat-cell *matCellDef="let item" fxHide fxShow.gt-md>
+                                <p class="phone text-truncate">
+                                    {{item.categoryId}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell *matHeaderCellDef>
+                                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 5px">Actions</div>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <div fxFlex="row" fxLayoutAlign="end center">
+                                    <button (click)="matDialogRef.close(item)" aria-label="Toggle star" mat-icon-button
+                                            style="color: green">
+                                        <mat-icon class="material-icons">check_circle</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let item; columns: displayedColumns;"
+                                 [@animate]="{value:'*',params:{y:'100%'}}"
+                                 class="contact">
+                        </mat-row>
+                    </mat-table>
+                </div>
+                <div *ngIf="storeItems.length > 0" fxFlex="100">
+                    <mat-paginator #paginator
+                                   (page)="pageEvent = onPageChange($event)"
+                                   [length]="pagination.total"
+                                   [pageIndex]="pagination.page-1"
+                                   [pageSize]="pagination.perpage"
+                    >
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

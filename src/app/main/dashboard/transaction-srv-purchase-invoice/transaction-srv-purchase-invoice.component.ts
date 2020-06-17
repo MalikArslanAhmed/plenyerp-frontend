@@ -10,6 +10,7 @@ import {StoreSetupStoresService} from '../../../shared/services/store-setup-stor
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
 import { TransactionStoreSelectComponent } from '../transaction-store-select/transaction-store-select.component';
+import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
 
 @Component({
     selector: 'app-transaction-srv-purchase-invoice',
@@ -19,7 +20,7 @@ import { TransactionStoreSelectComponent } from '../transaction-store-select/tra
     animations: fuseAnimations
 })
 export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
-    srvPurchaseInvocieForm: FormGroup;
+    srvPurchaseInvoiceForm: FormGroup;
     itemsArr = [];
     companies = [];
     dialogRef: any;
@@ -47,7 +48,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
 
 
     refresh() {
-        this.srvPurchaseInvocieForm = this.fb.group({
+        this.srvPurchaseInvoiceForm = this.fb.group({
             companyId: [''],
             storeId: [''],
             supplierAddress: [{value: '', disabled: true}],
@@ -111,7 +112,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 taxes: this.taxes,
                 totalTaxes: this.totalTaxes
             });
-            this.srvPurchaseInvocieForm.patchValue({
+            this.srvPurchaseInvoiceForm.patchValue({
                 itemId: '',
                 description: '',
                 unitOfMeasures: '',
@@ -130,13 +131,13 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     }
 
     addApplicableTaxes() {
-        if (!this.srvPurchaseInvocieForm.value.itemId || this.srvPurchaseInvocieForm.value.itemId === '') {
+        if (!this.srvPurchaseInvoiceForm.value.itemId || this.srvPurchaseInvoiceForm.value.itemId === '') {
             this.alertService.showErrors('Item Id can\'t be empty');
             return;
-        } else if (!this.srvPurchaseInvocieForm.value.quantity || this.srvPurchaseInvocieForm.value.quantity === '') {
+        } else if (!this.srvPurchaseInvoiceForm.value.quantity || this.srvPurchaseInvoiceForm.value.quantity === '') {
             this.alertService.showErrors('Quantity can\'t be empty');
             return;
-        } else if (!this.srvPurchaseInvocieForm.value.unitCost || this.srvPurchaseInvocieForm.value.unitCost === '') {
+        } else if (!this.srvPurchaseInvoiceForm.value.unitCost || this.srvPurchaseInvoiceForm.value.unitCost === '') {
             this.alertService.showErrors('Unit cost can\'t be empty');
             return;
         }
@@ -144,8 +145,8 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             panelClass: 'contact-form-dialog',
             data: {
                 action: 'CREATE',
-                itemId: this.srvPurchaseInvocieForm.value.itemId,
-                grossAmount: this.srvPurchaseInvocieForm.value.unitCost * this.srvPurchaseInvocieForm.value.quantity,
+                itemId: this.srvPurchaseInvoiceForm.value.itemId,
+                grossAmount: this.srvPurchaseInvoiceForm.value.unitCost * this.srvPurchaseInvoiceForm.value.quantity,
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -188,7 +189,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 }
             });
         }
-        this.srvPurchaseInvocieForm.patchValue({
+        this.srvPurchaseInvoiceForm.patchValue({
             supplierAddress: selectedSupplierAddress
         });
     }
@@ -202,7 +203,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 }
             });
         }
-        this.srvPurchaseInvocieForm.patchValue({
+        this.srvPurchaseInvoiceForm.patchValue({
             storeName: selectedStoreName
         });
     }
@@ -216,14 +217,14 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 subTotal = subTotal + parseInt(item.value);
                 totalTaxes = totalTaxes + parseInt(item.totalTaxes);
             });
-            this.srvPurchaseInvocieForm.patchValue({
+            this.srvPurchaseInvoiceForm.patchValue({
                 subTotal: subTotal,
                 totalTax: totalTaxes,
                 total: subTotal + totalTaxes,
                 totalValuesInWords: numberToWords.transform(subTotal + totalTaxes)
             });
         } else {
-            this.srvPurchaseInvocieForm.patchValue({
+            this.srvPurchaseInvoiceForm.patchValue({
                 subTotal: 0,
                 totalTax: 0,
                 total: 0,
@@ -240,7 +241,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                         id: storeItem.inventoryMeasurement.id,
                         name: storeItem.inventoryMeasurement.name
                     }];
-                    this.srvPurchaseInvocieForm.patchValue({
+                    this.srvPurchaseInvoiceForm.patchValue({
                         unitOfMeasures: storeItem.inventoryMeasurement.id
                     });
                 }
@@ -263,31 +264,31 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 }
             });
         }
-        this.srvPurchaseInvocieForm.value['items'] = itemsArrCopy;
-        delete this.srvPurchaseInvocieForm.value['description'];
-        delete this.srvPurchaseInvocieForm.value['itemId'];
-        delete this.srvPurchaseInvocieForm.value['quantity'];
-        delete this.srvPurchaseInvocieForm.value['unitCost'];
-        delete this.srvPurchaseInvocieForm.value['unitOfMeasures'];
-        this.srvPurchaseInvocieForm.value['date'] = this.srvPurchaseInvocieForm.value['dates'].format('YYYY-MM-DD');
-        this.srvPurchaseInvocieForm.value['storeName'] = this.srvPurchaseInvocieForm['controls']['storeName'].value;
-        this.srvPurchaseInvocieForm.value['totalValuesInWords'] = this.srvPurchaseInvocieForm['controls']['totalValuesInWords'].value;
-        this.srvPurchaseInvocieForm.value['subTotal'] = this.srvPurchaseInvocieForm['controls']['subTotal'].value;
-        this.srvPurchaseInvocieForm.value['totalTax'] = this.srvPurchaseInvocieForm['controls']['totalTax'].value;
-        this.srvPurchaseInvocieForm.value['total'] = this.srvPurchaseInvocieForm['controls']['total'].value;
-        this.srvPurchaseInvocieForm.value['supplierAddress'] = this.srvPurchaseInvocieForm['controls']['supplierAddress'].value;
-        this.srvPurchaseInvocieForm.value['companyType'] = 'SUPPLIER';
-        this.srvPurchaseInvocieForm.value['type'] = 'IN';
-        console.log('this.srvPurchaseInvocieForm', this.srvPurchaseInvocieForm.value);
+        this.srvPurchaseInvoiceForm.value['items'] = itemsArrCopy;
+        delete this.srvPurchaseInvoiceForm.value['description'];
+        delete this.srvPurchaseInvoiceForm.value['itemId'];
+        delete this.srvPurchaseInvoiceForm.value['quantity'];
+        delete this.srvPurchaseInvoiceForm.value['unitCost'];
+        delete this.srvPurchaseInvoiceForm.value['unitOfMeasures'];
+        this.srvPurchaseInvoiceForm.value['date'] = this.srvPurchaseInvoiceForm.value['dates'].format('YYYY-MM-DD');
+        this.srvPurchaseInvoiceForm.value['storeName'] = this.srvPurchaseInvoiceForm['controls']['storeName'].value;
+        this.srvPurchaseInvoiceForm.value['totalValuesInWords'] = this.srvPurchaseInvoiceForm['controls']['totalValuesInWords'].value;
+        this.srvPurchaseInvoiceForm.value['subTotal'] = this.srvPurchaseInvoiceForm['controls']['subTotal'].value;
+        this.srvPurchaseInvoiceForm.value['totalTax'] = this.srvPurchaseInvoiceForm['controls']['totalTax'].value;
+        this.srvPurchaseInvoiceForm.value['total'] = this.srvPurchaseInvoiceForm['controls']['total'].value;
+        this.srvPurchaseInvoiceForm.value['supplierAddress'] = this.srvPurchaseInvoiceForm['controls']['supplierAddress'].value;
+        this.srvPurchaseInvoiceForm.value['companyType'] = 'SUPPLIER';
+        this.srvPurchaseInvoiceForm.value['type'] = 'IN';
+        console.log('this.srvPurchaseInvoiceForm', this.srvPurchaseInvoiceForm.value);
 
         this.isSubmitted = true;
-        if (!this.srvPurchaseInvocieForm.valid) {
+        if (!this.srvPurchaseInvoiceForm.valid) {
             this.isSubmitted = false;
             return;
         }
         if (this.isSubmitted) {
-            this.transactionService.saveSrvPurchaseInvoice(this.srvPurchaseInvocieForm.value).subscribe(data => {
-                this.srvPurchaseInvocieForm.reset();
+            this.transactionService.saveSrvPurchaseInvoice(this.srvPurchaseInvoiceForm.value).subscribe(data => {
+                this.srvPurchaseInvoiceForm.reset();
                 this.itemsArr = [];
                 this.isSubmitted = false;
             });
@@ -306,7 +307,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 'name': response.name,
                 'id': response.id
             }];
-            this.srvPurchaseInvocieForm.patchValue({
+            this.srvPurchaseInvoiceForm.patchValue({
                 companyId: response.id,
             });
         });
@@ -324,8 +325,33 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 'name': response.name,
                 'id': response.id
             }];
-            this.srvPurchaseInvocieForm.patchValue({
+            this.srvPurchaseInvoiceForm.patchValue({
                 storeId: response.id,
+            });
+        });
+    }
+
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsSelectComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.srvPurchaseInvoiceForm.patchValue({
+                itemId: response.id,
+            });
+            this.unitOfMeasuresData = [{
+                'name': response['inventoryMeasurement'].name,
+                'id': response['inventoryMeasurement'].id
+            }];
+            this.srvPurchaseInvoiceForm.patchValue({
+                'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
         });
     }

@@ -9,6 +9,7 @@ import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 import {MatDialog} from '@angular/material/dialog';
 import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
 import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
+import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
 
 @Component({
     selector: 'app-transaction-srv-purchase-return',
@@ -42,7 +43,6 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
         this.getCompanies();
         this.getStores();
         this.getStoreItems();
-        // this.getStoreSetupUnitOfMeasure();
     }
 
     refresh() {
@@ -288,6 +288,31 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             }];
             this.srvPurchaseReturnForm.patchValue({
                 storeId: response.id,
+            });
+        });
+    }
+
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsSelectComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.srvPurchaseReturnForm.patchValue({
+                itemId: response.id,
+            });
+            this.unitOfMeasuresData = [{
+                'name': response['inventoryMeasurement'].name,
+                'id': response['inventoryMeasurement'].id
+            }];
+            this.srvPurchaseReturnForm.patchValue({
+                'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
         });
     }

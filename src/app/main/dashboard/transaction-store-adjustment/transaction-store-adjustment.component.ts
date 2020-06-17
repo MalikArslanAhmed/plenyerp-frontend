@@ -9,6 +9,7 @@ import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 import {MatDialog} from '@angular/material/dialog';
 import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
 import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
+import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
 
 @Component({
     selector: 'app-transaction-store-adjustment',
@@ -26,7 +27,6 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     unitOfMeasuresData = [];
     editableIndex: any;
     isSubmitted = false;
-
     dialogRef: any;
 
     constructor(private fb: FormBuilder,
@@ -67,7 +67,7 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     }
 
     getCompanies() {
-        this.transactionService.getCompanies({page: -1}).subscribe(data => {
+        this.transactionService.getCompanies({'page': -1}).subscribe(data => {
             this.companies = data.items;
         });
     }
@@ -90,12 +90,12 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         if (this.companies && this.companies.length > 0) {
             this.companies.forEach(company => {
                 if (parseInt(company.id) === parseInt(compId)) {
-                    selectedSupplierAddress = company.name;
+                    selectedSupplierAddress = company.name
                 }
             });
         }
         this.storeAdjustmentForm.patchValue({
-            supplierAddress: selectedSupplierAddress
+            'supplierAddress': selectedSupplierAddress
         });
     }
 
@@ -104,12 +104,12 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         if (this.stores && this.stores.length > 0) {
             this.stores.forEach(store => {
                 if (parseInt(store.id) === parseInt(storeId)) {
-                    selectedStoreName = store.name;
+                    selectedStoreName = store.name
                 }
             });
         }
         this.storeAdjustmentForm.patchValue({
-            storeName: selectedStoreName
+            'storeName': selectedStoreName
         });
     }
 
@@ -127,46 +127,46 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             if (this.unitOfMeasuresData && this.unitOfMeasuresData.length > 0) {
                 this.unitOfMeasuresData.forEach(unitOfMeasure => {
                     if (parseInt(unitOfMeasure.id) === parseInt(unitOfMeasures)) {
-                        unitOfMeasureName = unitOfMeasure.name;
+                        unitOfMeasureName = unitOfMeasure.name
                     }
                 });
             }
             if (this.editableIndex !== undefined) {
                 this.itemsArr[this.editableIndex] = {
-                    itemId: itemId,
-                    description: description,
-                    measurementId: unitOfMeasures,
-                    unitOfMeasureName: unitOfMeasureName,
-                    quantityInSys: quantityInSys,
-                    quantity: quantityPhyCount,
-                    quantitySysLessPhy: quantitySysLessPhy,
-                    unitCost: unitCostOfDiff,
-                    value: parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
-                    totalValue: (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff)),
+                    'itemId': itemId,
+                    'description': description,
+                    'measurementId': unitOfMeasures,
+                    'unitOfMeasureName': unitOfMeasureName,
+                    'quantityInSys': quantityInSys,
+                    'quantity': quantityPhyCount,
+                    'quantitySysLessPhy': quantitySysLessPhy,
+                    'unitCost': unitCostOfDiff,
+                    'value': parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
+                    'totalValue': (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff)),
                 };
                 this.editableIndex = undefined;
             } else {
                 this.itemsArr.push({
-                    itemId: itemId,
-                    description: description,
-                    measurementId: unitOfMeasures,
-                    unitOfMeasureName: unitOfMeasureName,
-                    quantityInSys: quantityInSys,
-                    quantity: quantityPhyCount,
-                    quantitySysLessPhy: quantitySysLessPhy,
-                    unitCost: unitCostOfDiff,
-                    value: parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
-                    totalValue: (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff))
+                    'itemId': itemId,
+                    'description': description,
+                    'measurementId': unitOfMeasures,
+                    'unitOfMeasureName': unitOfMeasureName,
+                    'quantityInSys': quantityInSys,
+                    'quantity': quantityPhyCount,
+                    'quantitySysLessPhy': quantitySysLessPhy,
+                    'unitCost': unitCostOfDiff,
+                    'value': parseInt(quantityPhyCount) * parseInt(unitCostOfDiff),
+                    'totalValue': (parseInt(quantityPhyCount) * parseInt(unitCostOfDiff))
                 });
             }
             this.storeAdjustmentForm.patchValue({
-                itemId: '',
-                description: '',
-                unitOfMeasures: '',
-                quantityInSys: '',
-                quantityPhyCount: '',
-                quantitySysLessPhy: '',
-                unitCostOfDiff: ''
+                'itemId': '',
+                'description': '',
+                'unitOfMeasures': '',
+                'quantityInSys': '',
+                'quantityPhyCount': '',
+                'quantitySysLessPhy': '',
+                'unitCostOfDiff': ''
             });
             this.setTotals();
         } else {
@@ -180,22 +180,22 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     }
 
     setTotals() {
-        const numberToWords = new NumberToWordsPipe();
+        let numberToWords = new NumberToWordsPipe();
         if (this.itemsArr && this.itemsArr.length > 0) {
             let subTotal = 0;
             this.itemsArr.forEach(item => {
                 subTotal = subTotal + parseInt(item.totalValue);
             });
             this.storeAdjustmentForm.patchValue({
-                subTotal: subTotal,
-                total: subTotal,
-                totalValuesInWords: numberToWords.transform(subTotal)
+                'subTotal': subTotal,
+                'total': subTotal,
+                'totalValuesInWords': numberToWords.transform(subTotal)
             });
         } else {
             this.storeAdjustmentForm.patchValue({
-                subTotal: 0,
-                total: 0,
-                totalValuesInWords: '-'
+                'subTotal': 0,
+                'total': 0,
+                'totalValuesInWords': '-'
             });
         }
     }
@@ -203,13 +203,13 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
     editItem(index) {
         this.editableIndex = index;
         this.storeAdjustmentForm.patchValue({
-            itemId: this.itemsArr[index].itemId,
-            description: this.itemsArr[index].description,
-            unitOfMeasures: this.itemsArr[index].measurementId,
-            quantityInSys: this.itemsArr[index].quantityInSys,
-            quantityPhyCount: this.itemsArr[index].quantity,
-            quantitySysLessPhy: this.itemsArr[index].quantitySysLessPhy,
-            unitCostOfDiff: this.itemsArr[index].unitCost
+            'itemId': this.itemsArr[index].itemId,
+            'description': this.itemsArr[index].description,
+            'unitOfMeasures': this.itemsArr[index].measurementId,
+            'quantityInSys': this.itemsArr[index].quantityInSys,
+            'quantityPhyCount': this.itemsArr[index].quantity,
+            'quantitySysLessPhy': this.itemsArr[index].quantitySysLessPhy,
+            'unitCostOfDiff': this.itemsArr[index].unitCost
         });
     }
 
@@ -218,14 +218,14 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             this.storeItems.forEach(storeItem => {
                 if (parseInt(storeItem.id) === parseInt(itemId.value)) {
                     this.unitOfMeasuresData = [{
-                        id: storeItem.inventoryMeasurement.id,
-                        name: storeItem.inventoryMeasurement.name
+                        'id': storeItem.inventoryMeasurement.id,
+                        'name': storeItem.inventoryMeasurement.name
                     }];
                     this.storeAdjustmentForm.patchValue({
-                        unitOfMeasures: storeItem.inventoryMeasurement.id
+                        'unitOfMeasures': storeItem.inventoryMeasurement.id
                     });
                     this.storeAdjustmentForm.patchValue({
-                        quantityInSys: storeItem.quantityAvailable
+                        'quantityInSys': storeItem.quantityAvailable
                     });
                 }
             });
@@ -237,14 +237,13 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         if (quant < 0) {
             this.alertService.showErrors('Quantity (Sys-less Phy) should be less than Quantity (Phy Count)');
             this.storeAdjustmentForm.patchValue({
-               quantityPhyCount: ''
+               'quantityPhyCount': ''
             });
             return;
         }
         this.storeAdjustmentForm.patchValue({
-            quantitySysLessPhy: quant
+            'quantitySysLessPhy': quant
         });
-        console.log('quant', quant);
     }
 
     saveStoreAdjustement() {
@@ -264,7 +263,6 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
         this.storeAdjustmentForm.value['total'] = this.storeAdjustmentForm['controls']['total'].value;
         this.storeAdjustmentForm.value['companyType'] = 'STORE';
         this.storeAdjustmentForm.value['type'] = 'IN';
-        console.log('this.storeAdjustmentForm', this.storeAdjustmentForm.value);
 
         this.isSubmitted = true;
         if (!this.storeAdjustmentForm.valid) {
@@ -312,6 +310,31 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             }];
             this.storeAdjustmentForm.patchValue({
                 storeId: response.id,
+            });
+        });
+    }
+
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsSelectComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.storeAdjustmentForm.patchValue({
+                itemId: response.id,
+            });
+            this.unitOfMeasuresData = [{
+                'name': response['inventoryMeasurement'].name,
+                'id': response['inventoryMeasurement'].id
+            }];
+            this.storeAdjustmentForm.patchValue({
+                'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
         });
     }

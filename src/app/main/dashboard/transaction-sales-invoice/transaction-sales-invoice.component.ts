@@ -10,6 +10,7 @@ import {StoreSetupItemsService} from '../../../shared/services/store-setup-items
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
 import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
+import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
 
 @Component({
     selector: 'app-transaction-sales-invoice',
@@ -313,6 +314,31 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             }];
             this.salesInvoiceForm.patchValue({
                 companyId: response.id,
+            });
+        });
+    }
+
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsSelectComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.salesInvoiceForm.patchValue({
+                itemId: response.id,
+            });
+            this.unitOfMeasuresData = [{
+                'name': response['inventoryMeasurement'].name,
+                'id': response['inventoryMeasurement'].id
+            }];
+            this.salesInvoiceForm.patchValue({
+                'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
         });
     }

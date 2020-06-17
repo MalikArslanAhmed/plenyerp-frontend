@@ -21,7 +21,7 @@
     <div class="content" fusePerfectScrollbar>
         <div class="center p-24 pb-56 pr-sm-92">
             <div class="content p-24" fusePerfectScrollbar>
-                <form fxLayout="column" [formGroup]="srvPurchaseInvocieForm">
+                <form fxLayout="column" [formGroup]="srvPurchaseInvoiceForm">
                     <mat-grid-list cols="2" rowHeight="100px">
                         <mat-grid-tile class="mr-1">
                             <div class="p-10px cursor-pointer" fxFlex="1 0 auto" fxLayout="column"
@@ -46,17 +46,6 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <!--<div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Default line item store Id</mat-label>
-                                    <select formControlName="storeId" matNativeControl
-                                            (change)="setStoreName($event.target.value)">
-                                        <option *ngFor="let stores of stores" [value]="stores.id">
-                                            {{stores.id}}
-                                        </option>
-                                    </select>
-                                </mat-form-field>
-                            </div>-->
                         </mat-grid-tile>
                     </mat-grid-list>
                     <mat-grid-list cols="2" rowHeight="100px">
@@ -117,15 +106,15 @@
                     </mat-grid-list>
                     <mat-grid-list cols="4" rowHeight="80px" class="m-10px shadow-1px">
                         <mat-grid-tile class="mt-2">
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column" (click)="selectItemsId()">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Item Id</mat-label>
-                                    <select formControlName="itemId" matNativeControl #itemId
-                                            (change)="setItemQuantity(itemId)">
-                                        <option *ngFor="let item of storeItems" [value]="item.id">
+                                    <mat-select formControlName="itemId" #itemId
+                                            (change)="setItemQuantity(itemId)" [disabled]="true">
+                                        <mat-option *ngFor="let item of storeItems" [value]="item.id">
                                             {{item.id}}
-                                        </option>
-                                    </select>
+                                        </mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
