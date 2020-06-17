@@ -3,6 +3,7 @@ import {TransactionService} from "../../../shared/services/transaction.service";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {MatDialogRef} from "@angular/material/dialog";
 import {PageEvent} from "@angular/material/paginator";
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-transaction-supplier-select',
@@ -22,13 +23,22 @@ export class TransactionSupplierSelectComponent implements OnInit {
     pageEvent: PageEvent;
     dialogRef: any;
     displayedColumns: string[] = ['sno', 'id', 'name', 'actions'];
+    itemsFilterForm: FormGroup;
 
     constructor(private transactionService: TransactionService,
+                private fb: FormBuilder,
                 public matDialogRef: MatDialogRef<TransactionSupplierSelectComponent>) {
     }
 
     ngOnInit(): void {
+        this.refresh();
         this.getStores();
+    }
+
+    refresh() {
+        this.itemsFilterForm = this.fb.group({
+            search: [''],
+        });
     }
 
     getStores(params = {}) {

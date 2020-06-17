@@ -9,10 +9,13 @@
     </mat-toolbar>
 
     <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
-        <mat-form-field appearance="outline" fxFlex="100">
-            <mat-label>Search Supplier Id</mat-label>
-            <input matInput class="search">
-        </mat-form-field>
+        <form [formGroup]="itemsFilterForm">
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Search Supplier Id</mat-label>
+                <input matInput formControlName="search" name="search"
+                       (keyup)="getStores({'search': this.itemsFilterForm.value.search})">
+            </mat-form-field>
+        </form>
     </div>
 
     <div class="p-5px">
