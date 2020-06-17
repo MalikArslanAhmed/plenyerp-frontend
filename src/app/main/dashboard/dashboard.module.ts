@@ -169,7 +169,7 @@ import { ReportOffLevelComponent } from './report-off-level/report-off-level.com
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { TransactionSupplierSelectComponent } from './transaction-supplier-select/transaction-supplier-select.component';
 import { TransactionStoreSelectComponent } from './transaction-store-select/transaction-store-select.component';
-import {TransactionsItemsComponent} from './transactions-items/transactions-items.component';
+import {TransactionsItemsSelectComponent} from './transactions-items-select/transactions-items-select.component';
 
 @NgModule({
     declarations: [
@@ -321,7 +321,7 @@ import {TransactionsItemsComponent} from './transactions-items/transactions-item
         ReportOffLevelComponent,
         TransactionSupplierSelectComponent,
         TransactionStoreSelectComponent,
-        TransactionsItemsComponent
+        TransactionsItemsSelectComponent
     ],
     imports: [
         CommonModule,

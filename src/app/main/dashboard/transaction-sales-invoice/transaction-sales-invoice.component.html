@@ -109,8 +109,8 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column" (click)="selectItemsId()">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Item Id</mat-label>
-                                    <mat-select formControlName="itemId" [disabled]="true"
-                                                matNativeControl #itemId (change)="setItemQuantity(itemId)">
+                                    <mat-select formControlName="itemId" #itemId
+                                                (change)="setItemQuantity(itemId)" [disabled]="true">
                                         <mat-option *ngFor="let item of storeItems" [value]="item.id">
                                             {{item.id}}
                                         </mat-option>

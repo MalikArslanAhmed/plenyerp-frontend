@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
 import {StoreSetupItemsService} from '../../../shared/services/store-setup-items.service';
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
-import {TransactionsItemsComponent} from '../transactions-items/transactions-items.component';
+import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
 
 @Component({
     selector: 'app-transaction-sales-invoice',
@@ -299,7 +299,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
     }
 
     selectItemsId() {
-        this.dialogRef = this._matDialog.open(TransactionsItemsComponent, {
+        this.dialogRef = this._matDialog.open(TransactionsItemsSelectComponent, {
             panelClass: 'transaction-items-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -312,6 +312,13 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             }];
             this.salesInvoiceForm.patchValue({
                 itemId: response.id,
+            });
+            this.unitOfMeasuresData = [{
+                'name': response['inventoryMeasurement'].name,
+                'id': response['inventoryMeasurement'].id
+            }];
+            this.salesInvoiceForm.patchValue({
+                'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
         });
     }

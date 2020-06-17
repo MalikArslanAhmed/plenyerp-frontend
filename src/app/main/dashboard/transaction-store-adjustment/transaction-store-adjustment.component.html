@@ -100,11 +100,11 @@
                     </mat-grid-list>
                     <mat-grid-list cols="4" rowHeight="80px" class="m-10px shadow-1px">
                         <mat-grid-tile class="mt-2">
-                            <div class="p-10px width-70-per" fxFlex="1 0 auto" fxLayout="column" (click)="selectItemsId()">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column" (click)="selectItemsId()">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Item Id</mat-label>
-                                    <mat-select formControlName="itemId" matNativeControl #itemId [disabled]="true"
-                                            (change)="setItemQuantity(itemId)">
+                                    <mat-select formControlName="itemId" #itemId
+                                                (change)="setItemQuantity(itemId)" [disabled]="true">
                                         <mat-option *ngFor="let item of storeItems" [value]="item.id">
                                             {{item.id}}
                                         </mat-option>

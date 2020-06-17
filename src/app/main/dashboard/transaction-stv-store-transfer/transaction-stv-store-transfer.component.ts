@@ -5,7 +5,7 @@ import {AlertService} from "../../../shared/services/alert.service";
 import {TransactionService} from "../../../shared/services/transaction.service";
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
-import {TransactionsItemsComponent} from '../transactions-items/transactions-items.component';
+import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
@@ -184,10 +184,11 @@ export class TransactionStvStoreTransferComponent implements OnInit {
         }
     }
     selectItemsId() {
-        this.dialogRef = this._matDialog.open(TransactionsItemsComponent, {
+        this.dialogRef = this._matDialog.open(TransactionsItemsSelectComponent, {
             panelClass: 'transaction-items-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
+            console.log('response', response);
             if (!response) {
                 return;
             }
@@ -197,6 +198,13 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             }];
             this.stvStoreTransferForm.patchValue({
                 itemId: response.id,
+            });
+            this.unitOfMeasuresData = [{
+                'name': response['inventoryMeasurement'].name,
+                'id': response['inventoryMeasurement'].id
+            }];
+            this.stvStoreTransferForm.patchValue({
+                'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
         });
     }
