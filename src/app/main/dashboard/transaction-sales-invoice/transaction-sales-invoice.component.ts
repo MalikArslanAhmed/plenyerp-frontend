@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
 import {StoreSetupItemsService} from '../../../shared/services/store-setup-items.service';
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
+import {TransactionsItemsComponent} from '../transactions-items/transactions-items.component';
 
 @Component({
     selector: 'app-transaction-sales-invoice',
@@ -295,5 +296,23 @@ export class TransactionSalesInvoiceComponent implements OnInit {
                 this.isSubmitted = false;
             });
         }
+    }
+
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.salesInvoiceForm.patchValue({
+                itemId: response.id,
+            });
+        });
     }
 }

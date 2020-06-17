@@ -1,0 +1,38 @@
+#items-list-select-component {
+    width: 1000px !important;
+    height: auto !important;
+    overflow-y: auto;
+}
+
+.addBtn {
+    color: #2E7D32 !important;
+}
+
+.ml-3 {
+    margin-left: 10px;
+}
+
+.p-5px {
+    padding: 5px;
+}
+.mt-20px{
+    margin-top: 20px;
+}
+.pl-1rem{
+    padding-left: 1rem;
+}
+
+.example-tree-invisible {
+    display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+.filter-title{
+    font-weight: bold;
+    font-size: 1.5rem;
+}

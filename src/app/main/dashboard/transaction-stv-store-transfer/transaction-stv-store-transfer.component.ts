@@ -5,6 +5,8 @@ import {AlertService} from "../../../shared/services/alert.service";
 import {TransactionService} from "../../../shared/services/transaction.service";
 import {StoreSetupItemsService} from "../../../shared/services/store-setup-items.service";
 import {StoreSetupStoresService} from "../../../shared/services/store-setup-stores.service";
+import {TransactionsItemsComponent} from '../transactions-items/transactions-items.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
     selector: 'app-transaction-stv-store-transfer',
@@ -21,9 +23,11 @@ export class TransactionStvStoreTransferComponent implements OnInit {
     storeItems = [];
     unitOfMeasuresData = [];
     isSubmitted = false;
+    dialogRef: any;
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
+                private _matDialog: MatDialog,
                 private transactionService: TransactionService,
                 private storeSetupItemsService: StoreSetupItemsService,
                 private storeSetupStoresService: StoreSetupStoresService) {
@@ -178,5 +182,22 @@ export class TransactionStvStoreTransferComponent implements OnInit {
                 this.isSubmitted = false;
             });
         }
+    }
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.stvStoreTransferForm.patchValue({
+                itemId: response.id,
+            });
+        });
     }
 }

@@ -49,4 +49,7 @@ export class TransactionService extends BaseService {
     saveDonation(data): Observable<any> {
         return this.postRequest(AppUrl.DONATIONS(), data);
     }
+    getItems(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_STORE_SETUP_ITEMS(), data);
+    }
 }

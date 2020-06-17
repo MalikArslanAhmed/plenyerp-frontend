@@ -8,6 +8,7 @@ import {StoreSetupItemsService} from '../../../shared/services/store-setup-items
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 import {MatDialog} from '@angular/material/dialog';
 import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
+import {TransactionsItemsComponent} from '../transactions-items/transactions-items.component';
 
 @Component({
     selector: 'app-transaction-srv-purchase-return',
@@ -269,6 +270,24 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             }];
             this.srvPurchaseReturnForm.patchValue({
                 companyId: response.id,
+            });
+        });
+    }
+
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.srvPurchaseReturnForm.patchValue({
+                itemId: response.id,
             });
         });
     }

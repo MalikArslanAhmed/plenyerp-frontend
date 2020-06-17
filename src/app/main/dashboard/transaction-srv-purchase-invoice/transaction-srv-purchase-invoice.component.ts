@@ -10,6 +10,7 @@ import {StoreSetupStoresService} from '../../../shared/services/store-setup-stor
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
 import { TransactionStoreSelectComponent } from '../transaction-store-select/transaction-store-select.component';
+import {TransactionsItemsComponent} from '../transactions-items/transactions-items.component';
 
 @Component({
     selector: 'app-transaction-srv-purchase-invoice',
@@ -326,6 +327,24 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             }];
             this.srvPurchaseInvocieForm.patchValue({
                 storeId: response.id,
+            });
+        });
+    }
+
+    selectItemsId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.srvPurchaseInvocieForm.patchValue({
+                itemId: response.id,
             });
         });
     }

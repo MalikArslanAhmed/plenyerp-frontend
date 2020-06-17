@@ -106,14 +106,14 @@
                     </mat-grid-list>
                     <mat-grid-list cols="4" rowHeight="80px" class="m-10px shadow-1px">
                         <mat-grid-tile class="mt-2">
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column" (click)="selectItemsId()">
                                 <mat-form-field appearance="outline" fxFlex="100">
-                                    <input type="text" placeholder="Item Id" aria-label="Number" matInput formControlName="itemId" [matAutocomplete]="auto" #itemId>
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let item of storeItems" [value]="item.id">
-                                            {{item?.id}}
-                                        </mat-option>
-                                    </mat-autocomplete>
+                                    <input type="text" placeholder="Item Id" aria-label="Number"  matInput formControlName="itemId" [matAutocomplete]="auto" #itemId>
+<!--                                    <mat-autocomplete #auto="matAutocomplete">-->
+<!--                                        <mat-option *ngFor="let item of storeItems" [value]="item.id">-->
+<!--                                            {{item?.id}}-->
+<!--                                        </mat-option>-->
+<!--                                    </mat-autocomplete>-->
                                 </mat-form-field>
                                 <!--<mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Item Id</mat-label>
