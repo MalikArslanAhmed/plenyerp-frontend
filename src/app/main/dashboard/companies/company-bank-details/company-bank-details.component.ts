@@ -13,19 +13,15 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 })
 export class CompanyBankDetailsComponent implements OnInit {
     action: any;
-    employeeBankDetailsForm: FormGroup;
+    companyeBankDetailsForm: FormGroup;
     isSubmitted = false;
     updateData: any;
-
-    currentEmployee: any;
-    // indexNo = 1;
-
+    currentCompany: any;
     bankList = [];
-    displayedBankColumns = ['id', 'title', 'number', 'type', 'name', 'branch', 'actions'];
+    displayedBankColumns = ['id', 'number', 'type', 'name', 'branch', 'isAuthorised', 'actions'];
     banksName;
     selectedBankBranchName;
     selectedBankList;
-
     editAction = false;
 
     constructor(private employeesService: EmployeeService,
@@ -33,36 +29,30 @@ export class CompanyBankDetailsComponent implements OnInit {
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder) {
         this.action = _data.action;
-        this.currentEmployee = _data.selectedEmployee;
-        // if (this.action === 'EDIT') {
-        //   if (_data.bankDetails) {
-        //     this.updateData = _data;
-        //   }
-        // }
+        this.currentCompany = _data.selectedCompany;
     }
 
     ngOnInit(): void {
         this.refresh();
-        this.getBankDetailsList(this.currentEmployee.id);
+        this.getBankDetailsList(this.currentCompany.id);
         this.getBanksName();
     }
 
     refresh() {
-        this.employeeBankDetailsForm = this.fb.group({
-            employeeId: [this.currentEmployee.id, Validators.required],
-            name: [this.currentEmployee.firstName, Validators.required],
-            // index: [this.indexNo, Validators.required],
-            title: ['', Validators.required],
+        this.companyeBankDetailsForm = this.fb.group({
+            companyId: [this.currentCompany.id, Validators.required],
+            name: [this.currentCompany.name, Validators.required],
             accNumber: ['', Validators.required],
             accType: ['', Validators.required],
             bankName: ['', Validators.required],
-            bankBranchName: ['', Validators.required]
+            bankBranchName: ['', Validators.required],
+            isAuthorised: [false]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
-            this.employeeBankDetailsForm.patchValue({
+            this.companyeBankDetailsForm.patchValue({
                 employeeId: this.updateData.bankDetails.name,
             });
         }
@@ -80,15 +70,13 @@ export class CompanyBankDetailsComponent implements OnInit {
         })
     }
 
-    getBankDetailsList(empId) {
-        this.employeesService.getBankDetailsList(empId, {'page': -1}).subscribe(data => {
+    getBankDetailsList(compId) {
+        this.employeesService.getCompanyBankDetailsList(compId, {'page': -1}).subscribe(data => {
             this.bankList = data.items;
-
             if (this.bankList && this.bankList.length > 0) {
                 let i = 1;
                 this.bankList.forEach(val => {
                     val['sno'] = i;
-                    // this.employeeBankDetailsForm.controls['index'].setValue(i+1);
                     i++;
                 });
             }
@@ -97,86 +85,86 @@ export class CompanyBankDetailsComponent implements OnInit {
 
     saveBankDetails() {
         this.isSubmitted = true;
-        if (!this.employeeBankDetailsForm.valid) {
+        if (!this.companyeBankDetailsForm.valid) {
             this.isSubmitted = false;
             return;
         }
 
         if (this.isSubmitted) {
             const params = {};
-            let reqObj = this.employeeBankDetailsForm.value;
+            let reqObj = this.companyeBankDetailsForm.value;
             if (reqObj.bankName) {
                 params['bankId'] = reqObj.bankName
             }
 
             if (reqObj.bankBranchName) {
-                params['bankBranchId'] = reqObj.bankBranchName
+                params['branchId'] = reqObj.bankBranchName
             }
 
-            if (reqObj.title) {
-                params['title'] = reqObj.title
+            if (reqObj.isAuthorised) {
+                params['isAuthorised'] = reqObj.isAuthorised
             }
 
             if (reqObj.accNumber) {
-                params['number'] = reqObj.accNumber
+                params['bankAccountNumber'] = reqObj.accNumber
             }
 
             if (reqObj.accType) {
-                params['type'] = reqObj.accType
+                params['typeOfBankAccount'] = reqObj.accType
             }
 
-            this.employeesService.addBankDetails(this.currentEmployee.id, params).subscribe(data => {
-                // this.employeeBankDetailsForm.reset();
-                this.employeeBankDetailsForm.controls['title'].reset();
-                this.employeeBankDetailsForm.controls['accNumber'].reset();
-                this.employeeBankDetailsForm.controls['accType'].reset();
-                this.employeeBankDetailsForm.controls['bankName'].reset();
-                this.employeeBankDetailsForm.controls['bankBranchName'].reset();
+            this.employeesService.addCompanyBankDetails(this.currentCompany.id, params).subscribe(data => {
+                // this.companyeBankDetailsForm.reset();
+                this.companyeBankDetailsForm.controls['accNumber'].reset();
+                this.companyeBankDetailsForm.controls['accType'].reset();
+                this.companyeBankDetailsForm.controls['bankName'].reset();
+                this.companyeBankDetailsForm.controls['bankBranchName'].reset();
+                this.companyeBankDetailsForm.controls['isAuthorised'].reset();
                 this.isSubmitted = false;
-                this.getBankDetailsList(this.currentEmployee.id);
+                this.getBankDetailsList(this.currentCompany.id);
             });
         }
     }
 
     updateBankDetails() {
         this.isSubmitted = true;
-        if (!this.employeeBankDetailsForm.valid) {
+        if (!this.companyeBankDetailsForm.valid) {
             this.isSubmitted = false;
             return;
         }
 
         if (this.isSubmitted) {
             const params = {};
-            let reqObj = this.employeeBankDetailsForm.value;
+            let reqObj = this.companyeBankDetailsForm.value;
             if (reqObj.bankName) {
                 params['bankId'] = reqObj.bankName
             }
 
             if (reqObj.bankBranchName) {
-                params['bankBranchId'] = reqObj.bankBranchName
+                params['branchId'] = reqObj.bankBranchName
             }
 
-            if (reqObj.title) {
-                params['title'] = reqObj.title
+            if (reqObj.isAuthorised) {
+                params['isAuthorised'] = reqObj.isAuthorised
             }
 
             if (reqObj.accNumber) {
-                params['number'] = reqObj.accNumber
+                params['bankAccountNumber'] = reqObj.accNumber
             }
 
             if (reqObj.accType) {
-                params['type'] = reqObj.accType
+                params['typeOfBankAccount'] = reqObj.accType
             }
-
-            this.employeesService.updateBankDetails(this.currentEmployee.id, this.selectedBankList.id, params).subscribe(data => {
-                this.employeeBankDetailsForm.controls['title'].reset();
-                this.employeeBankDetailsForm.controls['accNumber'].reset();
-                this.employeeBankDetailsForm.controls['accType'].reset();
-                this.employeeBankDetailsForm.controls['bankName'].reset();
-                this.employeeBankDetailsForm.controls['bankBranchName'].reset();
+            this.employeesService.updateCompanyBankDetails(this.currentCompany.id, this.selectedBankList.id, params).subscribe(data => {
+                this.companyeBankDetailsForm.controls['accNumber'].reset();
+                this.companyeBankDetailsForm.controls['accType'].reset();
+                this.companyeBankDetailsForm.controls['bankName'].reset();
+                this.companyeBankDetailsForm.controls['bankBranchName'].reset();
+                this.companyeBankDetailsForm.controls['isAuthorised'].reset();
                 this.isSubmitted = false;
+                this.selectedBankList = false;
                 this.editAction = false;
-                this.getBankDetailsList(this.currentEmployee.id);
+                this.getBankDetailsList(this.currentCompany.id);
             });
         }
     }
@@ -185,13 +173,12 @@ export class CompanyBankDetailsComponent implements OnInit {
         this.getBankBranchName(bank.bankId);
         this.editAction = true;
         this.selectedBankList = bank;
-        this.employeeBankDetailsForm.patchValue({
-            // index: bank.indexNo,
-            title: bank.title,
-            accNumber: bank.number,
-            accType: bank.type,
-            bankName: bank.bankId,
-            bankBranchName: bank.bankBranchId
+        this.companyeBankDetailsForm.patchValue({
+            accNumber: bank.bankAccountNumber,
+            accType: bank.typeOfBankAccount,
+            bankName: bank.bank.id,
+            bankBranchName: bank.branchId,
+            isAuthorised: bank.isAuthorised
         });
     }
 
@@ -199,7 +186,7 @@ export class CompanyBankDetailsComponent implements OnInit {
     deleteBank(bankId) {
         this.employeesService.deleteBankDetails(bankId).subscribe(data => {
             if (data) {
-                this.getBankDetailsList(this.currentEmployee.id);
+                this.getBankDetailsList(this.currentCompany.id);
             }
         });
     }

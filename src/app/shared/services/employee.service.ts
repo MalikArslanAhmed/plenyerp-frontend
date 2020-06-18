@@ -74,6 +74,10 @@ export class EmployeeService extends BaseService {
         return this.getRequest(AppUrl.GET_BANK_DETAILS_LIST(empId), data);
     }
 
+    getCompanyBankDetailsList(compId,data): Observable<any> {
+        return this.getRequest(AppUrl.GET_COMPANY_BANK_DETAILS_LIST(compId), data);
+    }
+
     getBanksName(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_BANKS_NAME(), data);
     }
@@ -86,8 +90,16 @@ export class EmployeeService extends BaseService {
         return this.postRequest(AppUrl.ADD_BANK_DETAILS(empId), data);
     }
 
+    addCompanyBankDetails(compId, data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_COMPANY_DETAILS(compId), data);
+    }
+
     updateBankDetails(empId, bankListId, data): Observable<any> {
         return this.putRequest(AppUrl.UPDATE_BANK_DETAILS(empId, bankListId), data);
+    }
+
+    updateCompanyBankDetails(compId, bankListId, data): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_COMPANY_BANK_DETAILS(compId, bankListId), data);
     }
 
     deleteBankDetails(id): Observable<any> {

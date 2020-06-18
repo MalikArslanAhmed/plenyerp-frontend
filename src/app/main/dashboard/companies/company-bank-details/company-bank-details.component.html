@@ -9,14 +9,14 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
-        <form fxLayout="column" [formGroup]="employeeBankDetailsForm">
+        <form fxLayout="column" [formGroup]="companyeBankDetailsForm">
             <ng-template matStepLabel>Employee</ng-template>
             <mat-grid-list cols="2" rowHeight="100px">
                 <mat-grid-tile>
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Company ID</mat-label>
-                            <input matInput formControlName="employeeId" readonly required>
+                            <input matInput formControlName="companyId" readonly required [disabled]="true">
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -24,23 +24,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Company Name</mat-label>
-                            <input matInput formControlName="name" readonly required>
-                        </mat-form-field>
-                    </div>
-                </mat-grid-tile>
-                <!-- <mat-grid-tile>
-                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                        <mat-form-field appearance="outline" fxFlex="100">
-                            <mat-label>Index No</mat-label>
-                            <input matInput formControlName="index" required readonly>
-                        </mat-form-field>
-                    </div>
-                </mat-grid-tile> -->
-                <mat-grid-tile colspan="2">
-                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                        <mat-form-field appearance="outline" fxFlex="100">
-                            <mat-label>Title</mat-label>
-                            <input matInput formControlName="title" required>
+                            <input matInput formControlName="name" readonly required [disabled]="true">
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -64,7 +48,8 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Bank Name</mat-label>
-                            <mat-select formControlName="bankName" required (selectionChange)="getBankBranchName($event.value)">
+                            <mat-select formControlName="bankName" required
+                                        (selectionChange)="getBankBranchName($event.value)">
                                 <mat-option *ngFor="let bank of banksName" [value]="bank.id">
                                     {{bank.name}}
                                 </mat-option>
@@ -84,20 +69,27 @@
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-label style="margin-right: 20px">Is Active</mat-label>
+                            <mat-slide-toggle formControlName="isAuthorised"></mat-slide-toggle>
+                        </div>
+                    </div>
+                </mat-grid-tile>
             </mat-grid-list>
-            <div fxLayout="row" fxLayoutAlign="start center">
-                <button mat-raised-button type="button" color="accent" *ngIf="!editAction" (click)="saveBankDetails()">
+            <div fxLayout="row" fxLayoutAlign="end end">
+                <button mat-raised-button type="button" color="accent" class="mr-5px" *ngIf="!editAction" (click)="saveBankDetails()">
                     Add
                 </button>
-
                 <button mat-raised-button type="button" color="accent" *ngIf="editAction" (click)="updateBankDetails()">
                     Update
                 </button>
             </div>
         </form>
 
-        <div class="country-list">
-            <mat-table [@animateStagger]="{value:'50'}" [dataSource]="bankList">
+        <div class="country-list margin-top-1-5rem">
+            <mat-table [@animateStagger]="{value:'50'}" [dataSource]="bankList" style="border: 1px solid #e0e0e0">
                 <ng-container matColumnDef="id">
                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let bank">
@@ -107,20 +99,11 @@
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="title">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
-                        <p class="phone text-truncate cursor-pointer">
-                            {{bank.title}}
-                        </p>
-                    </mat-cell>
-                </ng-container>
-
                 <ng-container matColumnDef="type">
                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Account Type</mat-header-cell>
                     <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
                         <p class="phone text-truncate cursor-pointer">
-                            {{bank.type | titlecase}}
+                            {{bank.typeOfBankAccount | titlecase}}
                         </p>
                     </mat-cell>
                 </ng-container>
@@ -129,7 +112,7 @@
                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Account Number</mat-header-cell>
                     <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
                         <p class="phone text-truncate cursor-pointer">
-                            {{bank.number}}
+                            {{bank.bankAccountNumber}}
                         </p>
                     </mat-cell>
                 </ng-container>
@@ -147,7 +130,19 @@
                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Branch</mat-header-cell>
                     <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
                         <p class="phone text-truncate cursor-pointer">
-                            {{bank.branches?.name}}
+                            {{bank.bankBranch?.name}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="isAuthorised">
+                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Authorised</mat-header-cell>
+                    <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
+                        <p class="phone text-truncate cursor-pointer" *ngIf="bank.isAuthorised">
+                            Active
+                        </p>
+                        <p class="phone text-truncate cursor-pointer" *ngIf="!bank.isAuthorised">
+                            Inactive
                         </p>
                     </mat-cell>
                 </ng-container>
@@ -177,12 +172,4 @@
             </mat-table>
         </div>
     </div>
-    <!-- <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" (click)="matDialogRef.close(addressTypeForm); saveBankDetails()"
-                 aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
-        </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(addressTypeForm); updateBankDetails()"
-                 aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
-        </button>
-    </div> -->
 </div>

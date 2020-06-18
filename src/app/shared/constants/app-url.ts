@@ -773,12 +773,24 @@ export class AppUrl {
         return AppUrl.API_URL + `employee/` + empId + '/banks';
     }
 
+    static GET_COMPANY_BANK_DETAILS_LIST(compId): string {
+        return AppUrl.API_URL + `company/` + compId + '/bank';
+    }
+
     static ADD_BANK_DETAILS(empId): string {
         return AppUrl.API_URL + `employee/` + empId + '/banks';
     }
 
+    static ADD_COMPANY_DETAILS(empId): string {
+        return AppUrl.API_URL + `company/` + empId + '/bank';
+    }
+
     static UPDATE_BANK_DETAILS(empId, bankListId): string {
         return AppUrl.API_URL + `employee/` + empId + '/banks/' + bankListId;
+    }
+
+    static UPDATE_COMPANY_BANK_DETAILS(compId, bankListId): string {
+        return AppUrl.API_URL + `company/` + compId + '/bank/' + bankListId;
     }
 
     static DELETE_BANK_DETAILS(bankId): string {
