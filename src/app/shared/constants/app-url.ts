@@ -952,4 +952,8 @@ export class AppUrl {
     static DELETE_COMPANY(id): string {
         return AppUrl.API_URL + 'companies/' + id;
     }
+
+    static GET_BIN_REPORT(): string {
+        return 'https://run.mocky.io/v3/ae8f321b-4985-4284-8117-ece56710298b';
+    }
 }
