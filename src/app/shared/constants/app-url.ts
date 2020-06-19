@@ -958,6 +958,13 @@ export class AppUrl {
     }
 
     static GET_INVENTORY_LEDGER_REPORT():string {
-        return 'https://run.mocky.io/v3/c8354082-3de3-4de7-8a9e-a1eb2bec626e';
+        return 'https://run.mocky.io/v3/2879175d-f87b-43bd-9463-b4fbd84f9ceb';
+    }
+
+    static GET_QUANTITY_BALANCE_REPORT(): string {
+        return 'https://run.mocky.io/v3/dfdd92c6-3af0-4ed3-ac58-2c8c4b70dd5d';
+    }
+    static GET_OFF_LEVEL_REPORT(): string {
+        return 'https://run.mocky.io/v3/62982b08-94c9-4777-9f99-cbc39d3328a8';
     }
 }

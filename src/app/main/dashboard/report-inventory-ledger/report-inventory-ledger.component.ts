@@ -121,7 +121,7 @@ export class ReportInventoryLedgerComponent implements OnInit {
           this.reportService.getInventoryLedgerReports(params).subscribe(data => {
             // console.log('data', data.items);
             this.itemsArr = data.items;
-            console.log('this.itemsArr', this.itemsArr);
+            //console.log('this.itemsArr', this.itemsArr);
         });
           //console.log(params);
         // this.binCardForm.value['openingDate'] = this.binCardForm.value['openingDate'].format('YYYY-MM-DD');

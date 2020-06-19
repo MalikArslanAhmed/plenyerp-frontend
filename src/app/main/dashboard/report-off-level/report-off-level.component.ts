@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import { TransactionsItemsSelectComponent } from '../transactions-items-select/transactions-items-select.component';
 import { TransactionStoreSelectComponent } from '../transaction-store-select/transaction-store-select.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ReportService } from 'app/shared/services/report.service';
 
 @Component({
     selector: 'app-report-off-level',
@@ -18,27 +19,29 @@ export class ReportOffLevelComponent implements OnInit {
     storeItems = [];
     stores = [];
     itemsArr = [
-        {
-            description: 'New Item 1',
-            minMaxReorderLevel: 10,
-            onHand: 12,
-            quantity: 1221,
-            variance: 1221,
-            unitOfMeasure: 'kg',
-            store: 'New Store '
-        },
-        {
-            description: 'New Item 2',
-            minMaxReorderLevel: 20,
-            onHand: 20,
-            quantity: 221,
-            variance: 221,
-            unitOfMeasure: 'kg',
-            store: 'New Store 1'
-        }
+        // {
+        //     description: 'New Item 1',
+        //     minMaxReorderLevel: 10,
+        //     onHand: 12,
+        //     quantity: 1221,
+        //     variance: 1221,
+        //     unitOfMeasure: 'kg',
+        //     store: 'New Store '
+        // },
+        // {
+        //     description: 'New Item 2',
+        //     minMaxReorderLevel: 20,
+        //     onHand: 20,
+        //     quantity: 221,
+        //     variance: 221,
+        //     unitOfMeasure: 'kg',
+        //     store: 'New Store 1'
+        // }
     ];
 
-    constructor(private fb: FormBuilder,private _matDialog: MatDialog) {
+    constructor(private fb: FormBuilder,
+        private _matDialog: MatDialog,
+        private reportService: ReportService) {
     }
 
     ngOnInit(): void {
@@ -99,15 +102,18 @@ export class ReportOffLevelComponent implements OnInit {
 
     loadReport() {
         const params = {
-              'openingDate': this.reportOffLevelForm.value['openingDate'].format('YYYY-MM-DD'),
-              'closingDate': this.reportOffLevelForm.value['closingDate'].format('YYYY-MM-DD'),
+              'openingDate': this.reportOffLevelForm.value['openingDate'] ? this.reportOffLevelForm.value['openingDate'].format('YYYY-MM-DD') : '',
+              'closingDate': this.reportOffLevelForm.value['closingDate'] ? this.reportOffLevelForm.value['closingDate'].format('YYYY-MM-DD') : '',
               'itemId': this.reportOffLevelForm.value['itemId'],
               'storeId': this.reportOffLevelForm.value['storeId'],
               'itemName': this.reportOffLevelForm.value['itemName'],
               'costingMethod': this.reportOffLevelForm.value['costingMethod']
           };
-          //console.log(params);
-        // this.binCardForm.value['openingDate'] = this.binCardForm.value['openingDate'].format('YYYY-MM-DD');
-        // this.binCardForm.value['closingDate'] = this.binCardForm.value['closingDate'].format('YYYY-MM-DD');
+
+          this.itemsArr = [];
+          this.reportService.getOffLevelReports(params).subscribe(data=>{
+              this.itemsArr=data.items;
+              //console.log(this.itemsArr);
+          });         
     }
 }
