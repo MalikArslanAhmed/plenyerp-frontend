@@ -86,8 +86,8 @@ export class ReportBinCardComponent implements OnInit {
 
     loadReport() {
         const params = {
-            'openingDate': this.binCardForm.value['openingDate'].format('YYYY-MM-DD'),
-            'closingDate': this.binCardForm.value['closingDate'].format('YYYY-MM-DD'),
+            'openingDate': this.binCardForm.value['openingDate'] ? this.binCardForm.value['openingDate'].format('YYYY-MM-DD') : '',
+            'closingDate': this.binCardForm.value['closingDate'] ? this.binCardForm.value['closingDate'].format('YYYY-MM-DD') : '',
             'itemId': this.binCardForm.value['itemId'],
             'storeId': this.binCardForm.value['storeId'],
             'itemName': this.binCardForm.value['itemName'],
