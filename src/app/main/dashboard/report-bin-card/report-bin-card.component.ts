@@ -18,10 +18,7 @@ export class ReportBinCardComponent implements OnInit {
     dialogRef: any;
     storeItems = [];
     stores = [];
-    itemsArr = [
-        /*{date: '12-06-2020', description: 'New Item 1', in: 12, unitCost: '1221', out: 6, balance: 6},
-        {date: '13-06-2020', description: 'New Item 2', in: 12, unitCost: '2221', out: 8, balance: 4}*/
-    ];
+    itemsArr = [];
 
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
@@ -59,10 +56,6 @@ export class ReportBinCardComponent implements OnInit {
                 itemId: response.id,
                 itemName: response.description
             });
-
-            // this.binCardForm.patchValue({
-            //     itemName: response.description,
-            // });
         });
     }
 
@@ -95,9 +88,7 @@ export class ReportBinCardComponent implements OnInit {
         };
         this.itemsArr = [];
         this.reportService.getBinReports(params).subscribe(data => {
-            // console.log('data', data.items);
             this.itemsArr = data.items;
-           // console.log('this.itemsArr', this.itemsArr);
         });
     }
 }

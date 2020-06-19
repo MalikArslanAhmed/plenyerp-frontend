@@ -44,7 +44,6 @@ export class TransactionStoreSelectComponent implements OnInit {
     getStores(params = {}) {
         this.transactionService.getStores(params).subscribe(data => {
             this.stores = data.items;
-            console.log(this.stores);
             this.pagination.page = data.page;
             this.pagination.total = data.total;
             if (this.stores && this.stores.length > 0) {

@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import { TransactionsItemsSelectComponent } from '../transactions-items-select/transactions-items-select.component';
-import { TransactionStoreSelectComponent } from '../transaction-store-select/transaction-store-select.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ReportService } from 'app/shared/services/report.service';
+import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
+import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
+import {MatDialog} from '@angular/material/dialog';
+import {ReportService} from 'app/shared/services/report.service';
 
 @Component({
     selector: 'app-report-off-level',
@@ -18,30 +18,11 @@ export class ReportOffLevelComponent implements OnInit {
     dialogRef: any;
     storeItems = [];
     stores = [];
-    itemsArr = [
-        // {
-        //     description: 'New Item 1',
-        //     minMaxReorderLevel: 10,
-        //     onHand: 12,
-        //     quantity: 1221,
-        //     variance: 1221,
-        //     unitOfMeasure: 'kg',
-        //     store: 'New Store '
-        // },
-        // {
-        //     description: 'New Item 2',
-        //     minMaxReorderLevel: 20,
-        //     onHand: 20,
-        //     quantity: 221,
-        //     variance: 221,
-        //     unitOfMeasure: 'kg',
-        //     store: 'New Store 1'
-        // }
-    ];
+    itemsArr = [];
 
     constructor(private fb: FormBuilder,
-        private _matDialog: MatDialog,
-        private reportService: ReportService) {
+                private _matDialog: MatDialog,
+                private reportService: ReportService) {
     }
 
     ngOnInit(): void {
@@ -75,10 +56,6 @@ export class ReportOffLevelComponent implements OnInit {
                 itemId: response.id,
                 itemName: response.description
             });
-
-            // this.binCardForm.patchValue({
-            //     itemName: response.description,
-            // });
         });
     }
 
@@ -102,18 +79,17 @@ export class ReportOffLevelComponent implements OnInit {
 
     loadReport() {
         const params = {
-              'openingDate': this.reportOffLevelForm.value['openingDate'] ? this.reportOffLevelForm.value['openingDate'].format('YYYY-MM-DD') : '',
-              'closingDate': this.reportOffLevelForm.value['closingDate'] ? this.reportOffLevelForm.value['closingDate'].format('YYYY-MM-DD') : '',
-              'itemId': this.reportOffLevelForm.value['itemId'],
-              'storeId': this.reportOffLevelForm.value['storeId'],
-              'itemName': this.reportOffLevelForm.value['itemName'],
-              'costingMethod': this.reportOffLevelForm.value['costingMethod']
-          };
+            'openingDate': this.reportOffLevelForm.value['openingDate'] ? this.reportOffLevelForm.value['openingDate'].format('YYYY-MM-DD') : '',
+            'closingDate': this.reportOffLevelForm.value['closingDate'] ? this.reportOffLevelForm.value['closingDate'].format('YYYY-MM-DD') : '',
+            'itemId': this.reportOffLevelForm.value['itemId'],
+            'storeId': this.reportOffLevelForm.value['storeId'],
+            'itemName': this.reportOffLevelForm.value['itemName'],
+            'costingMethod': this.reportOffLevelForm.value['costingMethod']
+        };
 
-          this.itemsArr = [];
-          this.reportService.getOffLevelReports(params).subscribe(data=>{
-              this.itemsArr=data.items;
-              //console.log(this.itemsArr);
-          });         
+        this.itemsArr = [];
+        this.reportService.getOffLevelReports(params).subscribe(data => {
+            this.itemsArr = data.items;
+        });
     }
 }

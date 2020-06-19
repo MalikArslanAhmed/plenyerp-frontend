@@ -14,10 +14,6 @@ export class ReportService extends BaseService {
         super(http, alertService, globalService);
     }
 
-    addSkill(data): Observable<any> {
-        return this.postRequest(AppUrl.SKILL(), data);
-    }
-
     getBinReports(data): Observable<any> {
         return this.getRequest(AppUrl.GET_BIN_REPORT(), data);
     }
@@ -26,18 +22,11 @@ export class ReportService extends BaseService {
         return this.getRequest(AppUrl.GET_INVENTORY_LEDGER_REPORT(), data);
     }
 
-    getQuantityBalanceReports(data): Observable<any>{
+    getQuantityBalanceReports(data): Observable<any> {
         return this.getRequest(AppUrl.GET_QUANTITY_BALANCE_REPORT(), data);
     }
-    getOffLevelReports(data): Observable<any>{
+
+    getOffLevelReports(data): Observable<any> {
         return this.getRequest(AppUrl.GET_OFF_LEVEL_REPORT(), data)
-    }
-
-    deleteSkill(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_SKILL(id));
-    }
-
-    updateSkill(id, data): Observable<any> {
-        return this.putRequest(AppUrl.SKILL(id), data);
     }
 }
