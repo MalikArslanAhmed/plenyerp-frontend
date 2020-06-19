@@ -22,6 +22,10 @@ export class ReportService extends BaseService {
         return this.getRequest(AppUrl.GET_BIN_REPORT(), data);
     }
 
+    getInventoryLedgerReports(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_INVENTORY_LEDGER_REPORT(), data);
+    }
+
     deleteSkill(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_SKILL(id));
     }

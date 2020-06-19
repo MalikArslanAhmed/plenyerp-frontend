@@ -956,4 +956,8 @@ export class AppUrl {
     static GET_BIN_REPORT(): string {
         return 'https://run.mocky.io/v3/482f2ac2-e62e-46c9-97dc-5277ad6c4c8d';
     }
+
+    static GET_INVENTORY_LEDGER_REPORT():string {
+        return 'https://run.mocky.io/v3/c8354082-3de3-4de7-8a9e-a1eb2bec626e';
+    }
 }

@@ -97,7 +97,7 @@ export class ReportBinCardComponent implements OnInit {
         this.reportService.getBinReports(params).subscribe(data => {
             // console.log('data', data.items);
             this.itemsArr = data.items;
-            console.log('this.itemsArr', this.itemsArr);
+           // console.log('this.itemsArr', this.itemsArr);
         });
     }
 }
