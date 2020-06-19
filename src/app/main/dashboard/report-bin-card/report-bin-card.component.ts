@@ -86,22 +86,18 @@ export class ReportBinCardComponent implements OnInit {
 
     loadReport() {
         const params = {
-              'openingDate': this.binCardForm.value['openingDate'].format('YYYY-MM-DD'),
-              'closingDate': this.binCardForm.value['closingDate'].format('YYYY-MM-DD'),
-              'itemId': this.binCardForm.value['itemId'],
-              'storeId': this.binCardForm.value['storeId'],
-              'itemName': this.binCardForm.value['itemName'],
-              'costingMethod': this.binCardForm.value['costingMethod']
-          };
-          //console.log(params);
-        // this.binCardForm.value['openingDate'] = this.binCardForm.value['openingDate'].format('YYYY-MM-DD');
-        // this.binCardForm.value['closingDate'] = this.binCardForm.value['closingDate'].format('YYYY-MM-DD');
-        console.log('binCardForm', this.binCardForm.value);
+            'openingDate': this.binCardForm.value['openingDate'].format('YYYY-MM-DD'),
+            'closingDate': this.binCardForm.value['closingDate'].format('YYYY-MM-DD'),
+            'itemId': this.binCardForm.value['itemId'],
+            'storeId': this.binCardForm.value['storeId'],
+            'itemName': this.binCardForm.value['itemName'],
+            'costingMethod': this.binCardForm.value['costingMethod']
+        };
         this.itemsArr = [];
         this.reportService.getBinReports(params).subscribe(data => {
-            console.log('data', data.items);
-            /*this.itemsArr = data.items;
-            console.log('this.itemsArr', this.itemsArr);*/
+            // console.log('data', data.items);
+            this.itemsArr = data.items;
+            console.log('this.itemsArr', this.itemsArr);
         });
     }
 }

@@ -954,6 +954,6 @@ export class AppUrl {
     }
 
     static GET_BIN_REPORT(): string {
-        return 'https://run.mocky.io/v3/ae8f321b-4985-4284-8117-ece56710298b';
+        return 'https://run.mocky.io/v3/482f2ac2-e62e-46c9-97dc-5277ad6c4c8d';
     }
 }
