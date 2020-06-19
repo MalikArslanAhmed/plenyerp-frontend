@@ -2,6 +2,9 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import { MatDialog } from '@angular/material/dialog';
+import { TransactionsItemsSelectComponent } from '../transactions-items-select/transactions-items-select.component';
+import { TransactionStoreSelectComponent } from '../transaction-store-select/transaction-store-select.component';
 
 @Component({
     selector: 'app-report-inventory-ledger',
@@ -12,6 +15,9 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class ReportInventoryLedgerComponent implements OnInit {
     reportInventoryLedgerForm: FormGroup;
+    dialogRef: any;
+    storeItems = [];
+    stores = [];
     itemsArr = [
         {
             description: 'lorem ipsum',
@@ -39,7 +45,7 @@ export class ReportInventoryLedgerComponent implements OnInit {
         },
     ];
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder,private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -52,8 +58,64 @@ export class ReportInventoryLedgerComponent implements OnInit {
             closingDate: [''],
             itemId: [''],
             itemName: [''],
-            store: [''],
-            costingMethod: []
+            storeId: [''],
+            costingMethod: ['']
         });
+    }
+
+    selectItemId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsSelectComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'description': response.description,
+                'id': response.id
+            }];
+            this.reportInventoryLedgerForm.patchValue({
+                itemId: response.id,
+                itemName: response.description
+            });
+
+            //console.log(this.storeItems)
+            // this.binCardForm.patchValue({
+            //     itemName: response.description,
+            // });
+        });
+    }
+
+    storeIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionStoreSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.stores = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.reportInventoryLedgerForm.patchValue({
+                storeId: response.id,
+            });
+        });
+    }
+
+    loadReport() {
+        const params = {
+              'openingDate': this.reportInventoryLedgerForm.value['openingDate'].format('YYYY-MM-DD'),
+              'closingDate': this.reportInventoryLedgerForm.value['closingDate'].format('YYYY-MM-DD'),
+              'itemId': this.reportInventoryLedgerForm.value['itemId'],
+              'storeId': this.reportInventoryLedgerForm.value['storeId'],
+              'itemName': this.reportInventoryLedgerForm.value['itemName'],
+              'costingMethod': this.reportInventoryLedgerForm.value['costingMethod']
+          };
+          //console.log(params);
+        // this.binCardForm.value['openingDate'] = this.binCardForm.value['openingDate'].format('YYYY-MM-DD');
+        // this.binCardForm.value['closingDate'] = this.binCardForm.value['closingDate'].format('YYYY-MM-DD');
     }
 }

@@ -48,22 +48,25 @@
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile class="mt-2">
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column" (click)="selectItemId()">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Item Id</mat-label>
-                                    <select formControlName="store" matNativeControl>
-                                        <option value="1">New Store</option>
-                                    </select>
+                                    <mat-select formControlName="itemId" [disabled]="true">
+                                        <mat-option *ngFor="let item of storeItems" [value]="item.id">
+                                            {{item.id}}
+                                        </mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile class="mt-2">
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column" (click)="storeIdSelect()">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Store</mat-label>
-                                    <select formControlName="itemId" matNativeControl>
-                                        <option value="1">New Store 1</option>
-                                    </select>
+                                    <mat-select formControlName="storeId" [disabled]="true">
+                                        <mat-option [value]="store.id"
+                                                    *ngFor="let store of stores">{{store.name}}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -88,8 +91,8 @@
                             </div>
                         </mat-grid-tile>
                         <mat-grid-tile class="mt-1">
-                            <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
-                                <button mat-raised-button class="mat-accent">
+                            <div class="p-5px" fxFlex="1 0 auto" fxLayout="column" >
+                                <button mat-raised-button class="mat-accent" (click)="loadReport()">
                                     Load Report
                                 </button>
                             </div>

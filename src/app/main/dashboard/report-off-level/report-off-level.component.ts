@@ -1,6 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import { TransactionsItemsSelectComponent } from '../transactions-items-select/transactions-items-select.component';
+import { TransactionStoreSelectComponent } from '../transaction-store-select/transaction-store-select.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-report-off-level',
@@ -11,6 +14,9 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class ReportOffLevelComponent implements OnInit {
     reportOffLevelForm: FormGroup;
+    dialogRef: any;
+    storeItems = [];
+    stores = [];
     itemsArr = [
         {
             description: 'New Item 1',
@@ -32,7 +38,7 @@ export class ReportOffLevelComponent implements OnInit {
         }
     ];
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder,private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -45,8 +51,63 @@ export class ReportOffLevelComponent implements OnInit {
             closingDate: [''],
             itemId: [''],
             itemName: [''],
-            store: [''],
-            costingMethod: []
+            storeId: [''],
+            costingMethod: ['']
         });
+    }
+
+    selectItemId() {
+        this.dialogRef = this._matDialog.open(TransactionsItemsSelectComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.storeItems = [{
+                'description': response.description,
+                'id': response.id
+            }];
+            this.reportOffLevelForm.patchValue({
+                itemId: response.id,
+                itemName: response.description
+            });
+
+            // this.binCardForm.patchValue({
+            //     itemName: response.description,
+            // });
+        });
+    }
+
+    storeIdSelect() {
+        this.dialogRef = this._matDialog.open(TransactionStoreSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.stores = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.reportOffLevelForm.patchValue({
+                storeId: response.id,
+            });
+        });
+    }
+
+    loadReport() {
+        const params = {
+              'openingDate': this.reportOffLevelForm.value['openingDate'].format('YYYY-MM-DD'),
+              'closingDate': this.reportOffLevelForm.value['closingDate'].format('YYYY-MM-DD'),
+              'itemId': this.reportOffLevelForm.value['itemId'],
+              'storeId': this.reportOffLevelForm.value['storeId'],
+              'itemName': this.reportOffLevelForm.value['itemName'],
+              'costingMethod': this.reportOffLevelForm.value['costingMethod']
+          };
+          //console.log(params);
+        // this.binCardForm.value['openingDate'] = this.binCardForm.value['openingDate'].format('YYYY-MM-DD');
+        // this.binCardForm.value['closingDate'] = this.binCardForm.value['closingDate'].format('YYYY-MM-DD');
     }
 }

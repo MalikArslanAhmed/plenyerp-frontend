@@ -39,7 +39,7 @@ export class ReportBinCardComponent implements OnInit {
             itemId: [''],
             storeId: [''],
             itemName: [''],
-            costingMethod: []
+            costingMethod: ['']
         });
     }
 
@@ -57,11 +57,12 @@ export class ReportBinCardComponent implements OnInit {
             }];
             this.binCardForm.patchValue({
                 itemId: response.id,
+                itemName: response.description
             });
 
-            this.binCardForm.patchValue({
-                itemName: response.description,
-            });
+            // this.binCardForm.patchValue({
+            //     itemName: response.description,
+            // });
         });
     }
 
@@ -84,11 +85,20 @@ export class ReportBinCardComponent implements OnInit {
     }
 
     loadReport() {
-        this.binCardForm.value['openingDate'] = this.binCardForm.value['openingDate'].format('YYYY-MM-DD');
-        this.binCardForm.value['closingDate'] = this.binCardForm.value['closingDate'].format('YYYY-MM-DD');
+        const params = {
+              'openingDate': this.binCardForm.value['openingDate'].format('YYYY-MM-DD'),
+              'closingDate': this.binCardForm.value['closingDate'].format('YYYY-MM-DD'),
+              'itemId': this.binCardForm.value['itemId'],
+              'storeId': this.binCardForm.value['storeId'],
+              'itemName': this.binCardForm.value['itemName'],
+              'costingMethod': this.binCardForm.value['costingMethod']
+          };
+          //console.log(params);
+        // this.binCardForm.value['openingDate'] = this.binCardForm.value['openingDate'].format('YYYY-MM-DD');
+        // this.binCardForm.value['closingDate'] = this.binCardForm.value['closingDate'].format('YYYY-MM-DD');
         console.log('binCardForm', this.binCardForm.value);
         this.itemsArr = [];
-        this.reportService.getBinReports(this.binCardForm.value).subscribe(data => {
+        this.reportService.getBinReports(params).subscribe(data => {
             console.log('data', data.items);
             /*this.itemsArr = data.items;
             console.log('this.itemsArr', this.itemsArr);*/
