@@ -42,6 +42,7 @@ export class TransactionStoreSelectComponent implements OnInit {
     }
 
     getStores(params = {}) {
+        params['isActive'] = 1;
         this.transactionService.getStores(params).subscribe(data => {
             this.stores = data.items;
             this.pagination.page = data.page;

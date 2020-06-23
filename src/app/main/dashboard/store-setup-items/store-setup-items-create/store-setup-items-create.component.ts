@@ -133,7 +133,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
     }
 
     getStoreSetupUnitOfMeasure() {
-        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1}).subscribe(data => {
+        this.storeSetupUnitOfMeasuresService.getStoreSetupUnitOfMeasures({'page': -1, isActive: 1}).subscribe(data => {
             this.unitOfMeasures = data.items;
             /*if (this.unitOfMeasures && this.unitOfMeasures.length > 0) {
                 let i = 1;
