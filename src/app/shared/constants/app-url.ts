@@ -281,7 +281,7 @@ export class AppUrl {
 
     static STATES(id?): string {
         if (id) {
-            return AppUrl.API_URL + 'public-holidays/' + id;
+            return AppUrl.API_URL + 'states/' + id;
         } else {
             return AppUrl.API_URL + 'states';
         }

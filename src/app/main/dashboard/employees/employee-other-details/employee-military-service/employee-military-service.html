@@ -107,7 +107,7 @@
                      <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Engaged At</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMilitaryService">
                          <p class="phone text-truncate cursor-pointer">
-                             {{employeeMilitaryService?.engagedAt}}
+                             {{employeeMilitaryService?.engagedAt | date:'mediumDate'}}
                          </p>
                      </mat-cell>
                  </ng-container>
@@ -116,7 +116,7 @@
                      <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Discharged At</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMilitaryService">
                          <p class="phone text-truncate cursor-pointer">
-                             {{employeeMilitaryService?.dischargedAt}}
+                             {{employeeMilitaryService?.dischargedAt | date:'mediumDate'}}
                          </p>
                      </mat-cell>
                  </ng-container>

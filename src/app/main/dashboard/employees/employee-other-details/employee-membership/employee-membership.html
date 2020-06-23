@@ -91,7 +91,7 @@
                      <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Date Joined</mat-header-cell>
                      <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMembership">
                          <p class="phone text-truncate cursor-pointer">
-                             {{employeeMembership?.joinAt}}
+                             {{employeeMembership?.joinAt | date:'mediumDate'}}
                          </p>
                      </mat-cell>
                  </ng-container>
