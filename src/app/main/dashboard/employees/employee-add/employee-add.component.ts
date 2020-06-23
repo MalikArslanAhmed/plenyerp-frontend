@@ -697,38 +697,38 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     chooseRegion(event) {
-        this.structureService.getRegions({'page': -1, 'countryId': event}).subscribe(data => {
+        this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1}).subscribe(data => {
             this.regions = data.items;
         });
     }
 
     chooseState(event) {
-        this.structureService.getStates({'page': -1, 'regionId': event}).subscribe(data => {
+        this.structureService.getStates({'page': -1, 'regionId': event, 'isActive' : 1}).subscribe(data => {
             this.states = data.items;
         });
     }
 
     chooseLga(event) {
-        this.structureService.getLga({'page': -1, 'lgaId': event}).subscribe(data => {
+        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive' : 1}).subscribe(data => {
             this.lgas = data.items;
         });
     }
 
 
     chooseRegionOther(event) {
-        this.structureService.getRegions({'page': -1, 'countryId': event}).subscribe(data => {
+        this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1}).subscribe(data => {
             this.regionsOther = data.items;
         });
     }
 
     chooseStateOther(event) {
-        this.structureService.getStates({'page': -1, 'regionId': event}).subscribe(data => {
+        this.structureService.getStates({'page': -1, 'regionId': event, 'isActive' : 1}).subscribe(data => {
             this.statesOther = data.items;
         });
     }
 
     chooseLgaOther(event) {
-        this.structureService.getLga({'page': -1, 'lgaId': event}).subscribe(data => {
+        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive' : 1}).subscribe(data => {
             this.lgasOthers = data.items;
         });
     }

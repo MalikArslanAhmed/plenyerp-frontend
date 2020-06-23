@@ -73,8 +73,8 @@ export class ContactInfoService extends BaseService {
     }
 
 
-    country(): Observable<any> {
-        return this.getRequest(AppUrl.GET_COUNTRY());
+    country(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_COUNTRY(), data);
     }
     region(data): Observable<any> {
         return this.getRequest(AppUrl.GET_REGION(), data);

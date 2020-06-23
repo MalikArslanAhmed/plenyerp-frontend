@@ -101,13 +101,13 @@ export class StatesCreateComponent implements OnInit {
     }
 
     getCountry() {
-        this.contactInfoService.country().subscribe(data => {
+        this.contactInfoService.country({isActive : 1}).subscribe(data => {
             this.countries = data.items;
         });
     }
     getRegion(countryId) {
         this.regions = [];
-        this.contactInfoService.region({countryId: countryId}).subscribe(data => {
+        this.contactInfoService.region({countryId: countryId, isActive : 1}).subscribe(data => {
             this.regions = data.items;
         });
     }

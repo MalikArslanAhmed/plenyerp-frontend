@@ -108,21 +108,21 @@ export class LgaCreateComponent implements OnInit {
     }
 
     getCountry() {
-        this.contactInfoService.country().subscribe(data => {
+        this.contactInfoService.country({isActive : 1}).subscribe(data => {
             this.countries = data.items;
         });
     }
     getRegion(countryId) {
         this.regions = [];
         console.log(countryId);
-        this.contactInfoService.region({countryId: countryId}).subscribe(data => {
+        this.contactInfoService.region({countryId: countryId, isActive : 1}).subscribe(data => {
             this.regions = data.items;
         });
     }
     getState(regionId) {
         this.states = [];
         console.log(regionId);
-        this.contactInfoService.state({regionId: regionId}).subscribe(data => {
+        this.contactInfoService.state({regionId: regionId, isActive : 1}).subscribe(data => {
             this.states = data.items;
         });
     }

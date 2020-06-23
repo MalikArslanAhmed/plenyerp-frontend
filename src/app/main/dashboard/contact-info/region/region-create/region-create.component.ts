@@ -92,7 +92,7 @@ export class RegionCreateComponent implements OnInit {
     }
 
     getCountry() {
-        this.contactInfoService.country().subscribe(data => {
+        this.contactInfoService.country({isActive : 1}).subscribe(data => {
             this.countries = data.items;
         });
     }
