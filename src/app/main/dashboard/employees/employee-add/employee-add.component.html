@@ -440,7 +440,7 @@
                                         <mat-select formControlName="otherCountryId" required
                                                     (selectionChange)="chooseRegionOther($event.value)">
                                             <mat-option [value]="country.id"
-                                                        *ngFor="let country of countries">{{country.name}}</mat-option>
+                                                        *ngFor="let country of countriesOther">{{country.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
                                         <mat-error>Country is required!</mat-error>
@@ -454,7 +454,7 @@
                                         <mat-select formControlName="otherRegionId" required
                                                     (selectionChange)="chooseStateOther($event.value)">
                                             <mat-option [value]="region.id"
-                                                        *ngFor="let region of regions">{{region.name}}</mat-option>
+                                                        *ngFor="let region of regionsOther">{{region.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
                                         <mat-error>Region is required!</mat-error>
@@ -468,7 +468,7 @@
                                         <mat-select formControlName="otherStateId" required
                                                     (selectionChange)="chooseLgaOther($event.value)">
                                             <mat-option [value]="state.id"
-                                                        *ngFor="let state of states">{{state.name}}</mat-option>
+                                                        *ngFor="let state of statesOther">{{state.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
                                         <mat-error>State is required!</mat-error>
@@ -481,7 +481,7 @@
                                         <mat-label>LGA</mat-label>
                                         <mat-select formControlName="otherLgaId" required>
                                             <mat-option [value]="lga.id"
-                                                        *ngFor="let lga of lgas">{{lga.name}}</mat-option>
+                                                        *ngFor="let lga of lgasOthers">{{lga.name}}</mat-option>
                                         </mat-select>
                                         <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
                                         <mat-error>LGA is required!</mat-error>
