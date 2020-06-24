@@ -137,6 +137,7 @@ export class EmployeeActionComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    departmentAllIds = [];
 
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
@@ -290,15 +291,36 @@ export class EmployeeActionComponent implements OnInit {
             if (!response) {
                 return;
             }
+            this.departmentAllIds = [];
+            this.departmentAllIds.push(response.id);
+            this.findAllIds(response);
+
             this.departments = [{
                 'name': response.name,
                 'id': response.id
+                // 'id': this.departmentAllIds
             }];
+
+
             this.employeeFilterForm.patchValue({
                 departmentId: response.id,
+                // departmentId: this.departmentAllIds,
                 disabled: true
             });
-            this.getEmployees({'departmentId': response.id});
+            // this.getEmployees({'departmentId': response.id});
+            this.getEmployees({departmentIds: JSON.stringify(this.departmentAllIds)});
+        });
+    }
+
+    findAllIds(data){
+        data.children.forEach(item => {
+            if(item.children && item.children.length){
+                this.departmentAllIds.push(item.id);
+                this.findAllIds(item);
+            }else{
+                this.departmentAllIds.push(item.id);
+                return;
+            }
         });
     }
 
