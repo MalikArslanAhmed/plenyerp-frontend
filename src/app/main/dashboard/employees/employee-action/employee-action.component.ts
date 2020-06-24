@@ -138,6 +138,7 @@ export class EmployeeActionComponent implements OnInit {
     };
     pageEvent: PageEvent;
     departmentAllIds = [];
+    filters ={};
 
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
@@ -161,6 +162,11 @@ export class EmployeeActionComponent implements OnInit {
         });
     }
 
+    addSearchFilter(){
+        this.filters['search'] = this.employeeFilterForm.value.search;
+        this.getEmployees(this.filters);
+    }
+
     getEmployees(params) {
         if (params.status === 'NEW') {
             this.nextStatus = 'ACTIVE';
@@ -174,6 +180,12 @@ export class EmployeeActionComponent implements OnInit {
             this.nextStatus = 'PROMOTION';
         } else {
             this.nextStatus = '';
+        }
+        if (this.filters['departmentIds']){
+            params['departmentIds'] = this.filters['departmentIds'];
+        }
+        if (this.filters['search']){
+            params['search'] = this.filters['search'];
         }
         this.employeesService.getEmployees(params).subscribe(data => {
             this.employees = data.items;
@@ -308,7 +320,9 @@ export class EmployeeActionComponent implements OnInit {
                 disabled: true
             });
             // this.getEmployees({'departmentId': response.id});
-            this.getEmployees({departmentIds: JSON.stringify(this.departmentAllIds)});
+            this.filters['departmentIds'] = JSON.stringify(this.departmentAllIds);
+            // this.getEmployees({departmentIds: JSON.stringify(this.departmentAllIds)});
+            this.getEmployees(this.filters);
         });
     }
 

@@ -43,7 +43,7 @@
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Search</mat-label>
                                         <input matInput formControlName="search"
-                                            (keyup)="getEmployees({'search': this.employeeFilterForm.value.search})">
+                                            (keyup)="addSearchFilter()">
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
