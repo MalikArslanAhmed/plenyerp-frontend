@@ -58,6 +58,10 @@ export class EmployeeService extends BaseService {
         return this.getRequest(AppUrl.GET_APPOINTMENTS_TYPE(), data);
     }
 
+    getCountryCode(data?): Observable<any> {
+        return this.getRequest(AppUrl.GET_COUNTRY_CODE(), data);
+    }
+
     getReligions(data?): Observable<any> {
         return this.getRequest(AppUrl.GET_RELIGIONS(), data);
     }

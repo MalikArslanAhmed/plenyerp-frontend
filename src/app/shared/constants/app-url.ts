@@ -415,6 +415,10 @@ export class AppUrl {
         return AppUrl.API_URL + `type-of-appointments`;
     }
 
+    static GET_COUNTRY_CODE(): string {
+        return AppUrl.API_URL + `country-codes`;
+    }
+
     static GET_RELIGIONS(): string {
         return AppUrl.API_URL + `religions`;
     }

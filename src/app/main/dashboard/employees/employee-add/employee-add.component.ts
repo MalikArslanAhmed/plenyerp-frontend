@@ -33,6 +33,7 @@ export class EmployeeAddComponent implements OnInit {
     maritalStatuses;
     religions;
     typeOfAppointments;
+    countryCodes;
 
     designations = [];
     countries = [];
@@ -75,6 +76,7 @@ export class EmployeeAddComponent implements OnInit {
         this.getCountriesOther();
         this.getEmployeeId();
         this.getAppointmentsType();
+        this.getCountryCode();
         this.getReligions();
         this.getMaritialStatus();
     }
@@ -94,6 +96,13 @@ export class EmployeeAddComponent implements OnInit {
     getAppointmentsType() {
         this.employeeService.getAppointmentsType().subscribe((data) => {
             this.typeOfAppointments = data.items;
+        });
+    }
+
+    getCountryCode() {
+        this.employeeService.getCountryCode().subscribe((data) => {
+            this.countryCodes = data.items;
+            console.log('country codes ----->', this.countryCodes);
         });
     }
 
@@ -124,6 +133,7 @@ export class EmployeeAddComponent implements OnInit {
             maritalStatus: ['SINGLE', Validators.required],
             gender: ['MALE', Validators.required],
             religion: ['CHRISTIANITY', Validators.required],
+            countryCode: ['', Validators.required],
             phone: ['', Validators.required],
             email: ['', Validators.required],
             appointedOn: ['', Validators.required],
@@ -229,6 +239,7 @@ export class EmployeeAddComponent implements OnInit {
             'maritalStatus': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.maritalStatus ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.maritalStatus : '',
             'gender': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.gender ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.gender : '',
             'religion': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.religion ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.religion : '',
+            'countryCode': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.countryCode ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.countryCode : '',
             'phone': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.phone ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.phone : '',
             'email': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.email ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.email : '',
             'appointedOn': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.appointedOn ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.appointedOn : '',
@@ -700,6 +711,11 @@ export class EmployeeAddComponent implements OnInit {
         this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1}).subscribe(data => {
             this.regions = data.items;
         });
+        this.citizenshipContactDetailsForm.controls['regionId'].reset();
+        this.citizenshipContactDetailsForm.controls['stateId'].reset();
+        this.citizenshipContactDetailsForm.controls['lgaId'].reset();
+        this.states = [];
+        this.lgas = [];
     }
 
     chooseState(event) {
@@ -719,6 +735,11 @@ export class EmployeeAddComponent implements OnInit {
         this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1}).subscribe(data => {
             this.regionsOther = data.items;
         });
+        this.citizenshipContactDetailsForm.controls['otherRegionId'].reset();
+        this.citizenshipContactDetailsForm.controls['otherStateId'].reset();
+        this.citizenshipContactDetailsForm.controls['otherLgaId'].reset();
+        this.statesOther = [];
+        this.lgasOthers = [];
     }
 
     chooseStateOther(event) {

@@ -141,6 +141,18 @@
                                 </div>
                             </mat-grid-tile>
                             <mat-grid-tile>
+                                <div class="p-10px mw-50" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Country Code</mat-label>
+                                        <mat-select formControlName="countryCode" required>
+                                            <mat-option [value]="countryCode.country_code"
+                                            *ngFor="let countryCode of countryCodes">{{countryCode.name | titlecase}} ({{countryCode.country_code}})</mat-option>
+                                        </mat-select>
+<!--                                        <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>-->
+                                        <mat-error>country code is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Phone</mat-label>
