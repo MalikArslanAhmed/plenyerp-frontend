@@ -31,6 +31,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     unitOfMeasuresData = [];
     subTotal = 0;
     isSubmitted = false;
+    taxArray = [1, 2];
 
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
@@ -146,6 +147,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             data: {
                 action: 'CREATE',
                 itemId: this.srvPurchaseInvoiceForm.value.itemId,
+                taxArray: this.taxArray,
                 grossAmount: this.srvPurchaseInvoiceForm.value.unitCost * this.srvPurchaseInvoiceForm.value.quantity,
             }
         });

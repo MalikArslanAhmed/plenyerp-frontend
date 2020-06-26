@@ -100,7 +100,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
                 this.itemForm.reset();
                 this.isSubmitted = false;
             });
-            console.log('--create form', this.itemForm.value);
+            // console.log('--create form', this.itemForm.value);
         }
     }
 
