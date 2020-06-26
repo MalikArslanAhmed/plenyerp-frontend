@@ -28,7 +28,8 @@
                     <div fxLayout="row" fxLayoutAlign="start start">
                         <mat-checkbox (change)="adjustTotal(i, $event)" [checked]="tax.checked ? true : null"
                                       *ngIf="this.updateData"></mat-checkbox>
-                        <mat-checkbox (change)="adjustTotal(i, $event)" *ngIf="!this.updateData"></mat-checkbox>
+                        <mat-checkbox (change)="adjustTotal(i, $event)" [checked]="tax.checked ? true : null"
+                                      *ngIf="!this.updateData"></mat-checkbox>
                     </div>
                 </mat-grid-tile>
                 <mat-grid-tile class="mr-1">

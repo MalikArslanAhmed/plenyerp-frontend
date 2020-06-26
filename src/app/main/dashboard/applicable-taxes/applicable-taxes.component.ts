@@ -18,12 +18,14 @@ export class ApplicableTaxesComponent implements OnInit {
     grossAmount: any;
     itemId: any;
     totalTaxes = 0;
+    taxArray = [];
 
     constructor(public matDialogRef: MatDialogRef<ApplicableTaxesComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder, private transactionService: TransactionService) {
         this.itemId = _data.itemId;
         this.grossAmount = _data.grossAmount;
+        this.taxArray = _data.taxArray;
         if (_data.action === 'CREATE') {
             this.updateData = undefined;
             this.dialogTitle = 'Add Applicable Taxes - ' + this.itemId;
@@ -35,13 +37,14 @@ export class ApplicableTaxesComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.getTaxes()
+        this.getTaxes();
     }
 
     refresh() {
         this.applicableTaxesForm = this.fb.group({
             'totalTaxes': ['']
         });
+
     }
 
     getTaxes() {
@@ -52,6 +55,7 @@ export class ApplicableTaxesComponent implements OnInit {
             } else {
                 this.taxes = data.items;
             }
+            this.checkedItemsId();
         });
     }
 
@@ -92,5 +96,23 @@ export class ApplicableTaxesComponent implements OnInit {
 
     save() {
         this.updateData = undefined;
+    }
+
+    checkedItemsId() {
+
+        if (this.taxArray && this.taxArray.length) {
+            this.taxArray.map(val => {
+                // console.log(val);
+                if (this.taxes && this.taxes.length){
+                    this.taxes.forEach(v => {
+                        if (v.id === val){
+                            v['checked'] = val;
+                        }
+                    });
+                }
+
+            });
+            // console.log(this.taxes);
+        }
     }
 }
