@@ -30,7 +30,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
     storeItems = [];
     unitOfMeasuresData = [];
     isSubmitted = false;
-
+    taxArray = [1, 2];
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
                 private transactionService: TransactionService,
@@ -138,6 +138,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             data: {
                 action: 'CREATE',
                 itemId: this.salesInvoiceForm.value.itemId,
+                taxArray: this.taxArray,
                 grossAmount: this.salesInvoiceForm.value.unitSellingPrice * this.salesInvoiceForm.value.quantity,
             }
         });
