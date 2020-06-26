@@ -104,8 +104,8 @@
                 </mat-grid-tile>
                 <mat-grid-tile class="ml-1">
                     <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Is a physical item</mat-label>
-                        <mat-slide-toggle formControlName="isPhysicalQuantity"></mat-slide-toggle>
+                        <mat-label style="margin-right: 20px">Not a physical item</mat-label>
+                        <mat-slide-toggle formControlName="isPhysicalQuantity" (change)="isPhysicalQuantity()"></mat-slide-toggle>
                     </div>
                 </mat-grid-tile>
             </mat-grid-list>

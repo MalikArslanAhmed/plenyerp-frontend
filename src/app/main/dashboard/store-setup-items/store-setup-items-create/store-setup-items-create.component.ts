@@ -43,6 +43,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
         this.refresh();
         this.getStoreSetupUnitOfMeasure();
         this.checkForUpdate();
+        this.isPhysicalQuantity();
     }
 
     refresh() {
@@ -143,5 +144,14 @@ export class StoreSetupItemsCreateComponent implements OnInit {
                 });
             }*/
         });
+    }
+
+    isPhysicalQuantity() {
+        const isPhysicalQuantity = this.itemForm.get('isPhysicalQuantity').value;
+        if (isPhysicalQuantity) {
+            this.itemForm.controls['measurementId'].disable();
+        } else {
+            this.itemForm.controls['measurementId'].enable();
+        }
     }
 }
