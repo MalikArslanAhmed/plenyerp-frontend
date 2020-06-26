@@ -171,6 +171,7 @@ import {TransactionSupplierSelectComponent} from './transaction-supplier-select/
 import {TransactionStoreSelectComponent} from './transaction-store-select/transaction-store-select.component';
 import {CompanyBankDetailsComponent} from './companies/company-bank-details/company-bank-details.component';
 import {TransactionsItemsSelectComponent} from './transactions-items-select/transactions-items-select.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
     declarations: [
@@ -352,7 +353,8 @@ import {TransactionsItemsSelectComponent} from './transactions-items-select/tran
         MaterialFileInputModule,
         SharedModule,
         MatPaginatorModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatListModule
     ]
 })
 export class DashboardModule {

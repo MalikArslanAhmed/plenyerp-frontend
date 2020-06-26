@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {StoreSetupStoresCreateComponent} from "../../store-setup-stores/store-setup-stores-create/store-setup-stores-create.component";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {StoreSetupStoresCreateComponent} from '../../store-setup-stores/store-setup-stores-create/store-setup-stores-create.component';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {StoreSetupItemsService} from 'app/shared/services/store-setup-items.service';
 import {CategoriesListSelectComponent} from '../categories-list-select/categories-list-select.component';
 import {StoreSetupUnitOfMeasuresService} from 'app/shared/services/store-setup-unit-of-measures.service';
@@ -21,7 +21,9 @@ export class StoreSetupItemsCreateComponent implements OnInit {
     dialogRef: any;
     categories = [];
     unitOfMeasures = [];
-
+    isTaxApplicableCheck = false;
+    toppings = new FormControl();
+    toppingList = [];
     constructor(public matDialogRef: MatDialogRef<StoreSetupStoresCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -44,6 +46,8 @@ export class StoreSetupItemsCreateComponent implements OnInit {
         this.getStoreSetupUnitOfMeasure();
         this.checkForUpdate();
         this.isPhysicalQuantity();
+        this.getTaxApplicable();
+        this.getTaxApplicableList();
     }
 
     refresh() {
@@ -58,8 +62,8 @@ export class StoreSetupItemsCreateComponent implements OnInit {
             'salesCommission': ['', Validators.required],
             'minimumQuantity': ['', Validators.required],
             'maximumQuantity': ['', Validators.required],
-            'isChargedVat': [false, Validators.required],
-            'isChargedOtherTax': [false, Validators.required],
+            'isTaxApplicable': [false, Validators.required],
+            'applicableTaxes': [''],
             'isPhysicalQuantity': [false, Validators.required]
         });
     }
@@ -77,8 +81,8 @@ export class StoreSetupItemsCreateComponent implements OnInit {
                 'salesCommission': this.updateData.store.salesCommission,
                 'minimumQuantity': this.updateData.store.minimumQuantity,
                 'maximumQuantity': this.updateData.store.maximumQuantity,
-                'isChargedVat': this.updateData.store.isChargedVat,
-                'isChargedOtherTax': this.updateData.store.isChargedOtherTax,
+                'isTaxApplicable': this.updateData.store.isTaxApplicable,
+                'applicableTaxes': this.updateData.store.applicableTaxes,
                 'isPhysicalQuantity': this.updateData.store.isPhysicalQuantity,
             });
         }
@@ -96,6 +100,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
                 this.itemForm.reset();
                 this.isSubmitted = false;
             });
+            console.log('--create form', this.itemForm.value);
         }
     }
 
@@ -153,5 +158,22 @@ export class StoreSetupItemsCreateComponent implements OnInit {
         } else {
             this.itemForm.controls['measurementId'].enable();
         }
+    }
+
+    getTaxApplicable() {
+        const isTaxApplicable = this.itemForm.get('isTaxApplicable').value;
+        if (isTaxApplicable) {
+            this.isTaxApplicableCheck = true;
+            this.itemForm.controls['applicableTaxes'].enable();
+            this.itemForm.controls['applicableTaxes'].setValidators(Validators.required);
+        } else {
+            this.isTaxApplicableCheck = false;
+            this.itemForm.controls['applicableTaxes'].disable();
+        }
+    }
+    getTaxApplicableList() {
+        this.storeSetupUnitOfMeasuresService.applicableTaxesList({page: -1}).subscribe(data => {
+            this.toppingList = data.items;
+        });
     }
 }

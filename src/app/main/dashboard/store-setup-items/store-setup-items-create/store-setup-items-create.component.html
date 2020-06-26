@@ -90,23 +90,25 @@
                 </mat-grid-tile>
             </mat-grid-list>
             <mat-grid-list cols="3" rowHeight="100px">
-                <mat-grid-tile class="mr-1">
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Charge VAT</mat-label>
-                        <mat-slide-toggle formControlName="isChargedVat"></mat-slide-toggle>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile class="ml-1 mr-1">
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Charge Other Tax</mat-label>
-                        <mat-slide-toggle formControlName="isChargedOtherTax"></mat-slide-toggle>
-                    </div>
-                </mat-grid-tile>
                 <mat-grid-tile class="ml-1">
                     <div fxLayout="row" fxLayoutAlign="start start">
                         <mat-label style="margin-right: 20px">Not a physical item</mat-label>
                         <mat-slide-toggle formControlName="isPhysicalQuantity" (change)="isPhysicalQuantity()"></mat-slide-toggle>
                     </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is Tax Applicable</mat-label>
+                        <mat-slide-toggle formControlName="isTaxApplicable" (change)="getTaxApplicable()"></mat-slide-toggle>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="mr-1" *ngIf="isTaxApplicableCheck">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Applicable Taxes</mat-label>
+                            <mat-select  multiple formControlName="applicableTaxes">
+                                <mat-option *ngFor="let topping of toppingList" [value]="topping.id">{{topping.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                 </mat-grid-tile>
             </mat-grid-list>
         </form>

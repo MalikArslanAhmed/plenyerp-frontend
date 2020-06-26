@@ -29,4 +29,7 @@ export class StoreSetupUnitOfMeasuresService extends BaseService {
     updateStoreSetupUnitOfMeasures(id, data): Observable<any> {
         return this.putRequest(AppUrl.STORE_SETUP_UNIT_OF_MEASURES(id), data);
     }
+    applicableTaxesList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_TAXES_LIST(), data);
+    }
 }
