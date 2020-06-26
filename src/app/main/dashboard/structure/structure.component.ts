@@ -9,7 +9,7 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 import {SalaryScalesService} from "../../../shared/services/salary-scales.service";
 import {SkillService} from "../../../shared/services/skill.service";
 import {DepartmentListSelectComponent} from "./department-list/department-list-select.component";
-import { DeleteListModalComponent } from '../delete-list-modal/delete-list-modal.component';
+import {DeleteListModalComponent} from '../delete-list-modal/delete-list-modal.component';
 
 interface StructureNode {
     id: number;
@@ -180,19 +180,19 @@ export class StructureComponent implements OnInit {
     }
 
     getDesignations() {
-        this.structureService.getDesignations({'page': -1, isActive : 1}).subscribe(data => {
+        this.structureService.getDesignations({'page': -1, isActive: 1}).subscribe(data => {
             this.designations = data.items
         });
     }
 
     getSalaryScales() {
-        this.salaryScalesService.getSalaryScales({'page': -1, isActive : 1}).subscribe(data => {
+        this.salaryScalesService.getSalaryScales({'page': -1, isActive: 1}).subscribe(data => {
             this.salaryScales = data
         });
     }
 
     getSkills() {
-        this.skillService.getSkills({'page': -1, isActive : 1}).subscribe(data => {
+        this.skillService.getSkills({'page': -1, isActive: 1}).subscribe(data => {
             this.skills = data.items;
         });
     }
@@ -262,6 +262,7 @@ export class StructureComponent implements OnInit {
             education: node.education ? node.education : '',
         });
     }
+
     deleteItemModal(items) {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',

@@ -172,6 +172,7 @@ import {TransactionStoreSelectComponent} from './transaction-store-select/transa
 import {CompanyBankDetailsComponent} from './companies/company-bank-details/company-bank-details.component';
 import {TransactionsItemsSelectComponent} from './transactions-items-select/transactions-items-select.component';
 import {MatListModule} from '@angular/material/list';
+import { GlCodeSelectComponent } from './taxes/gl-code-select/gl-code-select.component';
 
 @NgModule({
     declarations: [
@@ -324,7 +325,8 @@ import {MatListModule} from '@angular/material/list';
         TransactionSupplierSelectComponent,
         TransactionStoreSelectComponent,
         CompanyBankDetailsComponent,
-        TransactionsItemsSelectComponent
+        TransactionsItemsSelectComponent,
+        GlCodeSelectComponent
     ],
     imports: [
         CommonModule,

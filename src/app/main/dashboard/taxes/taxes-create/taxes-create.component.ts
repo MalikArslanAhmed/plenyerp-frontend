@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaxesService} from '../../../../shared/services/taxes.service';
+import {GlCodeSelectComponent} from '../gl-code-select/gl-code-select.component';
 
 @Component({
     selector: 'app-taxes-create',
@@ -15,11 +16,14 @@ export class TaxesCreateComponent implements OnInit {
     isSubmitted = false;
     taxes: any = [];
     updateData: any;
+    liabilities = [];
+    dialogRef: any;
 
     constructor(public matDialogRef: MatDialogRef<TaxesCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-                private taxesService: TaxesService) {
+                private taxesService: TaxesService,
+                private _matDialog: MatDialog) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit';
@@ -92,8 +96,31 @@ export class TaxesCreateComponent implements OnInit {
         }
     }
 
-    resetTaxMasterForm(){
+    resetTaxMasterForm() {
         this.taxMasterForm.reset();
         this.taxMasterForm.controls['isActive'].setValue(true);
+    }
+
+    liabilitySelect() {
+        this.dialogRef = this._matDialog.open(GlCodeSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.liabilities = [{
+                'name': response.individualCode,
+                'id': response.id
+            }];
+            this.taxMasterForm.patchValue({
+                glCode: response.id,
+                disabled: true
+            });
+            this.taxMasterForm.patchValue({
+                glCodeName: response.name,
+                disabled: true
+            });
+        });
     }
 }
