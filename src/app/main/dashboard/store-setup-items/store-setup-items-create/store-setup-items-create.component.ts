@@ -71,7 +71,13 @@ export class StoreSetupItemsCreateComponent implements OnInit {
 
     checkForUpdate() {
         if (this.updateData) {
-            console.log(this.updateData);
+            const taxIdsArray = [];
+            if ( this.updateData.store.itemTaxes &&  this.updateData.store.itemTaxes.length) {
+                this.updateData.store.itemTaxes.forEach(val => {
+                    taxIdsArray.push(val.taxId);
+                });
+            }
+            console.log(taxIdsArray);
             this.categories = [
                 {
                   'id': this.updateData['store']['inventoryCategory'].id,
@@ -90,7 +96,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
                 'minimumQuantity': this.updateData.store.minimumQuantity,
                 'maximumQuantity': this.updateData.store.maximumQuantity,
                 'isTaxApplicable': this.updateData.store.isTaxApplicable,
-                'taxIds': this.updateData['store']['itemTaxes'].taxId,
+                'taxIds': taxIdsArray,
                 'isNotPhysicalQuantity': this.updateData.store.isNotPhysicalQuantity,
             });
         }
