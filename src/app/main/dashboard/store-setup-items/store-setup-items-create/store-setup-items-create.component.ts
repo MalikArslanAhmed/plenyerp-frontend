@@ -45,7 +45,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
         this.refresh();
         this.getStoreSetupUnitOfMeasure();
         this.checkForUpdate();
-        this.isPhysicalQuantity();
+        this.isNotPhysicalQuantity();
         this.getTaxApplicable();
         this.getTaxApplicableList();
     }
@@ -63,8 +63,9 @@ export class StoreSetupItemsCreateComponent implements OnInit {
             'minimumQuantity': ['', Validators.required],
             'maximumQuantity': ['', Validators.required],
             'isTaxApplicable': [false, Validators.required],
-            'applicableTaxes': [''],
-            'isPhysicalQuantity': [false, Validators.required]
+            'taxIds' : [''],
+           // 'applicableTaxes': [''],
+            'isNotPhysicalQuantity': [false, Validators.required]
         });
     }
 
@@ -82,10 +83,11 @@ export class StoreSetupItemsCreateComponent implements OnInit {
                 'minimumQuantity': this.updateData.store.minimumQuantity,
                 'maximumQuantity': this.updateData.store.maximumQuantity,
                 'isTaxApplicable': this.updateData.store.isTaxApplicable,
-                'applicableTaxes': this.updateData.store.applicableTaxes,
-                'isPhysicalQuantity': this.updateData.store.isPhysicalQuantity,
+                'taxIds': this.updateData.store.itemTaxes.forEach(val=> val.taxId),
+                'isNotPhysicalQuantity': this.updateData.store.isNotPhysicalQuantity,
             });
         }
+        console.log(this.updateData);
     }
 
     saveStore() {
@@ -151,9 +153,9 @@ export class StoreSetupItemsCreateComponent implements OnInit {
         });
     }
 
-    isPhysicalQuantity() {
-        const isPhysicalQuantity = this.itemForm.get('isPhysicalQuantity').value;
-        if (isPhysicalQuantity) {
+    isNotPhysicalQuantity() {
+        const isNotPhysicalQuantity = this.itemForm.get('isNotPhysicalQuantity').value;
+        if (isNotPhysicalQuantity) {
             this.itemForm.controls['measurementId'].disable();
         } else {
             this.itemForm.controls['measurementId'].enable();
@@ -164,11 +166,11 @@ export class StoreSetupItemsCreateComponent implements OnInit {
         const isTaxApplicable = this.itemForm.get('isTaxApplicable').value;
         if (isTaxApplicable) {
             this.isTaxApplicableCheck = true;
-            this.itemForm.controls['applicableTaxes'].enable();
-            this.itemForm.controls['applicableTaxes'].setValidators(Validators.required);
+            this.itemForm.controls['taxIds'].enable();
+            this.itemForm.controls['taxIds'].setValidators(Validators.required);
         } else {
             this.isTaxApplicableCheck = false;
-            this.itemForm.controls['applicableTaxes'].disable();
+            this.itemForm.controls['taxIds'].disable();
         }
     }
     getTaxApplicableList() {
