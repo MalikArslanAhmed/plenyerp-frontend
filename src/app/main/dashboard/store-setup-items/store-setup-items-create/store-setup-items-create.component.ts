@@ -72,12 +72,11 @@ export class StoreSetupItemsCreateComponent implements OnInit {
     checkForUpdate() {
         if (this.updateData) {
             const taxIdsArray = [];
-            if ( this.updateData.store.itemTaxes &&  this.updateData.store.itemTaxes.length) {
+            if ( this.updateData.store.itemTaxes && this.updateData.store.itemTaxes.length>0) {
                 this.updateData.store.itemTaxes.forEach(val => {
                     taxIdsArray.push(val.taxId);
                 });
             }
-            console.log(taxIdsArray);
             this.categories = [
                 {
                   'id': this.updateData['store']['inventoryCategory'].id,

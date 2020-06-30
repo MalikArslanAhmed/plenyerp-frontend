@@ -57,6 +57,7 @@ export class ApplicableTaxesComponent implements OnInit {
             }
             this.checkedItemsId();
         });
+        console.log(this.updateData)
     }
 
     adjustTotal(index, event) {
