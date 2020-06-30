@@ -24,6 +24,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
     isTaxApplicableCheck = false;
     toppings = new FormControl();
     toppingList = [];
+
     constructor(public matDialogRef: MatDialogRef<StoreSetupStoresCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -171,6 +172,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
             this.itemForm.controls['applicableTaxes'].disable();
         }
     }
+
     getTaxApplicableList() {
         this.storeSetupUnitOfMeasuresService.applicableTaxesList({page: -1}).subscribe(data => {
             this.toppingList = data.items;
