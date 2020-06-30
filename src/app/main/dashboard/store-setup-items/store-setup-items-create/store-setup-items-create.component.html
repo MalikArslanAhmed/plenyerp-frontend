@@ -93,7 +93,7 @@
                 <mat-grid-tile class="ml-1">
                     <div fxLayout="row" fxLayoutAlign="start start">
                         <mat-label style="margin-right: 20px">Not a physical item</mat-label>
-                        <mat-slide-toggle formControlName="isPhysicalQuantity" (change)="isPhysicalQuantity()"></mat-slide-toggle>
+                        <mat-slide-toggle formControlName="isNotPhysicalQuantity" (change)="isNotPhysicalQuantity()"></mat-slide-toggle>
                     </div>
                 </mat-grid-tile>
                 <mat-grid-tile class="mr-1">
@@ -105,7 +105,7 @@
                 <mat-grid-tile class="mr-1" *ngIf="isTaxApplicableCheck">
                         <mat-form-field appearance="outline" fxFlex>
                             <mat-label>Applicable Taxes</mat-label>
-                            <mat-select  multiple formControlName="applicableTaxes">
+                            <mat-select  multiple formControlName="taxIds">
                                 <mat-option *ngFor="let topping of toppingList" [value]="topping.id">{{topping.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
