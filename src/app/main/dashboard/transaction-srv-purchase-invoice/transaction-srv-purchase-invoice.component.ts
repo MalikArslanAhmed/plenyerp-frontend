@@ -31,8 +31,8 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     unitOfMeasuresData = [];
     subTotal = 0;
     isSubmitted = false;
-    taxArray = [1, 2];
-
+    //taxArray = [1, 2];
+    taxArray = [];
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
                 private transactionService: TransactionService,
@@ -141,7 +141,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         } else if (!this.srvPurchaseInvoiceForm.value.unitCost || this.srvPurchaseInvoiceForm.value.unitCost === '') {
             this.alertService.showErrors('Unit cost can\'t be empty');
             return;
-        }
+        }  
         this.dialogRef = this._matDialog.open(ApplicableTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
@@ -340,11 +340,19 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
                 return;
+                
+            }
+
+            if ( response.itemTaxes && response.itemTaxes.length>0) {
+                response.itemTaxes.forEach(val => {
+                    this.taxArray.push(val.taxId);                    
+                });
             }
             this.storeItems = [{
                 'name': response.name,
                 'id': response.id
             }];
+           
             this.srvPurchaseInvoiceForm.patchValue({
                 itemId: response.id,
             });
@@ -355,6 +363,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             this.srvPurchaseInvoiceForm.patchValue({
                 'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
+            console.log(this.storeItems)
         });
     }
 }
