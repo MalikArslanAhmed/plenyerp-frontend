@@ -483,7 +483,7 @@
             <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Assumed Duty</mat-header-cell>
             <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
                 <p class="email text-truncate">
-                    {{employee.employeePersonalDetails?.assumedDutyOn}}
+                    {{employee.employeePersonalDetails?.assumedDutyOn | date:'mediumDate'}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -571,7 +571,7 @@
         </ng-container>
 
         <ng-container matColumnDef="Payroll pin">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Payroll pin</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Payroll Pin</mat-header-cell>
             <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
                 <p class="phone text-truncate">
                     {{employee.employeeIdNos?.payrollPin}}
