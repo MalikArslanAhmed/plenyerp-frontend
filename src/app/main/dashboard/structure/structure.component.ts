@@ -137,7 +137,7 @@ export class StructureComponent implements OnInit {
     }
 
     getStructures() {
-        this.structureService.getJobLocations({'page': -1}).subscribe(data => {
+        this.structureService.getJobLocations({'page': -1,orderby: 'name'}).subscribe(data => {
             this.dataSource.data = [{
                 id: null,
                 parentId: 0,
@@ -180,19 +180,19 @@ export class StructureComponent implements OnInit {
     }
 
     getDesignations() {
-        this.structureService.getDesignations({'page': -1, isActive: 1}).subscribe(data => {
+        this.structureService.getDesignations({'page': -1, isActive: 1,orderby: 'name'}).subscribe(data => {
             this.designations = data.items
         });
     }
 
     getSalaryScales() {
-        this.salaryScalesService.getSalaryScales({'page': -1, isActive: 1}).subscribe(data => {
+        this.salaryScalesService.getSalaryScales({'page': -1, isActive: 1,orderby: 'name'}).subscribe(data => {
             this.salaryScales = data
         });
     }
 
     getSkills() {
-        this.skillService.getSkills({'page': -1, isActive: 1}).subscribe(data => {
+        this.skillService.getSkills({'page': -1, isActive: 1,orderby: 'name'}).subscribe(data => {
             this.skills = data.items;
         });
     }

@@ -37,7 +37,7 @@ export class DesignationListComponent implements OnInit {
     }
 
     getDesignationList() {
-        this.designationList = [];
+        this.designationList = [];        
         this.contactInfoService.getDesignationList({page: this.pagination.page}).subscribe(data => {
             this.designationList = data.items;
             this.pagination.page = data.page;
