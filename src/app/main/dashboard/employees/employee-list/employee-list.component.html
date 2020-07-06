@@ -570,6 +570,15 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="Payroll pin">
+            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Payroll pin</mat-header-cell>
+            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                <p class="phone text-truncate">
+                    {{employee.employeeIdNos?.payrollPin}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
 
 
         <!-- <ng-container matColumnDef="actions">

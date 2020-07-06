@@ -17,7 +17,7 @@ import {PageEvent} from '@angular/material/paginator';
 export class EmployeeListComponent implements OnInit {
 
     employees = [];
-    displayedColumns = ['SN', 'Title', 'File No', 'Staff ID', 'First Name', 'Last Name'];
+    displayedColumns = ['SN', 'Title', 'File No', 'Staff ID', 'First Name', 'Last Name', 'Payroll pin'];
     dialogRef: any;
     pagination = {
         page: 1,
