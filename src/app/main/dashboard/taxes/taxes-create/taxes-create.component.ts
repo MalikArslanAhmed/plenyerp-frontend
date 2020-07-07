@@ -20,6 +20,7 @@ export class TaxesCreateComponent implements OnInit {
     liabilities = [];
     dialogRef: any;
     beneficiaryList=[];
+    beneficiaryId:any;
     constructor(public matDialogRef: MatDialogRef<TaxesCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -40,31 +41,35 @@ export class TaxesCreateComponent implements OnInit {
         this.refresh();
         this.checkForUpdate();
         this.getBeneficaryCode();
+        
     }
 
     refresh(): void {
         this.taxMasterForm = this.fb.group({
-            taxTitle: ['', Validators.required],
-            taxPercentage: ['', Validators.required],
-            glCode: ['', Validators.required],
+            name: ['', Validators.required],
+            tax: ['', Validators.required],
+            departmentId: ['', Validators.required],
             glCodeName: ['', Validators.required],
-            benCode: ['', Validators.required],
+            companyId: ['', Validators.required],
             benName: ['', Validators.required],
             isActive: [true, Validators.required]
         });
     }
 
     checkForUpdate(): void {
+        //console.log(this.updateData.tax.adminSegment.individualCode)
+        console.log('--->>>', this.updateData);
         if (this.updateData) {
             this.taxMasterForm.patchValue({
-                taxTitle: this.updateData.tax.taxTitle,
-                taxPercentage: this.updateData.tax.taxPercentage,
-                glCode: this.updateData.tax.glCode,
+                name: this.updateData.tax.name,
+                tax: this.updateData.tax.tax,
+                departmentId: this.updateData.tax.adminSegment.individualCode.id,
                 glCodeName: this.updateData.tax.glCodeName,
-                benCode: this.updateData.tax.benCode,
-                benName: this.updateData.tax.benName,
+                companyId: this.updateData.tax.companyId,
+                benName: this.updateData.tax.company.name,
                 isActive: this.updateData.tax.isActive
             });
+            console.log('gggg-------', this.taxMasterForm);
         }
     }
 
@@ -72,7 +77,7 @@ export class TaxesCreateComponent implements OnInit {
     {
         this.taxesService.getBeneficiaryList({isCustomer:1}).subscribe(data => {
             this.beneficiaryList = data.items;
-            console.log(this.beneficiaryList);
+            //console.log(this.beneficiaryList);
             // this.taxMasterForm.patchValue({
             //     benCode: this.beneficiaryList[name]
             // });
@@ -86,6 +91,7 @@ export class TaxesCreateComponent implements OnInit {
             return;
         }
 
+        console.log(this.taxMasterForm.value)
         if (this.isSubmitted) {
             this.taxesService.addTax(this.taxMasterForm.value).subscribe(data => {
                 this.taxMasterForm.reset();
@@ -113,7 +119,7 @@ export class TaxesCreateComponent implements OnInit {
         this.taxMasterForm.reset();
         this.taxMasterForm.controls['isActive'].setValue(true);
     }
- 
+  
     liabilitySelect() {
         this.dialogRef = this._matDialog.open(GlCodeSelectComponent, {
             panelClass: 'contact-form-dialog',
@@ -122,13 +128,14 @@ export class TaxesCreateComponent implements OnInit {
             if (!response) {
                 return;
             }
-            //console.log(response)
+            console.log(response)
             this.liabilities = [{
                 'name': response.individualCode,
                 'id': response.id
             }];
+            console.log(this.liabilities)
             this.taxMasterForm.patchValue({
-                glCode: response.id,
+                departmentId: response.id,
                 disabled: true
             });
             this.taxMasterForm.patchValue({

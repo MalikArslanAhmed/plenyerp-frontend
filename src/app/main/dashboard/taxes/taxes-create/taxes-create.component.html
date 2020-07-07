@@ -29,13 +29,13 @@
                     <div fxFlex="50">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Tax Title</mat-label>
-                            <input matInput formControlName="taxTitle">
+                            <input matInput formControlName="name">
                         </mat-form-field>
                     </div>
                     <div fxFlex="50">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Tax %age</mat-label>
-                            <input matInput type="number" formControlName="taxPercentage">
+                            <input matInput type="number" formControlName="tax">
                         </mat-form-field>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div fxFlex="50">
                         <mat-form-field appearance="outline" fxFlex="100" (click)="liabilitySelect()">
                             <mat-label>GL/Code</mat-label>
-                            <mat-select formControlName="glCode" [disabled]="true">
+                            <mat-select formControlName="departmentId" [disabled]="true">
                                 <mat-option [value]="liability.id"
                                             *ngFor="let liability of liabilities">{{liability.name}}</mat-option>
                             </mat-select>
@@ -63,7 +63,7 @@
                     <div fxFlex="50">
                         <mat-form-field appearance="outline" fxFlex="100" >
                             <mat-label>Beneficiary Code</mat-label>
-                            <mat-select formControlName="benCode" required (selectionChange)="beneficiarySelect($event.value)">
+                            <mat-select formControlName="companyId" required (selectionChange)="beneficiarySelect($event.value)">
                                 <mat-option [value]="beneficiary.id"
                                             *ngFor="let beneficiary of beneficiaryList">{{beneficiary.id}}</mat-option>
                             </mat-select>
