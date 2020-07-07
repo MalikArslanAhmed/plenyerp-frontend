@@ -3,7 +3,6 @@ import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaxesService} from '../../../../shared/services/taxes.service';
 import {GlCodeSelectComponent} from '../gl-code-select/gl-code-select.component';
-import { MatSelectChange } from '@angular/material/select';
 
 @Component({
     selector: 'app-taxes-create',
@@ -19,8 +18,8 @@ export class TaxesCreateComponent implements OnInit {
     updateData: any;
     liabilities = [];
     dialogRef: any;
-    beneficiaryList=[];
-    beneficiaryId:any;
+    beneficiaryList = [];
+
     constructor(public matDialogRef: MatDialogRef<TaxesCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -41,7 +40,7 @@ export class TaxesCreateComponent implements OnInit {
         this.refresh();
         this.checkForUpdate();
         this.getBeneficaryCode();
-        
+
     }
 
     refresh(): void {
@@ -57,30 +56,26 @@ export class TaxesCreateComponent implements OnInit {
     }
 
     checkForUpdate(): void {
-        //console.log(this.updateData.tax.adminSegment.individualCode)
-        console.log('--->>>', this.updateData);
+        this.liabilities = [{
+            'name': this.updateData.tax['adminSegment'].individualCode,
+            'id': this.updateData.tax['adminSegment'].individualCode
+        }];
         if (this.updateData) {
             this.taxMasterForm.patchValue({
                 name: this.updateData.tax.name,
                 tax: this.updateData.tax.tax,
-                departmentId: this.updateData.tax.adminSegment.individualCode.id,
-                glCodeName: this.updateData.tax.glCodeName,
+                departmentId: this.updateData.tax['adminSegment'].individualCode,
+                glCodeName: this.updateData.tax['adminSegment'].name,
                 companyId: this.updateData.tax.companyId,
                 benName: this.updateData.tax.company.name,
                 isActive: this.updateData.tax.isActive
             });
-            console.log('gggg-------', this.taxMasterForm);
         }
     }
 
-    getBeneficaryCode()
-    {
-        this.taxesService.getBeneficiaryList({isCustomer:1}).subscribe(data => {
+    getBeneficaryCode() {
+        this.taxesService.getBeneficiaryList({isCustomer: 1}).subscribe(data => {
             this.beneficiaryList = data.items;
-            //console.log(this.beneficiaryList);
-            // this.taxMasterForm.patchValue({
-            //     benCode: this.beneficiaryList[name]
-            // });
         });
     }
 
@@ -91,7 +86,6 @@ export class TaxesCreateComponent implements OnInit {
             return;
         }
 
-        console.log(this.taxMasterForm.value)
         if (this.isSubmitted) {
             this.taxesService.addTax(this.taxMasterForm.value).subscribe(data => {
                 this.taxMasterForm.reset();
@@ -119,7 +113,7 @@ export class TaxesCreateComponent implements OnInit {
         this.taxMasterForm.reset();
         this.taxMasterForm.controls['isActive'].setValue(true);
     }
-  
+
     liabilitySelect() {
         this.dialogRef = this._matDialog.open(GlCodeSelectComponent, {
             panelClass: 'contact-form-dialog',
@@ -128,12 +122,10 @@ export class TaxesCreateComponent implements OnInit {
             if (!response) {
                 return;
             }
-            console.log(response)
             this.liabilities = [{
                 'name': response.individualCode,
                 'id': response.id
             }];
-            console.log(this.liabilities)
             this.taxMasterForm.patchValue({
                 departmentId: response.id,
                 disabled: true
@@ -145,12 +137,9 @@ export class TaxesCreateComponent implements OnInit {
         });
     }
 
-    beneficiarySelect(beneficiaryId)
-    {
-      //  console.log(id);
-        this.beneficiaryList.forEach((value)=>{
-            if(value.id===beneficiaryId)
-            {
+    beneficiarySelect(beneficiaryId) {
+        this.beneficiaryList.forEach((value) => {
+            if (value.id === beneficiaryId) {
                 this.taxMasterForm.get('benName').patchValue(
                     value.name
                 );
