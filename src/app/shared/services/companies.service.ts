@@ -27,4 +27,7 @@ export class CompaniesService extends BaseService {
     deleteCompany(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_COMPANY(id));
     }
+    companyConfig(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_COMPANIES_CONFIG(), data);
+    }
 }
