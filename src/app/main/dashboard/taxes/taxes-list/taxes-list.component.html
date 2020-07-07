@@ -21,7 +21,8 @@
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Tax Title</mat-header-cell>
         <mat-cell fxHide fxShow.gt-sm *matCellDef="let tax">
             <p class="email text-truncate">
-                {{tax.personnelFileNumber}}
+                <!-- {{tax.personnelFileNumber}} -->
+                {{tax.name}}
             </p>
         </mat-cell>
     </ng-container>
@@ -30,7 +31,8 @@
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Tax %age (default value)</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
             <p class="phone text-truncate">
-                {{tax.lastName}}
+                <!-- {{tax.lastName}} -->
+                {{tax.tax}}
             </p>
         </mat-cell>
     </ng-container>
@@ -39,7 +41,7 @@
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>GL/Code</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
             <p class="phone text-truncate">
-                {{tax.firstName}}
+                {{tax.departmentId}}
             </p>
         </mat-cell>
     </ng-container>
@@ -48,7 +50,8 @@
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Benificiary Code</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
             <p class="phone text-truncate">
-                {{tax.employeePersonalDetails?.phone}}
+                <!-- {{tax.employeePersonalDetails?.phone}} -->
+                {{tax.companyId}}
             </p>
         </mat-cell>
     </ng-container>
@@ -57,7 +60,7 @@
         <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Benificiary Name</mat-header-cell>
         <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
             <p class="phone text-truncate">
-                {{tax.employeeJobProfiles?.department?.name}}
+                {{tax.company?.name}}
             </p>
         </mat-cell>
     </ng-container>

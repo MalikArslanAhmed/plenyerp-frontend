@@ -44,9 +44,13 @@ export class TaxesListComponent implements OnInit {
     }
 
     getTaxesList(params = {}): void {
-        this.taxesList = [];
+        this.taxesList = [
+            // {id:1,personnelFileNumber:'1',lastName:'20',firstName:'gl1',employeePersonalDetails:[{phone:124}],employeeJobProfiles:[{department:[{name:'dept1'}]}]},
+            // {id:1,personnelFileNumber:'1',lastName:'20',firstName:'gl2',employeePersonalDetails:[{phone:124}],employeeJobProfiles:[{department:[{name:'dept1'}]}]}
+        ];
+      
         this.taxesService.getTaxesList(params).subscribe(data => {
-            this.taxesList = data.items;
+            this.taxesList = data.items;           
             this.pagination.page = data.page;
             this.pagination.total = data.total;
             if (this.taxesList && this.taxesList.length > 0) {
