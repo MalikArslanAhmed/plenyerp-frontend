@@ -20,34 +20,36 @@ export class CompaniesCreateComponent implements OnInit {
     qualifications: any = [];
     updateData: any;
     dialogRef: any;
+    labels:string[];
+    toggles:boolean;
     companyToggleArr = [
-        {
-            id: 1,
-            name: 'Is Supplier?',
-            value: false
-        },
-        {
-            id: 2,
-            name: 'Is Customer?',
-            value: false
-        },
-        {
-            id: 3,
-            name: 'Is Cashbook A/C?',
-            value: false
-        },
-        {
-            id: 4,
-            name: 'Is One-off?',
-            value: false
-        },
-        {
-            id: 5,
-            name: 'Is PFA?',
-            value: false
-        },
+        // {
+        //     id: 1,
+        //     name: 'Is Supplier?',
+        //     value: false
+        // },
+        // {
+        //     id: 2,
+        //     name: 'Is Customer?',
+        //     value: false
+        // },
+        // {
+        //     id: 3,
+        //     name: 'Is Cashbook A/C?',
+        //     value: false
+        // },
+        // {
+        //     id: 4,
+        //     name: 'Is One-off?',
+        //     value: false
+        // },
+        // {
+        //     id: 5,
+        //     name: 'Is PFA?',
+        //     value: false
+        // },
     ];
-
+ 
     constructor(public matDialogRef: MatDialogRef<CompaniesCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -82,7 +84,11 @@ export class CompaniesCreateComponent implements OnInit {
             email: ['', Validators.required],
             website: ['', Validators.required],
             isActive: [false, Validators.required],
-
+            // is_supplier:[true, Validators.required],
+            // is_customer:[false, Validators.required],
+            // is_cashbook_ac:[false, Validators.required],
+            // is_on_off:[false, Validators.required],
+            // is_pfa:[false, Validators.required],
             // isSupplier: [false, Validators.required],
             // isCustomer: [false, Validators.required],
             // isCashbookAc: [false, Validators.required],
@@ -115,7 +121,7 @@ export class CompaniesCreateComponent implements OnInit {
                 email: this.updateData.company.email,
                 website: this.updateData.company.website,
                 isActive: this.updateData.company.isActive,
-
+                
 
                 // isSupplier: this.updateData.company.isSupplier,
                 // isCustomer: this.updateData.company.isCustomer,
@@ -136,9 +142,10 @@ export class CompaniesCreateComponent implements OnInit {
         const params = {
             ...this.itemForm.value,
             configs: this.companyToggleArr,
-        };
+        };       
         // console.log('--->>', params);
         if (this.isSubmitted) {
+            console.log(this.itemForm.value)
             this.companiesService.addCompany(this.itemForm.value).subscribe(data => {
                 this.itemForm.reset();
                 this.isSubmitted = false;
@@ -172,9 +179,10 @@ export class CompaniesCreateComponent implements OnInit {
     }
 
     getCompanyConfig() {
+       
         this.companiesService.companyConfig({page: -1}).subscribe(data => {
             this.companyToggleArr = data.items;
-            // console.log('--->>',  this.companyToggleArr);
+            this.labels=data.items.map(x=>"Is "+x.name.split('_')[1])
         });
     }
 
