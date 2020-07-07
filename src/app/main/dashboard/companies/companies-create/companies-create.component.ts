@@ -139,11 +139,19 @@ export class CompaniesCreateComponent implements OnInit {
             this.isSubmitted = false;
             return;
         }
-        const params = {
-            ...this.itemForm.value,
-            configs: this.companyToggleArr,
-        };       
+        // const params = {
+        //     ...this.itemForm.value,
+        //     configs: this.companyToggleArr,
+        // };       
         // console.log('--->>', params);
+
+        console.log(this.companyToggleArr);
+        this.companyToggleArr.forEach(value => {
+            //this.itemForm.value[value.name] = value.status; 
+            this.itemForm.value[value.name] = value.status ? value.status : false;
+        });
+
+        //this.itemForm.value['toogleData'] = this.companyToggleArr;
         if (this.isSubmitted) {
             console.log(this.itemForm.value)
             this.companiesService.addCompany(this.itemForm.value).subscribe(data => {
@@ -182,7 +190,8 @@ export class CompaniesCreateComponent implements OnInit {
        
         this.companiesService.companyConfig({page: -1}).subscribe(data => {
             this.companyToggleArr = data.items;
-            this.labels=data.items.map(x=>"Is "+x.name.split('_')[1])
+            this.labels=data.items.map(x=>"Is "+x.name.split('is')[1])
+            console.log(this.labels)
         });
     }
 
