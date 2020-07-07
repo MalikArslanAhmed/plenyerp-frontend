@@ -107,11 +107,11 @@
                 </mat-grid-tile>
             </mat-grid-list>-->
         </form>
-        <mat-grid-list cols="4" rowHeight="100px">
+        <mat-grid-list cols="5" rowHeight="100px">
             <mat-grid-tile class="ml-1 mr-1" *ngFor="let companyToggle of companyToggleArr; let i = index">
                 <div fxLayout="row" fxLayoutAlign="start start">
-                    <mat-label style="margin-right: 20px">{{companyToggle.name}}</mat-label>
-                    <mat-slide-toggle [(ngModel)]="companyToggle.value" name="{{'name' + i}}"></mat-slide-toggle>
+                    <mat-label style="margin-right: 20px">{{labels[i]}}</mat-label>
+                    <mat-slide-toggle [(ngModel)]="companyToggle.status" name="{{'name' + i}}"></mat-slide-toggle>
                 </div>
             </mat-grid-tile>
         </mat-grid-list>
