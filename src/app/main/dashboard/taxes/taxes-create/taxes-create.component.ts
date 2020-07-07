@@ -3,6 +3,7 @@ import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaxesService} from '../../../../shared/services/taxes.service';
 import {GlCodeSelectComponent} from '../gl-code-select/gl-code-select.component';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
     selector: 'app-taxes-create',
@@ -18,7 +19,7 @@ export class TaxesCreateComponent implements OnInit {
     updateData: any;
     liabilities = [];
     dialogRef: any;
-
+    beneficiaryList=[];
     constructor(public matDialogRef: MatDialogRef<TaxesCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -38,6 +39,7 @@ export class TaxesCreateComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.checkForUpdate();
+        this.getBeneficaryCode();
     }
 
     refresh(): void {
@@ -64,6 +66,17 @@ export class TaxesCreateComponent implements OnInit {
                 isActive: this.updateData.tax.isActive
             });
         }
+    }
+
+    getBeneficaryCode()
+    {
+        this.taxesService.getBeneficiaryList({isCustomer:1}).subscribe(data => {
+            this.beneficiaryList = data.items;
+            console.log(this.beneficiaryList);
+            // this.taxMasterForm.patchValue({
+            //     benCode: this.beneficiaryList[name]
+            // });
+        });
     }
 
     saveTax(): void {
@@ -100,7 +113,7 @@ export class TaxesCreateComponent implements OnInit {
         this.taxMasterForm.reset();
         this.taxMasterForm.controls['isActive'].setValue(true);
     }
-
+ 
     liabilitySelect() {
         this.dialogRef = this._matDialog.open(GlCodeSelectComponent, {
             panelClass: 'contact-form-dialog',
@@ -109,6 +122,7 @@ export class TaxesCreateComponent implements OnInit {
             if (!response) {
                 return;
             }
+            //console.log(response)
             this.liabilities = [{
                 'name': response.individualCode,
                 'id': response.id
@@ -121,6 +135,19 @@ export class TaxesCreateComponent implements OnInit {
                 glCodeName: response.name,
                 disabled: true
             });
+        });
+    }
+
+    beneficiarySelect(beneficiaryId)
+    {
+      //  console.log(id);
+        this.beneficiaryList.forEach((value)=>{
+            if(value.id===beneficiaryId)
+            {
+                this.taxMasterForm.get('benName').patchValue(
+                    value.name
+                );
+            }
         });
     }
 }
