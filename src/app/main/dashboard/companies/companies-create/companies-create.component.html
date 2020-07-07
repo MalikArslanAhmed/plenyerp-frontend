@@ -76,40 +76,29 @@
                         <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
                     </div>
                 </mat-grid-tile>
-                <mat-grid-tile class="ml-1 mr-1">
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Is Supplier?</mat-label>
-                        <mat-slide-toggle formControlName="isSupplier"></mat-slide-toggle>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile class="ml-1">
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Is Customer?</mat-label>
-                        <mat-slide-toggle formControlName="isCustomer"></mat-slide-toggle>
-                    </div>
-                </mat-grid-tile>
             </mat-grid-list>
 
-            <mat-grid-list cols="3" rowHeight="100px">
-                <mat-grid-tile class="mr-1">
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Is Cashbook A/C?</mat-label>
-                        <mat-slide-toggle formControlName="isCashbookAc"></mat-slide-toggle>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile class="ml-1 mr-1">
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Is One-off?</mat-label>
-                        <mat-slide-toggle formControlName="isOnOff"></mat-slide-toggle>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile class="ml-1">
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-label style="margin-right: 20px">Is PFA?</mat-label>
-                        <mat-slide-toggle formControlName="isPf"></mat-slide-toggle>
-                    </div>
-                </mat-grid-tile>
-            </mat-grid-list>
+<!--            <mat-grid-list cols="3" rowHeight="100px">-->
+<!--                <mat-grid-tile class="mr-1">-->
+<!--                    <div fxLayout="row" fxLayoutAlign="start start">-->
+<!--                        <mat-label style="margin-right: 20px">Is Cashbook A/C?</mat-label>-->
+<!--                        <mat-slide-toggle formControlName="isCashbookAc"></mat-slide-toggle>-->
+<!--                    </div>-->
+<!--                </mat-grid-tile>-->
+<!--                <mat-grid-tile class="ml-1 mr-1">-->
+<!--                    <div fxLayout="row" fxLayoutAlign="start start">-->
+<!--                        <mat-label style="margin-right: 20px">Is One-off?</mat-label>-->
+<!--                        <mat-slide-toggle formControlName="isOnOff"></mat-slide-toggle>-->
+<!--                    </div>-->
+<!--                </mat-grid-tile>-->
+<!--                <mat-grid-tile class="ml-1">-->
+<!--                    <div fxLayout="row" fxLayoutAlign="start start">-->
+<!--                        <mat-label style="margin-right: 20px">Is PFA?</mat-label>-->
+<!--                        <mat-slide-toggle formControlName="isPf"></mat-slide-toggle>-->
+<!--                    </div>-->
+<!--                </mat-grid-tile>-->
+<!--            </mat-grid-list>-->
+
             <!--<mat-grid-list cols="1" rowHeight="80px">
                 <mat-grid-tile class="ml-1">
                     <div fxLayout="row" fxLayoutAlign="start start">
@@ -118,6 +107,14 @@
                 </mat-grid-tile>
             </mat-grid-list>-->
         </form>
+        <mat-grid-list cols="4" rowHeight="100px">
+            <mat-grid-tile class="ml-1 mr-1" *ngFor="let companyToggle of companyToggleArr; let i = index">
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-label style="margin-right: 20px">{{companyToggle.name}}</mat-label>
+                    <mat-slide-toggle [(ngModel)]="companyToggle.value" name="{{'name' + i}}"></mat-slide-toggle>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
     </div>
 
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">

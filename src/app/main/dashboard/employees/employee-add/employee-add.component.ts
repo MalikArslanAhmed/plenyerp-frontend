@@ -404,16 +404,16 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     getCountries() {
-        this.structureService.getCountries({'page': -1, 'isActive' : 1}).subscribe(data => {
+        this.structureService.getCountries({'page': -1, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
             this.countries = data.items;
         });
     }
 
     getCountriesOther() {
-        this.structureService.getCountries({'page': -1 ,'isActive' : 1}).subscribe(data => {
+        this.structureService.getCountries({'page': -1 ,'isActive' : 1,orderby: 'name'}).subscribe(data => {
             this.countriesOther = data.items;
         });
-    }
+    } 
 
     jobPositionListSelect() {
         this.dialogRef = this._matDialog.open(JobPositionsListSelectComponent, {
@@ -551,13 +551,13 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     getDesignations() {
-        this.structureService.getDesignations({'page': -1, 'isActive': 1}).subscribe(data => {
+        this.structureService.getDesignations({'page': -1, 'isActive': 1,orderby: 'name'}).subscribe(data => {
             this.designations = data.items;
         });
     }
 
     getSalaryScales() {
-        this.salaryScalesService.getSalaryScales({'page': -1, 'isActive': 1}).subscribe(data => {
+        this.salaryScalesService.getSalaryScales({'page': -1, 'isActive': 1,orderby: 'name'}).subscribe(data => {
             this.salaryScales = data;
         });
     }
@@ -708,7 +708,7 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     chooseRegion(event) {
-        this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1}).subscribe(data => {
+        this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
             this.regions = data.items;
         });
         this.citizenshipContactDetailsForm.controls['regionId'].reset();
@@ -719,20 +719,20 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     chooseState(event) {
-        this.structureService.getStates({'page': -1, 'regionId': event, 'isActive' : 1}).subscribe(data => {
+        this.structureService.getStates({'page': -1, 'regionId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
             this.states = data.items;
         });
     }
 
     chooseLga(event) {
-        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive' : 1}).subscribe(data => {
+        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
             this.lgas = data.items;
         });
     }
 
 
     chooseRegionOther(event) {
-        this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1}).subscribe(data => {
+        this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
             this.regionsOther = data.items;
         });
         this.citizenshipContactDetailsForm.controls['otherRegionId'].reset();
@@ -743,13 +743,13 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     chooseStateOther(event) {
-        this.structureService.getStates({'page': -1, 'regionId': event, 'isActive' : 1}).subscribe(data => {
+        this.structureService.getStates({'page': -1, 'regionId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
             this.statesOther = data.items;
         });
     }
 
     chooseLgaOther(event) {
-        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive' : 1}).subscribe(data => {
+        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
             this.lgasOthers = data.items;
         });
     }

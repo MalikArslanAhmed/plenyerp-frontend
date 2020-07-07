@@ -190,7 +190,9 @@ export class StoreSetupItemsCreateComponent implements OnInit {
 
     getTaxApplicableList() {
         this.storeSetupUnitOfMeasuresService.applicableTaxesList({page: -1}).subscribe(data => {
+            //console.log(data)
             this.toppingList = data.items;
+            //this.toppingList=[{id:1,name:'abc'},{id:2,name:'xyz'}]
         });
     }
 }

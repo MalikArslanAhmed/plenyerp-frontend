@@ -14,7 +14,7 @@ export class TaxesService extends BaseService {
     constructor(public http: HttpClient, public alertService: AlertService, public globalService: GlobalService) {
         super(http, alertService, globalService);
     }
-
+ 
     getTaxesList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_TAXES_LIST(), data);
     }
@@ -26,5 +26,8 @@ export class TaxesService extends BaseService {
     }
     deleteTax(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_TAXES(id));
+    }
+    getBeneficiaryList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_COMPANIES_LIST(), data);
     }
 }

@@ -944,6 +944,9 @@ export class AppUrl {
     static GET_COMPANIES_LIST(): string {
         return AppUrl.API_URL + 'companies';
     }
+    static GET_COMPANIES_CONFIG(): string {
+        return AppUrl.API_URL + 'company-config';
+    }
 
     static ADD_COMPANY(): string {
         return AppUrl.API_URL + 'companies';

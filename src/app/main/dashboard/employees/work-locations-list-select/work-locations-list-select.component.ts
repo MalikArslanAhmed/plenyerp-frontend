@@ -61,7 +61,7 @@ export class WorkLocationsListSelectComponent implements OnInit {
     }
 
     getWorkLocations() {
-        this.workLocationService.getWorkLocations({'page': -1}).subscribe(data => {
+        this.workLocationService.getWorkLocations({'page': -1,orderby: 'name'}).subscribe(data => {
             this.dataSource.data = [{
                 id: 0,
                 isChildEnabled: true,

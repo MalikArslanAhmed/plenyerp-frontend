@@ -61,15 +61,19 @@
 
                 <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
                     <div fxFlex="50">
-                        <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-form-field appearance="outline" fxFlex="100" >
                             <mat-label>Beneficiary Code</mat-label>
-                            <input matInput type="text" min="0"  formControlName="benCode">
+                            <mat-select formControlName="benCode" required (selectionChange)="beneficiarySelect($event.value)">
+                                <mat-option [value]="beneficiary.id"
+                                            *ngFor="let beneficiary of beneficiaryList">{{beneficiary.id}}</mat-option>
+                            </mat-select>
+                            <mat-error>Beneficiary is required!</mat-error>
                         </mat-form-field>
                     </div>
                     <div fxFlex="50">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Beneficiary Name</mat-label>
-                            <input matInput type="text" min="0"  formControlName="benName">
+                            <input matInput type="text" min="0"  formControlName="benName" [disabled]="true" readonly>
                         </mat-form-field>
                     </div>
                 </div>

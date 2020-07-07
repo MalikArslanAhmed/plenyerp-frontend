@@ -3,6 +3,7 @@ import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {CompaniesService} from '../../../../shared/services/companies.service';
+import {log} from 'util';
 
 @Component({
     selector: 'app-companies-create',
@@ -19,6 +20,33 @@ export class CompaniesCreateComponent implements OnInit {
     qualifications: any = [];
     updateData: any;
     dialogRef: any;
+    companyToggleArr = [
+        {
+            id: 1,
+            name: 'Is Supplier?',
+            value: false
+        },
+        {
+            id: 2,
+            name: 'Is Customer?',
+            value: false
+        },
+        {
+            id: 3,
+            name: 'Is Cashbook A/C?',
+            value: false
+        },
+        {
+            id: 4,
+            name: 'Is One-off?',
+            value: false
+        },
+        {
+            id: 5,
+            name: 'Is PFA?',
+            value: false
+        },
+    ];
 
     constructor(public matDialogRef: MatDialogRef<CompaniesCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -39,6 +67,7 @@ export class CompaniesCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
+        this.getCompanyConfig();
         this.checkForUpdate();
     }
 
@@ -53,11 +82,12 @@ export class CompaniesCreateComponent implements OnInit {
             email: ['', Validators.required],
             website: ['', Validators.required],
             isActive: [false, Validators.required],
-            isSupplier: [false, Validators.required],
-            isCustomer: [false, Validators.required],
-            isCashbookAc: [false, Validators.required],
-            isOnOff: [false, Validators.required],
-            isPf: [false, Validators.required]
+
+            // isSupplier: [false, Validators.required],
+            // isCustomer: [false, Validators.required],
+            // isCashbookAc: [false, Validators.required],
+            // isOnOff: [false, Validators.required],
+            // isPf: [false, Validators.required]
 
             // 'categoryId': ['', Validators.required],
             // 'measurementId': ['', Validators.required],
@@ -85,12 +115,15 @@ export class CompaniesCreateComponent implements OnInit {
                 email: this.updateData.company.email,
                 website: this.updateData.company.website,
                 isActive: this.updateData.company.isActive,
-                isSupplier: this.updateData.company.isSupplier,
-                isCustomer: this.updateData.company.isCustomer,
-                isCashbookAc: this.updateData.company.isCashbookAc,
-                isOnOff: this.updateData.company.isOnOff,
-                isPf: this.updateData.company.isPf
+
+
+                // isSupplier: this.updateData.company.isSupplier,
+                // isCustomer: this.updateData.company.isCustomer,
+                // isCashbookAc: this.updateData.company.isCashbookAc,
+                // isOnOff: this.updateData.company.isOnOff,
+                // isPf: this.updateData.company.isPf
             });
+            this.companyToggleArr = this.updateData.configs;
         }
     }
 
@@ -100,7 +133,11 @@ export class CompaniesCreateComponent implements OnInit {
             this.isSubmitted = false;
             return;
         }
-
+        const params = {
+            ...this.itemForm.value,
+            configs: this.companyToggleArr,
+        };
+        // console.log('--->>', params);
         if (this.isSubmitted) {
             this.companiesService.addCompany(this.itemForm.value).subscribe(data => {
                 this.itemForm.reset();
@@ -115,6 +152,11 @@ export class CompaniesCreateComponent implements OnInit {
             this.isSubmitted = false;
             return;
         }
+        const params = {
+            ...this.itemForm.value,
+            configs: this.companyToggleArr,
+        };
+        // console.log('--->>', params);
         if (this.isSubmitted) {
             this.companiesService.updateCompany(this.updateData.company.id, this.itemForm.value).subscribe(data => {
                 this.updateData = undefined;
@@ -124,9 +166,16 @@ export class CompaniesCreateComponent implements OnInit {
         }
     }
 
-    resetForm(){
+    resetForm() {
         this.itemForm.reset();
         this.itemForm.controls['isActive'].setValue(true);
+    }
+
+    getCompanyConfig() {
+        this.companiesService.companyConfig({page: -1}).subscribe(data => {
+            this.companyToggleArr = data.items;
+            // console.log('--->>',  this.companyToggleArr);
+        });
     }
 
 }

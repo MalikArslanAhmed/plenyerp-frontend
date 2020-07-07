@@ -94,7 +94,7 @@ export class JobPositionsListSelectComponent implements OnInit {
     }
 
     getStructures() {
-        this.structureService.getJobLocations({'page': -1}).subscribe(data => {
+        this.structureService.getJobLocations({'page': -1,orderby: 'name'}).subscribe(data => {
             this.dataSource.data = [{
                 id: null,
                 parentId: 0,
