@@ -116,7 +116,7 @@ export class CompaniesCreateComponent implements OnInit {
             this.companyToggleArr = data.items;
             this.labels = data.items.map(x => "Is " + x.name.split('is')[1]);
 
-            if (this.updateData.action === 'EDIT') {
+            if (this.updateData && this.updateData.action === 'EDIT') {
                 this.companyToggleArr.forEach(value => {
                     value['status'] = this.updateData['company'][value.name] ? this.updateData['company'][value.name] : false;
                 });
