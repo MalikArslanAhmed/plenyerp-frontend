@@ -6,7 +6,6 @@ import {FormGroup} from '@angular/forms';
 import {CompaniesCreateComponent} from './companies-create/companies-create.component';
 import {CompaniesListComponent} from './companies-list/companies-list.component';
 
-
 @Component({
     selector: 'app-companies',
     templateUrl: './companies.component.html',

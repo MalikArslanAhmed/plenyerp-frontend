@@ -17,7 +17,6 @@ import {CompanyBankDetailsComponent} from '../company-bank-details/company-bank-
 })
 export class CompaniesListComponent implements OnInit {
     displayedColumns: string[] = ['sno', 'companyId', 'companyName', 'companyAddress', 'actions'];
-
     companiesList = [];
     dialogRef: any;
     pagination = {
