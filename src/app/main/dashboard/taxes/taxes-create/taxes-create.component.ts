@@ -56,11 +56,11 @@ export class TaxesCreateComponent implements OnInit {
     }
 
     checkForUpdate(): void {
-        this.liabilities = [{
-            'name': this.updateData.tax['adminSegment'].individualCode,
-            'id': this.updateData.tax['adminSegment'].individualCode
-        }];
         if (this.updateData) {
+            this.liabilities = [{
+                'name': this.updateData.tax['adminSegment'].individualCode,
+                'id': this.updateData.tax['adminSegment'].individualCode
+            }];
             this.taxMasterForm.patchValue({
                 name: this.updateData.tax.name,
                 tax: this.updateData.tax.tax,
