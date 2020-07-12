@@ -46,6 +46,10 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
         this.updateFormFields(nextIndividualCode);
    }
 
+   getPrefixString(){
+
+   }
+
     refresh() {
         this.segmentForm = this.fb.group({
             name: ['', Validators.required],
@@ -60,7 +64,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
         const isEdit = this.action === 'EDIT';
         let controlConfig = {};
         const {name, characterCount, isActive} = this.segment;
-        console.log(nextIndividualCode)
+
         if (isEdit) {
             controlConfig = {
                 name: name,

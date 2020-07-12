@@ -51,6 +51,7 @@ export class SegmentDetailsComponent implements OnInit {
             maxLevel: node.maxLevel,
             individualCode: node.individualCode,
             characterCount: node.characterCount,
+            combinedCode: node.combinedCode,
             children: node.children,
             showDelete: node.children.length === 0
         };
