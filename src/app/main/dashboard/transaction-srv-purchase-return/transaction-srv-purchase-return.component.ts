@@ -135,7 +135,8 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
                 measurementId: '',
                 quantity: '',
                 unitPrice: '',
-                unitCost: ''
+                unitCost: '',
+                unitOfMeasures:''
             });
             this.setTotals();
         } else {

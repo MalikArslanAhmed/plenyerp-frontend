@@ -52,7 +52,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             'dates': [''],
             'itemId': [''],
             'description': [''],
-            'unitOfMeasures': [{value: '', disabled: true}],
+            'unitOfMeasures': [''],
             'quantity': [''],
             'accountCode': ['']
         });
@@ -102,13 +102,6 @@ export class TransactionStvStoreTransferComponent implements OnInit {
 
     addItem(itemId, description, unitOfMeasures, quantity, accountCode) {
         let repeatItemFound = false;
-        // console.log("meausre0",unitOfMeasures)
-        // console.log("meausre",this.stvStoreTransferForm.value.unitOfMeasures)
-        // console.log("abx",this.stvStoreTransferForm.value)
-        // console.log("abx1",this.unitOfMeasuresData)
-    
-
-        //console.log("meausre1",this.unitOfMeasuresData['id'])
         if (this.itemsArr && this.itemsArr.length > 0) {
             this.itemsArr.forEach(item => {
                 if (parseInt(item.itemId) === parseInt(itemId)) {
@@ -140,7 +133,8 @@ export class TransactionStvStoreTransferComponent implements OnInit {
                 'description': '',
                 'measurementId': '',
                 'quantity': '',
-                'accountCode': ''
+                'accountCode': '',
+                'unitOfMeasures':''
             });
         } else {
             this.alertService.showErrors('Item already added');
@@ -253,6 +247,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
                 'name': response['inventoryMeasurement'].name,
                 'id': response['inventoryMeasurement'].id
             }];
+            console.log(this.unitOfMeasuresData)
             this.stvStoreTransferForm.patchValue({
                 'unitOfMeasures': this.unitOfMeasuresData[0].id
             });

@@ -122,7 +122,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Unit of measures</mat-label>
-                                    <mat-select  formControlName="unitOfMeasures" matNativeControl #unitOfMeasures>
+                                    <mat-select  formControlName="unitOfMeasures" matNativeControl #unitOfMeasures [disabled]="true">
                                         <mat-option *ngFor="let unitOfMeasure of unitOfMeasuresData" [value]="unitOfMeasure.id">
                                             {{unitOfMeasure.name}}
                                         </mat-option>
@@ -149,7 +149,7 @@
                         <mat-grid-tile class="mt-1">
                             <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
                                 <button mat-raised-button class="mat-accent mt--20px"
-                                        (click)="addItem(stvStoreTransferForm.value.itemId, description.value, unitOfMeasures.value, quantity.value, accountCode.value)">
+                                        (click)="addItem(stvStoreTransferForm.value.itemId, description.value, stvStoreTransferForm.value.unitOfMeasures, quantity.value, accountCode.value)">
                                     Add Item
                                 </button>
                             </div>

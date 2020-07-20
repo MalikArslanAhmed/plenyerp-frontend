@@ -103,7 +103,8 @@ export class TransactionSalesInvoiceComponent implements OnInit {
                 description: '',
                 measurementId: '',
                 quantity: '',
-                unitSellingPrice: ''
+                unitSellingPrice: '',
+                unitOfMeasures:''
             });
             this.setTotals();
         } else {
