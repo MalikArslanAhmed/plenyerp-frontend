@@ -101,7 +101,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
             });
         }
        
-        console.log(this.updateData.store.categoryId)
+        //console.log(this.updateData.store.categoryId)
     }
 
     saveStore() {
@@ -192,6 +192,7 @@ export class StoreSetupItemsCreateComponent implements OnInit {
         this.storeSetupUnitOfMeasuresService.applicableTaxesList({page: -1}).subscribe(data => {
             //console.log(data)
             this.toppingList = data.items;
+            //console.log(this.toppingList)
             //this.toppingList=[{id:1,name:'abc'},{id:2,name:'xyz'}]
         });
     }
