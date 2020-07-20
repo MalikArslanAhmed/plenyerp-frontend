@@ -102,6 +102,13 @@ export class TransactionStvStoreTransferComponent implements OnInit {
 
     addItem(itemId, description, unitOfMeasures, quantity, accountCode) {
         let repeatItemFound = false;
+        // console.log("meausre0",unitOfMeasures)
+        // console.log("meausre",this.stvStoreTransferForm.value.unitOfMeasures)
+        // console.log("abx",this.stvStoreTransferForm.value)
+        // console.log("abx1",this.unitOfMeasuresData)
+    
+
+        //console.log("meausre1",this.unitOfMeasuresData['id'])
         if (this.itemsArr && this.itemsArr.length > 0) {
             this.itemsArr.forEach(item => {
                 if (parseInt(item.itemId) === parseInt(itemId)) {
@@ -127,6 +134,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
                 'accountCode': accountCode,
             });
 
+            console.log("itemarray",this.itemsArr)
             this.stvStoreTransferForm.patchValue({
                 'itemId': '',
                 'description': '',

@@ -113,6 +113,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 taxes: this.taxes,
                 totalTaxes: this.totalTaxes
             });
+
             this.srvPurchaseInvoiceForm.patchValue({
                 itemId: '',
                 description: '',
@@ -363,7 +364,6 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             this.srvPurchaseInvoiceForm.patchValue({
                 'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
-            console.log(this.storeItems)
         });
     }
 }
