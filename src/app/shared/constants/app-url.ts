@@ -98,7 +98,7 @@ export class AppUrl {
     }
 
     static GET_COMPANIES(): string {
-        return AppUrl.API_URL + `companies`;
+        return AppUrl.API_URL + `companies?isCustomer=1`;
     }
 
     static GET_TAXES(): string {
