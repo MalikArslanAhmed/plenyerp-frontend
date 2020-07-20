@@ -30,7 +30,7 @@
                                     <mat-label>Giving Store Id</mat-label>
                                     <mat-select formControlName="storeId" [disabled]="true">
                                         <mat-option [value]="store.id"
-                                                    *ngFor="let store of stores">{{store.name}}</mat-option>
+                                                    *ngFor="let store of stores">{{store.id}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -42,7 +42,7 @@
                                     <mat-label>Receiving Store Id</mat-label>
                                     <mat-select formControlName="receiveStoreId" [disabled]="true">
                                         <mat-option [value]="store.id"
-                                                    *ngFor="let store of receivingStores">{{store.name}}</mat-option>
+                                                    *ngFor="let store of receivingStores">{{store.id}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>

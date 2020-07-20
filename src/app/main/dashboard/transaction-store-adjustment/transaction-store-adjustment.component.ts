@@ -292,6 +292,7 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             }];
             this.storeAdjustmentForm.patchValue({
                 companyId: response.id,
+                supplierAddress:response.address
             });
         });
     }
@@ -310,6 +311,7 @@ export class TransactionStoreAdjustmentComponent implements OnInit {
             }];
             this.storeAdjustmentForm.patchValue({
                 storeId: response.id,
+                storeName:response.name
             });
         });
     }

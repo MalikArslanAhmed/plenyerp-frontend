@@ -266,6 +266,7 @@ export class TransactionDonationsComponent implements OnInit {
             }];
             this.donationsForm.patchValue({
                 storeId: response.id,
+                storeName:response.name
             });
         });
     }
@@ -284,6 +285,7 @@ export class TransactionDonationsComponent implements OnInit {
             }];
             this.donationsForm.patchValue({
                 companyId: response.id,
+                supplierAddress:response.address
             });
         });
     }

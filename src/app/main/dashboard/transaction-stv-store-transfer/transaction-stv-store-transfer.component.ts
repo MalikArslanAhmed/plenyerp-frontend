@@ -209,6 +209,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             }];
             this.stvStoreTransferForm.patchValue({
                 storeId: response.id,
+                givingStoreName:response.name
             });
         });
     }
@@ -227,6 +228,7 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             }];
             this.stvStoreTransferForm.patchValue({
                 receiveStoreId: response.id,
+                receivingStoreName:response.name
             });
         });
     }

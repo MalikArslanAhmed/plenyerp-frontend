@@ -270,6 +270,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             }];
             this.srvPurchaseReturnForm.patchValue({
                 companyId: response.id,
+                cutomerAddress:response.address
             });
         });
     }
@@ -288,6 +289,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             }];
             this.srvPurchaseReturnForm.patchValue({
                 storeId: response.id,
+                storeName:response.name
             });
         });
     }

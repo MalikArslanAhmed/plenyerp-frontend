@@ -196,7 +196,8 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             });
         }
         this.salesInvoiceForm.patchValue({
-            storeName: selectedStoreName
+            storeName: selectedStoreName,
+            
         });
     }
 
@@ -315,6 +316,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             }];
             this.salesInvoiceForm.patchValue({
                 companyId: response.id,
+                supplierAddress:response.address
             });
         });
     }
@@ -358,6 +360,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             }];
             this.salesInvoiceForm.patchValue({
                 storeId: response.id,
+                storeName:response.name
             });
         });
     }

@@ -306,12 +306,15 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             if (!response) {
                 return;
             }
+            console.log(response);
             this.companies = [{
                 'name': response.name,
-                'id': response.id
+                'id': response.id,
             }];
+            
             this.srvPurchaseInvoiceForm.patchValue({
                 companyId: response.id,
+                supplierAddress:response.address
             });
         });
     }
@@ -330,6 +333,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             }];
             this.srvPurchaseInvoiceForm.patchValue({
                 storeId: response.id,
+                storeName:response.name
             });
         });
     }
