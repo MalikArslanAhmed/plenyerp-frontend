@@ -109,10 +109,10 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 quantity: quantity,
                 unitCost: unitCost,
                 value: parseInt(quantity) * parseInt(unitCost),
-                totalValue: this.totalTaxes + (parseInt(quantity) * parseInt(unitCost)),
+                totalValue: (parseInt(quantity) * parseInt(unitCost))+this.totalTaxes ,
                 taxes: this.taxes,
                 totalTaxes: this.totalTaxes
-            });
+            }); 
 
             this.srvPurchaseInvoiceForm.patchValue({
                 itemId: '',

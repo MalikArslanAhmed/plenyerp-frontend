@@ -94,7 +94,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
                 quantity: quantity,
                 sellingPrice: unitSellingPrice,
                 value: parseInt(quantity) * parseInt(unitSellingPrice),
-                totalValue: this.totalTaxes + (parseInt(quantity) * parseInt(unitSellingPrice)),
+                totalValue: (parseInt(quantity) * parseInt(unitSellingPrice))+this.totalTaxes ,
                 taxes: this.taxes,
                 totalTaxes: this.totalTaxes
             });
