@@ -197,7 +197,8 @@ export class EmployeeAddComponent implements OnInit {
             issuedAt: [''],
             issuedDate: [''],
             workPermitNumber: [''],
-            expiryDate: ['']
+            expiryDate: [''],
+            isForeignEmployee: [true, Validators.required]
         });
     }
 
@@ -386,6 +387,7 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     patchIdNosForm() {
+        console.log("12334",this.selectedEmployee);
         this.idNosForm.patchValue({
             'nhfNumber': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.nhfNumber ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.nhfNumber : '',
             'tinNumber': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.tinNumber ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.tinNumber : '',
@@ -400,6 +402,7 @@ export class EmployeeAddComponent implements OnInit {
             'issuedDate': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedDate ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedDate : '',
             'workPermitNumber': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber : '',
             'expiryDate': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate : '',
+            'isForeignEmployee': this.selectedEmployee.employeeIdNos.isForeignEmployee
         });
     }
 
