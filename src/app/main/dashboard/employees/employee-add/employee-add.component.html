@@ -731,7 +731,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Passport Number</mat-label>
-                                        <input matInput formControlName="passportNumber" required>
+                                        <input matInput formControlName="passportNumber">
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
@@ -739,7 +739,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Issued At</mat-label>
-                                        <mat-select formControlName="issuedAt" required>
+                                        <mat-select formControlName="issuedAt">
                                             <mat-option [value]="issued.id"
                                                         *ngFor="let issued of countries">{{issued.name}}</mat-option>
                                         </mat-select>
@@ -776,14 +776,14 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Work permit Number</mat-label>
-                                        <input matInput formControlName="workPermitNumber" required>
+                                        <input matInput formControlName="workPermitNumber">
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
                             <mat-grid-tile class="mr-1">
                                 <div fxLayout="row" fxLayoutAlign="start start">
                                     <mat-label style="margin-right: 20px">Is Foreign Employee?</mat-label>
-                                    <mat-slide-toggle formControlName="isForeignEmployee"></mat-slide-toggle>
+                                    <mat-slide-toggle formControlName="isForeignEmployee" (change)="onToggle($event)"></mat-slide-toggle>
                                 </div>
                             </mat-grid-tile>
                         </mat-grid-list>

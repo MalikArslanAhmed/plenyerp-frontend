@@ -402,7 +402,8 @@ export class EmployeeAddComponent implements OnInit {
             'issuedDate': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedDate ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedDate : '',
             'workPermitNumber': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber : '',
             'expiryDate': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate : '',
-            'isForeignEmployee': this.selectedEmployee.employeeIdNos.isForeignEmployee
+           // 'isForeignEmployee': this.selectedEmployee.employeeIdNos.isForeignEmployee
+            'isForeignEmployee': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee : '',
         });
     }
 
@@ -764,5 +765,32 @@ export class EmployeeAddComponent implements OnInit {
 
     goForward() {
         this.employeeStepper.next();
+    }
+
+    onToggle(event)
+    {
+        //console.log(event.checked);
+        if(event.checked==true)
+        {
+            this.idNosForm.controls['passportNumber'].setValidators([Validators.required]);   
+            this.idNosForm.get('passportNumber').updateValueAndValidity();
+
+            this.idNosForm.controls['issuedAt'].setValidators([Validators.required]);   
+            this.idNosForm.get('issuedAt').updateValueAndValidity();
+
+            this.idNosForm.controls['workPermitNumber'].setValidators([Validators.required]);   
+            this.idNosForm.get('workPermitNumber').updateValueAndValidity();
+        }
+        else{
+            this.idNosForm.get('passportNumber').clearValidators();
+            this.idNosForm.get('passportNumber').updateValueAndValidity();
+
+            this.idNosForm.get('issuedAt').clearValidators();
+            this.idNosForm.get('issuedAt').updateValueAndValidity();
+
+            this.idNosForm.get('workPermitNumber').clearValidators();
+            this.idNosForm.get('workPermitNumber').updateValueAndValidity();
+        }
+
     }
 }
