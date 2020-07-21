@@ -114,6 +114,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 totalTaxes: this.totalTaxes
             }); 
 
+            console.log(this.itemsArr)
             this.srvPurchaseInvoiceForm.patchValue({
                 itemId: '',
                 description: '',

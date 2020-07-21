@@ -20,6 +20,7 @@ import {EmployeeSchoolAttended} from '../employee-other-details/employee-school-
 import {EmployeeBankDetailsComponent} from './employee-bank-details/employee-bank-details.component';
 import {EmployeeBackground} from '../employee-other-details/employee-background/employee-background';
 import {PageEvent} from '@angular/material/paginator';
+import { EmployeeProgressionHistoryComponent } from './employee-progression-history/employee-progression-history.component';
 
 @Component({
     selector: 'app-employee-action',
@@ -215,7 +216,7 @@ export class EmployeeActionComponent implements OnInit {
         });
         this.getEmployees({});
     }
-
+ 
     addBankDetails(previewEmp) {
         this.dialogRef = this._matDialog.open(EmployeeBankDetailsComponent, {
             panelClass: 'bank-details-dialog',
@@ -229,6 +230,20 @@ export class EmployeeActionComponent implements OnInit {
         });
     }
 
+    employeeProgression(previewEmp)
+    {
+        console.log(previewEmp)
+        this.dialogRef = this._matDialog.open(EmployeeProgressionHistoryComponent, {
+            panelClass: 'bank-details-dialog',
+            data: {action: 'CREATE', selectedEmployee: previewEmp}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // this.getAddressTypeList.getAddressTypeList();
+        });
+    }
     editEmployee(employee) {
         console.log(3);
         this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);

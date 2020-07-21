@@ -173,6 +173,7 @@ import {CompanyBankDetailsComponent} from './companies/company-bank-details/comp
 import {TransactionsItemsSelectComponent} from './transactions-items-select/transactions-items-select.component';
 import {MatListModule} from '@angular/material/list';
 import { GlCodeSelectComponent } from './taxes/gl-code-select/gl-code-select.component';
+import { EmployeeProgressionHistoryComponent } from './employees/employee-action/employee-progression-history/employee-progression-history.component';
 
 @NgModule({
     declarations: [
@@ -326,7 +327,8 @@ import { GlCodeSelectComponent } from './taxes/gl-code-select/gl-code-select.com
         TransactionStoreSelectComponent,
         CompanyBankDetailsComponent,
         TransactionsItemsSelectComponent,
-        GlCodeSelectComponent
+        GlCodeSelectComponent,
+        EmployeeProgressionHistoryComponent
     ],
     imports: [
         CommonModule,

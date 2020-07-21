@@ -80,7 +80,7 @@
                             </button>
                             <button mat-raised-button matStepperNext type="button" color="accent"
                                     (click)="updateEmployee()" *ngIf="this.selectedEmployeeId">
-                                Update & Next
+                                Next
                             </button>
                         </div>
                     </form>
@@ -213,7 +213,7 @@
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button type="button" color="accent" (click)="savePersonalDetail()">
-                                {{this.selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
+                                {{this.selectedEmployeeId ? 'Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
@@ -338,7 +338,7 @@
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button type="button" color="accent" (click)="saveJobProfile()">
-                                {{this.selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
+                                {{this.selectedEmployeeId ? 'Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
@@ -503,7 +503,7 @@
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button type="button" color="accent" (click)="saveContactDetails()">
-                                {{selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
+                                {{selectedEmployeeId ? 'Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>
@@ -644,7 +644,7 @@
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button type="button" color="accent" (click)="saveProgression()">
-                                {{selectedEmployeeId ? 'Update & Next' : 'Save & Next'}}
+                                {{selectedEmployeeId ? 'Next' : 'Save & Next'}}
                             </button>
                         </div>
                     </form>

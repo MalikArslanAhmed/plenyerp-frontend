@@ -1,0 +1,140 @@
+<div class="dialog-content-wrapper" id="items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Employee Progression History</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form fxLayout="column" [formGroup]="employeeProgressionForm">
+            <ng-template matStepLabel>Employee</ng-template>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Value Date</mat-label>
+                            <input matInput [matDatepicker]="dateCurrentAppt"
+                                   formControlName="currentAppointment">
+                            <mat-datepicker-toggle matSuffix
+                                                   [for]="dateCurrentAppt"></mat-datepicker-toggle>
+                            <mat-datepicker #dateCurrentAppt></mat-datepicker>
+                            <mat-error>Value Date is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Job Position</mat-label>
+                            <mat-select formControlName="jobPositionId" required [disabled]="true"
+                                        (click)="jobPositionListSelect()">
+                                <mat-option [value]="jobPosition.id"
+                                            *ngFor="let jobPosition of jobPositions">{{jobPosition.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>Job Position is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Department</mat-label>
+                            <mat-select formControlName="departmentId" required [disabled]="true"
+                                        (click)="adminUnitListSelect()">
+                                <mat-option [value]="department.id"
+                                            *ngFor="let department of departments">{{department.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>Department required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Work Location</mat-label>
+                            <mat-select formControlName="workLocationId" required [disabled]="true"
+                                        (click)="workLocationListSelect()">
+                                <mat-option [value]="workLocation.id"
+                                            *ngFor="let workLocation of workLocations">{{workLocation.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>Work Location is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Designation</mat-label>
+                            <mat-select formControlName="designationId" required>
+                                <mat-option [value]="designation.id"
+                                            *ngFor="let designation of designations">{{designation.name}}</mat-option>
+                            </mat-select>
+                            <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
+                            <mat-error>Designation is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile> 
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>S / Scale</mat-label>
+                            <mat-select formControlName="salaryScaleId" required
+                                        (selectionChange)="salaryScaleChange($event.value)">
+                                <mat-option [value]="salaryScale.id"
+                                            *ngFor="let salaryScale of salaryScales">{{salaryScale.name}}</mat-option>
+                            </mat-select>
+                            <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
+                            <mat-error>S / Scale is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>G / Scale</mat-label>
+                            <mat-select formControlName="gradeLevelId" required
+                                        (selectionChange)="gradeScaleChange($event.value)">
+                                <mat-option [value]="gradeLevel.id"
+                                            *ngFor="let gradeLevel of gradeLevels">{{gradeLevel.name}}</mat-option>
+                            </mat-select>
+                            <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
+                            <mat-error>G / Scale is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>GL / Step</mat-label>
+                            <mat-select formControlName="gradeLevelStepId" required>
+                                <mat-option [value]="gradeLevelStep.id"
+                                            *ngFor="let gradeLevelStep of gradeLevelSteps">{{gradeLevelStep.name}}</mat-option>
+                            </mat-select>
+                            <mat-icon matSuffix class="secondary-text">outlined_flag</mat-icon>
+                            <mat-error>GL / Step is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <!-- <button mat-raised-button type="button" color="accent" *ngIf="!editAction" (click)="saveEmployeeProgressDetails()">
+                    Add
+                </button> -->
+                <button mat-raised-button type="button" color="accent" (click)="saveEmployeeProgressDetails()">
+                    Add
+                </button>
+
+                <!-- <button mat-raised-button type="button" color="accent" *ngIf="editAction" (click)="updateBankDetails()">
+                    Update
+                </button> -->
+            </div>
+        </form>
+                
+    </div>
+</div>
