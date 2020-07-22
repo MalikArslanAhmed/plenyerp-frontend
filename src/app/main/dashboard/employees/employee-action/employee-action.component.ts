@@ -232,9 +232,9 @@ export class EmployeeActionComponent implements OnInit {
 
     employeeProgression(previewEmp)
     {
-        console.log(previewEmp)
+        // console.log(previewEmp);
         this.dialogRef = this._matDialog.open(EmployeeProgressionHistoryComponent, {
-            panelClass: 'bank-details-dialog',
+            panelClass: 'employee-Progression-history-details-dialog',
             data: {action: 'CREATE', selectedEmployee: previewEmp}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {

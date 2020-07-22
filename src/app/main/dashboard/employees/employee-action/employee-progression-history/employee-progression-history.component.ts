@@ -92,7 +92,7 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
  
       jobPositionListSelect() {
         this.dialogRef = this._matDialog.open(JobPositionsListSelectComponent, {
-            panelClass: 'jobposition-form-dialog',
+            panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             // console.log('response job---->', response);
