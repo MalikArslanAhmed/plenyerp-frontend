@@ -109,6 +109,18 @@ export class EmployeeService extends BaseService {
     deleteBankDetails(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_BANK_DETAILS(id));
     }
+
+    getProgressionList(id): Observable<any>{
+        return this.getRequest(AppUrl.GET_EMPLOYEE_PROGRESSION_LIST(id));
+    }
+
+    addEmployeeProgression(empId,data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_EMPLOYEE_PROGRESSION_DETAILS(empId), data);
+    }
+
+    updateProgressionDetails(empId, progressionId, data): Observable<any> {
+        return this.putRequest(AppUrl.UPDATE_EMPLOYEE_PROGRESSION_DETAILS(empId, progressionId), data);
+    }
     
     public uploadFile(obj): Observable<any>  {
         let headers = new HttpHeaders();

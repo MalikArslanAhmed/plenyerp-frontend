@@ -79,11 +79,11 @@ export class EmployeeBankDetailsComponent implements OnInit {
             this.selectedBankBranchName = data.items;
         })
     }
-
+ 
     getBankDetailsList(empId) {
         this.employeesService.getBankDetailsList(empId, {'page': -1}).subscribe(data => {
             this.bankList = data.items;
-
+            console.log("bank",this.bankList);
             if (this.bankList && this.bankList.length > 0) {
                 let i = 1;
                 this.bankList.forEach(val => {

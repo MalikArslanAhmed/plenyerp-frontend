@@ -974,4 +974,16 @@ export class AppUrl {
     static GET_OFF_LEVEL_REPORT(): string {
         return 'https://run.mocky.io/v3/62982b08-94c9-4777-9f99-cbc39d3328a8';
     }
+
+    static GET_EMPLOYEE_PROGRESSION_LIST(id):string{
+        return AppUrl.API_URL + 'employee/' + id + '/progression-history';
+    }
+
+    static ADD_EMPLOYEE_PROGRESSION_DETAILS(empId): string {
+        return AppUrl.API_URL + `employee/` + empId + '/progression-history';
+    }
+
+    static UPDATE_EMPLOYEE_PROGRESSION_DETAILS(empId, progressionId): string {
+        return AppUrl.API_URL + `employee/` + empId + '/progression-history/' + progressionId;
+    }
 }

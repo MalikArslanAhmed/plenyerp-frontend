@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmployeeService } from 'app/shared/services/employee.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -7,11 +7,14 @@ import { DepartmentListSelectComponent } from 'app/main/dashboard/structure/depa
 import { WorkLocationsListSelectComponent } from '../../work-locations-list-select/work-locations-list-select.component';
 import { StructureService } from 'app/shared/services/structure.service';
 import { SalaryScalesService } from 'app/shared/services/salary-scales.service';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-employee-progression-history',
   templateUrl: './employee-progression-history.component.html',
-  styleUrls: ['./employee-progression-history.component.scss']
+  styleUrls: ['./employee-progression-history.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations
 })
 export class EmployeeProgressionHistoryComponent implements OnInit {
 
@@ -28,6 +31,12 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
   salaryScales = [];
   gradeLevels = [];
   gradeLevelSteps = [];
+  editAction = false;
+  selectedProgression;
+  
+  displayedBankColumns = ['id', 'valueDate', 'designation', 'department', 'workLocation', 'jobPosition', 'actions'];
+
+  progressionList=[];
   constructor(private employeesService: EmployeeService,
     public matDialogRef: MatDialogRef<EmployeeProgressionHistoryComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -37,6 +46,7 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
     private salaryScalesService: SalaryScalesService) {
     this.action = _data.action;
     this.currentEmployee = _data.selectedEmployee;
+   // console.log("current",this.currentEmployee);
 // if (this.action === 'EDIT') {
 //   if (_data.bankDetails) {
 //     this.updateData = _data;
@@ -47,13 +57,14 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
     this.refresh();
     this.getDesignations();
     this.getSalaryScales();
+    this.getProgressionDetailsList(this.currentEmployee.id);
   }
 
       refresh()
       {
         console.log(this.currentEmployee)
         this.employeeProgressionForm = this.fb.group({
-          currentAppointment: ['', Validators.required],
+          valueDate: ['', Validators.required],
           jobPositionId: ['', Validators.required],
           departmentId: ['', Validators.required],
           workLocationId: ['', Validators.required],
@@ -62,6 +73,21 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
           gradeLevelId: ['', Validators.required],
           gradeLevelStepId: ['', Validators.required]
         });
+      }
+      getProgressionDetailsList(empId)
+      {
+        this.employeesService.getProgressionList(empId).subscribe(data => {
+          this.progressionList = data.items;
+          console.log("progressionList",this.progressionList);
+          if (this.progressionList && this.progressionList.length > 0) {
+              let i = 1;
+              this.progressionList.forEach(val => {
+                  val['sno'] = i;
+                  // this.employeeBankDetailsForm.controls['index'].setValue(i+1);
+                  i++;
+              });
+          }
+      });
       }
  
       jobPositionListSelect() {
@@ -213,8 +239,92 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
 
     saveEmployeeProgressDetails()
     {
-      this.employeeProgressionForm.value['currentAppointment'] = this.employeeProgressionForm.value['currentAppointment'].format('YYYY-MM-DD');
+      this.employeeProgressionForm.value['valueDate'] = this.employeeProgressionForm.value['valueDate'].format('YYYY-MM-DD');
       console.log('this.employeeProgressionForm', this.employeeProgressionForm.value);
+      this.isSubmitted = true;
+        if (!this.employeeProgressionForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+        if (this.isSubmitted) {
+          this.employeesService.addEmployeeProgression(this.currentEmployee.id,this.employeeProgressionForm.value).subscribe(data => {
+            // this.employeeBankDetailsForm.reset();
+            this.employeeProgressionForm.controls['valueDate'].reset();
+            this.employeeProgressionForm.controls['jobPositionId'].reset();
+            this.employeeProgressionForm.controls['departmentId'].reset();
+            this.employeeProgressionForm.controls['workLocationId'].reset();
+            this.employeeProgressionForm.controls['designationId'].reset();
+            this.employeeProgressionForm.controls['salaryScaleId'].reset();
+            this.employeeProgressionForm.controls['gradeLevelId'].reset();
+            this.employeeProgressionForm.controls['gradeLevelStepId'].reset();
+            this.isSubmitted = false;
+            this.getProgressionDetailsList(this.currentEmployee.id);
+        });
+        }
+
+    }
+
+    
+    editProgression(progression)
+    {
+      
+      console.log("progression",progression)
+      this.editAction = true;
+      this.selectedProgression=progression;
+
+      this.jobPositions = [{
+        'name': progression.jobPosition && progression.jobPosition.name ? progression.jobPosition && progression.jobPosition.name : '',
+        'id': progression.jobPosition && progression.jobPosition.id ? progression.jobPosition && progression.jobPosition.id : '',
+    }];
+
+    this.departments = [{
+        'name': progression.department && progression.department.name ? progression.department && progression.department.name : '',
+        'id': progression.department && progression.department.id ? progression.department && progression.department.id : '',
+    }];
+
+    this.workLocations = [{
+        'name': progression.workLocation && progression.workLocation.name ? progression.workLocation && progression.workLocation.name : '',
+        'id': progression.workLocation && progression.workLocation.id ? progression.workLocation && progression.workLocation.id : '',
+    }];
+
+      this.salaryScaleChange(progression.salaryScale && progression.salaryScale.id, 'edit');
+      this.gradeScaleChange(progression.gradeLevel && progression.gradeLevel.id);
+
+      this.employeeProgressionForm.patchValue({
+        'valueDate':progression.valueDate,
+        'jobPositionId':progression.jobPositionId,
+        'departmentId':progression.departmentId,
+        'workLocationId':progression.workLocationId,
+        'designationId':progression.designationId,
+        'salaryScaleId':progression.salaryScaleId,
+        'gradeLevelId':progression.gradeLevelId,
+        'gradeLevelStepId':progression.gradeLevelStepId
+      });
+    }
+
+    updateEmployeeProgressionDetails()
+    {
+      this.isSubmitted = true;
+        if (!this.employeeProgressionForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.isSubmitted) {
+          this.employeesService.updateProgressionDetails(this.currentEmployee.id,this.selectedProgression.id,this.employeeProgressionForm.value).subscribe(data => {
+            this.employeeProgressionForm.controls['valueDate'].reset();
+            this.employeeProgressionForm.controls['jobPositionId'].reset();
+            this.employeeProgressionForm.controls['departmentId'].reset();
+            this.employeeProgressionForm.controls['workLocationId'].reset();
+            this.employeeProgressionForm.controls['designationId'].reset();
+            this.employeeProgressionForm.controls['salaryScaleId'].reset();
+            this.employeeProgressionForm.controls['gradeLevelId'].reset();
+            this.employeeProgressionForm.controls['gradeLevelStepId'].reset();
+            this.isSubmitted = false;
+            this.editAction = false;
+            this.getProgressionDetailsList(this.currentEmployee.id);
+        });
+        }
     }
 
 }
