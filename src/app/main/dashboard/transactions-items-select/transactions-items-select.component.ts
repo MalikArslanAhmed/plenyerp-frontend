@@ -41,7 +41,8 @@ export class TransactionsItemsSelectComponent implements OnInit {
             id: node.id,
             isChildEnabled: node.isChildEnabled,
             parentId: node.parentId,
-            isActive: node.isActive
+            isActive: node.isActive,
+            children: node.children
         };
     };
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);
@@ -61,6 +62,7 @@ export class TransactionsItemsSelectComponent implements OnInit {
     displayedColumns: string[] = ['sno', 'id', 'description', 'unitPrice', 'category', 'actions'];
     selectedCategory: any;
     transactionItemsForm: FormGroup;
+    itemCategoryAllIds =[];
 
     constructor(private transactionService: TransactionService,
                 public matDialogRef: MatDialogRef<TransactionsItemsSelectComponent>,
@@ -126,8 +128,23 @@ export class TransactionsItemsSelectComponent implements OnInit {
     }
 
     setCategory(node) {
+        this.itemCategoryAllIds = [];
+        this.itemCategoryAllIds.push(node.id);
+        this.findAllIds(node);
         this.selectedCategory = node.name;
-        this.getItems({'categoryId': node.id});
+        this.getItems({categoryIds: JSON.stringify(this.itemCategoryAllIds)});
+    }
+
+    findAllIds(data){
+        data.children.forEach(item => {
+            if(item.children && item.children.length){
+                this.itemCategoryAllIds.push(item.id);
+                this.findAllIds(item);
+            }else{
+                this.itemCategoryAllIds.push(item.id);
+                return;
+            }
+        });
     }
 
     cancelSelectedCategory() {
