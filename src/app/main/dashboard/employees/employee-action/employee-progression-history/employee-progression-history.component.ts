@@ -8,6 +8,7 @@ import { WorkLocationsListSelectComponent } from '../../work-locations-list-sele
 import { StructureService } from 'app/shared/services/structure.service';
 import { SalaryScalesService } from 'app/shared/services/salary-scales.service';
 import { fuseAnimations } from '@fuse/animations';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-employee-progression-history',
@@ -88,9 +89,10 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
                   val['sno'] = i;
                   // this.employeeBankDetailsForm.controls['index'].setValue(i+1);
                   i++;
-
                   this.addNewList=this.progressionList;
               });
+              
+              console.log("xyz",this.progressionList)
           }
       });
       }
@@ -254,8 +256,9 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
     {
       this.isAdd=false;
       this.isAddNew=true;
-      //console.log("form",this.employeeProgressionForm.value);
-      //this.employeeProgressionForm.value['valueDate'] = this.employeeProgressionForm.value['valueDate'].format('YYYY-MM-DD');
+      console.log("form",this.employeeProgressionForm.value);
+      this.employeeProgressionForm.value['valueDate'] = moment(this.employeeProgressionForm.value['valueDate']).format('YYYY-MM-DD');
+      console.log("form1",this.employeeProgressionForm.value);
       this.isSubmitted = true;
         if (!this.employeeProgressionForm.valid) {
             this.isSubmitted = false;
