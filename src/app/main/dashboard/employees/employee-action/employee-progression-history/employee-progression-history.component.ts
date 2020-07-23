@@ -34,6 +34,11 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
   editAction = false;
   selectedProgression;
   isEdit=false;
+  isAdd=false;
+  isAddNew=true;
+
+  addNewList=[];
+  addCurrentNewList=[];
   displayedBankColumns = ['id', 'valueDate', 'designation', 'department', 'workLocation', 'jobPosition', 'actions'];
 
   progressionList=[];
@@ -83,6 +88,8 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
                   val['sno'] = i;
                   // this.employeeBankDetailsForm.controls['index'].setValue(i+1);
                   i++;
+
+                  this.addNewList=this.progressionList;
               });
           }
       });
@@ -182,9 +189,73 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
 
     }
 
+    addNewEmployeeProgression()
+    {
+      this.isAdd=true;
+      this.isAddNew=false
+      //this.editAction = true;
+      //console.log("123",this.addNewList);
+      this.addNewList.forEach((value)=>{
+        if(value.isActive===true)
+        {
+          this.addCurrentNewList.push(value);
+        }
+      });
+    //  console.log('add',this.addCurrentNewList)
+
+
+      this.jobPositions = [{
+        'name': this.addCurrentNewList[0].jobPosition && this.addCurrentNewList[0].jobPosition.name ? this.addCurrentNewList[0].jobPosition && this.addCurrentNewList[0].jobPosition.name : '',
+        'id': this.addCurrentNewList[0].jobPosition && this.addCurrentNewList[0].jobPosition.id ? this.addCurrentNewList[0].jobPosition && this.addCurrentNewList[0].jobPosition.id : '',
+    }];
+
+    this.departments = [{
+        'name': this.addCurrentNewList[0].department && this.addCurrentNewList[0].department.name ? this.addCurrentNewList[0].department && this.addCurrentNewList[0].department.name : '',
+        'id': this.addCurrentNewList[0].department && this.addCurrentNewList[0].department.id ? this.addCurrentNewList[0].department && this.addCurrentNewList[0].department.id : '',
+    }];
+
+    this.workLocations = [{
+        'name': this.addCurrentNewList[0].workLocation && this.addCurrentNewList[0].workLocation.name ? this.addCurrentNewList[0].workLocation && this.addCurrentNewList[0].workLocation.name : '',
+        'id': this.addCurrentNewList[0].workLocation && this.addCurrentNewList[0].workLocation.id ? this.addCurrentNewList[0].workLocation && this.addCurrentNewList[0].workLocation.id : '',
+    }];
+
+      this.salaryScaleChange(this.addCurrentNewList[0].salaryScale && this.addCurrentNewList[0].salaryScale.id, 'edit');
+      this.gradeScaleChange(this.addCurrentNewList[0].gradeLevel && this.addCurrentNewList[0].gradeLevel.id);
+        this.employeeProgressionForm.patchValue({
+          'valueDate':this.addCurrentNewList[0].valueDate,
+          'jobPositionId':this.addCurrentNewList[0].jobPositionId,
+          'departmentId':this.addCurrentNewList[0].departmentId,
+          'workLocationId':this.addCurrentNewList[0].workLocationId,
+          'designationId':this.addCurrentNewList[0].designationId,
+          'salaryScaleId':this.addCurrentNewList[0].salaryScaleId,
+          'gradeLevelId':this.addCurrentNewList[0].gradeLevelId,
+          'gradeLevelStepId':this.addCurrentNewList[0].gradeLevelStepId
+        });
+       // 'designationId':this.addCurrentNewList['designationId'],
+        
+      
+
+    }
+
+    cancel()
+    {
+      this.isAdd=false;
+      this.isAddNew=true;
+      this.employeeProgressionForm.controls['valueDate'].reset();
+      this.employeeProgressionForm.controls['jobPositionId'].reset();
+      this.employeeProgressionForm.controls['departmentId'].reset();
+      this.employeeProgressionForm.controls['workLocationId'].reset();
+      this.employeeProgressionForm.controls['designationId'].reset();
+      this.employeeProgressionForm.controls['salaryScaleId'].reset();
+      this.employeeProgressionForm.controls['gradeLevelId'].reset();
+      this.employeeProgressionForm.controls['gradeLevelStepId'].reset();
+    }
     saveEmployeeProgressDetails()
     {
-      this.employeeProgressionForm.value['valueDate'] = this.employeeProgressionForm.value['valueDate'].format('YYYY-MM-DD');
+      this.isAdd=false;
+      this.isAddNew=true;
+      //console.log("form",this.employeeProgressionForm.value);
+      //this.employeeProgressionForm.value['valueDate'] = this.employeeProgressionForm.value['valueDate'].format('YYYY-MM-DD');
       this.isSubmitted = true;
         if (!this.employeeProgressionForm.valid) {
             this.isSubmitted = false;
@@ -212,6 +283,8 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
     editProgression(progression)
     {
       this.editAction = true;
+      this.isAdd=false;
+      this.isAddNew=false;
       this.selectedProgression=progression;
 
       this.jobPositions = [{
