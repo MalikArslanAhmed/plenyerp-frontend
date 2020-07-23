@@ -944,6 +944,7 @@ export class AppUrl {
     static GET_COMPANIES_LIST(): string {
         return AppUrl.API_URL + 'companies';
     }
+
     static GET_COMPANIES_CONFIG(): string {
         return AppUrl.API_URL + 'company-config';
     }
@@ -961,21 +962,22 @@ export class AppUrl {
     }
 
     static GET_BIN_REPORT(): string {
-        return 'https://run.mocky.io/v3/482f2ac2-e62e-46c9-97dc-5277ad6c4c8d';
+        return AppUrl.API_URL + 'invoices-lifo';
     }
 
-    static GET_INVENTORY_LEDGER_REPORT():string {
+    static GET_INVENTORY_LEDGER_REPORT(): string {
         return 'https://run.mocky.io/v3/2879175d-f87b-43bd-9463-b4fbd84f9ceb';
     }
 
     static GET_QUANTITY_BALANCE_REPORT(): string {
         return 'https://run.mocky.io/v3/dfdd92c6-3af0-4ed3-ac58-2c8c4b70dd5d';
     }
+
     static GET_OFF_LEVEL_REPORT(): string {
         return 'https://run.mocky.io/v3/62982b08-94c9-4777-9f99-cbc39d3328a8';
     }
 
-    static GET_EMPLOYEE_PROGRESSION_LIST(id):string{
+    static GET_EMPLOYEE_PROGRESSION_LIST(id): string {
         return AppUrl.API_URL + 'employee/' + id + '/progression-history';
     }
 

@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {TransactionsItemsSelectComponent} from "../transactions-items-select/transactions-items-select.component";
-import {MatDialog} from "@angular/material/dialog";
-import {TransactionStoreSelectComponent} from "../transaction-store-select/transaction-store-select.component";
-import {ReportService} from "../../../shared/services/report.service";
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
+import {MatDialog} from '@angular/material/dialog';
+import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
+import {ReportService} from '../../../shared/services/report.service';
 
 @Component({
     selector: 'app-report-bin-card',
@@ -68,8 +68,8 @@ export class ReportBinCardComponent implements OnInit {
                 return;
             }
             this.stores = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.binCardForm.patchValue({
                 storeId: response.id,
@@ -77,14 +77,14 @@ export class ReportBinCardComponent implements OnInit {
         });
     }
 
-    loadReport() {
+    loadReport(): void {
         const params = {
-            'openingDate': this.binCardForm.value['openingDate'] ? this.binCardForm.value['openingDate'].format('YYYY-MM-DD') : '',
-            'closingDate': this.binCardForm.value['closingDate'] ? this.binCardForm.value['closingDate'].format('YYYY-MM-DD') : '',
-            'itemId': this.binCardForm.value['itemId'],
-            'storeId': this.binCardForm.value['storeId'],
-            'itemName': this.binCardForm.value['itemName'],
-            'costingMethod': this.binCardForm.value['costingMethod']
+            openingDate: this.binCardForm.value['openingDate'] ? this.binCardForm.value['openingDate'].format('YYYY-MM-DD') : '',
+            closingDate: this.binCardForm.value['closingDate'] ? this.binCardForm.value['closingDate'].format('YYYY-MM-DD') : '',
+            itemId: this.binCardForm.value['itemId'],
+            storeId: this.binCardForm.value['storeId'],
+            itemName: this.binCardForm.value['itemName'],
+            costingMethod: this.binCardForm.value['costingMethod']
         };
         this.itemsArr = [];
         this.reportService.getBinReports(params).subscribe(data => {
