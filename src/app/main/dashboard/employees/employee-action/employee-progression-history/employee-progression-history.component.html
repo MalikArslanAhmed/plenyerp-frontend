@@ -198,7 +198,7 @@
                     </mat-header-cell>
                     <mat-cell *matCellDef="let progression">
                         <div fxFlex="row" fxLayoutAlign="end center">
-                            <button mat-icon-button aria-label="Toggle star" (click)="editProgression(progression)"
+                            <button mat-icon-button aria-label="Toggle star" *ngIf="progression.isActive==true" (click)="editProgression(progression)"
                                 style="color: blue">
                                 <mat-icon class="material-icons">edit</mat-icon>
                             </button>

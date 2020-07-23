@@ -33,7 +33,7 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
   gradeLevelSteps = [];
   editAction = false;
   selectedProgression;
-  
+  isEdit=false;
   displayedBankColumns = ['id', 'valueDate', 'designation', 'department', 'workLocation', 'jobPosition', 'actions'];
 
   progressionList=[];
@@ -62,7 +62,6 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
 
       refresh()
       {
-        console.log(this.currentEmployee)
         this.employeeProgressionForm = this.fb.group({
           valueDate: ['', Validators.required],
           jobPositionId: ['', Validators.required],
@@ -78,7 +77,6 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
       {
         this.employeesService.getProgressionList(empId).subscribe(data => {
           this.progressionList = data.items;
-          console.log("progressionList",this.progressionList);
           if (this.progressionList && this.progressionList.length > 0) {
               let i = 1;
               this.progressionList.forEach(val => {
@@ -108,60 +106,7 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
             this.employeeProgressionForm.patchValue({
                 jobPositionId: response.id,
                 disabled: true
-            });
-            // if (this.salaryScales && this.salaryScales.length > 0) 
-            // {
-            //     let salaryScales = this.salaryScales.find(function(salaryScale) {
-            //         return (salaryScale.id === response.salaryScaleId);
-            //     });
-
-            //     console.log('let salary scale---->', salaryScales);
-
-            //     // this.salaryScales = [{
-            //     //     'id': salaryScales.id,
-            //     //     'name': salaryScales.name
-            //     // }];
-            //     // console.log('new salary scale---->', this.salaryScales);
-            //     this.jobProfileSalaryPlacementForm.patchValue({
-            //         'salaryScaleId': salaryScales.id
-            //     });
-            //     if (salaryScales) {
-            //         if (salaryScales['gradeLevels'] && salaryScales['gradeLevels'].length > 0) {
-            //             this.gradeLevels = salaryScales['gradeLevels'];
-            //             let gradeLevels = salaryScales['gradeLevels'].find(function(gradeLevel) {
-            //                 return (gradeLevel.id === response.gradeLevelId);
-            //             });
-
-            //             console.log('this gradelevels---->', this.gradeLevels);
-            //             console.log('let gradelevels---->', gradeLevels);
-            //             // this.gradeLevels = [{
-            //             //     'id': gradeLevels.id,
-            //             //     'name': gradeLevels.name
-            //             // }];
-            //             this.jobProfileSalaryPlacementForm.patchValue({
-            //                 'gradeLevelId': gradeLevels.id
-            //             });
-
-            //             if (gradeLevels && gradeLevels['gradeLevelSteps'].length > 0) {
-            //                 this.gradeLevelSteps = gradeLevels['gradeLevelSteps'];
-            //                 let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function(gradeLevelStep) {
-            //                     return (gradeLevelStep.id === response.gradeLevelStepId);
-            //                 });
-
-            //                 console.log('this gradelevelsteps---->', this.gradeLevelSteps);
-            //                 console.log('let gradelevelsteps---->', gradeLevelSteps);
-
-            //                 // this.gradeLevelSteps = [{
-            //                 //     'id': gradeLevelSteps.id,
-            //                 //     'name': gradeLevelSteps.name
-            //                 // }];
-            //                 this.jobProfileSalaryPlacementForm.patchValue({
-            //                     'gradeLevelStepId': gradeLevelSteps.id
-            //                 });
-            //             }
-            //         }
-            //     }
-            // }
+            });            
         });
     }
 
@@ -240,7 +185,6 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
     saveEmployeeProgressDetails()
     {
       this.employeeProgressionForm.value['valueDate'] = this.employeeProgressionForm.value['valueDate'].format('YYYY-MM-DD');
-      console.log('this.employeeProgressionForm', this.employeeProgressionForm.value);
       this.isSubmitted = true;
         if (!this.employeeProgressionForm.valid) {
             this.isSubmitted = false;
@@ -267,8 +211,6 @@ export class EmployeeProgressionHistoryComponent implements OnInit {
     
     editProgression(progression)
     {
-      
-      console.log("progression",progression)
       this.editAction = true;
       this.selectedProgression=progression;
 
