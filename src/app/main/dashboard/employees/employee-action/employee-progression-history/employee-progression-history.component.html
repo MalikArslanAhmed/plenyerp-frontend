@@ -151,7 +151,7 @@
                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Effective Date</mat-header-cell>
                     <mat-cell fxHide fxShow.gt-md *matCellDef="let progression" class="cursor-pointer">
                         <p class="phone text-truncate cursor-pointer">
-                            {{progression.valueDate}}
+                            {{progression.valueDate | date: 'MM/dd/yyyy'}}
                         </p>
                     </mat-cell>
                 </ng-container>
