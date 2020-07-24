@@ -131,37 +131,40 @@
                                 <span class="text-truncate">{{i + 1}}.</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.description}}</span>
+                                <span class="text-truncate">{{item?.date | date}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.quantityIn}}</span>
+                                <span class="text-truncate">{{item?.details}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.unitPriceIn}}</span>
+                                <span class="text-truncate">{{item?.inQty}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.valueIn}}</span>
+                                <span class="text-truncate">{{item?.inUnitPrice}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.quantityOut}}</span>
+                                <span class="text-truncate">{{item?.inValue}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.unitPriceOut}}</span>
+                                <span class="text-truncate">{{item?.outQty}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.valueOut}}</span>
+                                <span class="text-truncate">{{item?.outUnitPrice}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.quantityBalance}}</span>
+                                <span class="text-truncate">{{item?.outValue}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.unitPriceBalance}}</span>
+                                <span class="text-truncate">{{item?.balanceQty}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.valueBalance}}</span>
+                                <span class="text-truncate">{{item?.balanceUnitPrice}}</span>
+                            </td>
+                            <td>
+                                <span class="text-truncate">{{item?.balanceValue}}</span>
                             </td>
                         </tr>
-                        <tr class="background-color-grey">
+                        <!--<tr class="background-color-grey">
                             <td></td>
                             <td>
                                 <span class="text-truncate">Total</span>
@@ -179,7 +182,7 @@
                             </td>
                             <td colspan="2">
                             </td>
-                        </tr>
+                        </tr>-->
                         </tbody>
                         <ng-template #noItemToShow>
                             <tbody>

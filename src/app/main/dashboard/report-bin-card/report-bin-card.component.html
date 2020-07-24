@@ -106,23 +106,12 @@
                     <table class="simple shadow-1px">
                         <thead>
                         <tr>
-                            <th colspan="3"></th>
-                            <th colspan="3">In</th>
-                            <th colspan="3">Out</th>
-                            <th colspan="3">Balance</th>
-                        </tr>
-                        <tr>
                             <th>S.No</th>
                             <th>Date</th>
                             <th>Item Description</th>
                             <th>In</th>
                             <th>Unit Cost</th>
-                            <th>Value</th>
                             <th>Out</th>
-                            <th>Unit Cost</th>
-                            <th>Value</th>
-                            <th>Qty</th>
-                            <th>Unit Cost</th>
                             <th>Balance</th>
                         </tr>
                         </thead>
@@ -132,37 +121,22 @@
                                 <span class="text-truncate">{{i + 1}}.</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.date | date}}</span>
+                                <span class="text-truncate">{{item?.date}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.details}}</span>
+                                <span class="text-truncate">{{item?.description}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.inQty}}</span>
+                                <span class="text-truncate">{{item?.in}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.inUnitPrice}}</span>
+                                <span class="text-truncate">{{item?.unitCost}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.inValue}}</span>
+                                <span class="text-truncate">{{item?.out}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.outQty}}</span>
-                            </td>
-                            <td>
-                                <span class="text-truncate">{{item?.outUnitPrice}}</span>
-                            </td>
-                            <td>
-                                <span class="text-truncate">{{item?.outValue}}</span>
-                            </td>
-                            <td>
-                                <span class="text-truncate">{{item?.balanceQty}}</span>
-                            </td>
-                            <td>
-                                <span class="text-truncate">{{item?.balanceUnitPrice}}</span>
-                            </td>
-                            <td>
-                                <span class="text-truncate">{{item?.balanceValue}}</span>
+                                <span class="text-truncate">{{item?.balance}}</span>
                             </td>
                         </tr>
                         <tr class="background-color-grey">
