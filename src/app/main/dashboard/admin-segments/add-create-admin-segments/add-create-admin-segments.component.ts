@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -18,17 +18,28 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
     segmentForm: FormGroup;
     isSubmitted: false;
     segment: any = [];
+    levelConfig: any;
+    segmentCode: string;
 
     constructor(public matDialogRef: MatDialogRef<AddCreateAdminSegmentsComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any, private fb: FormBuilder,
                 private segmentServices: AdminSegmentServices
-                ){
+    ) {
         this.action = _data.action;
         this.segment = _data.node;
+        this.levelConfig = _data.levelConfig;
+        this.segmentCode = '';
+        this.levelConfig.forEach(levelC => {
+            for (let i = 0; i < levelC.count; ++i) {
+                this.segmentCode += 'X';
+            }
+            this.segmentCode += '-';
+        });
+        this.segmentCode = this.segmentCode.replace(/-+$/, '');
         this.dialogTitle = this.action === 'EDIT' ? 'Update Segment' : 'Add Segment';
     }
 
-   ngOnInit(): void {
+    ngOnInit(): void {
         console.log('on init', this.segment);
         const parentChildren = this.segment.children || [];
         let nextIndividualCode = this.segment.individualCode;
@@ -44,17 +55,17 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
         }
         this.refresh();
         this.updateFormFields(nextIndividualCode);
-   }
+    }
 
-   getPrefixString(){
+    getPrefixString() {
 
-   }
+    }
 
     refresh() {
         this.segmentForm = this.fb.group({
             name: ['', Validators.required],
             characterCount: ['', Validators.required],
-            parentCode: {value: this.segment.individualCode, disabled: true},
+            parentCode: {value: this.segment.combinedCode, disabled: true},
             individualCode: [''],
             isActive: [true, Validators.required]
         });
@@ -70,7 +81,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
                 name: name,
                 characterCount: {value: characterCount, disabled: isEdit},
                 individualCode: {value: nextIndividualCode, disabled: true},
-                parentCode: {value: this.segment.individualCode, disabled: true},
+                parentCode: {value: this.segment.combinedCode, disabled: true},
                 isActive: {value: isActive, disabled: isEdit}
             };
         } else {
@@ -79,7 +90,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
                 characterCount: {value: '', disabled: isEdit},
                 individualCode: [nextIndividualCode],
                 isActive: {value: true, disabled: isEdit},
-                parentCode: {value: this.segment.individualCode, disabled: true},
+                parentCode: {value: this.segment.combinedCode, disabled: true},
             };
         }
         this.segmentForm = this.fb.group(controlConfig);
@@ -87,7 +98,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
 
     handleSegmentAddOrUpdate() {
         const formValues = this.segmentForm.getRawValue();
-        const { id, maxLevel } = this.segment;
+        const {id, maxLevel} = this.segment;
 
         const payloadToCreate = {
             ...formValues,
@@ -95,7 +106,9 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
             parentId: !id ? undefined : id,
         };
 
-        if (this.action === 'EDIT') { payloadToCreate.id = id; }
+        if (this.action === 'EDIT') {
+            payloadToCreate.id = id;
+        }
 
         this.action === 'EDIT' ? this.segmentServices.updateSegment(id, payloadToCreate).subscribe() :
             this.segmentServices.addSegment(payloadToCreate).subscribe();

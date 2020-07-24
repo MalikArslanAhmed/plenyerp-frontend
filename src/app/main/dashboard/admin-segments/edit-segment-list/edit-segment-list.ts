@@ -18,6 +18,7 @@ export class EditSegmentListComponent implements OnInit {
     segmentListForm: FormGroup;
     isSubmitted: false;
     segment: any = [];
+    segmenntCode = '';
 
     constructor(public matDialogRef: MatDialogRef<EditSegmentListComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any, private fb: FormBuilder,
@@ -25,8 +26,18 @@ export class EditSegmentListComponent implements OnInit {
     ) {
         this.action = _data.action;
         this.segment = _data.node;
+        this.segment.levelConfig.forEach(levelC => {
+            for (let i = 0; i < levelC.count; ++i) {
+                this.segmenntCode += 'X';
+            }
+            this.segmenntCode += '-';
+        });
+        this.segmenntCode = this.segmenntCode.replace(/-+$/, '');
+
+        console.log(this.segment)
         this.dialogTitle = 'Update Segment';
     }
+
 
     ngOnInit(): void {
         this.refresh();

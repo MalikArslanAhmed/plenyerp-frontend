@@ -70,6 +70,7 @@ export class SegmentDetailsComponent implements OnInit {
     dialogRef: any;
     segmentName: string;
     segmentId: number;
+    levelConfig: any;
 
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
@@ -85,6 +86,7 @@ export class SegmentDetailsComponent implements OnInit {
         this.adminSegmentServices.getAllSegments(this.segmentId).subscribe(data => {
             console.log('data', data);
             this.segmentName = data.name;
+            this.levelConfig = data.levelConfig;
             this.dataSource.data = [data];
             this.tree.treeControl.expandAll();
         });
@@ -93,7 +95,7 @@ export class SegmentDetailsComponent implements OnInit {
     addItem(node) {
         this.dialogRef = this._matDialog.open(AddCreateAdminSegmentsComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', node: node}
+            data: {action: 'CREATE', node: node, levelConfig: this.levelConfig}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             console.log(response);
@@ -107,7 +109,7 @@ export class SegmentDetailsComponent implements OnInit {
     editItem(node) {
         this.dialogRef = this._matDialog.open(AddCreateAdminSegmentsComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', node: node}
+            data: {action: 'EDIT', node: node, levelConfig: this.levelConfig}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             console.log(response);
