@@ -962,11 +962,11 @@ export class AppUrl {
     }
 
     static GET_BIN_REPORT(): string {
-        return AppUrl.API_URL + 'invoices-lifo';
+        return 'https://run.mocky.io/v3/482f2ac2-e62e-46c9-97dc-5277ad6c4c8d';
     }
 
     static GET_INVENTORY_LEDGER_REPORT(): string {
-        return 'https://run.mocky.io/v3/2879175d-f87b-43bd-9463-b4fbd84f9ceb';
+        return AppUrl.API_URL + 'invoices-lifo';
     }
 
     static GET_QUANTITY_BALANCE_REPORT(): string {

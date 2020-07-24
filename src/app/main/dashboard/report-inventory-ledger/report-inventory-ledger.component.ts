@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from "../../../../@fuse/animations";
-import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
 import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
@@ -69,8 +68,8 @@ export class ReportInventoryLedgerComponent implements OnInit {
                 return;
             }
             this.stores = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.reportInventoryLedgerForm.patchValue({
                 storeId: response.id,
@@ -78,14 +77,14 @@ export class ReportInventoryLedgerComponent implements OnInit {
         });
     }
 
-    loadReport() {
+    loadReport(): void {
         const params = {
-            'openingDate': this.reportInventoryLedgerForm.value['openingDate'] ? this.reportInventoryLedgerForm.value['openingDate'].format('YYYY-MM-DD') : '',
-            'closingDate': this.reportInventoryLedgerForm.value['closingDate'] ? this.reportInventoryLedgerForm.value['closingDate'].format('YYYY-MM-DD') : '',
-            'itemId': this.reportInventoryLedgerForm.value['itemId'],
-            'storeId': this.reportInventoryLedgerForm.value['storeId'],
-            'itemName': this.reportInventoryLedgerForm.value['itemName'],
-            'costingMethod': this.reportInventoryLedgerForm.value['costingMethod']
+            openingDate: this.reportInventoryLedgerForm.value['openingDate'] ? this.reportInventoryLedgerForm.value['openingDate'].format('YYYY-MM-DD') : '',
+            closingDate: this.reportInventoryLedgerForm.value['closingDate'] ? this.reportInventoryLedgerForm.value['closingDate'].format('YYYY-MM-DD') : '',
+            itemId: this.reportInventoryLedgerForm.value['itemId'],
+            storeId: this.reportInventoryLedgerForm.value['storeId'],
+            itemName: this.reportInventoryLedgerForm.value['itemName'],
+            costingMethod: this.reportInventoryLedgerForm.value['costingMethod']
         };
         this.itemsArr = [];
         this.reportService.getInventoryLedgerReports(params).subscribe(data => {
