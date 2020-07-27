@@ -2,605 +2,592 @@
     <button mat-button class="save-button mr-3" (click)="updateList()">
         Add Columns
     </button>
-
     <button mat-button class="save-button" (click)="downloadReport(displayedColumns)">
         Export To Excel
     </button>
 </div>
 
-
-<mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
-               *ngIf="employees.length > 0"
-               [length]="pagination.total"
-               [pageIndex]="pagination.page-1"
-               [pageSize]="pagination.perpage"
->
-</mat-paginator>
-
-<div class="table-responsive">
-    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
-        <ng-container matColumnDef="SN">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{((pagination.page - 1) * pagination.perpage) + employee.sno}}.
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Title">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.title}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="File No">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>File No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.personnelFileNumber}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Staff ID">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Staff ID</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Gender">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Gender</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeePersonalDetails?.gender | titlecase}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Marital Status">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Marital Status</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeePersonalDetails?.maritalStatus | titlecase}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Emp. Photo">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Emp. Photo</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <img [src]="employee.file.url" *ngIf="employee.file && employee.file.url" alt="image" style="max-height: 50px;" />
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Expected Exit Date">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Expected Exit Date</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeProgressions?.expectedExitDate | date: 'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-
-        <ng-container matColumnDef="Exited">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Exited</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeProgressions?.isExited}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="First Name">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>First Name</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.firstName}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Maiden Name">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Maiden Name</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.maidenName}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Last Name">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Last Name</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.lastName}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="Grade Level">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Grade Level</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="Type of Exit">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Type of Exit</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Type of Appointment">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Type of Appointment</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeePersonalDetails?.typeOfAppointment}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="TIN No">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>TIN No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeIdNos?.tinNumber}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="Street">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Street</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="State">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>State</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeContactDetails?.state?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="PFA No">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>PFA No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeIdNos?.pfaNumber}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Salary Scale">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Salary Scale</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeJobProfiles?.jobPosition?.salaryScale?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="RefNo TypeOfExit">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>RefNo TypeOfExit</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="RefNo TypeOfAppointment">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>RefNo TypeOfAppointment</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="Qualifications">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Qualifications</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--<ng-container matColumnDef="PFA">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>PFA</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeIdNos?.pfaNumber}}
-                </p>
-            </mat-cell>
-        </ng-container>-->
-
-        <ng-container matColumnDef="Permanent Staff">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Permanent Staff</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeePersonalDetails?.isPermanentStaff}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Pension Started">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Pension Started</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeePensions?.isPensionStarted}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="New Enrollment">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>New Enrollment</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Passport No">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Passport No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeInternationalPassports?.passportNumber}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Passport Issued on">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Passport Issued on</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeInternationalPassports?.issuedDate | date: 'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Passport Issued at">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Passport Issued at</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeInternationalPassports?.country?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Passport Expires on">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Passport Expires on</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeInternationalPassports?.expiryDate | date: 'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="NHF No">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>NHF No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeIdNos?.nhfNumber}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="Nature Of Exit">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Nature Of Exit</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="Nationality">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Nationality</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="National ID No">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>National ID No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeIdNos?.nationalIdNumber}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Mobile Phone">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.employeePersonalDetails?.phone}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Job Position">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Job Position</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeJobProfiles?.jobPosition?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Grade Level Step">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Grade Level Step</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeJobProfiles?.empGradeLevelStep?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Department">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Department</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.employeeJobProfiles?.department?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Address">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Address</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeContactDetails?.addressLine1}}, {{employee.employeeContactDetails?.addressLine2}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Address Country">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Address Country</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeContactDetails?.country?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Email">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Email</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeePersonalDetails?.email}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Drivers Licence No">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Drivers Licence No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeIdNos?.driverLicenseNumber}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Designation">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Designation</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.employeeJobProfiles?.designation?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Date Last Increment">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Last Increment</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeProgressions?.lastIncrement | date: 'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Date Pension Started">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Pension Started</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeePensions?.dateStarted | date: 'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Date of Birth">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date of Birth</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeePersonalDetails?.dateOfBirth | date:'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Date Last Promoted">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Last Promoted</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeProgressions?.lastPromoted | date:'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Date Current Appt">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Current Appt</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeJobProfiles?.currentAppointment | date:'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="Date Employed">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Employed</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Date Assumed Duty">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Assumed Duty</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeePersonalDetails?.assumedDutyOn | date:'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Confirmed">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Confirmed</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeProgressions?.isConfirmed}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--=========== not defined ============-->
-        <ng-container matColumnDef="Address LGA">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Address LGA</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="City">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>City</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeContactDetails?.city}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Address State">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Address State</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeContactDetails?.state?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Citizen Country">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Citizen Country</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeContactDetails?.otherCountry?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Citizen LGA">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Citizen LGA</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
-                <p class="email text-truncate">
-                    {{employee.employeeContactDetails?.otherLga?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Citizen Region">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Citizen Region</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.employeeContactDetails?.otherRegion?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Citizen State">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Citizen State</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.employeeContactDetails?.otherState?.name}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Confirmation Due Date">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Confirmation Due Date</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.employeeProgressions?.confirmationDueDate | date: 'mediumDate'}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Payroll pin">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Payroll Pin</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
-                <p class="phone text-truncate">
-                    {{employee.employeeIdNos?.payrollPin}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-
-
-        <!-- <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef>
-                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let employee">
-                <div fxFlex="row" fxLayoutAlign="end center">
-                    <button mat-icon-button aria-label="Toggle star" (click)="editCategory(employee)" style="color: blue">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteCategory(employee?.id)"
-                        style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
-                </div>
-            </mat-cell>
-        </ng-container> -->
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let employee; columns: displayedColumns;" class="contact"
-                 [@animate]="{value:'*',params:{y:'100%'}}">
-        </mat-row>
-    </mat-table>
+<div class="custom-container-fluid">
+    <mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
+                   *ngIf="employees.length > 0"
+                   [length]="pagination.total"
+                   [pageIndex]="pagination.page-1"
+                   [pageSize]="pagination.perpage"
+    >
+    </mat-paginator>
+    <div class="table-responsive">
+        <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
+            <ng-container matColumnDef="SN">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{((pagination.page - 1) * pagination.perpage) + employee.sno}}.
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Title">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.title}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="File No">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>File No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.personnelFileNumber}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Staff ID">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Staff ID</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Gender">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Gender</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeePersonalDetails?.gender | titlecase}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Marital Status">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Marital Status</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeePersonalDetails?.maritalStatus | titlecase}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Emp. Photo">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Emp. Photo</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <img [src]="employee.file.url" *ngIf="employee.file && employee.file.url" alt="image"
+                         style="max-height: 50px;"/>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Expected Exit Date">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Expected Exit Date</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeProgressions?.expectedExitDate | date: 'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="Exited">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Exited</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeProgressions?.isExited}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="First Name">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>First Name</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.firstName}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Maiden Name">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Maiden Name</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.maidenName}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Last Name">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Last Name</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.lastName}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Grade Level">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Grade Level</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Type of Exit">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Type of Exit</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Type of Appointment">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Type of Appointment</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeePersonalDetails?.typeOfAppointment}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="TIN No">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>TIN No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeIdNos?.tinNumber}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Street">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Street</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="State">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>State</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeContactDetails?.state?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="PFA No">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>PFA No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeIdNos?.pfaNumber}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Salary Scale">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Salary Scale</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeJobProfiles?.jobPosition?.salaryScale?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="RefNo TypeOfExit">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>RefNo TypeOfExit</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="RefNo TypeOfAppointment">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>RefNo TypeOfAppointment</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Qualifications">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Qualifications</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <!--<ng-container matColumnDef="PFA">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>PFA</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeIdNos?.pfaNumber}}
+                    </p>
+                </mat-cell>
+            </ng-container>-->
+
+            <ng-container matColumnDef="Permanent Staff">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Permanent Staff</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeePersonalDetails?.isPermanentStaff}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Pension Started">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Pension Started</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeePensions?.isPensionStarted}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="New Enrollment">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>New Enrollment</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Passport No">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Passport No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeInternationalPassports?.passportNumber}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Passport Issued on">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Passport Issued on</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeInternationalPassports?.issuedDate | date: 'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Passport Issued at">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Passport Issued at</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeInternationalPassports?.country?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Passport Expires on">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Passport Expires on</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeInternationalPassports?.expiryDate | date: 'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="NHF No">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>NHF No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeIdNos?.nhfNumber}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Nature Of Exit">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Nature Of Exit</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Nationality">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Nationality</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="National ID No">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>National ID No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeIdNos?.nationalIdNumber}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Mobile Phone">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.employeePersonalDetails?.phone}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Job Position">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Job Position</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeJobProfiles?.jobPosition?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Grade Level Step">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Grade Level Step</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeJobProfiles?.empGradeLevelStep?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Department">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Department</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.employeeJobProfiles?.department?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Address">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Address</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeContactDetails?.addressLine1}}
+                        , {{employee.employeeContactDetails?.addressLine2}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Address Country">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Address Country</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeContactDetails?.country?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Email">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Email</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeePersonalDetails?.email}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Drivers Licence No">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Drivers Licence No</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeIdNos?.driverLicenseNumber}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Designation">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Designation</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.employeeJobProfiles?.designation?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Date Last Increment">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Last Increment</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeProgressions?.lastIncrement | date: 'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Date Pension Started">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Pension Started</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeePensions?.dateStarted | date: 'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Date of Birth">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date of Birth</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeePersonalDetails?.dateOfBirth | date:'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Date Last Promoted">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Last Promoted</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeProgressions?.lastPromoted | date:'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Date Current Appt">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Current Appt</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeJobProfiles?.currentAppointment | date:'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Date Employed">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Employed</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Date Assumed Duty">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Date Assumed Duty</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeePersonalDetails?.assumedDutyOn | date:'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Confirmed">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Confirmed</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeProgressions?.isConfirmed}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Address LGA">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Address LGA</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.id}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="City">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>City</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeContactDetails?.city}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Address State">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Address State</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeContactDetails?.state?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Citizen Country">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Citizen Country</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeContactDetails?.otherCountry?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Citizen LGA">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Citizen LGA</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                    <p class="email text-truncate">
+                        {{employee.employeeContactDetails?.otherLga?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Citizen Region">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Citizen Region</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.employeeContactDetails?.otherRegion?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Citizen State">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Citizen State</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.employeeContactDetails?.otherState?.name}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Confirmation Due Date">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Confirmation Due Date</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.employeeProgressions?.confirmationDueDate | date: 'mediumDate'}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Payroll pin">
+                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Payroll Pin</mat-header-cell>
+                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                    <p class="phone text-truncate">
+                        {{employee.employeeIdNos?.payrollPin}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let employee">
+                    <div fxFlex="row" fxLayoutAlign="end center">
+                        <button mat-icon-button aria-label="Toggle star" (click)="editCategory(employee)" style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteCategory(employee?.id)"
+                            style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
+                </mat-cell>
+            </ng-container> -->
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let employee; columns: displayedColumns;" class="contact"
+                     [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
+    </div>
 </div>
