@@ -249,7 +249,7 @@ export class EmployeeAddComponent implements OnInit {
             'appointedOn': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.appointedOn ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.appointedOn : '',
             'assumedDutyOn': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.assumedDutyOn ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.assumedDutyOn : '',
             'typeOfAppointment': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.typeOfAppointment ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.typeOfAppointment : '',
-            'isPermanentStaff': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.isPermanentStaff ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.isPermanentStaff : ''
+            'isPermanentStaff': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.isPermanentStaff ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.isPermanentStaff : false
         });
     }
 
@@ -377,7 +377,7 @@ export class EmployeeAddComponent implements OnInit {
             'workPermitNumber': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber : '',
             'expiryDate': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate : '',
             // 'isForeignEmployee': this.selectedEmployee.employeeIdNos.isForeignEmployee
-            'isForeignEmployee': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee : '',
+            'isForeignEmployee': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee : false,
         });
     }
 
@@ -585,12 +585,14 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                this.personalDetailsForm.value['dateOfBirth'] = this.personalDetailsForm.value['dateOfBirth'].format('YYYY-MM-DD');
-                this.personalDetailsForm.value['appointedOn'] = this.personalDetailsForm.value['appointedOn'].format('YYYY-MM-DD');
-                this.personalDetailsForm.value['assumedDutyOn'] = this.personalDetailsForm.value['assumedDutyOn'].format('YYYY-MM-DD');
             }
-            this.employeeService.addPersonalDetails(this.employeeId, this.personalDetailsForm.value).subscribe(data => {
+            let params = {
+                ...this.personalDetailsForm.value
+            };
+            params['dateOfBirth'] = this.personalDetailsForm.value['dateOfBirth'] && typeof this.personalDetailsForm.value['dateOfBirth'] === 'object' ? this.personalDetailsForm.value['dateOfBirth'].format('YYYY-MM-DD') : this.personalDetailsForm.value['dateOfBirth'];
+            params['appointedOn'] = this.personalDetailsForm.value['appointedOn'] && typeof this.personalDetailsForm.value['appointedOn'] === 'object' ? this.personalDetailsForm.value['appointedOn'].format('YYYY-MM-DD') : this.personalDetailsForm.value['appointedOn'];
+            params['assumedDutyOn'] = this.personalDetailsForm.value['assumedDutyOn'] && typeof this.personalDetailsForm.value['assumedDutyOn'] === 'object' ? this.personalDetailsForm.value['assumedDutyOn'].format('YYYY-MM-DD') : this.personalDetailsForm.value['assumedDutyOn'];
+            this.employeeService.addPersonalDetails(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.goForward();
             });
@@ -609,10 +611,13 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                this.jobProfileSalaryPlacementForm.value['currentAppointment'] = this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD');
             }
-            this.employeeService.addJobProfile(this.employeeId, this.jobProfileSalaryPlacementForm.value).subscribe(data => {
+            let params = {
+                ...this.jobProfileSalaryPlacementForm.value
+            };
+            params['currentAppointment'] = (this.jobProfileSalaryPlacementForm.value['currentAppointment'] && typeof this.jobProfileSalaryPlacementForm.value['currentAppointment'] === 'object') ? this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD') : this.jobProfileSalaryPlacementForm.value['currentAppointment'];
+            // console.log('params', params);
+            this.employeeService.addJobProfile(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.goForward();
             });
@@ -630,10 +635,11 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                // this.jobProfileSalaryPlacementForm.value['currentAppointment'] = this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD');
             }
-            this.employeeService.addContactDetails(this.employeeId, this.citizenshipContactDetailsForm.value).subscribe(data => {
+            let params = {
+                ...this.citizenshipContactDetailsForm.value
+            };
+            this.employeeService.addContactDetails(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.goForward();
             });
@@ -650,14 +656,15 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                this.progressionForm.value['lastIncrement'] = this.progressionForm.value['lastIncrement'].format('YYYY-MM-DD');
-                this.progressionForm.value['confirmationDueDate'] = this.progressionForm.value['confirmationDueDate'].format('YYYY-MM-DD');
-                this.progressionForm.value['lastPromoted'] = this.progressionForm.value['lastPromoted'].format('YYYY-MM-DD');
-                this.progressionForm.value['expectedExitDate'] = this.progressionForm.value['expectedExitDate'].format('YYYY-MM-DD');
-                // this.progressionForm.value['dateStarted'] = this.progressionForm.value['dateStarted'] ? this.progressionForm.value['dateStarted'].format('YYYY-MM-DD') : '';
             }
-            this.employeeService.addProgression(this.employeeId, this.progressionForm.value).subscribe(data => {
+            let params = {
+                ...this.progressionForm.value
+            };
+            params['lastIncrement'] = (this.progressionForm.value['lastIncrement'] && typeof this.progressionForm.value['lastIncrement'] === 'object') ? this.progressionForm.value['lastIncrement'].format('YYYY-MM-DD') : this.progressionForm.value['lastIncrement'];
+            params['confirmationDueDate'] = (this.progressionForm.value['confirmationDueDate'] && typeof this.progressionForm.value['confirmationDueDate'] === 'object') ? this.progressionForm.value['confirmationDueDate'].format('YYYY-MM-DD') : this.progressionForm.value['confirmationDueDate'];
+            params['lastPromoted'] = (this.progressionForm.value['lastPromoted'] && typeof this.progressionForm.value['lastPromoted'] === 'object') ? this.progressionForm.value['lastPromoted'].format('YYYY-MM-DD') : this.progressionForm.value['lastPromoted'];
+            params['expectedExitDate'] = (this.progressionForm.value['expectedExitDate'] && typeof this.progressionForm.value['expectedExitDate'] === 'object') ? this.progressionForm.value['expectedExitDate'].format('YYYY-MM-DD') : this.progressionForm.value['expectedExitDate'];
+            this.employeeService.addProgression(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.goForward();
             });
@@ -693,11 +700,13 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                this.idNosForm.value['issuedDate'] = this.idNosForm.value['issuedDate'].format('YYYY-MM-DD');
-                this.idNosForm.value['expiryDate'] = this.idNosForm.value['expiryDate'].format('YYYY-MM-DD');
             }
-            this.employeeService.addIdNos(this.employeeId, this.idNosForm.value).subscribe(data => {
+            let params = {
+              ...this.idNosForm.value
+            };
+            params['issuedDate'] = this.idNosForm.value['issuedDate'] && this.idNosForm.value['issuedDate'].format('YYYY-MM-DD') ? this.idNosForm.value['issuedDate'].format('YYYY-MM-DD') : this.idNosForm.value['issuedDate'];
+            params['expiryDate'] = this.idNosForm.value['expiryDate'] && this.idNosForm.value['expiryDate'].format('YYYY-MM-DD') ? this.idNosForm.value['expiryDate'].format('YYYY-MM-DD') : this.idNosForm.value['expiryDate'];
+            this.employeeService.addIdNos(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.router.navigateByUrl(`/dashboard/employees`);
             });
