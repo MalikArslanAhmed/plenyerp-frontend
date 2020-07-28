@@ -84,6 +84,10 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     }
 
     addItem(itemId, description, unitOfMeasures, quantity, unitCost) {
+        if (!this.taxes || this.taxes.length === 0) {
+            this.alertService.showErrors('Please add and save applicable taxes before adding item');
+            return;
+        }
         let repeatItemFound = false;
         if (this.itemsArr && this.itemsArr.length > 0) {
             this.itemsArr.forEach(item => {

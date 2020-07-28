@@ -39,7 +39,8 @@ export class CategoriesListSelectComponent implements OnInit {
             id: node.id,
             isChildEnabled: node.isChildEnabled,
             parentId: node.parentId,
-            isActive: node.isActive
+            isActive: node.isActive,
+            children: node.children
         };
     };
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);

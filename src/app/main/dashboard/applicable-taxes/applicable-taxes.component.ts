@@ -32,6 +32,7 @@ export class ApplicableTaxesComponent implements OnInit {
         } else {
             this.dialogTitle = 'Edit Applicable Taxes - ' + this.itemId;
             this.updateData = _data;
+            // console.log('this.updateData', this.updateData);
         }
     }
 
@@ -60,7 +61,7 @@ export class ApplicableTaxesComponent implements OnInit {
                         if (tax) {
                             this.taxArray.forEach(taxObj => {
                                 if (parseInt(taxObj) === parseInt(tax.id)) {
-                                    totalTaxes.push(parseInt(tax.tax) * parseInt(this._data.quantity));
+                                    totalTaxes.push((parseInt(this._data.grossAmount) * (parseInt(tax.tax) / 100)));
                                 }
                             })
                         }
@@ -121,7 +122,6 @@ export class ApplicableTaxesComponent implements OnInit {
                         }
                     });
                 }
-
             });
         }
     }
