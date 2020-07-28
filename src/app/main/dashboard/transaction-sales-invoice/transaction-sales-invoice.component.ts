@@ -158,10 +158,11 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             data: {
                 action: 'EDIT',
                 id: index,
-                itemId: item.id,
+                itemId: item.itemId,
                 taxes: item.taxes,
                 totalTaxes: item.totalTaxes,
                 grossAmount: item.unitSellingPrice * item.quantity,
+                quanity: item.quantity
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {

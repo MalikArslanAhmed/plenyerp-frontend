@@ -321,8 +321,8 @@ export class EmployeeAddComponent implements OnInit {
             this.chooseState(this.selectedEmployee.employeeContactDetails.regionId);
         }
 
-        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.lgaId) {
-            this.chooseLga(this.selectedEmployee.employeeContactDetails.lgaId);
+        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.stateId) {
+            this.chooseLga(this.selectedEmployee.employeeContactDetails.stateId);
         }
 
         if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.otherCountryId) {
@@ -754,11 +754,15 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     chooseLga(event) {
-        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive': 1, orderby: 'name'}).subscribe(data => {
+        this.structureService.getLga({
+            'page': -1,
+            'stateId': event,
+            'isActive': 1,
+            orderby: 'name'
+        }).subscribe(data => {
             this.lgas = data.items;
         });
     }
-
 
     chooseRegionOther(event) {
         this.structureService.getRegions({

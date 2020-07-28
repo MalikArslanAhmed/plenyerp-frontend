@@ -23,11 +23,9 @@ export class ApplicableTaxesComponent implements OnInit {
     constructor(public matDialogRef: MatDialogRef<ApplicableTaxesComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder, private transactionService: TransactionService) {
-        console.log('_data', _data);
         this.itemId = _data.itemId;
         this.grossAmount = _data.grossAmount;
         this.taxArray = _data.taxArray;
-        console.log('tax', this.taxArray);
         if (_data.action === 'CREATE') {
             this.updateData = undefined;
             this.dialogTitle = 'Add Applicable Taxes - ' + this.itemId;
@@ -51,7 +49,6 @@ export class ApplicableTaxesComponent implements OnInit {
 
     getTaxes() {
         this.transactionService.getTaxes({'page': -1}).subscribe(data => {
-            console.log('this.updateData', this.updateData);
             if (this.updateData) {
                 this.taxes = this.updateData.taxes;
                 this.totalTaxes = this.updateData.totalTaxes;
@@ -63,17 +60,16 @@ export class ApplicableTaxesComponent implements OnInit {
                         if (tax) {
                             this.taxArray.forEach(taxObj => {
                                 if (parseInt(taxObj) === parseInt(tax.id)) {
-                                    totalTaxes.push(tax.tax);
+                                    totalTaxes.push(parseInt(tax.tax) * parseInt(this._data.quantity));
                                 }
                             })
                         }
                     });
-                    console.log('abcd', totalTaxes);
+                    this.totalTaxes = totalTaxes.reduce((a, b) => a + b, 0);
                 }
             }
             this.checkedItemsId();
         });
-        console.log(this.updateData)
     }
 
     adjustTotal(index, event) {
@@ -85,7 +81,6 @@ export class ApplicableTaxesComponent implements OnInit {
                     checkedArr.push(((tax.tax) * this.grossAmount) / 100);
                 }
             });
-            console.log('checkedArr', checkedArr);
             if (checkedArr && checkedArr.length > 0) {
                 this.totalTaxes = checkedArr.reduce((a, b) => a + b, 0);
             } else if (checkedArr && checkedArr.length === 0) {
@@ -104,7 +99,6 @@ export class ApplicableTaxesComponent implements OnInit {
                     checkedArr.push(((tax.tax) * this.grossAmount) / 100);
                 }
             });
-            console.log('checkedArr1', checkedArr);
             if (checkedArr && checkedArr.length > 0) {
                 this.totalTaxes = checkedArr.reduce((a, b) => a + b, 0);
             } else if (checkedArr && checkedArr.length === 0) {
@@ -118,10 +112,8 @@ export class ApplicableTaxesComponent implements OnInit {
     }
 
     checkedItemsId() {
-
         if (this.taxArray && this.taxArray.length) {
             this.taxArray.map(val => {
-                // console.log(val);
                 if (this.taxes && this.taxes.length) {
                     this.taxes.forEach(v => {
                         if (v.id === val) {
@@ -131,7 +123,6 @@ export class ApplicableTaxesComponent implements OnInit {
                 }
 
             });
-            // console.log(this.taxes);
         }
     }
 }
