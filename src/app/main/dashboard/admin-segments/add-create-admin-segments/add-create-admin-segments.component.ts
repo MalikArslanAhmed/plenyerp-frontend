@@ -35,7 +35,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
             }
             this.segmentCode += '-';
         });
-        this.segmentCode = this.segmentCode.replace(/-+$/, '');
+        this.segmentCode = this.segmentCode.replace(/-+$/, '').replace(/^-/, '');
         this.dialogTitle = this.action === 'EDIT' ? 'Update Segment' : 'Add Segment';
     }
 
@@ -81,7 +81,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
                 name: name,
                 characterCount: {value: characterCount, disabled: isEdit},
                 individualCode: {value: nextIndividualCode, disabled: true},
-                parentCode: {value: this.segment.combinedCode, disabled: true},
+                parentCode: {value: this.segment.combinedCode.replace(/^-/, ''), disabled: true},
                 isActive: {value: isActive, disabled: isEdit}
             };
         } else {
@@ -90,7 +90,7 @@ export class AddCreateAdminSegmentsComponent implements OnInit {
                 characterCount: {value: '', disabled: isEdit},
                 individualCode: [nextIndividualCode],
                 isActive: {value: true, disabled: isEdit},
-                parentCode: {value: this.segment.combinedCode, disabled: true},
+                parentCode: {value: this.segment.combinedCode.replace(/^-/, ''), disabled: true},
             };
         }
         this.segmentForm = this.fb.group(controlConfig);
