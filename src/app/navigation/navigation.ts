@@ -52,7 +52,7 @@ export const navigation: FuseNavigation[] = [
                 icon: 'assignment_ind',
                 url: '/dashboard/managers'
             },
-            {
+            /*{
                 id: 'training-management',
                 title: 'Training Management',
                 roles: [AppConstants.ROLE_ID_HR],
@@ -69,7 +69,7 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'settings_applications',
                 url: '/apps/calendar'
-            }
+            }*/
         ]
     },
     {

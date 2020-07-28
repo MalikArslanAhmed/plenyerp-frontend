@@ -84,6 +84,10 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     }
 
     addItem(itemId, description, unitOfMeasures, quantity, unitCost) {
+        if (!this.taxes || this.taxes.length === 0) {
+            this.alertService.showErrors('Please add and save applicable taxes before adding item');
+            return;
+        }
         let repeatItemFound = false;
         if (this.itemsArr && this.itemsArr.length > 0) {
             this.itemsArr.forEach(item => {
@@ -114,7 +118,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 totalTaxes: this.totalTaxes
             }); 
 
-            console.log(this.itemsArr)
+            // console.log(this.itemsArr)
             this.srvPurchaseInvoiceForm.patchValue({
                 itemId: '',
                 description: '',
@@ -151,6 +155,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 itemId: this.srvPurchaseInvoiceForm.value.itemId,
                 taxArray: this.taxArray,
                 grossAmount: this.srvPurchaseInvoiceForm.value.unitCost * this.srvPurchaseInvoiceForm.value.quantity,
+                quantity: this.srvPurchaseInvoiceForm.value.quantity
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -168,10 +173,11 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             data: {
                 action: 'EDIT',
                 id: index,
-                itemId: item.id,
+                itemId: item.itemId,
                 taxes: item.taxes,
                 totalTaxes: item.totalTaxes,
                 grossAmount: item.unitCost * item.quantity,
+                quantity: item.quantity
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -283,7 +289,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         this.srvPurchaseInvoiceForm.value['supplierAddress'] = this.srvPurchaseInvoiceForm['controls']['supplierAddress'].value;
         this.srvPurchaseInvoiceForm.value['companyType'] = 'SUPPLIER';
         this.srvPurchaseInvoiceForm.value['type'] = 'IN';
-        console.log('this.srvPurchaseInvoiceForm', this.srvPurchaseInvoiceForm.value);
+        // console.log('this.srvPurchaseInvoiceForm', this.srvPurchaseInvoiceForm.value);
 
         this.isSubmitted = true;
         if (!this.srvPurchaseInvoiceForm.valid) {
@@ -307,7 +313,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             if (!response) {
                 return;
             }
-            console.log(response);
+            // console.log(response);
             this.companies = [{
                 'name': response.name,
                 'id': response.id,

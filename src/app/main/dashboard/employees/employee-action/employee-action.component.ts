@@ -20,7 +20,7 @@ import {EmployeeSchoolAttended} from '../employee-other-details/employee-school-
 import {EmployeeBankDetailsComponent} from './employee-bank-details/employee-bank-details.component';
 import {EmployeeBackground} from '../employee-other-details/employee-background/employee-background';
 import {PageEvent} from '@angular/material/paginator';
-import { EmployeeProgressionHistoryComponent } from './employee-progression-history/employee-progression-history.component';
+import {EmployeeProgressionHistoryComponent} from './employee-progression-history/employee-progression-history.component';
 
 @Component({
     selector: 'app-employee-action',
@@ -139,7 +139,7 @@ export class EmployeeActionComponent implements OnInit {
     };
     pageEvent: PageEvent;
     departmentAllIds = [];
-    filters ={};
+    filters = {};
 
     constructor(private employeesService: EmployeeService,
                 private _matDialog: MatDialog,
@@ -163,7 +163,7 @@ export class EmployeeActionComponent implements OnInit {
         });
     }
 
-    addSearchFilter(){
+    addSearchFilter() {
         this.filters['search'] = this.employeeFilterForm.value.search;
         this.getEmployees(this.filters);
     }
@@ -182,10 +182,10 @@ export class EmployeeActionComponent implements OnInit {
         } else {
             this.nextStatus = '';
         }
-        if (this.filters['departmentIds']){
+        if (this.filters['departmentIds']) {
             params['departmentIds'] = this.filters['departmentIds'];
         }
-        if (this.filters['search']){
+        if (this.filters['search']) {
             params['search'] = this.filters['search'];
         }
         this.employeesService.getEmployees(params).subscribe(data => {
@@ -216,7 +216,7 @@ export class EmployeeActionComponent implements OnInit {
         });
         this.getEmployees({});
     }
- 
+
     addBankDetails(previewEmp) {
         this.dialogRef = this._matDialog.open(EmployeeBankDetailsComponent, {
             panelClass: 'bank-details-dialog',
@@ -230,8 +230,7 @@ export class EmployeeActionComponent implements OnInit {
         });
     }
 
-    employeeProgression(previewEmp)
-    {
+    employeeProgression(previewEmp) {
         // console.log(previewEmp);
         this.dialogRef = this._matDialog.open(EmployeeProgressionHistoryComponent, {
             panelClass: 'employee-Progression-history-details-dialog',
@@ -244,6 +243,7 @@ export class EmployeeActionComponent implements OnInit {
             // this.getAddressTypeList.getAddressTypeList();
         });
     }
+
     editEmployee(employee) {
         console.log(3);
         this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);
@@ -341,12 +341,12 @@ export class EmployeeActionComponent implements OnInit {
         });
     }
 
-    findAllIds(data){
+    findAllIds(data) {
         data.children.forEach(item => {
-            if(item.children && item.children.length){
+            if (item.children && item.children.length) {
                 this.departmentAllIds.push(item.id);
                 this.findAllIds(item);
-            }else{
+            } else {
                 this.departmentAllIds.push(item.id);
                 return;
             }

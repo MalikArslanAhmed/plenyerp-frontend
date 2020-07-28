@@ -32,6 +32,7 @@ export class ApplicableTaxesComponent implements OnInit {
         } else {
             this.dialogTitle = 'Edit Applicable Taxes - ' + this.itemId;
             this.updateData = _data;
+            // console.log('this.updateData', this.updateData);
         }
     }
 
@@ -54,10 +55,22 @@ export class ApplicableTaxesComponent implements OnInit {
                 this.totalTaxes = this.updateData.totalTaxes;
             } else {
                 this.taxes = data.items;
+                if (this.taxes && this.taxes.length > 0) {
+                    let totalTaxes = [];
+                    this.taxes.forEach(tax => {
+                        if (tax) {
+                            this.taxArray.forEach(taxObj => {
+                                if (parseInt(taxObj) === parseInt(tax.id)) {
+                                    totalTaxes.push((parseInt(this._data.grossAmount) * (parseInt(tax.tax) / 100)));
+                                }
+                            })
+                        }
+                    });
+                    this.totalTaxes = totalTaxes.reduce((a, b) => a + b, 0);
+                }
             }
             this.checkedItemsId();
         });
-        console.log(this.updateData)
     }
 
     adjustTotal(index, event) {
@@ -100,20 +113,16 @@ export class ApplicableTaxesComponent implements OnInit {
     }
 
     checkedItemsId() {
-
         if (this.taxArray && this.taxArray.length) {
             this.taxArray.map(val => {
-                // console.log(val);
-                if (this.taxes && this.taxes.length){
+                if (this.taxes && this.taxes.length) {
                     this.taxes.forEach(v => {
-                        if (v.id === val){
+                        if (v.id === val) {
                             v['checked'] = val;
                         }
                     });
                 }
-
             });
-            // console.log(this.taxes);
         }
     }
 }

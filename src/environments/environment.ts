@@ -12,7 +12,7 @@ export const environment = {
     staging: false,
     // appUrl: 'http://appUrlpi.dss.luezoid.com/',
     appUrl: 'http://api.erp.valuescale.co.in/',
-    // appUrl: 'http:///',
+    // appUrl: 'http://localhost:8000/',
 };
 
 /*

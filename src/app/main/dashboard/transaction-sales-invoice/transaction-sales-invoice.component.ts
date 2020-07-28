@@ -69,6 +69,10 @@ export class TransactionSalesInvoiceComponent implements OnInit {
     }
 
     addItem(itemId, description, unitOfMeasures, quantity, unitSellingPrice) {
+        if (!this.taxes || this.taxes.length === 0) {
+            this.alertService.showErrors('Please add and save applicable taxes before adding item');
+            return;
+        }
         let repeatItemFound = false;
         if (this.itemsArr && this.itemsArr.length > 0) {
             this.itemsArr.forEach(item => {
@@ -158,10 +162,11 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             data: {
                 action: 'EDIT',
                 id: index,
-                itemId: item.id,
+                itemId: item.itemId,
                 taxes: item.taxes,
                 totalTaxes: item.totalTaxes,
-                grossAmount: item.unitSellingPrice * item.quantity,
+                grossAmount: parseInt(item.sellingPrice) * parseInt(item.quantity),
+                quantity: item.quantity
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -173,6 +178,29 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             this.setTotals();
         });
     }
+
+    /*editTaxes(index, item) {
+        this.dialogRef = this._matDialog.open(ApplicableTaxesComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {
+                action: 'EDIT',
+                id: index,
+                itemId: item.itemId,
+                taxes: item.taxes,
+                totalTaxes: item.totalTaxes,
+                grossAmount: item.unitSellingPrice * item.quantity,
+                quanity: item.quantity
+            }
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.itemsArr[index].taxes = response.taxes;
+            this.itemsArr[index].totalTaxes = response.totalTaxes;
+            this.setTotals();
+        });
+    }*/
 
     getStores() {
         this.stores = [];
@@ -287,7 +315,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         this.salesInvoiceForm.value['supplierAddress'] = this.salesInvoiceForm['controls']['supplierAddress'].value;
         this.salesInvoiceForm.value['companyType'] = 'CUSTOMER';
         this.salesInvoiceForm.value['type'] = 'OUT';
-        console.log('this.salesInvoiceForm', this.salesInvoiceForm.value);
+        // console.log('this.salesInvoiceForm', this.salesInvoiceForm.value);
 
         this.isSubmitted = true;
         if (!this.salesInvoiceForm.valid) {

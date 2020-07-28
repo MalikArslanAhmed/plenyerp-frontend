@@ -13,6 +13,8 @@ import {WorkLocationsListSelectComponent} from '../work-locations-list-select/wo
 import {EmployeeService} from '../../../../shared/services/employee.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatStepper} from '@angular/material/stepper';
+import {AlertService} from "../../../../shared/services/alert.service";
+import {CompaniesService} from "../../../../shared/services/companies.service";
 
 @Component({
     selector: 'app-employee-add',
@@ -34,7 +36,6 @@ export class EmployeeAddComponent implements OnInit {
     religions;
     typeOfAppointments;
     countryCodes;
-
     designations = [];
     countries = [];
     countriesOther = [];
@@ -56,6 +57,8 @@ export class EmployeeAddComponent implements OnInit {
     selectedEmployeeId: any;
     selectedEmployee: any;
     pensionCheck: boolean;
+    jobProfileSalaryPlacementDisable = false;
+    companies = [];
 
     constructor(private structureService: StructureService,
                 private _fuseSidebarService: FuseSidebarService,
@@ -65,7 +68,9 @@ export class EmployeeAddComponent implements OnInit {
                 private fb: FormBuilder,
                 private employeeService: EmployeeService,
                 private router: Router,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                private alertService: AlertService,
+                private companiesService: CompaniesService) {
     }
 
     ngOnInit(): void {
@@ -79,6 +84,7 @@ export class EmployeeAddComponent implements OnInit {
         this.getCountryCode();
         this.getReligions();
         this.getMaritialStatus();
+        this.getCompaniesForPfa();
     }
 
     pensionChecked(data) {
@@ -99,10 +105,30 @@ export class EmployeeAddComponent implements OnInit {
         });
     }
 
+    getCompaniesForPfa() {
+        this.companies = [];
+        const params = {
+            'isActive': 1,
+            'isPfa': 1
+        };
+        this.companiesService.getCompaniesList(params).subscribe(data => {
+            this.companies = data.items;
+            /*this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            if (this.companiesList && this.companiesList.length > 0) {
+                let i = 1;
+                this.companiesList.forEach(company => {
+                    company['sno'] = i;
+                    i++;
+                });
+            }*/
+        });
+    }
+
     getCountryCode() {
         this.employeeService.getCountryCode().subscribe((data) => {
             this.countryCodes = data.items;
-            console.log('country codes ----->', this.countryCodes);
+            // console.log('country codes ----->', this.countryCodes);
         });
     }
 
@@ -212,7 +238,7 @@ export class EmployeeAddComponent implements OnInit {
     getEmployeeById() {
         this.employeeService.getEmployees({'page': -1, 'id': this.selectedEmployeeId}).subscribe(data => {
             this.selectedEmployee = data.items[0];
-            if (this.selectedEmployeeId) {
+            if (this.selectedEmployeeId && this.selectedEmployee) {
                 this.patchEmployeeForm();
                 this.patchPersonalDetailsForm();
                 this.patchJobProfileSalaryPlacementForm();
@@ -236,93 +262,77 @@ export class EmployeeAddComponent implements OnInit {
 
     patchPersonalDetailsForm() {
         this.personalDetailsForm.patchValue({
-            'dateOfBirth': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.dateOfBirth ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.dateOfBirth : '',
-            'maritalStatus': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.maritalStatus ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.maritalStatus : '',
-            'gender': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.gender ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.gender : '',
-            'religion': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.religion ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.religion : '',
-            'countryCode': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.countryCode ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.countryCode : '',
-            'phone': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.phone ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.phone : '',
-            'email': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.email ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.email : '',
-            'appointedOn': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.appointedOn ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.appointedOn : '',
-            'assumedDutyOn': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.assumedDutyOn ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.assumedDutyOn : '',
-            'typeOfAppointment': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.typeOfAppointment ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.typeOfAppointment : '',
-            'isPermanentStaff': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.isPermanentStaff ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.isPermanentStaff : ''
+            'dateOfBirth': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.dateOfBirth ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.dateOfBirth : '',
+            'maritalStatus': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.maritalStatus ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.maritalStatus : '',
+            'gender': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.gender ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.gender : '',
+            'religion': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.religion ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.religion : '',
+            'countryCode': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.countryCode ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.countryCode : '',
+            'phone': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.phone ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.phone : '',
+            'email': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.email ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.email : '',
+            'appointedOn': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.appointedOn ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.appointedOn : '',
+            'assumedDutyOn': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.assumedDutyOn ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.assumedDutyOn : '',
+            'typeOfAppointment': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.typeOfAppointment ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.typeOfAppointment : '',
+            'isPermanentStaff': this.selectedEmployee && this.selectedEmployee.employeePersonalDetails && this.selectedEmployee.employeePersonalDetails.isPermanentStaff ? this.selectedEmployee && this.selectedEmployee.employeePersonalDetails.isPermanentStaff : false
         });
     }
 
     patchJobProfileSalaryPlacementForm() {
         this.jobPositions = [{
-            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPosition.name ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPosition.name : '',
-            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId : '',
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPosition.name ? this.selectedEmployee.employeeJobProfiles.jobPosition.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId ? this.selectedEmployee.employeeJobProfiles.jobPositionId : '',
         }];
 
         this.departments = [{
-            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.department.name ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.department.name : '',
-            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId : '',
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.department.name ? this.selectedEmployee.employeeJobProfiles.department.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId ? this.selectedEmployee.employeeJobProfiles.departmentId : '',
         }];
 
         this.workLocations = [{
-            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name : '',
-            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId : '',
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name ? this.selectedEmployee.employeeJobProfiles.workLocation.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles.workLocationId : '',
         }];
 
-        this.salaryScaleChange(this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId, 'edit');
+        this.salaryScales = [{
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.empSalaryScale.name ? this.selectedEmployee.employeeJobProfiles.empSalaryScale.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId ? this.selectedEmployee.employeeJobProfiles.salaryScaleId : '',
+        }];
 
-        this.gradeScaleChange(this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId);
+        this.gradeLevels = [{
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.empGradeLevel.name ? this.selectedEmployee.employeeJobProfiles.empGradeLevel.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId ? this.selectedEmployee.employeeJobProfiles.gradeLevelId : '',
+        }];
+
+        this.gradeLevelSteps = [{
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.empGradeLevelStep.name ? this.selectedEmployee.employeeJobProfiles.empGradeLevelStep.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId ? this.selectedEmployee.employeeJobProfiles.gradeLevelStepId : '',
+        }];
+
+        // this.salaryScaleChange(this.selectedEmployee.employeeJobProfiles.salaryScaleId, 'edit');
 
         this.jobProfileSalaryPlacementForm.patchValue({
-            'currentAppointment': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.currentAppointment ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.currentAppointment : '',
-            'jobPositionId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId : '',
-            'departmentId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId : '',
-            'workLocationId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId : '',
-            'designationId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.designationId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.designationId : '',
-            'salaryScaleId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId : '',
-            'gradeLevelId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId : '',
-            'gradeLevelStepId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId : ''
+            'currentAppointment': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.currentAppointment ? this.selectedEmployee.employeeJobProfiles.currentAppointment : '',
+            'jobPositionId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId ? this.selectedEmployee.employeeJobProfiles.jobPositionId : '',
+            'departmentId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId ? this.selectedEmployee.employeeJobProfiles.departmentId : '',
+            'workLocationId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles.workLocationId : '',
+            'designationId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.designationId ? this.selectedEmployee.employeeJobProfiles.designationId : '',
+            'salaryScaleId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId ? this.selectedEmployee.employeeJobProfiles.salaryScaleId : '',
+            'gradeLevelId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId ? this.selectedEmployee.employeeJobProfiles.gradeLevelId : '',
+            'gradeLevelStepId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId ? this.selectedEmployee.employeeJobProfiles.gradeLevelStepId : ''
         });
-
-
-        // if (this.salaryScales && this.salaryScales.length > 0) {
-        //     let selectedEmployee = this.selectedEmployee;
-        //     let salaryScales = this.salaryScales.find(function (salaryScale) {
-        //         return (salaryScale.id === selectedEmployee.employeeJobProfiles.jobPosition.salaryScaleId);
-        //     });
-        //     this.salaryScales = [{
-        //         'id': salaryScales.id,
-        //         'name': salaryScales.name
-        //     }];
-        //     this.jobProfileSalaryPlacementForm.patchValue({
-        //         'salaryScaleId': salaryScales.id
-        //     });
-        //     if (salaryScales) {
-        //         if (salaryScales['gradeLevels'] && salaryScales['gradeLevels'].length > 0) {
-        //             let gradeLevels = salaryScales['gradeLevels'].find(function (gradeLevel) {
-        //                 return (gradeLevel.id === selectedEmployee.employeeJobProfiles.jobPosition.salaryScaleId);
-        //             });
-        //             this.gradeLevels = [{
-        //                 'id': gradeLevels.id ? gradeLevels.id : '',
-        //                 'name': gradeLevels.name ? gradeLevels.name : ''
-        //             }];
-        //             this.jobProfileSalaryPlacementForm.patchValue({
-        //                 'gradeLevelId': gradeLevels.id ? gradeLevels.id : ''
-        //             });
-
-        //             if (gradeLevels && gradeLevels['gradeLevelSteps'].length > 0) {
-        //                 let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function (gradeLevelStep) {
-        //                     return (gradeLevelStep.id === selectedEmployee.employeeJobProfiles.jobPosition.gradeLevelStepId);
-        //                 });
-
-        //                this.gradeLevelSteps = [{
-        //                    'id': gradeLevelSteps.id ? gradeLevelSteps.id : '',
-        //                    'name': gradeLevelSteps.name ? gradeLevelSteps.name : ''
-        //                }];
-        //                 this.jobProfileSalaryPlacementForm.patchValue({
-        //                     'gradeLevelStepId': gradeLevelSteps.id
-        //                 });
-        //             }
-        //         }
-        //     }
-        // }
+        if ((this.jobProfileSalaryPlacementForm.value['currentAppointment'] && this.jobProfileSalaryPlacementForm.value['currentAppointment'] !== '') &&
+            (this.jobProfileSalaryPlacementForm.value['jobPositionId'] && this.jobProfileSalaryPlacementForm.value['jobPositionId'] !== '') &&
+            (this.jobProfileSalaryPlacementForm.value['departmentId'] && this.jobProfileSalaryPlacementForm.value['departmentId'] !== '')) {
+            this.jobProfileSalaryPlacementForm.get('currentAppointment').disable();
+            this.jobProfileSalaryPlacementForm.get('jobPositionId').disable();
+            this.jobProfileSalaryPlacementForm.get('departmentId').disable();
+            this.jobProfileSalaryPlacementForm.get('workLocationId').disable();
+            this.jobProfileSalaryPlacementForm.get('designationId').disable();
+            this.jobProfileSalaryPlacementForm.get('salaryScaleId').disable();
+            this.jobProfileSalaryPlacementForm.get('gradeLevelId').disable();
+            this.jobProfileSalaryPlacementForm.get('gradeLevelStepId').disable();
+            this.jobProfileSalaryPlacementDisable = true;
+        }
+        // console.log('this.jobProfileSalaryPlacementForm', this.jobProfileSalaryPlacementForm.value);
     }
 
     patchCitizenshipContactDetailsForm() {
@@ -334,8 +344,8 @@ export class EmployeeAddComponent implements OnInit {
             this.chooseState(this.selectedEmployee.employeeContactDetails.regionId);
         }
 
-        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.lgaId) {
-            this.chooseLga(this.selectedEmployee.employeeContactDetails.lgaId);
+        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.stateId) {
+            this.chooseLga(this.selectedEmployee.employeeContactDetails.stateId);
         }
 
         if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.otherCountryId) {
@@ -387,7 +397,7 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     patchIdNosForm() {
-        console.log("12334",this.selectedEmployee);
+        // console.log("12334",this.selectedEmployee);
         this.idNosForm.patchValue({
             'nhfNumber': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.nhfNumber ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.nhfNumber : '',
             'tinNumber': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.tinNumber ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.tinNumber : '',
@@ -402,31 +412,31 @@ export class EmployeeAddComponent implements OnInit {
             'issuedDate': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedDate ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.issuedDate : '',
             'workPermitNumber': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.workPermitNumber : '',
             'expiryDate': this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate ? this.selectedEmployee.employeeInternationalPassports && this.selectedEmployee.employeeInternationalPassports.expiryDate : '',
-           // 'isForeignEmployee': this.selectedEmployee.employeeIdNos.isForeignEmployee
-            'isForeignEmployee': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee : '',
+            // 'isForeignEmployee': this.selectedEmployee.employeeIdNos.isForeignEmployee
+            'isForeignEmployee': this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee ? this.selectedEmployee.employeeIdNos && this.selectedEmployee.employeeIdNos.isForeignEmployee : false,
         });
     }
 
     getCountries() {
-        this.structureService.getCountries({'page': -1, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
+        this.structureService.getCountries({'page': -1, 'isActive': 1, orderby: 'name'}).subscribe(data => {
             this.countries = data.items;
         });
     }
 
     getCountriesOther() {
-        this.structureService.getCountries({'page': -1 ,'isActive' : 1,orderby: 'name'}).subscribe(data => {
+        this.structureService.getCountries({'page': -1, 'isActive': 1, orderby: 'name'}).subscribe(data => {
             this.countriesOther = data.items;
         });
-    } 
+    }
 
     jobPositionListSelect() {
         this.dialogRef = this._matDialog.open(JobPositionsListSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            console.log('response job---->', response);
+            /*console.log('response job---->', response);
             console.log('salary scale---->', this.salaryScales);
-            console.log('gradelevels---->', this.gradeLevels);
+            console.log('gradelevels---->', this.gradeLevels);*/
             if (!response) {
                 return;
             }
@@ -439,11 +449,11 @@ export class EmployeeAddComponent implements OnInit {
                 disabled: true
             });
             if (this.salaryScales && this.salaryScales.length > 0) {
-                let salaryScales = this.salaryScales.find(function(salaryScale) {
+                let salaryScales = this.salaryScales.find(function (salaryScale) {
                     return (salaryScale.id === response.salaryScaleId);
                 });
 
-                console.log('let salary scale---->', salaryScales);
+                // console.log('let salary scale---->', salaryScales);
 
                 // this.salaryScales = [{
                 //     'id': salaryScales.id,
@@ -455,13 +465,14 @@ export class EmployeeAddComponent implements OnInit {
                 });
                 if (salaryScales) {
                     if (salaryScales['gradeLevels'] && salaryScales['gradeLevels'].length > 0) {
+                        // console.log('salaryScales', salaryScales);
                         this.gradeLevels = salaryScales['gradeLevels'];
-                        let gradeLevels = salaryScales['gradeLevels'].find(function(gradeLevel) {
+                        let gradeLevels = salaryScales['gradeLevels'].find(function (gradeLevel) {
                             return (gradeLevel.id === response.gradeLevelId);
                         });
 
-                        console.log('this gradelevels---->', this.gradeLevels);
-                        console.log('let gradelevels---->', gradeLevels);
+                        // console.log('this gradelevels---->', this.gradeLevels);
+                        // console.log('let gradelevels---->', gradeLevels);
                         // this.gradeLevels = [{
                         //     'id': gradeLevels.id,
                         //     'name': gradeLevels.name
@@ -472,12 +483,12 @@ export class EmployeeAddComponent implements OnInit {
 
                         if (gradeLevels && gradeLevels['gradeLevelSteps'].length > 0) {
                             this.gradeLevelSteps = gradeLevels['gradeLevelSteps'];
-                            let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function(gradeLevelStep) {
+                            let gradeLevelSteps = gradeLevels['gradeLevelSteps'].find(function (gradeLevelStep) {
                                 return (gradeLevelStep.id === response.gradeLevelStepId);
                             });
 
-                            console.log('this gradelevelsteps---->', this.gradeLevelSteps);
-                            console.log('let gradelevelsteps---->', gradeLevelSteps);
+                            // console.log('this gradelevelsteps---->', this.gradeLevelSteps);
+                            // console.log('let gradelevelsteps---->', gradeLevelSteps);
 
                             // this.gradeLevelSteps = [{
                             //     'id': gradeLevelSteps.id,
@@ -494,10 +505,10 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     salaryScaleChange(data, action?) {
-        let salaryScales = this.salaryScales.find(function(salaryScale) {
+        let salaryScales = this.salaryScales.find(function (salaryScale) {
             return (salaryScale.id === data);
         });
-        this.gradeLevels = salaryScales['gradeLevels'];
+        this.gradeLevels = salaryScales && salaryScales['gradeLevels'] ? salaryScales['gradeLevels'] : [];
 
         if (!action) {
             this.gradeScaleChange();
@@ -506,10 +517,10 @@ export class EmployeeAddComponent implements OnInit {
 
     gradeScaleChange(data?) {
         if (data) {
-            let gradeScales = this.gradeLevels.find(function(gradeLevel) {
+            let gradeScales = this.gradeLevels.find(function (gradeLevel) {
                 return (gradeLevel.id === data);
             });
-            this.gradeLevelSteps = gradeScales['gradeLevelSteps'];
+            this.gradeLevelSteps = gradeScales && gradeScales['gradeLevelSteps'] ? gradeScales['gradeLevelSteps'] : [];
         } else {
             this.gradeLevelSteps = [];
         }
@@ -555,19 +566,19 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     getDesignations() {
-        this.structureService.getDesignations({'page': -1, 'isActive': 1,orderby: 'name'}).subscribe(data => {
+        this.structureService.getDesignations({'page': -1, 'isActive': 1, orderby: 'name'}).subscribe(data => {
             this.designations = data.items;
         });
     }
 
     getSalaryScales() {
-        this.salaryScalesService.getSalaryScales({'page': -1, 'isActive': 1,orderby: 'name'}).subscribe(data => {
+        this.salaryScalesService.getSalaryScales({'page': -1, 'isActive': 1, orderby: 'name'}).subscribe(data => {
             this.salaryScales = data;
         });
     }
 
     saveEmployee() {
-        console.log('this.employeeForm', this.employeeForm.value);
+        // console.log('this.employeeForm', this.employeeForm.value);
         this.isSubmitted = true;
         if (!this.employeeForm.valid) {
             this.isSubmitted = false;
@@ -584,7 +595,6 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     updateEmployee() {
-        console.log('this.employeeForm', this.employeeForm.value);
         this.isSubmitted = true;
         if (!this.employeeForm.valid) {
             this.isSubmitted = false;
@@ -595,12 +605,13 @@ export class EmployeeAddComponent implements OnInit {
             this.employeeService.updateEmployee(this.selectedEmployeeId, this.employeeForm.value).subscribe(data => {
                 this.employeeId = data.id;
                 this.isSubmitted = false;
+                this.goForward();
             });
         }
     }
 
     savePersonalDetail() {
-        console.log('this.personalDetailsForm', this.personalDetailsForm.value);
+        // console.log('this.personalDetailsForm', this.personalDetailsForm.value);
         this.isSubmitted = true;
         if (!this.personalDetailsForm.valid) {
             this.isSubmitted = false;
@@ -610,12 +621,14 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                this.personalDetailsForm.value['dateOfBirth'] = this.personalDetailsForm.value['dateOfBirth'].format('YYYY-MM-DD');
-                this.personalDetailsForm.value['appointedOn'] = this.personalDetailsForm.value['appointedOn'].format('YYYY-MM-DD');
-                this.personalDetailsForm.value['assumedDutyOn'] = this.personalDetailsForm.value['assumedDutyOn'].format('YYYY-MM-DD');
             }
-            this.employeeService.addPersonalDetails(this.employeeId, this.personalDetailsForm.value).subscribe(data => {
+            let params = {
+                ...this.personalDetailsForm.value
+            };
+            params['dateOfBirth'] = this.personalDetailsForm.value['dateOfBirth'] && typeof this.personalDetailsForm.value['dateOfBirth'] === 'object' ? this.personalDetailsForm.value['dateOfBirth'].format('YYYY-MM-DD') : this.personalDetailsForm.value['dateOfBirth'];
+            params['appointedOn'] = this.personalDetailsForm.value['appointedOn'] && typeof this.personalDetailsForm.value['appointedOn'] === 'object' ? this.personalDetailsForm.value['appointedOn'].format('YYYY-MM-DD') : this.personalDetailsForm.value['appointedOn'];
+            params['assumedDutyOn'] = this.personalDetailsForm.value['assumedDutyOn'] && typeof this.personalDetailsForm.value['assumedDutyOn'] === 'object' ? this.personalDetailsForm.value['assumedDutyOn'].format('YYYY-MM-DD') : this.personalDetailsForm.value['assumedDutyOn'];
+            this.employeeService.addPersonalDetails(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.goForward();
             });
@@ -624,7 +637,7 @@ export class EmployeeAddComponent implements OnInit {
 
 
     saveJobProfile() {
-        console.log('this.jobProfileSalaryPlacementForm', this.jobProfileSalaryPlacementForm.value);
+        // console.log('this.jobProfileSalaryPlacementForm', this.jobProfileSalaryPlacementForm.value);
         this.isSubmitted = true;
         if (!this.jobProfileSalaryPlacementForm.valid) {
             this.isSubmitted = false;
@@ -634,10 +647,13 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                this.jobProfileSalaryPlacementForm.value['currentAppointment'] = this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD');
             }
-            this.employeeService.addJobProfile(this.employeeId, this.jobProfileSalaryPlacementForm.value).subscribe(data => {
+            let params = {
+                ...this.jobProfileSalaryPlacementForm.value
+            };
+            params['currentAppointment'] = (this.jobProfileSalaryPlacementForm.value['currentAppointment'] && typeof this.jobProfileSalaryPlacementForm.value['currentAppointment'] === 'object') ? this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD') : this.jobProfileSalaryPlacementForm.value['currentAppointment'];
+            // console.log('params', params);
+            this.employeeService.addJobProfile(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.goForward();
             });
@@ -645,7 +661,7 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     saveContactDetails() {
-        console.log('this.citizenshipContactDetailsForm', this.citizenshipContactDetailsForm.value);
+        // console.log('this.citizenshipContactDetailsForm', this.citizenshipContactDetailsForm.value);
         this.isSubmitted = true;
         if (!this.citizenshipContactDetailsForm.valid) {
             this.isSubmitted = false;
@@ -655,10 +671,11 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                // this.jobProfileSalaryPlacementForm.value['currentAppointment'] = this.jobProfileSalaryPlacementForm.value['currentAppointment'].format('YYYY-MM-DD');
             }
-            this.employeeService.addContactDetails(this.employeeId, this.citizenshipContactDetailsForm.value).subscribe(data => {
+            let params = {
+                ...this.citizenshipContactDetailsForm.value
+            };
+            this.employeeService.addContactDetails(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.goForward();
             });
@@ -675,14 +692,15 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                this.progressionForm.value['lastIncrement'] = this.progressionForm.value['lastIncrement'].format('YYYY-MM-DD');
-                this.progressionForm.value['confirmationDueDate'] = this.progressionForm.value['confirmationDueDate'].format('YYYY-MM-DD');
-                this.progressionForm.value['lastPromoted'] = this.progressionForm.value['lastPromoted'].format('YYYY-MM-DD');
-                this.progressionForm.value['expectedExitDate'] = this.progressionForm.value['expectedExitDate'].format('YYYY-MM-DD');
-                // this.progressionForm.value['dateStarted'] = this.progressionForm.value['dateStarted'] ? this.progressionForm.value['dateStarted'].format('YYYY-MM-DD') : '';
             }
-            this.employeeService.addProgression(this.employeeId, this.progressionForm.value).subscribe(data => {
+            let params = {
+                ...this.progressionForm.value
+            };
+            params['lastIncrement'] = (this.progressionForm.value['lastIncrement'] && typeof this.progressionForm.value['lastIncrement'] === 'object') ? this.progressionForm.value['lastIncrement'].format('YYYY-MM-DD') : this.progressionForm.value['lastIncrement'];
+            params['confirmationDueDate'] = (this.progressionForm.value['confirmationDueDate'] && typeof this.progressionForm.value['confirmationDueDate'] === 'object') ? this.progressionForm.value['confirmationDueDate'].format('YYYY-MM-DD') : this.progressionForm.value['confirmationDueDate'];
+            params['lastPromoted'] = (this.progressionForm.value['lastPromoted'] && typeof this.progressionForm.value['lastPromoted'] === 'object') ? this.progressionForm.value['lastPromoted'].format('YYYY-MM-DD') : this.progressionForm.value['lastPromoted'];
+            params['expectedExitDate'] = (this.progressionForm.value['expectedExitDate'] && typeof this.progressionForm.value['expectedExitDate'] === 'object') ? this.progressionForm.value['expectedExitDate'].format('YYYY-MM-DD') : this.progressionForm.value['expectedExitDate'];
+            this.employeeService.addProgression(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.goForward();
             });
@@ -690,7 +708,25 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     saveIdNos() {
-        console.log('this.idNosForm', this.idNosForm.value);
+        // console.log('this.idNosForm', this.idNosForm.value);
+        if (this.idNosForm.value && this.idNosForm.value['isForeignEmployee']) {
+            if (!this.idNosForm.value['passportNumber'] || this.idNosForm.value['passportNumber'] === '') {
+                this.alertService.showErrors('Passport Number can\'t be blank');
+                return;
+            } else if (!this.idNosForm.value['issuedAt'] || this.idNosForm.value['issuedAt'] === '') {
+                this.alertService.showErrors('Issued at can\'t be blank');
+                return;
+            } else if (!this.idNosForm.value['issuedDate'] || this.idNosForm.value['issuedDate'] === '') {
+                this.alertService.showErrors('Issued Date can\'t be blank');
+                return;
+            } else if (!this.idNosForm.value['expiryDate'] || this.idNosForm.value['expiryDate'] === '') {
+                this.alertService.showErrors('Expiry Date can\'t be blank');
+                return;
+            } else if (!this.idNosForm.value['workPermitNumber'] || this.idNosForm.value['workPermitNumber'] === '') {
+                this.alertService.showErrors('Work permit number can\'t be blank');
+                return;
+            }
+        }
         this.isSubmitted = true;
         if (!this.idNosForm.valid) {
             this.isSubmitted = false;
@@ -700,11 +736,13 @@ export class EmployeeAddComponent implements OnInit {
         if (this.isSubmitted) {
             if (this.selectedEmployeeId) {
                 this.employeeId = this.selectedEmployeeId;
-            } else {
-                this.idNosForm.value['issuedDate'] = this.idNosForm.value['issuedDate'].format('YYYY-MM-DD');
-                this.idNosForm.value['expiryDate'] = this.idNosForm.value['expiryDate'].format('YYYY-MM-DD');
             }
-            this.employeeService.addIdNos(this.employeeId, this.idNosForm.value).subscribe(data => {
+            let params = {
+                ...this.idNosForm.value
+            };
+            params['issuedDate'] = this.idNosForm.value['issuedDate'] && typeof this.idNosForm.value['issuedDate'] === 'object' ? this.idNosForm.value['issuedDate'].format('YYYY-MM-DD') : this.idNosForm.value['issuedDate'];
+            params['expiryDate'] = this.idNosForm.value['expiryDate'] && typeof this.idNosForm.value['expiryDate'] === 'object' ? this.idNosForm.value['expiryDate'].format('YYYY-MM-DD') : this.idNosForm.value['expiryDate'];
+            this.employeeService.addIdNos(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.router.navigateByUrl(`/dashboard/employees`);
             });
@@ -712,7 +750,12 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     chooseRegion(event) {
-        this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
+        this.structureService.getRegions({
+            'page': -1,
+            'countryId': event,
+            'isActive': 1,
+            orderby: 'name'
+        }).subscribe(data => {
             this.regions = data.items;
         });
         this.citizenshipContactDetailsForm.controls['regionId'].reset();
@@ -723,20 +766,34 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     chooseState(event) {
-        this.structureService.getStates({'page': -1, 'regionId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
+        this.structureService.getStates({
+            'page': -1,
+            'regionId': event,
+            'isActive': 1,
+            orderby: 'name'
+        }).subscribe(data => {
             this.states = data.items;
         });
     }
 
     chooseLga(event) {
-        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
+        this.structureService.getLga({
+            'page': -1,
+            'stateId': event,
+            'isActive': 1,
+            orderby: 'name'
+        }).subscribe(data => {
             this.lgas = data.items;
         });
     }
 
-
     chooseRegionOther(event) {
-        this.structureService.getRegions({'page': -1, 'countryId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
+        this.structureService.getRegions({
+            'page': -1,
+            'countryId': event,
+            'isActive': 1,
+            orderby: 'name'
+        }).subscribe(data => {
             this.regionsOther = data.items;
         });
         this.citizenshipContactDetailsForm.controls['otherRegionId'].reset();
@@ -747,13 +804,18 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     chooseStateOther(event) {
-        this.structureService.getStates({'page': -1, 'regionId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
+        this.structureService.getStates({
+            'page': -1,
+            'regionId': event,
+            'isActive': 1,
+            orderby: 'name'
+        }).subscribe(data => {
             this.statesOther = data.items;
         });
     }
 
     chooseLgaOther(event) {
-        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive' : 1,orderby: 'name'}).subscribe(data => {
+        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive': 1, orderby: 'name'}).subscribe(data => {
             this.lgasOthers = data.items;
         });
     }
@@ -767,21 +829,18 @@ export class EmployeeAddComponent implements OnInit {
         this.employeeStepper.next();
     }
 
-    onToggle(event)
-    {
-        //console.log(event.checked);
-        if(event.checked==true)
-        {
-            this.idNosForm.controls['passportNumber'].setValidators([Validators.required]);   
+    onToggle(event) {
+        // console.log(event.checked);
+        if (event.checked == true) {
+            this.idNosForm.controls['passportNumber'].setValidators([Validators.required]);
             this.idNosForm.get('passportNumber').updateValueAndValidity();
 
-            this.idNosForm.controls['issuedAt'].setValidators([Validators.required]);   
+            this.idNosForm.controls['issuedAt'].setValidators([Validators.required]);
             this.idNosForm.get('issuedAt').updateValueAndValidity();
 
-            this.idNosForm.controls['workPermitNumber'].setValidators([Validators.required]);   
+            this.idNosForm.controls['workPermitNumber'].setValidators([Validators.required]);
             this.idNosForm.get('workPermitNumber').updateValueAndValidity();
-        }
-        else{
+        } else {
             this.idNosForm.get('passportNumber').clearValidators();
             this.idNosForm.get('passportNumber').updateValueAndValidity();
 
@@ -791,6 +850,19 @@ export class EmployeeAddComponent implements OnInit {
             this.idNosForm.get('workPermitNumber').clearValidators();
             this.idNosForm.get('workPermitNumber').updateValueAndValidity();
         }
+    }
 
+    setPFA(event) {
+        if (this.companies && this.companies.length > 0) {
+            let pfa = '';
+            this.companies.forEach(company => {
+                if (parseInt(company.id) === parseInt(event.value)) {
+                    pfa = company.name;
+                }
+            });
+            this.idNosForm.patchValue({
+                'pensionFundAdministration': pfa
+            });
+        }
     }
 }

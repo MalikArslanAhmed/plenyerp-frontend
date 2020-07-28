@@ -28,6 +28,8 @@ export class StoreSetupItemsListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    itemIdAll = [];
+    filters = {};
 
     constructor(private storeSetupItemsService: StoreSetupItemsService,
                 private fb: FormBuilder,
@@ -107,6 +109,10 @@ export class StoreSetupItemsListComponent implements OnInit {
             if (!response) {
                 return;
             }
+            this.itemIdAll = [];
+            this.itemIdAll.push(response.id);
+            this.findAllIds(response);
+
             this.categories = [{
                 'name': response.name,
                 'id': response.id
@@ -114,9 +120,9 @@ export class StoreSetupItemsListComponent implements OnInit {
             this.itemsFilterForm.patchValue({
                 categoryId: response.id,
             });
-            this.getStores({
-                categoryId: response.id,
-            });
+
+            this.filters['categoryIds'] = JSON.stringify(this.itemIdAll);
+            this.getStores(this.filters);
         });
     }
 
@@ -131,5 +137,19 @@ export class StoreSetupItemsListComponent implements OnInit {
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getStores({page: this.pagination.page});
+    }
+
+    findAllIds(data) {
+        if (data && data['children'] && data['children'].length > 0) {
+            data.children.forEach(item => {
+                if (item.children && item.children.length) {
+                    this.itemIdAll.push(item.id);
+                    this.findAllIds(item);
+                } else {
+                    this.itemIdAll.push(item.id);
+                    return;
+                }
+            });
+        }
     }
 }
