@@ -704,8 +704,8 @@ export class EmployeeAddComponent implements OnInit {
             let params = {
               ...this.idNosForm.value
             };
-            params['issuedDate'] = this.idNosForm.value['issuedDate'] && this.idNosForm.value['issuedDate'].format('YYYY-MM-DD') ? this.idNosForm.value['issuedDate'].format('YYYY-MM-DD') : this.idNosForm.value['issuedDate'];
-            params['expiryDate'] = this.idNosForm.value['expiryDate'] && this.idNosForm.value['expiryDate'].format('YYYY-MM-DD') ? this.idNosForm.value['expiryDate'].format('YYYY-MM-DD') : this.idNosForm.value['expiryDate'];
+            params['issuedDate'] = this.idNosForm.value['issuedDate'] && typeof this.idNosForm.value['issuedDate'] === 'object' ? this.idNosForm.value['issuedDate'].format('YYYY-MM-DD') : this.idNosForm.value['issuedDate'];
+            params['expiryDate'] = this.idNosForm.value['expiryDate'] && typeof this.idNosForm.value['expiryDate'] === 'object' ? this.idNosForm.value['expiryDate'].format('YYYY-MM-DD') : this.idNosForm.value['expiryDate'];
             this.employeeService.addIdNos(this.employeeId, params).subscribe(data => {
                 this.isSubmitted = false;
                 this.router.navigateByUrl(`/dashboard/employees`);
