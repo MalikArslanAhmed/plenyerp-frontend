@@ -146,7 +146,9 @@
                                         <mat-label>Country Code</mat-label>
                                         <mat-select formControlName="countryCode" required>
                                             <mat-option [value]="countryCode.country_code"
-                                            *ngFor="let countryCode of countryCodes">{{countryCode.name | titlecase}} ({{countryCode.country_code}})</mat-option>
+                                                        *ngFor="let countryCode of countryCodes">{{countryCode.name | titlecase}}
+                                                ({{countryCode.country_code}})
+                                            </mat-option>
                                         </mat-select>
                                         <mat-error>country code is required!</mat-error>
                                     </mat-form-field>
@@ -336,10 +338,13 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button type="button" color="accent" (click)="saveJobProfile()" *ngIf="!this.selectedEmployeeId || !jobProfileSalaryPlacementDisable">
+                            <button mat-raised-button type="button" color="accent" (click)="saveJobProfile()"
+                                    *ngIf="!this.selectedEmployeeId || !jobProfileSalaryPlacementDisable">
                                 Save & Next
                             </button>
-                            <button mat-raised-button type="button" color="accent" *ngIf="this.selectedEmployeeId && jobProfileSalaryPlacementDisable" (click)="this.goForward()">
+                            <button mat-raised-button type="button" color="accent"
+                                    *ngIf="this.selectedEmployeeId && jobProfileSalaryPlacementDisable"
+                                    (click)="this.goForward()">
                                 Next
                             </button>
                         </div>
@@ -703,24 +708,6 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>PFA</mat-label>
-                                        <input matInput formControlName="pensionFundAdministration" required>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                        <mat-grid-list cols="2" rowHeight="100px">
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>PFA No.</mat-label>
-                                        <input matInput formControlName="pfaNumber" required>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Payroll Pin</mat-label>
                                         <input matInput formControlName="payrollPin" required>
                                     </mat-form-field>
@@ -730,7 +717,35 @@
                         <mat-grid-list cols="2" rowHeight="100px">
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-checkbox formControlName="isForeignEmployee" (change)="onToggle($event)">Is Foreign Employee ?</mat-checkbox>
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>PFA Number</mat-label>
+                                        <mat-select formControlName="pfaNumber"
+                                                    (selectionChange)="setPFA($event)">
+                                            <mat-option value="">Select PFA Number</mat-option>
+                                            <mat-option *ngFor="let company of companies" [value]="company.id">
+                                                {{company.id}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>PFA</mat-label>
+                                        <input matInput readonly [disabled]="true"
+                                               formControlName="pensionFundAdministration"
+                                               required>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-checkbox formControlName="isForeignEmployee" (change)="onToggle($event)">Is
+                                        Foreign Employee ?
+                                    </mat-checkbox>
                                 </div>
                             </mat-grid-tile>
                             <mat-grid-tile class="mr-1">

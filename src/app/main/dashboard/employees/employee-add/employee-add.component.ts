@@ -14,6 +14,7 @@ import {EmployeeService} from '../../../../shared/services/employee.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatStepper} from '@angular/material/stepper';
 import {AlertService} from "../../../../shared/services/alert.service";
+import {CompaniesService} from "../../../../shared/services/companies.service";
 
 @Component({
     selector: 'app-employee-add',
@@ -35,7 +36,6 @@ export class EmployeeAddComponent implements OnInit {
     religions;
     typeOfAppointments;
     countryCodes;
-
     designations = [];
     countries = [];
     countriesOther = [];
@@ -58,6 +58,7 @@ export class EmployeeAddComponent implements OnInit {
     selectedEmployee: any;
     pensionCheck: boolean;
     jobProfileSalaryPlacementDisable = false;
+    companies = [];
 
     constructor(private structureService: StructureService,
                 private _fuseSidebarService: FuseSidebarService,
@@ -68,7 +69,8 @@ export class EmployeeAddComponent implements OnInit {
                 private employeeService: EmployeeService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
-                private alertService: AlertService) {
+                private alertService: AlertService,
+                private companiesService: CompaniesService) {
     }
 
     ngOnInit(): void {
@@ -82,6 +84,7 @@ export class EmployeeAddComponent implements OnInit {
         this.getCountryCode();
         this.getReligions();
         this.getMaritialStatus();
+        this.getCompaniesForPfa();
     }
 
     pensionChecked(data) {
@@ -99,6 +102,26 @@ export class EmployeeAddComponent implements OnInit {
     getAppointmentsType() {
         this.employeeService.getAppointmentsType().subscribe((data) => {
             this.typeOfAppointments = data.items;
+        });
+    }
+
+    getCompaniesForPfa() {
+        this.companies = [];
+        const params = {
+            'isActive': 1,
+            'isPfa': 1
+        };
+        this.companiesService.getCompaniesList(params).subscribe(data => {
+            this.companies = data.items;
+            /*this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            if (this.companiesList && this.companiesList.length > 0) {
+                let i = 1;
+                this.companiesList.forEach(company => {
+                    company['sno'] = i;
+                    i++;
+                });
+            }*/
         });
     }
 
@@ -826,6 +849,20 @@ export class EmployeeAddComponent implements OnInit {
 
             this.idNosForm.get('workPermitNumber').clearValidators();
             this.idNosForm.get('workPermitNumber').updateValueAndValidity();
+        }
+    }
+
+    setPFA(event) {
+        if (this.companies && this.companies.length > 0) {
+            let pfa = '';
+            this.companies.forEach(company => {
+                if (parseInt(company.id) === parseInt(event.value)) {
+                    pfa = company.name;
+                }
+            });
+            this.idNosForm.patchValue({
+                'pensionFundAdministration': pfa
+            });
         }
     }
 }
