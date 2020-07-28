@@ -23,6 +23,7 @@ export class ApplicableTaxesComponent implements OnInit {
     constructor(public matDialogRef: MatDialogRef<ApplicableTaxesComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder, private transactionService: TransactionService) {
+        console.log('_data', _data);
         this.itemId = _data.itemId;
         this.grossAmount = _data.grossAmount;
         this.taxArray = _data.taxArray;
@@ -62,7 +63,7 @@ export class ApplicableTaxesComponent implements OnInit {
                         if (tax) {
                             this.taxArray.forEach(taxObj => {
                                 if (parseInt(taxObj) === parseInt(tax.id)) {
-                                    totalTaxes.push(tax);
+                                    totalTaxes.push(tax.tax);
                                 }
                             })
                         }

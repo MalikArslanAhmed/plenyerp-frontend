@@ -137,7 +137,7 @@ export class EmployeeAddComponent implements OnInit {
             gender: ['MALE', Validators.required],
             religion: ['CHRISTIANITY', Validators.required],
             countryCode: ['', Validators.required],
-            phone: ['', Validators.compose([Validators.required, Validators.pattern(/^[6-9]\d{9}$/)])],
+            phone: ['', Validators.required],
             email: ['', Validators.required],
             appointedOn: ['', Validators.required],
             assumedDutyOn: ['', Validators.required],
@@ -215,7 +215,7 @@ export class EmployeeAddComponent implements OnInit {
     getEmployeeById() {
         this.employeeService.getEmployees({'page': -1, 'id': this.selectedEmployeeId}).subscribe(data => {
             this.selectedEmployee = data.items[0];
-            if (this.selectedEmployeeId) {
+            if (this.selectedEmployeeId && this.selectedEmployee) {
                 this.patchEmployeeForm();
                 this.patchPersonalDetailsForm();
                 this.patchJobProfileSalaryPlacementForm();
@@ -255,35 +255,47 @@ export class EmployeeAddComponent implements OnInit {
 
     patchJobProfileSalaryPlacementForm() {
         this.jobPositions = [{
-            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPosition.name ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPosition.name : '',
-            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId : '',
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPosition.name ? this.selectedEmployee.employeeJobProfiles.jobPosition.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId ? this.selectedEmployee.employeeJobProfiles.jobPositionId : '',
         }];
 
         this.departments = [{
-            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.department.name ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.department.name : '',
-            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId : '',
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.department.name ? this.selectedEmployee.employeeJobProfiles.department.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId ? this.selectedEmployee.employeeJobProfiles.departmentId : '',
         }];
 
         this.workLocations = [{
-            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name : '',
-            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId : '',
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocation.name ? this.selectedEmployee.employeeJobProfiles.workLocation.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles.workLocationId : '',
         }];
 
-        this.salaryScaleChange(this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId, 'edit');
+        this.salaryScales = [{
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.empSalaryScale.name ? this.selectedEmployee.employeeJobProfiles.empSalaryScale.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId ? this.selectedEmployee.employeeJobProfiles.salaryScaleId : '',
+        }];
 
-        this.gradeScaleChange(this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId);
+        this.gradeLevels = [{
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.empGradeLevel.name ? this.selectedEmployee.employeeJobProfiles.empGradeLevel.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId ? this.selectedEmployee.employeeJobProfiles.gradeLevelId : '',
+        }];
+
+        this.gradeLevelSteps = [{
+            'name': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.empGradeLevelStep.name ? this.selectedEmployee.employeeJobProfiles.empGradeLevelStep.name : '',
+            'id': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId ? this.selectedEmployee.employeeJobProfiles.gradeLevelStepId : '',
+        }];
+
+        // this.salaryScaleChange(this.selectedEmployee.employeeJobProfiles.salaryScaleId, 'edit');
 
         this.jobProfileSalaryPlacementForm.patchValue({
-            'currentAppointment': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.currentAppointment ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.currentAppointment : '',
-            'jobPositionId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId : '',
-            'departmentId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId : '',
-            'workLocationId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId : '',
-            'designationId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.designationId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.designationId : '',
-            'salaryScaleId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId : '',
-            'gradeLevelId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId : '',
-            'gradeLevelStepId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId ? this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId : ''
+            'currentAppointment': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.currentAppointment ? this.selectedEmployee.employeeJobProfiles.currentAppointment : '',
+            'jobPositionId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.jobPositionId ? this.selectedEmployee.employeeJobProfiles.jobPositionId : '',
+            'departmentId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.departmentId ? this.selectedEmployee.employeeJobProfiles.departmentId : '',
+            'workLocationId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.workLocationId ? this.selectedEmployee.employeeJobProfiles.workLocationId : '',
+            'designationId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.designationId ? this.selectedEmployee.employeeJobProfiles.designationId : '',
+            'salaryScaleId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.salaryScaleId ? this.selectedEmployee.employeeJobProfiles.salaryScaleId : '',
+            'gradeLevelId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelId ? this.selectedEmployee.employeeJobProfiles.gradeLevelId : '',
+            'gradeLevelStepId': this.selectedEmployee.employeeJobProfiles && this.selectedEmployee.employeeJobProfiles.gradeLevelStepId ? this.selectedEmployee.employeeJobProfiles.gradeLevelStepId : ''
         });
-
         if ((this.jobProfileSalaryPlacementForm.value['currentAppointment'] && this.jobProfileSalaryPlacementForm.value['currentAppointment'] !== '') &&
             (this.jobProfileSalaryPlacementForm.value['jobPositionId'] && this.jobProfileSalaryPlacementForm.value['jobPositionId'] !== '') &&
             (this.jobProfileSalaryPlacementForm.value['departmentId'] && this.jobProfileSalaryPlacementForm.value['departmentId'] !== '')) {
@@ -297,6 +309,7 @@ export class EmployeeAddComponent implements OnInit {
             this.jobProfileSalaryPlacementForm.get('gradeLevelStepId').disable();
             this.jobProfileSalaryPlacementDisable = true;
         }
+        // console.log('this.jobProfileSalaryPlacementForm', this.jobProfileSalaryPlacementForm.value);
     }
 
     patchCitizenshipContactDetailsForm() {
@@ -702,7 +715,7 @@ export class EmployeeAddComponent implements OnInit {
                 this.employeeId = this.selectedEmployeeId;
             }
             let params = {
-              ...this.idNosForm.value
+                ...this.idNosForm.value
             };
             params['issuedDate'] = this.idNosForm.value['issuedDate'] && typeof this.idNosForm.value['issuedDate'] === 'object' ? this.idNosForm.value['issuedDate'].format('YYYY-MM-DD') : this.idNosForm.value['issuedDate'];
             params['expiryDate'] = this.idNosForm.value['expiryDate'] && typeof this.idNosForm.value['expiryDate'] === 'object' ? this.idNosForm.value['expiryDate'].format('YYYY-MM-DD') : this.idNosForm.value['expiryDate'];
