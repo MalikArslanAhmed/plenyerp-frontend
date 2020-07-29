@@ -32,7 +32,7 @@ export class EditSegmentListComponent implements OnInit {
             }
             this.segmenntCode += '-';
         });
-        this.segmenntCode = this.segmenntCode.replace(/-+$/, '');
+        this.segmenntCode = this.segmenntCode.replace(/-+$/, '').replace(/^-/, '');
 
         console.log(this.segment)
         this.dialogTitle = 'Update Segment';
