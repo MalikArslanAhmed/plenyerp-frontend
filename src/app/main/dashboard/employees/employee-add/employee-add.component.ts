@@ -356,8 +356,8 @@ export class EmployeeAddComponent implements OnInit {
             this.chooseStateOther(this.selectedEmployee.employeeContactDetails.otherRegionId);
         }
 
-        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.otherLgaId) {
-            this.chooseLgaOther(this.selectedEmployee.employeeContactDetails.otherLgaId);
+        if (this.selectedEmployee.employeeContactDetails && this.selectedEmployee.employeeContactDetails.otherStateId) {
+            this.chooseLgaOther(this.selectedEmployee.employeeContactDetails.otherStateId);
         }
 
         this.citizenshipContactDetailsForm.patchValue({
@@ -815,8 +815,15 @@ export class EmployeeAddComponent implements OnInit {
     }
 
     chooseLgaOther(event) {
-        this.structureService.getLga({'page': -1, 'stateId': event, 'isActive': 1, orderby: 'name'}).subscribe(data => {
+        // console.log('event', event);
+        this.structureService.getLga({
+            'page': -1,
+            'stateId': event,
+            'isActive': 1,
+            orderby: 'name'
+        }).subscribe(data => {
             this.lgasOthers = data.items;
+            // console.log('this.lgasOthers', this.lgasOthers);
         });
     }
 
