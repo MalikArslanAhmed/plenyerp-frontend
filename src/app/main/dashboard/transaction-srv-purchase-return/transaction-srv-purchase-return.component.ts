@@ -136,7 +136,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
                 quantity: '',
                 unitPrice: '',
                 unitCost: '',
-                unitOfMeasures:''
+                unitOfMeasures: ''
             });
             this.setTotals();
         } else {
@@ -271,7 +271,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             }];
             this.srvPurchaseReturnForm.patchValue({
                 companyId: response.id,
-                cutomerAddress:response.address
+                cutomerAddress: response.address
             });
         });
     }
@@ -290,7 +290,7 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             }];
             this.srvPurchaseReturnForm.patchValue({
                 storeId: response.id,
-                storeName:response.name
+                storeName: response.name
             });
         });
     }
@@ -318,5 +318,10 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
                 'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
         });
+    }
+
+    resetForm() {
+        this.srvPurchaseReturnForm.reset();
+        this.itemsArr = [];
     }
 }

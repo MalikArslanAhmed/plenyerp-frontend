@@ -289,4 +289,9 @@ export class TransactionDonationsComponent implements OnInit {
             });
         });
     }
+
+    resetForm() {
+        this.donationsForm.reset();
+        this.itemsArr = [];
+    }
 }

@@ -9,7 +9,7 @@ import {StoreSetupItemsService} from '../../../shared/services/store-setup-items
 import {StoreSetupStoresService} from '../../../shared/services/store-setup-stores.service';
 import {NumberToWordsPipe} from '../../../shared/pipes/number-to-word.pipe';
 import {TransactionSupplierSelectComponent} from '../transaction-supplier-select/transaction-supplier-select.component';
-import { TransactionStoreSelectComponent } from '../transaction-store-select/transaction-store-select.component';
+import {TransactionStoreSelectComponent} from '../transaction-store-select/transaction-store-select.component';
 import {TransactionsItemsSelectComponent} from '../transactions-items-select/transactions-items-select.component';
 
 @Component({
@@ -33,6 +33,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
     isSubmitted = false;
     //taxArray = [1, 2];
     taxArray = [];
+
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
                 private transactionService: TransactionService,
@@ -46,7 +47,6 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         this.getStores();
         this.getStoreItems();
     }
-
 
     refresh() {
         this.srvPurchaseInvoiceForm = this.fb.group({
@@ -113,10 +113,10 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 quantity: quantity,
                 unitCost: unitCost,
                 value: parseInt(quantity) * parseInt(unitCost),
-                totalValue: (parseInt(quantity) * parseInt(unitCost))+this.totalTaxes ,
+                totalValue: (parseInt(quantity) * parseInt(unitCost)) + this.totalTaxes,
                 taxes: this.taxes,
                 totalTaxes: this.totalTaxes
-            }); 
+            });
 
             // console.log(this.itemsArr)
             this.srvPurchaseInvoiceForm.patchValue({
@@ -147,7 +147,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         } else if (!this.srvPurchaseInvoiceForm.value.unitCost || this.srvPurchaseInvoiceForm.value.unitCost === '') {
             this.alertService.showErrors('Unit cost can\'t be empty');
             return;
-        }  
+        }
         this.dialogRef = this._matDialog.open(ApplicableTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
@@ -318,10 +318,10 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 'name': response.name,
                 'id': response.id,
             }];
-            
+
             this.srvPurchaseInvoiceForm.patchValue({
                 companyId: response.id,
-                supplierAddress:response.address
+                supplierAddress: response.address
             });
         });
     }
@@ -340,7 +340,7 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
             }];
             this.srvPurchaseInvoiceForm.patchValue({
                 storeId: response.id,
-                storeName:response.name
+                storeName: response.name
             });
         });
     }
@@ -352,19 +352,19 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
                 return;
-                
+
             }
 
-            if ( response.itemTaxes && response.itemTaxes.length>0) {
+            if (response.itemTaxes && response.itemTaxes.length > 0) {
                 response.itemTaxes.forEach(val => {
-                    this.taxArray.push(val.taxId);                    
+                    this.taxArray.push(val.taxId);
                 });
             }
             this.storeItems = [{
                 'name': response.name,
                 'id': response.id
             }];
-           
+
             this.srvPurchaseInvoiceForm.patchValue({
                 itemId: response.id,
             });
@@ -376,5 +376,10 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 'unitOfMeasures': this.unitOfMeasuresData[0].id
             });
         });
+    }
+
+    resetForm() {
+        this.srvPurchaseInvoiceForm.reset();
+        this.itemsArr = [];
     }
 }

@@ -253,4 +253,9 @@ export class TransactionStvStoreTransferComponent implements OnInit {
             });
         });
     }
+
+    resetForm() {
+        this.stvStoreTransferForm.reset();
+        this.itemsArr = [];
+    }
 }

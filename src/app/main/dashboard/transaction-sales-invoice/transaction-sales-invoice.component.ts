@@ -393,4 +393,9 @@ export class TransactionSalesInvoiceComponent implements OnInit {
             });
         });
     }
+
+    resetForm() {
+        this.salesInvoiceForm.reset();
+        this.itemsArr = [];
+    }
 }

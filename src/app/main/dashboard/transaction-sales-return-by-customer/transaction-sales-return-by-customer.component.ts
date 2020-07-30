@@ -318,4 +318,9 @@ export class TransactionSalesReturnByCustomerComponent implements OnInit {
             });
         });
     }
+
+    resetForm() {
+        this.salesReturnByCustomerForm.reset();
+        this.itemsArr = [];
+    }
 }
