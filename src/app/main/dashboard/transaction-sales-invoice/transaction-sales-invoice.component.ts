@@ -30,7 +30,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
     storeItems = [];
     unitOfMeasuresData = [];
     isSubmitted = false;
-    taxArray = [1, 2];
+    taxArray = [];
     constructor(private fb: FormBuilder,
                 private alertService: AlertService,
                 private transactionService: TransactionService,
@@ -145,6 +145,7 @@ export class TransactionSalesInvoiceComponent implements OnInit {
                 itemId: this.salesInvoiceForm.value.itemId,
                 taxArray: this.taxArray,
                 grossAmount: this.salesInvoiceForm.value.unitSellingPrice * this.salesInvoiceForm.value.quantity,
+                quantity: this.salesInvoiceForm.value.quantity
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -357,6 +358,12 @@ export class TransactionSalesInvoiceComponent implements OnInit {
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
                 return;
+
+            }
+            if (response.itemTaxes && response.itemTaxes.length > 0) {
+                response.itemTaxes.forEach(val => {
+                    this.taxArray.push(val.taxId);
+                });
             }
             this.storeItems = [{
                 'name': response.name,
@@ -366,8 +373,8 @@ export class TransactionSalesInvoiceComponent implements OnInit {
                 itemId: response.id,
             });
             this.unitOfMeasuresData = [{
-                'name': response['inventoryMeasurement'].name,
-                'id': response['inventoryMeasurement'].id
+                'name': response['inventoryMeasurement'] && response['inventoryMeasurement'].name ? response['inventoryMeasurement'].name : '',
+                'id': response['inventoryMeasurement'] && response['inventoryMeasurement'].id ? response['inventoryMeasurement'].id : ''
             }];
             this.salesInvoiceForm.patchValue({
                 'unitOfMeasures': this.unitOfMeasuresData[0].id

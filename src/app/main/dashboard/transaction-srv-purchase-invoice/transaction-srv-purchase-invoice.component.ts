@@ -354,7 +354,6 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 return;
 
             }
-
             if (response.itemTaxes && response.itemTaxes.length > 0) {
                 response.itemTaxes.forEach(val => {
                     this.taxArray.push(val.taxId);
@@ -369,8 +368,8 @@ export class TransactionSrvPurchaseInvoiceComponent implements OnInit {
                 itemId: response.id,
             });
             this.unitOfMeasuresData = [{
-                'name': response['inventoryMeasurement'].name,
-                'id': response['inventoryMeasurement'].id
+                'name': response['inventoryMeasurement'] && response['inventoryMeasurement'].name ? response['inventoryMeasurement'].name : '',
+                'id': response['inventoryMeasurement'] && response['inventoryMeasurement'].id ? response['inventoryMeasurement'].id : ''
             }];
             this.srvPurchaseInvoiceForm.patchValue({
                 'unitOfMeasures': this.unitOfMeasuresData[0].id
