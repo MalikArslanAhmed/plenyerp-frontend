@@ -126,7 +126,7 @@ export class AppUrl {
     }
 
     static DELETE_STORE_SETUP_UNIT_OF_MEASURES(id?): string {
-        return AppUrl.API_URL + 'stores/' + id;
+        return AppUrl.API_URL + 'measurements/' + id;
     }
 
     static DELETE_STORE_SETUP_ITEMS(id?): string {

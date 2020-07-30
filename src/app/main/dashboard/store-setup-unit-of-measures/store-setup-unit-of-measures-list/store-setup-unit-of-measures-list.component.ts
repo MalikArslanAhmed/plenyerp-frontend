@@ -58,13 +58,13 @@ export class StoreSetupUnitOfMeasuresListComponent implements OnInit {
         });
         this.dialogRef.afterClosed().subscribe((response: boolean) => {
             if (response) {
-                this.deleteStore(items.id);
+                this.deleteUnitOfMeasures(items.id);
             }
         });
 
-    } 
+    }
 
-    deleteStore(id) {
+    deleteUnitOfMeasures(id) {
         this.storeSetupUnitOfMeasuresService.deleteStoreSetupUnitOfMeasures(id).subscribe(data => {
             if (data) {
                 this.getStoreSetupUnitOfMeasure();
