@@ -970,7 +970,7 @@ export class AppUrl {
     }
 
     static GET_INVENTORY_LEDGER_REPORT(): string {
-        return AppUrl.API_URL + 'invoices-lifo';
+        return AppUrl.API_URL + 'inventory-ledger-report';
     }
 
     static GET_QUANTITY_BALANCE_REPORT(): string {

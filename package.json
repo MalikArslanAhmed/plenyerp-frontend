@@ -11,6 +11,7 @@
         "prod-pull": "cd ../prod_build && git pull origin master",
         "build-stats": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --dev --stats-json",
         "build-prod": "npm run prod-pull && node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod && cp ../prod_build/.htaccess.txt ../prod_build/dist/.htaccess && cd ../prod_build && git add . && git commit -m 'Prod Build' && git push origin master",
+        "bp": "npm run prod-pull && node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod && cp ../prod_build/.htaccess.txt ../prod_build/dist/.htaccess && cd ../prod_build && git add . && git commit -m 'Prod Build' && git push origin master",
         "build-prod-stats": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --stats-json",
         "test": "ng test",
         "lint": "ng lint",

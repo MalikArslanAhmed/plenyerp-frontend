@@ -49,8 +49,8 @@ export class ReportInventoryLedgerComponent implements OnInit {
                 return;
             }
             this.storeItems = [{
-                'description': response.description,
-                'id': response.id
+                description: response.description,
+                id: response.id
             }];
             this.reportInventoryLedgerForm.patchValue({
                 itemId: response.id,
@@ -92,8 +92,8 @@ export class ReportInventoryLedgerComponent implements OnInit {
         });
     }
 
-    downloadReport() {
-        this.reportService.downloadTransactionReport({'type': 'INVENTORY_LEDGER'}).subscribe(data => {
+    downloadReport(): void {
+        this.reportService.downloadTransactionReport({type: 'INVENTORY_LEDGER'}).subscribe(data => {
             window.open(data.url, '_blank');
         });
     }
