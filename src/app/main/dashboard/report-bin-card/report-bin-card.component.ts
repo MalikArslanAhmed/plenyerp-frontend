@@ -19,6 +19,8 @@ export class ReportBinCardComponent implements OnInit {
     storeItems = [];
     stores = [];
     itemsArr = [];
+    inQuantity = 0;
+    outQuantity = 0;
 
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
@@ -35,8 +37,7 @@ export class ReportBinCardComponent implements OnInit {
             closingDate: [''],
             itemId: [''],
             storeId: [''],
-            itemName: [''],
-            costingMethod: ['']
+            itemName: ['']
         });
     }
 
@@ -83,12 +84,31 @@ export class ReportBinCardComponent implements OnInit {
             closingDate: this.binCardForm.value['closingDate'] ? this.binCardForm.value['closingDate'].format('YYYY-MM-DD') : '',
             itemId: this.binCardForm.value['itemId'],
             storeId: this.binCardForm.value['storeId'],
-            itemName: this.binCardForm.value['itemName'],
-            costingMethod: this.binCardForm.value['costingMethod']
+            itemName: this.binCardForm.value['itemName']
         };
         this.itemsArr = [];
         this.reportService.getBinReports(params).subscribe(data => {
-            this.itemsArr = data.items;
+            console.log('data', data);
+            this.itemsArr = data;
+            let inQuant = this.inQuantity;
+            let outQuant = this.outQuantity;
+            if (this.itemsArr && this.itemsArr.length > 0) {
+                this.itemsArr.forEach(item => {
+                    if (item.type === "IN") {
+                        inQuant++;
+                    } else {
+                        outQuant++;
+                    }
+                });
+                this.inQuantity = inQuant;
+                this.outQuantity = outQuant;
+            }
+        });
+    }
+
+    downloadReport() {
+        this.reportService.downloadTransactionReport({'type': 'BIN_CARD'}).subscribe(data => {
+            window.open(data.url, '_blank');
         });
     }
 }

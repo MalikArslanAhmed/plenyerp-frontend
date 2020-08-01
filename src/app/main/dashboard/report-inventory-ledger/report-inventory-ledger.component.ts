@@ -91,4 +91,10 @@ export class ReportInventoryLedgerComponent implements OnInit {
             this.itemsArr = data.items;
         });
     }
+
+    downloadReport() {
+        this.reportService.downloadTransactionReport({'type': 'INVENTORY_LEDGER'}).subscribe(data => {
+            window.open(data.url, '_blank');
+        });
+    }
 }

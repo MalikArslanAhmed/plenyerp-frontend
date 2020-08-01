@@ -31,12 +31,12 @@ export class ReportOffLevelComponent implements OnInit {
 
     refresh() {
         this.reportOffLevelForm = this.fb.group({
-            openingDate: [''],
-            closingDate: [''],
+            /*openingDate: [''],
+            closingDate: [''],*/
             itemId: [''],
             itemName: [''],
             storeId: [''],
-            costingMethod: ['']
+            reportPreference: ['']
         });
     }
 
@@ -79,17 +79,21 @@ export class ReportOffLevelComponent implements OnInit {
 
     loadReport() {
         const params = {
-            'openingDate': this.reportOffLevelForm.value['openingDate'] ? this.reportOffLevelForm.value['openingDate'].format('YYYY-MM-DD') : '',
-            'closingDate': this.reportOffLevelForm.value['closingDate'] ? this.reportOffLevelForm.value['closingDate'].format('YYYY-MM-DD') : '',
             'itemId': this.reportOffLevelForm.value['itemId'],
             'storeId': this.reportOffLevelForm.value['storeId'],
             'itemName': this.reportOffLevelForm.value['itemName'],
-            'costingMethod': this.reportOffLevelForm.value['costingMethod']
+            'reportPreference': this.reportOffLevelForm.value['reportPreference']
         };
 
         this.itemsArr = [];
         this.reportService.getOffLevelReports(params).subscribe(data => {
-            this.itemsArr = data.items;
+            this.itemsArr = data;
+        });
+    }
+
+    downloadReport() {
+        this.reportService.downloadTransactionReport({'type': 'OFF_LEVEL'}).subscribe(data => {
+            window.open(data.url, '_blank');
         });
     }
 }

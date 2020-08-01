@@ -962,7 +962,11 @@ export class AppUrl {
     }
 
     static GET_BIN_REPORT(): string {
-        return 'https://run.mocky.io/v3/482f2ac2-e62e-46c9-97dc-5277ad6c4c8d';
+        return AppUrl.API_URL + 'bin-card/report';
+    }
+
+    static DOWNLOAD_TRANSACTION_REPORT(): string {
+        return AppUrl.API_URL + 'bin-card/report/download';
     }
 
     static GET_INVENTORY_LEDGER_REPORT(): string {
@@ -974,7 +978,7 @@ export class AppUrl {
     }
 
     static GET_OFF_LEVEL_REPORT(): string {
-        return 'https://run.mocky.io/v3/62982b08-94c9-4777-9f99-cbc39d3328a8';
+        return AppUrl.API_URL + 'off-level-report';
     }
 
     static GET_EMPLOYEE_PROGRESSION_LIST(id): string {

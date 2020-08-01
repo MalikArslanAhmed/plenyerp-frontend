@@ -29,4 +29,8 @@ export class ReportService extends BaseService {
     getOffLevelReports(data): Observable<any> {
         return this.getRequest(AppUrl.GET_OFF_LEVEL_REPORT(), data);
     }
+
+    downloadTransactionReport(data): Observable<any> {
+        return this.getRequest(AppUrl.DOWNLOAD_TRANSACTION_REPORT(), data);
+    }
 }

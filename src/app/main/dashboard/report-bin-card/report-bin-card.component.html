@@ -13,7 +13,7 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <button mat-fab class="accent" id="add-button" title="Download Report"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="downloadReport()">
                 <mat-icon>cloud_download</mat-icon>
             </button>
         </div>
@@ -81,7 +81,7 @@
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile class="mt-2">
+                        <!--<mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Preferred Costing Method</mat-label>
@@ -92,7 +92,7 @@
                                     </select>
                                 </mat-form-field>
                             </div>
-                        </mat-grid-tile>
+                        </mat-grid-tile>-->
                         <mat-grid-tile class="mt-1">
                             <div class="p-5px" fxFlex="1 0 auto" fxLayout="column">
                                 <button mat-raised-button class="mat-accent" (click)="loadReport()">
@@ -115,6 +115,12 @@
                             <th>Balance</th>
                         </tr>
                         </thead>
+                        <!--balance: 10
+                        date: "2020-08-02"
+                        desc: "notax"
+                        id: 1
+                        type: "IN"
+                        unitCost: 50-->
                         <tbody *ngIf="itemsArr && itemsArr.length > 0; else noItemToShow">
                         <tr *ngFor="let item of itemsArr; let i = index">
                             <td>
@@ -124,16 +130,18 @@
                                 <span class="text-truncate">{{item?.date}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.description}}</span>
+                                <span class="text-truncate">{{item?.desc}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.in}}</span>
+                                <span class="text-truncate" *ngIf="item.type === 'IN'">True</span>
+                                <span class="text-truncate" *ngIf="item.type !== 'IN'">-</span>
                             </td>
                             <td>
                                 <span class="text-truncate">{{item?.unitCost}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.out}}</span>
+                                <span class="text-truncate" *ngIf="item.type === 'OUT'">True</span>
+                                <span class="text-truncate" *ngIf="item.type !== 'OUT'">-</span>
                             </td>
                             <td>
                                 <span class="text-truncate">{{item?.balance}}</span>
@@ -146,11 +154,11 @@
                                 <span class="text-truncate">Total</span>
                             </td>
                             <td>
-                                <span class="text-truncate">24</span>
+                                <span class="text-truncate">{{inQuantity}}</span>
                             </td>
                             <td></td>
                             <td>
-                                <span class="text-truncate">14</span>
+                                <span class="text-truncate">{{outQuantity}}</span>
                             </td>
                             <td></td>
                         </tr>

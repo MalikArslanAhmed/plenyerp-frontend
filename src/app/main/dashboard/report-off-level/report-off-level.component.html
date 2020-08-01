@@ -13,7 +13,7 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <button mat-fab class="accent" id="add-button" title="Download Report"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="downloadReport()">
                 <mat-icon>cloud_download</mat-icon>
             </button>
         </div>
@@ -22,8 +22,8 @@
         <div class="center p-24 pb-56 pr-sm-92">
             <div class="content p-24" fusePerfectScrollbar>
                 <form fxLayout="column" [formGroup]="reportOffLevelForm">
-                    <mat-grid-list cols="4" rowHeight="80px" class="m-10px shadow-1px">
-                        <mat-grid-tile class="mt-2">
+                    <mat-grid-list cols="5" rowHeight="80px" class="m-10px shadow-1px">
+                        <!--<mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Start Date</mat-label>
@@ -46,7 +46,7 @@
                                     <mat-datepicker #closingDate></mat-datepicker>
                                 </mat-form-field>
                             </div>
-                        </mat-grid-tile>
+                        </mat-grid-tile>-->
                         <mat-grid-tile class="mt-2">
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column" (click)="selectItemId()">
                                 <mat-form-field appearance="outline" fxFlex="100">
@@ -82,10 +82,11 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Preferred Costing Method</mat-label>
-                                    <select formControlName="costingMethod" matNativeControl>
-                                        <option value="1">W. Avg</option>
-                                        <option value="2">LIFO</option>
-                                        <option value="2">FIFO</option>
+                                    <select formControlName="reportPreference" matNativeControl>
+                                        <option value="">Select Costing Method</option>
+                                        <option value="MIN_ORDER">Minimum Order</option>
+                                        <option value="MAX_ORDER">Maximum Order</option>
+                                        <option value="RE_ORDER">Re-Order</option>
                                     </select>
                                 </mat-form-field>
                             </div>
@@ -119,25 +120,25 @@
                                 <span class="text-truncate">{{i + 1}}.</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.description}}</span>
+                                <span class="text-truncate">{{item?.itemDescription}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.minMaxReorderLevel}}</span>
+                                <span class="text-truncate">{{item?.minimumQuantity}} / {{item?.maximumQuantity}} / {{item?.reorderQuantity}}</span>
                             </td>
                             <td>
                                 <span class="text-truncate">{{item?.onHand}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.quantity}}</span>
+                                <span class="text-truncate">{{item?.quantityVariance}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.variance}}</span>
+                                <span class="text-truncate">{{item?.variancePercentage}}</span>
                             </td>
                             <td>
                                 <span class="text-truncate">{{item?.unitOfMeasure}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.store}}</span>
+                                <span class="text-truncate">{{item?.storeName}}</span>
                             </td>
                         </tr>
                         </tbody>

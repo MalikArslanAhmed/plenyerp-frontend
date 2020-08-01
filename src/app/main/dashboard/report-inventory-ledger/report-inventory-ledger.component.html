@@ -13,7 +13,7 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <button mat-fab class="accent" id="add-button" title="Download Report"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="downloadReport()">
                 <mat-icon>cloud_download</mat-icon>
             </button>
         </div>
