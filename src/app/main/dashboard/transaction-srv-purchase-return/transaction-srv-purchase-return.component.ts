@@ -303,12 +303,14 @@ export class TransactionSrvPurchaseReturnComponent implements OnInit {
             if (!response) {
                 return;
             }
+            
             this.storeItems = [{
                 'name': response.name,
                 'id': response.id
             }];
             this.srvPurchaseReturnForm.patchValue({
                 itemId: response.id,
+                description: response.description ? response.description : ''
             });
             this.unitOfMeasuresData = [{
                 'name': response['inventoryMeasurement'].name,
