@@ -61,8 +61,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeHistoryList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeHistory">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeHistory">
                          <p class="email text-truncate">
                              {{employeeHistory?.sno}}.
                          </p>
@@ -70,8 +70,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="employer">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Employer</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
+                     <mat-header-cell *matHeaderCellDef>Employer</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeHistory">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeHistory?.employer}}
                          </p>
@@ -79,8 +79,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="engaged">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Engaged</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
+                     <mat-header-cell *matHeaderCellDef>Engaged</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeHistory">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeHistory.engaged | date:'mediumDate'}}
                          </p>
@@ -88,8 +88,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="disengaged">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Disengaged</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
+                     <mat-header-cell *matHeaderCellDef>Disengaged</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeHistory">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeHistory?.disengaged | date:'mediumDate'}}
                          </p>
@@ -97,8 +97,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="totalRemuneration">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Total Remuneration</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
+                     <mat-header-cell *matHeaderCellDef>Total Remuneration</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeHistory">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeHistory?.totalRemuneration}}
                          </p>
@@ -106,8 +106,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="filePage">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>File Page</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeHistory">
+                     <mat-header-cell *matHeaderCellDef>File Page</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeHistory">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeHistory?.filePage}}
                          </p>

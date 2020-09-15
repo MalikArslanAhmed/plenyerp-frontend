@@ -91,8 +91,8 @@
         <div class="country-list margin-top-1-5rem">
             <mat-table [@animateStagger]="{value:'50'}" [dataSource]="bankList" style="border: 1px solid #e0e0e0">
                 <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-sm *matCellDef="let bank">
+                    <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                    <mat-cell *matCellDef="let bank">
                         <p class="email text-truncate">
                             {{bank.sno}}.
                         </p>
@@ -100,8 +100,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="type">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Account Type</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
+                    <mat-header-cell *matHeaderCellDef>Account Type</mat-header-cell>
+                    <mat-cell *matCellDef="let bank" class="cursor-pointer">
                         <p class="phone text-truncate cursor-pointer">
                             {{bank.typeOfBankAccount | titlecase}}
                         </p>
@@ -109,8 +109,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="number">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Account Number</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
+                    <mat-header-cell *matHeaderCellDef>Account Number</mat-header-cell>
+                    <mat-cell *matCellDef="let bank" class="cursor-pointer">
                         <p class="phone text-truncate cursor-pointer">
                             {{bank.bankAccountNumber}}
                         </p>
@@ -118,8 +118,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Bank Name</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
+                    <mat-header-cell *matHeaderCellDef>Bank Name</mat-header-cell>
+                    <mat-cell *matCellDef="let bank" class="cursor-pointer">
                         <p class="phone text-truncate cursor-pointer">
                             {{bank.bank?.name}}
                         </p>
@@ -127,8 +127,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="branch">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Branch</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
+                    <mat-header-cell *matHeaderCellDef>Branch</mat-header-cell>
+                    <mat-cell *matCellDef="let bank" class="cursor-pointer">
                         <p class="phone text-truncate cursor-pointer">
                             {{bank.bankBranch?.name}}
                         </p>
@@ -136,8 +136,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="isAuthorised">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Authorised</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let bank" class="cursor-pointer">
+                    <mat-header-cell *matHeaderCellDef>Authorised</mat-header-cell>
+                    <mat-cell *matCellDef="let bank" class="cursor-pointer">
                         <p class="phone text-truncate cursor-pointer" *ngIf="bank.isAuthorised">
                             Active
                         </p>

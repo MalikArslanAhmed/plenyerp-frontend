@@ -94,8 +94,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeQualificationList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeQualification">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeQualification">
                          <p class="email text-truncate">
                              {{employeeQualification.sno}}.
                          </p>
@@ -103,8 +103,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="institution">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Institution</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeQualification">
+                     <mat-header-cell *matHeaderCellDef>Institution</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeQualification">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeQualification?.instituteName}}
                          </p>
@@ -113,8 +113,8 @@
 
 
                  <ng-container matColumnDef="qualification">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Certification</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeQualification">
+                     <mat-header-cell *matHeaderCellDef>Certification</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeQualification">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeQualification?.qualification?.name}}
                          </p>
@@ -123,8 +123,8 @@
 
 
                  <ng-container matColumnDef="country">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Country of Issue</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeQualification">
+                     <mat-header-cell *matHeaderCellDef>Country of Issue</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeQualification">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeQualification?.country?.name}}
                          </p>
@@ -133,8 +133,8 @@
 
 
                  <ng-container matColumnDef="year">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Year</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeQualification">
+                     <mat-header-cell *matHeaderCellDef>Year</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeQualification">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeQualification?.year}}
                          </p>

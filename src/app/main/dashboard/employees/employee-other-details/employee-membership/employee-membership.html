@@ -52,8 +52,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeMembershipList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeMembership">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMembership">
                          <p class="email text-truncate">
                              {{employeeMembership.sno}}.
                          </p>
@@ -61,8 +61,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="membership">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Membership</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMembership">
+                     <mat-header-cell *matHeaderCellDef>Membership</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMembership">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMembership?.membership?.name}}
                          </p>
@@ -70,8 +70,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="membershipRegNumber">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Membership Reg. No.</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMembership">
+                     <mat-header-cell *matHeaderCellDef>Membership Reg. No.</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMembership">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMembership?.membershipRegistrationNumber}}
                          </p>
@@ -79,8 +79,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="membershipRank">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Membership Rank</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMembership">
+                     <mat-header-cell *matHeaderCellDef>Membership Rank</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMembership">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMembership.membershipRank}}
                          </p>
@@ -88,8 +88,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="joinAt">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Date Joined</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMembership">
+                     <mat-header-cell *matHeaderCellDef>Date Joined</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMembership">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMembership?.joinAt | date:'mediumDate'}}
                          </p>

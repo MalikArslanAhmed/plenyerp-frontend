@@ -68,8 +68,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeMilitaryServiceList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeMilitaryService">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMilitaryService">
                          <p class="email text-truncate">
                              {{employeeMilitaryService.sno}}.
                          </p>
@@ -77,8 +77,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="armOfServiceId">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Arm Of Service</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMilitaryService">
+                     <mat-header-cell *matHeaderCellDef>Arm Of Service</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMilitaryService">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMilitaryService?.armOfService?.name}}
                          </p>
@@ -86,8 +86,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="serviceNumber">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Service Number</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMilitaryService">
+                     <mat-header-cell *matHeaderCellDef>Service Number</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMilitaryService">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMilitaryService?.serviceNumber}}
                          </p>
@@ -95,8 +95,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="lastUnit">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Last Unit</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMilitaryService">
+                     <mat-header-cell *matHeaderCellDef>Last Unit</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMilitaryService">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMilitaryService?.lastUnit}}
                          </p>
@@ -104,8 +104,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="engagedAt">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Engaged At</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMilitaryService">
+                     <mat-header-cell *matHeaderCellDef>Engaged At</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMilitaryService">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMilitaryService?.engagedAt | date:'mediumDate'}}
                          </p>
@@ -113,8 +113,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="dischargedAt">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Discharged At</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMilitaryService">
+                     <mat-header-cell *matHeaderCellDef>Discharged At</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMilitaryService">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMilitaryService?.dischargedAt | date:'mediumDate'}}
                          </p>
@@ -122,8 +122,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="reasonToLeave">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Reason To Leave</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeMilitaryService">
+                     <mat-header-cell *matHeaderCellDef>Reason To Leave</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeMilitaryService">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeMilitaryService?.reasonToLeave}}
                          </p>

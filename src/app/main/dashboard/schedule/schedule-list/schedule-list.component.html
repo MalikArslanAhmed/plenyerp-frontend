@@ -1,8 +1,8 @@
 <div fxLayout="column" fxLayoutGap="20px" fxFlex="100">
 <mat-table [@animateStagger]="{value:'50'}" [dataSource]="schedules">
     <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let schedule">
+        <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+        <mat-cell *matCellDef="let schedule">
             <p class="email text-truncate">
                 {{((pagination.page - 1) * pagination.perpage) + schedule.sno}}.
             </p>
@@ -10,8 +10,8 @@
     </ng-container>
 
     <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let schedule">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let schedule">
             <p class="phone text-truncate">
                 {{schedule.name}}
             </p>
@@ -22,7 +22,7 @@
         <mat-header-cell *matHeaderCellDef>
             <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
         </mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let schedule">
+        <mat-cell *matCellDef="let schedule">
             <div fxFlex="row" fxLayoutAlign="end center">
                 <p *ngIf="schedule.isActive">Active</p>
                 <p *ngIf="!schedule.isActive">Inactive</p>

@@ -1,8 +1,8 @@
 <div fxFlex="100" fxLayout="column" fxLayoutGap="20px">
     <mat-table [@animateStagger]="{value:'50'}" [dataSource]="censures">
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-            <mat-cell *matCellDef="let censure" fxHide fxShow.gt-sm>
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let censure">
                 <p class="email text-truncate">
                     {{((pagination.page - 1) * pagination.perpage) + censure.sno}}.
                 </p>
@@ -10,8 +10,8 @@
         </ng-container>
 
         <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-            <mat-cell *matCellDef="let censure" fxHide fxShow.gt-md>
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let censure">
                 <p class="phone text-truncate">
                     {{censure.name}}
                 </p>
@@ -22,7 +22,7 @@
             <mat-header-cell *matHeaderCellDef>
                 <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
             </mat-header-cell>
-            <mat-cell *matCellDef="let censure" fxHide fxShow.gt-md>
+            <mat-cell *matCellDef="let censure">
                 <div fxFlex="row" fxLayoutAlign="end center">
                     <p *ngIf="censure.isActive">Active</p>
                     <p *ngIf="!censure.isActive">Inactive</p>

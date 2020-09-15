@@ -1,8 +1,8 @@
 <div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
     <mat-table [@animateStagger]="{value:'50'}" [dataSource]="statesList">
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let state">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let state">
                 <p class="email text-truncate">
                     {{((pagination.page - 1) * pagination.perpage) + state.sno}}.
                 </p>
@@ -10,8 +10,8 @@
         </ng-container>
 
         <ng-container matColumnDef="country">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Country</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let state">
+            <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+            <mat-cell *matCellDef="let state">
                 <p class="phone text-truncate">
                     {{state?.region?.country?.name}}
                 </p>
@@ -19,8 +19,8 @@
         </ng-container>
 
         <ng-container matColumnDef="region">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Region</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let state">
+            <mat-header-cell *matHeaderCellDef>Region</mat-header-cell>
+            <mat-cell *matCellDef="let state">
                 <p class="phone text-truncate">
                     {{state?.region?.name}}
                 </p>
@@ -28,8 +28,8 @@
         </ng-container>
 
         <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let state">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let state">
                 <p class="phone text-truncate">
                     {{state?.name}}
                 </p>
@@ -40,7 +40,7 @@
             <mat-header-cell *matHeaderCellDef>
                 <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
             </mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let state">
+            <mat-cell *matCellDef="let state">
                 <div fxFlex="row" fxLayoutAlign="end center">
                     <p *ngIf="state.isActive">Active</p>
                     <p *ngIf="!state.isActive">Inactive</p>

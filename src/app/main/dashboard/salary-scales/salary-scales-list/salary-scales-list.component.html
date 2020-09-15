@@ -2,8 +2,8 @@
     <div class="salary-scales-list">
         <mat-table [@animateStagger]="{value:'50'}" [dataSource]="salaryScales">
             <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-sm *matCellDef="let salaryScale">
+                <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                <mat-cell *matCellDef="let salaryScale">
                     <p class="email text-truncate">
                         {{salaryScale.sno}}.
                     </p>
@@ -11,8 +11,8 @@
             </ng-container>
 
             <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-md *matCellDef="let salaryScale" class="cursor-pointer" (click)="goToGradeLevel(salaryScale)">
+                <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                <mat-cell *matCellDef="let salaryScale" class="cursor-pointer" (click)="goToGradeLevel(salaryScale)">
                     <p class="phone text-truncate cursor-pointer" [ngClass]=" salaryScale['isSelected'] ? 'blueColor' : ''" >
                         {{salaryScale.name}}
                     </p>
@@ -61,56 +61,56 @@
             <mat-tab label="Grade Level">
                <mat-table [dataSource]="gradeLevels" style="margin: -8px 1rem 0 1rem">
                    <ng-container matColumnDef="id">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                       <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
+                       <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                       <mat-cell *matCellDef="let gradeLevel">
                            <p class="email text-truncate">
                                {{gradeLevel.sno}}.
                            </p>
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="name">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Name</mat-header-cell>
-                       <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel" class="cursor-pointer" (click)="goToStepLevel(gradeLevel)">
+                       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                       <mat-cell *matCellDef="let gradeLevel" class="cursor-pointer" (click)="goToStepLevel(gradeLevel)">
                            <p class="phone text-truncate" [ngClass]=" gradeLevel['isSelected'] ? 'blueColor' : ''">
                                {{gradeLevel.name}}
                            </p>
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="incrementDue">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Increment Due(Months)</mat-header-cell>
-                       <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
+                       <mat-header-cell *matHeaderCellDef>Increment Due(Months)</mat-header-cell>
+                       <mat-cell *matCellDef="let gradeLevel">
                            <p class="phone text-truncate">
                                {{gradeLevel.incrementDue}}
                            </p>
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="promotionDue">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Promotion Due(Months)</mat-header-cell>
-                       <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
+                       <mat-header-cell *matHeaderCellDef>Promotion Due(Months)</mat-header-cell>
+                       <mat-cell *matCellDef="let gradeLevel">
                            <p class="phone text-truncate">
                                {{gradeLevel.promotionDue}}
                            </p>
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="confirmAfter">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Confirm After(Months)</mat-header-cell>
-                       <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
+                       <mat-header-cell *matHeaderCellDef>Confirm After(Months)</mat-header-cell>
+                       <mat-cell *matCellDef="let gradeLevel">
                            <p class="phone text-truncate">
                                {{gradeLevel.confirmAfter}}
                            </p>
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="retireAfter">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Retire After(Years)</mat-header-cell>
-                       <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
+                       <mat-header-cell *matHeaderCellDef>Retire After(Years)</mat-header-cell>
+                       <mat-cell *matCellDef="let gradeLevel">
                            <p class="phone text-truncate">
                                {{gradeLevel.retireAfter}}
                            </p>
                        </mat-cell>
                    </ng-container>
                    <ng-container matColumnDef="retireType">
-                       <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Retire Type</mat-header-cell>
-                       <mat-cell fxHide fxShow.gt-sm *matCellDef="let gradeLevel">
+                       <mat-header-cell *matHeaderCellDef>Retire Type</mat-header-cell>
+                       <mat-cell *matCellDef="let gradeLevel">
                            <p class="phone text-truncate">
                                {{gradeLevel.retireType}}
                            </p>
@@ -142,16 +142,16 @@
             <mat-tab label="GL Step">
                 <mat-table [dataSource]="stepsLevels" style="margin: -8px 1rem 0 1rem">
                     <ng-container matColumnDef="id">
-                        <mat-header-cell *matHeaderCellDef  fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let stepsLevel">
+                        <mat-header-cell *matHeaderCellDef >S.No</mat-header-cell>
+                        <mat-cell *matCellDef="let stepsLevel">
                             <p class="email text-truncate">
                                 {{stepsLevel.sno}}.
                             </p>
                         </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="name">
-                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Name</mat-header-cell>
-                        <mat-cell fxHide fxShow.gt-sm *matCellDef="let stepsLevel" class="cursor-pointer" (click)="glStepLevel(stepsLevel)">
+                        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let stepsLevel" class="cursor-pointer" (click)="glStepLevel(stepsLevel)">
                             <p class="phone text-truncate " [ngClass]=" stepsLevel['isSelected'] ? 'blueColor' : ''">
                                 {{stepsLevel.name}}
                             </p>

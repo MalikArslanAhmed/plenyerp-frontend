@@ -104,8 +104,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeAddressList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeAddress">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
                          <p class="email text-truncate">
                              {{employeeAddress.sno}}.
                          </p>
@@ -114,8 +114,8 @@
 
 
                  <ng-container matColumnDef="addressType">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Address Type</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                     <mat-header-cell *matHeaderCellDef>Address Type</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeAddress?.addressType?.name}}
                          </p>
@@ -123,8 +123,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="address">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Address</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                     <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeAddress.addressLine1}} <br> {{employeeAddress.addressLine2}}
                          </p>
@@ -132,8 +132,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="city">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>City</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                     <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeAddress.city}}
                          </p>
@@ -141,8 +141,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="zipCode">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>ZIP Code</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                     <mat-header-cell *matHeaderCellDef>ZIP Code</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeAddress?.zipCode}}
                          </p>
@@ -150,8 +150,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="country">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Country</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                     <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeAddress?.country?.name}}
                          </p>
@@ -159,8 +159,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="region">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Region</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                     <mat-header-cell *matHeaderCellDef>Region</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeAddress?.region?.name}}
                          </p>
@@ -168,8 +168,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="state">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>State</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                     <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeAddress?.state?.name}}
                          </p>
@@ -177,8 +177,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="lga">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>LGA</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeAddress">
+                     <mat-header-cell *matHeaderCellDef>LGA</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeAddress">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeAddress?.lga?.name}}
                          </p>

@@ -1,8 +1,8 @@
 <div fxFlex="100" fxLayout="column" fxLayoutGap="20px">
     <mat-table [@animateStagger]="{value:'50'}" [dataSource]="managers">
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-            <mat-cell *matCellDef="let manager" fxHide fxShow.gt-sm>
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let manager">
                 <p class="email text-truncate">
                     {{((pagination.page - 1) * pagination.perpage) + manager.sno}}.
                 </p>
@@ -10,8 +10,8 @@
         </ng-container>
 
         <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-            <mat-cell *matCellDef="let manager" fxHide fxShow.gt-md>
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let manager">
                 <p class="phone text-truncate">
                     {{manager.name}}
                 </p>
@@ -22,7 +22,7 @@
             <mat-header-cell *matHeaderCellDef>
                 <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Username</div>
             </mat-header-cell>
-            <mat-cell *matCellDef="let manager" fxHide fxShow.gt-md>
+            <mat-cell *matCellDef="let manager">
                 <div fxFlex="row" fxLayoutAlign="end center">
                     <p class="text-truncate">
                         {{manager.username}}

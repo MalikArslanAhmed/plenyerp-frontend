@@ -21,8 +21,8 @@
     <div class="p-5px">
         <mat-table [@animateStagger]="{value:'50'}" [dataSource]="stores">
             <ng-container matColumnDef="sno">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-sm *matCellDef="let store">
+                <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                <mat-cell *matCellDef="let store">
                     <p class="email text-truncate">
                         {{((pagination.page - 1) * pagination.perpage) + store.sno}}.
                     </p>
@@ -30,8 +30,8 @@
             </ng-container>
 
             <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Store Id</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-md *matCellDef="let store">
+                <mat-header-cell *matHeaderCellDef>Store Id</mat-header-cell>
+                <mat-cell *matCellDef="let store">
                     <p class="phone text-truncate ml-3">
                         {{store.id}}
                     </p>
@@ -39,8 +39,8 @@
             </ng-container>
 
             <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-md *matCellDef="let store">
+                <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                <mat-cell *matCellDef="let store">
                     <p class="phone text-truncate">
                         {{store.name}}
                     </p>

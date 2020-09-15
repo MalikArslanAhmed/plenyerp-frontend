@@ -59,8 +59,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeLanguageList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeLanguage">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeLanguage">
                          <p class="email text-truncate">
                              {{employeeLanguage.sno}}.
                          </p>
@@ -68,8 +68,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="language">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Language</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeLanguage">
+                     <mat-header-cell *matHeaderCellDef>Language</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeLanguage">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeLanguage?.language?.name}}
                          </p>
@@ -77,8 +77,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="written">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Proficiency(Written)</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeLanguage">
+                     <mat-header-cell *matHeaderCellDef>Proficiency(Written)</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeLanguage">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeLanguage?.writtenProficiency}}
                          </p>
@@ -86,8 +86,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="spoken">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Proficiency(Spoken)</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeLanguage">
+                     <mat-header-cell *matHeaderCellDef>Proficiency(Spoken)</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeLanguage">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeLanguage?.spokenProficiency}}
                          </p>
@@ -95,8 +95,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="certification">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Certification</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeLanguage">
+                     <mat-header-cell *matHeaderCellDef>Certification</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeLanguage">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeLanguage?.certification}}
                          </p>

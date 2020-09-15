@@ -81,16 +81,16 @@
                     <div>
                         <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
                             <ng-container matColumnDef="select">
-                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm class="select-cell">Select
+                                <mat-header-cell *matHeaderCellDef class="select-cell">Select
                                 </mat-header-cell>
-                                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee" [ngClass]="select-cell">
+                                <mat-cell *matCellDef="let employee" [ngClass]="select-cell">
                                     <input type="checkbox" (click)="checkEmployee(employee)">
                                 </mat-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="id">
-                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                                <mat-cell fxHide fxShow.gt-sm *matCellDef="let employee">
+                                <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                                <mat-cell *matCellDef="let employee">
                                     <p class="email text-truncate">
                                         {{((pagination.page - 1) * pagination.perpage) + employee.sno}}.
                                     </p>
@@ -98,8 +98,8 @@
                             </ng-container>
 
                             <ng-container matColumnDef="empId">
-                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>ID</mat-header-cell>
-                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+                                <mat-cell *matCellDef="let employee">
                                     <p class="phone text-truncate">
                                         {{employee?.id}}
                                     </p>
@@ -107,8 +107,8 @@
                             </ng-container>
 
                             <ng-container matColumnDef="fileNo">
-                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>File No.</mat-header-cell>
-                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                <mat-header-cell *matHeaderCellDef>File No.</mat-header-cell>
+                                <mat-cell *matCellDef="let employee">
                                     <p class="phone text-truncate">
                                         {{employee?.personnelFileNumber}}
                                     </p>
@@ -116,8 +116,8 @@
                             </ng-container>
 
                             <ng-container matColumnDef="lastName">
-                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Last name</mat-header-cell>
-                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                <mat-header-cell *matHeaderCellDef>Last name</mat-header-cell>
+                                <mat-cell *matCellDef="let employee">
                                     <p class="phone text-truncate">
                                         {{employee?.lastName}}
                                     </p>
@@ -125,8 +125,8 @@
                             </ng-container>
 
                             <ng-container matColumnDef="firstName">
-                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>First name</mat-header-cell>
-                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                <mat-header-cell *matHeaderCellDef>First name</mat-header-cell>
+                                <mat-cell *matCellDef="let employee">
                                     <p class="phone text-truncate">
                                         {{employee?.firstName}}
                                     </p>
@@ -134,8 +134,8 @@
                             </ng-container>
 
                             <ng-container matColumnDef="title">
-                                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Title</mat-header-cell>
-                                <mat-cell fxHide fxShow.gt-md *matCellDef="let employee">
+                                <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+                                <mat-cell *matCellDef="let employee">
                                     <p class="phone text-truncate">
                                         {{employee?.title}}
                                     </p>

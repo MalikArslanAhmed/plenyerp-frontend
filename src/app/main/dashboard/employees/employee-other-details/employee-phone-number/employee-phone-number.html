@@ -43,8 +43,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeePhoneNumberList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeePhoneNumber">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeePhoneNumber">
                          <p class="email text-truncate">
                              {{employeePhoneNumber.sno}}.
                          </p>
@@ -52,8 +52,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="phoneType">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone Number Type</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeePhoneNumber">
+                     <mat-header-cell *matHeaderCellDef>Phone Number Type</mat-header-cell>
+                     <mat-cell *matCellDef="let employeePhoneNumber">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeePhoneNumber?.phoneNumberType?.name}}
                          </p>
@@ -61,8 +61,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="extension">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Extension</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeePhoneNumber">
+                     <mat-header-cell *matHeaderCellDef>Extension</mat-header-cell>
+                     <mat-cell *matCellDef="let employeePhoneNumber">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeePhoneNumber?.extension}}
                          </p>
@@ -70,8 +70,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="phone">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone No.</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeePhoneNumber">
+                     <mat-header-cell *matHeaderCellDef>Phone No.</mat-header-cell>
+                     <mat-cell *matCellDef="let employeePhoneNumber">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeePhoneNumber?.phone}}
                          </p>

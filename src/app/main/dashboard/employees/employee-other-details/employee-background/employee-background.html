@@ -23,8 +23,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeBackgroundList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeBackground">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeBackground">
                          <p class="email text-truncate">
                              {{employeeBackground.sno}}.
                          </p>
@@ -32,8 +32,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="background">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Background</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeBackground">
+                     <mat-header-cell *matHeaderCellDef>Background</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeBackground">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeBackground?.details}}
                          </p>

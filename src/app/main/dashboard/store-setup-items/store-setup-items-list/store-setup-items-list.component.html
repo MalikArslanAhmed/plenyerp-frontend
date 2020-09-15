@@ -21,8 +21,8 @@
     <div fxFlex="100">
         <mat-table [@animateStagger]="{value:'50'}" [dataSource]="items">
             <ng-container matColumnDef="sno">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-sm *matCellDef="let item">
+                <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                <mat-cell *matCellDef="let item">
                     <p class="email text-truncate">
                         {{((pagination.page - 1) * pagination.perpage) + item.sno}}.
                     </p>
@@ -30,8 +30,8 @@
             </ng-container>
 
             <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Item Id</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+                <mat-header-cell *matHeaderCellDef>Item Id</mat-header-cell>
+                <mat-cell *matCellDef="let item">
                     <p class="phone text-truncate">
                         {{item.id}}
                     </p>
@@ -39,8 +39,8 @@
             </ng-container>
 
             <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Description</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+                <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+                <mat-cell *matCellDef="let item">
                     <p class="phone text-truncate">
                         {{item.description}}
                     </p>
@@ -48,8 +48,8 @@
             </ng-container>
 
             <ng-container matColumnDef="unit">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Unit Price</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+                <mat-header-cell *matHeaderCellDef>Unit Price</mat-header-cell>
+                <mat-cell *matCellDef="let item">
                     <p class="phone text-truncate ml-1">
                         {{item.unitPrice}}
                     </p>
@@ -57,8 +57,8 @@
             </ng-container>
 
             <ng-container matColumnDef="category">
-                <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Category</mat-header-cell>
-                <mat-cell fxHide fxShow.gt-md *matCellDef="let item">
+                <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+                <mat-cell *matCellDef="let item">
                     <p class="phone text-truncate">
                         {{item.categoryId}}
                     </p>

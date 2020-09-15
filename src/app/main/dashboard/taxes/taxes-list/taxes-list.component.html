@@ -1,7 +1,7 @@
 <mat-table [@animateStagger]="{value:'50'}" [dataSource]="taxesList">
     <ng-container matColumnDef="SN">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let tax">
+        <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+        <mat-cell *matCellDef="let tax">
             <p class="email text-truncate">
                 {{((pagination.page - 1) * pagination.perpage) + tax.sno}}.
             </p>
@@ -9,8 +9,8 @@
     </ng-container>
 
     <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Tax ID</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let tax">
+        <mat-header-cell *matHeaderCellDef>Tax ID</mat-header-cell>
+        <mat-cell *matCellDef="let tax">
             <p class="email text-truncate">
                 {{tax.id}}
             </p>
@@ -18,8 +18,8 @@
     </ng-container>
 
     <ng-container matColumnDef="taxTitle">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Tax Title</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-sm *matCellDef="let tax">
+        <mat-header-cell *matHeaderCellDef>Tax Title</mat-header-cell>
+        <mat-cell *matCellDef="let tax">
             <p class="email text-truncate">
                 <!-- {{tax.personnelFileNumber}} -->
                 {{tax.name}}
@@ -28,8 +28,8 @@
     </ng-container>
 
     <ng-container matColumnDef="taxPercentage">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Tax %age (default value)</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
+        <mat-header-cell *matHeaderCellDef>Tax %age (default value)</mat-header-cell>
+        <mat-cell *matCellDef="let tax">
             <p class="phone text-truncate">
                 <!-- {{tax.lastName}} -->
                 {{tax.tax}}
@@ -38,8 +38,8 @@
     </ng-container>
 
     <ng-container matColumnDef="GLCode">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>GL/Code</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
+        <mat-header-cell *matHeaderCellDef>GL/Code</mat-header-cell>
+        <mat-cell *matCellDef="let tax">
             <p class="phone text-truncate">
                 {{tax.departmentId}}
             </p>
@@ -47,8 +47,8 @@
     </ng-container>
 
     <ng-container matColumnDef="benCode">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Benificiary Code</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
+        <mat-header-cell *matHeaderCellDef>Benificiary Code</mat-header-cell>
+        <mat-cell *matCellDef="let tax">
             <p class="phone text-truncate">
                 <!-- {{tax.employeePersonalDetails?.phone}} -->
                 {{tax.companyId}}
@@ -57,8 +57,8 @@
     </ng-container>
 
     <ng-container matColumnDef="benName">
-        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Benificiary Name</mat-header-cell>
-        <mat-cell fxHide fxShow.gt-md *matCellDef="let tax">
+        <mat-header-cell *matHeaderCellDef>Benificiary Name</mat-header-cell>
+        <mat-cell *matCellDef="let tax">
             <p class="phone text-truncate">
                 {{tax.company?.name}}
             </p>

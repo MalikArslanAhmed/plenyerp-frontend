@@ -93,8 +93,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeSchoolAttendedList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeSchoolAttended">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeSchoolAttended">
                          <p class="email text-truncate">
                              {{employeeSchoolAttended.sno}}.
                          </p>
@@ -102,8 +102,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>School Name</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeSchoolAttended">
+                    <mat-header-cell *matHeaderCellDef>School Name</mat-header-cell>
+                    <mat-cell *matCellDef="let employeeSchoolAttended">
                         <p class="phone text-truncate cursor-pointer">
                             {{employeeSchoolAttended.school}}
                         </p>
@@ -111,8 +111,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="country">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Country</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeSchoolAttended">
+                    <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+                    <mat-cell *matCellDef="let employeeSchoolAttended">
                         <p class="phone text-truncate cursor-pointer">
                             {{employeeSchoolAttended.country.name}}
                         </p>
@@ -120,8 +120,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="dateEntered">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Date Entered</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeSchoolAttended">
+                    <mat-header-cell *matHeaderCellDef>Date Entered</mat-header-cell>
+                    <mat-cell *matCellDef="let employeeSchoolAttended">
                         <p class="phone text-truncate cursor-pointer">
                             {{employeeSchoolAttended.enteredAt | date:'mediumDate'}}
                         </p>
@@ -129,8 +129,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="dateExited">
-                    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Date Exited</mat-header-cell>
-                    <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeSchoolAttended">
+                    <mat-header-cell *matHeaderCellDef>Date Exited</mat-header-cell>
+                    <mat-cell *matCellDef="let employeeSchoolAttended">
                         <p class="phone text-truncate cursor-pointer">
                             {{employeeSchoolAttended.exitedAt | date:'mediumDate'}}
                         </p>

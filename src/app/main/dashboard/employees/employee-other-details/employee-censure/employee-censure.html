@@ -82,8 +82,8 @@
          <div class="employee-address">
              <mat-table [@animateStagger]="{value:'50'}" [dataSource] = "employeeCensureList">
                  <ng-container matColumnDef="sno">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-sm *matCellDef="let employeeCensure">
+                     <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeCensure">
                          <p class="email text-truncate">
                              {{employeeCensure.sno}}.
                          </p>
@@ -91,8 +91,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="censure">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Censure</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeCensure">
+                     <mat-header-cell *matHeaderCellDef>Censure</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeCensure">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeCensure?.censure?.name}}
                          </p>
@@ -100,8 +100,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="dateIssued">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Date Issued</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeCensure">
+                     <mat-header-cell *matHeaderCellDef>Date Issued</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeCensure">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeCensure?.dateIssued | date:'mediumDate'}}
                          </p>
@@ -109,8 +109,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="issuedBy">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Issued By</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeCensure">
+                     <mat-header-cell *matHeaderCellDef>Issued By</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeCensure">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeCensure?.issuedBy?.firstName + ' ' + employeeCensure?.issuedBy?.lastName }}
                          </p>
@@ -118,8 +118,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="documentType">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Document Type</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeCensure">
+                     <mat-header-cell *matHeaderCellDef>Document Type</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeCensure">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeCensure?.documentType}}
                          </p>
@@ -127,8 +127,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="file">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>File</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeCensure">
+                     <mat-header-cell *matHeaderCellDef>File</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeCensure">
                          <p class="phone text-truncate cursor-pointer">
                              <a [href]="employeeCensure?.file?.url" target="_blank"> {{employeeCensure?.file?.name}}</a>
                          </p>
@@ -136,8 +136,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="filePage">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>File Page</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeCensure">
+                     <mat-header-cell *matHeaderCellDef>File Page</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeCensure">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeCensure?.filePage}}
                          </p>
@@ -145,8 +145,8 @@
                  </ng-container>
 
                  <ng-container matColumnDef="summary">
-                     <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Summary</mat-header-cell>
-                     <mat-cell fxHide fxShow.gt-md *matCellDef="let employeeCensure">
+                     <mat-header-cell *matHeaderCellDef>Summary</mat-header-cell>
+                     <mat-cell *matCellDef="let employeeCensure">
                          <p class="phone text-truncate cursor-pointer">
                              {{employeeCensure?.summary}}
                          </p>
