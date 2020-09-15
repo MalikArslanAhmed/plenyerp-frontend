@@ -1,8 +1,8 @@
 <div fxLayout="column" fxLayoutGap="20px" fxFlex="100">
     <mat-table [@animateStagger]="{value:'50'}" [dataSource]="segments">
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>S.No</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-sm *matCellDef="let segment">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let segment">
                 <p class="email text-truncate">
                     {{((pagination.page - 1) * pagination.perpage) + segment.sno}}.
                 </p>
@@ -10,8 +10,8 @@
         </ng-container>
 
         <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Name</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let segment">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let segment">
                 <p class="phone text-truncate">
                     {{segment.name}}
                 </p>
@@ -19,8 +19,8 @@
         </ng-container>
 
         <ng-container matColumnDef="characterCount">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Character Count</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let segment">
+            <mat-header-cell *matHeaderCellDef>Character Count</mat-header-cell>
+            <mat-cell *matCellDef="let segment">
                 <p class="phone text-truncate">
                     {{segment.characterCount}}
                 </p>
@@ -28,8 +28,8 @@
         </ng-container>
 
         <ng-container matColumnDef="maxLevels">
-            <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Max Level</mat-header-cell>
-            <mat-cell fxHide fxShow.gt-md *matCellDef="let segment">
+            <mat-header-cell *matHeaderCellDef>Max Level</mat-header-cell>
+            <mat-cell *matCellDef="let segment">
                 <p class="phone text-truncate">
                     {{segment.maxLevel}}
                 </p>

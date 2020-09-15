@@ -51,8 +51,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this.getUser();
 
 
-
-
         // Set the defaults
         this.userStatusOptions = [
             {
@@ -169,7 +167,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     getUser() {
         const token = localStorage.getItem('accessToken');
-        if (token === null){
+        if (token === null) {
             this.authService.logout();
         }
         this.authService.self().subscribe(data => {
@@ -177,10 +175,12 @@ export class ToolbarComponent implements OnInit, OnDestroy {
             this.userImage = data.file;
         });
     }
+
     logout() {
         this.authService.logout();
     }
-    userProfile(){
+
+    userProfile() {
         this.router.navigateByUrl('dashboard/profile');
     }
 }
