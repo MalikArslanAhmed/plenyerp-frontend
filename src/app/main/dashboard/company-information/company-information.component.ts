@@ -17,12 +17,49 @@ export class CompanyInformationComponent implements OnInit {
     {key:"Phone number",value:"9999999999"},
   ];
 
+  isEditableButton=true;
+
   dataSetting=[
-    {key:"Home/local currency",value:"Naira"},
-    {key:"International Currency",value:"USD"}
+    {id:1,key:"Home/local currency",value:"Naira"},
+    {id:2,key:"International Currency",value:"USD"},
+    {id:3,key:"Auto-Post JV?",value:""}
   ]
   displayedColumns: string[] = ['key','value'];
+  displayedColumnsSetting: string[] = ['key','value','actions'];
+
+  dropDownValues=[
+    {id:1,name:"naira"},
+    {id:2,name:"usd"}
+  ]
   ngOnInit(): void {
+    this.refresh();
+  }
+
+  refresh()
+  {
+    this.dataSetting.forEach((value)=>{
+      value['isSelected'] = false;
+    })
+  }
+  editSetting(element){
+    this.dataSetting.forEach((value)=>{
+      if(value.id==element.id){
+
+        value['isSelected']=true;
+      }
+      else{
+        value['isSelected']=false;
+      }
+    });
+
+  }
+
+  update(element){
+    this.dataSetting.forEach((value)=>{
+      if(value.id==element.id){
+        value['isSelected']=false;
+      }
+    })
   }
 
 }
