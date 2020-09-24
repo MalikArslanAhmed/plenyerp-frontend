@@ -54,6 +54,7 @@ import {ReportBinCardComponent} from "./report-bin-card/report-bin-card.componen
 import {ReportInventoryLedgerComponent} from "./report-inventory-ledger/report-inventory-ledger.component";
 import {ReportQuantityBalanceComponent} from "./report-quantity-balance/report-quantity-balance.component";
 import {ReportOffLevelComponent} from "./report-off-level/report-off-level.component";
+import {JournalVoucherComponent} from "./journal-voucher/journal-voucher.component";
 
 const routes: Routes = [
     {
@@ -439,6 +440,13 @@ const routes: Routes = [
         component: ReportOffLevelComponent,
         data: {
             title: 'Report Off Level'
+        }
+    },
+    {
+        path: 'journal-voucher',
+        component: JournalVoucherComponent,
+        data: {
+            title: 'journal Voucher'
         }
     }
 ];

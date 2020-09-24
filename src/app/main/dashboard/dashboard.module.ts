@@ -174,6 +174,8 @@ import {TransactionsItemsSelectComponent} from './transactions-items-select/tran
 import {MatListModule} from '@angular/material/list';
 import { GlCodeSelectComponent } from './taxes/gl-code-select/gl-code-select.component';
 import { EmployeeProgressionHistoryComponent } from './employees/employee-action/employee-progression-history/employee-progression-history.component';
+import { JournalVoucherComponent } from './journal-voucher/journal-voucher.component';
+import { JournalVoucherListComponent } from './journal-voucher/journal-voucher-list/journal-voucher-list.component';
 
 @NgModule({
     declarations: [
@@ -328,7 +330,9 @@ import { EmployeeProgressionHistoryComponent } from './employees/employee-action
         CompanyBankDetailsComponent,
         TransactionsItemsSelectComponent,
         GlCodeSelectComponent,
-        EmployeeProgressionHistoryComponent
+        EmployeeProgressionHistoryComponent,
+        JournalVoucherComponent,
+        JournalVoucherListComponent
     ],
     imports: [
         CommonModule,

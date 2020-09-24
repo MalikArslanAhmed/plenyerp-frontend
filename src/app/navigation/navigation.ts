@@ -497,6 +497,23 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/report-off-level'
                     }
                 ]
+            },
+            {
+                id: 'journal',
+                title: 'Journal Voucher',
+                roles: [AppConstants.ROLE_ID_HR],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'money',
+                children: [
+                    {
+                        id: 'journal-voucher',
+                        title: 'Journal Voucher',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/journal-voucher'
+                    }
+                ]
             }
         ]
     }

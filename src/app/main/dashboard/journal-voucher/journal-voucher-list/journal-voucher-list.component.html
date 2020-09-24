@@ -1,0 +1,99 @@
+<div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="journalVouchers">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let journalVoucher">
+                <p class="email text-truncate">
+                    {{((pagination.page - 1) * pagination.perpage) + journalVoucher.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="jvRef">
+            <mat-header-cell *matHeaderCellDef>JV Ref</mat-header-cell>
+            <mat-cell *matCellDef="let journalVoucher">
+                <p class="phone text-truncate cursor-pointer">
+                    {{journalVoucher.jvRef}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="jvValueDate">
+            <mat-header-cell *matHeaderCellDef>JV Value Date</mat-header-cell>
+            <mat-cell *matCellDef="let journalVoucher">
+                <p class="phone text-truncate cursor-pointer">
+                    {{journalVoucher.jvValueDate}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="narration">
+            <mat-header-cell *matHeaderCellDef>Narration</mat-header-cell>
+            <mat-cell *matCellDef="let journalVoucher">
+                <p class="phone text-truncate cursor-pointer">
+                    {{journalVoucher.narration}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="prepared">
+            <mat-header-cell *matHeaderCellDef>Prepared</mat-header-cell>
+            <mat-cell *matCellDef="let journalVoucher">
+                <p class="phone text-truncate cursor-pointer">
+                    {{journalVoucher.prepared}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="checkedStatus">
+            <mat-header-cell *matHeaderCellDef>Checked</mat-header-cell>
+            <mat-cell *matCellDef="let journalVoucher">
+                <p class="phone text-truncate cursor-pointer">
+                    {{journalVoucher.checkedStatus}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="checkedData">
+            <mat-header-cell *matHeaderCellDef>Checked</mat-header-cell>
+            <mat-cell *matCellDef="let journalVoucher">
+                <p class="phone text-truncate cursor-pointer">
+                    {{journalVoucher.checkedData}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="postedStatus">
+            <mat-header-cell *matHeaderCellDef>Posted ?</mat-header-cell>
+            <mat-cell *matCellDef="let journalVoucher">
+                <p class="phone text-truncate cursor-pointer">
+                    {{journalVoucher.postedStatus}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="postedData">
+            <mat-header-cell *matHeaderCellDef>Posted</mat-header-cell>
+            <mat-cell *matCellDef="let journalVoucher">
+                <p class="phone text-truncate cursor-pointer">
+                    {{journalVoucher.postedData}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedJournalColumns"></mat-header-row>
+        <mat-row *matRowDef="let journalVoucher; columns: displayedJournalColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator *ngIf ="journalVouchers.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="pageEvent = onPageChange($event)"
+    >
+    </mat-paginator>
+</div>
+
+
+
