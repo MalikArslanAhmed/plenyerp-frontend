@@ -4,13 +4,18 @@
 //     margin-left: 22px;
 // }
 
-.company-style{
+.company-style {
     height: 100%;
     width: 100%;
 }
-table{
+
+table {
     position: relative;
-    top:20px;
+    top: 20px;
     width: 98%;
-    margin:0px auto;
+    margin: 0px auto;
+}
+
+.mt-5rem {
+    margin-top: 5rem !important;
 }
