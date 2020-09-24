@@ -19,7 +19,8 @@ export class CompanyInformationComponent implements OnInit {
         {id: 3, key: "Auto-Post JV?", value: ""}
     ];
     displayedColumns: string[] = ['key', 'value'];
-    displayedColumnsSetting: string[] = ['key', 'value', 'actions'];
+   // displayedColumnsSetting: string[] = ['key', 'value', 'actions'];
+    displayedColumnsSetting: string[] = ['key', 'value'];
     dropDownValues = [
         {id: 1, name: "naira"},
         {id: 2, name: "usd"}

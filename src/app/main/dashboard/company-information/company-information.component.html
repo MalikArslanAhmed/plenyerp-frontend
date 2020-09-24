@@ -40,9 +40,21 @@
                     <ng-container *ngIf="i===2">
                         <mat-slide-toggle></mat-slide-toggle>
                     </ng-container>
+
+                    
+                        <button mat-icon-button aria-label="Toggle star" *ngIf="i!==2 && !element.isSelected"
+                                (click)="editSetting(element)"
+                                style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+
+                        <button mat-raised-button color="accent" class="update-button submit-button" *ngIf="element.isSelected"
+                                (click)="update(element)">Update
+                        </button>
+                   
                 </td>
             </ng-container>
-
+<!-- 
             <ng-container matColumnDef="actions">
                 <mat-cell *matCellDef="let element; let i=index">
                     <div fxFlex="row" fxLayoutAlign="end center">
@@ -57,7 +69,7 @@
                         </button>
                     </div>
                 </mat-cell>
-            </ng-container>
+            </ng-container> -->
             <tr mat-header-row *matHeaderRowDef="['titlename']"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsSetting;"></tr>
         </table>
