@@ -128,65 +128,6 @@
                         </mat-paginator>
                     </div>
                 </div>
-                <!--<div class="preview-col col" *ngIf="bankBranch && bankBranch['branches'] && bankBranch['branches'].length > 0">
-                    <div class="preview-wrapper">
-                        <div class="custom-container-fluid">
-                            <div class="custom-row">
-                                <div>
-                                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="bankBranch['branches']">
-                                        <ng-container matColumnDef="id">
-                                            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
-                                            <mat-cell *matCellDef="let branch">
-                                                <p class="email text-truncate">
-                                                    {{((pagination.page - 1) * pagination.perpage) + branch.sno}}.
-                                                </p>
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="title">
-                                            <mat-header-cell *matHeaderCellDef>Branch Title</mat-header-cell>
-                                            <mat-cell *matCellDef="let branch">
-                                                <p class="phone text-truncate">
-                                                    {{branch?.title}}
-                                                </p>
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="address">
-                                            <mat-header-cell *matHeaderCellDef>Branch Address</mat-header-cell>
-                                            <mat-cell *matCellDef="let branch">
-                                                <p class="phone text-truncate">
-                                                    {{branch?.address}}
-                                                </p>
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <ng-container matColumnDef="sortCode">
-                                            <mat-header-cell *matHeaderCellDef>Sort Code</mat-header-cell>
-                                            <mat-cell *matCellDef="let branch">
-                                                <p class="phone text-truncate">
-                                                    {{branch?.sortCode}}
-                                                </p>
-                                            </mat-cell>
-                                        </ng-container>
-
-                                        <mat-header-row *matHeaderRowDef="displayedBranchColumns"></mat-header-row>
-                                        <mat-row *matRowDef="let branch; columns: displayedBranchColumns;" class="contact"
-                                                 [@animate]="{value:'*',params:{y:'100%'}}">
-                                        </mat-row>
-                                    </mat-table>
-                                    <mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
-                                                   *ngIf="bankBranch['branches'].length > 0"
-                                                   [length]="pagination.total"
-                                                   [pageIndex]="pagination.page-1"
-                                                   [pageSize]="pagination.perpage"
-                                    >
-                                    </mat-paginator>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>
