@@ -35,6 +35,30 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
+                id: 'setup',
+                title: 'Setup',
+                roles: [AppConstants.ROLE_ID_HR],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'settings',
+                children: [
+                    {
+                        id: 'banks',
+                        title: 'Banks',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/banks'
+                    },
+                    {
+                        id: 'currencies',
+                        title: 'Currencies',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/currencies'
+                    }
+                ]
+            },
+            {
                 id: 'admin-segments',
                 title: 'Charts of Accounts',
                 roles: [AppConstants.ROLE_ID_ADMIN],
