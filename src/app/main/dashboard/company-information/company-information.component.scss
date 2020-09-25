@@ -27,7 +27,34 @@ table {
 //     margin-left: 52px !important;
 // }
 
-.mat-cell .mat-select {
-    width: auto;         
-    min-width: 100px; /*adjust accordingly*/
+// .mat-cell .mat-select {
+//     width: auto;         
+//     min-width: 100px; /*adjust accordingly*/
+// }
+
+.editPlace {
+    display: flex;
+  }
+  
+  .editPlace > * {
+    margin-right: 10px;
+  }
+  
+  .mat-select {
+    border: 1px solid #666666;
+    border-radius: 5px;
+    width: 10em;
+  }
+
+  .value{
+      margin-right: 132px;
+  }
+
+  
+  .editicon{
+    margin-left: -222px;
+}
+
+.toggle{
+    margin-left: -132px;
 }
