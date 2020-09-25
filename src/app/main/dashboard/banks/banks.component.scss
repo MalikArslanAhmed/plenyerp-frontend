@@ -31,7 +31,7 @@ app-banks {
 
         .mat-row {
             position: relative;
-            cursor: pointer;
+            //cursor: pointer;
             padding: 8px;
 
             .mat-cell {
@@ -156,4 +156,19 @@ app-banks {
             }
         }
     }
+    #add-button {
+        background-color: white !important;
+        color: #106CC8 !important;
+    }
+}
+.blueColor{
+    color: blue;
+}
+.hover_color{
+    &:hover{
+        color: blue;
+        cursor: pointer;
+    }
+
+
 }

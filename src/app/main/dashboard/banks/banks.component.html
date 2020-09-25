@@ -12,7 +12,7 @@
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-            <button mat-fab class="accent" id="add-button" aria-label="add categories"
+            <button mat-fab class="accent" id="add-button" aria-label="add categories" (click)="addBanks()"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
                 <mat-icon>add_circle</mat-icon>
             </button>
@@ -38,7 +38,7 @@
                                 <mat-header-cell *matHeaderCellDef>Bank ID</mat-header-cell>
                                 <mat-cell *matCellDef="let bank">
                                     <p class="phone text-truncate">
-                                        {{bank?.bankId}}
+                                        {{bank?.id}}
                                     </p>
                                 </mat-cell>
                             </ng-container>
@@ -46,8 +46,9 @@
                             <ng-container matColumnDef="title">
                                 <mat-header-cell *matHeaderCellDef>Bank Title</mat-header-cell>
                                 <mat-cell *matCellDef="let bank">
-                                    <p class="phone text-truncate" (click)="selectBranch(bank)">
-                                        {{bank?.title}}
+                                    <p class="phone text-truncate hover_color" (click)="selectBranch(bank)"
+                                       [ngClass]=" bank['isSelected'] ? 'blueColor' : ''">
+                                        {{bank?.name}}
                                     </p>
                                 </mat-cell>
                             </ng-container>
@@ -56,8 +57,24 @@
                                 <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
                                 <mat-cell *matCellDef="let bank">
                                     <p class="phone text-truncate">
-                                        {{bank?.isActive}}
+                                        {{ bank.isActive === 1 ? 'Active' : 'Inactive'}}
                                     </p>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action">
+                                <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                                <mat-cell *matCellDef="let bank">
+                                    <div fxFlex="row" fxLayoutAlign="start center">
+                                        <button mat-icon-button aria-label="Toggle star" (click)="editBank(bank)"
+                                                style="color: blue">
+                                            <mat-icon class="material-icons">edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button aria-label="Toggle star" (click)="deleteBank(bank)"
+                                                style="color: red">
+                                            <mat-icon class="material-icons">delete</mat-icon>
+                                        </button>
+                                    </div>
                                 </mat-cell>
                             </ng-container>
 
@@ -75,14 +92,14 @@
                         </mat-paginator>
                     </div>
                 </div>
-                <div class="list-col col" *ngIf="bankBranch && bankBranch['branches'] && bankBranch['branches'].length > 0">
+                <div class="list-col col">
                     <div>
-                        <mat-table [@animateStagger]="{value:'50'}" [dataSource]="bankBranch['branches']">
+                        <mat-table [@animateStagger]="{value:'50'}" [dataSource]="bankBranch">
                             <ng-container matColumnDef="id">
                                 <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
                                 <mat-cell *matCellDef="let branch">
                                     <p class="email text-truncate">
-                                        {{((pagination.page - 1) * pagination.perpage) + branch.sno}}.
+                                        {{((paginationBranches.page - 1) * paginationBranches.perpage) + branch.sno}}.
                                     </p>
                                 </mat-cell>
                             </ng-container>
@@ -91,7 +108,7 @@
                                 <mat-header-cell *matHeaderCellDef>Branch Title</mat-header-cell>
                                 <mat-cell *matCellDef="let branch">
                                     <p class="phone text-truncate">
-                                        {{branch?.title}}
+                                        {{branch?.name}}
                                     </p>
                                 </mat-cell>
                             </ng-container>
@@ -114,13 +131,34 @@
                                 </mat-cell>
                             </ng-container>
 
+                            <ng-container matColumnDef="action">
+                                <mat-header-cell *matHeaderCellDef>Action
+                                    <button mat-icon-button aria-label="Toggle star" (click)="addBranch()"
+                                            style="color: #039be5;margin-left: 1rem" title="Add Branch">
+                                        <mat-icon class="material-icons">add_circle</mat-icon>
+                                    </button>
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let branch">
+                                    <div fxFlex="row" fxLayoutAlign="start center">
+                                        <button mat-icon-button aria-label="Toggle star" (click)="editBranch(branch)"
+                                                style="color: blue">
+                                            <mat-icon class="material-icons">edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button aria-label="Toggle star" (click)="deleteBranch(branch)"
+                                                style="color: red">
+                                            <mat-icon class="material-icons">delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </mat-cell>
+                            </ng-container>
+
                             <mat-header-row *matHeaderRowDef="displayedBranchColumns"></mat-header-row>
                             <mat-row *matRowDef="let branch; columns: displayedBranchColumns;" class="contact"
                                      [@animate]="{value:'*',params:{y:'100%'}}">
                             </mat-row>
                         </mat-table>
-                        <mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
-                                       *ngIf="bankBranch['branches'].length > 0"
+                        <mat-paginator #paginator (page)="pageEvent = onBranchPageChange($event)"
+                                       *ngIf="bankBranch && bankBranch.length > 0"
                                        [length]="paginationBranches.total"
                                        [pageIndex]="paginationBranches.page-1"
                                        [pageSize]="paginationBranches.perpage"

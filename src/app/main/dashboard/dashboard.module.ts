@@ -175,6 +175,8 @@ import {MatListModule} from '@angular/material/list';
 import {GlCodeSelectComponent} from './taxes/gl-code-select/gl-code-select.component';
 import {EmployeeProgressionHistoryComponent} from './employees/employee-action/employee-progression-history/employee-progression-history.component';
 import {BanksComponent} from './banks/banks.component';
+import {BankCreateComponent} from './banks/bank-create/bank-create.component';
+import {BranchCreateComponent} from './banks/branch-create/branch-create.component';
 
 @NgModule({
     declarations: [
@@ -330,7 +332,9 @@ import {BanksComponent} from './banks/banks.component';
         TransactionsItemsSelectComponent,
         GlCodeSelectComponent,
         EmployeeProgressionHistoryComponent,
-        BanksComponent
+        BanksComponent,
+        BankCreateComponent,
+        BranchCreateComponent
     ],
     imports: [
         CommonModule,
