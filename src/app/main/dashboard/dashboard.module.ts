@@ -176,6 +176,7 @@ import { GlCodeSelectComponent } from './taxes/gl-code-select/gl-code-select.com
 import { EmployeeProgressionHistoryComponent } from './employees/employee-action/employee-progression-history/employee-progression-history.component';
 import { JournalVoucherComponent } from './journal-voucher/journal-voucher.component';
 import { JournalVoucherListComponent } from './journal-voucher/journal-voucher-list/journal-voucher-list.component';
+import { JournalVoucherCreateComponent } from './journal-voucher/journal-voucher-create/journal-voucher-create.component';
 
 @NgModule({
     declarations: [
@@ -332,7 +333,8 @@ import { JournalVoucherListComponent } from './journal-voucher/journal-voucher-l
         GlCodeSelectComponent,
         EmployeeProgressionHistoryComponent,
         JournalVoucherComponent,
-        JournalVoucherListComponent
+        JournalVoucherListComponent,
+        JournalVoucherCreateComponent
     ],
     imports: [
         CommonModule,

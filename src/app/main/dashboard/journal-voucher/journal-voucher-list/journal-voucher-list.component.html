@@ -37,16 +37,22 @@
         </ng-container>
 
         <ng-container matColumnDef="prepared">
-            <mat-header-cell *matHeaderCellDef>Prepared</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>PREPARED
+                <br>-- Value Date
+                <br>-- Trxn Date
+                <br>-- Username
+            </mat-header-cell>
             <mat-cell *matCellDef="let journalVoucher">
                 <p class="phone text-truncate cursor-pointer">
-                    {{journalVoucher.prepared}}
+                    {{journalVoucher['prepared'].valueDate}}
+                    <br>{{journalVoucher['prepared'].trxnDate}}
+                    <br>{{journalVoucher['prepared'].username}}
                 </p>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="checkedStatus">
-            <mat-header-cell *matHeaderCellDef>Checked</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Checked ?</mat-header-cell>
             <mat-cell *matCellDef="let journalVoucher">
                 <p class="phone text-truncate cursor-pointer">
                     {{journalVoucher.checkedStatus}}
@@ -55,10 +61,16 @@
         </ng-container>
 
         <ng-container matColumnDef="checkedData">
-            <mat-header-cell *matHeaderCellDef>Checked</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>CHECKED
+                <br>-- Value Date
+                <br>-- Trxn Date
+                <br>-- Username
+            </mat-header-cell>
             <mat-cell *matCellDef="let journalVoucher">
                 <p class="phone text-truncate cursor-pointer">
-                    {{journalVoucher.checkedData}}
+                    {{journalVoucher['checkedData'].valueDate}}
+                    <br>{{journalVoucher['checkedData'].trxnDate}}
+                    <br>{{journalVoucher['checkedData'].username}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -73,10 +85,16 @@
         </ng-container>
 
         <ng-container matColumnDef="postedData">
-            <mat-header-cell *matHeaderCellDef>Posted</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>POSTED
+                <br>-- Value Date
+                <br>-- Trxn Date
+                <br>-- Username
+            </mat-header-cell>
             <mat-cell *matCellDef="let journalVoucher">
                 <p class="phone text-truncate cursor-pointer">
-                    {{journalVoucher.postedData}}
+                    {{journalVoucher['postedData'].valueDate}}
+                    <br>{{journalVoucher['postedData'].trxnDate}}
+                    <br>{{journalVoucher['postedData'].username}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -86,7 +104,7 @@
                  [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
-    <mat-paginator #paginator *ngIf ="journalVouchers.length > 0"
+    <mat-paginator #paginator *ngIf="journalVouchers.length > 0"
                    [length]="pagination.total"
                    [pageSize]="pagination.perpage"
                    [pageIndex]="pagination.page-1"
