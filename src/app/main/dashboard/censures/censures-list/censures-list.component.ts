@@ -5,7 +5,7 @@ import {CensuresService} from '../../../../shared/services/censures.service';
 import {CensuresCreateComponent} from '../censures-create/censures-create.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
-import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-censures-list',
@@ -25,6 +25,7 @@ export class CensuresListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
     constructor(private censuresService: CensuresService,
                 private _matDialog: MatDialog) {
     }
@@ -61,7 +62,7 @@ export class CensuresListComponent implements OnInit {
             }
         });
 
-    } 
+    }
 
     deleteCensure(id) {
         this.censuresService.deleteCensure(id).subscribe(data => {
@@ -83,6 +84,7 @@ export class CensuresListComponent implements OnInit {
             this.getCensures();
         });
     }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getCensures();

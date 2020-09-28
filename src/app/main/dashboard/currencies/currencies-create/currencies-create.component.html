@@ -1,0 +1,239 @@
+<div id="currencies-create" class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="currencyForm">
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Currency Code</mat-label>
+                            <input matInput formControlName="currencyCode"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Country Code</mat-label>
+                            <input matInput formControlName="countryCode"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="2" rowHeight="30px">
+                <div fxLayout="row" fxLayoutAlign="end end">
+                    <mat-grid-tile class="abc">
+                        <h4>Currency :</h4>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <h4>Change :</h4>
+                    </mat-grid-tile>
+                </div>
+            </mat-grid-list>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Name Singular</mat-label>
+                            <input matInput formControlName="currencySingular"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Name Singular</mat-label>
+                            <input matInput formControlName="changeSingular"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Name Plural</mat-label>
+                            <input matInput formControlName="currencyPlural"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Name Plural</mat-label>
+                            <input matInput formControlName="changePlural"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Sign</mat-label>
+                            <input matInput formControlName="currencySign"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Sign</mat-label>
+                            <input matInput formControlName="changeSign"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="1" rowHeight="30px">
+                <div fxLayout="row" fxLayoutAlign="start end">
+                    <mat-grid-tile>
+                        <h4>Current Yr. Closing Rate :</h4>
+                    </mat-grid-tile>
+                </div>
+            </mat-grid-list>
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 01</mat-label>
+                            <input matInput formControlName="month01"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 02</mat-label>
+                            <input matInput formControlName="month02"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 03</mat-label>
+                            <input matInput formControlName="month03"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 04</mat-label>
+                            <input matInput formControlName="month04"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 05</mat-label>
+                            <input matInput formControlName="month05"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 06</mat-label>
+                            <input matInput formControlName="month06"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 07</mat-label>
+                            <input matInput formControlName="month07"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 08</mat-label>
+                            <input matInput formControlName="month08"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 09</mat-label>
+                            <input matInput formControlName="month09"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 10</mat-label>
+                            <input matInput formControlName="month10"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 11</mat-label>
+                            <input matInput formControlName="month11"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Month - 12</mat-label>
+                            <input matInput formControlName="month12"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        Previous Year Closing Rate
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>In Local Currency</mat-label>
+                            <input matInput formControlName="inLocalCurrency"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>In International Currency</mat-label>
+                            <input matInput formControlName="inInternationalCurrency"/>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-label style="margin-right: 20px">Is Active</mat-label>
+                    <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+                </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close(currencyForm); saveCurrency()"
+                [disabled]="currencyForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(currencyForm); updateCurrency()"
+                [disabled]="currencyForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>
