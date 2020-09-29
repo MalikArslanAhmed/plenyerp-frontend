@@ -55,7 +55,7 @@ export const navigation: FuseNavigation[] = [
             /*{
                 id: 'training-management',
                 title: 'Training Management',
-                roles: [AppConstants.ROLE_ID_HR],
+                user-role: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'watch_later',
@@ -64,7 +64,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'access-control',
                 title: 'Access Control',
-                roles: [AppConstants.ROLE_ID_HR],
+                user-role: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'settings_applications',
@@ -497,7 +497,24 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/report-off-level'
                     }
                 ]
-            }
+            },
+            {
+                id: 'configurations',
+                title: 'Configurations',
+                roles: [],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'admin_panel_settings',
+                children: [
+                    {
+                        id: 'user-role',
+                        title: 'Roles',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/user-role'
+                    }
+                ]
+            },
         ]
     }
 ];

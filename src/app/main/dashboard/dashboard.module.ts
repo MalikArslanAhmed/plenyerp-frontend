@@ -174,6 +174,9 @@ import {TransactionsItemsSelectComponent} from './transactions-items-select/tran
 import {MatListModule} from '@angular/material/list';
 import { GlCodeSelectComponent } from './taxes/gl-code-select/gl-code-select.component';
 import { EmployeeProgressionHistoryComponent } from './employees/employee-action/employee-progression-history/employee-progression-history.component';
+import {UserRoleComponent} from './configurations/user-role/user-role.component';
+import {UserRoleListComponent} from './configurations/user-role/user-role-list/user-role-list.component';
+import {UserRoleCreateComponent} from './configurations/user-role/user-role-create/user-role-create.component';
 
 @NgModule({
     declarations: [
@@ -328,7 +331,10 @@ import { EmployeeProgressionHistoryComponent } from './employees/employee-action
         CompanyBankDetailsComponent,
         TransactionsItemsSelectComponent,
         GlCodeSelectComponent,
-        EmployeeProgressionHistoryComponent
+        EmployeeProgressionHistoryComponent,
+        UserRoleComponent,
+        UserRoleListComponent,
+        UserRoleCreateComponent
     ],
     imports: [
         CommonModule,

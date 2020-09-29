@@ -36,9 +36,9 @@ export class GlobalService {
         const filteredRoutes = [];
         const blackListedParentRoutes = [];
         menuItems.forEach((i) => {
-            if (!i['roles'] || !i['roles'].length) {
+            if (!i['user-role'] || !i['user-role'].length) {
                 filteredRoutes.push(i)
-            } else if (i['roles'].indexOf(self.roleId) > -1) {
+            } else if (i['user-role'].indexOf(self.roleId) > -1) {
                 filteredRoutes.push(i)
             } else {
                 blackListedParentRoutes.push(i)

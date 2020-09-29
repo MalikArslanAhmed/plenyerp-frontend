@@ -54,6 +54,7 @@ import {ReportBinCardComponent} from "./report-bin-card/report-bin-card.componen
 import {ReportInventoryLedgerComponent} from "./report-inventory-ledger/report-inventory-ledger.component";
 import {ReportQuantityBalanceComponent} from "./report-quantity-balance/report-quantity-balance.component";
 import {ReportOffLevelComponent} from "./report-off-level/report-off-level.component";
+import {UserRoleComponent} from './configurations/user-role/user-role.component';
 
 const routes: Routes = [
     {
@@ -316,7 +317,7 @@ const routes: Routes = [
         }
     },
     {
-        path: 'managers/:id/roles',
+        path: 'managers/:id/user-role',
         component: RolesComponent,
         data: {
             title: 'Roles'
@@ -439,6 +440,13 @@ const routes: Routes = [
         component: ReportOffLevelComponent,
         data: {
             title: 'Report Off Level'
+        }
+    },
+    {
+        path: 'user-role',
+        component: UserRoleComponent,
+        data: {
+            title: 'Roles'
         }
     }
 ];

@@ -1,0 +1,66 @@
+<div class="userRole-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="userRoleList">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let userRole">
+                <p class="email text-truncate">
+                    {{((pagination.page - 1) * pagination.perpage) + userRole.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="roleName">
+            <mat-header-cell *matHeaderCellDef>Role Name</mat-header-cell>
+            <mat-cell *matCellDef="let userRole" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{userRole?.role}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+            <mat-cell *matCellDef="let userRole" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{userRole?.description}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let userRole">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-icon-button aria-label="Toggle star" matTooltip="Add Permission" matTooltipPosition="left" (click)="addPermissions(userRole)"
+                            style="color: #000000">
+                        <mat-icon class="material-icons">person</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star" (click)="editUserRole(userRole)"
+                            style="color: blue">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModel(userRole)"
+                            style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedCountryColumns"></mat-header-row>
+        <mat-row *matRowDef="let userRole; columns: displayedCountryColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator *ngIf ="userRoleList.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="pageEvent = onPageChange($event)"
+    >
+    </mat-paginator>
+</div>
+
+
