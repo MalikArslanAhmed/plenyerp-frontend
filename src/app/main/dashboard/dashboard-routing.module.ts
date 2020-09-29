@@ -54,6 +54,7 @@ import {ReportBinCardComponent} from "./report-bin-card/report-bin-card.componen
 import {ReportInventoryLedgerComponent} from "./report-inventory-ledger/report-inventory-ledger.component";
 import {ReportQuantityBalanceComponent} from "./report-quantity-balance/report-quantity-balance.component";
 import {ReportOffLevelComponent} from "./report-off-level/report-off-level.component";
+import { RouteGuard } from 'app/shared/guards/route.guard';
 
 const routes: Routes = [
     {
@@ -206,8 +207,10 @@ const routes: Routes = [
     {
         path: 'admin-segments',
         component: AdminSegmentsComponent,
+        canActivate: [RouteGuard],
         data: {
-            title: 'Admin Segment'
+            title: 'Admin Segment',
+            permissions: []
         },
     },
     {
