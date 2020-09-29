@@ -29,4 +29,9 @@ export class UserRolesPermissionService extends BaseService {
     updateUserRoles(id, data): Observable<any> {
         return this.putRequest(AppUrl.GET_USER_ROLE_LIST(id), data);
     }
+    // @ts-ignore
+    roleBasePermissionList(id, data): Observable<any> {
+        return this.getRequest(AppUrl.GET_ROLE_BASED_PERMISSION_LIST(id), data);
+    }
+
 }

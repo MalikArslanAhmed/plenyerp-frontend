@@ -23,13 +23,15 @@
                         *ngFor="let rolePermission of permissionModule">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    {{rolePermission.moduleName}}
+                                    {{rolePermission.module}}
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <p>
                                 <mat-checkbox
-                                    class="example-margin">
-                                    I'm a checkbox
+                                    class="example-margin"
+                                    (change)="getPermissions($event, rolePermission)"
+                                >
+                                    {{rolePermission.name}}
                                 </mat-checkbox>
                             </p>
                         </mat-expansion-panel>

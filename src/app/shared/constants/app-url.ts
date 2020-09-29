@@ -1001,4 +1001,7 @@ export class AppUrl {
         }
 
     }
+    static GET_ROLE_BASED_PERMISSION_LIST(id): string {
+        return AppUrl.API_URL + `roles/` + id + `/permissions`;
+    }
 }
