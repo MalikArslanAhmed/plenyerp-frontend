@@ -6,6 +6,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import {UserRolesPermissionService} from '../../../../../shared/services/user-roles-permission.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-user-role-list',
@@ -30,6 +31,7 @@ export class UserRoleListComponent implements OnInit {
 
     // tslint:disable-next-line:no-shadowed-variable
     constructor(private userRolesPermissionService: UserRolesPermissionService,
+                private router: Router,
                 private _matDialog: MatDialog) {
     }
 
@@ -93,6 +95,8 @@ export class UserRoleListComponent implements OnInit {
     }
 
     addPermissions(userRole) {
-
+    this.router.navigateByUrl('dashboard/user-role/' + userRole.id);
+        // user-role/:roleId/permissions/
+    // role-permissions/:roleId
     }
 }

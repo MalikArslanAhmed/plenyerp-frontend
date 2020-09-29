@@ -55,6 +55,7 @@ import {ReportInventoryLedgerComponent} from "./report-inventory-ledger/report-i
 import {ReportQuantityBalanceComponent} from "./report-quantity-balance/report-quantity-balance.component";
 import {ReportOffLevelComponent} from "./report-off-level/report-off-level.component";
 import {UserRoleComponent} from './configurations/user-role/user-role.component';
+import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
 
 const routes: Routes = [
     {
@@ -447,6 +448,13 @@ const routes: Routes = [
         component: UserRoleComponent,
         data: {
             title: 'Roles'
+        }
+    },
+    {
+        path: 'user-role/:roleId',
+        component: UserRolePermissionComponent,
+        data: {
+            title: 'User Role Permission'
         }
     }
 ];

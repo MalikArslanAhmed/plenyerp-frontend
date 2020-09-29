@@ -177,6 +177,8 @@ import { EmployeeProgressionHistoryComponent } from './employees/employee-action
 import {UserRoleComponent} from './configurations/user-role/user-role.component';
 import {UserRoleListComponent} from './configurations/user-role/user-role-list/user-role-list.component';
 import {UserRoleCreateComponent} from './configurations/user-role/user-role-create/user-role-create.component';
+import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
     declarations: [
@@ -334,7 +336,8 @@ import {UserRoleCreateComponent} from './configurations/user-role/user-role-crea
         EmployeeProgressionHistoryComponent,
         UserRoleComponent,
         UserRoleListComponent,
-        UserRoleCreateComponent
+        UserRoleCreateComponent,
+        UserRolePermissionComponent
     ],
     imports: [
         CommonModule,
@@ -364,7 +367,8 @@ import {UserRoleCreateComponent} from './configurations/user-role/user-role-crea
         SharedModule,
         MatPaginatorModule,
         MatAutocompleteModule,
-        MatListModule
+        MatListModule,
+        MatExpansionModule
     ]
 })
 export class DashboardModule {
