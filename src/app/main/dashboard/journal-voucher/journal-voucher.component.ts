@@ -1,9 +1,10 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {FormGroup} from "@angular/forms";
 import {FuseSidebarService} from "../../../../@fuse/components/sidebar/sidebar.service";
 import {MatDialog} from "@angular/material/dialog";
 import {JournalVoucherCreateComponent} from "./journal-voucher-create/journal-voucher-create.component";
+import {JournalVoucherListComponent} from "./journal-voucher-list/journal-voucher-list.component";
 
 @Component({
     selector: 'app-journal-voucher',
@@ -14,6 +15,7 @@ import {JournalVoucherCreateComponent} from "./journal-voucher-create/journal-vo
 })
 export class JournalVoucherComponent implements OnInit {
     dialogRef: any;
+    @ViewChild(JournalVoucherListComponent) getJournalVoucherData: JournalVoucherListComponent;
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -32,7 +34,7 @@ export class JournalVoucherComponent implements OnInit {
             if (!response) {
                 return;
             }
-            // this.getDesignationList.getDesignationList();
+            this.getJournalVoucherData.getJournalVoucherList();
         });
     }
 }

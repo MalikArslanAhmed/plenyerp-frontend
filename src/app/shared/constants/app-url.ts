@@ -992,4 +992,8 @@ export class AppUrl {
     static UPDATE_EMPLOYEE_PROGRESSION_DETAILS(empId, progressionId): string {
         return AppUrl.API_URL + `employee/` + empId + '/progression-history/' + progressionId;
     }
+
+    static JOURNAL_VOUCHER(): string {
+        return AppUrl.API_URL + `journal-vouchers`;
+    }
 }

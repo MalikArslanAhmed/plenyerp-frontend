@@ -177,6 +177,12 @@ import { EmployeeProgressionHistoryComponent } from './employees/employee-action
 import { JournalVoucherComponent } from './journal-voucher/journal-voucher.component';
 import { JournalVoucherListComponent } from './journal-voucher/journal-voucher-list/journal-voucher-list.component';
 import { JournalVoucherCreateComponent } from './journal-voucher/journal-voucher-create/journal-voucher-create.component';
+import { FundSegmentSelectComponent } from './journal-voucher/fund-segment-select/fund-segment-select.component';
+import { AdminSegmentSelectComponent } from './journal-voucher/admin-segment-select/admin-segment-select.component';
+import { EconomicSegmentSelectComponent } from './journal-voucher/economic-segment-select/economic-segment-select.component';
+import { ProgrammingSegmentSelectComponent } from './journal-voucher/programming-segment-select/programming-segment-select.component';
+import { FunctionalSegmentSelectComponent } from './journal-voucher/functional-segment-select/functional-segment-select.component';
+import { GeoCodeSegmentSelectComponent } from './journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
 
 @NgModule({
     declarations: [
@@ -334,7 +340,13 @@ import { JournalVoucherCreateComponent } from './journal-voucher/journal-voucher
         EmployeeProgressionHistoryComponent,
         JournalVoucherComponent,
         JournalVoucherListComponent,
-        JournalVoucherCreateComponent
+        JournalVoucherCreateComponent,
+        FundSegmentSelectComponent,
+        AdminSegmentSelectComponent,
+        EconomicSegmentSelectComponent,
+        ProgrammingSegmentSelectComponent,
+        FunctionalSegmentSelectComponent,
+        GeoCodeSegmentSelectComponent
     ],
     imports: [
         CommonModule,

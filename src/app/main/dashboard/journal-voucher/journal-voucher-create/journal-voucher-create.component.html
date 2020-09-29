@@ -10,35 +10,57 @@
 
     <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar *ngIf="!addDetails">
         <form [formGroup]="journalVoucherCreateForm">
-            <mat-grid-list cols="5" rowHeight="100px">
-                <mat-grid-tile class="mr-1">
-                    <mat-form-field appearance="outline" fxFlex>
-                        <mat-label>JV Ref. No.</mat-label>
-                        <input formControlName="jvRefNo" matInput>
-                    </mat-form-field>
-                </mat-grid-tile>
+            <mat-grid-list cols="4" rowHeight="100px">
                 <mat-grid-tile class="ml-1">
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>JV Source App</mat-label>
-                        <input formControlName="jvSourceApp" matInput required>
+                        <input formControlName="jvSourceApp" matInput>
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile class="ml-1">
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>Batch No.</mat-label>
-                        <input formControlName="batchNo" matInput required>
+                        <input formControlName="batchNumber" matInput>
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile class="ml-1">
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>JV Value Date</mat-label>
-                        <input formControlName="jvValueDate" matInput required>
+                        <input matInput [matDatepicker]="jvValueDate"
+                               formControlName="jvValueDate">
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="jvValueDate"></mat-datepicker-toggle>
+                        <mat-datepicker #jvValueDate></mat-datepicker>
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile class="ml-1">
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>Fund Segment Code</mat-label>
-                        <input formControlName="fundSegmentCode" matInput required>
+                        <input formControlName="fundSegmentCode" matInput>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile class="mr-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>JV Reference</mat-label>
+                        <input formControlName="jvReference" matInput>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Transaction Details</mat-label>
+                        <input formControlName="transactionDetails" matInput>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile class="ml-1">
+                    <mat-form-field appearance="outline" fxFlex="100" (click)="fundSegmentSelect()">
+                        <mat-label>Fund Segment Name</mat-label>
+                        <mat-select formControlName="fundSegmentId" [disabled]="true">
+                            <mat-option [value]="fundSegment.id"
+                                        *ngFor="let fundSegment of fundSegments">{{fundSegment.name}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </mat-grid-tile>
             </mat-grid-list>
@@ -46,60 +68,117 @@
             <mat-tab-group dynamicHeight>
                 <mat-tab label="Prepared">
                     <mat-grid-list cols="4" rowHeight="100px">
-                        <mat-grid-tile class="ml-1">
+                        <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Value Date</mat-label>
-                                <input formControlName="valueDate" matInput required>
+                                <input matInput [matDatepicker]="preparedValueDate"
+                                       formControlName="preparedValueDate">
+                                <mat-datepicker-toggle matSuffix
+                                                       [for]="preparedValueDate"></mat-datepicker-toggle>
+                                <mat-datepicker #preparedValueDate></mat-datepicker>
                             </mat-form-field>
                         </mat-grid-tile>
-                        <mat-grid-tile class="ml-1">
+                        <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Trxn Date:</mat-label>
-                                <input formControlName="trxnDate" matInput required>
+                                <input matInput [matDatepicker]="preparedTrxnDate"
+                                       formControlName="preparedTransactionDate">
+                                <mat-datepicker-toggle matSuffix
+                                                       [for]="preparedTrxnDate"></mat-datepicker-toggle>
+                                <mat-datepicker #preparedTrxnDate></mat-datepicker>
                             </mat-form-field>
                         </mat-grid-tile>
-                        <mat-grid-tile class="ml-1">
+                        <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>user Id</mat-label>
-                                <input formControlName="userId" matInput required>
+                                <input formControlName="preparedUserId" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
-                        <mat-grid-tile class="ml-1">
+                        <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Username</mat-label>
-                                <input formControlName="username" matInput required>
+                                <input formControlName="preparedUsername" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
                 </mat-tab>
                 <mat-tab label="Checked">
+                    <mat-grid-list cols="4" rowHeight="100px">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Value Date</mat-label>
+                                <input matInput [matDatepicker]="checkedValueDate"
+                                       formControlName="checkedValueDate">
+                                <mat-datepicker-toggle matSuffix
+                                                       [for]="checkedValueDate"></mat-datepicker-toggle>
+                                <mat-datepicker #checkedValueDate></mat-datepicker>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Trxn Date:</mat-label>
+                                <input matInput [matDatepicker]="checkedTransactionDate"
+                                       formControlName="checkedTransactionDate">
+                                <mat-datepicker-toggle matSuffix
+                                                       [for]="checkedTransactionDate"></mat-datepicker-toggle>
+                                <mat-datepicker #checkedTransactionDate></mat-datepicker>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>user Id</mat-label>
+                                <input formControlName="checkedUserId" matInput>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Username</mat-label>
+                                <input formControlName="checkedUsername" matInput>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
                 </mat-tab>
                 <mat-tab label="Posted">
+                    <mat-grid-list cols="4" rowHeight="100px">
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Value Date</mat-label>
+                                <input matInput [matDatepicker]="postedValueDate"
+                                       formControlName="postedValueDate">
+                                <mat-datepicker-toggle matSuffix
+                                                       [for]="postedValueDate"></mat-datepicker-toggle>
+                                <mat-datepicker #postedValueDate></mat-datepicker>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Trxn Date:</mat-label>
+                                <input matInput [matDatepicker]="postedTrxnDate"
+                                       formControlName="postedTransactionDate">
+                                <mat-datepicker-toggle matSuffix
+                                                       [for]="postedTrxnDate"></mat-datepicker-toggle>
+                                <mat-datepicker #postedTrxnDate></mat-datepicker>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>user Id</mat-label>
+                                <input formControlName="postedUserId" matInput>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Username</mat-label>
+                                <input formControlName="postedUsername" matInput>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
                 </mat-tab>
             </mat-tab-group>
-            <mat-grid-list cols="3" rowHeight="100px">
-                <mat-grid-tile class="mr-1">
-                    <mat-form-field appearance="outline" fxFlex>
-                        <mat-label>JV Reference</mat-label>
-                        <input formControlName="jvReference" matInput required>
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile class="ml-1">
-                    <mat-form-field appearance="outline" fxFlex>
-                        <mat-label>Transaction Details</mat-label>
-                        <input formControlName="transactionDetails" matInput required>
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile class="ml-1">
-                    <mat-form-field appearance="outline" fxFlex>
-                        <mat-label>Fund Segment Name</mat-label>
-                        <input formControlName="fundSegmentName" matInput required>
-                    </mat-form-field>
-                </mat-grid-tile>
-            </mat-grid-list>
+
             <mat-grid-list cols="1" class="p-10px">
                 <div class="content shadow-1px">
-                    <table class="simple invoice-table">
+                    <table class="simple">
                         <thead>
                         <tr>
                             <th>S.No</th>
@@ -135,45 +214,82 @@
                             </th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
+                        <tbody *ngIf="jvDetail && jvDetail.length > 0; else noJvDetail">
+                        <tr *ngFor="let jvDet of jvDetail; let i = index">
                             <td>
-                                <span class="text-truncate">1.</span>
+                                <span class="text-truncate">{{i + 1}}</span>
                             </td>
                             <td>
                                 <div class="title">
-                                    052102 Demo Code
+                                    {{jvDet?.adminSegmentCode}}<br>
+                                    {{jvDet?.adminSegmentName}}
                                 </div>
                             </td>
                             <td>
-                                <div class="title">310201 LMP Cash Bal.</div>
+                                <div class="title">
+                                    {{jvDet?.economicSegmentCode}}<br>
+                                    {{jvDet?.economicSegmentName}}
+                                </div>
                             </td>
                             <td>
-                                <div class="title">0521 Cash Function</div>
+                                <div class="title">
+                                    {{jvDet?.functionSegmentCode}}<br>
+                                    {{jvDet?.functionSegmentName}}
+                                </div>
                             </td>
                             <td>
-                                <div class="title">3012 Cash Fund</div>
+                                <div class="title">
+                                    {{jvDet?.fundSegmentCode}}<br>
+                                    {{jvDet?.fundSegmentName}}
+                                </div>
                             </td>
                             <td>
-                                <div class="title">002 Cash Program</div>
+                                <div class="title">
+                                    {{jvDet?.programmeSegmentCode}}<br>
+                                    {{jvDet?.programmeSegmentName}}
+                                </div>
                             </td>
                             <td>
-                                <div class="title">01 Cash Geo</div>
+                                <div class="title">
+                                    {{jvDet?.geoCodeSegmentCode}}<br>
+                                    {{jvDet?.geoCodeSegmentName}}
+                                </div>
                             </td>
                             <td>
-                                <div class="title">Line Ref-01</div>
+                                <div class="title">
+                                    {{jvDet?.lineReference}}
+                                </div>
                             </td>
                             <td>
-                                <div class="title">Acc. Balance Details</div>
+                                <div class="title">
+                                    Acc. Balance Details
+                                </div>
                             </td>
                             <td>
-                                <div class="title">10,000.00</div>
+                                <div class="title" *ngIf="jvDet.lineValueType === 'DEBIT'">
+                                    {{jvDet?.lvLineValue}}
+                                </div>
+                                <div class="title" *ngIf="jvDet.lineValueType === 'CREDIT'">
+                                    0.00
+                                </div>
                             </td>
                             <td>
-                                <div class="title">0.00</div>
+                                <div class="title" *ngIf="jvDet.lineValueType === 'CREDIT'">
+                                    {{jvDet?.lvLineValue}}
+                                </div>
+                                <div class="title" *ngIf="jvDet.lineValueType === 'DEBIT'">
+                                    0.00
+                                </div>
                             </td>
                         </tr>
                         </tbody>
+                        <ng-template #noJvDetail>
+                            <tbody>
+                            <tr>
+                                <td colspan="11" class="text-center">No data to show</td>
+                            </tr>
+                            </tbody>
+                        </ng-template>
                     </table>
                 </div>
             </mat-grid-list>
@@ -184,16 +300,10 @@
             <mat-tab label="ADD JV MAIN DETAILS">
                 <form [formGroup]="addDetailForm">
                     <mat-grid-list cols="5" rowHeight="100px">
-                        <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>JV No.</mat-label>
-                                <input formControlName="jvNo" matInput>
-                            </mat-form-field>
-                        </mat-grid-tile>
-                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Line No.</mat-label>
-                                <input formControlName="lineNo" matInput>
+                                <input formControlName="lineValue" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -206,9 +316,12 @@
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Fetched from admin segment code</mat-label>
-                                <input formControlName="fetchedAdminSegmentCode" matInput>
+                            <mat-form-field appearance="outline" fxFlex="100" (click)="adminSegmentSelect()">
+                                <mat-label>Admin Segment Name</mat-label>
+                                <mat-select formControlName="adminSegmentId" [disabled]="true">
+                                    <mat-option [value]="adminSegment.id"
+                                                *ngFor="let adminSegment of adminSegments">{{adminSegment.name}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
@@ -216,7 +329,10 @@
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Original Transaction Currency</mat-label>
-                                <input formControlName="originalTransactionCurrency" matInput>
+                                <mat-select formControlName="currency">
+                                    <mat-option [value]="currency.code"
+                                                *ngFor="let currency of currencies">{{currency?.name}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -229,9 +345,12 @@
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Sample Fund Segment Code Fetched</mat-label>
-                                <input formControlName="sampleFundSegmentFetched" matInput>
+                            <mat-form-field appearance="outline" fxFlex="100" (click)="fundSegmentSelectAddDetails()">
+                                <mat-label>Fund Segment Name</mat-label>
+                                <mat-select formControlName="fundSegmentId" [disabled]="true">
+                                    <mat-option [value]="fundSegment.id"
+                                                *ngFor="let fundSegment of fundSegmentsAddDet">{{fundSegment.name}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
@@ -239,13 +358,13 @@
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>X.Rate Local to Naira</mat-label>
-                                <input formControlName="xRateLocalToNaira" matInput>
+                                <input formControlName="xRateLocal" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Official bank X.Rate to USD</mat-label>
-                                <input formControlName="officialBankXRateLocalToUsd" matInput>
+                                <input formControlName="bankXRateToUsd" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -258,15 +377,18 @@
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Fetched From Economic Segment Code Fetched</mat-label>
-                                <input formControlName="fetchedEconomicSegmentCode" matInput>
+                            <mat-form-field appearance="outline" fxFlex="100" (click)="economicSegmentSelect()">
+                                <mat-label>Economic Segment Name</mat-label>
+                                <mat-select formControlName="economicSegmentId" [disabled]="true">
+                                    <mat-option [value]="economicSegment.id"
+                                                *ngFor="let economicSegment of economicSegments">{{economicSegment.name}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Account Name / Line Details</mat-label>
-                                <input formControlName="accountNameLineDetails" matInput>
+                                <input formControlName="accountName" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -279,9 +401,12 @@
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Fetched From Programme Segment Code</mat-label>
-                                <input formControlName="fetchedProgrammeSegmentCode" matInput>
+                            <mat-form-field appearance="outline" fxFlex="100" (click)="programmeSegmentSelect()">
+                                <mat-label>Programme Segment Name</mat-label>
+                                <mat-select formControlName="programmeSegmentId" [disabled]="true">
+                                    <mat-option [value]="programmeSegment.id"
+                                                *ngFor="let programmeSegment of programmeSegments">{{programmeSegment.name}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
@@ -289,7 +414,7 @@
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Line Refrence</mat-label>
-                                <input formControlName="lineRefrence" matInput>
+                                <input formControlName="lineReference" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -302,9 +427,12 @@
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Fetched From Functional Segment Code Fetched</mat-label>
-                                <input formControlName="fetchedFunctionalSegmentCode" matInput>
+                            <mat-form-field appearance="outline" fxFlex="100" (click)="functionSegmentSelect()">
+                                <mat-label>Functional Segment Name</mat-label>
+                                <mat-select formControlName="functionalSegmentId" [disabled]="true">
+                                    <mat-option [value]="functionSegment.id"
+                                                *ngFor="let functionSegment of functionSegments">{{functionSegment.name}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
@@ -325,9 +453,12 @@
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Fetched From Geo Code Segment Code</mat-label>
-                                <input formControlName="fetchedGeoCodeSegmentCode" matInput>
+                            <mat-form-field appearance="outline" fxFlex="100" (click)="geoCodeSegmentSelect()">
+                                <mat-label>Geo Code Segment Name</mat-label>
+                                <mat-select formControlName="geoCodeSegmentId" [disabled]="true">
+                                    <mat-option [value]="geoCodeSegment.id"
+                                                *ngFor="let geoCodeSegment of geoCodeSegments">{{geoCodeSegment.name}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
@@ -339,12 +470,12 @@
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
                             <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
-                                             formControlName="lvLine">
-                                <mat-radio-button class="example-radio-button" [value]="DEBIT"
+                                             formControlName="lineValueType">
+                                <mat-radio-button class="example-radio-button" value="DEBIT"
                                                   [style.marginRight.px]="20">
                                     Debit
                                 </mat-radio-button>
-                                <mat-radio-button class="example-radio-button" [value]="CREDIT">
+                                <mat-radio-button class="example-radio-button" value="CREDIT">
                                     Credit
                                 </mat-radio-button>
                             </mat-radio-group>
@@ -352,7 +483,7 @@
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Enter Debit Credit Line Value</mat-label>
-                                <input formControlName="debitCreditLineValue" matInput>
+                                <input formControlName="lvLineValue" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
@@ -366,11 +497,14 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button" (click)="addDetails = true" *ngIf="!addDetails">Add Details</button>
         <button mat-button class="save-button" (click)="addDetails = false" *ngIf="addDetails">Cancel</button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(journalVoucherCreateForm)"
-                [disabled]="journalVoucherCreateForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">SAVE
+        <button mat-button class="save-button" (click)="addDetail()" *ngIf="addDetails">Add</button>
+        <button mat-button class="save-button" (click)="saveJournalVoucher()"
+                [disabled]="journalVoucherCreateForm.invalid" aria-label="Save"
+                *ngIf="this.action !== 'EDIT' && !addDetails">SAVE
         </button>
         <button mat-button class="save-button" (click)="matDialogRef.close(journalVoucherCreateForm)"
-                [disabled]="journalVoucherCreateForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+                [disabled]="journalVoucherCreateForm.invalid" aria-label="Update"
+                *ngIf="this.action === 'EDIT' && !addDetails">UPDATE
         </button>
     </div>
 </div>
