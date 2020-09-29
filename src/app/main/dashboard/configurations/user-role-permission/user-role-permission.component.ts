@@ -21,23 +21,7 @@ export class UserRolePermissionComponent implements OnInit {
     labelPosition: 'before' | 'after' = 'after';
     disabled = false;
     roleId;
-    permissionModule = [
-        // {
-        //     id: 1,
-        //     moduleName: ' Self aware panel 1',
-        //     rolePermission: [],
-        // },
-        // {
-        //     id: 2,
-        //     moduleName: ' Self aware panel 2',
-        //     rolePermission: [],
-        // },
-        // {
-        //     id: 3,
-        //     moduleName: ' Self aware panel 3',
-        //     rolePermission: [],
-        // }
-    ];
+    permissionModule = [ ];
     permissionIds = [];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -49,30 +33,65 @@ export class UserRolePermissionComponent implements OnInit {
     ngOnInit(): void {
         this.route.params.subscribe(d => {
             this.roleId = d.roleId;
-            console.log('---->>', this.roleId);
+            // console.log('---->>', this.roleId);
         });
-        if (this.roleId) {
-            this.getRoleBasePermission();
-        }
+        this.getPermission();
     }
 
     getRoleBasePermission() {
         this.userRolesPermissionService.roleBasePermissionList(this.roleId, {}).subscribe(data => {
-            console.log('--->>>permission', data);
+            // console.log('--->>>role id base permission', data);
+            const  roleBasePer = data;
+            this.permissionIds = [];
+            if (roleBasePer && roleBasePer.length){
+                roleBasePer.map(v => {
+                   this.permissionIds.push(v.id);
+                });
+            }
+            // console.log('-->>', this.permissionIds);
+            // this.permissionModule = data;
+            this.patchPermissionCheckbox();
+        });
+    }
+    patchPermissionCheckbox() {
+        if (this.permissionIds && this.permissionIds.length){
+            this.permissionIds.forEach(v => {
+                this.permissionModule[0]['children'].forEach(d => {
+                    if (v === d.id){
+                        d['isSelected'] = true;
+                    }
+                });
+            });
+        }
+    }
+    getPermission() {
+        this.userRolesPermissionService.permissionList({}).subscribe(data => {
+            // console.log('--->>>permission', data);
             this.permissionModule = data;
+            if (this.roleId && this.permissionModule && this.permissionModule.length) {
+                this.getRoleBasePermission();
+            }
         });
     }
 
-    getPermissions(e, rolePermission) {
+    checkPermissions(e, rolePermission) {
         if (e['checked'] && this.permissionIds.indexOf(rolePermission.id) === -1) {
-            // console.log('---->>>', e['checked']);
             this.permissionIds.push(rolePermission.id);
         } else if (this.permissionIds.indexOf(rolePermission.id) !== -1) {
-            // console.log('---->>>', e['checked']);
             const selectedIndex = this.permissionIds.indexOf(rolePermission.id);
             this.permissionIds.splice(selectedIndex, 1);
 
         }
-        console.log('--->>this.permissionIds', this.permissionIds);
+        // console.log('--->>this.permissionIds', this.permissionIds);
+    }
+
+    submitPermission() {
+        const params = {
+            permissionIds : this.permissionIds
+        };
+        // console.log('mmmmmmmm...........', params);
+        this.userRolesPermissionService.addPermissions(this.roleId, params).subscribe(data => {
+            this.getPermission();
+        });
     }
 }

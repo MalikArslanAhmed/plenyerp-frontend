@@ -23,15 +23,16 @@
                         *ngFor="let rolePermission of permissionModule">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    {{rolePermission.module}}
+                                    {{rolePermission.name}}
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
-                            <p>
+                            <p *ngFor="let children of rolePermission['children']">
                                 <mat-checkbox
                                     class="example-margin"
-                                    (change)="getPermissions($event, rolePermission)"
+                                    [(ngModel)]="children['isSelected']"
+                                    (change)="checkPermissions($event, children)"
                                 >
-                                    {{rolePermission.name}}
+                                    {{children.name}}
                                 </mat-checkbox>
                             </p>
                         </mat-expansion-panel>
@@ -39,8 +40,8 @@
 
                 </div>
             </div>
-            <div class="submit-button">
-                <button mat-raised-button>Submit</button>
+            <div class="submit-button" *ngIf="permissionModule && permissionModule.length > 0">
+                <button mat-raised-button (click)="submitPermission()">Submit</button>
             </div>
         </div>
 

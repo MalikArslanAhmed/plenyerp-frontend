@@ -33,5 +33,11 @@ export class UserRolesPermissionService extends BaseService {
     roleBasePermissionList(id, data): Observable<any> {
         return this.getRequest(AppUrl.GET_ROLE_BASED_PERMISSION_LIST(id), data);
     }
+    permissionList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_PERMISSION_LIST(), data);
+    }
+    addPermissions(id, data): Observable<any> {
+        return this.postRequest(AppUrl.GET_ROLE_BASED_PERMISSION_LIST(id), data);
+    }
 
 }
