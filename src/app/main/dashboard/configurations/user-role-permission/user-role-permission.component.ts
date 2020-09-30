@@ -56,10 +56,12 @@ export class UserRolePermissionComponent implements OnInit {
     patchPermissionCheckbox() {
         if (this.permissionIds && this.permissionIds.length){
             this.permissionIds.forEach(v => {
-                this.permissionModule[0]['children'].forEach(d => {
-                    if (v === d.id){
-                        d['isSelected'] = true;
-                    }
+                this.permissionModule.forEach(module => {
+                    module['children'].forEach(d => {
+                        if (v === d.id){
+                            d['isSelected'] = true;
+                        }
+                    });
                 });
             });
         }
