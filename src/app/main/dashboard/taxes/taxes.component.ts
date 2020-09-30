@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {TaxesCreateComponent} from './taxes-create/taxes-create.component';
 import {FormGroup} from '@angular/forms';
 import {TaxesListComponent} from './taxes-list/taxes-list.component';
+import {PermissionConstant} from '../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-taxes',
@@ -15,6 +16,7 @@ import {TaxesListComponent} from './taxes-list/taxes-list.component';
 })
 export class TaxesComponent implements OnInit {
     dialogRef: any;
+    permissionAddTaxes = [PermissionConstant.TAXES_CREATE];
     @ViewChild(TaxesListComponent) getTaxesList: TaxesListComponent;
 
     constructor(

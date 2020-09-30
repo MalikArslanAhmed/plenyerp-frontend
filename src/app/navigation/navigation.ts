@@ -1,5 +1,6 @@
 import {FuseNavigation} from '@fuse/types';
 import {AppConstants} from '../shared/constants/app-constants';
+import {PermissionConstant} from '../shared/constants/permission-constant';
 
 export const navigation: FuseNavigation[] = [
     {
@@ -83,6 +84,7 @@ export const navigation: FuseNavigation[] = [
                 id: 'comapnies',
                 title: 'Companies',
                 roles: [AppConstants.ROLE_ID_ADMIN],
+                permissions: [PermissionConstant.COMPANIES_LIST],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'building',
@@ -92,6 +94,7 @@ export const navigation: FuseNavigation[] = [
                 id: 'taxes',
                 title: 'Taxes',
                 roles: [AppConstants.ROLE_ID_ADMIN],
+                permissions: [PermissionConstant.TAXES_LIST],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'money',

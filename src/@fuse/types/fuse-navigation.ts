@@ -20,6 +20,7 @@ export interface FuseNavigationItem
     };
     children?: FuseNavigationItem[];
     roles: Array<number>;
+    permissions?: Array<any>;
 }
 
 export interface FuseNavigation extends FuseNavigationItem

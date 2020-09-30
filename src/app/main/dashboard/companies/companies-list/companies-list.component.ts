@@ -7,6 +7,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 import {FormGroup} from '@angular/forms';
 import {CompanyBankDetailsComponent} from '../company-bank-details/company-bank-details.component';
+import {PermissionConstant} from '../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-companies-list',
@@ -26,7 +27,9 @@ export class CompaniesListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
-
+    permissionDelete = [PermissionConstant.COMPANIES_DELETE];
+    permissionUpdate = [PermissionConstant.COMPANIES_UPDATE];
+    permissionBankCreate = [PermissionConstant.COMPANIES_BANK_CREATE];
     constructor(private companiesService: CompaniesService,
                 private _matDialog: MatDialog) {
     }
