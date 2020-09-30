@@ -17,6 +17,7 @@ import * as moment from 'moment';
 export class JournalVoucherComponent implements OnInit {
     dialogRef: any;
     @ViewChild(JournalVoucherListComponent) getJournalVoucherData: JournalVoucherListComponent;
+    filterJournalVoucherForm: FormGroup;
     searchJournalVoucherForm: FormGroup;
     sourceApp = [
         {
@@ -54,12 +55,16 @@ export class JournalVoucherComponent implements OnInit {
     }
 
     refresh() {
-        this.searchJournalVoucherForm = this.fb.group({
+        this.filterJournalVoucherForm = this.fb.group({
             'sourceApp': [''],
             'from': [''],
             'to': [''],
             'status': ['']
-        })
+        });
+
+        this.searchJournalVoucherForm = this.fb.group({
+            'jvReference': [''],
+        });
     }
 
     addJournalVoucher() {
@@ -75,14 +80,19 @@ export class JournalVoucherComponent implements OnInit {
         });
     }
 
-    search() {
+    filter() {
         const params = {
-            'sourceApp': this.searchJournalVoucherForm.value.sourceApp ? this.searchJournalVoucherForm.value.sourceApp : '',
-            'from': this.searchJournalVoucherForm.value.from ? moment(this.searchJournalVoucherForm.value.from).format('YYYY-MM-DD') : '',
-            'to': this.searchJournalVoucherForm.value.to ? moment(this.searchJournalVoucherForm.value.to).format('YYYY-MM-DD') : '',
-            'status': this.searchJournalVoucherForm.value.status ? this.searchJournalVoucherForm.value.status : '',
+            'sourceApp': this.filterJournalVoucherForm.value.sourceApp ? this.filterJournalVoucherForm.value.sourceApp : '',
+            'from': this.filterJournalVoucherForm.value.from ? moment(this.filterJournalVoucherForm.value.from).format('YYYY-MM-DD') : '',
+            'to': this.filterJournalVoucherForm.value.to ? moment(this.filterJournalVoucherForm.value.to).format('YYYY-MM-DD') : '',
+            'status': this.filterJournalVoucherForm.value.status ? this.filterJournalVoucherForm.value.status : '',
         };
         this.getJournalVoucherData.getJournalVoucherList(params);
-        console.log('searchJournalVoucherForm', params);
+        // console.log('searchJournalVoucherForm', params);
+    }
+
+    search() {
+        this.getJournalVoucherData.getJournalVoucherList(this.searchJournalVoucherForm.value);
+        // console.log('searchJournalVoucherForm', this.searchJournalVoucherForm.value);
     }
 }
