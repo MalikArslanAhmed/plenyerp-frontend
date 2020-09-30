@@ -5,7 +5,7 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 import {MembershipCreateComponent} from '../membership-create/membership-create.component';
 import {MembershipService} from '../../../../shared/services/membership.service';
 import {PageEvent} from '@angular/material/paginator';
-import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-membership-list',
@@ -25,6 +25,7 @@ export class MembershipListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
     constructor(private membershipService: MembershipService,
                 private _matDialog: MatDialog) {
     }
@@ -61,7 +62,7 @@ export class MembershipListComponent implements OnInit {
             }
         });
 
-    } 
+    }
 
 
     deleteMembership(id) {
@@ -84,6 +85,7 @@ export class MembershipListComponent implements OnInit {
             this.getMemberships();
         });
     }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getMemberships();

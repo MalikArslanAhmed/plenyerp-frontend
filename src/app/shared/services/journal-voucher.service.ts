@@ -18,15 +18,19 @@ export class JournalVoucherService extends BaseService {
         return this.postRequest(AppUrl.JOURNAL_VOUCHER(), data);
     }
 
+    update(jvId, data): Observable<any> {
+        return this.putRequest(AppUrl.JOURNAL_VOUCHER(jvId), data);
+    }
+
     get(data): Observable<any> {
         return this.getRequest(AppUrl.JOURNAL_VOUCHER(), data);
     }
 
-    deleteCensure(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_CENSURE(id));
+    addDetails(jvId, data): Observable<any> {
+        return this.postRequest(AppUrl.JOURNAL_VOUCHER_DETAILS(jvId), data);
     }
 
-    updateCensure(id, data): Observable<any> {
-        return this.putRequest(AppUrl.CENSURE(id), data);
+    updateDetails(jvId, detailId, data): Observable<any> {
+        return this.putRequest(AppUrl.JOURNAL_VOUCHER_DETAILS(jvId, detailId), data);
     }
 }

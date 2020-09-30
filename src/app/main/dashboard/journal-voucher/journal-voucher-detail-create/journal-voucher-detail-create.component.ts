@@ -9,24 +9,21 @@ import {ProgrammingSegmentSelectComponent} from "../programming-segment-select/p
 import {FunctionalSegmentSelectComponent} from "../functional-segment-select/functional-segment-select.component";
 import {GeoCodeSegmentSelectComponent} from "../geo-code-segment-select/geo-code-segment-select.component";
 import {GlobalService} from 'app/shared/services/global.service';
-import * as moment from "moment";
 import {JournalVoucherService} from "../../../../shared/services/journal-voucher.service";
 
 @Component({
-    selector: 'app-journal-voucher-create',
-    templateUrl: './journal-voucher-create.component.html',
-    styleUrls: ['./journal-voucher-create.component.scss'],
+    selector: 'app-journal-voucher-detail-create',
+    templateUrl: './journal-voucher-detail-create.component.html',
+    styleUrls: ['./journal-voucher-detail-create.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class JournalVoucherCreateComponent implements OnInit {
+export class JournalVoucherDetailCreateComponent implements OnInit {
     action: any;
     dialogTitle: any;
-    journalVoucherCreateForm: FormGroup;
     addDetailForm: FormGroup;
     isSubmitted = false;
     updateData: any;
-    addDetails = false;
     currencies = [
         {
             'code': 'INR',
@@ -38,7 +35,6 @@ export class JournalVoucherCreateComponent implements OnInit {
         }
     ];
     dialogRef: any;
-    fundSegments = [];
     fundSegmentsAddDet = [];
     adminSegments = [];
     economicSegments = [];
@@ -47,21 +43,23 @@ export class JournalVoucherCreateComponent implements OnInit {
     geoCodeSegments = [];
     jvDetail = [];
     user: any;
+    journalVoucherId: any;
 
-    constructor(public matDialogRef: MatDialogRef<JournalVoucherCreateComponent>,
+    constructor(public matDialogRef: MatDialogRef<JournalVoucherDetailCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private globalService: GlobalService,
                 private journalVoucherService: JournalVoucherService) {
         this.action = _data.action;
+        this.journalVoucherId = _data.journalVoucherId;
         if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit New Journal Voucher';
-            if (_data.designation) {
-                this.updateData = _data;
+            this.dialogTitle = 'Edit New Journal Voucher Detail';
+            if (_data.jvDetail) {
+                this.updateData = _data.jvDetail;
             }
         } else {
-            this.dialogTitle = 'Create New Journal Voucher';
+            this.dialogTitle = 'Create New Journal Voucher Detail';
         }
     }
 
@@ -70,31 +68,7 @@ export class JournalVoucherCreateComponent implements OnInit {
     }
 
     refresh() {
-        // console.log(this.globalService.getSelf());
         this.user = this.globalService.getSelf();
-        this.journalVoucherCreateForm = this.fb.group({
-            'jvSourceApp': [{value: 'PLINYEGL', disabled: true}],
-            'batchNumber': [''],
-            'jvValueDate': [''],
-            'fundSegmentId': [''],
-            'fundSegmentCode': [{value: '', disabled: true}],
-            'preparedValueDate': [''],
-            'preparedTransactionDate': [''],
-            'preparedUserId': [{value: this.user.id, disabled: true}],
-            'preparedUsername': [{value: this.user.name, disabled: true}],
-            'checkedValueDate': [''],
-            'checkedTransactionDate': [''],
-            'checkedUserId': [{value: this.user.id, disabled: true}],
-            'checkedUsername': [{value: this.user.name, disabled: true}],
-            'postedValueDate': [''],
-            'postedTransactionDate': [''],
-            'postedUserId': [{value: this.user.id, disabled: true}],
-            'postedUsername': [{value: this.user.name, disabled: true}],
-            'jvReference': [''],
-            'transactionDetails': [''],
-            'fundSegmentName': ['']
-        });
-
         this.addDetailForm = this.fb.group({
             'lineValue': [''],
             'adminSegmentCode': [{value: '', disabled: true}],
@@ -118,26 +92,59 @@ export class JournalVoucherCreateComponent implements OnInit {
             'lineValueType': ['DEBIT'],
             'lvLineValue': ['']
         });
+
+        if (this.updateData) {
+            this.patchJvDetailForm();
+        }
     }
 
-    fundSegmentSelect() {
-        this.dialogRef = this._matDialog.open(FundSegmentSelectComponent, {
-            panelClass: 'contact-form-dialog',
-        });
-        this.dialogRef.afterClosed().subscribe((response) => {
-            // console.log('response', response);
-            if (!response) {
-                return;
-            }
-            this.fundSegments = [{
-                'name': response.name,
-                'id': response.id
-            }];
-            this.journalVoucherCreateForm.patchValue({
-                fundSegmentId: response.id,
-                fundSegmentCode: response.id,
-                disabled: true
-            });
+    patchJvDetailForm() {
+        if (this.updateData && this.updateData.adminSegment) {
+            this.adminSegments = [this.updateData.adminSegment];
+        }
+
+        if (this.updateData && this.updateData.fundSegment) {
+            this.fundSegmentsAddDet = [this.updateData.fundSegment];
+        }
+
+        if (this.updateData && this.updateData.economicSegment) {
+            this.economicSegments = [this.updateData.economicSegment];
+        }
+
+        if (this.updateData && this.updateData.programmeSegment) {
+            this.programmeSegments = [this.updateData.programmeSegment]
+        }
+
+        if (this.updateData && this.updateData.functionalSegment) {
+            this.functionSegments = [this.updateData.functionalSegment]
+        }
+
+        if (this.updateData && this.updateData.geoCodeSegment) {
+            this.geoCodeSegments = [this.updateData.geoCodeSegment]
+        }
+
+        this.addDetailForm.patchValue({
+            'lineValue': (this.updateData && this.updateData.lineValue) ? this.updateData.lineValue : '',
+            'adminSegmentCode': (this.updateData && this.updateData.adminSegment) ? this.updateData.adminSegment.id : '',
+            'adminSegmentId': (this.updateData && this.updateData.adminSegment) ? this.updateData.adminSegment.id : '',
+            'currency': (this.updateData && this.updateData.currency) ? this.updateData.currency : '',
+            'fundSegmentCode': (this.updateData && this.updateData.fundSegment) ? this.updateData.fundSegment.id : '',
+            'fundSegmentId': (this.updateData && this.updateData.fundSegment) ? this.updateData.fundSegment.id : '',
+            'xRateLocal': (this.updateData && this.updateData.xRateLocal) ? this.updateData.xRateLocal : '',
+            'bankXRateToUsd': (this.updateData && this.updateData.bankXRateToUsd) ? this.updateData.bankXRateToUsd : '',
+            'economicSegmentCode': (this.updateData && this.updateData.economicSegment) ? this.updateData.economicSegment.id : '',
+            'economicSegmentId': (this.updateData && this.updateData.economicSegment) ? this.updateData.economicSegment.id : '',
+            'accountName': (this.updateData && this.updateData.accountName) ? this.updateData.accountName : '',
+            'programmeSegmentCode': (this.updateData && this.updateData.programmeSegment) ? this.updateData.programmeSegment.id : '',
+            'programmeSegmentId': (this.updateData && this.updateData.programmeSegment) ? this.updateData.programmeSegment.id : '',
+            'lineReference': (this.updateData && this.updateData.lineReference) ? this.updateData.lineReference : '',
+            'functionalSegmentCode': (this.updateData && this.updateData.functionalSegment) ? this.updateData.functionalSegment.id : '',
+            'functionalSegmentId': (this.updateData && this.updateData.functionalSegment) ? this.updateData.functionalSegment.id : '',
+            'lineValueInTrxnCurrency': (this.updateData && this.updateData.currency) ? this.updateData.currency : '',
+            'geoCodeSegmentCode': (this.updateData && this.updateData.geoCodeSegment) ? this.updateData.geoCodeSegment.id : '',
+            'geoCodeSegmentId': (this.updateData && this.updateData.geoCodeSegment) ? this.updateData.geoCodeSegment.id : '',
+            'lineValueType': (this.updateData && this.updateData.lineValueType) ? this.updateData.lineValueType : '',
+            'lvLineValue': (this.updateData && this.updateData.lvLineValue) ? this.updateData.lvLineValue : '',
         });
     }
 
@@ -146,7 +153,6 @@ export class JournalVoucherCreateComponent implements OnInit {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            // console.log('response', response);
             if (!response) {
                 return;
             }
@@ -167,7 +173,6 @@ export class JournalVoucherCreateComponent implements OnInit {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            // console.log('response', response);
             if (!response) {
                 return;
             }
@@ -188,7 +193,6 @@ export class JournalVoucherCreateComponent implements OnInit {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            // console.log('response', response);
             if (!response) {
                 return;
             }
@@ -209,7 +213,6 @@ export class JournalVoucherCreateComponent implements OnInit {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            // console.log('response', response);
             if (!response) {
                 return;
             }
@@ -230,7 +233,6 @@ export class JournalVoucherCreateComponent implements OnInit {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            // console.log('response', response);
             if (!response) {
                 return;
             }
@@ -251,7 +253,6 @@ export class JournalVoucherCreateComponent implements OnInit {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            // console.log('response', response);
             if (!response) {
                 return;
             }
@@ -298,49 +299,56 @@ export class JournalVoucherCreateComponent implements OnInit {
             'functionSegmentCode': this.functionSegments[0].id,
             'geoCodeSegmentCode': this.geoCodeSegments[0].id
         };
-        this.jvDetail.push(params);
-        this.addDetails = false;
-        this.addDetailForm.reset();
-        // console.log('jv', this.jvDetail);
+        this.journalVoucherService.addDetails(this.journalVoucherId, params).subscribe(data => {
+            this.addDetailForm.reset();
+            this.isSubmitted = false;
+            this.matDialogRef.close(this.addDetailForm);
+        });
     }
 
-    saveJournalVoucher() {
-        const params = {
-            'jvSourceApp': this.journalVoucherCreateForm.value.jvSourceApp ? this.journalVoucherCreateForm.value.jvSourceApp : '',
-            'batchNumber': this.journalVoucherCreateForm.value.batchNumber ? this.journalVoucherCreateForm.value.batchNumber : '',
-            'jvValueDate': this.journalVoucherCreateForm.value.jvValueDate ? moment(this.journalVoucherCreateForm.value.jvValueDate).format('YYYY-MM-DD') : '',
-            'fundSegmentId': this.journalVoucherCreateForm.value.fundSegmentId ? this.journalVoucherCreateForm.value.fundSegmentId : '',
-            'fundSegmentCode': this.journalVoucherCreateForm.value.fundSegmentCode ? this.journalVoucherCreateForm.value.fundSegmentCode : '',
-            'preparedValueDate': this.journalVoucherCreateForm.value.preparedValueDate ? moment(this.journalVoucherCreateForm.value.preparedValueDate).format('YYYY-MM-DD') : '',
-            'preparedTransactionDate': this.journalVoucherCreateForm.value.preparedTransactionDate ? moment(this.journalVoucherCreateForm.value.preparedTransactionDate).format('YYYY-MM-DD') : '',
-            'preparedUserId': this.journalVoucherCreateForm.value.preparedUserId ? this.journalVoucherCreateForm.value.preparedUserId : '',
-            'preparedUsername': this.journalVoucherCreateForm.value.preparedUsername ? this.journalVoucherCreateForm.value.preparedUsername : '',
-            'checkedValueDate': this.journalVoucherCreateForm.value.checkedValueDate ? moment(this.journalVoucherCreateForm.value.checkedValueDate).format('YYYY-MM-DD') : '',
-            'checkedTransactionDate': this.journalVoucherCreateForm.value.checkedTransactionDate ? moment(this.journalVoucherCreateForm.value.checkedTransactionDate).format('YYYY-MM-DD') : '',
-            'checkedUserId': this.journalVoucherCreateForm.value.checkedUserId ? this.journalVoucherCreateForm.value.checkedUserId : '',
-            'checkedUsername': this.journalVoucherCreateForm.value.checkedUsername ? this.journalVoucherCreateForm.value.checkedUsername : '',
-            'postedValueDate': this.journalVoucherCreateForm.value.postedValueDate ? moment(this.journalVoucherCreateForm.value.postedValueDate).format('YYYY-MM-DD') : '',
-            'postedTransactionDate': this.journalVoucherCreateForm.value.postedTransactionDate ? moment(this.journalVoucherCreateForm.value.postedTransactionDate).format('YYYY-MM-DD') : '',
-            'postedUserId': this.journalVoucherCreateForm.value.postedUserId ? this.journalVoucherCreateForm.value.postedUserId : '',
-            'postedUsername': this.journalVoucherCreateForm.value.postedUsername ? this.journalVoucherCreateForm.value.postedUsername : '',
-            'jvReference': this.journalVoucherCreateForm.value.jvReference ? this.journalVoucherCreateForm.value.jvReference : '',
-            'transactionDetails': this.journalVoucherCreateForm.value.transactionDetails ? this.journalVoucherCreateForm.value.transactionDetails : '',
-            'fundSegmentName': this.journalVoucherCreateForm.value.fundSegmentName ? this.journalVoucherCreateForm.value.fundSegmentName : '',
-            'jvDetail': this.jvDetail
-        };
-        // console.log('this.journalVoucherCreateForm', params);
+    updateDetail() {
         this.isSubmitted = true;
-        if (!this.journalVoucherCreateForm.valid) {
+        if (!this.addDetailForm.valid) {
             this.isSubmitted = false;
             return;
         }
         if (this.isSubmitted) {
-            this.journalVoucherService.create(params).subscribe(data => {
-                // console.log('data', data);
-                this.journalVoucherCreateForm.reset();
+            const params = {
+                'lineValue': this.addDetailForm.value.lineValue ? this.addDetailForm.value.lineValue : '',
+                'adminSegmentId': this.addDetailForm.value.adminSegmentId ? this.addDetailForm.value.adminSegmentId : '',
+                'currency': this.addDetailForm.value.currency ? this.addDetailForm.value.currency : '',
+                'fundSegmentId': this.addDetailForm.value.fundSegmentId ? this.addDetailForm.value.fundSegmentId : '',
+                'xRateLocal': this.addDetailForm.value.xRateLocal ? parseFloat(this.addDetailForm.value.xRateLocal) : 0,
+                'bankXRateToUsd': this.addDetailForm.value.bankXRateToUsd ? parseFloat(this.addDetailForm.value.bankXRateToUsd) : 0,
+                'economicSegmentId': this.addDetailForm.value.economicSegmentId ? this.addDetailForm.value.economicSegmentId : '',
+                'accountName': this.addDetailForm.value.accountName ? this.addDetailForm.value.accountName : '',
+                'programmeSegmentId': this.addDetailForm.value.programmeSegmentId ? this.addDetailForm.value.programmeSegmentId : '',
+                'lineReference': this.addDetailForm.value.lineReference ? this.addDetailForm.value.lineReference : '',
+                'functionalSegmentCode': this.addDetailForm.value.functionalSegmentCode ? this.addDetailForm.value.functionalSegmentCode : '',
+                'functionalSegmentId': this.addDetailForm.value.functionalSegmentId ? this.addDetailForm.value.functionalSegmentId : '',
+                'lineValueInTrxnCurrency': this.addDetailForm.value.lineValueInTrxnCurrency ? this.addDetailForm.value.lineValueInTrxnCurrency : '',
+                'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
+                'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
+                'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
+                'adminSegmentName': this.adminSegments[0].name,
+                'fundSegmentName': this.fundSegmentsAddDet[0].name,
+                'economicSegmentName': this.economicSegments[0].name,
+                'programmeSegmentName': this.programmeSegments[0].name,
+                'functionSegmentName': this.functionSegments[0].name,
+                'geoCodeSegmentName': this.geoCodeSegments[0].name,
+                'adminSegmentCode': this.adminSegments[0].id,
+                'fundSegmentCode': this.fundSegmentsAddDet[0].id,
+                'economicSegmentCode': this.economicSegments[0].id,
+                'programmeSegmentCode': this.programmeSegments[0].id,
+                'functionSegmentCode': this.functionSegments[0].id,
+                'geoCodeSegmentCode': this.geoCodeSegments[0].id
+            };
+            this.journalVoucherService.updateDetails(this.journalVoucherId, this.updateData.id, params).subscribe(data => {
+                this.addDetailForm.reset();
                 this.isSubmitted = false;
-                this.matDialogRef.close(this.journalVoucherCreateForm);
+                this.matDialogRef.close(this.addDetailForm);
             });
         }
+        // console.log('this.addDetailForm.value', this.addDetailForm.value);
     }
 }

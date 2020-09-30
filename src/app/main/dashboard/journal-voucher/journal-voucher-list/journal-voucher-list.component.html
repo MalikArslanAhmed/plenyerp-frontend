@@ -1,5 +1,251 @@
 <div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
-    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="journalVouchers">
+    <!--<mat-paginator #paginator
+                   [length]="totalRows$ | async"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+    ></mat-paginator>-->
+
+    <mat-accordion displayMode="flat" multi class="mat-table">
+        <section matSort class="mat-elevation-z2 mat-header-row">
+            <span class="mat-header-cell" mat-sort-header="id">S.No</span>
+            <span class="mat-header-cell" mat-sort-header="jvRef">JV Ref</span>
+            <span class="mat-header-cell" mat-sort-header="jvValueDate">JV Value Date</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Narration</span>
+            <span class="mat-header-cell" mat-sort-header="prepared">
+                PREPARED
+                <br>-- Value Date
+                <br>-- Trxn Date
+                <br>-- Username
+            </span>
+            <span class="mat-header-cell" mat-sort-header="checkedStatus">Checked ?</span>
+            <span class="mat-header-cell" mat-sort-header="checkedData">
+                CHECKED
+                <br>-- Value Date
+                <br>-- Trxn Date
+                <br>-- Username
+            </span>
+            <span class="mat-header-cell" mat-sort-header="postedStatus">
+                Posted ?
+            </span>
+            <span class="mat-header-cell" mat-sort-header="postedData">
+                POSTED
+                <br>-- Value Date
+                <br>-- Trxn Date
+                <br>-- Username
+            </span>
+            <span class="mat-header-cell" mat-sort-header="action">
+                Action
+            </span>
+        </section>
+
+        <mat-expansion-panel *ngFor="let journalVoucher of journalVouchers">
+            <mat-expansion-panel-header class="mat-row align-items-center">
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{journalVoucher?.sno}}.</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{journalVoucher?.jvReference}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{journalVoucher?.jvValueDate}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">
+                        {{journalVoucher.narration ? journalVoucher.narration : '-'}}
+                    </p>
+                </span>
+                <span class="mat-cell">
+                    <p class="text-truncate cursor-pointer" *ngIf="journalVoucher.preparedValueDate">
+                        {{journalVoucher?.preparedValueDate}}
+                        <br>{{journalVoucher?.preparedTransactionDate}}
+                        <br>{{journalVoucher?.preparedUser?.name}}
+                    </p>
+                    <p class="text-truncate cursor-pointer mt-32px" *ngIf="!journalVoucher.preparedValueDate">
+                        -
+                    </p>
+                </span>
+                <span class="mat-cell" style="justify-content: center">
+                    <p class="text-truncate cursor-pointer mt-32px">
+                        {{journalVoucher.checkedTransactionDate ? 'Yes' : 'No'}}
+                    </p>
+                </span>
+                <span class="mat-cell">
+                    <p class="phone text-truncate cursor-pointer" *ngIf="journalVoucher?.checkedValueDate">
+                        {{journalVoucher?.checkedValueDate}}
+                        <br>{{journalVoucher?.checkedTransactionDate}}
+                        <br>{{journalVoucher?.checkedUser?.name}}
+                    </p>
+                    <p class="text-truncate cursor-pointer mt-32px" *ngIf="!journalVoucher.checkedValueDate">
+                        -
+                    </p>
+                </span>
+                <span class="mat-cell">
+                    <p class="text-truncate cursor-pointer mt-32px">
+                        {{journalVoucher.postedTransactionDate ? 'Yes' : 'No'}}
+                    </p>
+                </span>
+                <span class="mat-cell">
+                    <p class="text-truncate cursor-pointer" *ngIf="journalVoucher?.postedValueDate">
+                        {{journalVoucher?.postedValueDate}}
+                        <br>{{journalVoucher?.postedTransactionDate}}
+                        <br>{{journalVoucher?.preparedUser?.name}}
+                    </p>
+                    <p class="text-truncate cursor-pointer mt-32px" *ngIf="!journalVoucher?.postedValueDate">
+                        -
+                    </p>
+                </span>
+                <span class="mat-cell">
+                    <p class="text-truncate cursor-pointer mt-32px d-flex">
+                        <span class="material-icons f_20 cursor-pointer blueColor"
+                              (click)="editJournalVoucher(journalVoucher)">
+                            edit
+                        </span>
+                        <span class="material-icons ml-7px f_20 cursor-pointer redColor">
+                            delete
+                        </span>
+                    </p>
+                </span>
+            </mat-expansion-panel-header>
+            <div class="mt-23px">
+                <table class="simple invoice-table">
+                    <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>
+                            <div class="title">COA Admin</div>
+                        </th>
+                        <th>
+                            <div class="title">COA Economic</div>
+                        </th>
+                        <th>
+                            <div class="title">COA Functional</div>
+                        </th>
+                        <th>
+                            <div class="title">COA Fund</div>
+                        </th>
+                        <th>
+                            <div class="title">COA Programme</div>
+                        </th>
+                        <th>
+                            <div class="title">COA Geo-code</div>
+                        </th>
+                        <th>
+                            <div class="title">Line Reference</div>
+                        </th>
+                        <th>
+                            <div class="title">Line Narration</div>
+                        </th>
+                        <th>
+                            <div class="title">Debit</div>
+                        </th>
+                        <th>
+                            <div class="title">Credit</div>
+                        </th>
+                        <th>
+                            <div class="title">Action</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody
+                        *ngIf="journalVoucher['journalVoucherDetails'] && journalVoucher['journalVoucherDetails'].length > 0">
+                    <tr *ngFor="let voucher of journalVoucher['journalVoucherDetails']; let i = index">
+                        <td>
+                            <span class="text-truncate">
+                                {{i + 1}}.
+                            </span>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{voucher['adminSegment']?.id}}<br>
+                                {{voucher['adminSegment']?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{voucher['economicSegment']?.id}}<br>
+                                {{voucher['economicSegment']?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                <div class="title">
+                                    {{voucher['functionalSegment']?.id}}<br>
+                                    {{voucher['functionalSegment']?.name}}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{voucher['fundSegment']?.id}}<br>
+                                {{voucher['fundSegment']?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{voucher['programmeSegment']?.id}}<br>
+                                {{voucher['programmeSegment']?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{voucher['geoCodeSegment']?.id}}<br>
+                                {{voucher['geoCodeSegment']?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{voucher?.lineReference}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">-</div>
+                        </td>
+                        <td>
+                            <div class="title" *ngIf="voucher.lineValueType === 'DEBIT'">
+                                {{voucher?.lvLineValue}}
+                            </div>
+                            <div class="title" *ngIf="voucher.lineValueType === 'CREDIT'">
+                                0.00
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title" *ngIf="voucher.lineValueType === 'DEBIT'">
+                                0.00
+                            </div>
+                            <div class="title" *ngIf="voucher.lineValueType === 'CREDIT'">
+                                {{voucher?.lvLineValue}}
+                            </div>
+                        </td>
+                        <td>
+                            <span class="material-icons f_20 cursor-pointer  blueColor" (click)="editJvDetail(journalVoucher, voucher)">
+                                edit
+                            </span>
+                            <span class="material-icons f_20 cursor-pointer redColor">
+                                delete
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="10">
+                            <button mat-button class="save-button" (click)="createJvDetail(journalVoucher)">
+                                <mat-icon class="s-16">add_circle</mat-icon>
+                                <span class="ml-7px">Add Detail</span>
+                            </button>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <!--<mat-table [@animateStagger]="{value:'50'}" [dataSource]="journalVouchers">
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
             <mat-cell *matCellDef="let journalVoucher">
@@ -41,15 +287,15 @@
 
         <ng-container matColumnDef="prepared">
             <mat-header-cell *matHeaderCellDef>PREPARED
-                <br>-- Value Date
-                <br>-- Trxn Date
-                <br>-- Username
+                <br>&#45;&#45; Value Date
+                <br>&#45;&#45; Trxn Date
+                <br>&#45;&#45; Username
             </mat-header-cell>
             <mat-cell *matCellDef="let journalVoucher">
                 <p class="phone text-truncate cursor-pointer" *ngIf="journalVoucher.preparedValueDate">
                     {{journalVoucher?.preparedValueDate}}
                     <br>{{journalVoucher?.preparedTransactionDate}}
-                    <br>{{journalVoucher?.preparedUserId}}
+                    <br>{{journalVoucher?.preparedUser?.name}}
                 </p>
                 <p class="phone text-truncate cursor-pointer" *ngIf="!journalVoucher.preparedValueDate">
                     -
@@ -71,15 +317,15 @@
 
         <ng-container matColumnDef="checkedData">
             <mat-header-cell *matHeaderCellDef>CHECKED
-                <br>-- Value Date
-                <br>-- Trxn Date
-                <br>-- Username
+                <br>&#45;&#45; Value Date
+                <br>&#45;&#45; Trxn Date
+                <br>&#45;&#45; Username
             </mat-header-cell>
             <mat-cell *matCellDef="let journalVoucher">
                 <p class="phone text-truncate cursor-pointer" *ngIf="journalVoucher?.checkedValueDate">
                     {{journalVoucher?.checkedValueDate}}
                     <br>{{journalVoucher?.checkedTransactionDate}}
-                    <br>{{journalVoucher?.checkedUserId}}
+                    <br>{{journalVoucher?.checkedUser?.name}}
                 </p>
                 <p class="phone text-truncate cursor-pointer" *ngIf="!journalVoucher.checkedValueDate">
                     -
@@ -101,15 +347,15 @@
 
         <ng-container matColumnDef="postedData">
             <mat-header-cell *matHeaderCellDef>POSTED
-                <br>-- Value Date
-                <br>-- Trxn Date
-                <br>-- Username
+                <br>&#45;&#45; Value Date
+                <br>&#45;&#45; Trxn Date
+                <br>&#45;&#45; Username
             </mat-header-cell>
             <mat-cell *matCellDef="let journalVoucher">
                 <p class="phone text-truncate cursor-pointer" *ngIf="journalVoucher?.postedValueDate">
                     {{journalVoucher?.postedValueDate}}
                     <br>{{journalVoucher?.postedTransactionDate}}
-                    <br>{{journalVoucher?.postedUserId}}
+                    <br>{{journalVoucher?.preparedUser?.name}}
                 </p>
                 <p class="phone text-truncate cursor-pointer" *ngIf="!journalVoucher?.postedValueDate">
                     -
@@ -120,16 +366,17 @@
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
             <mat-cell *matCellDef="let journalVoucher">
+                <span class="material-icons ml-7px f_20 cursor-pointer"
+                      (click)="showTableData(journalVoucher);">edit</span>
                 <span class="material-icons ml-7px f_20 cursor-pointer" (click)="showTableData(journalVoucher);">keyboard_arrow_down</span>
             </mat-cell>
         </ng-container>
-
         <mat-header-row *matHeaderRowDef="displayedJournalColumns"></mat-header-row>
         <mat-row *matRowDef="let journalVoucher; columns: displayedJournalColumns;" class="contact"
                  [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
-    </mat-table>
-    <table class="simple invoice-table" *ngIf="showTable">
+    </mat-table>-->
+    <!--<table class="simple invoice-table">
         <thead>
         <tr>
             <th>S.No</th>
@@ -174,39 +421,39 @@
             </td>
             <td>
                 <div class="title">
-                    {{voucher['adminSegment']?.individualCode}}<br>
+                    {{voucher['adminSegment']?.id}}<br>
                     {{voucher['adminSegment']?.name}}
                 </div>
             </td>
             <td>
                 <div class="title">
-                    {{voucher['economicSegment']?.individualCode}}<br>
+                    {{voucher['economicSegment']?.id}}<br>
                     {{voucher['economicSegment']?.name}}
                 </div>
             </td>
             <td>
                 <div class="title">
                     <div class="title">
-                        {{voucher['functionalSegment']?.individualCode}}<br>
+                        {{voucher['functionalSegment']?.id}}<br>
                         {{voucher['functionalSegment']?.name}}
                     </div>
                 </div>
             </td>
             <td>
                 <div class="title">
-                    {{voucher['fundSegment']?.individualCode}}<br>
+                    {{voucher['fundSegment']?.id}}<br>
                     {{voucher['fundSegment']?.name}}
                 </div>
             </td>
             <td>
                 <div class="title">
-                    {{voucher['programmeSegment']?.individualCode}}<br>
+                    {{voucher['programmeSegment']?.id}}<br>
                     {{voucher['programmeSegment']?.name}}
                 </div>
             </td>
             <td>
                 <div class="title">
-                    {{voucher['geoCodeSegment']?.individualCode}}<br>
+                    {{voucher['geoCodeSegment']?.id}}<br>
                     {{voucher['geoCodeSegment']?.name}}
                 </div>
             </td>
@@ -236,14 +483,14 @@
             </td>
         </tr>
         </tbody>
-    </table>
-    <mat-paginator #paginator *ngIf="journalVouchers.length > 0"
+    </table>-->
+    <!--<mat-paginator #paginator *ngIf="journalVouchers.length > 0"
                    [length]="pagination.total"
                    [pageSize]="pagination.perpage"
                    [pageIndex]="pagination.page-1"
                    (page)="pageEvent = onPageChange($event)"
     >
-    </mat-paginator>
+    </mat-paginator>-->
 </div>
 
 

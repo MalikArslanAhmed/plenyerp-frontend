@@ -993,7 +993,19 @@ export class AppUrl {
         return AppUrl.API_URL + `employee/` + empId + '/progression-history/' + progressionId;
     }
 
-    static JOURNAL_VOUCHER(): string {
-        return AppUrl.API_URL + `journal-vouchers`;
+    static JOURNAL_VOUCHER(jvId?): string {
+        if (jvId) {
+            return AppUrl.API_URL + `journal-vouchers/` + jvId;
+        } else {
+            return AppUrl.API_URL + `journal-vouchers`;
+        }
+    }
+
+    static JOURNAL_VOUCHER_DETAILS(jvId, detId?): string {
+        if (detId) {
+            return AppUrl.API_URL + `journal-vouchers/` + jvId + `/details/` + detId;
+        } else {
+            return AppUrl.API_URL + `journal-vouchers/` + jvId + `/details`;
+        }
     }
 }

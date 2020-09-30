@@ -172,17 +172,21 @@ import {TransactionStoreSelectComponent} from './transaction-store-select/transa
 import {CompanyBankDetailsComponent} from './companies/company-bank-details/company-bank-details.component';
 import {TransactionsItemsSelectComponent} from './transactions-items-select/transactions-items-select.component';
 import {MatListModule} from '@angular/material/list';
-import { GlCodeSelectComponent } from './taxes/gl-code-select/gl-code-select.component';
-import { EmployeeProgressionHistoryComponent } from './employees/employee-action/employee-progression-history/employee-progression-history.component';
-import { JournalVoucherComponent } from './journal-voucher/journal-voucher.component';
-import { JournalVoucherListComponent } from './journal-voucher/journal-voucher-list/journal-voucher-list.component';
-import { JournalVoucherCreateComponent } from './journal-voucher/journal-voucher-create/journal-voucher-create.component';
-import { FundSegmentSelectComponent } from './journal-voucher/fund-segment-select/fund-segment-select.component';
-import { AdminSegmentSelectComponent } from './journal-voucher/admin-segment-select/admin-segment-select.component';
-import { EconomicSegmentSelectComponent } from './journal-voucher/economic-segment-select/economic-segment-select.component';
-import { ProgrammingSegmentSelectComponent } from './journal-voucher/programming-segment-select/programming-segment-select.component';
-import { FunctionalSegmentSelectComponent } from './journal-voucher/functional-segment-select/functional-segment-select.component';
-import { GeoCodeSegmentSelectComponent } from './journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
+import {GlCodeSelectComponent} from './taxes/gl-code-select/gl-code-select.component';
+import {EmployeeProgressionHistoryComponent} from './employees/employee-action/employee-progression-history/employee-progression-history.component';
+import {JournalVoucherComponent} from './journal-voucher/journal-voucher.component';
+import {JournalVoucherListComponent} from './journal-voucher/journal-voucher-list/journal-voucher-list.component';
+import {JournalVoucherCreateComponent} from './journal-voucher/journal-voucher-create/journal-voucher-create.component';
+import {FundSegmentSelectComponent} from './journal-voucher/fund-segment-select/fund-segment-select.component';
+import {AdminSegmentSelectComponent} from './journal-voucher/admin-segment-select/admin-segment-select.component';
+import {EconomicSegmentSelectComponent} from './journal-voucher/economic-segment-select/economic-segment-select.component';
+import {ProgrammingSegmentSelectComponent} from './journal-voucher/programming-segment-select/programming-segment-select.component';
+import {FunctionalSegmentSelectComponent} from './journal-voucher/functional-segment-select/functional-segment-select.component';
+import {GeoCodeSegmentSelectComponent} from './journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatSortModule} from "@angular/material/sort";
+import {JournalVoucherDetailCreateComponent} from './journal-voucher/journal-voucher-detail-create/journal-voucher-detail-create.component';
+import { JournalVoucherUpdateComponent } from './journal-voucher/journal-voucher-update/journal-voucher-update.component';
 
 @NgModule({
     declarations: [
@@ -346,7 +350,9 @@ import { GeoCodeSegmentSelectComponent } from './journal-voucher/geo-code-segmen
         EconomicSegmentSelectComponent,
         ProgrammingSegmentSelectComponent,
         FunctionalSegmentSelectComponent,
-        GeoCodeSegmentSelectComponent
+        GeoCodeSegmentSelectComponent,
+        JournalVoucherDetailCreateComponent,
+        JournalVoucherUpdateComponent
     ],
     imports: [
         CommonModule,
@@ -376,7 +382,9 @@ import { GeoCodeSegmentSelectComponent } from './journal-voucher/geo-code-segmen
         SharedModule,
         MatPaginatorModule,
         MatAutocompleteModule,
-        MatListModule
+        MatListModule,
+        MatExpansionModule,
+        MatSortModule
     ]
 })
 export class DashboardModule {

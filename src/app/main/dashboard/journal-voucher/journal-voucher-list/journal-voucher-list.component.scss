@@ -1,51 +1,11 @@
 @import "src/@fuse/scss/fuse";
 
-app-skill-list {
-    display: flex;
-    flex: 1 1 auto;
-    width: 100%;
-
-    .mat-table {
-        width: 100%;
-        background: transparent;
-        box-shadow: none;
-
-        .mat-column-checkbox {
-            flex: 0 1 64px;
-            padding-left: 18px;
-        }
-
-        .mat-column-avatar {
-            flex: 0 1 64px;
-        }
-
-        .mat-column-buttons {
-            flex: 0 1 80px;
-        }
-
-        .mat-row {
-            position: relative;
-            cursor: pointer;
-            padding: 8px;
-
-            .mat-cell {
-                min-width: 0;
-
-                &.mat-column-detail-button {
-                    flex: 0 1 auto;
-                    padding: 0 24px 0 0;
-
-                    @include media-breakpoint('gt-md') {
-                        display: none;
-                    }
-                }
-            }
-        }
-    }
-}
-
 .blueColor {
     color: blue;
+}
+
+.redColor {
+    color: red;
 }
 
 .ml-7px {
@@ -59,4 +19,62 @@ app-skill-list {
 .invoice-table {
     background-color: #E0E0E0;
     margin-top: -20px;
+}
+
+.mat-accordion .mat-header-row {
+    padding-left: 1.5rem;
+    padding-right: 2rem;
+    border-bottom: none;
+}
+
+.mat-expansion-panel-header.mat-row {
+    border-bottom: none;
+}
+
+$mat-header-row-height: 80px;
+$mat-row-height: 68px;
+$mat-row-horizontal-padding: 24px;
+
+.mat-table {
+    display: block;
+}
+
+.mat-header-row {
+    min-height: $mat-header-row-height;
+}
+
+.mat-row {
+    min-height: $mat-row-height;
+}
+
+.mat-row, .mat-header-row {
+    display: flex;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    align-items: center;
+    padding: 0 $mat-row-horizontal-padding;
+    box-sizing: border-box;
+
+    // Workaround for https://goo.gl/pFmjJD in IE 11. Adds a pseudo
+    // element that will stretch the row the correct height. See:
+    // https://connect.microsoft.com/IE/feedback/details/802625
+    &::after {
+        display: inline-block;
+        min-height: inherit;
+        content: '';
+    }
+}
+
+.mat-cell, .mat-header-cell {
+    flex: 1;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.mt-32px {
+    margin-top: 32px;
+}
+
+.mt-23px {
+    margin-top: 23px;
 }
