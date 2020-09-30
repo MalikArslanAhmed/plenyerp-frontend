@@ -905,9 +905,17 @@ export class JournalVoucherListComponent implements OnInit {
         this.showTable = !this.showTable;
     }*/
 
-    getJournalVoucherList() {
+    getJournalVoucherList(params?) {
+        let param = {
+            page: this.pagination.page
+        };
+        if (params) {
+          param = {
+              ...params
+          }
+        }
         this.journalVouchers = [];
-        this.journalVoucherService.get({page: this.pagination.page}).subscribe(data => {
+        this.journalVoucherService.get(param).subscribe(data => {
             this.journalVouchers = data.items;
             if (this.journalVouchers && this.journalVouchers.length > 0) {
                 let i = 1;

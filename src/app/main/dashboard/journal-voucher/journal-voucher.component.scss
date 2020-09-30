@@ -1,6 +1,6 @@
 @import "src/@fuse/scss/fuse";
 
-#skills {
+#journal-voucher {
     .header {
         .search-wrapper {
             width: 100%;
@@ -40,4 +40,40 @@
             }
         }
     }
+}
+
+.width-200px {
+    width: 200px;
+}
+
+.background-white {
+    background-color: white;
+}
+
+.ml-20px {
+    margin-left: 20px;
+}
+
+.mt-20px {
+    margin-top: 20px;
+}
+
+.color-white {
+    color: white;
+}
+
+.p-20px {
+    padding: 20px;
+}
+
+.p-10px {
+    padding: 10px;
+}
+
+.mt-10px {
+    margin-top: 10px;
+}
+
+.mt-13px {
+    margin-top: 13px;
 }
