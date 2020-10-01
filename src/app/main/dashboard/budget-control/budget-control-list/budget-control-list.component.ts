@@ -36,6 +36,28 @@ export class BudgetControlListComponent implements OnInit {
             month_10: '23',
             month_11: '34',
             month_12: '45'
+        },
+        {
+            sno: '2',
+            fullCode: '2',
+            lineCode: '3',
+            title: 'sfsfs',
+            Pr_Yr_budget: 'fsfs',
+            Pr_Yr_actual: 'sfdsd',
+            supplementary_budget: 'dsg',
+            total_Budget: 'sdfsdg',
+            month_1: '12',
+            month_2: '2',
+            month_3: '2',
+            month_4: '2',
+            month_5: '2',
+            month_6: '2',
+            month_7: '3',
+            month_8: '23',
+            month_9: '23',
+            month_10: '23',
+            month_11: '34',
+            month_12: '45'
         }
     ];
     dialogRef: any;
