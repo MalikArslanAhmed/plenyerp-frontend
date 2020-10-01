@@ -66,9 +66,22 @@
         padding-top: 2rem;
     }
     .segment-sec{
-        //.mat-form-field-outline{
-        //    background-color: #039be5;
-        //}
+        .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline {
+            color: #106CC8;
+            background-color: #039be5;
+            border-radius: 5px;
+        }
+        mat-form-field{
+            mat-label{
+                color: #fff;
+            }
+            .mat-select-arrow-wrapper{
+                .mat-select-arrow{
+                    color: #fff;
+                    display: none;
+                }
+            }
+        }
     }
 
 }
