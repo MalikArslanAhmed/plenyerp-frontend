@@ -1,0 +1,217 @@
+<div fxLayout="column" fxLayoutGap="5px" fxFlex="100">
+    <div fxFlex="100">
+        <mat-table [@animateStagger]="{value:'50'}" [dataSource]="budgetControlList">
+            <ng-container matColumnDef="sno">
+                <mat-header-cell *matHeaderCellDef>S.No.</mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate">
+                        {{item.sno}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fullCode">
+                <mat-header-cell *matHeaderCellDef>Full Code</mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate">
+                        {{item?.fullCode}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="lineCode">
+                <mat-header-cell *matHeaderCellDef>Line Code</mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate">
+                        {{item?.lineCode}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.title}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="Pr_Yr_budget">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Pr. Yr. budget</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.pr_Yr_budget}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Pr_Yr_actual">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Pr. Yr. actual</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.pr_Yr_actual}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="supplementary_budget">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Supplementary Budget</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.supplementary_budget}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="total_Budget">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Total Budget</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.total_Budget}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_1">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month1</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_1}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_2">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month2</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_2}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_3">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month3</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_3}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_4">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month4</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_4}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_5">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month5</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_5}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_6">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month6</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_6}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_7">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month7</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_7}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_8">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month8</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_8}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_9">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month9</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_9}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_10">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month10</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_10}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_11">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month11</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_11}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="month_12">
+                <mat-header-cell *matHeaderCellDef>
+                    <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Month12</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <p class="phone text-truncate ml-1">
+                        {{item?.month_12}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let item; columns: displayedColumns;" class="contact"
+                     [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
+    </div>
+    <div fxFlex="100" *ngIf ="budgetControlList.length > 0">
+        <mat-paginator #paginator
+                       [length]="pagination.total"
+                       [pageSize]="pagination.perpage"
+                       [pageIndex]="pagination.page-1"
+                       (page)="pageEvent = onPageChange($event)"
+        >
+        </mat-paginator>
+    </div>
+</div>

@@ -497,7 +497,16 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/report-off-level'
                     }
                 ]
-            }
+            },
+            {
+                id: 'budget-control',
+                title: 'Budget Control-Programme',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'monetization_on',
+                url: '/dashboard/budget-control'
+            },
         ]
     }
 ];

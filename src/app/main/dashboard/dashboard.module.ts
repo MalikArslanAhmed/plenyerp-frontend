@@ -133,7 +133,7 @@ import {PhoneTypeCreateComponent} from './contact-info/phone-type/phone-type-cre
 import {PhoneTypeListComponent} from './contact-info/phone-type/phone-type-list/phone-type-list.component';
 import {EmployeeBankDetailsComponent} from './employees/employee-action/employee-bank-details/employee-bank-details.component';
 import {EmployeeBackground} from './employees/employee-other-details/employee-background/employee-background';
-import {SharedModule} from "../../shared/shared.module";
+import {SharedModule} from '../../shared/shared.module';
 import {StoreSetupItemsComponent} from './store-setup-items/store-setup-items.component';
 import {StoreSetupItemsListComponent} from './store-setup-items/store-setup-items-list/store-setup-items-list.component';
 import {StoreSetupItemsCreateComponent} from './store-setup-items/store-setup-items-create/store-setup-items-create.component';
@@ -159,21 +159,25 @@ import {DeleteListModalComponent} from './delete-list-modal/delete-list-modal.co
 import {TaxesComponent} from './taxes/taxes.component';
 import {TaxesListComponent} from './taxes/taxes-list/taxes-list.component';
 import {TaxesCreateComponent} from './taxes/taxes-create/taxes-create.component';
-import {CompaniesComponent} from "./companies/companies.component";
-import {CompaniesListComponent} from "./companies/companies-list/companies-list.component";
+import {CompaniesComponent} from './companies/companies.component';
+import {CompaniesListComponent} from './companies/companies-list/companies-list.component';
 import {CompaniesCreateComponent} from './companies/companies-create/companies-create.component';
 import {ReportBinCardComponent} from './report-bin-card/report-bin-card.component';
 import {ReportInventoryLedgerComponent} from './report-inventory-ledger/report-inventory-ledger.component';
 import {ReportQuantityBalanceComponent} from './report-quantity-balance/report-quantity-balance.component';
 import {ReportOffLevelComponent} from './report-off-level/report-off-level.component';
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TransactionSupplierSelectComponent} from './transaction-supplier-select/transaction-supplier-select.component';
 import {TransactionStoreSelectComponent} from './transaction-store-select/transaction-store-select.component';
 import {CompanyBankDetailsComponent} from './companies/company-bank-details/company-bank-details.component';
 import {TransactionsItemsSelectComponent} from './transactions-items-select/transactions-items-select.component';
 import {MatListModule} from '@angular/material/list';
-import { GlCodeSelectComponent } from './taxes/gl-code-select/gl-code-select.component';
-import { EmployeeProgressionHistoryComponent } from './employees/employee-action/employee-progression-history/employee-progression-history.component';
+import {GlCodeSelectComponent} from './taxes/gl-code-select/gl-code-select.component';
+import {EmployeeProgressionHistoryComponent} from './employees/employee-action/employee-progression-history/employee-progression-history.component';
+import {BudgetControlComponent} from './budget-control/budget-control.component';
+import {MatCardModule} from '@angular/material/card';
+import {BudgetControlListComponent} from './budget-control/budget-control-list/budget-control-list.component';
+import {SegmentCodeListComponent} from './budget-control/segment-code-list/segment-code-list.component';
 
 @NgModule({
     declarations: [
@@ -328,7 +332,11 @@ import { EmployeeProgressionHistoryComponent } from './employees/employee-action
         CompanyBankDetailsComponent,
         TransactionsItemsSelectComponent,
         GlCodeSelectComponent,
-        EmployeeProgressionHistoryComponent
+        EmployeeProgressionHistoryComponent,
+        BudgetControlComponent,
+        BudgetControlListComponent,
+        SegmentCodeListComponent
+
     ],
     imports: [
         CommonModule,
@@ -358,7 +366,8 @@ import { EmployeeProgressionHistoryComponent } from './employees/employee-action
         SharedModule,
         MatPaginatorModule,
         MatAutocompleteModule,
-        MatListModule
+        MatListModule,
+        MatCardModule
     ]
 })
 export class DashboardModule {
