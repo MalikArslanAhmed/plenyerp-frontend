@@ -21,8 +21,9 @@ export class UserRolePermissionComponent implements OnInit {
     labelPosition: 'before' | 'after' = 'after';
     disabled = false;
     roleId;
-    permissionModule = [ ];
+    permissionModule = [];
     permissionIds = [];
+
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private userRolesPermissionService: UserRolesPermissionService,
@@ -41,11 +42,11 @@ export class UserRolePermissionComponent implements OnInit {
     getRoleBasePermission() {
         this.userRolesPermissionService.roleBasePermissionList(this.roleId, {}).subscribe(data => {
             // console.log('--->>>role id base permission', data);
-            const  roleBasePer = data;
+            const roleBasePer = data;
             this.permissionIds = [];
-            if (roleBasePer && roleBasePer.length){
+            if (roleBasePer && roleBasePer.length) {
                 roleBasePer.map(v => {
-                   this.permissionIds.push(v.id);
+                    this.permissionIds.push(v.id);
                 });
             }
             // console.log('-->>', this.permissionIds);
@@ -53,12 +54,13 @@ export class UserRolePermissionComponent implements OnInit {
             this.patchPermissionCheckbox();
         });
     }
+
     patchPermissionCheckbox() {
-        if (this.permissionIds && this.permissionIds.length){
+        if (this.permissionIds && this.permissionIds.length) {
             this.permissionIds.forEach(v => {
                 this.permissionModule.forEach(module => {
                     module['children'].forEach(d => {
-                        if (v === d.id){
+                        if (v === d.id) {
                             d['isSelected'] = true;
                         }
                     });
@@ -66,6 +68,7 @@ export class UserRolePermissionComponent implements OnInit {
             });
         }
     }
+
     getPermission() {
         this.userRolesPermissionService.permissionList({}).subscribe(data => {
             // console.log('--->>>permission', data);
@@ -87,9 +90,25 @@ export class UserRolePermissionComponent implements OnInit {
         // console.log('--->>this.permissionIds', this.permissionIds);
     }
 
+    checkAllPermissions(e, index) {
+        if (e.checked) {
+            if (this.permissionModule[index] && this.permissionModule[index].children && this.permissionModule[index].children.length > 0) {
+                this.permissionModule[index].children.forEach(permission => {
+                    permission['isSelected'] = true;
+                });
+            }
+        } else {
+            if (this.permissionModule[index] && this.permissionModule[index].children && this.permissionModule[index].children.length > 0) {
+                this.permissionModule[index].children.forEach(permission => {
+                    permission['isSelected'] = false;
+                });
+            }
+        }
+    }
+
     submitPermission() {
         const params = {
-            permissionIds : this.permissionIds
+            permissionIds: this.permissionIds
         };
         // console.log('mmmmmmmm...........', params);
         this.userRolesPermissionService.addPermissions(this.roleId, params).subscribe(data => {

@@ -11,7 +11,6 @@
                 </span>
             </div>
         </div>
-
     </div>
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
@@ -20,10 +19,14 @@
                     <mat-accordion>
                         <mat-expansion-panel (opened)="panelOpenState = true"
                                              (closed)="panelOpenState = false"
-                        *ngFor="let rolePermission of permissionModule">
+                                             *ngFor="let rolePermission of permissionModule; let i = index">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    {{rolePermission.name}}
+                                    <mat-checkbox
+                                        class="example-margin"
+                                        (change)="checkAllPermissions($event, i)"
+                                    >{{rolePermission.name}}
+                                    </mat-checkbox>
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <p *ngFor="let children of rolePermission['children']">
@@ -31,8 +34,7 @@
                                     class="example-margin"
                                     [(ngModel)]="children['isSelected']"
                                     (change)="checkPermissions($event, children)"
-                                >
-                                    {{children.name}}
+                                >{{children.name}}
                                 </mat-checkbox>
                             </p>
                         </mat-expansion-panel>
