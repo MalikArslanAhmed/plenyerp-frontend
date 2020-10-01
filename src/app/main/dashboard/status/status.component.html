@@ -11,7 +11,7 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center">
+        <div fxLayout="row" fxLayoutAlign="end center" appPermissionBind [permission]="permissionAddStaffStatus">
             <button mat-fab class="accent" id="add-button" aria-label="add status"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addStatus()">
                 <mat-icon>add_circle</mat-icon>

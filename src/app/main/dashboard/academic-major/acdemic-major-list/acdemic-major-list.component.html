@@ -36,14 +36,18 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let academicMajor">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button (click)="editAcademicMajor(academicMajor)" aria-label="Toggle star" mat-icon-button
-                            style="color: blue">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                    <button (click)="deleteItemModal(academicMajor)" aria-label="Toggle star" mat-icon-button
-                            style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
+                    <div appPermissionBind [permission]="permissionEditMajor">
+                        <button (click)="editAcademicMajor(academicMajor)" aria-label="Toggle star" mat-icon-button
+                                style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDeleteMajor">
+                        <button (click)="deleteItemModal(academicMajor)" aria-label="Toggle star" mat-icon-button
+                                style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>

@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {FormGroup} from "@angular/forms";
 import {AcdemicMajorListComponent} from './acdemic-major-list/acdemic-major-list.component';
 import {AcdemicMajorCreateComponent} from './acdemic-major-create/acdemic-major-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-academic-major',
@@ -17,6 +18,8 @@ export class AcademicMajorComponent implements OnInit {
     dialogRef: any;
     @ViewChild(AcdemicMajorListComponent) getAcademicMajor: AcdemicMajorListComponent;
 
+    permissionAddMajor = [PermissionConstant.ACADEMIC_MAJORS_ADD];
+    
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

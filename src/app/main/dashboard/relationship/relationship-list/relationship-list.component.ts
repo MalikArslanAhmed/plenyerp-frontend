@@ -6,6 +6,7 @@ import {RelationshipService} from '../../../../shared/services/relationship.serv
 import {RelationshipCreateComponent} from '../relationship-create/relationship-create.component';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-relationship-list',
@@ -25,6 +26,11 @@ export class RelationshipListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
+    permissionEditRelationship = [PermissionConstant.RELATIONS_EDIT];
+    permissionDeleteRelationship = [PermissionConstant.RELATIONS_DELETE];
+
+
     constructor(private relationshipService: RelationshipService,
                 private _matDialog: MatDialog) {
     }

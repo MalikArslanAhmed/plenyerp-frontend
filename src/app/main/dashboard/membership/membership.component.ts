@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {MembershipListComponent} from './membership-list/membership-list.component';
 import {MembershipCreateComponent} from "./membership-create/membership-create.component";
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-membership',
@@ -17,6 +18,7 @@ export class MembershipComponent implements OnInit {
     dialogRef: any;
     @ViewChild(MembershipListComponent) getMemberData: MembershipListComponent;
 
+    permissionAddMembership = [PermissionConstant.MEMBERSHIP_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

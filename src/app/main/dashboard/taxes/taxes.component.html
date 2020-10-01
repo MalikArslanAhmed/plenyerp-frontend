@@ -12,12 +12,12 @@
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-            <ng-container appPermissionBind [permission]="permissionAddTaxes">
+            <div appPermissionBind [permission]="permissionAddTaxes">
                 <button mat-fab class="accent" id="add-button" aria-label="add qualification"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addTax()">
                     <mat-icon>add_circle</mat-icon>
                 </button>
-            </ng-container>
+            </div>
         </div>
         <!-- SEARCH -->
         <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>

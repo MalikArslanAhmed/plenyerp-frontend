@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import { RelationshipListComponent } from './relationship-list/relationship-list.component';
 import {RelationshipCreateComponent} from "./relationship-create/relationship-create.component";
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-relationship',
@@ -17,6 +18,8 @@ export class RelationshipComponent implements OnInit {
     dialogRef: any;
     @ViewChild(RelationshipListComponent) getRelationship: RelationshipListComponent;
 
+    permissionAddRelationship = [PermissionConstant.RELATIONS_ADD];
+    
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

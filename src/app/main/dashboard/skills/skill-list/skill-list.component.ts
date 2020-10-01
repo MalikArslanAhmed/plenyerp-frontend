@@ -6,6 +6,7 @@ import {SkillCreateComponent} from '../skill-create/skill-create.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
 import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-skill-list',
@@ -25,6 +26,9 @@ export class SkillListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    permissionEditSkills = [PermissionConstant.JOB_SKILLS_EDIT];
+    permissionDeleteSkills = [PermissionConstant.JOB_SKILLS_DELETE];
+
     constructor(private skillService: SkillService,
                 private _matDialog: MatDialog) {
     }

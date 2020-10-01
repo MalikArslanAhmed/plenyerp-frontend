@@ -6,6 +6,7 @@ import {FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-qualification-list',
@@ -24,6 +25,10 @@ export class QualificationListComponent implements OnInit {
         perpage: 15,
         pages: null
     };
+
+    permissionEditQualification = [PermissionConstant.QUALIFICATION_EDIT];
+    permissionDeleteQualification = [PermissionConstant.QUALIFICATION_DELETE];
+    
     pageEvent: PageEvent;
     constructor(private qualificationService: QualificationService,
                 private _matDialog: MatDialog) {

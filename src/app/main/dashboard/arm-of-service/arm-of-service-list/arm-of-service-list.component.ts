@@ -6,6 +6,7 @@ import {ArmOfServiceService} from '../../../../shared/services/arm-of-service.se
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-arm-of-service-list',
@@ -25,6 +26,10 @@ export class ArmOfServiceListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
+    permissionEditArmOfService = [PermissionConstant.ARM_OF_SERVICE_EDIT];
+    permissionDeleteArmOfService = [PermissionConstant.ARM_OF_SERVICE_DELETE];
+
     constructor(private armOfServiceService: ArmOfServiceService,
                 private _matDialog: MatDialog) {
     }

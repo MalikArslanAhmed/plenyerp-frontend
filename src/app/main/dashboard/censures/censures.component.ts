@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {CensuresListComponent} from './censures-list/censures-list.component';
 import {CensuresCreateComponent} from './censures-create/censures-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-censures',
@@ -17,6 +18,8 @@ export class CensuresComponent implements OnInit {
     dialogRef: any;
     @ViewChild(CensuresListComponent) getCensures: CensuresListComponent;
 
+    permissionAddCensures = [PermissionConstant.CENSURES_ADD];
+    
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

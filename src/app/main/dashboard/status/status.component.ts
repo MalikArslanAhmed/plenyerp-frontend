@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {StatusListComponent} from './status-list/status-list.component';
 import {StatusCreateComponent} from "./status-create/status-create.component";
 import {fuseAnimations} from "../../../../@fuse/animations";
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-status',
@@ -22,6 +23,7 @@ export class StatusComponent implements OnInit {
         private _matDialog: MatDialog) {
     }
 
+    permissionAddStaffStatus = [PermissionConstant.STAFF_STATUS_ADD];
     ngOnInit(): void {
     }
 

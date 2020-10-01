@@ -6,6 +6,7 @@ import {CategoriesService} from "../../../../shared/services/categories.service"
 import {CategoriesCreateComponent} from '../categories-create/categories-create.component';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-categories-list',
@@ -25,6 +26,10 @@ export class CategoriesListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
+    permissionEditStaffCategory = [PermissionConstant.STAFF_CATEGORIES_EDIT];
+    permissionDeleteStaffCategory = [PermissionConstant.STAFF_CATEGORIES_DELETE];
+
     constructor(private categoriesService: CategoriesService,
                 private _matDialog: MatDialog) {
     }

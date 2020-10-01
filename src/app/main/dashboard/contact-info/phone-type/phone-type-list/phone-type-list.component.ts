@@ -6,6 +6,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-phone-type-list',
@@ -27,6 +28,9 @@ export class PhoneTypeListComponent implements OnInit {
     };
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
+
+    permissionEditPhoneType = [PermissionConstant.TYPES_OF_PHONE_NUM_EDIT];
+    permissionDeletePhoneType = [PermissionConstant.TYPES_OF_PHONE_NUM_DELETE];
 
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {

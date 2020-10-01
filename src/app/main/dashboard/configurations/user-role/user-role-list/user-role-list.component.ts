@@ -7,6 +7,7 @@ import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import {UserRolesPermissionService} from '../../../../../shared/services/user-roles-permission.service';
 import {Router} from '@angular/router';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-user-role-list',
@@ -29,6 +30,8 @@ export class UserRoleListComponent implements OnInit {
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
+    permissionEditRoles = [PermissionConstant.ROLES_EDIT];
+    permissionDeleteRoles = [PermissionConstant.ROLES_DELETE];
     // tslint:disable-next-line:no-shadowed-variable
     constructor(private userRolesPermissionService: UserRolesPermissionService,
                 private router: Router,

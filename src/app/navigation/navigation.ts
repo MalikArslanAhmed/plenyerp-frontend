@@ -144,14 +144,16 @@ export const navigation: FuseNavigation[] = [
                         title: 'Designations',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/designation'
+                        url: 'dashboard/designation',
+                        permissions: [PermissionConstant.DESIGNATION_LIST],
                     },
                     {
                         id: 'salary-scales',
                         title: 'Salary Scales',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/salary-scales'
+                        url: 'dashboard/salary-scales',
+                        permissions: [PermissionConstant.SALARYSCALES_LIST],
                     },
                     {
                         id: 'grade-level',
@@ -210,14 +212,16 @@ export const navigation: FuseNavigation[] = [
                         title: 'Address Type',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/address-type'
+                        url: 'dashboard/address-type',
+                        permissions: [PermissionConstant.ADDRESS_LIST],
                     },
                     {
                         id: 'phone-type',
                         title: 'Phone Type',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/phone-type'
+                        url: 'dashboard/phone-type',
+                        permissions: [PermissionConstant.TYPES_OF_PHONE_NUM_LIST],
                     }
                 ]
             },
@@ -248,7 +252,8 @@ export const navigation: FuseNavigation[] = [
                         title: 'Public Holidays ',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/public-holiday'
+                        url: 'dashboard/public-holiday',
+                        permissions: [PermissionConstant.PUBLIC_HOLIDAYS_LIST],
                     }
                 ]
             },
@@ -265,21 +270,24 @@ export const navigation: FuseNavigation[] = [
                         title: 'Qualification',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/qualification'
+                        url: 'dashboard/qualification',
+                        permissions: [PermissionConstant.QUALIFICATION_LIST],
                     },
                     {
                         id: 'skills',
                         title: 'Skills',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/skills'
+                        url: 'dashboard/skills',
+                        permissions: [PermissionConstant.JOB_SKILLS_LIST],
                     },
                     {
                         id: 'languages',
                         title: 'Languages',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/languages'
+                        url: 'dashboard/languages',
+                        permissions: [PermissionConstant.LANGUAGES_LIST],
                     },
                     {
                         id: 'schedule',
@@ -293,7 +301,8 @@ export const navigation: FuseNavigation[] = [
                         title: 'Academic Major',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/academic-major'
+                        url: 'dashboard/academic-major',
+                        permissions: [PermissionConstant.ACADEMIC_MAJORS_LIST],
                     }
                 ]
             },
@@ -310,21 +319,25 @@ export const navigation: FuseNavigation[] = [
                         title: 'Relationship',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/relationship'
+                        url: 'dashboard/relationship',
+                        permissions: [PermissionConstant.RELATIONS_LIST],
                     },
                     {
                         id: 'categories',
                         title: 'Categories',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/categories'
+                        url: 'dashboard/categories',
+                        permissions: [PermissionConstant.STAFF_CATEGORIES_LIST],
+
                     },
                     {
                         id: 'status',
                         title: 'Status',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/status'
+                        url: 'dashboard/status',
+                        permissions: [PermissionConstant.STAFF_STATUS_LIST],
                     },
                     {
                         id: 'disengagement',
@@ -338,7 +351,8 @@ export const navigation: FuseNavigation[] = [
                         title: 'Censures',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/censures'
+                        url: 'dashboard/censures',
+                        permissions: [PermissionConstant.CENSURES_LIST],
                     },
                 ]
             },
@@ -355,14 +369,16 @@ export const navigation: FuseNavigation[] = [
                         title: 'Arm Of Service',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/arm-of-service'
+                        url: 'dashboard/arm-of-service',
+                        permissions: [PermissionConstant.ARM_OF_SERVICE_LIST],
                     },
                     {
                         id: 'membership',
                         title: 'Membership',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/membership'
+                        url: 'dashboard/membership',
+                        permissions: [PermissionConstant.MEMBERSHIP_LIST],
                     }
                 ]
             },
@@ -514,7 +530,8 @@ export const navigation: FuseNavigation[] = [
                         title: 'Roles',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/user-role'
+                        url: 'dashboard/user-role',
+                        permissions: [PermissionConstant.ROLES_LIST],
                     }
                 ]
             },

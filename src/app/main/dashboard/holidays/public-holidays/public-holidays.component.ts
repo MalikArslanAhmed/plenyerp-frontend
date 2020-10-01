@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {PublicHolidayCreateComponent} from './public-holiday-create/public-holiday-create.component';
 import {PublicHolidayListComponent} from './public-holiday-list/public-holiday-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-public-holidays',
@@ -17,6 +18,7 @@ export class PublicHolidaysComponent implements OnInit {
     dialogRef: any;
     @ViewChild(PublicHolidayListComponent) getPublicHolidayList: PublicHolidayListComponent;
 
+    permissionAddPublicHoliday = [PermissionConstant.PUBLIC_HOLIDAYS_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

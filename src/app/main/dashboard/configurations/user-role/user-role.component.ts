@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {UserRoleCreateComponent} from './user-role-create/user-role-create.component';
 import {UserRoleListComponent} from './user-role-list/user-role-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-user-role',
@@ -17,6 +18,7 @@ export class UserRoleComponent implements OnInit {
     dialogRef: any;
     @ViewChild(UserRoleListComponent) getUserRoleList: UserRoleListComponent;
 
+    permissionAddRoles = [PermissionConstant.ROLES_ADD];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

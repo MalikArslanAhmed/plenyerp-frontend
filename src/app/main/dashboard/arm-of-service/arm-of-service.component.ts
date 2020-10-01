@@ -6,6 +6,7 @@ import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.s
 import {fuseAnimations} from '../../../../@fuse/animations';
 import {ArmOfServiceListComponent} from './arm-of-service-list/arm-of-service-list.component';
 import {ArmOfServiceCreateComponent} from './arm-of-service-create/arm-of-service-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-arm-of-service',
@@ -18,6 +19,7 @@ export class ArmOfServiceComponent implements OnInit {
     dialogRef: any;
     @ViewChild(ArmOfServiceListComponent) getarmOfService: ArmOfServiceListComponent;
 
+    permissionAddArmOfService = [PermissionConstant.ARM_OF_SERVICE_ADD];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

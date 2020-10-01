@@ -6,6 +6,7 @@ import {CensuresCreateComponent} from '../censures-create/censures-create.compon
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-censures-list',
@@ -25,6 +26,10 @@ export class CensuresListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    
+    permissionEditCensures = [PermissionConstant.CENSURES_EDIT];
+    permissionDeleteCensures = [PermissionConstant.CENSURES_DELETE];
+
     constructor(private censuresService: CensuresService,
                 private _matDialog: MatDialog) {
     }

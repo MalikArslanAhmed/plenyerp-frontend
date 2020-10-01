@@ -6,6 +6,7 @@ import {AcdemicMajorCreateComponent} from '../acdemic-major-create/acdemic-major
 import {AcademicMajorService} from '../../../../shared/services/academic-major.service';
 import {PageEvent} from '@angular/material/paginator';
 import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-acdemic-major-list',
@@ -25,6 +26,9 @@ export class AcdemicMajorListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
+    permissionEditMajor = [PermissionConstant.ACADEMIC_MAJORS_EDIT];
+    permissionDeleteMajor = [PermissionConstant.ACADEMIC_MAJORS_DELETE];
 
     constructor(private academicMajorService: AcademicMajorService,
                 private _matDialog: MatDialog) {

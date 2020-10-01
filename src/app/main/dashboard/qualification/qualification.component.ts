@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {QualificationCreateComponent} from './qualification-create/qualification-create.component';
 import {FormGroup} from '@angular/forms';
 import {QualificationListComponent} from './qualification-list/qualification-list.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-qualification',
@@ -17,6 +18,8 @@ export class QualificationComponent implements OnInit {
     dialogRef: any;
     @ViewChild(QualificationListComponent) getQualification: QualificationListComponent;
 
+    permissionAddQualification = [PermissionConstant.QUALIFICATION_ADD];
+    
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

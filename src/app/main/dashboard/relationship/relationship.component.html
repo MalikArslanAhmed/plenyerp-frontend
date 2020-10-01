@@ -11,7 +11,7 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center">
+        <div fxLayout="row" fxLayoutAlign="end center" appPermissionBind [permission]="permissionAddRelationship">
             <button mat-fab class="accent" id="add-button" aria-label="add skill"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addRelationship()">
                 <mat-icon>add_circle</mat-icon>
