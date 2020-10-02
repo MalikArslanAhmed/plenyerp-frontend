@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutGap="5px" fxFlex="100">
     <div fxFlex="100">
         <div  class="budget-control-container" style="overflow-x: scroll!important;">
-            <table mat-table [@animateStagger]="{value:'50'}" [dataSource]="budgetControlList">
+            <table mat-table [@animateStagger]="{value:'50'}" [dataSource]="budgetControlList" class="width-100-per">
                 <ng-container matColumnDef="sno">
                     <mat-header-cell *matHeaderCellDef>S.No.</mat-header-cell>
                     <mat-cell *matCellDef="let item">
