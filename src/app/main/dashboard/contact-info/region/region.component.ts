@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {RegionCreateComponent} from './region-create/region-create.component';
 import {RegionListComponent} from './region-list/region-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-region',
@@ -17,6 +18,7 @@ export class RegionComponent implements OnInit {
     dialogRef: any;
     @ViewChild(RegionListComponent) getRegionList: RegionListComponent;
 
+    permissionAddRegion = [PermissionConstant.REGION_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

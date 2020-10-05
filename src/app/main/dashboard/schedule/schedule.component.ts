@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {ScheduleListComponent} from './schedule-list/schedule-list.component';
 import {ScheduleCreateComponent} from "./schedule-create/schedule-create.component";
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-schedule',
@@ -17,6 +18,8 @@ export class ScheduleComponent implements OnInit {
     dialogRef: any;
     @ViewChild(ScheduleListComponent) getSchedule: ScheduleListComponent;
 
+    permissionAddSchedule = [PermissionConstant.SCHEDULE_ADD];
+    
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

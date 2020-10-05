@@ -6,6 +6,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-region-list',
@@ -28,6 +29,9 @@ export class RegionListComponent implements OnInit {
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
+    permissionEditRegion = [PermissionConstant.REGION_EDIT];
+    permissionDeleteRegion = [PermissionConstant.REGION_DELETE];
+    
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {
     }

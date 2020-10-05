@@ -12,10 +12,12 @@
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-            <button mat-fab class="accent" id="add-button" aria-label="add categories"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addDisengagements()">
-                <mat-icon>add_circle</mat-icon>
-            </button>
+            <div appPermissionBind [permission]="permissionAddDisengagement">
+                <button mat-fab class="accent" id="add-button" aria-label="add categories"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addDisengagements()">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
         </div>
         <!-- SEARCH -->
         <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>

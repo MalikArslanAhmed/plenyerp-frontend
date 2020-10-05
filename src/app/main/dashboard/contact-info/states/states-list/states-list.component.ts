@@ -6,6 +6,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-states-list',
@@ -27,6 +28,9 @@ export class StatesListComponent implements OnInit {
     };
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
+
+    permissionEditStates = [PermissionConstant.STATES_EDIT];
+    permissionDeleteStates = [PermissionConstant.STATES_DELETE];
 
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {

@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {CountryCreateComponent} from './country-create/country-create.component';
 import {CountryListComponent} from './country-list/country-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-salary-scales',
@@ -17,6 +18,7 @@ export class CountryComponent implements OnInit {
     dialogRef: any;
     @ViewChild(CountryListComponent) getCountryList: CountryListComponent;
 
+    permissionAddCountry = [PermissionConstant.COUNTRIES_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

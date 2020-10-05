@@ -9,6 +9,7 @@ import {FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {JournalVoucherDetailCreateComponent} from '../journal-voucher-detail-create/journal-voucher-detail-create.component';
 import {JournalVoucherUpdateComponent} from "../journal-voucher-update/journal-voucher-update.component";
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-journal-voucher-list',
@@ -28,6 +29,9 @@ export class JournalVoucherListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
+    permissionEditJV = [PermissionConstant.EDIT_GL_JV]; 
+    permissionDeleteJV = [PermissionConstant.DELETE_GL_JV]; 
 
     constructor(private journalVoucherService: JournalVoucherService,
                 private _matDialog: MatDialog) {

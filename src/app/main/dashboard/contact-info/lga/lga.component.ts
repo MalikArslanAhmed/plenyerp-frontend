@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {LgaCreateComponent} from './lga-create/lga-create.component';
 import {LgaListComponent} from './lga-list/lga-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-lga',
@@ -16,6 +17,8 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 export class LgaComponent implements OnInit {
     dialogRef: any;
     @ViewChild(LgaListComponent) getLgaList: LgaListComponent;
+
+    permissionAddLGA = [PermissionConstant.LGA_ADD];
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,

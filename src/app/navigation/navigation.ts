@@ -455,7 +455,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'store',
-                permissions :[PermissionConstant.STORE_SETUP_ITEMS_LIST,PermissionConstant.STORE_SETUP_CATEGORIES_LIST,PermissionConstant.STORE_SETUP_STORES_LIST,PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST],
+                //permissions :[PermissionConstant.STORE_SETUP_ITEMS_LIST,PermissionConstant.STORE_SETUP_CATEGORIES_LIST,PermissionConstant.STORE_SETUP_STORES_LIST,PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST],
                 children: [
                     {
                         id: 'items',
@@ -615,7 +615,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/user-role',
-                        permissions: [PermissionConstant.ROLES_LIST],
+                       // permissions: [PermissionConstant.ROLES_LIST],
                     }
                 ]
             },
@@ -626,7 +626,8 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'monetization_on',
-                url: '/dashboard/budget-control'
+                url: '/dashboard/budget-control',
+                permissions : [PermissionConstant.BUDGET_CONTROL_LIST]
             },
             {
                 id: 'journal',
@@ -635,13 +636,15 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'money',
+               // permissions : [PermissionConstant.LIST_GL_JV],
                 children: [
                     {
                         id: 'journal-voucher',
                         title: 'Journal Voucher',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/journal-voucher'
+                        url: 'dashboard/journal-voucher',
+                       // permissions : [PermissionConstant.LIST_GL_JV]
                     }
                 ]
             }

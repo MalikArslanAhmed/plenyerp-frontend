@@ -234,11 +234,13 @@ export class PermissionConstant {
 
     static ADD_GL_JV = 'ADD.GL.JV';
     static EDIT_GL_JV = 'EDIT.GL.JV';
+    static LIST_GL_JV = 'LIST.GL.JV';
     static DELETE_GL_JV = 'DELETE.GL.JV';
     static CHECK_GL_JV = 'CHECK.GL.JV';
     static POST_GL_JV = 'POST.GL.JV';
     static ADD_ECONOMIC_BUDGET = 'ADD.ECONOMIC.BUDGET';
     static EDIT_ECONOMIC_BUDGET = 'EDIT.ECONOMIC.BUDGET';
+    static BUDGET_CONTROL_LIST = 'BUDGET.CONTROL.LIST';
     static COMMIT_PAYMENT_APPROVAL = 'COMMIT.PAYMENT.APPROVAL';
     static POST_TO_GL = 'POST.TP.GL';
     static DELETE_ECONOMIC_BUDGET = 'DELETE.ECONOMIC.BUDGET';

@@ -97,12 +97,16 @@
                 </span>
                 <span class="mat-cell">
                     <p class="text-truncate cursor-pointer mt-32px d-flex">
-                        <span class="material-icons f_20 cursor-pointer blueColor"
-                              (click)="editJournalVoucher(journalVoucher)">
-                            edit
+                        <span appPermissionBind [permission]="permissionEditJV">
+                            <span class="material-icons f_20 cursor-pointer blueColor"
+                                (click)="editJournalVoucher(journalVoucher)">
+                                edit
+                            </span>
                         </span>
-                        <span class="material-icons ml-7px f_20 cursor-pointer redColor">
-                            delete
+                        <span appPermissionBind [permission]="permissionDeleteJV">
+                            <span class="material-icons ml-7px f_20 cursor-pointer redColor">
+                                delete
+                            </span>
                         </span>
                     </p>
                 </span>

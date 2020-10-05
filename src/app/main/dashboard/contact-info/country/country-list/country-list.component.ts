@@ -6,6 +6,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-country-list',
@@ -27,6 +28,9 @@ export class CountryListComponent implements OnInit {
     };
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
+
+    permissionEditCountry = [PermissionConstant.COUNTRIES_EDIT];
+    permissionDeleteCountry = [PermissionConstant.COUNTRIES_DELETE];
 
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {

@@ -6,6 +6,7 @@ import {DisengagementCreateComponent} from '../disengagement-create/disengagemen
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-disengagement-list',
@@ -25,6 +26,10 @@ export class DisengagementListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
+    permissionEditDisengagement = [PermissionConstant.DISENGAGEMENT_EDIT];
+    permissionDeleteDisengagement = [PermissionConstant.DISENGAGEMENT_DELETE];
+
     constructor(private disengagementService: DisengagementsService,
                 private _matDialog: MatDialog) {
     }

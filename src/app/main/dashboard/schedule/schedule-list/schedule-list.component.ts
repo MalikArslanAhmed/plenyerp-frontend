@@ -6,6 +6,7 @@ import {ScheduleCreateComponent} from '../schedule-create/schedule-create.compon
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-schedule-list',
@@ -25,6 +26,10 @@ export class ScheduleListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    
+    permissionEditSchedule = [PermissionConstant.SCHEDULE_EDIT];
+    permissionDeleteSchedule = [PermissionConstant.SCHEDULE_DELETE];
+
     constructor(private scheduleService: ScheduleService,
                 private _matDialog: MatDialog) {
     }

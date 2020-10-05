@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {JournalVoucherCreateComponent} from "./journal-voucher-create/journal-voucher-create.component";
 import {JournalVoucherListComponent} from "./journal-voucher-list/journal-voucher-list.component";
 import * as moment from 'moment';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-journal-voucher',
@@ -44,6 +45,7 @@ export class JournalVoucherComponent implements OnInit {
         },
     ];
 
+    permissionAddJV = [PermissionConstant.ADD_GL_JV];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog,

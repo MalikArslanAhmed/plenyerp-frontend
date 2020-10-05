@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {DisengagementCreateComponent} from './disengagement-create/disengagement-create.component';
 import {DisengagementListComponent} from './disengagement-list/disengagement-list.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-disengagement',
@@ -17,6 +18,7 @@ export class DisengagementComponent implements OnInit {
     dialogRef: any;
     @ViewChild(DisengagementListComponent) getDisengagements: DisengagementListComponent;
 
+    permissionAddDisengagement = [PermissionConstant.DISENGAGEMENT_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

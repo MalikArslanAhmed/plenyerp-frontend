@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {StatesCreateComponent} from './states-create/states-create.component';
 import {StatesListComponent} from './states-list/states-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-states',
@@ -17,6 +18,7 @@ export class StatesComponent implements OnInit {
     dialogRef: any;
     @ViewChild(StatesListComponent) getStatesList: StatesListComponent;
 
+    permissionAddStates = [PermissionConstant.STATES_ADD];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {
