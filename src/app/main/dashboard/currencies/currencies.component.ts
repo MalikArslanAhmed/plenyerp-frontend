@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {CurrenciesCreateComponent} from './currencies-create/currencies-create.component';
+import {CurrenciesListComponent} from './currencies-list/currencies-list.component';
 
 @Component({
     selector: 'app-currencies',
@@ -15,7 +16,7 @@ import {CurrenciesCreateComponent} from './currencies-create/currencies-create.c
 export class CurrenciesComponent implements OnInit {
     dialogRef: any;
 
-    // @ViewChild(CensuresListComponent) getCensures: CensuresListComponent;
+    @ViewChild(CurrenciesListComponent) getCurrency: CurrenciesListComponent;
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -34,7 +35,7 @@ export class CurrenciesComponent implements OnInit {
             if (!response) {
                 return;
             }
-            // this.getCensures.getCensures();
+            this.getCurrency.getCurrencies();
         });
     }
 }

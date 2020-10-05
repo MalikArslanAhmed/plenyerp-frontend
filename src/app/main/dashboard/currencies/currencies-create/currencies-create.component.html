@@ -15,15 +15,19 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Currency Code</mat-label>
-                            <input matInput formControlName="currencyCode"/>
+                            <input matInput formControlName="codeCurrency"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
                 <mat-grid-tile>
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                        <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-form-field appearance="outline" fxFlex>
                             <mat-label>Country Code</mat-label>
-                            <input matInput formControlName="countryCode"/>
+                            <mat-select formControlName="countryId">
+                                <mat-option *ngFor="let country of countries" [value]="country.id">
+                                    {{country.name}}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -43,7 +47,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Name Singular</mat-label>
-                            <input matInput formControlName="currencySingular"/>
+                            <input matInput formControlName="singularCurrencyName"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -51,7 +55,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Name Singular</mat-label>
-                            <input matInput formControlName="changeSingular"/>
+                            <input matInput formControlName="singularChangeName"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -59,7 +63,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Name Plural</mat-label>
-                            <input matInput formControlName="currencyPlural"/>
+                            <input matInput formControlName="pluralCurrencyName"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -67,7 +71,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Name Plural</mat-label>
-                            <input matInput formControlName="changePlural"/>
+                            <input matInput formControlName="pluralChangeName"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -100,7 +104,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 01</mat-label>
-                            <input matInput formControlName="month01"/>
+                            <input matInput formControlName="month_1"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -108,7 +112,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 02</mat-label>
-                            <input matInput formControlName="month02"/>
+                            <input matInput formControlName="month_2"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -116,7 +120,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 03</mat-label>
-                            <input matInput formControlName="month03"/>
+                            <input matInput formControlName="month_3"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -124,7 +128,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 04</mat-label>
-                            <input matInput formControlName="month04"/>
+                            <input matInput formControlName="month_4"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -134,7 +138,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 05</mat-label>
-                            <input matInput formControlName="month05"/>
+                            <input matInput formControlName="month_5"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -142,7 +146,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 06</mat-label>
-                            <input matInput formControlName="month06"/>
+                            <input matInput formControlName="month_6"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -150,7 +154,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 07</mat-label>
-                            <input matInput formControlName="month07"/>
+                            <input matInput formControlName="month_7"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -158,7 +162,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 08</mat-label>
-                            <input matInput formControlName="month08"/>
+                            <input matInput formControlName="month_8"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -168,7 +172,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 09</mat-label>
-                            <input matInput formControlName="month09"/>
+                            <input matInput formControlName="month_9"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -176,7 +180,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 10</mat-label>
-                            <input matInput formControlName="month10"/>
+                            <input matInput formControlName="month_10"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -184,7 +188,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 11</mat-label>
-                            <input matInput formControlName="month11"/>
+                            <input matInput formControlName="month_11"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -192,7 +196,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Month - 12</mat-label>
-                            <input matInput formControlName="month12"/>
+                            <input matInput formControlName="month_12"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -207,7 +211,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>In Local Currency</mat-label>
-                            <input matInput formControlName="inLocalCurrency"/>
+                            <input matInput formControlName="previousYearClosingRateLocal"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
@@ -215,15 +219,15 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>In International Currency</mat-label>
-                            <input matInput formControlName="inInternationalCurrency"/>
+                            <input matInput formControlName="previousYearClosingRateInternational"/>
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
                 <mat-grid-tile>
-                <div fxLayout="row" fxLayoutAlign="start start">
-                    <mat-label style="margin-right: 20px">Is Active</mat-label>
-                    <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
-                </div>
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label style="margin-right: 20px">Is Active</mat-label>
+                        <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+                    </div>
                 </mat-grid-tile>
             </mat-grid-list>
         </form>
