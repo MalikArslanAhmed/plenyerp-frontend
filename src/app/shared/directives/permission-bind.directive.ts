@@ -15,7 +15,7 @@ export class PermissionBindDirective implements OnInit {
 
     constructor(private el: ElementRef,
                 private globalService: GlobalService) {
-        this.globalService.self
+        this.globalService.self$
             .subscribe(
                 (user) => {
                     this.verifyPermission();
@@ -54,7 +54,7 @@ export class PermissionBindDirective implements OnInit {
     }
 
     @Input('roles')
-    set setRoles(value: Array<number>) {
+    set setRoles(value: any) {
         this.roles = value;
         this.verifyPermission();
     }
@@ -68,11 +68,10 @@ export class PermissionBindDirective implements OnInit {
     ngOnInit(): void {
     }
 
-    verifyPermission(user?) {
-        const permissions = [];
-        let hasPermission = false;
+    verifyPermission() {
+        let isNone = true;
 
-        /*for (let i = 0; i < this.globalService.getSelf().permissions.length; i++) {
+        for (let i = 0; i < this.globalService.getSelf().permissions.length; i++) {
             if (this.permission && this.permission.length) {
                 for (let j = 0; j < this.permission.length; j++) {
                     if (this.globalService.getSelf().permissions[i].id === this.permission[j] || this.globalService.getSelf().permissions[i].entityName === this.permission[j]) {
@@ -81,31 +80,23 @@ export class PermissionBindDirective implements OnInit {
                     }
                 }
             }
-        }*/
+        }
 
-        if ( this.globalService.getSelf()) {
-            for (let i = 0; i < this.globalService.getSelf().roles.length; i++) {
-                if (this.globalService.getSelf().roles[i].roleId === 1) {
-                    hasPermission = true;
-                    break;
-                }
-                for (let j = 0; j < this.roles.length; j++) {
-                    if (this.globalService.getSelf().roles[i].id === this.roles[j]) {
-                        hasPermission = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!(this.roles && this.roles.length)) {
-                hasPermission = true;
+        for (let i = 0; i < this.globalService.getSelf().roleUsers.length; i++) {
+            if (this.globalService.getSelf().roleUsers[i].roleId === 1) {
+                isNone = false;
+                break;
             }
         }
 
-        if (hasPermission) {
-            this.el.nativeElement.style.display = this.customDisplaySetting || 'inherit';
-        } else {
+        if (!(this.permission && this.permission.length)) {
+            isNone = false;
+        }
+
+        if (isNone) {
             this.el.nativeElement.style.display = 'none';
+        } else {
+            this.el.nativeElement.style.display = this.customDisplaySetting || 'inherit';
         }
     }
 }
