@@ -57,6 +57,7 @@ import {BudgetControlComponent} from './budget-control/budget-control.component'
 import {CurrenciesComponent} from './currencies/currencies.component';
 import {BanksComponent} from './banks/banks.component';
 import { CompanyInformationComponent } from './company-information/company-information.component';
+import { RouteGuard } from 'app/shared/guards/route.guard';
 
 const routes: Routes = [
     {
@@ -209,8 +210,10 @@ const routes: Routes = [
     {
         path: 'admin-segments',
         component: AdminSegmentsComponent,
+        canActivate: [RouteGuard],
         data: {
-            title: 'Admin Segment'
+            title: 'Admin Segment',
+            permissions: []
         },
     },
     {

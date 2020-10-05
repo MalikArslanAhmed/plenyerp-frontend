@@ -33,6 +33,7 @@ import {SharedModule} from './shared/shared.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {NumberToWordsPipe} from './shared/pipes/number-to-word.pipe';
 import {UnderscoreSeparatePipe} from './shared/pipes/underscore-separate.pipe';
+import { RouteGuard } from './shared/guards/route.guard';
 
 const appRoutes: Routes = [
     {
@@ -95,7 +96,8 @@ const appRoutes: Routes = [
         AlertService,
         {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
         SnotifyService,
-        HtpInterceptor
+        HtpInterceptor,
+        RouteGuard
     ],
     bootstrap: [
         AppComponent
