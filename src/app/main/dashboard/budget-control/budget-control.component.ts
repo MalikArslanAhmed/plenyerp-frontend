@@ -34,12 +34,8 @@ export class BudgetControlComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.budgetType = this.activatedRoute.snapshot.params['type'];
-        // console.log('this.budgetType', this.budgetType);
-        console.log('this.activatedRoute', this.activatedRoute.queryParams);
         this.activatedRoute.params.subscribe(param => {
-            //todo do it
-            console.log('param ======', param['type']);
+            this.budgetType = param['type']
         });
         this.budgetControlForm = this.fb.group({
             adminSegmentId: [''],
@@ -146,5 +142,6 @@ export class BudgetControlComponent implements OnInit {
     }
 
     budgetCurrencySelect() {
+        console.log('abc');
     }
 }
