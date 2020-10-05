@@ -18,20 +18,23 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'supervisor_account',
+                permissions : [PermissionConstant.EMPLOYEE_LIST,PermissionConstant.EMPLOYEE_ENROLLMENT_LIST],
                 children: [
                     {
                         id: 'employee-list',
                         title: 'Employee List',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/employees'
+                        url: 'dashboard/employees',
+                        permissions : [PermissionConstant.EMPLOYEE_LIST]
                     },
                     {
                         id: 'employee-action',
                         title: 'Add Employee / Enrolments',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/employee-action'
+                        url: 'dashboard/employee-action',
+                        permissions : [PermissionConstant.EMPLOYEE_ENROLLMENT_LIST]
                     }
                 ]
             },
@@ -150,27 +153,31 @@ export const navigation: FuseNavigation[] = [
                 type: 'collapsable',
                 icon: 'account_balance',
                 roles: [AppConstants.ROLE_ID_HR],
+                permissions : [PermissionConstant.DEPARTMENT_LIST,PermissionConstant.WORK_LOCATION_LIST,PermissionConstant.STRUCTURE_LIST],
                 children: [
                     {
                         id: 'work-location',
                         title: 'Work Locations',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/work-locations'
+                        url: 'dashboard/work-locations',
+                        permissions : [PermissionConstant.WORK_LOCATION_LIST],
                     },
                     {
                         id: 'structure',
                         title: 'Structure',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/structure'
+                        url: 'dashboard/structure',
+                        permissions : [PermissionConstant.STRUCTURE_LIST],
                     },
                     {
                         id: 'depratments',
                         title: 'Departments',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/departments'
+                        url: 'dashboard/departments',
+                        permissions : [PermissionConstant.DEPARTMENT_LIST],
                     }
                 ]
             },
@@ -181,6 +188,7 @@ export const navigation: FuseNavigation[] = [
                 type: 'collapsable',
                 icon: 'work',
                 roles: [AppConstants.ROLE_ID_HR],
+                permissions : [PermissionConstant.GL_STEP_LIST,PermissionConstant.GRADE_LEVEL_LIST,PermissionConstant.DESIGNATION_LIST,PermissionConstant.SALARYSCALES_LIST],
                 children: [
                     {
                         id: 'designation',
@@ -203,14 +211,16 @@ export const navigation: FuseNavigation[] = [
                         title: 'Grade Level',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/grade-level'
+                        url: 'dashboard/grade-level',
+                        permissions : [PermissionConstant.GRADE_LEVEL_LIST],
                     },
                     {
                         id: 'gl-step',
                         title: 'GL Step',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/gl-step'
+                        url: 'dashboard/gl-step',
+                        permissions : [PermissionConstant.GL_STEP_LIST]
                     }
                 ]
             },
@@ -221,34 +231,39 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'perm_contact_calendar',
+                permissions : [PermissionConstant.TYPES_OF_PHONE_NUM_LIST,PermissionConstant.ADDRESS_LIST,PermissionConstant.LGA_LIST,PermissionConstant.STATES_LIST,PermissionConstant.REGION_LIST,PermissionConstant.COUNTRIES_LIST],
                 children: [
                     {
                         id: 'country',
                         title: 'Country',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/country'
+                        url: 'dashboard/country',
+                        permissions : [PermissionConstant.COUNTRIES_LIST]
                     },
                     {
                         id: 'region',
                         title: 'Region',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/region'
+                        url: 'dashboard/region',
+                        permissions : [PermissionConstant.REGION_LIST]
                     },
                     {
                         id: 'states',
                         title: 'States ',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/states'
+                        url: 'dashboard/states',
+                        permissions : [PermissionConstant.STATES_LIST]
                     },
                     {
                         id: 'lga',
                         title: 'LGA',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/lga'
+                        url: 'dashboard/lga',
+                        permissions : [PermissionConstant.LGA_LIST]
                     },
                     {
                         id: 'address-type',
@@ -275,20 +290,23 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'calendar_today',
+                permissions : [PermissionConstant.PUBLIC_HOLIDAYS_LIST,PermissionConstant.LEAVE_GROUP_LIST,PermissionConstant.TYPES_OF_LEAVES_LIST],
                 children: [
                     {
                         id: 'leaves-type',
                         title: 'Type of leaves',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/leaves-type'
+                        url: 'dashboard/leaves-type',
+                        permissions : [PermissionConstant.TYPES_OF_LEAVES_LIST]
                     },
                     {
                         id: 'leave-group',
                         title: 'Leave Group',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/leave-group'
+                        url: 'dashboard/leave-group',
+                        permissions : [PermissionConstant.LEAVE_GROUP_LIST]
                     },
                     {
                         id: 'public-holiday',
@@ -307,6 +325,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'school',
+                permissions : [PermissionConstant.ACADEMIC_MAJORS_LIST,PermissionConstant.SCHEDULE_LIST,PermissionConstant.LANGUAGES_LIST,PermissionConstant.JOB_SKILLS_LIST,PermissionConstant.QUALIFICATION_LIST],
                 children: [
                     {
                         id: 'qualification',
@@ -337,7 +356,8 @@ export const navigation: FuseNavigation[] = [
                         title: 'Schedule',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/schedule'
+                        url: 'dashboard/schedule',
+                        permissions : [PermissionConstant.SCHEDULE_LIST]
                     },
                     {
                         id: 'academic-major',
@@ -356,6 +376,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'person_pin',
+                permissions : [PermissionConstant.CENSURES_LIST,PermissionConstant.DISENGAGEMENT_LIST,PermissionConstant.STAFF_STATUS_LIST,PermissionConstant.RELATIONS_LIST,PermissionConstant.STAFF_CATEGORIES_LIST],
                 children: [
                     {
                         id: 'relationship',
@@ -387,7 +408,8 @@ export const navigation: FuseNavigation[] = [
                         title: 'Disengagement',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/disengagement'
+                        url: 'dashboard/disengagement',
+                        permissions : [PermissionConstant.DISENGAGEMENT_LIST]
                     },
                     {
                         id: 'censures',
@@ -406,6 +428,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'business',
+                permissions : [PermissionConstant.ARM_OF_SERVICE_LIST,PermissionConstant.MEMBERSHIP_LIST],
                 children: [
                     {
                         id: 'arm-of-service',
@@ -432,34 +455,39 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'store',
+                permissions :[PermissionConstant.STORE_SETUP_ITEMS_LIST,PermissionConstant.STORE_SETUP_CATEGORIES_LIST,PermissionConstant.STORE_SETUP_STORES_LIST,PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST],
                 children: [
                     {
                         id: 'items',
                         title: 'Items',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/store-setup-items'
+                        url: 'dashboard/store-setup-items',
+                        permissions: [PermissionConstant.STORE_SETUP_ITEMS_LIST],
                     },
                     {
                         id: 'catergories',
                         title: 'Categories',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/store-setup-categories'
+                        url: 'dashboard/store-setup-categories',
+                        permissions: [PermissionConstant.STORE_SETUP_CATEGORIES_LIST]
                     },
                     {
                         id: 'stores',
                         title: 'Stores',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/store-setup-stores'
+                        url: 'dashboard/store-setup-stores',
+                        permissions: [PermissionConstant.STORE_SETUP_STORES_LIST]
                     },
                     {
                         id: 'unit-of-measures',
                         title: 'Unit of Measures',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/store-setup-unit-of-measures'
+                        url: 'dashboard/store-setup-unit-of-measures',
+                        permissions: [PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST]
                     }
                 ]
             },
@@ -470,55 +498,63 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'insert_chart',
+                permissions: [PermissionConstant.SRV_PURCHASE_INVOICE_LIST,PermissionConstant.SRV_PURCHASE_RETURN_LIST,PermissionConstant.SALES_INVOICE_LIST,PermissionConstant.SALES_RETURN_BY_CUSTOMER_LIST,PermissionConstant.STV_STORE_TRANSFER_LIST,PermissionConstant.STORE_ADJUSTMENT_LIST,PermissionConstant.DONATION_LIST],
                 children: [
                     {
                         id: 'srv-purchase-invoice',
                         title: 'SRV - Purchase Invocie',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/transaction-srv-purchase-invoice'
+                        url: 'dashboard/transaction-srv-purchase-invoice',
+                        permissions : [PermissionConstant.SRV_PURCHASE_INVOICE_LIST]
                     },
                     {
                         id: 'srv-purchase-return',
                         title: 'SRV - Purchase Return',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/transaction-srv-purchase-return'
+                        url: 'dashboard/transaction-srv-purchase-return',
+                        permissions : [PermissionConstant.SRV_PURCHASE_RETURN_LIST]
                     },
                     {
                         id: 'sales-invoice',
                         title: 'Sales Invoice',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/transaction-sales-invoice'
+                        url: 'dashboard/transaction-sales-invoice',
+                        permissions : [PermissionConstant.SALES_INVOICE_LIST]
                     },
                     {
                         id: 'sales-return-by-customer',
                         title: 'Sales return by customer',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/transaction-sales-return-by-customer'
+                        url: 'dashboard/transaction-sales-return-by-customer',
+                        permissions : [PermissionConstant.SALES_RETURN_BY_CUSTOMER_LIST]
                     },
                     {
                         id: 'stv-store-transfer',
                         title: 'STV - Store Transfer',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/transaction-stv-store-transfer'
+                        url: 'dashboard/transaction-stv-store-transfer',
+                        permissions : [PermissionConstant.STV_STORE_TRANSFER_LIST]
                     },
                     {
                         id: 'store-adjustment',
                         title: 'Store Adjustment',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/transaction-store-adjustment'
+                        url: 'dashboard/transaction-store-adjustment',
+                        permissions : [PermissionConstant.STORE_ADJUSTMENT_LIST]
                     },
                     {
                         id: 'donations',
                         title: 'Donations',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/transaction-donations'
+                        url: 'dashboard/transaction-donations',
+                        permissions : [PermissionConstant.DONATION_LIST]
                     }
                 ]
             },
@@ -529,34 +565,39 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'report',
+                permissions : [PermissionConstant.BIN_CARD_LIST,PermissionConstant.INVENTORY_LEDGER_LIST,PermissionConstant.QUALITY_BALANCE_LIST,PermissionConstant.OFF_LEVEL_LIST],
                 children: [
                     {
                         id: 'bin-card',
                         title: 'Bin Card',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/report-bin-card'
+                        url: 'dashboard/report-bin-card',
+                        permissions : [PermissionConstant.BIN_CARD_LIST]
                     },
                     {
                         id: 'inventory-ledger',
                         title: 'Inventory Ledger',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/report-inventory-ledger'
+                        url: 'dashboard/report-inventory-ledger',
+                        permissions : [PermissionConstant.INVENTORY_LEDGER_LIST]
                     },
                     {
                         id: 'quantity-balance',
                         title: 'Quantity Balance',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/report-quantity-balance'
+                        url: 'dashboard/report-quantity-balance',
+                        permissions : [PermissionConstant.QUALITY_BALANCE_LIST]
                     },
                     {
                         id: 'off-level',
                         title: 'Off Level',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/report-off-level'
+                        url: 'dashboard/report-off-level',
+                        permissions : [PermissionConstant.OFF_LEVEL_LIST]
                     }
                 ]
             },

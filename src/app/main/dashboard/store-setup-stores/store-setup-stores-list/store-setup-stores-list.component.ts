@@ -6,6 +6,7 @@ import {StoreSetupStoresCreateComponent} from '../store-setup-stores-create/stor
 import {StoreSetupStoresService} from 'app/shared/services/store-setup-stores.service';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-store-setup-stores-list',
@@ -25,6 +26,9 @@ export class StoreSetupStoresListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    permissionEditStoreSetupStore = [PermissionConstant.STORE_SETUP_STORES_EDIT];
+    permissionDeleteStoreSetupStore = [PermissionConstant.STORE_SETUP_STORES_DELETE];
+
     constructor(private storeSetupStoresService: StoreSetupStoresService,
                 private _matDialog: MatDialog) {
     }

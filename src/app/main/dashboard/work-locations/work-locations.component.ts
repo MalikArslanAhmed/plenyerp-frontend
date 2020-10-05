@@ -8,6 +8,7 @@ import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.s
 import {MatDialog} from '@angular/material/dialog';
 import {UpdateWorkLocationsComponent} from './update-work-locations/update-work-locations.component';
 import {DeleteListModalComponent} from '../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 interface WorkLocationNode {
     id: number;
@@ -49,6 +50,10 @@ export class WorkLocationsComponent implements OnInit {
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
     dialogRef: any;
     @ViewChild('tree') tree;
+
+    permissionEditWorkLocation = [PermissionConstant.WORK_LOCATION_EDIT];
+    permissionAddWorkLocation = [PermissionConstant.WORK_LOCATION_ADD];
+    permissionDeleteWorkLocation = [PermissionConstant.WORK_LOCATION_DELETE];
 
     constructor(private workLocationService: WorkLocationService,
                 private _fuseSidebarService: FuseSidebarService,
