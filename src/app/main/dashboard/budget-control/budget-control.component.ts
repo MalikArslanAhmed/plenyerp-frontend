@@ -3,11 +3,10 @@ import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.s
 import {MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {fuseAnimations} from '../../../../@fuse/animations';
-import {DepartmentListSelectComponent} from '../structure/department-list/department-list-select.component';
-import {SegmentCodeListComponent} from './segment-code-list/segment-code-list.component';
 import {AdminSegmentSelectComponent} from "../journal-voucher/admin-segment-select/admin-segment-select.component";
 import {ProgrammingSegmentSelectComponent} from "../journal-voucher/programming-segment-select/programming-segment-select.component";
 import {FundSegmentSelectComponent} from "../journal-voucher/fund-segment-select/fund-segment-select.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-budget-control',
@@ -21,21 +20,27 @@ export class BudgetControlComponent implements OnInit {
     departments = [];
     departmentAllIds = [];
     budgetControlForm: FormGroup;
-    filters = {};
     selectedRadioBudgetOption = 0;
     adminSegments = [];
     programmeSegments = [];
     fundSegments = [];
+    budgetType: any;
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private fb: FormBuilder,
-        private _matDialog: MatDialog) {
+        private _matDialog: MatDialog,
+        private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit(): void {
+        this.budgetType = this.activatedRoute.snapshot.params['type'];
+        // console.log('this.budgetType', this.budgetType);
+        console.log('this.activatedRoute', this.activatedRoute.queryParams);
+        /*this.activatedRoute.queryParams.subscribe(param => {
+            console.log('param', param);
+        });*/
         this.budgetControlForm = this.fb.group({
-            // departmentId: [''],
             adminSegmentId: [''],
             fundSegmentId: [''],
             programmeSegmentId: [''],

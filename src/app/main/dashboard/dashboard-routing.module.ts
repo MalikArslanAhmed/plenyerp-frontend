@@ -479,7 +479,7 @@ const routes: Routes = [
         }
     },
     {
-        path: 'budget-control',
+        path: 'budget-control/:type',
         component: BudgetControlComponent,
         data: {
             title: 'Budget Control'

@@ -620,13 +620,22 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
-                id: 'budget-control',
-                title: 'Budget Control-Programme',
+                id: 'budget-control-economic',
+                title: 'Budget Control Economic',
                 roles: [],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'monetization_on',
-                url: '/dashboard/budget-control'
+                url: '/dashboard/budget-control/economic'
+            },
+            {
+                id: 'budget-control-programme',
+                title: 'Budget Control Programme',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'monetization_on',
+                url: '/dashboard/budget-control/programme'
             },
             {
                 id: 'journal',
