@@ -37,9 +37,10 @@ export class BudgetControlComponent implements OnInit {
         this.budgetType = this.activatedRoute.snapshot.params['type'];
         // console.log('this.budgetType', this.budgetType);
         console.log('this.activatedRoute', this.activatedRoute.queryParams);
-        /*this.activatedRoute.queryParams.subscribe(param => {
-            console.log('param', param);
-        });*/
+        this.activatedRoute.params.subscribe(param => {
+            //todo do it
+            console.log('param ======', param['type']);
+        });
         this.budgetControlForm = this.fb.group({
             adminSegmentId: [''],
             fundSegmentId: [''],
