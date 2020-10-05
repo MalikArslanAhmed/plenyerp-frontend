@@ -4,23 +4,19 @@ import {GlobalService} from '../services/global.service';
 @Directive({selector: '[appPermissionBind]'})
 export class PermissionBindDirective implements OnInit {
     permission: string;
-    onlyAdmin: boolean;
-    onlyClient: boolean;
     roles = [];
-    isDev = false;
     departments = [];
-    userTypes = [];
-    userPermissions = [];
     customDisplaySetting = null;
 
     constructor(private el: ElementRef,
                 private globalService: GlobalService) {
-        this.globalService.self$
-            .subscribe(
-                (user) => {
+        this.globalService.self$.subscribe(
+            (user) => {
+                if (user) {
                     this.verifyPermission();
                 }
-            );
+            }
+        );
     }
 
     @Input('permission')
@@ -35,42 +31,20 @@ export class PermissionBindDirective implements OnInit {
         this.verifyPermission();
     }
 
-    @Input('userTypes')
-    set setUserTypes(value) {
-        this.userTypes = value;
-        this.verifyPermission();
-    }
-
-    @Input('onlyAdmin')
-    set setOnlyAdmin(value: boolean) {
-        this.onlyAdmin = value;
-        this.verifyPermission();
-    }
-
-    @Input('onlyClient')
-    set setOnlyClient(value: boolean) {
-        this.onlyClient = value;
-        this.verifyPermission();
-    }
-
     @Input('roles')
     set setRoles(value: any) {
         this.roles = value;
         this.verifyPermission();
     }
 
-    @Input('departments')
-    set setDepartments(value: any) {
-        this.departments = value;
-        this.verifyPermission();
-    }
-
     ngOnInit(): void {
     }
 
-    verifyPermission() {
+    verifyPermission(): void {
         let isNone = true;
-
+        if (!this.globalService.getSelf()) {
+            return;
+        }
         for (let i = 0; i < this.globalService.getSelf().permissions.length; i++) {
             if (this.permission && this.permission.length) {
                 for (let j = 0; j < this.permission.length; j++) {
