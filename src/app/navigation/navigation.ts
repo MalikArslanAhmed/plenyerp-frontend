@@ -376,7 +376,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'person_pin',
-                permissions : [PermissionConstant.CENSURES_LIST,PermissionConstant.DISENGAGEMENT_LIST,PermissionConstant.STAFF_STATUS_LIST,PermissionConstant.RELATIONS_LIST,PermissionConstant.STAFF_CATEGORIES_LIST],
+               // permissions : [PermissionConstant.CENSURES_LIST,PermissionConstant.DISENGAGEMENT_LIST,PermissionConstant.STAFF_STATUS_LIST,PermissionConstant.RELATIONS_LIST,PermissionConstant.STAFF_CATEGORIES_LIST],
                 children: [
                     {
                         id: 'relationship',
@@ -417,7 +417,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/censures',
-                        permissions: [PermissionConstant.CENSURES_LIST],
+                        //permissions: [PermissionConstant.CENSURES_LIST],
                     },
                 ]
             },

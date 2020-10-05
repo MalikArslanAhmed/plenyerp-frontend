@@ -11,11 +11,13 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center" appPermissionBind [permission]="permissionAddSkills">
-            <button mat-fab class="accent" id="add-button" aria-label="add skill"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addSkill()">
-                <mat-icon>add_circle</mat-icon>
-            </button>
+        <div fxLayout="row" fxLayoutAlign="end center" >
+            <div appPermissionBind [permission]="permissionAddSkills">
+                <button mat-fab class="accent" id="add-button" aria-label="add skill"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addSkill()">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
         </div>
         <!-- SEARCH -->
         <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
