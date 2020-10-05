@@ -20,7 +20,7 @@ export class GlobalService {
     public isSessionExist: Subject<any> = new Subject();
     // public notification = new BehaviorSubject(undefined);
     // viewRefresh$ = this.viewRefresh.asObservable();
-    // self$ = this.self.asObservable();
+    self$ = this.self.asObservable();
 
     constructor() {
         if (StorageService.getItem('accessToken')) {
