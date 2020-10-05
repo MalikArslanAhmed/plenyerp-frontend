@@ -11,6 +11,7 @@ import {GeoCodeSegmentSelectComponent} from "../geo-code-segment-select/geo-code
 import {GlobalService} from 'app/shared/services/global.service';
 import * as moment from "moment";
 import {JournalVoucherService} from "../../../../shared/services/journal-voucher.service";
+import {CurrencyService} from "../../../../shared/services/currency.service";
 
 @Component({
     selector: 'app-journal-voucher-create',
@@ -27,16 +28,7 @@ export class JournalVoucherCreateComponent implements OnInit {
     isSubmitted = false;
     updateData: any;
     addDetails = false;
-    currencies = [
-        {
-            'code': 'INR',
-            'name': 'Indian Currency'
-        },
-        {
-            'code': 'NIR',
-            'name': 'Niara'
-        }
-    ];
+    currencies = [];
     dialogRef: any;
     fundSegments = [];
     fundSegmentsAddDet = [];
@@ -53,7 +45,8 @@ export class JournalVoucherCreateComponent implements OnInit {
                 private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private globalService: GlobalService,
-                private journalVoucherService: JournalVoucherService) {
+                private journalVoucherService: JournalVoucherService,
+                private currencyService: CurrencyService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit New Journal Voucher';
@@ -67,10 +60,10 @@ export class JournalVoucherCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
+        this.getCurrencies();
     }
 
     refresh() {
-        // console.log(this.globalService.getSelf());
         this.user = this.globalService.getSelf();
         this.journalVoucherCreateForm = this.fb.group({
             'jvSourceApp': [{value: 'PLINYEGL', disabled: true}],
@@ -117,6 +110,20 @@ export class JournalVoucherCreateComponent implements OnInit {
             'geoCodeSegmentId': [''],
             'lineValueType': ['DEBIT'],
             'lvLineValue': ['']
+        });
+    }
+
+    getCurrencies() {
+        this.currencies = [];
+        this.currencyService.getCurrency({page: -1}).subscribe(data => {
+            this.currencies = data.items;
+            if (this.currencies && this.currencies.length > 0) {
+                let i = 1;
+                this.currencies.forEach(currency => {
+                    currency['sno'] = i;
+                    i++;
+                });
+            }
         });
     }
 

@@ -330,8 +330,8 @@
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Original Transaction Currency</mat-label>
                                 <mat-select formControlName="currency">
-                                    <mat-option [value]="currency.code"
-                                                *ngFor="let currency of currencies">{{currency?.name}}</mat-option>
+                                    <mat-option [value]="currency.codeCurrency"
+                                                *ngFor="let currency of currencies">{{currency?.singularCurrencyName}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>

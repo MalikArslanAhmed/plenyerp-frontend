@@ -56,6 +56,7 @@ import {ReportQuantityBalanceComponent} from "./report-quantity-balance/report-q
 import {ReportOffLevelComponent} from "./report-off-level/report-off-level.component";
 import {JournalVoucherComponent} from "./journal-voucher/journal-voucher.component";
 import {BudgetControlComponent} from './budget-control/budget-control.component';
+import {CurrenciesComponent} from "./currencies/currencies.component";
 
 const routes: Routes = [
     {
@@ -455,6 +456,13 @@ const routes: Routes = [
         component: JournalVoucherComponent,
         data: {
             title: 'journal Voucher'
+        }
+    },
+    {
+        path: 'currencies',
+        component: CurrenciesComponent,
+        data: {
+            title: 'Currencies'
         }
     }
 ];

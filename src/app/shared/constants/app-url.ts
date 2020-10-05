@@ -487,6 +487,14 @@ export class AppUrl {
         return AppUrl.API_URL + `censures`;
     }
 
+    static CURRENCIES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `currencies/` + id;
+        } else {
+            return AppUrl.API_URL + `currencies`;
+        }
+    }
+
     static DELETE_CENSURE(id?): string {
         return AppUrl.API_URL + 'censures/' + id;
     }

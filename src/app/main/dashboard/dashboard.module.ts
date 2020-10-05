@@ -173,6 +173,9 @@ import {CompanyBankDetailsComponent} from './companies/company-bank-details/comp
 import {TransactionsItemsSelectComponent} from './transactions-items-select/transactions-items-select.component';
 import {MatListModule} from '@angular/material/list';
 import {GlCodeSelectComponent} from './taxes/gl-code-select/gl-code-select.component';
+import {CurrenciesComponent} from './currencies/currencies.component';
+import {CurrenciesListComponent} from './currencies/currencies-list/currencies-list.component';
+import {CurrenciesCreateComponent} from './currencies/currencies-create/currencies-create.component';
 import {EmployeeProgressionHistoryComponent} from './employees/employee-action/employee-progression-history/employee-progression-history.component';
 import {BudgetControlComponent} from './budget-control/budget-control.component';
 import {MatCardModule} from '@angular/material/card';
@@ -191,6 +194,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatSortModule} from "@angular/material/sort";
 import {JournalVoucherDetailCreateComponent} from './journal-voucher/journal-voucher-detail-create/journal-voucher-detail-create.component';
 import {JournalVoucherUpdateComponent} from './journal-voucher/journal-voucher-update/journal-voucher-update.component';
+
 
 @NgModule({
     declarations: [
@@ -345,6 +349,10 @@ import {JournalVoucherUpdateComponent} from './journal-voucher/journal-voucher-u
         CompanyBankDetailsComponent,
         TransactionsItemsSelectComponent,
         GlCodeSelectComponent,
+        EmployeeProgressionHistoryComponent,
+        CurrenciesComponent,
+        CurrenciesListComponent,
+        CurrenciesCreateComponent,
         EmployeeProgressionHistoryComponent,
         BudgetControlComponent,
         BudgetControlListComponent,

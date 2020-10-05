@@ -1,0 +1,99 @@
+<div fxFlex="100" fxLayout="column" fxLayoutGap="20px">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="currencies">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let currency">
+                <p class="text-truncate">
+                    {{((pagination.page - 1) * pagination.perpage) + currency.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="code">
+            <mat-header-cell *matHeaderCellDef>Code</mat-header-cell>
+            <mat-cell *matCellDef="let currency">
+                <p class="text-truncate">
+                    {{currency.codeCurrency}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="currencyName">
+            <mat-header-cell *matHeaderCellDef>Currency Name</mat-header-cell>
+            <mat-cell *matCellDef="let currency">
+                <p class="text-truncate">
+                    {{currency?.currencyName?.singularCurrencyName}}<br>
+                    {{currency?.currencyName?.pluralCurrencyName}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="currencyChange">
+            <mat-header-cell *matHeaderCellDef>Currency Change</mat-header-cell>
+            <mat-cell *matCellDef="let currency">
+                <p class="phone text-truncate">
+                    {{currency?.currencyChange?.singularChangeName}}<br>
+                    {{currency?.currencyChange?.pluralChangeName}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="currentRate">
+            <mat-header-cell *matHeaderCellDef>Current Rate</mat-header-cell>
+            <mat-cell *matCellDef="let currency">
+                <p class="phone text-truncate">
+                    {{currency.currentRate}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="sign">
+            <mat-header-cell *matHeaderCellDef>Sign</mat-header-cell>
+            <mat-cell *matCellDef="let currency">
+                <p class="phone text-truncate">
+                    {{currency?.sign?.currency}}<br>
+                    {{currency?.sign?.change}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="countryCode">
+            <mat-header-cell *matHeaderCellDef>Country Code</mat-header-cell>
+            <mat-cell *matCellDef="let currency">
+                <p class="phone text-truncate">
+                    {{currency.countryCode}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let currency">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button (click)="editCurrency(currency)" aria-label="Toggle star" mat-icon-button
+                            style="color: blue">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button (click)="deleteItemModal(currency)" aria-label="Toggle star" mat-icon-button
+                            style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let currency; columns: displayedColumns;" [@animate]="{value:'*',params:{y:'100%'}}"
+                 class="contact">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator (page)="pageEvent = onPageChange($event)"
+                   *ngIf="currencies.length > 0"
+                   [length]="pagination.total"
+                   [pageIndex]="pagination.page-1"
+                   [pageSize]="pagination.perpage"
+    >
+    </mat-paginator>
+</div>
