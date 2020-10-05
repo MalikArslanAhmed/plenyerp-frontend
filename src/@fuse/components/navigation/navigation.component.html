@@ -5,9 +5,9 @@
 
         <ng-container *ngFor="let item of navigation">
 
-            <fuse-nav-vertical-group *ngIf="item.type=='group'" [item]="item"></fuse-nav-vertical-group>
-            <fuse-nav-vertical-collapsable *ngIf="item.type=='collapsable'" [item]="item"  appPermissionBind [roles]="item.roles"></fuse-nav-vertical-collapsable>
-            <fuse-nav-vertical-item *ngIf="item.type=='item'" [item]="item"  appPermissionBind [roles]="item.roles"></fuse-nav-vertical-item>
+            <fuse-nav-vertical-group *ngIf="item.type=='group'" [item]="item" appPermissionBind [permission]="item.permissions"></fuse-nav-vertical-group>
+            <fuse-nav-vertical-collapsable *ngIf="item.type=='collapsable'" [item]="item"  appPermissionBind [permission]="item.permissions"></fuse-nav-vertical-collapsable>
+            <fuse-nav-vertical-item *ngIf="item.type=='item'" [item]="item"  appPermissionBind [permission]="item.permissions"></fuse-nav-vertical-item>
 
         </ng-container>
 
@@ -19,10 +19,10 @@
 
         <ng-container *ngFor="let item of navigation">
 
-            <fuse-nav-horizontal-collapsable *ngIf="item.type=='group'" [item]="item"></fuse-nav-horizontal-collapsable>
+            <fuse-nav-horizontal-collapsable *ngIf="item.type=='group'" [item]="item" appPermissionBind [permission]="item.permissions"></fuse-nav-horizontal-collapsable>
             <fuse-nav-horizontal-collapsable *ngIf="item.type=='collapsable'"
-                                             [item]="item"></fuse-nav-horizontal-collapsable>
-            <fuse-nav-horizontal-item *ngIf="item.type=='item'" [item]="item"></fuse-nav-horizontal-item>
+                                             [item]="item" appPermissionBind [permission]="item.permissions"></fuse-nav-horizontal-collapsable>
+            <fuse-nav-horizontal-item *ngIf="item.type=='item'" [item]="item" appPermissionBind [permission]="item.permissions"></fuse-nav-horizontal-item>
 
         </ng-container>
 
