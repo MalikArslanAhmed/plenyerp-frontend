@@ -76,6 +76,24 @@ export const navigation: FuseNavigation[] = [
                 icon: 'assignment_ind',
                 url: '/dashboard/managers'
             },
+
+            {
+                id: 'setting',
+                title: 'Setting',
+                roles: [AppConstants.ROLE_ID_ADMIN],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'supervisor_account',
+                children: [
+                    {
+                        id: 'company-info',
+                        title: 'Company Information',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/company-info'
+                    }
+                ]
+            },
             /*{
                 id: 'training-management',
                 title: 'Training Management',
@@ -121,6 +139,7 @@ export const navigation: FuseNavigation[] = [
                 icon: 'money',
                 url: '/dashboard/taxes'
             },
+
             {
                 id: 'company-information',
                 title: 'Company Information',

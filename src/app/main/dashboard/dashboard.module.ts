@@ -197,6 +197,7 @@ import {JournalVoucherUpdateComponent} from './journal-voucher/journal-voucher-u
 import {BanksComponent} from './banks/banks.component';
 import {BankCreateComponent} from './banks/bank-create/bank-create.component';
 import {BranchCreateComponent} from './banks/branch-create/branch-create.component';
+import {CompanyInformationComponent} from './company-information/company-information.component';
 
 @NgModule({
     declarations: [
@@ -374,7 +375,8 @@ import {BranchCreateComponent} from './banks/branch-create/branch-create.compone
         FunctionalSegmentSelectComponent,
         GeoCodeSegmentSelectComponent,
         JournalVoucherDetailCreateComponent,
-        JournalVoucherUpdateComponent
+        JournalVoucherUpdateComponent,
+        CompanyInformationComponent,
     ],
     imports: [
         CommonModule,
