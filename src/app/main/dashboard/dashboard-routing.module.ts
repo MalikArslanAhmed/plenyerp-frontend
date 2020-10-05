@@ -55,6 +55,7 @@ import {ReportInventoryLedgerComponent} from "./report-inventory-ledger/report-i
 import {ReportQuantityBalanceComponent} from "./report-quantity-balance/report-quantity-balance.component";
 import {ReportOffLevelComponent} from "./report-off-level/report-off-level.component";
 import {JournalVoucherComponent} from "./journal-voucher/journal-voucher.component";
+import {BudgetControlComponent} from './budget-control/budget-control.component';
 
 const routes: Routes = [
     {
@@ -440,6 +441,13 @@ const routes: Routes = [
         component: ReportOffLevelComponent,
         data: {
             title: 'Report Off Level'
+        }
+    },
+    {
+        path: 'budget-control',
+        component: BudgetControlComponent,
+        data: {
+            title: 'Budget Control'
         }
     },
     {

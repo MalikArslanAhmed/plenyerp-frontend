@@ -499,6 +499,15 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
+                id: 'budget-control',
+                title: 'Budget Control-Programme',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'monetization_on',
+                url: '/dashboard/budget-control'
+            },
+            {
                 id: 'journal',
                 title: 'Journal Voucher',
                 roles: [AppConstants.ROLE_ID_HR],

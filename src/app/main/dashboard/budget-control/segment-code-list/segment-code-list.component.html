@@ -1,0 +1,35 @@
+<div id="department-list-select-component" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center" style="min-height: 10px !important; height: 70px !important;">
+        <mat-toolbar-row fxLayout="row theme-default accent" fxLayoutAlign="space-between center">
+            <span class="title dialog-title"><h2>Select Segment & Code</h2></span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog" class="close-popup">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </div>
+
+    <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+        <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
+            <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
+                <button mat-icon-button disabled></button>
+                {{node.name}}
+                <button mat-icon-button title="Choose" *ngIf="node.isActive" (click)="matDialogRef.close(node)">
+                    <mat-icon class="addBtn">check_circle</mat-icon>
+                </button>
+            </mat-tree-node>
+            <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
+                <button mat-icon-button matTreeNodeToggle
+                        [attr.aria-label]="'toggle ' + node.name">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                    </mat-icon>
+                </button>
+                {{node.name}}
+                <button mat-icon-button title="Choose" *ngIf="node.isActive" (click)="matDialogRef.close(node)">
+                    <mat-icon class="addBtn">check_circle</mat-icon>
+                </button>
+            </mat-tree-node>
+        </mat-tree>
+    </div>
+</div>
