@@ -10,7 +10,7 @@
         </ng-container>
 
         <ng-container matColumnDef="code">
-            <mat-header-cell *matHeaderCellDef>Code</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Currency Code</mat-header-cell>
             <mat-cell *matCellDef="let currency">
                 <p class="text-truncate">
                     {{currency.codeCurrency}}
@@ -19,21 +19,21 @@
         </ng-container>
 
         <ng-container matColumnDef="currencyName">
-            <mat-header-cell *matHeaderCellDef>Currency Name</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Name Singular <br> Name Plural</mat-header-cell>
             <mat-cell *matCellDef="let currency">
                 <p class="text-truncate">
-                    {{currency?.currencyName?.singularCurrencyName}}<br>
-                    {{currency?.currencyName?.pluralCurrencyName}}
+                    {{currency?.singularCurrencyName}}<br>
+                    {{currency?.pluralCurrencyName}}
                 </p>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="currencyChange">
-            <mat-header-cell *matHeaderCellDef>Currency Change</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Change Singular <br> Change Plural</mat-header-cell>
             <mat-cell *matCellDef="let currency">
                 <p class="phone text-truncate">
-                    {{currency?.currencyChange?.singularChangeName}}<br>
-                    {{currency?.currencyChange?.pluralChangeName}}
+                    {{currency?.singularChangeName}}<br>
+                    {{currency?.pluralChangeName}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -48,11 +48,11 @@
         </ng-container>
 
         <ng-container matColumnDef="sign">
-            <mat-header-cell *matHeaderCellDef>Sign</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Currency Sign <br> Change Sign</mat-header-cell>
             <mat-cell *matCellDef="let currency">
                 <p class="phone text-truncate">
-                    {{currency?.sign?.currency}}<br>
-                    {{currency?.sign?.change}}
+                    {{currency?.currencySign}}<br>
+                    {{currency?.changeSign}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -61,7 +61,7 @@
             <mat-header-cell *matHeaderCellDef>Country Code</mat-header-cell>
             <mat-cell *matCellDef="let currency">
                 <p class="phone text-truncate">
-                    {{currency.countryCode}}
+                    {{currency.countryId}}
                 </p>
             </mat-cell>
         </ng-container>

@@ -38,6 +38,7 @@ export class CurrenciesListComponent implements OnInit {
         this.currencies = [];
         this.currencyService.getCurrency({page: this.pagination.page}).subscribe(data => {
             this.currencies = data.items;
+
             if (this.currencies && this.currencies.length > 0) {
                 let i = 1;
                 this.currencies.forEach(currency => {
@@ -60,6 +61,7 @@ export class CurrenciesListComponent implements OnInit {
                 this.deleteCurrency(items.id);
             }
         });
+
     }
 
     deleteCurrency(id) {
