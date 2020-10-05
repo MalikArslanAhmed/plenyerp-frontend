@@ -6,6 +6,7 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 import {LanguageService} from '../../../../shared/services/language.service';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-language-list',
@@ -25,7 +26,11 @@ export class LanguageListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    
+    permissionEditLanguage = [PermissionConstant.LANGUAGES_EDIT];
+    permissionDeleteLanguage = [PermissionConstant.LANGUAGES_DELETE];
 
+ 
     constructor(private languageService: LanguageService,
                 private _matDialog: MatDialog) {
     }

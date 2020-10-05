@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {SkillCreateComponent} from './skill-create/skill-create.component';
 import {SkillListComponent} from "./skill-list/skill-list.component";
 import {fuseAnimations} from "../../../../@fuse/animations";
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-skills',
@@ -17,6 +18,7 @@ export class SkillsComponent implements OnInit {
     dialogRef: any;
     @ViewChild(SkillListComponent) getSkill: SkillListComponent;
 
+    permissionAddSkills = [PermissionConstant.JOB_SKILLS_ADD];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

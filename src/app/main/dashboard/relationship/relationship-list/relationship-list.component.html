@@ -36,14 +36,18 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let relationship">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button mat-icon-button aria-label="Toggle star" (click)="editRelationship(relationship)"
-                            style="color: blue">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(relationship)"
-                            style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
+                    <div appPermissionBind [permission]="permissionEditRelationship">
+                        <button mat-icon-button aria-label="Toggle star" (click)="editRelationship(relationship)"
+                                style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDeleteRelationship">
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(relationship)"
+                                style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>

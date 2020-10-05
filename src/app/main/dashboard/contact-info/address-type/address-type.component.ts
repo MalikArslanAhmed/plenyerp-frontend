@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {AddressTypeCreateComponent} from './address-type-create/address-type-create.component';
 import {AddressTypeListComponent} from './address-type-list/address-type-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
   selector: 'app-address-type',
@@ -17,6 +18,7 @@ export class AddressTypeComponent implements OnInit {
     dialogRef: any;
     @ViewChild(AddressTypeListComponent) getAddressTypeList: AddressTypeListComponent;
 
+    permissionAddAddressType = [PermissionConstant.ADDRESS_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

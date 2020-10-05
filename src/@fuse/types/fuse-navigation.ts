@@ -22,6 +22,7 @@ export interface FuseNavigationItem
     roles: Array<number>;
     canActivate?: any;
     data?: any;
+    permissions?: Array<any>;
 }
 
 export interface FuseNavigation extends FuseNavigationItem

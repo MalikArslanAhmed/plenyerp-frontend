@@ -36,14 +36,18 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let censure">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button (click)="editCensure(censure)" aria-label="Toggle star" mat-icon-button
-                            style="color: blue">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                    <button (click)="deleteItemModal(censure)" aria-label="Toggle star" mat-icon-button
-                            style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
+                    <div appPermissionBind [permission]="permissionEditCensures">
+                        <button (click)="editCensure(censure)" aria-label="Toggle star" mat-icon-button
+                                style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDeleteCensures">
+                        <button (click)="deleteItemModal(censure)" aria-label="Toggle star" mat-icon-button
+                                style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>

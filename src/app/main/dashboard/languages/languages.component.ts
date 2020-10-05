@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {LanguageListComponent} from "./language-list/language-list.component";
 import {LanguageCreateComponent} from "./language-create/language-create.component";
 import {fuseAnimations} from "../../../../@fuse/animations";
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-languages',
@@ -16,6 +17,8 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 export class LanguagesComponent implements OnInit {
     dialogRef: any;
     @ViewChild(LanguageListComponent) getLanguage: LanguageListComponent;
+
+    permissionAddLanguage = [PermissionConstant.LANGUAGES_ADD];
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,

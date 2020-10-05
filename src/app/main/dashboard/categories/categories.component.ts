@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {CategoriesListComponent} from './categories-list/categories-list.component';
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {CategoriesCreateComponent} from './categories-create/categories-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-categories',
@@ -17,6 +18,8 @@ export class CategoriesComponent implements OnInit {
     dialogRef: any;
     @ViewChild(CategoriesListComponent) getCategories: CategoriesListComponent;
 
+    permissionAddStaffCategory = [PermissionConstant.STAFF_CATEGORIES_ADD];
+    
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

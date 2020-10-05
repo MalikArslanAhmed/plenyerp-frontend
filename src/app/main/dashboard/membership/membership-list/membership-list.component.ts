@@ -6,6 +6,7 @@ import {MembershipCreateComponent} from '../membership-create/membership-create.
 import {MembershipService} from '../../../../shared/services/membership.service';
 import {PageEvent} from '@angular/material/paginator';
 import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
+import {PermissionConstant} from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-membership-list',
@@ -25,6 +26,9 @@ export class MembershipListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+
+    permissionEditMembership = [PermissionConstant.MEMBERSHIP_EDIT];
+    permissionDeleteMembership = [PermissionConstant.MEMBERSHIP_DELETE];
 
     constructor(private membershipService: MembershipService,
                 private _matDialog: MatDialog) {

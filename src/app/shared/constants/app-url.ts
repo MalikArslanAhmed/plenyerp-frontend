@@ -1000,6 +1000,21 @@ export class AppUrl {
     static UPDATE_EMPLOYEE_PROGRESSION_DETAILS(empId, progressionId): string {
         return AppUrl.API_URL + `employee/` + empId + '/progression-history/' + progressionId;
     }
+    // user-role-permission
+    static GET_USER_ROLE_LIST(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `roles/` + id;
+        } else {
+            return AppUrl.API_URL + `roles`;
+        }
+
+    }
+    static GET_ROLE_BASED_PERMISSION_LIST(id): string {
+        return AppUrl.API_URL + `roles/` + id + `/permissions`;
+    }
+    static GET_PERMISSION_LIST(): string {
+        return AppUrl.API_URL + `permissions`;
+    }
 
     static JOURNAL_VOUCHER(jvId?): string {
         if (jvId) {

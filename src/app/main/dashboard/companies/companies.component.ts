@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormGroup} from '@angular/forms';
 import {CompaniesCreateComponent} from './companies-create/companies-create.component';
 import {CompaniesListComponent} from './companies-list/companies-list.component';
+import {PermissionConstant} from '../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-companies',
@@ -15,6 +16,7 @@ import {CompaniesListComponent} from './companies-list/companies-list.component'
 })
 export class CompaniesComponent implements OnInit {
     dialogRef: any;
+    createCompanyPermission = [PermissionConstant.COMPANIES_CREATE];
     @ViewChild(CompaniesListComponent) getCompaniesList: CompaniesListComponent;
 
     constructor(private _fuseSidebarService: FuseSidebarService,

@@ -58,6 +58,8 @@ import {CurrenciesComponent} from './currencies/currencies.component';
 import {BanksComponent} from './banks/banks.component';
 import { CompanyInformationComponent } from './company-information/company-information.component';
 import { RouteGuard } from 'app/shared/guards/route.guard';
+import {UserRoleComponent} from './configurations/user-role/user-role.component';
+import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
 
 const routes: Routes = [
     {
@@ -322,7 +324,7 @@ const routes: Routes = [
         }
     },
     {
-        path: 'managers/:id/roles',
+        path: 'managers/:id/user-role',
         component: RolesComponent,
         data: {
             title: 'Roles'
@@ -445,6 +447,20 @@ const routes: Routes = [
         component: ReportOffLevelComponent,
         data: {
             title: 'Report Off Level'
+        }
+    },
+    {
+        path: 'user-role',
+        component: UserRoleComponent,
+        data: {
+            title: 'Roles'
+        }
+    },
+    {
+        path: 'user-role/:roleId',
+        component: UserRolePermissionComponent,
+        data: {
+            title: 'User Role Permission'
         }
     },
 

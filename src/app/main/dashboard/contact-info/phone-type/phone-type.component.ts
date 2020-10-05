@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {PhoneTypeCreateComponent} from './phone-type-create/phone-type-create.component';
 import {PhoneTypeListComponent} from './phone-type-list/phone-type-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-phone-type',
@@ -17,6 +18,7 @@ export class PhoneTypeComponent implements OnInit {
     dialogRef: any;
     @ViewChild(PhoneTypeListComponent) getPhoneTypeList: PhoneTypeListComponent;
 
+    permissionAddPhoneType = [PermissionConstant.TYPES_OF_PHONE_NUM_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

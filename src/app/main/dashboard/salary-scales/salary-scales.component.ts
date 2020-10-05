@@ -7,6 +7,7 @@ import {SkillListComponent} from '../skills/skill-list/skill-list.component';
 import {fuseAnimations} from '../../../../@fuse/animations';
 import {SalaryScalesCreateComponent} from './salary-scales-create/salary-scales-create.component';
 import {SalaryScalesListComponent} from './salary-scales-list/salary-scales-list.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-salary-scales',
@@ -19,6 +20,7 @@ export class SalaryScalesComponent implements OnInit {
     dialogRef: any;
     @ViewChild(SalaryScalesListComponent) getSalaryScale: SalaryScalesListComponent;
 
+    permissionAddSalaryScale = [PermissionConstant.SALARYSCALES_ADD];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

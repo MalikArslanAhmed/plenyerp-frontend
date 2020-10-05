@@ -198,6 +198,10 @@ import {BanksComponent} from './banks/banks.component';
 import {BankCreateComponent} from './banks/bank-create/bank-create.component';
 import {BranchCreateComponent} from './banks/branch-create/branch-create.component';
 import {CompanyInformationComponent} from './company-information/company-information.component';
+import {UserRoleComponent} from './configurations/user-role/user-role.component';
+import {UserRoleListComponent} from './configurations/user-role/user-role-list/user-role-list.component';
+import {UserRoleCreateComponent} from './configurations/user-role/user-role-create/user-role-create.component';
+import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
 
 @NgModule({
     declarations: [
@@ -356,15 +360,12 @@ import {CompanyInformationComponent} from './company-information/company-informa
         BanksComponent,
         BankCreateComponent,
         BranchCreateComponent,
-        EmployeeProgressionHistoryComponent,
         CurrenciesComponent,
         CurrenciesListComponent,
         CurrenciesCreateComponent,
-        EmployeeProgressionHistoryComponent,
         BudgetControlComponent,
         BudgetControlListComponent,
         SegmentCodeListComponent,
-        EmployeeProgressionHistoryComponent,
         JournalVoucherComponent,
         JournalVoucherListComponent,
         JournalVoucherCreateComponent,
@@ -377,6 +378,10 @@ import {CompanyInformationComponent} from './company-information/company-informa
         JournalVoucherDetailCreateComponent,
         JournalVoucherUpdateComponent,
         CompanyInformationComponent,
+        UserRoleComponent,
+        UserRoleListComponent,
+        UserRoleCreateComponent,
+        UserRolePermissionComponent
     ],
     imports: [
         CommonModule,

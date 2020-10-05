@@ -5,6 +5,7 @@ import {PublicHolidayCreateComponent} from '../public-holiday-create/public-holi
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-public-holiday-list',
@@ -19,6 +20,9 @@ export class PublicHolidayListComponent implements OnInit {
     dialogRef: any;    
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
+
+    permissionEditPublicHoliday = [PermissionConstant.PUBLIC_HOLIDAYS_EDIT];
+    permissionDeletePublicHoliday = [PermissionConstant.PUBLIC_HOLIDAYS_DELETE];
 
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {

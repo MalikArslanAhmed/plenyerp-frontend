@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {DesignationCreateComponent} from './designation-create/designation-create.component';
 import {DesignationListComponent} from './designation-list/designation-list.component';
 import {fuseAnimations} from '../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-designation',
@@ -17,6 +18,7 @@ export class DesignationComponent implements OnInit {
     dialogRef: any;
     @ViewChild(DesignationListComponent) getDesignationList: DesignationListComponent;
 
+    permissionAddDesignation = [PermissionConstant.DESIGNATION_ADD];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

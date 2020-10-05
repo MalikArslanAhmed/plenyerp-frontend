@@ -12,9 +12,10 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center">
+        <div fxLayout="row" fxLayoutAlign="end center" appPermissionBind [permission]="createCompanyPermission">
             <button mat-fab class="accent" id="add-button" aria-label="add qualification"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addCompany()">
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addCompany()"
+                    >
                 <mat-icon>add_circle</mat-icon>
             </button>
         </div>

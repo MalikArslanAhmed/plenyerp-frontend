@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import {PermissionConstant} from '../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-taxes-list',
@@ -27,6 +28,8 @@ export class TaxesListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    permissionUpdateTaxes = [PermissionConstant.TAXES_UPDATE];
+    permissionDeleteTaxes = [PermissionConstant.TAXES_DELETE];
     constructor(private taxesService: TaxesService,
                 private fb: FormBuilder,
                 private _matDialog: MatDialog) {
