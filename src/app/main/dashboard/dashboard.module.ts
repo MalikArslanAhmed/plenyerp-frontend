@@ -180,7 +180,6 @@ import {EmployeeProgressionHistoryComponent} from './employees/employee-action/e
 import {BudgetControlComponent} from './budget-control/budget-control.component';
 import {MatCardModule} from '@angular/material/card';
 import {BudgetControlListComponent} from './budget-control/budget-control-list/budget-control-list.component';
-import {SegmentCodeListComponent} from './budget-control/segment-code-list/segment-code-list.component';
 import {JournalVoucherComponent} from './journal-voucher/journal-voucher.component';
 import {JournalVoucherListComponent} from './journal-voucher/journal-voucher-list/journal-voucher-list.component';
 import {JournalVoucherCreateComponent} from './journal-voucher/journal-voucher-create/journal-voucher-create.component';
@@ -365,7 +364,6 @@ import {UserRolePermissionComponent} from './configurations/user-role-permission
         CurrenciesCreateComponent,
         BudgetControlComponent,
         BudgetControlListComponent,
-        SegmentCodeListComponent,
         JournalVoucherComponent,
         JournalVoucherListComponent,
         JournalVoucherCreateComponent,
