@@ -3,15 +3,14 @@ import {GlobalService} from '../services/global.service';
 
 @Directive({selector: '[appPermissionBind]'})
 export class PermissionBindDirective implements OnInit {
-    permission: string;
+    permission: any;
     roles = [];
     departments = [];
     customDisplaySetting = null;
 
     constructor(private el: ElementRef,
                 private globalService: GlobalService) {
-        this.globalService.self$.subscribe(
-            (user) => {
+        this.globalService.self$.subscribe((user) => {
                 if (user) {
                     this.verifyPermission();
                 }
@@ -45,10 +44,11 @@ export class PermissionBindDirective implements OnInit {
         if (!this.globalService.getSelf()) {
             return;
         }
-        for (let i = 0; i < this.globalService.getSelf().permissions.length; i++) {
-            if (this.permission && this.permission.length) {
-                for (let j = 0; j < this.permission.length; j++) {
-                    if (this.globalService.getSelf().permissions[i].id === this.permission[j] || this.globalService.getSelf().permissions[i].entityName === this.permission[j]) {
+        const userPermissions = this.globalService.getSelf().permissions;
+        for (const i in userPermissions) {
+            if (userPermissions.hasOwnProperty(i) && this.permission && this.permission.length) {
+                for (const j in this.permission) {
+                    if (this.permission.hasOwnProperty(j) && userPermissions[i].id === this.permission[j] || userPermissions[i].entityName === this.permission[j]) {
                         isNone = false;
                         break;
                     }
