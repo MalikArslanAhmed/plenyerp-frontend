@@ -9,7 +9,7 @@ import {FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {JournalVoucherDetailCreateComponent} from '../journal-voucher-detail-create/journal-voucher-detail-create.component';
 import {JournalVoucherUpdateComponent} from "../journal-voucher-update/journal-voucher-update.component";
-import { PermissionConstant } from 'app/shared/constants/permission-constant';
+import {PermissionConstant} from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-journal-voucher-list',
@@ -28,10 +28,10 @@ export class JournalVoucherListComponent implements OnInit {
         perpage: 15,
         pages: null
     };
+    status: any;
     pageEvent: PageEvent;
-
-    permissionEditJV = [PermissionConstant.EDIT_GL_JV]; 
-    permissionDeleteJV = [PermissionConstant.DELETE_GL_JV]; 
+    permissionEditJV = [PermissionConstant.EDIT_GL_JV];
+    permissionDeleteJV = [PermissionConstant.DELETE_GL_JV];
 
     constructor(private journalVoucherService: JournalVoucherService,
                 private _matDialog: MatDialog) {
@@ -47,13 +47,16 @@ export class JournalVoucherListComponent implements OnInit {
     }
 
     getJournalVoucherList(params?) {
+        if (params && params['status']) {
+            this.status = params['status'];
+        }
         let param = {
             page: this.pagination.page
         };
         if (params) {
-          param = {
-              ...params
-          }
+            param = {
+                ...params
+            }
         }
         this.journalVouchers = [];
         this.journalVoucherService.get(param).subscribe(data => {
@@ -108,6 +111,50 @@ export class JournalVoucherListComponent implements OnInit {
                 return;
             }
             this.getJournalVoucherList();
+        });
+    }
+
+    checkJV(index, event) {
+        if (this.status === 'NEW') {
+            this.journalVouchers[index].checked = event.checked;
+        } else if (this.status === 'CHECKED') {
+            this.journalVouchers[index].posted = event.checked;
+        }
+    }
+
+    markAsChecked() {
+        let jvReferenceNumbers = [];
+        if (this.journalVouchers && this.journalVouchers.length > 0) {
+            this.journalVouchers.forEach(journalVoucher => {
+                if (journalVoucher.checked) {
+                    jvReferenceNumbers.push(journalVoucher.id);
+                }
+            });
+        }
+
+        this.journalVoucherService.journalVouchersUpdate({
+            'jvReferenceNumbers': jvReferenceNumbers,
+            'status': 'CHECKED'
+        }).subscribe(data => {
+            console.log('data', data);
+        });
+    }
+
+    markAsPosted() {
+        let jvReferenceNumbers = [];
+        if (this.journalVouchers && this.journalVouchers.length > 0) {
+            this.journalVouchers.forEach(journalVoucher => {
+                if (journalVoucher.posted) {
+                    jvReferenceNumbers.push(journalVoucher.id);
+                }
+            });
+        }
+
+        this.journalVoucherService.journalVouchersUpdate({
+            'jvReferenceNumbers': jvReferenceNumbers,
+            'status': 'POSTED'
+        }).subscribe(data => {
+            console.log('data', data);
         });
     }
 }

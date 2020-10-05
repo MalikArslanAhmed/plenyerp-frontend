@@ -18,6 +18,10 @@ export class JournalVoucherService extends BaseService {
         return this.postRequest(AppUrl.JOURNAL_VOUCHER(), data);
     }
 
+    journalVouchersUpdate(data): Observable<any> {
+        return this.postRequest(AppUrl.JOURNAL_VOUCHER_UPDATE(), data);
+    }
+
     update(jvId, data): Observable<any> {
         return this.putRequest(AppUrl.JOURNAL_VOUCHER(jvId), data);
     }

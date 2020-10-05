@@ -1024,6 +1024,10 @@ export class AppUrl {
         }
     }
 
+    static JOURNAL_VOUCHER_UPDATE(): string {
+        return AppUrl.API_URL + `journal-vouchers/update`;
+    }
+
     static JOURNAL_VOUCHER_DETAILS(jvId, detId?): string {
         if (detId) {
             return AppUrl.API_URL + `journal-vouchers/` + jvId + `/details/` + detId;

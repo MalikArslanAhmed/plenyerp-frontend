@@ -637,7 +637,7 @@ export const navigation: FuseNavigation[] = [
                 icon: 'monetization_on',
                 url: '/dashboard/budget-control/programme',
                 permissions : [PermissionConstant.BUDGET_CONTROL_LIST]
-            },
+             },
             {
                 id: 'journal',
                 title: 'Journal Voucher',
@@ -645,7 +645,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'money',
-                permissions : [PermissionConstant.LIST_GL_JV],
+                permissions : [],
                 children: [
                     {
                         id: 'journal-voucher',
@@ -653,7 +653,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/journal-voucher',
-                        permissions : [PermissionConstant.LIST_GL_JV]
+                        permissions : []
                     }
                 ]
             }
