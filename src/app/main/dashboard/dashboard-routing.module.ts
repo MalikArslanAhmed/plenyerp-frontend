@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 import {QualificationComponent} from './qualification/qualification.component';
 import {SkillsComponent} from './skills/skills.component';
@@ -30,13 +30,11 @@ import {DepartmentsComponent} from './departments/departments.component';
 import {LeaveTypeComponent} from './holidays/leave-type/leave-type.component';
 import {LeaveGroupComponent} from './holidays/leave- group/leave-group.component';
 import {PublicHolidaysComponent} from './holidays/public-holidays/public-holidays.component';
-import {DesignationListComponent} from './designation/designation-list/designation-list.component';
 import {DesignationComponent} from './designation/designation.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {ManagersComponent} from './managers/managers.component';
 import {RolesComponent} from './managers/roles/roles.component';
 import {EmployeeActionComponent} from './employees/employee-action/employee-action.component';
-import {ItemComponent} from '@swimlane/ngx-dnd';
 import {StoreSetupItemsComponent} from './store-setup-items/store-setup-items.component';
 import {StoreSetupCategoriesComponent} from './store-setup-categories/store-setup-categories.component';
 import {StoreSetupStoresComponent} from './store-setup-stores/store-setup-stores.component';
@@ -48,15 +46,16 @@ import {TransactionSalesReturnByCustomerComponent} from './transaction-sales-ret
 import {TransactionStvStoreTransferComponent} from './transaction-stv-store-transfer/transaction-stv-store-transfer.component';
 import {TransactionStoreAdjustmentComponent} from './transaction-store-adjustment/transaction-store-adjustment.component';
 import {TransactionDonationsComponent} from './transaction-donations/transaction-donations.component';
-import {TaxesComponent} from "./taxes/taxes.component";
-import {CompaniesComponent} from "./companies/companies.component";
-import {ReportBinCardComponent} from "./report-bin-card/report-bin-card.component";
-import {ReportInventoryLedgerComponent} from "./report-inventory-ledger/report-inventory-ledger.component";
-import {ReportQuantityBalanceComponent} from "./report-quantity-balance/report-quantity-balance.component";
-import {ReportOffLevelComponent} from "./report-off-level/report-off-level.component";
-import {JournalVoucherComponent} from "./journal-voucher/journal-voucher.component";
+import {TaxesComponent} from './taxes/taxes.component';
+import {CompaniesComponent} from './companies/companies.component';
+import {ReportBinCardComponent} from './report-bin-card/report-bin-card.component';
+import {ReportInventoryLedgerComponent} from './report-inventory-ledger/report-inventory-ledger.component';
+import {ReportQuantityBalanceComponent} from './report-quantity-balance/report-quantity-balance.component';
+import {ReportOffLevelComponent} from './report-off-level/report-off-level.component';
+import {JournalVoucherComponent} from './journal-voucher/journal-voucher.component';
 import {BudgetControlComponent} from './budget-control/budget-control.component';
-import {CurrenciesComponent} from "./currencies/currencies.component";
+import {CurrenciesComponent} from './currencies/currencies.component';
+import {BanksComponent} from './banks/banks.component';
 
 const routes: Routes = [
     {
@@ -442,6 +441,13 @@ const routes: Routes = [
         component: ReportOffLevelComponent,
         data: {
             title: 'Report Off Level'
+        }
+    },
+    {
+        path: 'banks',
+        component: BanksComponent,
+        data: {
+            title: 'Banks'
         }
     },
     {

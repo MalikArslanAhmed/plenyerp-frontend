@@ -190,11 +190,13 @@ import {EconomicSegmentSelectComponent} from './journal-voucher/economic-segment
 import {ProgrammingSegmentSelectComponent} from './journal-voucher/programming-segment-select/programming-segment-select.component';
 import {FunctionalSegmentSelectComponent} from './journal-voucher/functional-segment-select/functional-segment-select.component';
 import {GeoCodeSegmentSelectComponent} from './journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
-import {MatExpansionModule} from "@angular/material/expansion";
-import {MatSortModule} from "@angular/material/sort";
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSortModule} from '@angular/material/sort';
 import {JournalVoucherDetailCreateComponent} from './journal-voucher/journal-voucher-detail-create/journal-voucher-detail-create.component';
 import {JournalVoucherUpdateComponent} from './journal-voucher/journal-voucher-update/journal-voucher-update.component';
-
+import {BanksComponent} from './banks/banks.component';
+import {BankCreateComponent} from './banks/bank-create/bank-create.component';
+import {BranchCreateComponent} from './banks/branch-create/branch-create.component';
 
 @NgModule({
     declarations: [
@@ -350,6 +352,10 @@ import {JournalVoucherUpdateComponent} from './journal-voucher/journal-voucher-u
         TransactionsItemsSelectComponent,
         GlCodeSelectComponent,
         EmployeeProgressionHistoryComponent,
+        BanksComponent,
+        BankCreateComponent,
+        BranchCreateComponent,
+        EmployeeProgressionHistoryComponent,
         CurrenciesComponent,
         CurrenciesListComponent,
         CurrenciesCreateComponent,
@@ -400,9 +406,8 @@ import {JournalVoucherUpdateComponent} from './journal-voucher/journal-voucher-u
         MatAutocompleteModule,
         MatListModule,
         MatCardModule,
-        MatListModule,
         MatExpansionModule,
-        MatSortModule
+        MatSortModule,
     ]
 })
 export class DashboardModule {

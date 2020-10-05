@@ -1,0 +1,70 @@
+<div class="dialog-content-wrapper" id="items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-3 m-0 items-data" fusePerfectScrollbar>
+        <form [formGroup]="itemForm">
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Sort Code</mat-label>
+                    <input name="sortCode" formControlName="sortCode" placeholder="Enter Branch Sort Code"
+                           matInput required cdk-focus-start>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Branch Title</mat-label>
+                    <input name="name" formControlName="name" placeholder="Enter Branch Title"
+                           matInput required cdk-focus-start>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Address</mat-label>
+                    <input name="address" formControlName="address" placeholder="Enter Branch Address"
+                           matInput required cdk-focus-start>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>City</mat-label>
+                    <input name="city" formControlName="city" placeholder="Enter Branch City"
+                           matInput required cdk-focus-start>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>State</mat-label>
+                    <input name="state" formControlName="state" placeholder="Enter Branch State"
+                           matInput required cdk-focus-start>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Country</mat-label>
+                    <input name="country" formControlName="country" placeholder="Enter Branch Country"
+                           matInput required cdk-focus-start>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-label>Is Active?</mat-label>
+                <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close(itemForm); save()"
+                [disabled]="itemForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(itemForm); update()"
+                [disabled]="itemForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

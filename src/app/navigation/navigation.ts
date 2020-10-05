@@ -43,6 +43,13 @@ export const navigation: FuseNavigation[] = [
                 icon: 'supervisor_account',
                 children: [
                     {
+                        id: 'banks',
+                        title: 'Banks',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/banks'
+                    },
+                    {
                         id: 'currencies',
                         title: 'Currencies',
                         roles: [],

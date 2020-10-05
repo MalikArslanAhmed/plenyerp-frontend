@@ -1016,4 +1016,26 @@ export class AppUrl {
             return AppUrl.API_URL + `journal-vouchers/` + jvId + `/details`;
         }
     }
+
+    // banks api
+
+    static BANKS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'banks/' + id;
+        } else {
+            return AppUrl.API_URL + 'banks';
+        }
+    }
+
+    static DELETE_BANKS(id?): string {
+        return AppUrl.API_URL + 'banks/' + id;
+    }
+
+    static BANK_BRANCHES(bankId?, branchId?): string {
+        if (bankId && branchId) {
+            return AppUrl.API_URL + 'bank/' + bankId + '/branches/' + branchId;
+        } else {
+            return AppUrl.API_URL + 'bank/' + bankId + '/branches';
+        }
+    }
 }
