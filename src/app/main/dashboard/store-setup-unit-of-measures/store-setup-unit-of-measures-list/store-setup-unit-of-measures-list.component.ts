@@ -6,6 +6,7 @@ import {StoreSetupUnitOfMeasuresCreateComponent} from "../store-setup-unit-of-me
 import { StoreSetupUnitOfMeasuresService } from 'app/shared/services/store-setup-unit-of-measures.service';
 import {PageEvent} from '@angular/material/paginator';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-store-setup-unit-of-measures-list',
@@ -25,6 +26,9 @@ export class StoreSetupUnitOfMeasuresListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    
+    permissionEditStoreSetupUnitOfMeasures = [PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_EDIT];
+    permissionDeleteStoreSetupUnitOfMeasures = [PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_DELETE];
 
     constructor(private storeSetupUnitOfMeasuresService: StoreSetupUnitOfMeasuresService,
                 private _matDialog: MatDialog) {

@@ -10,6 +10,7 @@ import {SalaryScalesService} from "../../../shared/services/salary-scales.servic
 import {SkillService} from "../../../shared/services/skill.service";
 import {DepartmentListSelectComponent} from "./department-list/department-list-select.component";
 import {DeleteListModalComponent} from '../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 interface StructureNode {
     id: number;
@@ -97,6 +98,10 @@ export class StructureComponent implements OnInit {
     jobPostionInitText = "Add Job Position";
     updateId: any;
     departments = [];
+
+    permissionEditStructure = [PermissionConstant.STRUCTURE_EDIT];
+    permissionAddStructure = [PermissionConstant.STRUCTURE_ADD];
+    permissionDeleteStructure = [PermissionConstant.STRUCTURE_DELETE];
 
     constructor(private structureService: StructureService,
                 private _fuseSidebarService: FuseSidebarService,

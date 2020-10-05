@@ -21,16 +21,22 @@
                         <!-- use a disabled button to provide padding for tree leaf -->
                         <button mat-icon-button disabled></button>
                         {{node.name}}
-                        <button mat-icon-button title="Add" (click)="addItem(node)"
-                                *ngIf="node.isChildEnabled">
-                            <mat-icon class="addBtn">add</mat-icon>
-                         </button>
-                        <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
-                            <mat-icon class="editBtn">edit</mat-icon>
-                        </button>
-                        <button mat-icon-button title="Delete" (click)="deleteItemModal(node)" *ngIf="node.level !== 0">
-                            <mat-icon class="deleteBtn">delete</mat-icon>
-                        </button>
+                        <div appPermissionBind [permission]="permissionAddWorkLocation">
+                            <button mat-icon-button title="Add" (click)="addItem(node)"
+                                    *ngIf="node.isChildEnabled">
+                                <mat-icon class="addBtn">add</mat-icon>
+                            </button>
+                        </div>
+                        <div appPermissionBind [permission]="permissionEditWorkLocation">
+                            <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
+                                <mat-icon class="editBtn">edit</mat-icon>
+                            </button>
+                        </div>
+                        <div appPermissionBind [permission]="permissionDeleteWorkLocation">
+                            <button mat-icon-button title="Delete" (click)="deleteItemModal(node)" *ngIf="node.level !== 0">
+                                <mat-icon class="deleteBtn">delete</mat-icon>
+                            </button>
+                        </div>
                     </mat-tree-node>
                     <!-- This is the tree node template for expandable nodes -->
                     <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
@@ -40,16 +46,22 @@
                             </mat-icon>
                         </button>
                         {{node.name}}
-                        <button mat-icon-button title="Add" (click)="addItem(node)"
-                                *ngIf="node.isChildEnabled">
-                            <mat-icon class="addBtn">add</mat-icon>
-                        </button>
-                        <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
-                            <mat-icon class="editBtn">edit</mat-icon>
-                        </button>
-                        <button mat-icon-button title="Delete" (click)="deleteItemModal(node)" *ngIf="node.level !== 0">
-                            <mat-icon class="deleteBtn">delete</mat-icon>
-                        </button>
+                        <div appPermissionBind [permission]="permissionAddWorkLocation">
+                            <button mat-icon-button title="Add" (click)="addItem(node)"
+                                    *ngIf="node.isChildEnabled">
+                                <mat-icon class="addBtn">add</mat-icon>
+                            </button>
+                        </div>
+                        <div appPermissionBind [permission]="permissionEditWorkLocation">
+                            <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
+                                <mat-icon class="editBtn">edit</mat-icon>
+                            </button>
+                        </div>
+                        <div appPermissionBind [permission]="permissionDeleteWorkLocation">
+                            <button mat-icon-button title="Delete" (click)="deleteItemModal(node)" *ngIf="node.level !== 0">
+                                <mat-icon class="deleteBtn">delete</mat-icon>
+                            </button>
+                        </div>
                     </mat-tree-node>
                 </mat-tree>
             </div>

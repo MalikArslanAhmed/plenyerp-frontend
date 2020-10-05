@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {StoreSetupUnitOfMeasuresListComponent} from "./store-setup-unit-of-measures-list/store-setup-unit-of-measures-list.component";
 import {StoreSetupUnitOfMeasuresCreateComponent} from "./store-setup-unit-of-measures-create/store-setup-unit-of-measures-create.component";
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-store-setup-unit-of-measures',
@@ -17,6 +18,7 @@ export class StoreSetupUnitOfMeasuresComponent implements OnInit {
     dialogRef: any;
     @ViewChild(StoreSetupUnitOfMeasuresListComponent) getStoreSetupUnitOfMeasure: StoreSetupUnitOfMeasuresListComponent;
 
+    permissionAddStoreSetupUnitOfMeasures = [PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

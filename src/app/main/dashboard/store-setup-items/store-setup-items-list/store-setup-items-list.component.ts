@@ -7,6 +7,7 @@ import {StoreSetupItemsService} from '../../../../shared/services/store-setup-it
 import {CategoriesListSelectComponent} from '../categories-list-select/categories-list-select.component';
 import {PageEvent} from '@angular/material/paginator';
 import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-store-setup-items-list',
@@ -30,6 +31,10 @@ export class StoreSetupItemsListComponent implements OnInit {
     pageEvent: PageEvent;
     itemIdAll = [];
     filters = {};
+
+    permissionEditStoreSetupItems = [PermissionConstant.STORE_SETUP_ITEMS_EDIT];
+    permissionDeleteStoreSetupItems = [PermissionConstant.STORE_SETUP_ITEMS_DELETE];
+
 
     constructor(private storeSetupItemsService: StoreSetupItemsService,
                 private fb: FormBuilder,

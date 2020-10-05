@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {StoreSetupItemsCreateComponent} from './store-setup-items-create/store-setup-items-create.component';
 import {StoreSetupItemsListComponent} from './store-setup-items-list/store-setup-items-list.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-store-setup-items',
@@ -17,6 +18,7 @@ export class StoreSetupItemsComponent implements OnInit {
     dialogRef: any;
     @ViewChild(StoreSetupItemsListComponent) getStores: StoreSetupItemsListComponent;
 
+    permissionAddStoreSetupItems = [PermissionConstant.STORE_SETUP_STORES_ADD];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

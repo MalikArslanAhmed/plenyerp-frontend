@@ -36,14 +36,18 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let unitOfMeasure">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button mat-icon-button aria-label="Toggle star" (click)="editStore(unitOfMeasure)"
-                            style="color: blue">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(unitOfMeasure)"
-                            style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
+                    <div appPermissionBind [permission]="permissionEditStoreSetupUnitOfMeasures">
+                        <button mat-icon-button aria-label="Toggle star" (click)="editStore(unitOfMeasure)"
+                                style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDeleteStoreSetupUnitOfMeasures">
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(unitOfMeasure)"
+                                style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>

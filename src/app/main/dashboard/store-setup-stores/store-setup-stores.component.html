@@ -16,7 +16,7 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center">
+        <div fxLayout="row" fxLayoutAlign="end center" appPermissionBind [permission]="permissionAddStoreSetupStore">
             <button mat-fab class="accent" id="add-button" aria-label="add qualification"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addStore()">
                 <mat-icon>add_circle</mat-icon>

@@ -8,6 +8,7 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 import {StoreSetupCategoriesCreateComponent} from './store-setup-categories-create/store-setup-categories-create.component';
 import {StoreSetupCategoriesService} from 'app/shared/services/store-setup-categories.service';
 import { DeleteListModalComponent } from '../delete-list-modal/delete-list-modal.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 interface CategoriesNode {
     id: number;
@@ -49,6 +50,10 @@ export class StoreSetupCategoriesComponent implements OnInit {
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
     dialogRef: any;
     @ViewChild('tree') tree;
+
+    permissionEditStoreSetupCategories = [PermissionConstant.STORE_SETUP_CATEGORIES_EDIT];
+    permissionAddStoreSetupCategories = [PermissionConstant.STORE_SETUP_CATEGORIES_ADD];
+    permissionDeleteStoreSetupCategories = [PermissionConstant.STORE_SETUP_CATEGORIES_DELETE];
 
     constructor(private storeSetupCategoriesService: StoreSetupCategoriesService,
                 private _fuseSidebarService: FuseSidebarService,
