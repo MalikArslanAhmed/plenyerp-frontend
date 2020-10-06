@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CurrencyService } from 'app/shared/services/currency.service';
+import { UpdateListModelComponent } from '../update-list-model/update-list-model.component';
 
 @Component({
     selector: 'app-company-information',
@@ -6,6 +9,8 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./company-information.component.scss']
 })
 export class CompanyInformationComponent implements OnInit {
+    currencies = [];
+    dialogRef: any;
     header = [{name: "Company Information"}];
     dataAddress = [
         {key: "Company Name", value: "Abuja Corp"},
@@ -26,17 +31,28 @@ export class CompanyInformationComponent implements OnInit {
         {id: 2, name: "usd"}
     ];
 
-    constructor() {
+    constructor(private currencyService: CurrencyService,private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
         this.refresh();
+        
     }
-
+ 
     refresh() {
+        this.getCurrencies();
         this.dataSetting.forEach((value) => {
             value['isSelected'] = false;
         })
+    }
+
+    getCurrencies() {
+        this.currencies = [];
+        this.currencyService.getCurrency({}).subscribe(data => {
+            this.currencies = data.items;
+            console.log("currency",this.currencies);
+        });
+        
     }
 
     editSetting(element) {
@@ -51,12 +67,42 @@ export class CompanyInformationComponent implements OnInit {
 
     }
 
-    update(element) {
-        this.dataSetting.forEach((value) => {
+    updateModel(items) {
+        this.dialogRef = this._matDialog.open(UpdateListModelComponent, {
+            panelClass: 'update-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.update(items);
+            }
+        });
+    }
+
+    update(element)
+    {
+         this.dataSetting.forEach((value) => {
             if (value.id == element.id) {
                 value['isSelected'] = false;
             }
         })
+    }
+    autoPostJV(value)
+    {
+        this.dialogRef = this._matDialog.open(UpdateListModelComponent, {
+            panelClass: 'update-items-dialog',
+            data: {data: value}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.updateAutoPostJV(value.id,value.checked);
+            }
+        });
+        //console.log("val",value.checked)
+    }
+    updateAutoPostJV(id,value)
+    {
+
     }
 
 }

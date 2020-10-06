@@ -35,19 +35,19 @@
                             style="color: blue">
                         <mat-icon class="editicon material-icons">edit</mat-icon>
                     </button>
-                    
+                     
                     <ng-template #editPlace>
                         <div class="editPlace">
                             <mat-select>
-                                <mat-option *ngFor="let value of dropDownValues">
-                                    {{value.name}}
+                                <mat-option *ngFor="let value of currencies" [value]="value.id">
+                                    {{value.codeCurrency}}
                                 </mat-option>
                             </mat-select>
-                        <button mat-raised-button color="accent" class="submit-button" *ngIf="element.isSelected" (click)="update(element)">Update</button>
+                        <button mat-raised-button color="accent" class="submit-button" *ngIf="element.isSelected" (click)="updateModel(element)">Update</button>
                         </div>
                     </ng-template>
                     <ng-container *ngIf="i===2">
-                        <mat-slide-toggle class="toggle"></mat-slide-toggle>
+                        <mat-slide-toggle class="toggle" (change)="autoPostJV($event)"></mat-slide-toggle>
                     </ng-container>
                    
                 </td>

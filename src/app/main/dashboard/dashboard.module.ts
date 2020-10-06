@@ -201,6 +201,7 @@ import {UserRoleComponent} from './configurations/user-role/user-role.component'
 import {UserRoleListComponent} from './configurations/user-role/user-role-list/user-role-list.component';
 import {UserRoleCreateComponent} from './configurations/user-role/user-role-create/user-role-create.component';
 import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
+import { UpdateListModelComponent } from './update-list-model/update-list-model.component';
 
 @NgModule({
     declarations: [
@@ -379,7 +380,8 @@ import {UserRolePermissionComponent} from './configurations/user-role-permission
         UserRoleComponent,
         UserRoleListComponent,
         UserRoleCreateComponent,
-        UserRolePermissionComponent
+        UserRolePermissionComponent,
+        UpdateListModelComponent
     ],
     imports: [
         CommonModule,
