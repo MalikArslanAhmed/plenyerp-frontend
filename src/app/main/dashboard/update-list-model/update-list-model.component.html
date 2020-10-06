@@ -1,0 +1,22 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{'Update'}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+       <div>Are You Sure ?</div>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button color="accent"  (click)="matDialogRef.close(isUpdateItems = true)"
+                aria-label="Save">Yes
+        </button>
+        <button mat-button color="warn"  (click)="matDialogRef.close(isUpdateItems = false);"
+               >No
+        </button>
+    </div>
+</div>
