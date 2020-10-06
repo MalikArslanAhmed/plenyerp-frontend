@@ -72,16 +72,6 @@ export const navigation: FuseNavigation[] = [
                 url: '/dashboard/admin-segments'
             },
             {
-                id: 'managers',
-                title: 'Managers',
-                roles: [AppConstants.ROLE_ID_ADMIN],
-                // translate: 'NAV.CALENDAR',
-                type: 'item',
-                icon: 'assignment_ind',
-                url: '/dashboard/managers'
-            },
-
-            {
                 id: 'setting',
                 title: 'Setting',
                 roles: [AppConstants.ROLE_ID_ADMIN],
@@ -603,7 +593,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'configurations',
-                title: 'Configurations',
+                title: 'Access Control',
                 roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
@@ -616,7 +606,15 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/user-role',
                         // permissions: [PermissionConstant.ROLES_LIST],
-                    }
+                    },
+                    {
+                        id: 'managers',
+                        title: 'Users',
+                        roles: [AppConstants.ROLE_ID_ADMIN],
+                        // translate: 'NAV.CALENDAR',
+                        type: 'item',
+                        url: '/dashboard/managers'
+                    },
                 ]
             },
             {

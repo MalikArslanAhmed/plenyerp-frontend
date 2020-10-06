@@ -70,7 +70,7 @@
                         <mat-datepicker #to></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>Type</mat-label>
+                        <mat-label>Status</mat-label>
                         <mat-select formControlName="status" (selectionChange)="filter()">
                             <mat-option [value]="type.value"
                                         *ngFor="let type of types">{{type?.name}}</mat-option>

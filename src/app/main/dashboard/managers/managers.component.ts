@@ -7,33 +7,34 @@ import {FormGroup} from '@angular/forms';
 import {ManagersListComponent} from './managers-list/managers-list.component';
 
 @Component({
-  selector: 'app-managers',
-  templateUrl: './managers.component.html',
-  styleUrls: ['./managers.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations
+    selector: 'app-managers',
+    templateUrl: './managers.component.html',
+    styleUrls: ['./managers.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
 })
 export class ManagersComponent implements OnInit {
-  dialogRef: any;
-  @ViewChild(ManagersListComponent) getManagers: ManagersListComponent;
+    dialogRef: any;
+    @ViewChild(ManagersListComponent) getManagers: ManagersListComponent;
 
-  constructor(private _fuseSidebarService: FuseSidebarService,
-    private _matDialog: MatDialog) { }
+    constructor(private _fuseSidebarService: FuseSidebarService,
+                private _matDialog: MatDialog) {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  addManager() {
-    this.dialogRef = this._matDialog.open(ManagersCreateComponent, {
-        panelClass: 'contact-form-dialog',
-        data: {action: 'CREATE'}
-    });
-    this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-        if (!response) {
-            return;
-        }
-        this.getManagers.getManagers();
-    });
-}
+    addManager() {
+        this.dialogRef = this._matDialog.open(ManagersCreateComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'CREATE'}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getManagers.getManagers();
+        });
+    }
 
 }
