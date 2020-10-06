@@ -90,6 +90,11 @@ export class JournalVoucherComponent implements OnInit {
             'to': this.filterJournalVoucherForm.value.to ? moment(this.filterJournalVoucherForm.value.to).format('YYYY-MM-DD') : '',
             'status': this.filterJournalVoucherForm.value.status ? this.filterJournalVoucherForm.value.status : '',
         };
+
+        if (params && params['status'] === 'ALL') {
+            params['status'] = ''
+        }
+
         this.getJournalVoucherData.getJournalVoucherList(params);
         // console.log('searchJournalVoucherForm', params);
     }
