@@ -21,13 +21,13 @@
     margin-top: -20px;
 }
 
-.mat-accordion .mat-header-row {
+.accordion-table .accordion-row {
     padding-left: 1.5rem;
     padding-right: 2rem;
     border-bottom: none;
 }
 
-.mat-expansion-panel-header.mat-row {
+.expansion-header.expansion-row {
     border-bottom: none;
 }
 
@@ -35,19 +35,19 @@ $mat-header-row-height: 80px;
 $mat-row-height: 68px;
 $mat-row-horizontal-padding: 24px;
 
-.mat-table {
+.accordion-table {
     display: block;
 }
 
-.mat-header-row {
+.accordion-row {
     min-height: $mat-header-row-height;
 }
 
-.mat-row {
+.expansion-row {
     min-height: $mat-row-height;
 }
 
-.mat-row, .mat-header-row {
+.expansion-row, .accordion-row {
     display: flex;
     border-bottom-width: 1px;
     border-bottom-style: solid;
