@@ -41,7 +41,7 @@
                 <br>-- Trxn Date
                 <br>-- Username
             </span>
-            <span class="mat-header-cell" mat-sort-header="action">
+            <span class="mat-header-cell" mat-sort-header="action" *ngIf="this.status !== 'POSTED'">
                 Action
             </span>
         </section>
@@ -108,15 +108,26 @@
                         -
                     </p>
                 </span>
-                <span class="mat-cell">
+                <span class="mat-cell" *ngIf="this.status !== 'POSTED'">
                     <p class="text-truncate cursor-pointer mt-32px d-flex">
-                        <span appPermissionBind [permission]="permissionEditJV">
+                        <!--<span appPermissionBind [permission]="permissionEditJV">
                             <span class="material-icons f_20 cursor-pointer blueColor"
                                   (click)="editJournalVoucher(journalVoucher)">
                                 edit
                             </span>
                         </span>
                         <span appPermissionBind [permission]="permissionDeleteJV">
+                            <span class="material-icons ml-7px f_20 cursor-pointer redColor">
+                                delete
+                            </span>
+                        </span>-->
+                        <span>
+                            <span class="material-icons f_20 cursor-pointer blueColor"
+                                  (click)="editJournalVoucher(journalVoucher)">
+                                edit
+                            </span>
+                        </span>
+                        <span>
                             <span class="material-icons ml-7px f_20 cursor-pointer redColor">
                                 delete
                             </span>
@@ -159,7 +170,7 @@
                         <th>
                             <div class="title">Credit</div>
                         </th>
-                        <th>
+                        <th *ngIf="this.status !== 'POSTED'">
                             <div class="title">Action</div>
                         </th>
                     </tr>
@@ -234,7 +245,7 @@
                                 {{voucher?.lvLineValue}}
                             </div>
                         </td>
-                        <td>
+                        <td *ngIf="this.status !== 'POSTED'">
                             <span class="material-icons f_20 cursor-pointer  blueColor"
                                   (click)="editJvDetail(journalVoucher, voucher)">
                                 edit
@@ -244,7 +255,7 @@
                             </span>
                         </td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="this.status !== 'POSTED'">
                         <td colspan="10">
                             <button mat-button class="save-button" (click)="createJvDetail(journalVoucher)">
                                 <mat-icon class="s-16">add_circle</mat-icon>
