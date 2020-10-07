@@ -20,11 +20,6 @@ export class PermissionConstant {
     static COA_EDIT = 'COA.EDIT';
 
 
-    static COMPANY_INFO_ADD = 'COMPANY.INFO.ADD';
-    static COMPANY_INFO_EDIT = 'COMPANY.INFO.EDIT';
-    static COMPANY_INFO_LIST = 'COMPANY.INFO.LIST';
-    static COMPANY_INFO_DELETE = 'COMPANY.INFO.DELETE';
-
     static ROLES_LIST = 'LIST.ROLE';
     static ROLES_ADD = 'ADD.ROLE'; 
     static ROLES_EDIT = 'EDIT.ROLE';
@@ -188,6 +183,10 @@ export class PermissionConstant {
     static GEO_LOC_LIST = 'GEO.LOC.LIST';
     static GEO_LOC_DELETE = 'GEO.LOC.DELETE';
 
+    static COMPANY_INFO_ADD = 'COMPANY.INFO.ADD';
+    static COMPANY_INFO_EDIT = 'COMPANY.INFO.EDIT';
+    static COMPANY_INFO_LIST = 'COMPANY.INFO.LIST';
+    static COMPANY_INFO_DELETE = 'COMPANY.INFO.DELETE';
 
     static OFFICE_LOCATION_ADD = 'OFFICE.LOCACTION.ADD';
     static OFFICE_LOCATION_EDIT = 'OFFICE.LOCACTION.EDIT';
