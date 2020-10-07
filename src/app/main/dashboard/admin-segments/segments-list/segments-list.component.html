@@ -42,20 +42,26 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let segment">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button mat-icon-button aria-label="Toggle star" (click)="editSegmentList(segment)"
-                            style="color: blue">
-                        <mat-icon class="editBtn">edit</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star"
-                            style="color: blue">
-                        <a [routerLink]="['/dashboard/admin-segment-detail', segment.id]">
-                            <mat-icon class="material-icons">device_hub</mat-icon>
-                        </a>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="addLevel(segment)"
-                    >
-                        <mat-icon class="addLevelBtn" color="accent">add_circle</mat-icon>
-                    </button>
+                    <div appPermissionBind [permission]="permissionEditCoa">
+                        <button mat-icon-button aria-label="Toggle star" (click)="editSegmentList(segment)"
+                                style="color: blue">
+                            <mat-icon class="editBtn">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionAdminSegmentDetails">
+                        <button mat-icon-button aria-label="Toggle star"
+                                style="color: blue">
+                            <a [routerLink]="['/dashboard/admin-segment-detail', segment.id]">
+                                <mat-icon class="material-icons">device_hub</mat-icon>
+                            </a>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionAddCoaCharCountConfig">
+                        <button mat-icon-button aria-label="Toggle star" (click)="addLevel(segment)"
+                        >
+                            <mat-icon class="addLevelBtn" color="accent">add_circle</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>

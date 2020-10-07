@@ -11,14 +11,20 @@ export class PermissionConstant {
     static TAXES = 'TAXES';
     static TAXES_LIST = 'TAXES.LIST';
     static TAXES_CREATE = 'TAXES.CREATE';
-    static TAXES_UPDATE = 'TAXES.UPDATE';
+    static TAXES_UPDATE = 'TAXES.EDIT';
     static TAXES_DELETE = 'TAXES.DELETE';
 
+    static COA_LIST = 'COA.LIST';
+    static COA_ADD_CHAR_COUNT_CONFIG = 'COA.ADD.CHAR.COUNT.CONFIG';
+    static COA_ADMIN_SEGMENT_DETAILS = 'COA.ADMIN.SEGMENT.DETAILS';
+    static COA_EDIT = 'COA.EDIT';
 
-    static ROLES_LIST = 'LIST.ROLE';
-    static ROLES_ADD = 'ADD.ROLE'; 
-    static ROLES_EDIT = 'EDIT.ROLE';
-    static ROLES_DELETE = 'DELETE.ROLE';
+
+    static ROLES_LIST = 'ROLE.LIST';
+    static ROLES_ADD = 'ROLE.ADD'; 
+    static ROLES_EDIT = 'ROLE.EDIT';
+    static ROLES_DELETE = 'ROLE.DELETE';
+    static ROLES_PERMISSION_ADD = 'ROLE.PERMISSIONS.ADD';
     static BANKS = 'BANKS';
     static CUSTOMERS = 'PAYERS.PAYEES';
     //static EDIT_COA_ADMIN = 'EDIT.COA.ADMIN'; //ALSO IN HR

@@ -8,6 +8,7 @@ import {EditSegmentListComponent} from '../edit-segment-list/edit-segment-list';
 import {FormGroup} from '@angular/forms';
 import {AddLevelCharCount} from '../add-level-char-count/add-level-char-count';
 import {PageEvent} from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'segments-list',
@@ -27,7 +28,10 @@ export class SegmentsListComponent implements OnInit{
         perpage: 15,
         pages: null
     };
-    pageEvent: PageEvent;
+    pageEvent: PageEvent; 
+    permissionEditCoa = [PermissionConstant.COA_EDIT];
+    permissionAdminSegmentDetails  = [PermissionConstant.COA_ADMIN_SEGMENT_DETAILS];
+    permissionAddCoaCharCountConfig = [PermissionConstant.COA_ADD_CHAR_COUNT_CONFIG];
     constructor(
         private _fuseSidebarService: FuseSidebarService, private _matDialog: MatDialog, private adminSegmentServices: AdminSegmentServices
     ) {}

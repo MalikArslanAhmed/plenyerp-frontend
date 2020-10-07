@@ -69,7 +69,8 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'watch_later',
-                url: '/dashboard/admin-segments'
+                url: '/dashboard/admin-segments',
+                permissions : [PermissionConstant.COA_LIST]
             },
             {
                 id: 'setting',
@@ -84,7 +85,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Company Information',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/company-info'
+                        url: 'dashboard/company-info',
                     }
                 ]
             },
@@ -605,7 +606,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/user-role',
-                        // permissions: [PermissionConstant.ROLES_LIST],
+                        permissions: [PermissionConstant.ROLES_LIST],
                     },
                     {
                         id: 'managers',
