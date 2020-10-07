@@ -157,4 +157,22 @@ export class JournalVoucherListComponent implements OnInit {
             console.log('data', data);
         });
     }
+
+    markAsNew() {
+        let jvReferenceNumbers = [];
+        if (this.journalVouchers && this.journalVouchers.length > 0) {
+            this.journalVouchers.forEach(journalVoucher => {
+                if (journalVoucher.posted) {
+                    jvReferenceNumbers.push(journalVoucher.id);
+                }
+            });
+        }
+
+        this.journalVoucherService.journalVouchersUpdate({
+            'jvReferenceNumbers': jvReferenceNumbers,
+            'status': 'NEW'
+        }).subscribe(data => {
+            console.log('data', data);
+        });
+    }
 }
