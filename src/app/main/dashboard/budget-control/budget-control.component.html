@@ -19,19 +19,26 @@
                     <mat-grid-list cols="2" rowHeight="400px">
                         <mat-grid-tile>
                             <div class="width-100-per"
-                                 style="top: 12px; position: absolute; padding-left: 0.5rem; padding-right: 0.5rem;">
+                                 style="top: 12px; position: absolute; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.5rem;">
                                 <div fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>Admin Segment</mat-label>
+                                    <button type="button" mat-button class="select-type-button" (click)="adminSegmentSelect()"> 
+                                        {{(adminSegments && adminSegments[0]?.name) ? adminSegments[0]?.name : 'Admin Segment'}}
+                                    </button>
+                                    <mat-form-field appearance="outline" class="my-select-panel-class" fxFlex>
+                                        <mat-label class="dropDownLabel">Admin Segment</mat-label>
                                         <mat-select (click)="adminSegmentSelect()" disabled
-                                                    formControlName="adminSegmentId">
+                                                    formControlName="adminSegmentId"
+                                                    >
                                             <mat-option *ngFor="let adminSegment of adminSegments"
                                                         [value]="adminSegment.id">
                                                 {{adminSegment?.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>Fund Segment</mat-label>
+                                    <button type="button" mat-button class="select-type-button" (click)="fundSegmentSelect()"> 
+                                        {{(fundSegments && fundSegments[0]?.name) ? fundSegments[0]?.name : 'Fund Segment'}}
+                                    </button>
+                                    <mat-form-field appearance="outline" class="my-select-panel-class" fxFlex>
+                                        <mat-label class="dropDownLabel">Fund Segment</mat-label>
                                         <mat-select (click)="fundSegmentSelect()" disabled
                                                     formControlName="fundSegmentId">
                                             <mat-option *ngFor="let fundSegment of fundSegments"
@@ -39,8 +46,11 @@
                                                 {{fundSegment?.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>Programme Code</mat-label>
+                                    <button type="button" mat-button class="select-type-button" (click)="programmeSegmentSelect()"> 
+                                        {{(programmeSegments && programmeSegments[0]?.name) ? programmeSegments[0]?.name : 'Program Segment'}}
+                                    </button>
+                                    <mat-form-field appearance="outline" class="my-select-panel-class" fxFlex>
+                                        <mat-label class="dropDownLabel">Programme Code</mat-label>
                                         <mat-select (click)="programmeSegmentSelect()" disabled
                                                     formControlName="programmeSegmentId">
                                             <mat-option *ngFor="let programmeSegment of programmeSegments"
@@ -124,22 +134,22 @@
                                 <div class="main-budget-month">
                                     <div fxLayout="row" fxLayoutGap="10px">
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-01</mat-label>
+                                            <mat-label class="month-label">Month-01</mat-label>
                                             <input formControlName="month_1" matInput
                                                    placeholder="Month-01">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-02</mat-label>
+                                            <mat-label class="month-label">Month-02</mat-label>
                                             <input formControlName="month_2" matInput
                                                    placeholder="Month-02">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-03</mat-label>
+                                            <mat-label class="month-label">Month-03</mat-label>
                                             <input formControlName="month_1" matInput
                                                    placeholder="Month-03">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-04</mat-label>
+                                            <mat-label class="month-label">Month-04</mat-label>
                                             <input formControlName="month_1" matInput
                                                    placeholder="Month-04">
                                         </mat-form-field>
@@ -148,22 +158,22 @@
                                 <div class="main-budget-month">
                                     <div fxLayout="row" fxLayoutGap="10px">
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-05</mat-label>
+                                            <mat-label class="month-label">Month-05</mat-label>
                                             <input formControlName="month_5" matInput
                                                    placeholder="Month-05">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-06</mat-label>
+                                            <mat-label class="month-label">Month-06</mat-label>
                                             <input formControlName="month_6" matInput
                                                    placeholder="Month-06">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-07</mat-label>
+                                            <mat-label class="month-label">Month-07</mat-label>
                                             <input formControlName="month_1" matInput
                                                    placeholder="Month-07">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-08</mat-label>
+                                            <mat-label class="month-label">Month-08</mat-label>
                                             <input formControlName="month_1" matInput
                                                    placeholder="Month-08">
                                         </mat-form-field>
@@ -172,22 +182,22 @@
                                 <div class="main-budget-month">
                                     <div fxLayout="row" fxLayoutGap="10px">
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-09</mat-label>
+                                            <mat-label class="month-label">Month-09</mat-label>
                                             <input formControlName="month_5" matInput
                                                    placeholder="Month-09">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-10</mat-label>
+                                            <mat-label class="month-label">Month-10</mat-label>
                                             <input formControlName="month_10" matInput
                                                    placeholder="Month-10">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-11</mat-label>
+                                            <mat-label class="month-label">Month-11</mat-label>
                                             <input formControlName="month_11" matInput
                                                    placeholder="Month-11">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Month-12</mat-label>
+                                            <mat-label class="month-label">Month-12</mat-label>
                                             <input formControlName="month_12" matInput
                                                    placeholder="Month-12">
                                         </mat-form-field>
@@ -202,12 +212,7 @@
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
                                             <mat-label>Budget Amount[Pr. Yr.]</mat-label>
-                                            <input formControlName="budgetAmountPrYr1" matInput
-                                                   placeholder="enter in local currency">
-                                        </mat-form-field>
-                                        <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Budget Amount[Pr. Yr.]</mat-label>
-                                            <input formControlName="budgetAmountPrYr2" matInput
+                                            <input formControlName="budgetAmountPrYr" matInput
                                                    placeholder="enter in local currency">
                                         </mat-form-field>
                                     </div>

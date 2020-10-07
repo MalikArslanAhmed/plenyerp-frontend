@@ -60,8 +60,7 @@ export class BudgetControlComponent implements OnInit {
             month_11: [''],
             month_12: [''],
             totalSupplementaryBudget: [''],
-            budgetAmountPrYr1: [''],
-            budgetAmountPrYr2: [''],
+            budgetAmountPrYr: [''],
         });
     }
 
