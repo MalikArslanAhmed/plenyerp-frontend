@@ -69,7 +69,8 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'watch_later',
-                url: '/dashboard/admin-segments'
+                url: '/dashboard/admin-segments',
+               // permissions : [PermissionConstant.COA_LIST]
             },
             {
                 id: 'setting',
@@ -78,13 +79,15 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'supervisor_account',
+               // permissions : [PermissionConstant.COMPANY_INFO_LIST],
                 children: [
                     {
                         id: 'company-info',
                         title: 'Company Information',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/company-info'
+                        url: 'dashboard/company-info',
+                       // permissions : [PermissionConstant.COMPANY_INFO_LIST]
                     }
                 ]
             },
