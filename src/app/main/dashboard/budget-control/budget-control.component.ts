@@ -75,13 +75,13 @@ export class BudgetControlComponent implements OnInit {
         // }
     ];
 
-    pagination = {
+    /*pagination = {
         page: 1,
         total: null,
         perpage: 15,
         pages: null
     };
-    pageEvent: PageEvent;
+    pageEvent: PageEvent;*/
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
