@@ -158,7 +158,6 @@ export class BudgetControlComponent implements OnInit {
             month_12:this.budgetControlForm.controls['month_12'].value,
         });
         this.budgetControlList=this.tempBudget
-        console.log("item",this.budgetControlList);
 
         this.budgetControlForm.reset();
 

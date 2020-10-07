@@ -230,34 +230,61 @@
                                 <tr>
                                     <th>S.No</th>
                                     <th>
-                                        <div class="title">COA Admin</div>
+                                        <div class="title">Full Code</div>
                                     </th>
                                     <th>
-                                        <div class="title">COA Economic</div>
+                                        <div class="title">Line Code</div>
                                     </th>
                                     <th>
-                                        <div class="title">COA Functional</div>
+                                        <div class="title">Title</div>
                                     </th>
                                     <th>
-                                        <div class="title">COA Fund</div>
+                                        <div class="title">Pr. Yr. Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">COA Programme</div>
+                                        <div class="title">Pr. Yr. Actual</div>
                                     </th>
                                     <th>
-                                        <div class="title">COA Geo-code</div>
+                                        <div class="title">Supp. Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Line Reference</div>
+                                        <div class="title">Total Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Line Narration</div>
+                                        <div class="title">Month 1</div>
                                     </th>
                                     <th>
-                                        <div class="title">Debit</div>
+                                        <div class="title">Month 2</div>
                                     </th>
                                     <th>
-                                        <div class="title">Credit</div>
+                                        <div class="title">Month 3</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 4</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 5</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 6</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 7</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 8</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 9</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 10</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 11</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 12</div>
                                     </th>
                                 </tr>
                                 </thead>
@@ -269,6 +296,61 @@
                                     <td>
                                         <span class="text-truncate">{{i + 1}}</span>
                                     </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.lineCode}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.title}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.Pr_Yr_budget}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.Pr_Yr_actual}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.supplementary_budget}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.total_Budget}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_1}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_2}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_3}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_4}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_5}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_6}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_7}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_8}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_9}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_10}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_11}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-truncate">{{budget?.month_12}}</span>
+                                    </td>
+
                                 </tr>
                                 </tbody>
                                 <ng-template #noBudgetControlList>
