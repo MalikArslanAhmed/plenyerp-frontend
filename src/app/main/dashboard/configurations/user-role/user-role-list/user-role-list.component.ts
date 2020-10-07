@@ -30,6 +30,7 @@ export class UserRoleListComponent implements OnInit {
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
+    permissionAddPermissions = [PermissionConstant.ROLES_PERMISSION_ADD];
     permissionEditRoles = [PermissionConstant.ROLES_EDIT];
     permissionDeleteRoles = [PermissionConstant.ROLES_DELETE];
     // tslint:disable-next-line:no-shadowed-variable

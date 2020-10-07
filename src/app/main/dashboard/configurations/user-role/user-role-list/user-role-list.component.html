@@ -33,10 +33,12 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let userRole">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button mat-icon-button aria-label="Toggle star" matTooltip="Add Permission" matTooltipPosition="left" (click)="addPermissions(userRole)"
-                            style="color: #000000">
-                        <mat-icon class="material-icons">person</mat-icon>
-                    </button>
+                    <div appPermissionBind [permission]="permissionAddPermissions">
+                        <button mat-icon-button aria-label="Toggle star" matTooltip="Add Permission" matTooltipPosition="left" (click)="addPermissions(userRole)"
+                                style="color: #000000">
+                            <mat-icon class="material-icons">person</mat-icon>
+                        </button>
+                    </div>
                     <div appPermissionBind [permission]="permissionEditRoles">
                         <button mat-icon-button aria-label="Toggle star" (click)="editUserRole(userRole)"
                                 style="color: blue">

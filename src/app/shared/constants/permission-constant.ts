@@ -20,10 +20,11 @@ export class PermissionConstant {
     static COA_EDIT = 'COA.EDIT';
 
 
-    static ROLES_LIST = 'LIST.ROLE';
-    static ROLES_ADD = 'ADD.ROLE'; 
-    static ROLES_EDIT = 'EDIT.ROLE';
-    static ROLES_DELETE = 'DELETE.ROLE';
+    static ROLES_LIST = 'ROLE.LIST';
+    static ROLES_ADD = 'ROLE.ADD'; 
+    static ROLES_EDIT = 'ROLE.EDIT';
+    static ROLES_DELETE = 'ROLE.DELETE';
+    static ROLES_PERMISSION_ADD = 'ROLE.PERMISSIONS.ADD';
     static BANKS = 'BANKS';
     static CUSTOMERS = 'PAYERS.PAYEES';
     //static EDIT_COA_ADMIN = 'EDIT.COA.ADMIN'; //ALSO IN HR

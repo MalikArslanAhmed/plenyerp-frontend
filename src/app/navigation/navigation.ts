@@ -606,7 +606,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/user-role',
-                        // permissions: [PermissionConstant.ROLES_LIST],
+                        permissions: [PermissionConstant.ROLES_LIST],
                     },
                     {
                         id: 'managers',
