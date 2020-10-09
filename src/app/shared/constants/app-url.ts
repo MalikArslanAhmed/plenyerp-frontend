@@ -1057,4 +1057,15 @@ export class AppUrl {
             return AppUrl.API_URL + 'bank/' + bankId + '/branches';
         }
     }
+
+    static GET_BUDGET_CONTROL_ECONOMIC(): string {
+        return AppUrl.API_URL + `economic-budget`;
+    }
+    static GET_BUDGET_CONTROL_PROGRAMME(): string {
+        return AppUrl.API_URL + `programme-budget`;
+    }
+    static DELETE_BUDGET(id?): string {
+        return AppUrl.API_URL + 'budget/' + id;
+    }
+
 }

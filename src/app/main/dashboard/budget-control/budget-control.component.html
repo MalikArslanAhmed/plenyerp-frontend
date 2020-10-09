@@ -251,104 +251,193 @@
                                         <div class="title">Total Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 1</div>
+                                        <div class="title">Month 1 Main Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 2</div>
+                                        <div class="title">Month 1 Supplementary Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 3</div>
+                                        <div class="title">Month 2 Main Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 4</div>
+                                        <div class="title">Month 2 Supplementary Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 5</div>
+                                        <div class="title">Month 3 Main Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 6</div>
+                                        <div class="title">Month 3 Supplementary Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 7</div>
+                                        <div class="title">Month 4 Main Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 8</div>
+                                        <div class="title">Month 4 Supplementary Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 9</div>
+                                        <div class="title">Month 5 Main Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 10</div>
+                                        <div class="title">Month 5 Supplementary Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 11</div>
+                                        <div class="title">Month 6 Main Budget</div>
                                     </th>
                                     <th>
-                                        <div class="title">Month 12</div>
+                                        <div class="title">Month 6 Supplementary Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 7 Main Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 7 Supplementary Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 8 Main Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 8 Supplementary Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 9 Main Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 9 Supplementary Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 10 Main Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 10 Supplementary Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 11 Main Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 11 Supplementary Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 12 Main Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Month 12 Supplementary Budget</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Action</div>
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody *ngIf="budgetControlList && budgetControlList.length > 0; else noBudgetControlList">
                                 <tr *ngFor="let budget of budgetControlList; let i = index">
-                                    <td>
+                                    <td class="table-data">
                                         <span class="text-truncate">{{i + 1}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{i + 1}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{(budget.programSegment && budget.programSegment.combinedCode) ? budget.programSegment?.combinedCode : (budget.economicSegment && budget.economicSegment.combinedCode) ? budget.economicSegment?.combinedCode : '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.lineCode}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{(budget.programSegment && budget.programSegment.individualCode) ? budget.programSegment?.individualCode : (budget.economicSegment && budget.economicSegment.individualCode) ? budget.economicSegment?.individualCode : '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.title}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{(budget.programSegment && budget.programSegment.name) ? budget.programSegment?.name : (budget.economicSegment && budget.economicSegment.name) ? budget.economicSegment?.name : '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.Pr_Yr_budget}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.previousYearAmount}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.Pr_Yr_actual}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.previousYearActualAmount}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.supplementary_budget}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.totalSupplementaryBudget}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.total_Budget}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.totalBudget}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_1}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month1MainBudget}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_2}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month1SupplementaryBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_3}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month2MainBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_4}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month2SupplementaryBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_5}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month3MainBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_6}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month3SupplementaryBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_7}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month4MainBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_8}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month4SupplementaryBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_9}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month5MainBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_10}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month5SupplementaryBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_11}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month6MainBudget || '-'}}</span>
                                     </td>
-                                    <td>
-                                        <span class="text-truncate">{{budget?.month_12}}</span>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month6SupplementaryBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month7MainBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month7SupplementaryBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month8MainBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month8SupplementaryBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month9MainBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month9SupplementaryBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month10MainBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month10SupplementaryBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month11MainBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month11SupplementaryBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month12MainBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{budget?.month12SupplementaryBudget || '-'}}</span>
+                                    </td>
+                                    <td class="table-data">
+                                        <div fxFlex="row" fxLayoutAlign="end center">
+                                                <button aria-label="Toggle star" mat-icon-button
+                                                        style="color: blue">
+                                                    <mat-icon class="material-icons">edit</mat-icon>
+                                                </button>
+                                            
+                                            
+                                                <button (click)="deleteItemModal(budget)" aria-label="Toggle star" mat-icon-button
+                                                        style="color: red">
+                                                    <mat-icon class="material-icons">delete</mat-icon>
+                                                </button>
+                                        </div>
                                     </td>
 
                                 </tr>

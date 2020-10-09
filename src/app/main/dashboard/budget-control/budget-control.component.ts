@@ -8,6 +8,8 @@ import {ProgrammingSegmentSelectComponent} from "../journal-voucher/programming-
 import {FundSegmentSelectComponent} from "../journal-voucher/fund-segment-select/fund-segment-select.component";
 import {ActivatedRoute, Event, NavigationEnd, Router} from "@angular/router";
 import { PageEvent } from '@angular/material/paginator';
+import { BudgetControlService } from 'app/shared/services/budget-control.service';
+import { DeleteListModalComponent } from '../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-budget-control',
@@ -88,12 +90,14 @@ export class BudgetControlComponent implements OnInit {
         private fb: FormBuilder,
         private _matDialog: MatDialog,
         private activatedRoute: ActivatedRoute,
-        private router: Router) {
+        private router: Router,
+        private budgetService: BudgetControlService) {
             this.router.events.subscribe((event: Event) => {
                 if (event instanceof NavigationEnd)
                 {
                     this.activatedRoute.params.subscribe(param => {
                         this.budgetType = param['type']
+                        this.ngOnInit();
                     });
                     //console.log("abc",this.budgetType);
                 }
@@ -105,6 +109,8 @@ export class BudgetControlComponent implements OnInit {
         this.activatedRoute.params.subscribe(param => {
             this.budgetType = param['type']
         });
+
+        this.getBudgetData();
         this.budgetControlForm = this.fb.group({
             adminSegmentId: [''],
             fundSegmentId: [''],
@@ -132,35 +138,80 @@ export class BudgetControlComponent implements OnInit {
         });
     }
 
+    getBudgetData()
+    {
+        this.budgetControlList =[];
+        if(this.budgetType==='economic')
+        {
+            this.budgetService.getBudgetControlForEconomic().subscribe(data => {
+                this.budgetControlList = data.items;
+                //console.log("hello",this.budgetControlList);
+            });
+            //console.log("he");
+        }
+        if(this.budgetType==='programme')
+        {
+            this.budgetService.getBudgetControlForProgramm().subscribe(data=> {
+                this.budgetControlList = data.items;
+               // console.log("bye",this.budgetControlList);
+            });
+        }
+        //console.log("abc",this.budgetControlList)
+    }
+
     addRow()
     {
+        console.log("abc",this.budgetControlForm.value);
         
-        this.tempBudget.push({
-            sno: '-',
-            fullCode: '-',
-            lineCode: '-',
-            title: '-',
-            Pr_Yr_budget: '-',
-            Pr_Yr_actual: '-',
-            supplementary_budget: '-',
-            total_Budget: '-',
-            month_1:this.budgetControlForm.controls['month_1'].value,
-            month_2:this.budgetControlForm.controls['month_2'].value,
-            month_3:this.budgetControlForm.controls['month_3'].value,
-            month_4:this.budgetControlForm.controls['month_4'].value,
-            month_5:this.budgetControlForm.controls['month_5'].value,
-            month_6:this.budgetControlForm.controls['month_6'].value,
-            month_7:this.budgetControlForm.controls['month_7'].value,
-            month_8:this.budgetControlForm.controls['month_8'].value,
-            month_9:this.budgetControlForm.controls['month_9'].value,
-            month_10:this.budgetControlForm.controls['month_10'].value,
-            month_11:this.budgetControlForm.controls['month_11'].value,
-            month_12:this.budgetControlForm.controls['month_12'].value,
-        });
-        this.budgetControlList=this.tempBudget
+        // this.tempBudget.push({
+        //     sno: '-',
+        //     fullCode: '-',
+        //     lineCode: '-',
+        //     title: '-',
+        //     Pr_Yr_budget: '-',
+        //     Pr_Yr_actual: '-',
+        //     supplementary_budget: '-',
+        //     total_Budget: '-',
+        //     month_1:this.budgetControlForm.controls['month_1'].value,
+        //     month_2:this.budgetControlForm.controls['month_2'].value,
+        //     month_3:this.budgetControlForm.controls['month_3'].value,
+        //     month_4:this.budgetControlForm.controls['month_4'].value,
+        //     month_5:this.budgetControlForm.controls['month_5'].value,
+        //     month_6:this.budgetControlForm.controls['month_6'].value,
+        //     month_7:this.budgetControlForm.controls['month_7'].value,
+        //     month_8:this.budgetControlForm.controls['month_8'].value,
+        //     month_9:this.budgetControlForm.controls['month_9'].value,
+        //     month_10:this.budgetControlForm.controls['month_10'].value,
+        //     month_11:this.budgetControlForm.controls['month_11'].value,
+        //     month_12:this.budgetControlForm.controls['month_12'].value,
+        // });
+        // this.budgetControlList=this.tempBudget
 
         this.budgetControlForm.reset();
 
+    }
+
+    deleteItemModal(items)
+    {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteBugdet(items.id);
+            }
+        });
+       // console.log("data",items);
+    }
+
+    deleteBugdet(id)
+    {
+        this.budgetService.deleteBudget(id).subscribe(data => {
+            if (data) {
+                this.getBudgetData();
+            }
+        }); 
     }
     adminSegmentSelect() {
         this.dialogRef = this._matDialog.open(AdminSegmentSelectComponent, {
