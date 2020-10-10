@@ -446,7 +446,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'store',
-                //permissions :[PermissionConstant.STORE_SETUP_ITEMS_LIST,PermissionConstant.STORE_SETUP_CATEGORIES_LIST,PermissionConstant.STORE_SETUP_STORES_LIST,PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST],
+                permissions :[PermissionConstant.STORE_SETUP_ITEMS_LIST,PermissionConstant.STORE_SETUP_CATEGORIES_LIST,PermissionConstant.STORE_SETUP_STORES_LIST,PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST],
                 children: [
                     {
                         id: 'items',
