@@ -18,7 +18,7 @@ export class StoreSetupItemsComponent implements OnInit {
     dialogRef: any;
     @ViewChild(StoreSetupItemsListComponent) getStores: StoreSetupItemsListComponent;
 
-    permissionAddStoreSetupItems = [PermissionConstant.STORE_SETUP_STORES_ADD];
+    permissionAddStoreSetupItems = [PermissionConstant.STORE_SETUP_ITEMS_ADD];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog) {

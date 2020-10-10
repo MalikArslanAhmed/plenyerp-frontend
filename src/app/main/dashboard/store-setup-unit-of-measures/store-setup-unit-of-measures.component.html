@@ -16,11 +16,13 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center" appPermissionBind [permission]="permissionAddStoreSetupUnitOfMeasures">
-            <button mat-fab class="accent" id="add-button" aria-label="add qualification"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addStore()">
-                <mat-icon>add_circle</mat-icon>
-            </button>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div appPermissionBind [permission]="permissionAddStoreSetupUnitOfMeasures">
+                <button mat-fab class="accent" id="add-button" aria-label="add qualification"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addStore()">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
         </div>
         <!-- SEARCH -->
         <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
