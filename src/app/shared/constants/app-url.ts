@@ -1000,6 +1000,7 @@ export class AppUrl {
     static UPDATE_EMPLOYEE_PROGRESSION_DETAILS(empId, progressionId): string {
         return AppUrl.API_URL + `employee/` + empId + '/progression-history/' + progressionId;
     }
+
     // user-role-permission
     static GET_USER_ROLE_LIST(id?): string {
         if (id) {
@@ -1009,9 +1010,11 @@ export class AppUrl {
         }
 
     }
+
     static GET_ROLE_BASED_PERMISSION_LIST(id): string {
         return AppUrl.API_URL + `roles/` + id + `/permissions`;
     }
+
     static GET_PERMISSION_LIST(): string {
         return AppUrl.API_URL + `permissions`;
     }
@@ -1061,11 +1064,22 @@ export class AppUrl {
     static GET_BUDGET_CONTROL_ECONOMIC(): string {
         return AppUrl.API_URL + `economic-budget`;
     }
+
     static GET_BUDGET_CONTROL_PROGRAMME(): string {
         return AppUrl.API_URL + `programme-budget`;
     }
+
     static DELETE_BUDGET(id?): string {
         return AppUrl.API_URL + 'budget/' + id;
+    }
+
+    static ADD_BUDGET(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `budget/` + id;
+        } else {
+            return AppUrl.API_URL + `budget`;
+        }
+
     }
 
 }
