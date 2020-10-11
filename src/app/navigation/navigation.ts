@@ -367,7 +367,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'person_pin',
-                // permissions : [PermissionConstant.CENSURES_LIST,PermissionConstant.DISENGAGEMENT_LIST,PermissionConstant.STAFF_STATUS_LIST,PermissionConstant.RELATIONS_LIST,PermissionConstant.STAFF_CATEGORIES_LIST],
+                permissions : [PermissionConstant.CENSURES_LIST,PermissionConstant.DISENGAGEMENT_LIST,PermissionConstant.STAFF_STATUS_LIST,PermissionConstant.RELATIONS_LIST,PermissionConstant.STAFF_CATEGORIES_LIST],
                 children: [
                     {
                         id: 'relationship',
@@ -408,7 +408,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/censures',
-                        //permissions: [PermissionConstant.CENSURES_LIST],
+                        permissions: [PermissionConstant.CENSURES_LIST],
                     },
                 ]
             },
@@ -446,7 +446,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'store',
-                //permissions :[PermissionConstant.STORE_SETUP_ITEMS_LIST,PermissionConstant.STORE_SETUP_CATEGORIES_LIST,PermissionConstant.STORE_SETUP_STORES_LIST,PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST],
+                permissions :[PermissionConstant.STORE_SETUP_ITEMS_LIST,PermissionConstant.STORE_SETUP_CATEGORIES_LIST,PermissionConstant.STORE_SETUP_STORES_LIST,PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST],
                 children: [
                     {
                         id: 'items',
