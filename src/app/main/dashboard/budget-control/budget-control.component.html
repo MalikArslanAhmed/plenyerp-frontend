@@ -51,13 +51,13 @@
                                     <div *ngIf="budgetType === 'programme'">
                                     <button (click)="programmeSegmentSelect()" class="select-type-button width-100-per" mat-button
                                             type="button">
-                                        {{(programmeSegments && programmeSegments[0]?.name) ? programmeSegments[0]?.name : 'Program Segment'}}
+                                        {{(programSegments && programSegments[0]?.name) ? programSegments[0]?.name : 'Program Segment'}}
                                     </button>
                                     <mat-form-field appearance="outline" class="my-select-panel-class" fxFlex>
                                         <mat-label class="dropDownLabel">Programme Code</mat-label>
                                         <mat-select (click)="programmeSegmentSelect()" disabled
-                                                    formControlName="programmeSegmentId">
-                                            <mat-option *ngFor="let programmeSegment of programmeSegments"
+                                                    formControlName="programSegmentId">
+                                            <mat-option *ngFor="let programmeSegment of programSegments"
                                                         [value]="programmeSegment.id">
                                                 {{programmeSegment?.name}}</mat-option>
                                         </mat-select>

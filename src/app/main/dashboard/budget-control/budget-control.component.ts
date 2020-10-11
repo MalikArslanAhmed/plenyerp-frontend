@@ -26,7 +26,7 @@ export class BudgetControlComponent implements OnInit {
     budgetControlForm: FormGroup;
     selectedRadioBudgetOption = 0;
     adminSegments = [];
-    programmeSegments = [];
+    programSegments = [];
     economicSegments = [];
     fundSegments = [];
     budgetType: any;
@@ -117,7 +117,7 @@ export class BudgetControlComponent implements OnInit {
         this.budgetControlForm = this.fb.group({
             adminSegmentId: [''],
             fundSegmentId: [''],
-            programmeSegmentId: [''],
+            programSegmentId: [''],
             economicSegmentId: [''],
             xRateLocal: [''],
             xRateToInternational: [''],
@@ -185,7 +185,7 @@ export class BudgetControlComponent implements OnInit {
         this.budgetControlForm.patchValue({
             adminSegmentId: items.adminSegmentId,
             fundSegmentId: items.fundSegmentId,
-            programmeSegmentId: items.programmeSegmentId,
+            programSegmentId: items.programSegmentId,
             economicSegmentId: items.economicSegmentId,
             xRateLocal: items.xRateLocal,
             xRateToInternational: items.xRateToInternational,
@@ -240,7 +240,7 @@ export class BudgetControlComponent implements OnInit {
         }
 
         if (items['programSegment']) {
-            this.programmeSegments = [{
+            this.programSegments = [{
                 name: items['programSegment'].name,
                 id: items['programSegment'].id
             }];
@@ -255,7 +255,7 @@ export class BudgetControlComponent implements OnInit {
                 this.budgetControlForm.reset();
                 this.adminSegments = [];
                 this.fundSegments = [];
-                this.programmeSegments = [];
+                this.programSegments = [];
                 this.economicSegments = [];
             });
         }
@@ -338,13 +338,13 @@ export class BudgetControlComponent implements OnInit {
             ]
         };
         if (this.budgetType === 'programme') {
-            budgetData['programmeSegmentId'] = f.programmeSegmentId;
+            budgetData['programSegmentId'] = f.programSegmentId;
             budgetData['economicSegmentId'] = null;
 
         }
         if (this.budgetType === 'economic') {
             budgetData['economicSegmentId'] = f.economicSegmentId;
-            budgetData['programmeSegmentId'] = null;
+            budgetData['programSegmentId'] = null;
         }
         return budgetData;
     }
@@ -355,6 +355,10 @@ export class BudgetControlComponent implements OnInit {
             // console.log('--programme', val);
             this.budgetControlForm.reset();
             this.getBudgetData();
+            this.adminSegments = [];
+            this.fundSegments = [];
+            this.programSegments = [];
+            this.economicSegments = [];
         });
     }
 
@@ -407,12 +411,12 @@ export class BudgetControlComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.programmeSegments = [{
+            this.programSegments = [{
                 'name': response.name,
                 'id': response.id
             }];
             this.budgetControlForm.patchValue({
-                programmeSegmentId: response.id,
+                programSegmentId: response.id,
                 programmeSegmentCode: response.id,
                 disabled: true
             });
@@ -483,7 +487,7 @@ export class BudgetControlComponent implements OnInit {
         this.budgetControlForm.reset();
         this.adminSegments = [];
         this.fundSegments = [];
-        this.programmeSegments = [];
+        this.programSegments = [];
         this.economicSegments = [];
     }
 }
