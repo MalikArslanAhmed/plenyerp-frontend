@@ -54,6 +54,7 @@ export class CompanyInformationComponent implements OnInit {
     dataSourceSetting:DataSetting[] =[];
     local:any;
     internation:any;
+    id:any;
     // dataAddress = [
     //     // {key: "Company Name", value: "Abuja Corp"},
     //     // {key: "Company Address", value: "1-301, Sector 18,"},
@@ -104,8 +105,9 @@ export class CompanyInformationComponent implements OnInit {
     {
         this.companyInformationService.getCompaniesInformationList().subscribe(data => {
             this.dataAddress = data.items;
-            //console.log("data",this.dataAddress);
+            console.log("data",this.dataAddress[0].id);
 
+            this.id=this.dataAddress[0].id
             var num:number=0
             const newData: Data[] = [];
             for (const d of this.dataAddress) {
@@ -146,7 +148,7 @@ export class CompanyInformationComponent implements OnInit {
             this.dataSetting.forEach((value) => {
                 value['isSelected'] = false;
             })
-            console.log("setting",this.dataSetting)
+            //console.log("setting",this.dataSetting)
            // console.log("newData",newData)
         })
     }
@@ -180,18 +182,18 @@ export class CompanyInformationComponent implements OnInit {
     update(element)
     {
         let id=1;
-        console.log("loc",this.local)
-        console.log("elemt",element.id);
+        //console.log("loc",this.local)
+        //console.log("elemt",element.id);
 
         if(element.id===1)
         {
-            this.companyInformationService.updateCompanySetting(id,{localCurrency:this.local}).subscribe((data)=>{
+            this.companyInformationService.updateCompanySetting(this.id,{localCurrency:this.local}).subscribe((data)=>{
                 this.getCompanySetting();
             })
         }
         if(element.id===2)
         {
-            this.companyInformationService.updateCompanySetting(id,{internationalCurrency:this.local}).subscribe((data)=>{
+            this.companyInformationService.updateCompanySetting(this.id,{internationalCurrency:this.local}).subscribe((data)=>{
                 this.getCompanySetting();
             })
         }
@@ -217,9 +219,9 @@ export class CompanyInformationComponent implements OnInit {
     updateAutoPostJV(value)
     {
         let id=1;
-        console.log("val",value);
+        //console.log("val",value);
 
-        this.companyInformationService.updateCompanySetting(id,{autoPost:value}).subscribe((data)=>{
+        this.companyInformationService.updateCompanySetting(this.id,{autoPost:value}).subscribe((data)=>{
             this.getCompanySetting();
         })
     }

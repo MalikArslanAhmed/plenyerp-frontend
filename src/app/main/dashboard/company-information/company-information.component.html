@@ -27,7 +27,7 @@
 
             <ng-container matColumnDef="value">
                 <td mat-cell *matCellDef="let element; let i=index">
-                    <span class ="value" *ngIf="!element.isSelected || i!==2; else editPlace">
+                    <span class ="value" *ngIf="!element.isSelected; else editPlace">
                         {{element.value}}
                     </span>
                     <button  mat-icon-button aria-label="Toggle star" *ngIf="i!==2 && !element.isSelected"
