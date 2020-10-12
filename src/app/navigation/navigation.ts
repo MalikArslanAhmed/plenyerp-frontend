@@ -625,7 +625,8 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'monetization_on',
-                url: '/dashboard/budget-control/economic'
+                url: '/dashboard/budget-control/economic',
+                permissions : [PermissionConstant.ECONOMIC_BUDGET_CONTROL_LIST]
             },
             {
                 id: 'budget-control-programme',
@@ -634,7 +635,8 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'monetization_on',
-                url: '/dashboard/budget-control/programme'
+                url: '/dashboard/budget-control/programme',
+                permissions : [PermissionConstant.PROGRAMME_BUDGET_CONTROL_LIST]
             },
             {
                 id: 'journal',
@@ -643,7 +645,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'money',
-                permissions: [],
+                permissions: [PermissionConstant.LIST_GL_JV],
                 children: [
                     {
                         id: 'journal-voucher',
@@ -651,7 +653,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/journal-voucher',
-                        permissions: []
+                        permissions: [PermissionConstant.LIST_GL_JV]
                     }
                 ]
             }
