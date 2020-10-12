@@ -33,6 +33,7 @@ export class GlobalService {
     }
 
     setSelf(self): void {
+        StorageService.setItem('self', self);
         this.self.next(self);
     }
 
