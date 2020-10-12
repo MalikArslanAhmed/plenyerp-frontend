@@ -8,7 +8,7 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import {AuthService} from '../../../../../shared/services/auth.service';
-import { StorageService } from 'app/shared/services/storage.service';
+import {GlobalService} from '../../../../../shared/services/global.service';
 
 @Component({
     selector     : 'navbar-vertical-style-1',
@@ -34,6 +34,7 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
      * @param {FuseSidebarService} _fuseSidebarService
      * @param {Router} _router
      * @param authService
+     * @param globalService
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
@@ -41,13 +42,13 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
         private _fuseSidebarService: FuseSidebarService,
         private _router: Router,
         private authService: AuthService,
+        private globalService: GlobalService
     )
     {
         this.users = localStorage.getItem('self') ? JSON.parse(localStorage.getItem('self')) : '';
         this.authService.self().subscribe(data => {
             this.users = data;
-            console.log("hello",this.users);
-            StorageService.setItem('self',this.users);
+            this.globalService.setSelf(this.users);
         });
 
        // console.log("hello1",this.users);

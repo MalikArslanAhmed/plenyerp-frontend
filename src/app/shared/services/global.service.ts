@@ -22,7 +22,7 @@ export class GlobalService {
     // public notification = new BehaviorSubject(undefined);
     // viewRefresh$ = this.viewRefresh.asObservable();
     self$ = this.self.asObservable();
-    
+
     constructor() {
         if (StorageService.getItem('accessToken')) {
             this.setAccessToken(StorageService.getItem('accessToken'));
@@ -32,26 +32,8 @@ export class GlobalService {
         }
     }
 
-    setSelf(self) {
-        console.log("anc1",StorageService.getItem('self'));
-        console.log("anc",self)
-        /*const menuItems = ROUTES.filter(menuItem => menuItem);
-        const filteredRoutes = [];
-        const blackListedParentRoutes = [];
-        menuItems.forEach((i) => {
-            if (!i['user-role'] || !i['user-role'].length) {
-                filteredRoutes.push(i)
-            } else if (i['user-role'].indexOf(self.roleId) > -1) {
-                filteredRoutes.push(i)
-            } else {
-                blackListedParentRoutes.push(i)
-            }
-        });
-        self['filteredRoutes'] = filteredRoutes;
-        self['blackListedParentRoutes'] = blackListedParentRoutes;*/
-        //StorageService.setItem('self', self);
+    setSelf(self): void {
         this.self.next(self);
-        // this.subscribeChannels();
     }
 
     getSelf() {
@@ -65,7 +47,7 @@ export class GlobalService {
     public setAccessToken(item) {
         StorageService.setItem('accessToken', item);
         this.accessToken.next(item);
-    } 
+    }
 
     public setViewRefresh(value) {
         this.viewRefresh.next(value);

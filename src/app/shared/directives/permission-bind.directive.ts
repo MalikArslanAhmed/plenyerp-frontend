@@ -12,7 +12,6 @@ export class PermissionBindDirective implements OnInit {
                 private globalService: GlobalService) {
         this.globalService.self$.subscribe((user) => {
                 if (user) {
-                    //console.log("user",user)
                     this.verifyPermission();
                 }
             }
