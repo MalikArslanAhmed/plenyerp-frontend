@@ -1082,4 +1082,17 @@ export class AppUrl {
 
     }
 
+    static GET_COMPANY_INFORMATION(): string {
+        return AppUrl.API_URL + 'company-information';
+    }
+
+    static GET_COMPANY_SETTING():string {
+        return AppUrl.API_URL + 'company-setting';
+    }
+
+    static UPDATE_COMPANY_SETTING(id): string {
+        return AppUrl.API_URL + 'company-setting/' + id;
+    }
+
+
 }
