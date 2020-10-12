@@ -8,6 +8,7 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import {AuthService} from '../../../../../shared/services/auth.service';
+import { StorageService } from 'app/shared/services/storage.service';
 
 @Component({
     selector     : 'navbar-vertical-style-1',
@@ -45,8 +46,11 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
         this.users = localStorage.getItem('self') ? JSON.parse(localStorage.getItem('self')) : '';
         this.authService.self().subscribe(data => {
             this.users = data;
+            console.log("hello",this.users);
+            StorageService.setItem('self',this.users);
         });
 
+       // console.log("hello1",this.users);
         // Set the private defaults
         this._unsubscribeAll = new Subject();
     }

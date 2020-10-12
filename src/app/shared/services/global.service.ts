@@ -6,6 +6,7 @@ import * as moment from 'moment';
 // import {PubNubAngular} from 'pubnub-angular2';
 // import {ROUTES} from '../sidebar/sidebar-routes.config';
 import {environment} from '../../../environments/environment';
+import { AuthService } from './auth.service';
 
 declare var $: any;
 
@@ -21,7 +22,7 @@ export class GlobalService {
     // public notification = new BehaviorSubject(undefined);
     // viewRefresh$ = this.viewRefresh.asObservable();
     self$ = this.self.asObservable();
-
+    
     constructor() {
         if (StorageService.getItem('accessToken')) {
             this.setAccessToken(StorageService.getItem('accessToken'));
@@ -32,6 +33,8 @@ export class GlobalService {
     }
 
     setSelf(self) {
+        console.log("anc1",StorageService.getItem('self'));
+        console.log("anc",self)
         /*const menuItems = ROUTES.filter(menuItem => menuItem);
         const filteredRoutes = [];
         const blackListedParentRoutes = [];
@@ -46,7 +49,7 @@ export class GlobalService {
         });
         self['filteredRoutes'] = filteredRoutes;
         self['blackListedParentRoutes'] = blackListedParentRoutes;*/
-        StorageService.setItem('self', self);
+        //StorageService.setItem('self', self);
         this.self.next(self);
         // this.subscribeChannels();
     }
@@ -62,7 +65,7 @@ export class GlobalService {
     public setAccessToken(item) {
         StorageService.setItem('accessToken', item);
         this.accessToken.next(item);
-    }
+    } 
 
     public setViewRefresh(value) {
         this.viewRefresh.next(value);
