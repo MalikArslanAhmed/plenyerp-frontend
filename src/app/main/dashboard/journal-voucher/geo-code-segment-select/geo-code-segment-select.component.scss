@@ -1,42 +1,44 @@
-mat-form-field {
-    margin-right: 4px;
-}
+app-geo-code-segment-select {
+    mat-form-field {
+        margin-right: 4px;
+    }
 
-.deleteBtn {
-    font-size: 17px;
-    margin-top: -3px;
-    color: red;
-}
+    .deleteBtn {
+        font-size: 17px;
+        margin-top: -3px;
+        color: red;
+    }
 
-.addBtn {
-    font-size: 17px;
-    margin-top: -3px;
-}
+    .addBtn {
+        font-size: 17px;
+        margin-top: -3px;
+    }
 
-.editBtn {
-    font-size: 17px;
-    margin-top: -3px;
-    color: blue;
-}
+    .editBtn {
+        font-size: 17px;
+        margin-top: -3px;
+        color: blue;
+    }
 
-/*.mat-grid-tile .mat-figure {
-    justify-content: flex-start !important;
-    align-items: flex-start !important;
-}*/
+    /*.mat-grid-tile .mat-figure {
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+    }*/
 
-.grid-tree {
-    box-shadow: 0 0 1px 1px #e0e0e0 !important;
-}
+    .grid-tree {
+        box-shadow: 0 0 1px 1px #e0e0e0 !important;
+    }
 
-.mt-30px {
-    margin-top: 30px;
-}
+    .mt-30px {
+        margin-top: 30px;
+    }
 
-.p-10px {
-    padding: 10px;
-}
+    .p-10px {
+        padding: 10px;
+    }
 
-.content {
-    overflow-y: scroll !important;
-    max-height: 500px !important;
+    .content {
+        overflow-y: scroll !important;
+        max-height: 500px !important;
+    }
 }
