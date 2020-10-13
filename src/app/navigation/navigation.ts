@@ -656,6 +656,41 @@ export const navigation: FuseNavigation[] = [
                         permissions: [PermissionConstant.LIST_GL_JV]
                     }
                 ]
+            },
+            {
+                id: 'report',
+                title: 'Report',
+                roles: [AppConstants.ROLE_ID_HR],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'report',
+                permissions: [PermissionConstant.LIST_GL_JV],
+                children: [
+                    {
+                        id: 'trial-balance',
+                        title: 'Trial Balance',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/trial-balance',
+                        permissions: [PermissionConstant.LIST_GL_JV]
+                    },
+                    {
+                        id: 'others',
+                        title: 'Others',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/others',
+                        permissions: [PermissionConstant.LIST_GL_JV]
+                    },
+                    {
+                        id: 'notes-master',
+                        title: 'Notes Master',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/notes-master',
+                        permissions: [PermissionConstant.LIST_GL_JV]
+                    }
+                ]
             }
         ]
     }

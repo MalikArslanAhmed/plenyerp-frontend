@@ -60,6 +60,7 @@ import { CompanyInformationComponent } from './company-information/company-infor
 import { RouteGuard } from 'app/shared/guards/route.guard';
 import {UserRoleComponent} from './configurations/user-role/user-role.component';
 import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
+import {TrialBalanceComponent} from "./trial-balance/trial-balance.component";
 
 const routes: Routes = [
     {
@@ -498,7 +499,14 @@ const routes: Routes = [
         data: {
             title: 'Currencies'
         }
-    }
+    },
+    {
+        path: 'trial-balance',
+        component: TrialBalanceComponent,
+        data: {
+            title: 'Trial Balance'
+        }
+    },
 ];
 
 @NgModule({
