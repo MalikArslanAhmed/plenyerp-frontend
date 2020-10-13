@@ -14,12 +14,12 @@ export class BudgetControlService extends BaseService {
         super(http, alertService, globalService);
     }
 
-    getBudgetControlForEconomic(): Observable<any> {
-        return this.getRequest(AppUrl.GET_BUDGET_CONTROL_ECONOMIC());
+    getBudgetControlForEconomic(params): Observable<any> {
+        return this.getRequest(AppUrl.GET_BUDGET_CONTROL_ECONOMIC(), params);
     }
 
-    getBudgetControlForProgramm(): Observable<any> {
-        return this.getRequest(AppUrl.GET_BUDGET_CONTROL_PROGRAMME());
+    getBudgetControlForProgramm(params): Observable<any> {
+        return this.getRequest(AppUrl.GET_BUDGET_CONTROL_PROGRAMME(), params);
     }
 
     deleteBudget(id): Observable<any> {

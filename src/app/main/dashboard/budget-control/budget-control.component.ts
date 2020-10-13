@@ -110,6 +110,7 @@ export class BudgetControlComponent implements OnInit {
                     this.fundSegmentSelected = false;
                     this.adminSegments = [];
                     this.fundSegments = [];
+                    this.budgetControlList =[];
                 });
                 //console.log("abc",this.budgetType);
             }
@@ -122,7 +123,7 @@ export class BudgetControlComponent implements OnInit {
             this.budgetType = param['type'];
         });
         this.getCurrencyList();
-        this.getBudgetData();
+       // this.getBudgetData();
         this.budgetControlForm = this.fb.group({
             adminSegmentId: [''],
             fundSegmentId: [''],
@@ -165,15 +166,20 @@ export class BudgetControlComponent implements OnInit {
 
     getBudgetData() {
         this.budgetControlList = [];
-        if (this.budgetType === 'economic') {
-            this.budgetService.getBudgetControlForEconomic().subscribe(data => {
+         const params = {
+             adminSegmentId: this.adminSegments[0].id,
+             fundSegmentId: this.fundSegments[0].id
+         };
+       
+        if (this.budgetType === 'economic') {          
+            this.budgetService.getBudgetControlForEconomic(params).subscribe(data => {
                 this.budgetControlList = data.items;
                 //console.log("hello",this.budgetControlList);
             });
             //console.log("he");
         }
         if (this.budgetType === 'programme') {
-            this.budgetService.getBudgetControlForProgramm().subscribe(data => {
+            this.budgetService.getBudgetControlForProgramm(params).subscribe(data => {
                 this.budgetControlList = data.items;
                 // console.log("bye",this.budgetControlList);
             });
@@ -404,10 +410,17 @@ export class BudgetControlComponent implements OnInit {
                 return;
             }
             this.adminSegmentSelected = true;
+
+            //console.log("admin res",response);
+            
             this.adminSegments = [{
                 'name': response.name,
                 'id': response.id
             }];
+            if(this.adminSegmentSelected && this.fundSegmentSelected)
+            {
+                this.getBudgetData();
+            }
             this.budgetControlForm.patchValue({
                 adminSegmentId: response.id,
                 adminSegmentCode: response.id,
@@ -446,10 +459,16 @@ export class BudgetControlComponent implements OnInit {
             }
 
             this.fundSegmentSelected = true;
+            //console.log("fund res",response);
+            
             this.fundSegments = [{
                 'name': response.name,
                 'id': response.id
             }];
+            if(this.adminSegmentSelected && this.fundSegmentSelected)
+            {
+                this.getBudgetData();
+            }
             this.budgetControlForm.patchValue({
                 fundSegmentId: response.id,
                 fundSegmentCode: response.id,
