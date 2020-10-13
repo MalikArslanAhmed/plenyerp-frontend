@@ -48,7 +48,7 @@
                                                 {{fundSegment?.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <div *ngIf="budgetType === 'programme'">
+                                    <div *ngIf="budgetType === 'programme' && (adminSegmentSelected && fundSegmentSelected)">
                                     <button (click)="programmeSegmentSelect()" class="select-type-button width-100-per" mat-button
                                             type="button">
                                         {{(programSegments && programSegments[0]?.name) ? programSegments[0]?.name : 'Program Segment'}}
@@ -63,7 +63,7 @@
                                         </mat-select>
                                     </mat-form-field>
                                     </div>
-                                    <div *ngIf="budgetType === 'economic'">
+                                    <div *ngIf="budgetType === 'economic' && (adminSegmentSelected && fundSegmentSelected)">
                                         <button (click)="economicSegmentSelect()" class="select-type-button width-100-per" mat-button
                                                 type="button">
                                             {{(economicSegments && economicSegments[0]?.name) ? economicSegments[0]?.name : 'Economic Segment'}}
@@ -71,7 +71,7 @@
                                         <mat-form-field appearance="outline" class="my-select-panel-class" fxFlex>
                                             <mat-label class="dropDownLabel">Economic Code</mat-label>
                                             <mat-select (click)="economicSegmentSelect()" disabled
-                                                        formControlName="programmeSegmentId">
+                                                        formControlName="economicSegmentId">
                                                 <mat-option *ngFor="let economicSegment of economicSegments"
                                                             [value]="economicSegment.id">
                                                     {{economicSegment?.name}}</mat-option>
@@ -326,7 +326,7 @@
                                 <tr>
                                     <th>S.No</th>
                                     <th>
-                                        <div class="title">Full Code</div>
+                                        <div class="title">Full</div><div class="title">Code</div>
                                     </th>
                                     <th>
                                         <div class="title">Line Code</div>

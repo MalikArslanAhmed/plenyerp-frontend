@@ -31,6 +31,11 @@ export class BudgetControlComponent implements OnInit {
     fundSegments = [];
     budgetType: any;
     tempBudget = [];
+    showEconomicButton=false;
+    showProgrammeButton=false;
+
+    adminSegmentSelected = false;
+    fundSegmentSelected = false;
     displayedColumns: string[] = ['sno', 'fullCode', 'lineCode', 'title', 'Pr_Yr_budget', 'Pr_Yr_actual', 'supplementary_budget', 'total_Budget', 'month_1', 'month_2', 'month_3', 'month_4', 'month_5', 'month_6', 'month_7', 'month_8', 'month_9', 'month_10', 'month_11', 'month_12'];
     budgetControlList = [
         // {
@@ -101,6 +106,10 @@ export class BudgetControlComponent implements OnInit {
                 this.activatedRoute.params.subscribe(param => {
                     this.budgetType = param['type'];
                     this.ngOnInit();
+                    this.adminSegmentSelected = false;
+                    this.fundSegmentSelected = false;
+                    this.adminSegments = [];
+                    this.fundSegments = [];
                 });
                 //console.log("abc",this.budgetType);
             }
@@ -180,6 +189,8 @@ export class BudgetControlComponent implements OnInit {
     }
 
     checkBudgetUpdate(items) {
+        this.adminSegmentSelected = true;
+        this.fundSegmentSelected = true;
         this.budgetId = items.id;
         // console.log('--->>', items);
         this.budgetControlForm.patchValue({
@@ -389,8 +400,10 @@ export class BudgetControlComponent implements OnInit {
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
+                console.log("bye");
                 return;
             }
+            this.adminSegmentSelected = true;
             this.adminSegments = [{
                 'name': response.name,
                 'id': response.id
@@ -431,6 +444,8 @@ export class BudgetControlComponent implements OnInit {
             if (!response) {
                 return;
             }
+
+            this.fundSegmentSelected = true;
             this.fundSegments = [{
                 'name': response.name,
                 'id': response.id
