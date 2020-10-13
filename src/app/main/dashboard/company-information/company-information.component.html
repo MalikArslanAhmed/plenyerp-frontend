@@ -1,6 +1,6 @@
 <div class="company-style">
     <div>
-        <table mat-table [dataSource]="dataAddress" class="mat-elevation-z1">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
             <ng-container matColumnDef="titlename">
                 <th mat-header-cell *matHeaderCellDef [attr.colspan]="2"> Company Information</th>
             </ng-container>
@@ -38,8 +38,8 @@
                      
                     <ng-template #editPlace>
                         <div class="editPlace">
-                            <mat-select>
-                                <mat-option *ngFor="let value of currencies" [value]="value.id">
+                            <mat-select name="local" [(ngModel)]="local">
+                                <mat-option *ngFor="let value of currencies"  [value]="value.codeCurrency">
                                     {{value.codeCurrency}}
                                 </mat-option>
                             </mat-select>
@@ -47,7 +47,7 @@
                         </div>
                     </ng-template>
                     <ng-container *ngIf="i===2">
-                        <mat-slide-toggle class="toggle" (change)="autoPostJV($event)"></mat-slide-toggle>
+                        <mat-slide-toggle class="toggle" [(ngModel)]="dataSetting[2].value" (change)="autoPostJV($event)"></mat-slide-toggle>
                     </ng-container>
                    
                 </td>

@@ -6,6 +6,7 @@ import * as moment from 'moment';
 // import {PubNubAngular} from 'pubnub-angular2';
 // import {ROUTES} from '../sidebar/sidebar-routes.config';
 import {environment} from '../../../environments/environment';
+import { AuthService } from './auth.service';
 
 declare var $: any;
 
@@ -31,24 +32,9 @@ export class GlobalService {
         }
     }
 
-    setSelf(self) {
-        /*const menuItems = ROUTES.filter(menuItem => menuItem);
-        const filteredRoutes = [];
-        const blackListedParentRoutes = [];
-        menuItems.forEach((i) => {
-            if (!i['user-role'] || !i['user-role'].length) {
-                filteredRoutes.push(i)
-            } else if (i['user-role'].indexOf(self.roleId) > -1) {
-                filteredRoutes.push(i)
-            } else {
-                blackListedParentRoutes.push(i)
-            }
-        });
-        self['filteredRoutes'] = filteredRoutes;
-        self['blackListedParentRoutes'] = blackListedParentRoutes;*/
+    setSelf(self): void {
         StorageService.setItem('self', self);
         this.self.next(self);
-        // this.subscribeChannels();
     }
 
     getSelf() {

@@ -90,11 +90,14 @@ export class UserRolePermissionComponent implements OnInit {
         // console.log('--->>this.permissionIds', this.permissionIds);
     }
 
-    checkAllPermissions(e, index) {
+    checkAllPermissions(e, index,rolePermission) {
         if (e.checked) {
             if (this.permissionModule[index] && this.permissionModule[index].children && this.permissionModule[index].children.length > 0) {
                 this.permissionModule[index].children.forEach(permission => {
                     permission['isSelected'] = true;
+                });
+                rolePermission.forEach((value)=>{
+                    this.permissionIds.push(value.id);
                 });
             }
         } else {
@@ -102,6 +105,7 @@ export class UserRolePermissionComponent implements OnInit {
                 this.permissionModule[index].children.forEach(permission => {
                     permission['isSelected'] = false;
                 });
+                this.permissionIds =[];
             }
         }
     }
