@@ -29,7 +29,14 @@
         #add-button {
             background-color: white !important;
             color: #106CC8 !important;
+            mat-label{
+                color:black !important;
+            }
         }
+        // #fromToDate{
+        //     background-color: white !important;
+        //     color: #106CC8 !important;
+        // }
     }
 
     .content {
@@ -76,4 +83,19 @@
 
 .mt-13px {
     margin-top: 13px;
+}
+
+::ng-deep .mat-datepicker{
+    background-color:white;
+ }
+
+ ::ng-deep .mat-form-field-underline{
+    background: white;
+}
+
+.submit-report {
+    background-color: #039be5 !important;
+    color: #fff !important;
+    height: 55px;
+    margin-top: 6px;
 }

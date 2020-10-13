@@ -67,7 +67,7 @@ export class TrialBalanceListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log("abc",this.dataSource)
+ //   console.log("abc",this.dataSource)
   }
 
 }
