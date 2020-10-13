@@ -89,12 +89,12 @@
                                         <mat-form-field appearance="outline" fxFlex>
                                             <mat-label>Exchange Rate[Local]</mat-label>
                                             <input formControlName="xRateLocal" matInput
-                                                   placeholder="Budget Curr. to local"
+                                                   placeholder="Budget Curr. to local" (focusout)="focusOutFunction()"
                                             >
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
                                             <mat-label>Exchange Rate[International]</mat-label>
-                                            <input formControlName="xRateToInternational"
+                                            <input formControlName="xRateToInternational" (focusout)="focusOutFunction()"
                                                    matInput
                                                    placeholder="Budget Curr. to International">
                                         </mat-form-field>
@@ -102,7 +102,7 @@
                                     <div fxLayout="row">
                                         <mat-form-field appearance="outline" fxFlex>
                                             <mat-label>Budget Currency[must be local or USD]</mat-label>
-                                            <mat-select (click)="budgetCurrencySelect()"
+                                            <mat-select (click)="budgetCurrencySelect()" (focusout)="focusOutFunction()"
                                                         formControlName="currencyId">
                                                 <ng-container *ngIf="currencyList && currencyList.length">
                                                     <mat-option *ngFor="let currency of currencyList"
@@ -115,7 +115,7 @@
                                     <div fxLayout="row">
                                         <mat-form-field appearance="outline" fxFlex>
                                             <mat-label>Budget Amount[in budget currency]</mat-label>
-                                            <input formControlName="budgetAmount" matInput
+                                            <input formControlName="budgetAmount" matInput (focusout)="focusOutFunction()"
                                                    placeholder="enter annual budget amount in budget currency"
                                             >
                                         </mat-form-field>
@@ -150,7 +150,7 @@
                                             Local Currency]
                                         </mat-radio-button>
                                     </mat-radio-group>
-                                    <button (click)="addRow()" class="add-row-btn" mat-button *ngIf="!budgetId"> Add Row</button>
+                                    <button (click)="addRow()" class="add-row-btn" mat-button [class.disabled]="isDisabled" [disabled]="isDisabled" *ngIf="!budgetId"> Add Row</button>
                                     <button (click)="getUpdateBudget()" class="add-row-btn" mat-button *ngIf="budgetId"> Update Row</button>
                                     <button (click)="cancelUpdate()" class="add-row-btn" mat-button *ngIf="budgetId"> Cancel</button>
                                 </div>
@@ -792,7 +792,6 @@
                         </mat-card>-->
                     </div>
                 </form>
-                <button class="submit-btn align-items-end" mat-button>Submit</button>
             </div>
         </div>
     </div>

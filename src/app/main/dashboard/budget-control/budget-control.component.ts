@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {MatDialog} from '@angular/material/dialog';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {fuseAnimations} from '../../../../@fuse/animations';
 import {AdminSegmentSelectComponent} from '../journal-voucher/admin-segment-select/admin-segment-select.component';
 import {ProgrammingSegmentSelectComponent} from '../journal-voucher/programming-segment-select/programming-segment-select.component';
@@ -31,9 +31,8 @@ export class BudgetControlComponent implements OnInit {
     fundSegments = [];
     budgetType: any;
     tempBudget = [];
-    showEconomicButton=false;
-    showProgrammeButton=false;
 
+    isDisabled = true;
     adminSegmentSelected = false;
     fundSegmentSelected = false;
     displayedColumns: string[] = ['sno', 'fullCode', 'lineCode', 'title', 'Pr_Yr_budget', 'Pr_Yr_actual', 'supplementary_budget', 'total_Budget', 'month_1', 'month_2', 'month_3', 'month_4', 'month_5', 'month_6', 'month_7', 'month_8', 'month_9', 'month_10', 'month_11', 'month_12'];
@@ -129,10 +128,10 @@ export class BudgetControlComponent implements OnInit {
             fundSegmentId: [''],
             programSegmentId: [''],
             economicSegmentId: [''],
-            xRateLocal: [''],
-            xRateToInternational: [''],
-            currencyId: [''],
-            budgetAmount: [''],
+            xRateLocal: ['',Validators.required],
+            xRateToInternational: ['',Validators.required],
+            currencyId: ['',Validators.required],
+            budgetAmount: ['',Validators.required],
             previousYearAmount: [''],
             previousYearActualAmount: [''],
             month_1: [''],
@@ -163,7 +162,14 @@ export class BudgetControlComponent implements OnInit {
             supplementary_month_12: [''],
         });
     }
-
+    focusOutFunction()
+    {
+        this.isDisabled = true;
+        if(this.budgetControlForm.valid)
+        {
+            this.isDisabled = false;
+        }
+    }
     getBudgetData() {
         this.budgetControlList = [];
          const params = {
@@ -368,15 +374,20 @@ export class BudgetControlComponent implements OnInit {
 
     addRow() {
         // console.log('------------>>>', this.getBudgetBreakupsDataFormat());
-        this.budgetService.addBudget(this.getBudgetBreakupsDataFormat()).subscribe(val => {
-            // console.log('--programme', val);
-            this.budgetControlForm.reset();
-            this.getBudgetData();
-            this.adminSegments = [];
-            this.fundSegments = [];
-            this.programSegments = [];
-            this.economicSegments = [];
-        });
+
+        if(this.budgetControlForm.valid)
+        {
+            this.budgetService.addBudget(this.getBudgetBreakupsDataFormat()).subscribe(val => {
+                // console.log('--programme', val);
+                this.budgetControlForm.reset();
+                this.getBudgetData();
+                this.adminSegments = [];
+                this.fundSegments = [];
+                this.programSegments = [];
+                this.economicSegments = [];
+            });
+        }
+       
     }
 
     deleteItemModal(items) {
