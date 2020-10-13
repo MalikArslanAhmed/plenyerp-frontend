@@ -10,20 +10,20 @@
 
     <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar *ngIf="!addDetails">
         <form [formGroup]="journalVoucherCreateForm">
-            <mat-grid-list cols="4" rowHeight="100px">
-                <mat-grid-tile class="ml-1">
+            <mat-grid-list cols="4" rowHeight="90px">
+                <mat-grid-tile>
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>JV Source App</mat-label>
                         <input formControlName="jvSourceApp" matInput>
                     </mat-form-field>
                 </mat-grid-tile>
-                <mat-grid-tile class="ml-1">
+                <mat-grid-tile>
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>Batch No.</mat-label>
                         <input formControlName="batchNumber" matInput>
                     </mat-form-field>
                 </mat-grid-tile>
-                <mat-grid-tile class="ml-1">
+                <mat-grid-tile>
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>JV Value Date</mat-label>
                         <input matInput [matDatepicker]="jvValueDate"
@@ -33,7 +33,7 @@
                         <mat-datepicker #jvValueDate></mat-datepicker>
                     </mat-form-field>
                 </mat-grid-tile>
-                <mat-grid-tile class="ml-1">
+                <mat-grid-tile>
                     <mat-form-field appearance="outline" fxFlex (click)="fundSegmentSelect()">
                         <mat-label>Fund Segment Code</mat-label>
                         <input formControlName="fundSegmentCode" matInput>
@@ -41,20 +41,20 @@
                 </mat-grid-tile>
             </mat-grid-list>
 
-            <mat-grid-list cols="3" rowHeight="100px">
-                <mat-grid-tile class="mr-1">
+            <mat-grid-list cols="3" rowHeight="90px">
+                <mat-grid-tile>
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>JV Reference</mat-label>
                         <input formControlName="jvReference" matInput>
                     </mat-form-field>
                 </mat-grid-tile>
-                <mat-grid-tile class="ml-1">
+                <mat-grid-tile>
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>Transaction Details</mat-label>
                         <input formControlName="transactionDetails" matInput>
                     </mat-form-field>
                 </mat-grid-tile>
-                <mat-grid-tile class="ml-1">
+                <mat-grid-tile>
                     <mat-form-field appearance="outline" fxFlex="100" (click)="fundSegmentSelect()">
                         <mat-label>Fund Segment Name</mat-label>
                         <mat-select formControlName="fundSegmentId" [disabled]="true">
@@ -65,9 +65,9 @@
                 </mat-grid-tile>
             </mat-grid-list>
 
-            <mat-tab-group dynamicHeight>
+            <mat-tab-group dynamicHeight class="transaction-det">
                 <mat-tab label="Prepared">
-                    <mat-grid-list cols="4" rowHeight="100px">
+                    <mat-grid-list cols="4" rowHeight="90px">
                         <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Value Date</mat-label>
@@ -103,7 +103,7 @@
                     </mat-grid-list>
                 </mat-tab>
                 <mat-tab label="Checked">
-                    <mat-grid-list cols="4" rowHeight="100px">
+                    <mat-grid-list cols="4" rowHeight="90px">
                         <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Value Date</mat-label>
@@ -139,7 +139,7 @@
                     </mat-grid-list>
                 </mat-tab>
                 <mat-tab label="Posted">
-                    <mat-grid-list cols="4" rowHeight="100px">
+                    <mat-grid-list cols="4" rowHeight="90px">
                         <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Value Date</mat-label>
@@ -176,7 +176,7 @@
                 </mat-tab>
             </mat-tab-group>
 
-            <mat-grid-list cols="1" class="p-10px">
+            <mat-grid-list cols="1" class="mt-25px">
                 <div class="shadow-1px">
                     <table class="simple journal-voucher-data">
                         <thead>
@@ -299,7 +299,7 @@
         <mat-tab-group dynamicHeight>
             <mat-tab label="ADD JV MAIN DETAILS">
                 <form [formGroup]="addDetailForm">
-                    <mat-grid-list cols="5" rowHeight="100px">
+                    <mat-grid-list cols="5" rowHeight="90px">
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Line No.</mat-label>
@@ -325,7 +325,7 @@
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="5" rowHeight="100px">
+                    <mat-grid-list cols="5" rowHeight="90px">
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Original Transaction Currency</mat-label>
@@ -354,7 +354,7 @@
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="5" rowHeight="100px">
+                    <mat-grid-list cols="5" rowHeight="90px">
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>X.Rate Local to Naira</mat-label>
@@ -410,7 +410,7 @@
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="5" rowHeight="100px">
+                    <mat-grid-list cols="5" rowHeight="90px">
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Line Refrence</mat-label>
@@ -436,7 +436,7 @@
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="5" rowHeight="100px">
+                    <mat-grid-list cols="5" rowHeight="90px">
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Line Value (in Trxn Currency)</mat-label>
@@ -462,7 +462,7 @@
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <mat-grid-list cols="5" rowHeight="100px">
+                    <mat-grid-list cols="5" rowHeight="90px">
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
