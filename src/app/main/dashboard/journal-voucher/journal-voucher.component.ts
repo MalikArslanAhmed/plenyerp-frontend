@@ -32,7 +32,7 @@ export class JournalVoucherComponent implements OnInit {
             'name': 'All'
         },
         {
-            'value': 'NEW',
+            'value': 'RENEW',
             'name': 'New'
         },
         {

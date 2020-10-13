@@ -1,7 +1,36 @@
 #items {
     max-width: 1300px !important;
     overflow-x: unset !important;
-    min-width: 1100px !important;
+    min-width: 1068px !important;
+
+    .mat-form-field-flex {
+        width: 96%;
+        height: 56px;
+    }
+
+    .transaction-det {
+        box-shadow: 0 0 0 1px #e0e0e0 !important;
+
+        .mat-form-field-appearance-outline .mat-form-field-flex {
+            margin-left: 5px;
+        }
+
+        .mat-grid-tile {
+            top: 12px !important;
+        }
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix {
+        top: 0.58em;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-label {
+        margin-top: 3px;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        margin-top: -10px;
+    }
 }
 
 .items-data {
@@ -56,4 +85,8 @@
         overflow: hidden;
         vertical-align: middle;
     }
+}
+
+.mt-25px {
+    margin-top: 25px !important;
 }
