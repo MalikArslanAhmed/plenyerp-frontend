@@ -1,13 +1,13 @@
 @import "src/@fuse/scss/fuse";
 
-app-companies-list {
+app-budget-control-list {
     display: flex;
     flex: 1 1 auto;
     width: 100%;
 
     .mat-table {
         width: 100%;
-        overflow-x: scroll!important;
+        overflow-x: scroll !important;
         background: transparent;
         box-shadow: none;
 
@@ -43,15 +43,16 @@ app-companies-list {
             }
         }
     }
+
     .budget-control-container {
-        overflow: auto!important;
+        overflow: auto !important;
+
         table {
             width: 100%;
         }
     }
-    .width-100-per{
+
+    .width-100-per {
         width: 100%;
     }
-
-
 }
