@@ -483,7 +483,7 @@ export class EmployeeActionComponent implements OnInit {
             'type': type
         };
         this.employeesService.getEmployeesDetailsDownload(id, params).subscribe(data => {
-            console.log('data', data);
+            // console.log('data', data);
             window.open(data.url, '_blank');
         });
     }

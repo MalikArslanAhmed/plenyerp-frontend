@@ -88,7 +88,7 @@ export class ReportBinCardComponent implements OnInit {
         };
         this.itemsArr = [];
         this.reportService.getBinReports(params).subscribe(data => {
-            console.log('data', data);
+            // console.log('data', data);
             this.itemsArr = data;
             let inQuant = this.inQuantity;
             let outQuant = this.outQuantity;

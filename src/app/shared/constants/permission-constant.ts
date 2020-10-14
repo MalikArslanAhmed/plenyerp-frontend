@@ -25,6 +25,7 @@ export class PermissionConstant {
     static ROLES_EDIT = 'ROLE.EDIT';
     static ROLES_DELETE = 'ROLE.DELETE';
     static ROLES_PERMISSION_ADD = 'ROLE.PERMISSIONS.ADD';
+    static CURRENCIES = 'CURRENCIES';
     static BANKS = 'BANKS';
     static CUSTOMERS = 'PAYERS.PAYEES';
     //static EDIT_COA_ADMIN = 'EDIT.COA.ADMIN'; //ALSO IN HR
@@ -48,6 +49,8 @@ export class PermissionConstant {
     static COUNTRIES_EDIT = 'COUNTIRES.EDIT';
     static COUNTRIES_LIST = 'COUNTIRES.LIST';
     static COUNTRIES_DELETE = 'COUNTIRES.DELETE';
+    static COUNTRIES = 'COUNTIRES';
+
 
     static REGION_ADD = 'REGION.ADD';
     static REGION_EDIT = 'REGION.EDIT';
@@ -300,5 +303,4 @@ export class PermissionConstant {
     static INVENTORY_LEDGER_LIST = 'INVENTORY.LEDGER.LIST';
     static QUALITY_BALANCE_LIST = 'QUALITY.BALANCE.LIST';
     static OFF_LEVEL_LIST = 'OFF.LEVEL.LIST';
-
 }

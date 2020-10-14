@@ -1,5 +1,5 @@
 import {FuseNavigation} from '@fuse/types';
-import { RouteGuard } from 'app/shared/guards/route.guard';
+import {RouteGuard} from 'app/shared/guards/route.guard';
 import {AppConstants} from '../shared/constants/app-constants';
 import {PermissionConstant} from '../shared/constants/permission-constant';
 
@@ -42,45 +42,49 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'setup',
                 title: 'Setup',
-                roles: [AppConstants.ROLE_ID_HR],
+                roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'supervisor_account',
+                permissions: [PermissionConstant.BANKS, PermissionConstant.CURRENCIES],
                 children: [
                     {
                         id: 'banks',
                         title: 'Banks',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/banks'
+                        url: 'dashboard/banks',
+                        permissions: [PermissionConstant.BANKS]
                     },
                     {
                         id: 'currencies',
                         title: 'Currencies',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/currencies'
+                        url: 'dashboard/currencies',
+                        permissions: [PermissionConstant.CURRENCIES]
                     }
                 ]
             },
             {
                 id: 'admin-segments',
                 title: 'Charts of Accounts',
-                roles: [AppConstants.ROLE_ID_ADMIN],
+                roles: [],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'watch_later',
                 url: '/dashboard/admin-segments',
-                permissions : [PermissionConstant.COA_LIST],
-                canActivate : [RouteGuard]
+                permissions: [PermissionConstant.COA_LIST],
+                canActivate: [RouteGuard]
             },
             {
                 id: 'setting',
                 title: 'Setting',
-                roles: [AppConstants.ROLE_ID_ADMIN],
+                roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'supervisor_account',
+                permissions: [PermissionConstant.COMPANIES],
                 children: [
                     {
                         id: 'company-info',
@@ -88,6 +92,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/company-info',
+                        permissions: [PermissionConstant.COMPANIES],
                     }
                 ]
             },
@@ -121,8 +126,8 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'comapnies',
                 title: 'Companies',
-                roles: [AppConstants.ROLE_ID_ADMIN],
-                permissions: [PermissionConstant.COMPANIES_LIST],
+                roles: [],
+                permissions: [PermissionConstant.COMPANIES],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'building',
@@ -131,21 +136,20 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'taxes',
                 title: 'Taxes',
-                roles: [AppConstants.ROLE_ID_ADMIN],
+                roles: [],
                 permissions: [PermissionConstant.TAXES_LIST],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
                 icon: 'money',
                 url: '/dashboard/taxes'
             },
-
             {
                 id: 'company-information',
                 title: 'Company Information',
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'account_balance',
-                roles: [AppConstants.ROLE_ID_HR],
+                roles: [],
                 permissions: [PermissionConstant.DEPARTMENT_LIST, PermissionConstant.WORK_LOCATION_LIST, PermissionConstant.STRUCTURE_LIST],
                 children: [
                     {
@@ -180,7 +184,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'work',
-                roles: [AppConstants.ROLE_ID_HR],
+                roles: [],
                 permissions: [PermissionConstant.GL_STEP_LIST, PermissionConstant.GRADE_LEVEL_LIST, PermissionConstant.DESIGNATION_LIST, PermissionConstant.SALARYSCALES_LIST],
                 children: [
                     {
@@ -220,7 +224,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'contact-info',
                 title: 'Contact Info',
-                roles: [AppConstants.ROLE_ID_HR],
+                roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'perm_contact_calendar',
@@ -232,7 +236,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/country',
-                        permissions: [PermissionConstant.COUNTRIES_LIST]
+                        permissions: [PermissionConstant.COUNTRIES_LIST, PermissionConstant.COUNTRIES]
                     },
                     {
                         id: 'region',
@@ -365,11 +369,11 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'extended-profile',
                 title: 'Extended profile',
-                roles: [AppConstants.ROLE_ID_HR],
+                roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'person_pin',
-                permissions : [PermissionConstant.CENSURES_LIST,PermissionConstant.DISENGAGEMENT_LIST,PermissionConstant.STAFF_STATUS_LIST,PermissionConstant.RELATIONS_LIST,PermissionConstant.STAFF_CATEGORIES_LIST],
+                permissions: [PermissionConstant.CENSURES_LIST, PermissionConstant.DISENGAGEMENT_LIST, PermissionConstant.STAFF_STATUS_LIST, PermissionConstant.RELATIONS_LIST, PermissionConstant.STAFF_CATEGORIES_LIST],
                 children: [
                     {
                         id: 'relationship',
@@ -417,7 +421,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'organizations',
                 title: 'Organizations',
-                roles: [AppConstants.ROLE_ID_HR],
+                roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'business',
@@ -448,7 +452,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'store',
-                permissions :[PermissionConstant.STORE_SETUP_ITEMS_LIST,PermissionConstant.STORE_SETUP_CATEGORIES_LIST,PermissionConstant.STORE_SETUP_STORES_LIST,PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST],
+                permissions: [PermissionConstant.STORE_SETUP_ITEMS_LIST, PermissionConstant.STORE_SETUP_CATEGORIES_LIST, PermissionConstant.STORE_SETUP_STORES_LIST, PermissionConstant.STORE_SETUP_UNIT_OF_MEASURES_LIST],
                 children: [
                     {
                         id: 'items',
@@ -487,7 +491,7 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'transaction',
                 title: 'Transaction',
-                roles: [AppConstants.ROLE_ID_INVENTORY],
+                roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'insert_chart',
@@ -601,6 +605,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'admin_panel_settings',
+                permissions: [PermissionConstant.ROLES_LIST, PermissionConstant.USERS_ACCOUNTS],
                 children: [
                     {
                         id: 'user-role',
@@ -613,10 +618,11 @@ export const navigation: FuseNavigation[] = [
                     {
                         id: 'managers',
                         title: 'Users',
-                        roles: [AppConstants.ROLE_ID_ADMIN],
+                        roles: [],
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
-                        url: '/dashboard/managers'
+                        url: '/dashboard/managers',
+                        permissions: [PermissionConstant.USERS_ACCOUNTS]
                     },
                 ]
             },
@@ -628,7 +634,7 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'monetization_on',
                 url: '/dashboard/budget-control/economic',
-                permissions : [PermissionConstant.ECONOMIC_BUDGET_CONTROL_LIST]
+                permissions: [PermissionConstant.ECONOMIC_BUDGET_CONTROL_LIST]
             },
             {
                 id: 'budget-control-programme',
@@ -638,12 +644,12 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'monetization_on',
                 url: '/dashboard/budget-control/programme',
-                permissions : [PermissionConstant.PROGRAMME_BUDGET_CONTROL_LIST]
+                permissions: [PermissionConstant.PROGRAMME_BUDGET_CONTROL_LIST]
             },
             {
                 id: 'journal',
                 title: 'Journal Voucher',
-                roles: [AppConstants.ROLE_ID_HR],
+                roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'money',

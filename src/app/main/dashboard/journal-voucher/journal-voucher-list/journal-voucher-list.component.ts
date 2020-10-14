@@ -136,7 +136,7 @@ export class JournalVoucherListComponent implements OnInit {
             'jvReferenceNumbers': jvReferenceNumbers,
             'status': 'CHECKED'
         }).subscribe(data => {
-            console.log('data', data);
+            // console.log('data', data);
         });
     }
 
@@ -154,7 +154,7 @@ export class JournalVoucherListComponent implements OnInit {
             'jvReferenceNumbers': jvReferenceNumbers,
             'status': 'POSTED'
         }).subscribe(data => {
-            console.log('data', data);
+            // console.log('data', data);
         });
     }
 
@@ -172,7 +172,7 @@ export class JournalVoucherListComponent implements OnInit {
             'jvReferenceNumbers': jvReferenceNumbers,
             'status': 'NEW'
         }).subscribe(data => {
-            console.log('data', data);
+            // console.log('data', data);
         });
     }
 }

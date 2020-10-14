@@ -84,7 +84,7 @@ export class SegmentDetailsComponent implements OnInit {
 
     getSegmentList() {
         this.adminSegmentServices.getAllSegments(this.segmentId).subscribe(data => {
-            console.log('data', data);
+            // console.log('data', data);
             this.segmentName = data.name;
             this.levelConfig = data.levelConfig;
             this.dataSource.data = [data];

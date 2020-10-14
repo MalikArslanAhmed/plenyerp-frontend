@@ -51,6 +51,16 @@ export class LoginComponent implements OnInit {
             username: ['', [Validators.required]],
             password: ['', Validators.required]
         });
+        this.checkLogin();
+    }
+
+    checkLogin() {
+        if (StorageService.getItem('accessToken') && StorageService.getItem('self')) {
+            this.globalService.setAccessToken(StorageService.getItem('accessToken'));
+            this.globalService.setSelf(StorageService.getItem('self'));
+            let role = StorageService.getItem('self');
+            this.navigateToAuthorizePage(role['roles']);
+        }
     }
 
     login() {
@@ -106,6 +116,8 @@ export class LoginComponent implements OnInit {
                 roleArr.push(role.id);
             });
         }
+        /*console.log('roles', roles);
+        console.log('roleArr', roleArr);*/
         let navUrl = '/dashboard/qualification';
 
         if (roleArr.includes(AppConstants.ROLE_ID_HR)) {
@@ -117,6 +129,7 @@ export class LoginComponent implements OnInit {
         }
 
         // const navUrl = '/dashboard/qualification';
+        // console.log('navUrl', navUrl);
         this.router.navigateByUrl(navUrl);
     }
 
