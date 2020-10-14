@@ -204,6 +204,7 @@ import {UserRolePermissionComponent} from './configurations/user-role-permission
 import { UpdateListModelComponent } from './update-list-model/update-list-model.component';
 import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
 import { TrialBalanceListComponent } from './trial-balance/trial-balance-list/trial-balance-list.component';
+import { JournalVoucherLedgerReportComponent } from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
 
 @NgModule({
     declarations: [
@@ -385,7 +386,8 @@ import { TrialBalanceListComponent } from './trial-balance/trial-balance-list/tr
         UserRolePermissionComponent,
         UpdateListModelComponent,
         TrialBalanceComponent,
-        TrialBalanceListComponent
+        TrialBalanceListComponent,
+        JournalVoucherLedgerReportComponent
     ],
     imports: [
         CommonModule,

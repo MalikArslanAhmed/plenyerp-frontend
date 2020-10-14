@@ -61,6 +61,7 @@ import { RouteGuard } from 'app/shared/guards/route.guard';
 import {UserRoleComponent} from './configurations/user-role/user-role.component';
 import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
 import {TrialBalanceComponent} from "./trial-balance/trial-balance.component";
+import { JournalVoucherLedgerReportComponent } from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
 
 const routes: Routes = [
     {
@@ -505,6 +506,13 @@ const routes: Routes = [
         component: TrialBalanceComponent,
         data: {
             title: 'Trial Balance'
+        }
+    },
+    {
+        path: 'jv-ledger-report',
+        component: JournalVoucherLedgerReportComponent,
+        data: {
+            title: 'JV Legder Report'
         }
     },
 ];

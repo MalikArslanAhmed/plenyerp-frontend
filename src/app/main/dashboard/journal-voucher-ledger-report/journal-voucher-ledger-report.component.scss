@@ -1,0 +1,56 @@
+.journal-voucher-data {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+
+    th {
+        width: 10%;
+    }
+
+    .mat-table {
+        width: 100%;
+        max-width: 100%;
+        display: table;
+        border-collapse: collapse;
+        margin: 0;
+    }
+
+    .mat-row,
+    .mat-header-row {
+        display: table-row;
+    }
+
+    .mat-cell,
+    .mat-header-cell {
+        word-wrap: initial;
+        display: table-cell;
+        padding: 0 5px;
+        line-break: unset;
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+
+    .table-data
+    {
+        text-align: center;
+    }
+    .width-100-per{
+        width: 100%;
+    }
+}
+
+.submit-report {
+    background-color: #039be5 !important;
+    color: #fff !important;
+    height: 55px;
+    margin-top: 6px;
+    margin-left: 9px;
+}
+.p-10px {
+    padding: 10px;
+}
+.mt-20px {
+    margin-top: 20px;
+}

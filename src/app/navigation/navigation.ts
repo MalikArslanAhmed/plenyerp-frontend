@@ -689,6 +689,14 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/notes-master',
                         permissions: [PermissionConstant.LIST_GL_JV]
+                    },
+                    {
+                        id: 'jv-ledger-report',
+                        title: 'Journal Voucher(JV) Ledger',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/jv-ledger-report',
+                        
                     }
                 ]
             }
