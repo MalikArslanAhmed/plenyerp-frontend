@@ -18,11 +18,13 @@ export class RouteGuard implements CanActivate {
 
         let hasPermission = false;
 
+        console.log("next",next);
         if (next && next.data && next.data.permissions && next.data.permissions.length) {
             this.permission = next.data.permissions;
         }
 
         const userPermissions = this.globalService.getSelf().permissions;
+        console.log("userpermission",userPermissions);
         for (const i in userPermissions) {
             if (userPermissions.hasOwnProperty(i) && this.permission && this.permission.length) {
                 for (const j in this.permission) {
@@ -33,13 +35,14 @@ export class RouteGuard implements CanActivate {
                 }
             }
         }
-        return true;
-        /*if (hasPermission) {
+        console.log("has",hasPermission)
+        //return true;
+        if (hasPermission) {
             return true;
         }
 
         this.router.navigateByUrl('auth/login');
-        return false;*/
+        return false;
     }
 
 }

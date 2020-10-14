@@ -1,4 +1,5 @@
 import {FuseNavigation} from '@fuse/types';
+import { RouteGuard } from 'app/shared/guards/route.guard';
 import {AppConstants} from '../shared/constants/app-constants';
 import {PermissionConstant} from '../shared/constants/permission-constant';
 
@@ -70,7 +71,8 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'watch_later',
                 url: '/dashboard/admin-segments',
-                permissions : [PermissionConstant.COA_LIST]
+                permissions : [PermissionConstant.COA_LIST],
+                canActivate : [RouteGuard]
             },
             {
                 id: 'setting',

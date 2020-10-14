@@ -60,6 +60,7 @@ import { CompanyInformationComponent } from './company-information/company-infor
 import { RouteGuard } from 'app/shared/guards/route.guard';
 import {UserRoleComponent} from './configurations/user-role/user-role.component';
 import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 const routes: Routes = [
     {
@@ -215,7 +216,7 @@ const routes: Routes = [
         canActivate: [RouteGuard],
         data: {
             title: 'Admin Segment',
-            permissions: []
+            permissions : [PermissionConstant.COA_LIST],
         },
     },
     {
