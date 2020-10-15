@@ -664,6 +664,49 @@ export const navigation: FuseNavigation[] = [
                         permissions: [PermissionConstant.LIST_GL_JV]
                     }
                 ]
+            },
+            {
+                id: 'report',
+                title: 'Report',
+                roles: [],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'report',
+                permissions: [],
+                children: [
+                    {
+                        id: 'trial-balance',
+                        title: 'Trial Balance',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/trial-balance',
+                        permissions: []
+                    },
+                    {
+                        id: 'others',
+                        title: 'Others',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/others',
+                        permissions: []
+                    },
+                    {
+                        id: 'notes-master',
+                        title: 'Notes Master',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/notes-master',
+                        permissions: []
+                    },
+                    {
+                        id: 'jv-ledger-report',
+                        title: 'Journal Voucher(JV) Ledger',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/jv-ledger-report',
+                        
+                    }
+                ]
             }
         ]
     }

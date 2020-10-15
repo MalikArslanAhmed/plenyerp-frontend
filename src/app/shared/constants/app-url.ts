@@ -1094,5 +1094,9 @@ export class AppUrl {
         return AppUrl.API_URL + 'company-setting/' + id;
     }
 
+    static GET_JV_LEDGER_REPORT(): string {
+        return AppUrl.API_URL + 'finance/jv-ledger';
+    }
+
 
 }

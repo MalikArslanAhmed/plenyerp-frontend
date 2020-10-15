@@ -202,6 +202,9 @@ import {UserRoleListComponent} from './configurations/user-role/user-role-list/u
 import {UserRoleCreateComponent} from './configurations/user-role/user-role-create/user-role-create.component';
 import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
 import { UpdateListModelComponent } from './update-list-model/update-list-model.component';
+import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
+import { TrialBalanceListComponent } from './trial-balance/trial-balance-list/trial-balance-list.component';
+import { JournalVoucherLedgerReportComponent } from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
 
 @NgModule({
     declarations: [
@@ -381,7 +384,10 @@ import { UpdateListModelComponent } from './update-list-model/update-list-model.
         UserRoleListComponent,
         UserRoleCreateComponent,
         UserRolePermissionComponent,
-        UpdateListModelComponent
+        UpdateListModelComponent,
+        TrialBalanceComponent,
+        TrialBalanceListComponent,
+        JournalVoucherLedgerReportComponent
     ],
     imports: [
         CommonModule,

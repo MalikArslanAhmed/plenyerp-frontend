@@ -1,0 +1,120 @@
+<div id="journal-voucher" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                   Journal Voucher Ledger Report
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="center p-24" fusePerfectScrollbar>
+            <div class="content">
+                <form [formGroup]="filterJVLegderReportForm">
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px mb--15px">
+                        <mat-label>Type of Selection</mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option value="">Choose Type</mat-option>
+                            <mat-option [value]="source.id"
+                                        *ngFor="let source of sourceApp">{{source?.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px mb--15px">
+                        <mat-label>Enter Corresponding ID</mat-label>
+                        <input matInput placeholder="ID here" formControlName="id" name="id" type="number">
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="submitReport()">
+                            Submit
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="content mt-20px">
+                <mat-grid-list cols="1" class="mt-25px">
+                    <div class="shadow-1px">
+                        <table class="simple">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="title">JV Ref Number</div>
+                                </th>
+                                <th>
+                                    <div class="title">Value Date</div>
+                                </th>
+                                <th>
+                                    <div class="title">Line Reference</div>
+                                </th>
+                                <th>
+                                    <div class="title">Line Narration</div>
+                                </th>
+                                <th>
+                                    <div class="title">Debit</div>
+                                </th>
+                                <th>
+                                    <div class="title">Credit</div>
+                                </th>
+                                <th>
+                                    <div class="title">Balance</div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="jvReportData && jvReportData.length > 0; else noJvDetail">
+                            <tr *ngFor="let jvDet of jvReportData; let i = index">
+                                <td>
+                                    <div class="title">
+                                        {{jvDet?.id}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="title">
+                                        {{jvDet?.jvValueDate}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="title">
+                                        {{jvDet?.lineReference}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="title">
+                                        {{jvDet?.transactionDetails}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="title">
+                                        {{(jvDet.lineValueType && jvDet.lineValueType === 'DEBIT') ? jvDet?.lvLineValue : '-' }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="title">
+                                        {{(jvDet.lineValueType && jvDet.lineValueType === 'CREDIT') ? jvDet?.lvLineValue : '-'}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="title">
+                                        {{jvDet?.lvLineValue}}
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <ng-template #noJvDetail>
+                                <tbody>
+                                <tr>
+                                    <td colspan="7" class="text-center">No data to show</td>
+                                </tr>
+                                </tbody>
+                            </ng-template>
+                        </table>
+                    </div>
+                </mat-grid-list>
+            </div>
+        </div>
+    </div>
+</div>
