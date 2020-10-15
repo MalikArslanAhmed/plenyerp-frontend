@@ -9,16 +9,14 @@
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                    Journal Voucher Ledger Report
                 </span>
-            </div>           
-        </div>       
+            </div>
+        </div>
     </div>
-  
     <div class="content">
-        <div class="center p-24 pb-56" fusePerfectScrollbar>
+        <div class="center p-24" fusePerfectScrollbar>
             <div class="content">
                 <form [formGroup]="filterJVLegderReportForm">
-                   
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px mb--15px">
                         <mat-label>Type of Selection</mat-label>
                         <mat-select formControlName="type">
                             <mat-option value="">Choose Type</mat-option>
@@ -26,23 +24,22 @@
                                         *ngFor="let source of sourceApp">{{source?.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px mb--15px">
                         <mat-label>Enter Corresponding ID</mat-label>
-                    <input matInput placeholder="ID here" formControlName="id" name="id" cdk-focus-start>
+                        <input matInput placeholder="ID here" formControlName="id" name="id" type="number">
                     </mat-form-field>
-                    <div appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <button mat-button class="submit-report" (click)="submitReport()">                           
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="submitReport()">
                             Submit
                             <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
                         </button>
                     </div>
                 </form>
             </div>
-           
             <div class="content mt-20px">
                 <mat-grid-list cols="1" class="mt-25px">
                     <div class="shadow-1px">
-                        <table class="simple journal-voucher-data">
+                        <table class="simple">
                             <thead>
                             <tr>
                                 <th>
@@ -66,7 +63,6 @@
                                 <th>
                                     <div class="title">Balance</div>
                                 </th>
-                                
                             </tr>
                             </thead>
                             <tbody *ngIf="jvReportData && jvReportData.length > 0; else noJvDetail">
@@ -111,7 +107,7 @@
                             <ng-template #noJvDetail>
                                 <tbody>
                                 <tr>
-                                    <td colspan="12" class="text-center">No data to show</td>
+                                    <td colspan="7" class="text-center">No data to show</td>
                                 </tr>
                                 </tbody>
                             </ng-template>

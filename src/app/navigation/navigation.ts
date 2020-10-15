@@ -660,11 +660,11 @@ export const navigation: FuseNavigation[] = [
             {
                 id: 'report',
                 title: 'Report',
-                roles: [AppConstants.ROLE_ID_HR],
+                roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'report',
-                permissions: [PermissionConstant.LIST_GL_JV],
+                permissions: [],
                 children: [
                     {
                         id: 'trial-balance',
@@ -672,7 +672,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/trial-balance',
-                        permissions: [PermissionConstant.LIST_GL_JV]
+                        permissions: []
                     },
                     {
                         id: 'others',
@@ -680,7 +680,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/others',
-                        permissions: [PermissionConstant.LIST_GL_JV]
+                        permissions: []
                     },
                     {
                         id: 'notes-master',
@@ -688,7 +688,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/notes-master',
-                        permissions: [PermissionConstant.LIST_GL_JV]
+                        permissions: []
                     },
                     {
                         id: 'jv-ledger-report',
