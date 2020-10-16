@@ -59,6 +59,7 @@ export class TrialBalanceComponent implements OnInit {
         const params = {};
         if (data && data.economicSegmentId) {
             params['parentId'] = data.economicSegmentId;
+            this.childTrialBalanceData = [];
             this.trialBalanceReportService.getTrailReport(params).subscribe(data => {
                 this.childTrialBalanceData = data.items
             });

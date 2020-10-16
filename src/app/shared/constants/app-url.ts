@@ -1086,7 +1086,7 @@ export class AppUrl {
         return AppUrl.API_URL + 'company-information';
     }
 
-    static GET_COMPANY_SETTING():string {
+    static GET_COMPANY_SETTING(): string {
         return AppUrl.API_URL + 'company-setting';
     }
 
@@ -1098,5 +1098,7 @@ export class AppUrl {
         return AppUrl.API_URL + 'finance/jv-ledger';
     }
 
-
+    static GET_TRAIL_REPORT(): string {
+        return AppUrl.API_URL + 'finance/trial-report';
+    }
 }
