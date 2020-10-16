@@ -1,22 +1,22 @@
-<mat-accordion displayMode="flat" multi class="mat-table accordion-table">
+<mat-accordion displayMode="flat" [multi]="false" class="mat-table accordion-table">
     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-        
+
         <span class="mat-header-cell" >Acc Code</span>
         <span class="mat-header-cell">Acc. Title</span>
         <span class="mat-header-cell">Credit</span>
         <span class="mat-header-cell">Debit</span>
         <span class="mat-header-cell">Balance</span>
-       
+
     </section>
 
-    <mat-expansion-panel *ngFor="let reportData of dataSource; let i = index">
-        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
-            
+    <mat-expansion-panel *ngFor="let reportData of trailReportMainData; let i = index">
+        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row" (click)="getChildReport(reportData)">
+
             <span class="mat-cell align-items-center">
-                <p class="text-truncate cursor-pointer mt-32px">{{reportData?.sno}}.</p>
+                <p class="text-truncate cursor-pointer mt-32px">{{i+1}}.</p>
             </span>
             <span class="mat-cell align-items-center">
-                <p class="text-truncate cursor-pointer mt-32px">{{reportData?.accTitle}}</p>
+                <p class="text-truncate cursor-pointer mt-32px">{{reportData?.economicSegment?.name}}</p>
             </span>
             <span class="mat-cell align-items-center">
                 <p class="text-truncate cursor-pointer mt-32px">{{reportData?.credit}}</p>
@@ -27,7 +27,7 @@
             <span class="mat-cell align-items-center">
                 <p class="text-truncate cursor-pointer mt-32px">{{reportData?.balance}}</p>
             </span>
-            
+
         </mat-expansion-panel-header>
         <div class="mt-23px">
             <table class="simple invoice-table">
@@ -51,28 +51,28 @@
                     <th>
                         <div class="title">Balance</div>
                     </th>
-                    
+
                     <th>
                         <div class="title">Note</div>
                     </th>
                 </tr>
                 </thead>
                 <tbody
-                    *ngIf="reportData['reportDetails'] && reportData['reportDetails'].length > 0">
-                <tr *ngFor="let data of reportData['reportDetails']; let i = index">
+                    *ngIf="childTrialBalanceData && childTrialBalanceData.length > 0">
+                <tr *ngFor="let data of childTrialBalanceData; let i = index">
                     <td>
                         <div class="title">
-                            {{data?.fullCode}}
+                            {{data?.economicSegment?.combinedCode}}
                         </div>
                     </td>
                     <td>
                         <div class="title">
-                            {{data?.lineCode}}
+                            {{data?.economicSegment?.individualCode}}
                         </div>
                     </td>
                     <td>
                         <div class="title">
-                            {{data?.title}}
+                            {{data?.economicSegment?.name}}
                         </div>
                     </td>
                     <td>
@@ -90,15 +90,15 @@
                             {{data?.balance}}
                         </div>
                     </td>
-                   
+
                     <td>
                         <span class="material-icons f_20 cursor-pointer  blueColor"
-                             >
+                        >
                             add_box
                         </span>
                     </td>
                 </tr>
-                
+
                 </tbody>
             </table>
         </div>
