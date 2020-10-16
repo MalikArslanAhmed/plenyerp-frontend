@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import { TrialBalanceReportService } from 'app/shared/services/trial-balance-report.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../../@fuse/animations";
+import {TrialBalanceReportService} from "../../../../shared/services/trial-balance-report.service";
 
 @Component({
     selector: 'app-trial-balance-list',
@@ -10,89 +10,83 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
     animations: fuseAnimations
 })
 export class TrialBalanceListComponent implements OnInit {
-
-    trailReportMainData =[
-        // {
-        //   'sno':1,
-        //   'accTitle':'Ashish',
-        //   'title' : 'Ashish1',
-        //   'credit' : 1000,
-        //   'debit': 2000,
-        //   'balance':1000,
-        //   'reportDetails':[
-        //     {
-        //       'fullCode':1,
-        //       'lineCode':2,
-        //       'title':'Govt share of FAAC',
-        //       'credit': 5000,
-        //       'debit': 2000,
-        //       'balance': 0.00
-        //     },
-        //     {
-        //       'fullCode':2,
-        //       'lineCode':2,
-        //       'title':'Grants',
-        //       'credit': 5000,
-        //       'debit': 2000,
-        //       'balance': 0.00
-        //     }
-        //   ]
-        // },
-        // {
-        //   'sno':2,
-        //   'accTitle':'Mishra',
-        //   'title' : 'Ashish2',
-        //   'credit' : 1000,
-        //   'debit': 2000,
-        //   'balance':1000,
-        //   'reportDetails':[
-        //     {
-        //       'fullCode':1,
-        //       'lineCode':2,
-        //       'title':'Govt share of FAAC111',
-        //       'credit': 5000,
-        //       'debit': 2000,
-        //       'balance': 0.00
-        //     },
-        //     {
-        //       'fullCode':21,
-        //       'lineCode':2,
-        //       'title':'Grants',
-        //       'credit': 5000,
-        //       'debit': 2000,
-        //       'balance': 0.00
-        //     }
-        //   ]
-        // }
+    trailReportMainData = [
+        /*{
+          'sno':1,
+          'accTitle':'Ashish',
+          'title' : 'Ashish1',
+          'credit' : 1000,
+          'debit': 2000,
+          'balance':1000,
+          'reportDetails':[
+            {
+              'fullCode':1,
+              'lineCode':2,
+              'title':'Govt share of FAAC',
+              'credit': 5000,
+              'debit': 2000,
+              'balance': 0.00
+            },
+            {
+              'fullCode':2,
+              'lineCode':2,
+              'title':'Grants',
+              'credit': 5000,
+              'debit': 2000,
+              'balance': 0.00
+            }
+          ]
+        },
+        {
+          'sno':2,
+          'accTitle':'Mishra',
+          'title' : 'Ashish2',
+          'credit' : 1000,
+          'debit': 2000,
+          'balance':1000,
+          'reportDetails':[
+            {
+              'fullCode':1,
+              'lineCode':2,
+              'title':'Govt share of FAAC111',
+              'credit': 5000,
+              'debit': 2000,
+              'balance': 0.00
+            },
+            {
+              'fullCode':21,
+              'lineCode':2,
+              'title':'Grants',
+              'credit': 5000,
+              'debit': 2000,
+              'balance': 0.00
+            }
+          ]
+        }*/
     ];
 
     childTrialBalanceData = [];
 
-    constructor(private trialBalanceReportService:TrialBalanceReportService) { }
+    constructor(private trialBalanceReportService: TrialBalanceReportService) {
+    }
 
     ngOnInit(): void {
         //   console.log("abc",this.dataSource)
         this.getTrailBalanceData();
     }
 
-    getTrailBalanceData()
-    {
-        this.trialBalanceReportService.getTrailReport({}).subscribe(data=> {
+    getTrailBalanceData() {
+        this.trialBalanceReportService.getTrailReport({}).subscribe(data => {
             this.trailReportMainData = data.items
         })
     }
 
-    getChildReport(data)
-    {
+    getChildReport(data) {
         const params = {};
-        //console.log("data",data.economicSegmentId);
-        if(data && data.economicSegmentId)
-        {
-            //console.log("abc");
+        if (data && data.economicSegmentId) {
             params['parentId'] = data.economicSegmentId;
-            console.log('apr',params);
-
-            this.trialBalanceReportService.getTrailReport(params).subscribe(data=> {
+            // console.log('apr', params);
+            this.trialBalanceReportService.getTrailReport(params).subscribe(data => {
                 this.childTrialBalanceData = data.items
             })
         }
