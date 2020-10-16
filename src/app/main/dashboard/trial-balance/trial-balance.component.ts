@@ -32,7 +32,7 @@ export class TrialBalanceComponent implements OnInit {
 
     getTrailBalanceData(params) {
         this.trialBalanceReportService.getTrailReport(params).subscribe(data => {
-            this.trailReportMainData = data.items
+            this.trailReportMainData = data.items;
         })
     }
 
@@ -64,5 +64,11 @@ export class TrialBalanceComponent implements OnInit {
                 this.childTrialBalanceData = data.items
             });
         }
+    }
+
+    addNote(economicSegmentId) {
+        this.trialBalanceReportService.addNote(economicSegmentId, {}).subscribe(data => {
+            console.log('data', data);
+        });
     }
 }

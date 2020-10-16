@@ -227,4 +227,9 @@ app-trial-balance {
             vertical-align: middle;
         }
     }
+
+    .border-bg-none {
+        border: none !important;
+        background-color: transparent !important;
+    }
 }

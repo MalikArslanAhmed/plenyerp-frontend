@@ -17,4 +17,8 @@ export class TrialBalanceReportService extends BaseService {
     getTrailReport(data): Observable<any> {
         return this.getRequest(AppUrl.GET_TRAIL_REPORT(), data);
     }
+
+    addNote(segmentId, data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_NOTE_TRAIL_REPORT(segmentId), data);
+    }
 }

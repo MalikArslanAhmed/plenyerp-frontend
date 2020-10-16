@@ -25,12 +25,15 @@ export class BudgetControlService extends BaseService {
     deleteBudget(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_BUDGET(id));
     }
+
     getCurrencies(): Observable<any> {
         return this.getRequest(AppUrl.CURRENCIES());
     }
+
     addBudget(data): Observable<any> {
         return this.postRequestWithoutDataDeletion(AppUrl.ADD_BUDGET(), data);
     }
+
     updateBudget(id, data): Observable<any> {
         return this.putRequestWithoutDataDeletion(AppUrl.ADD_BUDGET(id), data);
     }

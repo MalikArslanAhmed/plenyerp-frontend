@@ -1101,4 +1101,8 @@ export class AppUrl {
     static GET_TRAIL_REPORT(): string {
         return AppUrl.API_URL + 'finance/trial-report';
     }
+
+    static ADD_NOTE_TRAIL_REPORT(id): string {
+        return AppUrl.API_URL + 'notes/' + id;
+    }
 }

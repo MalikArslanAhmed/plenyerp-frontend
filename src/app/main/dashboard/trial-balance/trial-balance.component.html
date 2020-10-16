@@ -97,7 +97,6 @@
             <div class="content mt-20px">
                 <mat-accordion displayMode="flat" [multi]="false" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-
                         <span class="mat-header-cell">Acc Code</span>
                         <span class="mat-header-cell">Acc. Title</span>
                         <span class="mat-header-cell">Credit</span>
@@ -185,9 +184,11 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="material-icons f_20 cursor-pointer  blueColor">
-                                            add_box
-                                        </span>
+                                        <button class="border-bg-none" (click)="addNote(reportData.economicSegmentId)">
+                                            <span class="material-icons f_20 cursor-pointer blueColor">
+                                                add_box
+                                            </span>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>
