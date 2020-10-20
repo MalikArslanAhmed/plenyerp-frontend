@@ -1,0 +1,177 @@
+<div id="journal-voucher" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                   Notes Master
+                </span>
+            </div>
+        </div>
+        <!-- <div fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field appearance="outline" fxFlex class="mt-13px" id="fromToDate">
+                <mat-label>From</mat-label>
+                <input matInput [matDatepicker]="from"
+                       >
+                <mat-datepicker-toggle matSuffix
+                                       [for]="from"></mat-datepicker-toggle>
+                <mat-datepicker #from></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field appearance="outline" fxFlex class="mt-13px">
+                <mat-label>To</mat-label>
+                <input matInput [matDatepicker]="to"
+                       >
+                <mat-datepicker-toggle matSuffix
+                                       [for]="to"></mat-datepicker-toggle>
+                <mat-datepicker #to></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center">
+            <button mat-icon-button 
+                       >Submit
+                    <mat-icon class="amber-600-fg">play_arrow</mat-icon>
+                </button>
+        </div> -->
+
+        <!-- SEARCH -->
+        <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
+            <div class="search-wrapper mt-16 mt-sm-0">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input [formControl]="searchInput" placeholder="Search for a contact">
+                </div>
+            </div>
+        </div>-->
+        <!-- / SEARCH -->
+    </div>
+
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content mt-20px">
+                <form [formGroup]="searchNotesMasterForm">
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>Search For Notes</mat-label>
+                        <input formControlName="id" matInput (keyup)="search()">
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="content mt-20px">
+                <mat-accordion displayMode="flat" [multi]="false" class="mat-table accordion-table">
+                    <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                        <span class="mat-header-cell">Note Id</span>
+                        <span class="mat-header-cell">Full Code</span>
+                        <span class="mat-header-cell">Credit</span>
+                        <span class="mat-header-cell">Debit</span>
+                        <span class="mat-header-cell">Balance</span>
+                    </section>
+                    <mat-expansion-panel *ngFor="let reportData of notesMasterData; let i = index">
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
+                                                    (click)="getChildNotes(reportData)">
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.id}}.</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.economicSegment?.combinedCode}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.credit}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.debit}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
+                            </span>
+                        </mat-expansion-panel-header>
+                        <div class="mt-23px">
+                            <table class="simple invoice-table">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <div class="title">Full Code</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Line Code</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Title</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Credit</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Debit</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Balance</div>
+                                    </th>
+
+                                    <th>
+                                        <div class="title">Note</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody
+                                    *ngIf="chileNotesData && chileNotesData.length > 0; else noChildToShow">
+                                <tr *ngFor="let data of chileNotesData; let i = index">
+                                    <td>
+                                        <div class="title">
+                                            {{data?.economicSegment?.combinedCode}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.economicSegment?.individualCode}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.economicSegment?.name}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.credit}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.debit}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.balance}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="border-bg-none" (click)="addNote(reportData.economicSegmentId)">
+                                            <span class="material-icons f_20 cursor-pointer blueColor">
+                                                add_box
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <ng-template #noChildToShow>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-center" colspan="7">No data to show</td>
+                                    </tr>
+                                    </tbody>
+                                </ng-template>
+                            </table>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </div>
+</div>

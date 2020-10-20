@@ -63,6 +63,7 @@ import {UserRolePermissionComponent} from './configurations/user-role-permission
 import {PermissionConstant} from 'app/shared/constants/permission-constant';
 import {TrialBalanceComponent} from "./trial-balance/trial-balance.component";
 import { JournalVoucherLedgerReportComponent } from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
+import { NotesMasterComponent } from './notes-master/notes-master.component';
 
 const routes: Routes = [
     {
@@ -638,6 +639,13 @@ const routes: Routes = [
             title: 'JV Legder Report'
         }
     },
+    {
+        path: 'notes-master',
+        component: NotesMasterComponent,
+        data: {
+            title: 'Notes Master'
+        }
+    }
 ];
 
 @NgModule({

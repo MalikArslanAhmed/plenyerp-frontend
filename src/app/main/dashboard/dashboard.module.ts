@@ -204,6 +204,7 @@ import {UserRolePermissionComponent} from './configurations/user-role-permission
 import {UpdateListModelComponent} from './update-list-model/update-list-model.component';
 import {TrialBalanceComponent} from './trial-balance/trial-balance.component';
 import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
+import { NotesMasterComponent } from './notes-master/notes-master.component';
 
 @NgModule({
     declarations: [
@@ -385,7 +386,8 @@ import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-repo
         UserRolePermissionComponent,
         UpdateListModelComponent,
         TrialBalanceComponent,
-        JournalVoucherLedgerReportComponent
+        JournalVoucherLedgerReportComponent,
+        NotesMasterComponent
     ],
     imports: [
         CommonModule,

@@ -1105,4 +1105,8 @@ export class AppUrl {
     static ADD_NOTE_TRAIL_REPORT(id): string {
         return AppUrl.API_URL + 'notes/' + id;
     }
+
+    static GET_NOTE_MASTER_DATA(): string {
+        return AppUrl.API_URL + 'finance/notes-trial-report';
+    }
 }
