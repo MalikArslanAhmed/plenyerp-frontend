@@ -125,7 +125,7 @@ export class JournalVoucherListComponent implements OnInit {
     markAsChecked() {
         let jvReferenceNumbers = [];
         if (this.journalVouchers && this.journalVouchers.length > 0) {
-            console.log('journalVouchersjournalVouchersjournalVouchers', this.journalVouchers);
+            // console.log('journalVouchersjournalVouchersjournalVouchers', this.journalVouchers);
             this.journalVouchers.forEach(journalVoucher => {
                 if (journalVoucher.checked) {
                     jvReferenceNumbers.push(journalVoucher.id);
