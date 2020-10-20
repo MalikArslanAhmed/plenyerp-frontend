@@ -152,9 +152,14 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="border-bg-none" (click)="addNote(reportData.economicSegmentId)">
+                                        <button class="border-bg-none" *ngIf="!data.noteId" (click)="addNote(data.economicSegmentId)">
                                             <span class="material-icons f_20 cursor-pointer blueColor">
                                                 add_box
+                                            </span>
+                                        </button>
+                                        <button *ngIf="data.noteId" class="border-bg-none no-click">
+                                            <span class="material-icons f_20 cursor-pointer blueColor">
+                                                done
                                             </span>
                                         </button>
                                     </td>
