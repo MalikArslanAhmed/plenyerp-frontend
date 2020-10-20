@@ -126,6 +126,8 @@ export class LoginComponent implements OnInit {
             navUrl = '/dashboard/admin-segments';
         } else if (roleArr.includes(AppConstants.ROLE_ID_INVENTORY)) {
             navUrl = '/dashboard/store-setup-items';
+        } else if (roleArr.includes(AppConstants.ROLE_ID_FINANCIAL)) {
+            navUrl = '/dashboard/journal-voucher';
         }
 
         // const navUrl = '/dashboard/qualification';

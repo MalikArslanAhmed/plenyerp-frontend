@@ -18,7 +18,7 @@
                 <mat-icon>add_circle</mat-icon>
             </button>-->
             <button mat-raised-button (click)="markAsChecked()" class="checked-btn justify-content-end"
-                    *ngIf="this.status === 'NEW'">Mark as checked
+                    *ngIf="this.status === 'RENEW'">Mark as checked
             </button>
             <button mat-raised-button (click)="markAsPosted()" class="checked-btn"
                     *ngIf="this.status === 'CHECKED'">Post JV
@@ -31,7 +31,7 @@
     <mat-accordion displayMode="flat" multi class="mat-table accordion-table">
         <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
             <span class="mat-header-cell" mat-sort-header="checkbox"
-                  *ngIf="this.status === 'NEW' || this.status === 'CHECKED'">#</span>
+                  *ngIf="this.status === 'RENEW' || this.status === 'CHECKED'">#</span>
             <span class="mat-header-cell" mat-sort-header="id">S.No</span>
             <span class="mat-header-cell" mat-sort-header="jvRef">JV Ref</span>
             <span class="mat-header-cell" mat-sort-header="jvValueDate">JV Value Date</span>
@@ -65,7 +65,7 @@
 
         <mat-expansion-panel *ngFor="let journalVoucher of journalVouchers; let i = index">
             <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
-                <span class="mat-cell align-items-center" *ngIf="this.status === 'NEW' || this.status === 'CHECKED'">
+                <span class="mat-cell align-items-center" *ngIf="this.status === 'RENEW' || this.status === 'CHECKED'">
                     <p class="text-truncate cursor-pointer mt-28px">
                         <mat-checkbox (change)="checkJV(i, $event)"
                                       [checked]="journalVoucher.checked ? true : null"></mat-checkbox>

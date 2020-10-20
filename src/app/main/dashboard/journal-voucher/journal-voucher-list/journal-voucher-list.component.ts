@@ -115,7 +115,7 @@ export class JournalVoucherListComponent implements OnInit {
     }
 
     checkJV(index, event) {
-        if (this.status === 'NEW') {
+        if (this.status === 'RENEW') {
             this.journalVouchers[index].checked = event.checked;
         } else if (this.status === 'CHECKED') {
             this.journalVouchers[index].posted = event.checked;
@@ -125,6 +125,7 @@ export class JournalVoucherListComponent implements OnInit {
     markAsChecked() {
         let jvReferenceNumbers = [];
         if (this.journalVouchers && this.journalVouchers.length > 0) {
+            console.log('journalVouchersjournalVouchersjournalVouchers', this.journalVouchers);
             this.journalVouchers.forEach(journalVoucher => {
                 if (journalVoucher.checked) {
                     jvReferenceNumbers.push(journalVoucher.id);
