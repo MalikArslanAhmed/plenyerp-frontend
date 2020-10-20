@@ -232,4 +232,7 @@ app-trial-balance {
         border: none !important;
         background-color: transparent !important;
     }
+    .no-click {
+        pointer-events: none;
+    }
 }

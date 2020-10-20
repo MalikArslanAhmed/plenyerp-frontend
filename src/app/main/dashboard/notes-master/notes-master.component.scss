@@ -232,4 +232,7 @@ app-notes-master {
         border: none !important;
         background-color: transparent !important;
     }
+    .no-click {
+        pointer-events: none;
+    }
 }
