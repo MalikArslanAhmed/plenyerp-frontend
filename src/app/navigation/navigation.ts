@@ -672,7 +672,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'report',
-                permissions: [],
+                permissions: [PermissionConstant.JV_LEDGER_LIST,PermissionConstant.TRAIL_BALANCE_LIST,PermissionConstant.NOTES_MASTER_LIST],
                 children: [
                     {
                         id: 'trial-balance',
@@ -680,7 +680,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/trial-balance',
-                        permissions: []
+                        permissions: [PermissionConstant.TRAIL_BALANCE_LIST]
                     },
                     {
                         id: 'others',
@@ -688,7 +688,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/others',
-                        permissions: []
+                        permissions: [PermissionConstant.TRAIL_BALANCE_LIST]
                     },
                     {
                         id: 'notes-master',
@@ -696,7 +696,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/notes-master',
-                        permissions: []
+                        permissions: [PermissionConstant.NOTES_MASTER_LIST]
                     },
                     {
                         id: 'jv-ledger-report',
@@ -704,7 +704,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/jv-ledger-report',
-                        
+                        permissions: [PermissionConstant.JV_LEDGER_LIST]
                     }
                 ]
             }

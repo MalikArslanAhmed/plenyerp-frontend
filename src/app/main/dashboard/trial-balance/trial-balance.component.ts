@@ -4,6 +4,7 @@ import {fuseAnimations} from '@fuse/animations';
 import {AlertService} from 'app/shared/services/alert.service';
 import * as moment from 'moment';
 import {TrialBalanceReportService} from 'app/shared/services/trial-balance-report.service';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-trial-balance',
@@ -17,6 +18,8 @@ export class TrialBalanceComponent implements OnInit {
     trailReportMainData = [];
     childTrialBalanceData = [];
 
+    permissionAddNotesTrail = [PermissionConstant.TRAIL_BALANCE_NOTES_ADD]
+    
     constructor(private fb: FormBuilder,
                 private trialBalanceReportService: TrialBalanceReportService,
                 private alertService: AlertService) {

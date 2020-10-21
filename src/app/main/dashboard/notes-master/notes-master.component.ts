@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TrialBalanceReportService } from 'app/shared/services/trial-balance-report.service';
 import {fuseAnimations} from '@fuse/animations';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
   selector: 'app-notes-master',
@@ -12,6 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class NotesMasterComponent implements OnInit {
 
+  permissionAddNotes = [PermissionConstant.NOTES_MASTER_NOTE_ADD]
   constructor(private trialBalanceReportService: TrialBalanceReportService,
     private fb: FormBuilder) { }
   searchNotesMasterForm: FormGroup;

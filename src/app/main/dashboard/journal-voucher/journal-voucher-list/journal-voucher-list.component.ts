@@ -32,7 +32,9 @@ export class JournalVoucherListComponent implements OnInit {
     pageEvent: PageEvent;
     permissionEditJV = [PermissionConstant.EDIT_GL_JV];
     permissionDeleteJV = [PermissionConstant.DELETE_GL_JV];
-
+    permissionAddJVDetails = [PermissionConstant.JV_DETAILS_ADD];
+    permissionEditJVDetails = [PermissionConstant.JV_DETAILS_EDIT];
+    permissionDeleteJVDetails =[PermissionConstant.JV_DETAILS_DELETE];
     constructor(private journalVoucherService: JournalVoucherService,
                 private _matDialog: MatDialog) {
     }

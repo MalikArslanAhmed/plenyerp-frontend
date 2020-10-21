@@ -152,7 +152,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="border-bg-none" *ngIf="!data.noteId" (click)="addNote(data.economicSegmentId)">
+                                        <button appPermissionBind [permission]="permissionAddNotes"  class="border-bg-none" *ngIf="!data.noteId" (click)="addNote(data.economicSegmentId)">
                                             <span class="material-icons f_20 cursor-pointer blueColor">
                                                 add_box
                                             </span>
