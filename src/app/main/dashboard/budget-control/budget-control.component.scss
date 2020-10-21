@@ -1,6 +1,6 @@
 @import "src/@fuse/scss/fuse";
 
-#skills {
+#budget-control {
     .header {
         .search-wrapper {
             width: 100%;
@@ -78,11 +78,12 @@
         color: #fff;
         margin-left: 2rem;
     }
-    .copy-all{
+
+    .copy-all {
         background-color: #039be5 !important;
         color: #fff;
         height: 45px;
-        margin-top: 20px;
+        margin-bottom: 15px;
         margin-left: 15px;
         width: 119px;
     }
@@ -139,24 +140,6 @@
 
     .my-select-panel-class {
         display: none;
-        // background-color: #039be5;
-        // border-radius: 5px;
-        // width: 100%;
-        // height: 55px;
-        // margin-top:6px;
-        // margin-bottom:27.5px;
-        // .mat-select-arrow{
-        //     display: none;
-        // }
-        // .mat-select-value-text{
-        //     color:white!important;
-        // }
-        // .dropDownLabel{
-        //     color:white!important;
-        //     top:1.3 rem;
-        // }
-
-
     }
 
     .select-type-button {
