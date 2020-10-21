@@ -351,6 +351,8 @@ export class JournalVoucherCreateComponent implements OnInit {
                         if (response) {
                             //console.log("res",response)
                             this.jvDetail.push(params);
+                            this.addDetails = false;
+                            this.addDetailForm.reset();
                             //console.log("data",this.jvDetail);
                         }
                     });
@@ -378,6 +380,8 @@ export class JournalVoucherCreateComponent implements OnInit {
                         if (response) {
                            // console.log("res",response);
                             this.jvDetail.push(params);
+                            this.addDetails = false;
+                            this.addDetailForm.reset();
                            // console.log("data",this.jvDetail);
                         }
                     });
@@ -388,9 +392,11 @@ export class JournalVoucherCreateComponent implements OnInit {
         {
             
             this.jvDetail.push(params);
+            this.addDetails = false;
+            this.addDetailForm.reset();
         }
-        this.addDetails = false;
-        this.addDetailForm.reset();
+        //this.addDetails = false;
+        //this.addDetailForm.reset();
     }
 
     saveJournalVoucher() {
