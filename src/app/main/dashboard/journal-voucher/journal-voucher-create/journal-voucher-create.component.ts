@@ -293,18 +293,18 @@ export class JournalVoucherCreateComponent implements OnInit {
             'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
             'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
             'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
-            'adminSegmentName': this.adminSegments[0].name,
-            'fundSegmentName': this.fundSegmentsAddDet[0].name,
-            'economicSegmentName': this.economicSegments[0].name,
-            'programmeSegmentName': this.programmeSegments[0].name,
-            'functionSegmentName': this.functionSegments[0].name,
-            'geoCodeSegmentName': this.geoCodeSegments[0].name,
-            'adminSegmentCode': this.adminSegments[0].id,
-            'fundSegmentCode': this.fundSegmentsAddDet[0].id,
-            'economicSegmentCode': this.economicSegments[0].id,
-            'programmeSegmentCode': this.programmeSegments[0].id,
-            'functionSegmentCode': this.functionSegments[0].id,
-            'geoCodeSegmentCode': this.geoCodeSegments[0].id
+            'adminSegmentName': this.adminSegments[0] && this.adminSegments[0].name ? this.adminSegments[0].name : '',
+            'fundSegmentName': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].name ? this.fundSegmentsAddDet[0].name : '',
+            'economicSegmentName': this.economicSegments[0] && this.economicSegments[0].name ? this.economicSegments[0].name : '',
+            'programmeSegmentName': this.programmeSegments[0] && this.programmeSegments[0].name ? this.programmeSegments[0].name : '',
+            'functionSegmentName': this.functionSegments[0] && this.functionSegments[0].name ? this.functionSegments[0].name : '',
+            'geoCodeSegmentName': this.geoCodeSegments[0] && this.geoCodeSegments[0].name ? this.geoCodeSegments[0].name : '',
+            'adminSegmentCode': this.adminSegments[0] && this.adminSegments[0].id ? this.adminSegments[0].id : '',
+            'fundSegmentCode': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].id ? this.fundSegmentsAddDet[0].id : '',
+            'economicSegmentCode': this.economicSegments[0] && this.economicSegments[0].id ? this.economicSegments[0].id : '',
+            'programmeSegmentCode': this.programmeSegments[0] && this.programmeSegments[0].id ? this.programmeSegments[0].id : '',
+            'functionSegmentCode': this.functionSegments[0] && this.functionSegments[0].id ? this.functionSegments[0].id : '',
+            'geoCodeSegmentCode': this.geoCodeSegments[0] && this.geoCodeSegments[0].id ? this.geoCodeSegments[0].id : ''
         };
 
         if (this.jvDetail && this.jvDetail.length > 0) {
