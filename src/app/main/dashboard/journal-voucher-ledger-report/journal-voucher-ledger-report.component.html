@@ -18,16 +18,30 @@
                 <form [formGroup]="filterJVLegderReportForm">
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px mb--15px">
                         <mat-label>Type of Selection</mat-label>
-                        <mat-select formControlName="type">
+                        <mat-select formControlName="type" (selectionChange)="selectOption($event)">
                             <mat-option value="">Choose Type</mat-option>
                             <mat-option [value]="source.id"
                                         *ngFor="let source of sourceApp">{{source?.name}}</mat-option>
                         </mat-select>
+                    </mat-form-field> 
+                    <mat-form-field *ngIf="economicPopupShow" class="width-200px p-10px mt-13px mb--15px" appearance="outline" fxFlex="100" (click)="economicSegmentSelect()">
+                        <mat-label>Economic Segment Name</mat-label>
+                        <mat-select formControlName="economicSegmentId" [disabled]="true">
+                            <mat-option [value]="economicSegment.id"
+                                        *ngFor="let economicSegment of economicSegments">{{economicSegment.name}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px mb--15px">
+                    <mat-form-field *ngIf="programmePopupShow" class="width-200px p-10px mt-13px mb--15px" appearance="outline" fxFlex="100" (click)="programmeSegmentSelect()">
+                        <mat-label>Programme Segment Name</mat-label>
+                        <mat-select formControlName="programmeSegmentId" [disabled]="true">
+                            <mat-option [value]="programmeSegment.id"
+                                        *ngFor="let programmeSegment of programmeSegments">{{programmeSegment.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px mb--15px">
                         <mat-label>Enter Corresponding ID</mat-label>
                         <input matInput placeholder="ID here" formControlName="id" name="id" type="number">
-                    </mat-form-field>
+                    </mat-form-field> -->
                     <div fxFlex class="width-200px p-10px mt-13px">
                         <button mat-button class="submit-report" (click)="submitReport()">
                             Submit
