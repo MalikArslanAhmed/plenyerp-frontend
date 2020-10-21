@@ -12,7 +12,7 @@ import {GlobalService} from 'app/shared/services/global.service';
 import * as moment from "moment";
 import {JournalVoucherService} from "../../../../shared/services/journal-voucher.service";
 import {CurrencyService} from "../../../../shared/services/currency.service";
-import { BalanceAmountModelComponent } from '../balance-amount-model/balance-amount-model.component';
+import {BalanceAmountModelComponent} from '../balance-amount-model/balance-amount-model.component';
 
 @Component({
     selector: 'app-journal-voucher-create',
@@ -306,97 +306,75 @@ export class JournalVoucherCreateComponent implements OnInit {
             'functionSegmentCode': this.functionSegments[0].id,
             'geoCodeSegmentCode': this.geoCodeSegments[0].id
         };
-        
-       if(this.jvDetail && this.jvDetail.length>0)
-       {
-          // console.log("data h",this.jvDetail);
+
+        if (this.jvDetail && this.jvDetail.length > 0) {
             let debitTotal = 0;
             let creditTotal = 0;
-        
-            this.jvDetail.forEach((value)=>{
-                if(value.lineValueType === 'CREDIT')
-                {
-                    creditTotal = creditTotal+ Number(value.lvLineValue);
-                }
-            })
 
-            this.jvDetail.forEach((value)=>{
-                if(value.lineValueType === 'DEBIT')
-                {
-                    debitTotal = debitTotal+ Number(value.lvLineValue);
+            this.jvDetail.forEach((value) => {
+                if (value.lineValueType === 'CREDIT') {
+                    creditTotal = creditTotal + Number(value.lvLineValue);
                 }
-            })
-            let tempCreditTotal =0;
-            let tempDebitTotal =0;
-            if(params.lineValueType === 'CREDIT')
-            {
+            });
+
+            this.jvDetail.forEach((value) => {
+                if (value.lineValueType === 'DEBIT') {
+                    debitTotal = debitTotal + Number(value.lvLineValue);
+                }
+            });
+
+            let tempCreditTotal = 0;
+            let tempDebitTotal = 0;
+
+            if (params.lineValueType === 'CREDIT') {
                 tempCreditTotal = Number(params.lvLineValue);
-                //console.log("abc",creditTotal);
-                tempCreditTotal = tempCreditTotal + creditTotal
-                //this.jvDetail.push(params);
-               // console.log("creditTotal",creditTotal);
-                //console.log("tempCreditTotal",tempCreditTotal);
-                //console.log("debitTotal",debitTotal);
-                if(tempCreditTotal === debitTotal)
-                {
+                tempCreditTotal = tempCreditTotal + creditTotal;
+                if (tempCreditTotal === debitTotal) {
                     this.jvDetail.push(params);
                 }
-                if(tempCreditTotal != debitTotal)
-                {
+                if (tempCreditTotal != debitTotal) {
                     this.dialogRef = this._matDialog.open(BalanceAmountModelComponent, {
                         panelClass: 'delete-items-dialog',
                         data: {data: '1'}
                     });
                     this.dialogRef.afterClosed().subscribe((response: boolean) => {
                         if (response) {
-                            //console.log("res",response)
                             this.jvDetail.push(params);
                             this.addDetails = false;
                             this.addDetailForm.reset();
-                            //console.log("data",this.jvDetail);
                         }
                     });
-                    //this.jvDetail.push(params);
-                    //console.log("are you sure?")
                 }
             }
-            if(params.lineValueType === 'DEBIT')
-            {
+
+            if (params.lineValueType === 'DEBIT') {
                 tempDebitTotal = Number(params.lvLineValue);
-                //console.log("abc",creditTotal);
-                tempDebitTotal = tempDebitTotal + creditTotal
-                //this.jvDetail.push(params);
-                if(tempDebitTotal === creditTotal)
-                {
+                tempDebitTotal = tempDebitTotal + creditTotal;
+                if (tempDebitTotal === creditTotal) {
                     this.jvDetail.push(params);
                 }
-                if(tempDebitTotal != creditTotal)
-                {
+                if (tempDebitTotal != creditTotal) {
                     this.dialogRef = this._matDialog.open(BalanceAmountModelComponent, {
                         panelClass: 'delete-items-dialog',
                         data: {data: '1'}
                     });
+
                     this.dialogRef.afterClosed().subscribe((response: boolean) => {
                         if (response) {
-                           // console.log("res",response);
                             this.jvDetail.push(params);
                             this.addDetails = false;
                             this.addDetailForm.reset();
-                           // console.log("data",this.jvDetail);
                         }
                     });
                 }
             }
         }
-        if(this.jvDetail && this.jvDetail.length==0)
-        {
-            
+
+        if (this.jvDetail && this.jvDetail.length == 0) {
             this.jvDetail.push(params);
             this.addDetails = false;
             this.addDetailForm.reset();
         }
-        //this.addDetails = false;
-        //this.addDetailForm.reset();
     }
 
     saveJournalVoucher() {

@@ -1,10 +1,7 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {PageEvent, MatPaginator} from "@angular/material/paginator";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {PageEvent} from "@angular/material/paginator";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {JournalVoucherService} from "../../../../shared/services/journal-voucher.service";
-import {MatSort} from '@angular/material/sort';
-import {Observable} from 'rxjs';
-import {MembershipCreateComponent} from "../../membership/membership-create/membership-create.component";
 import {FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {JournalVoucherDetailCreateComponent} from '../journal-voucher-detail-create/journal-voucher-detail-create.component';
@@ -34,7 +31,8 @@ export class JournalVoucherListComponent implements OnInit {
     permissionDeleteJV = [PermissionConstant.DELETE_GL_JV];
     permissionAddJVDetails = [PermissionConstant.JV_DETAILS_ADD];
     permissionEditJVDetails = [PermissionConstant.JV_DETAILS_EDIT];
-    permissionDeleteJVDetails =[PermissionConstant.JV_DETAILS_DELETE];
+    permissionDeleteJVDetails = [PermissionConstant.JV_DETAILS_DELETE];
+
     constructor(private journalVoucherService: JournalVoucherService,
                 private _matDialog: MatDialog) {
     }
@@ -127,7 +125,6 @@ export class JournalVoucherListComponent implements OnInit {
     markAsChecked() {
         let jvReferenceNumbers = [];
         if (this.journalVouchers && this.journalVouchers.length > 0) {
-            // console.log('journalVouchersjournalVouchersjournalVouchers', this.journalVouchers);
             this.journalVouchers.forEach(journalVoucher => {
                 if (journalVoucher.checked) {
                     jvReferenceNumbers.push(journalVoucher.id);
@@ -139,7 +136,7 @@ export class JournalVoucherListComponent implements OnInit {
             'jvReferenceNumbers': jvReferenceNumbers,
             'status': 'CHECKED'
         }).subscribe(data => {
-            // console.log('data', data);
+            console.log('data', data);
         });
     }
 
@@ -157,7 +154,7 @@ export class JournalVoucherListComponent implements OnInit {
             'jvReferenceNumbers': jvReferenceNumbers,
             'status': 'POSTED'
         }).subscribe(data => {
-            // console.log('data', data);
+            console.log('data', data);
         });
     }
 
@@ -175,7 +172,7 @@ export class JournalVoucherListComponent implements OnInit {
             'jvReferenceNumbers': jvReferenceNumbers,
             'status': 'NEW'
         }).subscribe(data => {
-            // console.log('data', data);
+            console.log('data', data);
         });
     }
 }
