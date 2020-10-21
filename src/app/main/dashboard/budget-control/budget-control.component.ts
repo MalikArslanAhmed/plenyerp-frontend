@@ -270,6 +270,108 @@ export class BudgetControlComponent implements OnInit {
         }
     }
 
+    copyToAll()
+    {
+        if(this.selectedRadioBudgetOption === 0)
+        {
+            if(this.budgetControlForm.value && this.budgetControlForm.value.month_1)
+            {
+                this.budgetControlForm.patchValue({
+                    month_2: this.budgetControlForm.value.month_1,
+                    month_3: this.budgetControlForm.value.month_1,
+                    month_4: this.budgetControlForm.value.month_1,
+                    month_5: this.budgetControlForm.value.month_1,
+                    month_6: this.budgetControlForm.value.month_1,
+                    month_7: this.budgetControlForm.value.month_1,
+                    month_8: this.budgetControlForm.value.month_1,
+                    month_9: this.budgetControlForm.value.month_1,
+                    month_10: this.budgetControlForm.value.month_1,
+                    month_11: this.budgetControlForm.value.month_1,
+                    month_12: this.budgetControlForm.value.month_1,
+                    
+                });
+            }
+            
+        }
+
+        if(this.selectedRadioBudgetOption === 1)
+        {
+            if(this.budgetControlForm.value && this.budgetControlForm.value.supplementary_month_1)
+            {
+                this.budgetControlForm.patchValue({
+                    supplementary_month_2: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_3: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_4: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_5: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_6: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_7: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_8: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_9: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_10: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_11: this.budgetControlForm.value.supplementary_month_1,
+                    supplementary_month_12: this.budgetControlForm.value.supplementary_month_1,
+                    
+                });
+            }
+        }
+       
+    }
+
+    split()
+    {
+        let month_data = 0;
+        let month_data_supplementary = 0;
+        if(this.selectedRadioBudgetOption === 0)
+        {
+            if(this.budgetControlForm.value && this.budgetControlForm.value.month_1)
+            {
+                month_data = Number(this.budgetControlForm.value.month_1/12);
+                month_data = Number(month_data.toFixed(2));
+                this.budgetControlForm.patchValue({
+                    month_1: month_data,
+                    month_2: month_data,
+                    month_3: month_data,
+                    month_4: month_data,
+                    month_5: month_data,
+                    month_6: month_data,
+                    month_7: month_data,
+                    month_8: month_data,
+                    month_9: month_data,
+                    month_10: month_data,
+                    month_11: month_data,
+                    month_12: month_data,
+                    
+                });
+            }
+            
+        }
+
+        if(this.selectedRadioBudgetOption === 1)
+        {
+            if(this.budgetControlForm.value && this.budgetControlForm.value.supplementary_month_1)
+            {
+                month_data_supplementary = Number(this.budgetControlForm.value.supplementary_month_1/12)
+                month_data_supplementary = Number(month_data_supplementary.toFixed(2));
+                
+                this.budgetControlForm.patchValue({
+                    supplementary_month_1: month_data_supplementary,
+                    supplementary_month_2: month_data_supplementary,
+                    supplementary_month_3: month_data_supplementary,
+                    supplementary_month_4: month_data_supplementary,
+                    supplementary_month_5: month_data_supplementary,
+                    supplementary_month_6: month_data_supplementary,
+                    supplementary_month_7: month_data_supplementary,
+                    supplementary_month_8: month_data_supplementary,
+                    supplementary_month_9: month_data_supplementary,
+                    supplementary_month_10: month_data_supplementary,
+                    supplementary_month_11: month_data_supplementary,
+                    supplementary_month_12: month_data_supplementary,
+                    
+                });
+            }
+        }
+    }
+
     getUpdateBudget() {
         if (this.budgetId) {
             this.budgetService.updateBudget(this.budgetId, this.getBudgetBreakupsDataFormat()).subscribe(val => {

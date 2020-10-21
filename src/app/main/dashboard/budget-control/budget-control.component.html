@@ -154,7 +154,11 @@
                                     <button (click)="getUpdateBudget()" class="add-row-btn" mat-button *ngIf="budgetId"> Update Row</button>
                                     <button (click)="cancelUpdate()" class="add-row-btn" mat-button *ngIf="budgetId"> Cancel</button>
                                 </div>
-                            </mat-card-header>
+                            </mat-card-header> 
+                            <div>
+                                <button (click)="copyToAll()" class="copy-all" mat-button >Copy to All</button>
+                                <button (click)="split()" class="copy-all" mat-button >Split</button>
+                            </div>
                             <mat-card-content *ngIf="selectedRadioBudgetOption === 0">
                                 <div class="main-budget-month">
                                     <div fxLayout="row" fxLayoutGap="10px">
