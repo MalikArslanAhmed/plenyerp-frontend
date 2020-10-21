@@ -62,15 +62,13 @@ export class TrialBalanceComponent implements OnInit {
             this.childTrialBalanceData = [];
             this.trialBalanceReportService.getTrailReport(params).subscribe(data => {
                 this.childTrialBalanceData = data.items
-                console.log("child",this.childTrialBalanceData);
             });
         }
     }
 
     addNote(economicSegmentId) {
-        console.log("abc",economicSegmentId)
         this.trialBalanceReportService.addNote(economicSegmentId, {}).subscribe(data => {
-            console.log('data', data);
+            this.getTrailBalanceData({});
         });
     }
 }

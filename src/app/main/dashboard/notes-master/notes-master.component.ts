@@ -52,6 +52,7 @@ export class NotesMasterComponent implements OnInit {
         this.trialBalanceReportService.getNotesData(params).subscribe(data => {
             this.chileNotesData = data.items
         });
+        this.getNotesMasterData({});
     });
   }
 
