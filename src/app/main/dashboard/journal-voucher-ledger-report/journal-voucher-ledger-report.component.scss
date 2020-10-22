@@ -1,26 +1,30 @@
-.submit-report {
-    background-color: #039be5 !important;
-    color: #fff !important;
-    height: 55px;
-    margin-top: 6px;
-    margin-left: 9px;
-}
+@import "src/@fuse/scss/fuse";
 
-.p-10px {
-    padding: 10px;
-}
-
-.mt-20px {
-    margin-top: 20px;
-}
-.width-200px {
-    width: 256px;
-    max-width: 256px !important;
-}
-.mt-13px {
-    margin-top: 13px;
-}
-
-.mb--15px {
-    margin-bottom: -15px !important;
+app-journal-voucher-ledger-report {
+    .submit-report {
+        background-color: #039be5 !important;
+        color: #fff !important;
+        height: 55px;
+        margin-top: 6px;
+        margin-left: 9px;
+    }
+    
+    .p-10px {
+        padding: 10px;
+    }
+    
+    .mt-20px {
+        margin-top: 20px;
+    }
+    .width-200px {
+        width: 256px;
+        max-width: 256px !important;
+    }
+    .mt-13px {
+        margin-top: 13px;
+    }
+    
+    .mb--15px {
+        margin-bottom: -15px !important;
+    }
 }
