@@ -705,6 +705,13 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/jv-ledger-report',
                         permissions: [PermissionConstant.JV_LEDGER_LIST]
+                    },
+                    {
+                        id: 'jv-ledger-sibling',
+                        title: 'JV Ledger Sibling',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/jv-ledger-sibling'
                     }
                 ]
             }

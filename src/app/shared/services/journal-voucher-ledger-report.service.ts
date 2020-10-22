@@ -18,5 +18,9 @@ export class JournalVoucherLedgerReportService extends BaseService{
   getJVLedgerReport(data): Observable<any> {
     return this.getRequest(AppUrl.GET_JV_LEDGER_REPORT(), data);
  }
+
+ getJVLedgerSiblingReport(data): Observable<any> {
+   return this.getRequest(AppUrl.GET_JV_LEDGER_SIBLING_REPORT(), data);
+ }
 }
  

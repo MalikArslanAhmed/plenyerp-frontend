@@ -1109,4 +1109,8 @@ export class AppUrl {
     static GET_NOTE_MASTER_DATA(): string {
         return AppUrl.API_URL + 'finance/notes-trial-report';
     }
+
+    static GET_JV_LEDGER_SIBLING_REPORT(): string {
+        return AppUrl.API_URL + 'finance/jv-sibling'
+    }
 }

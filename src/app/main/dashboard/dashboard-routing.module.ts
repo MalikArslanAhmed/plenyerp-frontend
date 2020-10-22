@@ -64,6 +64,7 @@ import {PermissionConstant} from 'app/shared/constants/permission-constant';
 import {TrialBalanceComponent} from "./trial-balance/trial-balance.component";
 import { JournalVoucherLedgerReportComponent } from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
 import { NotesMasterComponent } from './notes-master/notes-master.component';
+import { JvLedgerSiblingComponent } from './jv-ledger-sibling/jv-ledger-sibling.component';
 
 const routes: Routes = [
     {
@@ -644,6 +645,13 @@ const routes: Routes = [
         component: NotesMasterComponent,
         data: {
             title: 'Notes Master'
+        }
+    },
+    {
+        path: 'jv-ledger-sibling',
+        component: JvLedgerSiblingComponent,
+        data: {
+            title: 'JV Ledger Sibling Report'
         }
     }
 ];

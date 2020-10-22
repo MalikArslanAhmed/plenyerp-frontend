@@ -1,0 +1,159 @@
+<div id="journal-voucher" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                   Journal Voucher Ledger Sibling Report
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- Hello -->
+    <div class="content">
+        <div class="center p-24" fusePerfectScrollbar>
+            <div class="content">
+                <form [formGroup]="filterJVLegderSiblingReportForm"> 
+                    <mat-form-field class="width-200px p-10px mt-13px mb--15px" appearance="outline" fxFlex="100" (click)="economicSegmentSelect()">
+                        <mat-label>Economic Segment Name</mat-label>
+                        <mat-select formControlName="economicSegmentId" [disabled]="true">
+                            <mat-option [value]="economicSegment.id"
+                                        *ngFor="let economicSegment of economicSegments">{{economicSegment.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>From</mat-label>
+                        <input matInput [matDatepicker]="from"
+                               formControlName="fromDate">
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="from"></mat-datepicker-toggle>
+                        <mat-datepicker #from></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>To</mat-label>
+                        <input matInput [matDatepicker]="to"
+                               formControlName="toDate">
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="to"></mat-datepicker-toggle>
+                        <mat-datepicker #to></mat-datepicker>
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px mb--15px">
+                        <mat-label>Enter Corresponding ID</mat-label>
+                        <input matInput placeholder="ID here" formControlName="id" name="id" type="number">
+                    </mat-form-field> -->
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="submitReport()">
+                            Submit
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="content mt-20px">
+                <mat-accordion displayMode="flat" [multi]="false" class="mat-table accordion-table">
+                    <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                        <span class="mat-header-cell">JV Reference Number</span>
+                        <span class="mat-header-cell">Value Date</span>
+                        <span class="mat-header-cell">Line Reference</span>
+                        <span class="mat-header-cell">Line Narration</span>
+                        <span class="mat-header-cell">Credit</span>
+                        <span class="mat-header-cell">Debit</span>
+                        <span class="mat-header-cell">Balance</span>
+                    </section>
+                    <mat-expansion-panel *ngFor="let reportData of siblingReportData; let i = index">
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
+                                                    >
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.id}}.</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.jvValueDate}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.jvReference}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.transactionDetails}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.credit}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.debit}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
+                            </span>
+                        </mat-expansion-panel-header>
+                        <div class="mt-23px">
+                            <table class="simple invoice-table">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <div class="title">Account Name</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Line Reference</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Line Value</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Line Value Type</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Line Value</div>
+                                    </th>
+                                  
+                                </tr>
+                                </thead>
+                                <tbody
+                                    *ngIf="reportData['journalVoucherDetails'] && reportData['journalVoucherDetails'].length > 0; else noChildToShow">
+                                <tr *ngFor="let data of reportData['journalVoucherDetails']; let i = index">
+                                    <td>
+                                        <div class="title">
+                                            {{data?.accountName}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.lineReference}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.lineValue}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.lineValueType}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.lvLineValue}}
+                                        </div>
+                                    </td>
+                                    
+                                </tr>
+                                </tbody>
+                                <ng-template #noChildToShow>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-center" colspan="7">No data to show</td>
+                                    </tr>
+                                    </tbody>
+                                </ng-template>
+                            </table>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+      
+            </div>
+        </div>
+    </div>
+</div>
