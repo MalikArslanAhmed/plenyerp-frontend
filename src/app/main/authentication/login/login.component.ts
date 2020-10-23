@@ -110,12 +110,12 @@ export class LoginComponent implements OnInit {
     }
 
     navigateToAuthorizePage(roles) {
-        let roleArr = [];
+        /*let roleArr = [];
         if (roles && roles.length > 0) {
             roles.forEach(role => {
                 roleArr.push(role.id);
             });
-        }
+        }*/
         /*console.log('roles', roles);
         console.log('roleArr', roleArr);*/
         let navUrl = '/home';
