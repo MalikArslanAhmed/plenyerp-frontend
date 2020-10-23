@@ -118,9 +118,9 @@ export class LoginComponent implements OnInit {
         }
         /*console.log('roles', roles);
         console.log('roleArr', roleArr);*/
-        let navUrl = '/dashboard/qualification';
+        let navUrl = '/home';
 
-        if (roleArr.includes(AppConstants.ROLE_ID_HR)) {
+        /*if (roleArr.includes(AppConstants.ROLE_ID_HR)) {
             navUrl = '/dashboard/employees';
         } else if (roleArr.includes(AppConstants.ROLE_ID_ADMIN)) {
             navUrl = '/dashboard/admin-segments';
@@ -128,7 +128,7 @@ export class LoginComponent implements OnInit {
             navUrl = '/dashboard/store-setup-items';
         } else if (roleArr.includes(AppConstants.ROLE_ID_FINANCIAL)) {
             navUrl = '/dashboard/journal-voucher';
-        }
+        }*/
 
         // const navUrl = '/dashboard/qualification';
         // console.log('navUrl', navUrl);

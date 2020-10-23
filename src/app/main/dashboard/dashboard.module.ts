@@ -204,9 +204,9 @@ import {UserRolePermissionComponent} from './configurations/user-role-permission
 import {UpdateListModelComponent} from './update-list-model/update-list-model.component';
 import {TrialBalanceComponent} from './trial-balance/trial-balance.component';
 import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
-import { NotesMasterComponent } from './notes-master/notes-master.component';
-import { BalanceAmountModelComponent } from './journal-voucher/balance-amount-model/balance-amount-model.component';
-import { JvLedgerSiblingComponent } from './jv-ledger-sibling/jv-ledger-sibling.component';
+import {NotesMasterComponent} from './notes-master/notes-master.component';
+import {BalanceAmountModelComponent} from './journal-voucher/balance-amount-model/balance-amount-model.component';
+import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
 
 @NgModule({
     declarations: [

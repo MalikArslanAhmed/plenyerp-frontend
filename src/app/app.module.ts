@@ -8,13 +8,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {TranslateModule} from '@ngx-translate/core';
 import 'hammerjs';
-
 import {FuseModule} from '@fuse/fuse.module';
 import {FuseSharedModule} from '@fuse/shared.module';
 import {FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule} from '@fuse/components';
-
 import {fuseConfig} from 'app/fuse-config';
-
 import {AppComponent} from 'app/app.component';
 import {LayoutModule} from 'app/layout/layout.module';
 import {SampleModule} from 'app/main/sample/sample.module';
@@ -27,13 +24,12 @@ import {HtpInterceptor} from "./shared/services/interceptor.service";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 // import {DashboardModule} from './main/dashboard/dashboard.module';
-
 import {MomentDatePipe} from "./shared/pipes/moment-date.pipe";
 import {SharedModule} from './shared/shared.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {NumberToWordsPipe} from './shared/pipes/number-to-word.pipe';
 import {UnderscoreSeparatePipe} from './shared/pipes/underscore-separate.pipe';
-import { RouteGuard } from './shared/guards/route.guard';
+import {RouteGuard} from './shared/guards/route.guard';
 
 const appRoutes: Routes = [
     {
@@ -46,7 +42,7 @@ const appRoutes: Routes = [
     },
     {
         path: '**',
-        redirectTo: 'sample'
+        redirectTo: 'home'
     }
 ];
 

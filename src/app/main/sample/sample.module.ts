@@ -6,7 +6,7 @@ import {SampleComponent} from './sample.component';
 
 const routes = [
     {
-        path: 'sample',
+        path: 'home',
         component: SampleComponent
     }
 ];
