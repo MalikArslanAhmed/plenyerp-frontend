@@ -66,6 +66,7 @@ import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-repo
 import {NotesMasterComponent} from './notes-master/notes-master.component';
 import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
 import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
+import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
 
 const routes: Routes = [
     {
@@ -660,6 +661,13 @@ const routes: Routes = [
         component: StatementOfPositionComponent,
         data: {
             title: 'Statment of Position Report'
+        }
+    },
+    {
+        path: 'financial-performance',
+        component: FinancialPerformanceReportComponent,
+        data: {
+            title: 'Financial Performance Report'
         }
     }
 ];

@@ -719,6 +719,13 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/statement-of-position'
+                    },
+                    {
+                        id: 'financial-performance',
+                        title: 'Financial Performance',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/financial-performance'
                     }
                 ]
             }

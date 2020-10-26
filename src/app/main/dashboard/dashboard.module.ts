@@ -208,6 +208,7 @@ import {NotesMasterComponent} from './notes-master/notes-master.component';
 import {BalanceAmountModelComponent} from './journal-voucher/balance-amount-model/balance-amount-model.component';
 import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
 import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
+import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
 
 @NgModule({
     declarations: [
@@ -393,7 +394,8 @@ import { StatementOfPositionComponent } from './statement-of-position/statement-
         NotesMasterComponent,
         BalanceAmountModelComponent,
         JvLedgerSiblingComponent,
-        StatementOfPositionComponent
+        StatementOfPositionComponent,
+        FinancialPerformanceReportComponent
     ],
     imports: [
         CommonModule,

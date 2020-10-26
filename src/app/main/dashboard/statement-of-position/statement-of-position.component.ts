@@ -25,7 +25,7 @@ export class StatementOfPositionComponent implements OnInit {
     this.filterStatementOfPositionReportForm = this.fb.group({
       'from': ['', Validators.required],
       'to': ['', Validators.required]
-  });
+    });
     this.getStatementPositionData({});
   }
 
@@ -55,6 +55,6 @@ export class StatementOfPositionComponent implements OnInit {
           toDate: toDate
       };
       this.getStatementPositionData(params);
-  }
+    }
   }
 }

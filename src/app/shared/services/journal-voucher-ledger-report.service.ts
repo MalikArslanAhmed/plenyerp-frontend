@@ -26,5 +26,9 @@ export class JournalVoucherLedgerReportService extends BaseService{
  getStatementPositionReport(data): Observable<any> {
    return this.getRequest(AppUrl.GET_STATEMENT_POSITION_REPORT(), data);
  }
+
+ getFinanceStatementReport(data): Observable<any> {
+  return this.getRequest(AppUrl.GET_FINANCIAL_PEFROMANCE_REPORT(), data);
+ }
 }
  

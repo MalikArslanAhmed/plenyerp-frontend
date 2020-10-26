@@ -1117,4 +1117,8 @@ export class AppUrl {
     static GET_STATEMENT_POSITION_REPORT(): string {
         return AppUrl.API_URL +'finance/statement-of-position'
     }
+
+    static GET_FINANCIAL_PEFROMANCE_REPORT(): string {
+        return AppUrl.API_URL +'finance/financial-performance'
+    }
 }
