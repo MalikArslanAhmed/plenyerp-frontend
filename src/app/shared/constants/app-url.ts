@@ -1113,4 +1113,8 @@ export class AppUrl {
     static GET_JV_LEDGER_SIBLING_REPORT(): string {
         return AppUrl.API_URL + 'finance/jv-sibling'
     }
+
+    static GET_STATEMENT_POSITION_REPORT(): string {
+        return AppUrl.API_URL +'finance/statement-of-position'
+    }
 }

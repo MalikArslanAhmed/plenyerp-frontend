@@ -1,0 +1,198 @@
+<div id="journal-voucher" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                   Trial Balance Report
+                </span>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content">
+                <form [formGroup]="filterStatementOfPositionReportForm">
+
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>From</mat-label>
+                        <input matInput [matDatepicker]="from"
+                               formControlName="from">
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="from"></mat-datepicker-toggle>
+                        <mat-datepicker #from></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>To</mat-label>
+                        <input matInput [matDatepicker]="to"
+                               formControlName="to">
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="to"></mat-datepicker-toggle>
+                        <mat-datepicker #to></mat-datepicker>
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="filterStatementOfPosition()">
+                            Submit
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>                       
+                    </div>
+                </form>
+            </div>
+
+            <div class="content mt-20px">
+                <mat-accordion displayMode="flat" [multi]="false" class="mat-table accordion-table">
+                    <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                        <span class="mat-header-cell">Full Code</span>
+                        <span class="mat-header-cell">Line Code</span>
+                        <span class="mat-header-cell">Acc. Title</span>
+                        <span class="mat-header-cell">Balance</span>
+                    </section>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{assetData?.combinedCode}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{assetData?.individualCode}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{assetData?.name}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{assetData?.balance}}</p>
+                            </span>
+                        </mat-expansion-panel-header>
+
+                        <div class="mt-23px">
+                            <table class="simple invoice-table">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <div class="title">Full Code</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Line Code</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Acc. Title</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Balance</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody
+                                    *ngIf="statmentPositionData['asset'] && statmentPositionData['asset']['assetChild'] && statmentPositionData['asset']['assetChild'].length > 0; else noChildToShow">
+                                <tr *ngFor="let data of statmentPositionData['asset']['assetChild'];">
+                                    <td>
+                                        <div class="title">
+                                            {{data?.combinedCode}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.individualCode}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.name}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.balance}}
+                                        </div>
+                                    </td>
+                                   
+                                </tr>
+                                </tbody>
+                                <ng-template #noChildToShow>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-center" colspan="4">No data to show</td>
+                                    </tr>
+                                    </tbody>
+                                </ng-template>
+                            </table>
+                        </div>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{liabilitiesData?.combinedCode}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{liabilitiesData?.individualCode}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{liabilitiesData?.name}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{liabilitiesData?.balance}}</p>
+                            </span>
+                        </mat-expansion-panel-header>
+                        <div class="mt-23px">
+                            <table class="simple invoice-table">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <div class="title">Full Code</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Line Code</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Acc. Title</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Balance</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody
+                                    *ngIf="statmentPositionData['liabilities'] && statmentPositionData['liabilities']['liabilitiesChild'] && statmentPositionData['liabilities']['liabilitiesChild'].length > 0; else noChildToShow">
+                                <tr *ngFor="let data of statmentPositionData['liabilities']['liabilitiesChild'];">
+                                    <td>
+                                        <div class="title">
+                                            {{data?.combinedCode}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.individualCode}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.name}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title">
+                                            {{data?.balance}}
+                                        </div>
+                                    </td>
+                    
+                                </tr>
+                                </tbody>
+                                <ng-template #noChildToShow>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-center" colspan="4">No data to show</td>
+                                    </tr>
+                                    </tbody>
+                                </ng-template>
+                            </table>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </div>
+</div>

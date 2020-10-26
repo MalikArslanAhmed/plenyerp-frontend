@@ -207,6 +207,7 @@ import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-repo
 import {NotesMasterComponent} from './notes-master/notes-master.component';
 import {BalanceAmountModelComponent} from './journal-voucher/balance-amount-model/balance-amount-model.component';
 import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
+import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
 
 @NgModule({
     declarations: [
@@ -391,7 +392,8 @@ import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.co
         JournalVoucherLedgerReportComponent,
         NotesMasterComponent,
         BalanceAmountModelComponent,
-        JvLedgerSiblingComponent
+        JvLedgerSiblingComponent,
+        StatementOfPositionComponent
     ],
     imports: [
         CommonModule,

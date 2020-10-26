@@ -712,6 +712,13 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/jv-ledger-sibling'
+                    },
+                    {
+                        id: 'statement-of-position',
+                        title: 'Statement of Position Report',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/statement-of-position'
                     }
                 ]
             }

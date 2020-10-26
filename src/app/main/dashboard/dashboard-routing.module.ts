@@ -65,6 +65,7 @@ import {TrialBalanceComponent} from "./trial-balance/trial-balance.component";
 import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
 import {NotesMasterComponent} from './notes-master/notes-master.component';
 import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
+import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
 
 const routes: Routes = [
     {
@@ -652,6 +653,13 @@ const routes: Routes = [
         component: JvLedgerSiblingComponent,
         data: {
             title: 'JV Ledger Sibling Report'
+        }
+    },
+    {
+        path: 'statement-of-position',
+        component: StatementOfPositionComponent,
+        data: {
+            title: 'Statment of Position Report'
         }
     }
 ];
