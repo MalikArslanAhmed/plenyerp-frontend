@@ -11,14 +11,12 @@
                 </span>
             </div>
         </div>
-        
     </div>
 
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
                 <form [formGroup]="filterFinancialPerformanceReportForm">
-
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>From</mat-label>
                         <input matInput [matDatepicker]="from"
@@ -39,7 +37,7 @@
                         <button mat-button class="submit-report" (click)="filterFinancialPerformance()">
                             Submit
                             <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
-                        </button>                       
+                        </button>
                     </div>
                 </form>
             </div>
@@ -109,7 +107,7 @@
                                             {{data?.balance}}
                                         </div>
                                     </td>
-                                   
+
                                 </tr>
                                 </tbody>
                                 <ng-template #noChildToShow>
@@ -178,7 +176,6 @@
                                             {{data?.balance}}
                                         </div>
                                     </td>
-                    
                                 </tr>
                                 </tbody>
                                 <ng-template #noChildToShow>

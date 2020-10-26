@@ -11,14 +11,12 @@
                 </span>
             </div>
         </div>
-        
     </div>
 
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
                 <!-- <form [formGroup]="filterFinancialPerformanceReportForm">
-
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>From</mat-label>
                         <input matInput [matDatepicker]="from"
@@ -65,68 +63,67 @@
                         <span class="mat-header-cell">Total</span>
                     </section>
                     <ng-container
-                    *ngTemplateOutlet="recursiveListTmpl; context:{ data: data.data.revenue }"
+                        *ngTemplateOutlet="recursiveListTmpl; context:{ data: data.data.revenue }"
                     ></ng-container>
                 </mat-accordion>
-                
+
                 <ng-template #recursiveListTmpl let-data="data">
                     <mat-expansion-panel *ngFor="let item of data">
-                    <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
                         <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.name}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.combinedCode}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.january}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.february}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.march}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.april}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.may}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.june}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.july}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.august}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.september}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.october}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.november}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.december}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.previousYears}}</p>
                         </span>
-                        <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.total}}</p>
                         </span>
-                    </mat-expansion-panel-header>
-                   
-                    <div *ngIf="item.child?.length">
-                        <ng-container
-                        *ngTemplateOutlet="recursiveListTmpl; context:{ data: item.child }"
-                        ></ng-container>
-                    </div>
+                        </mat-expansion-panel-header>
+                        <div *ngIf="item.child?.length">
+                            <ng-container
+                                *ngTemplateOutlet="recursiveListTmpl; context:{ data: item.child }"
+                            ></ng-container>
+                        </div>
                     </mat-expansion-panel>
                 </ng-template>
             </div>
