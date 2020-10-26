@@ -67,6 +67,7 @@ import {NotesMasterComponent} from './notes-master/notes-master.component';
 import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
 import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
 import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
+import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
 
 const routes: Routes = [
     {
@@ -668,6 +669,13 @@ const routes: Routes = [
         component: FinancialPerformanceReportComponent,
         data: {
             title: 'Financial Performance Report'
+        }
+    },
+    {
+        path: 'monthly-activity',
+        component: MonthlyActivityComponent,
+        data: {
+            title: 'Monthly Activity Report'
         }
     }
 ];

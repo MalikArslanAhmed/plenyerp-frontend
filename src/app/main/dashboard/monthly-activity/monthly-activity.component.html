@@ -1,0 +1,135 @@
+<div id="journal-voucher" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                  Monthly Activity Report
+                </span>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content">
+                <!-- <form [formGroup]="filterFinancialPerformanceReportForm">
+
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>From</mat-label>
+                        <input matInput [matDatepicker]="from"
+                               formControlName="from">
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="from"></mat-datepicker-toggle>
+                        <mat-datepicker #from></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>To</mat-label>
+                        <input matInput [matDatepicker]="to"
+                               formControlName="to">
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="to"></mat-datepicker-toggle>
+                        <mat-datepicker #to></mat-datepicker>
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="filterFinancialPerformance()">
+                            Submit
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>                       
+                    </div>
+                </form> -->
+            </div>
+
+            <div class="content mt-20px">
+                <mat-accordion displayMode="flat" [multi]="false" class="mat-table accordion-table">
+                    <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                        <span class="mat-header-cell">Item</span>
+                        <span class="mat-header-cell">Full Code</span>
+                        <span class="mat-header-cell">January</span>
+                        <span class="mat-header-cell">February</span>
+                        <span class="mat-header-cell">March</span>
+                        <span class="mat-header-cell">April</span>
+                        <span class="mat-header-cell">May</span>
+                        <span class="mat-header-cell">June</span>
+                        <span class="mat-header-cell">July</span>
+                        <span class="mat-header-cell">August</span>
+                        <span class="mat-header-cell">September</span>
+                        <span class="mat-header-cell">October</span>
+                        <span class="mat-header-cell">November</span>
+                        <span class="mat-header-cell">December</span>
+                        <span class="mat-header-cell">Previous Year</span>
+                        <span class="mat-header-cell">Total</span>
+                    </section>
+                    <ng-container
+                    *ngTemplateOutlet="recursiveListTmpl; context:{ data: data.data.revenue }"
+                    ></ng-container>
+                </mat-accordion>
+                
+                <ng-template #recursiveListTmpl let-data="data">
+                    <mat-expansion-panel *ngFor="let item of data">
+                    <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.name}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.combinedCode}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.january}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.february}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.march}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.april}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.may}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.june}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.july}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.august}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.september}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.october}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.november}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.december}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.previousYears}}</p>
+                        </span>
+                        <span class="mat-cell align-items-center">
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.total}}</p>
+                        </span>
+                    </mat-expansion-panel-header>
+                   
+                    <div *ngIf="item.child?.length">
+                        <ng-container
+                        *ngTemplateOutlet="recursiveListTmpl; context:{ data: item.child }"
+                        ></ng-container>
+                    </div>
+                    </mat-expansion-panel>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

@@ -726,6 +726,13 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/financial-performance'
+                    },
+                    {
+                        id: 'monthly-activity',
+                        title: 'Monthly Activity',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/monthly-activity'
                     }
                 ]
             }

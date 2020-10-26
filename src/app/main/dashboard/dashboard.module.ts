@@ -209,6 +209,7 @@ import {BalanceAmountModelComponent} from './journal-voucher/balance-amount-mode
 import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
 import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
 import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
+import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
 
 @NgModule({
     declarations: [
@@ -395,7 +396,8 @@ import { FinancialPerformanceReportComponent } from './financial-performance-rep
         BalanceAmountModelComponent,
         JvLedgerSiblingComponent,
         StatementOfPositionComponent,
-        FinancialPerformanceReportComponent
+        FinancialPerformanceReportComponent,
+        MonthlyActivityComponent
     ],
     imports: [
         CommonModule,
