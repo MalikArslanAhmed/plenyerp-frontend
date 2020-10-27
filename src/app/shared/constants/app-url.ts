@@ -1121,4 +1121,8 @@ export class AppUrl {
     static GET_FINANCIAL_PEFROMANCE_REPORT(): string {
         return AppUrl.API_URL +'finance/financial-performance'
     }
+
+    static GET_MONTHLY_ACTIVITY_REPORT(): string {
+        return AppUrl.API_URL + 'finance/monthly-activity'
+    }
 }

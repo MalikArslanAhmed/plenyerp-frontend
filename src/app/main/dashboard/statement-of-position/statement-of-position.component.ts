@@ -15,6 +15,8 @@ import * as moment from 'moment';
 export class StatementOfPositionComponent implements OnInit {
     filterStatementOfPositionReportForm: FormGroup;
     statmentPositionData = [];
+    childStatementPositionData = [];
+    
     assetData: any;
     liabilitiesData: any;
 
@@ -30,13 +32,17 @@ export class StatementOfPositionComponent implements OnInit {
         });
         this.getStatementPositionData({});
     }
-
+ 
     getStatementPositionData(params) {
         this.jvLedgerReportService.getStatementPositionReport(params).subscribe(data => {
-            this.statmentPositionData = data;
-            this.assetData = this.statmentPositionData['asset'];
-            this.liabilitiesData = this.statmentPositionData['liabilities'];
+            this.statmentPositionData = data.items;
+            // this.assetData = this.statmentPositionData['asset'];
+            // this.liabilitiesData = this.statmentPositionData['liabilities'];
         });
+    }
+
+    getChildReportData(data) {
+        console.log("da",data);
     }
 
     filterStatementOfPosition() {

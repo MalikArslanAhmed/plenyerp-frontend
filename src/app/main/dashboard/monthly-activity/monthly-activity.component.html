@@ -59,17 +59,17 @@
                         <span class="mat-header-cell">October</span>
                         <span class="mat-header-cell">November</span>
                         <span class="mat-header-cell">December</span>
-                        <span class="mat-header-cell">Previous Year</span>
-                        <span class="mat-header-cell">Total</span>
+                        <!-- <span class="mat-header-cell">Previous Year</span>
+                        <span class="mat-header-cell">Total</span> -->
                     </section>
                     <ng-container
-                        *ngTemplateOutlet="recursiveListTmpl; context:{ data: data.data.revenue }"
+                        *ngTemplateOutlet="recursiveListTmpl; context:{ data: data }"
                     ></ng-container>
                 </mat-accordion>
 
                 <ng-template #recursiveListTmpl let-data="data">
-                    <mat-expansion-panel *ngFor="let item of data">
-                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                    <mat-expansion-panel *ngFor="let item of data; let i=index">
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row" (click)="getChildData(item.id,i)">
                         <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.name}}</p>
                         </span>
@@ -77,47 +77,47 @@
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.combinedCode}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.january}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month1}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.february}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month2}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.march}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month3}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.april}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month4}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.may}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month5}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.june}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month6}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.july}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month7}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.august}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month8}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.september}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month9}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.october}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month10}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.november}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month11}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.december}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month12}}</p>
                         </span>
-                            <span class="mat-cell align-items-center">
+                            <!-- <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.previousYears}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.total}}</p>
-                        </span>
+                        </span> -->
                         </mat-expansion-panel-header>
                         <div *ngIf="item.child?.length">
                             <ng-container

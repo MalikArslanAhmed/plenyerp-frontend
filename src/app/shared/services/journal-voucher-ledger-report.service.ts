@@ -30,5 +30,9 @@ export class JournalVoucherLedgerReportService extends BaseService{
  getFinanceStatementReport(data): Observable<any> {
   return this.getRequest(AppUrl.GET_FINANCIAL_PEFROMANCE_REPORT(), data);
  }
+
+ getMonthlyActivityReport(data): Observable<any> {
+   return this.getRequest(AppUrl.GET_MONTHLY_ACTIVITY_REPORT(), data);
+ }
 }
  
