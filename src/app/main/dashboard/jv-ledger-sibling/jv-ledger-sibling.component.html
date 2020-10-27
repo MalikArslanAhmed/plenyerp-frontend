@@ -65,7 +65,7 @@
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of siblingReportData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
-                                                    >
+                                                    (click) = "getChildReportData(reportData)">
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.id}}.</p>
                             </span>
@@ -79,13 +79,13 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.transactionDetails}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.credit}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'CREDIT') ? reportData?.lvLineValue : '-' }}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.debit}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'DEBIT') ? reportData?.lvLineValue : '-' }}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.lvLineValue}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -93,51 +93,50 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        <div class="title">Account Name</div>
+                                        <div class="title">Reference No</div>
                                     </th>
                                     <th>
-                                        <div class="title">Line Reference</div>
+                                        <div class="title">Full Code</div>
                                     </th>
                                     <th>
-                                        <div class="title">Line Value</div>
+                                        <div class="title">Title</div>
                                     </th>
                                     <th>
-                                        <div class="title">Line Value Type</div>
-                                    </th>
+                                        <div class="title">Debit</div>
+                                    </th>                                      
                                     <th>
-                                        <div class="title">Line Value</div>
-                                    </th>
-                                  
+                                        <div class="title">Credit</div>
+                                    </th>                                                                  
                                 </tr>
-                                </thead>
+                                </thead> 
                                 <tbody
-                                    *ngIf="reportData['journalVoucherDetails'] && reportData['journalVoucherDetails'].length > 0; else noChildToShow">
-                                <tr *ngFor="let data of reportData['journalVoucherDetails']; let i = index">
+                                    *ngIf="childSiblingReportData && childSiblingReportData.length > 0; else noChildToShow">
+                                <tr *ngFor="let data of childSiblingReportData; let i = index">
                                     <td>
                                         <div class="title">
-                                            {{data?.accountName}}
+                                            {{data?.journalVoucherId}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.lineReference}}
+                                            {{data?.combinedCode}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.lineValue}}
+                                            {{data?.name}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.lineValueType}}
+                                            {{(data.lineValueType && data.lineValueType === 'CREDIT') ? data?.lvLineValue : '-' }}
                                         </div>
-                                    </td>
+                                    </td>                                   
                                     <td>
                                         <div class="title">
-                                            {{data?.lvLineValue}}
+                                            {{(data.lineValueType && data.lineValueType === 'CREDIT') ? data?.lvLineValue : '-' }}
                                         </div>
-                                    </td>
+                                    </td>                           
                                     
                                 </tr>
                                 </tbody>

@@ -19,6 +19,7 @@ export class JvLedgerSiblingComponent implements OnInit {
   filterJVLegderSiblingReportForm: FormGroup;
   economicSegments = [];
   siblingReportData = [];
+  childSiblingReportData = [];
   constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
                 private fb: FormBuilder,
                 private alertService: AlertService,
@@ -83,5 +84,17 @@ export class JvLedgerSiblingComponent implements OnInit {
     this.jvLedgerReportService.getJVLedgerSiblingReport(params).subscribe(data=>{
       this.siblingReportData = data.items;
     });
+  }
+
+  getChildReportData(data) {
+    const params = {}
+    if (data && data.id && data.journalVoucherId) {
+      params['journalVoucherId'] = data.journalVoucherId
+      params['jvDetailId'] = data.id;
+      params['economicSegmentId'] = this.filterJVLegderSiblingReportForm.value.economicSegmentId;
+      this.jvLedgerReportService.getJVLedgerSiblingReport(params).subscribe(data => {
+        this.childSiblingReportData = data.items;
+      });
+    }
   }
 }
