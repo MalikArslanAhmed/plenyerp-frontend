@@ -16,9 +16,6 @@ export class StatementOfPositionComponent implements OnInit {
     filterStatementOfPositionReportForm: FormGroup;
     statmentPositionData = [];
     childStatementPositionData = [];
-    
-    assetData: any;
-    liabilitiesData: any;
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
                 private fb: FormBuilder,
@@ -42,7 +39,14 @@ export class StatementOfPositionComponent implements OnInit {
     }
 
     getChildReportData(data) {
-        console.log("da",data);
+        const params = {};
+        if (data && data.id) {
+            params['parentId'] = data.id;
+            this.childStatementPositionData = [];
+            this.jvLedgerReportService.getStatementPositionReport(params).subscribe(data => {
+                this.childStatementPositionData = data.items;
+            })
+        }
     }
 
     filterStatementOfPosition() {

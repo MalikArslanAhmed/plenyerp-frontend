@@ -15,8 +15,7 @@ import * as moment from 'moment';
 export class FinancialPerformanceReportComponent implements OnInit {
     filterFinancialPerformanceReportForm: FormGroup;
     financialPerformaceData = [];
-    revenueData: any;
-    expenditureData: any;
+    childFinancialPerformanceData = [];
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
                 private fb: FormBuilder,
@@ -33,10 +32,18 @@ export class FinancialPerformanceReportComponent implements OnInit {
 
     getFinancialPerformanceData(params) {
         this.jvLedgerReportService.getFinanceStatementReport(params).subscribe(data => {
-            this.financialPerformaceData = data;
-            this.revenueData = this.financialPerformaceData['revenue'];
-            this.expenditureData = this.financialPerformaceData['expenditure'];
+            this.financialPerformaceData = data.items;
         });
+    }
+    getChildReportData(data) {
+        const params = {}
+        if (data && data.id) {
+            params['parentId'] = data.id;
+            this.childFinancialPerformanceData = [];
+            this.jvLedgerReportService.getFinanceStatementReport(params).subscribe(data => {
+                this.childFinancialPerformanceData = data.items
+            })
+        }
     }
 
     filterFinancialPerformance() {

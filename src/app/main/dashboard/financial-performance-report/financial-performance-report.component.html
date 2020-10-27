@@ -7,16 +7,56 @@
                           [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                   Financial Performance Report
+                   Statement of Position Report
                 </span>
             </div>
         </div>
+        <!-- <div fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field appearance="outline" fxFlex class="mt-13px" id="fromToDate">
+                <mat-label>From</mat-label>
+                <input matInput [matDatepicker]="from"
+                       >
+                <mat-datepicker-toggle matSuffix
+                                       [for]="from"></mat-datepicker-toggle>
+                <mat-datepicker #from></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field appearance="outline" fxFlex class="mt-13px">
+                <mat-label>To</mat-label>
+                <input matInput [matDatepicker]="to"
+                       >
+                <mat-datepicker-toggle matSuffix
+                                       [for]="to"></mat-datepicker-toggle>
+                <mat-datepicker #to></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center">
+            <button mat-icon-button 
+                       >Submit
+                    <mat-icon class="amber-600-fg">play_arrow</mat-icon>
+                </button>
+        </div> -->
+
+        <!-- SEARCH -->
+        <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
+            <div class="search-wrapper mt-16 mt-sm-0">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input [formControl]="searchInput" placeholder="Search for a contact">
+                </div>
+            </div>
+        </div>-->
+        <!-- / SEARCH -->
     </div>
 
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
                 <form [formGroup]="filterFinancialPerformanceReportForm">
+
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>From</mat-label>
                         <input matInput [matDatepicker]="from"
@@ -38,7 +78,19 @@
                             Submit
                             <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
                         </button>
+                        <!-- <button class="submit-report" mat-button> Submit</button> -->
+                        <!-- <button mat-icon-button
+                        >Submit
+                     <mat-icon class="material-icons f_20 cursor-pointer blueColor">play_arrow</mat-icon>
+                 </button> -->
                     </div>
+
+                    <!-- <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-icon-button
+                        >Submit
+                     <mat-icon class="amber-600-fg">play_arrow</mat-icon>
+                 </button>
+                    </mat-form-field> -->
                 </form>
             </div>
 
@@ -47,92 +99,23 @@
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell">Full Code</span>
                         <span class="mat-header-cell">Line Code</span>
-                        <span class="mat-header-cell">Acc. Title</span>
+                        <span class="mat-header-cell">Acc. Title </span>
                         <span class="mat-header-cell">Balance</span>
-                    </section>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                    </section> 
+                    <mat-expansion-panel *ngFor="let reportData of financialPerformaceData">
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
+                                                    (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{revenueData?.combinedCode}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.combinedCode}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{revenueData?.individualCode}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.individualCode}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{revenueData?.name}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.name}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{revenueData?.balance}}</p>
-                            </span>
-                        </mat-expansion-panel-header>
-
-                        <div class="mt-23px">
-                            <table class="simple invoice-table">
-                                <thead>
-                                <tr>
-                                    <th>
-                                        <div class="title">Full Code</div>
-                                    </th>
-                                    <th>
-                                        <div class="title">Line Code</div>
-                                    </th>
-                                    <th>
-                                        <div class="title">Acc. Title</div>
-                                    </th>
-                                    <th>
-                                        <div class="title">Balance</div>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody
-                                    *ngIf="financialPerformaceData['revenue'] && financialPerformaceData['revenue']['revenueChild'] && financialPerformaceData['revenue']['revenueChild'].length > 0; else noChildToShow">
-                                <tr *ngFor="let data of financialPerformaceData['revenue']['revenueChild'];">
-                                    <td>
-                                        <div class="title">
-                                            {{data?.combinedCode}}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="title">
-                                            {{data?.individualCode}}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="title">
-                                            {{data?.name}}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="title">
-                                            {{data?.balance}}
-                                        </div>
-                                    </td>
-
-                                </tr>
-                                </tbody>
-                                <ng-template #noChildToShow>
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-center" colspan="4">No data to show</td>
-                                    </tr>
-                                    </tbody>
-                                </ng-template>
-                            </table>
-                        </div>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{expenditureData?.combinedCode}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{expenditureData?.individualCode}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{expenditureData?.name}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{expenditureData?.balance}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -154,8 +137,8 @@
                                 </tr>
                                 </thead>
                                 <tbody
-                                    *ngIf="financialPerformaceData['expenditure'] && financialPerformaceData['expenditure']['expenditureChild'] && financialPerformaceData['expenditure']['expenditureChild'].length > 0; else noChildToShow">
-                                <tr *ngFor="let data of financialPerformaceData['expenditure']['expenditureChild'];">
+                                    *ngIf="childFinancialPerformanceData && childFinancialPerformanceData.length > 0; else noChildToShow">
+                                <tr *ngFor="let data of childFinancialPerformanceData; let i = index">
                                     <td>
                                         <div class="title">
                                             {{data?.combinedCode}}
@@ -186,7 +169,7 @@
                                     </tbody>
                                 </ng-template>
                             </table>
-                        </div>
+                        </div> 
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>

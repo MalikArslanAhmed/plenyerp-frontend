@@ -11,45 +11,6 @@
                 </span>
             </div>
         </div>
-        <!-- <div fxLayout="row" fxLayoutAlign="center">
-            <mat-form-field appearance="outline" fxFlex class="mt-13px" id="fromToDate">
-                <mat-label>From</mat-label>
-                <input matInput [matDatepicker]="from"
-                       >
-                <mat-datepicker-toggle matSuffix
-                                       [for]="from"></mat-datepicker-toggle>
-                <mat-datepicker #from></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="center">
-            <mat-form-field appearance="outline" fxFlex class="mt-13px">
-                <mat-label>To</mat-label>
-                <input matInput [matDatepicker]="to"
-                       >
-                <mat-datepicker-toggle matSuffix
-                                       [for]="to"></mat-datepicker-toggle>
-                <mat-datepicker #to></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="center">
-            <button mat-icon-button 
-                       >Submit
-                    <mat-icon class="amber-600-fg">play_arrow</mat-icon>
-                </button>
-        </div> -->
-
-        <!-- SEARCH -->
-        <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
-            <div class="search-wrapper mt-16 mt-sm-0">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
-                    <input [formControl]="searchInput" placeholder="Search for a contact">
-                </div>
-            </div>
-        </div>-->
-        <!-- / SEARCH -->
     </div>
 
     <div class="content">
@@ -77,20 +38,8 @@
                         <button mat-button class="submit-report" (click)="filterStatementOfPosition()">
                             Submit
                             <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
-                        </button>
-                        <!-- <button class="submit-report" mat-button> Submit</button> -->
-                        <!-- <button mat-icon-button
-                        >Submit
-                     <mat-icon class="material-icons f_20 cursor-pointer blueColor">play_arrow</mat-icon>
-                 </button> -->
+                        </button>                       
                     </div>
-
-                    <!-- <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <button mat-icon-button
-                        >Submit
-                     <mat-icon class="amber-600-fg">play_arrow</mat-icon>
-                 </button>
-                    </mat-form-field> -->
                 </form>
             </div>
 
@@ -118,7 +67,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
                             </span>
                         </mat-expansion-panel-header>
-                        <!-- <div class="mt-23px">
+                        <div class="mt-23px">
                             <table class="simple invoice-table">
                                 <thead>
                                 <tr>
@@ -141,27 +90,17 @@
                                 <tr *ngFor="let data of childStatementPositionData; let i = index">
                                     <td>
                                         <div class="title">
-                                            {{data?.economicSegment?.combinedCode}}
+                                            {{data?.combinedCode}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.economicSegment?.individualCode}}
+                                            {{data?.individualCode}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.economicSegment?.name}}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="title">
-                                            {{data?.credit}}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="title">
-                                            {{data?.debit}}
+                                            {{data?.name}}
                                         </div>
                                     </td>
                                     <td>
@@ -174,12 +113,12 @@
                                 <ng-template #noChildToShow>
                                     <tbody>
                                     <tr>
-                                        <td class="text-center" colspan="7">No data to show</td>
+                                        <td class="text-center" colspan="4">No data to show</td>
                                     </tr>
                                     </tbody>
                                 </ng-template>
                             </table>
-                        </div> -->
+                        </div> 
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>
