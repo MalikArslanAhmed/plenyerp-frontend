@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '@fuse/animations';
-import { JournalVoucherLedgerReportService } from 'app/shared/services/journal-voucher-ledger-report.service';
+import {JournalVoucherLedgerReportService} from 'app/shared/services/journal-voucher-ledger-report.service';
 
 @Component({
     selector: 'app-monthly-activity',
@@ -11,7 +11,7 @@ import { JournalVoucherLedgerReportService } from 'app/shared/services/journal-v
 })
 export class MonthlyActivityComponent implements OnInit {
     // panelOpenState = false;
-    data =[];
+    data = [];
     childData = [];
     // data = {
     //     "message": "Resource created/Updated",
@@ -150,29 +150,27 @@ export class MonthlyActivityComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.getMonthlyActivityData({});
+        this.getMonthlyActivityData({});
         //console.log("month",this.data)
     }
-    getMonthlyActivityData(params)
-    {
-      this.jvLedgerReportService.getMonthlyActivityReport(params).subscribe(data => {
-        this.data = data.items
-        //console.log("data",this.data);
-      })
+
+    getMonthlyActivityData(params) {
+        this.jvLedgerReportService.getMonthlyActivityReport(params).subscribe(data => {
+            this.data = data.items
+            //console.log("data",this.data);
+        })
     }
 
-    getChildData(id,index)
-    {
-      console.log('id',id);
-      console.log('index',index);
-      const params ={};
-      params['parentId'] = id;
-      this.jvLedgerReportService.getMonthlyActivityReport(params).subscribe(data => {
-        this.childData = data.items
-       // console.log("childData",this.childData);
-        this.data[index]['child']= this.childData;
-        //console.log("after",this.data);
-      })
+    getChildData(id, index) {
+        console.log('id', id);
+        console.log('index', index);
+        const params = {};
+        params['parentId'] = id;
+        this.jvLedgerReportService.getMonthlyActivityReport(params).subscribe(data => {
+            this.childData = data.items
+            // console.log("childData",this.childData);
+            this.data[index]['child'] = this.childData;
+            //console.log("after",this.data);
+        })
     }
-
 }

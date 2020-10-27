@@ -91,7 +91,7 @@ export class JvLedgerSiblingComponent implements OnInit {
     if (data && data.id && data.journalVoucherId) {
       params['journalVoucherId'] = data.journalVoucherId
       params['jvDetailId'] = data.id;
-      params['economicSegmentId'] = this.filterJVLegderSiblingReportForm.value.economicSegmentId;
+      params['economicSegmentId'] = this.filterJVLegderSiblingReportForm.value.economicSegmentId;;
       this.jvLedgerReportService.getJVLedgerSiblingReport(params).subscribe(data => {
         this.childSiblingReportData = data.items;
       });

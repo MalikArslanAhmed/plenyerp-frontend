@@ -13,6 +13,7 @@ import * as moment from "moment";
 import {JournalVoucherService} from "../../../../shared/services/journal-voucher.service";
 import {CurrencyService} from "../../../../shared/services/currency.service";
 import {BalanceAmountModelComponent} from '../balance-amount-model/balance-amount-model.component';
+import {AlertService} from "../../../../shared/services/alert.service";
 
 @Component({
     selector: 'app-journal-voucher-create',
@@ -47,7 +48,8 @@ export class JournalVoucherCreateComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private globalService: GlobalService,
                 private journalVoucherService: JournalVoucherService,
-                private currencyService: CurrencyService) {
+                private currencyService: CurrencyService,
+                private alertService: AlertService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit New Journal Voucher';
@@ -306,6 +308,26 @@ export class JournalVoucherCreateComponent implements OnInit {
             'functionSegmentCode': this.functionSegments[0] && this.functionSegments[0].id ? this.functionSegments[0].id : '',
             'geoCodeSegmentCode': this.geoCodeSegments[0] && this.geoCodeSegments[0].id ? this.geoCodeSegments[0].id : ''
         };
+
+        if (params['adminSegmentName'] === '') {
+            this.alertService.showErrors('Admin Segment can\'t be blank');
+            return;
+        } else if (params['fundSegmentName'] === '') {
+            this.alertService.showErrors('Fund Segment can\'t be blank');
+            return;
+        } else if (params['economicSegmentName'] === '') {
+            this.alertService.showErrors('Economic Segment can\'t be blank');
+            return;
+        } else if (params['programmeSegmentName'] === '') {
+            this.alertService.showErrors('Program Segment can\'t be blank');
+            return;
+        } else if (params['functionSegmentName'] === '') {
+            this.alertService.showErrors('Function Segment can\'t be blank');
+            return;
+        } else if (params['geoCodeSegmentName'] === '') {
+            this.alertService.showErrors('Geo Code Segment can\'t be blank');
+            return;
+        }
 
         if (this.jvDetail && this.jvDetail.length > 0) {
             let debitTotal = 0;
