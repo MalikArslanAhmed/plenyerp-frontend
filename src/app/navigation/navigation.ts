@@ -682,14 +682,14 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/trial-balance',
                         permissions: [PermissionConstant.TRAIL_BALANCE_LIST]
                     },
-                    {
+                    /*{
                         id: 'others',
                         title: 'Others',
                         roles: [],
                         type: 'item',
                         url: 'dashboard/others',
                         permissions: [PermissionConstant.TRAIL_BALANCE_LIST]
-                    },
+                    },*/
                     {
                         id: 'notes-master',
                         title: 'Notes Master',
