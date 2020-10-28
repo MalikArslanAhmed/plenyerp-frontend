@@ -256,12 +256,12 @@
                                 <div *ngIf="selectedRadioBudgetOption === 0" class="main-budget-month">
                                     <div fxLayout="row" fxLayoutGap="10px">
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Budget Amount(if any)</mat-label>
+                                            <mat-label>Cumulative Previous Years Budget Amount</mat-label>
                                             <input formControlName="cumulativePreviousYearAmount" matInput
                                                    placeholder="enter in local currency">
                                         </mat-form-field>
                                         <mat-form-field appearance="outline" fxFlex>
-                                            <mat-label>Budget Amount[Pr. Yr. Actual]</mat-label>
+                                            <mat-label>Previous Years Actual Amount</mat-label>
                                             <input formControlName="cumulativePreviousYearActualAmount" matInput
                                                    placeholder="enter in local currency">
                                         </mat-form-field>
@@ -272,12 +272,16 @@
                                 <div class="main-budget-month">
                                     <div>
                                         <button (click)="copyToAll()" class="copy-all"
-                                                [class.disabled]="this.budgetControlForm.value.supplementary_month_1 === ''" mat-button
-                                                [disabled]="this.budgetControlForm.value.supplementary_month_1 === ''">Copy to All
+                                                [class.disabled]="this.budgetControlForm.value.supplementary_month_1 === ''"
+                                                mat-button
+                                                [disabled]="this.budgetControlForm.value.supplementary_month_1 === ''">
+                                            Copy to All
                                         </button>
                                         <button (click)="split()" class="copy-all"
-                                                [class.disabled]="this.budgetControlForm.value.supplementary_month_1 === ''" mat-button
-                                                [disabled]="this.budgetControlForm.value.supplementary_month_1 === ''">Split
+                                                [class.disabled]="this.budgetControlForm.value.supplementary_month_1 === ''"
+                                                mat-button
+                                                [disabled]="this.budgetControlForm.value.supplementary_month_1 === ''">
+                                            Split
                                         </button>
                                     </div>
                                     <div fxLayout="row" fxLayoutGap="10px">
@@ -470,88 +474,115 @@
                                             class="text-truncate">{{(budget.programSegment && budget.programSegment.name) ? budget.programSegment?.name : (budget.economicSegment && budget.economicSegment.name) ? budget.economicSegment?.name : '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.previousYearAmount}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.previousYearAmount | number : '1.2-2'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.previousYearActualAmount}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.previousYearActualAmount | number : '1.2-2'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.totalSupplementaryBudget}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.totalSupplementaryBudget | number : '1.2-2'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.totalBudget}}</span>
+                                        <span class="text-truncate">{{budget?.totalBudget | number : '1.2-2'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month1MainBudget}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month1MainBudget | number : '1.2-2'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month1SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month1SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month2MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month2MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month2SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month2SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month3MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month3MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month3SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month3SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month4MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month4MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month4SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month4SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month5MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month5MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month5SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month5SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month6MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month6MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month6SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month6SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month7MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month7MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month7SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month7SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month8MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month8MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month8SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month8SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month9MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month9MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month9SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month9SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month10MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month10MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month10SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month10SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month11MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month11MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month11SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month11SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month12MainBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month12MainBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
-                                        <span class="text-truncate">{{budget?.month12SupplementaryBudget || '-'}}</span>
+                                        <span
+                                            class="text-truncate">{{budget?.month12SupplementaryBudget | number : '1.2-2' || '-'}}</span>
                                     </td>
                                     <td class="table-data">
                                         <div fxFlex="row" fxLayoutAlign="end center">
@@ -560,8 +591,6 @@
                                                     style="color: blue">
                                                 <mat-icon class="material-icons">edit</mat-icon>
                                             </button>
-
-
                                             <button (click)="deleteItemModal(budget)" aria-label="Toggle star"
                                                     mat-icon-button
                                                     style="color: red">
@@ -569,7 +598,6 @@
                                             </button>
                                         </div>
                                     </td>
-
                                 </tr>
                                 </tbody>
                                 <ng-template #noBudgetControlList>
@@ -584,250 +612,6 @@
                             </table>
                         </div>
                     </mat-grid-list>
-                    <div fxLayout="row">
-                        <!--<mat-card class="width-100-per"
-                                  style="border: 2px solid #e2e2e2; margin-bottom: 2rem; padding: 0">
-                            <div fxLayout="column" fxLayoutGap="5px" fxFlex="100">
-                                <div fxFlex="100">
-                                    <div class="budget-control-container" style="overflow-x: scroll!important;">
-                                        <table mat-table [@animateStagger]="{value:'50'}"
-                                               [dataSource]="budgetControlList" class="width-100-per">
-                                            <ng-container matColumnDef="sno">
-                                                <mat-header-cell *matHeaderCellDef>S.No.</mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate">
-                                                        {{item.sno}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-
-                                            <ng-container matColumnDef="fullCode">
-                                                <mat-header-cell *matHeaderCellDef>Full Code</mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate">
-                                                        {{item?.fullCode}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="lineCode">
-                                                <mat-header-cell *matHeaderCellDef>Line Code</mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate">
-                                                        {{item?.lineCode}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="title">
-                                                <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.title}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Pr_Yr_budget">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Pr. Yr. budget
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.pr_Yr_budget}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="Pr_Yr_actual">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Pr. Yr. actual
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.pr_Yr_actual}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="supplementary_budget">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Supplementary Budget
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.supplementary_budget}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="total_Budget">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Total Budget
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.total_Budget}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_1">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month1
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_1}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_2">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month2
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_2}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_3">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month3
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_3}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_4">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month4
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_4}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_5">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month5
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_5}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_6">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month6
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_6}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_7">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month7
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_7}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_8">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month8
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_8}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_9">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month9
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_9}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_10">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month10
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_10}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_11">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month11
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_11}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-                                            <ng-container matColumnDef="month_12">
-                                                <mat-header-cell *matHeaderCellDef>
-                                                    <div fxFlex="row" fxLayoutAlign="end center"
-                                                         style="margin-right: 28px">Month12
-                                                    </div>
-                                                </mat-header-cell>
-                                                <mat-cell *matCellDef="let item">
-                                                    <p class="phone text-truncate ml-1">
-                                                        {{item?.month_12}}
-                                                    </p>
-                                                </mat-cell>
-                                            </ng-container>
-
-                                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                                            <mat-row *matRowDef="let item; columns: displayedColumns;" class="contact"
-                                                     [@animate]="{value:'*',params:{y:'100%'}}">
-                                            </mat-row>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-card>-->
-                    </div>
                 </form>
             </div>
         </div>

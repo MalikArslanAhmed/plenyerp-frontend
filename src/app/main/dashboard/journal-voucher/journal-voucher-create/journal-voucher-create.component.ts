@@ -353,6 +353,8 @@ export class JournalVoucherCreateComponent implements OnInit {
                 tempCreditTotal = tempCreditTotal + creditTotal;
                 if (tempCreditTotal === debitTotal) {
                     this.jvDetail.push(params);
+                    this.addDetails = false;
+                    this.addDetailForm.reset();
                 }
                 if (tempCreditTotal != debitTotal) {
                     this.dialogRef = this._matDialog.open(BalanceAmountModelComponent, {
@@ -374,13 +376,15 @@ export class JournalVoucherCreateComponent implements OnInit {
                 tempDebitTotal = tempDebitTotal + creditTotal;
                 if (tempDebitTotal === creditTotal) {
                     this.jvDetail.push(params);
+                    this.addDetails = false;
+                    this.addDetailForm.reset();
                 }
+
                 if (tempDebitTotal != creditTotal) {
                     this.dialogRef = this._matDialog.open(BalanceAmountModelComponent, {
                         panelClass: 'delete-items-dialog',
                         data: {data: '1'}
                     });
-
                     this.dialogRef.afterClosed().subscribe((response: boolean) => {
                         if (response) {
                             this.jvDetail.push(params);
@@ -421,7 +425,7 @@ export class JournalVoucherCreateComponent implements OnInit {
             'jvReference': this.journalVoucherCreateForm.value.jvReference ? this.journalVoucherCreateForm.value.jvReference : '',
             'transactionDetails': this.journalVoucherCreateForm.value.transactionDetails ? this.journalVoucherCreateForm.value.transactionDetails : '',
             'fundSegmentName': this.journalVoucherCreateForm.value.fundSegmentName ? this.journalVoucherCreateForm.value.fundSegmentName : '',
-            'jvDetail': this.jvDetail
+            'jvDetail': this.jvDetail.length > 0 ? this.jvDetail : []
         };
         // console.log('this.journalVoucherCreateForm', params);
         this.isSubmitted = true;
