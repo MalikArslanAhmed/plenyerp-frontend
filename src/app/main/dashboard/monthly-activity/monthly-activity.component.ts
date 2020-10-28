@@ -157,8 +157,6 @@ export class MonthlyActivityComponent implements OnInit {
     }
 
     getChildData(item, index) {
-        console.log('id', item.id);
-        console.log('index', index);
         const params = {};
         params['parentId'] = item.id;
         this.jvLedgerReportService.getMonthlyActivityReport(params).subscribe(data => {

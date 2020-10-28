@@ -67,8 +67,8 @@
 
                 <ng-template #recursiveListTmpl let-data="data">
                     <mat-expansion-panel *ngFor="let item of data; let i=index">
-                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row" (click)="getChildData(item, i)">
-<!--                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">-->
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
+                                                    (click)="getChildData(item, i)">
                         <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.name}}</p>
                         </span>
