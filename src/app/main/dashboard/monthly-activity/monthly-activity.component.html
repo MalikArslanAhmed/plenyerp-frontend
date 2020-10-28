@@ -16,30 +16,21 @@
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
-                <!-- <form [formGroup]="filterFinancialPerformanceReportForm">
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>From</mat-label>
-                        <input matInput [matDatepicker]="from"
-                               formControlName="from">
-                        <mat-datepicker-toggle matSuffix
-                                               [for]="from"></mat-datepicker-toggle>
-                        <mat-datepicker #from></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>To</mat-label>
-                        <input matInput [matDatepicker]="to"
-                               formControlName="to">
-                        <mat-datepicker-toggle matSuffix
-                                               [for]="to"></mat-datepicker-toggle>
-                        <mat-datepicker #to></mat-datepicker>
+                <form [formGroup]="filterJVLegderSiblingReportForm">
+                    <mat-form-field class="width-200px p-10px mt-13px mb--15px" appearance="outline" fxFlex="100" (click)="economicSegmentSelect()">
+                        <mat-label>Economic Segment Name</mat-label>
+                        <mat-select formControlName="economicSegmentId" [disabled]="true">
+                            <mat-option [value]="economicSegment.id"
+                                        *ngFor="let economicSegment of economicSegments">{{economicSegment.name}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                     <div fxFlex class="width-200px p-10px mt-13px">
-                        <button mat-button class="submit-report" (click)="filterFinancialPerformance()">
+                        <button mat-button class="submit-report" (click)="submitReport()">
                             Submit
                             <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
                         </button>
                     </div>
-                </form> -->
+                </form>
             </div>
 
             <div class="content mt-20px">
@@ -70,7 +61,7 @@
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildData(item, i)">
                         <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.name}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px" [title]="item.name">{{item?.name}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.combinedCode}}</p>
@@ -111,12 +102,6 @@
                             <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.month12}}</p>
                         </span>
-                            <!-- <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.previousYears}}</p>
-                        </span>
-                            <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.total}}</p>
-                        </span> -->
                         </mat-expansion-panel-header>
                         <div *ngIf="item.child?.length">
                             <ng-container
