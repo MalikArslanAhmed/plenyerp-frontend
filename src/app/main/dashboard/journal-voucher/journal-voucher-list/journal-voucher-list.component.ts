@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {JournalVoucherDetailCreateComponent} from '../journal-voucher-detail-create/journal-voucher-detail-create.component';
 import {JournalVoucherUpdateComponent} from "../journal-voucher-update/journal-voucher-update.component";
 import {PermissionConstant} from 'app/shared/constants/permission-constant';
+import {AlertService} from "../../../../shared/services/alert.service";
 
 @Component({
     selector: 'app-journal-voucher-list',
@@ -34,7 +35,8 @@ export class JournalVoucherListComponent implements OnInit {
     permissionDeleteJVDetails = [PermissionConstant.JV_DETAILS_DELETE];
 
     constructor(private journalVoucherService: JournalVoucherService,
-                private _matDialog: MatDialog) {
+                private _matDialog: MatDialog,
+                private alertService: AlertService) {
     }
 
     ngOnInit(): void {
@@ -124,55 +126,73 @@ export class JournalVoucherListComponent implements OnInit {
 
     markAsChecked() {
         let jvReferenceNumbers = [];
+        let i = 0;
         if (this.journalVouchers && this.journalVouchers.length > 0) {
             this.journalVouchers.forEach(journalVoucher => {
                 if (journalVoucher.checked) {
+                    i++;
                     jvReferenceNumbers.push(journalVoucher.id);
                 }
             });
         }
 
-        this.journalVoucherService.journalVouchersUpdate({
-            'jvReferenceNumbers': jvReferenceNumbers,
-            'status': 'CHECKED'
-        }).subscribe(data => {
-            console.log('data', data);
-        });
+        if (i > 0) {
+            this.journalVoucherService.journalVouchersUpdate({
+                'jvReferenceNumbers': jvReferenceNumbers,
+                'status': 'CHECKED'
+            }).subscribe(data => {
+                console.log('data', data);
+            });
+        } else {
+            this.alertService.showErrors('Please choose voucher to Mark as checked');
+        }
     }
 
     markAsPosted() {
         let jvReferenceNumbers = [];
+        let i = 0;
         if (this.journalVouchers && this.journalVouchers.length > 0) {
             this.journalVouchers.forEach(journalVoucher => {
                 if (journalVoucher.posted) {
+                    i++;
                     jvReferenceNumbers.push(journalVoucher.id);
                 }
             });
         }
 
-        this.journalVoucherService.journalVouchersUpdate({
-            'jvReferenceNumbers': jvReferenceNumbers,
-            'status': 'POSTED'
-        }).subscribe(data => {
-            console.log('data', data);
-        });
+        if (i > 0) {
+            this.journalVoucherService.journalVouchersUpdate({
+                'jvReferenceNumbers': jvReferenceNumbers,
+                'status': 'POSTED'
+            }).subscribe(data => {
+                console.log('data', data);
+            });
+        } else {
+            this.alertService.showErrors('Please choose voucher to Post JV');
+        }
     }
 
     markAsNew() {
         let jvReferenceNumbers = [];
+        let i = 0;
         if (this.journalVouchers && this.journalVouchers.length > 0) {
             this.journalVouchers.forEach(journalVoucher => {
                 if (journalVoucher.posted) {
+                    i++;
                     jvReferenceNumbers.push(journalVoucher.id);
                 }
             });
         }
 
-        this.journalVoucherService.journalVouchersUpdate({
-            'jvReferenceNumbers': jvReferenceNumbers,
-            'status': 'NEW'
-        }).subscribe(data => {
-            console.log('data', data);
-        });
+        if (i > 0) {
+            this.journalVoucherService.journalVouchersUpdate({
+                'jvReferenceNumbers': jvReferenceNumbers,
+                'status': 'RENEW'
+            }).subscribe(data => {
+                console.log('data', data);
+            });
+        } else {
+            this.alertService.showErrors('Please choose voucher to Mark as New');
+        }
     }
 }

@@ -11,140 +11,135 @@ import {JournalVoucherLedgerReportService} from 'app/shared/services/journal-vou
 })
 export class MonthlyActivityComponent implements OnInit {
     // panelOpenState = false;
-    data = [];
+    // data = [];
     childData = [];
-    // data = {
-    //     "message": "Resource created/Updated",
-    //     "data": {
-    //         "revenue": [
-    //             {
-    //                 "name": "Current Assets",
-    //                 "combinedCode": 31,
-    //                 "january": 0,
-    //                 "february": 0,
-    //                 "march": 0,
-    //                 "april": 0,
-    //                 "may": 100,
-    //                 "june": 0,
-    //                 "july": 0,
-    //                 "august": 200,
-    //                 "september": 0,
-    //                 "november": 0,
-    //                 "december": 0,
-    //                 "previousYears": 0,
-    //                 "total": 300,
-    //                 "child": [
-    //                     {
-    //                         "name": "Current Assets",
-    //                         "combinedCode": 31,
-    //                         "january": 0,
-    //                         "february": 0,
-    //                         "march": 0,
-    //                         "april": 0,
-    //                         "may": 100,
-    //                         "june": 0,
-    //                         "july": 0,
-    //                         "august": 200,
-    //                         "september": 0,
-    //                         "november": 0,
-    //                         "december": 0,
-    //                         "previousYears": 0,
-    //                         "total": 300,
-    //                         "child": [
-    //                             {
-    //                                 "name": "Current Assets",
-    //                                 "combinedCode": 31,
-    //                                 "january": 0,
-    //                                 "february": 0,
-    //                                 "march": 0,
-    //                                 "april": 0,
-    //                                 "may": 100,
-    //                                 "june": 0,
-    //                                 "july": 0,
-    //                                 "august": 200,
-    //                                 "september": 0,
-    //                                 "november": 0,
-    //                                 "december": 0,
-    //                                 "previousYears": 0,
-    //                                 "total": 300
-    //                             },
-    //                             {
-    //                                 "name": "Current Assets",
-    //                                 "combinedCode": 31,
-    //                                 "january": 0,
-    //                                 "february": 0,
-    //                                 "march": 0,
-    //                                 "april": 0,
-    //                                 "may": 100,
-    //                                 "june": 0,
-    //                                 "july": 0,
-    //                                 "august": 200,
-    //                                 "september": 0,
-    //                                 "november": 0,
-    //                                 "december": 0,
-    //                                 "previousYears": 0,
-    //                                 "total": 300,
-    //                                 "child": [
-    //                                     {
-    //                                         "name": "Current Assets",
-    //                                         "combinedCode": 31,
-    //                                         "january": 0,
-    //                                         "february": 0,
-    //                                         "march": 0,
-    //                                         "april": 0,
-    //                                         "may": 100,
-    //                                         "june": 0,
-    //                                         "july": 0,
-    //                                         "august": 200,
-    //                                         "september": 0,
-    //                                         "november": 0,
-    //                                         "december": 0,
-    //                                         "previousYears": 0,
-    //                                         "total": 300
-    //                                     }
-    //                                 ]
-    //                             }
-    //                         ]
-    //                     },
-    //                     {
-    //                         "name": "Current Assets",
-    //                         "combinedCode": 31,
-    //                         "january": 0,
-    //                         "february": 0,
-    //                         "march": 0,
-    //                         "april": 0,
-    //                         "may": 100,
-    //                         "june": 0,
-    //                         "july": 0,
-    //                         "august": 200,
-    //                         "september": 0,
-    //                         "november": 0,
-    //                         "december": 0,
-    //                         "previousYears": 0,
-    //                         "total": 300
-    //                     }
-    //                 ]
-    //             },
-    //             {
-    //                 "name": "Non-Current Assets",
-    //                 "combinedCode": 32,
-    //                 "january": 0,
-    //                 "february": 0,
-    //                 "march": 0,
-    //                 "april": 0,
-    //                 "may": 100,
-    //                 "june": 0,
-    //                 "july": 0,
-    //                 "august": 200,
-    //                 "september": 0,
-    //                 "november": 0,
-    //                 "december": 0,
-    //                 "previousYears": 0,
-    //                 "total": 300
-    //             }
-    //         ]
-    //     }
-    // };
+    data = [
+        {
+            "name": "Current Assets",
+            "combinedCode": 31,
+            "january": 0,
+            "february": 0,
+            "march": 0,
+            "april": 0,
+            "may": 100,
+            "june": 0,
+            "july": 0,
+            "august": 200,
+            "september": 0,
+            "november": 0,
+            "december": 0,
+            "previousYears": 0,
+            "total": 300,
+            "child": [
+                {
+                    "name": "Current Assets",
+                    "combinedCode": 31,
+                    "january": 0,
+                    "february": 0,
+                    "march": 0,
+                    "april": 0,
+                    "may": 100,
+                    "june": 0,
+                    "july": 0,
+                    "august": 200,
+                    "september": 0,
+                    "november": 0,
+                    "december": 0,
+                    "previousYears": 0,
+                    "total": 300,
+                    "child": [
+                        {
+                            "name": "1",
+                            "combinedCode": 31,
+                            "january": 0,
+                            "february": 0,
+                            "march": 0,
+                            "april": 0,
+                            "may": 100,
+                            "june": 0,
+                            "july": 0,
+                            "august": 200,
+                            "september": 0,
+                            "november": 0,
+                            "december": 0,
+                            "previousYears": 0,
+                            "total": 300
+                        },
+                        {
+                            "name": "2",
+                            "combinedCode": 31,
+                            "january": 0,
+                            "february": 0,
+                            "march": 0,
+                            "april": 0,
+                            "may": 100,
+                            "june": 0,
+                            "july": 0,
+                            "august": 200,
+                            "september": 0,
+                            "november": 0,
+                            "december": 0,
+                            "previousYears": 0,
+                            "total": 300,
+                            "child": [
+                                {
+                                    "name": "Current Assets",
+                                    "combinedCode": 31,
+                                    "january": 0,
+                                    "february": 0,
+                                    "march": 0,
+                                    "april": 0,
+                                    "may": 100,
+                                    "june": 0,
+                                    "july": 0,
+                                    "august": 200,
+                                    "september": 0,
+                                    "november": 0,
+                                    "december": 0,
+                                    "previousYears": 0,
+                                    "total": 300
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Current Assets",
+                    "combinedCode": 31,
+                    "january": 0,
+                    "february": 0,
+                    "march": 0,
+                    "april": 0,
+                    "may": 100,
+                    "june": 0,
+                    "july": 0,
+                    "august": 200,
+                    "september": 0,
+                    "november": 0,
+                    "december": 0,
+                    "previousYears": 0,
+                    "total": 300
+                }
+            ]
+        },
+        {
+            "name": "Non-Current Assets",
+            "combinedCode": 32,
+            "january": 0,
+            "february": 0,
+            "march": 0,
+            "april": 0,
+            "may": 100,
+            "june": 0,
+            "july": 0,
+            "august": 200,
+            "september": 0,
+            "november": 0,
+            "december": 0,
+            "previousYears": 0,
+            "total": 300
+        }
+    ];
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService) {
     }
@@ -156,7 +151,7 @@ export class MonthlyActivityComponent implements OnInit {
 
     getMonthlyActivityData(params) {
         this.jvLedgerReportService.getMonthlyActivityReport(params).subscribe(data => {
-            this.data = data.items
+            // this.data = data.items
             //console.log("data",this.data);
         })
     }

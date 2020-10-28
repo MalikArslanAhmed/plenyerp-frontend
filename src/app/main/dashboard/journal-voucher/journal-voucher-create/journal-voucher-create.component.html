@@ -310,7 +310,7 @@
                             <h5>(#) Admin Segment:</h5>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
+                            <mat-form-field appearance="outline" fxFlex (click)="adminSegmentSelect()">
                                 <mat-label>Enter Code</mat-label>
                                 <input formControlName="adminSegmentCode" matInput>
                             </mat-form-field>
@@ -339,7 +339,7 @@
                             <h5>(#) Fund Segment:</h5>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
+                            <mat-form-field appearance="outline" fxFlex (click)="fundSegmentSelectAddDetails()">
                                 <mat-label>Enter Code</mat-label>
                                 <input formControlName="fundSegmentCode" matInput>
                             </mat-form-field>
@@ -371,7 +371,7 @@
                             <h5>(#) Economic Segment:</h5>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
+                            <mat-form-field appearance="outline" fxFlex (click)="economicSegmentSelect()">
                                 <mat-label>Enter Code</mat-label>
                                 <input formControlName="economicSegmentCode" matInput>
                             </mat-form-field>
@@ -395,7 +395,7 @@
                             <h5>(#) Programme Segment:</h5>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
+                            <mat-form-field appearance="outline" fxFlex (click)="programmeSegmentSelect()">
                                 <mat-label>Enter Code</mat-label>
                                 <input formControlName="programmeSegmentCode" matInput>
                             </mat-form-field>
@@ -421,7 +421,7 @@
                             <h5>Functional Segment:</h5>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
+                            <mat-form-field appearance="outline" fxFlex (click)="functionSegmentSelect()">
                                 <mat-label>Enter Code</mat-label>
                                 <input formControlName="functionalSegmentCode" matInput>
                             </mat-form-field>
@@ -447,7 +447,7 @@
                             <h5>Geo Code Segment:</h5>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
+                            <mat-form-field appearance="outline" fxFlex (click)="geoCodeSegmentSelect()">
                                 <mat-label>Enter Code</mat-label>
                                 <input formControlName="geoCodeSegmentCode" matInput>
                             </mat-form-field>
