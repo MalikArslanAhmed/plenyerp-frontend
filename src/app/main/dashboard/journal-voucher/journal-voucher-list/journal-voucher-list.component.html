@@ -18,13 +18,13 @@
                 <mat-icon>add_circle</mat-icon>
             </button>-->
             <button mat-raised-button (click)="markAsChecked()" class="checked-btn justify-content-end"
-                    *ngIf="this.status === 'NEW'">Mark as checked
+                    *ngIf="this.status && this.status === 'NEW'">Mark as checked
             </button>
             <button mat-raised-button (click)="markAsPosted()" class="checked-btn"
-                    *ngIf="this.status === 'CHECKED'">Post JV
+                    *ngIf="this.status && this.status === 'CHECKED'">Post JV
             </button>
             <button mat-raised-button (click)="markAsNew()" class="checked-btn"
-                    *ngIf="this.status === 'CHECKED'">Mark as New
+                    *ngIf="this.status && this.status === 'CHECKED'">Mark as New
             </button>
         </div>
     </div>

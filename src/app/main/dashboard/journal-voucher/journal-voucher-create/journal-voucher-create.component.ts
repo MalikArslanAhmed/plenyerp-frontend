@@ -309,7 +309,19 @@ export class JournalVoucherCreateComponent implements OnInit {
             'geoCodeSegmentCode': this.geoCodeSegments[0] && this.geoCodeSegments[0].id ? this.geoCodeSegments[0].id : ''
         };
 
-        if (params['adminSegmentName'] === '') {
+        if (params['lineValue'] === '') {
+            this.alertService.showErrors('Line no. can\'t be blank');
+            return;
+        } else if (params['currency'] === '') {
+            this.alertService.showErrors('Currency can\'t be blank');
+            return;
+        } else if (params['accountName'] === '') {
+            this.alertService.showErrors('Account name can\'t be blank');
+            return;
+        } else if (params['lineReference'] === '') {
+            this.alertService.showErrors('Line reference can\'t be blank');
+            return;
+        } else if (params['adminSegmentName'] === '') {
             this.alertService.showErrors('Admin Segment can\'t be blank');
             return;
         } else if (params['fundSegmentName'] === '') {
@@ -355,6 +367,12 @@ export class JournalVoucherCreateComponent implements OnInit {
                     this.jvDetail.push(params);
                     this.addDetails = false;
                     this.addDetailForm.reset();
+                    this.adminSegments = [];
+                    this.fundSegmentsAddDet = [];
+                    this.economicSegments = [];
+                    this.programmeSegments = [];
+                    this.functionSegments = [];
+                    this.geoCodeSegments = [];
                 }
                 if (tempCreditTotal != debitTotal) {
                     this.dialogRef = this._matDialog.open(BalanceAmountModelComponent, {
@@ -366,6 +384,12 @@ export class JournalVoucherCreateComponent implements OnInit {
                             this.jvDetail.push(params);
                             this.addDetails = false;
                             this.addDetailForm.reset();
+                            this.adminSegments = [];
+                            this.fundSegmentsAddDet = [];
+                            this.economicSegments = [];
+                            this.programmeSegments = [];
+                            this.functionSegments = [];
+                            this.geoCodeSegments = [];
                         }
                     });
                 }
@@ -378,6 +402,12 @@ export class JournalVoucherCreateComponent implements OnInit {
                     this.jvDetail.push(params);
                     this.addDetails = false;
                     this.addDetailForm.reset();
+                    this.adminSegments = [];
+                    this.fundSegmentsAddDet = [];
+                    this.economicSegments = [];
+                    this.programmeSegments = [];
+                    this.functionSegments = [];
+                    this.geoCodeSegments = [];
                 }
 
                 if (tempDebitTotal != creditTotal) {
@@ -390,6 +420,12 @@ export class JournalVoucherCreateComponent implements OnInit {
                             this.jvDetail.push(params);
                             this.addDetails = false;
                             this.addDetailForm.reset();
+                            this.adminSegments = [];
+                            this.fundSegmentsAddDet = [];
+                            this.economicSegments = [];
+                            this.programmeSegments = [];
+                            this.functionSegments = [];
+                            this.geoCodeSegments = [];
                         }
                     });
                 }
@@ -400,6 +436,12 @@ export class JournalVoucherCreateComponent implements OnInit {
             this.jvDetail.push(params);
             this.addDetails = false;
             this.addDetailForm.reset();
+            this.adminSegments = [];
+            this.fundSegmentsAddDet = [];
+            this.economicSegments = [];
+            this.programmeSegments = [];
+            this.functionSegments = [];
+            this.geoCodeSegments = [];
         }
     }
 

@@ -49,7 +49,7 @@ export class JournalVoucherListComponent implements OnInit {
     }
 
     getJournalVoucherList(params?) {
-        if (params && params['status']) {
+        if (params) {
             this.status = params['status'];
         }
         let param = {
@@ -89,7 +89,6 @@ export class JournalVoucherListComponent implements OnInit {
     }
 
     editJvDetail(journalVoucher, voucher) {
-        // console.log('voucher', voucher);
         this.dialogRef = this._matDialog.open(JournalVoucherDetailCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', jvDetail: voucher, journalVoucherId: journalVoucher.id},
@@ -103,7 +102,10 @@ export class JournalVoucherListComponent implements OnInit {
     }
 
     createJvDetail(journalVoucher) {
-        // console.log('journalVoucher', journalVoucher);
+        if (this.status === 'NEW') {
+            this.alertService.showErrors('Detail can\'t be added for new vouchers');
+            return;
+        }
         this.dialogRef = this._matDialog.open(JournalVoucherDetailCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE', journalVoucherId: journalVoucher.id},

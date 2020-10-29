@@ -10,6 +10,9 @@ import {FunctionalSegmentSelectComponent} from "../functional-segment-select/fun
 import {GeoCodeSegmentSelectComponent} from "../geo-code-segment-select/geo-code-segment-select.component";
 import {GlobalService} from 'app/shared/services/global.service';
 import {JournalVoucherService} from "../../../../shared/services/journal-voucher.service";
+import {BalanceAmountModelComponent} from "../balance-amount-model/balance-amount-model.component";
+import {AlertService} from "../../../../shared/services/alert.service";
+import {CurrencyService} from "../../../../shared/services/currency.service";
 
 @Component({
     selector: 'app-journal-voucher-detail-create',
@@ -24,16 +27,7 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
     addDetailForm: FormGroup;
     isSubmitted = false;
     updateData: any;
-    currencies = [
-        {
-            'code': 'INR',
-            'name': 'Indian Currency'
-        },
-        {
-            'code': 'NIR',
-            'name': 'Niara'
-        }
-    ];
+    currencies = [];
     dialogRef: any;
     fundSegmentsAddDet = [];
     adminSegments = [];
@@ -50,7 +44,9 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
                 private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private globalService: GlobalService,
-                private journalVoucherService: JournalVoucherService) {
+                private journalVoucherService: JournalVoucherService,
+                private alertService: AlertService,
+                private currencyService: CurrencyService) {
         this.action = _data.action;
         this.journalVoucherId = _data.journalVoucherId;
         if (this.action === 'EDIT') {
@@ -65,6 +61,7 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
+        this.getCurrencies();
     }
 
     refresh() {
@@ -96,6 +93,20 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
         if (this.updateData) {
             this.patchJvDetailForm();
         }
+    }
+
+    getCurrencies() {
+        this.currencies = [];
+        this.currencyService.getCurrency({page: -1}).subscribe(data => {
+            this.currencies = data.items;
+            if (this.currencies && this.currencies.length > 0) {
+                let i = 1;
+                this.currencies.forEach(currency => {
+                    currency['sno'] = i;
+                    i++;
+                });
+            }
+        });
     }
 
     patchJvDetailForm() {
@@ -269,7 +280,7 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
     }
 
     addDetail() {
-        const params = {
+        /*const params = {
             'lineValue': this.addDetailForm.value.lineValue ? this.addDetailForm.value.lineValue : '',
             'adminSegmentId': this.addDetailForm.value.adminSegmentId ? this.addDetailForm.value.adminSegmentId : '',
             'currency': this.addDetailForm.value.currency ? this.addDetailForm.value.currency : '',
@@ -303,6 +314,81 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
             this.addDetailForm.reset();
             this.isSubmitted = false;
             this.matDialogRef.close(this.addDetailForm);
+        });*/
+
+        const params = {
+            'lineValue': this.addDetailForm.value.lineValue ? this.addDetailForm.value.lineValue : '',
+            'adminSegmentId': this.addDetailForm.value.adminSegmentId ? this.addDetailForm.value.adminSegmentId : '',
+            'currency': this.addDetailForm.value.currency ? this.addDetailForm.value.currency : '',
+            'fundSegmentId': this.addDetailForm.value.fundSegmentId ? this.addDetailForm.value.fundSegmentId : '',
+            'xRateLocal': this.addDetailForm.value.xRateLocal ? parseFloat(this.addDetailForm.value.xRateLocal) : 0,
+            'bankXRateToUsd': this.addDetailForm.value.bankXRateToUsd ? parseFloat(this.addDetailForm.value.bankXRateToUsd) : 0,
+            'economicSegmentId': this.addDetailForm.value.economicSegmentId ? this.addDetailForm.value.economicSegmentId : '',
+            'accountName': this.addDetailForm.value.accountName ? this.addDetailForm.value.accountName : '',
+            'programmeSegmentId': this.addDetailForm.value.programmeSegmentId ? this.addDetailForm.value.programmeSegmentId : '',
+            'lineReference': this.addDetailForm.value.lineReference ? this.addDetailForm.value.lineReference : '',
+            'functionalSegmentCode': this.addDetailForm.value.functionalSegmentCode ? this.addDetailForm.value.functionalSegmentCode : '',
+            'functionalSegmentId': this.addDetailForm.value.functionalSegmentId ? this.addDetailForm.value.functionalSegmentId : '',
+            'lineValueInTrxnCurrency': this.addDetailForm.value.lineValueInTrxnCurrency ? this.addDetailForm.value.lineValueInTrxnCurrency : '',
+            'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
+            'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
+            'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
+            'adminSegmentName': this.adminSegments[0] && this.adminSegments[0].name ? this.adminSegments[0].name : '',
+            'fundSegmentName': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].name ? this.fundSegmentsAddDet[0].name : '',
+            'economicSegmentName': this.economicSegments[0] && this.economicSegments[0].name ? this.economicSegments[0].name : '',
+            'programmeSegmentName': this.programmeSegments[0] && this.programmeSegments[0].name ? this.programmeSegments[0].name : '',
+            'functionSegmentName': this.functionSegments[0] && this.functionSegments[0].name ? this.functionSegments[0].name : '',
+            'geoCodeSegmentName': this.geoCodeSegments[0] && this.geoCodeSegments[0].name ? this.geoCodeSegments[0].name : '',
+            'adminSegmentCode': this.adminSegments[0] && this.adminSegments[0].id ? this.adminSegments[0].id : '',
+            'fundSegmentCode': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].id ? this.fundSegmentsAddDet[0].id : '',
+            'economicSegmentCode': this.economicSegments[0] && this.economicSegments[0].id ? this.economicSegments[0].id : '',
+            'programmeSegmentCode': this.programmeSegments[0] && this.programmeSegments[0].id ? this.programmeSegments[0].id : '',
+            'functionSegmentCode': this.functionSegments[0] && this.functionSegments[0].id ? this.functionSegments[0].id : '',
+            'geoCodeSegmentCode': this.geoCodeSegments[0] && this.geoCodeSegments[0].id ? this.geoCodeSegments[0].id : ''
+        };
+
+        if (params['lineValue'] === '') {
+            this.alertService.showErrors('Line no. can\'t be blank');
+            return;
+        } else if (params['currency'] === '') {
+            this.alertService.showErrors('Currency can\'t be blank');
+            return;
+        } else if (params['accountName'] === '') {
+            this.alertService.showErrors('Account name can\'t be blank');
+            return;
+        } else if (params['lineReference'] === '') {
+            this.alertService.showErrors('Line reference can\'t be blank');
+            return;
+        } else if (params['adminSegmentName'] === '') {
+            this.alertService.showErrors('Admin Segment can\'t be blank');
+            return;
+        } else if (params['fundSegmentName'] === '') {
+            this.alertService.showErrors('Fund Segment can\'t be blank');
+            return;
+        } else if (params['economicSegmentName'] === '') {
+            this.alertService.showErrors('Economic Segment can\'t be blank');
+            return;
+        } else if (params['programmeSegmentName'] === '') {
+            this.alertService.showErrors('Program Segment can\'t be blank');
+            return;
+        } else if (params['functionSegmentName'] === '') {
+            this.alertService.showErrors('Function Segment can\'t be blank');
+            return;
+        } else if (params['geoCodeSegmentName'] === '') {
+            this.alertService.showErrors('Geo Code Segment can\'t be blank');
+            return;
+        }
+
+        this.journalVoucherService.addDetails(this.journalVoucherId, params).subscribe(data => {
+            this.addDetailForm.reset();
+            this.isSubmitted = false;
+            this.adminSegments = [];
+            this.fundSegmentsAddDet = [];
+            this.economicSegments = [];
+            this.programmeSegments = [];
+            this.functionSegments = [];
+            this.geoCodeSegments = [];
+            this.matDialogRef.close(this.addDetailForm);
         });
     }
 
@@ -330,25 +416,63 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
                 'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
                 'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
                 'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
-                'adminSegmentName': this.adminSegments[0].name,
-                'fundSegmentName': this.fundSegmentsAddDet[0].name,
-                'economicSegmentName': this.economicSegments[0].name,
-                'programmeSegmentName': this.programmeSegments[0].name,
-                'functionSegmentName': this.functionSegments[0].name,
-                'geoCodeSegmentName': this.geoCodeSegments[0].name,
-                'adminSegmentCode': this.adminSegments[0].id,
-                'fundSegmentCode': this.fundSegmentsAddDet[0].id,
-                'economicSegmentCode': this.economicSegments[0].id,
-                'programmeSegmentCode': this.programmeSegments[0].id,
-                'functionSegmentCode': this.functionSegments[0].id,
-                'geoCodeSegmentCode': this.geoCodeSegments[0].id
+                'adminSegmentName': this.adminSegments[0] && this.adminSegments[0].name ? this.adminSegments[0].name : '',
+                'fundSegmentName': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].name ? this.fundSegmentsAddDet[0].name : '',
+                'economicSegmentName': this.economicSegments[0] && this.economicSegments[0].name ? this.economicSegments[0].name : '',
+                'programmeSegmentName': this.programmeSegments[0] && this.programmeSegments[0].name ? this.programmeSegments[0].name : '',
+                'functionSegmentName': this.functionSegments[0] && this.functionSegments[0].name ? this.functionSegments[0].name : '',
+                'geoCodeSegmentName': this.geoCodeSegments[0] && this.geoCodeSegments[0].name ? this.geoCodeSegments[0].name : '',
+                'adminSegmentCode': this.adminSegments[0] && this.adminSegments[0].id ? this.adminSegments[0].id : '',
+                'fundSegmentCode': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].id ? this.fundSegmentsAddDet[0].id : '',
+                'economicSegmentCode': this.economicSegments[0] && this.economicSegments[0].id ? this.economicSegments[0].id : '',
+                'programmeSegmentCode': this.programmeSegments[0] && this.programmeSegments[0].id ? this.programmeSegments[0].id : '',
+                'functionSegmentCode': this.functionSegments[0] && this.functionSegments[0].id ? this.functionSegments[0].id : '',
+                'geoCodeSegmentCode': this.geoCodeSegments[0] && this.geoCodeSegments[0].id ? this.geoCodeSegments[0].id : ''
             };
+
+            if (params['lineValue'] === '') {
+                this.alertService.showErrors('Line no. can\'t be blank');
+                return;
+            } else if (params['currency'] === '') {
+                this.alertService.showErrors('Currency can\'t be blank');
+                return;
+            } else if (params['accountName'] === '') {
+                this.alertService.showErrors('Account name can\'t be blank');
+                return;
+            } else if (params['lineReference'] === '') {
+                this.alertService.showErrors('Line reference can\'t be blank');
+                return;
+            } else if (params['adminSegmentName'] === '') {
+                this.alertService.showErrors('Admin Segment can\'t be blank');
+                return;
+            } else if (params['fundSegmentName'] === '') {
+                this.alertService.showErrors('Fund Segment can\'t be blank');
+                return;
+            } else if (params['economicSegmentName'] === '') {
+                this.alertService.showErrors('Economic Segment can\'t be blank');
+                return;
+            } else if (params['programmeSegmentName'] === '') {
+                this.alertService.showErrors('Program Segment can\'t be blank');
+                return;
+            } else if (params['functionSegmentName'] === '') {
+                this.alertService.showErrors('Function Segment can\'t be blank');
+                return;
+            } else if (params['geoCodeSegmentName'] === '') {
+                this.alertService.showErrors('Geo Code Segment can\'t be blank');
+                return;
+            }
+
             this.journalVoucherService.updateDetails(this.journalVoucherId, this.updateData.id, params).subscribe(data => {
                 this.addDetailForm.reset();
                 this.isSubmitted = false;
+                this.adminSegments = [];
+                this.fundSegmentsAddDet = [];
+                this.economicSegments = [];
+                this.programmeSegments = [];
+                this.functionSegments = [];
+                this.geoCodeSegments = [];
                 this.matDialogRef.close(this.addDetailForm);
             });
         }
-        // console.log('this.addDetailForm.value', this.addDetailForm.value);
     }
 }
