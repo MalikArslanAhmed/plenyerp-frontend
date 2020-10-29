@@ -130,7 +130,7 @@
                         <span class="display-inline">
                             <span appPermissionBind [permission]="permissionEditJV">
                                 <span class="material-icons f_20 cursor-pointer blueColor"
-                                    (click)="editJournalVoucher(journalVoucher)">
+                                      (click)="editJournalVoucher(journalVoucher)">
                                     edit
                                 </span>
                             </span>
@@ -269,15 +269,19 @@
                             </div>
                         </td>
                         <td *ngIf="this.status !== 'POSTED'">
-                                <span appPermissionBind [permission]="permissionEditJVDetails" class="material-icons f_20 cursor-pointer  blueColor"
-                                    (click)="editJvDetail(journalVoucher, voucher)">
+                                <span appPermissionBind [permission]="permissionEditJVDetails"
+                                      class="material-icons f_20 cursor-pointer  blueColor"
+                                      (click)="editJvDetail(journalVoucher, voucher)">
                                     edit
                                 </span>
-                                <span appPermissionBind [permission]="permissionDeleteJVDetails"  class="material-icons f_20 cursor-pointer redColor">
+                            <span appPermissionBind [permission]="permissionDeleteJVDetails"
+                                  class="material-icons f_20 cursor-pointer redColor">
                                     delete
                                 </span>
                         </td>
                     </tr>
+                    </tbody>
+                    <tbody>
                     <tr *ngIf="this.status !== 'POSTED'">
                         <td colspan="10">
                             <div appPermissionBind [permission]="permissionAddJVDetails">
@@ -287,12 +291,8 @@
                                 </button>
                             </div>
                         </td>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>
