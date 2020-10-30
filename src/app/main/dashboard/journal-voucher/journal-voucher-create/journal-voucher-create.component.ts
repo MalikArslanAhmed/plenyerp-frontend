@@ -341,6 +341,20 @@ export class JournalVoucherCreateComponent implements OnInit {
             return;
         }
 
+        if (this.jvDetail && this.jvDetail.length > 0) {
+            let economicSegment = false;
+            this.jvDetail.forEach(jvDet => {
+               if (jvDet['economicSegmentCode'] === params['economicSegmentCode']) {
+                   economicSegment = true;
+               }
+            });
+
+            if (economicSegment) {
+                this.alertService.showErrors('Economic Segment already exists');
+                return;
+            }
+        }
+
         this.jvDetail.push(params);
         this.addDetails = false;
         this.addDetailForm.reset();
