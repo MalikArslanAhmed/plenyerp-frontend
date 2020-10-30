@@ -102,10 +102,6 @@ export class JournalVoucherListComponent implements OnInit {
     }
 
     createJvDetail(journalVoucher) {
-        if (this.status === 'NEW') {
-            this.alertService.showErrors('Detail can\'t be added for new vouchers');
-            return;
-        }
         this.dialogRef = this._matDialog.open(JournalVoucherDetailCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE', journalVoucherId: journalVoucher.id},

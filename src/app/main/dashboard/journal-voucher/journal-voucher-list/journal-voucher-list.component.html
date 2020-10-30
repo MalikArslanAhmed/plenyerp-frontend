@@ -127,7 +127,7 @@
                 </span>
                 <span class="mat-cell" *ngIf="this.status !== 'POSTED'">
                     <p class="text-truncate cursor-pointer mt-32px d-flex">
-                        <span class="display-inline">
+                        <span class="display-inline" *ngIf="!journalVoucher.postedTransactionDate">
                             <span appPermissionBind [permission]="permissionEditJV">
                                 <span class="material-icons f_20 cursor-pointer blueColor"
                                       (click)="editJournalVoucher(journalVoucher)">
@@ -139,6 +139,9 @@
                                     delete
                                 </span>
                             </span>
+                        </span>
+                        <span class="display-inline" *ngIf="journalVoucher.postedTransactionDate">
+                            <span>-</span>
                         </span>
                         <!-- <span appPermissionBind [permission]="permissionEditJV">
                             <span>
@@ -193,7 +196,7 @@
                         <th>
                             <div class="title">Credit</div>
                         </th>
-                        <th *ngIf="this.status !== 'POSTED'">
+                        <th *ngIf="!journalVoucher.postedTransactionDate">
                             <div class="title">Action</div>
                         </th>
                     </tr>
@@ -268,7 +271,7 @@
                                 {{voucher?.lvLineValue}}
                             </div>
                         </td>
-                        <td *ngIf="this.status !== 'POSTED'">
+                        <td *ngIf="!journalVoucher.postedTransactionDate">
                                 <span appPermissionBind [permission]="permissionEditJVDetails"
                                       class="material-icons f_20 cursor-pointer  blueColor"
                                       (click)="editJvDetail(journalVoucher, voucher)">
@@ -282,7 +285,7 @@
                     </tr>
                     </tbody>
                     <tbody>
-                    <tr *ngIf="this.status !== 'POSTED'">
+                    <tr *ngIf="!journalVoucher.postedTransactionDate">
                         <td colspan="10">
                             <div appPermissionBind [permission]="permissionAddJVDetails">
                                 <button mat-button class="save-button" (click)="createJvDetail(journalVoucher)">

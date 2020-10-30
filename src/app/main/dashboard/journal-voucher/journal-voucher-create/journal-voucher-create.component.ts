@@ -341,7 +341,17 @@ export class JournalVoucherCreateComponent implements OnInit {
             return;
         }
 
-        if (this.jvDetail && this.jvDetail.length > 0) {
+        this.jvDetail.push(params);
+        this.addDetails = false;
+        this.addDetailForm.reset();
+        this.adminSegments = [];
+        this.fundSegmentsAddDet = [];
+        this.economicSegments = [];
+        this.programmeSegments = [];
+        this.functionSegments = [];
+        this.geoCodeSegments = [];
+
+        /*if (this.jvDetail && this.jvDetail.length > 0) {
             let debitTotal = 0;
             let creditTotal = 0;
 
@@ -442,7 +452,7 @@ export class JournalVoucherCreateComponent implements OnInit {
             this.programmeSegments = [];
             this.functionSegments = [];
             this.geoCodeSegments = [];
-        }
+        }*/
     }
 
     saveJournalVoucher() {
@@ -471,17 +481,60 @@ export class JournalVoucherCreateComponent implements OnInit {
         };
         // console.log('this.journalVoucherCreateForm', params);
         this.isSubmitted = true;
-        if (!this.journalVoucherCreateForm.valid) {
-            this.isSubmitted = false;
-            return;
-        }
-        if (this.isSubmitted) {
-            this.journalVoucherService.create(params).subscribe(data => {
-                // console.log('data', data);
-                this.journalVoucherCreateForm.reset();
-                this.isSubmitted = false;
-                this.matDialogRef.close(this.journalVoucherCreateForm);
+
+        if (this.jvDetail && this.jvDetail.length > 1) {
+            let creditSum: number;
+            let debitSum: number;
+            let creditVals = [];
+            let debitVals = [];
+            this.jvDetail.forEach((value) => {
+                if (value.lineValueType === 'CREDIT') {
+                    creditVals.push(parseInt(value.lvLineValue));
+                } else if (value.lineValueType === 'DEBIT') {
+                    debitVals.push(parseInt(value.lvLineValue));
+                }
             });
+            creditSum = creditVals.reduce((a, b) => a + b, 0);
+            debitSum = debitVals.reduce((a, b) => a + b, 0);
+
+            if (creditSum !== debitSum) {
+                this.dialogRef = this._matDialog.open(BalanceAmountModelComponent, {
+                    panelClass: 'delete-items-dialog',
+                    data: {data: '1'}
+                });
+                this.dialogRef.afterClosed().subscribe((response: boolean) => {
+                    if (response) {
+                        if (!this.journalVoucherCreateForm.valid) {
+                            this.isSubmitted = false;
+                            return;
+                        }
+                        if (this.isSubmitted) {
+                            this.journalVoucherService.create(params).subscribe(data => {
+                                // console.log('data', data);
+                                this.journalVoucherCreateForm.reset();
+                                this.isSubmitted = false;
+                                this.matDialogRef.close(this.journalVoucherCreateForm);
+                            });
+                        }
+                    }
+                });
+            } else {
+                if (!this.journalVoucherCreateForm.valid) {
+                    this.isSubmitted = false;
+                    return;
+                }
+                if (this.isSubmitted) {
+                    this.journalVoucherService.create(params).subscribe(data => {
+                        // console.log('data', data);
+                        this.journalVoucherCreateForm.reset();
+                        this.isSubmitted = false;
+                        this.matDialogRef.close(this.journalVoucherCreateForm);
+                    });
+                }
+            }
+
+            console.log('credit', creditVals);
+            console.log('debit', debitVals);
         }
     }
 }
