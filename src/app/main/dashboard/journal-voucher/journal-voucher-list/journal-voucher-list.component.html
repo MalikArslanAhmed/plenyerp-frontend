@@ -285,7 +285,7 @@
                     </tr>
                     </tbody>
                     <tbody>
-                    <tr *ngIf="!journalVoucher.postedTransactionDate">
+                    <tr *ngIf="!journalVoucher.postedTransactionDate && !journalVoucher.checkedTransactionDate">
                         <td colspan="10">
                             <div appPermissionBind [permission]="permissionAddJVDetails">
                                 <button mat-button class="save-button" (click)="createJvDetail(journalVoucher)">
