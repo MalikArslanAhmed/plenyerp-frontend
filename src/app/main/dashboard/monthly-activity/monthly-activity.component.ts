@@ -6,6 +6,7 @@ import {EconomicSegmentSelectComponent} from "../journal-voucher/economic-segmen
 import {MatDialog} from "@angular/material/dialog";
 import * as moment from "moment";
 import {AlertService} from "../../../shared/services/alert.service";
+import {MonthlyActivityEconomicSegmentComponent} from './monthly-activity-economic-segment/monthly-activity-economic-segment.component';
 
 @Component({
     selector: 'app-monthly-activity',
@@ -178,7 +179,7 @@ export class MonthlyActivityComponent implements OnInit {
     }
 
     economicSegmentSelect() {
-        this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
+        this.dialogRef = this._matDialog.open(MonthlyActivityEconomicSegmentComponent, {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {

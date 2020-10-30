@@ -210,6 +210,7 @@ import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.co
 import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
 import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
 import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
+import { MonthlyActivityEconomicSegmentComponent } from './monthly-activity/monthly-activity-economic-segment/monthly-activity-economic-segment.component';
 
 @NgModule({
     declarations: [
@@ -397,7 +398,8 @@ import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.co
         JvLedgerSiblingComponent,
         StatementOfPositionComponent,
         FinancialPerformanceReportComponent,
-        MonthlyActivityComponent
+        MonthlyActivityComponent,
+        MonthlyActivityEconomicSegmentComponent
     ],
     imports: [
         CommonModule,
