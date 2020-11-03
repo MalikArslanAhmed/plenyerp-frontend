@@ -236,4 +236,15 @@ app-monthly-activity {
     .no-click {
         pointer-events: none;
     }
+
+    span.mat-expansion-indicator
+    {
+        pointer-events: visiblefill !important;
+    }
+
+    mat-expansion-panel-header
+    {
+        pointer-events: none;
+    }
+
 }

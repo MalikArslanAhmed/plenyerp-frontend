@@ -11,6 +11,14 @@
                 </span>
             </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div appPermissionBind [permission]="">
+                <button mat-button class="accent" id="add-button" aria-label="add skill"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
+                    {{panelOpenState ? 'Close': 'Open'}} All
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="content">
@@ -57,7 +65,7 @@
                 </mat-accordion>
 
                 <ng-template #recursiveListTmpl let-data="data">
-                    <mat-expansion-panel *ngFor="let item of data; let i=index">
+                    <mat-expansion-panel *ngFor="let item of data; let i=index" [expanded]="panelOpenState">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildData(item, i)">
                         <span class="mat-cell align-items-center">
