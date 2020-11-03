@@ -344,9 +344,9 @@ export class JournalVoucherCreateComponent implements OnInit {
         if (this.jvDetail && this.jvDetail.length > 0) {
             let economicSegment = false;
             this.jvDetail.forEach(jvDet => {
-               if (jvDet['economicSegmentCode'] === params['economicSegmentCode']) {
-                   economicSegment = true;
-               }
+                if (jvDet['economicSegmentCode'] === params['economicSegmentCode']) {
+                    economicSegment = true;
+                }
             });
 
             if (economicSegment) {
@@ -364,109 +364,6 @@ export class JournalVoucherCreateComponent implements OnInit {
         this.programmeSegments = [];
         this.functionSegments = [];
         this.geoCodeSegments = [];
-
-        /*if (this.jvDetail && this.jvDetail.length > 0) {
-            let debitTotal = 0;
-            let creditTotal = 0;
-
-            this.jvDetail.forEach((value) => {
-                if (value.lineValueType === 'CREDIT') {
-                    creditTotal = creditTotal + Number(value.lvLineValue);
-                }
-            });
-
-            this.jvDetail.forEach((value) => {
-                if (value.lineValueType === 'DEBIT') {
-                    debitTotal = debitTotal + Number(value.lvLineValue);
-                }
-            });
-
-            let tempCreditTotal = 0;
-            let tempDebitTotal = 0;
-
-            if (params.lineValueType === 'CREDIT') {
-                tempCreditTotal = Number(params.lvLineValue);
-                tempCreditTotal = tempCreditTotal + creditTotal;
-                if (tempCreditTotal === debitTotal) {
-                    this.jvDetail.push(params);
-                    this.addDetails = false;
-                    this.addDetailForm.reset();
-                    this.adminSegments = [];
-                    this.fundSegmentsAddDet = [];
-                    this.economicSegments = [];
-                    this.programmeSegments = [];
-                    this.functionSegments = [];
-                    this.geoCodeSegments = [];
-                }
-                if (tempCreditTotal != debitTotal) {
-                    this.dialogRef = this._matDialog.open(BalanceAmountModelComponent, {
-                        panelClass: 'delete-items-dialog',
-                        data: {data: '1'}
-                    });
-                    this.dialogRef.afterClosed().subscribe((response: boolean) => {
-                        if (response) {
-                            this.jvDetail.push(params);
-                            this.addDetails = false;
-                            this.addDetailForm.reset();
-                            this.adminSegments = [];
-                            this.fundSegmentsAddDet = [];
-                            this.economicSegments = [];
-                            this.programmeSegments = [];
-                            this.functionSegments = [];
-                            this.geoCodeSegments = [];
-                        }
-                    });
-                }
-            }
-
-            if (params.lineValueType === 'DEBIT') {
-                tempDebitTotal = Number(params.lvLineValue);
-                tempDebitTotal = tempDebitTotal + creditTotal;
-                if (tempDebitTotal === creditTotal) {
-                    this.jvDetail.push(params);
-                    this.addDetails = false;
-                    this.addDetailForm.reset();
-                    this.adminSegments = [];
-                    this.fundSegmentsAddDet = [];
-                    this.economicSegments = [];
-                    this.programmeSegments = [];
-                    this.functionSegments = [];
-                    this.geoCodeSegments = [];
-                }
-
-                if (tempDebitTotal != creditTotal) {
-                    this.dialogRef = this._matDialog.open(BalanceAmountModelComponent, {
-                        panelClass: 'delete-items-dialog',
-                        data: {data: '1'}
-                    });
-                    this.dialogRef.afterClosed().subscribe((response: boolean) => {
-                        if (response) {
-                            this.jvDetail.push(params);
-                            this.addDetails = false;
-                            this.addDetailForm.reset();
-                            this.adminSegments = [];
-                            this.fundSegmentsAddDet = [];
-                            this.economicSegments = [];
-                            this.programmeSegments = [];
-                            this.functionSegments = [];
-                            this.geoCodeSegments = [];
-                        }
-                    });
-                }
-            }
-        }
-
-        if (this.jvDetail && this.jvDetail.length == 0) {
-            this.jvDetail.push(params);
-            this.addDetails = false;
-            this.addDetailForm.reset();
-            this.adminSegments = [];
-            this.fundSegmentsAddDet = [];
-            this.economicSegments = [];
-            this.programmeSegments = [];
-            this.functionSegments = [];
-            this.geoCodeSegments = [];
-        }*/
     }
 
     saveJournalVoucher() {
@@ -546,9 +443,13 @@ export class JournalVoucherCreateComponent implements OnInit {
                     });
                 }
             }
-
-            console.log('credit', creditVals);
-            console.log('debit', debitVals);
+        } else {
+            this.journalVoucherService.create(params).subscribe(data => {
+                // console.log('data', data);
+                this.journalVoucherCreateForm.reset();
+                this.isSubmitted = false;
+                this.matDialogRef.close(this.journalVoucherCreateForm);
+            });
         }
     }
 }
