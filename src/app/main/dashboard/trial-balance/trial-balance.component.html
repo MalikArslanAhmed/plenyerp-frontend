@@ -110,7 +110,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{i + 1}}.</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.economicSegment?.name}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.name}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.credit}}</p>
@@ -155,17 +155,17 @@
                                 <tr *ngFor="let data of childTrialBalanceData; let i = index">
                                     <td>
                                         <div class="title">
-                                            {{data?.economicSegment?.combinedCode}}
+                                            {{data?.combinedCode}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.economicSegment?.individualCode}}
+                                            {{data?.individualCode}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.economicSegment?.name}}
+                                            {{data?.name}}
                                         </div>
                                     </td>
                                     <td>
@@ -184,7 +184,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button appPermissionBind [permission]="permissionAddNotesTrail" *ngIf="!data.noteId" class="border-bg-none" (click)="addNote(data.economicSegmentId)">
+                                        <button appPermissionBind [permission]="permissionAddNotesTrail"
+                                                *ngIf="!data.noteId" class="border-bg-none"
+                                                (click)="addNote(data.id)">
                                             <span class="material-icons f_20 cursor-pointer blueColor">
                                                 add_box
                                             </span>

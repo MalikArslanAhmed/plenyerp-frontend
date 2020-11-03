@@ -4,7 +4,7 @@ import {fuseAnimations} from '@fuse/animations';
 import {AlertService} from 'app/shared/services/alert.service';
 import * as moment from 'moment';
 import {TrialBalanceReportService} from 'app/shared/services/trial-balance-report.service';
-import { PermissionConstant } from 'app/shared/constants/permission-constant';
+import {PermissionConstant} from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-trial-balance',
@@ -19,7 +19,7 @@ export class TrialBalanceComponent implements OnInit {
     childTrialBalanceData = [];
 
     permissionAddNotesTrail = [PermissionConstant.TRAIL_BALANCE_NOTES_ADD]
-    
+
     constructor(private fb: FormBuilder,
                 private trialBalanceReportService: TrialBalanceReportService,
                 private alertService: AlertService) {
@@ -59,9 +59,10 @@ export class TrialBalanceComponent implements OnInit {
     }
 
     getChildReport(data) {
+        // console.log('data', data);
         const params = {};
-        if (data && data.economicSegmentId) {
-            params['parentId'] = data.economicSegmentId;
+        if (data && data.id) {
+            params['parentId'] = data.id;
             this.childTrialBalanceData = [];
             this.trialBalanceReportService.getTrailReport(params).subscribe(data => {
                 this.childTrialBalanceData = data.items
