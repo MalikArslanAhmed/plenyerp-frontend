@@ -59,8 +59,8 @@
                         <span class="mat-header-cell">Value Date</span>
                         <span class="mat-header-cell">Line Reference</span>
                         <span class="mat-header-cell">Line Narration</span>
-                        <span class="mat-header-cell">Credit</span>
                         <span class="mat-header-cell">Debit</span>
+                        <span class="mat-header-cell">Credit</span>
                         <span class="mat-header-cell">Balance</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of siblingReportData; let i = index">
@@ -79,10 +79,10 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.transactionDetails}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'CREDIT') ? reportData?.lvLineValue : '-' }}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'DEBIT') ? reportData?.lvLineValue : '-' }}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'DEBIT') ? reportData?.lvLineValue : '-' }}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'CREDIT') ? reportData?.lvLineValue : '-' }}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.lvLineValue}}</p>
@@ -103,7 +103,7 @@
                                     </th>
                                     <th>
                                         <div class="title">Debit</div>
-                                    </th>                                      
+                                    </th>
                                     <th>
                                         <div class="title">Credit</div>
                                     </th>                                                                  
