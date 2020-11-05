@@ -25,4 +25,7 @@ export class TrialBalanceReportService extends BaseService {
     getNotesData(data): Observable<any>{
         return this.getRequest(AppUrl.GET_NOTE_MASTER_DATA(), data);
     }
+    downloadNoteMasterReport(data): Observable<any> {
+        return this.getRequest(AppUrl.DOWNLOAD_NOTES_MASTER_REPORT(), data);
+    }
 }

@@ -11,6 +11,14 @@
                 </span>
             </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div appPermissionBind [permission]="">
+                <button mat-button class="accent" id="add-button" aria-label="add skill"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="downloadNoteMaster(notesMasterColumn)">
+                    Download
+                </button>
+            </div>
+        </div>
         <!-- <div fxLayout="row" fxLayoutAlign="center">
             <mat-form-field appearance="outline" fxFlex class="mt-13px" id="fromToDate">
                 <mat-label>From</mat-label>

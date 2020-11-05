@@ -402,7 +402,9 @@ export class AppUrl {
     static DOWNLOAD_REPORT(): string {
         return AppUrl.API_URL + `employees/report-download`;
     }
-
+    static DOWNLOAD_NOTES_MASTER_REPORT(): string {
+        return AppUrl.API_URL + `download/notes`;
+    }
     static GET_EMPLOYEES(): string {
         return AppUrl.API_URL + `employees`;
     }
