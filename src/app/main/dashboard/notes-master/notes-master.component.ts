@@ -17,7 +17,7 @@ export class NotesMasterComponent implements OnInit {
     searchNotesMasterForm: FormGroup;
     notesMasterData = [];
     chileNotesData = [];
-    notesMasterColumn = ['Note Id', 'Full Code', 'Full Code', 'Debit', 'Credit', 'Balance'];
+    notesMasterColumn = ['Note Id', 'Full Code', 'Debit', 'Credit', 'Balance'];
     constructor(private trialBalanceReportService: TrialBalanceReportService,
                 private fb: FormBuilder) {
     }
