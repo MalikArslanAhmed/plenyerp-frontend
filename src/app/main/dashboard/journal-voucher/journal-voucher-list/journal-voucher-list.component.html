@@ -33,6 +33,7 @@
             <span class="mat-header-cell" mat-sort-header="checkbox"
                   *ngIf="this.status === 'NEW' || this.status === 'CHECKED'">#</span>
             <span class="mat-header-cell" mat-sort-header="id">S.No</span>
+            <span class="mat-header-cell" mat-sort-header="jvRef(#)">JV Ref(#)</span>
             <span class="mat-header-cell" mat-sort-header="jvRef">JV Ref</span>
             <span class="mat-header-cell" mat-sort-header="jvValueDate">JV Value Date</span>
             <span class="mat-header-cell" mat-sort-header="narration">Narration</span>
@@ -75,14 +76,21 @@
                     <p class="text-truncate cursor-pointer mt-32px">{{journalVoucher?.sno}}.</p>
                 </span>
                 <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{journalVoucher?.id}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-32px">{{journalVoucher?.jvReference}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-32px">{{journalVoucher?.jvValueDate}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-32px">
-                        {{journalVoucher.narration ? journalVoucher.narration : '-'}}
+                    <p class="text-truncate cursor-pointer mt-32px" *ngIf="journalVoucher.transactionDetails"
+                       [title]="journalVoucher.transactionDetails">
+                        {{journalVoucher?.transactionDetails}}
+                    </p>
+                    <p class="text-truncate cursor-pointer mt-32px" *ngIf="!journalVoucher.transactionDetails">
+                        -
                     </p>
                 </span>
                 <span class="mat-cell">
@@ -253,7 +261,9 @@
                             </div>
                         </td>
                         <td>
-                            <div class="title">-</div>
+                            <div class="title" [title]="voucher.accountName">
+                                {{voucher?.accountName}}
+                            </div>
                         </td>
                         <td>
                             <div class="title" *ngIf="voucher.lineValueType === 'DEBIT'">

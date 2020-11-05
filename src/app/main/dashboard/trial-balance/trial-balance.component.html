@@ -99,8 +99,8 @@
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell">Acc Code</span>
                         <span class="mat-header-cell">Acc. Title</span>
-                        <span class="mat-header-cell">Credit</span>
                         <span class="mat-header-cell">Debit</span>
+                        <span class="mat-header-cell">Credit</span>
                         <span class="mat-header-cell">Balance</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of trailReportMainData; let i = index">
@@ -113,13 +113,16 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.name}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.credit}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.debit}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.credit}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px"
+                                   *ngIf="reportData.debit > reportData?.credit">({{reportData?.balance}})</p>
+                                <p class="text-truncate cursor-pointer mt-10px"
+                                   *ngIf="reportData.debit <= reportData?.credit">{{reportData?.balance}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -136,10 +139,10 @@
                                         <div class="title">Title</div>
                                     </th>
                                     <th>
-                                        <div class="title">Credit</div>
+                                        <div class="title">Debit</div>
                                     </th>
                                     <th>
-                                        <div class="title">Debit</div>
+                                        <div class="title">Credit</div>
                                     </th>
                                     <th>
                                         <div class="title">Balance</div>
@@ -170,18 +173,17 @@
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.credit}}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="title">
                                             {{data?.debit}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.balance}}
+                                            {{data?.credit}}
                                         </div>
+                                    </td>
+                                    <td>
+                                        <div class="title" *ngIf="data.debit > data?.credit">({{data?.balance}})</div>
+                                        <div class="title" *ngIf="data.debit <= data?.credit">{{data?.balance}}</div>
                                     </td>
                                     <td>
                                         <button appPermissionBind [permission]="permissionAddNotesTrail"
