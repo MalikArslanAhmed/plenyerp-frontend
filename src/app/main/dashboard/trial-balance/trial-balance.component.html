@@ -59,7 +59,7 @@
 
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>From</mat-label>
-                        <input matInput [matDatepicker]="from"
+                        <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
                                formControlName="from">
                         <mat-datepicker-toggle matSuffix
                                                [for]="from"></mat-datepicker-toggle>
@@ -67,7 +67,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>To</mat-label>
-                        <input matInput [matDatepicker]="to"
+                        <input matInput [matDatepicker]="to" (click)="to.open()" (focus)="to.open()"
                                formControlName="to">
                         <mat-datepicker-toggle matSuffix
                                                [for]="to"></mat-datepicker-toggle>

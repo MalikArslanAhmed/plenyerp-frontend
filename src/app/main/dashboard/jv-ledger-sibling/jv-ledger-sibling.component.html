@@ -26,7 +26,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>From</mat-label>
-                        <input matInput [matDatepicker]="from"
+                        <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
                                formControlName="fromDate">
                         <mat-datepicker-toggle matSuffix
                                                [for]="from"></mat-datepicker-toggle>
@@ -34,7 +34,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>To</mat-label>
-                        <input matInput [matDatepicker]="to"
+                        <input matInput [matDatepicker]="to" (click)="to.open()" (focus)="to.open()"
                                formControlName="toDate">
                         <mat-datepicker-toggle matSuffix
                                                [for]="to"></mat-datepicker-toggle>
@@ -59,8 +59,8 @@
                         <span class="mat-header-cell">Value Date</span>
                         <span class="mat-header-cell">Line Reference</span>
                         <span class="mat-header-cell">Line Narration</span>
-                        <span class="mat-header-cell">Credit</span>
                         <span class="mat-header-cell">Debit</span>
+                        <span class="mat-header-cell">Credit</span>
                         <span class="mat-header-cell">Balance</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of siblingReportData; let i = index">
@@ -79,10 +79,10 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.transactionDetails}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'CREDIT') ? reportData?.lvLineValue : '-' }}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'DEBIT') ? reportData?.lvLineValue : '-' }}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'DEBIT') ? reportData?.lvLineValue : '-' }}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'CREDIT') ? reportData?.lvLineValue : '-' }}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.lvLineValue}}</p>
@@ -103,7 +103,7 @@
                                     </th>
                                     <th>
                                         <div class="title">Debit</div>
-                                    </th>                                      
+                                    </th>
                                     <th>
                                         <div class="title">Credit</div>
                                     </th>                                                                  
