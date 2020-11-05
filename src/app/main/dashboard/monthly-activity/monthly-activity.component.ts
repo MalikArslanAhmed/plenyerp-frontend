@@ -161,7 +161,6 @@ export class MonthlyActivityComponent implements OnInit {
 
     ngOnInit(): void {
         this.getMonthlyActivityData({});
-
         this.filterJVLegderSiblingReportForm = this.fb.group({
             'economicSegmentId': ['']
         });
@@ -171,6 +170,13 @@ export class MonthlyActivityComponent implements OnInit {
     getMonthlyActivityData(params) {
         this.jvLedgerReportService.getMonthlyActivityReport(params).subscribe(data => {
             this.data = data.items;
+            if (this.data && this.data.length > 0) {
+                this.data.forEach(d => {
+                    d['isOpen'] = !this.panelOpenState;
+                    this.getChildData(d);
+                });
+                this.panelOpenState = !this.panelOpenState;
+            }
         });
     }
 
@@ -209,13 +215,13 @@ export class MonthlyActivityComponent implements OnInit {
     }
 
     openAll() {
-        console.log('--->>>open all');
-        this.panelOpenState = !this.panelOpenState;
-        if (this.data && this.data.length) {
+        // console.log('--->>>open all');
+        if (this.data && this.data.length > 0) {
             this.data.forEach(d => {
-                console.log('--->>data', d);
+                d['isOpen'] = !this.panelOpenState;
                 this.getChildData(d);
             });
+            this.panelOpenState = !this.panelOpenState;
         }
     }
 }

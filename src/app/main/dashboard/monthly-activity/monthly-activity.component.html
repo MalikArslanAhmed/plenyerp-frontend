@@ -65,7 +65,7 @@
                 </mat-accordion>
 
                 <ng-template #recursiveListTmpl let-data="data">
-                    <mat-expansion-panel *ngFor="let item of data; let i=index" [expanded]="panelOpenState">
+                    <mat-expansion-panel *ngFor="let item of data; let i=index" [expanded]="item.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildData(item, i)">
                         <span class="mat-cell align-items-center">
