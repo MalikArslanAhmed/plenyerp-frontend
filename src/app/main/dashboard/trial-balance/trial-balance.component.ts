@@ -16,9 +16,8 @@ import {PermissionConstant} from 'app/shared/constants/permission-constant';
 export class TrialBalanceComponent implements OnInit {
     filterTrialBalanceReportForm: FormGroup;
     trailReportMainData = [];
-    // childTrialBalanceData = [];
-
-    permissionAddNotesTrail = [PermissionConstant.TRAIL_BALANCE_NOTES_ADD]
+    permissionAddNotesTrail = [PermissionConstant.TRAIL_BALANCE_NOTES_ADD];
+    panelOpenState: boolean = false;
 
     constructor(private fb: FormBuilder,
                 private trialBalanceReportService: TrialBalanceReportService,
@@ -36,7 +35,14 @@ export class TrialBalanceComponent implements OnInit {
     getTrailBalanceData(params) {
         this.trialBalanceReportService.getTrailReport(params).subscribe(data => {
             this.trailReportMainData = data.items;
-        })
+            if (this.trailReportMainData && this.trailReportMainData.length > 0) {
+                this.trailReportMainData.forEach(d => {
+                    d['isOpen'] = !this.panelOpenState;
+                    this.getChildReport(d);
+                });
+                this.panelOpenState = !this.panelOpenState;
+            }
+        });
     }
 
     filterTrailBalance() {
@@ -62,10 +68,8 @@ export class TrialBalanceComponent implements OnInit {
         const params = {};
         if (reportData && reportData.id) {
             params['parentId'] = reportData.id;
-            // this.childTrialBalanceData = [];
             this.trialBalanceReportService.getTrailReport(params).subscribe(data => {
                 reportData['childs'] = data.items;
-                // this.childTrialBalanceData = data.items
             });
         }
     }
@@ -74,5 +78,15 @@ export class TrialBalanceComponent implements OnInit {
         this.trialBalanceReportService.addNote(economicSegmentId, {}).subscribe(data => {
             this.getTrailBalanceData({});
         });
+    }
+
+    openAll() {
+        if (this.trailReportMainData && this.trailReportMainData.length > 0) {
+            this.trailReportMainData.forEach(d => {
+                d['isOpen'] = !this.panelOpenState;
+                this.getChildReport(d);
+            });
+            this.panelOpenState = !this.panelOpenState;
+        }
     }
 }
