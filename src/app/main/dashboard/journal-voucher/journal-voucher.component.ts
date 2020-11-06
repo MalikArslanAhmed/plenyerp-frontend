@@ -96,9 +96,9 @@ export class JournalVoucherComponent implements OnInit {
         // console.log('searchJournalVoucherForm', params);
     }
 
-    search() {
+    /*search() {
         console.log('aaaaa');
         // this.getJournalVoucherData.getJournalVoucherList(this.searchJournalVoucherForm.value);
         // console.log('searchJournalVoucherForm', this.searchJournalVoucherForm.value);
-    }
+    }*/
 }
