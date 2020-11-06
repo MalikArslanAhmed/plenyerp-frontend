@@ -1,27 +1,29 @@
-#items {
-    width: 1200px !important;
-    overflow-x: unset !important;
-}
+app-journal-voucher-detail-create {
+    #items {
+        width: 1200px !important;
+        overflow-x: unset !important;
+    }
 
-.items-data {
-    width: 100%;
-    overflow-x: unset !important;
-}
+    .items-data {
+        width: 100%;
+        overflow-x: unset !important;
+    }
 
-.mr-1 {
-    margin-right: 0.5rem;
-}
+    .mr-1 {
+        margin-right: 0.5rem;
+    }
 
-.ml-1 {
-    margin-left: 0.5rem;
-}
+    .ml-1 {
+        margin-left: 0.5rem;
+    }
 
-.add-btn {
-    background-color: #106cc8 !important;
-    color: white !important;
-    float: left;
-}
+    .add-btn {
+        background-color: #106cc8 !important;
+        color: white !important;
+        float: left;
+    }
 
-.shadow-1px {
-    box-shadow: 0 0 0 1px #E0E0E0;
+    .shadow-1px {
+        box-shadow: 0 0 0 1px #E0E0E0;
+    }
 }

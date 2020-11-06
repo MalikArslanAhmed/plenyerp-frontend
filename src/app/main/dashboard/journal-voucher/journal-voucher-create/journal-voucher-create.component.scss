@@ -1,92 +1,94 @@
-#items {
-    max-width: 1300px !important;
-    overflow-x: unset !important;
-    min-width: 1068px !important;
+app-journal-voucher-create {
+    #items {
+        max-width: 1300px !important;
+        overflow-x: unset !important;
+        min-width: 1068px !important;
 
-    .mat-form-field-flex {
-        width: 96%;
-        height: 56px;
-    }
-
-    .transaction-det {
-        box-shadow: 0 0 0 1px #e0e0e0 !important;
-
-        .mat-form-field-appearance-outline .mat-form-field-flex {
-            margin-left: 5px;
+        .mat-form-field-flex {
+            width: 96%;
+            height: 56px;
         }
 
-        .mat-grid-tile {
-            top: 12px !important;
+        .transaction-det {
+            box-shadow: 0 0 0 1px #e0e0e0 !important;
+
+            .mat-form-field-appearance-outline .mat-form-field-flex {
+                margin-left: 5px;
+            }
+
+            .mat-grid-tile {
+                top: 12px !important;
+            }
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix {
+            top: 0.58em;
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-label {
+            margin-top: 3px;
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-infix {
+            margin-top: -10px;
         }
     }
 
-    .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix {
-        top: 0.58em;
-    }
-
-    .mat-form-field-appearance-outline .mat-form-field-label {
-        margin-top: 3px;
-    }
-
-    .mat-form-field-appearance-outline .mat-form-field-infix {
-        margin-top: -10px;
-    }
-}
-
-.items-data {
-    width: 100%;
-    overflow-x: unset !important;
-}
-
-.mr-1 {
-    margin-right: 0.5rem;
-}
-
-.ml-1 {
-    margin-left: 0.5rem;
-}
-
-.add-btn {
-    background-color: #106cc8 !important;
-    color: white !important;
-    float: left;
-}
-
-.shadow-1px {
-    box-shadow: 0 0 0 1px #E0E0E0;
-}
-
-.journal-voucher-data {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-
-    .mat-table {
+    .items-data {
         width: 100%;
-        max-width: 100%;
-        display: table;
-        border-collapse: collapse;
-        margin: 0;
+        overflow-x: unset !important;
     }
 
-    .mat-row,
-    .mat-header-row {
-        display: table-row;
+    .mr-1 {
+        margin-right: 0.5rem;
     }
 
-    .mat-cell,
-    .mat-header-cell {
-        word-wrap: initial;
-        display: table-cell;
-        padding: 0 5px;
-        line-break: unset;
-        width: auto;
-        white-space: nowrap;
-        overflow: hidden;
-        vertical-align: middle;
+    .ml-1 {
+        margin-left: 0.5rem;
     }
-}
 
-.mt-25px {
-    margin-top: 25px !important;
+    .add-btn {
+        background-color: #106cc8 !important;
+        color: white !important;
+        float: left;
+    }
+
+    .shadow-1px {
+        box-shadow: 0 0 0 1px #E0E0E0;
+    }
+
+    .journal-voucher-data {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+
+        .mat-table {
+            width: 100%;
+            max-width: 100%;
+            display: table;
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        .mat-row,
+        .mat-header-row {
+            display: table-row;
+        }
+
+        .mat-cell,
+        .mat-header-cell {
+            word-wrap: initial;
+            display: table-cell;
+            padding: 0 5px;
+            line-break: unset;
+            width: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            vertical-align: middle;
+        }
+    }
+
+    .mt-25px {
+        margin-top: 25px !important;
+    }
 }
