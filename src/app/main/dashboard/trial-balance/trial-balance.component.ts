@@ -16,7 +16,7 @@ import {PermissionConstant} from 'app/shared/constants/permission-constant';
 export class TrialBalanceComponent implements OnInit {
     filterTrialBalanceReportForm: FormGroup;
     trailReportMainData = [];
-    childTrialBalanceData = [];
+    // childTrialBalanceData = [];
 
     permissionAddNotesTrail = [PermissionConstant.TRAIL_BALANCE_NOTES_ADD]
 
@@ -58,14 +58,14 @@ export class TrialBalanceComponent implements OnInit {
         }
     }
 
-    getChildReport(data) {
-        // console.log('data', data);
+    getChildReport(reportData) {
         const params = {};
-        if (data && data.id) {
-            params['parentId'] = data.id;
-            this.childTrialBalanceData = [];
+        if (reportData && reportData.id) {
+            params['parentId'] = reportData.id;
+            // this.childTrialBalanceData = [];
             this.trialBalanceReportService.getTrailReport(params).subscribe(data => {
-                this.childTrialBalanceData = data.items
+                reportData['childs'] = data.items;
+                // this.childTrialBalanceData = data.items
             });
         }
     }

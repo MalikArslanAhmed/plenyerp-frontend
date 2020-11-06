@@ -95,7 +95,7 @@
             </div>
 
             <div class="content mt-20px">
-                <mat-accordion displayMode="flat" [multi]="false" class="mat-table accordion-table">
+                <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell">Acc Code</span>
                         <span class="mat-header-cell">Acc. Title</span>
@@ -154,46 +154,46 @@
                                 </tr>
                                 </thead>
                                 <tbody
-                                    *ngIf="childTrialBalanceData && childTrialBalanceData.length > 0; else noChildToShow">
-                                <tr *ngFor="let data of childTrialBalanceData; let i = index">
+                                    *ngIf="reportData && reportData['childs'] && reportData['childs'].length > 0; else noChildToShow">
+                                <tr *ngFor="let child of reportData['childs']; let j = index">
                                     <td>
                                         <div class="title">
-                                            {{data?.combinedCode}}
+                                            {{child?.combinedCode}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.individualCode}}
+                                            {{child?.individualCode}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.name}}
+                                            {{child?.name}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.debit}}
+                                            {{child?.debit}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{data?.credit}}
+                                            {{child?.credit}}
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="title" *ngIf="data.debit > data?.credit">({{data?.balance}})</div>
-                                        <div class="title" *ngIf="data.debit <= data?.credit">{{data?.balance}}</div>
+                                        <div class="title" *ngIf="child.debit > child?.credit">({{child?.balance}})</div>
+                                        <div class="title" *ngIf="child.debit <= child?.credit">{{child?.balance}}</div>
                                     </td>
                                     <td>
                                         <button appPermissionBind [permission]="permissionAddNotesTrail"
-                                                *ngIf="!data.noteId" class="border-bg-none"
-                                                (click)="addNote(data.id)">
+                                                *ngIf="!child.noteId" class="border-bg-none"
+                                                (click)="addNote(child.id)">
                                             <span class="material-icons f_20 cursor-pointer blueColor">
                                                 add_box
                                             </span>
                                         </button>
-                                        <button *ngIf="data.noteId" class="border-bg-none no-click">
+                                        <button *ngIf="child.noteId" class="border-bg-none no-click">
                                             <span class="material-icons f_20 cursor-pointer blueColor">
                                                 done
                                             </span>
