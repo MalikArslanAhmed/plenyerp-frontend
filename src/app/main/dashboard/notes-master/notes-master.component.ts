@@ -18,6 +18,7 @@ export class NotesMasterComponent implements OnInit {
     notesMasterData = [];
     chileNotesData = [];
     notesMasterColumn = ['Note Id', 'Full Code', 'Debit', 'Credit', 'Balance'];
+    panelOpenState: boolean = false;
     constructor(private trialBalanceReportService: TrialBalanceReportService,
                 private fb: FormBuilder) {
     }
@@ -33,16 +34,22 @@ export class NotesMasterComponent implements OnInit {
     getNotesMasterData(params) {
         this.trialBalanceReportService.getNotesData(params).subscribe(data => {
             this.notesMasterData = data.items;
+            if (this.notesMasterData && this.notesMasterData.length > 0) {
+                this.notesMasterData.forEach(d => {
+                    d['isOpen'] = !this.panelOpenState;
+                    this.getChildNotes(d);
+                });
+                this.panelOpenState = !this.panelOpenState;
+            }
         });
     }
 
-    getChildNotes(data) {
+    getChildNotes(item) {
         const params = {};
-        if (data && data.economicSegmentId) {
-            params['parentId'] = data.economicSegmentId;
-            this.chileNotesData = [];
+        if (item && item.economicSegmentId) {
+            params['parentId'] = item.economicSegmentId;
             this.trialBalanceReportService.getNotesData(params).subscribe(data => {
-                this.chileNotesData = data.items;
+                item['childs'] = data.items;
             });
         }
     }
@@ -67,5 +74,14 @@ export class NotesMasterComponent implements OnInit {
         this.trialBalanceReportService.downloadNoteMasterReport({columns: JSON.stringify(data)}).subscribe((success) => {
             window.location.href = success.url;
         });
+    }
+    openAll() {
+        if (this.notesMasterData && this.notesMasterData.length > 0) {
+            this.notesMasterData.forEach(d => {
+                d['isOpen'] = !this.panelOpenState;
+                this.getChildNotes(d);
+            });
+            this.panelOpenState = !this.panelOpenState;
+        }
     }
 }

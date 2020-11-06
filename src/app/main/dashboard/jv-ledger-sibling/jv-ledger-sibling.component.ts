@@ -20,6 +20,7 @@ export class JvLedgerSiblingComponent implements OnInit {
     economicSegments = [];
     siblingReportData = [];
     childSiblingReportData = [];
+    panelOpenState: boolean = false;
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
                 private fb: FormBuilder,
@@ -85,18 +86,34 @@ export class JvLedgerSiblingComponent implements OnInit {
     getJVLedgerSiblingReport(params) {
         this.jvLedgerReportService.getJVLedgerSiblingReport(params).subscribe(data => {
             this.siblingReportData = data.items;
+            if (this.siblingReportData && this.siblingReportData.length > 0) {
+                this.siblingReportData.forEach(d => {
+                    d['isOpen'] = !this.panelOpenState;
+                    this.getChildReportData(d);
+                });
+                this.panelOpenState = !this.panelOpenState;
+            }
         });
     }
 
-    getChildReportData(data) {
+    getChildReportData(item) {
         const params = {};
-        if (data && data.id && data.journalVoucherId) {
-            params['journalVoucherId'] = data.journalVoucherId;
-            params['jvDetailId'] = data.id;
+        if (item && item.id && item.journalVoucherId) {
+            params['journalVoucherId'] = item.journalVoucherId;
+            params['jvDetailId'] = item.id;
             params['economicSegmentId'] = this.filterJVLegderSiblingReportForm.value.economicSegmentId;
             this.jvLedgerReportService.getJVLedgerSiblingReport(params).subscribe(data => {
-                this.childSiblingReportData = data.items;
+                item['childs'] = data.items;
             });
+        }
+    }
+    openAll() {
+        if (this.siblingReportData && this.siblingReportData.length > 0) {
+            this.siblingReportData.forEach(d => {
+                d['isOpen'] = !this.panelOpenState;
+                this.getChildReportData(d);
+            });
+            this.panelOpenState = !this.panelOpenState;
         }
     }
 }

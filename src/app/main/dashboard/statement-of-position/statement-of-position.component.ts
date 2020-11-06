@@ -16,6 +16,7 @@ export class StatementOfPositionComponent implements OnInit {
     filterStatementOfPositionReportForm: FormGroup;
     statmentPositionData = [];
     childStatementPositionData = [];
+    panelOpenState: boolean = false;
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
                 private fb: FormBuilder,
@@ -33,19 +34,25 @@ export class StatementOfPositionComponent implements OnInit {
     getStatementPositionData(params) {
         this.jvLedgerReportService.getStatementPositionReport(params).subscribe(data => {
             this.statmentPositionData = data.items;
+            if (this.statmentPositionData && this.statmentPositionData.length > 0) {
+                this.statmentPositionData.forEach(d => {
+                    d['isOpen'] = !this.panelOpenState;
+                    this.getChildReportData(d);
+                });
+                this.panelOpenState = !this.panelOpenState;
+            }
             // this.assetData = this.statmentPositionData['asset'];
             // this.liabilitiesData = this.statmentPositionData['liabilities'];
         });
     }
 
-    getChildReportData(data) {
+    getChildReportData(item) {
         const params = {};
-        if (data && data.id) {
-            params['parentId'] = data.id;
-            this.childStatementPositionData = [];
+        if (item && item.id) {
+            params['parentId'] = item.id;
             this.jvLedgerReportService.getStatementPositionReport(params).subscribe(data => {
-                this.childStatementPositionData = data.items;
-            })
+                item['childs'] = data.items;
+            });
         }
     }
 
@@ -65,6 +72,15 @@ export class StatementOfPositionComponent implements OnInit {
                 toDate: toDate
             };
             this.getStatementPositionData(params);
+        }
+    }
+    openAll() {
+        if (this.statmentPositionData && this.statmentPositionData.length > 0) {
+            this.statmentPositionData.forEach(d => {
+                d['isOpen'] = !this.panelOpenState;
+                this.getChildReportData(d);
+            });
+            this.panelOpenState = !this.panelOpenState;
         }
     }
 }

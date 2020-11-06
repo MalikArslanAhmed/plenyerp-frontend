@@ -11,6 +11,14 @@
                 </span>
             </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div appPermissionBind [permission]="">
+                <button mat-button class="accent" id="add-button" aria-label="add skill"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
+                    {{panelOpenState ? 'Close': 'Open'}} All
+                </button>
+            </div>
+        </div>
         <!-- <div fxLayout="row" fxLayoutAlign="center">
             <mat-form-field appearance="outline" fxFlex class="mt-13px" id="fromToDate">
                 <mat-label>From</mat-label>
@@ -95,14 +103,14 @@
             </div>
 
             <div class="content mt-20px">
-                <mat-accordion displayMode="flat" [multi]="false" class="mat-table accordion-table">
+                <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell">Full Code</span>
                         <span class="mat-header-cell">Line Code</span>
                         <span class="mat-header-cell">Acc. Title </span>
                         <span class="mat-header-cell">Balance</span>
                     </section> 
-                    <mat-expansion-panel *ngFor="let reportData of financialPerformaceData">
+                    <mat-expansion-panel *ngFor="let reportData of financialPerformaceData" [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center">
@@ -137,8 +145,8 @@
                                 </tr>
                                 </thead>
                                 <tbody
-                                    *ngIf="childFinancialPerformanceData && childFinancialPerformanceData.length > 0; else noChildToShow">
-                                <tr *ngFor="let data of childFinancialPerformanceData; let i = index">
+                                    *ngIf="reportData && reportData['childs'] && reportData['childs'].length > 0; else noChildToShow">
+                                <tr *ngFor="let data of reportData['childs']; let i = index">
                                     <td>
                                         <div class="title">
                                             {{data?.combinedCode}}

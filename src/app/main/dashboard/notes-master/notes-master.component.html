@@ -18,6 +18,12 @@
                     Download
                 </button>
             </div>
+            <div appPermissionBind [permission]="" class="margin-left-1">
+                <button mat-button class="accent" id="open-all" aria-label="add skill"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
+                    {{panelOpenState ? 'Close': 'Open'}} All
+                </button>
+            </div>
         </div>
         <!-- <div fxLayout="row" fxLayoutAlign="center">
             <mat-form-field appearance="outline" fxFlex class="mt-13px" id="fromToDate">
@@ -71,7 +77,7 @@
                 </form>
             </div>
             <div class="content mt-20px">
-                <mat-accordion displayMode="flat" [multi]="false" class="mat-table accordion-table">
+                <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell">Note Id</span>
                         <span class="mat-header-cell">Full Code</span>
@@ -79,7 +85,7 @@
                         <span class="mat-header-cell">Credit</span>
                         <span class="mat-header-cell">Balance</span>
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of notesMasterData; let i = index">
+                    <mat-expansion-panel *ngFor="let reportData of notesMasterData; let i = index" [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildNotes(reportData)">
                             <span class="mat-cell align-items-center">
@@ -127,8 +133,8 @@
                                 </tr>
                                 </thead>
                                 <tbody
-                                    *ngIf="chileNotesData && chileNotesData.length > 0; else noChildToShow">
-                                <tr *ngFor="let data of chileNotesData; let i = index">
+                                    *ngIf="reportData['childs'] && reportData['childs'].length > 0; else noChildToShow">
+                                <tr *ngFor="let data of reportData['childs']; let j = index">
                                     <td>
                                         <div class="title">
                                             {{data?.economicSegment?.combinedCode}}

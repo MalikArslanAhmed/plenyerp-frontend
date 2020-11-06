@@ -16,6 +16,7 @@ export class FinancialPerformanceReportComponent implements OnInit {
     filterFinancialPerformanceReportForm: FormGroup;
     financialPerformaceData = [];
     childFinancialPerformanceData = [];
+    panelOpenState: boolean = false;
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
                 private fb: FormBuilder,
@@ -33,16 +34,22 @@ export class FinancialPerformanceReportComponent implements OnInit {
     getFinancialPerformanceData(params) {
         this.jvLedgerReportService.getFinanceStatementReport(params).subscribe(data => {
             this.financialPerformaceData = data.items;
+            if (this.financialPerformaceData && this.financialPerformaceData.length > 0) {
+                this.financialPerformaceData.forEach(d => {
+                    d['isOpen'] = !this.panelOpenState;
+                    this.getChildReportData(d);
+                });
+                this.panelOpenState = !this.panelOpenState;
+            }
         });
     }
-    getChildReportData(data) {
-        const params = {}
-        if (data && data.id) {
-            params['parentId'] = data.id;
-            this.childFinancialPerformanceData = [];
+    getChildReportData(item) {
+        const params = {};
+        if (item && item.id) {
+            params['parentId'] = item.id;
             this.jvLedgerReportService.getFinanceStatementReport(params).subscribe(data => {
-                this.childFinancialPerformanceData = data.items
-            })
+                item['childs'] = data.items;
+            });
         }
     }
 
@@ -62,6 +69,15 @@ export class FinancialPerformanceReportComponent implements OnInit {
                 toDate: toDate
             };
             this.getFinancialPerformanceData(params);
+        }
+    }
+    openAll() {
+        if (this.financialPerformaceData && this.financialPerformaceData.length > 0) {
+            this.financialPerformaceData.forEach(d => {
+                d['isOpen'] = !this.panelOpenState;
+                this.getChildReportData(d);
+            });
+            this.panelOpenState = !this.panelOpenState;
         }
     }
 
