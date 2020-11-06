@@ -92,7 +92,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/company-info',
-                        permissions: [PermissionConstant.COMPANIES],
+                        permissions: [PermissionConstant.COMPANIES_SETTING],
                     }
                 ]
             },

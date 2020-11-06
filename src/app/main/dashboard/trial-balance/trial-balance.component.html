@@ -129,10 +129,10 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px"
-                                   *ngIf="reportData.debit > reportData?.credit">({{(reportData?.credit - reportData?.debit) * -1}}
+                                   *ngIf="reportData.credit > reportData?.debit">({{(reportData?.debit - reportData?.credit) * -1}}
                                     )</p>
                                 <p class="text-truncate cursor-pointer mt-10px"
-                                   *ngIf="reportData.debit <= reportData?.credit">{{reportData?.credit - reportData?.debit}}</p>
+                                   *ngIf="reportData.credit <= reportData?.debit">{{reportData?.debit - reportData?.credit}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -192,11 +192,11 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="title" *ngIf="child.debit > child?.credit">
-                                            ({{(child?.credit - child?.debit) * -1}})
+                                        <div class="title" *ngIf="child.credit > child?.debit">
+                                            ({{(child?.debit - child?.credit) * -1}})
                                         </div>
                                         <div class="title"
-                                             *ngIf="child.debit <= child?.credit">{{child?.credit - child?.debit}}</div>
+                                             *ngIf="child.credit <= child?.debit">{{child?.debit - child?.credit}}</div>
                                     </td>
                                     <td>
                                         <button appPermissionBind [permission]="permissionAddNotesTrail"
