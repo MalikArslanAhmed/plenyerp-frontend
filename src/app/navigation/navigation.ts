@@ -84,7 +84,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'supervisor_account',
-                permissions: [PermissionConstant.COMPANIES],
+                permissions: [PermissionConstant.COMPANIES_SETTING],
                 children: [
                     {
                         id: 'company-info',

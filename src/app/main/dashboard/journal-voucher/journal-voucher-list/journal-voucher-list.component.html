@@ -85,7 +85,7 @@
                     <p class="text-truncate cursor-pointer mt-32px">{{journalVoucher?.jvValueDate}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-32px" *ngIf="journalVoucher.transactionDetails"
+                    <p class="cursor-pointer" *ngIf="journalVoucher.transactionDetails"
                        [title]="journalVoucher.transactionDetails">
                         {{journalVoucher?.transactionDetails}}
                     </p>

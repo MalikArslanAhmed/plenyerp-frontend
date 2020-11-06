@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 export class PermissionConstant {
     // admin
     static COMPANIES = 'COMPANIES';
+    static COMPANIES_SETTING = 'COMPANIES.SETTING';
     static COMPANIES_CREATE = 'COMPANIES.CREATE';
     static COMPANIES_LIST = 'COMPANIES.LIST';
     static COMPANIES_UPDATE = 'COMPANIES.UPDATE';
