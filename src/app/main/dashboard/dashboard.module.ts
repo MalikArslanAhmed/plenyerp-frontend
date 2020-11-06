@@ -211,6 +211,9 @@ import { StatementOfPositionComponent } from './statement-of-position/statement-
 import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
 import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
 import { MonthlyActivityEconomicSegmentComponent } from './monthly-activity/monthly-activity-economic-segment/monthly-activity-economic-segment.component';
+import {VoucherSourceUnitComponent} from './treasure-report/voucher-source-unit/voucher-source-unit.component';
+import {VoucherSourceUnitCreateComponent} from './treasure-report/voucher-source-unit/voucher-source-unit-create/voucher-source-unit-create.component';
+import {VoucherSourceUnitListComponent} from './treasure-report/voucher-source-unit/voucher-source-unit-list/voucher-source-unit-list.component';
 
 @NgModule({
     declarations: [
@@ -399,7 +402,10 @@ import { MonthlyActivityEconomicSegmentComponent } from './monthly-activity/mont
         StatementOfPositionComponent,
         FinancialPerformanceReportComponent,
         MonthlyActivityComponent,
-        MonthlyActivityEconomicSegmentComponent
+        MonthlyActivityEconomicSegmentComponent,
+        VoucherSourceUnitComponent,
+        VoucherSourceUnitCreateComponent,
+        VoucherSourceUnitListComponent
     ],
     imports: [
         CommonModule,

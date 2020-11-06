@@ -672,7 +672,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'report',
-                permissions: [PermissionConstant.JV_LEDGER_LIST,PermissionConstant.TRAIL_BALANCE_LIST,PermissionConstant.NOTES_MASTER_LIST],
+                permissions: [PermissionConstant.JV_LEDGER_LIST, PermissionConstant.TRAIL_BALANCE_LIST, PermissionConstant.NOTES_MASTER_LIST],
                 children: [
                     {
                         id: 'trial-balance',
@@ -735,7 +735,17 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/monthly-activity'
                     }
                 ]
-            }
+            },
+            {
+                id: 'voucher-source-unit',
+                title: 'Voucher Source Unit',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'local_offer',
+                url: '/dashboard/voucher-source-unit',
+                permissions: []
+            },
         ]
     }
 ];

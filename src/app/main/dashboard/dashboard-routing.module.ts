@@ -68,6 +68,7 @@ import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.co
 import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
 import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
 import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
+import {VoucherSourceUnitComponent} from './treasure-report/voucher-source-unit/voucher-source-unit.component';
 
 const routes: Routes = [
     {
@@ -676,6 +677,13 @@ const routes: Routes = [
         component: MonthlyActivityComponent,
         data: {
             title: 'Monthly Activity Report'
+        }
+    },
+    {
+        path: 'voucher-source-unit',
+        component: VoucherSourceUnitComponent,
+        data: {
+            title: 'Voucher Source Unit'
         }
     }
 ];

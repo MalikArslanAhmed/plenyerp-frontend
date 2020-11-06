@@ -1,0 +1,50 @@
+<div id="skills" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">local_offer
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Voucher Source Unit
+                </span>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div appPermissionBind [permission]="permissionAddRoles">
+                <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addUserRole()">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
+        </div>
+        <!-- SEARCH -->
+<!--        <div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>-->
+<!--            <div class="search-wrapper mt-16 mt-sm-0">-->
+<!--                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">-->
+<!--                    <mat-icon>search</mat-icon>-->
+<!--                    <input [formControl]="searchInput" placeholder="Search for a contact">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <!-- / SEARCH -->
+    </div>
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content">
+                <form [formGroup]="searchVoucherSourceForm">
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>Search for VSU</mat-label>
+                        <input formControlName="searchVoucherSource"
+                               placeholder="Search Voucher Source Unit"
+                               matInput (keyup)="search()">
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="content mt-20px">
+                <app-voucher-source-unit-list></app-voucher-source-unit-list>
+            </div>
+        </div>
+    </div>
+</div>
