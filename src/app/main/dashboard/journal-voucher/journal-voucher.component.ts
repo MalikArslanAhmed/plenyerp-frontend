@@ -19,7 +19,7 @@ export class JournalVoucherComponent implements OnInit {
     dialogRef: any;
     @ViewChild(JournalVoucherListComponent) getJournalVoucherData: JournalVoucherListComponent;
     filterJournalVoucherForm: FormGroup;
-    searchJournalVoucherForm: FormGroup;
+    // searchJournalVoucherForm: FormGroup;
     sourceApp = [
         {
             'value': 'GENERAL_LEDGER',
@@ -62,12 +62,13 @@ export class JournalVoucherComponent implements OnInit {
             'sourceApp': [''],
             'from': [''],
             'to': [''],
-            'status': ['']
+            'status': [''],
+            'jvReference': ['']
         });
 
-        this.searchJournalVoucherForm = this.fb.group({
+        /*this.searchJournalVoucherForm = this.fb.group({
             'jvReference': [''],
-        });
+        });*/
     }
 
     addJournalVoucher() {
@@ -89,13 +90,15 @@ export class JournalVoucherComponent implements OnInit {
             'from': this.filterJournalVoucherForm.value.from ? moment(this.filterJournalVoucherForm.value.from).format('YYYY-MM-DD') : '',
             'to': this.filterJournalVoucherForm.value.to ? moment(this.filterJournalVoucherForm.value.to).format('YYYY-MM-DD') : '',
             'status': this.filterJournalVoucherForm.value.status ? this.filterJournalVoucherForm.value.status : '',
+            'jvReference': this.filterJournalVoucherForm.value.jvReference ? this.filterJournalVoucherForm.value.jvReference : '',
         };
         this.getJournalVoucherData.getJournalVoucherList(params);
         // console.log('searchJournalVoucherForm', params);
     }
 
     search() {
-        this.getJournalVoucherData.getJournalVoucherList(this.searchJournalVoucherForm.value);
+        console.log('aaaaa');
+        // this.getJournalVoucherData.getJournalVoucherList(this.searchJournalVoucherForm.value);
         // console.log('searchJournalVoucherForm', this.searchJournalVoucherForm.value);
     }
 }
