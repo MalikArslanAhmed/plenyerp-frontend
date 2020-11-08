@@ -14,14 +14,15 @@
         <div fxLayout="row" fxLayoutAlign="end center">
             <div appPermissionBind [permission]="">
                 <button mat-button class="accent" id="add-button" aria-label="add skill"
-                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="downloadNoteMaster(notesMasterColumn)">
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
+                        (click)="downloadNoteMaster(notesMasterColumn)">
                     Download
                 </button>
             </div>
             <div appPermissionBind [permission]="" class="margin-left-1">
                 <button mat-button class="accent" id="open-all" aria-label="add skill"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
-                    {{panelOpenState ? 'Close': 'Open'}} All
+                    {{panelOpenState ? 'Close' : 'Open'}} All
                 </button>
             </div>
         </div>
@@ -85,11 +86,12 @@
                         <span class="mat-header-cell">Credit</span>
                         <span class="mat-header-cell">Balance</span>
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of notesMasterData; let i = index" [expanded]="reportData.isOpen">
+                    <mat-expansion-panel *ngFor="let reportData of notesMasterData; let i = index"
+                                         [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildNotes(reportData)">
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.id}}.</p>
+                                <p class="text-truncate cursor-pointer mt-10px">N{{reportData?.id}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.economicSegment?.combinedCode}}</p>
@@ -101,7 +103,11 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.credit}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px"
+                                   *ngIf="reportData.credit > reportData?.debit">({{(reportData?.debit - reportData?.credit) * -1}}
+                                    )</p>
+                                <p class="text-truncate cursor-pointer mt-10px"
+                                   *ngIf="reportData.credit <= reportData?.debit">{{reportData?.debit - reportData?.credit}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -161,12 +167,13 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="title">
-                                            {{data?.balance}}
-                                        </div>
+                                        <div class="title" *ngIf="reportData.credit > reportData?.debit">({{(reportData?.debit - reportData?.credit) * -1}})</div>
+                                        <div class="title" *ngIf="reportData.credit <= reportData?.debit">{{reportData?.debit - reportData?.credit}}</div>
                                     </td>
                                     <td>
-                                        <button appPermissionBind [permission]="permissionAddNotes"  class="border-bg-none" *ngIf="!data.noteId" (click)="addNote(data.economicSegmentId)">
+                                        <button appPermissionBind [permission]="permissionAddNotes"
+                                                class="border-bg-none" *ngIf="!data.noteId"
+                                                (click)="addNote(data.economicSegmentId)">
                                             <span class="material-icons f_20 cursor-pointer blueColor">
                                                 add_box
                                             </span>
