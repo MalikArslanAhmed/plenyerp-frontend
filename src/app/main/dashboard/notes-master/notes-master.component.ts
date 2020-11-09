@@ -3,6 +3,7 @@ import {TrialBalanceReportService} from 'app/shared/services/trial-balance-repor
 import {fuseAnimations} from '@fuse/animations';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {PermissionConstant} from 'app/shared/constants/permission-constant';
+import {AlertService} from "../../../shared/services/alert.service";
 
 @Component({
     selector: 'app-notes-master',
@@ -19,7 +20,8 @@ export class NotesMasterComponent implements OnInit {
     panelOpenState: boolean = false;
 
     constructor(private trialBalanceReportService: TrialBalanceReportService,
-                private fb: FormBuilder) {
+                private fb: FormBuilder,
+                private alertService: AlertService) {
     }
 
     ngOnInit(): void {
@@ -77,12 +79,16 @@ export class NotesMasterComponent implements OnInit {
                     notesData.push({'economicSegmentId': note['economicSegment'].id, 'noteId': note.noteId});
                 }
             });
-            this.trialBalanceReportService.downloadNoteMasterReport({
-                'notesData': JSON.stringify(notesData),
-                'type': type
-            }).subscribe((success) => {
-                window.location.href = success.url;
-            });
+            if (notesData && notesData.length > 0) {
+                this.trialBalanceReportService.downloadNoteMasterReport({
+                    'notesData': JSON.stringify(notesData),
+                    'type': type
+                }).subscribe((success) => {
+                    window.location.href = success.url;
+                });
+            } else {
+                this.alertService.showErrors('Please select notes to download.');
+            }
         }
     }
 
