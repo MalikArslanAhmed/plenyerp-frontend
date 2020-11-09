@@ -408,7 +408,7 @@ export class AppUrl {
     }
 
     static DELETE_NOTES(): string {
-        return AppUrl.API_URL + `finance/delete-notes`;
+        return AppUrl.API_URL + `finance/notes`;
     }
 
     static GET_EMPLOYEES(): string {
