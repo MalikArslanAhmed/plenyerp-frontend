@@ -1,6 +1,7 @@
 app-journal-voucher-detail-create {
     #items {
-        width: 1200px !important;
+        min-width: 1050px !important;
+        max-width: 1200px !important;
         overflow-x: unset !important;
     }
 

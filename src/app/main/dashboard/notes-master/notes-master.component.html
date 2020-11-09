@@ -13,10 +13,17 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <div appPermissionBind [permission]="">
-                <button mat-button class="accent" id="add-button" aria-label="add skill"
+                <button mat-button class="accent" id="add-button"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
                         (click)="downloadNoteMaster('Trail_balance')">
                     Download
+                </button>
+            </div>
+            <div appPermissionBind [permission]="">
+                <button mat-button class="accent" id="reset-button"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
+                        (click)="resetNoteMaster()">
+                    Reset
                 </button>
             </div>
             <div appPermissionBind [permission]="" class="margin-left-1">

@@ -29,4 +29,8 @@ export class TrialBalanceReportService extends BaseService {
     downloadNoteMasterReport(data): Observable<any> {
         return this.getRequest(AppUrl.DOWNLOAD_NOTES_MASTER_REPORT(), data);
     }
+
+    deleteAll(): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_NOTES());
+    }
 }

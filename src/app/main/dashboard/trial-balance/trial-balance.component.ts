@@ -75,7 +75,7 @@ export class TrialBalanceComponent implements OnInit {
     }
 
     addNote(economicSegmentId) {
-        this.trialBalanceReportService.addNote(economicSegmentId, {}).subscribe(data => {
+        this.trialBalanceReportService.addNote(economicSegmentId, {'type': 'Trail_balance'}).subscribe(data => {
             this.getTrailBalanceData({});
         });
     }

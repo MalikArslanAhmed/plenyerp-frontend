@@ -209,16 +209,5 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button" (click)="addDetail()" *ngIf="this.action === 'CREATE'">Add Detail</button>
         <button mat-button class="save-button" (click)="updateDetail()" *ngIf="this.action === 'EDIT'">Update Detail</button>
-        <!--<button mat-button class="save-button" (click)="addDetails = true" *ngIf="!addDetails">Add Details</button>
-        <button mat-button class="save-button" (click)="addDetails = false" *ngIf="addDetails">Cancel</button>
-        <button mat-button class="save-button" (click)="addDetail()" *ngIf="addDetails">Add</button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(journalVoucherCreateForm); saveJournalVoucher()"
-                [disabled]="journalVoucherCreateForm.invalid" aria-label="Save"
-                *ngIf="this.action !== 'EDIT' && !addDetails">SAVE
-        </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(journalVoucherCreateForm)"
-                [disabled]="journalVoucherCreateForm.invalid" aria-label="Update"
-                *ngIf="this.action === 'EDIT' && !addDetails">UPDATE
-        </button>-->
     </div>
 </div>

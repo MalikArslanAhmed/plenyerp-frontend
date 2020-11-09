@@ -56,8 +56,8 @@ export class NotesMasterComponent implements OnInit {
     addNote(economicSegmentId) {
         const params = {};
         this.trialBalanceReportService.addNote(economicSegmentId, {}).subscribe(data => {
-            //console.log('data', data);
             params['parentId'] = economicSegmentId;
+            params['types'] = 'Trail_balance';
             this.trialBalanceReportService.getNotesData(params).subscribe(data => {
                 this.chileNotesData = data.items;
             });
@@ -106,5 +106,13 @@ export class NotesMasterComponent implements OnInit {
                 notes['checked'] = true;
             });
         }
+    }
+
+    resetNoteMaster() {
+        this.trialBalanceReportService.deleteAll().subscribe(data => {
+            if (data) {
+                this.getNotesMasterData({});
+            }
+        });
     }
 }

@@ -31,16 +31,21 @@ app-notes-master {
             #add-button {
                 background-color: white !important;
                 color: #106CC8 !important;
+                margin-right: 10px;
 
                 mat-label {
                     color: black !important;
                 }
             }
 
-            // #fromToDate{
-            //     background-color: white !important;
-            //     color: #106CC8 !important;
-            // }
+            #reset-button {
+                background-color: white !important;
+                color: #106CC8 !important;
+
+                mat-label {
+                    color: black !important;
+                }
+            }
         }
 
         .content {
