@@ -73,7 +73,6 @@ export class NotesMasterComponent implements OnInit {
         if (this.notesMasterData && this.notesMasterData.length > 0) {
             let notesData = [];
             this.notesMasterData.forEach(note => {
-                console.log('note', note);
                 if (note.checked) {
                     notesData.push({'economicSegmentId': note['economicSegment'].id, 'noteId': note.noteId});
                 }
