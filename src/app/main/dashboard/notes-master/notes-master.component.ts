@@ -103,7 +103,7 @@ export class NotesMasterComponent implements OnInit {
     reportCheckedAll() {
         if (this.notesMasterData && this.notesMasterData.length > 0) {
             this.notesMasterData.forEach(notes => {
-                notes['checked'] = true;
+                notes['checked'] = !notes['checked'];
             });
         }
     }
