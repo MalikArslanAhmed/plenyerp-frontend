@@ -113,8 +113,11 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="title">
+                                    <div class="title" *ngIf="jvDet.lineValueType === 'DEBIT'">
                                         {{jvDet?.lvLineValue}}
+                                    </div>
+                                    <div class="title" *ngIf="jvDet.lineValueType === 'CREDIT'">
+                                        ({{jvDet?.lvLineValue}})
                                     </div>
                                 </td>
                             </tr>

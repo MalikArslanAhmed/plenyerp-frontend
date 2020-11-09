@@ -232,9 +232,11 @@ app-notes-master {
         border: none !important;
         background-color: transparent !important;
     }
+
     .no-click {
         pointer-events: none;
     }
+
     #open-all {
         background-color: white !important;
         color: #106CC8 !important;
@@ -243,6 +245,7 @@ app-notes-master {
             color: black !important;
         }
     }
+
     .margin-left-1 {
         margin-left: 1rem;
     }

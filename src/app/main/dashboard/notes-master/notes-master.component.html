@@ -15,7 +15,7 @@
             <div appPermissionBind [permission]="">
                 <button mat-button class="accent" id="add-button" aria-label="add skill"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
-                        (click)="downloadNoteMaster(notesMasterColumn)">
+                        (click)="downloadNoteMaster('Trail_balance')">
                     Download
                 </button>
             </div>
@@ -91,7 +91,7 @@
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildNotes(reportData)">
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">N{{reportData?.id}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">N{{reportData?.noteId}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.economicSegment?.combinedCode}}</p>
@@ -167,8 +167,11 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="title" *ngIf="reportData.credit > reportData?.debit">({{(reportData?.debit - reportData?.credit) * -1}})</div>
-                                        <div class="title" *ngIf="reportData.credit <= reportData?.debit">{{reportData?.debit - reportData?.credit}}</div>
+                                        <div class="title" *ngIf="reportData.credit > reportData?.debit">
+                                            ({{(reportData?.debit - reportData?.credit) * -1}})
+                                        </div>
+                                        <div class="title"
+                                             *ngIf="reportData.credit <= reportData?.debit">{{reportData?.debit - reportData?.credit}}</div>
                                     </td>
                                     <td>
                                         <button appPermissionBind [permission]="permissionAddNotes"

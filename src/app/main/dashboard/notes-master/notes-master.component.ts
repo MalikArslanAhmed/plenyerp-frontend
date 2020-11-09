@@ -17,8 +17,8 @@ export class NotesMasterComponent implements OnInit {
     searchNotesMasterForm: FormGroup;
     notesMasterData = [];
     chileNotesData = [];
-    notesMasterColumn = ['Note Id', 'Full Code', 'Debit', 'Credit', 'Balance'];
     panelOpenState: boolean = false;
+
     constructor(private trialBalanceReportService: TrialBalanceReportService,
                 private fb: FormBuilder) {
     }
@@ -70,11 +70,12 @@ export class NotesMasterComponent implements OnInit {
         this.getNotesMasterData(this.searchNotesMasterForm.value);
     }
 
-    downloadNoteMaster(data) {
-        this.trialBalanceReportService.downloadNoteMasterReport({columns: JSON.stringify(data)}).subscribe((success) => {
+    downloadNoteMaster(type) {
+        this.trialBalanceReportService.downloadNoteMasterReport({'type': type}).subscribe((success) => {
             window.location.href = success.url;
         });
     }
+
     openAll() {
         if (this.notesMasterData && this.notesMasterData.length > 0) {
             this.notesMasterData.forEach(d => {
