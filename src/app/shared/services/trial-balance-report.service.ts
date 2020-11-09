@@ -22,9 +22,10 @@ export class TrialBalanceReportService extends BaseService {
         return this.postRequest(AppUrl.ADD_NOTE_TRAIL_REPORT(segmentId), data);
     }
 
-    getNotesData(data): Observable<any>{
+    getNotesData(data): Observable<any> {
         return this.getRequest(AppUrl.GET_NOTE_MASTER_DATA(), data);
     }
+
     downloadNoteMasterReport(data): Observable<any> {
         return this.getRequest(AppUrl.DOWNLOAD_NOTES_MASTER_REPORT(), data);
     }

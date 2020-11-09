@@ -12,7 +12,6 @@ import {PermissionConstant} from 'app/shared/constants/permission-constant';
     animations: fuseAnimations
 })
 export class NotesMasterComponent implements OnInit {
-
     permissionAddNotes = [PermissionConstant.NOTES_MASTER_NOTE_ADD];
     searchNotesMasterForm: FormGroup;
     notesMasterData = [];
@@ -25,7 +24,6 @@ export class NotesMasterComponent implements OnInit {
 
     ngOnInit(): void {
         this.getNotesMasterData({});
-
         this.searchNotesMasterForm = this.fb.group({
             'id': [''],
         });
@@ -36,6 +34,7 @@ export class NotesMasterComponent implements OnInit {
             this.notesMasterData = data.items;
             if (this.notesMasterData && this.notesMasterData.length > 0) {
                 this.notesMasterData.forEach(d => {
+                    d['checked'] = false;
                     d['isOpen'] = !this.panelOpenState;
                     this.getChildNotes(d);
                 });
@@ -71,9 +70,21 @@ export class NotesMasterComponent implements OnInit {
     }
 
     downloadNoteMaster(type) {
-        this.trialBalanceReportService.downloadNoteMasterReport({'type': type}).subscribe((success) => {
-            window.location.href = success.url;
-        });
+        if (this.notesMasterData && this.notesMasterData.length > 0) {
+            let notesData = [];
+            this.notesMasterData.forEach(note => {
+                console.log('note', note);
+                if (note.checked) {
+                    notesData.push({'economicSegmentId': note['economicSegment'].id, 'noteId': note.noteId});
+                }
+            });
+            this.trialBalanceReportService.downloadNoteMasterReport({
+                'notesData': JSON.stringify(notesData),
+                'type': type
+            }).subscribe((success) => {
+                window.location.href = success.url;
+            });
+        }
     }
 
     openAll() {
@@ -83,6 +94,18 @@ export class NotesMasterComponent implements OnInit {
                 this.getChildNotes(d);
             });
             this.panelOpenState = !this.panelOpenState;
+        }
+    }
+
+    reportChecked(index, event) {
+        this.notesMasterData[index].checked = event.checked;
+    }
+
+    reportCheckedAll() {
+        if (this.notesMasterData && this.notesMasterData.length > 0) {
+            this.notesMasterData.forEach(notes => {
+                notes['checked'] = true;
+            });
         }
     }
 }

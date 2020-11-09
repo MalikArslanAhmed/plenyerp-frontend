@@ -1,22 +1,6 @@
 <div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
-    <!--<mat-paginator #paginator
-                   [length]="totalRows$ | async"
-                   [pageIndex]="0"
-                   [pageSize]="10"
-                   [pageSizeOptions]="[5, 10, 25, 100]"
-    ></mat-paginator>-->
     <div fxLayout="row" fxLayoutAlign="end center">
-        <!--<div appPermissionBind [permission]="permissionAddJV">
-            <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addJournalVoucher()">
-                <mat-icon>add_circle</mat-icon>
-            </button>
-        </div>-->
         <div>
-            <!--<button mat-fab class="accent" id="add-button" aria-label="add salary scales"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addJournalVoucher()">
-                <mat-icon>add_circle</mat-icon>
-            </button>-->
             <button mat-raised-button (click)="markAsChecked()" class="checked-btn justify-content-end"
                     *ngIf="this.status && this.status === 'NEW'">Mark as checked
             </button>
@@ -151,21 +135,6 @@
                         <span class="display-inline" *ngIf="journalVoucher.postedTransactionDate">
                             <span>-</span>
                         </span>
-                        <!-- <span appPermissionBind [permission]="permissionEditJV">
-                            <span>
-                                <span class="material-icons f_20 cursor-pointer blueColor"
-                                    (click)="editJournalVoucher(journalVoucher)">
-                                    edit
-                                </span>
-                            </span>
-                        </span>
-                        <span appPermissionBind [permission]="permissionDeleteJV">
-                            <span>
-                                <span class="material-icons ml-7px f_20 cursor-pointer redColor">
-                                    delete
-                                </span>
-                            </span>
-                        </span> -->
                     </p>
                 </span>
             </mat-expansion-panel-header>

@@ -26,45 +26,6 @@
                 </button>
             </div>
         </div>
-        <!-- <div fxLayout="row" fxLayoutAlign="center">
-            <mat-form-field appearance="outline" fxFlex class="mt-13px" id="fromToDate">
-                <mat-label>From</mat-label>
-                <input matInput [matDatepicker]="from"
-                       >
-                <mat-datepicker-toggle matSuffix
-                                       [for]="from"></mat-datepicker-toggle>
-                <mat-datepicker #from></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="center">
-            <mat-form-field appearance="outline" fxFlex class="mt-13px">
-                <mat-label>To</mat-label>
-                <input matInput [matDatepicker]="to"
-                       >
-                <mat-datepicker-toggle matSuffix
-                                       [for]="to"></mat-datepicker-toggle>
-                <mat-datepicker #to></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="center">
-            <button mat-icon-button 
-                       >Submit
-                    <mat-icon class="amber-600-fg">play_arrow</mat-icon>
-                </button>
-        </div> -->
-
-        <!-- SEARCH -->
-        <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
-            <div class="search-wrapper mt-16 mt-sm-0">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
-                    <input [formControl]="searchInput" placeholder="Search for a contact">
-                </div>
-            </div>
-        </div>-->
-        <!-- / SEARCH -->
     </div>
 
     <div class="content">
@@ -80,6 +41,9 @@
             <div class="content mt-20px">
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                        <span class="mat-header-cell">
+                            <mat-checkbox (change)="reportCheckedAll()" (click)="$event.stopPropagation()"
+                                          style="margin-right: 10px"></mat-checkbox> Select</span>
                         <span class="mat-header-cell">Note Id</span>
                         <span class="mat-header-cell">Full Code</span>
                         <span class="mat-header-cell">Debit</span>
@@ -91,7 +55,13 @@
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildNotes(reportData)">
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">N{{reportData?.noteId}}</p>
+                                <p class="text-truncate cursor-pointer" style="margin-top: 5px">
+                                    <mat-checkbox (change)="reportChecked(i, $event)" (click)="$event.stopPropagation()"
+                                                  [checked]="reportData.checked ? true : null"></mat-checkbox>
+                                </p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.noteId}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.economicSegment?.combinedCode}}</p>
