@@ -89,6 +89,10 @@
                             <mat-label>Search JV Reference</mat-label>
                             <input formControlName="jvReference" matInput>
                         </mat-form-field>
+                        <button mat-button class="reset-report" (click)="resetfilter()">
+                            Reset
+                            <mat-icon class="material-icons cursor-pointer whiteColor">cached</mat-icon>
+                        </button>
                         <button mat-button class="submit-report" (click)="filter()">
                             Submit
                             <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>

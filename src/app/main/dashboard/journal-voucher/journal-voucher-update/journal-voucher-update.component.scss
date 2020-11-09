@@ -1,6 +1,7 @@
 app-journal-voucher-update {
     #items {
-        width: 1200px !important;
+        max-width: 1200px !important;
+        min-width: 1050px !important;
         overflow-x: unset !important;
     }
 

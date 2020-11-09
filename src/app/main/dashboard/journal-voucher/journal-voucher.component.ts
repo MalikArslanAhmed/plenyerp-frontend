@@ -65,10 +65,6 @@ export class JournalVoucherComponent implements OnInit {
             'status': [''],
             'jvReference': ['']
         });
-
-        /*this.searchJournalVoucherForm = this.fb.group({
-            'jvReference': [''],
-        });*/
     }
 
     addJournalVoucher() {
@@ -94,6 +90,17 @@ export class JournalVoucherComponent implements OnInit {
         };
         this.getJournalVoucherData.getJournalVoucherList(params);
         // console.log('searchJournalVoucherForm', params);
+    }
+
+    resetfilter() {
+        this.filterJournalVoucherForm.patchValue({
+            'sourceApp': '',
+            'from': '',
+            'to': '',
+            'status': '',
+            'jvReference': '',
+        });
+        this.getJournalVoucherData.getJournalVoucherList(this.filterJournalVoucherForm.value);
     }
 
     /*search() {
