@@ -746,6 +746,16 @@ export const navigation: FuseNavigation[] = [
                 url: '/dashboard/voucher-source-unit',
                 permissions: []
             },
+            {
+                id: 'cashbook',
+                title: 'Cashbook',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'payment',
+                url: '/dashboard/cashbook-account',
+                permissions: []
+            },
         ]
     }
 ];

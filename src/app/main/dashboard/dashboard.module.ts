@@ -214,6 +214,9 @@ import { MonthlyActivityEconomicSegmentComponent } from './monthly-activity/mont
 import {VoucherSourceUnitComponent} from './treasure-report/voucher-source-unit/voucher-source-unit.component';
 import {VoucherSourceUnitCreateComponent} from './treasure-report/voucher-source-unit/voucher-source-unit-create/voucher-source-unit-create.component';
 import {VoucherSourceUnitListComponent} from './treasure-report/voucher-source-unit/voucher-source-unit-list/voucher-source-unit-list.component';
+import {CashbookListComponent} from './treasure-report/cashbook/cashbook-list/cashbook-list.component';
+import {CashbookCreateComponent} from './treasure-report/cashbook/cashbook-create/cashbook-create.component';
+import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
 
 @NgModule({
     declarations: [
@@ -405,7 +408,10 @@ import {VoucherSourceUnitListComponent} from './treasure-report/voucher-source-u
         MonthlyActivityEconomicSegmentComponent,
         VoucherSourceUnitComponent,
         VoucherSourceUnitCreateComponent,
-        VoucherSourceUnitListComponent
+        VoucherSourceUnitListComponent,
+        CashbookListComponent,
+        CashbookCreateComponent,
+        CashbookComponent
     ],
     imports: [
         CommonModule,

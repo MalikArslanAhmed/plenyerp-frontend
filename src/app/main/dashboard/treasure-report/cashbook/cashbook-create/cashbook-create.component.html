@@ -1,0 +1,110 @@
+<div class="dialog-content-wrapper" id="roles-items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+<!--        <form [formGroup]="voucherSourceUnitForm">-->
+<!--            <div fxLayout="row" fxLayoutAlign="start">-->
+<!--                <mat-form-field appearance="outline" fxFlex>-->
+<!--                    <mat-label>Ref. No</mat-label>-->
+<!--                    <input matInput placeholder="Name" formControlName="refNo" name="refNo" required>-->
+<!--                </mat-form-field>-->
+<!--            </div>-->
+<!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
+<!--                <mat-form-field appearance="outline" fxFlex>-->
+<!--                    <mat-label>Long Name</mat-label>-->
+<!--                    <input matInput placeholder="Enter VSU Long Name" formControlName="longName" name="longName" required>-->
+<!--                </mat-form-field>-->
+<!--                <mat-form-field appearance="outline" fxFlex>-->
+<!--                    <mat-label>Short Name</mat-label>-->
+<!--                    <input matInput placeholder="Enter VSU Short Name" formControlName="shortName" name="shortName" required>-->
+<!--                </mat-form-field>-->
+<!--            </div>-->
+<!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
+<!--                <mat-form-field appearance="outline" fxFlex>-->
+<!--                    <mat-label>Next PV Index No.</mat-label>-->
+<!--                    <input matInput placeholder="PV Index #" formControlName="nextPvIndexNo" name="nextPvIndexNo" required>-->
+<!--                </mat-form-field>-->
+<!--                <mat-form-field appearance="outline" fxFlex>-->
+<!--                    <mat-label>Next RV Index No.</mat-label>-->
+<!--                    <input matInput placeholder="RV Index #" formControlName="nextRvIndexNo" name="nextRvIndexNo" required>-->
+<!--                </mat-form-field>-->
+<!--            </div>-->
+<!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
+<!--                <mat-form-field appearance="outline" fxFlex>-->
+<!--                    <mat-label>Honour.</mat-label>-->
+<!--                    <textarea matInput placeholder="Authorized by Staff Name" formControlName="honourCertificate" name="honourCertificate" required></textarea>-->
+<!--                </mat-form-field>-->
+<!--            </div>-->
+<!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
+<!--                <div fxLayout="column" fxLayoutAlign="start" class= "w-60-per">-->
+<!--                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
+<!--                        <div>-->
+<!--                            <button mat-raised-button color="accent" style="margin-top: 14px">Select</button>-->
+<!--                        </div>-->
+<!--                        <mat-form-field appearance="outline" class="w-100-per">-->
+<!--                            <mat-label>Checking Officer</mat-label>-->
+<!--                            <input matInput placeholder="Checking Officer Name" formControlName="checkingOfficer" name="checkingOfficer" required>-->
+<!--                        </mat-form-field>-->
+<!--                    </div>-->
+<!--                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
+<!--                        <div>-->
+<!--                            <button mat-raised-button color="accent"  style="margin-top: 14px">Select</button>-->
+<!--                        </div>-->
+<!--                        <mat-form-field appearance="outline" class="w-100-per">-->
+<!--                            <mat-label>Paying Officer</mat-label>-->
+<!--                            <input matInput placeholder="Paying Officer Name" formControlName="payingOfficer" name="payingOfficer" required>-->
+<!--                        </mat-form-field>-->
+<!--                    </div>-->
+<!--                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
+<!--                        <div>-->
+<!--                            <button mat-raised-button color="accent"  style="margin-top: 14px">Select</button>-->
+<!--                        </div>-->
+<!--                        <mat-form-field appearance="outline" class="w-100-per">-->
+<!--                            <mat-label>Financial Controller</mat-label>-->
+<!--                            <input matInput placeholder="Financial Controller Name" formControlName="financialController" name="financialController" required>-->
+<!--                        </mat-form-field>-->
+<!--                    </div>-->
+<!--                   <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
+<!--                       <mat-slide-toggle>A Personal Adv. Unit ?</mat-slide-toggle>-->
+<!--                   </div>-->
+<!--                </div>-->
+<!--                <div fxLayout="column" fxLayoutAlign="start" class= "w-40-per">-->
+<!--                    <mat-form-field appearance="outline">-->
+<!--                        <mat-label>Retirement Ref No.</mat-label>-->
+<!--                        <input matInput placeholder="Enter Retirement Ref. #" formControlName="retirementRefNo" name="retirementRefNo" required>-->
+<!--                    </mat-form-field>-->
+<!--                    <mat-form-field appearance="outline">-->
+<!--                        <mat-label>Reverse V Ref No.</mat-label>-->
+<!--                        <input matInput placeholder="Enter Reverse V Ref. #" formControlName="reverseVRefNo" name="reverseVRefNo" required>-->
+<!--                    </mat-form-field>-->
+<!--                    <mat-form-field appearance="outline">-->
+<!--                        <mat-label>Revalidation Ref No.</mat-label>-->
+<!--                        <input matInput placeholder="Enter Revalidation Ref. #" formControlName="revalidationRefNo" name="revalidationRefNo" required>-->
+<!--                    </mat-form-field>-->
+<!--                    <mat-form-field appearance="outline">-->
+<!--                        <mat-label>Text Voucher Ref No.</mat-label>-->
+<!--                        <input matInput placeholder="Enter Text Voucher Ref. #" formControlName="textVoucherRefNo" name="textVoucherRefNo" required>-->
+<!--                    </mat-form-field>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close();"
+                aria-label="Cancel">CANCEL
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(voucherSourceUnitForm); saveVoucherSourceUnit()"
+                [disabled]="voucherSourceUnitForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(voucherSourceUnitForm); updateVoucherSourceUnit()"
+                [disabled]="voucherSourceUnitForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

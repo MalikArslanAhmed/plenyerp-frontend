@@ -69,6 +69,7 @@ import { StatementOfPositionComponent } from './statement-of-position/statement-
 import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
 import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
 import {VoucherSourceUnitComponent} from './treasure-report/voucher-source-unit/voucher-source-unit.component';
+import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
 
 const routes: Routes = [
     {
@@ -684,6 +685,13 @@ const routes: Routes = [
         component: VoucherSourceUnitComponent,
         data: {
             title: 'Voucher Source Unit'
+        }
+    },
+    {
+        path: 'cashbook-account',
+        component: CashbookComponent,
+        data: {
+            title: 'Cashbook'
         }
     }
 ];

@@ -1,0 +1,66 @@
+<div class="voucherSource-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="cashbookAccountList">
+        <ng-container matColumnDef="s_no">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let cashbook">
+                <p class="email text-truncate">
+                    {{((pagination.page - 1) * pagination.perpage) + cashbook.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let cashbook" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{cashbook?.id}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+            <mat-cell *matCellDef="let cashbook" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{cashbook?.title}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Action</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let cashbook">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <div>
+                        <button mat-icon-button aria-label="Toggle star" (click)="editCashbook(cashbook)"
+                                style="color: blue; margin-left: 1rem">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div>
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModel(cashbook)"
+                                style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedCountryColumns"></mat-header-row>
+        <mat-row *matRowDef="let cashbook; columns: displayedCountryColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator *ngIf ="cashbookAccountList.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="pageEvent = onPageChange($event)"
+    >
+    </mat-paginator>
+</div>
+
+
