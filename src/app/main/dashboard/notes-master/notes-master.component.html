@@ -19,17 +19,18 @@
                     Download
                 </button>
             </div>
-            <div appPermissionBind [permission]="">
-                <button mat-button class="accent" id="reset-button"
-                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
-                        (click)="resetNoteMaster()">
-                    Reset
-                </button>
-            </div>
-            <div appPermissionBind [permission]="" class="margin-left-1">
+            <div appPermissionBind [permission]="" class="margin-left-1" style="margin-right: 10px">
                 <button mat-button class="accent" id="open-all" aria-label="add skill"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
                     {{panelOpenState ? 'Close' : 'Open'}} All
+                </button>
+            </div>
+            <div appPermissionBind [permission]="">
+                <button mat-button class="accent" id="reset-button"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
+                        (click)="resetNoteMaster()" title="Reset Notes">
+                    <mat-icon class="material-icons">delete</mat-icon>
+                    Reset
                 </button>
             </div>
         </div>

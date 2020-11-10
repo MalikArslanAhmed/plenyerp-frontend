@@ -207,10 +207,11 @@ import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-repo
 import {NotesMasterComponent} from './notes-master/notes-master.component';
 import {BalanceAmountModelComponent} from './journal-voucher/balance-amount-model/balance-amount-model.component';
 import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
-import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
-import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
-import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
-import { MonthlyActivityEconomicSegmentComponent } from './monthly-activity/monthly-activity-economic-segment/monthly-activity-economic-segment.component';
+import {StatementOfPositionComponent} from './statement-of-position/statement-of-position.component';
+import {FinancialPerformanceReportComponent} from './financial-performance-report/financial-performance-report.component';
+import {MonthlyActivityComponent} from './monthly-activity/monthly-activity.component';
+import {MonthlyActivityEconomicSegmentComponent} from './monthly-activity/monthly-activity-economic-segment/monthly-activity-economic-segment.component';
+import {NotesDeleteModalComponent} from './notes-master/notes-delete-modal/notes-delete-modal.component';
 
 @NgModule({
     declarations: [
@@ -399,7 +400,8 @@ import { MonthlyActivityEconomicSegmentComponent } from './monthly-activity/mont
         StatementOfPositionComponent,
         FinancialPerformanceReportComponent,
         MonthlyActivityComponent,
-        MonthlyActivityEconomicSegmentComponent
+        MonthlyActivityEconomicSegmentComponent,
+        NotesDeleteModalComponent
     ],
     imports: [
         CommonModule,

@@ -4,6 +4,9 @@ import {fuseAnimations} from '@fuse/animations';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {PermissionConstant} from 'app/shared/constants/permission-constant';
 import {AlertService} from "../../../shared/services/alert.service";
+import {DeleteListModalComponent} from "../delete-list-modal/delete-list-modal.component";
+import {MatDialog} from "@angular/material/dialog";
+import {NotesDeleteModalComponent} from './notes-delete-modal/notes-delete-modal.component';
 
 @Component({
     selector: 'app-notes-master',
@@ -18,10 +21,12 @@ export class NotesMasterComponent implements OnInit {
     notesMasterData = [];
     chileNotesData = [];
     panelOpenState: boolean = false;
+    dialogRef: any;
 
     constructor(private trialBalanceReportService: TrialBalanceReportService,
                 private fb: FormBuilder,
-                private alertService: AlertService) {
+                private alertService: AlertService,
+                private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -115,9 +120,17 @@ export class NotesMasterComponent implements OnInit {
     }
 
     resetNoteMaster() {
-        this.trialBalanceReportService.deleteAll().subscribe(data => {
-            if (data) {
-                this.getNotesMasterData({});
+        this.dialogRef = this._matDialog.open(NotesDeleteModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: ''}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.trialBalanceReportService.deleteAll().subscribe(data => {
+                    if (data) {
+                        this.getNotesMasterData({});
+                    }
+                });
             }
         });
     }

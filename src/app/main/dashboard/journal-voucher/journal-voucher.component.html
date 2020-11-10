@@ -10,23 +10,8 @@
                    Journal Voucher
                 </span>
             </div>
-            <!--<div class="ml-20px mt-20px color-white" fxLayout="row" fxLayoutAlign="start center">
-                <mat-form-field appearance="outline" fxFlex="100" class="width-200px">
-                    <mat-label>Originating / Source App</mat-label>
-                    <mat-select>
-                        <mat-option [value]="source.value"
-                                    *ngFor="let source of sourceApp">{{source?.name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>--> 
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-            <!--<div appPermissionBind [permission]="permissionAddJV">
-                <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
-                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addJournalVoucher()">
-                    <mat-icon>add_circle</mat-icon>
-                </button>
-            </div>-->
             <div appPermissionBind [permission]="permissionAddJV">
                 <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addJournalVoucher()">
@@ -34,16 +19,6 @@
                 </button>
             </div>
         </div>
-        <!-- SEARCH -->
-        <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
-            <div class="search-wrapper mt-16 mt-sm-0">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
-                    <input [formControl]="searchInput" placeholder="Search for a contact">
-                </div>
-            </div>
-        </div>-->
-        <!-- / SEARCH -->
     </div>
     <div class="content">
     </div>
@@ -100,14 +75,6 @@
                     </mat-grid-list>
                 </form>
             </div>
-            <!--<div class="content mt-20px">
-                <form [formGroup]="searchJournalVoucherForm">
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>Search JV Reference</mat-label>
-                        <input formControlName="jvReference" matInput (keyup)="search()">
-                    </mat-form-field>
-                </form>
-            </div>-->
             <div class="content mt-20px">
                 <app-journal-voucher-list></app-journal-voucher-list>
             </div>
