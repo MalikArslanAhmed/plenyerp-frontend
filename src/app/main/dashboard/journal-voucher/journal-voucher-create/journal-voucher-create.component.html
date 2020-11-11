@@ -440,7 +440,7 @@
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Line Value (in Trxn Currency)</mat-label>
-                                <input formControlName="lineValueInTrxnCurrency" matInput>
+                                <input formControlName="lineValueInTrxnCurrency" matInput type="number" (change)="addLineValue($event)"/>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
