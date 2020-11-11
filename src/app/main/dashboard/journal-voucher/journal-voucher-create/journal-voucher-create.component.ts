@@ -108,11 +108,11 @@ export class JournalVoucherCreateComponent implements OnInit {
             'lineReference': [''],
             'functionalSegmentCode': [{value: '', disabled: true}],
             'functionalSegmentId': [''],
-            'lineValueInTrxnCurrency': [''],
             'geoCodeSegmentCode': [{value: '', disabled: true}],
             'geoCodeSegmentId': [''],
             'lineValueType': ['DEBIT'],
-            'lvLineValue': [{value: '', disabled: true}]
+            'lvLineValue': [''],
+            'creditDebitValue': [{value: '', disabled: true}]
         });
     }
 
@@ -279,7 +279,7 @@ export class JournalVoucherCreateComponent implements OnInit {
 
     addLineValue(event) {
         this.addDetailForm.patchValue({
-            'lvLineValue': event.target.value
+            'creditDebitValue': event.target.value
         });
     }
 
@@ -297,10 +297,9 @@ export class JournalVoucherCreateComponent implements OnInit {
             'lineReference': this.addDetailForm.value.lineReference ? this.addDetailForm.value.lineReference : '',
             'functionalSegmentCode': this.addDetailForm.value.functionalSegmentCode ? this.addDetailForm.value.functionalSegmentCode : '',
             'functionalSegmentId': this.addDetailForm.value.functionalSegmentId ? this.addDetailForm.value.functionalSegmentId : '',
-            'lineValueInTrxnCurrency': this.addDetailForm.value.lineValueInTrxnCurrency ? this.addDetailForm.value.lineValueInTrxnCurrency : '',
             'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
             'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
-            'lvLineValue': this.addDetailForm.value.lineValueInTrxnCurrency ? this.addDetailForm.value.lineValueInTrxnCurrency : '',
+            'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
             'adminSegmentName': this.adminSegments[0] && this.adminSegments[0].name ? this.adminSegments[0].name : '',
             'fundSegmentName': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].name ? this.fundSegmentsAddDet[0].name : '',
             'economicSegmentName': this.economicSegments[0] && this.economicSegments[0].name ? this.economicSegments[0].name : '',
