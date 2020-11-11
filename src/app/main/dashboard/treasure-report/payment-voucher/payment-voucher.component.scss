@@ -1,7 +1,7 @@
 @import "src/@fuse/scss/fuse";
 
 app-payment-voucher {
-    #journal-voucher {
+    #payment-voucher {
         .header {
             .search-wrapper {
                 width: 100%;
@@ -125,7 +125,6 @@ app-payment-voucher {
 
     .invoice-table {
         background-color: #E0E0E0;
-        margin-top: -20px;
     }
 
     .accordion-table .accordion-row {
@@ -235,5 +234,15 @@ app-payment-voucher {
 
     .no-click {
         pointer-events: none;
+    }
+
+    .items-data {
+        width: 100%;
+        overflow-x: unset !important;
+        box-shadow: 0 0 1px 1px #e0e0e0;
+    }
+
+    .mt--20px {
+        margin-top: -20px;
     }
 }

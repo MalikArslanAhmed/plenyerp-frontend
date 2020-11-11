@@ -13,7 +13,8 @@ import * as moment from "moment";
     animations: fuseAnimations
 })
 export class PaymentVoucherComponent implements OnInit {
-    filterStatementOfPositionReportForm: FormGroup;
+    filterPaymentVoucherForm: FormGroup;
+    searchPaymentVoucherForm: FormGroup;
     paymentVoucherData = [
         {
             'year': '2018',
@@ -23,7 +24,53 @@ export class PaymentVoucherComponent implements OnInit {
             'taxes': '0',
             'paymentRef': '1241',
             'lastActioned': '31-Dec-2018',
-            'status': 'Checked'
+            'status': 'Checked',
+            'payee': [
+                {
+                    'id': 1,
+                    'name': 'Test Name',
+                    'amountNet': 10000,
+                    'taxes': 1000,
+                    'amountTotal': 200000,
+                    'details': 'New Test Details',
+                    'bankTitle': 'CBI',
+                    'bankAC': '1199008899',
+                    'typeOfBankAC': 'Savings',
+                    'bank': 'Central Bank Of India',
+                    'bankBranch': 'New Delhi',
+                    'sortCode': 'CBIN',
+                    'paymentRef': 'New',
+                    'status': 'Checked',
+                },
+                {
+                    'id': 2,
+                    'name': 'Test Name 2',
+                    'amountNet': 10000,
+                    'taxes': 1000,
+                    'amountTotal': 200000,
+                    'details': 'New Test Details',
+                    'bankTitle': 'CBI',
+                    'bankAC': '1199008899',
+                    'typeOfBankAC': 'Savings',
+                    'bank': 'Central Bank Of India',
+                    'bankBranch': 'New Delhi',
+                    'sortCode': 'CBIN',
+                    'paymentRef': 'New',
+                    'status': 'Checked',
+                }
+            ],
+            'economic': [
+                {
+                    'id': 1,
+                    'account': 'Test Name',
+                    'amount': 10000
+                },
+                {
+                    'id': 2,
+                    'account': 'Test Name 2',
+                    'amount': 10000
+                }
+            ]
         },
         {
             'year': '2019',
@@ -33,22 +80,113 @@ export class PaymentVoucherComponent implements OnInit {
             'taxes': '0',
             'paymentRef': '1214',
             'lastActioned': '31-Dec-2018',
-            'status': 'Approved'
+            'status': 'Approved',
+            'payee': [
+                {
+                    'id': 1,
+                    'name': 'Test Name',
+                    'amountNet': 10000,
+                    'taxes': 1000,
+                    'amountTotal': 200000,
+                    'details': 'New Test Details',
+                    'bankTitle': 'CBI',
+                    'bankAC': '1199008899',
+                    'typeOfBankAC': 'Savings',
+                    'bank': 'Central Bank Of India',
+                    'bankBranch': 'New Delhi',
+                    'sortCode': 'CBIN',
+                    'paymentRef': 'New',
+                    'status': 'Checked',
+                },
+                {
+                    'id': 2,
+                    'name': 'Test Name 2',
+                    'amountNet': 10000,
+                    'taxes': 1000,
+                    'amountTotal': 200000,
+                    'details': 'New Test Details',
+                    'bankTitle': 'CBI',
+                    'bankAC': '1199008899',
+                    'typeOfBankAC': 'Savings',
+                    'bank': 'Central Bank Of India',
+                    'bankBranch': 'New Delhi',
+                    'sortCode': 'CBIN',
+                    'paymentRef': 'New',
+                    'status': 'Checked',
+                }
+            ],
+            'economic': [
+                {
+                    'id': 1,
+                    'account': 'Test Name',
+                    'amount': 10000
+                },
+                {
+                    'id': 2,
+                    'account': 'Test Name 2',
+                    'amount': 10000
+                }
+            ]
         }
     ];
     panelOpenState: boolean = false;
+    sourceUnit = [
+        {
+            'name': 'Loan & Advances',
+            'value': 'LOAN_AND_ADVANCES'
+        }
+    ];
+    statuses = [
+        {
+            'name': 'All',
+            'value': 'ALL'
+        },
+        {
+            'name': 'New',
+            'value': 'NEW'
+        },
+        {
+            'name': 'Checked',
+            'value': 'CHECKED'
+        },
+        {
+            'name': 'Approved',
+            'value': 'APPROVED'
+        },
+        {
+            'name': 'Budget Codes Verified',
+            'value': 'BUDGET_CODES_VERIFIED'
+        },
+        {
+            'name': 'Audited',
+            'value': 'AUDITED'
+        },
+        {
+            'name': 'Closed',
+            'value': 'CLOSED'
+        },
+        {
+            'name': 'Posted to GL (#)',
+            'value': 'POSTED_TO_gl'
+        },
+        {
+            'name': 'On Mandate',
+            'value': 'ON_MANDATE'
+        }
+    ];
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
-                private fb: FormBuilder,
-                private alertService: AlertService) {
+                private fb: FormBuilder) {
     }
 
     ngOnInit(): void {
-        this.filterStatementOfPositionReportForm = this.fb.group({
-            'from': ['', Validators.required],
-            'to': ['', Validators.required]
+        this.filterPaymentVoucherForm = this.fb.group({
+            'sourceUnit': [''],
+            'status': ['']
         });
-        // this.getStatementPositionData({});
+        this.searchPaymentVoucherForm = this.fb.group({
+            'search': ['']
+        });
     }
 
     /*getStatementPositionData(params) {
@@ -74,32 +212,11 @@ export class PaymentVoucherComponent implements OnInit {
         }
     }
 
-    filterStatementOfPosition() {
-        if (this.filterStatementOfPositionReportForm.value.from === '' || this.filterStatementOfPositionReportForm.value.to === '') {
-            if (this.filterStatementOfPositionReportForm.value.from === '') {
-                this.alertService.showErrors("From date is required");
-            } else if (this.filterStatementOfPositionReportForm.value.to === '') {
-                this.alertService.showErrors("To date is required");
-            }
-        } else {
-            const f = this.filterStatementOfPositionReportForm.value;
-            const fromDate = moment(f.from).format('YYYY-MM-DD');
-            const toDate = moment(f.to).format('YYYY-MM-DD');
-            const params = {
-                fromDate: fromDate,
-                toDate: toDate
-            };
-            // this.getStatementPositionData(params);
-        }
+    filterPaymentVoucher() {
+        console.log('filterPaymentVoucherForm', this.filterPaymentVoucherForm.value);
     }
 
-    openAll() {
-        /*if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
-            this.paymentVoucherData.forEach(d => {
-                d['isOpen'] = !this.panelOpenState;
-                this.getChildReportData(d);
-            });
-            this.panelOpenState = !this.panelOpenState;
-        }*/
+    search() {
+        console.log('searchPaymentVoucherForm', this.searchPaymentVoucherForm.value);
     }
 }
