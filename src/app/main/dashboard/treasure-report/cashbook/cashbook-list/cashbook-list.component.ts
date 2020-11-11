@@ -8,6 +8,7 @@ import {DeleteListModalComponent} from 'app/main/dashboard/delete-list-modal/del
 import {Router} from '@angular/router';
 import {PermissionConstant} from 'app/shared/constants/permission-constant';
 import {TreasureReportService} from '../../../../../shared/services/treasure-report.service';
+import {CashbookService} from '../../../../../shared/services/cashbook.service';
 
 @Component({
     selector: 'app-cashbook-list',
@@ -40,7 +41,7 @@ export class CashbookListComponent implements OnInit {
     @Output() selectedIndexChange: EventEmitter<number>;
 
     // tslint:disable-next-line:no-shadowed-variable
-    constructor(private treasureReportService: TreasureReportService,
+    constructor(private cashbookService: CashbookService,
                 private router: Router,
                 private _matDialog: MatDialog) {
     }
@@ -51,7 +52,7 @@ export class CashbookListComponent implements OnInit {
 
     getcashbookList() {
         // this.cashbookAccountList = [];
-        // this.treasureReportService.cashbookAccountList({page: this.pagination.page}).subscribe(data => {
+        // this.cashbookService.cashboCashbookountList({page: this.pagination.page}).subscribe(data => {
         //     this.cashbookAccountList = data.items;
         //     // console.log('---->>>roles', this.cashbookAccountList);
         //     this.pagination.page = data.page;
@@ -81,7 +82,7 @@ export class CashbookListComponent implements OnInit {
     }
 
     deleteCashbook(id) {
-        this.treasureReportService.deleteRoles(id).subscribe(data => {
+        this.cashbookService.deleteCashbook(id).subscribe(data => {
             if (data) {
                 this.getcashbookList();
             }

@@ -1,4 +1,4 @@
-<div class="dialog-content-wrapper" id="roles-items">
+<div class="dialog-content-wrapper" id="cashbook-items">
     <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title dialog-title">{{dialogTitle}}</span>
@@ -9,102 +9,277 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="cashbookAccountForm">
+            <mat-tab-group animationDuration="0ms" class="remove-border-bottom">
+                <mat-tab label="BASIC PROFILE">
+                    <div class="tab-box">
+                        <div class="basic-details">
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <div>
+                                    <button mat-raised-button color="accent" style="margin-top: 14px">Select</button>
+                                </div>
+                                <mat-form-field appearance="outline" class="" style="width: 300px">
+                                    <mat-label>Select (#) Eco. Code</mat-label>
+                                    <input matInput placeholder="FULL CODE-ECONOMIC LEDGER NAME"
+                                           formControlName="eco_code" name="eco_code" disabled required>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <mat-form-field appearance="outline" class="" style="width: 400px">
+                                    <mat-label>Cashbook Title</mat-label>
+                                    <input matInput placeholder="FULL CODE-ECONOMIC LEDGER NAME"
+                                           formControlName="cashbook_title" name="cashbook_title" required>
+                                </mat-form-field>
+                                <div>
+                                    <mat-form-field appearance="outline" class="" style="width: 150px">
+                                        <mat-label>Full Code</mat-label>
+                                        <input matInput placeholder="FULL CODE"
+                                               formControlName="full_code" name="full_code" disabled >
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="horizontal_line"></div>
+
+
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <div fxLayout="column" fxLayoutAlign="start">
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <h5>Opening Balance as per.</h5>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <mat-form-field appearance="outline" class="w-100-per">
+                                            <mat-label>Bank Stmt.</mat-label>
+                                            <input formControlName="bankStmt" matInput name="bankStmt"
+                                                   placeholder="0.00">
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <mat-form-field appearance="outline" class="w-100-per">
+                                            <mat-label>Cashbook</mat-label>
+                                            <input formControlName="cashbook" matInput name="cashbook"
+                                                   placeholder="0.00">
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <mat-form-field appearance="outline" class="w-100-per">
+                                            <mat-label>X.Rate(to local currency)</mat-label>
+                                            <input formControlName="x_rate" matInput name="x_rate" placeholder="0.00">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                    <div fxLayout="column" fxLayoutAlign="start">
+                                        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                            <h5>Next Treasury Number:</h5>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                            <mat-form-field appearance="outline" class="w-100-per">
+                                                <mat-label>PV</mat-label>
+                                                <input formControlName="pv" matInput name="pv">
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                            <mat-form-field appearance="outline" class="w-100-per">
+                                                <mat-label>RV</mat-label>
+                                                <input formControlName="rv" matInput name="rv">
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                            <mat-form-field appearance="outline" class="w-100-per">
+                                                <mat-label>E-Mandate</mat-label>
+                                                <input formControlName="e_mandate" matInput name="e_mandate">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                    <div fxLayout="column" fxLayoutAlign="start">
+                                        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                            <h5>E-Mandate Treasury No:</h5>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                            <mat-form-field appearance="outline" class="w-100-per">
+                                                <mat-label>Prefix</mat-label>
+                                                <input formControlName="prifix" placeholder="Enter Prefix" matInput name="prifix">
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                            <mat-form-field appearance="outline" class="w-100-per">
+                                                <mat-label>Suffix</mat-label>
+                                                <input formControlName="suffix" placeholder="Enter Suffix" matInput name="suffix">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="horizontal_line"></div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 2rem">
+                                <mat-form-field appearance="outline" class="" style="width: 400px">
+                                    <mat-label>Fund Owned by</mat-label>
+                                    <mat-select formControlName="fund_own">
+                                        <mat-option value="option1">Option 1</mat-option>
+                                        <mat-option value="option2">Option 2</mat-option>
+                                        <mat-option value="option3">Option 3</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="horizontal_line"></div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 2rem">
+                                <h5>Bank Account Details</h5>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <div fxLayout="column" fxLayoutAlign="start" class="width-50-per">
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <mat-form-field appearance="outline" class="w-100-per">
+                                            <mat-label>Bank A/C No.</mat-label>
+                                            <input formControlName="bankAcNumber" matInput name="bankAcNumber"
+                                                   >
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <mat-form-field appearance="outline" class="w-100-per">
+                                            <mat-label>Title</mat-label>
+                                            <input formControlName="title" matInput name="title"
+                                                   >
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <mat-form-field appearance="outline" class="w-100-per">
+                                            <mat-label>Bank</mat-label>
+                                            <input formControlName="bank" matInput name="bank" >
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start" class="width-50-per">
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <mat-form-field appearance="outline" class="w-100-per">
+                                            <mat-label>Branch</mat-label>
+                                            <input formControlName="branch" matInput name="branch">
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <mat-form-field appearance="outline" class="w-100-per">
+                                            <mat-label>Currency</mat-label>
+                                            <input formControlName="currency" matInput name="currency">
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                        <mat-form-field appearance="outline" class="w-100-per">
+                                            <mat-label>E-Mandate</mat-label>
+                                            <input formControlName="bank_e_mandate" matInput name="bank_e_mandate">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="BANK BAL. && OTHER DETAILS">
+                    <div class="tab-box">
+                        <div class="main-cashbook-month">
+                            <div fxLayout="row"><h5>Closing Bank Balance</h5></div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-01</mat-label>
+                                    <input formControlName="month_1" matInput type="number"
+                                           placeholder="Month-01">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-02</mat-label>
+                                    <input formControlName="month_2" matInput type="number"
+                                           placeholder="Month-02">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-03</mat-label>
+                                    <input formControlName="month_3" matInput type="number"
+                                           placeholder="Month-03">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-04</mat-label>
+                                    <input formControlName="month_4" matInput type="number"
+                                           placeholder="Month-04">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="main-cashbook-month">
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-05</mat-label>
+                                    <input formControlName="month_5" matInput type="number"
+                                           placeholder="Month-05">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-06</mat-label>
+                                    <input formControlName="month_6" matInput type="number"
+                                           placeholder="Month-06">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-07</mat-label>
+                                    <input formControlName="month_7" matInput type="number"
+                                           placeholder="Month-07">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-08</mat-label>
+                                    <input formControlName="month_8" matInput type="number"
+                                           placeholder="Month-08">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="main-cashbook-month">
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-09</mat-label>
+                                    <input formControlName="month_9" matInput type="number"
+                                           placeholder="Month-09">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-10</mat-label>
+                                    <input formControlName="month_10" matInput type="number"
+                                           placeholder="Month-10">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-11</mat-label>
+                                    <input formControlName="month_11" matInput type="number"
+                                           placeholder="Month-11">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label class="month-label">Month-12</mat-label>
+                                    <input formControlName="month_12" matInput type="number"
+                                           placeholder="Month-12">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </form>
+
+
+
+
+
+
+
+
 <!--        <form [formGroup]="voucherSourceUnitForm">-->
-<!--            <div fxLayout="row" fxLayoutAlign="start">-->
-<!--                <mat-form-field appearance="outline" fxFlex>-->
-<!--                    <mat-label>Ref. No</mat-label>-->
-<!--                    <input matInput placeholder="Name" formControlName="refNo" name="refNo" required>-->
-<!--                </mat-form-field>-->
-<!--            </div>-->
-<!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-<!--                <mat-form-field appearance="outline" fxFlex>-->
-<!--                    <mat-label>Long Name</mat-label>-->
-<!--                    <input matInput placeholder="Enter VSU Long Name" formControlName="longName" name="longName" required>-->
-<!--                </mat-form-field>-->
-<!--                <mat-form-field appearance="outline" fxFlex>-->
-<!--                    <mat-label>Short Name</mat-label>-->
-<!--                    <input matInput placeholder="Enter VSU Short Name" formControlName="shortName" name="shortName" required>-->
-<!--                </mat-form-field>-->
-<!--            </div>-->
-<!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-<!--                <mat-form-field appearance="outline" fxFlex>-->
-<!--                    <mat-label>Next PV Index No.</mat-label>-->
-<!--                    <input matInput placeholder="PV Index #" formControlName="nextPvIndexNo" name="nextPvIndexNo" required>-->
-<!--                </mat-form-field>-->
-<!--                <mat-form-field appearance="outline" fxFlex>-->
-<!--                    <mat-label>Next RV Index No.</mat-label>-->
-<!--                    <input matInput placeholder="RV Index #" formControlName="nextRvIndexNo" name="nextRvIndexNo" required>-->
-<!--                </mat-form-field>-->
-<!--            </div>-->
-<!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-<!--                <mat-form-field appearance="outline" fxFlex>-->
-<!--                    <mat-label>Honour.</mat-label>-->
-<!--                    <textarea matInput placeholder="Authorized by Staff Name" formControlName="honourCertificate" name="honourCertificate" required></textarea>-->
-<!--                </mat-form-field>-->
-<!--            </div>-->
-<!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-<!--                <div fxLayout="column" fxLayoutAlign="start" class= "w-60-per">-->
-<!--                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-<!--                        <div>-->
-<!--                            <button mat-raised-button color="accent" style="margin-top: 14px">Select</button>-->
-<!--                        </div>-->
-<!--                        <mat-form-field appearance="outline" class="w-100-per">-->
-<!--                            <mat-label>Checking Officer</mat-label>-->
-<!--                            <input matInput placeholder="Checking Officer Name" formControlName="checkingOfficer" name="checkingOfficer" required>-->
-<!--                        </mat-form-field>-->
-<!--                    </div>-->
-<!--                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-<!--                        <div>-->
-<!--                            <button mat-raised-button color="accent"  style="margin-top: 14px">Select</button>-->
-<!--                        </div>-->
-<!--                        <mat-form-field appearance="outline" class="w-100-per">-->
-<!--                            <mat-label>Paying Officer</mat-label>-->
-<!--                            <input matInput placeholder="Paying Officer Name" formControlName="payingOfficer" name="payingOfficer" required>-->
-<!--                        </mat-form-field>-->
-<!--                    </div>-->
-<!--                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-<!--                        <div>-->
-<!--                            <button mat-raised-button color="accent"  style="margin-top: 14px">Select</button>-->
-<!--                        </div>-->
-<!--                        <mat-form-field appearance="outline" class="w-100-per">-->
-<!--                            <mat-label>Financial Controller</mat-label>-->
-<!--                            <input matInput placeholder="Financial Controller Name" formControlName="financialController" name="financialController" required>-->
-<!--                        </mat-form-field>-->
-<!--                    </div>-->
-<!--                   <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-<!--                       <mat-slide-toggle>A Personal Adv. Unit ?</mat-slide-toggle>-->
-<!--                   </div>-->
-<!--                </div>-->
-<!--                <div fxLayout="column" fxLayoutAlign="start" class= "w-40-per">-->
-<!--                    <mat-form-field appearance="outline">-->
-<!--                        <mat-label>Retirement Ref No.</mat-label>-->
-<!--                        <input matInput placeholder="Enter Retirement Ref. #" formControlName="retirementRefNo" name="retirementRefNo" required>-->
-<!--                    </mat-form-field>-->
-<!--                    <mat-form-field appearance="outline">-->
-<!--                        <mat-label>Reverse V Ref No.</mat-label>-->
-<!--                        <input matInput placeholder="Enter Reverse V Ref. #" formControlName="reverseVRefNo" name="reverseVRefNo" required>-->
-<!--                    </mat-form-field>-->
-<!--                    <mat-form-field appearance="outline">-->
-<!--                        <mat-label>Revalidation Ref No.</mat-label>-->
-<!--                        <input matInput placeholder="Enter Revalidation Ref. #" formControlName="revalidationRefNo" name="revalidationRefNo" required>-->
-<!--                    </mat-form-field>-->
-<!--                    <mat-form-field appearance="outline">-->
-<!--                        <mat-label>Text Voucher Ref No.</mat-label>-->
-<!--                        <input matInput placeholder="Enter Text Voucher Ref. #" formControlName="textVoucherRefNo" name="textVoucherRefNo" required>-->
-<!--                    </mat-form-field>-->
-<!--                </div>-->
-<!--            </div>-->
+
 <!--        </form>-->
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button" (click)="matDialogRef.close();"
                 aria-label="Cancel">CANCEL
         </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(voucherSourceUnitForm); saveVoucherSourceUnit()"
-                [disabled]="voucherSourceUnitForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        <button mat-button class="save-button" (click)="matDialogRef.close(cashbookAccountForm); saveCashbookDetails()"
+                [disabled]="cashbookAccountForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
         </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(voucherSourceUnitForm); updateVoucherSourceUnit()"
-                [disabled]="voucherSourceUnitForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        <button mat-button class="save-button" (click)="matDialogRef.close(cashbookAccountForm); updateCashbookDetails()"
+                [disabled]="cashbookAccountForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
         </button>
     </div>
 </div>
