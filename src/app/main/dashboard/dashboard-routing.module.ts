@@ -70,6 +70,7 @@ import { FinancialPerformanceReportComponent } from './financial-performance-rep
 import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
 import {VoucherSourceUnitComponent} from './treasure-report/voucher-source-unit/voucher-source-unit.component';
 import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
+import { PaymentVoucherComponent } from './treasure-report/payment-voucher/payment-voucher.component';
 
 const routes: Routes = [
     {
@@ -692,6 +693,13 @@ const routes: Routes = [
         component: CashbookComponent,
         data: {
             title: 'Cashbook'
+        }
+    },
+    {
+        path: 'payment-voucher',
+        component: PaymentVoucherComponent,
+        data: {
+            title: 'Payment Voucher'
         }
     }
 ];

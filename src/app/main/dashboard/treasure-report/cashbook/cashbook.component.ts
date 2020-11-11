@@ -46,7 +46,7 @@ export class CashbookComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getUserRoleList.getVoucherSourceUnitList();
+            // this.getUserRoleList.getVoucherSourceUnitList();
         });
     }
 

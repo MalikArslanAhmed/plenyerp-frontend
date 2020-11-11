@@ -217,6 +217,8 @@ import {VoucherSourceUnitListComponent} from './treasure-report/voucher-source-u
 import {CashbookListComponent} from './treasure-report/cashbook/cashbook-list/cashbook-list.component';
 import {CashbookCreateComponent} from './treasure-report/cashbook/cashbook-create/cashbook-create.component';
 import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
+import { PaymentVoucherComponent } from './treasure-report/payment-voucher/payment-voucher.component';
+import { PaymentVoucherCreateComponent } from './treasure-report/payment-voucher/payment-voucher-create/payment-voucher-create.component';
 
 @NgModule({
     declarations: [
@@ -411,7 +413,9 @@ import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
         VoucherSourceUnitListComponent,
         CashbookListComponent,
         CashbookCreateComponent,
-        CashbookComponent
+        CashbookComponent,
+        PaymentVoucherComponent,
+        PaymentVoucherCreateComponent
     ],
     imports: [
         CommonModule,
