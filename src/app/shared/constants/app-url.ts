@@ -1137,4 +1137,14 @@ export class AppUrl {
         }
 
     }
+
+    // cashbook
+    static CASHBOOK_ACCOUNT(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `dummy/` + id;
+        } else {
+            return AppUrl.API_URL + `dummy`;
+        }
+
+    }
 }

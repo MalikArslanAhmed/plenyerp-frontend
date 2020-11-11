@@ -2,7 +2,7 @@ import {Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
-import {TreasureReportService} from '../../../../../shared/services/treasure-report.service';
+import {CashbookService} from '../../../../../shared/services/cashbook.service';
 
 @Component({
     selector: 'app-cashbook-create',
@@ -14,14 +14,14 @@ import {TreasureReportService} from '../../../../../shared/services/treasure-rep
 export class CashbookCreateComponent implements OnInit {
     action: any;
     dialogTitle: any;
-    voucherSourceUnitForm: FormGroup;
+    cashbookAccountForm: FormGroup;
     isSubmitted = false;
     salaryScales: any = [];
-    updateData: any;   
+    updateData: any;
     constructor(public matDialogRef: MatDialogRef<CashbookCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-                private treasureReportService: TreasureReportService) {
+                private cashbookService: CashbookService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit a Cashbook Account';
@@ -39,51 +39,67 @@ export class CashbookCreateComponent implements OnInit {
     }
 
     refresh() {
-        this.voucherSourceUnitForm = this.fb.group({
-            refNo: ['', Validators.required],
-            longName: ['', Validators.required],
-            shortName: ['', Validators.required],
-            nextPvIndexNo: ['', Validators.required],
-            nextRvIndexNo: ['', Validators.required],
-            honourCertificate: ['', Validators.required],
-            checkingOfficer: ['', Validators.required],
-            payingOfficer: ['', Validators.required],
-            financialController: ['', Validators.required],
-            retirementRefNo: ['', Validators.required],
-            reverseVRefNo: ['', Validators.required],
-            revalidationRefNo: ['', Validators.required],
-            textVoucherRefNo: ['', Validators.required],
-            isPersonalAdvUnit: [''],
+        this.cashbookAccountForm = this.fb.group({
+            eco_code: ['', Validators.required],
+            cashbook_title: ['', Validators.required],
+            full_code: ['', Validators.required],
+            bankStmt: ['', Validators.required],
+            cashbook: ['', Validators.required],
+            x_rate: ['', Validators.required],
+            pv: ['', Validators.required],
+            rv: ['', Validators.required],
+            prifix: ['', Validators.required],
+            suffix: ['', Validators.required],
+            e_mandate: ['', Validators.required],
+            fund_own: ['', Validators.required],
+            bankAcNumber: ['', Validators.required],
+            title: ['', Validators.required],
+            bank: ['', Validators.required],
+            branch: ['', Validators.required],
+            currency: ['', Validators.required],
+            bank_e_mandate: ['', Validators.required],
+            month_1: [''],
+            month_2: [''],
+            month_3: [''],
+            month_4: [''],
+            month_5: [''],
+            month_6: [''],
+            month_7: [''],
+            month_8: [''],
+            month_9: [''],
+            month_10: [''],
+            month_11: [''],
+            month_12: [''],
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
-            this.voucherSourceUnitForm.patchValue({
+            this.cashbookAccountForm.patchValue({
                 // name: this.updateData.roles.role,
                 // description: this.updateData.roles.description
             });
         }
     }
 
-    saveVoucherSourceUnit() {
-        console.log('-->save', this.voucherSourceUnitForm.getRawValue());
-        if (!this.voucherSourceUnitForm.valid) {
+    saveCashbookDetails() {
+        console.log('-->save', this.cashbookAccountForm.getRawValue());
+        if (!this.cashbookAccountForm.valid) {
             return;
         }
-        // this.treasureReportService.addVoucherSourceUnits(this.voucherSourceUnitForm.value).subscribe(data => {
-        //     this.voucherSourceUnitForm.reset();
+        // this.cashbookService.addCashbook(this.cashbookAccountForm.value).subscribe(data => {
+        //     this.cashbookAccountForm.reset();
         // });
     }
 
-    updateVoucherSourceUnit() {
-        console.log('-->update', this.voucherSourceUnitForm.getRawValue());
-        if (!this.voucherSourceUnitForm.valid) {
+    updateCashbookDetails() {
+        console.log('-->update', this.cashbookAccountForm.getRawValue());
+        if (!this.cashbookAccountForm.valid) {
             return;
         }
-        // this.treasureReportService.updateVoucherSourceUnits(this.updateData.roles.id, this.voucherSourceUnitForm.value).subscribe(data => {
+        // this.cashbookService.updateCashbook(this.updateData.roles.id, this.cashbookAccountForm.value).subscribe(data => {
         //     this.updateData = undefined;
-        //     this.voucherSourceUnitForm.reset();
+        //     this.cashbookAccountForm.reset();
         // });
     }
 }
