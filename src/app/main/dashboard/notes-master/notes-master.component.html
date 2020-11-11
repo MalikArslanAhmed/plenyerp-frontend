@@ -50,7 +50,7 @@
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell">
-                            <mat-checkbox (change)="reportCheckedAll()" (click)="$event.stopPropagation()"
+                            <mat-checkbox (change)="reportCheckedAll($event)" (click)="$event.stopPropagation()"
                                           style="margin-right: 10px"></mat-checkbox> Select</span>
                         <span class="mat-header-cell">Note Id</span>
                         <span class="mat-header-cell">Full Code</span>

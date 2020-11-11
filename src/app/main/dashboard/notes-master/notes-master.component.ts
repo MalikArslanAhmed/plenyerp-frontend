@@ -111,10 +111,14 @@ export class NotesMasterComponent implements OnInit {
         this.notesMasterData[index].checked = event.checked;
     }
 
-    reportCheckedAll() {
-        if (this.notesMasterData && this.notesMasterData.length > 0) {
+    reportCheckedAll(event) {
+        if (event['checked']) {
             this.notesMasterData.forEach(notes => {
-                notes['checked'] = !notes['checked'];
+                notes['checked'] = true;
+            });
+        } else {
+            this.notesMasterData.forEach(notes => {
+                notes['checked'] = false;
             });
         }
     }
