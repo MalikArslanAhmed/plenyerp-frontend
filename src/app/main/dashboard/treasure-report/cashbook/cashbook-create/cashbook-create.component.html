@@ -10,31 +10,35 @@
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
         <form [formGroup]="cashbookAccountForm">
-            <mat-tab-group animationDuration="0ms" class="remove-border-bottom">
+            <mat-tab-group animationDuration="0ms" class="remove-border-bottom" (selectedTabChange)="tabChange($event)">
                 <mat-tab label="BASIC PROFILE">
                     <div class="tab-box">
                         <div class="basic-details">
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <div>
-                                    <button mat-raised-button color="accent" style="margin-top: 14px">Select</button>
+                                    <button mat-raised-button color="accent" style="margin-top: 14px"
+                                            (click)="economicSegmentSelect()">Select
+                                    </button>
                                 </div>
                                 <mat-form-field appearance="outline" class="" style="width: 300px">
                                     <mat-label>Select (#) Eco. Code</mat-label>
-                                    <input matInput placeholder="FULL CODE-ECONOMIC LEDGER NAME"
-                                           formControlName="eco_code" name="eco_code" disabled required>
+                                    <mat-select formControlName="economicSegmentId" [disabled]="true">
+                                        <mat-option [value]="economicSegment.id"
+                                                    *ngFor="let economicSegment of economicSegments">{{economicSegment.name}}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" class="" style="width: 400px">
                                     <mat-label>Cashbook Title</mat-label>
-                                    <input matInput placeholder="FULL CODE-ECONOMIC LEDGER NAME"
-                                           formControlName="cashbook_title" name="cashbook_title" required>
+                                    <input matInput placeholder="Full Code - Economic Code"
+                                           formControlName="cashbookTitle">
                                 </mat-form-field>
                                 <div>
                                     <mat-form-field appearance="outline" class="" style="width: 150px">
                                         <mat-label>Full Code</mat-label>
-                                        <input matInput placeholder="FULL CODE"
-                                               formControlName="full_code" name="full_code" disabled >
+                                        <input matInput placeholder="Full Code"
+                                               formControlName="fullCode" disabled>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -49,21 +53,19 @@
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>Bank Stmt.</mat-label>
-                                            <input formControlName="bankStmt" matInput name="bankStmt"
-                                                   placeholder="0.00">
+                                            <input formControlName="bankStatement" matInput placeholder="0.00" type="number">
                                         </mat-form-field>
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>Cashbook</mat-label>
-                                            <input formControlName="cashbook" matInput name="cashbook"
-                                                   placeholder="0.00">
+                                            <input formControlName="cashbook" matInput placeholder="0.00" type="number">
                                         </mat-form-field>
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>X.Rate(to local currency)</mat-label>
-                                            <input formControlName="x_rate" matInput name="x_rate" placeholder="0.00">
+                                            <input formControlName="xRateLocalCurrency" matInput placeholder="0.00" type="number">
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -76,19 +78,19 @@
                                         <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                             <mat-form-field appearance="outline" class="w-100-per">
                                                 <mat-label>PV</mat-label>
-                                                <input formControlName="pv" matInput name="pv">
+                                                <input formControlName="paymentVoucherId" matInput>
                                             </mat-form-field>
                                         </div>
                                         <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                             <mat-form-field appearance="outline" class="w-100-per">
                                                 <mat-label>RV</mat-label>
-                                                <input formControlName="rv" matInput name="rv">
+                                                <input formControlName="receiptVoucherId" matInput>
                                             </mat-form-field>
                                         </div>
                                         <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                             <mat-form-field appearance="outline" class="w-100-per">
                                                 <mat-label>E-Mandate</mat-label>
-                                                <input formControlName="e_mandate" matInput name="e_mandate">
+                                                <input formControlName="eMandate" matInput>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -103,13 +105,13 @@
                                         <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                             <mat-form-field appearance="outline" class="w-100-per">
                                                 <mat-label>Prefix</mat-label>
-                                                <input formControlName="prifix" placeholder="Enter Prefix" matInput name="prifix">
+                                                <input formControlName="prefix" placeholder="Enter Prefix" matInput>
                                             </mat-form-field>
                                         </div>
                                         <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                             <mat-form-field appearance="outline" class="w-100-per">
                                                 <mat-label>Suffix</mat-label>
-                                                <input formControlName="suffix" placeholder="Enter Suffix" matInput name="suffix">
+                                                <input formControlName="suffix" placeholder="Enter Suffix" matInput>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -120,10 +122,9 @@
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 2rem">
                                 <mat-form-field appearance="outline" class="" style="width: 400px">
                                     <mat-label>Fund Owned by</mat-label>
-                                    <mat-select formControlName="fund_own">
-                                        <mat-option value="option1">Option 1</mat-option>
-                                        <mat-option value="option2">Option 2</mat-option>
-                                        <mat-option value="option3">Option 3</mat-option>
+                                    <mat-select formControlName="fundOwnedBy">
+                                        <mat-option value="">Choose Fund Owned By</mat-option>
+                                        <mat-option [value]="owned.id" *ngFor="let owned of fundOwnedBy">{{owned?.name}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -136,21 +137,22 @@
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>Bank A/C No.</mat-label>
-                                            <input formControlName="bankAcNumber" matInput name="bankAcNumber"
-                                                   >
+                                            <input formControlName="bankAccountNumber" matInput>
                                         </mat-form-field>
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>Title</mat-label>
-                                            <input formControlName="title" matInput name="title"
-                                                   >
+                                            <input formControlName="title" matInput name="title">
                                         </mat-form-field>
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>Bank</mat-label>
-                                            <input formControlName="bank" matInput name="bank" >
+                                            <mat-select formControlName="bankId" (selectionChange)="getBranches($event.value)">
+                                                <mat-option value="">Choose Bank</mat-option>
+                                                <mat-option [value]="bank.id" *ngFor="let bank of banks">{{bank?.name}}</mat-option>
+                                            </mat-select>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -158,29 +160,34 @@
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>Branch</mat-label>
-                                            <input formControlName="branch" matInput name="branch">
+                                            <mat-select formControlName="bankBranchId" (selectionChange)="getBranches($event.value)">
+                                                <mat-option value="">Choose Branch</mat-option>
+                                                <mat-option [value]="branch.id" *ngFor="let branch of bankBranch">{{branch?.name}}</mat-option>
+                                            </mat-select>
                                         </mat-form-field>
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                                        <mat-form-field appearance="outline" class="w-100-per">
-                                            <mat-label>Currency</mat-label>
-                                            <input formControlName="currency" matInput name="currency">
+                                        <mat-form-field appearance="outline" fxFlex>
+                                            <mat-label>Currencies</mat-label>
+                                            <mat-select formControlName="currencyId">
+                                                <mat-option value="">Select Currency</mat-option>
+                                                <mat-option [value]="currency.codeCurrency"
+                                                            *ngFor="let currency of currencies">{{currency?.singularCurrencyName}}</mat-option>
+                                            </mat-select>
                                         </mat-form-field>
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>E-Mandate</mat-label>
-                                            <input formControlName="bank_e_mandate" matInput name="bank_e_mandate">
+                                            <input formControlName="bankEMandate" matInput>
                                         </mat-form-field>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </mat-tab>
-                <mat-tab label="BANK BAL. && OTHER DETAILS">
+                <mat-tab label="BANK BAL. & OTHER DETAILS">
                     <div class="tab-box">
                         <div class="main-cashbook-month">
                             <div fxLayout="row"><h5>Closing Bank Balance</h5></div>
@@ -259,27 +266,24 @@
                 </mat-tab>
             </mat-tab-group>
         </form>
-
-
-
-
-
-
-
-
-<!--        <form [formGroup]="voucherSourceUnitForm">-->
-
-<!--        </form>-->
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button" (click)="matDialogRef.close();"
                 aria-label="Cancel">CANCEL
         </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(cashbookAccountForm); saveCashbookDetails()"
-                [disabled]="cashbookAccountForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        <button mat-button class="save-button" (click)="saveCashbookDetails()"
+                [disabled]="cashbookAccountForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT' && this.tab === 'BASIC PROFILE'">SAVE
         </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(cashbookAccountForm); updateCashbookDetails()"
-                [disabled]="cashbookAccountForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        <button mat-button class="save-button" (click)="addCashbookMonthly()"
+                [disabled]="cashbookAccountForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT' && this.tab === 'BANK BAL. & OTHER DETAILS'">ADD
+        </button>
+        <button mat-button class="save-button"
+                (click)="updateCashbookDetails()"
+                [disabled]="cashbookAccountForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT' && this.tab === 'BASIC PROFILE'">UPDATE
+        </button>
+        <button mat-button class="save-button"
+                (click)="addCashbookMonthly()"
+                [disabled]="cashbookAccountForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT' && this.tab === 'BANK BAL. & OTHER DETAILS'">EDIT
         </button>
     </div>
 </div>

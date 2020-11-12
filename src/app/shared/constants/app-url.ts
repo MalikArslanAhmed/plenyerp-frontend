@@ -402,9 +402,11 @@ export class AppUrl {
     static DOWNLOAD_REPORT(): string {
         return AppUrl.API_URL + `employees/report-download`;
     }
+
     static DOWNLOAD_NOTES_MASTER_REPORT(): string {
         return AppUrl.API_URL + `download/notes`;
     }
+
     static GET_EMPLOYEES(): string {
         return AppUrl.API_URL + `employees`;
     }
@@ -1117,11 +1119,11 @@ export class AppUrl {
     }
 
     static GET_STATEMENT_POSITION_REPORT(): string {
-        return AppUrl.API_URL +'finance/statement-of-position'
+        return AppUrl.API_URL + 'finance/statement-of-position'
     }
 
     static GET_FINANCIAL_PEFROMANCE_REPORT(): string {
-        return AppUrl.API_URL +'finance/financial-performance'
+        return AppUrl.API_URL + 'finance/financial-performance'
     }
 
     static GET_MONTHLY_ACTIVITY_REPORT(): string {
@@ -1138,13 +1140,15 @@ export class AppUrl {
 
     }
 
-    // cashbook
-    static CASHBOOK_ACCOUNT(id?): string {
+    static CASHBOOKS(id?): string {
         if (id) {
-            return AppUrl.API_URL + `dummy/` + id;
+            return AppUrl.API_URL + `treasury/cashbooks/` + id;
         } else {
-            return AppUrl.API_URL + `dummy`;
+            return AppUrl.API_URL + `treasury/cashbooks`;
         }
+    }
 
+    static CASHBOOK_TYPES(): string {
+        return AppUrl.API_URL + `treasury/cashbook-types`;
     }
 }

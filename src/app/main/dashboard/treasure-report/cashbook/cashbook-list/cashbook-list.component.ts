@@ -6,8 +6,6 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
 import {DeleteListModalComponent} from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import {Router} from '@angular/router';
-import {PermissionConstant} from 'app/shared/constants/permission-constant';
-import {TreasureReportService} from '../../../../../shared/services/treasure-report.service';
 import {CashbookService} from '../../../../../shared/services/cashbook.service';
 
 @Component({
@@ -40,7 +38,6 @@ export class CashbookListComponent implements OnInit {
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
-    // tslint:disable-next-line:no-shadowed-variable
     constructor(private cashbookService: CashbookService,
                 private router: Router,
                 private _matDialog: MatDialog) {
@@ -51,20 +48,19 @@ export class CashbookListComponent implements OnInit {
     }
 
     getcashbookList() {
-        // this.cashbookAccountList = [];
-        // this.cashbookService.cashboCashbookountList({page: this.pagination.page}).subscribe(data => {
-        //     this.cashbookAccountList = data.items;
-        //     // console.log('---->>>roles', this.cashbookAccountList);
-        //     this.pagination.page = data.page;
-        //     this.pagination.total = data.total;
-        //     if (this.cashbookAccountList && this.cashbookAccountList.length > 0) {
-        //         let i = 1;
-        //         this.cashbookAccountList.forEach(val => {
-        //             val['sno'] = i;
-        //             i++;
-        //         });
-        //     }
-        // });
+        this.cashbookAccountList = [];
+        this.cashbookService.list({page: this.pagination.page}).subscribe(data => {
+            this.cashbookAccountList = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            if (this.cashbookAccountList && this.cashbookAccountList.length > 0) {
+                let i = 1;
+                this.cashbookAccountList.forEach(val => {
+                    val['sno'] = i;
+                    i++;
+                });
+            }
+        });
     }
 
 
@@ -82,17 +78,17 @@ export class CashbookListComponent implements OnInit {
     }
 
     deleteCashbook(id) {
-        this.cashbookService.deleteCashbook(id).subscribe(data => {
+        this.cashbookService.delete(id).subscribe(data => {
             if (data) {
                 this.getcashbookList();
             }
         });
     }
 
-    editCashbook(roles) {
+    editCashbook(cashbook) {
         this.dialogRef = this._matDialog.open(CashbookCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', roles: roles},
+            data: {action: 'EDIT', cashbook: cashbook},
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -106,5 +102,4 @@ export class CashbookListComponent implements OnInit {
         this.pagination.page = page.pageIndex + 1;
         this.getcashbookList();
     }
-
 }

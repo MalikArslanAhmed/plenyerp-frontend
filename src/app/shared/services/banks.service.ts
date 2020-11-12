@@ -33,12 +33,15 @@ export class BanksService extends BaseService {
     addBranches(bankId, data): Observable<any> {
         return this.postRequest(AppUrl.BANK_BRANCHES(bankId), data);
     }
+
     getBranches(bankId, data): Observable<any> {
         return this.getRequest(AppUrl.BANK_BRANCHES(bankId), data);
     }
+
     updateBranch(bankId, branchId, data): Observable<any> {
         return this.putRequest(AppUrl.BANK_BRANCHES(bankId, branchId), data);
     }
+
     deleteBranch(bankId, branchId): Observable<any> {
         return this.deleteRequest(AppUrl.BANK_BRANCHES(bankId, branchId));
     }

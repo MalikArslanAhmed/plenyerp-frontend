@@ -1,4 +1,4 @@
-<div id="skills" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+<div id="cashbook" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
          fxLayoutAlign.gt-xs="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
@@ -13,22 +13,12 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <div appPermissionBind [permission]="permissionAddRoles">
-                <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
-                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addUserRole()">
+                <button mat-fab class="accent" id="add-button" aria-label="add cashbook details"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addCashbook()">
                     <mat-icon>add_circle</mat-icon>
                 </button>
             </div>
         </div>
-        <!-- SEARCH -->
-<!--        <div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>-->
-<!--            <div class="search-wrapper mt-16 mt-sm-0">-->
-<!--                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">-->
-<!--                    <mat-icon>search</mat-icon>-->
-<!--                    <input [formControl]="searchInput" placeholder="Search for a contact">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <!-- / SEARCH -->
     </div>
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>

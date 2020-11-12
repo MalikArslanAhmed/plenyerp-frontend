@@ -37,7 +37,7 @@ export class CashbookComponent implements OnInit {
         });
     }
 
-    addUserRole() {
+    addCashbook() {
         this.dialogRef = this._matDialog.open(CashbookCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE'}
@@ -51,6 +51,5 @@ export class CashbookComponent implements OnInit {
     }
 
     search() {
-
     }
 }

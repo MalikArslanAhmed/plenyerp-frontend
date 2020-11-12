@@ -14,20 +14,23 @@ export class CashbookService extends BaseService {
         super(http, alertService, globalService);
     }
 
-    addCashbook(data): Observable<any> {
-        return this.postRequest(AppUrl.CASHBOOK_ACCOUNT(), data);
+    save(data): Observable<any> {
+        return this.postRequest(AppUrl.CASHBOOKS(), data);
     }
 
-    voucherCashbookList(data): Observable<any> {
-        return this.getRequest(AppUrl.CASHBOOK_ACCOUNT(), data);
+    list(data): Observable<any> {
+        return this.getRequest(AppUrl.CASHBOOKS(), data);
     }
 
-    deleteCashbook(id): Observable<any> {
-        return this.deleteRequest(AppUrl.CASHBOOK_ACCOUNT(id));
+    delete(id): Observable<any> {
+        return this.deleteRequest(AppUrl.CASHBOOKS(id));
     }
 
-    updateCashbook(id, data): Observable<any> {
-        return this.putRequest(AppUrl.CASHBOOK_ACCOUNT(id), data);
+    update(id, data): Observable<any> {
+        return this.putRequest(AppUrl.CASHBOOKS(id), data);
     }
 
+    fundOwned(data): Observable<any> {
+        return this.getRequest(AppUrl.CASHBOOK_TYPES(), data);
+    }
 }
