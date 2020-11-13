@@ -53,6 +53,7 @@
                 <span class="mat-cell align-items-center" *ngIf="this.status === 'NEW' || this.status === 'CHECKED'">
                     <p class="text-truncate cursor-pointer mt-28px">
                         <mat-checkbox (change)="checkJV(i, $event)"
+                                      (click)="$event.stopPropagation()"
                                       [checked]="journalVoucher.checked ? true : null"></mat-checkbox>
                     </p>
                 </span>
@@ -281,13 +282,13 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion>
-    <!--<mat-paginator #paginator *ngIf="journalVouchers.length > 0"
+    <mat-paginator #paginator *ngIf ="journalVouchers.length > 0"
                    [length]="pagination.total"
                    [pageSize]="pagination.perpage"
                    [pageIndex]="pagination.page-1"
                    (page)="pageEvent = onPageChange($event)"
     >
-    </mat-paginator>-->
+    </mat-paginator>
 </div>
 
 
