@@ -171,7 +171,7 @@
                                             <mat-label>Currencies</mat-label>
                                             <mat-select formControlName="currencyId">
                                                 <mat-option value="">Select Currency</mat-option>
-                                                <mat-option [value]="currency.codeCurrency"
+                                                <mat-option [value]="currency.id"
                                                             *ngFor="let currency of currencies">{{currency?.singularCurrencyName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>

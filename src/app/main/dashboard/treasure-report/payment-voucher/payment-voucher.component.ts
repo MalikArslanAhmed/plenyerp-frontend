@@ -4,6 +4,10 @@ import {fuseAnimations} from "../../../../../@fuse/animations";
 import {JournalVoucherLedgerReportService} from "../../../../shared/services/journal-voucher-ledger-report.service";
 import {AlertService} from "../../../../shared/services/alert.service";
 import * as moment from "moment";
+import {CashbookCreateComponent} from "../cashbook/cashbook-create/cashbook-create.component";
+import {MatDialog} from "@angular/material/dialog";
+import {SchedulePayeeCustomerComponent} from './schedule-payee-customer/schedule-payee-customer.component';
+import {SchedulePayeeEmployeeComponent} from "./schedule-payee-employee/schedule-payee-employee.component";
 
 @Component({
     selector: 'app-payment-voucher',
@@ -174,9 +178,11 @@ export class PaymentVoucherComponent implements OnInit {
             'value': 'ON_MANDATE'
         }
     ];
+    dialogRef: any;
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
-                private fb: FormBuilder) {
+                private fb: FormBuilder,
+                private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -210,6 +216,32 @@ export class PaymentVoucherComponent implements OnInit {
                 item['childs'] = data.items;
             });
         }
+    }
+
+    scheduleEmployee() {
+        this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'CREATE'}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // this.getUserRoleList.getcashbookList();
+        });
+    }
+
+    scheduleCustomers() {
+        this.dialogRef = this._matDialog.open(SchedulePayeeCustomerComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'CREATE'}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // this.getUserRoleList.getcashbookList();
+        });
     }
 
     filterPaymentVoucher() {
