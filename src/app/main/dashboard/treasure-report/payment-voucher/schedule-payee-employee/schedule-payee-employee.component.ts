@@ -41,7 +41,12 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             year: [''],
             departmentalNo: [''],
             details: [''],
-            isActive: [true, Validators.required]
+            payeeId: [''],
+            payeeName: [''],
+            netAmount: [''],
+            taxAmount: [''],
+            totalAmount: [''],
+            totalAmountInWords: ['']
         });
     }
 

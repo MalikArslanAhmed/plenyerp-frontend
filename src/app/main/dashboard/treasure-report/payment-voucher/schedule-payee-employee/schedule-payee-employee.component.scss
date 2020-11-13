@@ -1,61 +1,21 @@
-app-schedule-payee-employee {
-    #cashbook-items {
-        max-width: 800px !important;
-        overflow-x: unset !important;
-        min-width: 800px !important;
-    }
+#schedule-items {
+    max-width: 800px !important;
+    overflow-x: unset !important;
+    min-width: 800px !important;
+}
 
-    .items-data {
-        width: 100%;
-        overflow-x: unset !important;
-    }
+.items-data {
+    width: 100%;
+    overflow-x: unset !important;
+}
 
-    .w-100-per {
-        width: 100% !important;
-    }
+.add-taxes {
+    background-color: #039be5 !important;
+    color: #fff !important;
+    height: 40px;
+    margin-top: 15px;
+}
 
-    .w-60-per {
-        width: 60% !important;
-    }
-
-    .w-40-per {
-        width: 40% !important;
-    }
-
-    .remove-border-bottom .mat-tab-header {
-        border-bottom: none !important;
-    }
-
-    .remove-border-bottom.mat-primary .mat-ink-bar, body.theme-default .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-        background-color: blue !important;
-    }
-
-    .tab-box {
-        width: 100%;
-        min-height: 400px;
-        border-radius: 5px;
-        border: 2px solid #9ea1a9;
-        overflow: auto;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    .main-cashbook-month {
-        .mat-form-field {
-            width: 150px !important;
-        }
-    }
-
-    .basic-details {
-        margin-top: 1rem;
-    }
-
-    .horizontal_line {
-        box-shadow: 1px 1px 1px 1px #9ea1a9 inset;
-        padding-top: 0.2rem;
-    }
-
-    .width-50-per {
-        width: 50%;
-    }
+.invoice-table {
+    background-color: #E0E0E0;
 }

@@ -1,1 +1,119 @@
-<p>schedule-payee-customer works!</p>
+<div class="dialog-content-wrapper" id="schedule-items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar>
+        <form [formGroup]="schedulePayeeCustomerForm">
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-select formControlName="year">
+                        <mat-option value="">Voucher Year</mat-option>
+                        <mat-option value="2017">2017</mat-option>
+                        <mat-option value="2018">2018</mat-option>
+                        <mat-option value="2019">2019</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Deptal No.</mat-label>
+                    <input matInput placeholder="Deptal No." formControlName="departmentalNo">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Details</mat-label>
+                    <input matInput placeholder="Details" formControlName="details">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-select formControlName="payeeId">
+                        <mat-option value="">Payee Id</mat-option>
+                        <mat-option value="1">Employee 1</mat-option>
+                        <mat-option value="2">Employee 2</mat-option>
+                        <mat-option value="3">Employee 3</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Payee Name</mat-label>
+                    <input matInput placeholder="Payee Name" formControlName="payeeName">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Net Amount</mat-label>
+                    <input matInput placeholder="Net Amount" formControlName="netAmount" type="number">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Taxes Amount</mat-label>
+                    <input matInput placeholder="Taxes Amount" formControlName="taxAmount">
+                </mat-form-field>
+                <div fxLayout="row" fxLayoutAlign="center">
+                    <button mat-button class="add-taxes">Add Taxes</button>
+                </div>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Total Amount</mat-label>
+                    <input matInput placeholder="Total Amount" formControlName="totalAmount" type="number">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Total Amount (in words)</mat-label>
+                    <input matInput placeholder="Total Amount (in words)" formControlName="totalAmountInWords">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <table class="simple invoice-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="title">#</div>
+                        </th>
+                        <th>
+                            <div class="title">S.No</div>
+                        </th>
+                        <th>
+                            <div class="title">Bank A/O Title</div>
+                        </th>
+                        <th>
+                            <div class="title">Bank A/C</div>
+                        </th>
+                        <th>
+                            <div class="title">Type of Bank A/C</div>
+                        </th>
+                        <th>
+                            <div class="title">Bank</div>
+                        </th>
+                        <th>
+                            <div class="title">Bank Branch</div>
+                        </th>
+                        <th>
+                            <div class="title">Sort Code</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="8">
+                            <div class="title text-center">
+                                No data to show
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close(schedulePayeeCustomerForm); saveCountry()"
+                [disabled]="schedulePayeeCustomerForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(schedulePayeeCustomerForm); updateCountry()"
+                [disabled]="schedulePayeeCustomerForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

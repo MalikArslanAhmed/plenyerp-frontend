@@ -18,7 +18,7 @@ import {SchedulePayeeEmployeeComponent} from "./schedule-payee-employee/schedule
 })
 export class PaymentVoucherComponent implements OnInit {
     filterPaymentVoucherForm: FormGroup;
-    searchPaymentVoucherForm: FormGroup;
+    // searchPaymentVoucherForm: FormGroup;
     paymentVoucherData = [
         {
             'year': '2018',
@@ -188,11 +188,12 @@ export class PaymentVoucherComponent implements OnInit {
     ngOnInit(): void {
         this.filterPaymentVoucherForm = this.fb.group({
             'sourceUnit': [''],
-            'status': ['']
-        });
-        this.searchPaymentVoucherForm = this.fb.group({
+            'status': [''],
             'search': ['']
         });
+        /*this.searchPaymentVoucherForm = this.fb.group({
+            'search': ['']
+        });*/
     }
 
     /*getStatementPositionData(params) {
@@ -248,7 +249,7 @@ export class PaymentVoucherComponent implements OnInit {
         console.log('filterPaymentVoucherForm', this.filterPaymentVoucherForm.value);
     }
 
-    search() {
+    /*search() {
         console.log('searchPaymentVoucherForm', this.searchPaymentVoucherForm.value);
-    }
+    }*/
 }

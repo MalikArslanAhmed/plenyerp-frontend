@@ -32,6 +32,10 @@
                                         *ngFor="let status of statuses">{{status?.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-label>Search PV</mat-label>
+                        <input formControlName="search" matInput placeholder="Search for Payment Voucher">
+                    </mat-form-field>
                     <div fxFlex class="width-200px p-10px mt-13px">
                         <button mat-button class="submit-report" (click)="filterPaymentVoucher()">
                             Submit
@@ -39,12 +43,9 @@
                         </button>
                     </div>
                 </form>
-                <form [formGroup]="searchPaymentVoucherForm">
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt--20px">
-                        <mat-label>Search PV</mat-label>
-                        <input formControlName="search" matInput (keyup)="search()" placeholder="Search for Payment Voucher">
-                    </mat-form-field>
-                </form>
+                <!--<form [formGroup]="searchPaymentVoucherForm">
+
+                </form>-->
             </div>
 
             <div class="content mt-20px">
