@@ -72,7 +72,8 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.name}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px" *ngIf="reportData.credit > reportData.debit">({{(reportData.debit - reportData.credit) * -1}})</p>
+                                <p class="text-truncate cursor-pointer mt-10px" *ngIf="reportData.credit <= reportData.debit">{{reportData.debit - reportData.credit}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -112,9 +113,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="title">
-                                            {{data?.balance}}
-                                        </div>
+                                        <div class="title" *ngIf="reportData.credit > reportData.debit">({{(reportData.debit - reportData.credit) * -1}})</div>
+                                        <div class="title" *ngIf="reportData.credit <= reportData.debit">{{reportData.debit - reportData.credit}}</div>
                                     </td>
                                 </tr>
                                 </tbody>

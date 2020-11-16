@@ -3,6 +3,10 @@ import {TrialBalanceReportService} from 'app/shared/services/trial-balance-repor
 import {fuseAnimations} from '@fuse/animations';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {PermissionConstant} from 'app/shared/constants/permission-constant';
+import {AlertService} from "../../../shared/services/alert.service";
+import {DeleteListModalComponent} from "../delete-list-modal/delete-list-modal.component";
+import {MatDialog} from "@angular/material/dialog";
+import {NotesDeleteModalComponent} from './notes-delete-modal/notes-delete-modal.component';
 
 @Component({
     selector: 'app-notes-master',
@@ -12,20 +16,21 @@ import {PermissionConstant} from 'app/shared/constants/permission-constant';
     animations: fuseAnimations
 })
 export class NotesMasterComponent implements OnInit {
-
     permissionAddNotes = [PermissionConstant.NOTES_MASTER_NOTE_ADD];
     searchNotesMasterForm: FormGroup;
     notesMasterData = [];
     chileNotesData = [];
-    notesMasterColumn = ['Note Id', 'Full Code', 'Debit', 'Credit', 'Balance'];
     panelOpenState: boolean = false;
+    dialogRef: any;
+
     constructor(private trialBalanceReportService: TrialBalanceReportService,
-                private fb: FormBuilder) {
+                private fb: FormBuilder,
+                private alertService: AlertService,
+                private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
         this.getNotesMasterData({});
-
         this.searchNotesMasterForm = this.fb.group({
             'id': [''],
         });
@@ -36,6 +41,7 @@ export class NotesMasterComponent implements OnInit {
             this.notesMasterData = data.items;
             if (this.notesMasterData && this.notesMasterData.length > 0) {
                 this.notesMasterData.forEach(d => {
+                    d['checked'] = false;
                     d['isOpen'] = !this.panelOpenState;
                     this.getChildNotes(d);
                 });
@@ -57,8 +63,8 @@ export class NotesMasterComponent implements OnInit {
     addNote(economicSegmentId) {
         const params = {};
         this.trialBalanceReportService.addNote(economicSegmentId, {}).subscribe(data => {
-            //console.log('data', data);
             params['parentId'] = economicSegmentId;
+            params['types'] = 'Trail_balance';
             this.trialBalanceReportService.getNotesData(params).subscribe(data => {
                 this.chileNotesData = data.items;
             });
@@ -70,11 +76,27 @@ export class NotesMasterComponent implements OnInit {
         this.getNotesMasterData(this.searchNotesMasterForm.value);
     }
 
-    downloadNoteMaster(data) {
-        this.trialBalanceReportService.downloadNoteMasterReport({columns: JSON.stringify(data)}).subscribe((success) => {
-            window.location.href = success.url;
-        });
+    downloadNoteMaster(type) {
+        if (this.notesMasterData && this.notesMasterData.length > 0) {
+            let notesData = [];
+            this.notesMasterData.forEach(note => {
+                if (note.checked) {
+                    notesData.push({'economicSegmentId': note['economicSegment'].id, 'noteId': note.noteId});
+                }
+            });
+            if (notesData && notesData.length > 0) {
+                this.trialBalanceReportService.downloadNoteMasterReport({
+                    'notesData': JSON.stringify(notesData),
+                    'type': type
+                }).subscribe((success) => {
+                    window.location.href = success.url;
+                });
+            } else {
+                this.alertService.showErrors('Please select notes to download.');
+            }
+        }
     }
+
     openAll() {
         if (this.notesMasterData && this.notesMasterData.length > 0) {
             this.notesMasterData.forEach(d => {
@@ -83,5 +105,37 @@ export class NotesMasterComponent implements OnInit {
             });
             this.panelOpenState = !this.panelOpenState;
         }
+    }
+
+    reportChecked(index, event) {
+        this.notesMasterData[index].checked = event.checked;
+    }
+
+    reportCheckedAll(event) {
+        if (event['checked']) {
+            this.notesMasterData.forEach(notes => {
+                notes['checked'] = true;
+            });
+        } else {
+            this.notesMasterData.forEach(notes => {
+                notes['checked'] = false;
+            });
+        }
+    }
+
+    resetNoteMaster() {
+        this.dialogRef = this._matDialog.open(NotesDeleteModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: ''}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.trialBalanceReportService.deleteAll().subscribe(data => {
+                    if (data) {
+                        this.getNotesMasterData({});
+                    }
+                });
+            }
+        });
     }
 }

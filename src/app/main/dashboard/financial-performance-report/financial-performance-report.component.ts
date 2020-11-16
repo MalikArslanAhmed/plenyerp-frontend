@@ -15,7 +15,6 @@ import * as moment from 'moment';
 export class FinancialPerformanceReportComponent implements OnInit {
     filterFinancialPerformanceReportForm: FormGroup;
     financialPerformaceData = [];
-    childFinancialPerformanceData = [];
     panelOpenState: boolean = false;
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
@@ -43,6 +42,7 @@ export class FinancialPerformanceReportComponent implements OnInit {
             }
         });
     }
+
     getChildReportData(item) {
         const params = {};
         if (item && item.id) {
@@ -71,6 +71,7 @@ export class FinancialPerformanceReportComponent implements OnInit {
             this.getFinancialPerformanceData(params);
         }
     }
+
     openAll() {
         if (this.financialPerformaceData && this.financialPerformaceData.length > 0) {
             this.financialPerformaceData.forEach(d => {

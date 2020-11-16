@@ -2,11 +2,10 @@
     <div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
             <ng-container matColumnDef="titlename">
-                <th mat-header-cell *matHeaderCellDef [attr.colspan]="2"> Company Information</th>
+                <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Company Information</th>
             </ng-container>
-
             <ng-container matColumnDef="key">
-                <td mat-cell *matCellDef="let element" class="item-name"> {{element.key}} </td>
+                <td mat-cell *matCellDef="let element" class="item-name">{{element.key}} </td>
             </ng-container>
             <ng-container matColumnDef="value">
                 <td mat-cell *matCellDef="let element"> {{element.value}} </td>
@@ -19,55 +18,41 @@
     <div class="mt-5rem">
         <table mat-table [dataSource]="dataSetting" class="mat-elevation-z1">
             <ng-container matColumnDef="titlename">
-                <th mat-header-cell *matHeaderCellDef [attr.colspan]="3"> Settings</th>
+                <th mat-header-cell *matHeaderCellDef [attr.colspan]="3">Settings</th>
             </ng-container>
             <ng-container matColumnDef="key">
-                <td mat-cell *matCellDef="let element" class="item-name"> {{element.key}} </td>
+                <td mat-cell *matCellDef="let element" class="item-name">{{element.key}}</td>
             </ng-container>
 
             <ng-container matColumnDef="value">
                 <td mat-cell *matCellDef="let element; let i=index">
-                    <span class ="value" *ngIf="!element.isSelected; else editPlace">
+                    <span class="value" *ngIf="!element.isSelected; else editPlace">
                         {{element.value}}
                     </span>
-                    <button  mat-icon-button aria-label="Toggle star" *ngIf="i!==2 && !element.isSelected"
+                    <button mat-icon-button aria-label="Toggle star" *ngIf="i!==2 && !element.isSelected"
                             (click)="editSetting(element)"
                             style="color: blue">
                         <mat-icon class="editicon material-icons">edit</mat-icon>
                     </button>
-                     
+
                     <ng-template #editPlace>
                         <div class="editPlace">
                             <mat-select name="local" [(ngModel)]="local">
-                                <mat-option *ngFor="let value of currencies"  [value]="value.codeCurrency">
+                                <mat-option *ngFor="let value of currencies" [value]="value.codeCurrency">
                                     {{value.codeCurrency}}
                                 </mat-option>
                             </mat-select>
-                        <button mat-raised-button color="accent" class="submit-button" *ngIf="element.isSelected" (click)="updateModel(element)">Update</button>
+                            <button mat-raised-button color="accent" class="submit-button" *ngIf="element.isSelected"
+                                    (click)="updateModel(element)">Update
+                            </button>
                         </div>
                     </ng-template>
                     <ng-container *ngIf="i===2">
-                        <mat-slide-toggle class="toggle" [(ngModel)]="dataSetting[2].value" (change)="autoPostJV($event)"></mat-slide-toggle>
+                        <mat-slide-toggle class="toggle" [(ngModel)]="dataSetting[2].value"
+                                          (change)="autoPostJV($event)"></mat-slide-toggle>
                     </ng-container>
-                   
                 </td>
             </ng-container>
-<!-- 
-            <ng-container matColumnDef="actions">
-                <mat-cell *matCellDef="let element; let i=index">
-                    <div fxFlex="row" fxLayoutAlign="end center">
-                        <button mat-icon-button aria-label="Toggle star" *ngIf="i!==2 && !element.isSelected"
-                                (click)="editSetting(element)"
-                                style="color: blue">
-                            <mat-icon class="material-icons">edit</mat-icon>
-                        </button>
-
-                        <button mat-raised-button color="accent" class="submit-button" *ngIf="element.isSelected"
-                                (click)="update(element)">Update
-                        </button>
-                    </div>
-                </mat-cell>
-            </ng-container> -->
             <tr mat-header-row *matHeaderRowDef="['titlename']"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsSetting;"></tr>
         </table>

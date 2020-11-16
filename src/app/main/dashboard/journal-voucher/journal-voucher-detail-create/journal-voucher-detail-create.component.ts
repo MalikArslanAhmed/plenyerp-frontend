@@ -83,11 +83,11 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
             'lineReference': [''],
             'functionalSegmentCode': [{value: '', disabled: true}],
             'functionalSegmentId': [''],
-            'lineValueInTrxnCurrency': [''],
             'geoCodeSegmentCode': [{value: '', disabled: true}],
             'geoCodeSegmentId': [''],
             'lineValueType': ['DEBIT'],
-            'lvLineValue': ['']
+            'lvLineValue': [''],
+            'creditDebitValue': [{value: '', disabled: true}]
         });
 
         if (this.updateData) {
@@ -151,11 +151,11 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
             'lineReference': (this.updateData && this.updateData.lineReference) ? this.updateData.lineReference : '',
             'functionalSegmentCode': (this.updateData && this.updateData.functionalSegment) ? this.updateData.functionalSegment.id : '',
             'functionalSegmentId': (this.updateData && this.updateData.functionalSegment) ? this.updateData.functionalSegment.id : '',
-            'lineValueInTrxnCurrency': (this.updateData && this.updateData.currency) ? this.updateData.currency : '',
             'geoCodeSegmentCode': (this.updateData && this.updateData.geoCodeSegment) ? this.updateData.geoCodeSegment.id : '',
             'geoCodeSegmentId': (this.updateData && this.updateData.geoCodeSegment) ? this.updateData.geoCodeSegment.id : '',
             'lineValueType': (this.updateData && this.updateData.lineValueType) ? this.updateData.lineValueType : '',
             'lvLineValue': (this.updateData && this.updateData.lvLineValue) ? this.updateData.lvLineValue : '',
+            'creditDebitValue': (this.updateData && this.updateData.lvLineValue) ? this.updateData.lvLineValue : '',
         });
     }
 
@@ -280,42 +280,6 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
     }
 
     addDetail() {
-        /*const params = {
-            'lineValue': this.addDetailForm.value.lineValue ? this.addDetailForm.value.lineValue : '',
-            'adminSegmentId': this.addDetailForm.value.adminSegmentId ? this.addDetailForm.value.adminSegmentId : '',
-            'currency': this.addDetailForm.value.currency ? this.addDetailForm.value.currency : '',
-            'fundSegmentId': this.addDetailForm.value.fundSegmentId ? this.addDetailForm.value.fundSegmentId : '',
-            'xRateLocal': this.addDetailForm.value.xRateLocal ? parseFloat(this.addDetailForm.value.xRateLocal) : 0,
-            'bankXRateToUsd': this.addDetailForm.value.bankXRateToUsd ? parseFloat(this.addDetailForm.value.bankXRateToUsd) : 0,
-            'economicSegmentId': this.addDetailForm.value.economicSegmentId ? this.addDetailForm.value.economicSegmentId : '',
-            'accountName': this.addDetailForm.value.accountName ? this.addDetailForm.value.accountName : '',
-            'programmeSegmentId': this.addDetailForm.value.programmeSegmentId ? this.addDetailForm.value.programmeSegmentId : '',
-            'lineReference': this.addDetailForm.value.lineReference ? this.addDetailForm.value.lineReference : '',
-            'functionalSegmentCode': this.addDetailForm.value.functionalSegmentCode ? this.addDetailForm.value.functionalSegmentCode : '',
-            'functionalSegmentId': this.addDetailForm.value.functionalSegmentId ? this.addDetailForm.value.functionalSegmentId : '',
-            'lineValueInTrxnCurrency': this.addDetailForm.value.lineValueInTrxnCurrency ? this.addDetailForm.value.lineValueInTrxnCurrency : '',
-            'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
-            'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
-            'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
-            'adminSegmentName': this.adminSegments[0].name,
-            'fundSegmentName': this.fundSegmentsAddDet[0].name,
-            'economicSegmentName': this.economicSegments[0].name,
-            'programmeSegmentName': this.programmeSegments[0].name,
-            'functionSegmentName': this.functionSegments[0].name,
-            'geoCodeSegmentName': this.geoCodeSegments[0].name,
-            'adminSegmentCode': this.adminSegments[0].id,
-            'fundSegmentCode': this.fundSegmentsAddDet[0].id,
-            'economicSegmentCode': this.economicSegments[0].id,
-            'programmeSegmentCode': this.programmeSegments[0].id,
-            'functionSegmentCode': this.functionSegments[0].id,
-            'geoCodeSegmentCode': this.geoCodeSegments[0].id
-        };
-        this.journalVoucherService.addDetails(this.journalVoucherId, params).subscribe(data => {
-            this.addDetailForm.reset();
-            this.isSubmitted = false;
-            this.matDialogRef.close(this.addDetailForm);
-        });*/
-
         const params = {
             'lineValue': this.addDetailForm.value.lineValue ? this.addDetailForm.value.lineValue : '',
             'adminSegmentId': this.addDetailForm.value.adminSegmentId ? this.addDetailForm.value.adminSegmentId : '',
@@ -329,10 +293,10 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
             'lineReference': this.addDetailForm.value.lineReference ? this.addDetailForm.value.lineReference : '',
             'functionalSegmentCode': this.addDetailForm.value.functionalSegmentCode ? this.addDetailForm.value.functionalSegmentCode : '',
             'functionalSegmentId': this.addDetailForm.value.functionalSegmentId ? this.addDetailForm.value.functionalSegmentId : '',
-            'lineValueInTrxnCurrency': this.addDetailForm.value.lineValueInTrxnCurrency ? this.addDetailForm.value.lineValueInTrxnCurrency : '',
             'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
             'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
             'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
+            'creditDebitValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
             'adminSegmentName': this.adminSegments[0] && this.adminSegments[0].name ? this.adminSegments[0].name : '',
             'fundSegmentName': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].name ? this.fundSegmentsAddDet[0].name : '',
             'economicSegmentName': this.economicSegments[0] && this.economicSegments[0].name ? this.economicSegments[0].name : '',
@@ -392,6 +356,12 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
         });
     }
 
+    addLineValue(event) {
+        this.addDetailForm.patchValue({
+            'creditDebitValue': event.target.value
+        });
+    }
+
     updateDetail() {
         this.isSubmitted = true;
         if (!this.addDetailForm.valid) {
@@ -412,10 +382,10 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
                 'lineReference': this.addDetailForm.value.lineReference ? this.addDetailForm.value.lineReference : '',
                 'functionalSegmentCode': this.addDetailForm.value.functionalSegmentCode ? this.addDetailForm.value.functionalSegmentCode : '',
                 'functionalSegmentId': this.addDetailForm.value.functionalSegmentId ? this.addDetailForm.value.functionalSegmentId : '',
-                'lineValueInTrxnCurrency': this.addDetailForm.value.lineValueInTrxnCurrency ? this.addDetailForm.value.lineValueInTrxnCurrency : '',
                 'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
                 'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
                 'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
+                'creditDebitValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
                 'adminSegmentName': this.adminSegments[0] && this.adminSegments[0].name ? this.adminSegments[0].name : '',
                 'fundSegmentName': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].name ? this.fundSegmentsAddDet[0].name : '',
                 'economicSegmentName': this.economicSegments[0] && this.economicSegments[0].name ? this.economicSegments[0].name : '',

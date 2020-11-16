@@ -10,23 +10,8 @@
                    Journal Voucher
                 </span>
             </div>
-            <!--<div class="ml-20px mt-20px color-white" fxLayout="row" fxLayoutAlign="start center">
-                <mat-form-field appearance="outline" fxFlex="100" class="width-200px">
-                    <mat-label>Originating / Source App</mat-label>
-                    <mat-select>
-                        <mat-option [value]="source.value"
-                                    *ngFor="let source of sourceApp">{{source?.name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>--> 
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-            <!--<div appPermissionBind [permission]="permissionAddJV">
-                <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
-                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addJournalVoucher()">
-                    <mat-icon>add_circle</mat-icon>
-                </button>
-            </div>-->
             <div appPermissionBind [permission]="permissionAddJV">
                 <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addJournalVoucher()">
@@ -34,16 +19,6 @@
                 </button>
             </div>
         </div>
-        <!-- SEARCH -->
-        <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
-            <div class="search-wrapper mt-16 mt-sm-0">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
-                    <input [formControl]="searchInput" placeholder="Search for a contact">
-                </div>
-            </div>
-        </div>-->
-        <!-- / SEARCH -->
     </div>
     <div class="content">
     </div>
@@ -51,45 +26,53 @@
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
                 <form [formGroup]="filterJournalVoucherForm">
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>Originating / Source App</mat-label>
-                        <mat-select formControlName="sourceApp" (selectionChange)="search()">
-                            <mat-option value="">Choose Source</mat-option>
-                            <mat-option [value]="source.value"
-                                        *ngFor="let source of sourceApp">{{source?.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>From</mat-label>
-                        <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
-                               formControlName="from" (dateInput)="search()">
-                        <mat-datepicker-toggle matSuffix
-                                               [for]="from"></mat-datepicker-toggle>
-                        <mat-datepicker #from></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>To</mat-label>
-                        <input matInput [matDatepicker]="to" (click)="to.open()" (focus)="to.open()"
-                               formControlName="to" (dateInput)="search()">
-                        <mat-datepicker-toggle matSuffix
-                                               [for]="to"></mat-datepicker-toggle>
-                        <mat-datepicker #to></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>Status</mat-label>
-                        <mat-select formControlName="status" (selectionChange)="filter()">
-                            <mat-option [value]="type.value"
-                                        *ngFor="let type of types">{{type?.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </form>
-            </div>
-            <div class="content mt-20px">
-                <form [formGroup]="searchJournalVoucherForm">
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>Search JV Reference</mat-label>
-                        <input formControlName="jvReference" matInput (keyup)="search()">
-                    </mat-form-field>
+                    <mat-grid-list cols="4">
+                        <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>Originating / Source App</mat-label>
+                            <mat-select formControlName="sourceApp">
+                                <mat-option value="">Choose Source</mat-option>
+                                <mat-option [value]="source.value"
+                                            *ngFor="let source of sourceApp">{{source?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>From</mat-label>
+                            <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
+                                   formControlName="from">
+                            <mat-datepicker-toggle matSuffix
+                                                   [for]="from"></mat-datepicker-toggle>
+                            <mat-datepicker #from></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>To</mat-label>
+                            <input matInput [matDatepicker]="to" (click)="to.open()" (focus)="to.open()"
+                                   formControlName="to">
+                            <mat-datepicker-toggle matSuffix
+                                                   [for]="to"></mat-datepicker-toggle>
+                            <mat-datepicker #to></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="status">
+                                <mat-option [value]="type.value"
+                                            *ngFor="let type of types">{{type?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-grid-list>
+                    <mat-grid-list cols="1" class="width-99-per mt--34px">
+                        <mat-form-field appearance="outline" fxFlex class="p-10px">
+                            <mat-label>Search JV Reference</mat-label>
+                            <input formControlName="jvReference" matInput>
+                        </mat-form-field>
+                        <button mat-button class="reset-report" (click)="resetfilter()">
+                            Reset
+                            <mat-icon class="material-icons cursor-pointer whiteColor">cached</mat-icon>
+                        </button>
+                        <button mat-button class="submit-report" (click)="filter()">
+                            Submit
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>
+                    </mat-grid-list>
                 </form>
             </div>
             <div class="content mt-20px">

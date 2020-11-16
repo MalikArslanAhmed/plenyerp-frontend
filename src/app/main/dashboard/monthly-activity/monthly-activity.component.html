@@ -15,7 +15,7 @@
             <div appPermissionBind [permission]="">
                 <button mat-button class="accent" id="add-button" aria-label="add skill"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
-                    {{panelOpenState ? 'Close': 'Open'}} All
+                    {{panelOpenState ? 'Close' : 'Open'}} All
                 </button>
             </div>
         </div>
@@ -25,7 +25,8 @@
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
                 <form [formGroup]="filterJVLegderSiblingReportForm">
-                    <mat-form-field class="width-200px p-10px mt-13px mb--15px" appearance="outline" fxFlex="100" (click)="economicSegmentSelect()">
+                    <mat-form-field class="width-200px p-10px mt-13px mb--15px" appearance="outline" fxFlex="100"
+                                    (click)="economicSegmentSelect()">
                         <mat-label>Economic Segment Name</mat-label>
                         <mat-select formControlName="economicSegmentId" [disabled]="true">
                             <mat-option [value]="economicSegment.id"
@@ -58,8 +59,6 @@
                         <span class="mat-header-cell">October</span>
                         <span class="mat-header-cell">November</span>
                         <span class="mat-header-cell">December</span>
-                        <!-- <span class="mat-header-cell">Previous Year</span>
-                        <span class="mat-header-cell">Total</span> -->
                     </section>
                     <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ data: data}"></ng-container>
                 </mat-accordion>
@@ -69,7 +68,7 @@
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildData(item, i)">
                         <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px" [title]="item.name">{{item?.name}}</p>
+                            <p class="cursor-pointer mt-10px" [title]="item.name">{{item?.name}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.combinedCode}}</p>

@@ -15,56 +15,16 @@
             <div appPermissionBind [permission]="">
                 <button mat-button class="accent" id="add-button" aria-label="add skill"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
-                    {{panelOpenState ? 'Close': 'Open'}} All
+                    {{panelOpenState ? 'Close' : 'Open'}} All
                 </button>
             </div>
         </div>
-        <!-- <div fxLayout="row" fxLayoutAlign="center">
-            <mat-form-field appearance="outline" fxFlex class="mt-13px" id="fromToDate">
-                <mat-label>From</mat-label>
-                <input matInput [matDatepicker]="from"
-                       >
-                <mat-datepicker-toggle matSuffix
-                                       [for]="from"></mat-datepicker-toggle>
-                <mat-datepicker #from></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="center">
-            <mat-form-field appearance="outline" fxFlex class="mt-13px">
-                <mat-label>To</mat-label>
-                <input matInput [matDatepicker]="to"
-                       >
-                <mat-datepicker-toggle matSuffix
-                                       [for]="to"></mat-datepicker-toggle>
-                <mat-datepicker #to></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="center">
-            <button mat-icon-button 
-                       >Submit
-                    <mat-icon class="amber-600-fg">play_arrow</mat-icon>
-                </button>
-        </div> -->
-
-        <!-- SEARCH -->
-        <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
-            <div class="search-wrapper mt-16 mt-sm-0">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
-                    <input [formControl]="searchInput" placeholder="Search for a contact">
-                </div>
-            </div>
-        </div>-->
-        <!-- / SEARCH -->
     </div>
 
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
                 <form [formGroup]="filterFinancialPerformanceReportForm">
-
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>From</mat-label>
                         <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
@@ -86,22 +46,9 @@
                             Submit
                             <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
                         </button>
-                        <!-- <button class="submit-report" mat-button> Submit</button> -->
-                        <!-- <button mat-icon-button
-                        >Submit
-                     <mat-icon class="material-icons f_20 cursor-pointer blueColor">play_arrow</mat-icon>
-                 </button> -->
                     </div>
-
-                    <!-- <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <button mat-icon-button
-                        >Submit
-                     <mat-icon class="amber-600-fg">play_arrow</mat-icon>
-                 </button>
-                    </mat-form-field> -->
                 </form>
             </div>
-
             <div class="content mt-20px">
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
@@ -109,8 +56,9 @@
                         <span class="mat-header-cell">Line Code</span>
                         <span class="mat-header-cell">Acc. Title </span>
                         <span class="mat-header-cell">Balance</span>
-                    </section> 
-                    <mat-expansion-panel *ngFor="let reportData of financialPerformaceData" [expanded]="reportData.isOpen">
+                    </section>
+                    <mat-expansion-panel *ngFor="let reportData of financialPerformaceData"
+                                         [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center">
@@ -123,7 +71,11 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.name}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px"
+                                   *ngIf="reportData.credit > reportData.debit">({{(reportData.debit - reportData.credit) * -1}}
+                                    )</p>
+                                <p class="text-truncate cursor-pointer mt-10px"
+                                   *ngIf="reportData.credit <= reportData.debit">{{reportData.debit - reportData.credit}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -163,9 +115,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="title">
-                                            {{data?.balance}}
-                                        </div>
+                                        <div class="title" *ngIf="data.credit > data.debit">({{(data.debit - data.credit) * -1}})</div>
+                                        <div class="title" *ngIf="data.credit <= data.debit">{{data.debit - data.credit}}</div>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -177,7 +128,7 @@
                                     </tbody>
                                 </ng-template>
                             </table>
-                        </div> 
+                        </div>
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>

@@ -121,11 +121,23 @@ export class BudgetControlComponent implements OnInit {
         if (this.budgetType === 'economic') {
             this.budgetService.getBudgetControlForEconomic(params).subscribe(data => {
                 this.budgetControlList = data.items;
+                if (this.budgetControlList && this.budgetControlList.length > 0) {
+                    this.budgetControlList.forEach(budgetControl => {
+                        budgetControl['totalSupplementaryBudget'] = Math.round(budgetControl['totalSupplementaryBudget']);
+                        budgetControl['totalBudget'] = Math.round(budgetControl['totalBudget']);
+                    });
+                }
             });
         }
         if (this.budgetType === 'programme') {
             this.budgetService.getBudgetControlForProgramm(params).subscribe(data => {
                 this.budgetControlList = data.items;
+                if (this.budgetControlList && this.budgetControlList.length > 0) {
+                    this.budgetControlList.forEach(budgetControl => {
+                        budgetControl['totalSupplementaryBudget'] = Math.round(budgetControl['totalSupplementaryBudget']);
+                        budgetControl['totalBudget'] = Math.round(budgetControl['totalBudget']);
+                    });
+                }
             });
         }
     }

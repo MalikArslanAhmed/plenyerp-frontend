@@ -17,136 +17,7 @@ import {MatAccordion} from '@angular/material/expansion';
     animations: fuseAnimations
 })
 export class MonthlyActivityComponent implements OnInit {
-    // panelOpenState = false;
     data = [];
-    childData = [];
-    /*data = [
-        {
-            name: 'Current Assets',
-            combinedCode: 31,
-            january: 0,
-            february: 0,
-            march: 0,
-            april: 0,
-            may: 100,
-            june: 0,
-            july: 0,
-            august: 200,
-            september: 0,
-            november: 0,
-            december: 0,
-            previousYears: 0,
-            total: 300,
-            child: [
-                {
-                    name: 'Current Assets',
-                    combinedCode: 31,
-                    january: 0,
-                    february: 0,
-                    march: 0,
-                    april: 0,
-                    may: 100,
-                    june: 0,
-                    july: 0,
-                    august: 200,
-                    september: 0,
-                    november: 0,
-                    december: 0,
-                    previousYears: 0,
-                    total: 300,
-                    child: [
-                        {
-                            name: '1',
-                            combinedCode: 31,
-                            january: 0,
-                            february: 0,
-                            march: 0,
-                            april: 0,
-                            may: 100,
-                            june: 0,
-                            july: 0,
-                            august: 200,
-                            september: 0,
-                            november: 0,
-                            december: 0,
-                            previousYears: 0,
-                            total: 300
-                        },
-                        {
-                            name: '2',
-                            combinedCode: 31,
-                            january: 0,
-                            february: 0,
-                            march: 0,
-                            april: 0,
-                            may: 100,
-                            june: 0,
-                            july: 0,
-                            august: 200,
-                            september: 0,
-                            november: 0,
-                            december: 0,
-                            previousYears: 0,
-                            total: 300,
-                            child: [
-                                {
-                                    name: 'Current Assets',
-                                    combinedCode: 31,
-                                    january: 0,
-                                    february: 0,
-                                    march: 0,
-                                    april: 0,
-                                    may: 100,
-                                    june: 0,
-                                    july: 0,
-                                    august: 200,
-                                    september: 0,
-                                    november: 0,
-                                    december: 0,
-                                    previousYears: 0,
-                                    total: 300
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    name: 'Current Assets',
-                    combinedCode: 31,
-                    january: 0,
-                    february: 0,
-                    march: 0,
-                    april: 0,
-                    may: 100,
-                    june: 0,
-                    july: 0,
-                    august: 200,
-                    september: 0,
-                    november: 0,
-                    december: 0,
-                    previousYears: 0,
-                    total: 300
-                }
-            ]
-        },
-        {
-            name: 'Non-Current Assets',
-            combinedCode: 32,
-            january: 0,
-            february: 0,
-            march: 0,
-            april: 0,
-            may: 100,
-            june: 0,
-            july: 0,
-            august: 200,
-            september: 0,
-            november: 0,
-            december: 0,
-            previousYears: 0,
-            total: 300
-        }
-    ];*/
     dialogRef: any;
     filterJVLegderSiblingReportForm: FormGroup;
     economicSegments = [];
@@ -155,8 +26,7 @@ export class MonthlyActivityComponent implements OnInit {
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
                 private fb: FormBuilder,
-                private _matDialog: MatDialog,
-                private alertService: AlertService) {
+                private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -164,7 +34,6 @@ export class MonthlyActivityComponent implements OnInit {
         this.filterJVLegderSiblingReportForm = this.fb.group({
             'economicSegmentId': ['']
         });
-        // this.getChildData({id: 7}, 1);
     }
 
     getMonthlyActivityData(params) {
@@ -181,7 +50,6 @@ export class MonthlyActivityComponent implements OnInit {
     }
 
     getChildData(item, index?) {
-        console.log('--->>>anup');
         const params = {};
         params['parentId'] = item.id;
         this.jvLedgerReportService.getMonthlyActivityReport(params).subscribe(data => {
@@ -215,7 +83,6 @@ export class MonthlyActivityComponent implements OnInit {
     }
 
     openAll() {
-        // console.log('--->>>open all');
         if (this.data && this.data.length > 0) {
             this.data.forEach(d => {
                 d['isOpen'] = !this.panelOpenState;

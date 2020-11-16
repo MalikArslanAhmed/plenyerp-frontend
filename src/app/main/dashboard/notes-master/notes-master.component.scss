@@ -31,16 +31,21 @@ app-notes-master {
             #add-button {
                 background-color: white !important;
                 color: #106CC8 !important;
+                margin-right: 10px;
 
                 mat-label {
                     color: black !important;
                 }
             }
 
-            // #fromToDate{
-            //     background-color: white !important;
-            //     color: #106CC8 !important;
-            // }
+            #reset-button {
+                background-color: #dc3545 !important;
+                color: white !important;
+
+                mat-label {
+                    color: black !important;
+                }
+            }
         }
 
         .content {
@@ -232,9 +237,11 @@ app-notes-master {
         border: none !important;
         background-color: transparent !important;
     }
+
     .no-click {
         pointer-events: none;
     }
+
     #open-all {
         background-color: white !important;
         color: #106CC8 !important;
@@ -243,6 +250,7 @@ app-notes-master {
             color: black !important;
         }
     }
+
     .margin-left-1 {
         margin-left: 1rem;
     }

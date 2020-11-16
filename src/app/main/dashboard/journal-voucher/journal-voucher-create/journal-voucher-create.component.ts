@@ -41,6 +41,7 @@ export class JournalVoucherCreateComponent implements OnInit {
     geoCodeSegments = [];
     jvDetail = [];
     user: any;
+    currentDate: any = moment(new Date()).format('YYYY-MM-DD');
 
     constructor(public matDialogRef: MatDialogRef<JournalVoucherCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -75,15 +76,15 @@ export class JournalVoucherCreateComponent implements OnInit {
             'fundSegmentId': [''],
             'fundSegmentCode': [{value: '', disabled: true}],
             'preparedValueDate': [''],
-            'preparedTransactionDate': [''],
+            'preparedTransactionDate': [{value: this.currentDate, disabled: true}],
             'preparedUserId': [{value: this.user.id, disabled: true}],
             'preparedUsername': [{value: this.user.name, disabled: true}],
             'checkedValueDate': [''],
-            'checkedTransactionDate': [''],
+            'checkedTransactionDate': [{value: this.currentDate, disabled: true}],
             'checkedUserId': [{value: this.user.id, disabled: true}],
             'checkedUsername': [{value: this.user.name, disabled: true}],
             'postedValueDate': [''],
-            'postedTransactionDate': [''],
+            'postedTransactionDate': [{value: this.currentDate, disabled: true}],
             'postedUserId': [{value: this.user.id, disabled: true}],
             'postedUsername': [{value: this.user.name, disabled: true}],
             'jvReference': [''],
@@ -108,11 +109,11 @@ export class JournalVoucherCreateComponent implements OnInit {
             'lineReference': [''],
             'functionalSegmentCode': [{value: '', disabled: true}],
             'functionalSegmentId': [''],
-            'lineValueInTrxnCurrency': [''],
             'geoCodeSegmentCode': [{value: '', disabled: true}],
             'geoCodeSegmentId': [''],
             'lineValueType': ['DEBIT'],
-            'lvLineValue': ['']
+            'lvLineValue': [''],
+            'creditDebitValue': [{value: '', disabled: true}]
         });
     }
 
@@ -277,6 +278,12 @@ export class JournalVoucherCreateComponent implements OnInit {
         });
     }
 
+    addLineValue(event) {
+        this.addDetailForm.patchValue({
+            'creditDebitValue': event.target.value
+        });
+    }
+
     addDetail() {
         const params = {
             'lineValue': this.addDetailForm.value.lineValue ? this.addDetailForm.value.lineValue : '',
@@ -291,7 +298,6 @@ export class JournalVoucherCreateComponent implements OnInit {
             'lineReference': this.addDetailForm.value.lineReference ? this.addDetailForm.value.lineReference : '',
             'functionalSegmentCode': this.addDetailForm.value.functionalSegmentCode ? this.addDetailForm.value.functionalSegmentCode : '',
             'functionalSegmentId': this.addDetailForm.value.functionalSegmentId ? this.addDetailForm.value.functionalSegmentId : '',
-            'lineValueInTrxnCurrency': this.addDetailForm.value.lineValueInTrxnCurrency ? this.addDetailForm.value.lineValueInTrxnCurrency : '',
             'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
             'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
             'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
@@ -374,15 +380,15 @@ export class JournalVoucherCreateComponent implements OnInit {
             'fundSegmentId': this.journalVoucherCreateForm.value.fundSegmentId ? this.journalVoucherCreateForm.value.fundSegmentId : '',
             'fundSegmentCode': this.journalVoucherCreateForm.value.fundSegmentCode ? this.journalVoucherCreateForm.value.fundSegmentCode : '',
             'preparedValueDate': this.journalVoucherCreateForm.value.preparedValueDate ? moment(this.journalVoucherCreateForm.value.preparedValueDate).format('YYYY-MM-DD') : '',
-            'preparedTransactionDate': this.journalVoucherCreateForm.value.preparedTransactionDate ? moment(this.journalVoucherCreateForm.value.preparedTransactionDate).format('YYYY-MM-DD') : '',
+            'preparedTransactionDate': this.currentDate,
             'preparedUserId': this.journalVoucherCreateForm.value.preparedUserId ? this.journalVoucherCreateForm.value.preparedUserId : '',
             'preparedUsername': this.journalVoucherCreateForm.value.preparedUsername ? this.journalVoucherCreateForm.value.preparedUsername : '',
             'checkedValueDate': this.journalVoucherCreateForm.value.checkedValueDate ? moment(this.journalVoucherCreateForm.value.checkedValueDate).format('YYYY-MM-DD') : '',
-            'checkedTransactionDate': this.journalVoucherCreateForm.value.checkedTransactionDate ? moment(this.journalVoucherCreateForm.value.checkedTransactionDate).format('YYYY-MM-DD') : '',
+            'checkedTransactionDate': this.currentDate,
             'checkedUserId': this.journalVoucherCreateForm.value.checkedUserId ? this.journalVoucherCreateForm.value.checkedUserId : '',
             'checkedUsername': this.journalVoucherCreateForm.value.checkedUsername ? this.journalVoucherCreateForm.value.checkedUsername : '',
             'postedValueDate': this.journalVoucherCreateForm.value.postedValueDate ? moment(this.journalVoucherCreateForm.value.postedValueDate).format('YYYY-MM-DD') : '',
-            'postedTransactionDate': this.journalVoucherCreateForm.value.postedTransactionDate ? moment(this.journalVoucherCreateForm.value.postedTransactionDate).format('YYYY-MM-DD') : '',
+            'postedTransactionDate': this.currentDate,
             'postedUserId': this.journalVoucherCreateForm.value.postedUserId ? this.journalVoucherCreateForm.value.postedUserId : '',
             'postedUsername': this.journalVoucherCreateForm.value.postedUsername ? this.journalVoucherCreateForm.value.postedUsername : '',
             'jvReference': this.journalVoucherCreateForm.value.jvReference ? this.journalVoucherCreateForm.value.jvReference : '',

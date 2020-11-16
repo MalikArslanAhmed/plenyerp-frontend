@@ -407,6 +407,11 @@ export class AppUrl {
         return AppUrl.API_URL + `download/notes`;
     }
 
+
+    static DELETE_NOTES(): string {
+        return AppUrl.API_URL + `finance/notes`;
+    }
+
     static GET_EMPLOYEES(): string {
         return AppUrl.API_URL + `employees`;
     }

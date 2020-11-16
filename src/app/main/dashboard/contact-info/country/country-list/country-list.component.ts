@@ -5,8 +5,8 @@ import {CountryCreateComponent} from '../country-create/country-create.component
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import {PageEvent} from '@angular/material/paginator';
-import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
-import { PermissionConstant } from 'app/shared/constants/permission-constant';
+import {DeleteListModalComponent} from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
+import {PermissionConstant} from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-country-list',
@@ -18,7 +18,7 @@ import { PermissionConstant } from 'app/shared/constants/permission-constant';
 export class CountryListComponent implements OnInit {
     countryList = [];
     displayedCountryColumns = ['id', 'name', 'status', 'actions'];
-    dialogRef: any;    
+    dialogRef: any;
     selectIndex = 0;
     pagination = {
         page: 1,
@@ -68,7 +68,8 @@ export class CountryListComponent implements OnInit {
             }
         });
 
-    } 
+    }
+
     deleteCountry(id) {
         this.contactInfoService.deleteCountry(id).subscribe(data => {
             if (data) {
@@ -89,6 +90,7 @@ export class CountryListComponent implements OnInit {
             this.getCountryList();
         });
     }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getCountryList();

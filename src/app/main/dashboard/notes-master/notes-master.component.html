@@ -13,57 +13,27 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <div appPermissionBind [permission]="">
-                <button mat-button class="accent" id="add-button" aria-label="add skill"
-                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="downloadNoteMaster(notesMasterColumn)">
+                <button mat-button class="accent" id="add-button"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
+                        (click)="downloadNoteMaster('Trail_balance')">
                     Download
                 </button>
             </div>
-            <div appPermissionBind [permission]="" class="margin-left-1">
+            <div appPermissionBind [permission]="" class="margin-left-1" style="margin-right: 10px">
                 <button mat-button class="accent" id="open-all" aria-label="add skill"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
-                    {{panelOpenState ? 'Close': 'Open'}} All
+                    {{panelOpenState ? 'Close' : 'Open'}} All
+                </button>
+            </div>
+            <div appPermissionBind [permission]="">
+                <button mat-button class="accent" id="reset-button"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
+                        (click)="resetNoteMaster()" title="Reset Notes">
+                    <mat-icon class="material-icons">delete</mat-icon>
+                    Reset
                 </button>
             </div>
         </div>
-        <!-- <div fxLayout="row" fxLayoutAlign="center">
-            <mat-form-field appearance="outline" fxFlex class="mt-13px" id="fromToDate">
-                <mat-label>From</mat-label>
-                <input matInput [matDatepicker]="from"
-                       >
-                <mat-datepicker-toggle matSuffix
-                                       [for]="from"></mat-datepicker-toggle>
-                <mat-datepicker #from></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="center">
-            <mat-form-field appearance="outline" fxFlex class="mt-13px">
-                <mat-label>To</mat-label>
-                <input matInput [matDatepicker]="to"
-                       >
-                <mat-datepicker-toggle matSuffix
-                                       [for]="to"></mat-datepicker-toggle>
-                <mat-datepicker #to></mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="center">
-            <button mat-icon-button 
-                       >Submit
-                    <mat-icon class="amber-600-fg">play_arrow</mat-icon>
-                </button>
-        </div> -->
-
-        <!-- SEARCH -->
-        <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>
-            <div class="search-wrapper mt-16 mt-sm-0">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
-                    <input [formControl]="searchInput" placeholder="Search for a contact">
-                </div>
-            </div>
-        </div>-->
-        <!-- / SEARCH -->
     </div>
 
     <div class="content">
@@ -79,17 +49,27 @@
             <div class="content mt-20px">
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                        <span class="mat-header-cell">
+                            <mat-checkbox (change)="reportCheckedAll($event)" (click)="$event.stopPropagation()"
+                                          style="margin-right: 10px"></mat-checkbox> Select</span>
                         <span class="mat-header-cell">Note Id</span>
                         <span class="mat-header-cell">Full Code</span>
                         <span class="mat-header-cell">Debit</span>
                         <span class="mat-header-cell">Credit</span>
                         <span class="mat-header-cell">Balance</span>
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of notesMasterData; let i = index" [expanded]="reportData.isOpen">
+                    <mat-expansion-panel *ngFor="let reportData of notesMasterData; let i = index"
+                                         [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildNotes(reportData)">
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.id}}.</p>
+                                <p class="text-truncate cursor-pointer" style="margin-top: 5px">
+                                    <mat-checkbox (change)="reportChecked(i, $event)" (click)="$event.stopPropagation()"
+                                                  [checked]="reportData.checked ? true : null"></mat-checkbox>
+                                </p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.noteId}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.economicSegment?.combinedCode}}</p>
@@ -101,7 +81,11 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.credit}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.balance}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px"
+                                   *ngIf="reportData.credit > reportData?.debit">({{(reportData?.debit - reportData?.credit) * -1}}
+                                    )</p>
+                                <p class="text-truncate cursor-pointer mt-10px"
+                                   *ngIf="reportData.credit <= reportData?.debit">{{reportData?.debit - reportData?.credit}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -161,12 +145,16 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="title">
-                                            {{data?.balance}}
+                                        <div class="title" *ngIf="reportData.credit > reportData?.debit">
+                                            ({{(reportData?.debit - reportData?.credit) * -1}})
                                         </div>
+                                        <div class="title"
+                                             *ngIf="reportData.credit <= reportData?.debit">{{reportData?.debit - reportData?.credit}}</div>
                                     </td>
                                     <td>
-                                        <button appPermissionBind [permission]="permissionAddNotes"  class="border-bg-none" *ngIf="!data.noteId" (click)="addNote(data.economicSegmentId)">
+                                        <button appPermissionBind [permission]="permissionAddNotes"
+                                                class="border-bg-none" *ngIf="!data.noteId"
+                                                (click)="addNote(data.economicSegmentId)">
                                             <span class="material-icons f_20 cursor-pointer blueColor">
                                                 add_box
                                             </span>

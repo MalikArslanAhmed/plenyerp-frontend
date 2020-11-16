@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
             this.globalService.setAccessToken(StorageService.getItem('accessToken'));
             this.globalService.setSelf(StorageService.getItem('self'));
             let role = StorageService.getItem('self');
+            console.log('rolerolerole', role);
             this.navigateToAuthorizePage(role['roles']);
         }
     }

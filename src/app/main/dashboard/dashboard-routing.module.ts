@@ -593,7 +593,7 @@ const routes: Routes = [
         canActivate: [RouteGuard],
         data: {
             title: 'Company Information',
-            permissions: [PermissionConstant.COMPANIES]
+            permissions: [PermissionConstant.COMPANIES_SETTING]
         }
     },
     {

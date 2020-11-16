@@ -26,8 +26,8 @@ export class JournalVoucherListComponent implements OnInit {
         perpage: 15,
         pages: null
     };
-    status: any;
     pageEvent: PageEvent;
+    status: any;
     permissionEditJV = [PermissionConstant.EDIT_GL_JV];
     permissionDeleteJV = [PermissionConstant.DELETE_GL_JV];
     permissionAddJVDetails = [PermissionConstant.JV_DETAILS_ADD];
@@ -125,25 +125,47 @@ export class JournalVoucherListComponent implements OnInit {
     markAsChecked() {
         let jvReferenceNumbers = [];
         let i = 0;
+        let postAllow = true;
         if (this.journalVouchers && this.journalVouchers.length > 0) {
             this.journalVouchers.forEach(journalVoucher => {
-                // console.log('journalVoucher', journalVoucher);
                 if (journalVoucher.checked) {
-                    i++;
-                    jvReferenceNumbers.push(journalVoucher.id);
+                    let creditValTotal = 0;
+                    let debitValTotal = 0;
+                    if (journalVoucher && journalVoucher['journalVoucherDetails'] && journalVoucher['journalVoucherDetails'].length > 0) {
+                        journalVoucher['journalVoucherDetails'].forEach(journalVoucher => {
+                            if (journalVoucher && journalVoucher['lineValueType'] === 'CREDIT') {
+                                creditValTotal += journalVoucher.lvLineValue;
+                            }
+                        });
+                        journalVoucher['journalVoucherDetails'].forEach(journalVoucher => {
+                            if (journalVoucher && journalVoucher['lineValueType'] === 'DEBIT') {
+                                debitValTotal += journalVoucher.lvLineValue;
+                            }
+                        });
+                    }
+                    if (creditValTotal !== debitValTotal) {
+                        this.alertService.showErrors('Debit and Credit items are not balanced in ' + journalVoucher.jvReference);
+                        postAllow = false;
+                        return;
+                    } else {
+                        i++;
+                        jvReferenceNumbers.push(journalVoucher.id);
+                    }
                 }
             });
         }
 
-        if (i > 0) {
-            this.journalVoucherService.journalVouchersUpdate({
-                'jvReferenceNumbers': jvReferenceNumbers,
-                'status': 'CHECKED'
-            }).subscribe(data => {
-                console.log('data', data);
-            });
-        } else {
-            this.alertService.showErrors('Please choose voucher to Mark as checked');
+        if (postAllow) {
+            if (i > 0) {
+                this.journalVoucherService.journalVouchersUpdate({
+                    'jvReferenceNumbers': jvReferenceNumbers,
+                    'status': 'CHECKED'
+                }).subscribe(data => {
+                    console.log('data', data);
+                });
+            } else {
+                this.alertService.showErrors('Please choose voucher to Mark as checked');
+            }
         }
     }
 

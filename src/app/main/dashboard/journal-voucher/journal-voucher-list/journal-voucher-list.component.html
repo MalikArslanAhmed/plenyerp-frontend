@@ -1,22 +1,6 @@
 <div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
-    <!--<mat-paginator #paginator
-                   [length]="totalRows$ | async"
-                   [pageIndex]="0"
-                   [pageSize]="10"
-                   [pageSizeOptions]="[5, 10, 25, 100]"
-    ></mat-paginator>-->
     <div fxLayout="row" fxLayoutAlign="end center">
-        <!--<div appPermissionBind [permission]="permissionAddJV">
-            <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addJournalVoucher()">
-                <mat-icon>add_circle</mat-icon>
-            </button>
-        </div>-->
         <div>
-            <!--<button mat-fab class="accent" id="add-button" aria-label="add salary scales"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addJournalVoucher()">
-                <mat-icon>add_circle</mat-icon>
-            </button>-->
             <button mat-raised-button (click)="markAsChecked()" class="checked-btn justify-content-end"
                     *ngIf="this.status && this.status === 'NEW'">Mark as checked
             </button>
@@ -69,6 +53,7 @@
                 <span class="mat-cell align-items-center" *ngIf="this.status === 'NEW' || this.status === 'CHECKED'">
                     <p class="text-truncate cursor-pointer mt-28px">
                         <mat-checkbox (change)="checkJV(i, $event)"
+                                      (click)="$event.stopPropagation()"
                                       [checked]="journalVoucher.checked ? true : null"></mat-checkbox>
                     </p>
                 </span>
@@ -151,26 +136,11 @@
                         <span class="display-inline" *ngIf="journalVoucher.postedTransactionDate">
                             <span>-</span>
                         </span>
-                        <!-- <span appPermissionBind [permission]="permissionEditJV">
-                            <span>
-                                <span class="material-icons f_20 cursor-pointer blueColor"
-                                    (click)="editJournalVoucher(journalVoucher)">
-                                    edit
-                                </span>
-                            </span>
-                        </span>
-                        <span appPermissionBind [permission]="permissionDeleteJV">
-                            <span>
-                                <span class="material-icons ml-7px f_20 cursor-pointer redColor">
-                                    delete
-                                </span>
-                            </span>
-                        </span> -->
                     </p>
                 </span>
             </mat-expansion-panel-header>
-            <div class="mt-23px">
-                <table class="simple invoice-table">
+            <div class="mt-23px overflow-x-scroll">
+                <table class="simple invoice-table pt-18px">
                     <thead>
                     <tr>
                         <th>S.No</th>
@@ -312,13 +282,13 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion>
-    <!--<mat-paginator #paginator *ngIf="journalVouchers.length > 0"
+    <mat-paginator #paginator *ngIf ="journalVouchers.length > 0"
                    [length]="pagination.total"
                    [pageSize]="pagination.perpage"
                    [pageIndex]="pagination.page-1"
                    (page)="pageEvent = onPageChange($event)"
     >
-    </mat-paginator>-->
+    </mat-paginator>
 </div>
 
 
