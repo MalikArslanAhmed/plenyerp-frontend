@@ -124,6 +124,28 @@
                         </mat-form-field>
                         <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
                     </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Paying Officer</mat-label>
+                            <mat-select formControlName="payingOfficerId">
+                                <mat-option value="">Paying Officer Name</mat-option>
+                                <mat-option [value]="payingOfficer.id"
+                                            *ngFor="let payingOfficer of payingOfficers">{{payingOfficer?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Financial Controller</mat-label>
+                            <mat-select formControlName="financialControllerId">
+                                <mat-option value="">Financial Controller Name</mat-option>
+                                <mat-option [value]="financialController.id"
+                                            *ngFor="let financialController of financialControllers">{{financialController?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
                 </form>
             </div>
         </div>

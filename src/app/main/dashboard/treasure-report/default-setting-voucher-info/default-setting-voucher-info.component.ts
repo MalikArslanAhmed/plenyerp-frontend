@@ -22,6 +22,8 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
     geoCodes = [];
     economicCodes = [];
     checkingOfficers = [];
+    payingOfficers = [];
+    financialControllers = [];
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -44,6 +46,8 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
             'geoCodeSegmentId': [''],
             'economicSegmentId': [''],
             'checkingOfficerId': [''],
+            'payingOfficerId': [''],
+            'financialControllerId': ['']
         });
     }
 }
