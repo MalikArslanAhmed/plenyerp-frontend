@@ -1,0 +1,118 @@
+<div class="page-layout simple left-sidebar inner-sidebar inner-scroll" id="items-list-select-component">
+    <mat-toolbar class="mat-accent m-0 items-data" matDialogTitle>
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{head}}</span>
+            <button (click)="matDialogRef.close()" aria-label="Close dialog" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div fxFlex="100" fxLayout="row" class="mt-20px">
+        <div class="margin-top-1rem" fxFlex="25">
+            <div class="center p-5px pb-56" fusePerfectScrollbar>
+                <div class="filter-title">Filter Employees by Department</div>
+                <div class="content">
+                    <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
+                        <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
+                            <button mat-icon-button disabled></button>
+                            {{node.name}}
+                            <button mat-icon-button title="Choose" (click)="setAdminSegment(node)"
+                                    *ngIf="allowType === 'BOTH' || allowType === 'CHILD'">
+                                <mat-icon class="addBtn">check_circle</mat-icon>
+                            </button>
+                        </mat-tree-node>
+                        <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
+                            <button mat-icon-button matTreeNodeToggle
+                                    [attr.aria-label]="'toggle ' + node.name">
+                                <mat-icon class="mat-icon-rtl-mirror">
+                                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                </mat-icon>
+                            </button>
+                            {{node.name}}
+                            <button mat-icon-button title="Choose" (click)="setAdminSegment(node)"
+                                    *ngIf="allowType === 'BOTH' || allowType === 'PARENT'">
+                                <mat-icon class="addBtn">check_circle</mat-icon>
+                            </button>
+                        </mat-tree-node>
+                    </mat-tree>
+                </div>
+            </div>
+        </div>
+        <div class="margin-top-1rem pl-1rem" fxFlex="74.9">
+            <div fxLayout="column" fxLayoutGap="20px">
+                <div fxFlex="100" style="padding: 1rem">
+                    <form [formGroup]="adminSegmentSearchForm">
+                        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start" fxFlex="50">
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Search</mat-label>
+                                <input matInput formControlName="search" name="search"
+                                       (keyup)="getItemsBySearch({'search': this.adminSegmentSearchForm.value.search})">
+                            </mat-form-field>
+                            <button mat-button class="save-button reset-btn" (click)="resetTransFilter()">Reset</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="p-5px">
+                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
+                        <ng-container matColumnDef="Staff ID">
+                            <mat-header-cell *matHeaderCellDef>Staff ID</mat-header-cell>
+                            <mat-cell *matCellDef="let employee">
+                                <p class="email text-truncate">
+                                    {{employee.id}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="File No">
+                            <mat-header-cell *matHeaderCellDef>File No</mat-header-cell>
+                            <mat-cell *matCellDef="let employee">
+                                <p class="email text-truncate">
+                                    {{employee.personnelFileNumber}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Employee Name">
+                            <mat-header-cell *matHeaderCellDef>Employee Name</mat-header-cell>
+                            <mat-cell *matCellDef="let employee">
+                                <p class="phone text-truncate">
+                                    {{employee.firstName}} {{employee.maidenName}} {{employee.lastName}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Action">
+                            <mat-header-cell *matHeaderCellDef>
+                                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 5px">Action</div>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let employee">
+                                <div fxFlex="row" fxLayoutAlign="end center">
+                                    <button (click)="matDialogRef.close({empData: employee, node: choosenNode})"
+                                            aria-label="Toggle star"
+                                            mat-icon-button
+                                            style="color: green">
+                                        <mat-icon class="material-icons">check_circle</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let employee; columns: displayedColumns;" class="contact"
+                                 [@animate]="{value:'*',params:{y:'100%'}}">
+                        </mat-row>
+                    </mat-table>
+                </div>
+                <div *ngIf="employees.length > 0" fxFlex="100">
+                    <mat-paginator #paginator
+                                   (page)="pageEvent = onPageChange($event)"
+                                   [length]="pagination.total"
+                                   [pageIndex]="pagination.page-1"
+                                   [pageSize]="pagination.perpage"
+                    >
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

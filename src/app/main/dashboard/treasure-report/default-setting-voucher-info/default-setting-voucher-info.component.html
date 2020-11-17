@@ -15,7 +15,7 @@
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content mt-20px p-10px">
-                <form [formGroup]="voucherInfoForm">
+                <form [formGroup]="voucherInfoForm" class="p-20px">
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
                             <mat-label>Account Head</mat-label>
@@ -25,7 +25,7 @@
                                             *ngFor="let accountHead of accountHeads">{{accountHead?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="selectAdminEmployee('Select Account Head')">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
@@ -36,10 +36,10 @@
                                             *ngFor="let subOrganisation of subOrganisations">{{subOrganisation?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="selectAdminEmployee('Sub Organisation')">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <h4>Default COA Segment Codes :</h4>
+                        <h4 class="font-bold">Default COA Segment Codes :</h4>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
@@ -50,7 +50,7 @@
                                             *ngFor="let adminSegment of adminSegments">{{adminSegment?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="adminSegmentSelect()">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
@@ -61,18 +61,21 @@
                                             *ngFor="let fundSegment of fundSegments">{{fundSegment?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="fundSegmentSelect()">Select
+                        </button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
                             <mat-label>Programme Segment (#)</mat-label>
-                            <mat-select formControlName="programmeId">
+                            <mat-select formControlName="programSegmentId">
                                 <mat-option value="">Enter Code</mat-option>
                                 <mat-option [value]="programme.id"
                                             *ngFor="let programme of programmes">{{programme?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="programmeSegmentSelect()">
+                            Select
+                        </button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
@@ -83,7 +86,7 @@
                                             *ngFor="let functionalSegment of functionalSegments">{{functionalSegment?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="functionSegmentSelect()">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
@@ -91,13 +94,13 @@
                             <mat-select formControlName="geoCodeSegmentId">
                                 <mat-option value="">Enter Code</mat-option>
                                 <mat-option [value]="geoCode.id"
-                                            *ngFor="let geoCode of geoCodes">{{geoCodes?.name}}</mat-option>
+                                            *ngFor="let geoCode of geoCodes">{{geoCode?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="geoCodeSegmentSelect()">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <h4>Economic COA for Refund of Advances/Imprest :</h4>
+                        <h4 class="font-bold">Economic COA for Refund of Advances / Imprest :</h4>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
@@ -108,10 +111,10 @@
                                             *ngFor="let economicCode of economicCodes">{{economicCode?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="economicSegmentSelect()">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <h4>Accounting Officers (File No.) :</h4>
+                        <h4 class="font-bold">Accounting Officers (File No.) :</h4>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
@@ -122,7 +125,7 @@
                                             *ngFor="let checkingOfficer of checkingOfficers">{{checkingOfficer?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="selectAdminEmployee('Select Checking Officer')">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
@@ -133,7 +136,7 @@
                                             *ngFor="let payingOfficer of payingOfficers">{{payingOfficer?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="selectAdminEmployee('Select Paying Officer')">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline">
@@ -144,7 +147,10 @@
                                             *ngFor="let financialController of financialControllers">{{financialController?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="selectAdminEmployee('Select Financial Control')">Select</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <button mat-button aria-label="Save" class="save-button" (click)="submitVoucherInfo()">Submit</button>
                     </div>
                 </form>
             </div>

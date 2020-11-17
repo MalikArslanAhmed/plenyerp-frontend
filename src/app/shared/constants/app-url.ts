@@ -1153,6 +1153,14 @@ export class AppUrl {
         }
     }
 
+    static DEFAULT_SETTING_VOUCHER_INFO(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/default-settings/` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/default-settings`;
+        }
+    }
+
     static CASHBOOK_TYPES(): string {
         return AppUrl.API_URL + `treasury/cashbook-types`;
     }

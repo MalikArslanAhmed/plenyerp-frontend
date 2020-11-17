@@ -1,6 +1,18 @@
 app-default-setting-voucher-info {
     @import "../../../../../@fuse/scss/fuse";
 
+    .font-bold {
+        font-weight: 600 !important;
+    }
+
+    .p-20px {
+        padding: 20px;
+    }
+
+    .p-24 {
+        padding: 24px;
+    }
+
     .mat-form-field-wrapper {
         width: 500px;
     }
