@@ -1,0 +1,131 @@
+<div id="cashbook" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">payment
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Voucher Info
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content mt-20px p-10px">
+                <form [formGroup]="voucherInfoForm">
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Account Head</mat-label>
+                            <mat-select formControlName="accountHeadId">
+                                <mat-option value="">Enter Code</mat-option>
+                                <mat-option [value]="accountHead.id"
+                                            *ngFor="let accountHead of accountHeads">{{accountHead?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Sub Organisation</mat-label>
+                            <mat-select formControlName="subOrganisationId">
+                                <mat-option value="">Enter Code</mat-option>
+                                <mat-option [value]="subOrganisation.id"
+                                            *ngFor="let subOrganisation of subOrganisations">{{subOrganisation?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <h4>Default COA Segment Codes :</h4>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Admin Segment (#)</mat-label>
+                            <mat-select formControlName="adminSegmentId">
+                                <mat-option value="">Enter Code</mat-option>
+                                <mat-option [value]="adminSegment.id"
+                                            *ngFor="let adminSegment of adminSegments">{{adminSegment?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Fund Segment (#)</mat-label>
+                            <mat-select formControlName="fundSegmentId">
+                                <mat-option value="">Enter Code</mat-option>
+                                <mat-option [value]="fundSegment.id"
+                                            *ngFor="let fundSegment of fundSegments">{{fundSegment?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Programme Segment (#)</mat-label>
+                            <mat-select formControlName="programmeId">
+                                <mat-option value="">Enter Code</mat-option>
+                                <mat-option [value]="programme.id"
+                                            *ngFor="let programme of programmes">{{programme?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Functional Segment</mat-label>
+                            <mat-select formControlName="functionalSegmentId">
+                                <mat-option value="">Enter Code</mat-option>
+                                <mat-option [value]="functionalSegment.id"
+                                            *ngFor="let functionalSegment of functionalSegments">{{functionalSegment?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Geo Code Segment</mat-label>
+                            <mat-select formControlName="geoCodeSegmentId">
+                                <mat-option value="">Enter Code</mat-option>
+                                <mat-option [value]="geoCode.id"
+                                            *ngFor="let geoCode of geoCodes">{{geoCodes?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <h4>Economic COA for Refund of Advances/Imprest :</h4>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Economic Codes</mat-label>
+                            <mat-select formControlName="economicSegmentId">
+                                <mat-option value="">Enter Code</mat-option>
+                                <mat-option [value]="economicCode.id"
+                                            *ngFor="let economicCode of economicCodes">{{economicCode?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <h4>Accounting Officers (File No.) :</h4>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Checking Officer</mat-label>
+                            <mat-select formControlName="checkingOfficerId">
+                                <mat-option value="">Checking Officer Name</mat-option>
+                                <mat-option [value]="checkingOfficer.id"
+                                            *ngFor="let checkingOfficer of checkingOfficers">{{checkingOfficer?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button aria-label="Save" class="save-button">Select Account Head</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -766,6 +766,16 @@ export const navigation: FuseNavigation[] = [
                 url: '/dashboard/payment-voucher',
                 permissions: []
             },
+            {
+                id: 'default-setting',
+                title: 'Default Setting (Voucher Info)',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'admin_panel_settings',
+                url: '/dashboard/default-setting-voucher-info',
+                permissions: []
+            },
         ]
     }
 ];

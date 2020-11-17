@@ -222,6 +222,7 @@ import { PaymentVoucherComponent } from './treasure-report/payment-voucher/payme
 import { PaymentVoucherCreateComponent } from './treasure-report/payment-voucher/payment-voucher-create/payment-voucher-create.component';
 import { SchedulePayeeEmployeeComponent } from './treasure-report/payment-voucher/schedule-payee-employee/schedule-payee-employee.component';
 import { SchedulePayeeCustomerComponent } from './treasure-report/payment-voucher/schedule-payee-customer/schedule-payee-customer.component';
+import { DefaultSettingVoucherInfoComponent } from './treasure-report/default-setting-voucher-info/default-setting-voucher-info.component';
 
 @NgModule({
     declarations: [
@@ -422,6 +423,7 @@ import { SchedulePayeeCustomerComponent } from './treasure-report/payment-vouche
         PaymentVoucherCreateComponent,
         SchedulePayeeEmployeeComponent,
         SchedulePayeeCustomerComponent,
+        DefaultSettingVoucherInfoComponent,
     ],
     imports: [
         CommonModule,

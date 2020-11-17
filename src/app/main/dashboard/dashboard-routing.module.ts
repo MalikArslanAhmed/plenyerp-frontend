@@ -71,6 +71,7 @@ import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.co
 import {VoucherSourceUnitComponent} from './treasure-report/voucher-source-unit/voucher-source-unit.component';
 import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
 import { PaymentVoucherComponent } from './treasure-report/payment-voucher/payment-voucher.component';
+import {DefaultSettingVoucherInfoComponent} from "./treasure-report/default-setting-voucher-info/default-setting-voucher-info.component";
 
 const routes: Routes = [
     {
@@ -700,6 +701,13 @@ const routes: Routes = [
         component: PaymentVoucherComponent,
         data: {
             title: 'Payment Voucher'
+        }
+    },
+    {
+        path: 'default-setting-voucher-info',
+        component: DefaultSettingVoucherInfoComponent,
+        data: {
+            title: 'Default Setting Voucher Info'
         }
     }
 ];
