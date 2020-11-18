@@ -7,7 +7,6 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {FuseSidebarService} from "../../../../../../@fuse/components/sidebar/sidebar.service";
 import {ActivatedRoute} from "@angular/router";
 import {AdminSegmentServices} from "../../../../../shared/services/admin-segment.services";
-import {AddCreateAdminSegmentsComponent} from "../../../admin-segments/add-create-admin-segments/add-create-admin-segments.component";
 import {EmployeesService} from "../../../../../shared/services/employees.service";
 
 interface SegmentNode {
@@ -60,6 +59,7 @@ export class AdminSegmentEmployeeSelectComponent implements OnInit {
     employees = [];
     head: any;
     allowType: any = 'BOTH';
+    nodeData = [];
 
     constructor(public matDialogRef: MatDialogRef<AdminSegmentEmployeeSelectComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -69,12 +69,11 @@ export class AdminSegmentEmployeeSelectComponent implements OnInit {
                 private adminSegmentServices: AdminSegmentServices,
                 private employeesService: EmployeesService,
                 private fb: FormBuilder) {
-        // console.log('_data', _data);
-        // console.log('aaaaaaaa', this.dataSource);
+        this.dataSource.data = TREE_DATA;
         if (_data.node) {
-            this.dataSource.data = [_data.node];
+            this.nodeData = [_data.node];
         } else {
-            this.dataSource.data = TREE_DATA;
+            this.nodeData = [];
         }
         this.head = _data.head;
         this.allowType = _data.allow;
@@ -84,7 +83,6 @@ export class AdminSegmentEmployeeSelectComponent implements OnInit {
     treeFlattener = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.children);
     dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     dialogRef: any;
-    segmentName: string;
     segmentId: number;
     levelConfig: any;
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
@@ -113,10 +111,11 @@ export class AdminSegmentEmployeeSelectComponent implements OnInit {
 
     getSegmentList() {
         this.adminSegmentServices.getAllSegments(this.segmentId).subscribe(data => {
-            this.segmentName = data.name;
-            this.levelConfig = data.levelConfig;
-            this.dataSource.data = [data];
-            console.log('sasd', this.dataSource.data);
+            if (this.nodeData && this.nodeData.length > 0) {
+                this.dataSource.data = this.nodeData;
+            } else {
+                this.dataSource.data = [data];
+            }
             this.tree.treeControl.expandAll();
         });
     }

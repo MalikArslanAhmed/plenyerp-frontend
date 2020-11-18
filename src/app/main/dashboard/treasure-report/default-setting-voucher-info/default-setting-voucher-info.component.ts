@@ -63,6 +63,7 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
             'payingOfficerId': [{value: '', disabled: true}],
             'financialControllerId': [{value: '', disabled: true}]
         });
+        this.getDefaultSettingVoucherInfo();
     }
 
     adminSegmentSelect() {
@@ -201,12 +202,10 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
             data: {head: type, allow: allowType, node: node}
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            console.log('response', response);
-            this.accounHeadNode = response['node'];
             if (!response) {
                 return;
             }
-
+            this.accounHeadNode = response['node'];
             if (type === 'Select Account Head') {
                 this.accountHeads = [{
                     'name': response['empData'].firstName + ' ' + response['empData'].lastName,
@@ -214,6 +213,15 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
                 }];
                 this.voucherInfoForm.patchValue({
                     accountHeadId: response['empData'].id,
+                    disabled: true
+                });
+            } else if (type === 'Sub Organisation') {
+                this.subOrganisations = [{
+                    'name': response['empData'].firstName + ' ' + response['empData'].lastName,
+                    'id': response['empData'].id
+                }];
+                this.voucherInfoForm.patchValue({
+                    subOrganisationId: response['empData'].id,
                     disabled: true
                 });
             } else if (type === 'Select Checking Officer') {
@@ -235,12 +243,127 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
                     disabled: true
                 });
             } else if (type === 'Select Financial Control') {
-                this.checkingOfficers = [{
+                this.financialControllers = [{
                     'name': response['empData'].firstName + ' ' + response['empData'].lastName,
                     'id': response['empData'].id
                 }];
                 this.voucherInfoForm.patchValue({
-                    checkingOfficerId: response['empData'].id,
+                    financialControllerId: response['empData'].id,
+                    disabled: true
+                });
+            }
+        });
+    }
+
+    getDefaultSettingVoucherInfo() {
+        this.defaultSettingVoucherInfoService.detail().subscribe(data => {
+            if (data.accountHead) {
+                this.accountHeads = [{
+                    'id': data.accountHead.id,
+                    'name': data.accountHead.firstName + ' ' + data.accountHead.lastName
+                }];
+                this.voucherInfoForm.patchValue({
+                    accountHeadId: data.accountHeadId,
+                    disabled: true
+                });
+            }
+            if (data.subOrganisation) {
+                this.subOrganisations = [{
+                    'id': data.subOrganisation.id,
+                    'name': data.subOrganisation.name
+                }];
+                this.voucherInfoForm.patchValue({
+                    subOrganisationId: data.subOrganisationId,
+                    disabled: true
+                });
+            }
+            if (data.adminSegment) {
+                this.adminSegments = [{
+                    'id': data.adminSegment.id,
+                    'name': data.adminSegment.name
+                }];
+                this.voucherInfoForm.patchValue({
+                    adminSegmentId: data.adminSegmentId,
+                    disabled: true
+                });
+            }
+            if (data.fundSegment) {
+                this.fundSegments = [{
+                    'id': data.fundSegment.id,
+                    'name': data.fundSegment.name
+                }];
+                this.voucherInfoForm.patchValue({
+                    fundSegmentId: data.fundSegmentId,
+                    disabled: true
+                });
+            }
+            if (data.programSegment) {
+                this.programmes = [{
+                    'id': data.programSegment.id,
+                    'name': data.programSegment.name
+                }];
+                this.voucherInfoForm.patchValue({
+                    programSegmentId: data.programSegmentId,
+                    disabled: true
+                });
+            }
+            if (data.functionalSegment) {
+                this.functionalSegments = [{
+                    'id': data.functionalSegment.id,
+                    'name': data.functionalSegment.name
+                }];
+                this.voucherInfoForm.patchValue({
+                    functionalSegmentId: data.functionalSegmentId,
+                    disabled: true
+                });
+            }
+            if (data.geoCodeSegment) {
+                this.geoCodes = [{
+                    'id': data.geoCodeSegment.id,
+                    'name': data.geoCodeSegment.name
+                }];
+                this.voucherInfoForm.patchValue({
+                    geoCodeSegmentId: data.geoCodeSegmentId,
+                    disabled: true
+                });
+            }
+            if (data.economicSegment) {
+                this.economicCodes = [{
+                    'id': data.economicSegment.id,
+                    'name': data.economicSegment.name
+                }];
+                this.voucherInfoForm.patchValue({
+                    economicSegmentId: data.economicSegmentId,
+                    disabled: true
+                });
+            }
+            if (data.checkingOfficer) {
+                this.checkingOfficers = [{
+                    'id': data.checkingOfficer.id,
+                    'name': data.checkingOfficer.firstName + ' ' + data.checkingOfficer.lastName
+                }];
+                this.voucherInfoForm.patchValue({
+                    checkingOfficerId: data.checkingOfficerId,
+                    disabled: true
+                });
+            }
+            if (data.payingOfficer) {
+                this.payingOfficers = [{
+                    'id': data.payingOfficer.id,
+                    'name': data.payingOfficer.firstName + ' ' + data.payingOfficer.lastName
+                }];
+                this.voucherInfoForm.patchValue({
+                    payingOfficerId: data.payingOfficerId,
+                    disabled: true
+                });
+            }
+            if (data.financialController) {
+                this.financialControllers = [{
+                    'id': data.financialController.id,
+                    'name': data.financialController.firstName + ' ' + data.financialController.lastName
+                }];
+                this.voucherInfoForm.patchValue({
+                    financialControllerId: data.financialControllerId,
                     disabled: true
                 });
             }
@@ -249,20 +372,11 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
 
     submitVoucherInfo() {
         this.isSubmitted = true;
-        console.log('this.voucherInfoForm', this.voucherInfoForm.value);
-        /*if (!this.voucherInfoForm.valid) {
-            console.log('aaaaaa');
-            this.isSubmitted = false;
-            return;
-        }*/
-
         if (this.isSubmitted) {
-            // this.cashbookAccountForm.value['cashbookMonthly'] = this.cashbookMonthly;
-            console.log('this.cashbookAccountForm', this.voucherInfoForm.value);
             this.defaultSettingVoucherInfoService.save(this.voucherInfoForm.value).subscribe(data => {
                 this.voucherInfoForm.reset();
-                // this.matDialogRef.close(this.cashbookAccountForm);
                 this.isSubmitted = false;
+                this.getDefaultSettingVoucherInfo();
             });
         }
     }

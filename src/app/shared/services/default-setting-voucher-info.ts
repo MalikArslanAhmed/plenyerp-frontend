@@ -22,6 +22,10 @@ export class DefaultSettingVoucherInfoService extends BaseService {
         return this.getRequest(AppUrl.DEFAULT_SETTING_VOUCHER_INFO(), data);
     }
 
+    detail(): Observable<any> {
+        return this.getRequest(AppUrl.DEFAULT_SETTING_VOUCHER_INFO());
+    }
+
     delete(id): Observable<any> {
         return this.deleteRequest(AppUrl.DEFAULT_SETTING_VOUCHER_INFO(id));
     }
