@@ -14,20 +14,20 @@ export class TreasureReportService extends BaseService {
         super(http, alertService, globalService);
     }
 
-    addVoucherSourceUnits(data): Observable<any> {
-        return this.postRequest(AppUrl.GET_VOUCHER_SOURCE_UNIT_LIST(), data);
+    save(data): Observable<any> {
+        return this.postRequest(AppUrl.GET_VOUCHER_SOURCE_UNIT(), data);
     }
 
-    voucherSourceUnitList(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_VOUCHER_SOURCE_UNIT_LIST(), data);
+    list(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_VOUCHER_SOURCE_UNIT(), data);
     }
 
-    deleteRoles(id): Observable<any> {
-        return this.deleteRequest(AppUrl.GET_VOUCHER_SOURCE_UNIT_LIST(id));
+    delete(id): Observable<any> {
+        return this.deleteRequest(AppUrl.GET_VOUCHER_SOURCE_UNIT(id));
     }
 
-    updateVoucherSourceUnits(id, data): Observable<any> {
-        return this.putRequest(AppUrl.GET_VOUCHER_SOURCE_UNIT_LIST(id), data);
+    update(id, data): Observable<any> {
+        return this.putRequest(AppUrl.GET_VOUCHER_SOURCE_UNIT(id), data);
     }
 
 }

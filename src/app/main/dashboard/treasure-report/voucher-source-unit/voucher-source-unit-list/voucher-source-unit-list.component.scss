@@ -1,6 +1,5 @@
-@import "../../../../../../@fuse/scss/fuse";
-
-.userRole-list {
+app-voucher-source-unit-list {
+    @import "../../../../../../@fuse/scss/fuse";
     display: flex;
     flex: 1 1 auto;
     width: 100%;
@@ -42,8 +41,8 @@
             }
         }
     }
-}
 
-.blueColor {
-    color: blue;
+    .blueColor {
+        color: blue;
+    }
 }

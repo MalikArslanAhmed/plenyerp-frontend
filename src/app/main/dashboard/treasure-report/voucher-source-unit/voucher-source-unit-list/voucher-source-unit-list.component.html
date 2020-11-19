@@ -1,6 +1,6 @@
 <div class="voucherSource-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
     <mat-table [@animateStagger]="{value:'50'}" [dataSource]="voucherSourceUnitList">
-        <ng-container matColumnDef="s_no">
+        <ng-container matColumnDef="sNo">
             <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
             <mat-cell *matCellDef="let voucherSource">
                 <p class="email text-truncate">
@@ -13,7 +13,7 @@
             <mat-header-cell *matHeaderCellDef>Ref. No.</mat-header-cell>
             <mat-cell *matCellDef="let voucherSource" class="cursor-pointer">
                 <p class="phone text-truncate cursor-pointer">
-                    {{voucherSource?.refNo}}
+                    {{voucherSource?.id}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -22,7 +22,7 @@
             <mat-header-cell *matHeaderCellDef>Long Name</mat-header-cell>
             <mat-cell *matCellDef="let voucherSource" class="cursor-pointer">
                 <p class="phone text-truncate cursor-pointer">
-                    {{voucherSource?.long_name}}
+                    {{voucherSource?.longName}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -31,7 +31,7 @@
             <mat-header-cell *matHeaderCellDef>Short Name</mat-header-cell>
             <mat-cell *matCellDef="let voucherSource" class="cursor-pointer">
                 <p class="phone text-truncate cursor-pointer">
-                    {{voucherSource?.short_name}}
+                    {{voucherSource?.shortName}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -39,8 +39,8 @@
         <ng-container matColumnDef="next_pv_index_no">
             <mat-header-cell *matHeaderCellDef>Next PV Index No.</mat-header-cell>
             <mat-cell *matCellDef="let voucherSource" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{voucherSource?.next_pv_index_no}}
+                <p class="phone text-truncate cursor-pointer" style="margin-left: 10px">
+                    {{voucherSource?.nextPvIndexNumber}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -48,8 +48,8 @@
         <ng-container matColumnDef="next_rv_index_no">
             <mat-header-cell *matHeaderCellDef>Next RV Index No.</mat-header-cell>
             <mat-cell *matCellDef="let voucherSource" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{voucherSource?.next_rv_index_no}}
+                <p class="phone text-truncate cursor-pointer" style="margin-left: 10px">
+                    {{voucherSource?.nextRvIndexNumber}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -59,19 +59,15 @@
                 <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Editable</div>
             </mat-header-cell>
             <mat-cell *matCellDef="let voucherSource">
-                <div fxFlex="row" fxLayoutAlign="center center">
-                    <div>
-                        <button mat-icon-button aria-label="Toggle star" (click)="editVoucherSourceUnit(voucherSource)"
-                                style="color: blue; margin-left: 1rem">
-                            <mat-icon class="material-icons">edit</mat-icon>
-                        </button>
-                    </div>
-<!--                    <div>-->
-<!--                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModel(voucherSource)"-->
-<!--                                style="color: red">-->
-<!--                            <mat-icon class="material-icons">delete</mat-icon>-->
-<!--                        </button>-->
-<!--                    </div>-->
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-icon-button aria-label="Toggle star"
+                            style="color: #e0e0e0; margin-right: 20px" *ngIf="!voucherSource.isEditable">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star" (click)="editVoucherSourceUnit(voucherSource)"
+                            style="color: blue; margin-right: 20px" *ngIf="voucherSource.isEditable">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
                 </div>
             </mat-cell>
         </ng-container>
@@ -81,7 +77,7 @@
                  [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
-    <mat-paginator #paginator *ngIf ="voucherSourceUnitList.length > 0"
+    <mat-paginator #paginator *ngIf="voucherSourceUnitList.length > 0"
                    [length]="pagination.total"
                    [pageSize]="pagination.perpage"
                    [pageIndex]="pagination.page-1"

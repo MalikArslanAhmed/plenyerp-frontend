@@ -1135,12 +1135,11 @@ export class AppUrl {
         return AppUrl.API_URL + 'finance/monthly-activity'
     }
 
-    // voucher source unit
-    static GET_VOUCHER_SOURCE_UNIT_LIST(id?): string {
+    static GET_VOUCHER_SOURCE_UNIT(id?): string {
         if (id) {
-            return AppUrl.API_URL + `dummy/` + id;
+            return AppUrl.API_URL + `treasury/source-units/` + id;
         } else {
-            return AppUrl.API_URL + `dummy`;
+            return AppUrl.API_URL + `treasury/source-units`;
         }
 
     }

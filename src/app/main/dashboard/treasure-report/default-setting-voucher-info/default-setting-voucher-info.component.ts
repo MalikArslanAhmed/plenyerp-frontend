@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {FuseSidebarService} from "../../../../../@fuse/components/sidebar/sidebar.service";
 import {MatDialog} from "@angular/material/dialog";

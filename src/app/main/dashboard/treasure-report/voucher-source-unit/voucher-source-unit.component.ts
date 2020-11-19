@@ -17,9 +17,8 @@ import {PermissionConstant} from 'app/shared/constants/permission-constant';
 export class VoucherSourceUnitComponent implements OnInit {
     dialogRef: any;
     searchVoucherSourceForm: FormGroup;
-    @ViewChild(VoucherSourceUnitListComponent) getUserRoleList: VoucherSourceUnitListComponent;
-
     permissionAddRoles = [PermissionConstant.ROLES_ADD];
+    @ViewChild(VoucherSourceUnitListComponent) getUserRoleList: VoucherSourceUnitListComponent;
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -33,7 +32,7 @@ export class VoucherSourceUnitComponent implements OnInit {
 
     refresh() {
         this.searchVoucherSourceForm = this.fb.group({
-            'searchVoucherSource': [''],
+            'search': [''],
         });
     }
 
@@ -46,11 +45,11 @@ export class VoucherSourceUnitComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getUserRoleList.getVoucherSourceUnitList();
+            this.getUserRoleList.getVoucherSourceUnitList(this.searchVoucherSourceForm.value);
         });
     }
 
     search() {
-
+        this.getUserRoleList.getVoucherSourceUnitList(this.searchVoucherSourceForm.value);
     }
 }
