@@ -440,8 +440,6 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
                 return;
             }
 
-            console.log('params', params);
-
             this.journalVoucherService.updateDetails(this.journalVoucherId, this.updateData.id, params).subscribe(data => {
                 this.addDetailForm.reset();
                 this.isSubmitted = false;

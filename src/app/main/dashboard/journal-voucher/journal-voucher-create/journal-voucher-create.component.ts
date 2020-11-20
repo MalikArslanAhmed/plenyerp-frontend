@@ -369,8 +369,6 @@ export class JournalVoucherCreateComponent implements OnInit {
                 return;
             }
         }
-
-        console.log('params', params);
         this.jvDetail.push(params);
         this.addDetails = false;
         this.addDetailForm.reset();
