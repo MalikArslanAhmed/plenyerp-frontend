@@ -1,8 +1,8 @@
 app-cashbook-create {
     #cashbook-items {
-        max-width: 800px !important;
+        max-width: 1100px !important;
         overflow-x: unset !important;
-        min-width: 800px !important;
+        min-width: 1100px !important;
     }
 
     .items-data {
@@ -42,7 +42,7 @@ app-cashbook-create {
 
     .main-cashbook-month {
         .mat-form-field {
-            width: 150px !important;
+            width: 250px !important;
         }
     }
 
@@ -57,5 +57,9 @@ app-cashbook-create {
 
     .width-50-per {
         width: 50%;
+    }
+
+    .width-33_33-per {
+        width: 33.33%;
     }
 }

@@ -190,6 +190,7 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
             if (!response) {
                 return;
             }
+            this.accounHeadNode = response;
             this.accountHeads = [{
                 'name': response.name,
                 'id': response.id

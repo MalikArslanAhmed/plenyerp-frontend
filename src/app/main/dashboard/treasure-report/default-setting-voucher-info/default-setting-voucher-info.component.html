@@ -17,7 +17,7 @@
             <div class="content mt-20px p-10px">
                 <form [formGroup]="voucherInfoForm" class="p-20px">
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="selectAdminAccountHead()">
                             <mat-label>Account Head</mat-label>
                             <mat-select formControlName="accountHeadId">
                                 <mat-option value="">Enter Code</mat-option>
@@ -28,7 +28,7 @@
                         <button mat-button aria-label="Save" class="save-button" (click)="selectAdminAccountHead()">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="selectAdminEmployee('Sub Organisation')">
                             <mat-label>Sub Organisation</mat-label>
                             <mat-select formControlName="subOrganisationId">
                                 <mat-option value="">Enter Code</mat-option>
@@ -42,7 +42,7 @@
                         <h4 class="font-bold">Default COA Segment Codes :</h4>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="adminSegmentSelect()">
                             <mat-label>Admin Segment (#)</mat-label>
                             <mat-select formControlName="adminSegmentId">
                                 <mat-option value="">Enter Code</mat-option>
@@ -53,7 +53,7 @@
                         <button mat-button aria-label="Save" class="save-button" (click)="adminSegmentSelect()">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="fundSegmentSelect()">
                             <mat-label>Fund Segment (#)</mat-label>
                             <mat-select formControlName="fundSegmentId">
                                 <mat-option value="">Enter Code</mat-option>
@@ -65,7 +65,7 @@
                         </button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="programmeSegmentSelect()">
                             <mat-label>Programme Segment (#)</mat-label>
                             <mat-select formControlName="programSegmentId">
                                 <mat-option value="">Enter Code</mat-option>
@@ -78,7 +78,7 @@
                         </button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="functionSegmentSelect()">
                             <mat-label>Functional Segment</mat-label>
                             <mat-select formControlName="functionalSegmentId">
                                 <mat-option value="">Enter Code</mat-option>
@@ -89,7 +89,7 @@
                         <button mat-button aria-label="Save" class="save-button" (click)="functionSegmentSelect()">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="geoCodeSegmentSelect()">
                             <mat-label>Geo Code Segment</mat-label>
                             <mat-select formControlName="geoCodeSegmentId">
                                 <mat-option value="">Enter Code</mat-option>
@@ -103,7 +103,7 @@
                         <h4 class="font-bold">Economic COA for Refund of Advances / Imprest :</h4>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="economicSegmentSelect()">
                             <mat-label>Economic Codes</mat-label>
                             <mat-select formControlName="economicSegmentId">
                                 <mat-option value="">Enter Code</mat-option>
@@ -117,7 +117,7 @@
                         <h4 class="font-bold">Accounting Officers (File No.) :</h4>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="selectAdminEmployee('Select Checking Officer')">
                             <mat-label>Checking Officer</mat-label>
                             <mat-select formControlName="checkingOfficerId">
                                 <mat-option value="">Checking Officer Name</mat-option>
@@ -128,7 +128,7 @@
                         <button mat-button aria-label="Save" class="save-button" (click)="selectAdminEmployee('Select Checking Officer')">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="selectAdminEmployee('Select Paying Officer')">
                             <mat-label>Paying Officer</mat-label>
                             <mat-select formControlName="payingOfficerId">
                                 <mat-option value="">Paying Officer Name</mat-option>
@@ -139,7 +139,7 @@
                         <button mat-button aria-label="Save" class="save-button" (click)="selectAdminEmployee('Select Paying Officer')">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" (click)="selectAdminEmployee('Select Financial Control')">
                             <mat-label>Financial Controller</mat-label>
                             <mat-select formControlName="financialControllerId">
                                 <mat-option value="">Financial Controller Name</mat-option>

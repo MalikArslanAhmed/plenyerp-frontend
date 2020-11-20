@@ -80,7 +80,7 @@ export class CashbookCreateComponent implements OnInit {
             bankId: [''],
             bankBranchId: [''],
             currencyId: [''],
-            bankEMandate: [''],
+            typeOfAccount: [''],
             month_1: [''],
             month_2: [''],
             month_3: [''],
@@ -143,7 +143,7 @@ export class CashbookCreateComponent implements OnInit {
                 'bankBranchId': this.updateData['cashbook'] && this.updateData['cashbook'].bankBranchId ? this.updateData['cashbook'].bankBranchId : '',
                 'title': this.updateData['cashbook'] && this.updateData['cashbook'].title ? this.updateData['cashbook'].title : '',
                 'currencyId': this.updateData['cashbook'] && this.updateData['cashbook'].currencyId ? this.updateData['cashbook'].currencyId : '',
-                'bankEMandate': this.updateData['cashbook'] && this.updateData['cashbook'].bankEMandate ? this.updateData['cashbook'].bankEMandate : '',
+                'typeOfAccount': this.updateData['cashbook'] && this.updateData['cashbook'].typeOfAccount ? this.updateData['cashbook'].typeOfAccount : '',
             });
 
             if (this.updateData['cashbook']['cashbookMonthlyBalances'] && this.updateData['cashbook']['cashbookMonthlyBalances'].length > 0) {
@@ -271,7 +271,7 @@ export class CashbookCreateComponent implements OnInit {
                 economicSegmentId: response.id,
                 economicSegmentCode: response.id,
                 fullCode: response.combinedCode,
-                cashbookTitle: response.combinedCode + ' - ' + response.name,
+                cashbookTitle: response.name,
                 disabled: true
             });
         });
@@ -290,7 +290,7 @@ export class CashbookCreateComponent implements OnInit {
                 });
             }
         }
-        console.log('this.cashbookMonthly', this.cashbookMonthly);
+        // console.log('this.cashbookMonthly', this.cashbookMonthly);
         this.alertService.showSuccess({title: 'Success', message: 'Bank balance and Other details Added ..!'});
     }
 

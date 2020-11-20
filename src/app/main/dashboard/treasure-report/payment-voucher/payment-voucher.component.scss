@@ -251,4 +251,8 @@ app-payment-voucher {
     .mt--20px {
         margin-top: -20px;
     }
+
+    .mat-tab-group-dynamic-height .mat-tab-body-content {
+        overflow-x: scroll;
+    }
 }
