@@ -12,6 +12,7 @@ import {AdminSegmentSelectComponent} from "../../journal-voucher/admin-segment-s
 import {AdminSegmentEmployeeSelectComponent} from './admin-segment-employee-select/admin-segment-employee-select.component';
 import {AlertService} from "../../../../shared/services/alert.service";
 import {DefaultSettingVoucherInfoService} from "../../../../shared/services/default-setting-voucher-info";
+import {AdminSegmentSelectAccountHeadComponent} from './admin-segment-select-account-head/admin-segment-select-account-head.component';
 
 @Component({
     selector: 'app-default-setting-voucher-info',
@@ -180,6 +181,26 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
         });
     }
 
+    selectAdminAccountHead() {
+        this.dialogRef = this._matDialog.open(AdminSegmentSelectAccountHeadComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            // console.log('response', response);
+            if (!response) {
+                return;
+            }
+            this.accountHeads = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.voucherInfoForm.patchValue({
+                accountHeadId: response.id,
+                disabled: true
+            });
+        });
+    }
+
     selectAdminEmployee(type) {
         let allowType: any = 'BOTH';
         let node: any = undefined;
@@ -259,8 +280,8 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
         this.defaultSettingVoucherInfoService.detail().subscribe(data => {
             if (data.accountHead) {
                 this.accountHeads = [{
-                    'id': data.accountHead.id,
-                    'name': data.accountHead.firstName + ' ' + data.accountHead.lastName
+                    'name': data.accountHead.name,
+                    'id': data.accountHead.id
                 }];
                 this.voucherInfoForm.patchValue({
                     accountHeadId: data.accountHeadId,
