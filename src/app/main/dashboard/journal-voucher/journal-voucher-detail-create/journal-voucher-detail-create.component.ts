@@ -363,9 +363,15 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
         if (this.addDetailForm.value.xRateLocal && this.addDetailForm.value.lineValue) {
             let value = parseFloat(this.addDetailForm.value.lineValue) * parseFloat(this.addDetailForm.value.xRateLocal);
             let lvArr = value.toString().split('.');
-            this.addDetailForm.patchValue({
-                'lvLineValue': lvArr[0] + '.' + lvArr[1].substring(0, 2)
-            });
+            if (lvArr && lvArr[1]) {
+                this.addDetailForm.patchValue({
+                    'lvLineValue': lvArr[0] + '.' + lvArr[1].substring(0, 2)
+                });
+            } else {
+                this.addDetailForm.patchValue({
+                    'lvLineValue': lvArr[0]
+                });
+            }
         }
     }
 
