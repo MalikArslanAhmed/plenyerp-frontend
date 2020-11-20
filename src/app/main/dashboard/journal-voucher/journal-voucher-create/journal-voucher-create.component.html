@@ -26,7 +26,8 @@
                 <mat-grid-tile>
                     <mat-form-field appearance="outline" fxFlex>
                         <mat-label>JV Value Date</mat-label>
-                        <input matInput [matDatepicker]="jvValueDate" (click)="jvValueDate.open()" (focus)="jvValueDate.open()"
+                        <input matInput [matDatepicker]="jvValueDate" (click)="jvValueDate.open()"
+                               (focus)="jvValueDate.open()"
                                formControlName="jvValueDate">
                         <mat-datepicker-toggle matSuffix
                                                [for]="jvValueDate"></mat-datepicker-toggle>
@@ -71,7 +72,8 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Value Date</mat-label>
-                                <input matInput [matDatepicker]="preparedValueDate" (click)="preparedValueDate.open()" (focus)="preparedValueDate.open()"
+                                <input matInput [matDatepicker]="preparedValueDate" (click)="preparedValueDate.open()"
+                                       (focus)="preparedValueDate.open()"
                                        formControlName="preparedValueDate">
                                 <mat-datepicker-toggle matSuffix
                                                        [for]="preparedValueDate"></mat-datepicker-toggle>
@@ -81,7 +83,8 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Trxn Date:</mat-label>
-                                <input matInput [matDatepicker]="preparedTrxnDate" (click)="preparedTrxnDate.open()" (focus)="preparedTrxnDate.open()"
+                                <input matInput [matDatepicker]="preparedTrxnDate" (click)="preparedTrxnDate.open()"
+                                       (focus)="preparedTrxnDate.open()"
                                        formControlName="preparedTransactionDate">
                                 <mat-datepicker-toggle matSuffix
                                                        [for]="preparedTrxnDate"></mat-datepicker-toggle>
@@ -107,7 +110,8 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Value Date</mat-label>
-                                <input matInput [matDatepicker]="checkedValueDate" (click)="checkedValueDate.open()" (focus)="checkedValueDate.open()"
+                                <input matInput [matDatepicker]="checkedValueDate" (click)="checkedValueDate.open()"
+                                       (focus)="checkedValueDate.open()"
                                        formControlName="checkedValueDate">
                                 <mat-datepicker-toggle matSuffix
                                                        [for]="checkedValueDate"></mat-datepicker-toggle>
@@ -117,7 +121,8 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Trxn Date:</mat-label>
-                                <input matInput [matDatepicker]="checkedTransactionDate" (click)="checkedTransactionDate.open()" (focus)="checkedTransactionDate.open()"
+                                <input matInput [matDatepicker]="checkedTransactionDate"
+                                       (click)="checkedTransactionDate.open()" (focus)="checkedTransactionDate.open()"
                                        formControlName="checkedTransactionDate">
                                 <mat-datepicker-toggle matSuffix
                                                        [for]="checkedTransactionDate"></mat-datepicker-toggle>
@@ -143,7 +148,8 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Value Date</mat-label>
-                                <input matInput [matDatepicker]="postedValueDate" (click)="postedValueDate.open()" (focus)="postedValueDate.open()"
+                                <input matInput [matDatepicker]="postedValueDate" (click)="postedValueDate.open()"
+                                       (focus)="postedValueDate.open()"
                                        formControlName="postedValueDate">
                                 <mat-datepicker-toggle matSuffix
                                                        [for]="postedValueDate"></mat-datepicker-toggle>
@@ -153,7 +159,8 @@
                         <mat-grid-tile>
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Trxn Date:</mat-label>
-                                <input matInput [matDatepicker]="postedTrxnDate" (click)="postedTrxnDate.open()" (focus)="postedTrxnDate.open()"
+                                <input matInput [matDatepicker]="postedTrxnDate" (click)="postedTrxnDate.open()"
+                                       (focus)="postedTrxnDate.open()"
                                        formControlName="postedTransactionDate">
                                 <mat-datepicker-toggle matSuffix
                                                        [for]="postedTrxnDate"></mat-datepicker-toggle>
@@ -300,10 +307,19 @@
             <mat-tab label="ADD JV MAIN DETAILS">
                 <form [formGroup]="addDetailForm">
                     <mat-grid-list cols="5" rowHeight="90px">
-                        <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <!--<mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Line No.</mat-label>
                                 <input formControlName="lineValue" matInput>
+                            </mat-form-field>
+                        </mat-grid-tile>-->
+                        <mat-grid-tile [colspan]="2" [rowspan]="1">
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Transaction Currency</mat-label>
+                                <mat-select formControlName="currency">
+                                    <mat-option [value]="currency.codeCurrency"
+                                                *ngFor="let currency of currencies">{{currency?.singularCurrencyName}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -326,13 +342,16 @@
                         </mat-grid-tile>
                     </mat-grid-list>
                     <mat-grid-list cols="5" rowHeight="90px">
-                        <mat-grid-tile [colspan]="2" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Original Transaction Currency</mat-label>
-                                <mat-select formControlName="currency">
-                                    <mat-option [value]="currency.codeCurrency"
-                                                *ngFor="let currency of currencies">{{currency?.singularCurrencyName}}</mat-option>
-                                </mat-select>
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>X.Rate Local to {{localCurrency}}</mat-label>
+                                <input formControlName="xRateLocal" matInput type="number" (change)="addLineValue()">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Official bank X.Rate to USD</mat-label>
+                                <input formControlName="bankXRateToUsd" matInput type="number">
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -355,16 +374,10 @@
                         </mat-grid-tile>
                     </mat-grid-list>
                     <mat-grid-list cols="5" rowHeight="90px">
-                        <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>X.Rate Local to Naira</mat-label>
-                                <input formControlName="xRateLocal" matInput type="number">
-                            </mat-form-field>
-                        </mat-grid-tile>
-                        <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Official bank X.Rate to USD</mat-label>
-                                <input formControlName="bankXRateToUsd" matInput type="number">
+                                <mat-label>Account Name / Line Details</mat-label>
+                                <input formControlName="accountName" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -387,8 +400,8 @@
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Account Name / Line Details</mat-label>
-                                <input formControlName="accountName" matInput>
+                                <mat-label>Line Refrence</mat-label>
+                                <input formControlName="lineReference" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -413,8 +426,9 @@
                     <mat-grid-list cols="5" rowHeight="90px">
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Line Refrence</mat-label>
-                                <input formControlName="lineReference" matInput>
+                                <mat-label>Line Value (in Trxn Currency)</mat-label>
+                                <input formControlName="lineValue" matInput type="number"
+                                       (change)="addLineValue()"/>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -437,12 +451,7 @@
                         </mat-grid-tile>
                     </mat-grid-list>
                     <mat-grid-list cols="5" rowHeight="90px">
-                        <mat-grid-tile [colspan]="2" [rowspan]="1">
-                            <mat-form-field appearance="outline" fxFlex>
-                                <mat-label>Line Value (in Trxn Currency)</mat-label>
-                                <input formControlName="lvLineValue" matInput type="number" (change)="addLineValue($event)"/>
-                            </mat-form-field>
-                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2" [rowspan]="1"></mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
                             <h5>Geo Code Segment:</h5>
                         </mat-grid-tile>
@@ -466,7 +475,7 @@
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
-                            <h5>LV Line Value (Naira):</h5>
+                            <h5>JV Line Value ({{localCurrency}}):</h5>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
                             <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
@@ -483,7 +492,7 @@
                         <mat-grid-tile [colspan]="1" [rowspan]="1">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Enter Debit Credit Line Value</mat-label>
-                                <input formControlName="creditDebitValue" matInput>
+                                <input formControlName="lvLineValue" matInput>
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>

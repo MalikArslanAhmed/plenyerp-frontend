@@ -14,6 +14,7 @@ import {JournalVoucherService} from "../../../../shared/services/journal-voucher
 import {CurrencyService} from "../../../../shared/services/currency.service";
 import {BalanceAmountModelComponent} from '../balance-amount-model/balance-amount-model.component';
 import {AlertService} from "../../../../shared/services/alert.service";
+import {CompanyInformationService} from "../../../../shared/services/company-information.service";
 
 @Component({
     selector: 'app-journal-voucher-create',
@@ -42,6 +43,8 @@ export class JournalVoucherCreateComponent implements OnInit {
     jvDetail = [];
     user: any;
     currentDate: any = moment(new Date()).format('YYYY-MM-DD');
+    localCurrency: any;
+    internationalCurrency: any;
 
     constructor(public matDialogRef: MatDialogRef<JournalVoucherCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -50,7 +53,8 @@ export class JournalVoucherCreateComponent implements OnInit {
                 private globalService: GlobalService,
                 private journalVoucherService: JournalVoucherService,
                 private currencyService: CurrencyService,
-                private alertService: AlertService) {
+                private alertService: AlertService,
+                private companyInformationService: CompanyInformationService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit New Journal Voucher';
@@ -65,6 +69,7 @@ export class JournalVoucherCreateComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.getCurrencies();
+        this.getCompanySetting();
     }
 
     refresh() {
@@ -112,8 +117,7 @@ export class JournalVoucherCreateComponent implements OnInit {
             'geoCodeSegmentCode': [{value: '', disabled: true}],
             'geoCodeSegmentId': [''],
             'lineValueType': ['DEBIT'],
-            'lvLineValue': [''],
-            'creditDebitValue': [{value: '', disabled: true}]
+            'lvLineValue': [{value: '', disabled: true}]
         });
     }
 
@@ -157,7 +161,6 @@ export class JournalVoucherCreateComponent implements OnInit {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            // console.log('response', response);
             if (!response) {
                 return;
             }
@@ -278,29 +281,34 @@ export class JournalVoucherCreateComponent implements OnInit {
         });
     }
 
-    addLineValue(event) {
-        this.addDetailForm.patchValue({
-            'creditDebitValue': event.target.value
-        });
+    addLineValue() {
+        if (this.addDetailForm.value.xRateLocal && this.addDetailForm.value.lineValue) {
+            let value = parseFloat(this.addDetailForm.value.lineValue) * parseFloat(this.addDetailForm.value.xRateLocal);
+            let lvArr = value.toString().split('.');
+            this.addDetailForm.patchValue({
+                'lvLineValue': lvArr[0] + '.' + lvArr[1].substring(0, 2)
+            });
+        }
     }
 
     addDetail() {
+        let rawData = this.addDetailForm.getRawValue();
         const params = {
-            'lineValue': this.addDetailForm.value.lineValue ? this.addDetailForm.value.lineValue : '',
-            'adminSegmentId': this.addDetailForm.value.adminSegmentId ? this.addDetailForm.value.adminSegmentId : '',
-            'currency': this.addDetailForm.value.currency ? this.addDetailForm.value.currency : '',
-            'fundSegmentId': this.addDetailForm.value.fundSegmentId ? this.addDetailForm.value.fundSegmentId : '',
-            'xRateLocal': this.addDetailForm.value.xRateLocal ? parseFloat(this.addDetailForm.value.xRateLocal) : 0,
-            'bankXRateToUsd': this.addDetailForm.value.bankXRateToUsd ? parseFloat(this.addDetailForm.value.bankXRateToUsd) : 0,
-            'economicSegmentId': this.addDetailForm.value.economicSegmentId ? this.addDetailForm.value.economicSegmentId : '',
-            'accountName': this.addDetailForm.value.accountName ? this.addDetailForm.value.accountName : '',
-            'programmeSegmentId': this.addDetailForm.value.programmeSegmentId ? this.addDetailForm.value.programmeSegmentId : '',
-            'lineReference': this.addDetailForm.value.lineReference ? this.addDetailForm.value.lineReference : '',
-            'functionalSegmentCode': this.addDetailForm.value.functionalSegmentCode ? this.addDetailForm.value.functionalSegmentCode : '',
-            'functionalSegmentId': this.addDetailForm.value.functionalSegmentId ? this.addDetailForm.value.functionalSegmentId : '',
-            'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
-            'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
-            'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
+            'lineValue': rawData.lineValue ? rawData.lineValue : '',
+            'adminSegmentId': rawData.adminSegmentId ? rawData.adminSegmentId : '',
+            'currency': rawData.currency ? rawData.currency : '',
+            'fundSegmentId': rawData.fundSegmentId ? rawData.fundSegmentId : '',
+            'xRateLocal': rawData.xRateLocal ? parseFloat(rawData.xRateLocal) : 0,
+            'bankXRateToUsd': rawData.bankXRateToUsd ? parseFloat(rawData.bankXRateToUsd) : 0,
+            'economicSegmentId': rawData.economicSegmentId ? rawData.economicSegmentId : '',
+            'accountName': rawData.accountName ? rawData.accountName : '',
+            'programmeSegmentId': rawData.programmeSegmentId ? rawData.programmeSegmentId : '',
+            'lineReference': rawData.lineReference ? rawData.lineReference : '',
+            'functionalSegmentCode': rawData.functionalSegmentCode ? rawData.functionalSegmentCode : '',
+            'functionalSegmentId': rawData.functionalSegmentId ? rawData.functionalSegmentId : '',
+            'geoCodeSegmentId': rawData.geoCodeSegmentId ? rawData.geoCodeSegmentId : '',
+            'lineValueType': rawData.lineValueType ? rawData.lineValueType : '',
+            'lvLineValue': rawData.lvLineValue ? rawData.lvLineValue : '',
             'adminSegmentName': this.adminSegments[0] && this.adminSegments[0].name ? this.adminSegments[0].name : '',
             'fundSegmentName': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].name ? this.fundSegmentsAddDet[0].name : '',
             'economicSegmentName': this.economicSegments[0] && this.economicSegments[0].name ? this.economicSegments[0].name : '',
@@ -312,7 +320,8 @@ export class JournalVoucherCreateComponent implements OnInit {
             'economicSegmentCode': this.economicSegments[0] && this.economicSegments[0].id ? this.economicSegments[0].id : '',
             'programmeSegmentCode': this.programmeSegments[0] && this.programmeSegments[0].id ? this.programmeSegments[0].id : '',
             'functionSegmentCode': this.functionSegments[0] && this.functionSegments[0].id ? this.functionSegments[0].id : '',
-            'geoCodeSegmentCode': this.geoCodeSegments[0] && this.geoCodeSegments[0].id ? this.geoCodeSegments[0].id : ''
+            'geoCodeSegmentCode': this.geoCodeSegments[0] && this.geoCodeSegments[0].id ? this.geoCodeSegments[0].id : '',
+            'localCurrency': this.localCurrency ? this.localCurrency : ''
         };
 
         if (params['lineValue'] === '') {
@@ -361,6 +370,7 @@ export class JournalVoucherCreateComponent implements OnInit {
             }
         }
 
+        console.log('params', params);
         this.jvDetail.push(params);
         this.addDetails = false;
         this.addDetailForm.reset();
@@ -457,5 +467,12 @@ export class JournalVoucherCreateComponent implements OnInit {
                 this.matDialogRef.close(this.journalVoucherCreateForm);
             });
         }
+    }
+
+    getCompanySetting() {
+        this.companyInformationService.getCompanySetting().subscribe(data => {
+            this.localCurrency = data['items'][0].localCurrency;
+            this.internationalCurrency = data['items'][0].internationalCurrency;
+        })
     }
 }
