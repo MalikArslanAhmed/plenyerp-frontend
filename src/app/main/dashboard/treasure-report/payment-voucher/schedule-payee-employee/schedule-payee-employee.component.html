@@ -12,8 +12,9 @@
         <form [formGroup]="schedulePayeeEmployeeForm">
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Voucher Year</mat-label>
                     <mat-select formControlName="year">
-                        <mat-option value="">Voucher Year</mat-option>
+                        <mat-option value="">Choose Year</mat-option>
                         <mat-option value="2017">2017</mat-option>
                         <mat-option value="2018">2018</mat-option>
                         <mat-option value="2019">2019</mat-option>
@@ -30,8 +31,9 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Payee Id</mat-label>
                     <mat-select formControlName="payeeId">
-                        <mat-option value="">Payee Id</mat-option>
+                        <mat-option value="">Choose Employee</mat-option>
                         <mat-option value="1">Employee 1</mat-option>
                         <mat-option value="2">Employee 2</mat-option>
                         <mat-option value="3">Employee 3</mat-option>
@@ -109,10 +111,10 @@
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" (click)="matDialogRef.close(schedulePayeeEmployeeForm); saveCountry()"
+        <button mat-button class="save-button" (click)="matDialogRef.close(schedulePayeeEmployeeForm); savePayeeEmployee()"
                 [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
         </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(schedulePayeeEmployeeForm); updateCountry()"
+        <button mat-button class="save-button" (click)="matDialogRef.close(schedulePayeeEmployeeForm); updatePayeeEmployee()"
                 [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
         </button>
     </div>

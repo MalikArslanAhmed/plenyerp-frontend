@@ -1,12 +1,15 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ContactInfoService} from "../../../../../shared/services/contact-info.service";
+import {fuseAnimations} from "../../../../../../@fuse/animations";
 
 @Component({
     selector: 'app-schedule-payee-customer',
     templateUrl: './schedule-payee-customer.component.html',
-    styleUrls: ['./schedule-payee-customer.component.scss']
+    styleUrls: ['./schedule-payee-customer.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
 })
 export class SchedulePayeeCustomerComponent implements OnInit {
     action: any;
@@ -59,7 +62,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         }
     }*/
 
-    saveCountry() {
+    savePayeeCustomer() {
         this.isSubmitted = true;
         if (!this.schedulePayeeCustomerForm.valid) {
             this.isSubmitted = false;
@@ -67,28 +70,27 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            this.contactInfoService.addCountry(this.schedulePayeeCustomerForm.value).subscribe(data => {
+            console.log('this.schedulePayeeCustomerForm.value', this.schedulePayeeCustomerForm.value);
+            /*this.contactInfoService.addCountry(this.schedulePayeeCustomerForm.value).subscribe(data => {
                 this.schedulePayeeCustomerForm.reset();
                 this.isSubmitted = false;
-            });
-
-
+            });*/
         }
     }
 
-    updateCountry() {
+    updatePayeeCustomer() {
         this.isSubmitted = true;
         if (!this.schedulePayeeCustomerForm.valid) {
             this.isSubmitted = false;
             return;
         }
         if (this.isSubmitted) {
-            this.contactInfoService.updateCountry(this.updateData.country.id, this.schedulePayeeCustomerForm.value).subscribe(data => {
+            console.log('this.schedulePayeeCustomerForm.value', this.schedulePayeeCustomerForm.value);
+            /*this.contactInfoService.updateCountry(this.updateData.country.id, this.schedulePayeeCustomerForm.value).subscribe(data => {
                 this.updateData = undefined;
                 this.schedulePayeeCustomerForm.reset();
                 this.isSubmitted = false;
-            });
-
+            });*/
         }
     }
 }

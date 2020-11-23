@@ -52,6 +52,11 @@
                         </div>
                     </form>
                 </div>
+                <div fxFlex="100" *ngIf="selectedCategory" style="margin-top: -20px">
+                    <button mat-button aria-label="Save" class="save-button">{{selectedCategory}}
+                        <mat-icon (click)="resetSelection()">close</mat-icon>
+                    </button>
+                </div>
                 <div class="p-5px">
                     <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
                         <ng-container matColumnDef="Staff ID">

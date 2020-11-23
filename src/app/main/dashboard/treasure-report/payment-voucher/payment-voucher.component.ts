@@ -1,13 +1,12 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {JournalVoucherLedgerReportService} from "../../../../shared/services/journal-voucher-ledger-report.service";
-import {AlertService} from "../../../../shared/services/alert.service";
-import * as moment from "moment";
-import {CashbookCreateComponent} from "../cashbook/cashbook-create/cashbook-create.component";
 import {MatDialog} from "@angular/material/dialog";
 import {SchedulePayeeCustomerComponent} from './schedule-payee-customer/schedule-payee-customer.component';
 import {SchedulePayeeEmployeeComponent} from "./schedule-payee-employee/schedule-payee-employee.component";
+import {PaymentVoucherCreateComponent} from './payment-voucher-create/payment-voucher-create.component';
+import {AlertService} from "../../../../shared/services/alert.service";
 
 @Component({
     selector: 'app-payment-voucher',
@@ -18,7 +17,7 @@ import {SchedulePayeeEmployeeComponent} from "./schedule-payee-employee/schedule
 })
 export class PaymentVoucherComponent implements OnInit {
     filterPaymentVoucherForm: FormGroup;
-    // searchPaymentVoucherForm: FormGroup;
+    createPaymentVoucherForm: FormGroup;
     paymentVoucherData = [
         {
             'year': '2018',
@@ -178,22 +177,61 @@ export class PaymentVoucherComponent implements OnInit {
             'value': 'ON_MANDATE'
         }
     ];
+    types = [
+        {
+            'name': 'Expenditure Voucher',
+            'value': 'EXPENDITURE_VOUCHER'
+        },
+        {
+            'name': 'Non-Personal Advances',
+            'value': 'NON_PERSONAL_ADVANCES'
+        },
+        {
+            'name': 'Personal Advances',
+            'value': 'PERSONAL_ADVANCES'
+        },
+        {
+            'name': 'Special Imprest',
+            'value': 'SPECIAL_IMPREST'
+        },
+        {
+            'name': 'Standing Imprest',
+            'value': 'STANDING_IMPREST'
+        },
+        {
+            'name': 'Transfer - Cashbook',
+            'value': 'TRANSFER_CASHBOOKS'
+        },
+        {
+            'name': 'Remitance',
+            'value': 'REMITANCE'
+        },
+        {
+            'name': 'Deposit',
+            'value': 'DEPOSIT'
+        },
+        {
+            'name': 'Expenditure Credit',
+            'value': 'EXPENDITURE_CREDIT'
+        },
+    ];
     dialogRef: any;
 
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
                 private fb: FormBuilder,
-                private _matDialog: MatDialog) {
+                private _matDialog: MatDialog,
+                private alertService: AlertService) {
     }
 
     ngOnInit(): void {
         this.filterPaymentVoucherForm = this.fb.group({
-            'sourceUnit': [''],
-            'status': [''],
+            'status': ['ALL'],
             'search': ['']
         });
-        /*this.searchPaymentVoucherForm = this.fb.group({
-            'search': ['']
-        });*/
+        this.createPaymentVoucherForm = this.fb.group({
+            'sourceUnit': [''],
+            'type': ['']
+        });
     }
 
     /*getStatementPositionData(params) {
@@ -228,7 +266,6 @@ export class PaymentVoucherComponent implements OnInit {
             if (!response) {
                 return;
             }
-            // this.getUserRoleList.getcashbookList();
         });
     }
 
@@ -241,7 +278,6 @@ export class PaymentVoucherComponent implements OnInit {
             if (!response) {
                 return;
             }
-            // this.getUserRoleList.getcashbookList();
         });
     }
 
@@ -249,7 +285,44 @@ export class PaymentVoucherComponent implements OnInit {
         console.log('filterPaymentVoucherForm', this.filterPaymentVoucherForm.value);
     }
 
-    /*search() {
-        console.log('searchPaymentVoucherForm', this.searchPaymentVoucherForm.value);
-    }*/
+    addPaymentVoucher() {
+        if (this.createPaymentVoucherForm.value['sourceUnit'] === '') {
+            this.alertService.showErrors('Please Choose Voucher Source Unit');
+            return;
+        } else if (this.createPaymentVoucherForm.value['type'] === '') {
+            this.alertService.showErrors('Please Choose Payment Voucher Type');
+            return;
+        }
+
+
+        if (this.types && this.types.length > 0 && this.sourceUnit && this.sourceUnit.length > 0) {
+            let selectedType = '';
+            this.types.forEach(type => {
+                if (type.value === this.createPaymentVoucherForm.value['type']) {
+                    selectedType = type.name;
+                }
+            });
+
+            let selectedSource = [];
+            this.sourceUnit.forEach(source => {
+                if (source.value === this.createPaymentVoucherForm.value['sourceUnit']) {
+                    selectedSource.push({
+                        'name': source.name,
+                        'value': source.value
+                    });
+                }
+            });
+
+            this.dialogRef = this._matDialog.open(PaymentVoucherCreateComponent, {
+                panelClass: 'contact-form-dialog',
+                data: {action: 'CREATE', header: selectedType, source: selectedSource}
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                // console.log('response', response);
+                if (!response) {
+                    return;
+                }
+            });
+        }
+    }
 }

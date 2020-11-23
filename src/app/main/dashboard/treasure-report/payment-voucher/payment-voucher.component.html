@@ -11,12 +11,20 @@
                 </span>
             </div>
         </div>
+        <!--<div fxLayout="row" fxLayoutAlign="end center">
+            <div>
+                <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addPaymentVoucher()">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
+        </div>-->
     </div>
 
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
-                <form [formGroup]="filterPaymentVoucherForm">
+                <form [formGroup]="createPaymentVoucherForm">
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
                         <mat-label>Voucher Source Unit</mat-label>
                         <mat-select formControlName="sourceUnit">
@@ -25,6 +33,22 @@
                                         *ngFor="let source of sourceUnit">{{source?.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-label>Type</mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option value="">Choose Type</mat-option>
+                            <mat-option [value]="type.value"
+                                        *ngFor="let type of types">{{type?.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="addPaymentVoucher()">
+                            <mat-icon class="material-icons cursor-pointer whiteColor mr-10px">add_circle</mat-icon>
+                            Payment Voucher
+                        </button>
+                    </div>
+                </form>
+                <form [formGroup]="filterPaymentVoucherForm" style="margin-top: -40px">
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
                         <mat-label>Voucher Status</mat-label>
                         <mat-select formControlName="status">
@@ -43,9 +67,6 @@
                         </button>
                     </div>
                 </form>
-                <!--<form [formGroup]="searchPaymentVoucherForm">
-
-                </form>-->
             </div>
 
             <div class="content mt-20px">
@@ -61,7 +82,8 @@
                         <span class="mat-header-cell">Last Actioned</span>
                         <span class="mat-header-cell">Status</span>
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index" [expanded]="reportData.isOpen">
+                    <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index"
+                                         [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center">
@@ -93,7 +115,8 @@
                             </span>
                         </mat-expansion-panel-header>
                         <div>
-                            <div mat-dialog-content class="items-data" fusePerfectScrollbar style="overflow-x: scroll !important;">
+                            <div mat-dialog-content class="items-data" fusePerfectScrollbar
+                                 style="overflow-x: scroll !important;">
                                 <mat-tab-group dynamicHeight>
                                     <mat-tab label="Payees">
                                         <table class="simple invoice-table">
@@ -219,10 +242,14 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <button mat-button class="payee-report" (click)="scheduleEmployee()">Schedule Payee Employees</button>
+                                                    <button mat-button class="payee-report"
+                                                            (click)="scheduleEmployee()">Schedule Payee Employees
+                                                    </button>
                                                 </td>
                                                 <td>
-                                                    <button mat-button class="payee-report" (click)="scheduleCustomers()">Schedule Payee Customers</button>
+                                                    <button mat-button class="payee-report"
+                                                            (click)="scheduleCustomers()">Schedule Payee Customers
+                                                    </button>
                                                 </td>
                                                 <td colspan="12"></td>
                                             </tr>

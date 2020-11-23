@@ -1,8 +1,8 @@
 app-payment-voucher-create {
-    #roles-items {
-        max-width: 800px !important;
+    #payment-voucher-create {
+        max-width: 1300px !important;
         overflow-x: unset !important;
-        min-width: 800px !important;
+        min-width: 1100px !important;
     }
 
     .items-data {
@@ -10,15 +10,26 @@ app-payment-voucher-create {
         overflow-x: unset !important;
     }
 
+    .add-taxes {
+        background-color: #039be5 !important;
+        color: #fff !important;
+        height: 40px;
+        margin-top: 15px;
+    }
+
+    .invoice-table {
+        background-color: #E0E0E0;
+    }
+
+    .font-weight-bold {
+        font-weight: 600;
+    }
+
     .w-100-per {
-        width: 100% !important;
+        width: 100%;
     }
 
-    .w-60-per {
-        width: 60% !important;
-    }
-
-    .w-40-per {
-        width: 40% !important;
+    .mt--20px {
+        margin-top: -20px;
     }
 }

@@ -176,4 +176,12 @@ export class AdminSegmentEmployeeSelectComponent implements OnInit {
             }
         });
     }
+
+    resetSelection() {
+        this.choosenNode = undefined;
+        this.adminSegmentAllIds = [];
+        this.adminSegmentAllIds = [];
+        this.selectedCategory = undefined;
+        this.getEmployees({});
+    }
 }

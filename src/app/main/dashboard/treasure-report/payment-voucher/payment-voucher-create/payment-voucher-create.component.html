@@ -1,5 +1,5 @@
-<div class="dialog-content-wrapper" id="roles-items">
-    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+<div class="dialog-content-wrapper" id="payment-voucher-create">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title dialog-title">{{dialogTitle}}</span>
             <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
@@ -8,105 +8,268 @@
         </mat-toolbar-row>
     </mat-toolbar>
 
-    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
-        <!--        <form [formGroup]="voucherSourceUnitForm">-->
-        <!--            <div fxLayout="row" fxLayoutAlign="start">-->
-        <!--                <mat-form-field appearance="outline" fxFlex>-->
-        <!--                    <mat-label>Ref. No</mat-label>-->
-        <!--                    <input matInput placeholder="Name" formControlName="refNo" name="refNo" required>-->
-        <!--                </mat-form-field>-->
-        <!--            </div>-->
-        <!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-        <!--                <mat-form-field appearance="outline" fxFlex>-->
-        <!--                    <mat-label>Long Name</mat-label>-->
-        <!--                    <input matInput placeholder="Enter VSU Long Name" formControlName="longName" name="longName" required>-->
-        <!--                </mat-form-field>-->
-        <!--                <mat-form-field appearance="outline" fxFlex>-->
-        <!--                    <mat-label>Short Name</mat-label>-->
-        <!--                    <input matInput placeholder="Enter VSU Short Name" formControlName="shortName" name="shortName" required>-->
-        <!--                </mat-form-field>-->
-        <!--            </div>-->
-        <!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-        <!--                <mat-form-field appearance="outline" fxFlex>-->
-        <!--                    <mat-label>Next PV Index No.</mat-label>-->
-        <!--                    <input matInput placeholder="PV Index #" formControlName="nextPvIndexNo" name="nextPvIndexNo" required>-->
-        <!--                </mat-form-field>-->
-        <!--                <mat-form-field appearance="outline" fxFlex>-->
-        <!--                    <mat-label>Next RV Index No.</mat-label>-->
-        <!--                    <input matInput placeholder="RV Index #" formControlName="nextRvIndexNo" name="nextRvIndexNo" required>-->
-        <!--                </mat-form-field>-->
-        <!--            </div>-->
-        <!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-        <!--                <mat-form-field appearance="outline" fxFlex>-->
-        <!--                    <mat-label>Honour.</mat-label>-->
-        <!--                    <textarea matInput placeholder="Authorized by Staff Name" formControlName="honourCertificate" name="honourCertificate" required></textarea>-->
-        <!--                </mat-form-field>-->
-        <!--            </div>-->
-        <!--            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-        <!--                <div fxLayout="column" fxLayoutAlign="start" class= "w-60-per">-->
-        <!--                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-        <!--                        <div>-->
-        <!--                            <button mat-raised-button color="accent" style="margin-top: 14px">Select</button>-->
-        <!--                        </div>-->
-        <!--                        <mat-form-field appearance="outline" class="w-100-per">-->
-        <!--                            <mat-label>Checking Officer</mat-label>-->
-        <!--                            <input matInput placeholder="Checking Officer Name" formControlName="checkingOfficer" name="checkingOfficer" required>-->
-        <!--                        </mat-form-field>-->
-        <!--                    </div>-->
-        <!--                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-        <!--                        <div>-->
-        <!--                            <button mat-raised-button color="accent"  style="margin-top: 14px">Select</button>-->
-        <!--                        </div>-->
-        <!--                        <mat-form-field appearance="outline" class="w-100-per">-->
-        <!--                            <mat-label>Paying Officer</mat-label>-->
-        <!--                            <input matInput placeholder="Paying Officer Name" formControlName="payingOfficer" name="payingOfficer" required>-->
-        <!--                        </mat-form-field>-->
-        <!--                    </div>-->
-        <!--                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-        <!--                        <div>-->
-        <!--                            <button mat-raised-button color="accent"  style="margin-top: 14px">Select</button>-->
-        <!--                        </div>-->
-        <!--                        <mat-form-field appearance="outline" class="w-100-per">-->
-        <!--                            <mat-label>Financial Controller</mat-label>-->
-        <!--                            <input matInput placeholder="Financial Controller Name" formControlName="financialController" name="financialController" required>-->
-        <!--                        </mat-form-field>-->
-        <!--                    </div>-->
-        <!--                   <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">-->
-        <!--                       <mat-slide-toggle>A Personal Adv. Unit ?</mat-slide-toggle>-->
-        <!--                   </div>-->
-        <!--                </div>-->
-        <!--                <div fxLayout="column" fxLayoutAlign="start" class= "w-40-per">-->
-        <!--                    <mat-form-field appearance="outline">-->
-        <!--                        <mat-label>Retirement Ref No.</mat-label>-->
-        <!--                        <input matInput placeholder="Enter Retirement Ref. #" formControlName="retirementRefNo" name="retirementRefNo" required>-->
-        <!--                    </mat-form-field>-->
-        <!--                    <mat-form-field appearance="outline">-->
-        <!--                        <mat-label>Reverse V Ref No.</mat-label>-->
-        <!--                        <input matInput placeholder="Enter Reverse V Ref. #" formControlName="reverseVRefNo" name="reverseVRefNo" required>-->
-        <!--                    </mat-form-field>-->
-        <!--                    <mat-form-field appearance="outline">-->
-        <!--                        <mat-label>Revalidation Ref No.</mat-label>-->
-        <!--                        <input matInput placeholder="Enter Revalidation Ref. #" formControlName="revalidationRefNo" name="revalidationRefNo" required>-->
-        <!--                    </mat-form-field>-->
-        <!--                    <mat-form-field appearance="outline">-->
-        <!--                        <mat-label>Text Voucher Ref No.</mat-label>-->
-        <!--                        <input matInput placeholder="Enter Text Voucher Ref. #" formControlName="textVoucherRefNo" name="textVoucherRefNo" required>-->
-        <!--                    </mat-form-field>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </form>-->
+    <div mat-dialog-content class="p-10px pb-0 m-0 items-data" fusePerfectScrollbar>
+        <mat-tab-group dynamicHeight>
+            <mat-tab label="CREATE PV FORM">
+                <form [formGroup]="schedulePayeeEmployeeForm" style="margin-top: 20px">
+                    <div fxLayout="row" fxLayoutAlign="start">
+                        <div fxLayout="column" style="margin-right: 20px; width: 50%">
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Source Unit</mat-label>
+                                    <mat-select formControlName="sourceUnit">
+                                        <mat-option value="">Choose Source Unit</mat-option>
+                                        <mat-option [value]="source.value"
+                                                    *ngFor="let source of sources">{{source.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Deptal No.</mat-label>
+                                    <input matInput placeholder="Deptal No." formControlName="departmentalNo">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Voucher No.</mat-label>
+                                    <input matInput placeholder="Voucher Number" formControlName="voucherNo">
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Value Date</mat-label>
+                                    <input matInput [matDatepicker]="valueDatePicker" placeholder="Value Date"
+                                           formControlName="valueDate">
+                                    <mat-datepicker-toggle matSuffix [for]="valueDatePicker">
+                                        <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #valueDatePicker></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Payment Approval Ref (#)</mat-label>
+                                    <input matInput placeholder="Voucher Number" formControlName="paymentApprovalRef">
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <h4>Payee</h4>
+                                <mat-radio-group aria-labelledby="example-radio-group-label"
+                                                 class="example-radio-group" formControlName="payee">
+                                    <mat-radio-button class="example-radio-button" value="EMPLOYEE"
+                                                      [style.marginLeft.px]="40" [style.marginTop.px]="20">
+                                        Employee
+                                    </mat-radio-button>
+                                    <mat-radio-button class="example-radio-button" value="CUSTOMER"
+                                                      [style.marginLeft.px]="40" [style.marginTop.px]="20">
+                                        Customer
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Currency Code</mat-label>
+                                    <input matInput placeholder="Currency Code" formControlName="currencyCode">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Currency</mat-label>
+                                    <input matInput placeholder="Currency" formControlName="currency">
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Being Payed For</mat-label>
+                                    <input matInput placeholder="Being Payed For" formControlName="beingPayedFor">
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Being Payed For</mat-label>
+                                    <input matInput placeholder="Being Payed For" formControlName="beingPayedFor">
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <mat-form-field appearance="outline" fxFlex="15">
+                                    <mat-label>X.Rate</mat-label>
+                                    <input matInput placeholder="X Rate" formControlName="xRate">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="40">
+                                    <mat-label>X.Rate Currency</mat-label>
+                                    <input matInput placeholder="X Rate Currency" formControlName="xRateCurrency">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" fxFlex="40">
+                                    <mat-label>Official X.Rate International</mat-label>
+                                    <input matInput placeholder="X Rate Currency International"
+                                           formControlName="officialXRateInternational">
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>AIE No.</mat-label>
+                                    <input matInput placeholder="AIE No" formControlName="aieNo">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="column" style="width: 50%">
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px"
+                                 style="margin-top: -25px; margin-bottom: 15px">
+                                <h4 class="font-weight-bold">COA Segments</h4>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
+                                <h5 style="width: 25%">(#) Admin Segment:</h5>
+                                <mat-form-field appearance="outline" fxFlex="35">
+                                    <mat-label>Enter Code</mat-label>
+                                    <input matInput formControlName="adminSegmentCode">
+                                </mat-form-field>
+                                <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="35"
+                                                (click)="adminSegmentSelect()">
+                                    <mat-label>Admin Segment Name</mat-label>
+                                    <mat-select formControlName="adminSegmentId" [disabled]="true">
+                                        <mat-option [value]="adminSegment.id"
+                                                    *ngFor="let adminSegment of adminSegments">{{adminSegment.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
+                                <h5 style="width: 25%">(#) Fund Segment:</h5>
+                                <mat-form-field appearance="outline" (click)="fundSegmentSelect()" fxFlex="35">
+                                    <mat-label>Enter Code</mat-label>
+                                    <input matInput formControlName="fundSegmentCode">
+                                </mat-form-field>
+                                <mat-form-field class="cursor-pointer" appearance="outline"
+                                                (click)="fundSegmentSelect()" fxFlex="35">
+                                    <mat-label>Fund Segment Name</mat-label>
+                                    <mat-select formControlName="fundSegmentId" [disabled]="true">
+                                        <mat-option [value]="fundSegment.id"
+                                                    *ngFor="let fundSegment of fundSegments">{{fundSegment.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
+                                <h5 style="width: 25%">(#) Economic Segment:</h5>
+                                <mat-form-field appearance="outline" fxFlex="35" (click)="economicSegmentSelect()">
+                                    <mat-label>Enter Code</mat-label>
+                                    <input matInput formControlName="economicSegmentCode">
+                                </mat-form-field>
+                                <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="35"
+                                                (click)="economicSegmentSelect()">
+                                    <mat-label>Economic Segment Name</mat-label>
+                                    <mat-select formControlName="economicSegmentId" [disabled]="true">
+                                        <mat-option [value]="economicSegment.id"
+                                                    *ngFor="let economicSegment of economicSegments">{{economicSegment.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
+                                <h5 style="width: 25%">(#) Programme Segment:</h5>
+                                <mat-form-field appearance="outline" fxFlex="35" (click)="programmeSegmentSelect()">
+                                    <mat-label>Enter Code</mat-label>
+                                    <input matInput formControlName="programmeSegmentCode">
+                                </mat-form-field>
+                                <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="35"
+                                                (click)="programmeSegmentSelect()">
+                                    <mat-label>Programme Segment Name</mat-label>
+                                    <mat-select formControlName="programmeSegmentId" [disabled]="true">
+                                        <mat-option [value]="programmeSegment.id"
+                                                    *ngFor="let programmeSegment of programmeSegments">{{programmeSegment.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
+                                <h5 style="width: 25%">Functional Segment:</h5>
+                                <mat-form-field appearance="outline" fxFlex="35" (click)="functionalSegmentSelect()">
+                                    <mat-label>Enter Code</mat-label>
+                                    <input matInput formControlName="functionalSegmentCode">
+                                </mat-form-field>
+                                <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="35"
+                                                (click)="functionalSegmentSelect()">
+                                    <mat-label>Functional Segment Name</mat-label>
+                                    <mat-select formControlName="functionalSegmentId" [disabled]="true">
+                                        <mat-option [value]="functionalSegment.id"
+                                                    *ngFor="let functionalSegment of functionalSegments">{{functionalSegment.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
+                                <h5 style="width: 25%">Geo-Code Segment:</h5>
+                                <mat-form-field appearance="outline" fxFlex="35" (click)="geoCodeSegmentSelect()">
+                                    <mat-label>Enter Code</mat-label>
+                                    <input matInput formControlName="geoCodeSegmentCode">
+                                </mat-form-field>
+                                <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="35"
+                                                (click)="geoCodeSegmentSelect()">
+                                    <mat-label>Geo-Code Segment Name</mat-label>
+                                    <mat-select formControlName="geoCodeSegmentId" [disabled]="true">
+                                        <mat-option [value]="geoCodeSegment.id"
+                                                    *ngFor="let geoCodeSegment of geoCodeSegments">{{geoCodeSegment.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
+                                <h4 class="font-weight-bold">Officers</h4>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <div>
+                                    <button mat-raised-button color="accent" style="margin-top: 14px"
+                                            (click)="selectAdminEmployee('Select Checking Officer')">Select
+                                    </button>
+                                </div>
+                                <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
+                                                (click)="selectAdminEmployee('Select Checking Officer')">
+                                    <mat-label>Checking Officer</mat-label>
+                                    <mat-select formControlName="checkingOfficerId">
+                                        <mat-option value="">Checking Officer Name</mat-option>
+                                        <mat-option [value]="checkingOfficer.id"
+                                                    *ngFor="let checkingOfficer of checkingOfficers">{{checkingOfficer?.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <div>
+                                    <button mat-raised-button color="accent" style="margin-top: 14px"
+                                            (click)="selectAdminEmployee('Select Paying Officer')">Select
+                                    </button>
+                                </div>
+                                <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
+                                                (click)="selectAdminEmployee('Select Paying Officer')">
+                                    <mat-label>Paying Officer</mat-label>
+                                    <mat-select formControlName="payingOfficerId">
+                                        <mat-option value="">Paying Officer Name</mat-option>
+                                        <mat-option [value]="payingOfficer.id"
+                                                    *ngFor="let payingOfficer of payingOfficers">{{payingOfficer?.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                                <div>
+                                    <button mat-raised-button color="accent" style="margin-top: 14px"
+                                            (click)="selectAdminEmployee('Select Financial Control')">Select
+                                    </button>
+                                </div>
+                                <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
+                                                (click)="selectAdminEmployee('Select Financial Control')">
+                                    <mat-label>Financial Controller</mat-label>
+                                    <mat-select formControlName="financialControllerId">
+                                        <mat-option value="">Financial Controller Name</mat-option>
+                                        <mat-option [value]="financialController.id"
+                                                    *ngFor="let financialController of financialControllers">{{financialController?.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-tab>
+            <mat-tab label="OTHER INFO">
+                <h6>No data to show</h6>
+            </mat-tab>
+        </mat-tab-group>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" (click)="matDialogRef.close();"
-                aria-label="Cancel">CANCEL
+        <button mat-button class="save-button"
+                (click)="matDialogRef.close(schedulePayeeEmployeeForm); savePayeeEmployee()"
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
         </button>
         <button mat-button class="save-button"
-                (click)="matDialogRef.close(voucherSourceUnitForm); saveVoucherSourceUnit()"
-                [disabled]="voucherSourceUnitForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
-        </button>
-        <button mat-button class="save-button"
-                (click)="matDialogRef.close(voucherSourceUnitForm); updateVoucherSourceUnit()"
-                [disabled]="voucherSourceUnitForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+                (click)="matDialogRef.close(schedulePayeeEmployeeForm); updatePayeeEmployee()"
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
         </button>
     </div>
 </div>
