@@ -226,6 +226,8 @@ import { DefaultSettingVoucherInfoComponent } from './treasure-report/default-se
 import { AdminSegmentEmployeeSelectComponent } from './treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
 import { AdminSegmentSelectAccountHeadComponent } from './treasure-report/default-setting-voucher-info/admin-segment-select-account-head/admin-segment-select-account-head.component';
 
+import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie.component';
+
 @NgModule({
     declarations: [
         DashboardComponent,
@@ -428,6 +430,7 @@ import { AdminSegmentSelectAccountHeadComponent } from './treasure-report/defaul
         DefaultSettingVoucherInfoComponent,
         AdminSegmentEmployeeSelectComponent,
         AdminSegmentSelectAccountHeadComponent,
+        BudgetControlAieComponent
     ],
     imports: [
         CommonModule,

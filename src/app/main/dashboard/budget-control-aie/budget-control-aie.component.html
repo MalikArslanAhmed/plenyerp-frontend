@@ -1,0 +1,158 @@
+<div class="page-layout simple left-sidebar inner-sidebar inner-scroll" id="budget-control-aie">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
+                          class="logo-icon mr-16">outlined_flag
+                </mat-icon>
+                <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" class="logo-text h1">
+                    Budget Control - AIE
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content" style="padding: 1rem;">
+                <form  [formGroup]="budgetControlForm">
+                    <div fxLayout="column" fxLayoutGap="20px">
+                        <div fxLayout="column" fxLayoutGap="10px">
+                            <button (click)="adminSegmentSelect()" class="select-button width-50-per" mat-button
+                                    type="button">
+                                {{(adminSegments && adminSegments[0]?.name) ? adminSegments[0]?.name : 'Admin Segment'}}
+                            </button>
+                            <button (click)="fundSegmentSelect()" class="select-button width-50-per" mat-button
+                                    type="button">
+                                {{(fundSegments && fundSegments[0]?.name) ? fundSegments[0]?.name : 'Fund Segment'}}
+                            </button>
+                        </div>
+
+                        <div  class="border-1px-solid">
+                            <div fxLayout="column" fxLayoutAlign="start start" style="padding: 10px">
+                                <mat-form-field appearance="outline" fxLayoutGap="10px" fxFlex class="width-50-per">
+                                    <mat-label>Ref. No.</mat-label>
+                                    <input name="ref_no" formControlName="ref_no" matInput>
+                                </mat-form-field>
+                                <div fxLayout="row" fxLayoutGap="10px" class="width-100-per">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>AIE No.</mat-label>
+                                        <input name="aie_no" formControlName="aie_no" matInput>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Date Issued</mat-label>
+                                        <input name="date_issued" formControlName="date_issued" matInput>
+                                    </mat-form-field>
+                                </div>
+                                <mat-form-field appearance="outline" fxFlex="100" class="width-100-per"  style="margin-bottom: 0">
+                                    <mat-label>Narration</mat-label>
+                                    <textarea matInput formControlName="narration" placeholder="Narration:"></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div  class="border-1px-solid">
+                            <div fxLayout="column" fxLayoutAlign="start start" style="padding: 10px">
+                                <div class="simple_table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Economic Code</th>
+                                            <th>Title</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="10px">
+                                    <button mat-button class="add-row" (click)="addRow()"> + Add Row</button>
+                                </div>
+
+                                <div fxLayout="row" fxLayoutGap="10px" class="width-100-per">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Search for Eco Codes</mat-label>
+                                        <input name="search_eco_code" formControlName="search_eco_code" matInput>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Total Amount</mat-label>
+                                        <input name="total_amount" formControlName="total_amount" matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="20px">
+                                    <button mat-button class="cancel_btn" (click)="cancel()"> Cancel</button>
+                                    <button mat-button class="save_btn" (click)="save()"> Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <div  class="border-1px-solid" style="margin-top: 1.5rem">
+                    <div fxLayout="column" fxLayoutAlign="start start" style="padding: 10px">
+                        <div fxLayout="row" fxLayoutGap="10px" class="width-100-per">
+                            <mat-form-field appearance="outline" fxFlex>
+                                <mat-label>Search for AIE No</mat-label>
+                                <input name="search_aie_no" matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="list-table">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>AIE No</th>
+                                    <th>Narration</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody
+                                    *ngIf="budgetControlAieList && budgetControlAieList.length > 0; else noBudgetControlList">
+                                <tr *ngFor="let budgetAie of budgetControlAieList; let i = index">
+                                    <td class="table-data">
+                                        <span class="text-truncate">{{i + 1}}</span>
+                                    </td>
+                                    <td>{{budgetAie.aie_no}}</td>
+                                    <td>{{budgetAie.narration}}</td>
+                                    <td class="table-data">
+                                        <div fxFlex="row" fxLayoutAlign="center center">
+                                            <button  aria-label="Toggle star"
+                                                     mat-icon-button
+                                                     style="color: blue">
+                                                <mat-icon class="material-icons">edit</mat-icon>
+                                            </button>
+                                            <button aria-label="Toggle star"
+                                                    mat-icon-button
+                                                    style="color: red">
+                                                <mat-icon class="material-icons">delete</mat-icon>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <ng-template #noBudgetControlList>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-center" colspan="100">
+                                            No data to show
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </ng-template>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -647,6 +647,16 @@ export const navigation: FuseNavigation[] = [
                 permissions: [PermissionConstant.PROGRAMME_BUDGET_CONTROL_LIST]
             },
             {
+                id: 'budget-control-aie',
+                title: 'Budget Control AIE',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'monetization_on',
+                url: '/dashboard/budget-controls/AIE',
+                permissions: []
+            },
+            {
                 id: 'journal',
                 title: 'Journal Voucher',
                 roles: [],
