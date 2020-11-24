@@ -1,0 +1,74 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="applicableTaxesForm">
+            <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile class="mr-1"></mat-grid-tile>
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label>Gross</mat-label>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label>{{grossAmount}}</mat-label>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="3" rowHeight="100px" *ngFor="let tax of taxes; let i = index">
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-checkbox (change)="adjustTotal(i, $event)" [checked]="tax.checked ? true : null"
+                                      *ngIf="this.updateData"></mat-checkbox>
+                        <mat-checkbox (change)="adjustTotal(i, $event)" [checked]="tax.checked ? true : null"
+                                      *ngIf="!this.updateData"></mat-checkbox>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>{{tax?.name}} (%)</mat-label>
+                            <input matInput value="{{tax?.tax}}" (change)="changeTax(i, $event)">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Total {{tax?.name}}</mat-label>
+                            <input matInput [disabled]="true" value="{{(tax?.tax * this.grossAmount) / 100}}">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile class="mr-1"></mat-grid-tile>
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-label>Total Taxes</mat-label>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="mr-1">
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-label>{{totalTaxes}}</mat-label>
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button"
+                (click)="matDialogRef.close({'taxes': this.taxes, 'totalTaxes': this.totalTaxes}); save()">SAVE
+        </button>
+    </div>
+</div>

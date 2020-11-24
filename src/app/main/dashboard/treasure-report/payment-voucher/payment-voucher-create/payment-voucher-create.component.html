@@ -24,16 +24,16 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                            <!--<div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Deptal No.</mat-label>
                                     <input matInput placeholder="Deptal No." formControlName="departmentalNo">
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Voucher No.</mat-label>
-                                    <input matInput placeholder="Voucher Number" formControlName="voucherNo">
+                                    <input matInput placeholder="Voucher Number" formControlName="voucherSourceUnitId">
                                 </mat-form-field>
-                            </div>
+                            </div>-->
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Value Date</mat-label>
@@ -46,7 +46,7 @@
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Payment Approval Ref (#)</mat-label>
-                                    <input matInput placeholder="Voucher Number" formControlName="paymentApprovalRef">
+                                    <input matInput placeholder="Voucher Number" formControlName="paymentApproveId">
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
@@ -66,7 +66,11 @@
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Currency Code</mat-label>
-                                    <input matInput placeholder="Currency Code" formControlName="currencyCode">
+                                    <mat-select formControlName="currencyId" (selectionChange)="selectCurrency($event)">
+                                        <mat-option value="">Choose Currency</mat-option>
+                                        <mat-option [value]="currency.id"
+                                                    *ngFor="let currency of currencies">{{currency?.codeCurrency}}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Currency</mat-label>
@@ -76,19 +80,13 @@
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Being Payed For</mat-label>
-                                    <input matInput placeholder="Being Payed For" formControlName="beingPayedFor">
-                                </mat-form-field>
-                            </div>
-                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                                <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>Being Payed For</mat-label>
-                                    <input matInput placeholder="Being Payed For" formControlName="beingPayedFor">
+                                    <input matInput placeholder="Being Payed For" formControlName="paymentDescription">
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" fxFlex="15">
                                     <mat-label>X.Rate</mat-label>
-                                    <input matInput placeholder="X Rate" formControlName="xRate">
+                                    <input matInput placeholder="X Rate" formControlName="xRate" type="number">
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex="40">
                                     <mat-label>X.Rate Currency</mat-label>
@@ -97,13 +95,13 @@
                                 <mat-form-field appearance="outline" fxFlex="40">
                                     <mat-label>Official X.Rate International</mat-label>
                                     <input matInput placeholder="X Rate Currency International"
-                                           formControlName="officialXRateInternational">
+                                           formControlName="officialXRate" type="number">
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>AIE No.</mat-label>
-                                    <input matInput placeholder="AIE No" formControlName="aieNo">
+                                    <input matInput placeholder="AIE No" formControlName="aieId" type="number">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -166,7 +164,7 @@
                                 <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="35"
                                                 (click)="programmeSegmentSelect()">
                                     <mat-label>Programme Segment Name</mat-label>
-                                    <mat-select formControlName="programmeSegmentId" [disabled]="true">
+                                    <mat-select formControlName="programSegmentId" [disabled]="true">
                                         <mat-option [value]="programmeSegment.id"
                                                     *ngFor="let programmeSegment of programmeSegments">{{programmeSegment.name}}</mat-option>
                                     </mat-select>
@@ -202,10 +200,10 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--40px">
                                 <h4 class="font-weight-bold">Officers</h4>
                             </div>
-                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--10px">
                                 <div>
                                     <button mat-raised-button color="accent" style="margin-top: 14px"
                                             (click)="selectAdminEmployee('Select Checking Officer')">Select
@@ -221,7 +219,7 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
                                 <div>
                                     <button mat-raised-button color="accent" style="margin-top: 14px"
                                             (click)="selectAdminEmployee('Select Paying Officer')">Select
@@ -237,7 +235,7 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
                                 <div>
                                     <button mat-raised-button color="accent" style="margin-top: 14px"
                                             (click)="selectAdminEmployee('Select Financial Control')">Select

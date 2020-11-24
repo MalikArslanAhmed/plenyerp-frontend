@@ -1,8 +1,10 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ContactInfoService} from "../../../../../shared/services/contact-info.service";
 import {fuseAnimations} from "../../../../../../@fuse/animations";
+import {ApplicableTaxesComponent} from "../../../applicable-taxes/applicable-taxes.component";
+import {PaymentVoucherTaxesComponent} from '../payment-voucher-taxes/payment-voucher-taxes.component';
 
 @Component({
     selector: 'app-schedule-payee-employee',
@@ -18,11 +20,12 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     isSubmitted = false;
     salaryScales: any = [];
     updateData: any;
+    dialogRef: any;
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeEmployeeComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-                private contactInfoService: ContactInfoService) {
+                private _matDialog: MatDialog) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Country';
@@ -92,5 +95,35 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 this.isSubmitted = false;
             });*/
         }
+    }
+
+    addApplicableTaxes() {
+        /*if (!this.salesInvoiceForm.value.itemId || this.salesInvoiceForm.value.itemId === '') {
+            this.alertService.showErrors('Item Id can\'t be empty');
+            return;
+        } else if (!this.salesInvoiceForm.value.quantity || this.salesInvoiceForm.value.quantity === '') {
+            this.alertService.showErrors('Quantity can\'t be empty');
+            return;
+        } else if (!this.salesInvoiceForm.value.unitSellingPrice || this.salesInvoiceForm.value.unitSellingPrice === '') {
+            this.alertService.showErrors('Unit selling price can\'t be empty');
+            return;
+        }*/
+        this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {
+                action: 'CREATE',
+                // itemId: this.salesInvoiceForm.value.itemId,
+                // taxArray: this.taxArray,
+                netAmount: this.schedulePayeeEmployeeForm.value.netAmount,
+            }
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            console.log('response', response);
+            if (!response) {
+                return;
+            }
+            // this.taxes = response.taxes;
+            // this.totalTaxes = response.totalTaxes;
+        });
     }
 }
