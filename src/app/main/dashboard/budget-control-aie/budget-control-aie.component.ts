@@ -4,13 +4,12 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {fuseAnimations} from '../../../../@fuse/animations';
 import {AdminSegmentSelectComponent} from '../journal-voucher/admin-segment-select/admin-segment-select.component';
-import {ProgrammingSegmentSelectComponent} from '../journal-voucher/programming-segment-select/programming-segment-select.component';
 import {FundSegmentSelectComponent} from '../journal-voucher/fund-segment-select/fund-segment-select.component';
 import {ActivatedRoute, Event, NavigationEnd, Router} from '@angular/router';
 import {BudgetControlService} from 'app/shared/services/budget-control.service';
 import {DeleteListModalComponent} from '../delete-list-modal/delete-list-modal.component';
-import {EconomicSegmentSelectComponent} from '../journal-voucher/economic-segment-select/economic-segment-select.component';
 import {AlertService} from '../../../shared/services/alert.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-budget-control-aie',
@@ -34,10 +33,12 @@ export class BudgetControlAieComponent implements OnInit {
     isDisabled = true;
     adminSegmentSelected = false;
     fundSegmentSelected = false;
-    budgetControlAieList = [{
-        aie_no: '234',
-        narration: 'asdfg',
-    }];
+    budgetControlAieList = [
+        // {
+        // aie_no: '234',
+        // narration: 'asdfg',
+        // }
+    ];
     currencyList = [];
     budgetId;
 
@@ -69,15 +70,11 @@ export class BudgetControlAieComponent implements OnInit {
         });
         this.getCurrencyList();
         this.budgetControlForm = this.fb.group({
-            adminSegmentId: [''],
-            fundSegmentId: [''],
-            ref_no: [''],
-            aie_no: [''],
-            date_issued: [''],
-            narration: [''],
-            search_eco_code: [''],
-            search_aie_no: [''],
-            total_amount: [''],
+            adminSegmentId: ['', Validators.required],
+            fundSegmentId: ['', Validators.required],
+            aieNumber: ['', Validators.required],
+            dateIssued: ['', Validators.required],
+            narration: ['', Validators.required],
 
         });
     }
@@ -86,12 +83,18 @@ export class BudgetControlAieComponent implements OnInit {
         this.isDisabled = !this.budgetControlForm.valid;
     }
 
-    getBudgetData() {
-        // this.budgetControlAieList = [];
+    getBudgetAieData() {
+        this.budgetControlAieList = [];
         const params = {
             adminSegmentId: this.adminSegments[0].id,
             fundSegmentId: this.fundSegments[0].id
         };
+        this.budgetService.budgetControlAieList(params).subscribe(
+            data => {
+                this.budgetControlAieList = data.items;
+                console.log('----->>>>', data.items);
+            }
+        );
     }
 
     getCurrencyList() {
@@ -131,9 +134,9 @@ export class BudgetControlAieComponent implements OnInit {
     }
 
     deleteBugdet(id) {
-        this.budgetService.deleteBudget(id).subscribe(data => {
+        this.budgetService.deleteBudgetAie(id).subscribe(data => {
             if (data) {
-                this.getBudgetData();
+                this.getBudgetAieData();
             }
         });
     }
@@ -153,7 +156,7 @@ export class BudgetControlAieComponent implements OnInit {
                 'id': response.id
             }];
             if (this.adminSegmentSelected && this.fundSegmentSelected) {
-                this.getBudgetData();
+                this.getBudgetAieData();
             }
             this.budgetControlForm.patchValue({
                 adminSegmentId: response.id,
@@ -179,7 +182,7 @@ export class BudgetControlAieComponent implements OnInit {
                 'id': response.id
             }];
             if (this.adminSegmentSelected && this.fundSegmentSelected) {
-                this.getBudgetData();
+                this.getBudgetAieData();
             }
             this.budgetControlForm.patchValue({
                 fundSegmentId: response.id,
@@ -194,10 +197,16 @@ export class BudgetControlAieComponent implements OnInit {
     }
 
     cancel() {
-
+        this.budgetControlForm.reset();
     }
 
     save() {
-
+        console.log('---datepicker', this.budgetControlForm.value);
+        if (this.budgetControlForm.invalid) {
+            return;
+        }
+        const finalData = this.budgetControlForm.value;
+        finalData.dateIssued = finalData.dateIssued ? moment(finalData.dateIssued).format('YY-MM-DD') : '';
+        console.log('---submit', this.budgetControlForm.value);
     }
 }
