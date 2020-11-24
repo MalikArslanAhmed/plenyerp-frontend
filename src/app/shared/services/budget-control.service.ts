@@ -38,4 +38,11 @@ export class BudgetControlService extends BaseService {
         return this.putRequestWithoutDataDeletion(AppUrl.ADD_BUDGET(id), data);
     }
 
+    budgetControlAieList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_BUDGET_CONTROL_AIE(), data);
+    }
+
+    deleteBudgetAie(id): Observable<any> {
+        return this.deleteRequest(AppUrl.GET_BUDGET_CONTROL_AIE(id));
+    }
 }

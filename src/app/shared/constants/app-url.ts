@@ -1098,6 +1098,13 @@ export class AppUrl {
         }
 
     }
+    static GET_BUDGET_CONTROL_AIE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/aies/` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/aies`;
+        }
+    }
 
     static GET_COMPANY_INFORMATION(): string {
         return AppUrl.API_URL + 'company-information';

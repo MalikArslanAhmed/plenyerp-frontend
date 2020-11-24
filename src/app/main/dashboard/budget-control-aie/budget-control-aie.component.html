@@ -29,25 +29,31 @@
                         </div>
 
                         <div  class="border-1px-solid">
-                            <div fxLayout="column" fxLayoutAlign="start start" style="padding: 10px">
-                                <mat-form-field appearance="outline" fxLayoutGap="10px" fxFlex class="width-50-per">
-                                    <mat-label>Ref. No.</mat-label>
-                                    <input name="ref_no" formControlName="ref_no" matInput>
-                                </mat-form-field>
+                            <div style="padding: 10px">
+<!--                                <mat-form-field appearance="outline" fxLayoutGap="10px" fxFlex class="width-50-per">-->
+<!--                                    <mat-label>Ref. No.</mat-label>-->
+<!--                                    <input name="ref_no" formControlName="ref_no" matInput>-->
+<!--                                </mat-form-field>-->
                                 <div fxLayout="row" fxLayoutGap="10px" class="width-100-per">
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>AIE No.</mat-label>
-                                        <input name="aie_no" formControlName="aie_no" matInput>
+                                        <input name="aieNumber" formControlName="aieNumber" matInput>
                                     </mat-form-field>
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Date Issued</mat-label>
-                                        <input name="date_issued" formControlName="date_issued" matInput>
+                                        <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
+                                               formControlName="dateIssued">
+                                        <mat-datepicker-toggle matSuffix
+                                                               [for]="from"></mat-datepicker-toggle>
+                                        <mat-datepicker #from></mat-datepicker>
                                     </mat-form-field>
                                 </div>
-                                <mat-form-field appearance="outline" fxFlex="100" class="width-100-per"  style="margin-bottom: 0">
-                                    <mat-label>Narration</mat-label>
-                                    <textarea matInput formControlName="narration" placeholder="Narration:"></textarea>
-                                </mat-form-field>
+                                <div class="width-100-per" fxLayout="row">
+                                    <mat-form-field appearance="outline" fxFlex="100" class="width-100-per">
+                                        <mat-label>Narration</mat-label>
+                                        <textarea matInput formControlName="narration" placeholder="Narration:"></textarea>
+                                    </mat-form-field>
+                                </div>
                             </div>
                         </div>
 
@@ -80,11 +86,11 @@
                                 <div fxLayout="row" fxLayoutGap="10px" class="width-100-per">
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Search for Eco Codes</mat-label>
-                                        <input name="search_eco_code" formControlName="search_eco_code" matInput>
+                                        <input name="search_eco_code"  matInput>
                                     </mat-form-field>
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Total Amount</mat-label>
-                                        <input name="total_amount" formControlName="total_amount" matInput>
+                                        <input name="total_amount" matInput>
                                     </mat-form-field>
                                 </div>
                                 <div fxLayout="row" fxLayoutGap="20px">
@@ -120,16 +126,16 @@
                                     <td class="table-data">
                                         <span class="text-truncate">{{i + 1}}</span>
                                     </td>
-                                    <td>{{budgetAie.aie_no}}</td>
+                                    <td>{{budgetAie.aieNumber}}</td>
                                     <td>{{budgetAie.narration}}</td>
                                     <td class="table-data">
-                                        <div fxFlex="row" fxLayoutAlign="center center">
+                                        <div>
                                             <button  aria-label="Toggle star"
                                                      mat-icon-button
                                                      style="color: blue">
                                                 <mat-icon class="material-icons">edit</mat-icon>
                                             </button>
-                                            <button aria-label="Toggle star"
+                                            <button aria-label="Toggle star" (click)="deleteBugdet(budgetAie.id)"
                                                     mat-icon-button
                                                     style="color: red">
                                                 <mat-icon class="material-icons">delete</mat-icon>
