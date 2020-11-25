@@ -30,11 +30,11 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-select formControlName="payeeId">
-                        <mat-option value="">Payee Id</mat-option>
-                        <mat-option value="1">Employee 1</mat-option>
-                        <mat-option value="2">Employee 2</mat-option>
-                        <mat-option value="3">Employee 3</mat-option>
+                    <mat-label>Payee Id</mat-label>
+                    <mat-select formControlName="payeeId" (selectionChange)="payeeChange($event.value)">
+                        <mat-option value="">Choose Employee</mat-option>
+                        <mat-option [value]="employee.id" *ngFor="let employee of employees">{{employee?.id}}
+                            - {{employee?.firstName}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
@@ -52,7 +52,7 @@
                     <input matInput placeholder="Taxes Amount" formControlName="taxAmount">
                 </mat-form-field>
                 <div fxLayout="row" fxLayoutAlign="center">
-                    <button mat-button class="add-taxes">Add Taxes</button>
+                    <button mat-button class="add-taxes" (click)="addApplicableTaxes()">Add Taxes</button>
                 </div>
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Total Amount</mat-label>

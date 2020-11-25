@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {JournalVoucherLedgerReportService} from 'app/shared/services/journal-voucher-ledger-report.service';
 import {fuseAnimations} from '../../../../@fuse/animations';
 import {AlertService} from "../../../shared/services/alert.service";
-import { EconomicSegmentSelectComponent } from '../journal-voucher/economic-segment-select/economic-segment-select.component';
-import { ProgrammingSegmentSelectComponent } from '../journal-voucher/programming-segment-select/programming-segment-select.component';
+import {EconomicSegmentSelectComponent} from '../journal-voucher/economic-segment-select/economic-segment-select.component';
+import {ProgrammingSegmentSelectComponent} from '../journal-voucher/programming-segment-select/programming-segment-select.component';
 
 @Component({
     selector: 'app-journal-voucher-ledger-report',
@@ -20,7 +20,7 @@ export class JournalVoucherLedgerReportComponent implements OnInit {
     filterJVLegderReportForm: FormGroup;
     economicSegments = [];
     programmeSegments = [];
-    economicPopupShow = false;;
+    economicPopupShow = false;
     programmePopupShow = false;
     sourceApp = [
         {
@@ -43,7 +43,7 @@ export class JournalVoucherLedgerReportComponent implements OnInit {
         this.filterJVLegderReportForm = this.fb.group({
             'type': [''],
             'economicSegmentId': [''],
-            'programmeSegmentId':['']
+            'programmeSegmentId': ['']
         });
         this.getLedgerReport({});
     }
@@ -64,7 +64,7 @@ export class JournalVoucherLedgerReportComponent implements OnInit {
         } else {
             const params = {};
             if (this.filterJVLegderReportForm.value.type === 1) {
-                
+
                 params['economicSegmentId'] = this.filterJVLegderReportForm.value.economicSegmentId
             } else if (this.filterJVLegderReportForm.value.type === 2) {
                 params['programmeSegmentId'] = this.filterJVLegderReportForm.value.programmeSegmentId
@@ -73,19 +73,17 @@ export class JournalVoucherLedgerReportComponent implements OnInit {
         }
     }
 
-    selectOption(event)
-    {
-        if(event.value === 1)
-        {
+    selectOption(event) {
+        if (event.value === 1) {
             this.economicPopupShow = true;
             this.programmePopupShow = false;
         }
-        if(event.value === 2)
-        {
+        if (event.value === 2) {
             this.programmePopupShow = true;
             this.economicPopupShow = false;
         }
     }
+
     economicSegmentSelect() {
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',

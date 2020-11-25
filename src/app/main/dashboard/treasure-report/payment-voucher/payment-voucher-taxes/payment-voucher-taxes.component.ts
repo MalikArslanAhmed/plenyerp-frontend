@@ -19,16 +19,15 @@ export class PaymentVoucherTaxesComponent implements OnInit {
     updateData: any;
     taxes = [];
     grossAmount: any;
-    itemId: any;
     totalTaxes = 0;
-    taxArray = [];
+    // taxArray = [];
 
     constructor(public matDialogRef: MatDialogRef<PaymentVoucherTaxesComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder, private transactionService: TransactionService) {
-        this.itemId = _data.itemId;
-        this.grossAmount = _data.grossAmount;
-        this.taxArray = _data.taxArray;
+        console.log('data', _data);
+        this.grossAmount = _data.netAmount;
+        // this.taxArray = _data.taxArray;
         if (_data.action === 'CREATE') {
             this.updateData = undefined;
             this.dialogTitle = 'Add Applicable Taxes';
@@ -58,7 +57,8 @@ export class PaymentVoucherTaxesComponent implements OnInit {
                 this.totalTaxes = this.updateData.totalTaxes;
             } else {
                 this.taxes = data.items;
-                if (this.taxes && this.taxes.length > 0) {
+                console.log('this.taxes', this.taxes);
+                /*if (this.taxes && this.taxes.length > 0) {
                     let totalTaxes = [];
                     this.taxes.forEach(tax => {
                         if (tax) {
@@ -70,9 +70,9 @@ export class PaymentVoucherTaxesComponent implements OnInit {
                         }
                     });
                     this.totalTaxes = totalTaxes.reduce((a, b) => a + b, 0);
-                }
+                }*/
             }
-            this.checkedItemsId();
+            // this.checkedItemsId();
         });
     }
 
@@ -115,7 +115,7 @@ export class PaymentVoucherTaxesComponent implements OnInit {
         this.updateData = undefined;
     }
 
-    checkedItemsId() {
+    /*checkedItemsId() {
         if (this.taxArray && this.taxArray.length) {
             this.taxArray.map(val => {
                 if (this.taxes && this.taxes.length) {
@@ -127,5 +127,5 @@ export class PaymentVoucherTaxesComponent implements OnInit {
                 }
             });
         }
-    }
+    }*/
 }

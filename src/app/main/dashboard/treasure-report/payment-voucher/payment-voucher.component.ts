@@ -336,10 +336,10 @@ export class PaymentVoucherComponent implements OnInit {
                 data: {action: 'CREATE', header: selectedType, source: selectedSource}
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                // console.log('response', response);
                 if (!response) {
                     return;
                 }
+                this.getPyamentVoucher({});
             });
         }
     }
