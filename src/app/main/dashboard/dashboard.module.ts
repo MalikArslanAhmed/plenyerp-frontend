@@ -433,7 +433,7 @@ import { PaymentVoucherTaxesComponent } from './treasure-report/payment-voucher/
         AdminSegmentEmployeeSelectComponent,
         AdminSegmentSelectAccountHeadComponent,
         BudgetControlAieComponent,
-        BudgetControlAieModalComponent
+        BudgetControlAieModalComponent,
         BudgetControlAieComponent,
         PaymentVoucherTaxesComponent
     ],
