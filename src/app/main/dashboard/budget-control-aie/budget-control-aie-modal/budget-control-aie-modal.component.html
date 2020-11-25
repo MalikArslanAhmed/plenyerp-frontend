@@ -1,0 +1,43 @@
+<div class="dialog-content-wrapper" id="roles-items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="economicCodeForm">
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex (click)="!isUpdate ? economicModalOpen() : ''" class="cursor-pointer">
+                    <mat-label>Economic Code</mat-label>
+                    <input matInput placeholder="Economic Code"  formControlName="ecoCode"
+                           name="ecoCode" readonly cdk-focus-start class="cursor-pointer" required>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex (click)="!isUpdate ? economicModalOpen() : ''" class="cursor-pointer">
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Title" formControlName="title"
+                           readonly name="title" class="cursor-pointer" required>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Amount</mat-label>
+                    <input matInput placeholder="Amount" formControlName="amount" name="amount" required>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close(economicCodeForm); saveUserRole()"
+                [disabled]="economicCodeForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(economicCodeForm); updateUserRole()"
+                [disabled]="economicCodeForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

@@ -15,7 +15,7 @@
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content" style="padding: 1rem;">
-                <form  [formGroup]="budgetControlForm">
+                <form [formGroup]="budgetControlForm">
                     <div fxLayout="column" fxLayoutGap="20px">
                         <div fxLayout="column" fxLayoutGap="10px">
                             <button (click)="adminSegmentSelect()" class="select-button width-50-per" mat-button
@@ -28,86 +28,113 @@
                             </button>
                         </div>
 
-                        <div  class="border-1px-solid">
+                        <div class="border-1px-solid">
                             <div style="padding: 10px">
-<!--                                <mat-form-field appearance="outline" fxLayoutGap="10px" fxFlex class="width-50-per">-->
-<!--                                    <mat-label>Ref. No.</mat-label>-->
-<!--                                    <input name="ref_no" formControlName="ref_no" matInput>-->
-<!--                                </mat-form-field>-->
-                                <div fxLayout="row" fxLayoutGap="10px" class="width-100-per">
+                                <!--                                <mat-form-field appearance="outline" fxLayoutGap="10px" fxFlex class="width-50-per">-->
+                                <!--                                    <mat-label>Ref. No.</mat-label>-->
+                                <!--                                    <input name="ref_no" formControlName="ref_no" matInput>-->
+                                <!--                                </mat-form-field>-->
+                                <div class="width-100-per" fxLayout="row" fxLayoutGap="10px">
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>AIE No.</mat-label>
-                                        <input name="aieNumber" formControlName="aieNumber" matInput>
+                                        <input formControlName="aieNumber" matInput name="aieNumber">
                                     </mat-form-field>
                                     <mat-form-field appearance="outline" fxFlex>
                                         <mat-label>Date Issued</mat-label>
-                                        <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
-                                               formControlName="dateIssued">
-                                        <mat-datepicker-toggle matSuffix
-                                                               [for]="from"></mat-datepicker-toggle>
+                                        <input (click)="from.open()" (focus)="from.open()" [matDatepicker]="from"
+                                               formControlName="dateIssued"
+                                               matInput>
+                                        <mat-datepicker-toggle [for]="from"
+                                                               matSuffix></mat-datepicker-toggle>
                                         <mat-datepicker #from></mat-datepicker>
                                     </mat-form-field>
                                 </div>
                                 <div class="width-100-per" fxLayout="row">
-                                    <mat-form-field appearance="outline" fxFlex="100" class="width-100-per">
+                                    <mat-form-field appearance="outline" class="width-100-per" fxFlex="100">
                                         <mat-label>Narration</mat-label>
-                                        <textarea matInput formControlName="narration" placeholder="Narration:"></textarea>
+                                        <textarea formControlName="narration" matInput
+                                                  placeholder="Narration:"></textarea>
                                     </mat-form-field>
                                 </div>
                             </div>
                         </div>
 
-                        <div  class="border-1px-solid">
+                        <div class="border-1px-solid">
                             <div fxLayout="column" fxLayoutAlign="start start" style="padding: 10px">
+                                <div class="width-50-per" fxLayout="row" fxLayoutGap="10px">
+                                    <mat-form-field appearance="outline" fxFlex>
+                                        <mat-label>Search for Eco Codes</mat-label>
+                                        <input matInput name="search_eco_code">
+                                    </mat-form-field>
+                                    <!--                                    <mat-form-field appearance="outline" fxFlex>-->
+                                    <!--                                        <mat-label>Total Amount</mat-label>-->
+                                    <!--                                        <input name="total_amount" matInput>-->
+                                    <!--                                    </mat-form-field>                                    -->
+                                    <div>
+                                        <div fxLayout="row" fxLayoutGap="10px">
+                                            <button (click)="addRow()" class="add-row" mat-button> + Add Row</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="simple_table">
                                     <table>
                                         <thead>
                                         <tr>
-                                            <th></th>
+                                            <th>S.No.</th>
                                             <th>Economic Code</th>
                                             <th>Title</th>
                                             <th>Amount</th>
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        <ng-container *ngIf="economicCodeData && economicCodeData.length">
+                                            <tr *ngFor="let economicCode of economicCodeData; let i = index">
+                                                <td>{{i+1}}</td>
+                                                <td>{{economicCode?.ecoCode}}</td>
+                                                <td>{{economicCode.title}}</td>
+                                                <td>{{economicCode.amount}}</td>
+                                                <td>
+                                                    <div fxLayout="row">
+                                                        <button aria-label="Toggle star"
+                                                                mat-icon-button
+                                                                style="color: blue" (click)="editEcoFormField(economicCode, i)">
+                                                            <mat-icon class="material-icons">edit</mat-icon>
+                                                        </button>
+                                                        <button aria-label="Toggle star"
+                                                                mat-icon-button
+                                                                style="color: red">
+                                                            <mat-icon class="material-icons" (click)="delete(i)">delete</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="text-align: end; font-weight: 600">
+                                                    Total Amount: {{totalAmount ? totalAmount : '0'}}
+                                                </td>
+                                            </tr>
+                                        </ng-container>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div fxLayout="row" fxLayoutGap="10px">
-                                    <button mat-button class="add-row" (click)="addRow()"> + Add Row</button>
-                                </div>
 
-                                <div fxLayout="row" fxLayoutGap="10px" class="width-100-per">
-                                    <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>Search for Eco Codes</mat-label>
-                                        <input name="search_eco_code"  matInput>
-                                    </mat-form-field>
-                                    <mat-form-field appearance="outline" fxFlex>
-                                        <mat-label>Total Amount</mat-label>
-                                        <input name="total_amount" matInput>
-                                    </mat-form-field>
-                                </div>
-                                <div fxLayout="row" fxLayoutGap="20px">
-                                    <button mat-button class="cancel_btn" (click)="cancel()"> Cancel</button>
-                                    <button mat-button class="save_btn" (click)="save()"> Save</button>
+
+                                <div fxLayout="row" fxLayoutGap="20px" style="margin-top: 1rem">
+                                    <button (click)="reset()" class="cancel_btn" mat-button> Cancel</button>
+                                    <button (click)="save()" class="save_btn" mat-button>{{isUpdateAieTable ? 'Update' : 'Save'}}</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </form>
-                <div  class="border-1px-solid" style="margin-top: 1.5rem">
+                <div class="border-1px-solid" style="margin-top: 1.5rem">
                     <div fxLayout="column" fxLayoutAlign="start start" style="padding: 10px">
-                        <div fxLayout="row" fxLayoutGap="10px" class="width-100-per">
+                        <div class="width-100-per" fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Search for AIE No</mat-label>
-                                <input name="search_aie_no" matInput>
+                                <input matInput name="search_aie_no">
                             </mat-form-field>
                         </div>
                         <div class="list-table">
@@ -130,12 +157,12 @@
                                     <td>{{budgetAie.narration}}</td>
                                     <td class="table-data">
                                         <div>
-                                            <button  aria-label="Toggle star"
-                                                     mat-icon-button
-                                                     style="color: blue">
+                                            <button aria-label="Toggle star" (click)="editAieTableItem(budgetAie)"
+                                                    mat-icon-button
+                                                    style="color: blue">
                                                 <mat-icon class="material-icons">edit</mat-icon>
                                             </button>
-                                            <button aria-label="Toggle star" (click)="deleteBugdet(budgetAie.id)"
+                                            <button (click)="deleteItemModal(budgetAie)" aria-label="Toggle star"
                                                     mat-icon-button
                                                     style="color: red">
                                                 <mat-icon class="material-icons">delete</mat-icon>

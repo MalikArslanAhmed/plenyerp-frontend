@@ -10,6 +10,8 @@ import {BudgetControlService} from 'app/shared/services/budget-control.service';
 import {DeleteListModalComponent} from '../delete-list-modal/delete-list-modal.component';
 import {AlertService} from '../../../shared/services/alert.service';
 import * as moment from 'moment';
+import {CensuresCreateComponent} from '../censures/censures-create/censures-create.component';
+import {BudgetControlAieModalComponent} from './budget-control-aie-modal/budget-control-aie-modal.component';
 
 @Component({
     selector: 'app-budget-control-aie',
@@ -41,7 +43,10 @@ export class BudgetControlAieComponent implements OnInit {
     ];
     currencyList = [];
     budgetId;
-
+    budgetAieId;
+    economicCodeData = [];
+    isUpdateAieTable = false;
+    totalAmount = 0;
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private fb: FormBuilder,
@@ -50,18 +55,6 @@ export class BudgetControlAieComponent implements OnInit {
         private router: Router,
         private budgetService: BudgetControlService,
         private alertService: AlertService) {
-        // this.router.events.subscribe((event: Event) => {
-        //     if (event instanceof NavigationEnd) {
-        //         this.activatedRoute.params.subscribe(param => {
-        //             this.budgetType = param['type'];
-        //             this.ngOnInit();
-        //             this.adminSegmentSelected = false;
-        //             this.fundSegmentSelected = false;
-        //             this.adminSegments = [];
-        //             this.fundSegments = [];
-        //         });
-        //     }
-        // });
     }
 
     ngOnInit(): void {
@@ -70,17 +63,22 @@ export class BudgetControlAieComponent implements OnInit {
         });
         this.getCurrencyList();
         this.budgetControlForm = this.fb.group({
-            adminSegmentId: ['', Validators.required],
-            fundSegmentId: ['', Validators.required],
-            aieNumber: ['', Validators.required],
-            dateIssued: ['', Validators.required],
-            narration: ['', Validators.required],
+            adminSegmentId: [''],
+            fundSegmentId: [''],
+            aieNumber: [''],
+            dateIssued: [''],
+            narration: [''],
 
         });
     }
 
-    focusOutFunction() {
-        this.isDisabled = !this.budgetControlForm.valid;
+    getTotalAmount() {
+        this.totalAmount = 0;
+        if (this.economicCodeData && this.economicCodeData.length) {
+            this.economicCodeData.forEach(v => {
+                this.totalAmount = this.totalAmount + parseInt(v.amount);
+            });
+        }
     }
 
     getBudgetAieData() {
@@ -92,7 +90,7 @@ export class BudgetControlAieComponent implements OnInit {
         this.budgetService.budgetControlAieList(params).subscribe(
             data => {
                 this.budgetControlAieList = data.items;
-                console.log('----->>>>', data.items);
+                // console.log('----->>>>', data.items);
             }
         );
     }
@@ -147,7 +145,7 @@ export class BudgetControlAieComponent implements OnInit {
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
-                console.log('bye');
+                // console.log('bye');
                 return;
             }
             this.adminSegmentSelected = true;
@@ -163,6 +161,7 @@ export class BudgetControlAieComponent implements OnInit {
                 adminSegmentCode: response.id,
                 disabled: true
             });
+            this.economicCodeData = [];
         });
     }
 
@@ -189,24 +188,137 @@ export class BudgetControlAieComponent implements OnInit {
                 fundSegmentCode: response.id,
                 disabled: true
             });
+            this.economicCodeData = [];
         });
     }
 
+
     addRow() {
-        console.log('--add row');
+        this.dialogRef = this._matDialog.open(BudgetControlAieModalComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'CREATE'}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            if (this.economicCodeData && this.economicCodeData.length) {
+                const selectedIndex = this.economicCodeData.map(val => {
+                    return val.ecoCode;
+                }).indexOf(response.value.ecoCode);
+                // console.log('--->>>', selectedIndex);
+                if (selectedIndex === -1) {
+                    this.economicCodeData.push(response.value);
+                } else {
+                    this.alertService.showErrors('Already added please select an other Economic code');
+                }
+            } else {
+                this.economicCodeData.push(response.value);
+            }
+            this.getTotalAmount();
+
+        });
     }
 
-    cancel() {
+    editEcoFormField(item, itemIndex) {
+        item['isUpdate'] = this.isUpdateAieTable;
+        this.dialogRef = this._matDialog.open(BudgetControlAieModalComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'EDIT', economic: item}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            if (response.value && this.economicCodeData && this.economicCodeData.length) {
+                this.economicCodeData.forEach(val => {
+                    if (val.ecoCode === response.value.ecoCode) {
+                        val.amount = response.value.amount;
+                    }
+                });
+            }
+            this.getTotalAmount();
+        });
+    }
+
+    delete(itemIndex) {
+        this.economicCodeData.splice(itemIndex, 1);
+        this.getTotalAmount();
+    }
+
+    reset() {
         this.budgetControlForm.reset();
+        this.economicCodeData = [];
+        this.adminSegments = [];
+        this.fundSegments = [];
+        this.isUpdateAieTable = false;
+        this.budgetControlAieList = [];
     }
 
     save() {
-        console.log('---datepicker', this.budgetControlForm.value);
         if (this.budgetControlForm.invalid) {
             return;
         }
+        const aieEconomicBalances = [];
+        if (this.economicCodeData && this.economicCodeData.length) {
+            this.economicCodeData.forEach(val => {
+                aieEconomicBalances.push({
+                    economicSegmentId: val.ecoCode,
+                    amount: val.amount,
+                });
+            });
+        }
+
         const finalData = this.budgetControlForm.value;
-        finalData.dateIssued = finalData.dateIssued ? moment(finalData.dateIssued).format('YY-MM-DD') : '';
-        console.log('---submit', this.budgetControlForm.value);
+        const params = {
+            ...finalData,
+            dateIssued: finalData.dateIssued ? moment(finalData.dateIssued).format('YYYY-MM-DD') : '',
+            aieEconomicBalances: aieEconomicBalances
+        };
+
+        // console.log('---submit', params);
+        if (this.isUpdateAieTable) {
+            this.budgetService.updateBudgetControlAie(this.budgetAieId, params).subscribe(data => {
+                // this.getBudgetAieData();
+                this.budgetControlAieList = [];
+                this.reset();
+                this.isUpdateAieTable = false;
+            });
+        } else {
+            this.budgetService.addBudgetControlAie(params).subscribe(data => {
+                this.getBudgetAieData();
+                this.reset();
+                this.isUpdateAieTable = false;
+            });
+        }
+
+    }
+
+    editAieTableItem(items) {
+        this.economicCodeData = [];
+        this.isUpdateAieTable = true;
+        this.budgetAieId = items.id;
+        // console.log('--->>>edit', items);
+        const aieEconomicBalances = [];
+        if (items['aieEconomicBalances'] && items['aieEconomicBalances'].length) {
+            items['aieEconomicBalances'].forEach(val => {
+                aieEconomicBalances.push({
+                    ecoCode: val.economicSegmentId,
+                    amount: val.amount,
+                    title: val.economicSegment.name
+                });
+            });
+        }
+        this.economicCodeData = aieEconomicBalances;
+        this.budgetControlForm.patchValue({
+            adminSegmentId: items.adminSegmentId,
+            fundSegmentId: items.fundSegmentId,
+            aieNumber: items.aieNumber,
+            dateIssued: moment(items.dateIssued).format('YYYY-MM-DD'),
+            narration: items.narration,
+
+        });
+        this.getTotalAmount();
+
     }
 }
