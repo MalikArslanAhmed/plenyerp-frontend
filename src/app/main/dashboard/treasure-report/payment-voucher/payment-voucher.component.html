@@ -29,8 +29,8 @@
                         <mat-label>Voucher Source Unit</mat-label>
                         <mat-select formControlName="sourceUnit">
                             <mat-option value="">Choose Source</mat-option>
-                            <mat-option [value]="source.value"
-                                        *ngFor="let source of sourceUnit">{{source?.name}}</mat-option>
+                            <mat-option [value]="source.id"
+                                        *ngFor="let source of sourceUnit">{{source?.longName}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
@@ -72,46 +72,46 @@
             <div class="content mt-20px">
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-                        <span class="mat-header-cell">S.No.</span>
-                        <span class="mat-header-cell">Year</span>
-                        <span class="mat-header-cell">Deptal No.</span>
-                        <span class="mat-header-cell">Payee Names</span>
-                        <span class="mat-header-cell">Amount (Net)</span>
-                        <span class="mat-header-cell">Taxes</span>
-                        <span class="mat-header-cell">Payment Ref. (#)</span>
-                        <span class="mat-header-cell">Last Actioned</span>
-                        <span class="mat-header-cell">Status</span>
+                        <span class="mat-header-cell text-center">S.No.</span>
+                        <span class="mat-header-cell text-center">Year</span>
+                        <span class="mat-header-cell text-center">Deptal No.</span>
+                        <span class="mat-header-cell text-center">Payee Names</span>
+                        <span class="mat-header-cell text-center">Amount (Net)</span>
+                        <span class="mat-header-cell text-center">Taxes</span>
+                        <span class="mat-header-cell text-center">Payment Ref. (#)</span>
+                        <span class="mat-header-cell text-center">Last Actioned</span>
+                        <span class="mat-header-cell text-center">Status</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index"
                                          [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{i + 1}}.</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.year}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.deptalNo}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.deptalId ? reportData?.deptalId : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.payeeName}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.payee ? reportData?.payee : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.amount}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.amount ? reportData?.amount : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.taxes}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.taxes ? reportData?.taxes : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.paymentRef}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.paymentRef ? reportData?.paymentRef : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.lastActioned}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{reportData?.status}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.status ? reportData?.status : '-'}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div>
@@ -167,8 +167,8 @@
                                             </tr>
                                             </thead>
                                             <tbody
-                                                *ngIf="reportData && reportData['payee'] && reportData['payee'].length > 0; else noChildToShow">
-                                            <tr *ngFor="let data of reportData['payee']; let i = index">
+                                                *ngIf="reportData && reportData['payees'] && reportData['payees'].length > 0; else noChildToShow">
+                                            <tr *ngFor="let data of reportData['payees']; let i = index">
                                                 <td>
                                                     <div class="title">
                                                         {{data?.id}}
@@ -240,6 +240,8 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                            </tbody>
+                                            <tbody>
                                             <tr>
                                                 <td>
                                                     <button mat-button class="payee-report"

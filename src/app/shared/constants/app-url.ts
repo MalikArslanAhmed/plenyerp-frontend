@@ -504,6 +504,14 @@ export class AppUrl {
         }
     }
 
+    static PAYMENT_VOUCHER(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/payment-vouchers` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/payment-vouchers`;
+        }
+    }
+
     static DELETE_CENSURE(id?): string {
         return AppUrl.API_URL + 'censures/' + id;
     }

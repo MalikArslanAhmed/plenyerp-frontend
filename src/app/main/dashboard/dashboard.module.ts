@@ -228,6 +228,7 @@ import { AdminSegmentSelectAccountHeadComponent } from './treasure-report/defaul
 
 import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie.component';
 import {BudgetControlAieModalComponent} from './budget-control-aie/budget-control-aie-modal/budget-control-aie-modal.component';
+import { PaymentVoucherTaxesComponent } from './treasure-report/payment-voucher/payment-voucher-taxes/payment-voucher-taxes.component';
 
 @NgModule({
     declarations: [
@@ -433,6 +434,8 @@ import {BudgetControlAieModalComponent} from './budget-control-aie/budget-contro
         AdminSegmentSelectAccountHeadComponent,
         BudgetControlAieComponent,
         BudgetControlAieModalComponent
+        BudgetControlAieComponent,
+        PaymentVoucherTaxesComponent
     ],
     imports: [
         CommonModule,

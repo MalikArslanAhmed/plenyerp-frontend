@@ -1,8 +1,11 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ContactInfoService} from "../../../../../shared/services/contact-info.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {fuseAnimations} from "../../../../../../@fuse/animations";
+import {PaymentVoucherTaxesComponent} from '../payment-voucher-taxes/payment-voucher-taxes.component';
+import {AlertService} from "../../../../../shared/services/alert.service";
+import {NumberToWordsPipe} from "../../../../../shared/pipes/number-to-word.pipe";
+import {EmployeeService} from "../../../../../shared/services/employee.service";
 
 @Component({
     selector: 'app-schedule-payee-employee',
@@ -18,11 +21,15 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     isSubmitted = false;
     salaryScales: any = [];
     updateData: any;
+    dialogRef: any;
+    employees = [];
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeEmployeeComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-                private contactInfoService: ContactInfoService) {
+                private _matDialog: MatDialog,
+                private alertService: AlertService,
+                private employeesService: EmployeeService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Country';
@@ -36,6 +43,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
+        this.getEmployees();
         // this.checkForUpdate();
     }
 
@@ -45,11 +53,11 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             departmentalNo: [''],
             details: [''],
             payeeId: [''],
-            payeeName: [''],
+            payeeName: [{'value': '', disabled: true}],
             netAmount: [''],
-            taxAmount: [''],
-            totalAmount: [''],
-            totalAmountInWords: ['']
+            taxAmount: [{'value': '', disabled: true}],
+            totalAmount: [{'value': '', disabled: true}],
+            totalAmountInWords: [{'value': '', disabled: true}]
         });
     }
 
@@ -91,6 +99,53 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 this.schedulePayeeEmployeeForm.reset();
                 this.isSubmitted = false;
             });*/
+        }
+    }
+
+    addApplicableTaxes() {
+        if (!this.schedulePayeeEmployeeForm.value || this.schedulePayeeEmployeeForm.value.netAmount === '') {
+            this.alertService.showErrors('Net Amount can\'t be empty');
+            return;
+        }
+        this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {
+                action: 'CREATE',
+                netAmount: this.schedulePayeeEmployeeForm.value.netAmount,
+            }
+        });
+        const numberToWords = new NumberToWordsPipe();
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.schedulePayeeEmployeeForm.patchValue({
+                'taxAmount': response['totalTaxes'],
+                'totalAmount': parseFloat(this.schedulePayeeEmployeeForm.value.netAmount) + parseFloat(response['totalTaxes']),
+                'totalAmountInWords': numberToWords.transform(parseFloat(this.schedulePayeeEmployeeForm.value.netAmount) + parseFloat(response['totalTaxes']))
+            });
+        });
+    }
+
+    getEmployees(): void {
+        this.employees = [];
+        this.employeesService.getEmployees({page: -1}).subscribe(data => {
+            this.employees = data.items;
+        });
+    }
+
+    payeeChange(event) {
+        let selectedEmployee = '';
+        if (this.employees && this.employees.length > 0 && event) {
+            this.employees.forEach(employee => {
+                if (parseInt(employee.id) === parseInt(event)) {
+                    selectedEmployee = employee.firstName + '-' + employee.lastName;
+                }
+            });
+
+            this.schedulePayeeEmployeeForm.patchValue({
+                'payeeName': selectedEmployee
+            });
         }
     }
 }

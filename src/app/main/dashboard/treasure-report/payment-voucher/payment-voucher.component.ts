@@ -7,6 +7,9 @@ import {SchedulePayeeCustomerComponent} from './schedule-payee-customer/schedule
 import {SchedulePayeeEmployeeComponent} from "./schedule-payee-employee/schedule-payee-employee.component";
 import {PaymentVoucherCreateComponent} from './payment-voucher-create/payment-voucher-create.component';
 import {AlertService} from "../../../../shared/services/alert.service";
+import {PaymentVoucherService} from "../../../../shared/services/payment-voucher.service";
+import * as moment from "moment";
+import {TreasureReportService} from "../../../../shared/services/treasure-report.service";
 
 @Component({
     selector: 'app-payment-voucher',
@@ -133,12 +136,7 @@ export class PaymentVoucherComponent implements OnInit {
         }
     ];
     panelOpenState: boolean = false;
-    sourceUnit = [
-        {
-            'name': 'Loan & Advances',
-            'value': 'LOAN_AND_ADVANCES'
-        }
-    ];
+    sourceUnit = [];
     statuses = [
         {
             'name': 'All',
@@ -217,13 +215,20 @@ export class PaymentVoucherComponent implements OnInit {
     ];
     dialogRef: any;
 
-    constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
-                private fb: FormBuilder,
+    constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
-                private alertService: AlertService) {
+                private alertService: AlertService,
+                private paymentVoucherService: PaymentVoucherService,
+                private treasureReportService: TreasureReportService) {
     }
 
     ngOnInit(): void {
+        this.refresh();
+        this.getPyamentVoucher({});
+        this.getVoucherSourceUnitList()
+    }
+
+    refresh() {
         this.filterPaymentVoucherForm = this.fb.group({
             'status': ['ALL'],
             'search': ['']
@@ -231,6 +236,20 @@ export class PaymentVoucherComponent implements OnInit {
         this.createPaymentVoucherForm = this.fb.group({
             'sourceUnit': [''],
             'type': ['']
+        });
+    }
+
+    getPyamentVoucher(params) {
+        this.paymentVoucherService.get(params).subscribe(data => {
+            this.paymentVoucherData = data.items;
+            if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
+                this.paymentVoucherData.forEach(d => {
+                    d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
+                    d['isOpen'] = !this.panelOpenState;
+                    this.getChildReportData(d);
+                });
+                this.panelOpenState = !this.panelOpenState;
+            }
         });
     }
 
@@ -249,12 +268,12 @@ export class PaymentVoucherComponent implements OnInit {
 
     getChildReportData(item) {
         const params = {};
-        if (item && item.id) {
+        /*if (item && item.id) {
             params['parentId'] = item.id;
             this.jvLedgerReportService.getStatementPositionReport(params).subscribe(data => {
                 item['childs'] = data.items;
             });
-        }
+        }*/
     }
 
     scheduleEmployee() {
@@ -294,7 +313,6 @@ export class PaymentVoucherComponent implements OnInit {
             return;
         }
 
-
         if (this.types && this.types.length > 0 && this.sourceUnit && this.sourceUnit.length > 0) {
             let selectedType = '';
             this.types.forEach(type => {
@@ -305,10 +323,10 @@ export class PaymentVoucherComponent implements OnInit {
 
             let selectedSource = [];
             this.sourceUnit.forEach(source => {
-                if (source.value === this.createPaymentVoucherForm.value['sourceUnit']) {
+                if (source.id === this.createPaymentVoucherForm.value['sourceUnit']) {
                     selectedSource.push({
-                        'name': source.name,
-                        'value': source.value
+                        'name': source.id + ' - ' + source.longName,
+                        'value': source.id
                     });
                 }
             });
@@ -318,11 +336,18 @@ export class PaymentVoucherComponent implements OnInit {
                 data: {action: 'CREATE', header: selectedType, source: selectedSource}
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-                // console.log('response', response);
                 if (!response) {
                     return;
                 }
+                this.getPyamentVoucher({});
             });
         }
+    }
+
+    getVoucherSourceUnitList() {
+        this.sourceUnit = [];
+        this.treasureReportService.list({page: -1}).subscribe(data => {
+            this.sourceUnit = data.items;
+        });
     }
 }
