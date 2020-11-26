@@ -30,12 +30,11 @@
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                <mat-form-field appearance="outline" fxFlex>
+                <mat-form-field appearance="outline" fxFlex (click)="selectAdminEmployee('Select Payee Employee')">
                     <mat-label>Payee Id</mat-label>
-                    <mat-select formControlName="payeeId" (selectionChange)="payeeChange($event.value)">
+                    <mat-select formControlName="payingOfficerId">
                         <mat-option value="">Choose Employee</mat-option>
-                        <mat-option [value]="employee.id" *ngFor="let employee of employees">{{employee?.id}}
-                            - {{employee?.firstName}}</mat-option>
+                        <mat-option [value]="payingOfficer.id" *ngFor="let payingOfficer of payingOfficers">{{payingOfficer?.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>

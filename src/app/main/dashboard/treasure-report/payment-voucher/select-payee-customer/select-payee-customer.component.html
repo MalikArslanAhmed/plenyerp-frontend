@@ -1,0 +1,85 @@
+<div class="page-layout simple left-sidebar inner-sidebar inner-scroll" id="items-list-select-component">
+    <mat-toolbar class="mat-accent m-0 items-data" matDialogTitle>
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Select Payee Customers</span>
+            <button (click)="matDialogRef.close()" aria-label="Close dialog" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="content">
+        <form [formGroup]="searchCustomerForm">
+            <mat-form-field appearance="outline" fxFlex class="search-customer">
+                <mat-label>Search for Customer Id</mat-label>
+                <input formControlName="search"
+                       placeholder="Search for Cashbook ID or Title"
+                       matInput (keyup)="search()">
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="content">
+        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+            <div fxLayout="column" fxLayoutGap="5px" fxFlex="100">
+                <div fxFlex="100">
+                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="companiesList">
+                        <ng-container matColumnDef="sno">
+                            <mat-header-cell *matHeaderCellDef>S.No.</mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <p class="phone text-truncate">
+                                    {{item.sno}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="companyId">
+                            <mat-header-cell *matHeaderCellDef>Company ID</mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <p class="phone text-truncate">
+                                    {{item.id}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="companyName">
+                            <mat-header-cell *matHeaderCellDef>Company Name</mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <p class="phone text-truncate">
+                                    {{item.name}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell *matHeaderCellDef>
+                                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let item">
+                                <div fxFlex="row" fxLayoutAlign="end center">
+                                    <div>
+                                        <button mat-icon-button title="Choose" (click)="matDialogRef.close(item)">
+                                            <mat-icon class="addBtn">check_circle</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let item; columns: displayedColumns;" class="contact"
+                                 [@animate]="{value:'*',params:{y:'100%'}}">
+                        </mat-row>
+                    </mat-table>
+                </div>
+                <div fxFlex="100" *ngIf="companiesList.length > 0">
+                    <mat-paginator #paginator
+                                   [length]="pagination.total"
+                                   [pageSize]="pagination.perpage"
+                                   [pageIndex]="pagination.page-1"
+                                   (page)="pageEvent = onPageChange($event)"
+                    >
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
