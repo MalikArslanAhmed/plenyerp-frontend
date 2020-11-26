@@ -229,6 +229,13 @@ app-budget-control-aie {
         width: 150px;
         color: #fff!important;
     }
+    .search_btn{
+        background-color: #039be5!important;
+        width: 100px;
+        color: #fff!important;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
     .simple_table{
         width: 100%;
         table{
@@ -273,11 +280,14 @@ app-budget-control-aie {
                     th{
                         border: 1px solid #e2e2e2;
                         border-collapse: collapse;
-                        width: 30%;
+                        width: 28%;
                         padding: 8px;
                         text-align: center;
                         &:first-child{
                             width: 10px;
+                        }
+                        &:last-child{
+                            width: 100px!important;
                         }
                     }
                 }

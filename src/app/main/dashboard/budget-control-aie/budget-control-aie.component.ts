@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -46,7 +46,11 @@ export class BudgetControlAieComponent implements OnInit {
     budgetAieId;
     economicCodeData = [];
     isUpdateAieTable = false;
+
     totalAmount = 0;
+    isAddRowValid = false;
+    filterEcoCode = null;
+    ecoCodeOriginalData = [];
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private fb: FormBuilder,
@@ -162,6 +166,7 @@ export class BudgetControlAieComponent implements OnInit {
                 disabled: true
             });
             this.economicCodeData = [];
+            this.ecoCodeOriginalData = [];
         });
     }
 
@@ -189,35 +194,49 @@ export class BudgetControlAieComponent implements OnInit {
                 disabled: true
             });
             this.economicCodeData = [];
+            this.ecoCodeOriginalData = [];
         });
     }
 
 
     addRow() {
-        this.dialogRef = this._matDialog.open(BudgetControlAieModalComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE'}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-            if (this.economicCodeData && this.economicCodeData.length) {
-                const selectedIndex = this.economicCodeData.map(val => {
-                    return val.ecoCode;
-                }).indexOf(response.value.ecoCode);
-                // console.log('--->>>', selectedIndex);
-                if (selectedIndex === -1) {
-                    this.economicCodeData.push(response.value);
-                } else {
-                    this.alertService.showErrors('Already added please select an other Economic code');
-                }
-            } else {
-                this.economicCodeData.push(response.value);
-            }
-            this.getTotalAmount();
+        const budgetForm = this.budgetControlForm.value;
+        if (budgetForm.fundSegmentId && budgetForm.adminSegmentId) {
+            this.isAddRowValid = true;
 
-        });
+            this.dialogRef = this._matDialog.open(BudgetControlAieModalComponent, {
+                panelClass: 'contact-form-dialog',
+                data: {action: 'CREATE'}
+            });
+            this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+                if (!response) {
+                    return;
+                }
+                if (this.economicCodeData && this.economicCodeData.length) {
+                    const selectedIndex = this.economicCodeData.map(val => {
+                        return val.ecoCode;
+                    }).indexOf(response.value.ecoCode);
+                    // console.log('--->>>', selectedIndex);
+                    if (selectedIndex === -1) {
+                        this.economicCodeData.push(response.value);
+                        this.ecoCodeOriginalData.push(response.value);
+                    } else {
+                        this.alertService.showErrors('Already added please select an other Economic code');
+                    }
+                } else {
+                    this.economicCodeData.push(response.value);
+                    this.ecoCodeOriginalData.push(response.value);
+                }
+                this.getTotalAmount();
+
+            });
+        } else if (budgetForm.adminSegmentId) {
+            this.alertService.showErrors('Fund segment is not selected');
+        } else if (budgetForm.fundSegmentId) {
+            this.alertService.showErrors('Admin segment is not selected');
+        } else {
+            this.alertService.showErrors('Admin segment && Fund segment is not selected');
+        }
     }
 
     editEcoFormField(item, itemIndex) {
@@ -232,9 +251,10 @@ export class BudgetControlAieComponent implements OnInit {
             }
             if (response.value && this.economicCodeData && this.economicCodeData.length) {
                 this.economicCodeData.forEach(val => {
-                    if (val.ecoCode === response.value.ecoCode) {
-                        val.amount = response.value.amount;
-                    }
+                    // if (val.ecoCode === response.value.ecoCode) {
+                    //     val.amount = response.value.amount;
+                    // }
+                    this.economicCodeData[itemIndex] = response.value;
                 });
             }
             this.getTotalAmount();
@@ -249,10 +269,12 @@ export class BudgetControlAieComponent implements OnInit {
     reset() {
         this.budgetControlForm.reset();
         this.economicCodeData = [];
+        this.ecoCodeOriginalData = [];
         this.adminSegments = [];
         this.fundSegments = [];
         this.isUpdateAieTable = false;
         this.budgetControlAieList = [];
+        this.filterEcoCode = null;
     }
 
     save() {
@@ -286,7 +308,8 @@ export class BudgetControlAieComponent implements OnInit {
             });
         } else {
             this.budgetService.addBudgetControlAie(params).subscribe(data => {
-                this.getBudgetAieData();
+                // this.getBudgetAieData();
+                this.budgetControlAieList = [];
                 this.reset();
                 this.isUpdateAieTable = false;
             });
@@ -296,6 +319,7 @@ export class BudgetControlAieComponent implements OnInit {
 
     editAieTableItem(items) {
         this.economicCodeData = [];
+        this.ecoCodeOriginalData = [];
         this.isUpdateAieTable = true;
         this.budgetAieId = items.id;
         // console.log('--->>>edit', items);
@@ -310,6 +334,7 @@ export class BudgetControlAieComponent implements OnInit {
             });
         }
         this.economicCodeData = aieEconomicBalances;
+        this.ecoCodeOriginalData = aieEconomicBalances;
         this.budgetControlForm.patchValue({
             adminSegmentId: items.adminSegmentId,
             fundSegmentId: items.fundSegmentId,
@@ -319,6 +344,25 @@ export class BudgetControlAieComponent implements OnInit {
 
         });
         this.getTotalAmount();
+
+    }
+
+    search() {
+        // console.log('---search', this.filterEcoCode);
+        const filterData = [];
+        if (this.economicCodeData && this.economicCodeData.length) {
+            this.economicCodeData.forEach(v => {
+                if (v.ecoCode === Number(this.filterEcoCode)) {
+                    filterData.push(v);
+                }
+            });
+            if (this.filterEcoCode){
+                this.economicCodeData = filterData;
+            }else {
+                this.economicCodeData = this.ecoCodeOriginalData;
+            }
+            this.getTotalAmount();
+        }
 
     }
 }

@@ -47,9 +47,9 @@ export class BudgetControlService extends BaseService {
     }
 
     addBudgetControlAie(data): Observable<any> {
-        return this.postRequest(AppUrl.GET_BUDGET_CONTROL_AIE(), data);
+        return this.postRequestWithoutDataDeletion(AppUrl.GET_BUDGET_CONTROL_AIE(), data);
     }
     updateBudgetControlAie(id, data): Observable<any> {
-        return this.putRequest(AppUrl.GET_BUDGET_CONTROL_AIE(id), data);
+        return this.putRequestWithoutDataDeletion(AppUrl.GET_BUDGET_CONTROL_AIE(id), data);
     }
 }

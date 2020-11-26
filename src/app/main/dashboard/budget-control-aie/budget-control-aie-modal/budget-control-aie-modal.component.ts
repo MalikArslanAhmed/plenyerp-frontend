@@ -24,7 +24,7 @@ export class BudgetControlAieModalComponent implements OnInit {
     updateData: any;
     dialogRef: any;
     economicCodes;
-    isUpdate = false;
+    isEconomicFormFill = true;
     constructor(public matDialogRef: MatDialogRef<BudgetControlAieModalComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -33,7 +33,6 @@ export class BudgetControlAieModalComponent implements OnInit {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Economic code';
-            this.isUpdate = true;
             if (_data.economic) {
                 this.updateData = _data;
             }
@@ -45,13 +44,35 @@ export class BudgetControlAieModalComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.checkForUpdate();
+        this.checkEconomicFormValue();
     }
 
     refresh() {
         this.economicCodeForm = this.fb.group({
-            ecoCode: ['', Validators.required],
-            title: ['', Validators.required],
-            amount: ['', Validators.required],
+            ecoCode: [''],
+            title: [''],
+            amount: [''],
+        });
+        this.economicCodeForm.get('ecoCode').valueChanges.subscribe(v => {
+            if (v) {
+                this.checkEconomicFormValue();
+            } else {
+                this.isEconomicFormFill = true;
+            }
+        });
+        this.economicCodeForm.get('title').valueChanges.subscribe(v => {
+            if (v) {
+                this.checkEconomicFormValue();
+            } else {
+                this.isEconomicFormFill = true;
+            }
+        });
+        this.economicCodeForm.get('amount').valueChanges.subscribe(v => {
+            if (v) {
+                this.checkEconomicFormValue();
+            } else {
+                this.isEconomicFormFill = true;
+            }
         });
     }
 
@@ -64,7 +85,14 @@ export class BudgetControlAieModalComponent implements OnInit {
             });
         }
     }
-
+    checkEconomicFormValue() {
+        const formValue = this.economicCodeForm.value;
+        if (formValue.ecoCode && formValue.title && formValue.amount) {
+            this.isEconomicFormFill = false;
+        }else {
+            this.isEconomicFormFill = true;
+        }
+    }
     economicModalOpen() {
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
