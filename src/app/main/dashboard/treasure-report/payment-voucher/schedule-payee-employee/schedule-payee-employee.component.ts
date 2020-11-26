@@ -6,6 +6,7 @@ import {PaymentVoucherTaxesComponent} from '../payment-voucher-taxes/payment-vou
 import {AlertService} from "../../../../../shared/services/alert.service";
 import {NumberToWordsPipe} from "../../../../../shared/pipes/number-to-word.pipe";
 import {EmployeeService} from "../../../../../shared/services/employee.service";
+import {AdminSegmentEmployeeSelectComponent} from "../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component";
 
 @Component({
     selector: 'app-schedule-payee-employee',
@@ -23,6 +24,9 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     updateData: any;
     dialogRef: any;
     employees = [];
+    payingOfficers = [];
+    checkingOfficers = [];
+    financialControllers = [];
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeEmployeeComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -52,7 +56,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             year: [''],
             departmentalNo: [''],
             details: [''],
-            payeeId: [''],
+            payingOfficerId: [{'value': '', disabled: true}],
             payeeName: [{'value': '', disabled: true}],
             netAmount: [''],
             taxAmount: [{'value': '', disabled: true}],
@@ -147,5 +151,54 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 'payeeName': selectedEmployee
             });
         }
+    }
+
+    selectAdminEmployee(type) {
+        let allowType: any = 'BOTH';
+        let node: any = undefined;
+        if (type === 'Select Checking Employee' || type === 'Select Paying Employee' || type === 'Select Financial Control') {
+            allowType = 'BOTH';
+        }
+
+        this.dialogRef = this._matDialog.open(AdminSegmentEmployeeSelectComponent, {
+            panelClass: 'transaction-items-form-dialog',
+            data: {head: type, allow: allowType, node: node}
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            if (type === 'Select Checking Employee') {
+                this.checkingOfficers = [{
+                    'name': response['empData'].id,
+                    'id': response['empData'].id
+                }];
+                this.schedulePayeeEmployeeForm.patchValue({
+                    checkingOfficerId: response['empData'].id,
+                    payeeName: response['empData'].firstName + ' ' + response['empData'].lastName,
+                    disabled: true
+                });
+            } else if (type === 'Select Payee Employee') {
+                this.payingOfficers = [{
+                    'name': response['empData'].id,
+                    'id': response['empData'].id
+                }];
+                this.schedulePayeeEmployeeForm.patchValue({
+                    payingOfficerId: response['empData'].id,
+                    payeeName: response['empData'].firstName + ' ' + response['empData'].lastName,
+                    disabled: true
+                });
+            } else if (type === 'Select Financial Control') {
+                this.financialControllers = [{
+                    'name': response['empData'].id,
+                    'id': response['empData'].id
+                }];
+                this.schedulePayeeEmployeeForm.patchValue({
+                    financialControllerId: response['empData'].id,
+                    payeeName: response['empData'].firstName + ' ' + response['empData'].lastName,
+                    disabled: true
+                });
+            }
+        });
     }
 }

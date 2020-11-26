@@ -48,7 +48,17 @@
                         </button>
                     </div>
                 </form>
-                <form [formGroup]="filterPaymentVoucherForm" style="margin-top: -40px">
+            </div>
+            <div class="content" style="margin-top: 20px">
+                <form [formGroup]="filterPaymentVoucherForm">
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-label>Voucher Source Unit</mat-label>
+                        <mat-select formControlName="sourceUnit">
+                            <mat-option value="">Choose Source</mat-option>
+                            <mat-option [value]="source.id"
+                                        *ngFor="let source of sourceUnit">{{source?.longName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
                         <mat-label>Voucher Status</mat-label>
                         <mat-select formControlName="status">
@@ -70,8 +80,32 @@
             </div>
 
             <div class="content mt-20px">
+                <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+                    <button mat-button class="update-report" *ngIf="this.status === 'ALL' || this.status === 'CHECKED'">
+                        New
+                    </button>
+                    <button mat-button class="update-report" *ngIf="this.status === 'NEW' || this.status === 'APPROVED'">
+                        Checked
+                    </button>
+                    <button mat-button class="update-report" *ngIf="this.status === 'CHECKED' || this.status === 'BUDGET_CODES_VERIFIED'">
+                        Approved
+                    </button>
+                    <button mat-button class="update-report" *ngIf="this.status === 'APPROVED' || this.status === 'AUDITED'">
+                        Budget Codes Verified
+                    </button>
+                    <button mat-button class="update-report" *ngIf="this.status === 'BUDGET_CODES_VERIFIED' || this.status === 'CLOSED'">
+                        Audited
+                    </button>
+                    <button mat-button class="update-report" *ngIf="this.status === 'AUDITED' || this.status === 'ON_MANDATE'">
+                        Closed
+                    </button>
+                    <button mat-button class="update-report" *ngIf="this.status === 'CLOSED'">
+                        On Mandate
+                    </button>
+                </div>
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                        <span class="mat-header-cell text-center">#</span>
                         <span class="mat-header-cell text-center">S.No.</span>
                         <span class="mat-header-cell text-center">Year</span>
                         <span class="mat-header-cell text-center">Deptal No.</span>
@@ -86,6 +120,13 @@
                                          [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">
+                                    <mat-checkbox (change)="checkPV(i, $event)"
+                                                  (click)="$event.stopPropagation()"
+                                                  [checked]="reportData.checked ? true : null"></mat-checkbox>
+                                </p>
+                            </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
                             </span>

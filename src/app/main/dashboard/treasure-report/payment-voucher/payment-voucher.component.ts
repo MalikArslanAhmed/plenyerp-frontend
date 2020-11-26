@@ -22,7 +22,7 @@ export class PaymentVoucherComponent implements OnInit {
     filterPaymentVoucherForm: FormGroup;
     createPaymentVoucherForm: FormGroup;
     paymentVoucherData = [
-        {
+        /*{
             'year': '2018',
             'deptalNo': '1200003',
             'payeeName': 'Abhishek Mishra',
@@ -133,7 +133,7 @@ export class PaymentVoucherComponent implements OnInit {
                     'amount': 10000
                 }
             ]
-        }
+        }*/
     ];
     panelOpenState: boolean = false;
     sourceUnit = [];
@@ -214,6 +214,7 @@ export class PaymentVoucherComponent implements OnInit {
         },
     ];
     dialogRef: any;
+    status = 'ALL';
 
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
@@ -231,7 +232,8 @@ export class PaymentVoucherComponent implements OnInit {
     refresh() {
         this.filterPaymentVoucherForm = this.fb.group({
             'status': ['ALL'],
-            'search': ['']
+            'search': [''],
+            'sourceUnit': ['']
         });
         this.createPaymentVoucherForm = this.fb.group({
             'sourceUnit': [''],
@@ -244,6 +246,7 @@ export class PaymentVoucherComponent implements OnInit {
             this.paymentVoucherData = data.items;
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
                 this.paymentVoucherData.forEach(d => {
+                    d['checked'] = false;
                     d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
                     d['isOpen'] = !this.panelOpenState;
                     this.getChildReportData(d);
@@ -301,7 +304,14 @@ export class PaymentVoucherComponent implements OnInit {
     }
 
     filterPaymentVoucher() {
-        console.log('filterPaymentVoucherForm', this.filterPaymentVoucherForm.value);
+        let params = {};
+        if (this.filterPaymentVoucherForm.value.status !== 'ALL') {
+            params['status'] = this.filterPaymentVoucherForm.value.status;
+            this.status = this.filterPaymentVoucherForm.value.status;
+        }
+        params['sourceUnit'] = this.filterPaymentVoucherForm.value.sourceUnit;
+        params['search'] = this.filterPaymentVoucherForm.value.search;
+        this.getPyamentVoucher(params);
     }
 
     addPaymentVoucher() {
@@ -349,5 +359,11 @@ export class PaymentVoucherComponent implements OnInit {
         this.treasureReportService.list({page: -1}).subscribe(data => {
             this.sourceUnit = data.items;
         });
+    }
+
+    checkPV(index, event) {
+        console.log(index);
+        console.log(event);
+        this.paymentVoucherData[index].checked = event.checked;
     }
 }

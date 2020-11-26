@@ -6,6 +6,7 @@ import {PaymentVoucherTaxesComponent} from "../payment-voucher-taxes/payment-vou
 import {NumberToWordsPipe} from "../../../../../shared/pipes/number-to-word.pipe";
 import {AlertService} from "../../../../../shared/services/alert.service";
 import {EmployeeService} from "../../../../../shared/services/employee.service";
+import {SelectPayeeCustomerComponent} from '../select-payee-customer/select-payee-customer.component';
 
 @Component({
     selector: 'app-schedule-payee-customer',
@@ -23,6 +24,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     updateData: any;
     dialogRef: any;
     employees = [];
+    customers = [];
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeCustomerComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -52,8 +54,8 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             year: [''],
             departmentalNo: [''],
             details: [''],
-            payeeId: [''],
-            payeeName: [''],
+            payeeId: [{'value': '', disabled: true}],
+            payeeName: [{'value': '', disabled: true}],
             netAmount: [''],
             taxAmount: [{'value': '', disabled: true}],
             totalAmount: [{'value': '', disabled: true}],
@@ -148,5 +150,25 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 'payeeName': selectedEmployee
             });
         }
+    }
+
+    selectPayeeCustomer() {
+        this.dialogRef = this._matDialog.open(SelectPayeeCustomerComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            console.log('response', response);
+            if (!response) {
+                return;
+            }
+            this.customers = [{
+                id: response.id,
+                name: response.id,
+            }];
+            this.schedulePayeeCustomerForm.patchValue({
+                'payeeId': response.id,
+                'payeeName': response.name
+            });
+        });
     }
 }

@@ -12,6 +12,7 @@
         <form [formGroup]="schedulePayeeCustomerForm">
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Voucher Year</mat-label>
                     <mat-select formControlName="year">
                         <mat-option value="">Voucher Year</mat-option>
                         <mat-option value="2017">2017</mat-option>
@@ -29,12 +30,11 @@
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                <mat-form-field appearance="outline" fxFlex>
+                <mat-form-field appearance="outline" fxFlex (click)="selectPayeeCustomer()">
                     <mat-label>Payee Id</mat-label>
                     <mat-select formControlName="payeeId" (selectionChange)="payeeChange($event.value)">
                         <mat-option value="">Choose Employee</mat-option>
-                        <mat-option [value]="employee.id" *ngFor="let employee of employees">{{employee?.id}}
-                            - {{employee?.firstName}}</mat-option>
+                        <mat-option [value]="customer.id" *ngFor="let customer of customers">{{customer?.id}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
