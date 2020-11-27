@@ -219,13 +219,13 @@ export class BudgetControlAieComponent implements OnInit {
                     // console.log('--->>>', selectedIndex);
                     if (selectedIndex === -1) {
                         this.economicCodeData.push(response.value);
-                        this.ecoCodeOriginalData.push(response.value);
+                        this.ecoCodeOriginalData = this.economicCodeData;
                     } else {
                         this.alertService.showErrors('Already added please select an other Economic code');
                     }
                 } else {
                     this.economicCodeData.push(response.value);
-                    this.ecoCodeOriginalData.push(response.value);
+                    this.ecoCodeOriginalData = this.economicCodeData;
                 }
                 this.getTotalAmount();
 
