@@ -293,12 +293,17 @@
                                             <tr>
                                                 <td>
                                                     <button mat-button class="payee-report"
-                                                            (click)="scheduleEmployee()">Schedule Payee Employees
+                                                            (click)="scheduleEmployee(reportData)">Schedule Payee Employees
                                                     </button>
                                                 </td>
                                                 <td>
                                                     <button mat-button class="payee-report"
-                                                            (click)="scheduleCustomers()">Schedule Payee Customers
+                                                            (click)="scheduleCustomers(reportData)">Schedule Payee Customers
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button mat-button class="payee-report"
+                                                            (click)="scheduleEconomicCodes(reportData)">Schedule Economic Codes
                                                     </button>
                                                 </td>
                                                 <td colspan="12"></td>

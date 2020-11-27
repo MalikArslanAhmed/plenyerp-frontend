@@ -25,6 +25,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     dialogRef: any;
     employees = [];
     customers = [];
+    payeeData: any;
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeCustomerComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -32,7 +33,9 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
                 private employeesService: EmployeeService) {
+        console.log('_data', _data);
         this.action = _data.action;
+        this.payeeData = _data.pv;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Country';
             if (_data.country) {
@@ -61,6 +64,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}]
         });
+        console.log('this.payeeData', this.payeeData);
     }
 
     /*checkForUpdate() {

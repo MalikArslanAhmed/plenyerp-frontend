@@ -10,6 +10,7 @@ import {AlertService} from '../../../../shared/services/alert.service';
 import {PaymentVoucherService} from '../../../../shared/services/payment-voucher.service';
 import * as moment from 'moment';
 import {TreasureReportService} from '../../../../shared/services/treasure-report.service';
+import {ScheduleEconomicCodesComponent} from "./schedule-economic-codes/schedule-economic-codes.component";
 
 @Component({
     selector: 'app-payment-voucher',
@@ -279,10 +280,11 @@ export class PaymentVoucherComponent implements OnInit {
         }*/
     }
 
-    scheduleEmployee() {
+    scheduleEmployee(data) {
+        console.log('data', data);
         this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE'}
+            data: {action: 'CREATE', pv: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -291,10 +293,22 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    scheduleCustomers() {
+    scheduleCustomers(data) {
         this.dialogRef = this._matDialog.open(SchedulePayeeCustomerComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE'}
+            data: {action: 'CREATE', pv: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+        });
+    }
+
+    scheduleEconomicCodes(data) {
+        this.dialogRef = this._matDialog.open(ScheduleEconomicCodesComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'CREATE', pv: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -381,7 +395,7 @@ export class PaymentVoucherComponent implements OnInit {
             };
             console.log('--->>>>', params);
             this.paymentVoucherService.getUpdateStatus(params).subscribe(data => {
-                    // console.log('---->>success', data);
+                // console.log('---->>success', data);
             });
         }
     }

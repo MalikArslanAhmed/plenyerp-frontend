@@ -230,6 +230,7 @@ import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie
 import {BudgetControlAieModalComponent} from './budget-control-aie/budget-control-aie-modal/budget-control-aie-modal.component';
 import { PaymentVoucherTaxesComponent } from './treasure-report/payment-voucher/payment-voucher-taxes/payment-voucher-taxes.component';
 import { SelectPayeeCustomerComponent } from './treasure-report/payment-voucher/select-payee-customer/select-payee-customer.component';
+import { ScheduleEconomicCodesComponent } from './treasure-report/payment-voucher/schedule-economic-codes/schedule-economic-codes.component';
 
 @NgModule({
     declarations: [
@@ -437,7 +438,8 @@ import { SelectPayeeCustomerComponent } from './treasure-report/payment-voucher/
         BudgetControlAieModalComponent,
         BudgetControlAieComponent,
         PaymentVoucherTaxesComponent,
-        SelectPayeeCustomerComponent
+        SelectPayeeCustomerComponent,
+        ScheduleEconomicCodesComponent
     ],
     imports: [
         CommonModule,
