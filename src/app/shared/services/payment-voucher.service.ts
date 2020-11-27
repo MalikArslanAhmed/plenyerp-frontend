@@ -29,4 +29,7 @@ export class PaymentVoucherService extends BaseService {
     update(id, data): Observable<any> {
         return this.putRequest(AppUrl.CURRENCIES(id), data);
     }
+    getUpdateStatus(data): Observable<any> {
+        return this.postRequest(AppUrl.UPDATE_VOUCHER_STATUS(), data);
+    }
 }

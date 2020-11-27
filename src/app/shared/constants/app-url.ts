@@ -1178,4 +1178,8 @@ export class AppUrl {
     static CASHBOOK_TYPES(): string {
         return AppUrl.API_URL + `treasury/cashbook-types`;
     }
+
+    static UPDATE_VOUCHER_STATUS(): string {
+        return AppUrl.API_URL + `treasury/payment-vouchers/update-status`;
+    }
 }

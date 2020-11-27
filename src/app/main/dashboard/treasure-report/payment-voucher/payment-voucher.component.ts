@@ -1,15 +1,15 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {JournalVoucherLedgerReportService} from "../../../../shared/services/journal-voucher-ledger-report.service";
-import {MatDialog} from "@angular/material/dialog";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {JournalVoucherLedgerReportService} from '../../../../shared/services/journal-voucher-ledger-report.service';
+import {MatDialog} from '@angular/material/dialog';
 import {SchedulePayeeCustomerComponent} from './schedule-payee-customer/schedule-payee-customer.component';
-import {SchedulePayeeEmployeeComponent} from "./schedule-payee-employee/schedule-payee-employee.component";
+import {SchedulePayeeEmployeeComponent} from './schedule-payee-employee/schedule-payee-employee.component';
 import {PaymentVoucherCreateComponent} from './payment-voucher-create/payment-voucher-create.component';
-import {AlertService} from "../../../../shared/services/alert.service";
-import {PaymentVoucherService} from "../../../../shared/services/payment-voucher.service";
-import * as moment from "moment";
-import {TreasureReportService} from "../../../../shared/services/treasure-report.service";
+import {AlertService} from '../../../../shared/services/alert.service';
+import {PaymentVoucherService} from '../../../../shared/services/payment-voucher.service';
+import * as moment from 'moment';
+import {TreasureReportService} from '../../../../shared/services/treasure-report.service';
 
 @Component({
     selector: 'app-payment-voucher',
@@ -226,7 +226,7 @@ export class PaymentVoucherComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.getPyamentVoucher({});
-        this.getVoucherSourceUnitList()
+        this.getVoucherSourceUnitList();
     }
 
     refresh() {
@@ -365,5 +365,24 @@ export class PaymentVoucherComponent implements OnInit {
         console.log(index);
         console.log(event);
         this.paymentVoucherData[index].checked = event.checked;
+    }
+
+    updateStatus(status: string) {
+        const paymentVoucherId = [];
+        if (this.paymentVoucherData && this.paymentVoucherData.length) {
+            this.paymentVoucherData.forEach(item => {
+                if (item.checked === true) {
+                    paymentVoucherId.push(item.id);
+                }
+            });
+            const params = {
+                status: status,
+                paymentVoucherIds: paymentVoucherId
+            };
+            console.log('--->>>>', params);
+            this.paymentVoucherService.getUpdateStatus(params).subscribe(data => {
+                    // console.log('---->>success', data);
+            });
+        }
     }
 }

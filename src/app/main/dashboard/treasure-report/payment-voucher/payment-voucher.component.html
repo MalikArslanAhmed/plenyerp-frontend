@@ -81,25 +81,32 @@
 
             <div class="content mt-20px">
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-                    <button mat-button class="update-report" *ngIf="this.status === 'ALL' || this.status === 'CHECKED'">
+                    <button mat-button class="update-report" (click)="updateStatus('NEW')"
+                            *ngIf="this.status === 'ALL' || this.status === 'CHECKED'">
                         New
                     </button>
-                    <button mat-button class="update-report" *ngIf="this.status === 'NEW' || this.status === 'APPROVED'">
+                    <button mat-button class="update-report" (click)="updateStatus('CHECKED')"
+                            *ngIf="this.status === 'NEW' || this.status === 'APPROVED'">
                         Checked
                     </button>
-                    <button mat-button class="update-report" *ngIf="this.status === 'CHECKED' || this.status === 'BUDGET_CODES_VERIFIED'">
+                    <button mat-button class="update-report" (click)="updateStatus('APPROVED')"
+                            *ngIf="this.status === 'CHECKED' || this.status === 'BUDGET_CODES_VERIFIED'">
                         Approved
                     </button>
-                    <button mat-button class="update-report" *ngIf="this.status === 'APPROVED' || this.status === 'AUDITED'">
+                    <button mat-button class="update-report" (click)="updateStatus('BUDGET_CODES_VERIFIED')"
+                            *ngIf="this.status === 'APPROVED' || this.status === 'AUDITED'">
                         Budget Codes Verified
                     </button>
-                    <button mat-button class="update-report" *ngIf="this.status === 'BUDGET_CODES_VERIFIED' || this.status === 'CLOSED'">
+                    <button mat-button class="update-report" (click)="updateStatus('AUDITED')"
+                            *ngIf="this.status === 'BUDGET_CODES_VERIFIED' || this.status === 'CLOSED'">
                         Audited
                     </button>
-                    <button mat-button class="update-report" *ngIf="this.status === 'AUDITED' || this.status === 'ON_MANDATE'">
+                    <button mat-button class="update-report" (click)="updateStatus('CLOSED')"
+                            *ngIf="this.status === 'AUDITED' || this.status === 'ON_MANDATE'">
                         Closed
                     </button>
-                    <button mat-button class="update-report" *ngIf="this.status === 'CLOSED'">
+                    <button mat-button class="update-report" (click)="updateStatus('ON_MANDATE')"
+                            *ngIf="this.status === 'CLOSED'">
                         On Mandate
                     </button>
                 </div>
