@@ -32,9 +32,10 @@
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex (click)="selectAdminEmployee('Select Payee Employee')">
                     <mat-label>Payee Id</mat-label>
-                    <mat-select formControlName="payingOfficerId">
+                    <mat-select formControlName="employeeId">
                         <mat-option value="">Choose Employee</mat-option>
-                        <mat-option [value]="payingOfficer.id" *ngFor="let payingOfficer of payingOfficers">{{payingOfficer?.name}}</mat-option>
+                        <mat-option [value]="payingOfficer.id"
+                                    *ngFor="let payingOfficer of payingOfficers">{{payingOfficer?.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
@@ -49,7 +50,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Taxes Amount</mat-label>
-                    <input matInput placeholder="Taxes Amount" formControlName="taxAmount">
+                    <input matInput placeholder="Taxes Amount" formControlName="totalTax">
                 </mat-form-field>
                 <div fxLayout="row" fxLayoutAlign="center">
                     <button mat-button class="add-taxes" (click)="addApplicableTaxes()">Add Taxes</button>
@@ -95,22 +96,68 @@
                         </th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td colspan="8">
-                            <div class="title text-center">
-                                No data to show
+                    <tbody *ngIf="banks && banks.length > 0; else noBankFound">
+                    <tr *ngFor="let bank of banks; let i = index">
+                        <td>
+                            <div class="title">
+                                <mat-radio-button (change)="selectRadio($event)"></mat-radio-button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{i + 1}}.
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.title}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.accountNo}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.type}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.bank?.bank}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.branches?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.branches?.sortCode}}
                             </div>
                         </td>
                     </tr>
                     </tbody>
+                    <ng-template #noBankFound>
+                        <tbody>
+                        <tr>
+                            <td colspan="8">
+                                <div class="title text-center">
+                                    No data to show
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </ng-template>
                 </table>
             </div>
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
-                (click)="matDialogRef.close(schedulePayeeEmployeeForm); savePayeeEmployee()"
+                (click)="savePayeeEmployee()"
                 [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
         </button>
         <button mat-button class="save-button"

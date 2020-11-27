@@ -7,6 +7,7 @@ import {AlertService} from "../../../../../shared/services/alert.service";
 import {NumberToWordsPipe} from "../../../../../shared/pipes/number-to-word.pipe";
 import {EmployeeService} from "../../../../../shared/services/employee.service";
 import {AdminSegmentEmployeeSelectComponent} from "../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component";
+import {PaymentVoucherService} from "../../../../../shared/services/payment-voucher.service";
 
 @Component({
     selector: 'app-schedule-payee-employee',
@@ -28,13 +29,15 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     checkingOfficers = [];
     financialControllers = [];
     payeeData: any;
+    banks = [];
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeEmployeeComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
-                private employeesService: EmployeeService) {
+                private employeesService: EmployeeService,
+                private paymentVoucherService: PaymentVoucherService,) {
         this.action = _data.action;
         this.payeeData = _data.pv;
         if (this.action === 'EDIT') {
@@ -56,16 +59,19 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     refresh() {
         this.schedulePayeeEmployeeForm = this.fb.group({
             year: [''],
-            departmentalNo: [''],
+            departmentalNo: [{'value': '', disabled: true}],
             details: [''],
-            payingOfficerId: [{'value': '', disabled: true}],
+            employeeId: [{'value': '', disabled: true}],
             payeeName: [{'value': '', disabled: true}],
             netAmount: [''],
-            taxAmount: [{'value': '', disabled: true}],
+            totalTax: [{'value': '', disabled: true}],
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}]
         });
         console.log('this.payeeData', this.payeeData);
+        this.schedulePayeeEmployeeForm.patchValue({
+            'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
+        })
     }
 
     /*checkForUpdate() {
@@ -85,11 +91,12 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            console.log('this.schedulePayeeEmployeeForm.value', this.schedulePayeeEmployeeForm.value);
-            /*this.contactInfoService.addCountry(this.schedulePayeeEmployeeForm.value).subscribe(data => {
+            // console.log('this.schedulePayeeEmployeeForm.value', this.schedulePayeeEmployeeForm.value);
+            this.paymentVoucherService.schedulePayee(this.payeeData.id, this.schedulePayeeEmployeeForm.value).subscribe(data => {
                 this.schedulePayeeEmployeeForm.reset();
                 this.isSubmitted = false;
-            });*/
+                this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+            });
         }
     }
 
@@ -127,7 +134,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 return;
             }
             this.schedulePayeeEmployeeForm.patchValue({
-                'taxAmount': response['totalTaxes'],
+                'totalTax': response['totalTaxes'],
                 'totalAmount': parseFloat(this.schedulePayeeEmployeeForm.value.netAmount) + parseFloat(response['totalTaxes']),
                 'totalAmountInWords': numberToWords.transform(parseFloat(this.schedulePayeeEmployeeForm.value.netAmount) + parseFloat(response['totalTaxes']))
             });
@@ -138,6 +145,13 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
         this.employees = [];
         this.employeesService.getEmployees({page: -1}).subscribe(data => {
             this.employees = data.items;
+        });
+    }
+
+    getBanks(id) {
+        this.employeesService.getBankDetailsList(id, {'page': -1}).subscribe(data => {
+            this.banks = data.items;
+            console.log("bank", this.banks);
         });
     }
 
@@ -187,10 +201,11 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                     'id': response['empData'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    payingOfficerId: response['empData'].id,
+                    employeeId: response['empData'].id,
                     payeeName: response['empData'].firstName + ' ' + response['empData'].lastName,
                     disabled: true
                 });
+                this.getBanks(response['empData'].id);
             } else if (type === 'Select Financial Control') {
                 this.financialControllers = [{
                     'name': response['empData'].id,
@@ -203,5 +218,9 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 });
             }
         });
+    }
+
+    selectRadio(event) {
+
     }
 }

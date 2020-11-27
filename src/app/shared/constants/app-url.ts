@@ -512,6 +512,12 @@ export class AppUrl {
         }
     }
 
+    static SCHEDULE_PAYEES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + id + `/schedule-payees`;
+        }
+    }
+
     static DELETE_CENSURE(id?): string {
         return AppUrl.API_URL + 'censures/' + id;
     }
@@ -1098,6 +1104,7 @@ export class AppUrl {
         }
 
     }
+
     static GET_BUDGET_CONTROL_AIE(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/aies/` + id;

@@ -7,6 +7,7 @@ import {NumberToWordsPipe} from "../../../../../shared/pipes/number-to-word.pipe
 import {AlertService} from "../../../../../shared/services/alert.service";
 import {EmployeeService} from "../../../../../shared/services/employee.service";
 import {SelectPayeeCustomerComponent} from '../select-payee-customer/select-payee-customer.component';
+import {PaymentVoucherService} from "../../../../../shared/services/payment-voucher.service";
 
 @Component({
     selector: 'app-schedule-payee-customer',
@@ -26,13 +27,15 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     employees = [];
     customers = [];
     payeeData: any;
+    banks = [];
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeCustomerComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
-                private employeesService: EmployeeService) {
+                private employeesService: EmployeeService,
+                private paymentVoucherService: PaymentVoucherService) {
         console.log('_data', _data);
         this.action = _data.action;
         this.payeeData = _data.pv;
@@ -55,16 +58,19 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     refresh() {
         this.schedulePayeeCustomerForm = this.fb.group({
             year: [''],
-            departmentalNo: [''],
+            departmentalNo: [{'value': '', disabled: true}],
             details: [''],
-            payeeId: [{'value': '', disabled: true}],
+            companyId: [{'value': '', disabled: true}],
             payeeName: [{'value': '', disabled: true}],
             netAmount: [''],
-            taxAmount: [{'value': '', disabled: true}],
+            totalTax: [{'value': '', disabled: true}],
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}]
         });
         console.log('this.payeeData', this.payeeData);
+        this.schedulePayeeCustomerForm.patchValue({
+            'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
+        })
     }
 
     /*checkForUpdate() {
@@ -84,11 +90,11 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            console.log('this.schedulePayeeCustomerForm.value', this.schedulePayeeCustomerForm.value);
-            /*this.contactInfoService.addCountry(this.schedulePayeeCustomerForm.value).subscribe(data => {
+            this.paymentVoucherService.schedulePayee(this.payeeData.id, this.schedulePayeeCustomerForm.value).subscribe(data => {
                 this.schedulePayeeCustomerForm.reset();
                 this.isSubmitted = false;
-            });*/
+                this.matDialogRef.close(this.schedulePayeeCustomerForm);
+            });
         }
     }
 
@@ -127,7 +133,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 return;
             }
             this.schedulePayeeCustomerForm.patchValue({
-                'taxAmount': response['totalTaxes'],
+                'totalTax': response['totalTaxes'],
                 'totalAmount': parseFloat(this.schedulePayeeCustomerForm.value.netAmount) + parseFloat(response['totalTaxes']),
                 'totalAmountInWords': numberToWords.transform(parseFloat(this.schedulePayeeCustomerForm.value.netAmount) + parseFloat(response['totalTaxes']))
             });
@@ -170,9 +176,21 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 name: response.id,
             }];
             this.schedulePayeeCustomerForm.patchValue({
-                'payeeId': response.id,
+                'companyId': response.id,
                 'payeeName': response.name
             });
+            this.getBanks(response.id);
         });
+    }
+
+    getBanks(id) {
+        this.employeesService.getCompanyBankDetailsList(id, {'page': -1}).subscribe(data => {
+            this.banks = data.items;
+            console.log("bank", this.banks);
+        });
+    }
+
+    selectRadio(event) {
+
     }
 }
