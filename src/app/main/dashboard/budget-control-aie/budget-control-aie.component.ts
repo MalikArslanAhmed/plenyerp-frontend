@@ -105,23 +105,23 @@ export class BudgetControlAieComponent implements OnInit {
         });
     }
 
-    checkBudgetUpdate(items) {
-        this.adminSegmentSelected = true;
-        this.fundSegmentSelected = true;
-        this.budgetId = items.id;
-        if (items['adminSegment']) {
-            this.adminSegments = [{
-                name: items['adminSegment'].name,
-                id: items['adminSegment'].id
-            }];
-        }
-        if (items['fundSegment']) {
-            this.fundSegments = [{
-                name: items['fundSegment'].name,
-                id: items['fundSegment'].id
-            }];
-        }
-    }
+    // checkBudgetUpdate(items) {
+    //     this.adminSegmentSelected = true;
+    //     this.fundSegmentSelected = true;
+    //     this.budgetId = items.id;
+    //     if (items['adminSegment']) {
+    //         this.adminSegments = [{
+    //             name: items['adminSegment'].name,
+    //             id: items['adminSegment'].id
+    //         }];
+    //     }
+    //     if (items['fundSegment']) {
+    //         this.fundSegments = [{
+    //             name: items['fundSegment'].name,
+    //             id: items['fundSegment'].id
+    //         }];
+    //     }
+    // }
 
     deleteItemModal(items) {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
@@ -332,9 +332,9 @@ export class BudgetControlAieComponent implements OnInit {
                     title: val.economicSegment.name
                 });
             });
+            this.economicCodeData = aieEconomicBalances;
+            this.ecoCodeOriginalData = aieEconomicBalances;
         }
-        this.economicCodeData = aieEconomicBalances;
-        this.ecoCodeOriginalData = aieEconomicBalances;
         this.budgetControlForm.patchValue({
             adminSegmentId: items.adminSegmentId,
             fundSegmentId: items.fundSegmentId,
