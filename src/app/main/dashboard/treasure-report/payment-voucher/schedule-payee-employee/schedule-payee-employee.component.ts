@@ -91,8 +91,14 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
+            let params = {
+                'employeeId': this.schedulePayeeEmployeeForm.getRawValue().employeeId,
+                'netAmount': this.schedulePayeeEmployeeForm.getRawValue().netAmount,
+                'totalTax': this.schedulePayeeEmployeeForm.getRawValue().totalTax,
+                'year': this.schedulePayeeEmployeeForm.getRawValue().year
+            };
             // console.log('this.schedulePayeeEmployeeForm.value', this.schedulePayeeEmployeeForm.value);
-            this.paymentVoucherService.schedulePayee(this.payeeData.id, this.schedulePayeeEmployeeForm.value).subscribe(data => {
+            this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
                 this.schedulePayeeEmployeeForm.reset();
                 this.isSubmitted = false;
                 this.matDialogRef.close(this.schedulePayeeEmployeeForm);

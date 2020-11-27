@@ -90,7 +90,13 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            this.paymentVoucherService.schedulePayee(this.payeeData.id, this.schedulePayeeCustomerForm.value).subscribe(data => {
+            let params = {
+                'companyId': this.schedulePayeeCustomerForm.getRawValue().companyId,
+                'netAmount': this.schedulePayeeCustomerForm.getRawValue().netAmount,
+                'totalTax': this.schedulePayeeCustomerForm.getRawValue().totalTax,
+                'year': this.schedulePayeeCustomerForm.getRawValue().year
+            };
+            this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
                 this.schedulePayeeCustomerForm.reset();
                 this.isSubmitted = false;
                 this.matDialogRef.close(this.schedulePayeeCustomerForm);
