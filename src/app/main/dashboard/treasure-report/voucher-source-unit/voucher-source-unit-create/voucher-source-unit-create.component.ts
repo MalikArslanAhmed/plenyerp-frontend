@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {TreasureReportService} from '../../../../../shared/services/treasure-report.service';
 import {AdminSegmentEmployeeSelectComponent} from "../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component";
+import {DefaultSettingVoucherInfoService} from "../../../../../shared/services/default-setting-voucher-info";
 
 @Component({
     selector: 'app-voucher-source-unit-create',
@@ -28,15 +29,16 @@ export class VoucherSourceUnitCreateComponent implements OnInit {
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
                 private _matDialog: MatDialog,
-                private treasureReportService: TreasureReportService) {
+                private treasureReportService: TreasureReportService,
+                private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit a Voucher Source Unit';
+            this.dialogTitle = 'Edit Voucher Source Unit';
             if (_data.voucher) {
                 this.updateData = _data;
             }
         } else {
-            this.dialogTitle = 'Add a Voucher Source Unit';
+            this.dialogTitle = 'Add Voucher Source Unit';
         }
     }
 
@@ -61,6 +63,12 @@ export class VoucherSourceUnitCreateComponent implements OnInit {
             taxVoucherId: [''],
             isPersonalAdvanceUnit: [false],
         });
+        this.voucherSourceUnitForm.patchValue({
+            'retirementId': 11,
+            'reverseVoucherId': 10,
+            'revalidationId': 19
+        });
+        this.getDefaultSettingVoucherInfo();
     }
 
     checkForUpdate() {
@@ -113,7 +121,6 @@ export class VoucherSourceUnitCreateComponent implements OnInit {
     }
 
     updateVoucherSourceUnit() {
-        // console.log('-->update', this.voucherSourceUnitForm.getRawValue());
         if (!this.voucherSourceUnitForm.valid) {
             return;
         }
@@ -164,6 +171,40 @@ export class VoucherSourceUnitCreateComponent implements OnInit {
                 this.voucherSourceUnitForm.patchValue({
                     financialControllerId: response['empData'].id,
                     disabled: true
+                });
+            }
+        });
+    }
+
+    getDefaultSettingVoucherInfo() {
+        this.defaultSettingVoucherInfoService.detail().subscribe(data => {
+            if (data && data.checkingOfficer && data.checkingOfficerId) {
+                this.checkingOfficers = [{
+                    'name': data['checkingOfficer'].firstName + ' ' + data['checkingOfficer'].lastName,
+                    'id': data['checkingOfficer'].id
+                }];
+                this.voucherSourceUnitForm.patchValue({
+                    'checkingOfficerId': data.checkingOfficerId ? data.checkingOfficerId : ''
+                });
+            }
+
+            if (data && data.payingOfficer && data.payingOfficerId) {
+                this.payingOfficers = [{
+                    'name': data['payingOfficer'].firstName + ' ' + data['payingOfficer'].lastName,
+                    'id': data['payingOfficer'].id
+                }];
+                this.voucherSourceUnitForm.patchValue({
+                    'payingOfficerId': data.payingOfficerId ? data.payingOfficerId : ''
+                });
+            }
+
+            if (data && data.financialController && data.financialControllerId) {
+                this.financialControllers = [{
+                    'name': data['financialController'].firstName + ' ' + data['financialController'].lastName,
+                    'id': data['financialController'].id
+                }];
+                this.voucherSourceUnitForm.patchValue({
+                    'financialControllerId': data.financialControllerId ? data.financialControllerId : '',
                 });
             }
         });

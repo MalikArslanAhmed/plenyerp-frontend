@@ -35,12 +35,7 @@ export class BudgetControlAieComponent implements OnInit {
     isDisabled = true;
     adminSegmentSelected = false;
     fundSegmentSelected = false;
-    budgetControlAieList = [
-        // {
-        // aie_no: '234',
-        // narration: 'asdfg',
-        // }
-    ];
+    budgetControlAieList = [];
     currencyList = [];
     budgetId;
     budgetAieId;
@@ -51,6 +46,7 @@ export class BudgetControlAieComponent implements OnInit {
     isAddRowValid = false;
     filterEcoCode = null;
     ecoCodeOriginalData = [];
+
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private fb: FormBuilder,
@@ -91,12 +87,21 @@ export class BudgetControlAieComponent implements OnInit {
             adminSegmentId: this.adminSegments[0].id,
             fundSegmentId: this.fundSegments[0].id
         };
-        this.budgetService.budgetControlAieList(params).subscribe(
-            data => {
+        this.budgetService.budgetControlAieList(params).subscribe(data => {
+            if (data.items && data.items.length > 0) {
+                data.items.forEach(aie => {
+                    let totalAmount = 0;
+                    if (aie && aie['aieEconomicBalances'] && aie['aieEconomicBalances'].length > 0) {
+                        aie['aieEconomicBalances'].forEach(amnt => {
+                            console.log('amnt', amnt);
+                            totalAmount = totalAmount + parseFloat(amnt['amount']);
+                        });
+                    }
+                    aie['totalAmount'] = totalAmount;
+                });
                 this.budgetControlAieList = data.items;
-                // console.log('----->>>>', data.items);
             }
-        );
+        });
     }
 
     getCurrencyList() {
@@ -356,9 +361,9 @@ export class BudgetControlAieComponent implements OnInit {
                     filterData.push(v);
                 }
             });
-            if (this.filterEcoCode){
+            if (this.filterEcoCode) {
                 this.economicCodeData = filterData;
-            }else {
+            } else {
                 this.economicCodeData = this.ecoCodeOriginalData;
             }
             this.getTotalAmount();

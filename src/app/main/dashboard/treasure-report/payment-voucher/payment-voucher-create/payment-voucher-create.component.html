@@ -37,7 +37,8 @@
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Value Date</mat-label>
-                                    <input matInput [matDatepicker]="valueDatePicker" placeholder="Value Date"
+                                    <input matInput (click)="valueDatePicker.open()" (focus)="valueDatePicker.open()"
+                                           [matDatepicker]="valueDatePicker" placeholder="Value Date"
                                            formControlName="valueDate">
                                     <mat-datepicker-toggle matSuffix [for]="valueDatePicker">
                                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
