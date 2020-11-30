@@ -23,120 +23,7 @@ import {DefaultSettingVoucherInfoService} from "../../../../shared/services/defa
 export class PaymentVoucherComponent implements OnInit {
     filterPaymentVoucherForm: FormGroup;
     createPaymentVoucherForm: FormGroup;
-    paymentVoucherData = [
-        /*{
-            'year': '2018',
-            'deptalNo': '1200003',
-            'payeeName': 'Abhishek Mishra',
-            'amount': '20,000',
-            'taxes': '0',
-            'paymentRef': '1241',
-            'lastActioned': '31-Dec-2018',
-            'status': 'Checked',
-            'payee': [
-                {
-                    'id': 1,
-                    'name': 'Test Name',
-                    'amountNet': 10000,
-                    'taxes': 1000,
-                    'amountTotal': 200000,
-                    'details': 'New Test Details',
-                    'bankTitle': 'CBI',
-                    'bankAC': '1199008899',
-                    'typeOfBankAC': 'Savings',
-                    'bank': 'Central Bank Of India',
-                    'bankBranch': 'New Delhi',
-                    'sortCode': 'CBIN',
-                    'paymentRef': 'New',
-                    'status': 'Checked',
-                },
-                {
-                    'id': 2,
-                    'name': 'Test Name 2',
-                    'amountNet': 10000,
-                    'taxes': 1000,
-                    'amountTotal': 200000,
-                    'details': 'New Test Details',
-                    'bankTitle': 'CBI',
-                    'bankAC': '1199008899',
-                    'typeOfBankAC': 'Savings',
-                    'bank': 'Central Bank Of India',
-                    'bankBranch': 'New Delhi',
-                    'sortCode': 'CBIN',
-                    'paymentRef': 'New',
-                    'status': 'Checked',
-                }
-            ],
-            'economic': [
-                {
-                    'id': 1,
-                    'account': 'Test Name',
-                    'amount': 10000
-                },
-                {
-                    'id': 2,
-                    'account': 'Test Name 2',
-                    'amount': 10000
-                }
-            ]
-        },
-        {
-            'year': '2019',
-            'deptalNo': '1200002',
-            'payeeName': 'Ankit Mishra',
-            'amount': '35,000',
-            'taxes': '0',
-            'paymentRef': '1214',
-            'lastActioned': '31-Dec-2018',
-            'status': 'Approved',
-            'payee': [
-                {
-                    'id': 1,
-                    'name': 'Test Name',
-                    'amountNet': 10000,
-                    'taxes': 1000,
-                    'amountTotal': 200000,
-                    'details': 'New Test Details',
-                    'bankTitle': 'CBI',
-                    'bankAC': '1199008899',
-                    'typeOfBankAC': 'Savings',
-                    'bank': 'Central Bank Of India',
-                    'bankBranch': 'New Delhi',
-                    'sortCode': 'CBIN',
-                    'paymentRef': 'New',
-                    'status': 'Checked',
-                },
-                {
-                    'id': 2,
-                    'name': 'Test Name 2',
-                    'amountNet': 10000,
-                    'taxes': 1000,
-                    'amountTotal': 200000,
-                    'details': 'New Test Details',
-                    'bankTitle': 'CBI',
-                    'bankAC': '1199008899',
-                    'typeOfBankAC': 'Savings',
-                    'bank': 'Central Bank Of India',
-                    'bankBranch': 'New Delhi',
-                    'sortCode': 'CBIN',
-                    'paymentRef': 'New',
-                    'status': 'Checked',
-                }
-            ],
-            'economic': [
-                {
-                    'id': 1,
-                    'account': 'Test Name',
-                    'amount': 10000
-                },
-                {
-                    'id': 2,
-                    'account': 'Test Name 2',
-                    'amount': 10000
-                }
-            ]
-        }*/
-    ];
+    paymentVoucherData = [];
     panelOpenState: boolean = false;
     sourceUnit = [];
     statuses = [
@@ -222,8 +109,7 @@ export class PaymentVoucherComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
                 private paymentVoucherService: PaymentVoucherService,
-                private treasureReportService: TreasureReportService,
-                private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService) {
+                private treasureReportService: TreasureReportService) {
     }
 
     ngOnInit(): void {
@@ -259,31 +145,17 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    /*getStatementPositionData(params) {
-        this.jvLedgerReportService.getStatementPositionReport(params).subscribe(data => {
-            this.paymentVoucherData = data.items;
-            if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
-                this.paymentVoucherData.forEach(d => {
-                    d['isOpen'] = !this.panelOpenState;
-                    this.getChildReportData(d);
-                });
-                this.panelOpenState = !this.panelOpenState;
-            }
-        });
-    }*/
-
     getChildReportData(item) {
         const params = {};
-        /*if (item && item.id) {
+        if (item && item.id) {
             params['parentId'] = item.id;
-            this.jvLedgerReportService.getStatementPositionReport(params).subscribe(data => {
-                item['childs'] = data.items;
+            this.paymentVoucherService.getSchedulePayee(item.id, {page: -1}).subscribe(data => {
+                item['payees'] = data.items;
             });
-        }*/
+        }
     }
 
     scheduleEmployee(data) {
-        console.log('data', data);
         this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE', pv: data}
@@ -307,10 +179,10 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    scheduleEconomicCodes(data) {
+    scheduleEconomicCodes(report, data) {
         this.dialogRef = this._matDialog.open(ScheduleEconomicCodesComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', pv: data}
+            data: {action: 'CREATE', pv: data, report: report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -378,8 +250,6 @@ export class PaymentVoucherComponent implements OnInit {
     }
 
     checkPV(index, event) {
-        console.log(index);
-        console.log(event);
         this.paymentVoucherData[index].checked = event.checked;
     }
 
@@ -395,9 +265,8 @@ export class PaymentVoucherComponent implements OnInit {
                 status: status,
                 paymentVoucherIds: paymentVoucherId
             };
-            console.log('--->>>>', params);
             this.paymentVoucherService.getUpdateStatus(params).subscribe(data => {
-                // console.log('---->>success', data);
+                console.log(data);
             });
         }
     }

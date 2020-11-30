@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AlertService} from '../../../../../shared/services/alert.service';
-import {EmployeeService} from '../../../../../shared/services/employee.service';
-import {PaymentVoucherService} from '../../../../../shared/services/payment-voucher.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {EconomicSegmentSelectComponent} from "../../../journal-voucher/economic-segment-select/economic-segment-select.component";
+import {AlertService} from "../../../../../shared/services/alert.service";
+import {PaymentVoucherService} from "../../../../../shared/services/payment-voucher.service";
 
 @Component({
     selector: 'app-schedule-economic-codes',
@@ -15,14 +15,11 @@ export class ScheduleEconomicCodesComponent implements OnInit {
     dialogTitle: any;
     economicCodeForm: FormGroup;
     dialogRef: any;
-    banks = [
-        // {
-        //     accountNo: '2345678',
-        //     amount: '45678'
-        // }
-    ];
-
-
+    banks = [];
+    economicSegments = [];
+    ledgers = [];
+    isSubmitted = false;
+    payeeData: any;
 
     constructor(
         public matDialogRef: MatDialogRef<ScheduleEconomicCodesComponent>,
@@ -30,9 +27,8 @@ export class ScheduleEconomicCodesComponent implements OnInit {
         private fb: FormBuilder,
         private _matDialog: MatDialog,
         private alertService: AlertService,
-        private employeesService: EmployeeService,
-        private paymentVoucherService: PaymentVoucherService,
-    ) {
+        private paymentVoucherService: PaymentVoucherService) {
+        this.payeeData = _data.pv;
     }
 
     ngOnInit(): void {
@@ -41,23 +37,100 @@ export class ScheduleEconomicCodesComponent implements OnInit {
 
     refresh() {
         this.economicCodeForm = this.fb.group({
-            year: [''],
-            deptal_no: [''],
-            eco_code: [''],
-            eco_code_title: [''],
-            gross_amount: [''],
-            payee_name: [''],
-            ledger_code: [''],
-            ledger_code_title: [''],
+            year: [{value: '', disabled: true}],
+            deptalId: [{value: '', disabled: true}],
+            economicCode: [{value: '', disabled: true}],
+            economicSegmentName: [{value: '', disabled: true}],
+            grossAmount: [{value: '', disabled: true}],
+            payeeName: [{value: '', disabled: true}],
+            economicSegmentId: [{value: '', disabled: true}],
+            economicName: [{value: '', disabled: true}],
+            amount: [''],
+        });
+        let payeeName = '';
+        if (this._data && this._data['pv'] && this._data['pv']['adminCompany']) {
+            payeeName = this._data['pv']['adminCompany'].name;
+        } else if (this._data && this._data['pv'] && this._data['pv']['employee']) {
+            payeeName = this._data['pv']['employee'].firstName + ' ' + this._data['pv']['employee'].lastName;
+        }
+        this.economicCodeForm.patchValue({
+            'year': this._data.report.year,
+            'deptalId': this._data.report.deptalId,
+            'economicCode': this._data.report.economicCode,
+            'economicSegmentName': this._data['report'].economicSegment.name,
+            'grossAmount': this._data['pv'].netAmount,
+            'payeeName': payeeName
+        })
+    }
 
+    economicSegmentSelect() {
+        this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.economicCodeForm.patchValue({
+                economicSegmentId: response.id,
+                economicName: response.name,
+            });
         });
     }
 
-    saveEconomicCode() {
+    addLedger() {
+        if (!this.economicCodeForm.getRawValue().economicSegmentId) {
+            this.alertService.showErrors('Please Fill Economic Segment');
+            return;
+        } else if (!this.economicCodeForm.getRawValue().amount) {
+            this.alertService.showErrors('Please Fill Amount');
+            return;
+        }
+        let foundLedger = false;
+        if (this.ledgers.length > 0) {
+            this.ledgers.forEach(led => {
+                if (parseInt(led['economicSegmentId']) === parseInt(this.economicCodeForm.getRawValue().economicSegmentId)) {
+                    foundLedger = true;
+                }
+            })
+        }
+        if (foundLedger) {
+            this.alertService.showErrors('Economic Segment already exist');
+            return;
+        }
 
+        this.ledgers.push({
+            'economicSegmentId': this.economicCodeForm.getRawValue().economicSegmentId,
+            'economicName': this.economicCodeForm.getRawValue().economicName,
+            'amount': this.economicCodeForm.getRawValue().amount
+        });
+        this.economicCodeForm.patchValue({
+            'economicSegmentId': '',
+            'economicName': '',
+            'amount': '',
+        });
     }
 
-    updateEconomicCode() {
+    deleteLedger(index) {
+        this.ledgers.splice(index, 1);
+    }
 
+    saveEconomicCode() {
+        this.isSubmitted = true;
+        if (!this.economicCodeForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.isSubmitted) {
+            let params = {
+                scheduleEconomics: this.ledgers
+            };
+            this.paymentVoucherService.scheduleEconomic(this.payeeData.id, params).subscribe(data => {
+                this.economicCodeForm.reset();
+                this.isSubmitted = false;
+                this.matDialogRef.close(this.economicCodeForm);
+            });
+        }
     }
 }

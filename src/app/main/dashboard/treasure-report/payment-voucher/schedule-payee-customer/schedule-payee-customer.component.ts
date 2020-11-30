@@ -28,6 +28,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     customers = [];
     payeeData: any;
     banks = [];
+    payeeBankId: any;
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeCustomerComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -52,7 +53,6 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
-        // this.checkForUpdate();
     }
 
     refresh() {
@@ -73,15 +73,6 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         })
     }
 
-    /*checkForUpdate() {
-        if (this.updateData) {
-            this.schedulePayeeCustomerForm.patchValue({
-                name: this.updateData.country.name,
-                isActive: this.updateData.country.isActive
-            });
-        }
-    }*/
-
     savePayeeCustomer() {
         this.isSubmitted = true;
         if (!this.schedulePayeeCustomerForm.valid) {
@@ -94,29 +85,14 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 'companyId': this.schedulePayeeCustomerForm.getRawValue().companyId,
                 'netAmount': this.schedulePayeeCustomerForm.getRawValue().netAmount,
                 'totalTax': this.schedulePayeeCustomerForm.getRawValue().totalTax,
-                'year': this.schedulePayeeCustomerForm.getRawValue().year
+                'year': this.schedulePayeeCustomerForm.getRawValue().year,
+                'payeeBankId': this.payeeBankId ? this.payeeBankId : ''
             };
             this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
                 this.schedulePayeeCustomerForm.reset();
                 this.isSubmitted = false;
                 this.matDialogRef.close(this.schedulePayeeCustomerForm);
             });
-        }
-    }
-
-    updatePayeeCustomer() {
-        this.isSubmitted = true;
-        if (!this.schedulePayeeCustomerForm.valid) {
-            this.isSubmitted = false;
-            return;
-        }
-        if (this.isSubmitted) {
-            console.log('this.schedulePayeeCustomerForm.value', this.schedulePayeeCustomerForm.value);
-            /*this.contactInfoService.updateCountry(this.updateData.country.id, this.schedulePayeeCustomerForm.value).subscribe(data => {
-                this.updateData = undefined;
-                this.schedulePayeeCustomerForm.reset();
-                this.isSubmitted = false;
-            });*/
         }
     }
 
@@ -196,7 +172,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         });
     }
 
-    selectRadio(event) {
-
+    selectRadio(id) {
+        this.payeeBankId = id;
     }
 }

@@ -30,6 +30,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     financialControllers = [];
     payeeData: any;
     banks = [];
+    payeeBankId: any;
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeEmployeeComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -37,7 +38,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
                 private employeesService: EmployeeService,
-                private paymentVoucherService: PaymentVoucherService,) {
+                private paymentVoucherService: PaymentVoucherService) {
         this.action = _data.action;
         this.payeeData = _data.pv;
         if (this.action === 'EDIT') {
@@ -68,20 +69,10 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}]
         });
-        console.log('this.payeeData', this.payeeData);
         this.schedulePayeeEmployeeForm.patchValue({
             'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
         })
     }
-
-    /*checkForUpdate() {
-        if (this.updateData) {
-            this.schedulePayeeEmployeeForm.patchValue({
-                name: this.updateData.country.name,
-                isActive: this.updateData.country.isActive
-            });
-        }
-    }*/
 
     savePayeeEmployee() {
         this.isSubmitted = true;
@@ -95,30 +86,14 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 'employeeId': this.schedulePayeeEmployeeForm.getRawValue().employeeId,
                 'netAmount': this.schedulePayeeEmployeeForm.getRawValue().netAmount,
                 'totalTax': this.schedulePayeeEmployeeForm.getRawValue().totalTax,
-                'year': this.schedulePayeeEmployeeForm.getRawValue().year
+                'year': this.schedulePayeeEmployeeForm.getRawValue().year,
+                'payeeBankId': this.payeeBankId ? this.payeeBankId : ''
             };
-            // console.log('this.schedulePayeeEmployeeForm.value', this.schedulePayeeEmployeeForm.value);
             this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
                 this.schedulePayeeEmployeeForm.reset();
                 this.isSubmitted = false;
                 this.matDialogRef.close(this.schedulePayeeEmployeeForm);
             });
-        }
-    }
-
-    updatePayeeEmployee() {
-        this.isSubmitted = true;
-        if (!this.schedulePayeeEmployeeForm.valid) {
-            this.isSubmitted = false;
-            return;
-        }
-        if (this.isSubmitted) {
-            console.log('this.schedulePayeeEmployeeForm.value', this.schedulePayeeEmployeeForm.value);
-            /*this.contactInfoService.updateCountry(this.updateData.country.id, this.schedulePayeeEmployeeForm.value).subscribe(data => {
-                this.updateData = undefined;
-                this.schedulePayeeEmployeeForm.reset();
-                this.isSubmitted = false;
-            });*/
         }
     }
 
@@ -159,21 +134,6 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             this.banks = data.items;
             console.log("bank", this.banks);
         });
-    }
-
-    payeeChange(event) {
-        let selectedEmployee = '';
-        if (this.employees && this.employees.length > 0 && event) {
-            this.employees.forEach(employee => {
-                if (parseInt(employee.id) === parseInt(event)) {
-                    selectedEmployee = employee.firstName + '-' + employee.lastName;
-                }
-            });
-
-            this.schedulePayeeEmployeeForm.patchValue({
-                'payeeName': selectedEmployee
-            });
-        }
     }
 
     selectAdminEmployee(type) {
@@ -226,7 +186,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
         });
     }
 
-    selectRadio(event) {
-
+    selectRadio(id) {
+        this.payeeBankId = id;
     }
 }

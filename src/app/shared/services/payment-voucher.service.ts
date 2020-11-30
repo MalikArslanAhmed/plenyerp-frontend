@@ -37,4 +37,12 @@ export class PaymentVoucherService extends BaseService {
     schedulePayee(id, data): Observable<any> {
         return this.postRequest(AppUrl.SCHEDULE_PAYEES(id), data);
     }
+
+    scheduleEconomic(id, data): Observable<any> {
+        return this.postRequest(AppUrl.SCHEDULE_ECONOMIC(id), data);
+    }
+
+    getSchedulePayee(id, data): Observable<any> {
+        return this.getRequest(AppUrl.SCHEDULE_PAYEES(id), data);
+    }
 }

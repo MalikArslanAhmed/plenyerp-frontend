@@ -11,14 +11,6 @@
                 </span>
             </div>
         </div>
-        <!--<div fxLayout="row" fxLayoutAlign="end center">
-            <div>
-                <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
-                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addPaymentVoucher()">
-                    <mat-icon>add_circle</mat-icon>
-                </button>
-            </div>
-        </div>-->
     </div>
 
     <div class="content">
@@ -212,34 +204,43 @@
                                                 <th>
                                                     <div class="title">Status</div>
                                                 </th>
+                                                <th>
+                                                    <div class="title">Schedule Economic Code</div>
+                                                </th>
                                             </tr>
                                             </thead>
                                             <tbody
                                                 *ngIf="reportData && reportData['payees'] && reportData['payees'].length > 0; else noChildToShow">
                                             <tr *ngFor="let data of reportData['payees']; let i = index">
                                                 <td>
-                                                    <div class="title">
-                                                        {{data?.id}}
+                                                    <div class="title" *ngIf="data && data.employee">
+                                                        {{data?.employee?.id}}
+                                                    </div>
+                                                    <div class="title" *ngIf="data && data.companyId">
+                                                        {{data.companyId}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title" *ngIf="data && data.employee">
+                                                        {{data?.employee?.firstName}} {{data?.employee?.lastName}}
+                                                    </div>
+                                                    <div class="title" *ngIf="data && data.adminCompany">
+                                                        {{data?.adminCompany?.name}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.name}}
+                                                        {{data?.netAmount}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.amountNet}}
+                                                        {{data?.totalTax}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.taxes}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title">
-                                                        {{data?.amountTotal}}
+                                                        {{(data?.netAmount + data?.totalTax) | number}}
                                                     </div>
                                                 </td>
                                                 <td>
@@ -248,33 +249,58 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title">
-                                                        {{data?.bankTitle}}
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
+                                                        {{data?.employee?.employeeBanks[0]?.title}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.companyBanks">
+                                                        {{data?.employee?.companyBanks[0]?.title}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
+                                                        {{data?.employee?.employeeBanks[0]?.number}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
+                                                        {{data?.adminCompany?.companyBanks[0]?.bankAccountNumber}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.bankAC}}
+                                                        {{data?.employee?.employeeBanks[0]?.type}}
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title">
-                                                        {{data?.typeOfBankAC}}
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
+                                                        {{data?.employee?.employeeBanks[0]?.bank?.name}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
+                                                        {{data?.adminCompany?.companyBanks[0]?.bank?.name}}
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title">
-                                                        {{data?.bank}}
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
+                                                        {{data?.employee?.employeeBanks[0]?.bank?.branchName}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
+                                                        {{data?.adminCompany?.companyBanks[0]?.bankBranch?.name}}
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title">
-                                                        {{data?.bankBranch}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title">
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
                                                         {{data?.sortCode}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
+                                                        {{data?.adminCompany?.companyBanks[0]?.bankBranch?.sortCode}}
                                                     </div>
                                                 </td>
                                                 <td>
@@ -287,23 +313,26 @@
                                                         {{data?.status}}
                                                     </div>
                                                 </td>
+                                                <td>
+                                                    <button mat-button class="payee-report"
+                                                            (click)="scheduleEconomicCodes(reportData, data)">Schedule
+                                                        Economic Codes
+                                                    </button>
+                                                </td>
                                             </tr>
                                             </tbody>
                                             <tbody>
                                             <tr>
                                                 <td>
                                                     <button mat-button class="payee-report"
-                                                            (click)="scheduleEmployee(reportData)">Schedule Payee Employees
+                                                            (click)="scheduleEmployee(reportData)">Schedule Payee
+                                                        Employees
                                                     </button>
                                                 </td>
                                                 <td>
                                                     <button mat-button class="payee-report"
-                                                            (click)="scheduleCustomers(reportData)">Schedule Payee Customers
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button mat-button class="payee-report"
-                                                            (click)="scheduleEconomicCodes(reportData)">Schedule Economic Codes
+                                                            (click)="scheduleCustomers(reportData)">Schedule Payee
+                                                        Customers
                                                     </button>
                                                 </td>
                                                 <td colspan="12"></td>

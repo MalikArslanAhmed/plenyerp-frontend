@@ -518,6 +518,12 @@ export class AppUrl {
         }
     }
 
+    static SCHEDULE_ECONOMIC(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + id + `/schedule-economic`;
+        }
+    }
+
     static DELETE_CENSURE(id?): string {
         return AppUrl.API_URL + 'censures/' + id;
     }
