@@ -11,6 +11,7 @@ import {PaymentVoucherService} from '../../../../shared/services/payment-voucher
 import * as moment from 'moment';
 import {TreasureReportService} from '../../../../shared/services/treasure-report.service';
 import {ScheduleEconomicCodesComponent} from "./schedule-economic-codes/schedule-economic-codes.component";
+import {DefaultSettingVoucherInfoService} from "../../../../shared/services/default-setting-voucher-info";
 
 @Component({
     selector: 'app-payment-voucher',
@@ -221,7 +222,8 @@ export class PaymentVoucherComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
                 private paymentVoucherService: PaymentVoucherService,
-                private treasureReportService: TreasureReportService) {
+                private treasureReportService: TreasureReportService,
+                private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService) {
     }
 
     ngOnInit(): void {

@@ -46,7 +46,7 @@
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex>
                                     <mat-label>Payment Approval Ref (#)</mat-label>
-                                    <input matInput placeholder="Voucher Number" formControlName="paymentApproveId">
+                                    <input matInput formControlName="paymentApproveId">
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
@@ -86,7 +86,8 @@
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" fxFlex="15">
                                     <mat-label>X.Rate</mat-label>
-                                    <input matInput placeholder="X Rate" formControlName="xRate" type="number">
+                                    <input matInput placeholder="X Rate" formControlName="xRate" type="number"
+                                           (change)="setXRate()">
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex="40">
                                     <mat-label>X.Rate Currency</mat-label>
@@ -262,12 +263,8 @@
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
-                (click)="matDialogRef.close(schedulePayeeEmployeeForm); savePayeeEmployee()"
-                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
-        </button>
-        <button mat-button class="save-button"
-                (click)="matDialogRef.close(schedulePayeeEmployeeForm); updatePayeeEmployee()"
-                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+                (click)="savePayeeEmployee()"
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save">ADD
         </button>
     </div>
 </div>

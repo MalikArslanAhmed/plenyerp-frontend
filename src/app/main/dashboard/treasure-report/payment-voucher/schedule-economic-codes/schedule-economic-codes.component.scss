@@ -1,37 +1,43 @@
 #schedule-economic-code {
-    max-width: 1300px !important;
+    max-width: 1200px !important;
     overflow-x: unset !important;
-    min-width: 1100px !important;
+    min-width: 1030px !important;
 
-    .border-1px-solid{
+    .border-1px-solid {
         border: 1px solid #e2e2e2;
     }
-    .border-2px-solid{
+
+    .border-2px-solid {
         border: 2px solid #e2e2e2;
     }
-    table{
-        thead{
-            tr{
-                th{
-                    div{
+
+    table {
+        thead {
+            tr {
+                th {
+                    div {
                         text-align: center;
                     }
-                    &:first-child, &:last-child{
+
+                    &:first-child, &:last-child {
                         width: 100px;
                     }
-                };
+                }
+            ;
 
 
             }
         }
-        tbody{
-            tr{
-                td{
-                    div{
+
+        tbody {
+            tr {
+                td {
+                    div {
                         text-align: center;
                     }
 
-                };
+                }
+            ;
 
 
             }
@@ -47,11 +53,13 @@
 .invoice-table {
     background-color: #E0E0E0;
 }
-.voucher_title{
+
+.voucher_title {
     font-weight: bold;
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
+
 .add-row {
     width: 150px;
     margin-top: 1.5rem;
