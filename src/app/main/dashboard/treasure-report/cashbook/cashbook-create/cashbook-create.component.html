@@ -140,8 +140,7 @@
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>Branch</mat-label>
-                                            <mat-select formControlName="bankBranchId"
-                                                        (selectionChange)="getBranches($event.value)">
+                                            <mat-select formControlName="bankBranchId">
                                                 <mat-option value="">Choose Branch</mat-option>
                                                 <mat-option [value]="branch.id"
                                                             *ngFor="let branch of bankBranch">{{branch?.name}}</mat-option>
