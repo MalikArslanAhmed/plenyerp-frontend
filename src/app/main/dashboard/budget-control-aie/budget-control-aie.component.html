@@ -148,8 +148,13 @@
                         <div class="width-100-per" fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Search for AIE No</mat-label>
-                                <input matInput name="search_aie_no">
+                                <input matInput name="search_aie_no"  [(ngModel)]="aieNumberFilter">
                             </mat-form-field>
+                            <div>
+                                <div fxLayout="row" fxLayoutGap="10px" style="align-items: center">
+                                    <button (click)="searchAieTable()" class="search_btn" mat-button> Search</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="list-table">
                             <table class="table">

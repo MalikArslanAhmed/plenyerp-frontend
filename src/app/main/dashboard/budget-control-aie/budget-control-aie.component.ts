@@ -46,6 +46,8 @@ export class BudgetControlAieComponent implements OnInit {
     isAddRowValid = false;
     filterEcoCode = null;
     ecoCodeOriginalData = [];
+    aieNumberFilter = '';
+    isSearchAieNo = false;
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -87,13 +89,17 @@ export class BudgetControlAieComponent implements OnInit {
             adminSegmentId: this.adminSegments[0].id,
             fundSegmentId: this.fundSegments[0].id
         };
+        this.budgetAieData(params);
+
+    }
+    budgetAieData(params){
         this.budgetService.budgetControlAieList(params).subscribe(data => {
             if (data.items && data.items.length > 0) {
                 data.items.forEach(aie => {
                     let totalAmount = 0;
                     if (aie && aie['aieEconomicBalances'] && aie['aieEconomicBalances'].length > 0) {
                         aie['aieEconomicBalances'].forEach(amnt => {
-                            console.log('amnt', amnt);
+                            // console.log('amnt', amnt);
                             totalAmount = totalAmount + parseFloat(amnt['amount']);
                         });
                     }
@@ -369,5 +375,17 @@ export class BudgetControlAieComponent implements OnInit {
             this.getTotalAmount();
         }
 
+    }
+
+    searchAieTable() {
+        if (this.adminSegments && this.adminSegments.length && this.fundSegments && this.fundSegments.length) {
+            const params = {
+                adminSegmentId: this.adminSegments[0].id,
+                fundSegmentId: this.fundSegments[0].id,
+                aieNumber: this.aieNumberFilter
+            };
+            this.budgetControlAieList = [];
+            this.budgetAieData(params);
+        }
     }
 }
