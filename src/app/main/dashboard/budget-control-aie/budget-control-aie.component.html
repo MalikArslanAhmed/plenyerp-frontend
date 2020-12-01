@@ -50,7 +50,8 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="width-100-per" fxLayout="row">
-                                    <mat-form-field appearance="outline" class="width-100-per" fxFlex="100" resize="false">
+                                    <mat-form-field appearance="outline" class="width-100-per" fxFlex="100"
+                                                    resize="false">
                                         <mat-label>Narration</mat-label>
                                         <textarea formControlName="narration" matInput style="resize: none!important;"
                                                   placeholder="Narration:"></textarea>
@@ -96,7 +97,7 @@
                                 <tbody>
                                 <ng-container *ngIf="economicCodeData && economicCodeData.length else noEconomicCode">
                                     <tr *ngFor="let economicCode of economicCodeData; let i = index">
-                                        <td>{{i+1}}.</td>
+                                        <td>{{i + 1}}.</td>
                                         <td>{{economicCode?.ecoCode}}</td>
                                         <td>{{economicCode.title}}</td>
                                         <td>{{economicCode.amount}}</td>
@@ -110,7 +111,8 @@
                                                 <button aria-label="Toggle star"
                                                         mat-icon-button
                                                         style="color: red">
-                                                    <mat-icon class="material-icons" (click)="delete(i)">delete</mat-icon>
+                                                    <mat-icon class="material-icons" (click)="delete(i)">delete
+                                                    </mat-icon>
                                                 </button>
                                             </div>
                                         </td>
@@ -135,7 +137,8 @@
 
                         <div fxLayout="row" fxLayoutGap="20px" style="margin-top: 1rem">
                             <button (click)="reset()" class="cancel_btn" mat-button> Cancel</button>
-                            <button (click)="save()" class="save_btn" mat-button>{{isUpdateAieTable ? 'Update' : 'Save'}}</button>
+                            <button (click)="save()" class="save_btn"
+                                    mat-button>{{isUpdateAieTable ? 'Update' : 'Save'}}</button>
                         </div>
                     </div>
                 </div>
@@ -197,7 +200,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

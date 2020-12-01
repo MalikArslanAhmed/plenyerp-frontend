@@ -157,7 +157,7 @@
                         <div>
                             <div mat-dialog-content class="items-data" fusePerfectScrollbar
                                  style="overflow-x: scroll !important;">
-                                <mat-tab-group dynamicHeight>
+                                <mat-tab-group dynamicHeight (selectedTabChange)="tabClick(reportData, $event)">
                                     <mat-tab label="Payees">
                                         <table class="simple invoice-table">
                                             <thead>
@@ -323,25 +323,22 @@
                                             </tbody>
                                             <tbody>
                                             <tr>
-                                                <td>
-                                                    <button mat-button class="payee-report"
+                                                <td colspan="15">
+                                                    <button mat-button class="payee-report" style="margin-right: 10px"
                                                             (click)="scheduleEmployee(reportData)">Schedule Payee
                                                         Employees
                                                     </button>
-                                                </td>
-                                                <td>
                                                     <button mat-button class="payee-report"
                                                             (click)="scheduleCustomers(reportData)">Schedule Payee
                                                         Customers
                                                     </button>
                                                 </td>
-                                                <td colspan="12"></td>
                                             </tr>
                                             </tbody>
                                             <ng-template #noChildToShow>
                                                 <tbody>
                                                 <tr>
-                                                    <td class="text-center" colspan="14">No data to show</td>
+                                                    <td class="text-center" colspan="15">No data to show</td>
                                                 </tr>
                                                 </tbody>
                                             </ng-template>
@@ -355,7 +352,7 @@
                                                     <div class="title">S.No</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Acclount</div>
+                                                    <div class="title">Account</div>
                                                 </th>
                                                 <th>
                                                     <div class="title">Amount</div>
@@ -372,7 +369,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.account}}
+                                                        {{data?.economicSegmentId}}
                                                     </div>
                                                 </td>
                                                 <td>

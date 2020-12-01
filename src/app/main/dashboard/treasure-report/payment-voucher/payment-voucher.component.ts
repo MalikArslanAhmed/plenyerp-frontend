@@ -130,14 +130,14 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    getPyamentVoucher(params) {
+    getPyamentVoucher(params, openAll?) {
         this.paymentVoucherService.get(params).subscribe(data => {
             this.paymentVoucherData = data.items;
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
                 this.paymentVoucherData.forEach(d => {
                     d['checked'] = false;
                     d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
-                    d['isOpen'] = !this.panelOpenState;
+                    d['isOpen'] = openAll ? true : !this.panelOpenState;
                     this.getChildReportData(d);
                 });
                 this.panelOpenState = !this.panelOpenState;
@@ -195,11 +195,11 @@ export class PaymentVoucherComponent implements OnInit {
         let params = {};
         if (this.filterPaymentVoucherForm.value.status !== 'ALL') {
             params['status'] = this.filterPaymentVoucherForm.value.status;
-            this.status = this.filterPaymentVoucherForm.value.status;
         }
+        this.status = this.filterPaymentVoucherForm.value.status;
         params['sourceUnit'] = this.filterPaymentVoucherForm.value.sourceUnit;
         params['search'] = this.filterPaymentVoucherForm.value.search;
-        this.getPyamentVoucher(params);
+        this.getPyamentVoucher(params, true);
     }
 
     addPaymentVoucher() {
@@ -269,5 +269,17 @@ export class PaymentVoucherComponent implements OnInit {
                 console.log(data);
             });
         }
+    }
+
+    tabClick(report, event) {
+        if (event.tab['textLabel'] === 'Economic Codes') {
+            this.getEconomicCodes(report);
+        }
+    }
+
+    getEconomicCodes(report) {
+        this.paymentVoucherService.getScheduleEconomic(report.id).subscribe(data => {
+            report['economic'] = data.items;
+        });
     }
 }

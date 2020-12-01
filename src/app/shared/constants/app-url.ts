@@ -520,6 +520,12 @@ export class AppUrl {
 
     static SCHEDULE_ECONOMIC(id?): string {
         if (id) {
+            return AppUrl.API_URL + `treasury/payee-vouchers/` + id + `/schedule-economic`;
+        }
+    }
+
+    static GET_SCHEDULE_ECONOMIC(id?): string {
+        if (id) {
             return AppUrl.API_URL + `treasury/payment-vouchers/` + id + `/schedule-economic`;
         }
     }
