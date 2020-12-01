@@ -362,7 +362,7 @@ export class BudgetControlAieComponent implements OnInit {
                 }
             });
             if (this.filterEcoCode) {
-                this.economicCodeData = filterData;
+                this.economicCodeData = filterData && filterData.length ? filterData : this.ecoCodeOriginalData ;
             } else {
                 this.economicCodeData = this.ecoCodeOriginalData;
             }
