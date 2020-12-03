@@ -231,6 +231,8 @@ import {BudgetControlAieModalComponent} from './budget-control-aie/budget-contro
 import { PaymentVoucherTaxesComponent } from './treasure-report/payment-voucher/payment-voucher-taxes/payment-voucher-taxes.component';
 import { SelectPayeeCustomerComponent } from './treasure-report/payment-voucher/select-payee-customer/select-payee-customer.component';
 import { ScheduleEconomicCodesComponent } from './treasure-report/payment-voucher/schedule-economic-codes/schedule-economic-codes.component';
+import {PaymentReportComponent} from './payment-report/payment-report.component';
+import {ReportListHeadersComponent} from './payment-report/report-list-headers/report-list-headers.component';
 
 @NgModule({
     declarations: [
@@ -439,7 +441,9 @@ import { ScheduleEconomicCodesComponent } from './treasure-report/payment-vouche
         BudgetControlAieComponent,
         PaymentVoucherTaxesComponent,
         SelectPayeeCustomerComponent,
-        ScheduleEconomicCodesComponent
+        ScheduleEconomicCodesComponent,
+        PaymentReportComponent,
+        ReportListHeadersComponent
     ],
     imports: [
         CommonModule,
