@@ -116,8 +116,8 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             }
             this.schedulePayeeEmployeeForm.patchValue({
                 'totalTax': response['totalTaxes'],
-                'totalAmount': parseFloat(this.schedulePayeeEmployeeForm.value.netAmount) + parseFloat(response['totalTaxes']),
-                'totalAmountInWords': numberToWords.transform(parseFloat(this.schedulePayeeEmployeeForm.value.netAmount) + parseFloat(response['totalTaxes']))
+                'totalAmount': parseInt(this.schedulePayeeEmployeeForm.value.netAmount) + parseInt(response['totalTaxes']),
+                'totalAmountInWords': numberToWords.transform(parseInt(this.schedulePayeeEmployeeForm.value.netAmount) + parseInt(response['totalTaxes']))
             });
         });
     }
