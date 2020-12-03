@@ -74,7 +74,7 @@
             <div class="content mt-20px">
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <button mat-button class="update-report" (click)="updateStatus('NEW')"
-                            *ngIf="this.status === 'ALL' || this.status === 'CHECKED'">
+                            *ngIf="this.status === 'CHECKED'">
                         New
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('CHECKED')"
@@ -111,12 +111,10 @@
                         <span class="mat-header-cell text-center">Payee Names</span>
                         <span class="mat-header-cell text-center">Amount (Net)</span>
                         <span class="mat-header-cell text-center">Taxes</span>
-                        <span class="mat-header-cell text-center">Payment Ref. (#)</span>
                         <span class="mat-header-cell text-center">Last Actioned</span>
                         <span class="mat-header-cell text-center">Status</span>
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index"
-                                         [expanded]="reportData.isOpen">
+                    <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center">
@@ -143,9 +141,6 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.taxes ? reportData?.taxes : '-'}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.paymentRef ? reportData?.paymentRef : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
@@ -197,9 +192,6 @@
                                                 </th>
                                                 <th>
                                                     <div class="title">Sort Code</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Payment Ref</div>
                                                 </th>
                                                 <th>
                                                     <div class="title">Status</div>
@@ -305,11 +297,6 @@
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.paymentRef}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title">
                                                         {{data?.status}}
                                                     </div>
                                                 </td>
@@ -325,11 +312,15 @@
                                             <tr>
                                                 <td colspan="15">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
-                                                            (click)="scheduleEmployee(reportData)">Schedule Payee
+                                                            (click)="scheduleEmployee(reportData)"
+                                                            *ngIf="reportData && reportData.payee === 'EMPLOYEE'">
+                                                        Schedule Payee
                                                         Employees
                                                     </button>
                                                     <button mat-button class="payee-report"
-                                                            (click)="scheduleCustomers(reportData)">Schedule Payee
+                                                            (click)="scheduleCustomers(reportData)"
+                                                            *ngIf="reportData && reportData.payee === 'CUSTOMER'">
+                                                        Schedule Payee
                                                         Customers
                                                     </button>
                                                 </td>

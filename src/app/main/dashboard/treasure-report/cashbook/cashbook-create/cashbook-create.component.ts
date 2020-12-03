@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {CashbookService} from '../../../../../shared/services/cashbook.service';
@@ -7,6 +7,7 @@ import {EconomicSegmentSelectComponent} from "../../../journal-voucher/economic-
 import {CurrencyService} from "../../../../../shared/services/currency.service";
 import {BanksService} from "../../../../../shared/services/banks.service";
 import {AlertService} from "../../../../../shared/services/alert.service";
+import {MatTabGroup} from '@angular/material/tabs';
 
 @Component({
     selector: 'app-cashbook-create',
@@ -45,7 +46,7 @@ export class CashbookCreateComponent implements OnInit {
             if (_data.cashbook) {
                 this.updateData = _data;
                 this.cashbookMonthly = [];
-                console.log('this.updateData', this.updateData);
+                // console.log('this.updateData', this.updateData);
             }
         } else {
             this.dialogTitle = 'Add a Cashbook Account';
@@ -129,6 +130,7 @@ export class CashbookCreateComponent implements OnInit {
             this.cashbookAccountForm.patchValue({
                 'economicSegmentId': this.updateData['cashbook'] && this.updateData['cashbook'].economicSegmentId ? this.updateData['cashbook'].economicSegmentId : '',
                 'cashbookTitle': this.updateData['cashbook'] && this.updateData['cashbook'].cashbookTitle ? this.updateData['cashbook'].cashbookTitle : '',
+                'fullCode': this.updateData['cashbook'] && this.updateData['cashbook'].fullCode ? this.updateData['cashbook'].fullCode : '',
                 'bankStatement': this.updateData['cashbook'] && this.updateData['cashbook'].bankStatement ? this.updateData['cashbook'].bankStatement : '',
                 'cashbook': this.updateData['cashbook'] && this.updateData['cashbook'].cashbook ? this.updateData['cashbook'].cashbook : '',
                 'xRateLocalCurrency': this.updateData['cashbook'] && this.updateData['cashbook'].xRateLocalCurrency ? this.updateData['cashbook'].xRateLocalCurrency : '',
@@ -221,8 +223,16 @@ export class CashbookCreateComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            this.cashbookAccountForm.value['cashbookMonthly'] = this.cashbookMonthly;
-            console.log('this.cashbookAccountForm', this.cashbookAccountForm.value);
+            for (let i = 1; i <= 12; i++) {
+                if (this.cashbookAccountForm.value['month_' + i] !== '') {
+                    this.cashbookMonthly.push({
+                        'month': i,
+                        'balance': parseInt(this.cashbookAccountForm.value['month_' + i])
+                    });
+                }
+            }
+
+            this.cashbookAccountForm.value['cashbookMonthly'] = (this.cashbookMonthly && this.cashbookMonthly.length > 0) ? this.cashbookMonthly : [];
             this.cashbookService.save(this.cashbookAccountForm.value).subscribe(data => {
                 this.cashbookAccountForm.reset();
                 this.matDialogRef.close(this.cashbookAccountForm);
@@ -244,7 +254,14 @@ export class CashbookCreateComponent implements OnInit {
             } else {
                 this.cashbookAccountForm.value['cashbookMonthly'] = this.updateData['cashbook']['cashbookMonthlyBalances'];
             }
-            console.log('this.cashbookAccountForm', this.cashbookAccountForm.value);
+            for (let i = 1; i <= 12; i++) {
+                if (this.cashbookAccountForm.value['month_' + i] !== '') {
+                    this.cashbookMonthly.push({
+                        'month': i,
+                        'balance': parseInt(this.cashbookAccountForm.value['month_' + i])
+                    });
+                }
+            }
             this.cashbookService.update(this.updateData['cashbook'].id, this.cashbookAccountForm.value).subscribe(data => {
                 this.cashbookAccountForm.reset();
                 this.updateData = undefined;
@@ -259,7 +276,6 @@ export class CashbookCreateComponent implements OnInit {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            console.log('response', response);
             if (!response) {
                 return;
             }
@@ -281,22 +297,24 @@ export class CashbookCreateComponent implements OnInit {
         this.tab = event['tab'].textLabel;
     }
 
-    addCashbookMonthly() {
-        for (let i = 1; i <= 12; i++) {
-            if (this.cashbookAccountForm.value['month_' + i] !== '') {
-                this.cashbookMonthly.push({
-                    'month': i,
-                    'balance': parseInt(this.cashbookAccountForm.value['month_' + i])
-                });
-            }
-        }
+    /*addCashbookMonthly() {
         // console.log('this.cashbookMonthly', this.cashbookMonthly);
         this.alertService.showSuccess({title: 'Success', message: 'Bank balance and Other details Added ..!'});
-    }
+    }*/
 
     getBranches(bankId) {
         this.bankService.getBranches(bankId, {page: -1}).subscribe(data => {
             this.bankBranch = data.items;
         });
+    }
+
+    goToNextTab(tabGroup: MatTabGroup) {
+        this.goToNextTabIndex(tabGroup);
+    }
+
+    goToNextTabIndex(tabGroup: MatTabGroup) {
+        if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
+        const tabCount = tabGroup._tabs.length;
+        tabGroup.selectedIndex = (tabGroup.selectedIndex + 1) % tabCount;
     }
 }

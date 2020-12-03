@@ -56,7 +56,7 @@ export class ScheduleEconomicCodesComponent implements OnInit {
         this.economicCodeForm.patchValue({
             'year': this._data.report.year,
             'deptalId': this._data.report.deptalId,
-            'economicCode': this._data.report.economicCode,
+            'economicCode': this._data.report.economicSegment.combinedCode,
             'economicSegmentName': this._data['report'].economicSegment.name,
             'grossAmount': this._data['pv'].netAmount,
             'payeeName': payeeName
@@ -71,6 +71,10 @@ export class ScheduleEconomicCodesComponent implements OnInit {
             if (!response) {
                 return;
             }
+            this.economicSegments = [{
+                id: response.id,
+                name: response.combinedCode + ' - ' + response.name
+            }];
             this.economicCodeForm.patchValue({
                 economicSegmentId: response.id,
                 economicName: response.name,
@@ -96,6 +100,11 @@ export class ScheduleEconomicCodesComponent implements OnInit {
         }
         if (foundLedger) {
             this.alertService.showErrors('Economic Segment already exist');
+            return;
+        }
+
+        if (parseInt(this.economicCodeForm.getRawValue().amount) > parseInt(this._data['pv'].netAmount)) {
+            this.alertService.showErrors('Amount can\'t be greater than gross amount');
             return;
         }
 

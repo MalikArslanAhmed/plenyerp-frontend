@@ -57,7 +57,7 @@ export class NumberToWordsPipe implements PipeTransform {
                 str += (Number(n[4]) !== 0) ? (this.a[Number(n[4])] || this.b[n[4][0]] + ' ' + this.a[n[4][1]]) + 'hundred ' : '';
                 str += (Number(n[5]) !== 0) ? ((str !== '') ? 'and ' : '') +
                     (this.a[Number(n[5])] || this.b[n[5][0]] + ' ' +
-                        this.a[n[5][1]]) + 'dollar' : '';
+                        this.a[n[5][1]]) + 'only' : 'only';
                 return str;
             } else {
                 return '';

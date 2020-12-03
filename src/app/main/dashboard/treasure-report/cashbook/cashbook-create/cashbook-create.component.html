@@ -10,7 +10,8 @@
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
         <form [formGroup]="cashbookAccountForm">
-            <mat-tab-group animationDuration="0ms" class="remove-border-bottom" (selectedTabChange)="tabChange($event)">
+            <mat-tab-group animationDuration="0ms" class="remove-border-bottom" (selectedTabChange)="tabChange($event)"
+                           #tabGroup>
                 <mat-tab label="BASIC PROFILE">
                     <div class="tab-box">
                         <div class="basic-details">
@@ -69,11 +70,11 @@
                                     </div>
                                     <mat-form-field appearance="outline">
                                         <mat-label>PV</mat-label>
-                                        <input formControlName="paymentVoucherId" matInput>
+                                        <input formControlName="paymentVoucherId" matInput type="number">
                                     </mat-form-field>
                                     <mat-form-field appearance="outline">
                                         <mat-label>RV</mat-label>
-                                        <input formControlName="receiptVoucherId" matInput>
+                                        <input formControlName="receiptVoucherId" matInput type="number">
                                     </mat-form-field>
                                     <mat-form-field appearance="outline">
                                         <mat-label>E-Mandate</mat-label>
@@ -115,7 +116,7 @@
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                         <mat-form-field appearance="outline" class="w-100-per">
                                             <mat-label>Bank A/C No.</mat-label>
-                                            <input formControlName="bankAccountNumber" matInput>
+                                            <input formControlName="bankAccountNumber" matInput type="number">
                                         </mat-form-field>
                                     </div>
                                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
@@ -249,14 +250,27 @@
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" (click)="matDialogRef.close();"
+        <!--<button mat-button class="save-button" (click)="matDialogRef.close();"
                 aria-label="Cancel">CANCEL
+        </button>-->
+        <button mat-button class="save-button" (click)="goToNextTab(tabGroup)"
+                [disabled]="cashbookAccountForm.invalid" aria-label="Save"
+                *ngIf=" this.tab === 'BANK BAL. & OTHER DETAILS'">BACK
         </button>
         <button mat-button class="save-button" (click)="saveCashbookDetails()"
                 [disabled]="cashbookAccountForm.invalid" aria-label="Save"
-                *ngIf="this.action !== 'EDIT' && this.tab === 'BASIC PROFILE'">SAVE
+                *ngIf="this.action !== 'EDIT' && this.tab === 'BANK BAL. & OTHER DETAILS'">SAVE
         </button>
-        <button mat-button class="save-button" (click)="addCashbookMonthly()"
+        <button mat-button class="save-button" (click)="goToNextTab(tabGroup)"
+                [disabled]="cashbookAccountForm.invalid" aria-label="Save"
+                *ngIf="this.tab === 'BASIC PROFILE'">NEXT
+        </button>
+        <button mat-button class="save-button"
+                (click)="updateCashbookDetails()"
+                [disabled]="cashbookAccountForm.invalid" aria-label="Update"
+                *ngIf="this.action === 'EDIT' && this.tab === 'BANK BAL. & OTHER DETAILS'">UPDATE
+        </button>
+        <!--<button mat-button class="save-button" (click)="addCashbookMonthly()"
                 [disabled]="cashbookAccountForm.invalid" aria-label="Save"
                 *ngIf="this.action !== 'EDIT' && this.tab === 'BANK BAL. & OTHER DETAILS'">ADD
         </button>
@@ -269,6 +283,6 @@
                 (click)="addCashbookMonthly()"
                 [disabled]="cashbookAccountForm.invalid" aria-label="Update"
                 *ngIf="this.action === 'EDIT' && this.tab === 'BANK BAL. & OTHER DETAILS'">EDIT
-        </button>
+        </button>-->
     </div>
 </div>

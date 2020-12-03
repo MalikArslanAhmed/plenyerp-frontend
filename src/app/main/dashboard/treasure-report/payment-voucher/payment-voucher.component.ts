@@ -130,15 +130,14 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    getPyamentVoucher(params, openAll?) {
+    getPyamentVoucher(params) {
         this.paymentVoucherService.get(params).subscribe(data => {
             this.paymentVoucherData = data.items;
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
                 this.paymentVoucherData.forEach(d => {
                     d['checked'] = false;
                     d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
-                    d['isOpen'] = openAll ? true : !this.panelOpenState;
-                    this.getChildReportData(d);
+                    // this.getChildReportData(d);
                 });
                 this.panelOpenState = !this.panelOpenState;
             }
@@ -158,31 +157,33 @@ export class PaymentVoucherComponent implements OnInit {
     scheduleEmployee(data) {
         this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', pv: data}
+            data: {pv: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
                 return;
             }
+            this.getChildReportData(data);
         });
     }
 
     scheduleCustomers(data) {
         this.dialogRef = this._matDialog.open(SchedulePayeeCustomerComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', pv: data}
+            data: {pv: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
                 return;
             }
+            this.getChildReportData(data);
         });
     }
 
     scheduleEconomicCodes(report, data) {
         this.dialogRef = this._matDialog.open(ScheduleEconomicCodesComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', pv: data, report: report}
+            data: {pv: data, report: report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -199,7 +200,7 @@ export class PaymentVoucherComponent implements OnInit {
         this.status = this.filterPaymentVoucherForm.value.status;
         params['sourceUnit'] = this.filterPaymentVoucherForm.value.sourceUnit;
         params['search'] = this.filterPaymentVoucherForm.value.search;
-        this.getPyamentVoucher(params, true);
+        this.getPyamentVoucher(params);
     }
 
     addPaymentVoucher() {

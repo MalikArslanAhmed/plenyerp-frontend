@@ -37,17 +37,8 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 private alertService: AlertService,
                 private employeesService: EmployeeService,
                 private paymentVoucherService: PaymentVoucherService) {
-        console.log('_data', _data);
-        this.action = _data.action;
         this.payeeData = _data.pv;
-        if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit Country';
-            if (_data.country) {
-                this.updateData = _data;
-            }
-        } else {
-            this.dialogTitle = 'Non-Personal Advance | PV - Schedule Payees Customer';
-        }
+        this.dialogTitle = 'Non-Personal Advance | PV - Schedule Payees Customer';
     }
 
     ngOnInit(): void {
@@ -57,7 +48,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
 
     refresh() {
         this.schedulePayeeCustomerForm = this.fb.group({
-            year: [''],
+            year: [{'value': '', disabled: true}],
             departmentalNo: [{'value': '', disabled: true}],
             details: [''],
             companyId: [{'value': '', disabled: true}],
@@ -67,7 +58,14 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}]
         });
-        console.log('this.payeeData', this.payeeData);
+        if (this.payeeData && this.payeeData['valueDate']) {
+            let valArr1 = this.payeeData['valueDate'].split(" ");
+            let valArr2 = valArr1[0].split("-");
+
+            this.schedulePayeeCustomerForm.patchValue({
+                'year': valArr2 && valArr2[0] ? valArr2[0] : ''
+            });
+        }
         this.schedulePayeeCustomerForm.patchValue({
             'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
         })
@@ -110,7 +108,6 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         });
         const numberToWords = new NumberToWordsPipe();
         this.dialogRef.afterClosed().subscribe((response) => {
-            console.log('response', response);
             if (!response) {
                 return;
             }
@@ -149,7 +146,6 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             panelClass: 'transaction-items-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
-            console.log('response', response);
             if (!response) {
                 return;
             }
@@ -168,7 +164,6 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     getBanks(id) {
         this.employeesService.getCompanyBankDetailsList(id, {'page': -1}).subscribe(data => {
             this.banks = data.items;
-            console.log("bank", this.banks);
         });
     }
 
