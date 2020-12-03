@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import {EconomicSegmentSelectComponent} from '../journal-voucher/economic-segment-select/economic-segment-select.component';
 import {PaymentReportService} from '../../../shared/services/payment-report.service';
 import {EmpListHeadersComponent} from '../employees/employee-list/emp-list-headers/emp-list-headers.component';
+import {ReportListHeadersComponent} from './report-list-headers/report-list-headers.component';
 
 @Component({
     selector: 'app-payment-report',
@@ -21,7 +22,7 @@ export class PaymentReportComponent implements OnInit {
     paymentReportForm: FormGroup;
     paymentReportData = [];
     economicSegments = [];
-    displayedColumns = ['SN', 'Title', 'File No', 'Staff ID', 'First Name', 'Last Name', 'Payroll pin'];
+    displayedColumns = ['S.No.', 'Year', 'Deptal No.', 'Payee Names', 'Amount (Net)', 'Taxes', 'Payment Ref. (#)', 'Last Actioned', 'Status'];
     panelOpenState: boolean = false;
 
     constructor(private paymentReportService: PaymentReportService,
@@ -88,7 +89,7 @@ export class PaymentReportComponent implements OnInit {
     }
 
     addColumn() {
-        this.dialogRef = this._matDialog.open(EmpListHeadersComponent, {
+        this.dialogRef = this._matDialog.open(ReportListHeadersComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE', selectedCol: this.displayedColumns}
         });
@@ -100,5 +101,19 @@ export class PaymentReportComponent implements OnInit {
             const formData = response.getRawValue();
             this.displayedColumns = formData.headers;
         });
+    }
+
+    getColumnData(columnData: string) {
+        let isColumnDataMatch: boolean = false;
+        // console.log('---sn', columnData);
+        if (this.displayedColumns && this.displayedColumns.length) {
+            this.displayedColumns.forEach(val => {
+                if (val === columnData) {
+                    isColumnDataMatch = true;
+                }
+            });
+        }
+        return isColumnDataMatch;
+
     }
 }
