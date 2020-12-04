@@ -15,7 +15,6 @@ import * as moment from "moment";
 import {PaymentVoucherService} from 'app/shared/services/payment-voucher.service';
 import {DefaultSettingVoucherInfoService} from "../../../../../shared/services/default-setting-voucher-info";
 import {AlertService} from "../../../../../shared/services/alert.service";
-import {SelectPayeeCustomerComponent} from "../select-payee-customer/select-payee-customer.component";
 import {SelectAieComponent} from '../select-aie/select-aie.component';
 
 @Component({
@@ -66,23 +65,17 @@ export class PaymentVoucherCreateComponent implements OnInit {
             }
         } else {
             this.dialogTitle = this.header + ' - Payment Voucher';
-            console.log('_data', _data);
-            // console.log('this.sources', this.sources);
         }
     }
 
     ngOnInit(): void {
         this.getCurrencies();
-        // this.getVoucherSourceUnitList();
         this.refresh();
-        // this.checkForUpdate();
     }
 
     refresh() {
         this.schedulePayeeEmployeeForm = this.fb.group({
             sourceUnit: [{value: '', disabled: true}],
-            // departmentalNo: [''],
-            // voucherSourceUnitId: [{value: '', disabled: true}],
             valueDate: [''],
             payee: ['EMPLOYEE'],
             currencyId: [''],
@@ -110,7 +103,6 @@ export class PaymentVoucherCreateComponent implements OnInit {
         });
 
         if (this.sources && this.sources.length > 0) {
-            console.log('this.sources', this.sources);
             this.schedulePayeeEmployeeForm.patchValue({
                 'sourceUnit': this.sources[0].value
             });
@@ -256,7 +248,6 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 'payingOfficerId': this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId : '',
                 'financialControllerId': this.schedulePayeeEmployeeForm.getRawValue().financialControllerId ? this.schedulePayeeEmployeeForm.getRawValue().financialControllerId : '',
             };
-            console.log('params', params);
             this.paymentVoucherService.save(params).subscribe(data => {
                 this.schedulePayeeEmployeeForm.reset();
                 this.isSubmitted = false;
