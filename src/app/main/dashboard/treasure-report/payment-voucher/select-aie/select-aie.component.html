@@ -1,7 +1,7 @@
 <div class="page-layout simple left-sidebar inner-sidebar inner-scroll" id="items-list-select-component">
     <mat-toolbar class="mat-accent m-0 items-data" matDialogTitle>
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title dialog-title">Select Payee Customers</span>
+            <span class="title dialog-title">Select AIE No.</span>
             <button (click)="matDialogRef.close()" aria-label="Close dialog" mat-icon-button>
                 <mat-icon>close</mat-icon>
             </button>
@@ -10,7 +10,7 @@
     <div class="content">
         <form [formGroup]="searchCustomerForm">
             <mat-form-field appearance="outline" fxFlex class="search-customer">
-                <mat-label>Search for Customer Id</mat-label>
+                <mat-label>Search for AIE NUmber</mat-label>
                 <input formControlName="search"
                        placeholder="Search for Cashbook ID or Title"
                        matInput (keyup)="search()">
@@ -20,31 +20,31 @@
     <div class="content">
         <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
             <div fxLayout="column" fxLayoutGap="5px" fxFlex="100">
-                <div fxFlex="100">
-                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="companiesList">
+                <div fxFlex="100" style="height: 300px">
+                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="aies">
                         <ng-container matColumnDef="sno">
                             <mat-header-cell *matHeaderCellDef>S.No.</mat-header-cell>
                             <mat-cell *matCellDef="let item">
                                 <p class="phone text-truncate">
-                                    {{item.sno}}
+                                    {{item?.sno}}
                                 </p>
                             </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="companyId">
-                            <mat-header-cell *matHeaderCellDef>Company ID</mat-header-cell>
+                        <ng-container matColumnDef="aieNumber">
+                            <mat-header-cell *matHeaderCellDef>AIE Number</mat-header-cell>
                             <mat-cell *matCellDef="let item">
                                 <p class="phone text-truncate">
-                                    {{item.id}}
+                                    {{item?.aieNumber}}
                                 </p>
                             </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="companyName">
-                            <mat-header-cell *matHeaderCellDef>Company Name</mat-header-cell>
+                        <ng-container matColumnDef="narration">
+                            <mat-header-cell *matHeaderCellDef>Narration</mat-header-cell>
                             <mat-cell *matCellDef="let item">
                                 <p class="phone text-truncate">
-                                    {{item.name}}
+                                    {{item?.narration}}
                                 </p>
                             </mat-cell>
                         </ng-container>
@@ -70,7 +70,7 @@
                         </mat-row>
                     </mat-table>
                 </div>
-                <!--<div fxFlex="100" *ngIf="companiesList.length > 0">
+                <!--<div fxFlex="100" *ngIf="aies.length > 0">
                     <mat-paginator #paginator
                                    [length]="pagination.total"
                                    [pageSize]="pagination.perpage"

@@ -78,6 +78,12 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             return;
         }
 
+        if (!this.payeeBankId || this.payeeBankId === '') {
+            this.alertService.showErrors('Please select payee bank');
+            this.isSubmitted = false;
+            return;
+        }
+
         if (this.isSubmitted) {
             let params = {
                 'companyId': this.schedulePayeeCustomerForm.getRawValue().companyId,
@@ -88,8 +94,8 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             };
             this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
                 this.schedulePayeeCustomerForm.reset();
-                this.isSubmitted = false;
                 this.matDialogRef.close(this.schedulePayeeCustomerForm);
+                this.isSubmitted = false;
             });
         }
     }
@@ -113,8 +119,8 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             }
             this.schedulePayeeCustomerForm.patchValue({
                 'totalTax': response['totalTaxes'],
-                'totalAmount': parseFloat(this.schedulePayeeCustomerForm.value.netAmount) + parseFloat(response['totalTaxes']),
-                'totalAmountInWords': numberToWords.transform(parseFloat(this.schedulePayeeCustomerForm.value.netAmount) + parseFloat(response['totalTaxes']))
+                'totalAmount': parseInt(this.schedulePayeeCustomerForm.value.netAmount) + parseInt(response['totalTaxes']),
+                'totalAmountInWords': numberToWords.transform(parseInt(this.schedulePayeeCustomerForm.value.netAmount) + parseInt(response['totalTaxes']))
             });
         });
     }

@@ -87,9 +87,13 @@
                                 </mat-form-field>
                             </div>
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                                <mat-form-field appearance="outline" fxFlex>
+                                <mat-form-field class="cursor-pointer" appearance="outline" (click)="aieSegmentSelect()"
+                                                fxFlex="100">
                                     <mat-label>AIE No.</mat-label>
-                                    <input matInput placeholder="AIE No" formControlName="aieId" type="number">
+                                    <mat-select formControlName="aieId" [disabled]="true">
+                                        <mat-option [value]="aie.id"
+                                                    *ngFor="let aie of aies">{{aie.name}}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
