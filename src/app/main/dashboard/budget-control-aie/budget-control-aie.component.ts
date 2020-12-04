@@ -92,7 +92,8 @@ export class BudgetControlAieComponent implements OnInit {
         this.budgetAieData(params);
 
     }
-    budgetAieData(params){
+
+    budgetAieData(params) {
         this.budgetService.budgetControlAieList(params).subscribe(data => {
             if (data.items && data.items.length > 0) {
                 data.items.forEach(aie => {
@@ -368,7 +369,7 @@ export class BudgetControlAieComponent implements OnInit {
                 }
             });
             if (this.filterEcoCode) {
-                this.economicCodeData = filterData && filterData.length ? filterData : this.ecoCodeOriginalData ;
+                this.economicCodeData = filterData && filterData.length ? filterData : this.ecoCodeOriginalData;
             } else {
                 this.economicCodeData = this.ecoCodeOriginalData;
             }

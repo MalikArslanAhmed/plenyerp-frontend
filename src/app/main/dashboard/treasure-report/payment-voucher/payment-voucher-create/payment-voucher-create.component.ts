@@ -15,6 +15,8 @@ import * as moment from "moment";
 import {PaymentVoucherService} from 'app/shared/services/payment-voucher.service';
 import {DefaultSettingVoucherInfoService} from "../../../../../shared/services/default-setting-voucher-info";
 import {AlertService} from "../../../../../shared/services/alert.service";
+import {SelectPayeeCustomerComponent} from "../select-payee-customer/select-payee-customer.component";
+import {SelectAieComponent} from '../select-aie/select-aie.component';
 
 @Component({
     selector: 'app-payment-voucher-create',
@@ -43,6 +45,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
     header: any;
     sources = [];
     currencies = [];
+    aies = [];
 
     constructor(public matDialogRef: MatDialogRef<PaymentVoucherCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -554,5 +557,23 @@ export class PaymentVoucherCreateComponent implements OnInit {
         } else if (!this.schedulePayeeEmployeeForm.value.xRate) {
             this.alertService.showErrors('Please fill X Rate');
         }
+    }
+
+    aieSegmentSelect() {
+        this.dialogRef = this._matDialog.open(SelectAieComponent, {
+            panelClass: 'transaction-items-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.aies = [{
+                id: response.id,
+                name: response.aieNumber,
+            }];
+            this.schedulePayeeEmployeeForm.patchValue({
+                'aieId': response.id
+            });
+        });
     }
 }

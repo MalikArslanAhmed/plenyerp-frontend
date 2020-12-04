@@ -40,7 +40,7 @@ export class SelectPayeeCustomerComponent implements OnInit {
     }
 
     search() {
-        this.getCompaniesList({search: this.searchCustomerForm.value});
+        this.getCompaniesList({search: this.searchCustomerForm.value.search});
     }
 
     getCompaniesList(params = {}): void {
