@@ -420,6 +420,13 @@
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
+                <mat-paginator #paginator *ngIf ="paymentVoucherData.length > 0"
+                               [length]="pagination.total"
+                               [pageSize]="pagination.perpage"
+                               [pageIndex]="pagination.page-1"
+                               (page)="pageEvent = onPageChange($event)"
+                >
+                </mat-paginator>
             </div>
         </div>
     </div>

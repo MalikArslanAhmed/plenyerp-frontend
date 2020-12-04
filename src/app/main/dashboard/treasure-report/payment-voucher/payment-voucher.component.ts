@@ -104,6 +104,12 @@ export class PaymentVoucherComponent implements OnInit {
     ];
     dialogRef: any;
     status = 'ALL';
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
 
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
@@ -131,14 +137,18 @@ export class PaymentVoucherComponent implements OnInit {
         this.createPaymentVoucherForm.get('sourceUnit').valueChanges.subscribe(val => {
             if (val) {
                 this.getTypeData(val);
-            }else {
+            } else {
                 this.createPaymentVoucherForm.get('type').reset();
             }
         });
     }
 
-    getPyamentVoucher(params) {
-        this.paymentVoucherService.get(params).subscribe(data => {
+    getPyamentVoucher(params?) {
+        let param = {
+            ...params,
+            page: this.pagination.page
+        };
+        this.paymentVoucherService.get(param).subscribe(data => {
             this.paymentVoucherData = data.items;
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
                 this.paymentVoucherData.forEach(d => {
@@ -291,16 +301,21 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-   getTypeData(sourceUnitId) {
+    getTypeData(sourceUnitId) {
         if (sourceUnitId) {
             const params = {
                 voucherSourceUnitId: sourceUnitId,
-                status : 'NEW'
+                status: 'NEW'
             };
             this.paymentVoucherService.typeData(params).subscribe(data => {
                 this.types = data.items;
             });
         }
 
+    }
+
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getPyamentVoucher();
     }
 }
