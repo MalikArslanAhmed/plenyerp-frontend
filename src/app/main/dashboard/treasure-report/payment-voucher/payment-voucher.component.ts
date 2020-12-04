@@ -102,8 +102,6 @@ export class PaymentVoucherComponent implements OnInit {
             this.createPaymentVoucherForm.get('type').reset();
             if (val) {
                 this.getTypeData(val);
-            } else {
-                this.createPaymentVoucherForm.get('type').reset();
             }
         });
     }
