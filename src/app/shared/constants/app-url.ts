@@ -1202,7 +1202,7 @@ export class AppUrl {
         return AppUrl.API_URL + `treasury/payment-vouchers/update-status`;
     }
 
-    static GET_SOURCE_UNIT_TYPE(): string {
-        return AppUrl.API_URL + `treasury/payment-vouchers`;
+    static GET_SOURCE_UNIT_TYPE(id): string {
+        return AppUrl.API_URL + `treasury/source-units/${id}/types`;
     }
 }

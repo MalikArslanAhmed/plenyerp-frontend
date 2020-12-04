@@ -129,10 +129,10 @@ export class PaymentVoucherComponent implements OnInit {
             'type': ['']
         });
         this.createPaymentVoucherForm.get('sourceUnit').valueChanges.subscribe(val => {
+            this.types = [];
+            this.createPaymentVoucherForm.get('type').reset();
             if (val) {
                 this.getTypeData(val);
-            }else {
-                this.createPaymentVoucherForm.get('type').reset();
             }
         });
     }
@@ -293,12 +293,9 @@ export class PaymentVoucherComponent implements OnInit {
 
    getTypeData(sourceUnitId) {
         if (sourceUnitId) {
-            const params = {
-                voucherSourceUnitId: sourceUnitId,
-                status : 'NEW'
-            };
-            this.paymentVoucherService.typeData(params).subscribe(data => {
-                this.types = data.items;
+            this.paymentVoucherService.typeData(sourceUnitId).subscribe(data => {
+                this.types = data.type;
+                // console.log('--->>>', this.types);
             });
         }
 
