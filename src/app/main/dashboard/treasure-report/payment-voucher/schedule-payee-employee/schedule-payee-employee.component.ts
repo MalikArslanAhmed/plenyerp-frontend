@@ -41,25 +41,17 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 private paymentVoucherService: PaymentVoucherService) {
         this.action = _data.action;
         this.payeeData = _data.pv;
-        if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit Country';
-            if (_data.country) {
-                this.updateData = _data;
-            }
-        } else {
-            this.dialogTitle = 'Non-Personal Advance | PV - Schedule Payees Employee';
-        }
+        this.dialogTitle = 'Non-Personal Advance | PV - Schedule Payees Employee';
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
-        // this.checkForUpdate();
     }
 
     refresh() {
         this.schedulePayeeEmployeeForm = this.fb.group({
-            year: [''],
+            year: [{'value': '', disabled: true}],
             departmentalNo: [{'value': '', disabled: true}],
             details: [''],
             employeeId: [{'value': '', disabled: true}],
@@ -69,9 +61,17 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}]
         });
+        if (this.payeeData && this.payeeData['valueDate']) {
+            let valArr1 = this.payeeData['valueDate'].split(" ");
+            let valArr2 = valArr1[0].split("-");
+
+            this.schedulePayeeEmployeeForm.patchValue({
+                'year': valArr2 && valArr2[0] ? valArr2[0] : ''
+            });
+        }
         this.schedulePayeeEmployeeForm.patchValue({
             'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
-        })
+        });
     }
 
     savePayeeEmployee() {
@@ -132,7 +132,6 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     getBanks(id) {
         this.employeesService.getBankDetailsList(id, {'page': -1}).subscribe(data => {
             this.banks = data.items;
-            console.log("bank", this.banks);
         });
     }
 

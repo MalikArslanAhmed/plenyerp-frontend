@@ -65,42 +65,42 @@ export class PaymentVoucherComponent implements OnInit {
         }
     ];
     types = [
-        {
-            'name': 'Expenditure Voucher',
-            'value': 'EXPENDITURE_VOUCHER'
-        },
-        {
-            'name': 'Non-Personal Advances',
-            'value': 'NON_PERSONAL_ADVANCES'
-        },
-        {
-            'name': 'Personal Advances',
-            'value': 'PERSONAL_ADVANCES'
-        },
-        {
-            'name': 'Special Imprest',
-            'value': 'SPECIAL_IMPREST'
-        },
-        {
-            'name': 'Standing Imprest',
-            'value': 'STANDING_IMPREST'
-        },
-        {
-            'name': 'Transfer - Cashbook',
-            'value': 'TRANSFER_CASHBOOKS'
-        },
-        {
-            'name': 'Remitance',
-            'value': 'REMITANCE'
-        },
-        {
-            'name': 'Deposit',
-            'value': 'DEPOSIT'
-        },
-        {
-            'name': 'Expenditure Credit',
-            'value': 'EXPENDITURE_CREDIT'
-        },
+        // {
+        //     'name': 'Expenditure Voucher',
+        //     'value': 'EXPENDITURE_VOUCHER'
+        // },
+        // {
+        //     'name': 'Non-Personal Advances',
+        //     'value': 'NON_PERSONAL_ADVANCES'
+        // },
+        // {
+        //     'name': 'Personal Advances',
+        //     'value': 'PERSONAL_ADVANCES'
+        // },
+        // {
+        //     'name': 'Special Imprest',
+        //     'value': 'SPECIAL_IMPREST'
+        // },
+        // {
+        //     'name': 'Standing Imprest',
+        //     'value': 'STANDING_IMPREST'
+        // },
+        // {
+        //     'name': 'Transfer - Cashbook',
+        //     'value': 'TRANSFER_CASHBOOKS'
+        // },
+        // {
+        //     'name': 'Remitance',
+        //     'value': 'REMITANCE'
+        // },
+        // {
+        //     'name': 'Deposit',
+        //     'value': 'DEPOSIT'
+        // },
+        // {
+        //     'name': 'Expenditure Credit',
+        //     'value': 'EXPENDITURE_CREDIT'
+        // },
     ];
     dialogRef: any;
     status = 'ALL';
@@ -116,7 +116,6 @@ export class PaymentVoucherComponent implements OnInit {
         this.refresh();
         this.getPyamentVoucher({});
         this.getVoucherSourceUnitList();
-        this.getTypeData(24);
     }
 
     refresh() {
@@ -132,19 +131,20 @@ export class PaymentVoucherComponent implements OnInit {
         this.createPaymentVoucherForm.get('sourceUnit').valueChanges.subscribe(val => {
             if (val) {
                 this.getTypeData(val);
+            }else {
+                this.createPaymentVoucherForm.get('type').reset();
             }
         });
     }
 
-    getPyamentVoucher(params, openAll?) {
+    getPyamentVoucher(params) {
         this.paymentVoucherService.get(params).subscribe(data => {
             this.paymentVoucherData = data.items;
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
                 this.paymentVoucherData.forEach(d => {
                     d['checked'] = false;
                     d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
-                    d['isOpen'] = openAll ? true : !this.panelOpenState;
-                    this.getChildReportData(d);
+                    // this.getChildReportData(d);
                 });
                 this.panelOpenState = !this.panelOpenState;
             }
@@ -164,31 +164,33 @@ export class PaymentVoucherComponent implements OnInit {
     scheduleEmployee(data) {
         this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', pv: data}
+            data: {pv: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
                 return;
             }
+            this.getChildReportData(data);
         });
     }
 
     scheduleCustomers(data) {
         this.dialogRef = this._matDialog.open(SchedulePayeeCustomerComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', pv: data}
+            data: {pv: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
                 return;
             }
+            this.getChildReportData(data);
         });
     }
 
     scheduleEconomicCodes(report, data) {
         this.dialogRef = this._matDialog.open(ScheduleEconomicCodesComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE', pv: data, report: report}
+            data: {pv: data, report: report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -205,7 +207,7 @@ export class PaymentVoucherComponent implements OnInit {
         this.status = this.filterPaymentVoucherForm.value.status;
         params['sourceUnit'] = this.filterPaymentVoucherForm.value.sourceUnit;
         params['search'] = this.filterPaymentVoucherForm.value.search;
-        this.getPyamentVoucher(params, true);
+        this.getPyamentVoucher(params);
     }
 
     addPaymentVoucher() {
@@ -296,7 +298,6 @@ export class PaymentVoucherComponent implements OnInit {
                 status : 'NEW'
             };
             this.paymentVoucherService.typeData(params).subscribe(data => {
-                console.log('--->>>', data);
                 this.types = data.items;
             });
         }

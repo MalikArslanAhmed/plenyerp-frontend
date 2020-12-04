@@ -29,8 +29,8 @@
                         <mat-label>Type</mat-label>
                         <mat-select formControlName="type">
                             <mat-option value="">Choose Type</mat-option>
-                            <mat-option [value]="type.value"
-                                        *ngFor="let type of types">{{type?.name}}</mat-option>
+                            <mat-option [value]="type.type"
+                                        *ngFor="let type of types">{{type.type}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <div fxFlex class="width-200px p-10px mt-13px">
@@ -74,32 +74,44 @@
             <div class="content mt-20px">
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <button mat-button class="update-report" (click)="updateStatus('NEW')"
-                            *ngIf="this.status === 'ALL' || this.status === 'CHECKED'">
+                            *ngIf="this.status === 'CHECKED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'CHECKED'">keyboard_arrow_left</mat-icon>
                         New
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('CHECKED')"
                             *ngIf="this.status === 'NEW' || this.status === 'APPROVED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'APPROVED'">keyboard_arrow_left</mat-icon>
                         Checked
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'NEW'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('APPROVED')"
                             *ngIf="this.status === 'CHECKED' || this.status === 'BUDGET_CODES_VERIFIED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'BUDGET_CODES_VERIFIED'">keyboard_arrow_left</mat-icon>
                         Approved
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'CHECKED'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('BUDGET_CODES_VERIFIED')"
                             *ngIf="this.status === 'APPROVED' || this.status === 'AUDITED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'AUDITED'">keyboard_arrow_left</mat-icon>
                         Budget Codes Verified
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'APPROVED'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('AUDITED')"
                             *ngIf="this.status === 'BUDGET_CODES_VERIFIED' || this.status === 'CLOSED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'CLOSED'">keyboard_arrow_left</mat-icon>
                         Audited
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'BUDGET_CODES_VERIFIED'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('CLOSED')"
                             *ngIf="this.status === 'AUDITED' || this.status === 'ON_MANDATE'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'ON_MANDATE'">keyboard_arrow_left</mat-icon>
                         Closed
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'AUDITED'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('ON_MANDATE')"
                             *ngIf="this.status === 'CLOSED'">
                         On Mandate
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'CLOSED'">keyboard_arrow_right</mat-icon>
                     </button>
                 </div>
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
@@ -111,12 +123,10 @@
                         <span class="mat-header-cell text-center">Payee Names</span>
                         <span class="mat-header-cell text-center">Amount (Net)</span>
                         <span class="mat-header-cell text-center">Taxes</span>
-                        <span class="mat-header-cell text-center">Payment Ref. (#)</span>
                         <span class="mat-header-cell text-center">Last Actioned</span>
                         <span class="mat-header-cell text-center">Status</span>
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index"
-                                         [expanded]="reportData.isOpen">
+                    <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center">
@@ -143,9 +153,6 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.taxes ? reportData?.taxes : '-'}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.paymentRef ? reportData?.paymentRef : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
@@ -199,9 +206,6 @@
                                                     <div class="title">Sort Code</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Payment Ref</div>
-                                                </th>
-                                                <th>
                                                     <div class="title">Status</div>
                                                 </th>
                                                 <th>
@@ -250,62 +254,57 @@
                                                 </td>
                                                 <td>
                                                     <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.title}}
+                                                         *ngIf="data && data.employee && data.employee.employeeBank">
+                                                        {{data?.employee?.employeeBank?.title}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.companyBanks">
-                                                        {{data?.employee?.companyBanks[0]?.title}}
+                                                         *ngIf="data && data.employee && data.employee.companyBank">
+                                                        {{data?.employee?.companyBank?.title}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.number}}
+                                                         *ngIf="data && data.employee && data.employee.employeeBank">
+                                                        {{data?.employee?.employeeBank?.number}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bankAccountNumber}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title">
-                                                        {{data?.employee?.employeeBanks[0]?.type}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.bank?.name}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bank?.name}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.bank?.branchName}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bankBranch?.name}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.sortCode}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bankBranch?.sortCode}}
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                        {{data?.adminCompany?.companyBank?.bankAccountNumber}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.paymentRef}}
+                                                        {{data?.employee?.employeeBank?.type}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.employeeBank">
+                                                        {{data?.employee?.employeeBank?.bank?.name}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                        {{data?.adminCompany?.companyBank?.bank?.name}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
+                                                        {{data?.employee?.employeeBank?.branches?.name}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                        {{data?.adminCompany?.companyBank?.bankBranch?.name}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
+                                                        {{data?.employee?.employeeBank?.branches?.sortCode}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                        {{data?.adminCompany?.companyBank?.bankBranch?.sortCode}}
                                                     </div>
                                                 </td>
                                                 <td>
@@ -325,11 +324,15 @@
                                             <tr>
                                                 <td colspan="15">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
-                                                            (click)="scheduleEmployee(reportData)">Schedule Payee
+                                                            (click)="scheduleEmployee(reportData)"
+                                                            *ngIf="reportData && reportData.payee === 'EMPLOYEE'">
+                                                        Schedule Payee
                                                         Employees
                                                     </button>
                                                     <button mat-button class="payee-report"
-                                                            (click)="scheduleCustomers(reportData)">Schedule Payee
+                                                            (click)="scheduleCustomers(reportData)"
+                                                            *ngIf="reportData && reportData.payee === 'CUSTOMER'">
+                                                        Schedule Payee
                                                         Customers
                                                     </button>
                                                 </td>

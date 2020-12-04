@@ -20,21 +20,17 @@ export class PaymentVoucherTaxesComponent implements OnInit {
     taxes = [];
     grossAmount: any;
     totalTaxes = 0;
-    // taxArray = [];
 
     constructor(public matDialogRef: MatDialogRef<PaymentVoucherTaxesComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder, private transactionService: TransactionService) {
-        console.log('data', _data);
         this.grossAmount = _data.netAmount;
-        // this.taxArray = _data.taxArray;
         if (_data.action === 'CREATE') {
             this.updateData = undefined;
             this.dialogTitle = 'Add Applicable Taxes';
         } else {
             this.dialogTitle = 'Edit Applicable Taxes';
             this.updateData = _data;
-            console.log('this.updateData', this.updateData);
         }
     }
 
@@ -57,22 +53,7 @@ export class PaymentVoucherTaxesComponent implements OnInit {
                 this.totalTaxes = this.updateData.totalTaxes;
             } else {
                 this.taxes = data.items;
-                console.log('this.taxes', this.taxes);
-                /*if (this.taxes && this.taxes.length > 0) {
-                    let totalTaxes = [];
-                    this.taxes.forEach(tax => {
-                        if (tax) {
-                            this.taxArray.forEach(taxObj => {
-                                if (parseInt(taxObj) === parseInt(tax.id)) {
-                                    totalTaxes.push((parseInt(this._data.grossAmount) * (parseInt(tax.tax) / 100)));
-                                }
-                            })
-                        }
-                    });
-                    this.totalTaxes = totalTaxes.reduce((a, b) => a + b, 0);
-                }*/
             }
-            // this.checkedItemsId();
         });
     }
 
