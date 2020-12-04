@@ -50,7 +50,7 @@ export class PaymentVoucherService extends BaseService {
         return this.getRequest(AppUrl.GET_SCHEDULE_ECONOMIC(id));
     }
 
-    typeData(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_SOURCE_UNIT_TYPE(), data);
+    typeData(id): Observable<any> {
+        return this.getRequest(AppUrl.GET_SOURCE_UNIT_TYPE(id));
     }
 }

@@ -64,44 +64,7 @@ export class PaymentVoucherComponent implements OnInit {
             'value': 'ON_MANDATE'
         }
     ];
-    types = [
-        // {
-        //     'name': 'Expenditure Voucher',
-        //     'value': 'EXPENDITURE_VOUCHER'
-        // },
-        // {
-        //     'name': 'Non-Personal Advances',
-        //     'value': 'NON_PERSONAL_ADVANCES'
-        // },
-        // {
-        //     'name': 'Personal Advances',
-        //     'value': 'PERSONAL_ADVANCES'
-        // },
-        // {
-        //     'name': 'Special Imprest',
-        //     'value': 'SPECIAL_IMPREST'
-        // },
-        // {
-        //     'name': 'Standing Imprest',
-        //     'value': 'STANDING_IMPREST'
-        // },
-        // {
-        //     'name': 'Transfer - Cashbook',
-        //     'value': 'TRANSFER_CASHBOOKS'
-        // },
-        // {
-        //     'name': 'Remitance',
-        //     'value': 'REMITANCE'
-        // },
-        // {
-        //     'name': 'Deposit',
-        //     'value': 'DEPOSIT'
-        // },
-        // {
-        //     'name': 'Expenditure Credit',
-        //     'value': 'EXPENDITURE_CREDIT'
-        // },
-    ];
+    types = [];
     dialogRef: any;
     status = 'ALL';
     pagination = {
@@ -135,6 +98,8 @@ export class PaymentVoucherComponent implements OnInit {
             'type': ['']
         });
         this.createPaymentVoucherForm.get('sourceUnit').valueChanges.subscribe(val => {
+            this.types = [];
+            this.createPaymentVoucherForm.get('type').reset();
             if (val) {
                 this.getTypeData(val);
             } else {
@@ -303,15 +268,10 @@ export class PaymentVoucherComponent implements OnInit {
 
     getTypeData(sourceUnitId) {
         if (sourceUnitId) {
-            const params = {
-                voucherSourceUnitId: sourceUnitId,
-                status: 'NEW'
-            };
-            this.paymentVoucherService.typeData(params).subscribe(data => {
-                this.types = data.items;
+            this.paymentVoucherService.typeData(sourceUnitId).subscribe(data => {
+                this.types = data.type;
             });
         }
-
     }
 
     onPageChange(page) {
