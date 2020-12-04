@@ -116,6 +116,7 @@ export class PaymentVoucherComponent implements OnInit {
         this.refresh();
         this.getPyamentVoucher({});
         this.getVoucherSourceUnitList();
+        this.getTypeData(24);
     }
 
     refresh() {
@@ -127,6 +128,11 @@ export class PaymentVoucherComponent implements OnInit {
         this.createPaymentVoucherForm = this.fb.group({
             'sourceUnit': [''],
             'type': ['']
+        });
+        this.createPaymentVoucherForm.get('sourceUnit').valueChanges.subscribe(val => {
+            if (val) {
+                this.getTypeData(val);
+            }
         });
     }
 
@@ -281,5 +287,19 @@ export class PaymentVoucherComponent implements OnInit {
         this.paymentVoucherService.getScheduleEconomic(report.id).subscribe(data => {
             report['economic'] = data.items;
         });
+    }
+
+   getTypeData(sourceUnitId) {
+        if (sourceUnitId) {
+            const params = {
+                voucherSourceUnitId: sourceUnitId,
+                status : 'NEW'
+            };
+            this.paymentVoucherService.typeData(params).subscribe(data => {
+                console.log('--->>>', data);
+                this.types = data.items;
+            });
+        }
+
     }
 }
