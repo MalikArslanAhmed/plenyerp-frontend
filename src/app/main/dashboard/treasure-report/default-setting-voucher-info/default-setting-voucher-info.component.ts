@@ -13,6 +13,7 @@ import {AdminSegmentEmployeeSelectComponent} from './admin-segment-employee-sele
 import {AlertService} from "../../../../shared/services/alert.service";
 import {DefaultSettingVoucherInfoService} from "../../../../shared/services/default-setting-voucher-info";
 import {AdminSegmentSelectAccountHeadComponent} from './admin-segment-select-account-head/admin-segment-select-account-head.component';
+import {SubOrgranisationSelectComponent} from './sub-orgranisation-select/sub-orgranisation-select.component';
 
 @Component({
     selector: 'app-default-setting-voucher-info',
@@ -237,15 +238,6 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
                     accountHeadId: response['empData'].id,
                     disabled: true
                 });
-            } else if (type === 'Sub Organisation') {
-                this.subOrganisations = [{
-                    'name': response['empData'].firstName + ' ' + response['empData'].lastName,
-                    'id': response['empData'].id
-                }];
-                this.voucherInfoForm.patchValue({
-                    subOrganisationId: response['empData'].id,
-                    disabled: true
-                });
             } else if (type === 'Select Checking Officer') {
                 this.checkingOfficers = [{
                     'name': response['empData'].firstName + ' ' + response['empData'].lastName,
@@ -274,6 +266,34 @@ export class DefaultSettingVoucherInfoComponent implements OnInit {
                     disabled: true
                 });
             }
+        });
+    }
+
+    selectSubOrganisation() {
+        let node: any = undefined;
+        if (!this.accounHeadNode) {
+            this.alertService.showErrors('Choose Account Head Data ..!');
+            return;
+        } else {
+            node = this.accounHeadNode;
+        }
+
+        this.dialogRef = this._matDialog.open(SubOrgranisationSelectComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {node: node}
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.subOrganisations = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.voucherInfoForm.patchValue({
+                subOrganisationId: response.id,
+                disabled: true
+            });
         });
     }
 

@@ -20,6 +20,7 @@ export class ScheduleEconomicCodesComponent implements OnInit {
     ledgers = [];
     isSubmitted = false;
     payeeData: any;
+    reportData: any;
 
     constructor(
         public matDialogRef: MatDialogRef<ScheduleEconomicCodesComponent>,
@@ -28,6 +29,7 @@ export class ScheduleEconomicCodesComponent implements OnInit {
         private _matDialog: MatDialog,
         private alertService: AlertService,
         private paymentVoucherService: PaymentVoucherService) {
+        this.reportData = _data.report;
         this.payeeData = _data.pv;
     }
 
@@ -60,7 +62,8 @@ export class ScheduleEconomicCodesComponent implements OnInit {
             'economicSegmentName': this._data['report'].economicSegment.name,
             'grossAmount': this._data['pv'].netAmount,
             'payeeName': payeeName
-        })
+        });
+        this.getPayeeEconomicCode();
     }
 
     economicSegmentSelect() {
@@ -79,6 +82,22 @@ export class ScheduleEconomicCodesComponent implements OnInit {
                 economicSegmentId: response.id,
                 economicName: response.name,
             });
+        });
+    }
+
+    getPayeeEconomicCode() {
+        this.paymentVoucherService.getScheduleEconomic(this.reportData.id, {payeeVoucherId: this.payeeData.id}).subscribe(data => {
+            let ledgers = [];
+            if (data && data.items && data.items.length > 0) {
+                data.items.forEach(item => {
+                    ledgers.push({
+                        'economicSegmentId': item.economicSegmentId,
+                        'economicName': item['economicSegment'].name,
+                        'amount': item.amount
+                    });
+                });
+                this.ledgers = ledgers;
+            }
         });
     }
 

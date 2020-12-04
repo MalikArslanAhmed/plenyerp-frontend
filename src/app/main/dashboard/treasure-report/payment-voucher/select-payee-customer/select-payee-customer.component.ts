@@ -30,7 +30,7 @@ export class SelectPayeeCustomerComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.getCompaniesList({isCustomer: true});
+        this.getCompaniesList({isCustomer: 1});
     }
 
     refresh() {
@@ -40,7 +40,7 @@ export class SelectPayeeCustomerComponent implements OnInit {
     }
 
     search() {
-        this.getCompaniesList({search: this.searchCustomerForm.value.search});
+        this.getCompaniesList({companyId: this.searchCustomerForm.value.search});
     }
 
     getCompaniesList(params = {}): void {

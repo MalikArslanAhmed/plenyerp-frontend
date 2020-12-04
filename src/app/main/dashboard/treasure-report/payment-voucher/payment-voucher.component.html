@@ -379,6 +379,12 @@
                                                     <div class="title">S.No</div>
                                                 </th>
                                                 <th>
+                                                    <div class="title">Payee Id</div>
+                                                </th>
+                                                <th>
+                                                    <div class="title">Payee Name</div>
+                                                </th>
+                                                <th>
                                                     <div class="title">Account</div>
                                                 </th>
                                                 <th>
@@ -392,6 +398,26 @@
                                                 <td>
                                                     <div class="title">
                                                         {{j + 1}}.
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['adminCompany']">
+                                                        {{data?.payeeVoucher?.adminCompany?.id}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['employee']">
+                                                        {{data?.payeeVoucher?.employee?.id}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['adminCompany']">
+                                                        {{data?.payeeVoucher?.adminCompany?.name}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['employee']">
+                                                        {{data?.payeeVoucher?.employee?.firstName}} {{data?.payeeVoucher?.employee?.lastName}}
                                                     </div>
                                                 </td>
                                                 <td>
@@ -420,7 +446,7 @@
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
-                <mat-paginator #paginator *ngIf ="paymentVoucherData.length > 0"
+                <mat-paginator #paginator *ngIf="paymentVoucherData.length > 0"
                                [length]="pagination.total"
                                [pageSize]="pagination.perpage"
                                [pageIndex]="pagination.page-1"

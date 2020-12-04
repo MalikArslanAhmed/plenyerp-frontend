@@ -18,10 +18,10 @@
         </form>
     </div>
     <div class="content">
-        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar style="margin-top: -60px">
             <div fxLayout="column" fxLayoutGap="5px" fxFlex="100">
-                <div fxFlex="100" style="height: 300px">
-                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="aies">
+                <div fxFlex="100">
+                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="aies" style="max-height: 450px; overflow-y: scroll">
                         <ng-container matColumnDef="sno">
                             <mat-header-cell *matHeaderCellDef>S.No.</mat-header-cell>
                             <mat-cell *matCellDef="let item">
@@ -70,7 +70,7 @@
                         </mat-row>
                     </mat-table>
                 </div>
-                <!--<div fxFlex="100" *ngIf="aies.length > 0">
+                <div fxFlex="100" *ngIf="aies.length > 0">
                     <mat-paginator #paginator
                                    [length]="pagination.total"
                                    [pageSize]="pagination.perpage"
@@ -78,7 +78,7 @@
                                    (page)="pageEvent = onPageChange($event)"
                     >
                     </mat-paginator>
-                </div>-->
+                </div>
             </div>
         </div>
     </div>

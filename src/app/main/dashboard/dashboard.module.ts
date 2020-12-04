@@ -232,6 +232,7 @@ import { PaymentVoucherTaxesComponent } from './treasure-report/payment-voucher/
 import { SelectPayeeCustomerComponent } from './treasure-report/payment-voucher/select-payee-customer/select-payee-customer.component';
 import { ScheduleEconomicCodesComponent } from './treasure-report/payment-voucher/schedule-economic-codes/schedule-economic-codes.component';
 import { SelectAieComponent } from './treasure-report/payment-voucher/select-aie/select-aie.component';
+import { SubOrgranisationSelectComponent } from './treasure-report/default-setting-voucher-info/sub-orgranisation-select/sub-orgranisation-select.component';
 
 @NgModule({
     declarations: [
@@ -441,7 +442,8 @@ import { SelectAieComponent } from './treasure-report/payment-voucher/select-aie
         PaymentVoucherTaxesComponent,
         SelectPayeeCustomerComponent,
         ScheduleEconomicCodesComponent,
-        SelectAieComponent
+        SelectAieComponent,
+        SubOrgranisationSelectComponent
     ],
     imports: [
         CommonModule,

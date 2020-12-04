@@ -28,7 +28,7 @@
                         <button mat-button aria-label="Save" class="save-button" (click)="selectAdminAccountHead()">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" (click)="selectAdminEmployee('Sub Organisation')">
+                        <mat-form-field appearance="outline" (click)="selectSubOrganisation()">
                             <mat-label>Sub Organisation</mat-label>
                             <mat-select formControlName="subOrganisationId">
                                 <mat-option value="">Enter Code</mat-option>
@@ -36,7 +36,7 @@
                                             *ngFor="let subOrganisation of subOrganisations">{{subOrganisation?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-button aria-label="Save" class="save-button" (click)="selectAdminEmployee('Sub Organisation')">Select</button>
+                        <button mat-button aria-label="Save" class="save-button" (click)="selectSubOrganisation()">Select</button>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <h4 class="font-bold">Default COA Segment Codes :</h4>
