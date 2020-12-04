@@ -1201,4 +1201,8 @@ export class AppUrl {
     static UPDATE_VOUCHER_STATUS(): string {
         return AppUrl.API_URL + `treasury/payment-vouchers/update-status`;
     }
+
+    static GET_SOURCE_UNIT_TYPE(): string {
+        return AppUrl.API_URL + `treasury/payment-vouchers`;
+    }
 }

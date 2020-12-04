@@ -29,8 +29,8 @@
                         <mat-label>Type</mat-label>
                         <mat-select formControlName="type">
                             <mat-option value="">Choose Type</mat-option>
-                            <mat-option [value]="type.value"
-                                        *ngFor="let type of types">{{type?.name}}</mat-option>
+                            <mat-option [value]="type.type"
+                                        *ngFor="let type of types">{{type.type}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <div fxFlex class="width-200px p-10px mt-13px">
@@ -75,31 +75,43 @@
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <button mat-button class="update-report" (click)="updateStatus('NEW')"
                             *ngIf="this.status === 'CHECKED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'CHECKED'">keyboard_arrow_left</mat-icon>
                         New
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('CHECKED')"
                             *ngIf="this.status === 'NEW' || this.status === 'APPROVED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'APPROVED'">keyboard_arrow_left</mat-icon>
                         Checked
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'NEW'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('APPROVED')"
                             *ngIf="this.status === 'CHECKED' || this.status === 'BUDGET_CODES_VERIFIED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'BUDGET_CODES_VERIFIED'">keyboard_arrow_left</mat-icon>
                         Approved
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'CHECKED'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('BUDGET_CODES_VERIFIED')"
                             *ngIf="this.status === 'APPROVED' || this.status === 'AUDITED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'AUDITED'">keyboard_arrow_left</mat-icon>
                         Budget Codes Verified
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'APPROVED'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('AUDITED')"
                             *ngIf="this.status === 'BUDGET_CODES_VERIFIED' || this.status === 'CLOSED'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'CLOSED'">keyboard_arrow_left</mat-icon>
                         Audited
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'BUDGET_CODES_VERIFIED'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('CLOSED')"
                             *ngIf="this.status === 'AUDITED' || this.status === 'ON_MANDATE'">
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'ON_MANDATE'">keyboard_arrow_left</mat-icon>
                         Closed
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'AUDITED'">keyboard_arrow_right</mat-icon>
                     </button>
                     <button mat-button class="update-report" (click)="updateStatus('ON_MANDATE')"
                             *ngIf="this.status === 'CLOSED'">
                         On Mandate
+                        <mat-icon class="material-icons cursor-pointer whiteColor" *ngIf="this.status === 'CLOSED'">keyboard_arrow_right</mat-icon>
                     </button>
                 </div>
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
