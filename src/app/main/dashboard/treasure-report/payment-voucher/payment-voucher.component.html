@@ -242,57 +242,57 @@
                                                 </td>
                                                 <td>
                                                     <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.title}}
+                                                         *ngIf="data && data.employee && data.employee.employeeBank">
+                                                        {{data?.employee?.employeeBank?.title}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.companyBanks">
-                                                        {{data?.employee?.companyBanks[0]?.title}}
+                                                         *ngIf="data && data.employee && data.employee.companyBank">
+                                                        {{data?.employee?.companyBank?.title}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.number}}
+                                                         *ngIf="data && data.employee && data.employee.employeeBank">
+                                                        {{data?.employee?.employeeBank?.number}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bankAccountNumber}}
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                        {{data?.adminCompany?.companyBank?.bankAccountNumber}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.employee?.employeeBanks[0]?.type}}
+                                                        {{data?.employee?.employeeBank?.type}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.bank?.name}}
+                                                         *ngIf="data && data.employee && data.employee.employeeBank">
+                                                        {{data?.employee?.employeeBank?.bank?.name}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bank?.name}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.bank?.branchName}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bankBranch?.name}}
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                        {{data?.adminCompany?.companyBank?.bank?.name}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.sortCode}}
+                                                         *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
+                                                        {{data?.employee?.employeeBank?.branches?.name}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bankBranch?.sortCode}}
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                        {{data?.adminCompany?.companyBank?.bankBranch?.name}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
+                                                        {{data?.employee?.employeeBank?.branches?.sortCode}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                        {{data?.adminCompany?.companyBank?.bankBranch?.sortCode}}
                                                     </div>
                                                 </td>
                                                 <td>
