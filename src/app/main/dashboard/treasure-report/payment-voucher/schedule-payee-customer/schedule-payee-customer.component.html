@@ -72,9 +72,6 @@
                             <div class="title">S.No</div>
                         </th>
                         <th>
-                            <div class="title">Bank A/O Title</div>
-                        </th>
-                        <th>
                             <div class="title">Bank A/C</div>
                         </th>
                         <th>
@@ -101,11 +98,6 @@
                         <td>
                             <div class="title">
                                 {{i + 1}}.
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title">
-                                {{bank?.title}}
                             </div>
                         </td>
                         <td>
@@ -152,7 +144,7 @@
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
-                (click)="matDialogRef.close(schedulePayeeCustomerForm); savePayeeCustomer()"
+                (click)="savePayeeCustomer()"
                 [disabled]="schedulePayeeCustomerForm.invalid" aria-label="Save">ADD
         </button>
     </div>

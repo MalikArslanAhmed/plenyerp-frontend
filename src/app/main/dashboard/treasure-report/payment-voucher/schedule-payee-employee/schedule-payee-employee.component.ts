@@ -81,6 +81,12 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             return;
         }
 
+        if (!this.payeeBankId || this.payeeBankId === '') {
+            this.alertService.showErrors('Please select payee bank');
+            this.isSubmitted = false;
+            return;
+        }
+
         if (this.isSubmitted) {
             let params = {
                 'employeeId': this.schedulePayeeEmployeeForm.getRawValue().employeeId,
@@ -91,8 +97,8 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             };
             this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
                 this.schedulePayeeEmployeeForm.reset();
-                this.isSubmitted = false;
                 this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+                this.isSubmitted = false;
             });
         }
     }
