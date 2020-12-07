@@ -30,7 +30,7 @@
                         <mat-select formControlName="type">
                             <mat-option value="">Choose Type</mat-option>
                             <mat-option [value]="type.value"
-                                        *ngFor="let type of types">{{type.name}}</mat-option>
+                                        *ngFor="let type of types">{{type.name | titlecase}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <div fxFlex class="width-200px p-10px mt-13px">
@@ -140,7 +140,7 @@
                 </div>
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-                        <span class="mat-header-cell text-center">#</span>
+                        <span class="mat-header-cell text-center" *ngIf="status !== 'ALL'">#</span>
                         <span class="mat-header-cell text-center">S.No.</span>
                         <span class="mat-header-cell text-center">Year</span>
                         <span class="mat-header-cell text-center">Deptal No.</span>
