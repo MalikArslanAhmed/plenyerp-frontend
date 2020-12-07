@@ -240,7 +240,7 @@ export class PaymentVoucherComponent implements OnInit {
 
     paymentVoucherStatus(status) {
         this.selectedStatus = [];
-        console.log('---->>status', status);
+        // console.log('---->>status', status);
         if (this.statuses && this.statuses.length) {
             this.statuses.forEach(val => {
                 if (val.value === status) {
@@ -275,7 +275,7 @@ export class PaymentVoucherComponent implements OnInit {
                 paymentVoucherIds: paymentVoucherId
             };
             this.paymentVoucherService.getUpdateStatus(params).subscribe(data => {
-                console.log(data);
+                // console.log(data);
             });
         }
     }
