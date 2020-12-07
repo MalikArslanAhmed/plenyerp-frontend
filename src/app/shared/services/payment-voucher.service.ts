@@ -53,4 +53,7 @@ export class PaymentVoucherService extends BaseService {
     typeData(id): Observable<any> {
         return this.getRequest(AppUrl.GET_SOURCE_UNIT_TYPE(id));
     }
+    getPaymentVoucherStatus(data): Observable<any> {
+        return  this.getRequest(AppUrl.GET_PAYMENT_VOUCHER_STATUS(), data);
+    }
 }

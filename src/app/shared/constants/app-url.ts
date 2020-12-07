@@ -1205,4 +1205,7 @@ export class AppUrl {
     static GET_SOURCE_UNIT_TYPE(id): string {
         return AppUrl.API_URL + `treasury/source-units/${id}/types`;
     }
+    static GET_PAYMENT_VOUCHER_STATUS(): string {
+        return AppUrl.API_URL + `treasury/payment-voucher-status`;
+    }
 }

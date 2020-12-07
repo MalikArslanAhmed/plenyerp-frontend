@@ -27,53 +27,54 @@ export class PaymentVoucherComponent implements OnInit {
     panelOpenState: boolean = false;
     sourceUnit = [];
     statuses = [
-        {
-            'name': 'All',
-            'value': 'ALL'
-        },
-        {
-            'name': 'New',
-            'value': 'NEW'
-        },
-        {
-            'name': 'Checked',
-            'value': 'CHECKED'
-        },
-        {
-            'name': 'Approved',
-            'value': 'APPROVED'
-        },
-        {
-            'name': 'Budget Codes Verified',
-            'value': 'BUDGET_CODES_VERIFIED'
-        },
-        {
-            'name': 'Audited',
-            'value': 'AUDITED'
-        },
-        {
-            'name': 'Closed',
-            'value': 'CLOSED'
-        },
-        {
-            'name': 'Posted to GL (#)',
-            'value': 'POSTED_TO_gl'
-        },
-        {
-            'name': 'On Mandate',
-            'value': 'ON_MANDATE'
-        }
+        // {
+        //     'name': 'All',
+        //     'value': 'ALL'
+        // },
+        // {
+        //     'name': 'New',
+        //     'value': 'NEW'
+        // },
+        // {
+        //     'name': 'Checked',
+        //     'value': 'CHECKED'
+        // },
+        // {
+        //     'name': 'Approved',
+        //     'value': 'APPROVED'
+        // },
+        // {
+        //     'name': 'Budget Codes Verified',
+        //     'value': 'BUDGET_CODES_VERIFIED'
+        // },
+        // {
+        //     'name': 'Audited',
+        //     'value': 'AUDITED'
+        // },
+        // {
+        //     'name': 'Closed',
+        //     'value': 'CLOSED'
+        // },
+        // {
+        //     'name': 'Posted to GL (#)',
+        //     'value': 'POSTED_TO_gl'
+        // },
+        // {
+        //     'name': 'On Mandate',
+        //     'value': 'ON_MANDATE'
+        // }
     ];
     types = [];
     dialogRef: any;
+    selectedStatusIndex = 0;
     status = 'ALL';
+    selectedStatus = [];
     pagination = {
         page: 1,
         total: null,
         perpage: 15,
         pages: null
     };
-
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
@@ -85,6 +86,8 @@ export class PaymentVoucherComponent implements OnInit {
         this.refresh();
         this.getPyamentVoucher({});
         this.getVoucherSourceUnitList();
+        this.paymentVoucherStatus({});
+        // this.status = this.statuses[this.selectedStatusIndex].value;
     }
 
     refresh() {
@@ -181,6 +184,7 @@ export class PaymentVoucherComponent implements OnInit {
         params['sourceUnit'] = this.filterPaymentVoucherForm.value.sourceUnit;
         params['search'] = this.filterPaymentVoucherForm.value.search;
         this.getPyamentVoucher(params);
+        this.paymentVoucherStatus(this.status);
     }
 
     addPaymentVoucher() {
@@ -234,6 +238,30 @@ export class PaymentVoucherComponent implements OnInit {
         this.paymentVoucherData[index].checked = event.checked;
     }
 
+    paymentVoucherStatus(status) {
+        this.selectedStatus = [];
+        console.log('---->>status', status);
+        if (this.statuses && this.statuses.length) {
+            this.statuses.forEach(val => {
+                if (val.value === status) {
+                    const sIndex = this.statuses.indexOf(val);
+                    if (sIndex < this.statuses.length - 1) {
+                        this.selectedStatus.push(this.statuses[sIndex + 1]);
+                    }else {
+                        this.selectedStatus = [];
+                    }
+                }
+            });
+        }
+
+        const params = {};
+        if (status !== 'ALL') {
+            params['status'] = status;
+        }
+        this.paymentVoucherService.getPaymentVoucherStatus(params).subscribe(data => {
+            this.statuses = data.status;
+        });
+    }
     updateStatus(status: string) {
         const paymentVoucherId = [];
         if (this.paymentVoucherData && this.paymentVoucherData.length) {
