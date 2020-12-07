@@ -153,7 +153,7 @@
                     <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
-                            <span class="mat-cell align-items-center">
+                            <span class="mat-cell align-items-center" *ngIf="status !== 'ALL'">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">
                                     <mat-checkbox (change)="checkPV(i, $event)"
                                                   (click)="$event.stopPropagation()"
@@ -232,7 +232,7 @@
                                                 <th>
                                                     <div class="title">Status</div>
                                                 </th>
-                                                <th>
+                                                <th *ngIf="status ==='NEW'">
                                                     <div class="title">Schedule Economic Code</div>
                                                 </th>
                                             </tr>
@@ -336,7 +336,7 @@
                                                         {{data?.status}}
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td *ngIf="status ==='NEW'">
                                                     <button mat-button class="payee-report"
                                                             (click)="scheduleEconomicCodes(reportData, data)">Schedule
                                                         Economic Codes
@@ -344,7 +344,7 @@
                                                 </td>
                                             </tr>
                                             </tbody>
-                                            <tbody>
+                                            <tbody *ngIf="status ==='NEW'">
                                             <tr>
                                                 <td colspan="15">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
