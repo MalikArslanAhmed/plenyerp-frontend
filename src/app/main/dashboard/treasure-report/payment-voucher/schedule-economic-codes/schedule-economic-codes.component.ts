@@ -60,7 +60,7 @@ export class ScheduleEconomicCodesComponent implements OnInit {
             'deptalId': this._data.report.deptalId,
             'economicCode': this._data.report.economicSegment.combinedCode,
             'economicSegmentName': this._data['report'].economicSegment.name,
-            'grossAmount': this._data['pv'].netAmount,
+            'grossAmount': parseInt(this._data['pv'].netAmount) + parseInt(this._data['pv'].totalTax),
             'payeeName': payeeName
         });
         this.getPayeeEconomicCode();
