@@ -73,6 +73,7 @@ import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
 import { PaymentVoucherComponent } from './treasure-report/payment-voucher/payment-voucher.component';
 import {DefaultSettingVoucherInfoComponent} from "./treasure-report/default-setting-voucher-info/default-setting-voucher-info.component";
 import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie.component';
+import {PaymentReportComponent} from './payment-report/payment-report.component';
 
 const routes: Routes = [
     {
@@ -716,6 +717,13 @@ const routes: Routes = [
         component: BudgetControlAieComponent,
         data: {
             title: 'Budget Control AIE'
+        }
+    },
+    {
+        path: 'reports',
+        component: PaymentReportComponent,
+        data: {
+            title: 'Reports'
         }
     }
 ];

@@ -218,21 +218,22 @@ import {VoucherSourceUnitListComponent} from './treasure-report/voucher-source-u
 import {CashbookListComponent} from './treasure-report/cashbook/cashbook-list/cashbook-list.component';
 import {CashbookCreateComponent} from './treasure-report/cashbook/cashbook-create/cashbook-create.component';
 import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
-import { PaymentVoucherComponent } from './treasure-report/payment-voucher/payment-voucher.component';
-import { PaymentVoucherCreateComponent } from './treasure-report/payment-voucher/payment-voucher-create/payment-voucher-create.component';
-import { SchedulePayeeEmployeeComponent } from './treasure-report/payment-voucher/schedule-payee-employee/schedule-payee-employee.component';
-import { SchedulePayeeCustomerComponent } from './treasure-report/payment-voucher/schedule-payee-customer/schedule-payee-customer.component';
-import { DefaultSettingVoucherInfoComponent } from './treasure-report/default-setting-voucher-info/default-setting-voucher-info.component';
-import { AdminSegmentEmployeeSelectComponent } from './treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
-import { AdminSegmentSelectAccountHeadComponent } from './treasure-report/default-setting-voucher-info/admin-segment-select-account-head/admin-segment-select-account-head.component';
-
+import {PaymentVoucherComponent} from './treasure-report/payment-voucher/payment-voucher.component';
+import {PaymentVoucherCreateComponent} from './treasure-report/payment-voucher/payment-voucher-create/payment-voucher-create.component';
+import {SchedulePayeeEmployeeComponent} from './treasure-report/payment-voucher/schedule-payee-employee/schedule-payee-employee.component';
+import {SchedulePayeeCustomerComponent} from './treasure-report/payment-voucher/schedule-payee-customer/schedule-payee-customer.component';
+import {DefaultSettingVoucherInfoComponent} from './treasure-report/default-setting-voucher-info/default-setting-voucher-info.component';
+import {AdminSegmentEmployeeSelectComponent} from './treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
+import {AdminSegmentSelectAccountHeadComponent} from './treasure-report/default-setting-voucher-info/admin-segment-select-account-head/admin-segment-select-account-head.component';
 import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie.component';
 import {BudgetControlAieModalComponent} from './budget-control-aie/budget-control-aie-modal/budget-control-aie-modal.component';
-import { PaymentVoucherTaxesComponent } from './treasure-report/payment-voucher/payment-voucher-taxes/payment-voucher-taxes.component';
-import { SelectPayeeCustomerComponent } from './treasure-report/payment-voucher/select-payee-customer/select-payee-customer.component';
-import { ScheduleEconomicCodesComponent } from './treasure-report/payment-voucher/schedule-economic-codes/schedule-economic-codes.component';
-import { SelectAieComponent } from './treasure-report/payment-voucher/select-aie/select-aie.component';
-import { SubOrgranisationSelectComponent } from './treasure-report/default-setting-voucher-info/sub-orgranisation-select/sub-orgranisation-select.component';
+import {PaymentVoucherTaxesComponent} from './treasure-report/payment-voucher/payment-voucher-taxes/payment-voucher-taxes.component';
+import {SelectPayeeCustomerComponent} from './treasure-report/payment-voucher/select-payee-customer/select-payee-customer.component';
+import {ScheduleEconomicCodesComponent} from './treasure-report/payment-voucher/schedule-economic-codes/schedule-economic-codes.component';
+import {SelectAieComponent} from './treasure-report/payment-voucher/select-aie/select-aie.component';
+import {SubOrgranisationSelectComponent} from './treasure-report/default-setting-voucher-info/sub-orgranisation-select/sub-orgranisation-select.component';
+import {PaymentReportComponent} from './payment-report/payment-report.component';
+import {ReportListHeadersComponent} from './payment-report/report-list-headers/report-list-headers.component';
 
 @NgModule({
     declarations: [
@@ -438,12 +439,13 @@ import { SubOrgranisationSelectComponent } from './treasure-report/default-setti
         AdminSegmentSelectAccountHeadComponent,
         BudgetControlAieComponent,
         BudgetControlAieModalComponent,
-        BudgetControlAieComponent,
         PaymentVoucherTaxesComponent,
         SelectPayeeCustomerComponent,
         ScheduleEconomicCodesComponent,
         SelectAieComponent,
-        SubOrgranisationSelectComponent
+        SubOrgranisationSelectComponent,
+        PaymentReportComponent,
+        ReportListHeadersComponent
     ],
     imports: [
         CommonModule,
