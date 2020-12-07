@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {fuseAnimations} from '../../../../../@fuse/animations';
-import {JournalVoucherLedgerReportService} from '../../../../shared/services/journal-voucher-ledger-report.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SchedulePayeeCustomerComponent} from './schedule-payee-customer/schedule-payee-customer.component';
 import {SchedulePayeeEmployeeComponent} from './schedule-payee-employee/schedule-payee-employee.component';
@@ -11,7 +10,6 @@ import {PaymentVoucherService} from '../../../../shared/services/payment-voucher
 import * as moment from 'moment';
 import {TreasureReportService} from '../../../../shared/services/treasure-report.service';
 import {ScheduleEconomicCodesComponent} from "./schedule-economic-codes/schedule-economic-codes.component";
-import {DefaultSettingVoucherInfoService} from "../../../../shared/services/default-setting-voucher-info";
 
 @Component({
     selector: 'app-payment-voucher',
@@ -26,47 +24,9 @@ export class PaymentVoucherComponent implements OnInit {
     paymentVoucherData = [];
     panelOpenState: boolean = false;
     sourceUnit = [];
-    statuses = [
-        // {
-        //     'name': 'All',
-        //     'value': 'ALL'
-        // },
-        // {
-        //     'name': 'New',
-        //     'value': 'NEW'
-        // },
-        // {
-        //     'name': 'Checked',
-        //     'value': 'CHECKED'
-        // },
-        // {
-        //     'name': 'Approved',
-        //     'value': 'APPROVED'
-        // },
-        // {
-        //     'name': 'Budget Codes Verified',
-        //     'value': 'BUDGET_CODES_VERIFIED'
-        // },
-        // {
-        //     'name': 'Audited',
-        //     'value': 'AUDITED'
-        // },
-        // {
-        //     'name': 'Closed',
-        //     'value': 'CLOSED'
-        // },
-        // {
-        //     'name': 'Posted to GL (#)',
-        //     'value': 'POSTED_TO_gl'
-        // },
-        // {
-        //     'name': 'On Mandate',
-        //     'value': 'ON_MANDATE'
-        // }
-    ];
+    statuses = [];
     types = [];
     dialogRef: any;
-    selectedStatusIndex = 0;
     status = 'ALL';
     selectedStatus = [];
     pagination = {
@@ -87,7 +47,6 @@ export class PaymentVoucherComponent implements OnInit {
         this.getPyamentVoucher({});
         this.getVoucherSourceUnitList();
         this.paymentVoucherStatus({});
-        // this.status = this.statuses[this.selectedStatusIndex].value;
     }
 
     refresh() {
@@ -240,7 +199,6 @@ export class PaymentVoucherComponent implements OnInit {
 
     paymentVoucherStatus(status) {
         this.selectedStatus = [];
-        // console.log('---->>status', status);
         if (this.statuses && this.statuses.length) {
             this.statuses.forEach(val => {
                 if (val.value === status) {

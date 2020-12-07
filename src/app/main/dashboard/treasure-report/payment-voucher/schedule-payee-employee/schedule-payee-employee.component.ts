@@ -93,6 +93,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 'netAmount': this.schedulePayeeEmployeeForm.getRawValue().netAmount,
                 'totalTax': this.schedulePayeeEmployeeForm.getRawValue().totalTax,
                 'year': this.schedulePayeeEmployeeForm.getRawValue().year,
+                'details': this.schedulePayeeEmployeeForm.getRawValue().details,
                 'payeeBankId': this.payeeBankId ? this.payeeBankId : ''
             };
             this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
