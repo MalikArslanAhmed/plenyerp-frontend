@@ -777,6 +777,16 @@ export const navigation: FuseNavigation[] = [
                 permissions: []
             },
             {
+                id: 'receipt-voucher',
+                title: 'Receipt Voucher',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'payment',
+                url: '/dashboard/receipt-voucher',
+                permissions: []
+            },
+            {
                 id: 'default-setting',
                 title: 'Default Setting (Voucher Info)',
                 roles: [],

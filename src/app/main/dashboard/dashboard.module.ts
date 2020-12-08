@@ -234,6 +234,12 @@ import {SelectAieComponent} from './treasure-report/payment-voucher/select-aie/s
 import {SubOrgranisationSelectComponent} from './treasure-report/default-setting-voucher-info/sub-orgranisation-select/sub-orgranisation-select.component';
 import {PaymentReportComponent} from './payment-report/payment-report.component';
 import {ReportListHeadersComponent} from './payment-report/report-list-headers/report-list-headers.component';
+import {ReceiptVouchersComponent} from './treasure-report/receipt-vouchers/receipt-vouchers.component';
+import { ReceiptVoucherCreateComponent } from './treasure-report/receipt-vouchers/receipt-voucher-create/receipt-voucher-create.component';
+import { SchedulePayersCustomerComponent } from './treasure-report/receipt-vouchers/schedule-payers-customer/schedule-payers-customer.component';
+import { SelectPayersCustomerComponent } from './treasure-report/receipt-vouchers/select-payers-customer/select-payers-customer.component';
+import { SchedulePayersEmployeeComponent } from './treasure-report/receipt-vouchers/schedule-payers-employee/schedule-payers-employee.component';
+import { ScheduleEconomicCodesReceiptComponent } from './treasure-report/receipt-vouchers/schedule-economic-codes-receipt/schedule-economic-codes-receipt.component';
 
 @NgModule({
     declarations: [
@@ -445,7 +451,13 @@ import {ReportListHeadersComponent} from './payment-report/report-list-headers/r
         SelectAieComponent,
         SubOrgranisationSelectComponent,
         PaymentReportComponent,
-        ReportListHeadersComponent
+        ReportListHeadersComponent,
+        ReceiptVouchersComponent,
+        ReceiptVoucherCreateComponent,
+        SchedulePayersCustomerComponent,
+        SelectPayersCustomerComponent,
+        SchedulePayersEmployeeComponent,
+        ScheduleEconomicCodesReceiptComponent
     ],
     imports: [
         CommonModule,

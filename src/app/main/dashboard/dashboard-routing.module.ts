@@ -65,15 +65,16 @@ import {TrialBalanceComponent} from "./trial-balance/trial-balance.component";
 import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
 import {NotesMasterComponent} from './notes-master/notes-master.component';
 import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
-import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
-import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
-import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
+import {StatementOfPositionComponent} from './statement-of-position/statement-of-position.component';
+import {FinancialPerformanceReportComponent} from './financial-performance-report/financial-performance-report.component';
+import {MonthlyActivityComponent} from './monthly-activity/monthly-activity.component';
 import {VoucherSourceUnitComponent} from './treasure-report/voucher-source-unit/voucher-source-unit.component';
 import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
-import { PaymentVoucherComponent } from './treasure-report/payment-voucher/payment-voucher.component';
+import {PaymentVoucherComponent} from './treasure-report/payment-voucher/payment-voucher.component';
 import {DefaultSettingVoucherInfoComponent} from "./treasure-report/default-setting-voucher-info/default-setting-voucher-info.component";
 import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie.component';
 import {PaymentReportComponent} from './payment-report/payment-report.component';
+import {ReceiptVouchersComponent} from "./treasure-report/receipt-vouchers/receipt-vouchers.component";
 
 const routes: Routes = [
     {
@@ -703,6 +704,20 @@ const routes: Routes = [
         component: PaymentVoucherComponent,
         data: {
             title: 'Payment Voucher'
+        }
+    },
+    {
+        path: 'receipt-voucher',
+        component: ReceiptVouchersComponent,
+        data: {
+            title: 'Receipt Voucher'
+        }
+    },
+    {
+        path: 'receipt-voucher',
+        component: ReceiptVouchersComponent,
+        data: {
+            title: 'Receipt Voucher'
         }
     },
     {

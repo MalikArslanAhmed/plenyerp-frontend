@@ -1,19 +1,19 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {EconomicSegmentSelectComponent} from "../../../journal-voucher/economic-segment-select/economic-segment-select.component";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AlertService} from "../../../../../shared/services/alert.service";
-import {PaymentVoucherService} from "../../../../../shared/services/payment-voucher.service";
+import {EconomicSegmentSelectComponent} from "../../../journal-voucher/economic-segment-select/economic-segment-select.component";
 import {fuseAnimations} from "../../../../../../@fuse/animations";
+import {ReceiptVoucherService} from "../../../../../shared/services/receipt-voucher.service";
 
 @Component({
-    selector: 'app-schedule-economic-codes',
-    templateUrl: './schedule-economic-codes.component.html',
-    styleUrls: ['./schedule-economic-codes.component.scss'],
+    selector: 'app-schedule-economic-codes-receipt',
+    templateUrl: './schedule-economic-codes-receipt.component.html',
+    styleUrls: ['./schedule-economic-codes-receipt.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class ScheduleEconomicCodesComponent implements OnInit {
+export class ScheduleEconomicCodesReceiptComponent implements OnInit {
     action: any;
     dialogTitle: any;
     economicCodeForm: FormGroup;
@@ -26,12 +26,12 @@ export class ScheduleEconomicCodesComponent implements OnInit {
     reportData: any;
 
     constructor(
-        public matDialogRef: MatDialogRef<ScheduleEconomicCodesComponent>,
+        public matDialogRef: MatDialogRef<ScheduleEconomicCodesReceiptComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private fb: FormBuilder,
         private _matDialog: MatDialog,
         private alertService: AlertService,
-        private paymentVoucherService: PaymentVoucherService) {
+        private receiptVoucherService: ReceiptVoucherService) {
         this.reportData = _data.report;
         this.payeeData = _data.pv;
     }
@@ -89,7 +89,7 @@ export class ScheduleEconomicCodesComponent implements OnInit {
     }
 
     getPayeeEconomicCode() {
-        this.paymentVoucherService.getScheduleEconomic(this.reportData.id, {payeeVoucherId: this.payeeData.id}).subscribe(data => {
+        this.receiptVoucherService.getScheduleEconomic(this.reportData.id, {payeeVoucherId: this.payeeData.id}).subscribe(data => {
             let ledgers = [];
             if (data && data.items && data.items.length > 0) {
                 data.items.forEach(item => {
@@ -125,7 +125,7 @@ export class ScheduleEconomicCodesComponent implements OnInit {
             return;
         }
 
-        if (parseInt(this.economicCodeForm.getRawValue().amount) > parseInt(this.economicCodeForm.getRawValue().grossAmount)) {
+        if (parseInt(this.economicCodeForm.getRawValue().amount) > parseInt(this._data['pv'].netAmount)) {
             this.alertService.showErrors('Amount can\'t be greater than gross amount');
             return;
         }
@@ -157,7 +157,7 @@ export class ScheduleEconomicCodesComponent implements OnInit {
             let params = {
                 scheduleEconomics: this.ledgers
             };
-            this.paymentVoucherService.scheduleEconomic(this.payeeData.id, params).subscribe(data => {
+            this.receiptVoucherService.scheduleEconomic(this.payeeData.id, params).subscribe(data => {
                 this.economicCodeForm.reset();
                 this.isSubmitted = false;
                 this.matDialogRef.close(this.economicCodeForm);

@@ -1,0 +1,151 @@
+<div class="dialog-content-wrapper" id="schedule-items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar>
+        <form [formGroup]="schedulePayersCustomerForm">
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Voucher Year</mat-label>
+                    <input matInput placeholder="Year" formControlName="year">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Deptal No.</mat-label>
+                    <input matInput placeholder="Deptal No." formControlName="departmentalNo">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Details</mat-label>
+                    <input matInput placeholder="Details" formControlName="details">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex (click)="selectPayerCustomer()">
+                    <mat-label>Payee Id</mat-label>
+                    <mat-select formControlName="companyId" (selectionChange)="payeeChange($event.value)">
+                        <mat-option value="">Choose Customer</mat-option>
+                        <mat-option [value]="customer.id"
+                                    *ngFor="let customer of customers">{{customer?.id}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Payee Name</mat-label>
+                    <input matInput placeholder="Payee Name" formControlName="payeeName">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Net Amount</mat-label>
+                    <input matInput placeholder="Net Amount" formControlName="netAmount" type="number">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Taxes Amount</mat-label>
+                    <input matInput placeholder="Taxes Amount" formControlName="totalTax">
+                </mat-form-field>
+                <div fxLayout="row" fxLayoutAlign="center">
+                    <button mat-button class="add-taxes" (click)="addApplicableTaxes()">Add Taxes</button>
+                </div>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Total Amount</mat-label>
+                    <input matInput placeholder="Total Amount" formControlName="totalAmount" type="number">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Total Amount (in words)</mat-label>
+                    <input matInput placeholder="Total Amount (in words)" formControlName="totalAmountInWords">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <table class="simple invoice-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="title">#</div>
+                        </th>
+                        <th>
+                            <div class="title">S.No</div>
+                        </th>
+                        <th>
+                            <div class="title">Bank A/C</div>
+                        </th>
+                        <th>
+                            <div class="title">Type of Bank A/C</div>
+                        </th>
+                        <th>
+                            <div class="title">Bank</div>
+                        </th>
+                        <th>
+                            <div class="title">Bank Branch</div>
+                        </th>
+                        <th>
+                            <div class="title">Sort Code</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="banks && banks.length > 0; else noBankFound">
+                    <tr *ngFor="let bank of banks; let i = index">
+                        <td>
+                            <div class="title">
+                                <mat-radio-button (change)="selectRadio(bank.id)"></mat-radio-button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{i + 1}}.
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.bankAccountNumber}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.typeOfBankAccount}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.bank?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.bankBranch?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{bank?.bankBranch?.sortCode}}
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <ng-template #noBankFound>
+                        <tbody>
+                        <tr>
+                            <td colspan="8">
+                                <div class="title text-center">
+                                    No data to show
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </ng-template>
+                </table>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button"
+                (click)="savePayerCustomer()"
+                [disabled]="schedulePayersCustomerForm.invalid" aria-label="Save">ADD
+        </button>
+    </div>
+</div>
