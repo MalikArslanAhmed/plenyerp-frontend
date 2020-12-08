@@ -40,10 +40,14 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Net Amount</mat-label>
-                    <input matInput placeholder="Net Amount" formControlName="netAmount" type="number">
+                    <mat-label>Amount</mat-label>
+                    <input matInput placeholder="Amount" formControlName="amount" type="number">
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Total Amount (in words)</mat-label>
+                    <input matInput placeholder="Total Amount (in words)" formControlName="totalAmountInWords">
+                </mat-form-field>
+                <!--<mat-form-field appearance="outline" fxFlex>
                     <mat-label>Taxes Amount</mat-label>
                     <input matInput placeholder="Taxes Amount" formControlName="totalTax">
                 </mat-form-field>
@@ -53,15 +57,48 @@
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Total Amount</mat-label>
                     <input matInput placeholder="Total Amount" formControlName="totalAmount" type="number">
-                </mat-form-field>
+                </mat-form-field>-->
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Total Amount (in words)</mat-label>
-                    <input matInput placeholder="Total Amount (in words)" formControlName="totalAmountInWords">
+                    <mat-label>Line Details</mat-label>
+                    <input matInput placeholder="Line Details" formControlName="lineDetails">
                 </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start">
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 10px; margin-bottom: 10px">
+                <span style="margin-top: 4px">Pay Mode</span>
+                <span>
+                    <mat-radio-button (change)="selectRadio('CASH')"></mat-radio-button>Cash
+                </span>
+                <span>
+                    <mat-radio-button (change)="selectRadio('DIRECT_PAYMENT')"></mat-radio-button>Direct Payment
+                </span>
+                <span>
+                    <mat-radio-button (change)="selectRadio('INSTRUMENTS')"></mat-radio-button>Instruments (Cheque, Drafts etc.)
+                </span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 20px">
+                <h4>Instruments' Details</h4>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Number</mat-label>
+                    <input matInput placeholder="Number" formControlName="number">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Type</mat-label>
+                    <input matInput placeholder="Type" formControlName="type">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Teller No.</mat-label>
+                    <input matInput placeholder="Teller No." formControlName="tellerNumber">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Issued By</mat-label>
+                    <input matInput placeholder="Issued By" formControlName="issuedBy">
+                </mat-form-field>
+            </div>
+            <!--<div fxLayout="row" fxLayoutAlign="start">
                 <table class="simple invoice-table">
                     <thead>
                     <tr>
@@ -147,7 +184,7 @@
                         </tbody>
                     </ng-template>
                 </table>
-            </div>
+            </div>-->
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">

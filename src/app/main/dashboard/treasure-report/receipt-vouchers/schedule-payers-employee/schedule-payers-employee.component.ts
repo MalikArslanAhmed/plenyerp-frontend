@@ -30,7 +30,7 @@ export class SchedulePayersEmployeeComponent implements OnInit {
     financialControllers = [];
     payeeData: any;
     banks = [];
-    payeeBankId: any;
+    payerMode: any;
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayersEmployeeComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -56,10 +56,15 @@ export class SchedulePayersEmployeeComponent implements OnInit {
             details: [''],
             employeeId: [{'value': '', disabled: true}],
             payeeName: [{'value': '', disabled: true}],
-            netAmount: [''],
-            totalTax: [{'value': '', disabled: true}],
+            amount: [''],
+            // totalTax: [{'value': '', disabled: true}],
             totalAmount: [{'value': '', disabled: true}],
-            totalAmountInWords: [{'value': '', disabled: true}]
+            totalAmountInWords: [{'value': '', disabled: true}],
+            lineDetails: [''],
+            number: [''],
+            type: [''],
+            tellerNumber: [''],
+            issuedBy: ['']
         });
         if (this.payeeData && this.payeeData['valueDate']) {
             let valArr1 = this.payeeData['valueDate'].split(" ");
@@ -81,7 +86,7 @@ export class SchedulePayersEmployeeComponent implements OnInit {
             return;
         }
 
-        if (!this.payeeBankId || this.payeeBankId === '') {
+        if (!this.payerMode || this.payerMode === '') {
             this.alertService.showErrors('Please select payee bank');
             this.isSubmitted = false;
             return;
@@ -90,11 +95,11 @@ export class SchedulePayersEmployeeComponent implements OnInit {
         if (this.isSubmitted) {
             let params = {
                 'employeeId': this.schedulePayersEmployeeForm.getRawValue().employeeId,
-                'netAmount': this.schedulePayersEmployeeForm.getRawValue().netAmount,
+                'amount': this.schedulePayersEmployeeForm.getRawValue().amount,
                 'totalTax': this.schedulePayersEmployeeForm.getRawValue().totalTax,
                 'year': this.schedulePayersEmployeeForm.getRawValue().year,
                 'details': this.schedulePayersEmployeeForm.getRawValue().details,
-                'payeeBankId': this.payeeBankId ? this.payeeBankId : ''
+                'payerMode': this.payerMode ? this.payerMode : ''
             };
             this.receiptVoucherService.schedulePayer(this.payeeData.id, params).subscribe(data => {
                 this.schedulePayersEmployeeForm.reset();
@@ -104,16 +109,16 @@ export class SchedulePayersEmployeeComponent implements OnInit {
         }
     }
 
-    addApplicableTaxes() {
-        if (!this.schedulePayersEmployeeForm.value || this.schedulePayersEmployeeForm.value.netAmount === '') {
-            this.alertService.showErrors('Net Amount can\'t be empty');
+    /*addApplicableTaxes() {
+        if (!this.schedulePayersEmployeeForm.value || this.schedulePayersEmployeeForm.value.amount === '') {
+            this.alertService.showErrors('Amount can\'t be empty');
             return;
         }
         this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
                 action: 'CREATE',
-                netAmount: this.schedulePayersEmployeeForm.value.netAmount,
+                amount: this.schedulePayersEmployeeForm.value.amount,
             }
         });
         const numberToWords = new NumberToWordsPipe();
@@ -123,11 +128,11 @@ export class SchedulePayersEmployeeComponent implements OnInit {
             }
             this.schedulePayersEmployeeForm.patchValue({
                 'totalTax': response['totalTaxes'],
-                'totalAmount': parseInt(this.schedulePayersEmployeeForm.value.netAmount) + parseInt(response['totalTaxes']),
-                'totalAmountInWords': numberToWords.transform(parseInt(this.schedulePayersEmployeeForm.value.netAmount) + parseInt(response['totalTaxes']))
+                'totalAmount': parseInt(this.schedulePayersEmployeeForm.value.amount) + parseInt(response['totalTaxes']),
+                'totalAmountInWords': numberToWords.transform(parseInt(this.schedulePayersEmployeeForm.value.amount) + parseInt(response['totalTaxes']))
             });
         });
-    }
+    }*/
 
     getEmployees(): void {
         this.employees = [];
@@ -192,7 +197,7 @@ export class SchedulePayersEmployeeComponent implements OnInit {
         });
     }
 
-    selectRadio(id) {
-        this.payeeBankId = id;
+    selectRadio(mode) {
+        this.payerMode = mode;
     }
 }

@@ -26,6 +26,7 @@
                 }
             }
         }
+
         #add-button {
             background-color: white !important;
             color: #106CC8 !important;
@@ -34,6 +35,7 @@
 
     .content {
         overflow: hidden;
+
         .sidebar {
             &:not(.locked-open) {
                 background: white;
@@ -41,11 +43,13 @@
         }
     }
 }
-.submit-button{
+
+.submit-button {
     margin-top: 2rem;
     float: right;
-    button{
+
+    button {
         background-color: #039be5 !important;
-        color: white!important;
+        color: white !important;
     }
 }
