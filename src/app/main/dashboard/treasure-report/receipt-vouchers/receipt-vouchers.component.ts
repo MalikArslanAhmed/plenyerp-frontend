@@ -234,6 +234,7 @@ export class ReceiptVouchersComponent implements OnInit {
                 status: status,
                 receiptVoucherIds: receiptVoucherId
             };
+            console.log('--->>> update status', params);
             this.receiptVoucherService.getUpdateStatus(params).subscribe(data => {
                 // console.log(data);
             });

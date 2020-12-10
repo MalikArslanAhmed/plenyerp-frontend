@@ -511,6 +511,24 @@ export class AppUrl {
             return AppUrl.API_URL + `treasury/payment-vouchers`;
         }
     }
+    static RECEIPT_VOUCHER(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/receipt-vouchers` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/receipt-vouchers`;
+        }
+    }
+    static RV_SOURCE_UNIT_TYPE(id): string {
+        return AppUrl.API_URL + `treasury/source-units/${id}/rv-types`;
+    }
+    static RV_VOUCHER_STATUS(): string {
+        return AppUrl.API_URL + `treasury/receipt-vouchers/update-status`;
+    }
+    static RV_SCHEDULE_PAYEES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/receipt-vouchers/` + id + `/schedule-payees`;
+        }
+    }
 
     static SCHEDULE_PAYEES(id?): string {
         if (id) {

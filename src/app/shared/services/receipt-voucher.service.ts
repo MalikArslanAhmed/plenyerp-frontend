@@ -15,11 +15,11 @@ export class ReceiptVoucherService extends BaseService {
     }
 
     save(data): Observable<any> {
-        return this.postRequest(AppUrl.PAYMENT_VOUCHER(), data);
+        return this.postRequest(AppUrl.RECEIPT_VOUCHER(), data);
     }
 
     get(data): Observable<any> {
-        return this.getRequest(AppUrl.PAYMENT_VOUCHER(), data);
+        return this.getRequest(AppUrl.RECEIPT_VOUCHER(), data);
     }
 
     delete(id): Observable<any> {
@@ -31,11 +31,11 @@ export class ReceiptVoucherService extends BaseService {
     }
 
     getUpdateStatus(data): Observable<any> {
-        return this.postRequest(AppUrl.UPDATE_VOUCHER_STATUS(), data);
+        return this.postRequest(AppUrl.RV_VOUCHER_STATUS(), data);
     }
 
     schedulePayer(id, data): Observable<any> {
-        return this.postRequest(AppUrl.SCHEDULE_PAYEES(id), data);
+        return this.postRequest(AppUrl.RV_SCHEDULE_PAYEES(id), data);
     }
 
     scheduleEconomic(id, data): Observable<any> {
@@ -43,7 +43,7 @@ export class ReceiptVoucherService extends BaseService {
     }
 
     getSchedulePayee(id, data): Observable<any> {
-        return this.getRequest(AppUrl.SCHEDULE_PAYEES(id), data);
+        return this.getRequest(AppUrl.RV_SCHEDULE_PAYEES(id), data);
     }
 
     getScheduleEconomic(id, data?): Observable<any> {
@@ -51,7 +51,7 @@ export class ReceiptVoucherService extends BaseService {
     }
 
     typeData(id): Observable<any> {
-        return this.getRequest(AppUrl.GET_SOURCE_UNIT_TYPE(id));
+        return this.getRequest(AppUrl.RV_SOURCE_UNIT_TYPE(id));
     }
 
     getReceiptVoucherStatus(data): Observable<any> {
