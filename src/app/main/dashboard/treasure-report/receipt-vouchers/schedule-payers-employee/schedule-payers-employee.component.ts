@@ -3,11 +3,11 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AlertService} from "../../../../../shared/services/alert.service";
 import {EmployeeService} from "../../../../../shared/services/employee.service";
-import {PaymentVoucherTaxesComponent} from "../../payment-voucher/payment-voucher-taxes/payment-voucher-taxes.component";
 import {NumberToWordsPipe} from "../../../../../shared/pipes/number-to-word.pipe";
 import {AdminSegmentEmployeeSelectComponent} from "../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component";
 import {fuseAnimations} from "../../../../../../@fuse/animations";
 import {ReceiptVoucherService} from "../../../../../shared/services/receipt-voucher.service";
+import {GlobalService} from "../../../../../shared/services/global.service";
 
 @Component({
     selector: 'app-schedule-payers-employee',
@@ -30,7 +30,8 @@ export class SchedulePayersEmployeeComponent implements OnInit {
     financialControllers = [];
     payeeData: any;
     banks = [];
-    payerMode: any;
+    payMode: any;
+    user: any;
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayersEmployeeComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -38,7 +39,8 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
                 private employeesService: EmployeeService,
-                private receiptVoucherService: ReceiptVoucherService) {
+                private receiptVoucherService: ReceiptVoucherService,
+                private globalService: GlobalService) {
         this.action = _data.action;
         this.payeeData = _data.pv;
         this.dialogTitle = 'Non-Personal Advance | RV - Schedule Payers Employee';
@@ -50,21 +52,24 @@ export class SchedulePayersEmployeeComponent implements OnInit {
     }
 
     refresh() {
+        this.user = this.globalService.getSelf();
         this.schedulePayersEmployeeForm = this.fb.group({
             year: [{'value': '', disabled: true}],
             departmentalNo: [{'value': '', disabled: true}],
             details: [''],
             employeeId: [{'value': '', disabled: true}],
-            payeeName: [{'value': '', disabled: true}],
+            payerName: [{'value': '', disabled: true}],
             amount: [''],
-            // totalTax: [{'value': '', disabled: true}],
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}],
             lineDetails: [''],
-            number: [''],
-            type: [''],
-            tellerNumber: [''],
-            issuedBy: ['']
+            instrumentNumber: [''],
+            instrumentType: [''],
+            instrumentTellerNumber: [''],
+            instrumentIssuedBy: [{'value': '', disabled: true}]
+        });
+        this.schedulePayersEmployeeForm.patchValue({
+            instrumentIssuedBy: this.user.name
         });
         if (this.payeeData && this.payeeData['valueDate']) {
             let valArr1 = this.payeeData['valueDate'].split(" ");
@@ -86,20 +91,24 @@ export class SchedulePayersEmployeeComponent implements OnInit {
             return;
         }
 
-        if (!this.payerMode || this.payerMode === '') {
-            this.alertService.showErrors('Please select payee bank');
+        if (!this.payMode || this.payMode === '') {
+            this.alertService.showErrors('Please select pay mode');
             this.isSubmitted = false;
             return;
         }
 
         if (this.isSubmitted) {
             let params = {
-                'employeeId': this.schedulePayersEmployeeForm.getRawValue().employeeId,
-                'amount': this.schedulePayersEmployeeForm.getRawValue().amount,
-                'totalTax': this.schedulePayersEmployeeForm.getRawValue().totalTax,
-                'year': this.schedulePayersEmployeeForm.getRawValue().year,
-                'details': this.schedulePayersEmployeeForm.getRawValue().details,
-                'payerMode': this.payerMode ? this.payerMode : ''
+                'employeeId': this.schedulePayersEmployeeForm.getRawValue().employeeId ? this.schedulePayersEmployeeForm.getRawValue().employeeId : '',
+                'totalAmount': this.schedulePayersEmployeeForm.getRawValue().amount ? this.schedulePayersEmployeeForm.getRawValue().amount : '',
+                'year': this.schedulePayersEmployeeForm.getRawValue().year ? this.schedulePayersEmployeeForm.getRawValue().year : '',
+                'details': this.schedulePayersEmployeeForm.getRawValue().details ? this.schedulePayersEmployeeForm.getRawValue().details : '',
+                'payMode': this.payMode ? this.payMode : '',
+                'lineDetails': this.schedulePayersEmployeeForm.getRawValue().lineDetails ? this.schedulePayersEmployeeForm.getRawValue().lineDetails : '',
+                'instrumentNumber': this.schedulePayersEmployeeForm.getRawValue().instrumentNumber ? this.schedulePayersEmployeeForm.getRawValue().instrumentNumber : '',
+                'instrumentType': this.schedulePayersEmployeeForm.getRawValue().instrumentType ? this.schedulePayersEmployeeForm.getRawValue().instrumentType : '',
+                'instrumentTellerNumber': this.schedulePayersEmployeeForm.getRawValue().instrumentTellerNumber ? this.schedulePayersEmployeeForm.getRawValue().instrumentTellerNumber : '',
+                'instrumentIssuedBy': this.schedulePayersEmployeeForm.getRawValue().instrumentIssuedBy ? this.schedulePayersEmployeeForm.getRawValue().instrumentIssuedBy : '',
             };
             this.receiptVoucherService.schedulePayer(this.payeeData.id, params).subscribe(data => {
                 this.schedulePayersEmployeeForm.reset();
@@ -109,41 +118,19 @@ export class SchedulePayersEmployeeComponent implements OnInit {
         }
     }
 
-    /*addApplicableTaxes() {
-        if (!this.schedulePayersEmployeeForm.value || this.schedulePayersEmployeeForm.value.amount === '') {
-            this.alertService.showErrors('Amount can\'t be empty');
-            return;
-        }
-        this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {
-                action: 'CREATE',
-                amount: this.schedulePayersEmployeeForm.value.amount,
-            }
-        });
-        const numberToWords = new NumberToWordsPipe();
-        this.dialogRef.afterClosed().subscribe((response) => {
-            if (!response) {
-                return;
-            }
+    totalAmountWords(amount) {
+        if (amount) {
+            const numberToWords = new NumberToWordsPipe();
             this.schedulePayersEmployeeForm.patchValue({
-                'totalTax': response['totalTaxes'],
-                'totalAmount': parseInt(this.schedulePayersEmployeeForm.value.amount) + parseInt(response['totalTaxes']),
-                'totalAmountInWords': numberToWords.transform(parseInt(this.schedulePayersEmployeeForm.value.amount) + parseInt(response['totalTaxes']))
+                'totalAmountInWords': numberToWords.transform(parseInt(this.schedulePayersEmployeeForm.value.amount))
             });
-        });
-    }*/
+        }
+    }
 
     getEmployees(): void {
         this.employees = [];
         this.employeesService.getEmployees({page: -1}).subscribe(data => {
             this.employees = data.items;
-        });
-    }
-
-    getBanks(id) {
-        this.employeesService.getBankDetailsList(id, {'page': -1}).subscribe(data => {
-            this.banks = data.items;
         });
     }
 
@@ -169,7 +156,7 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 }];
                 this.schedulePayersEmployeeForm.patchValue({
                     checkingOfficerId: response['empData'].id,
-                    payeeName: response['empData'].firstName + ' ' + response['empData'].lastName,
+                    payerName: response['empData'].firstName + ' ' + response['empData'].lastName,
                     disabled: true
                 });
             } else if (type === 'Select Payeer Employee') {
@@ -179,10 +166,9 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 }];
                 this.schedulePayersEmployeeForm.patchValue({
                     employeeId: response['empData'].id,
-                    payeeName: response['empData'].firstName + ' ' + response['empData'].lastName,
+                    payerName: response['empData'].firstName + ' ' + response['empData'].lastName,
                     disabled: true
                 });
-                this.getBanks(response['empData'].id);
             } else if (type === 'Select Financial Control') {
                 this.financialControllers = [{
                     'name': response['empData'].id,
@@ -190,7 +176,7 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 }];
                 this.schedulePayersEmployeeForm.patchValue({
                     financialControllerId: response['empData'].id,
-                    payeeName: response['empData'].firstName + ' ' + response['empData'].lastName,
+                    payerName: response['empData'].firstName + ' ' + response['empData'].lastName,
                     disabled: true
                 });
             }
@@ -198,6 +184,6 @@ export class SchedulePayersEmployeeComponent implements OnInit {
     }
 
     selectRadio(mode) {
-        this.payerMode = mode;
+        this.payMode = mode;
     }
 }

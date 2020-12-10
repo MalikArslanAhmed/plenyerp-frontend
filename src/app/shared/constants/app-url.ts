@@ -511,6 +511,7 @@ export class AppUrl {
             return AppUrl.API_URL + `treasury/payment-vouchers`;
         }
     }
+
     static RECEIPT_VOUCHER(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-vouchers` + id;
@@ -518,12 +519,15 @@ export class AppUrl {
             return AppUrl.API_URL + `treasury/receipt-vouchers`;
         }
     }
+
     static RV_SOURCE_UNIT_TYPE(id): string {
         return AppUrl.API_URL + `treasury/source-units/${id}/rv-types`;
     }
+
     static RV_VOUCHER_STATUS(): string {
         return AppUrl.API_URL + `treasury/receipt-vouchers/update-status`;
     }
+
     static RV_SCHEDULE_PAYEES(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-vouchers/` + id + `/schedule-payees`;
@@ -542,9 +546,21 @@ export class AppUrl {
         }
     }
 
+    static RV_SCHEDULE_ECONOMIC(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/receipt-vouchers/` + id + `/schedule-economic`;
+        }
+    }
+
     static GET_SCHEDULE_ECONOMIC(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/payment-vouchers/` + id + `/schedule-economic`;
+        }
+    }
+
+    static RV_GET_SCHEDULE_ECONOMIC(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/receipt-vouchers/` + id + `/schedule-economic`;
         }
     }
 
@@ -1223,7 +1239,12 @@ export class AppUrl {
     static GET_SOURCE_UNIT_TYPE(id): string {
         return AppUrl.API_URL + `treasury/source-units/${id}/types`;
     }
+
     static GET_PAYMENT_VOUCHER_STATUS(): string {
         return AppUrl.API_URL + `treasury/payment-voucher-status`;
+    }
+
+    static GET_RECEIPT_VOUCHER_STATUS(): string {
+        return AppUrl.API_URL + `treasury/receipt-voucher-status`;
     }
 }

@@ -200,7 +200,7 @@ export class ReceiptVouchersComponent implements OnInit {
 
     receiptVoucherStatus(status) {
         this.selectedStatus = [];
-        if (this.statuses && this.statuses.length) {
+        if (this.statuses && this.statuses.length > 0) {
             this.statuses.forEach(val => {
                 if (val.value === status) {
                     const sIndex = this.statuses.indexOf(val);

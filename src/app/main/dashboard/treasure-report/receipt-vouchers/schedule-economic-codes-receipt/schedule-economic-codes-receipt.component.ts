@@ -58,12 +58,13 @@ export class ScheduleEconomicCodesReceiptComponent implements OnInit {
         } else if (this._data && this._data['pv'] && this._data['pv']['employee']) {
             payeeName = this._data['pv']['employee'].firstName + ' ' + this._data['pv']['employee'].lastName;
         }
+        console.log('this._data', this._data);
         this.economicCodeForm.patchValue({
             'year': this._data.report.year,
             'deptalId': this._data.report.deptalId,
             'economicCode': this._data.report.economicSegment.combinedCode,
             'economicSegmentName': this._data['report'].economicSegment.name,
-            'grossAmount': parseInt(this._data['pv'].netAmount) + parseInt(this._data['pv'].totalTax),
+            'grossAmount': this._data['pv'].totalAmount,
             'payeeName': payeeName
         });
         this.getPayeeEconomicCode();
@@ -125,7 +126,7 @@ export class ScheduleEconomicCodesReceiptComponent implements OnInit {
             return;
         }
 
-        if (parseInt(this.economicCodeForm.getRawValue().amount) > parseInt(this._data['pv'].netAmount)) {
+        if (parseInt(this.economicCodeForm.getRawValue().amount) > parseInt(this._data['pv'].totalAmount)) {
             this.alertService.showErrors('Amount can\'t be greater than gross amount');
             return;
         }

@@ -39,7 +39,7 @@ export class ReceiptVoucherService extends BaseService {
     }
 
     scheduleEconomic(id, data): Observable<any> {
-        return this.postRequest(AppUrl.SCHEDULE_ECONOMIC(id), data);
+        return this.postRequest(AppUrl.RV_SCHEDULE_ECONOMIC(id), data);
     }
 
     getSchedulePayee(id, data): Observable<any> {
@@ -47,7 +47,7 @@ export class ReceiptVoucherService extends BaseService {
     }
 
     getScheduleEconomic(id, data?): Observable<any> {
-        return this.getRequest(AppUrl.GET_SCHEDULE_ECONOMIC(id), data);
+        return this.getRequest(AppUrl.RV_GET_SCHEDULE_ECONOMIC(id), data);
     }
 
     typeData(id): Observable<any> {
@@ -55,6 +55,6 @@ export class ReceiptVoucherService extends BaseService {
     }
 
     getReceiptVoucherStatus(data): Observable<any> {
-        return this.getRequest(AppUrl.GET_PAYMENT_VOUCHER_STATUS(), data);
+        return this.getRequest(AppUrl.GET_RECEIPT_VOUCHER_STATUS(), data);
     }
 }

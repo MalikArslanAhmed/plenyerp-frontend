@@ -34,30 +34,20 @@
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Payee Name</mat-label>
-                    <input matInput placeholder="Payee Name" formControlName="payeeName">
+                    <mat-label>Payer Name</mat-label>
+                    <input matInput placeholder="Payee Name" formControlName="payerName">
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Amount</mat-label>
-                    <input matInput placeholder="Amount" formControlName="amount" type="number">
+                    <input matInput placeholder="Amount" formControlName="amount" type="number"
+                           (change)="totalAmountWords($event.target.value)">
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Total Amount (in words)</mat-label>
                     <input matInput placeholder="Total Amount (in words)" formControlName="totalAmountInWords">
                 </mat-form-field>
-                <!--<mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Taxes Amount</mat-label>
-                    <input matInput placeholder="Taxes Amount" formControlName="totalTax">
-                </mat-form-field>
-                <div fxLayout="row" fxLayoutAlign="center">
-                    <button mat-button class="add-taxes" (click)="addApplicableTaxes()">Add Taxes</button>
-                </div>
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Total Amount</mat-label>
-                    <input matInput placeholder="Total Amount" formControlName="totalAmount" type="number">
-                </mat-form-field>-->
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
@@ -77,114 +67,27 @@
                     <mat-radio-button (change)="selectRadio('INSTRUMENTS')"></mat-radio-button>Instruments (Cheque, Drafts etc.)
                 </span>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 20px">
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 20px" *ngIf="this.payMode === 'INSTRUMENTS'">
                 <h4>Instruments' Details</h4>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" *ngIf="this.payMode === 'INSTRUMENTS'">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Number</mat-label>
-                    <input matInput placeholder="Number" formControlName="number">
+                    <input matInput placeholder="Number" formControlName="instrumentNumber" type="number">
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Type</mat-label>
-                    <input matInput placeholder="Type" formControlName="type">
+                    <input matInput placeholder="Type" formControlName="instrumentType">
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Teller No.</mat-label>
-                    <input matInput placeholder="Teller No." formControlName="tellerNumber">
+                    <input matInput placeholder="Teller No." formControlName="instrumentTellerNumber" type="number">
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Issued By</mat-label>
-                    <input matInput placeholder="Issued By" formControlName="issuedBy">
+                    <input matInput placeholder="Issued By" formControlName="instrumentIssuedBy">
                 </mat-form-field>
             </div>
-            <!--<div fxLayout="row" fxLayoutAlign="start">
-                <table class="simple invoice-table">
-                    <thead>
-                    <tr>
-                        <th>
-                            <div class="title">#</div>
-                        </th>
-                        <th>
-                            <div class="title">S.No</div>
-                        </th>
-                        <th>
-                            <div class="title">Bank A/O Title</div>
-                        </th>
-                        <th>
-                            <div class="title">Bank A/C</div>
-                        </th>
-                        <th>
-                            <div class="title">Type of Bank A/C</div>
-                        </th>
-                        <th>
-                            <div class="title">Bank</div>
-                        </th>
-                        <th>
-                            <div class="title">Bank Branch</div>
-                        </th>
-                        <th>
-                            <div class="title">Sort Code</div>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody *ngIf="banks && banks.length > 0; else noBankFound">
-                    <tr *ngFor="let bank of banks; let i = index">
-                        <td>
-                            <div class="title">
-                                <mat-radio-button (change)="selectRadio(bank.id)"></mat-radio-button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title">
-                                {{i + 1}}.
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title">
-                                {{bank?.title}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title">
-                                {{bank?.number}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title">
-                                {{bank?.type}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title">
-                                {{bank?.bank?.name}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title">
-                                {{bank?.branches?.name}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title">
-                                {{bank?.branches?.sortCode}}
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <ng-template #noBankFound>
-                        <tbody>
-                        <tr>
-                            <td colspan="8">
-                                <div class="title text-center">
-                                    No data to show
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </ng-template>
-                </table>
-            </div>-->
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
