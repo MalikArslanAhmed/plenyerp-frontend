@@ -60,7 +60,7 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
-                        <mat-label>Search PV</mat-label>
+                        <mat-label>Search RV</mat-label>
                         <input formControlName="search" matInput placeholder="Search for Receipt Voucher">
                     </mat-form-field>
                     <div fxFlex class="width-200px p-10px mt-13px">
@@ -98,7 +98,6 @@
                         <span class="mat-header-cell text-center">Deptal No.</span>
                         <span class="mat-header-cell text-center">Payee Names</span>
                         <span class="mat-header-cell text-center">Amount (Net)</span>
-                        <!--<span class="mat-header-cell text-center">Taxes</span>-->
                         <span class="mat-header-cell text-center">Last Actioned</span>
                         <span class="mat-header-cell text-center">Status</span>
                         <span
@@ -106,7 +105,8 @@
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of receiptVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
-                                                    (click)="getChildReportData(reportData)" [collapsedHeight]="'200px'" [expandedHeight]="'200px'">
+                                                    (click)="getChildReportData(reportData)" [collapsedHeight]="'200px'"
+                                                    [expandedHeight]="'200px'">
                             <span class="mat-cell align-items-center"
                                   *ngIf="status !== 'ALL' && status !== 'ON_MANDATE'">
                                 <p class="text-truncate cursor-pointer text-center mt-100px">
@@ -130,9 +130,6 @@
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-100px text-center">{{reportData && reportData['totalAmount'] && reportData['totalAmount'].amount ? reportData['totalAmount'].amount : '-'}}</p>
                             </span>
-                            <!--<span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-100px text-center">{{reportData && reportData['totalTax'] && reportData['totalTax'].tax ? reportData['totalTax'].tax : '-'}}</p>
-                            </span>-->
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-100px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
                             </span>
@@ -140,22 +137,27 @@
                                 <p class="text-truncate cursor-pointer mt-100px text-center ml-20px">{{reportData && reportData.status ? reportData?.status : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px"
+                                <p [title]="reportData['adminSegment'].combinedCode+' - '+reportData['adminSegment'].name"
+                                   class="text-truncate cursor-pointer mt-10px text-center ml-20px"
                                    *ngIf="reportData && reportData.adminSegment">{{reportData['adminSegment'].combinedCode}}
                                     - {{reportData['adminSegment'].name}}</p>
-                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px"
+                                <p [title]="reportData['fundSegment'].combinedCode+' - '+reportData['fundSegment'].name" class="text-truncate cursor-pointer mt-10px text-center ml-20px"
                                    *ngIf="reportData && reportData.fundSegment">{{reportData['fundSegment'].combinedCode}}
                                     - {{reportData['fundSegment'].name}}</p>
-                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px"
+                                <p [title]="reportData['economicSegment'].combinedCode+' - '+reportData['economicSegment'].name"
+                                   class="text-truncate cursor-pointer mt-10px text-center ml-20px"
                                    *ngIf="reportData && reportData.economicSegment">{{reportData['economicSegment'].combinedCode}}
                                     - {{reportData['economicSegment'].name}}</p>
-                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px"
+                                <p [title]="reportData['programSegment'].combinedCode+' - '+reportData['programSegment'].name"
+                                   class="text-truncate cursor-pointer mt-10px text-center ml-20px"
                                    *ngIf="reportData && reportData.programSegment">{{reportData['programSegment'].combinedCode}}
                                     - {{reportData['programSegment'].name}}</p>
-                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px"
+                                <p [title]="reportData['functionalSegment'].combinedCode+' - '+reportData['functionalSegment'].name"
+                                   class="text-truncate cursor-pointer mt-10px text-center ml-20px"
                                    *ngIf="reportData && reportData.functionalSegment">{{reportData['functionalSegment'].combinedCode}}
                                     - {{reportData['functionalSegment'].name}}</p>
-                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px"
+                                <p [title]="reportData['geoCodeSegment'].combinedCode+' - '+reportData['geoCodeSegment'].name"
+                                   class="text-truncate cursor-pointer mt-10px text-center ml-20px"
                                    *ngIf="reportData && reportData.geoCodeSegment">{{reportData['geoCodeSegment'].combinedCode}}
                                     - {{reportData['geoCodeSegment'].name}}</p>
                             </span>
@@ -422,7 +424,7 @@
                 <mat-paginator #paginator *ngIf="receiptVoucherData.length > 0"
                                [length]="pagination.total"
                                [pageSize]="pagination.perpage"
-                               [pageIndex]="pagination.page-1"
+                               [pageIndex]="pagination.page - 1"
                                (page)="pageEvent = onPageChange($event)"
                 >
                 </mat-paginator>

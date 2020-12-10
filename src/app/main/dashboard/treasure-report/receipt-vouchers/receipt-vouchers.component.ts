@@ -176,7 +176,7 @@ export class ReceiptVouchersComponent implements OnInit {
 
             this.dialogRef = this._matDialog.open(ReceiptVoucherCreateComponent, {
                 panelClass: 'contact-form-dialog',
-                data: {action: 'CREATE', header: selectedType, source: selectedSource}
+                data: {header: selectedType, source: selectedSource, type: this.createReceiptVoucherForm.value['type']}
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
                 if (!response) {
