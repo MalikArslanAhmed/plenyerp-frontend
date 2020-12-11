@@ -41,7 +41,7 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 private receiptVoucherService: ReceiptVoucherService,
                 private globalService: GlobalService) {
         this.payeeData = _data.rv;
-        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name : '-' + ' | RV - Schedule Payers Employee';
+        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | RV - Schedule Payers Employee' : '-';
     }
 
     ngOnInit(): void {

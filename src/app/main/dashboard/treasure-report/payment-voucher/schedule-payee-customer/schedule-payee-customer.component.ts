@@ -38,7 +38,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 private employeesService: EmployeeService,
                 private paymentVoucherService: PaymentVoucherService) {
         this.payeeData = _data.pv;
-        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name : '-' + ' | PV - Schedule Payees Customer';
+        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | PV - Schedule Payees Customer' : '-';
     }
 
     ngOnInit(): void {
