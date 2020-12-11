@@ -797,14 +797,31 @@ export const navigation: FuseNavigation[] = [
                 permissions: []
             },
             {
-                id: 'payment-reports',
+                id: 'payment-report',
                 title: 'Reports',
                 roles: [],
-                // translate: 'NAV.CALENDAR',
-                type: 'item',
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
                 icon: 'report',
-                url: '/dashboard/reports',
-                permissions: []
+                permissions: [],
+                children: [
+                    {
+                        id: 'pv-reports',
+                        title: 'PV List',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/pv-list',
+                        permissions: []
+                    },
+                    {
+                        id: 'rv-reports',
+                        title: 'RV List',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/rv-list',
+                        permissions: []
+                    }
+                ]
             },
         ]
     }

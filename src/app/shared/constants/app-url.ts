@@ -511,6 +511,14 @@ export class AppUrl {
             return AppUrl.API_URL + `treasury/payment-vouchers`;
         }
     }
+    static RV_REPORT_DATA(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/receipt-vouchers` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/receipt-vouchers`;
+        }
+    }
+
 
     static RECEIPT_VOUCHER(id?): string {
         if (id) {
