@@ -7,7 +7,7 @@
                           [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                   PV Reports
+                   RV Reports
                 </span>
             </div>
         </div>
@@ -29,7 +29,7 @@
     <div class="content">
         <div class="center p-24" fusePerfectScrollbar>
             <div class="content">
-                <form [formGroup]="paymentReportForm">
+                <form [formGroup]="rvPaymentReportForm">
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>From</mat-label>
                         <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
@@ -61,17 +61,8 @@
                         <ng-container *ngFor="let header of displayedColumns">
                         <span class="mat-header-cell text-center">{{header}}</span>
                         </ng-container>
-<!--                        <span class="mat-header-cell text-center">S.No.</span>-->
-<!--                        <span class="mat-header-cell text-center">Year</span>-->
-<!--                        <span class="mat-header-cell text-center">Deptal No.</span>-->
-<!--                        <span class="mat-header-cell text-center">Payee Names</span>-->
-<!--                        <span class="mat-header-cell text-center">Amount (Net)</span>-->
-<!--                        <span class="mat-header-cell text-center">Taxes</span>-->
-<!--                        <span class="mat-header-cell text-center">Payment Ref. (#)</span>-->
-<!--                        <span class="mat-header-cell text-center">Last Actioned</span>-->
-<!--                        <span class="mat-header-cell text-center">Status</span>-->
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of paymentReportData; let i = index"
+                    <mat-expansion-panel *ngFor="let reportData of rvPaymentReportData; let i = index"
                                          [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">

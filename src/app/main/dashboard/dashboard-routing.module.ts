@@ -75,6 +75,7 @@ import {DefaultSettingVoucherInfoComponent} from "./treasure-report/default-sett
 import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie.component';
 import {PaymentReportComponent} from './payment-report/payment-report.component';
 import {ReceiptVouchersComponent} from "./treasure-report/receipt-vouchers/receipt-vouchers.component";
+import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 
 const routes: Routes = [
     {
@@ -735,10 +736,17 @@ const routes: Routes = [
         }
     },
     {
-        path: 'reports',
+        path: 'pv-list',
         component: PaymentReportComponent,
         data: {
-            title: 'Reports'
+            title: 'PV List'
+        }
+    },
+    {
+        path: 'rv-list',
+        component: RvReportListComponent,
+        data: {
+            title: 'RV List'
         }
     }
 ];

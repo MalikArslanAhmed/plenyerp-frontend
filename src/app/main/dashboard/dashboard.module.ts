@@ -240,6 +240,8 @@ import { SchedulePayersCustomerComponent } from './treasure-report/receipt-vouch
 import { SelectPayersCustomerComponent } from './treasure-report/receipt-vouchers/select-payers-customer/select-payers-customer.component';
 import { SchedulePayersEmployeeComponent } from './treasure-report/receipt-vouchers/schedule-payers-employee/schedule-payers-employee.component';
 import { ScheduleEconomicCodesReceiptComponent } from './treasure-report/receipt-vouchers/schedule-economic-codes-receipt/schedule-economic-codes-receipt.component';
+import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
+import {RvReportListHeadersComponent} from './rv-report-list/rv-report-list-headers/rv-report-list-headers.component';
 
 @NgModule({
     declarations: [
@@ -457,7 +459,9 @@ import { ScheduleEconomicCodesReceiptComponent } from './treasure-report/receipt
         SchedulePayersCustomerComponent,
         SelectPayersCustomerComponent,
         SchedulePayersEmployeeComponent,
-        ScheduleEconomicCodesReceiptComponent
+        ScheduleEconomicCodesReceiptComponent,
+        RvReportListComponent,
+        RvReportListHeadersComponent
     ],
     imports: [
         CommonModule,
