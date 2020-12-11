@@ -7,7 +7,7 @@ import {NumberToWordsPipe} from "../../../../../shared/pipes/number-to-word.pipe
 import {fuseAnimations} from "../../../../../../@fuse/animations";
 import {ReceiptVoucherService} from "../../../../../shared/services/receipt-voucher.service";
 import {GlobalService} from "../../../../../shared/services/global.service";
-import { SelectPayersCustomerComponent } from '../select-payers-customer/select-payers-customer.component';
+import {SelectPayersCustomerComponent} from '../select-payers-customer/select-payers-customer.component';
 
 @Component({
     selector: 'app-schedule-payers-customer',
@@ -17,7 +17,6 @@ import { SelectPayersCustomerComponent } from '../select-payers-customer/select-
     animations: fuseAnimations
 })
 export class SchedulePayersCustomerComponent implements OnInit {
-    action: any;
     dialogTitle: any;
     schedulePayersCustomerForm: FormGroup;
     isSubmitted = false;
@@ -39,9 +38,8 @@ export class SchedulePayersCustomerComponent implements OnInit {
                 private employeesService: EmployeeService,
                 private receiptVoucherService: ReceiptVoucherService,
                 private globalService: GlobalService) {
-        this.action = _data.action;
-        this.payeeData = _data.pv;
-        this.dialogTitle = 'Non-Personal Advance | RV - Schedule Payers Employee';
+        this.payeeData = _data.rv;
+        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name : '-' + ' | RV - Schedule Payers Company';
     }
 
     ngOnInit(): void {
@@ -54,20 +52,21 @@ export class SchedulePayersCustomerComponent implements OnInit {
         this.schedulePayersCustomerForm = this.fb.group({
             year: [{'value': '', disabled: true}],
             departmentalNo: [{'value': '', disabled: true}],
-            details: [''],
+            details: [{'value': '', disabled: true}],
             companyId: [{'value': '', disabled: true}],
             payerName: [{'value': '', disabled: true}],
             amount: [''],
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}],
-            lineDetails: [''],
+            lineDetail: [''],
             instrumentNumber: [''],
             instrumentType: [''],
             instrumentTellerNumber: [''],
             instrumentIssuedBy: [{'value': '', disabled: true}]
         });
         this.schedulePayersCustomerForm.patchValue({
-            instrumentIssuedBy: this.user.name
+            instrumentIssuedBy: this.user.name,
+            details: (this.payeeData && this.payeeData.paymentDescription) ? this.payeeData.paymentDescription : '',
         });
         if (this.payeeData && this.payeeData['valueDate']) {
             let valArr1 = this.payeeData['valueDate'].split(" ");
@@ -97,12 +96,12 @@ export class SchedulePayersCustomerComponent implements OnInit {
 
         if (this.isSubmitted) {
             let params = {
-                'companyId': this.schedulePayersCustomerForm.getRawValue().employeeId ? this.schedulePayersCustomerForm.getRawValue().employeeId : '',
+                'companyId': this.schedulePayersCustomerForm.getRawValue().companyId ? this.schedulePayersCustomerForm.getRawValue().companyId : '',
                 'totalAmount': this.schedulePayersCustomerForm.getRawValue().amount ? this.schedulePayersCustomerForm.getRawValue().amount : '',
                 'year': this.schedulePayersCustomerForm.getRawValue().year ? this.schedulePayersCustomerForm.getRawValue().year : '',
                 'details': this.schedulePayersCustomerForm.getRawValue().details ? this.schedulePayersCustomerForm.getRawValue().details : '',
                 'payMode': this.payMode ? this.payMode : '',
-                'lineDetails': this.schedulePayersCustomerForm.getRawValue().lineDetails ? this.schedulePayersCustomerForm.getRawValue().lineDetails : '',
+                'lineDetail': this.schedulePayersCustomerForm.getRawValue().lineDetail ? this.schedulePayersCustomerForm.getRawValue().lineDetail : '',
                 'instrumentNumber': this.schedulePayersCustomerForm.getRawValue().instrumentNumber ? this.schedulePayersCustomerForm.getRawValue().instrumentNumber : '',
                 'instrumentType': this.schedulePayersCustomerForm.getRawValue().instrumentType ? this.schedulePayersCustomerForm.getRawValue().instrumentType : '',
                 'instrumentTellerNumber': this.schedulePayersCustomerForm.getRawValue().instrumentTellerNumber ? this.schedulePayersCustomerForm.getRawValue().instrumentTellerNumber : '',

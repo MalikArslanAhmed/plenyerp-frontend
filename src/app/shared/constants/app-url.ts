@@ -556,7 +556,7 @@ export class AppUrl {
 
     static RV_SCHEDULE_ECONOMIC(id?): string {
         if (id) {
-            return AppUrl.API_URL + `treasury/receipt-vouchers/` + id + `/schedule-economic`;
+            return AppUrl.API_URL + `treasury/receipt-payees/` + id + `/schedule-economic`;
         }
     }
 

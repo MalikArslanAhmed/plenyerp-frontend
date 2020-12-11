@@ -17,7 +17,6 @@ import {PaymentVoucherService} from "../../../../../shared/services/payment-vouc
     animations: fuseAnimations
 })
 export class SchedulePayeeEmployeeComponent implements OnInit {
-    action: any;
     dialogTitle: any;
     schedulePayeeEmployeeForm: FormGroup;
     isSubmitted = false;
@@ -39,9 +38,8 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 private alertService: AlertService,
                 private employeesService: EmployeeService,
                 private paymentVoucherService: PaymentVoucherService) {
-        this.action = _data.action;
         this.payeeData = _data.pv;
-        this.dialogTitle = 'Non-Personal Advance | PV - Schedule Payees Employee';
+        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name : '-' + ' | PV - Schedule Payees Employee';
     }
 
     ngOnInit(): void {

@@ -25,7 +25,6 @@ import {SelectAieComponent} from '../select-aie/select-aie.component';
     animations: fuseAnimations
 })
 export class PaymentVoucherCreateComponent implements OnInit {
-    action: any;
     dialogTitle: any;
     schedulePayeeEmployeeForm: FormGroup;
     isSubmitted = false;
@@ -55,17 +54,9 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 private paymentVoucherService: PaymentVoucherService,
                 private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService,
                 private alertService: AlertService) {
-        this.action = _data.action;
         this.header = _data.header;
         this.sources = _data.source;
-        if (this.action === 'EDIT') {
-            this.dialogTitle = 'Edit Payment Voucher';
-            if (_data.country) {
-                this.updateData = _data;
-            }
-        } else {
-            this.dialogTitle = this.header + ' - Payment Voucher';
-        }
+        this.dialogTitle = this.header + ' - Payment Voucher';
     }
 
     ngOnInit(): void {

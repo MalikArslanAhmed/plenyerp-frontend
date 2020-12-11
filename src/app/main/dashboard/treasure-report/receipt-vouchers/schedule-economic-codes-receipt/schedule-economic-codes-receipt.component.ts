@@ -33,7 +33,7 @@ export class ScheduleEconomicCodesReceiptComponent implements OnInit {
         private alertService: AlertService,
         private receiptVoucherService: ReceiptVoucherService) {
         this.reportData = _data.report;
-        this.payeeData = _data.pv;
+        this.payeeData = _data.rv;
     }
 
     ngOnInit(): void {
@@ -53,18 +53,17 @@ export class ScheduleEconomicCodesReceiptComponent implements OnInit {
             amount: [''],
         });
         let payeeName = '';
-        if (this._data && this._data['pv'] && this._data['pv']['adminCompany']) {
-            payeeName = this._data['pv']['adminCompany'].name;
-        } else if (this._data && this._data['pv'] && this._data['pv']['employee']) {
-            payeeName = this._data['pv']['employee'].firstName + ' ' + this._data['pv']['employee'].lastName;
+        if (this._data && this._data['rv'] && this._data['rv']['adminCompany']) {
+            payeeName = this._data['rv']['adminCompany'].name;
+        } else if (this._data && this._data['rv'] && this._data['rv']['employee']) {
+            payeeName = this._data['rv']['employee'].firstName + ' ' + this._data['rv']['employee'].lastName;
         }
-        console.log('this._data', this._data);
         this.economicCodeForm.patchValue({
             'year': this._data.report.year,
             'deptalId': this._data.report.deptalId,
             'economicCode': this._data.report.economicSegment.combinedCode,
             'economicSegmentName': this._data['report'].economicSegment.name,
-            'grossAmount': this._data['pv'].totalAmount,
+            'grossAmount': this._data['rv'].totalAmount,
             'payeeName': payeeName
         });
         this.getPayeeEconomicCode();
@@ -126,7 +125,7 @@ export class ScheduleEconomicCodesReceiptComponent implements OnInit {
             return;
         }
 
-        if (parseInt(this.economicCodeForm.getRawValue().amount) > parseInt(this._data['pv'].totalAmount)) {
+        if (parseInt(this.economicCodeForm.getRawValue().amount) > parseInt(this._data['rv'].totalAmount)) {
             this.alertService.showErrors('Amount can\'t be greater than gross amount');
             return;
         }
