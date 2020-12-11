@@ -76,7 +76,7 @@
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <ng-container *ngIf="statuses && statuses.length > 0">
                         <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
-                                *ngIf="status !== 'ALL' && status !== 'ON_MANDATE'">
+                                *ngIf="status !== 'ALL' && status !== 'POST_TO_GL'">
                             {{statuses[0].name}}
                         </button>
                         <button mat-button class="update-report"
@@ -92,7 +92,7 @@
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell text-center"
-                              *ngIf="status !== 'ALL' && status !== 'ON_MANDATE'">#</span>
+                              *ngIf="status !== 'ALL' && status !== 'POST_TO_GL'">#</span>
                         <span class="mat-header-cell text-center">S.No.</span>
                         <span class="mat-header-cell text-center">Year</span>
                         <span class="mat-header-cell text-center">Deptal No.</span>
@@ -108,7 +108,7 @@
                                                     (click)="getChildReportData(reportData)" [collapsedHeight]="'200px'"
                                                     [expandedHeight]="'200px'">
                             <span class="mat-cell align-items-center"
-                                  *ngIf="status !== 'ALL' && status !== 'ON_MANDATE'">
+                                  *ngIf="status !== 'ALL' && status !== 'POST_TO_GL'">
                                 <p class="text-truncate cursor-pointer text-center mt-100px">
                                     <mat-checkbox (change)="checkPV(i, $event)"
                                                   (click)="$event.stopPropagation()"
@@ -214,10 +214,10 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title" *ngIf="data && data.lineDetails">
-                                                        {{data?.lineDetails}}
+                                                    <div class="title" *ngIf="data && data.lineDetail">
+                                                        {{data?.lineDetail}}
                                                     </div>
-                                                    <div class="title" *ngIf="!data || !data.lineDetails">
+                                                    <div class="title" *ngIf="!data || !data.lineDetail">
                                                         -
                                                     </div>
                                                 </td>
@@ -341,22 +341,22 @@
                                                 </td>
                                                 <td>
                                                     <div class="title"
-                                                         *ngIf="data && data['receiptVoucher'] && data['receiptVoucher']['adminCompany']">
-                                                        {{data?.receiptVoucher?.adminCompany?.id}}
+                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['adminCompany']">
+                                                        {{data?.receiptPayee?.adminCompany?.id}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data['receiptVoucher'] && data['receiptVoucher']['employee']">
-                                                        {{data?.receiptVoucher?.employee?.id}}
+                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['employee']">
+                                                        {{data?.receiptPayee?.employee?.id}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title"
-                                                         *ngIf="data && data['receiptVoucher'] && data['receiptVoucher']['adminCompany']">
-                                                        {{data?.receiptVoucher?.adminCompany?.name}}
+                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['adminCompany']">
+                                                        {{data?.receiptPayee?.adminCompany?.name}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data['receiptVoucher'] && data['receiptVoucher']['employee']">
-                                                        {{data?.receiptVoucher?.employee?.firstName}} {{data?.receiptVoucher?.employee?.lastName}}
+                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['employee']">
+                                                        {{data?.receiptPayee?.employee?.firstName}} {{data?.receiptPayee?.employee?.lastName}}
                                                     </div>
                                                 </td>
                                                 <td>

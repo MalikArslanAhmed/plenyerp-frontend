@@ -100,7 +100,7 @@ export class ReceiptVouchersComponent implements OnInit {
     scheduleEmployee(data) {
         this.dialogRef = this._matDialog.open(SchedulePayersEmployeeComponent, {
             panelClass: 'contact-form-dialog',
-            data: {pv: data}
+            data: {rv: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -113,7 +113,7 @@ export class ReceiptVouchersComponent implements OnInit {
     scheduleCustomers(data) {
         this.dialogRef = this._matDialog.open(SchedulePayersCustomerComponent, {
             panelClass: 'contact-form-dialog',
-            data: {pv: data}
+            data: {rv: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -126,7 +126,7 @@ export class ReceiptVouchersComponent implements OnInit {
     scheduleEconomicCodes(report, data) {
         this.dialogRef = this._matDialog.open(ScheduleEconomicCodesReceiptComponent, {
             panelClass: 'contact-form-dialog',
-            data: {pv: data, report: report}
+            data: {rv: data, report: report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -148,10 +148,10 @@ export class ReceiptVouchersComponent implements OnInit {
     }
 
     addReceiptVoucher() {
-        if (this.createReceiptVoucherForm.value['sourceUnit'] === '') {
+        if (this.createReceiptVoucherForm.value['sourceUnit'] === '' || !this.createReceiptVoucherForm.value['sourceUnit']) {
             this.alertService.showErrors('Please Choose Voucher Source Unit');
             return;
-        } else if (this.createReceiptVoucherForm.value['type'] === '') {
+        } else if (this.createReceiptVoucherForm.value['type'] === '' || !this.createReceiptVoucherForm.value['type']) {
             this.alertService.showErrors('Please Choose Receipt Voucher Type');
             return;
         }
@@ -234,7 +234,6 @@ export class ReceiptVouchersComponent implements OnInit {
                 status: status,
                 receiptVoucherIds: receiptVoucherId
             };
-            console.log('--->>> update status', params);
             this.receiptVoucherService.getUpdateStatus(params).subscribe(data => {
                 // console.log(data);
             });

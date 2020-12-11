@@ -17,7 +17,6 @@ import {GlobalService} from "../../../../../shared/services/global.service";
     animations: fuseAnimations
 })
 export class SchedulePayersEmployeeComponent implements OnInit {
-    action: any;
     dialogTitle: any;
     schedulePayersEmployeeForm: FormGroup;
     isSubmitted = false;
@@ -41,9 +40,8 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 private employeesService: EmployeeService,
                 private receiptVoucherService: ReceiptVoucherService,
                 private globalService: GlobalService) {
-        this.action = _data.action;
-        this.payeeData = _data.pv;
-        this.dialogTitle = 'Non-Personal Advance | RV - Schedule Payers Employee';
+        this.payeeData = _data.rv;
+        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name : '-' + ' | RV - Schedule Payers Employee';
     }
 
     ngOnInit(): void {
@@ -56,20 +54,21 @@ export class SchedulePayersEmployeeComponent implements OnInit {
         this.schedulePayersEmployeeForm = this.fb.group({
             year: [{'value': '', disabled: true}],
             departmentalNo: [{'value': '', disabled: true}],
-            details: [''],
+            details: [{'value': '', disabled: true}],
             employeeId: [{'value': '', disabled: true}],
             payerName: [{'value': '', disabled: true}],
             amount: [''],
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}],
-            lineDetails: [''],
+            lineDetail: [''],
             instrumentNumber: [''],
             instrumentType: [''],
             instrumentTellerNumber: [''],
             instrumentIssuedBy: [{'value': '', disabled: true}]
         });
         this.schedulePayersEmployeeForm.patchValue({
-            instrumentIssuedBy: this.user.name
+            instrumentIssuedBy: this.user.name,
+            details: (this.payeeData && this.payeeData.paymentDescription) ? this.payeeData.paymentDescription : '',
         });
         if (this.payeeData && this.payeeData['valueDate']) {
             let valArr1 = this.payeeData['valueDate'].split(" ");
@@ -104,7 +103,7 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 'year': this.schedulePayersEmployeeForm.getRawValue().year ? this.schedulePayersEmployeeForm.getRawValue().year : '',
                 'details': this.schedulePayersEmployeeForm.getRawValue().details ? this.schedulePayersEmployeeForm.getRawValue().details : '',
                 'payMode': this.payMode ? this.payMode : '',
-                'lineDetails': this.schedulePayersEmployeeForm.getRawValue().lineDetails ? this.schedulePayersEmployeeForm.getRawValue().lineDetails : '',
+                'lineDetail': this.schedulePayersEmployeeForm.getRawValue().lineDetail ? this.schedulePayersEmployeeForm.getRawValue().lineDetail : '',
                 'instrumentNumber': this.schedulePayersEmployeeForm.getRawValue().instrumentNumber ? this.schedulePayersEmployeeForm.getRawValue().instrumentNumber : '',
                 'instrumentType': this.schedulePayersEmployeeForm.getRawValue().instrumentType ? this.schedulePayersEmployeeForm.getRawValue().instrumentType : '',
                 'instrumentTellerNumber': this.schedulePayersEmployeeForm.getRawValue().instrumentTellerNumber ? this.schedulePayersEmployeeForm.getRawValue().instrumentTellerNumber : '',
