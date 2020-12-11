@@ -175,7 +175,7 @@ export class PaymentVoucherComponent implements OnInit {
 
             this.dialogRef = this._matDialog.open(PaymentVoucherCreateComponent, {
                 panelClass: 'contact-form-dialog',
-                data: {action: 'CREATE', header: selectedType, source: selectedSource}
+                data: {header: selectedType, source: selectedSource}
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
                 if (!response) {
