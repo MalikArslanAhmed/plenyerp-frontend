@@ -35,6 +35,7 @@ export class PaymentVoucherComponent implements OnInit {
         perpage: 15,
         pages: null
     };
+
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
@@ -147,10 +148,10 @@ export class PaymentVoucherComponent implements OnInit {
     }
 
     addPaymentVoucher() {
-        if (this.createPaymentVoucherForm.value['sourceUnit'] === '') {
+        if (!this.createPaymentVoucherForm.value['sourceUnit'] || this.createPaymentVoucherForm.value['sourceUnit'] === '') {
             this.alertService.showErrors('Please Choose Voucher Source Unit');
             return;
-        } else if (this.createPaymentVoucherForm.value['type'] === '') {
+        } else if (!this.createPaymentVoucherForm.value['type'] || this.createPaymentVoucherForm.value['type'] === '') {
             this.alertService.showErrors('Please Choose Payment Voucher Type');
             return;
         }
@@ -205,7 +206,7 @@ export class PaymentVoucherComponent implements OnInit {
                     const sIndex = this.statuses.indexOf(val);
                     if (sIndex < this.statuses.length - 1) {
                         this.selectedStatus.push(this.statuses[sIndex + 1]);
-                    }else {
+                    } else {
                         this.selectedStatus = [];
                     }
                 }
@@ -220,6 +221,7 @@ export class PaymentVoucherComponent implements OnInit {
             this.statuses = data.status;
         });
     }
+
     updateStatus(status: string) {
         const paymentVoucherId = [];
         if (this.paymentVoucherData && this.paymentVoucherData.length) {
