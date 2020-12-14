@@ -820,6 +820,14 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/rv-list',
                         permissions: []
+                    },
+                    {
+                        id: 'ifr-reports',
+                        title: 'Application of Fund Report',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/application-fund-report',
+                        permissions: []
                     }
                 ]
             },

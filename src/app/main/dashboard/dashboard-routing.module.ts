@@ -76,6 +76,7 @@ import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie
 import {PaymentReportComponent} from './payment-report/payment-report.component';
 import {ReceiptVouchersComponent} from "./treasure-report/receipt-vouchers/receipt-vouchers.component";
 import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
+import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
 
 const routes: Routes = [
     {
@@ -747,6 +748,13 @@ const routes: Routes = [
         component: RvReportListComponent,
         data: {
             title: 'RV List'
+        }
+    },
+    {
+        path: 'application-fund-report',
+        component: ApplicationFundReportsComponent,
+        data: {
+            title: 'Application of Fund Report'
         }
     }
 ];
