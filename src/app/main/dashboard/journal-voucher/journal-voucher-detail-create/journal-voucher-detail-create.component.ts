@@ -462,8 +462,9 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
 
     getCompanySetting() {
         this.companyInformationService.getCompanySetting().subscribe(data => {
-            this.localCurrency = data['items'][0].localCurrency;
-            this.internationalCurrency = data['items'][0].internationalCurrency;
+            // console.log('data', data);
+            this.localCurrency = data['items'][0].local['pluralCurrencyName'];
+            this.internationalCurrency = data['items'][0].international['pluralCurrencyName'];
         })
     }
 }

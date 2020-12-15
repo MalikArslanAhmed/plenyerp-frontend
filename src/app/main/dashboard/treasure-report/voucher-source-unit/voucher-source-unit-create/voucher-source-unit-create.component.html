@@ -116,11 +116,11 @@
                 aria-label="Cancel">CANCEL
         </button>
         <button mat-button class="save-button"
-                (click)="matDialogRef.close(voucherSourceUnitForm); saveVoucherSourceUnit()"
+                (click)="saveVoucherSourceUnit()"
                 [disabled]="voucherSourceUnitForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
         </button>
         <button mat-button class="save-button"
-                (click)="matDialogRef.close(voucherSourceUnitForm); updateVoucherSourceUnit()"
+                (click)="updateVoucherSourceUnit()"
                 [disabled]="voucherSourceUnitForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
         </button>
     </div>

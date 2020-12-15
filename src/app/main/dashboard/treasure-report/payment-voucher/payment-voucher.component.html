@@ -76,7 +76,10 @@
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <ng-container *ngIf="statuses && statuses.length > 0">
                         <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
-                                *ngIf="status !== 'ALL' && status !== 'ON_MANDATE'">
+                                *ngIf="status !== 'ALL' && status !== 'PAID' && status !== 'NEW'">
+                            <mat-icon class="material-icons cursor-pointer whiteColor">
+                                keyboard_arrow_left
+                            </mat-icon>
                             {{statuses[0].name}}
                         </button>
                         <button mat-button class="update-report"
@@ -92,7 +95,7 @@
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell text-center"
-                              *ngIf="status !== 'ALL' && status !== 'ON_MANDATE'">#</span>
+                              *ngIf="status !== 'ALL' && status !== 'PAID'">#</span>
                         <span class="mat-header-cell text-center">S.No.</span>
                         <span class="mat-header-cell text-center">Year</span>
                         <span class="mat-header-cell text-center">Deptal No.</span>
@@ -106,7 +109,7 @@
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center"
-                                  *ngIf="status !== 'ALL' && status !== 'ON_MANDATE'">
+                                  *ngIf="status !== 'ALL' && status !== 'PAID'">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">
                                     <mat-checkbox (change)="checkPV(i, $event)"
                                                   (click)="$event.stopPropagation()"

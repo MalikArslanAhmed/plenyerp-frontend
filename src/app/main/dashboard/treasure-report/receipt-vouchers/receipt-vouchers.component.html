@@ -76,7 +76,10 @@
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <ng-container *ngIf="statuses && statuses.length > 0">
                         <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
-                                *ngIf="status !== 'ALL' && status !== 'POST_TO_GL'">
+                                *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL' && status !== 'NEW'">
+                            <mat-icon class="material-icons cursor-pointer whiteColor">
+                                keyboard_arrow_left
+                            </mat-icon>
                             {{statuses[0].name}}
                         </button>
                         <button mat-button class="update-report"
@@ -92,7 +95,7 @@
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell text-center"
-                              *ngIf="status !== 'ALL' && status !== 'POST_TO_GL'">#</span>
+                              *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL'">#</span>
                         <span class="mat-header-cell text-center">S.No.</span>
                         <span class="mat-header-cell text-center">Year</span>
                         <span class="mat-header-cell text-center">Deptal No.</span>
@@ -101,65 +104,61 @@
                         <span class="mat-header-cell text-center">Last Actioned</span>
                         <span class="mat-header-cell text-center">Status</span>
                         <span
-                            class="mat-header-cell text-center">COA admin, fund, eco, programme, functional, geo</span>
+                            class="mat-header-cell text-center">COA Admin, Eco</span>
+                        <!--<span
+                            class="mat-header-cell text-center">COA admin, fund, eco, programme, functional, geo</span>-->
+                        <span
+                            class="mat-header-cell text-center">Other COA Segments</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of receiptVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
-                                                    (click)="getChildReportData(reportData)" [collapsedHeight]="'200px'"
-                                                    [expandedHeight]="'200px'">
+                                                    (click)="getChildReportData(reportData)" [collapsedHeight]="'80px'"
+                                                    [expandedHeight]="'80px'">
                             <span class="mat-cell align-items-center"
-                                  *ngIf="status !== 'ALL' && status !== 'POST_TO_GL'">
-                                <p class="text-truncate cursor-pointer text-center mt-100px">
+                                  *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL'">
+                                <p class="text-truncate cursor-pointer text-center mt-30px">
                                     <mat-checkbox (change)="checkPV(i, $event)"
                                                   (click)="$event.stopPropagation()"
                                                   [checked]="reportData.checked ? true : null"></mat-checkbox>
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-100px text-center">{{i + 1}}.</p>
+                                <p class="text-truncate cursor-pointer mt-30px text-center">{{i + 1}}.</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-100px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-30px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-100px text-center">{{reportData && reportData.deptalId ? reportData?.deptalId : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-30px text-center">{{reportData && reportData.deptalId ? reportData?.deptalId : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-100px text-center">{{reportData && reportData.payee ? reportData?.payee : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-30px text-center">{{reportData && reportData.payee ? reportData?.payee : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-100px text-center">{{reportData && reportData['totalAmount'] && reportData['totalAmount'].amount ? reportData['totalAmount'].amount : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-30px text-center">{{reportData && reportData['totalAmount'] && reportData['totalAmount'].amount ? reportData['totalAmount'].amount : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-100px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-30px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-100px text-center ml-20px">{{reportData && reportData.status ? reportData?.status : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-30px text-center ml-20px">{{reportData && reportData.status ? reportData?.status : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p [title]="reportData['adminSegment'].combinedCode+' - '+reportData['adminSegment'].name"
                                    class="text-truncate cursor-pointer mt-10px text-center ml-20px"
                                    *ngIf="reportData && reportData.adminSegment">{{reportData['adminSegment'].combinedCode}}
                                     - {{reportData['adminSegment'].name}}</p>
-                                <p [title]="reportData['fundSegment'].combinedCode+' - '+reportData['fundSegment'].name" class="text-truncate cursor-pointer mt-10px text-center ml-20px"
-                                   *ngIf="reportData && reportData.fundSegment">{{reportData['fundSegment'].combinedCode}}
-                                    - {{reportData['fundSegment'].name}}</p>
                                 <p [title]="reportData['economicSegment'].combinedCode+' - '+reportData['economicSegment'].name"
                                    class="text-truncate cursor-pointer mt-10px text-center ml-20px"
                                    *ngIf="reportData && reportData.economicSegment">{{reportData['economicSegment'].combinedCode}}
                                     - {{reportData['economicSegment'].name}}</p>
-                                <p [title]="reportData['programSegment'].combinedCode+' - '+reportData['programSegment'].name"
-                                   class="text-truncate cursor-pointer mt-10px text-center ml-20px"
-                                   *ngIf="reportData && reportData.programSegment">{{reportData['programSegment'].combinedCode}}
-                                    - {{reportData['programSegment'].name}}</p>
-                                <p [title]="reportData['functionalSegment'].combinedCode+' - '+reportData['functionalSegment'].name"
-                                   class="text-truncate cursor-pointer mt-10px text-center ml-20px"
-                                   *ngIf="reportData && reportData.functionalSegment">{{reportData['functionalSegment'].combinedCode}}
-                                    - {{reportData['functionalSegment'].name}}</p>
-                                <p [title]="reportData['geoCodeSegment'].combinedCode+' - '+reportData['geoCodeSegment'].name"
-                                   class="text-truncate cursor-pointer mt-10px text-center ml-20px"
-                                   *ngIf="reportData && reportData.geoCodeSegment">{{reportData['geoCodeSegment'].combinedCode}}
-                                    - {{reportData['geoCodeSegment'].name}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="material-icons" style="margin-top: 28px; margin-left: 80px"
+                                   [title]="reportData['fundSegment'].combinedCode+' - '+reportData['fundSegment'].name +', '
+                                   +reportData['programSegment'].combinedCode+' - '+reportData['programSegment'].name +', '
+                                   +reportData['functionalSegment'].combinedCode+' - '+reportData['functionalSegment'].name+', '
+                                   +reportData['geoCodeSegment'].combinedCode+' - '+reportData['geoCodeSegment'].name">info</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div>
@@ -238,10 +237,12 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title" *ngIf="data && data.employee && data.employee.firstName">
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.firstName">
                                                         {{data?.employee?.firstName}} {{data?.employee?.lastName}}
                                                     </div>
-                                                    <div class="title" *ngIf="data && data.adminCompany && data.adminCompany.name">
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.name">
                                                         {{data?.adminCompany?.name}}
                                                     </div>
                                                 </td>
@@ -361,7 +362,8 @@
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.economicSegment?.combinedCode}} - {{data?.economicSegment?.name}}
+                                                        {{data?.economicSegment?.combinedCode}}
+                                                        - {{data?.economicSegment?.name}}
                                                     </div>
                                                 </td>
                                                 <td>

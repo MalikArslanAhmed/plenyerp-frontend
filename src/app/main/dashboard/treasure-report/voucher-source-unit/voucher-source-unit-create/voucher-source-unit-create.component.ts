@@ -110,12 +110,12 @@ export class VoucherSourceUnitCreateComponent implements OnInit {
     }
 
     saveVoucherSourceUnit() {
-        console.log('-->save', this.voucherSourceUnitForm.getRawValue());
         if (!this.voucherSourceUnitForm.valid) {
             return;
         }
         this.treasureReportService.save(this.voucherSourceUnitForm.getRawValue()).subscribe(data => {
             console.log('data', data);
+            this.matDialogRef.close(this.voucherSourceUnitForm);
             this.voucherSourceUnitForm.reset();
         });
     }
@@ -126,6 +126,7 @@ export class VoucherSourceUnitCreateComponent implements OnInit {
         }
         this.treasureReportService.update(this.updateData.voucher.id, this.voucherSourceUnitForm.getRawValue()).subscribe(data => {
             this.updateData = undefined;
+            this.matDialogRef.close(this.voucherSourceUnitForm);
             this.voucherSourceUnitForm.reset();
         });
     }

@@ -22,7 +22,7 @@
             <div fxLayout="column" fxLayoutGap="5px" fxFlex="100">
                 <div fxFlex="100">
                     <mat-table [@animateStagger]="{value:'50'}" [dataSource]="companiesList"
-                               style="max-height: 450px; overflow-y: scroll">
+                               style="max-height: 300px; overflow-y: scroll">
                         <ng-container matColumnDef="sno">
                             <mat-header-cell *matHeaderCellDef>S.No.</mat-header-cell>
                             <mat-cell *matCellDef="let item">
