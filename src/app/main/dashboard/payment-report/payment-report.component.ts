@@ -22,7 +22,7 @@ export class PaymentReportComponent implements OnInit {
     paymentReportForm: FormGroup;
     paymentReportData = [];
     economicSegments = [];
-    displayedColumns = ['S.No.', 'Year', 'Deptal No.', 'Payee Names', 'Amount (Net)', 'Taxes', 'Payment Ref. (#)', 'Last Actioned', 'Status'];
+    displayedColumns = ['S.No.', 'PV Year', 'Deptal No.', 'Payee Names', 'Amount (Net)', 'Taxes', 'Payment Ref. (#)', 'Last Actioned', 'Status'];
     panelOpenState: boolean = false;
 
     constructor(private paymentReportService: PaymentReportService,
