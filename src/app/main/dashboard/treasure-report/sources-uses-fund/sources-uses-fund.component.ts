@@ -24,15 +24,15 @@ export class SourcesUsesFundComponent implements OnInit {
     receiptVoucherData = [
         {
             item: 'abcd',
-            full_code: '12332',
-            previous_semester: 'sdfs',
+            section: '12332',
+            forecast_semester: 'sdfs',
             current_semester: 'fdgh',
             cum_semester: 'sfdg',
         },
         {
             item: 'abcd',
-            full_code: '12332',
-            previous_semester: 'sdfs',
+            section: '12332',
+            forecast_semester: 'sdfs',
             current_semester: 'fdgh',
             cum_semester: 'sfdg',
         }
@@ -314,6 +314,6 @@ export class SourcesUsesFundComponent implements OnInit {
     }
 
     filterTable() {
-        console.log('----->>>', this.filterSourceUsesDataForm.value);
+        console.log('----->>>', this.filterSourceUsesDataForm.getRawValue());
     }
 }

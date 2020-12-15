@@ -283,33 +283,34 @@ app-application-fund-reports {
             thead{
                 tr{
                     th{
-                        border-bottom: 1px solid #e2e2e2;
                         border-collapse: collapse;
-                        width: 20%;
-                        padding: 8px;
+                        //width: 20%;
+                        padding: 1rem;
                         font-size: 12px;
                         font-weight: 600;
-                        background-color: #e2e2e2;
-                        color: rgba(0, 0, 0, 0.54);
+                        background-color: rgba(0, 0, 0, 0.12);
+                        color: rgba(0,0,0,.54);
+                        border-bottom: 1px solid rgba(0,0,0,.12);
                         text-align: center!important;
-                        &:first-child{
-                            width: 10px;
-                        }
-                        &:last-child{
-                            width: 100px!important;
-                        }
+                        //&:first-child{
+                        //    width: 10px;
+                        //}
+                        //&:last-child{
+                        //    width: 100px!important;
+                        //}
                     }
                 }
             }
             tbody{
                 tr{
                     td{
-                        border-bottom: 1px solid #e2e2e2;
                         border-collapse: collapse;
-                        padding: 8px;
+                        padding: 1rem;
                         font-size: 16px;
                         font-weight: 500;
-                        color: rgba(0, 0, 0, 0.54);
+                        background-color: rgba(0, 0, 0, 0.12);
+                        color: rgba(0,0,0,.54);
+                        border-bottom: 1px solid rgba(0,0,0,.12);
                         text-align: center!important;
                     }
                     &:last-child{
