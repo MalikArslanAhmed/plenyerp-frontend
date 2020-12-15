@@ -62,10 +62,9 @@ export class SchedulePayersCustomerComponent implements OnInit {
             instrumentNumber: [''],
             instrumentType: [''],
             instrumentTellerNumber: [''],
-            instrumentIssuedBy: [{'value': '', disabled: true}]
+            instrumentIssuedBy: ['']
         });
         this.schedulePayersCustomerForm.patchValue({
-            instrumentIssuedBy: this.user.name,
             details: (this.payeeData && this.payeeData.paymentDescription) ? this.payeeData.paymentDescription : '',
         });
         if (this.payeeData && this.payeeData['valueDate']) {
