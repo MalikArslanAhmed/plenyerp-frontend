@@ -67,12 +67,11 @@
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
 
-                        <span class="mat-header-cell text-center">S.No.</span>
+                        <span class="mat-header-cell text-center">Section</span>
                         <span class="mat-header-cell text-center">Item</span>
-                        <span class="mat-header-cell text-center">Full Code</span>
-                        <span class="mat-header-cell text-center">Previous Semester <br>1.Budget <br>2.Actual <br>3.Variance</span>
-                        <span class="mat-header-cell text-center">This Semester Only<br>1.Budget <br>2.Actual <br>3.Variance</span>
-                        <span class="mat-header-cell text-center">Cumulative To Semester <br>1.Budget <br>2.Actual <br>3.Variance</span>
+                        <span class="mat-header-cell text-center">This Semester Only<br>1.USD($) <br>2.Naira(N)</span>
+                        <span class="mat-header-cell text-center">Cumulative To Date <br>1.USD($) <br>2.Naira(N)</span>
+                        <span class="mat-header-cell text-center">Forecast Next Semester <br>1.USD($) <br>2.Naira(N)</span>
 
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of receiptVoucherData; let i = index">
@@ -81,42 +80,37 @@
                                                     [expandedHeight]="'100px'">
 
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-25px text-center">{{i + 1}}.</p>
+                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.section}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.item}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.full_code}}</p>
+                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.current_semester}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData.previous_semester}}</p>
+                                <p class="text-truncate cursor-pointer mt-25px text-center ml-20px">{{reportData?.cum_semester}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData.current_semester}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-25px text-center ml-20px">{{reportData.cum_semester}}</p>
+                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.forecast_semester}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div>
-                            <div mat-dialog-content class="items-data child-table" fusePerfectScrollbar
+                            <div mat-dialog-content class="child-table" fusePerfectScrollbar
                                  style="overflow-x: scroll !important;">
                                 <table>
                                     <thead>
                                     <tr>
-                                        <th>S.No.</th>
+                                        <th>Section</th>
                                         <th>Item</th>
-                                        <th>Full Code</th>
-                                        <th>Previous Semester <br>1.Budget <br>2.Actual <br>3.Variance</th>
-                                        <th>This Semester Only<br>1.Budget <br>2.Actual <br>3.Variance</th>
-                                        <th>Cumulative To Semester <br>1.Budget <br>2.Actual <br>3.Variance</th>
+                                        <th>This Semester Only<br>1.USD($) <br>2.Naira(N)</th>
+                                        <th>Cumulative To Date <br>1.USD($) <br>2.Naira(N)</th>
+                                        <th>Forecast Next Semester <br>1.USD($) <br>2.Naira(N)</th>
                                         <th>Note</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>1</td>
                                         <td>abcd</td>
                                         <td>abcd</td>
                                         <td>aaaa</td>
@@ -131,7 +125,6 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>2</td>
                                         <td>abcd</td>
                                         <td>abcd</td>
                                         <td>aaaa</td>
