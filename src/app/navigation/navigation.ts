@@ -828,6 +828,14 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/application-fund-report',
                         permissions: []
+                    },
+                    {
+                        id: 'source-uses-fund',
+                        title: 'Sources & Uses of Fund Stmt.',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/source-uses-fund',
+                        permissions: []
                     }
                 ]
             },

@@ -243,6 +243,7 @@ import { ScheduleEconomicCodesReceiptComponent } from './treasure-report/receipt
 import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 import {RvReportListHeadersComponent} from './rv-report-list/rv-report-list-headers/rv-report-list-headers.component';
 import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
+import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
 
 @NgModule({
     declarations: [
@@ -463,7 +464,8 @@ import {ApplicationFundReportsComponent} from './treasure-report/application-fun
         ScheduleEconomicCodesReceiptComponent,
         RvReportListComponent,
         RvReportListHeadersComponent,
-        ApplicationFundReportsComponent
+        ApplicationFundReportsComponent,
+        SourcesUsesFundComponent
     ],
     imports: [
         CommonModule,

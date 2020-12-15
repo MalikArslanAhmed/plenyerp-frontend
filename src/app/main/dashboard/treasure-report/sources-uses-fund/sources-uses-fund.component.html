@@ -1,0 +1,164 @@
+<div id="receipt-voucher" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                  Sources & Uses of Fund Stmt.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content">
+                <form [formGroup]="showTableDataForm">
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-select formControlName="type">
+                            <mat-option value="">Select Report Type</mat-option>
+                            <mat-option [value]="type.value"
+                                        *ngFor="let type of reportTypes">{{type?.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-select formControlName="report">
+                            <mat-option value="">Select Report</mat-option>
+                            <mat-option [value]="report.name"
+                                        *ngFor="let report of reports">{{report.name | titlecase}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report">
+                           Show By
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="content" style="margin-top: 20px">
+                <form [formGroup]="filterSourceUsesDataForm">
+                    <div class="radio-btn-area">
+                        <mat-radio-group formControlName="radioType">
+                            <mat-radio-button value="PROGRAMME">Programme</mat-radio-button>
+                            <mat-radio-button value="ECONOMIC">Economic</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-label>Admin Unit</mat-label>
+                        <mat-select formControlName="adminUnit" (click)="adminSegmentSelect()">
+                            <mat-option value="">Choose Admin Unit</mat-option>
+                            <mat-option [value]="adminUnit.id"
+                                        *ngFor="let adminUnit of adminUnitData">{{adminUnit?.name}}</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="filterTable()">
+                            Filter By
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="content mt-20px">
+                <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
+                    <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+
+                        <span class="mat-header-cell text-center">S.No.</span>
+                        <span class="mat-header-cell text-center">Item</span>
+                        <span class="mat-header-cell text-center">Full Code</span>
+                        <span class="mat-header-cell text-center">Previous Semester <br>1.Budget <br>2.Actual <br>3.Variance</span>
+                        <span class="mat-header-cell text-center">This Semester Only<br>1.Budget <br>2.Actual <br>3.Variance</span>
+                        <span class="mat-header-cell text-center">Cumulative To Semester <br>1.Budget <br>2.Actual <br>3.Variance</span>
+
+                    </section>
+                    <mat-expansion-panel *ngFor="let reportData of receiptVoucherData; let i = index">
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
+                                                    [collapsedHeight]="'100px'"
+                                                    [expandedHeight]="'100px'">
+
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-25px text-center">{{i + 1}}.</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.item}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.full_code}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData.previous_semester}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData.current_semester}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-25px text-center ml-20px">{{reportData.cum_semester}}</p>
+                            </span>
+                        </mat-expansion-panel-header>
+                        <div>
+                            <div mat-dialog-content class="items-data child-table" fusePerfectScrollbar
+                                 style="overflow-x: scroll !important;">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Item</th>
+                                        <th>Full Code</th>
+                                        <th>Previous Semester <br>1.Budget <br>2.Actual <br>3.Variance</th>
+                                        <th>This Semester Only<br>1.Budget <br>2.Actual <br>3.Variance</th>
+                                        <th>Cumulative To Semester <br>1.Budget <br>2.Actual <br>3.Variance</th>
+                                        <th>Note</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>abcd</td>
+                                        <td>abcd</td>
+                                        <td>aaaa</td>
+                                        <td>bbbb</td>
+                                        <td>bbbb</td>
+                                        <td>
+                                            <button class="border-bg-none">
+                                            <span class="material-icons f_20 cursor-pointer blueColor">
+                                                add_box
+                                            </span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>abcd</td>
+                                        <td>abcd</td>
+                                        <td>aaaa</td>
+                                        <td>bbbb</td>
+                                        <td>bbbb</td>
+                                        <td>
+                                            <button class="border-bg-none">
+                                            <span class="material-icons f_20 cursor-pointer blueColor">
+                                                add_box
+                                            </span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <mat-paginator #paginator *ngIf="receiptVoucherData.length > 0"
+                               [length]="pagination.total"
+                               [pageSize]="pagination.perpage"
+                               [pageIndex]="pagination.page - 1"
+                               (page)="pageEvent = onPageChange($event)"
+                >
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

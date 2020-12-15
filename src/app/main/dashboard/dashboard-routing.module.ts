@@ -77,6 +77,7 @@ import {PaymentReportComponent} from './payment-report/payment-report.component'
 import {ReceiptVouchersComponent} from "./treasure-report/receipt-vouchers/receipt-vouchers.component";
 import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
+import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
 
 const routes: Routes = [
     {
@@ -755,6 +756,13 @@ const routes: Routes = [
         component: ApplicationFundReportsComponent,
         data: {
             title: 'Application of Fund Report'
+        }
+    },
+    {
+        path: 'source-uses-fund',
+        component: SourcesUsesFundComponent,
+        data: {
+            title: 'Sources & Uses of Fund Stmt.'
         }
     }
 ];
