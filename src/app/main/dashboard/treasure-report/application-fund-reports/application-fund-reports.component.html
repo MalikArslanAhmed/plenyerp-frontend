@@ -42,7 +42,7 @@
                 <form [formGroup]="filterFundReportDataForm">
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
                         <mat-label>Fund Segment</mat-label>
-                        <mat-select formControlName="fundSegment">
+                        <mat-select formControlName="fundSegment" (click)="fundSegmentSelect()">
                             <mat-option value="">Choose Fund Segment</mat-option>
                             <mat-option [value]="fundSegment.id"
                                         *ngFor="let fundSegment of fundSegmentsData">{{fundSegment?.name}}</mat-option>
@@ -50,7 +50,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
                         <mat-label>Admin Unit</mat-label>
-                        <mat-select formControlName="adminUnit">
+                        <mat-select formControlName="adminUnit" (click)="adminSegmentSelect()">
                             <mat-option value="">Choose Admin Unit</mat-option>
                             <mat-option [value]="adminUnit.id"
                                         *ngFor="let adminUnit of adminUnitData">{{adminUnit?.name}}</mat-option>
@@ -59,14 +59,14 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
                         <mat-label>Economic Code</mat-label>
-                        <mat-select formControlName="EconomicCode">
+                        <mat-select formControlName="EconomicCode" (click)="economicSegmentSelect()">
                             <mat-option value="">Choose Economic Code</mat-option>
                             <mat-option [value]="economicCode.id"
                                         *ngFor="let economicCode of economicCodeData">{{economicCode?.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <div fxFlex class="width-200px p-10px mt-13px">
-                        <button mat-button class="submit-report">
+                        <button mat-button class="submit-report" (click)="filterTable()">
                             Filter By
                         </button>
                     </div>
@@ -141,7 +141,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>1</td>
+                                        <td>2</td>
                                         <td>abcd</td>
                                         <td>abcd</td>
                                         <td>aaaa</td>

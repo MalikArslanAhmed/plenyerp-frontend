@@ -276,7 +276,7 @@ app-application-fund-reports {
     .child-table{
         width: 100%;
         table{
-            width: 100%;
+            width: 100% !important;
             text-align: center!important;
             border-collapse: collapse;
             border: none;

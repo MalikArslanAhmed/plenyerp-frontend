@@ -6,6 +6,10 @@ import {TreasureReportService} from '../../../../shared/services/treasure-report
 import * as moment from 'moment';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {ReceiptVoucherService} from '../../../../shared/services/receipt-voucher.service';
+import {ScheduleEconomicCodesComponent} from '../payment-voucher/schedule-economic-codes/schedule-economic-codes.component';
+import {EconomicSegmentSelectComponent} from '../../journal-voucher/economic-segment-select/economic-segment-select.component';
+import {AdminSegmentSelectComponent} from '../../journal-voucher/admin-segment-select/admin-segment-select.component';
+import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-select/fund-segment-select.component';
 
 @Component({
     selector: 'app-application-fund-reports',
@@ -90,9 +94,9 @@ export class ApplicationFundReportsComponent implements OnInit {
 
     refresh() {
         this.filterFundReportDataForm = this.fb.group({
-            'fundSegment': [{value: '', disable: true}],
-            'adminUnit': [{value: '', disable: true}],
-            'EconomicCode': [{value: '', disable: true}]
+            'fundSegment': [{value: '', disabled: true}],
+            'adminUnit': [{value: '', disabled: true}],
+            'EconomicCode': [{value: '', disabled: true}]
         });
         this.showTableDataForm = this.fb.group({
             'report': [''],
@@ -288,8 +292,61 @@ export class ApplicationFundReportsComponent implements OnInit {
     //     }
     // }
 
-    // onPageChange(page) {
-    //     this.pagination.page = page.pageIndex + 1;
-    //     // this.getReceiptVoucher();
-    // }
+    economicSegmentSelect() {
+        this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.economicCodeData = [{
+                id: response.id,
+                name: response.combinedCode + ' - ' + response.name
+            }];
+            this.filterFundReportDataForm.get('EconomicCode').patchValue(response.id);
+        });
+    }
+    adminSegmentSelect() {
+        this.dialogRef = this._matDialog.open(AdminSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                // console.log('bye');
+                return;
+            }
+            this.adminUnitData = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.filterFundReportDataForm.get('adminUnit').patchValue(response.id);
+        });
+    }
+
+    fundSegmentSelect() {
+        this.dialogRef = this._matDialog.open(FundSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.fundSegmentsData = [{
+                'name': response.name,
+                'id': response.id
+            }];
+            this.filterFundReportDataForm.get('fundSegment').patchValue(response.id);
+        });
+    }
+
+
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        // this.getReceiptVoucher();
+    }
+
+    filterTable() {
+        console.log('----->>>', this.filterFundReportDataForm.value);
+    }
 }
