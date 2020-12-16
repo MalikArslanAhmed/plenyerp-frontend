@@ -20,7 +20,7 @@ export class RvReportListComponent implements OnInit {
     rvPaymentReportForm: FormGroup;
     rvPaymentReportData = [];
     economicSegments = [];
-    displayedColumns = ['S.No.', 'Year', 'Deptal No.', 'Payee Names', 'Amount (Net)', 'Taxes', 'Payment Ref. (#)', 'Last Actioned', 'Status'];
+    displayedColumns = ['S.No.', 'RV Year', 'Deptal No.', 'Payee Names', 'Amount (Net)', 'Payment Ref. (#)', 'Last Actioned', 'Status'];
     panelOpenState: boolean = false;
 
     constructor(private rvReportService: RvReportService,

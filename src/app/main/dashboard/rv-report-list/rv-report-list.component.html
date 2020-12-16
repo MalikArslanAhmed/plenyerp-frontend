@@ -57,7 +57,6 @@
             <div class="content mt-20px">
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-                        <span class="mat-header-cell text-center">#</span>
                         <ng-container *ngFor="let header of displayedColumns">
                         <span class="mat-header-cell text-center">{{header}}</span>
                         </ng-container>
@@ -66,36 +65,158 @@
                                          [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">
-                                    <mat-checkbox (change)="checkPV(i, $event)"
-                                                  (click)="$event.stopPropagation()"
-                                                  [checked]="reportData.checked ? true : null"></mat-checkbox>
-                                </p>
-                            </span>
-                            <span class="mat-cell align-items-center" *ngIf="getColumnData('S.No.')">
+                             <span class="mat-cell align-items-center" *ngIf="getColumnData('S.No.')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
                             </span>
-                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Year')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('RV Year')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData.year : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Deptal No.')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.deptalId ? reportData?.deptalId : '-'}}</p>
                             </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Payee Id')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{'-'}}</p>
+                            </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Payee Names')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.payee ? reportData?.payee : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{'-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Amount (Net)')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.amount ? reportData?.amount : '-'}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Taxes')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.taxes ? reportData?.taxes : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.totalAmount && reportData.totalAmount.amount ? reportData.totalAmount.amount : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Payment Ref. (#)')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.paymentRef ? reportData?.paymentRef : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Last Actioned')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Currency')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.currency && reportData.currency.codeCurrency ? reportData.currency.codeCurrency : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Value Date')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.valueDate ? reportData.valueDate : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Type Of Payee')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.type ? reportData.type : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Xrate')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.xRate ? reportData.xRate : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('XRate To USD')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.officialXRate ? reportData.officialXRate : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Ref. AIE')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.aie && reportData.aie.aieNumber ? reportData.aie.aieNumber :'-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Ref. AIE Title')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.aie && reportData.aie.narration ? reportData.aie.narration :'-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Prepared Date')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.createdAt ? reportData.createdAt : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('COA: Admin')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.adminSegment && reportData.adminSegment.id ? reportData.adminSegment.id : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('COA: Programme')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.programSegment && reportData.programSegment.id ? reportData.programSegment.id : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('COA: Geo Code')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.geoCodeSegment && reportData.geoCodeSegment.id ? reportData.geoCodeSegment.id : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('COA: Fund')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.fundSegment && reportData.fundSegment.id ? reportData.fundSegment.id : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('COA: Functional')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.functionalSegment && reportData.functionalSegment.id ? reportData.functionalSegment.id : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('COA: Economic')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.economicSegment && reportData.economicSegment.id ? reportData.economicSegment.id : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Admin FullCode')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.adminSegment && reportData.adminSegment.combinedCode ? reportData.adminSegment.combinedCode : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Admin: Title')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.adminSegment && reportData.adminSegment.name ? reportData.adminSegment.name : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Programme: Title')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.programSegment && reportData.programSegment.name ? reportData.programSegment.name : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Programme: Full Code')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.programSegment && reportData.programSegment.combinedCode ? reportData.programSegment.combinedCode : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Economic: Full Code')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.economicSegment && reportData.economicSegment.combinedCode ? reportData.economicSegment.combinedCode : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Economic: Title')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.economicSegment && reportData.economicSegment.name ? reportData.economicSegment.name : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Geo: Title')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.geoCodeSegment && reportData.geoCodeSegment.name ? reportData.geoCodeSegment.name : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Geo: Full Code')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.geoCodeSegment && reportData.geoCodeSegment.combinedCode ? reportData.geoCodeSegment.combinedCode : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Fund: Title')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.fundSegment && reportData.fundSegment.name ? reportData.fundSegment.name : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Fund: Full Code')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.fundSegment && reportData.fundSegment.combinedCode ? reportData.fundSegment.combinedCode : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Functional: Title')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.functionalSegment && reportData.functionalSegment.name ? reportData.functionalSegment.name : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Functional: Full Code')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.functionalSegment && reportData.functionalSegment.combinedCode ? reportData.functionalSegment.combinedCode : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Details/Naration')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{'-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Account')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{'-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Amount')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{'-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Parent Voucher Year')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.year ? reportData.year : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Parent Voucher Ref')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{'-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Paid TDate')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{'-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Checked?')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.isChecked ? reportData.isChecked : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Approved?')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.isApproved ? reportData.isApproved : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Audited?')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.isAudited ? reportData.isAudited : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Approved Date')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.approved_date ? reportData.approved_date : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Checked Date')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.checked_date ? reportData.checked_date : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Audited Date')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.audited_date ? reportData.audited_date : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Paid?')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.isPaid ? reportData.isPaid : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Paid Date')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.paid_date ? reportData.paid_date : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Bank Acct ID')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{'-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('Approval RefNo')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{'-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="getColumnData('JV RefNo')">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{'-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Status')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.status ? reportData?.status : '-'}}</p>

@@ -557,7 +557,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'report',
-                title: 'Report',
+                title: 'Report - Inventory',
                 roles: [AppConstants.ROLE_ID_INVENTORY],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
@@ -677,7 +677,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'report',
-                title: 'Report',
+                title: 'Report - Journal Voucher',
                 roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
@@ -743,6 +743,30 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/monthly-activity'
+                    },
+                    {
+                        id: 'ifr-reports',
+                        title: 'Application of Fund Report',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/application-fund-report',
+                        permissions: []
+                    },
+                    {
+                        id: 'source-uses-fund',
+                        title: 'Sources & Uses of Fund Stmt.',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/source-uses-fund',
+                        permissions: []
+                    },
+                    {
+                        id: 'special-account-activity',
+                        title: 'Special Account Activity Stmt.',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/special-account-activity',
+                        permissions: []
                     }
                 ]
             },
@@ -798,7 +822,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'payment-report',
-                title: 'Reports',
+                title: 'Reports - Treasury',
                 roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
@@ -821,33 +845,6 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/rv-list',
                         permissions: []
                     },
-                    {
-                        id: 'ifr-reports',
-                        title: 'Application of Fund Report',
-                        roles: [],
-                        type: 'item',
-                        url: 'dashboard/application-fund-report',
-                        permissions: []
-                    },
-                    {
-                        id: 'source-uses-fund',
-                        title: 'Sources & Uses of Fund Stmt.',
-                        roles: [],
-                        type: 'item',
-                        url: 'dashboard/source-uses-fund',
-                        permissions: []
-                    }
-                ]
-            },
-            {
-                id: 'summary-report',
-                title: 'Summary',
-                roles: [],
-                // translate: 'NAV.DASHBOARDS',
-                type: 'collapsable',
-                icon: 'report',
-                permissions: [],
-                children: [
                     {
                         id: 'summary-non-personal-advances',
                         title: 'Non Personal Advances',

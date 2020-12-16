@@ -22,7 +22,7 @@ export class PaymentReportComponent implements OnInit {
     paymentReportForm: FormGroup;
     paymentReportData = [];
     economicSegments = [];
-    displayedColumns = ['S.No.', 'PV Year', 'Deptal No.', 'Payee Names', 'Amount (Net)', 'Taxes', 'Payment Ref. (#)', 'Last Actioned', 'Status'];
+    displayedColumns = ['S.No.', 'PV Year', 'Deptal No.', 'Payee Names', 'Amount (Net)', 'Taxes', 'Total Amount', 'Payment Ref. (#)', 'Last Actioned', 'Status'];
     panelOpenState: boolean = false;
 
     constructor(private paymentReportService: PaymentReportService,
@@ -115,5 +115,12 @@ export class PaymentReportComponent implements OnInit {
         }
         return isColumnDataMatch;
 
+    }
+
+    totalAmount(amount, tax) {
+        let totalAmount;
+        totalAmount = Math.round(amount) + Math.round(tax);
+
+        return totalAmount;
     }
 }

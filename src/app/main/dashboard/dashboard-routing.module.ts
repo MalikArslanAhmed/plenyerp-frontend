@@ -78,6 +78,7 @@ import {ReceiptVouchersComponent} from "./treasure-report/receipt-vouchers/recei
 import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
 import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
+import {SpecialAccountActivityReportComponent} from './treasure-report/special-account-activity-report/special-account-activity-report.component';
 import {SummaryReportNonPersonalAdvancesComponent} from "./summary-report-non-personal-advances/summary-report-non-personal-advances.component";
 import {SummaryReportPersonalAdvancesComponent} from "./summary-report-personal-advances/summary-report-personal-advances.component";
 import {SummaryReportStandingImprestComponent} from "./summary-report-standing-imprest/summary-report-standing-imprest.component";
@@ -767,6 +768,13 @@ const routes: Routes = [
         component: SourcesUsesFundComponent,
         data: {
             title: 'Sources & Uses of Fund Stmt.'
+        }
+    },
+    {
+        path: 'special-account-activity',
+        component: SpecialAccountActivityReportComponent,
+        data: {
+            title: 'Special Account Activity Stmt.'
         }
     },
     {
