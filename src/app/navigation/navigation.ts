@@ -839,6 +839,49 @@ export const navigation: FuseNavigation[] = [
                     }
                 ]
             },
+            {
+                id: 'summary-report',
+                title: 'Summary',
+                roles: [],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'report',
+                permissions: [],
+                children: [
+                    {
+                        id: 'summary-non-personal-advances',
+                        title: 'Non Personal Advances',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/summary-non-personal-advances',
+                        permissions: []
+                    },
+                    {
+                        id: 'summary-personal-advances',
+                        title: 'Personal Advances',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/summary-personal-advances',
+                        permissions: []
+                    },
+                    {
+                        id: 'summary-standing-imprest',
+                        title: 'Standing Imprest',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/summary-standing-imprest',
+                        permissions: []
+                    },
+                    {
+                        id: 'summary-special-imprest',
+                        title: 'Special Imprest',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/summary-special-imprest',
+                        permissions: []
+                    }
+                ]
+            },
         ]
     }
 ];

@@ -78,6 +78,10 @@ import {ReceiptVouchersComponent} from "./treasure-report/receipt-vouchers/recei
 import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
 import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
+import {SummaryReportNonPersonalAdvancesComponent} from "./summary-report-non-personal-advances/summary-report-non-personal-advances.component";
+import {SummaryReportPersonalAdvancesComponent} from "./summary-report-personal-advances/summary-report-personal-advances.component";
+import {SummaryReportStandingImprestComponent} from "./summary-report-standing-imprest/summary-report-standing-imprest.component";
+import {SummaryReportSpecialImprestComponent} from "./summary-report-special-imprest/summary-report-special-imprest.component";
 
 const routes: Routes = [
     {
@@ -763,6 +767,34 @@ const routes: Routes = [
         component: SourcesUsesFundComponent,
         data: {
             title: 'Sources & Uses of Fund Stmt.'
+        }
+    },
+    {
+        path: 'summary-non-personal-advances',
+        component: SummaryReportNonPersonalAdvancesComponent,
+        data: {
+            title: 'Summary - Non Personal Advances'
+        }
+    },
+    {
+        path: 'summary-personal-advances',
+        component: SummaryReportPersonalAdvancesComponent,
+        data: {
+            title: 'Summary - Personal Advances'
+        }
+    },
+    {
+        path: 'summary-standing-imprest',
+        component: SummaryReportStandingImprestComponent,
+        data: {
+            title: 'Summary - Standing Imprest'
+        }
+    },
+    {
+        path: 'summary-special-imprest',
+        component: SummaryReportSpecialImprestComponent,
+        data: {
+            title: 'Summary - Special Imprest'
         }
     }
 ];

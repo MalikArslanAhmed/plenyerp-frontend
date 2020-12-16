@@ -511,6 +511,7 @@ export class AppUrl {
             return AppUrl.API_URL + `treasury/payment-vouchers`;
         }
     }
+
     static RV_REPORT_DATA(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-vouchers` + id;
@@ -518,7 +519,6 @@ export class AppUrl {
             return AppUrl.API_URL + `treasury/receipt-vouchers`;
         }
     }
-
 
     static RECEIPT_VOUCHER(id?): string {
         if (id) {
@@ -1254,5 +1254,37 @@ export class AppUrl {
 
     static GET_RECEIPT_VOUCHER_STATUS(): string {
         return AppUrl.API_URL + `treasury/receipt-voucher-status`;
+    }
+
+    static SUMMARY_REPORT_NON_PERSONAL(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/report/summary-non-personal` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/report/summary-non-personal`;
+        }
+    }
+
+    static SUMMARY_REPORT_PERSONAL(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/report/summary-personal` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/report/summary-personal`;
+        }
+    }
+
+    static SUMMARY_REPORT_STANDING_IMPREST(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/report/summary-standing` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/report/summary-standing`;
+        }
+    }
+
+    static SUMMARY_REPORT_SPECIAL_IMPREST(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/report/summary-special` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/report/summary-special`;
+        }
     }
 }

@@ -244,6 +244,10 @@ import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 import {RvReportListHeadersComponent} from './rv-report-list/rv-report-list-headers/rv-report-list-headers.component';
 import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
 import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
+import { SummaryReportNonPersonalAdvancesComponent } from './summary-report-non-personal-advances/summary-report-non-personal-advances.component';
+import { SummaryReportPersonalAdvancesComponent } from './summary-report-personal-advances/summary-report-personal-advances.component';
+import { SummaryReportStandingImprestComponent } from './summary-report-standing-imprest/summary-report-standing-imprest.component';
+import { SummaryReportSpecialImprestComponent } from './summary-report-special-imprest/summary-report-special-imprest.component';
 
 @NgModule({
     declarations: [
@@ -465,7 +469,11 @@ import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sour
         RvReportListComponent,
         RvReportListHeadersComponent,
         ApplicationFundReportsComponent,
-        SourcesUsesFundComponent
+        SourcesUsesFundComponent,
+        SummaryReportNonPersonalAdvancesComponent,
+        SummaryReportPersonalAdvancesComponent,
+        SummaryReportStandingImprestComponent,
+        SummaryReportSpecialImprestComponent
     ],
     imports: [
         CommonModule,
