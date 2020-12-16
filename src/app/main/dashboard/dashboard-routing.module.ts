@@ -78,6 +78,7 @@ import {ReceiptVouchersComponent} from "./treasure-report/receipt-vouchers/recei
 import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
 import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
+import {SpecialAccountActivityReportComponent} from './treasure-report/special-account-activity-report/special-account-activity-report.component';
 
 const routes: Routes = [
     {
@@ -763,6 +764,13 @@ const routes: Routes = [
         component: SourcesUsesFundComponent,
         data: {
             title: 'Sources & Uses of Fund Stmt.'
+        }
+    },
+    {
+        path: 'special-account-activity',
+        component: SpecialAccountActivityReportComponent,
+        data: {
+            title: 'Special Account Activity Stmt.'
         }
     }
 ];

@@ -244,6 +244,7 @@ import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 import {RvReportListHeadersComponent} from './rv-report-list/rv-report-list-headers/rv-report-list-headers.component';
 import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
 import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
+import {SpecialAccountActivityReportComponent} from './treasure-report/special-account-activity-report/special-account-activity-report.component';
 
 @NgModule({
     declarations: [
@@ -465,7 +466,8 @@ import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sour
         RvReportListComponent,
         RvReportListHeadersComponent,
         ApplicationFundReportsComponent,
-        SourcesUsesFundComponent
+        SourcesUsesFundComponent,
+        SpecialAccountActivityReportComponent
     ],
     imports: [
         CommonModule,

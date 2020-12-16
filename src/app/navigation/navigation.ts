@@ -836,6 +836,14 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/source-uses-fund',
                         permissions: []
+                    },
+                    {
+                        id: 'special-account-activity',
+                        title: 'Special Account Activity Stmt.',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/special-account-activity',
+                        permissions: []
                     }
                 ]
             },
