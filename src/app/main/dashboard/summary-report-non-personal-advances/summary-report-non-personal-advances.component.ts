@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {AdminSegmentSelectComponent} from "../journal-voucher/admin-segment-select/admin-segment-select.component";
 import {MatDialog} from "@angular/material/dialog";
 import {SummaryReportService} from "../../../shared/services/summary-report.service";
 import {AlertService} from "../../../shared/services/alert.service";
+import {SummaryAdminSegmentSelectComponent} from '../summary-admin-segment-select/summary-admin-segment-select.component';
 
 @Component({
     selector: 'app-summary-report-non-personal-advances',
@@ -37,13 +37,13 @@ export class SummaryReportNonPersonalAdvancesComponent implements OnInit {
             'adminSegmentId': [{value: '', disabled: true}]
         });
         this.summaryReportFilterForm.patchValue({
-           'adminSegmentId': 1
+            'adminSegmentId': 1
         });
         this.getDepartments();
     }
 
     adminSegmentSelect() {
-        this.dialogRef = this._matDialog.open(AdminSegmentSelectComponent, {
+        this.dialogRef = this._matDialog.open(SummaryAdminSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {
@@ -67,10 +67,10 @@ export class SummaryReportNonPersonalAdvancesComponent implements OnInit {
             this.alertService.showErrors('Please Select Admin Segment');
             return;
         }
-
+        const adminSegmentIds = [this.summaryReportFilterForm.value.adminSegmentId];
         this.summaryReportService.summaryReportNonPersonal({
             'page': -1,
-            'adminSegmentIds': [this.summaryReportFilterForm.value.adminSegmentId]
+            'adminSegmentIds': JSON.stringify(adminSegmentIds)
         }).subscribe(data => {
             this.reportData = data;
         });

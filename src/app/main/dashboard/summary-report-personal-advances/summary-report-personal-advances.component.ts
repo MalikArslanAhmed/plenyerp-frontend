@@ -3,8 +3,8 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {SummaryReportService} from "../../../shared/services/summary-report.service";
-import {AdminSegmentSelectComponent} from "../journal-voucher/admin-segment-select/admin-segment-select.component";
 import {AlertService} from "../../../shared/services/alert.service";
+import {SummaryAdminSegmentSelectComponent} from '../summary-admin-segment-select/summary-admin-segment-select.component';
 
 @Component({
     selector: 'app-summary-report-personal-advances',
@@ -43,7 +43,7 @@ export class SummaryReportPersonalAdvancesComponent implements OnInit {
     }
 
     adminSegmentSelect() {
-        this.dialogRef = this._matDialog.open(AdminSegmentSelectComponent, {
+        this.dialogRef = this._matDialog.open(SummaryAdminSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
         this.dialogRef.afterClosed().subscribe((response) => {

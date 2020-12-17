@@ -249,6 +249,7 @@ import { SummaryReportNonPersonalAdvancesComponent } from './summary-report-non-
 import { SummaryReportPersonalAdvancesComponent } from './summary-report-personal-advances/summary-report-personal-advances.component';
 import { SummaryReportStandingImprestComponent } from './summary-report-standing-imprest/summary-report-standing-imprest.component';
 import { SummaryReportSpecialImprestComponent } from './summary-report-special-imprest/summary-report-special-imprest.component';
+import { SummaryAdminSegmentSelectComponent } from './summary-admin-segment-select/summary-admin-segment-select.component';
 
 @NgModule({
     declarations: [
@@ -476,7 +477,8 @@ import { SummaryReportSpecialImprestComponent } from './summary-report-special-i
         SummaryReportNonPersonalAdvancesComponent,
         SummaryReportPersonalAdvancesComponent,
         SummaryReportStandingImprestComponent,
-        SummaryReportSpecialImprestComponent
+        SummaryReportSpecialImprestComponent,
+        SummaryAdminSegmentSelectComponent
     ],
     imports: [
         CommonModule,
