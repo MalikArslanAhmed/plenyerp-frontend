@@ -677,7 +677,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'report',
-                title: 'Report - Journal Voucher',
+                title: 'Report - Financials',
                 roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
