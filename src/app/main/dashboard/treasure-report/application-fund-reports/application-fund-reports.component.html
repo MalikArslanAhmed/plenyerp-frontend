@@ -15,60 +15,55 @@
 
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
-            <div class="content">
-                <form [formGroup]="showTableDataForm">
-                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
-                        <mat-select formControlName="type">
-                            <mat-option value="">Select Report Type</mat-option>
-                            <mat-option [value]="type.value"
-                                        *ngFor="let type of reportTypes">{{type?.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
-                        <mat-select formControlName="report">
-                            <mat-option value="">Select Report</mat-option>
-                            <mat-option [value]="report.name"
-                                        *ngFor="let report of reports">{{report.name | titlecase}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <div fxFlex class="width-200px p-10px mt-13px">
-                        <button mat-button class="submit-report">
-                           Show By
-                        </button>
-                    </div>
-                </form>
-            </div>
             <div class="content" style="margin-top: 20px">
-                <form [formGroup]="filterFundReportDataForm">
-                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
-                        <mat-label>Fund Segment</mat-label>
-                        <mat-select formControlName="fundSegment" (click)="fundSegmentSelect()">
-                            <mat-option value="">Choose Fund Segment</mat-option>
-                            <mat-option [value]="fundSegment.id"
-                                        *ngFor="let fundSegment of fundSegmentsData">{{fundSegment?.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
-                        <mat-label>Admin Unit</mat-label>
-                        <mat-select formControlName="adminUnit" (click)="adminSegmentSelect()">
-                            <mat-option value="">Choose Admin Unit</mat-option>
-                            <mat-option [value]="adminUnit.id"
-                                        *ngFor="let adminUnit of adminUnitData">{{adminUnit?.name}}</mat-option>
+                <form [formGroup]="filterFundReportDataForm" fxLayout="column">
+                    <div fxFlex="row" fxLayoutGap="10px">
+                        <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                            <mat-label>Fund Segment</mat-label>
+                            <mat-select formControlName="fundSegment" (click)="fundSegmentSelect()">
+                                <mat-option value="">Choose Fund Segment</mat-option>
+                                <mat-option [value]="fundSegment.id"
+                                            *ngFor="let fundSegment of fundSegmentsData">{{fundSegment?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                            <mat-label>Admin Unit</mat-label>
+                            <mat-select formControlName="adminUnit" (click)="adminSegmentSelect()">
+                                <mat-option value="">Choose Admin Unit</mat-option>
+                                <mat-option [value]="adminUnit.id"
+                                            *ngFor="let adminUnit of adminUnitData">{{adminUnit?.name}}</mat-option>
 
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
-                        <mat-label>Economic Code</mat-label>
-                        <mat-select formControlName="EconomicCode" (click)="economicSegmentSelect()">
-                            <mat-option value="">Choose Economic Code</mat-option>
-                            <mat-option [value]="economicCode.id"
-                                        *ngFor="let economicCode of economicCodeData">{{economicCode?.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <div fxFlex class="width-200px p-10px mt-13px">
-                        <button mat-button class="submit-report" (click)="filterTable()">
-                            Filter By
-                        </button>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                            <mat-label>Economic Code</mat-label>
+                            <mat-select formControlName="EconomicCode" (click)="economicSegmentSelect()">
+                                <mat-option value="">Choose Economic Code</mat-option>
+                                <mat-option [value]="economicCode.id"
+                                            *ngFor="let economicCode of economicCodeData">{{economicCode?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="10px">
+                        <mat-form-field appearance="outline" fxFlex class="p-10px">
+                            <mat-select formControlName="type">
+                                <mat-option value="">Select Report Type</mat-option>
+                                <mat-option [value]="type.value"
+                                            *ngFor="let type of reportTypes">{{type?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex class="p-10px">
+                            <mat-select formControlName="report">
+                                <mat-option value="">Select Report</mat-option>
+                                <mat-option [value]="report.value"
+                                            *ngFor="let report of reports">{{report.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div fxFlex class="width-200px p-10px">
+                            <button mat-button class="submit-report" (click)="filterTable()">
+                                Submit
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -59,12 +59,33 @@ export class SpecialAccountActivityReportComponent implements OnInit {
         }
     ];
 
-    reports = [
+    reports = [ ];
+    semesterList = [
         {
-            name: '1 st Semester'
+            name: '1st Semester',
+            value: '1st_Semester'
         },
         {
-            name: '2 st Semester'
+            name: '2nd Semester',
+            value: '2nd Semester'
+        }
+    ];
+    quarterList = [
+        {
+            name: '1st Quarter',
+            value: '1st_Quarter'
+        },
+        {
+            name: '2nd Quarter',
+            value: '2nd Quarter'
+        },
+        {
+            name: '3rd Quarter',
+            value: '3rd Quarter'
+        },
+        {
+            name: '4th Quarter',
+            value: '4th Quarter'
         }
     ];
     constructor(private fb: FormBuilder,
@@ -88,9 +109,11 @@ export class SpecialAccountActivityReportComponent implements OnInit {
         });
         this.showTableDataForm.get('type').valueChanges.subscribe(val => {
             this.reports = [];
-            this.showTableDataForm.get('report').reset();
-            if (val) {
-                // this.getTypeData(val);
+            this.showTableDataForm.get('report').patchValue('');
+            if (val === 'SEMESTER_WISE') {
+                this.reports = this.semesterList;
+            } else {
+                this.reports = this.quarterList;
             }
         });
     }

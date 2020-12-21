@@ -27,13 +27,13 @@
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
                         <mat-select formControlName="report">
                             <mat-option value="">Select Report</mat-option>
-                            <mat-option [value]="report.name"
-                                        *ngFor="let report of reports">{{report.name | titlecase}}</mat-option>
+                            <mat-option [value]="report.value"
+                                        *ngFor="let report of reports">{{report.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <div fxFlex class="width-200px p-10px mt-13px">
                         <button mat-button class="submit-report">
-                           Show By
+                           Submit
                         </button>
                     </div>
                 </form>

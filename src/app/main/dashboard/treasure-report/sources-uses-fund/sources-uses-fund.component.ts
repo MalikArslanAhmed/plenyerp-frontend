@@ -20,7 +20,6 @@ import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-sel
 })
 export class SourcesUsesFundComponent implements OnInit {
     filterSourceUsesDataForm: FormGroup;
-    showTableDataForm: FormGroup;
     receiptVoucherData = [
         {
             item: 'abcd',
@@ -57,22 +56,36 @@ export class SourcesUsesFundComponent implements OnInit {
         {
             name: 'Quarter Wise',
             value: 'QUARTER_WISE'
-        },
-        {
-            name: 'Monthly',
-            value: 'MONTHLY'
         }
     ];
 
-    reports = [
+    reports = [];
+    semesterList = [
         {
-            name: '1st Semester'
+            name: '1st Semester',
+            value: '1st_Semester'
         },
         {
-            name: '2st Semester'
+            name: '2nd Semester',
+            value: '2nd Semester'
+        }
+    ];
+    quarterList = [
+        {
+            name: '1st Quarter',
+            value: '1st_Quarter'
         },
         {
-            name: '3st Semester'
+            name: '2nd Quarter',
+            value: '2nd Quarter'
+        },
+        {
+            name: '3rd Quarter',
+            value: '3rd Quarter'
+        },
+        {
+            name: '4th Quarter',
+            value: '4th Quarter'
         }
     ];
     fundSegmentsData;
@@ -96,18 +109,19 @@ export class SourcesUsesFundComponent implements OnInit {
         this.filterSourceUsesDataForm = this.fb.group({
             'radioType': ['PROGRAMME'],
             'adminUnit': [{value: '', disabled: true}],
-        });
-        this.showTableDataForm = this.fb.group({
             'report': [''],
             'type': ['']
         });
-        this.showTableDataForm.get('type').valueChanges.subscribe(val => {
+        this.filterSourceUsesDataForm.get('type').valueChanges.subscribe(val => {
             this.reports = [];
-            this.showTableDataForm.get('report').reset();
-            if (val) {
-                // this.getTypeData(val);
+            this.filterSourceUsesDataForm.get('report').patchValue('');
+            if (val === 'SEMESTER_WISE') {
+                this.reports = this.semesterList;
+            } else {
+                this.reports = this.quarterList;
             }
         });
+
     }
 
     // getReceiptVoucher(params?) {

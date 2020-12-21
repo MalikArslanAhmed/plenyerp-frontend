@@ -51,8 +51,8 @@ export class ApplicationFundReportsComponent implements OnInit {
     };
     reportTypes = [
         {
-        name: 'Semester Wise',
-        value: 'SEMESTER_WISE'
+            name: 'Semester Wise',
+            value: 'SEMESTER_WISE'
         },
         {
             name: 'Quarter Wise',
@@ -64,20 +64,89 @@ export class ApplicationFundReportsComponent implements OnInit {
         }
     ];
 
-    reports = [
+    reports = [];
+    semesterList = [
         {
-            name: '1st Semester'
+            name: '1st Semester',
+            value: '1st_Semester'
         },
         {
-            name: '2st Semester'
-        },
-        {
-            name: '3st Semester'
+            name: '2nd Semester',
+            value: '2nd Semester'
         }
+    ];
+    quarterList = [
+        {
+            name: '1st Quarter',
+            value: '1st_Quarter'
+        },
+        {
+            name: '2nd Quarter',
+            value: '2nd Quarter'
+        },
+        {
+            name: '3rd Quarter',
+            value: '3rd Quarter'
+        },
+        {
+            name: '4th Quarter',
+            value: '4th Quarter'
+        }
+    ];
+    monthList = [
+        {
+            name: 'January',
+            value: '01'
+        },
+        {
+            name: 'February',
+            value: '02'
+        },
+        {
+            name: 'March ',
+            value: '03'
+        },
+        {
+            name: 'April',
+            value: '04'
+        },
+        {
+            name: 'May',
+            value: '05'
+        },
+        {
+            name: 'June',
+            value: '06'
+        },
+        {
+            name: 'July',
+            value: '07'
+        },
+        {
+            name: 'August',
+            value: '08'
+        },
+        {
+            name: 'September',
+            value: '09'
+        },
+        {
+            name: 'October',
+            value: '10'
+        },
+        {
+            name: 'November',
+            value: '11'
+        },
+        {
+            name: 'December',
+            value: '12'
+        },
     ];
     fundSegmentsData;
     adminUnitData;
     economicCodeData;
+
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
@@ -96,17 +165,20 @@ export class ApplicationFundReportsComponent implements OnInit {
         this.filterFundReportDataForm = this.fb.group({
             'fundSegment': [{value: '', disabled: true}],
             'adminUnit': [{value: '', disabled: true}],
-            'EconomicCode': [{value: '', disabled: true}]
-        });
-        this.showTableDataForm = this.fb.group({
+            'EconomicCode': [{value: '', disabled: true}],
             'report': [''],
             'type': ['']
         });
-        this.showTableDataForm.get('type').valueChanges.subscribe(val => {
+
+        this.filterFundReportDataForm.get('type').valueChanges.subscribe(val => {
             this.reports = [];
-            this.showTableDataForm.get('report').reset();
-            if (val) {
-                // this.getTypeData(val);
+            this.filterFundReportDataForm.get('report').patchValue('');
+            if (val === 'SEMESTER_WISE') {
+                this.reports = this.semesterList;
+            } else if (val === 'QUARTER_WISE') {
+                this.reports = this.quarterList;
+            }else {
+                this.reports = this.monthList;
             }
         });
     }
@@ -176,7 +248,6 @@ export class ApplicationFundReportsComponent implements OnInit {
     //         }
     //     });
     // }
-
 
 
     // addReceiptVoucher() {
@@ -307,6 +378,7 @@ export class ApplicationFundReportsComponent implements OnInit {
             this.filterFundReportDataForm.get('EconomicCode').patchValue(response.id);
         });
     }
+
     adminSegmentSelect() {
         this.dialogRef = this._matDialog.open(AdminSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
