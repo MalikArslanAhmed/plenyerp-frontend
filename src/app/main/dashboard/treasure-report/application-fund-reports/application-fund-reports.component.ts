@@ -239,12 +239,11 @@ export class ApplicationFundReportsComponent implements OnInit {
         });
     }
     getChildReportData(item) {
-        const params = {};
-        // if (item && item.id) {
-        //     params['parentId'] = item.id;
-        //     this.ifrReportService.applicationOfFundChildData(item.id, {page: -1}).subscribe(data => {
-        //         item['payees'] = data.items;
-        //     });
-        // }
+        if (item && item.id) {
+            this.ifrReportService.applicationOfFundChildData({economicSegmentId: item.id}).subscribe(data => {
+                item['childTableData'] = data;
+                console.log('--->child data', data);
+            });
+        }
     }
 }

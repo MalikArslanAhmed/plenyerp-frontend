@@ -17,7 +17,7 @@ export class IfrReportService extends BaseService {
     applicationOfFundData(data): Observable<any> {
         return this.getRequest(AppUrl.APPLICATION_FUND_REPORT_DATA(), data);
     }
-    applicationOfFundChildData(id, data): Observable<any> {
+    applicationOfFundChildData(data): Observable<any> {
         return this.getRequest(AppUrl.APPLICATION_FUND_REPORT_DATA(), data);
     }
 }

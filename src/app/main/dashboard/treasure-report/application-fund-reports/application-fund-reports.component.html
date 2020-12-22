@@ -102,7 +102,7 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer text-center">
-                                    {{reportData?.currentBudget}} <br>{{reportData?.currentActual}} <br> {{reportData?.currentVariance}}
+                                    {{reportData?.budget}} <br>{{reportData?.actual}} <br> {{reportData?.variance}}
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
@@ -127,36 +127,30 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>abcd</td>
-                                        <td>abcd</td>
-                                        <td>aaaa</td>
-                                        <td>bbbb</td>
-                                        <td>bbbb</td>
-                                        <td>
-                                            <button class="border-bg-none">
+                                    <ng-container *ngIf="reportData && reportData['childTableData'] && reportData['childTableData'].length">
+                                        <tr *ngFor="let childData of reportData['childTableData']; let j = index">
+                                            <td>{{j + 1}}</td>
+                                            <td>{{childData?.name}}</td>
+                                            <td>{{childData?.combinedCode}}</td>
+                                            <td>
+                                                {{childData?.previousBudget}} <br>{{childData?.previousActual}} <br> {{childData?.previousVariance}}
+                                            </td>
+                                            <td>
+                                                {{childData?.budget}} <br>{{childData?.actual}} <br> {{childData?.variance}}
+                                            </td>
+                                            <td>
+                                                {{childData?.cumulativeBudget}} <br>{{childData?.cumulativeActual}} <br> {{childData?.cumulativeVariance}}
+                                            </td>
+                                            <td>
+                                                <button class="border-bg-none">
                                             <span class="material-icons f_20 cursor-pointer blueColor">
                                                 add_box
                                             </span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>abcd</td>
-                                        <td>abcd</td>
-                                        <td>aaaa</td>
-                                        <td>bbbb</td>
-                                        <td>bbbb</td>
-                                        <td>
-                                            <button class="border-bg-none">
-                                            <span class="material-icons f_20 cursor-pointer blueColor">
-                                                add_box
-                                            </span>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+
                                     </tbody>
                                 </table>
                             </div>

@@ -1290,7 +1290,7 @@ export class AppUrl {
 
     static APPLICATION_FUND_REPORT_DATA(id?): string {
         if (id) {
-            return AppUrl.API_URL + `finance/report/application-of-funds` + id;
+            return AppUrl.API_URL + `finance/report/application-of-funds/` + id;
         } else {
             return AppUrl.API_URL + `finance/report/application-of-funds`;
         }
