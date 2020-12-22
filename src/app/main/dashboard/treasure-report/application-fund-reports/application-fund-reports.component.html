@@ -15,7 +15,7 @@
 
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
-            <div class="content" style="margin-top: 20px">
+            <div class="content">
                 <form [formGroup]="filterFundReportDataForm" fxLayout="column">
                     <div fxFlex="row" fxLayoutGap="10px">
                         <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
@@ -150,7 +150,9 @@
                                             </td>
                                         </tr>
                                     </ng-container>
-
+                                    <tr *ngIf="reportData && reportData['childTableData'] && reportData['childTableData'].length === 0 ">
+                                        <td colspan="100">No Data To Show</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
