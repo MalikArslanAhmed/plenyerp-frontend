@@ -13,9 +13,15 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <div appPermissionBind [permission]="">
-                <button mat-button class="accent" id="add-column" aria-label="add skill"
+                <button mat-button class="accent" id="add-column" aria-label="add column"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addColumn()">
                     Add Columns
+                </button>
+            </div>
+            <div appPermissionBind [permission]="">
+                <button mat-button class="accent" id="download-report" aria-label="Download Report"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="downloadReport()">
+                    Download Report
                 </button>
             </div>
             <div appPermissionBind [permission]="">

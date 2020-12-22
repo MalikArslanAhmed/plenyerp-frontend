@@ -37,7 +37,6 @@ export class EmployeeListComponent implements OnInit {
     }
 
     downloadReport(data): void {
-
         this.employeesService.downloadReport({columns: JSON.stringify(data)}).subscribe((success) => {
             window.location.href = success.url;
         });

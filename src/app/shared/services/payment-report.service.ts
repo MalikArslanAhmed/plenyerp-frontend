@@ -22,8 +22,14 @@ export class PaymentReportService extends BaseService {
     getSchedulePayee(id, data): Observable<any> {
         return this.getRequest(AppUrl.SCHEDULE_PAYEES(id), data);
     }
+
     getScheduleEconomic(id): Observable<any> {
         return this.getRequest(AppUrl.GET_SCHEDULE_ECONOMIC(id));
     }
+
+    getDownloadPvListReport(data): Observable<any> {
+        return this.getRequest(AppUrl.DOWNLOAD_PV_LIST_REPORT(), data);
+    }
+
 }
  

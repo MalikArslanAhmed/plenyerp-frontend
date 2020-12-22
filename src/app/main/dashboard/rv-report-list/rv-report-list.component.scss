@@ -36,7 +36,16 @@ app-rv-report-list {
                     color: black !important;
                 }
             }
-            #add-column {
+            #add-column{
+                background-color: white !important;
+                color: #106CC8 !important;
+                margin-right: 1rem;
+
+                mat-label {
+                    color: black !important;
+                }
+            }
+            #download-report{
                 background-color: white !important;
                 color: #106CC8 !important;
                 margin-right: 1rem;

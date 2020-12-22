@@ -242,7 +242,7 @@ export class ApplicationFundReportsComponent implements OnInit {
         if (item && item.id) {
             this.ifrReportService.applicationOfFundChildData({economicSegmentId: item.id}).subscribe(data => {
                 item['childTableData'] = data;
-                console.log('--->child data', data);
+                // console.log('--->child data', data);
             });
         }
     }

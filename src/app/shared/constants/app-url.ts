@@ -1196,19 +1196,19 @@ export class AppUrl {
     }
 
     static GET_JV_LEDGER_SIBLING_REPORT(): string {
-        return AppUrl.API_URL + 'finance/jv-sibling'
+        return AppUrl.API_URL + 'finance/jv-sibling';
     }
 
     static GET_STATEMENT_POSITION_REPORT(): string {
-        return AppUrl.API_URL + 'finance/statement-of-position'
+        return AppUrl.API_URL + 'finance/statement-of-position';
     }
 
     static GET_FINANCIAL_PEFROMANCE_REPORT(): string {
-        return AppUrl.API_URL + 'finance/financial-performance'
+        return AppUrl.API_URL + 'finance/financial-performance';
     }
 
     static GET_MONTHLY_ACTIVITY_REPORT(): string {
-        return AppUrl.API_URL + 'finance/monthly-activity'
+        return AppUrl.API_URL + 'finance/monthly-activity';
     }
 
     static GET_VOUCHER_SOURCE_UNIT(id?): string {
@@ -1295,5 +1295,13 @@ export class AppUrl {
             return AppUrl.API_URL + `finance/report/application-of-funds`;
         }
     }
+
+    static DOWNLOAD_PV_LIST_REPORT(): string {
+        return AppUrl.API_URL + `treasury/download/payment-vouchers`;
+    }
+    static DOWNLOAD_RV_LIST_REPORT(): string {
+        return AppUrl.API_URL + `treasury/download/receipt-vouchers`;
+    }
+
 
 }

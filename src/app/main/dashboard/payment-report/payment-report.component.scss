@@ -278,4 +278,13 @@ app-payment-report {
         background-color: #039be5 !important;
         color: #fff !important;
     }
+    #download-report{
+        background-color: white !important;
+        color: #106CC8 !important;
+        margin-right: 1rem;
+
+        mat-label {
+            color: black !important;
+        }
+    }
 }

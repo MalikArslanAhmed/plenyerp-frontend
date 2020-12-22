@@ -26,5 +26,8 @@ export class RvReportService extends BaseService {
     getScheduleEconomic(id): Observable<any> {
         return this.getRequest(AppUrl.GET_SCHEDULE_ECONOMIC(id));
     }
+    getDownloadRvListReport(data): Observable<any> {
+        return this.getRequest(AppUrl.DOWNLOAD_RV_LIST_REPORT(), data);
+    }
 }
  

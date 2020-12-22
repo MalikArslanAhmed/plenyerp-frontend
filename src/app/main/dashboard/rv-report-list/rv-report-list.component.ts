@@ -114,4 +114,22 @@ export class RvReportListComponent implements OnInit {
         return isColumnDataMatch;
 
     }
+    downloadReport() {
+        const columns = [];
+        if (this.displayedColumns && this.displayedColumns.length) {
+            this.displayedColumns.forEach(col => {
+                if (col !== 'S.No.') {
+                    columns.push(col);
+                }
+            });
+        }
+        const params = {
+            columns: columns && columns.length ? JSON.stringify(columns) : []
+        };
+        this.rvReportService.getDownloadRvListReport(params).subscribe(data => {
+            window.location.href = data.url;
+            // console.log('-->>', data);
+        });
+
+    }
 }

@@ -77,11 +77,13 @@ export class PaymentReportComponent implements OnInit {
     checkPV(index, event) {
         this.paymentReportData[index].checked = event.checked;
     }
+
     tabClick(report, event) {
         if (event.tab['textLabel'] === 'Economic Codes') {
             this.getEconomicCodes(report);
         }
     }
+
     getEconomicCodes(report) {
         this.paymentReportService.getScheduleEconomic(report.id).subscribe(data => {
             report['economic'] = data.items;
@@ -123,4 +125,24 @@ export class PaymentReportComponent implements OnInit {
 
         return totalAmount;
     }
+
+    downloadReport() {
+        const columns = [];
+        if (this.displayedColumns && this.displayedColumns.length) {
+            this.displayedColumns.forEach(col => {
+                if (col !== 'S.No.') {
+                    columns.push(col);
+                }
+            });
+        }
+        const params = {
+            columns: columns && columns.length ? JSON.stringify(columns) : []
+        };
+        this.paymentReportService.getDownloadPvListReport(params).subscribe(data => {
+            window.location.href = data.url;
+            // console.log('-->>', data);
+        });
+
+    }
+
 }
