@@ -1287,4 +1287,13 @@ export class AppUrl {
             return AppUrl.API_URL + `treasury/report/summary-special`;
         }
     }
+
+    static APPLICATION_FUND_REPORT_DATA(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `finance/report/application-of-funds` + id;
+        } else {
+            return AppUrl.API_URL + `finance/report/application-of-funds`;
+        }
+    }
+
 }
