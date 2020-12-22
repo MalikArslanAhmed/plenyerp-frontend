@@ -1302,6 +1302,13 @@ export class AppUrl {
     static DOWNLOAD_RV_LIST_REPORT(): string {
         return AppUrl.API_URL + `treasury/download/receipt-vouchers`;
     }
+    static SOURCES_USES_FUND_REPORT_DATA(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `finance/report/uses-of-funds/` + id;
+        } else {
+            return AppUrl.API_URL + `finance/report/uses-of-funds`;
+        }
+    }
 
 
 }

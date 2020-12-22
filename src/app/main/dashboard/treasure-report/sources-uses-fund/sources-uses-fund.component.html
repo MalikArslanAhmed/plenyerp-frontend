@@ -42,7 +42,7 @@
                             </mat-select>
                         </mat-form-field>
                         <div fxFlex class="width-200px p-10px mt-13px">
-                            <button mat-button class="submit-report" (click)="filterTable()">
+                            <button mat-button class="submit-report" (click)="submit()">
                                 Submit
                             </button>
                         </div>
@@ -68,8 +68,9 @@
                         <span class="mat-header-cell text-center">Forecast Next Semester <br>1.USD($) <br>2.Naira(N)</span>
 
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of receiptVoucherData; let i = index">
+                    <mat-expansion-panel *ngFor="let reportData of fundUseData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
+                                                    (click)="getChildReportData(reportData)"
                                                     [collapsedHeight]="'100px'"
                                                     [expandedHeight]="'100px'">
 
@@ -80,13 +81,13 @@
                                 <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.item}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.current_semester}}</p>
+                                <p class="text-truncate cursor-pointer text-center">{{reportData?.current_semester}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-25px text-center ml-20px">{{reportData?.cum_semester}}</p>
+                                <p class="text-truncate cursor-pointer text-center ml-20px">{{reportData?.cum_semester}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.forecast_semester}}</p>
+                                <p class="text-truncate cursor-pointer text-center">{{reportData?.forecast_semester}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div>
@@ -104,33 +105,30 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>abcd</td>
-                                        <td>abcd</td>
-                                        <td>aaaa</td>
-                                        <td>bbbb</td>
-                                        <td>bbbb</td>
-                                        <td>
-                                            <button class="border-bg-none">
+                                    <ng-container *ngIf="reportData && reportData['childTableData'] && reportData['childTableData'].length">
+                                        <tr *ngFor="let childData of reportData['childTableData'];">
+                                            <td>{{childData?.name}}</td>
+                                            <td>{{childData?.combinedCode}}</td>
+                                            <td>
+                                                {{childData?.previousBudget}} <br>{{childData?.previousActual}} <br> {{childData?.previousVariance}}
+                                            </td>
+                                            <td>
+                                                {{childData?.budget}} <br>{{childData?.actual}} <br> {{childData?.variance}}
+                                            </td>
+                                            <td>
+                                                {{childData?.cumulativeBudget}} <br>{{childData?.cumulativeActual}} <br> {{childData?.cumulativeVariance}}
+                                            </td>
+                                            <td>
+                                                <button class="border-bg-none">
                                             <span class="material-icons f_20 cursor-pointer blueColor">
                                                 add_box
                                             </span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>abcd</td>
-                                        <td>abcd</td>
-                                        <td>aaaa</td>
-                                        <td>bbbb</td>
-                                        <td>bbbb</td>
-                                        <td>
-                                            <button class="border-bg-none">
-                                            <span class="material-icons f_20 cursor-pointer blueColor">
-                                                add_box
-                                            </span>
-                                            </button>
-                                        </td>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                    <tr *ngIf="reportData && reportData['childTableData'] && reportData['childTableData'].length === 0 ">
+                                        <td colspan="100">No Data To Show</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -138,13 +136,13 @@
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
-                <mat-paginator #paginator *ngIf="receiptVoucherData.length > 0"
-                               [length]="pagination.total"
-                               [pageSize]="pagination.perpage"
-                               [pageIndex]="pagination.page - 1"
-                               (page)="pageEvent = onPageChange($event)"
-                >
-                </mat-paginator>
+<!--                <mat-paginator #paginator *ngIf="fundUseData.length > 0"-->
+<!--                               [length]="pagination.total"-->
+<!--                               [pageSize]="pagination.perpage"-->
+<!--                               [pageIndex]="pagination.page - 1"-->
+<!--                               (page)="pageEvent = onPageChange($event)"-->
+<!--                >-->
+<!--                </mat-paginator>-->
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@ import {ScheduleEconomicCodesComponent} from '../payment-voucher/schedule-econom
 import {EconomicSegmentSelectComponent} from '../../journal-voucher/economic-segment-select/economic-segment-select.component';
 import {AdminSegmentSelectComponent} from '../../journal-voucher/admin-segment-select/admin-segment-select.component';
 import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-select/fund-segment-select.component';
+import {IfrReportService} from '../../../../shared/services/ifr-report.service';
 
 @Component({
     selector: 'app-sources-uses-fund',
@@ -20,22 +21,7 @@ import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-sel
 })
 export class SourcesUsesFundComponent implements OnInit {
     filterSourceUsesDataForm: FormGroup;
-    receiptVoucherData = [
-        {
-            item: 'abcd',
-            section: '12332',
-            forecast_semester: 'sdfs',
-            current_semester: 'fdgh',
-            cum_semester: 'sfdg',
-        },
-        {
-            item: 'abcd',
-            section: '12332',
-            forecast_semester: 'sdfs',
-            current_semester: 'fdgh',
-            cum_semester: 'sfdg',
-        }
-    ];
+    fundUseData = [ ];
     panelOpenState: boolean = false;
     sourceUnit = [];
     statuses = [];
@@ -93,6 +79,7 @@ export class SourcesUsesFundComponent implements OnInit {
     economicCodeData;
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
+                private ifrReportService: IfrReportService,
                 private alertService: AlertService) {
     }
 
@@ -140,7 +127,28 @@ export class SourcesUsesFundComponent implements OnInit {
         // this.getReceiptVoucher();
     }
 
-    filterTable() {
-        console.log('----->>>', this.filterSourceUsesDataForm.getRawValue());
+    submit() {
+        const formData = this.filterSourceUsesDataForm.getRawValue();
+        const param = {
+            adminSegmentId: formData.adminUnit,
+            report: formData.report,
+            report_type: formData.report_type
+        };
+        this.getSourcesFundReport(param);
+    }
+
+    getSourcesFundReport(params = {}) {
+        this.ifrReportService.sourcesFundData(params).subscribe(data => {
+            // console.log('--->>>', data);
+            this.fundSegmentsData = data;
+        });
+    }
+    getChildReportData(item) {
+        if (item && item.id) {
+            this.ifrReportService.sourcesFundData({economicSegmentId: item.id}).subscribe(data => {
+                item['childTableData'] = data;
+                // console.log('--->child data', data);
+            });
+        }
     }
 }
