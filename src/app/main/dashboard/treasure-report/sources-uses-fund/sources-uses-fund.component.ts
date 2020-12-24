@@ -74,9 +74,7 @@ export class SourcesUsesFundComponent implements OnInit {
             value: '4'
         }
     ];
-    fundSegmentsData;
     adminUnitData;
-    economicCodeData;
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private ifrReportService: IfrReportService,
@@ -89,7 +87,7 @@ export class SourcesUsesFundComponent implements OnInit {
 
     refresh() {
         this.filterSourceUsesDataForm = this.fb.group({
-            'radioType': ['PROGRAMME'],
+            'radioType': ['4'],
             'adminUnit': [{value: '', disabled: true}],
             'report': [''],
             'report_type': ['']
@@ -134,21 +132,23 @@ export class SourcesUsesFundComponent implements OnInit {
             report: formData.report,
             report_type: formData.report_type
         };
+        if (formData.radioType === '4') {
+            param['programSegmentId'] = formData.radioType;
+        } else {
+            param['economicSegmentId'] = formData.radioType;
+        }
         this.getSourcesFundReport(param);
     }
 
     getSourcesFundReport(params = {}) {
         this.ifrReportService.sourcesFundData(params).subscribe(data => {
             // console.log('--->>>', data);
-            this.fundSegmentsData = data;
+            this.fundUseData = data;
         });
     }
-    getChildReportData(item) {
-        if (item && item.id) {
-            this.ifrReportService.sourcesFundData({economicSegmentId: item.id}).subscribe(data => {
-                item['childTableData'] = data;
-                // console.log('--->child data', data);
-            });
+    getChildReportData(data) {
+        if (data && data.items && data.items.length) {
+            data['childTableData'] = data.items;
         }
     }
 }
