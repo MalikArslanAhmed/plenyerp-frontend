@@ -1,0 +1,68 @@
+@import "src/@fuse/scss/fuse";
+
+app-advances-ledger-employee-report {
+    .submit-report {
+        background-color: #039be5 !important;
+        color: #fff !important;
+        height: 55px;
+        margin-top: 6px;
+        margin-left: 9px;
+    }
+    
+    .p-10px {
+        padding: 10px;
+    }
+    
+    .mt-20px {
+        margin-top: 20px;
+    }
+    .width-256px {
+        width: 256px;
+        max-width: 256px !important;
+    }
+
+    .width-150px {
+        width: 150px;
+        max-width: 150px !important;
+    }
+    .width-200px {
+        width: 200px;
+        max-width: 200px !important;
+    }
+    .mt-13px {
+        margin-top: 13px;
+    }
+    
+    .mb--15px {
+        margin-bottom: -15px !important;
+    }
+
+    .advance_table {
+        table {
+            thead {
+
+                tr {
+
+                    th {
+                        padding: 16px 8px;
+                        width: 150px!important;
+                        white-space: normal!important;
+                        &:first-child{
+                            width: 200px!important;
+                        }
+                    }
+                }
+            }
+
+            tbody {
+
+                tr {
+
+                    td {
+                        padding: 16px 8px;
+                    }
+                }
+            }
+        }
+    }
+}

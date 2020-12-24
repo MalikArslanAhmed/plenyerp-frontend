@@ -83,6 +83,7 @@ import {SummaryReportNonPersonalAdvancesComponent} from "./summary-report-non-pe
 import {SummaryReportPersonalAdvancesComponent} from "./summary-report-personal-advances/summary-report-personal-advances.component";
 import {SummaryReportStandingImprestComponent} from "./summary-report-standing-imprest/summary-report-standing-imprest.component";
 import {SummaryReportSpecialImprestComponent} from "./summary-report-special-imprest/summary-report-special-imprest.component";
+import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
 
 const routes: Routes = [
     {
@@ -803,6 +804,13 @@ const routes: Routes = [
         component: SummaryReportSpecialImprestComponent,
         data: {
             title: 'Summary - Special Imprest'
+        }
+    },
+    {
+        path: 'advances-ledger-by-employee',
+        component: AdvancesLedgerEmployeeReportComponent,
+        data: {
+            title: 'Advances Ledger (By Employee)'
         }
     }
 ];

@@ -1,0 +1,95 @@
+<div class="page-layout simple left-sidebar inner-sidebar inner-scroll" id="journal-voucher">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"
+                          class="logo-icon mr-16">money
+                </mat-icon>
+                <span [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}" class="logo-text h1">
+                   Advances Ledger (By Employee)
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- Hello -->
+    <div class="content">
+        <div class="center p-24" fusePerfectScrollbar>
+            <div class="content">
+                <form [formGroup]="advanceLedgerReportForm">
+                    <div>
+                        <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px"
+                                        (click)="selectAdminEmployee('Select Payee Employee')" fxFlex>
+                            <mat-label>Type of Selection</mat-label>
+                            <mat-select formControlName="employeeId">
+                                <mat-option value="">Choose Employee</mat-option>
+                                <mat-option *ngFor="let employee of selectedEmployee"
+                                            [value]="employee.id">{{employee?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="width-150px p-10px mt-13px" fxFlex>
+                            <button (click)="submitReport()" class="submit-report" mat-button>
+                                Submit
+                                <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                            </button>
+                        </div>
+                        <mat-form-field appearance="outline" class="width-200px p-10px mt-13px mb--15px" fxFlex="100">
+                            <mat-label>Staff Id.</mat-label>
+                            <input matInput formControlName="staffId">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="width-200px p-10px mt-13px mb--15px" fxFlex="100">
+                            <mat-label>Name</mat-label>
+                            <input matInput formControlName="name">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="width-200px p-10px mt-13px mb--15px" fxFlex="100">
+                            <mat-label>Department</mat-label>
+                            <input matInput formControlName="department">
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+            <div class="content mt-20px">
+                <div class="shadow-1px advance_table">
+                <table class="simple">
+                    <thead>
+                    <tr>
+                        <th class="title">Date Paid</th>
+                        <th class="title">Deptal No.</th>
+                        <th class="title">Narration</th>
+                        <th class="title">Debit</th>
+                        <th class="title">Credit</th>
+                        <th class="title">Balance</th>
+                        <th class="title">Old Balance</th>
+                        <th class="title">Comp. Voucher Paid(Year)</th>
+                        <th class="title">Deptal No. of. Complementary Voucher
+
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody
+                        *ngIf="advanceLedgerEmployeeReport && advanceLedgerEmployeeReport.length > 0; else noAdvanceLedgerDetail">
+                    <tr *ngFor="let advanceLedgerReport of advanceLedgerEmployeeReport; let i = index">
+                        <td class="title">{{advanceLedgerReport?.paid_date}}</td>
+                        <td class="title">{{advanceLedgerReport?.deptal_no}}</td>
+                        <td class="title">{{advanceLedgerReport?.narration}}</td>
+                        <td class="title">{{advanceLedgerReport?.debit}}</td>
+                        <td class="title">{{advanceLedgerReport?.credit}}</td>
+                        <td class="title"> {{advanceLedgerReport?.balance}}</td>
+                        <td class="title">{{advanceLedgerReport?.old_balance}}</td>
+                        <td class="title">{{advanceLedgerReport?.comp_voucher_paid_year}}</td>
+                        <td class="title">{{advanceLedgerReport?.deptal_no_of_complementary_voucher}}</td>
+                    </tr>
+                    </tbody>
+                    <ng-template #noAdvanceLedgerDetail>
+                        <tbody>
+                        <tr>
+                            <td class="text-center" colspan="100">No data to show</td>
+                        </tr>
+                        </tbody>
+                    </ng-template>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

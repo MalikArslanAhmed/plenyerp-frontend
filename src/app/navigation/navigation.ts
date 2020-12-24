@@ -767,6 +767,14 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/special-account-activity',
                         permissions: []
+                    },
+                    {
+                        id: 'advances-ledger-by-employee',
+                        title: 'Advances Ledger (By Employee)',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/advances-ledger-by-employee',
+                        permissions: []
                     }
                 ]
             },
