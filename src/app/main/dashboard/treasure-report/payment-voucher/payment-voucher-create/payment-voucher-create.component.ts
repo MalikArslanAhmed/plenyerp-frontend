@@ -1,20 +1,20 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {fuseAnimations} from "../../../../../../@fuse/animations";
-import {AdminSegmentSelectComponent} from "../../../journal-voucher/admin-segment-select/admin-segment-select.component";
-import {FundSegmentSelectComponent} from "../../../journal-voucher/fund-segment-select/fund-segment-select.component";
-import {EconomicSegmentSelectComponent} from "../../../journal-voucher/economic-segment-select/economic-segment-select.component";
-import {ProgrammingSegmentSelectComponent} from "../../../journal-voucher/programming-segment-select/programming-segment-select.component";
-import {GeoCodeSegmentSelectComponent} from "../../../journal-voucher/geo-code-segment-select/geo-code-segment-select.component";
-import {AdminSegmentEmployeeSelectComponent} from "../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component";
-import {FunctionalSegmentSelectComponent} from "../../../journal-voucher/functional-segment-select/functional-segment-select.component";
-import {CurrencyService} from "../../../../../shared/services/currency.service";
-import {TreasureReportService} from "../../../../../shared/services/treasure-report.service";
-import * as moment from "moment";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {fuseAnimations} from '../../../../../../@fuse/animations';
+import {AdminSegmentSelectComponent} from '../../../journal-voucher/admin-segment-select/admin-segment-select.component';
+import {FundSegmentSelectComponent} from '../../../journal-voucher/fund-segment-select/fund-segment-select.component';
+import {EconomicSegmentSelectComponent} from '../../../journal-voucher/economic-segment-select/economic-segment-select.component';
+import {ProgrammingSegmentSelectComponent} from '../../../journal-voucher/programming-segment-select/programming-segment-select.component';
+import {GeoCodeSegmentSelectComponent} from '../../../journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
+import {AdminSegmentEmployeeSelectComponent} from '../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
+import {FunctionalSegmentSelectComponent} from '../../../journal-voucher/functional-segment-select/functional-segment-select.component';
+import {CurrencyService} from '../../../../../shared/services/currency.service';
+import {TreasureReportService} from '../../../../../shared/services/treasure-report.service';
+import * as moment from 'moment';
 import {PaymentVoucherService} from 'app/shared/services/payment-voucher.service';
-import {DefaultSettingVoucherInfoService} from "../../../../../shared/services/default-setting-voucher-info";
-import {AlertService} from "../../../../../shared/services/alert.service";
+import {DefaultSettingVoucherInfoService} from '../../../../../shared/services/default-setting-voucher-info';
+import {AlertService} from '../../../../../shared/services/alert.service';
 import {SelectAieComponent} from '../select-aie/select-aie.component';
 
 @Component({
@@ -44,7 +44,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
     sources = [];
     currencies = [];
     aies = [];
-
+    sourceType;
     constructor(public matDialogRef: MatDialogRef<PaymentVoucherCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -55,6 +55,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService,
                 private alertService: AlertService) {
         this.header = _data.header;
+        this.sourceType = _data.type;
         this.sources = _data.source;
         this.dialogTitle = this.header + ' - Payment Voucher';
     }
@@ -239,6 +240,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 'payingOfficerId': this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId : '',
                 'financialControllerId': this.schedulePayeeEmployeeForm.getRawValue().financialControllerId ? this.schedulePayeeEmployeeForm.getRawValue().financialControllerId : '',
             };
+            params['type'] = this.sourceType;
             this.paymentVoucherService.save(params).subscribe(data => {
                 this.schedulePayeeEmployeeForm.reset();
                 this.isSubmitted = false;

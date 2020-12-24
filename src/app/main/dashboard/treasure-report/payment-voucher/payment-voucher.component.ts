@@ -158,9 +158,11 @@ export class PaymentVoucherComponent implements OnInit {
 
         if (this.types && this.types.length > 0 && this.sourceUnit && this.sourceUnit.length > 0) {
             let selectedType = '';
+            let selectedTypeValue = '';
             this.types.forEach(type => {
                 if (type.value === this.createPaymentVoucherForm.value['type']) {
                     selectedType = type.name;
+                    selectedTypeValue = type.value;
                 }
             });
 
@@ -176,7 +178,7 @@ export class PaymentVoucherComponent implements OnInit {
 
             this.dialogRef = this._matDialog.open(PaymentVoucherCreateComponent, {
                 panelClass: 'contact-form-dialog',
-                data: {header: selectedType, source: selectedSource}
+                data: {header: selectedType, source: selectedSource, type: selectedTypeValue}
             });
             this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
                 if (!response) {
