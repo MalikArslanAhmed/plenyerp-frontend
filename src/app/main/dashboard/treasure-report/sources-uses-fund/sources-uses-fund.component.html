@@ -19,6 +19,7 @@
                 <form [formGroup]="filterSourceUsesDataForm" fxLayout="column">
                     <div fxLayout="row">
                         <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                            <mat-label>Report Type</mat-label>
                             <mat-select formControlName="report_type">
                                 <mat-option value="">Select Report Type</mat-option>
                                 <mat-option [value]="type.value"
@@ -26,6 +27,7 @@
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                            <mat-label>Report</mat-label>
                             <mat-select formControlName="report">
                                 <mat-option value="">Select Report</mat-option>
                                 <mat-option [value]="report.value"
@@ -60,20 +62,18 @@
             <div class="content mt-20px">
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-
                         <span class="mat-header-cell text-center">Section</span>
                         <span class="mat-header-cell text-center">Item</span>
                         <span class="mat-header-cell text-center">This Semester Only<br>1.USD($) <br>2.Naira(N)</span>
                         <span class="mat-header-cell text-center">Cumulative To Date <br>1.USD($) <br>2.Naira(N)</span>
-                        <span class="mat-header-cell text-center">Forecast Next Semester <br>1.USD($) <br>2.Naira(N)</span>
-
+                        <span
+                            class="mat-header-cell text-center">Forecast Next Semester <br>1.USD($) <br>2.Naira(N)</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of fundUseData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)"
                                                     [collapsedHeight]="'100px'"
                                                     [expandedHeight]="'100px'">
-
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-25px text-center">{{reportData?.section}}</p>
                             </span>
@@ -87,7 +87,8 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer text-center ml-20px">
-                                    {{'$ ' + reportData?.cumulativeLocal}} <br> {{'N ' + reportData?.cumulativeInternational}}
+                                    {{'$ ' + reportData?.cumulativeLocal}}
+                                    <br> {{'N ' + reportData?.cumulativeInternational}}
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
@@ -107,29 +108,36 @@
                                         <th>This Semester Only<br>1.USD($) <br>2.Naira(N)</th>
                                         <th>Cumulative To Date <br>1.USD($) <br>2.Naira(N)</th>
                                         <th>Forecast Next Semester <br>1.USD($) <br>2.Naira(N)</th>
-                                        <th>Note</th>
+                                        <th *ngIf="reportData.section !== 'Opening Bank Balance' && reportData.section !== 'Closing Bank Balance'">Note</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <ng-container *ngIf="reportData && reportData['childTableData'] && reportData['childTableData'].length; else noChildDataShow">
+                                    <ng-container
+                                        *ngIf="reportData && reportData['childTableData'] && reportData['childTableData'].length; else noChildDataShow">
                                         <tr *ngFor="let childData of reportData['childTableData'];">
                                             <td>{{reportData?.section}}</td>
                                             <td>{{childData?.name}}</td>
                                             <td>
-                                                {{'$ ' + childData?.actualLocal}} <br> {{'N ' + childData?.actualInternational}}
+                                                {{'$ ' + childData?.actualLocal}}
+                                                <br> {{'N ' + childData?.actualInternational}}
                                             </td>
                                             <td>
-                                                {{'$ ' + childData?.cumulativeLocal}} <br> {{'N ' + childData?.cumulativeInternational}}
+                                                {{'$ ' + childData?.cumulativeLocal}}
+                                                <br> {{'N ' + childData?.cumulativeInternational}}
                                             </td>
                                             <td>
-                                                {{'$ ' + childData?.futureLocal}} <br> {{'N ' + childData?.futureInternational}}
+                                                {{'$ ' + childData?.futureLocal}}
+                                                <br> {{'N ' + childData?.futureInternational}}
                                             </td>
-                                            <td>
-                                                <button class="border-bg-none">
-                                            <span class="material-icons f_20 cursor-pointer blueColor">
-                                                add_box
-                                            </span>
-                                                </button>
+                                            <td class="text-center"
+                                                *ngIf="reportData.section !== 'Opening Bank Balance' && reportData.section !== 'Closing Bank Balance'">
+                                                <span>
+                                                    <button class="border-bg-none">
+                                                        <span class="material-icons f_20 cursor-pointer blueColor">
+                                                            add_box
+                                                        </span>
+                                                    </button>
+                                                </span>
                                             </td>
                                         </tr>
                                     </ng-container>
@@ -144,13 +152,13 @@
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
-<!--                <mat-paginator #paginator *ngIf="fundUseData.length > 0"-->
-<!--                               [length]="pagination.total"-->
-<!--                               [pageSize]="pagination.perpage"-->
-<!--                               [pageIndex]="pagination.page - 1"-->
-<!--                               (page)="pageEvent = onPageChange($event)"-->
-<!--                >-->
-<!--                </mat-paginator>-->
+                <!--                <mat-paginator #paginator *ngIf="fundUseData.length > 0"-->
+                <!--                               [length]="pagination.total"-->
+                <!--                               [pageSize]="pagination.perpage"-->
+                <!--                               [pageIndex]="pagination.page - 1"-->
+                <!--                               (page)="pageEvent = onPageChange($event)"-->
+                <!--                >-->
+                <!--                </mat-paginator>-->
             </div>
         </div>
     </div>
