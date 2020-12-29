@@ -745,6 +745,14 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/monthly-activity'
                     },
                     {
+                        id: 'ifr-notes-master',
+                        title: 'IFR Notes Master',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/ifr-notes-master',
+                        permissions: []
+                    },
+                    {
                         id: 'ifr-reports',
                         title: 'Application of Fund Report',
                         roles: [],

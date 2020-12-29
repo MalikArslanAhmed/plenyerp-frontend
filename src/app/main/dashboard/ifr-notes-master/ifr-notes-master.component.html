@@ -7,7 +7,7 @@
                           [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                  Budget Control / Application of Funds Reports
+                  IFR - Notes Master
                 </span>
             </div>
         </div>
@@ -131,7 +131,7 @@
                                     <tbody>
                                     <ng-container *ngIf="reportData && reportData['childTableData'] && reportData['childTableData'].length">
                                         <tr *ngFor="let childData of reportData['childTableData']; let j = index">
-                                            <td>{{j + 1}}</td>
+                                            <td>{{j + 1}}.</td>
                                             <td>{{childData?.name}}</td>
                                             <td>{{childData?.combinedCode}}</td>
                                             <td>
@@ -161,13 +161,13 @@
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
-<!--                <mat-paginator #paginator *ngIf="applicationFundReportData.length > 0"-->
-<!--                               [length]="pagination.total"-->
-<!--                               [pageSize]="pagination.perpage"-->
-<!--                               [pageIndex]="pagination.page - 1"-->
-<!--                               (page)="pageEvent = onPageChange($event)"-->
-<!--                >-->
-<!--                </mat-paginator>-->
+                <!--                <mat-paginator #paginator *ngIf="applicationFundReportData.length > 0"-->
+                <!--                               [length]="pagination.total"-->
+                <!--                               [pageSize]="pagination.perpage"-->
+                <!--                               [pageIndex]="pagination.page - 1"-->
+                <!--                               (page)="pageEvent = onPageChange($event)"-->
+                <!--                >-->
+                <!--                </mat-paginator>-->
             </div>
         </div>
     </div>

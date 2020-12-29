@@ -84,6 +84,7 @@ import {SummaryReportPersonalAdvancesComponent} from "./summary-report-personal-
 import {SummaryReportStandingImprestComponent} from "./summary-report-standing-imprest/summary-report-standing-imprest.component";
 import {SummaryReportSpecialImprestComponent} from "./summary-report-special-imprest/summary-report-special-imprest.component";
 import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
+import {IfrNotesMasterComponent} from "./ifr-notes-master/ifr-notes-master.component";
 
 const routes: Routes = [
     {
@@ -812,7 +813,14 @@ const routes: Routes = [
         data: {
             title: 'Advances Ledger (By Employee)'
         }
-    }
+    },
+    {
+        path: 'ifr-notes-master',
+        component: IfrNotesMasterComponent,
+        data: {
+            title: 'IFR Notes Master'
+        }
+    },
 ];
 
 @NgModule({

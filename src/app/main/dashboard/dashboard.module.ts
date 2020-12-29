@@ -251,6 +251,7 @@ import { SummaryReportStandingImprestComponent } from './summary-report-standing
 import { SummaryReportSpecialImprestComponent } from './summary-report-special-imprest/summary-report-special-imprest.component';
 import { SummaryAdminSegmentSelectComponent } from './summary-admin-segment-select/summary-admin-segment-select.component';
 import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
+import { IfrNotesMasterComponent } from './ifr-notes-master/ifr-notes-master.component';
 
 @NgModule({
     declarations: [
@@ -480,7 +481,8 @@ import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-
         SummaryReportStandingImprestComponent,
         SummaryReportSpecialImprestComponent,
         SummaryAdminSegmentSelectComponent,
-        AdvancesLedgerEmployeeReportComponent
+        AdvancesLedgerEmployeeReportComponent,
+        IfrNotesMasterComponent
     ],
     imports: [
         CommonModule,
