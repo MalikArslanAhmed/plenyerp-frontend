@@ -61,16 +61,14 @@
                         <th class="title">Balance</th>
                         <th class="title">Old Balance</th>
                         <th class="title">Comp. Voucher Paid(Year)</th>
-                        <th class="title">Deptal No. of. Complementary Voucher
-
-                        </th>
+                        <th class="title">Deptal No. of. Complementary Voucher</th>
                     </tr>
                     </thead>
                     <tbody
                         *ngIf="advanceLedgerEmployeeReport && advanceLedgerEmployeeReport.length > 0; else noAdvanceLedgerDetail">
                     <tr *ngFor="let advanceLedgerReport of advanceLedgerEmployeeReport; let i = index">
-                        <td class="title">{{advanceLedgerReport?.paid_date}}</td>
-                        <td class="title">{{advanceLedgerReport?.deptal_no}}</td>
+                        <td class="title">{{advanceLedgerReport?.valueDate}}</td>
+                        <td class="title">{{advanceLedgerReport?.deptalId}}</td>
                         <td class="title">{{advanceLedgerReport?.narration}}</td>
                         <td class="title">{{advanceLedgerReport?.debit}}</td>
                         <td class="title">{{advanceLedgerReport?.credit}}</td>
@@ -83,7 +81,7 @@
                     <ng-template #noAdvanceLedgerDetail>
                         <tbody>
                         <tr>
-                            <td class="text-center" colspan="100">No data to show</td>
+                            <td class="text-center" colspan="9">No data to show</td>
                         </tr>
                         </tbody>
                     </ng-template>

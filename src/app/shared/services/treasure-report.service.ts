@@ -30,4 +30,7 @@ export class TreasureReportService extends BaseService {
         return this.putRequest(AppUrl.GET_VOUCHER_SOURCE_UNIT(id), data);
     }
 
+    advancesLedgerEmployee(data): Observable<any> {
+        return this.getRequest(AppUrl.ADVANCE_LEDGER_EMPLOYEE(), data);
+    }
 }

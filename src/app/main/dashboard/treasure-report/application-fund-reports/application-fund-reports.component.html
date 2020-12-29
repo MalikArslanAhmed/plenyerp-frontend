@@ -46,6 +46,7 @@
                     </div>
                     <div fxLayout="row" fxLayoutGap="10px">
                         <mat-form-field appearance="outline" fxFlex class="p-10px">
+                            <mat-label>Report Type</mat-label>
                             <mat-select formControlName="report_type">
                                 <mat-option value="">Select Report Type</mat-option>
                                 <mat-option [value]="type.value"
@@ -53,6 +54,7 @@
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex class="p-10px">
+                            <mat-label>Semester</mat-label>
                             <mat-select formControlName="report">
                                 <mat-option value="">Select Report</mat-option>
                                 <mat-option [value]="report.value"

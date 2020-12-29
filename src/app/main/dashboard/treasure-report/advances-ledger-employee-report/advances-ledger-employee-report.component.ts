@@ -5,6 +5,7 @@ import {JournalVoucherLedgerReportService} from 'app/shared/services/journal-vou
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {AlertService} from '../../../../shared/services/alert.service';
 import {AdminSegmentEmployeeSelectComponent} from '../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
+import {TreasureReportService} from "../../../../shared/services/treasure-report.service";
 
 @Component({
     selector: 'app-advances-ledger-employee-report',
@@ -14,39 +15,18 @@ import {AdminSegmentEmployeeSelectComponent} from '../default-setting-voucher-in
     animations: fuseAnimations
 })
 export class AdvancesLedgerEmployeeReportComponent implements OnInit {
-    advanceLedgerEmployeeReport = [
-        {
-            paid_date: '12-12-2020',
-            deptal_no: '123',
-            narration: 'abcde',
-            debit: '123',
-            credit: '12313',
-            balance: '23333',
-            old_balance: '345553',
-            comp_voucher_paid_year: '2020',
-            deptal_no_of_complementary_voucher: 'sdfsfdz',
-        },
-        {
-            paid_date: '12-12-2020',
-            deptal_no: '123',
-            narration: 'abcde',
-            debit: '123',
-            credit: '12313',
-            balance: '23333',
-            old_balance: '345553',
-            comp_voucher_paid_year: '2020',
-            deptal_no_of_complementary_voucher: 'sdfsfdz',
-        }
-    ];
+    advanceLedgerEmployeeReport = [];
     dialogRef: any;
     advanceLedgerReportForm: FormGroup;
     selectedEmployee: any;
     payingOfficers = [];
     banks = [];
+
     constructor(private jvLedgerReportService: JournalVoucherLedgerReportService,
                 private fb: FormBuilder,
                 private alertService: AlertService,
-                private _matDialog: MatDialog) {
+                private _matDialog: MatDialog,
+                private treasureReportService: TreasureReportService) {
     }
 
     ngOnInit(): void {
@@ -84,11 +64,13 @@ export class AdvancesLedgerEmployeeReportComponent implements OnInit {
                     name: response['empData'].firstName + ' ' + response['empData'].lastName,
                     department: response['empData'].employeeJobProfiles.department.name,
                 });
-                // console.log('-----department', response);
             }
         });
     }
+
     submitReport() {
-        console.log('---->>>employeeId', this.advanceLedgerReportForm.value.employeeId);
+        this.treasureReportService.advancesLedgerEmployee({employeeId: this.advanceLedgerReportForm.value.employeeId}).subscribe(data => {
+            this.advanceLedgerEmployeeReport = data;
+        });
     }
 }

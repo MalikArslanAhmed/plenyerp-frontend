@@ -10,6 +10,7 @@ import {ScheduleEconomicCodesComponent} from '../payment-voucher/schedule-econom
 import {EconomicSegmentSelectComponent} from '../../journal-voucher/economic-segment-select/economic-segment-select.component';
 import {AdminSegmentSelectComponent} from '../../journal-voucher/admin-segment-select/admin-segment-select.component';
 import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-select/fund-segment-select.component';
+import {AppConstants} from "../../../../shared/constants/app-constants";
 
 @Component({
     selector: 'app-special-account-activity-report',
@@ -41,56 +42,20 @@ export class SpecialAccountActivityReportComponent implements OnInit {
     statuses = [];
     dialogRef: any;
     status = 'ALL';
-    selectedStatus = [];
+    reportTypes = AppConstants.REPORT_TYPES;
+    semesterList = AppConstants.SEMESTERS;
+    quarterList = AppConstants.QUARTERS;
+    monthlyList = AppConstants.MONTHS;
+    reports = [];
     pagination = {
         page: 1,
         total: null,
         perpage: 15,
         pages: null
     };
-    reportTypes = [
-        {
-        name: 'Semester Wise',
-        value: 'SEMESTER'
-        },
-        {
-            name: 'Quarter Wise',
-            value: 'QUARTER'
-        }
-    ];
 
-    reports = [ ];
-    semesterList = [
-        {
-            name: '1st Semester',
-            value: '1'
-        },
-        {
-            name: '2nd Semester',
-            value: '2'
-        }
-    ];
-    quarterList = [
-        {
-            name: '1st Quarter',
-            value: '1'
-        },
-        {
-            name: '2nd Quarter',
-            value: '2'
-        },
-        {
-            name: '3rd Quarter',
-            value: '3'
-        },
-        {
-            name: '4th Quarter',
-            value: '4'
-        }
-    ];
     constructor(private fb: FormBuilder,
-                private _matDialog: MatDialog,
-                private alertService: AlertService) {
+                private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -107,14 +72,16 @@ export class SpecialAccountActivityReportComponent implements OnInit {
             this.showTableDataForm.get('report').patchValue('');
             if (val === 'SEMESTER') {
                 this.reports = this.semesterList;
-            } else {
+            } else if (val === 'QUARTER') {
                 this.reports = this.quarterList;
+            } else if (val === 'MONTHLY') {
+                this.reports = this.monthlyList;
             }
         });
     }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         // this.getReceiptVoucher();
     }
-
 }

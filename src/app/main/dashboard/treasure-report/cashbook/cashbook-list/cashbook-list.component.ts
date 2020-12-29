@@ -16,16 +16,7 @@ import {CashbookService} from '../../../../../shared/services/cashbook.service';
     animations: fuseAnimations
 })
 export class CashbookListComponent implements OnInit {
-    cashbookAccountList = [
-        {
-            id: '001',
-            title: 'abcdg',
-        },
-        {
-            id: '003',
-            title: 'pqrs',
-        }
-    ];
+    cashbookAccountList = [];
     displayedCountryColumns = ['s_no', 'id', 'title', 'actions'];
     dialogRef: any;
     selectIndex = 0;

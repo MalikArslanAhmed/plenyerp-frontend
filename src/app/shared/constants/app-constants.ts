@@ -6,7 +6,6 @@ export class AppConstants {
     static ROLE_ID_HR = 7;
     static ROLE_ID_INVENTORY = 3;
     static ROLE_ID_FINANCIAL = 5;
-
     static maritalStatuses = [
         {
             name: 'Unmarried',
@@ -105,5 +104,101 @@ export class AppConstants {
             name: 'Not Applicable',
             value: 'NOT_APPLICABLE',
         }
+    ];
+
+    static REPORT_TYPES = [
+        {
+            name: 'Semester Wise',
+            value: 'SEMESTER'
+        },
+        {
+            name: 'Quarter Wise',
+            value: 'QUARTER'
+        },
+        {
+            name: 'Monthly',
+            value: 'MONTHLY'
+        }
+    ];
+
+    static SEMESTERS = [
+        {
+            name: '1st Semester',
+            value: '1'
+        },
+        {
+            name: '2nd Semester',
+            value: '2'
+        }
+    ];
+
+    static QUARTERS = [
+        {
+            name: '1st Quarter',
+            value: '1'
+        },
+        {
+            name: '2nd Quarter',
+            value: '2'
+        },
+        {
+            name: '3rd Quarter',
+            value: '3'
+        },
+        {
+            name: '4th Quarter',
+            value: '4'
+        }
+    ];
+
+    static MONTHS = [
+        {
+            name: 'January',
+            value: '1'
+        },
+        {
+            name: 'February',
+            value: '2'
+        },
+        {
+            name: 'March ',
+            value: '3'
+        },
+        {
+            name: 'April',
+            value: '4'
+        },
+        {
+            name: 'May',
+            value: '5'
+        },
+        {
+            name: 'June',
+            value: '6'
+        },
+        {
+            name: 'July',
+            value: '7'
+        },
+        {
+            name: 'August',
+            value: '8'
+        },
+        {
+            name: 'September',
+            value: '9'
+        },
+        {
+            name: 'October',
+            value: '10'
+        },
+        {
+            name: 'November',
+            value: '11'
+        },
+        {
+            name: 'December',
+            value: '12'
+        },
     ];
 }

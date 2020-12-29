@@ -1296,12 +1296,18 @@ export class AppUrl {
         }
     }
 
+    static ADVANCE_LEDGER_EMPLOYEE(): string {
+        return AppUrl.API_URL + `treasury/report/advance-ledger`;
+    }
+
     static DOWNLOAD_PV_LIST_REPORT(): string {
         return AppUrl.API_URL + `treasury/download/payment-vouchers`;
     }
+
     static DOWNLOAD_RV_LIST_REPORT(): string {
         return AppUrl.API_URL + `treasury/download/receipt-vouchers`;
     }
+
     static SOURCES_USES_FUND_REPORT_DATA(id?): string {
         if (id) {
             return AppUrl.API_URL + `finance/report/uses-of-funds/` + id;
