@@ -14,6 +14,14 @@ export class IfrReportService extends BaseService {
         super(http, alertService, globalService);
     }
 
+    ifrNotes(data): Observable<any> {
+        return this.getRequest(AppUrl.IFR_NOTES(), data);
+    }
+
+    addIfrNote(data): Observable<any> {
+        return this.postRequest(AppUrl.IFR_NOTES(), data);
+    }
+
     applicationOfFundData(data): Observable<any> {
         return this.getRequest(AppUrl.APPLICATION_FUND_REPORT_DATA(), data);
     }

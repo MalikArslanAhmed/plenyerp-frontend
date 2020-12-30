@@ -1296,6 +1296,14 @@ export class AppUrl {
         }
     }
 
+    static IFR_NOTES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `finance/ifr-notes/` + id;
+        } else {
+            return AppUrl.API_URL + `finance/ifr-notes`;
+        }
+    }
+
     static ADVANCE_LEDGER_EMPLOYEE(): string {
         return AppUrl.API_URL + `treasury/report/advance-ledger`;
     }
