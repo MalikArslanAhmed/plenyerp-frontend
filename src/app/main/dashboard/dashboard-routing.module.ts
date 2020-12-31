@@ -85,6 +85,7 @@ import {SummaryReportStandingImprestComponent} from "./summary-report-standing-i
 import {SummaryReportSpecialImprestComponent} from "./summary-report-special-imprest/summary-report-special-imprest.component";
 import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
 import {IfrNotesMasterComponent} from "./ifr-notes-master/ifr-notes-master.component";
+import {RetireVouchersComponent} from "./treasure-report/retire-vouchers/retire-vouchers.component";
 
 const routes: Routes = [
     {
@@ -819,6 +820,13 @@ const routes: Routes = [
         component: IfrNotesMasterComponent,
         data: {
             title: 'IFR Notes Master'
+        }
+    },
+    {
+        path: 'retire-vouchers',
+        component: RetireVouchersComponent,
+        data: {
+            title: 'Retire Vouchers'
         }
     },
 ];

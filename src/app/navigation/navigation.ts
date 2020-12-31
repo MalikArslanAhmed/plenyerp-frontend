@@ -819,6 +819,16 @@ export const navigation: FuseNavigation[] = [
                 permissions: []
             },
             {
+                id: 'retire-vouchers',
+                title: 'Retire Vouchers',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'payment',
+                url: '/dashboard/retire-vouchers',
+                permissions: []
+            },
+            {
                 id: 'default-setting',
                 title: 'Default Setting (Voucher Info)',
                 roles: [],

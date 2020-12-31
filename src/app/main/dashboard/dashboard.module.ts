@@ -235,23 +235,25 @@ import {SubOrgranisationSelectComponent} from './treasure-report/default-setting
 import {PaymentReportComponent} from './payment-report/payment-report.component';
 import {ReportListHeadersComponent} from './payment-report/report-list-headers/report-list-headers.component';
 import {ReceiptVouchersComponent} from './treasure-report/receipt-vouchers/receipt-vouchers.component';
-import { ReceiptVoucherCreateComponent } from './treasure-report/receipt-vouchers/receipt-voucher-create/receipt-voucher-create.component';
-import { SchedulePayersCustomerComponent } from './treasure-report/receipt-vouchers/schedule-payers-customer/schedule-payers-customer.component';
-import { SelectPayersCustomerComponent } from './treasure-report/receipt-vouchers/select-payers-customer/select-payers-customer.component';
-import { SchedulePayersEmployeeComponent } from './treasure-report/receipt-vouchers/schedule-payers-employee/schedule-payers-employee.component';
-import { ScheduleEconomicCodesReceiptComponent } from './treasure-report/receipt-vouchers/schedule-economic-codes-receipt/schedule-economic-codes-receipt.component';
+import {ReceiptVoucherCreateComponent} from './treasure-report/receipt-vouchers/receipt-voucher-create/receipt-voucher-create.component';
+import {SchedulePayersCustomerComponent} from './treasure-report/receipt-vouchers/schedule-payers-customer/schedule-payers-customer.component';
+import {SelectPayersCustomerComponent} from './treasure-report/receipt-vouchers/select-payers-customer/select-payers-customer.component';
+import {SchedulePayersEmployeeComponent} from './treasure-report/receipt-vouchers/schedule-payers-employee/schedule-payers-employee.component';
+import {ScheduleEconomicCodesReceiptComponent} from './treasure-report/receipt-vouchers/schedule-economic-codes-receipt/schedule-economic-codes-receipt.component';
 import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 import {RvReportListHeadersComponent} from './rv-report-list/rv-report-list-headers/rv-report-list-headers.component';
 import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
 import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
 import {SpecialAccountActivityReportComponent} from './treasure-report/special-account-activity-report/special-account-activity-report.component';
-import { SummaryReportNonPersonalAdvancesComponent } from './summary-report-non-personal-advances/summary-report-non-personal-advances.component';
-import { SummaryReportPersonalAdvancesComponent } from './summary-report-personal-advances/summary-report-personal-advances.component';
-import { SummaryReportStandingImprestComponent } from './summary-report-standing-imprest/summary-report-standing-imprest.component';
-import { SummaryReportSpecialImprestComponent } from './summary-report-special-imprest/summary-report-special-imprest.component';
-import { SummaryAdminSegmentSelectComponent } from './summary-admin-segment-select/summary-admin-segment-select.component';
+import {SummaryReportNonPersonalAdvancesComponent} from './summary-report-non-personal-advances/summary-report-non-personal-advances.component';
+import {SummaryReportPersonalAdvancesComponent} from './summary-report-personal-advances/summary-report-personal-advances.component';
+import {SummaryReportStandingImprestComponent} from './summary-report-standing-imprest/summary-report-standing-imprest.component';
+import {SummaryReportSpecialImprestComponent} from './summary-report-special-imprest/summary-report-special-imprest.component';
+import {SummaryAdminSegmentSelectComponent} from './summary-admin-segment-select/summary-admin-segment-select.component';
 import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
-import { IfrNotesMasterComponent } from './ifr-notes-master/ifr-notes-master.component';
+import {IfrNotesMasterComponent} from './ifr-notes-master/ifr-notes-master.component';
+import {RetireVouchersComponent} from './treasure-report/retire-vouchers/retire-vouchers.component';
+import { LiabilitiesComponent } from './treasure-report/retire-vouchers/liabilities/liabilities.component';
 
 @NgModule({
     declarations: [
@@ -482,7 +484,9 @@ import { IfrNotesMasterComponent } from './ifr-notes-master/ifr-notes-master.com
         SummaryReportSpecialImprestComponent,
         SummaryAdminSegmentSelectComponent,
         AdvancesLedgerEmployeeReportComponent,
-        IfrNotesMasterComponent
+        IfrNotesMasterComponent,
+        RetireVouchersComponent,
+        LiabilitiesComponent
     ],
     imports: [
         CommonModule,
