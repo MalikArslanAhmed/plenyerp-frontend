@@ -6,6 +6,7 @@ import {PermissionConstant} from "../../../../shared/constants/permission-consta
 import {FuseSidebarService} from "../../../../../@fuse/components/sidebar/sidebar.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CashbookCreateComponent} from "../cashbook/cashbook-create/cashbook-create.component";
+import {OnMandateCreateComponent} from "./on-mandate-create/on-mandate-create.component";
 
 @Component({
     selector: 'app-on-mandate',
@@ -37,8 +38,8 @@ export class OnMandateComponent implements OnInit {
         });
     }
 
-    addCashbook() {
-        this.dialogRef = this._matDialog.open(CashbookCreateComponent, {
+    addOnMandate() {
+        this.dialogRef = this._matDialog.open(OnMandateCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE'}
         });

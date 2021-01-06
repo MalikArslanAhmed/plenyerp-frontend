@@ -16,8 +16,31 @@ import {fuseAnimations} from "../../../../../../@fuse/animations";
     animations: fuseAnimations
 })
 export class OnMandateListComponent implements OnInit {
-    cashbookAccountList = [];
-    displayedCountryColumns = ['s_no', 'id', 'title', 'actions'];
+    onMandateList = [
+        {
+            'id': 1,
+            'beneficery': 'Not Set 1',
+            'bank': 'SBI',
+            'branch': 'New Branch',
+            'accountNumber': 'ABCDEFG1234',
+            'type': 'Saving',
+            'amount': 10000,
+            'tax': 1000,
+            'purpose': 'Testing'
+        },
+        {
+            'id': 2,
+            'beneficery': 'Not Set 2',
+            'bank': 'SBI',
+            'branch': 'New Branch',
+            'accountNumber': 'ABCDEFG1234',
+            'type': 'Saving',
+            'amount': 10000,
+            'tax': 1000,
+            'purpose': 'Testing',
+        }
+    ];
+    displayedColumns = ['sno', 'beneficiery', 'bank', 'branch', 'account_number', 'type', 'amount', 'tax', 'purpose'];
     dialogRef: any;
     selectIndex = 0;
     pagination = {
@@ -35,27 +58,27 @@ export class OnMandateListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getcashbookList();
+        // this.getcashbookList();
     }
 
-    getcashbookList() {
-        this.cashbookAccountList = [];
+    /*getcashbookList() {
+        this.onMandateList = [];
         this.cashbookService.list({page: this.pagination.page}).subscribe(data => {
-            this.cashbookAccountList = data.items;
+            this.onMandateList = data.items;
             this.pagination.page = data.page;
             this.pagination.total = data.total;
-            if (this.cashbookAccountList && this.cashbookAccountList.length > 0) {
+            if (this.onMandateList && this.onMandateList.length > 0) {
                 let i = 1;
-                this.cashbookAccountList.forEach(val => {
+                this.onMandateList.forEach(val => {
                     val['sno'] = i;
                     i++;
                 });
             }
         });
-    }
+    }*/
 
 
-    deleteItemModel(items) {
+    /*deleteItemModel(items) {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
             data: {data: items}
@@ -74,9 +97,9 @@ export class OnMandateListComponent implements OnInit {
                 this.getcashbookList();
             }
         });
-    }
+    }*/
 
-    editCashbook(cashbook) {
+    /*editCashbook(cashbook) {
         this.dialogRef = this._matDialog.open(CashbookCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', cashbook: cashbook},
@@ -87,10 +110,10 @@ export class OnMandateListComponent implements OnInit {
             }
             this.getcashbookList();
         });
-    }
+    }*/
 
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
-        this.getcashbookList();
+        // this.getcashbookList();
     }
 }

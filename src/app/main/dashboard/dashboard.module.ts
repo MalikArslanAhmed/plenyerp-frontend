@@ -256,6 +256,7 @@ import {RetireVouchersComponent} from './treasure-report/retire-vouchers/retire-
 import { LiabilitiesComponent } from './treasure-report/retire-vouchers/liabilities/liabilities.component';
 import { OnMandateComponent } from './treasure-report/on-mandate/on-mandate.component';
 import { OnMandateListComponent } from './treasure-report/on-mandate/on-mandate-list/on-mandate-list.component';
+import { OnMandateCreateComponent } from './treasure-report/on-mandate/on-mandate-create/on-mandate-create.component';
 
 @NgModule({
     declarations: [
@@ -490,7 +491,8 @@ import { OnMandateListComponent } from './treasure-report/on-mandate/on-mandate-
         RetireVouchersComponent,
         LiabilitiesComponent,
         OnMandateComponent,
-        OnMandateListComponent
+        OnMandateListComponent,
+        OnMandateCreateComponent
     ],
     imports: [
         CommonModule,
