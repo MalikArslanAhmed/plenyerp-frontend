@@ -254,6 +254,8 @@ import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-
 import {IfrNotesMasterComponent} from './ifr-notes-master/ifr-notes-master.component';
 import {RetireVouchersComponent} from './treasure-report/retire-vouchers/retire-vouchers.component';
 import { LiabilitiesComponent } from './treasure-report/retire-vouchers/liabilities/liabilities.component';
+import { OnMandateComponent } from './treasure-report/on-mandate/on-mandate.component';
+import { OnMandateListComponent } from './treasure-report/on-mandate/on-mandate-list/on-mandate-list.component';
 
 @NgModule({
     declarations: [
@@ -486,7 +488,9 @@ import { LiabilitiesComponent } from './treasure-report/retire-vouchers/liabilit
         AdvancesLedgerEmployeeReportComponent,
         IfrNotesMasterComponent,
         RetireVouchersComponent,
-        LiabilitiesComponent
+        LiabilitiesComponent,
+        OnMandateComponent,
+        OnMandateListComponent
     ],
     imports: [
         CommonModule,

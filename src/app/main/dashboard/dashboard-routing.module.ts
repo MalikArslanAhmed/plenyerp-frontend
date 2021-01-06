@@ -86,6 +86,7 @@ import {SummaryReportSpecialImprestComponent} from "./summary-report-special-imp
 import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
 import {IfrNotesMasterComponent} from "./ifr-notes-master/ifr-notes-master.component";
 import {RetireVouchersComponent} from "./treasure-report/retire-vouchers/retire-vouchers.component";
+import {OnMandateComponent} from "./treasure-report/on-mandate/on-mandate.component";
 
 const routes: Routes = [
     {
@@ -827,6 +828,13 @@ const routes: Routes = [
         component: RetireVouchersComponent,
         data: {
             title: 'Retire Vouchers'
+        }
+    },
+    {
+        path: 'on-mandate',
+        component: OnMandateComponent,
+        data: {
+            title: 'On Mandate'
         }
     },
 ];

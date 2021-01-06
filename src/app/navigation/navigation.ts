@@ -819,6 +819,16 @@ export const navigation: FuseNavigation[] = [
                 permissions: []
             },
             {
+                id: 'om-mandate',
+                title: 'On Mandate',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'payment',
+                url: '/dashboard/on-mandate',
+                permissions: []
+            },
+            {
                 id: 'retire-vouchers',
                 title: 'Retire Vouchers',
                 roles: [],
