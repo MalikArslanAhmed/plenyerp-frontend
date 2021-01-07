@@ -5,6 +5,7 @@ import {TreasureReportService} from "../../../../../shared/services/treasure-rep
 import {DefaultSettingVoucherInfoService} from "../../../../../shared/services/default-setting-voucher-info";
 import {AdminSegmentEmployeeSelectComponent} from "../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component";
 import {fuseAnimations} from "../../../../../../@fuse/animations";
+import {CashbookService} from "../../../../../shared/services/cashbook.service";
 
 @Component({
     selector: 'app-on-mandate-create',
@@ -23,13 +24,16 @@ export class OnMandateCreateComponent implements OnInit {
     checkingOfficers = [];
     payingOfficers = [];
     financialControllers = [];
+    cashbookAccountList = [];
     dialogRef: any;
+    cashbookData: any;
 
     constructor(public matDialogRef: MatDialogRef<OnMandateCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private treasureReportService: TreasureReportService,
+                private cashbookService: CashbookService,
                 private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
@@ -45,15 +49,26 @@ export class OnMandateCreateComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.checkForUpdate();
+        this.getcashbookList();
     }
 
     refresh() {
         this.onMandateForm = this.fb.group({
-            longName: [''],
-            shortName: [''],
-            nextPvIndexNumber: [''],
-            nextRvIndexNumber: [''],
-            honourCertificate: [''],
+            cashBookAccountId: [''],
+            refNumber: [''],
+            batchNumber: [''],
+            treasuryNumber: [''],
+            // longName: [''],
+            // shortName: [''],
+            // nextRvIndexNumber: [''],
+            valueDate: [''],
+            instructionToBank: [''],
+            preparedBy: [{value: '', disabled: true}],
+            preparedDate: [{value: '', disabled: true}],
+            istAuthorizedBy: [{value: '', disabled: true}],
+            istAuthorizedDate: [{value: '', disabled: true}],
+            secondAuthorizedBy: [{value: '', disabled: true}],
+            secondAuthorizedDate: [{value: '', disabled: true}],
             // checkingOfficerId: [{value: '', disabled: true}],
             // payingOfficerId: [{value: '', disabled: true}],
             // financialControllerId: [{value: '', disabled: true}],
@@ -63,12 +78,35 @@ export class OnMandateCreateComponent implements OnInit {
             // taxVoucherId: [''],
             // isPersonalAdvanceUnit: [false],
         });
+        this.onMandateForm.get('cashBookAccountId').valueChanges.subscribe(val => {
+            this.cashbookItem();
+        });
         /*this.voucherSourceUnitForm.patchValue({
             'retirementId': 11,
             'reverseVoucherId': 10,
             'revalidationId': 19
         });
         this.getDefaultSettingVoucherInfo();*/
+    }
+
+    getcashbookList() {
+        this.cashbookAccountList = [];
+        this.cashbookService.list({}).subscribe(data => {
+            this.cashbookAccountList = data.items;
+        });
+    }
+
+    cashbookItem() {
+        let cashbookData = '';
+        const selectedCashbookId = this.onMandateForm.get('cashBookAccountId').value;
+        if (this.cashbookAccountList && this.cashbookAccountList.length > 0) {
+            this.cashbookAccountList.forEach(val => {
+                if (val.id === selectedCashbookId) {
+                    cashbookData = val
+                }
+            });
+        }
+        this.cashbookData = cashbookData;
     }
 
     checkForUpdate() {
@@ -109,7 +147,7 @@ export class OnMandateCreateComponent implements OnInit {
         }
     }
 
-    saveVoucherSourceUnit() {
+    saveMandate() {
         if (!this.onMandateForm.valid) {
             return;
         }
@@ -120,7 +158,7 @@ export class OnMandateCreateComponent implements OnInit {
         });
     }
 
-    updateVoucherSourceUnit() {
+    updateMandate() {
         if (!this.onMandateForm.valid) {
             return;
         }
