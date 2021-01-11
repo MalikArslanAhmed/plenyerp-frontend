@@ -1228,6 +1228,14 @@ export class AppUrl {
         }
     }
 
+    static MANDATE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/mandate/` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/mandate`;
+        }
+    }
+
     static DEFAULT_SETTING_VOUCHER_INFO(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/default-settings/` + id;

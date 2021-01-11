@@ -6,6 +6,10 @@ import {DefaultSettingVoucherInfoService} from "../../../../../shared/services/d
 import {AdminSegmentEmployeeSelectComponent} from "../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component";
 import {fuseAnimations} from "../../../../../../@fuse/animations";
 import {CashbookService} from "../../../../../shared/services/cashbook.service";
+import * as moment from "moment";
+import {PaymentVoucherService} from "../../../../../shared/services/payment-voucher.service";
+import {AlertService} from "../../../../../shared/services/alert.service";
+import {MandateService} from "../../../../../shared/services/mandate.service";
 
 @Component({
     selector: 'app-on-mandate-create',
@@ -27,6 +31,9 @@ export class OnMandateCreateComponent implements OnInit {
     cashbookAccountList = [];
     dialogRef: any;
     cashbookData: any;
+    paymentVoucherData = [];
+    panelOpenState: boolean = false;
+    tabName = 'CHOOSE PAYMENT VOUCHER';
 
     constructor(public matDialogRef: MatDialogRef<OnMandateCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -34,7 +41,10 @@ export class OnMandateCreateComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private treasureReportService: TreasureReportService,
                 private cashbookService: CashbookService,
-                private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService) {
+                private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService,
+                private paymentVoucherService: PaymentVoucherService,
+                private alertService: AlertService,
+                private mandateService: MandateService) {
         this.action = _data.action;
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Mandate';
@@ -50,6 +60,7 @@ export class OnMandateCreateComponent implements OnInit {
         this.refresh();
         this.checkForUpdate();
         this.getcashbookList();
+        this.getPaymentVouchers();
     }
 
     refresh() {
@@ -148,14 +159,33 @@ export class OnMandateCreateComponent implements OnInit {
     }
 
     saveMandate() {
-        if (!this.onMandateForm.valid) {
-            return;
+        let params = {
+            'cashbookId': this.onMandateForm.getRawValue().cashBookAccountId ? this.onMandateForm.getRawValue().cashBookAccountId : '',
+            'refNumber': this.onMandateForm.getRawValue().refNumber ? this.onMandateForm.getRawValue().refNumber : '',
+            'batchNumber': this.onMandateForm.getRawValue().batchNumber ? this.onMandateForm.getRawValue().batchNumber : '',
+            'treasuryNumber': this.onMandateForm.getRawValue().treasuryNumber ? this.onMandateForm.getRawValue().treasuryNumber : '',
+            'valueDate': this.onMandateForm.getRawValue().valueDate ? moment(this.onMandateForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
+            'instructions': this.onMandateForm.getRawValue().instructionToBank ? this.onMandateForm.getRawValue().instructionToBank : '',
+        };
+        let paymentVouchers = [];
+        if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
+            this.paymentVoucherData.forEach(pv => {
+                if (pv && pv.checked) {
+                    paymentVouchers.push(pv.id);
+                }
+            });
         }
-        this.treasureReportService.save(this.onMandateForm.getRawValue()).subscribe(data => {
-            console.log('data', data);
-            this.matDialogRef.close(this.onMandateForm);
-            this.onMandateForm.reset();
-        });
+        params['paymentVouchers'] = JSON.stringify(paymentVouchers);
+
+        if (paymentVouchers && paymentVouchers.length > 0) {
+            this.mandateService.save(params).subscribe(data => {
+                this.matDialogRef.close(this.onMandateForm);
+                this.onMandateForm.reset();
+            });
+        } else {
+            this.alertService.showErrors('Please choose payment vouchers to save');
+        }
+
     }
 
     updateMandate() {
@@ -167,6 +197,16 @@ export class OnMandateCreateComponent implements OnInit {
             this.matDialogRef.close(this.onMandateForm);
             this.onMandateForm.reset();
         });
+    }
+
+    getChildReportData(item) {
+        const params = {};
+        if (item && item.id) {
+            params['parentId'] = item.id;
+            this.paymentVoucherService.getSchedulePayee(item.id, {page: -1}).subscribe(data => {
+                item['payees'] = data.items;
+            });
+        }
     }
 
     selectAdminEmployee(type) {
@@ -213,6 +253,60 @@ export class OnMandateCreateComponent implements OnInit {
                 });
             }
         });
+    }
+
+    getPaymentVouchers(params?) {
+        let param = {
+            ...params,
+            page: -1
+        };
+        this.paymentVoucherService.get(param).subscribe(data => {
+            this.paymentVoucherData = data.items;
+            if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
+                this.paymentVoucherData.forEach(d => {
+                    d['checked'] = false;
+                    d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
+                    // this.getChildReportData(d);
+                });
+                this.panelOpenState = !this.panelOpenState;
+            }
+        });
+    }
+
+    checkPV(index, event) {
+        this.paymentVoucherData[index].checked = event.checked;
+    }
+
+    addPV() {
+        let paymentVouchers = [];
+        if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
+            this.paymentVoucherData.forEach(pv => {
+                if (pv && pv.checked) {
+                    paymentVouchers.push(pv.id);
+                }
+            });
+        }
+        console.log('paymentVouchers', paymentVouchers);
+        if (paymentVouchers && paymentVouchers.length > 0) {
+            this.moveToSelectedTab('DETAILS');
+            this.tabName = 'DETAILS';
+        } else {
+            this.alertService.showErrors('Please choose payment vouchers to prooceed');
+        }
+
+    }
+
+    tabClick(event) {
+        this.tabName = event['tab'].textLabel;
+        // this.addPV(event);
+    }
+
+    moveToSelectedTab(tabName: string) {
+        for (let i = 0; i < document.querySelectorAll('.mat-tab-label-content').length; i++) {
+            if ((<HTMLElement>document.querySelectorAll('.mat-tab-label-content')[i]).innerText == tabName) {
+                (<HTMLElement>document.querySelectorAll('.mat-tab-label')[i]).click();
+            }
+        }
     }
 
     /*getDefaultSettingVoucherInfo() {

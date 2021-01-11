@@ -7,6 +7,7 @@ import {DeleteListModalComponent} from "../../../delete-list-modal/delete-list-m
 import {CashbookCreateComponent} from "../../cashbook/cashbook-create/cashbook-create.component";
 import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../../@fuse/animations";
+import {MandateService} from "../../../../../shared/services/mandate.service";
 
 @Component({
     selector: 'app-on-mandate-list',
@@ -54,11 +55,30 @@ export class OnMandateListComponent implements OnInit {
 
     constructor(private cashbookService: CashbookService,
                 private router: Router,
-                private _matDialog: MatDialog) {
+                private _matDialog: MatDialog,
+                private mandateService: MandateService) {
     }
 
     ngOnInit(): void {
         // this.getcashbookList();
+        this.getMadateList()
+    }
+
+    getMadateList() {
+        this.onMandateList = [];
+        this.mandateService.list({page: this.pagination.page}).subscribe(data => {
+            console.log('data', data);
+            this.onMandateList = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            if (this.onMandateList && this.onMandateList.length > 0) {
+                let i = 1;
+                this.onMandateList.forEach(val => {
+                    val['sno'] = i;
+                    i++;
+                });
+            }
+        });
     }
 
     /*getcashbookList() {

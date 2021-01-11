@@ -1,4 +1,381 @@
-<div class="dialog-content-wrapper" id="roles-items">
+<div class="dialog-content-wrapper" id="mandate-create">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-10px pb-0 m-0" fusePerfectScrollbar>
+        <mat-tab-group dynamicHeight (selectedTabChange)="tabClick($event)" #formTab>
+            <mat-tab label="CHOOSE PAYMENT VOUCHER">
+                <div class="content mt-20px"
+                     *ngIf="paymentVoucherData && paymentVoucherData.length > 0; else noPaymentVoucherData">
+                    <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
+                        <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                            <span class="mat-header-cell text-center">#</span>
+                            <span class="mat-header-cell text-center">S.No.</span>
+                            <span class="mat-header-cell text-center">Year</span>
+                            <span class="mat-header-cell text-center">Deptal No.</span>
+                            <span class="mat-header-cell text-center">Payee Names</span>
+                            <span class="mat-header-cell text-center">Amount (Net)</span>
+                            <span class="mat-header-cell text-center">Taxes</span>
+                        </section>
+                        <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index">
+                            <mat-expansion-panel-header
+                                class="mat-row align-items-center expansion-header expansion-row"
+                                (click)="getChildReportData(reportData)">
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">
+                                    <mat-checkbox (change)="checkPV(i, $event)"
+                                                  (click)="$event.stopPropagation()"
+                                                  [checked]="reportData.checked ? true : null"></mat-checkbox>
+                                </p>
+                            </span>
+                                <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
+                            </span>
+                                <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
+                            </span>
+                                <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.deptalId ? reportData?.deptalId : '-'}}</p>
+                            </span>
+                                <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.payee ? reportData?.payee : '-'}}</p>
+                            </span>
+                                <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData['totalAmount'] && reportData['totalAmount'].amount ? reportData['totalAmount'].amount : '-'}}</p>
+                            </span>
+                                <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData['totalTax'] && reportData['totalTax'].tax ? reportData['totalTax'].tax : '-'}}</p>
+                            </span>
+                            </mat-expansion-panel-header>
+                            <div>
+                                <div mat-dialog-content class="items-data" fusePerfectScrollbar
+                                     style="overflow-x: scroll !important;">
+                                    <table class="simple invoice-table">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="title">Payee Id</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Payee Name</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Amount Net</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Taxes</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Total Amount</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Details</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Bank A/C Title</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Bank A/C #</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Type of Bank A/C</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Bank</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Bank Branch</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Sort Code</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">Status</div>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody
+                                            *ngIf="reportData && reportData['payees'] && reportData['payees'].length > 0; else noChildToShow">
+                                        <tr *ngFor="let data of reportData['payees']; let i = index">
+                                            <td>
+                                                <div class="title" *ngIf="data && data.employee">
+                                                    {{data?.employee?.id}}
+                                                </div>
+                                                <div class="title" *ngIf="data && data.companyId">
+                                                    {{data.companyId}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title" *ngIf="data && data.employee">
+                                                    {{data?.employee?.firstName}} {{data?.employee?.lastName}}
+                                                </div>
+                                                <div class="title" *ngIf="data && data.adminCompany">
+                                                    {{data?.adminCompany?.name}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title">
+                                                    {{data?.netAmount}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title">
+                                                    {{data?.totalTax}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title">
+                                                    {{(data?.netAmount + data?.totalTax) | number}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title">
+                                                    {{data?.details}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title"
+                                                     *ngIf="data && data.employee && data.employee.employeeBank">
+                                                    {{data?.employee?.employeeBank?.title}}
+                                                </div>
+                                                <div class="title"
+                                                     *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                    {{data?.adminCompany?.companyBank?.title}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title"
+                                                     *ngIf="data && data.employee && data.employee.employeeBank">
+                                                    {{data?.employee?.employeeBank?.number}}
+                                                </div>
+                                                <div class="title"
+                                                     *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                    {{data?.adminCompany?.companyBank?.bankAccountNumber}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title"
+                                                     *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.type">
+                                                    {{data?.employee?.employeeBank?.type}}
+                                                </div>
+                                                <div class="title"
+                                                     *ngIf="data && data.adminCompany && data.adminCompany.companyBank && data.adminCompany.companyBank.typeOfBankAccount">
+                                                    {{data?.adminCompany?.companyBank?.typeOfBankAccount}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title"
+                                                     *ngIf="data && data.employee && data.employee.employeeBank">
+                                                    {{data?.employee?.employeeBank?.bank?.name}}
+                                                </div>
+                                                <div class="title"
+                                                     *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                    {{data?.adminCompany?.companyBank?.bank?.name}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title"
+                                                     *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
+                                                    {{data?.employee?.employeeBank?.branches?.name}}
+                                                </div>
+                                                <div class="title"
+                                                     *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                    {{data?.adminCompany?.companyBank?.bankBranch?.name}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title"
+                                                     *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
+                                                    {{data?.employee?.employeeBank?.branches?.sortCode}}
+                                                </div>
+                                                <div class="title"
+                                                     *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                                    {{data?.adminCompany?.companyBank?.bankBranch?.sortCode}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="title">
+                                                    {{data?.status}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <ng-template #noChildToShow>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-center" colspan="15">No data to show</td>
+                                            </tr>
+                                            </tbody>
+                                        </ng-template>
+                                    </table>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <!--<mat-paginator #paginator *ngIf="paymentVoucherData.length > 0"
+                                   [length]="pagination.total"
+                                   [pageSize]="pagination.perpage"
+                                   [pageIndex]="pagination.page-1"
+                                   (page)="pageEvent = onPageChange($event)"
+                    >
+                    </mat-paginator>-->
+                </div>
+                <ng-template #noPaymentVoucherData>
+                    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+                        <h6>No data to show</h6>
+                    </div>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="DETAILS">
+                <form [formGroup]="onMandateForm" style="margin-top: 20px">
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer">
+                            <mat-label>Cashbook Acct:</mat-label>
+                            <mat-select formControlName="cashBookAccountId">
+                                <mat-option value="">Cashbook Account Name</mat-option>
+                                <mat-option [value]="cashbook.id"
+                                            *ngFor="let cashbook of cashbookAccountList">{{cashbook?.title}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="10px" style="margin-top: -10px">
+                        <div *ngIf="cashbookData">
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Title of Acct.:</span>&nbsp;
+                                <span>{{cashbookData.title}}</span>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Domiciled at.:</span>&nbsp;
+                                <span>{{cashbookData?.bank?.name}}</span>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Acct. Number:</span>&nbsp;
+                                <span>{{cashbookData?.bankAccountNumber}}</span>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Currency:</span>&nbsp;
+                                <span>{{cashbookData.currency?.codeCurrency}}</span>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Curr. Balance:</span>&nbsp;
+                                <span>{{cashbookData?.cashbook}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Ref No.</mat-label>
+                            <input matInput placeholder="Ref No." formControlName="refNumber">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Batch No.</mat-label>
+                            <input matInput placeholder="Batch No." formControlName="batchNumber">
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Treasury No.</mat-label>
+                            <input matInput placeholder="Treasury No." formControlName="treasuryNumber">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Value Date</mat-label>
+                            <input (click)="valDate.open()" (focus)="valDate.open()" [matDatepicker]="valDate"
+                                   formControlName="valueDate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="valDate"
+                                                   matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #valDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Instruction to Bank</mat-label>
+                            <textarea matInput placeholder="Instruction to Bank" formControlName="instructionToBank"
+                                      style="resize: none"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Prepared By</mat-label>
+                            <input matInput placeholder="Prepared By" formControlName="preparedBy">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Prepared Date</mat-label>
+                            <input (click)="preapredBy.open()" (focus)="preapredBy.open()" [matDatepicker]="preapredBy"
+                                   formControlName="preparedDate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="preapredBy"
+                                                   matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #preapredBy></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Ist Authorized By</mat-label>
+                            <input matInput placeholder="Ist Authorized By" formControlName="istAuthorizedBy">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Ist Authorized Date</mat-label>
+                            <input (click)="isAuthorizedBy.open()" (focus)="isAuthorizedBy.open()"
+                                   [matDatepicker]="isAuthorizedBy"
+                                   formControlName="istAuthorizedDate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="isAuthorizedBy"
+                                                   matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #isAuthorizedBy></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>IInd Authorized By</mat-label>
+                            <input matInput placeholder="IInd Authorized By" formControlName="secondAuthorizedBy">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>IInd Authorized Date</mat-label>
+                            <input (click)="secondAuthorizedDate.open()" (focus)="secondAuthorizedDate.open()"
+                                   [matDatepicker]="secondAuthorizedDate"
+                                   formControlName="istAuthorizedDate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="secondAuthorizedDate"
+                                                   matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #secondAuthorizedDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <!--<div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-button class="save-button" (click)="matDialogRef.close();"
+                                aria-label="Cancel">CANCEL
+                        </button>
+                        <button mat-button class="save-button"
+                                (click)="saveMandate()"
+                                [disabled]="onMandateForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+                        </button>
+                        <button mat-button class="save-button"
+                                (click)="updateMandate()"
+                                [disabled]="onMandateForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+                        </button>
+                    </div>-->
+                </form>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close();"
+                aria-label="Cancel">CANCEL
+        </button>
+        <button mat-button class="save-button" aria-label="Save" *ngIf="tabName === 'CHOOSE PAYMENT VOUCHER'" (click)="addPV('DETAILS')">NEXT</button>
+        <button mat-button class="save-button" *ngIf="tabName === 'DETAILS'"
+                (click)="saveMandate()" aria-label="Save">SAVE
+        </button>
+    </div>
+</div>
+
+<!--<div class="dialog-content-wrapper" id="roles-items">
     <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title dialog-title">{{dialogTitle}}</span>
@@ -136,4 +513,4 @@
                 [disabled]="onMandateForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
         </button>
     </div>
-</div>
+</div>-->
