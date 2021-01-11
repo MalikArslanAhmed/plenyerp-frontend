@@ -1,123 +1,211 @@
 <div class="voucherSource-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
-    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="onMandateList">
-        <ng-container matColumnDef="sno">
-            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
-            <mat-cell *matCellDef="let mandate">
-                <!--<p class="email text-truncate">
-                    {{((pagination.page - 1) * pagination.perpage) + mandate?.sno}}.
-                </p>-->
-                <p class="email text-truncate">
-                    {{mandate?.id}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="beneficiery">
-            <mat-header-cell *matHeaderCellDef>Beneficiery</mat-header-cell>
-            <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{mandate?.beneficery}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="bank">
-            <mat-header-cell *matHeaderCellDef>Bank</mat-header-cell>
-            <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{mandate?.bank}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="branch">
-            <mat-header-cell *matHeaderCellDef>Branch</mat-header-cell>
-            <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{mandate?.branch}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="account_number">
-            <mat-header-cell *matHeaderCellDef>Account Number</mat-header-cell>
-            <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{mandate?.accountNumber}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="type">
-            <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
-            <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{mandate?.type}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="amount">
-            <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
-            <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{mandate?.amount}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="tax">
-            <mat-header-cell *matHeaderCellDef>Tax</mat-header-cell>
-            <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{mandate?.tax}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="purpose">
-            <mat-header-cell *matHeaderCellDef>Purpose</mat-header-cell>
-            <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{mandate?.purpose}}
-                </p>
-            </mat-cell>
-        </ng-container>
-
-        <!--<ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef>
-                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Action</div>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let mandate">
-                <div fxFlex="row" fxLayoutAlign="end center">
-                    <div>
-                        <button mat-icon-button aria-label="Toggle star" (click)="editCashbook(mandate)"
-                                style="color: blue; margin-left: 1rem">
-                            <mat-icon class="material-icons">edit</mat-icon>
-                        </button>
-                    </div>
-                    <div>
-                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModel(mandate)"
-                                style="color: red">
-                            <mat-icon class="material-icons">delete</mat-icon>
-                        </button>
-                    </div>
+    <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
+        <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+            <span class="mat-header-cell text-center">S.No.</span>
+            <span class="mat-header-cell text-center">Ref No.</span>
+            <span class="mat-header-cell text-center">Cashbook Account</span>
+            <span class="mat-header-cell text-center">Batch No.</span>
+            <span class="mat-header-cell text-center">Treasury No.</span>
+            <span class="mat-header-cell text-center">Value Date</span>
+            <span class="mat-header-cell text-center">Amount (Net)</span>
+            <span class="mat-header-cell text-center">Taxes</span>
+        </section>
+        <mat-expansion-panel *ngFor="let reportData of onMandateList; let i = index">
+            <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.id}}.</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.cashbook?.title}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.batchNumber}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.treasuryNumber}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.valueDate}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.totalAmount}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.totalTax}}</p>
+                </span>
+            </mat-expansion-panel-header>
+            <div>
+                <div mat-dialog-content class="items-data" fusePerfectScrollbar style="overflow-x: scroll !important;">
+                    <table class="simple invoice-table">
+                        <thead>
+                        <tr>
+                            <!--<th>
+                                <div class="title">S.No.</div>
+                            </th>-->
+                            <th>
+                                <div class="title">Beneficiery</div>
+                            </th>
+                            <th>
+                                <div class="title">Bank</div>
+                            </th>
+                            <th>
+                                <div class="title">Branch</div>
+                            </th>
+                            <th>
+                                <div class="title">Account</div>
+                            </th>
+                            <th>
+                                <div class="title">Sort Code</div>
+                            </th>
+                            <th>
+                                <div class="title">Amount</div>
+                            </th>
+                            <th>
+                                <div class="title">Tax</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf="reportData['paymentVouchers'] && reportData['paymentVouchers'].length > 0">
+                        <ng-container *ngFor="let payee of reportData['paymentVouchers']">
+                            <tr *ngFor="let benef of payee['payeeVouchers']">
+                                <td></td>
+                                <td>{{benef?.adminCompany?.companyBank?.bankId}}</td>
+                                <td>{{benef?.adminCompany?.companyBank?.bankBranch?.name}}</td>
+                                <td>{{benef?.adminCompany?.companyBank?.bankAccountNumber}}</td>
+                                <td>{{benef?.adminCompany?.companyBank?.bankBranch?.sortCode}}</td>
+                                <td>{{benef?.netAmount}}</td>
+                                <td>{{benef?.totalTax}}</td>
+                            </tr>
+                        </ng-container>
+                        </tbody>
+                    </table>
                 </div>
-            </mat-cell>
-        </ng-container>-->
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let mandate; columns: displayedColumns;" class="contact"
-                 [@animate]="{value:'*',params:{y:'100%'}}">
-        </mat-row>
-    </mat-table>
-    <mat-paginator #paginator *ngIf="onMandateList.length > 0"
-                   [length]="pagination.total"
-                   [pageSize]="pagination.perpage"
-                   [pageIndex]="pagination.page-1"
-                   (page)="pageEvent = onPageChange($event)"
-    >
-    </mat-paginator>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>
+<!--<mat-table [@animateStagger]="{value:'50'}" [dataSource]="onMandateList">
+    <ng-container matColumnDef="sno">
+        <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+        <mat-cell *matCellDef="let mandate">
+            &lt;!&ndash;<p class="email text-truncate">
+                {{((pagination.page - 1) * pagination.perpage) + mandate?.sno}}.
+            </p>&ndash;&gt;
+            <p class="email text-truncate">
+                {{mandate?.id}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="beneficiery">
+        <mat-header-cell *matHeaderCellDef>Beneficiery</mat-header-cell>
+        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
+            <p class="phone text-truncate cursor-pointer">
+                {{mandate?.beneficery}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bank">
+        <mat-header-cell *matHeaderCellDef>Bank</mat-header-cell>
+        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
+            <p class="phone text-truncate cursor-pointer">
+                {{mandate?.bank}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="branch">
+        <mat-header-cell *matHeaderCellDef>Branch</mat-header-cell>
+        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
+            <p class="phone text-truncate cursor-pointer">
+                {{mandate?.branch}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="account_number">
+        <mat-header-cell *matHeaderCellDef>Account Number</mat-header-cell>
+        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
+            <p class="phone text-truncate cursor-pointer">
+                {{mandate?.accountNumber}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
+            <p class="phone text-truncate cursor-pointer">
+                {{mandate?.type}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
+            <p class="phone text-truncate cursor-pointer">
+                {{mandate?.amount}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tax">
+        <mat-header-cell *matHeaderCellDef>Tax</mat-header-cell>
+        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
+            <p class="phone text-truncate cursor-pointer">
+                {{mandate?.tax}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="purpose">
+        <mat-header-cell *matHeaderCellDef>Purpose</mat-header-cell>
+        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
+            <p class="phone text-truncate cursor-pointer">
+                {{mandate?.purpose}}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    &lt;!&ndash;<ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Action</div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let mandate">
+            <div fxFlex="row" fxLayoutAlign="end center">
+                <div>
+                    <button mat-icon-button aria-label="Toggle star" (click)="editCashbook(mandate)"
+                            style="color: blue; margin-left: 1rem">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                </div>
+                <div>
+                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModel(mandate)"
+                            style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-cell>
+    </ng-container>&ndash;&gt;
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let mandate; columns: displayedColumns;" class="contact"
+             [@animate]="{value:'*',params:{y:'100%'}}">
+    </mat-row>
+</mat-table>
+<mat-paginator #paginator *ngIf="onMandateList.length > 0"
+               [length]="pagination.total"
+               [pageSize]="pagination.perpage"
+               [pageIndex]="pagination.page-1"
+               (page)="pageEvent = onPageChange($event)"
+>
+</mat-paginator>-->
+<!--</div>-->
 
 

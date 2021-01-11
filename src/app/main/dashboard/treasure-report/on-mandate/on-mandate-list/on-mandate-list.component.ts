@@ -41,7 +41,7 @@ export class OnMandateListComponent implements OnInit {
             'purpose': 'Testing',
         }
     ];
-    displayedColumns = ['sno', 'beneficiery', 'bank', 'branch', 'account_number', 'type', 'amount', 'tax', 'purpose'];
+    // displayedColumns = ['sno', 'beneficiery', 'bank', 'branch', 'account_number', 'type', 'amount', 'tax', 'purpose'];
     dialogRef: any;
     selectIndex = 0;
     pagination = {

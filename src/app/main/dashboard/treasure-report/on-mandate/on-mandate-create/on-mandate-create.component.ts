@@ -33,7 +33,7 @@ export class OnMandateCreateComponent implements OnInit {
     cashbookData: any;
     paymentVoucherData = [];
     panelOpenState: boolean = false;
-    tabName = 'CHOOSE PAYMENT VOUCHER';
+    tabName = 'DETAILS';
 
     constructor(public matDialogRef: MatDialogRef<OnMandateCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -66,7 +66,6 @@ export class OnMandateCreateComponent implements OnInit {
     refresh() {
         this.onMandateForm = this.fb.group({
             cashBookAccountId: [''],
-            refNumber: [''],
             batchNumber: [''],
             treasuryNumber: [''],
             // longName: [''],
@@ -161,7 +160,6 @@ export class OnMandateCreateComponent implements OnInit {
     saveMandate() {
         let params = {
             'cashbookId': this.onMandateForm.getRawValue().cashBookAccountId ? this.onMandateForm.getRawValue().cashBookAccountId : '',
-            'refNumber': this.onMandateForm.getRawValue().refNumber ? this.onMandateForm.getRawValue().refNumber : '',
             'batchNumber': this.onMandateForm.getRawValue().batchNumber ? this.onMandateForm.getRawValue().batchNumber : '',
             'treasuryNumber': this.onMandateForm.getRawValue().treasuryNumber ? this.onMandateForm.getRawValue().treasuryNumber : '',
             'valueDate': this.onMandateForm.getRawValue().valueDate ? moment(this.onMandateForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
@@ -175,17 +173,12 @@ export class OnMandateCreateComponent implements OnInit {
                 }
             });
         }
-        params['paymentVouchers'] = JSON.stringify(paymentVouchers);
+        params['paymentVouchers'] = (paymentVouchers && paymentVouchers.length > 0) ? JSON.stringify(paymentVouchers) : '';
 
-        if (paymentVouchers && paymentVouchers.length > 0) {
-            this.mandateService.save(params).subscribe(data => {
-                this.matDialogRef.close(this.onMandateForm);
-                this.onMandateForm.reset();
-            });
-        } else {
-            this.alertService.showErrors('Please choose payment vouchers to save');
-        }
-
+        this.mandateService.save(params).subscribe(data => {
+            this.matDialogRef.close(this.onMandateForm);
+            this.onMandateForm.reset();
+        });
     }
 
     updateMandate() {
@@ -287,13 +280,14 @@ export class OnMandateCreateComponent implements OnInit {
             });
         }
         console.log('paymentVouchers', paymentVouchers);
-        if (paymentVouchers && paymentVouchers.length > 0) {
-            this.moveToSelectedTab('DETAILS');
-            this.tabName = 'DETAILS';
+        this.moveToSelectedTab('CHOOSE PAYMENT VOUCHER');
+        this.tabName = 'CHOOSE PAYMENT VOUCHER';
+        /*if (paymentVouchers && paymentVouchers.length > 0) {
+            this.moveToSelectedTab('CHOOSE PAYMENT VOUCHER');
+            this.tabName = 'CHOOSE PAYMENT VOUCHER';
         } else {
             this.alertService.showErrors('Please choose payment vouchers to prooceed');
-        }
-
+        }*/
     }
 
     tabClick(event) {

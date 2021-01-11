@@ -10,6 +10,132 @@
 
     <div mat-dialog-content class="p-10px pb-0 m-0" fusePerfectScrollbar>
         <mat-tab-group dynamicHeight (selectedTabChange)="tabClick($event)" #formTab>
+            <mat-tab label="DETAILS">
+                <form [formGroup]="onMandateForm" style="margin-top: 20px">
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer">
+                            <mat-label>Cashbook Acct:</mat-label>
+                            <mat-select formControlName="cashBookAccountId">
+                                <mat-option value="">Cashbook Account Name</mat-option>
+                                <mat-option [value]="cashbook.id"
+                                            *ngFor="let cashbook of cashbookAccountList">{{cashbook?.title}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="10px" style="margin-top: -10px">
+                        <div *ngIf="cashbookData">
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Title of Acct.:</span>&nbsp;
+                                <span>{{cashbookData.title}}</span>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Domiciled at.:</span>&nbsp;
+                                <span>{{cashbookData?.bank?.name}}</span>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Acct. Number:</span>&nbsp;
+                                <span>{{cashbookData?.bankAccountNumber}}</span>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Currency:</span>&nbsp;
+                                <span>{{cashbookData.currency?.codeCurrency}}</span>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <span style="font-weight: 600">Curr. Balance:</span>&nbsp;
+                                <span>{{cashbookData?.cashbook}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 15px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Batch No.</mat-label>
+                            <input matInput placeholder="Batch No." formControlName="batchNumber" type="number">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Treasury No.</mat-label>
+                            <input matInput placeholder="Treasury No." formControlName="treasuryNumber" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Value Date</mat-label>
+                            <input (click)="valDate.open()" (focus)="valDate.open()" [matDatepicker]="valDate"
+                                   formControlName="valueDate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="valDate"
+                                                   matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #valDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Instruction to Bank</mat-label>
+                            <textarea matInput placeholder="Instruction to Bank" formControlName="instructionToBank"
+                                      style="resize: none"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Prepared By</mat-label>
+                            <input matInput placeholder="Prepared By" formControlName="preparedBy">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Prepared Date</mat-label>
+                            <input (click)="preapredBy.open()" (focus)="preapredBy.open()" [matDatepicker]="preapredBy"
+                                   formControlName="preparedDate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="preapredBy"
+                                                   matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #preapredBy></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Ist Authorized By</mat-label>
+                            <input matInput placeholder="Ist Authorized By" formControlName="istAuthorizedBy">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>Ist Authorized Date</mat-label>
+                            <input (click)="isAuthorizedBy.open()" (focus)="isAuthorizedBy.open()"
+                                   [matDatepicker]="isAuthorizedBy"
+                                   formControlName="istAuthorizedDate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="isAuthorizedBy"
+                                                   matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #isAuthorizedBy></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>IInd Authorized By</mat-label>
+                            <input matInput placeholder="IInd Authorized By" formControlName="secondAuthorizedBy">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex>
+                            <mat-label>IInd Authorized Date</mat-label>
+                            <input (click)="secondAuthorizedDate.open()" (focus)="secondAuthorizedDate.open()"
+                                   [matDatepicker]="secondAuthorizedDate"
+                                   formControlName="istAuthorizedDate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="secondAuthorizedDate"
+                                                   matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #secondAuthorizedDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <!--<div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-button class="save-button" (click)="matDialogRef.close();"
+                                aria-label="Cancel">CANCEL
+                        </button>
+                        <button mat-button class="save-button"
+                                (click)="saveMandate()"
+                                [disabled]="onMandateForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+                        </button>
+                        <button mat-button class="save-button"
+                                (click)="updateMandate()"
+                                [disabled]="onMandateForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+                        </button>
+                    </div>-->
+                </form>
+            </mat-tab>
             <mat-tab label="CHOOSE PAYMENT VOUCHER">
                 <div class="content mt-20px"
                      *ngIf="paymentVoucherData && paymentVoucherData.length > 0; else noPaymentVoucherData">
@@ -27,31 +153,31 @@
                             <mat-expansion-panel-header
                                 class="mat-row align-items-center expansion-header expansion-row"
                                 (click)="getChildReportData(reportData)">
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">
-                                    <mat-checkbox (change)="checkPV(i, $event)"
-                                                  (click)="$event.stopPropagation()"
-                                                  [checked]="reportData.checked ? true : null"></mat-checkbox>
-                                </p>
-                            </span>
                                 <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
-                            </span>
+                                    <p class="text-truncate cursor-pointer mt-10px text-center">
+                                        <mat-checkbox (change)="checkPV(i, $event)"
+                                                      (click)="$event.stopPropagation()"
+                                                      [checked]="reportData.checked ? true : null"></mat-checkbox>
+                                    </p>
+                                </span>
                                 <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
-                            </span>
+                                    <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
+                                </span>
                                 <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.deptalId ? reportData?.deptalId : '-'}}</p>
-                            </span>
+                                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
+                                </span>
                                 <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.payee ? reportData?.payee : '-'}}</p>
-                            </span>
+                                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.deptalId ? reportData?.deptalId : '-'}}</p>
+                                </span>
                                 <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData['totalAmount'] && reportData['totalAmount'].amount ? reportData['totalAmount'].amount : '-'}}</p>
-                            </span>
+                                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.payee ? reportData?.payee : '-'}}</p>
+                                </span>
                                 <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData['totalTax'] && reportData['totalTax'].tax ? reportData['totalTax'].tax : '-'}}</p>
-                            </span>
+                                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData['totalAmount'] && reportData['totalAmount'].amount ? reportData['totalAmount'].amount : '-'}}</p>
+                                </span>
+                                <span class="mat-cell align-items-center">
+                                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData['totalTax'] && reportData['totalTax'].tax ? reportData['totalTax'].tax : '-'}}</p>
+                                </span>
                             </mat-expansion-panel-header>
                             <div>
                                 <div mat-dialog-content class="items-data" fusePerfectScrollbar
@@ -232,144 +358,14 @@
                     </div>
                 </ng-template>
             </mat-tab>
-            <mat-tab label="DETAILS">
-                <form [formGroup]="onMandateForm" style="margin-top: 20px">
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer">
-                            <mat-label>Cashbook Acct:</mat-label>
-                            <mat-select formControlName="cashBookAccountId">
-                                <mat-option value="">Cashbook Account Name</mat-option>
-                                <mat-option [value]="cashbook.id"
-                                            *ngFor="let cashbook of cashbookAccountList">{{cashbook?.title}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="10px" style="margin-top: -10px">
-                        <div *ngIf="cashbookData">
-                            <div fxLayout="row" fxLayoutGap="10px">
-                                <span style="font-weight: 600">Title of Acct.:</span>&nbsp;
-                                <span>{{cashbookData.title}}</span>
-                            </div>
-                            <div fxLayout="row" fxLayoutGap="10px">
-                                <span style="font-weight: 600">Domiciled at.:</span>&nbsp;
-                                <span>{{cashbookData?.bank?.name}}</span>
-                            </div>
-                            <div fxLayout="row" fxLayoutGap="10px">
-                                <span style="font-weight: 600">Acct. Number:</span>&nbsp;
-                                <span>{{cashbookData?.bankAccountNumber}}</span>
-                            </div>
-                            <div fxLayout="row" fxLayoutGap="10px">
-                                <span style="font-weight: 600">Currency:</span>&nbsp;
-                                <span>{{cashbookData.currency?.codeCurrency}}</span>
-                            </div>
-                            <div fxLayout="row" fxLayoutGap="10px">
-                                <span style="font-weight: 600">Curr. Balance:</span>&nbsp;
-                                <span>{{cashbookData?.cashbook}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Ref No.</mat-label>
-                            <input matInput placeholder="Ref No." formControlName="refNumber">
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Batch No.</mat-label>
-                            <input matInput placeholder="Batch No." formControlName="batchNumber">
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Treasury No.</mat-label>
-                            <input matInput placeholder="Treasury No." formControlName="treasuryNumber">
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Value Date</mat-label>
-                            <input (click)="valDate.open()" (focus)="valDate.open()" [matDatepicker]="valDate"
-                                   formControlName="valueDate"
-                                   matInput>
-                            <mat-datepicker-toggle [for]="valDate"
-                                                   matSuffix></mat-datepicker-toggle>
-                            <mat-datepicker #valDate></mat-datepicker>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Instruction to Bank</mat-label>
-                            <textarea matInput placeholder="Instruction to Bank" formControlName="instructionToBank"
-                                      style="resize: none"></textarea>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Prepared By</mat-label>
-                            <input matInput placeholder="Prepared By" formControlName="preparedBy">
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Prepared Date</mat-label>
-                            <input (click)="preapredBy.open()" (focus)="preapredBy.open()" [matDatepicker]="preapredBy"
-                                   formControlName="preparedDate"
-                                   matInput>
-                            <mat-datepicker-toggle [for]="preapredBy"
-                                                   matSuffix></mat-datepicker-toggle>
-                            <mat-datepicker #preapredBy></mat-datepicker>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Ist Authorized By</mat-label>
-                            <input matInput placeholder="Ist Authorized By" formControlName="istAuthorizedBy">
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Ist Authorized Date</mat-label>
-                            <input (click)="isAuthorizedBy.open()" (focus)="isAuthorizedBy.open()"
-                                   [matDatepicker]="isAuthorizedBy"
-                                   formControlName="istAuthorizedDate"
-                                   matInput>
-                            <mat-datepicker-toggle [for]="isAuthorizedBy"
-                                                   matSuffix></mat-datepicker-toggle>
-                            <mat-datepicker #isAuthorizedBy></mat-datepicker>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>IInd Authorized By</mat-label>
-                            <input matInput placeholder="IInd Authorized By" formControlName="secondAuthorizedBy">
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>IInd Authorized Date</mat-label>
-                            <input (click)="secondAuthorizedDate.open()" (focus)="secondAuthorizedDate.open()"
-                                   [matDatepicker]="secondAuthorizedDate"
-                                   formControlName="istAuthorizedDate"
-                                   matInput>
-                            <mat-datepicker-toggle [for]="secondAuthorizedDate"
-                                                   matSuffix></mat-datepicker-toggle>
-                            <mat-datepicker #secondAuthorizedDate></mat-datepicker>
-                        </mat-form-field>
-                    </div>
-                    <!--<div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-                        <button mat-button class="save-button" (click)="matDialogRef.close();"
-                                aria-label="Cancel">CANCEL
-                        </button>
-                        <button mat-button class="save-button"
-                                (click)="saveMandate()"
-                                [disabled]="onMandateForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
-                        </button>
-                        <button mat-button class="save-button"
-                                (click)="updateMandate()"
-                                [disabled]="onMandateForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
-                        </button>
-                    </div>-->
-                </form>
-            </mat-tab>
         </mat-tab-group>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button" (click)="matDialogRef.close();"
                 aria-label="Cancel">CANCEL
         </button>
-        <button mat-button class="save-button" aria-label="Save" *ngIf="tabName === 'CHOOSE PAYMENT VOUCHER'" (click)="addPV('DETAILS')">NEXT</button>
-        <button mat-button class="save-button" *ngIf="tabName === 'DETAILS'"
+        <button mat-button class="save-button" aria-label="Save" *ngIf="tabName === 'DETAILS'" (click)="addPV('CHOOSE PAYMENT VOUCHER')">NEXT</button>
+        <button mat-button class="save-button" *ngIf="tabName === 'CHOOSE PAYMENT VOUCHER'"
                 (click)="saveMandate()" aria-label="Save">SAVE
         </button>
     </div>
