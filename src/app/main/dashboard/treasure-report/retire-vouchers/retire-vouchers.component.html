@@ -80,7 +80,7 @@
                         <span class="mat-header-cell text-center">PV Status</span>
                         <span class="mat-header-cell text-center">Retr. Status</span>
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index">
+                    <mat-expansion-panel *ngFor="let reportData of retireVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center"
@@ -165,9 +165,6 @@
                                                 </th>
                                                 <th>
                                                     <div class="title">Status</div>
-                                                </th>
-                                                <th *ngIf="reportData.status === 'NEW'">
-                                                    <div class="title">Schedule Economic Code</div>
                                                 </th>
                                             </tr>
                                             </thead>
@@ -275,29 +272,11 @@
                                                         {{data?.status}}
                                                     </div>
                                                 </td>
-                                                <td *ngIf="reportData.status ==='NEW'">
-                                                    <button mat-button class="payee-report"
-                                                            (click)="scheduleEconomicCodes(reportData, data)">Schedule
-                                                        Economic Codes
-                                                    </button>
-                                                </td>
                                             </tr>
                                             </tbody>
                                             <tbody *ngIf="reportData.status ==='NEW'">
                                             <tr>
                                                 <td colspan="15">
-                                                    <button mat-button class="payee-report" style="margin-right: 10px"
-                                                            (click)="scheduleEmployee(reportData)"
-                                                            *ngIf="reportData && reportData.payee === 'EMPLOYEE'">
-                                                        Schedule Payee
-                                                        Employees
-                                                    </button>
-                                                    <button mat-button class="payee-report"
-                                                            (click)="scheduleCustomers(reportData)"
-                                                            *ngIf="reportData && reportData.payee === 'CUSTOMER'">
-                                                        Schedule Payee
-                                                        Customers
-                                                    </button>
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
                                                             (click)="editLiabilities(reportData)">
                                                         Edit Liablities
@@ -390,7 +369,7 @@
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
-                <mat-paginator #paginator *ngIf="paymentVoucherData.length > 0"
+                <mat-paginator #paginator *ngIf="retireVoucherData.length > 0"
                                [length]="pagination.total"
                                [pageSize]="pagination.perpage"
                                [pageIndex]="pagination.page-1"

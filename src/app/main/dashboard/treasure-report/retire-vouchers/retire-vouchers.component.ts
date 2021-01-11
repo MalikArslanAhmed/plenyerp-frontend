@@ -10,6 +10,7 @@ import {SchedulePayeeEmployeeComponent} from "../payment-voucher/schedule-payee-
 import {SchedulePayeeCustomerComponent} from "../payment-voucher/schedule-payee-customer/schedule-payee-customer.component";
 import {ScheduleEconomicCodesComponent} from "../payment-voucher/schedule-economic-codes/schedule-economic-codes.component";
 import {LiabilitiesComponent} from "./liabilities/liabilities.component";
+import {RetireVoucherService} from "../../../../shared/services/retire-voucher.service";
 
 @Component({
     selector: 'app-retire-vouchers',
@@ -20,7 +21,8 @@ import {LiabilitiesComponent} from "./liabilities/liabilities.component";
 })
 export class RetireVouchersComponent implements OnInit {
     filterPaymentVoucherForm: FormGroup;
-    paymentVoucherData = [];
+    // retireVoucherData = [];
+    retireVoucherData = [];
     panelOpenState: boolean = false;
     sourceUnit = [];
     statuses = [];
@@ -39,12 +41,13 @@ export class RetireVouchersComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
                 private paymentVoucherService: PaymentVoucherService,
-                private treasureReportService: TreasureReportService) {
+                private treasureReportService: TreasureReportService,
+                private retireVoucherService: RetireVoucherService) {
     }
 
     ngOnInit(): void {
         this.refresh();
-        this.getPyamentVoucher({});
+        this.getRetireVoucher({});
         this.getVoucherSourceUnitList();
         this.paymentVoucherStatus({});
     }
@@ -57,15 +60,16 @@ export class RetireVouchersComponent implements OnInit {
         });
     }
 
-    getPyamentVoucher(params?) {
+    getRetireVoucher(params?) {
         let param = {
             ...params,
             page: this.pagination.page
         };
-        this.paymentVoucherService.get(param).subscribe(data => {
-            this.paymentVoucherData = data.items;
-            if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
-                this.paymentVoucherData.forEach(d => {
+        this.retireVoucherService.get(param).subscribe(data => {
+            console.log('data', data);
+            this.retireVoucherData = data.items;
+            if (this.retireVoucherData && this.retireVoucherData.length > 0) {
+                this.retireVoucherData.forEach(d => {
                     d['checked'] = false;
                     d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
                     // this.getChildReportData(d);
@@ -143,7 +147,6 @@ export class RetireVouchersComponent implements OnInit {
         this.status = this.filterPaymentVoucherForm.value.status;
         params['sourceUnit'] = this.filterPaymentVoucherForm.value.sourceUnit;
         params['search'] = this.filterPaymentVoucherForm.value.search;
-        this.getPyamentVoucher(params);
         this.paymentVoucherStatus(this.status);
     }
 
@@ -155,7 +158,7 @@ export class RetireVouchersComponent implements OnInit {
     }
 
     checkPV(index, event) {
-        this.paymentVoucherData[index].checked = event.checked;
+        this.retireVoucherData[index].checked = event.checked;
     }
 
     paymentVoucherStatus(status) {
@@ -184,8 +187,8 @@ export class RetireVouchersComponent implements OnInit {
 
     updateStatus(status: string) {
         const paymentVoucherId = [];
-        if (this.paymentVoucherData && this.paymentVoucherData.length) {
-            this.paymentVoucherData.forEach(item => {
+        if (this.retireVoucherData && this.retireVoucherData.length) {
+            this.retireVoucherData.forEach(item => {
                 if (item.checked === true) {
                     paymentVoucherId.push(item.id);
                 }
@@ -214,6 +217,6 @@ export class RetireVouchersComponent implements OnInit {
 
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
-        this.getPyamentVoucher();
+        this.getRetireVoucher();
     }
 }

@@ -512,6 +512,14 @@ export class AppUrl {
         }
     }
 
+    static RETIRE_VOUCHER(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/retire-voucher` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/retire-voucher`;
+        }
+    }
+
     static RV_REPORT_DATA(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-vouchers` + id;
@@ -552,6 +560,10 @@ export class AppUrl {
         if (id) {
             return AppUrl.API_URL + `treasury/payee-vouchers/` + id + `/schedule-economic`;
         }
+    }
+
+    static LIABILITIES(): string {
+        return AppUrl.API_URL + `treasury/retire-voucher`;
     }
 
     static RV_SCHEDULE_ECONOMIC(id?): string {
