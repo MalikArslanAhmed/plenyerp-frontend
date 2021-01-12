@@ -10,6 +10,7 @@ import {PaymentVoucherService} from '../../../../shared/services/payment-voucher
 import * as moment from 'moment';
 import {TreasureReportService} from '../../../../shared/services/treasure-report.service';
 import {ScheduleEconomicCodesComponent} from "./schedule-economic-codes/schedule-economic-codes.component";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-payment-voucher',
@@ -40,7 +41,8 @@ export class PaymentVoucherComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
                 private paymentVoucherService: PaymentVoucherService,
-                private treasureReportService: TreasureReportService) {
+                private treasureReportService: TreasureReportService,
+                private router: Router) {
     }
 
     ngOnInit(): void {
@@ -236,9 +238,14 @@ export class PaymentVoucherComponent implements OnInit {
                 status: status,
                 paymentVoucherIds: paymentVoucherId
             };
-            this.paymentVoucherService.getUpdateStatus(params).subscribe(data => {
-                // console.log(data);
-            });
+            if (status === 'ON_MANDATE' && params['paymentVoucherIds'] && params['paymentVoucherIds'].length > 0) {
+                const url = '/dashboard/on-mandate?paymentVoucherIds=' + JSON.stringify(params['paymentVoucherIds']);
+                this.router.navigateByUrl(url);
+            } else {
+                this.paymentVoucherService.getUpdateStatus(params).subscribe(data => {
+                    // console.log(data);
+                });
+            }
         }
     }
 

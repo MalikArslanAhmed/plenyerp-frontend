@@ -6,6 +6,7 @@ import {FuseSidebarService} from "../../../../../@fuse/components/sidebar/sideba
 import {MatDialog} from "@angular/material/dialog";
 import {OnMandateCreateComponent} from "./on-mandate-create/on-mandate-create.component";
 import {OnMandateListComponent} from "./on-mandate-list/on-mandate-list.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-on-mandate',
@@ -37,15 +38,21 @@ export class OnMandateComponent implements OnInit {
             'value': 'POSTED_TO_GL',
         }
     ];
+    queryParams: any = {};
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog,
-        private fb: FormBuilder) {
+        private fb: FormBuilder,
+        private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit(): void {
         this.refresh();
+        this.queryParams = this.activatedRoute.snapshot.queryParams;
+        if (this.queryParams['paymentVoucherIds']) {
+            this.addOnMandate(this.queryParams['paymentVoucherIds'])
+        }
     }
 
     refresh() {
@@ -55,10 +62,10 @@ export class OnMandateComponent implements OnInit {
         });
     }
 
-    addOnMandate() {
+    addOnMandate(paymentVoucherIds?) {
         this.dialogRef = this._matDialog.open(OnMandateCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE'}
+            data: {action: 'CREATE', paymentVoucherIds: paymentVoucherIds}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {

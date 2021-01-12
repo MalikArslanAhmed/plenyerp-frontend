@@ -56,7 +56,7 @@ export class OnMandateListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getMadateList()
+        this.getMadateList();
     }
 
     getMadateList(data?) {
@@ -67,6 +67,7 @@ export class OnMandateListComponent implements OnInit {
         if (data) {
             params['status'] = data['status'];
             params['search'] = data['search'];
+            this.status = data['status'] === '' ? 'ALL' : data['status'];
             if (this.statuses && this.statuses.length > 0) {
                 let i = 0;
                 this.statuses.forEach(stat => {
@@ -77,7 +78,7 @@ export class OnMandateListComponent implements OnInit {
                     }
                     i++
                 });
-                console.log('this.selectedStatus', this.selectedStatus);
+                // console.log('this.selectedStatus', this.selectedStatus);
             }
         }
 
@@ -130,6 +131,14 @@ export class OnMandateListComponent implements OnInit {
                 console.log(data);
             });
         }
+    }
+
+    deleteMandate(mandateId) {
+        this.mandateService.delete(mandateId).subscribe(data => {
+            if (data) {
+                this.getMadateList();
+            }
+        });
     }
 
     onPageChange(page) {

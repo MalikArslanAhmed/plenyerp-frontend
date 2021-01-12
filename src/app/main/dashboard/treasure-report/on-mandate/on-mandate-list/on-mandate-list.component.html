@@ -2,7 +2,7 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <ng-container *ngIf="statuses && statuses.length > 0">
             <button mat-button class="update-report"
-                    *ngIf="selectedStatus && selectedStatus.length > 0 && selectedStatus[0].value !== 'ALL' && selectedStatus[0].value !== 'NEW'"
+                    *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL' && selectedStatus && selectedStatus.length > 0"
                     (click)="updateStatus(selectedStatus[0].value)">
                 {{selectedStatus[0].name}}
                 <mat-icon class="material-icons cursor-pointer whiteColor">
@@ -13,7 +13,8 @@
     </div>
     <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
         <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-            <span class="mat-header-cell text-center" *ngIf="selectedStatus && selectedStatus.length > 0">#</span>
+            <span class="mat-header-cell text-center"
+                  *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'POSTED_TO_GL'">#</span>
             <span class="mat-header-cell text-center">S.No.</span>
             <span class="mat-header-cell text-center">Ref No.</span>
             <span class="mat-header-cell text-center">Cashbook Account</span>
@@ -26,7 +27,8 @@
         </section>
         <mat-expansion-panel *ngFor="let reportData of onMandateList; let i = index">
             <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
-                <span class="mat-cell align-items-center" *ngIf="selectedStatus && selectedStatus.length > 0">
+                <span class="mat-cell align-items-center"
+                      *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'POSTED_TO_GL'">
                     <p class="text-truncate cursor-pointer mt-10px text-center">
                         <mat-checkbox (change)="checkPV(i, $event)"
                                       (click)="$event.stopPropagation()"
@@ -52,19 +54,22 @@
                     <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.valueDate}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="reportData.totalAmount">{{reportData.totalAmount}}</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center"
+                       *ngIf="reportData.totalAmount">{{reportData.totalAmount}}</p>
                     <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalAmount">-</p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="reportData.totalTax">{{reportData?.totalTax}}</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center"
+                       *ngIf="reportData.totalTax">{{reportData?.totalTax}}</p>
                     <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalTax">-</p>
                 </span>
                 <span class="mat-cell align-items-center text-center">
-                    <button aria-label="Toggle star" mat-icon-button style="color: blue; margin-left: 20px" (click)="editModal(reportData, i)">
+                    <button aria-label="Toggle star" mat-icon-button style="color: blue; margin-left: 20px"
+                            (click)="editModal(reportData, i)">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                     <!--<button aria-label="Toggle star" mat-icon-button style="color: red">
-                        <mat-icon class="material-icons" (click)="delete(reportData.id)">delete
+                        <mat-icon class="material-icons" (click)="deleteMandate(reportData.id)">delete
                         </mat-icon>
                     </button>-->
                 </span>
@@ -105,23 +110,32 @@
                             <tr *ngFor="let benef of payee['payeeVouchers']">
                                 <td>
                                     <span *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.name}}</span>
-                                    <span *ngIf="benef && benef['employee']">{{benef?.employee?.firstName +' '+benef?.employee?.lastName}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef?.employee?.firstName + ' ' + benef?.employee?.lastName}}</span>
                                 </td>
                                 <td>
-                                    <span *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankId}}</span>
-                                    <span *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches']['hrBank'].name}}</span>
+                                    <span
+                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankId}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches']['hrBank'].name}}</span>
                                 </td>
                                 <td>
-                                    <span *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankBranch?.name}}</span>
-                                    <span *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches'].name}}</span>
+                                    <span
+                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankBranch?.name}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches'].name}}</span>
                                 </td>
                                 <td>
-                                    <span *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankAccountNumber}}</span>
-                                    <span *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank'].number}}</span>
+                                    <span
+                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankAccountNumber}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank'].number}}</span>
                                 </td>
                                 <td>
-                                    <span *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankBranch?.sortCode}}</span>
-                                    <span *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches'].sortCode}}</span>
+                                    <span
+                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankBranch?.sortCode}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches'].sortCode}}</span>
                                 </td>
                                 <td>
                                     <span>{{benef?.netAmount}}</span>

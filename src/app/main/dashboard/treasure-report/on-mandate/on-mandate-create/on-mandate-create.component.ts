@@ -34,6 +34,7 @@ export class OnMandateCreateComponent implements OnInit {
     paymentVoucherData = [];
     panelOpenState: boolean = false;
     tabName = 'DETAILS';
+    selectedPaymentVocuherIds = [];
 
     constructor(public matDialogRef: MatDialogRef<OnMandateCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -250,7 +251,15 @@ export class OnMandateCreateComponent implements OnInit {
                 this.paymentVoucherData.forEach(d => {
                     d['checked'] = false;
                     d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
-                    // this.getChildReportData(d);
+
+                    if (this._data['paymentVoucherIds']) {
+                        let paymentVoucherIds = JSON.parse(this._data['paymentVoucherIds']);
+                        paymentVoucherIds.forEach(pvId => {
+                            if(parseInt(d.id) === parseInt(pvId)) {
+                                d['checked'] = true;
+                            }
+                        })
+                    }
                 });
                 this.panelOpenState = !this.panelOpenState;
             }

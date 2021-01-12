@@ -23,7 +23,7 @@ export class MandateService extends BaseService {
     }
 
     delete(id): Observable<any> {
-        return this.deleteRequest(AppUrl.CASHBOOKS(id));
+        return this.deleteRequest(AppUrl.MANDATE(id));
     }
 
     update(id, data): Observable<any> {
