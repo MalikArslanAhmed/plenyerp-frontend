@@ -139,7 +139,7 @@ export class RetireVouchersComponent implements OnInit {
         });
     }
 
-    filterPaymentVoucher() {
+    filterRetireVoucher() {
         let params = {};
         if (this.filterPaymentVoucherForm.value.status !== 'ALL') {
             params['status'] = this.filterPaymentVoucherForm.value.status;
@@ -157,9 +157,9 @@ export class RetireVouchersComponent implements OnInit {
         });
     }
 
-    checkPV(index, event) {
+    /*checkPV(index, event) {
         this.retireVoucherData[index].checked = event.checked;
-    }
+    }*/
 
     paymentVoucherStatus(status) {
         this.selectedStatus = [];
@@ -180,7 +180,7 @@ export class RetireVouchersComponent implements OnInit {
         if (status !== 'ALL') {
             params['status'] = status;
         }
-        this.paymentVoucherService.getPaymentVoucherStatus(params).subscribe(data => {
+        this.retireVoucherService.getRetireVoucherStatus(params).subscribe(data => {
             this.statuses = data.status;
         });
     }

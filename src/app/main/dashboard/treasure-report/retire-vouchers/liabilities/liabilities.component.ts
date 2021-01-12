@@ -64,12 +64,13 @@ export class LiabilitiesComponent implements OnInit {
             payeeName = this._data['pv']['employee'].firstName + ' ' + this._data['pv']['employee'].lastName;
         }
         console.log('aaaaaaa', this._data['pv']);*/
+        // console.log('acccvvvvvv', this._data['pv'].totalAmount);
         this.liabilityForm.patchValue({
             'year': this._data['pv'].year,
             'deptalId': this._data['pv'].deptalId,
             'lastActioned': this._data['pv'].lastActioned,
-            // 'grossAmount': parseInt(this._data['pv'].totalAmount.amount) + parseInt(this._data['pv'].totalTax.tax),
-            'grossAmount': this._data['pv'].totalAmount ? parseInt(this._data['pv'].totalAmount) : 0,
+            'grossAmount': (this._data['pv'].totalAmount.amount && this._data['pv'].totalTax.tax) ? parseInt(this._data['pv'].totalAmount.amount) + parseInt(this._data['pv'].totalTax.tax) : 0,
+            // 'grossAmount': this._data['pv'].totalAmount ? parseInt(this._data['pv'].totalAmount) : 0,
             // 'payeeName': payeeName
         });
         // this.getPayeeEconomicCode();

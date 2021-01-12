@@ -1272,6 +1272,10 @@ export class AppUrl {
         return AppUrl.API_URL + `treasury/payment-voucher-status`;
     }
 
+    static GET_RETIRE_VOUCHER_STATUS(): string {
+        return AppUrl.API_URL + `treasury/retire-voucher-status`;
+    }
+
     static GET_RECEIPT_VOUCHER_STATUS(): string {
         return AppUrl.API_URL + `treasury/receipt-voucher-status`;
     }

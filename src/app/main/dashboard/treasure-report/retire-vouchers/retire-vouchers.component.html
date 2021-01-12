@@ -34,11 +34,11 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
-                        <mat-label>Search PV</mat-label>
+                        <mat-label>Search Voucher</mat-label>
                         <input formControlName="search" matInput placeholder="Search for Payment Voucher">
                     </mat-form-field>
                     <div fxFlex class="width-200px p-10px mt-13px">
-                        <button mat-button class="submit-report" (click)="filterPaymentVoucher()">
+                        <button mat-button class="submit-report" (click)="filterRetireVoucher()">
                             Submit
                             <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
                         </button>
@@ -68,8 +68,7 @@
                 </div>
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-                        <span class="mat-header-cell text-center"
-                              *ngIf="status !== 'ALL' && status !== 'PAID'">#</span>
+                        <!--<span class="mat-header-cell text-center" *ngIf="status !== 'ALL' && status !== 'PAID'">#</span>-->
                         <span class="mat-header-cell text-center">S.No.</span>
                         <span class="mat-header-cell text-center">Year</span>
                         <span class="mat-header-cell text-center">Deptal No.</span>
@@ -83,14 +82,14 @@
                     <mat-expansion-panel *ngFor="let reportData of retireVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
-                            <span class="mat-cell align-items-center"
+                            <!--<span class="mat-cell align-items-center"
                                   *ngIf="status !== 'ALL' && status !== 'PAID'">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">
                                     <mat-checkbox (change)="checkPV(i, $event)"
                                                   (click)="$event.stopPropagation()"
                                                   [checked]="reportData.checked ? true : null"></mat-checkbox>
                                 </p>
-                            </span>
+                            </span>-->
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
                             </span>
@@ -274,7 +273,7 @@
                                                 </td>
                                             </tr>
                                             </tbody>
-                                            <tbody *ngIf="reportData.status ==='NEW'">
+                                            <tbody>
                                             <tr>
                                                 <td colspan="15">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
