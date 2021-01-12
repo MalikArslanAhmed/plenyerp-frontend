@@ -17,31 +17,7 @@ import {MandateService} from "../../../../../shared/services/mandate.service";
     animations: fuseAnimations
 })
 export class OnMandateListComponent implements OnInit {
-    onMandateList = [
-        {
-            'id': 1,
-            'beneficery': 'Not Set 1',
-            'bank': 'SBI',
-            'branch': 'New Branch',
-            'accountNumber': 'ABCDEFG1234',
-            'type': 'Saving',
-            'amount': 10000,
-            'tax': 1000,
-            'purpose': 'Testing'
-        },
-        {
-            'id': 2,
-            'beneficery': 'Not Set 2',
-            'bank': 'SBI',
-            'branch': 'New Branch',
-            'accountNumber': 'ABCDEFG1234',
-            'type': 'Saving',
-            'amount': 10000,
-            'tax': 1000,
-            'purpose': 'Testing',
-        }
-    ];
-    // displayedColumns = ['sno', 'beneficiery', 'bank', 'branch', 'account_number', 'type', 'amount', 'tax', 'purpose'];
+    onMandateList = [];
     dialogRef: any;
     selectIndex = 0;
     pagination = {
@@ -60,7 +36,6 @@ export class OnMandateListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.getcashbookList();
         this.getMadateList()
     }
 
@@ -81,22 +56,6 @@ export class OnMandateListComponent implements OnInit {
         });
     }
 
-    /*getcashbookList() {
-        this.onMandateList = [];
-        this.cashbookService.list({page: this.pagination.page}).subscribe(data => {
-            this.onMandateList = data.items;
-            this.pagination.page = data.page;
-            this.pagination.total = data.total;
-            if (this.onMandateList && this.onMandateList.length > 0) {
-                let i = 1;
-                this.onMandateList.forEach(val => {
-                    val['sno'] = i;
-                    i++;
-                });
-            }
-        });
-    }*/
-
 
     /*deleteItemModel(items) {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
@@ -109,14 +68,6 @@ export class OnMandateListComponent implements OnInit {
             }
         });
 
-    }
-
-    deleteCashbook(id) {
-        this.cashbookService.delete(id).subscribe(data => {
-            if (data) {
-                this.getcashbookList();
-            }
-        });
     }*/
 
     /*editCashbook(cashbook) {
@@ -131,6 +82,19 @@ export class OnMandateListComponent implements OnInit {
             this.getcashbookList();
         });
     }*/
+
+    editModal(report) {
+        this.dialogRef = this._matDialog.open(OnMandateCreateComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'EDIT', cashbook: cashbook},
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getcashbookList();
+        });
+    }
 
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;

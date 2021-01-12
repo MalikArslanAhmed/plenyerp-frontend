@@ -1,12 +1,11 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {CashbookListComponent} from "../cashbook/cashbook-list/cashbook-list.component";
 import {PermissionConstant} from "../../../../shared/constants/permission-constant";
 import {FuseSidebarService} from "../../../../../@fuse/components/sidebar/sidebar.service";
 import {MatDialog} from "@angular/material/dialog";
-import {CashbookCreateComponent} from "../cashbook/cashbook-create/cashbook-create.component";
 import {OnMandateCreateComponent} from "./on-mandate-create/on-mandate-create.component";
+import {OnMandateListComponent} from "./on-mandate-list/on-mandate-list.component";
 
 @Component({
     selector: 'app-on-mandate',
@@ -18,7 +17,7 @@ import {OnMandateCreateComponent} from "./on-mandate-create/on-mandate-create.co
 export class OnMandateComponent implements OnInit {
     dialogRef: any;
     searchForm: FormGroup;
-    @ViewChild(CashbookListComponent) getUserRoleList: CashbookListComponent;
+    @ViewChild(OnMandateListComponent) getMandateList: OnMandateListComponent;
 
     permissionAddRoles = [PermissionConstant.ROLES_ADD];
 
@@ -47,7 +46,7 @@ export class OnMandateComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getUserRoleList.getcashbookList();
+            this.getMandateList.getMadateList();
         });
     }
 
