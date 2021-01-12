@@ -16,10 +16,27 @@ import {OnMandateListComponent} from "./on-mandate-list/on-mandate-list.componen
 })
 export class OnMandateComponent implements OnInit {
     dialogRef: any;
-    searchForm: FormGroup;
+    filterMandateForm: FormGroup;
     @ViewChild(OnMandateListComponent) getMandateList: OnMandateListComponent;
-
     permissionAddRoles = [PermissionConstant.ROLES_ADD];
+    statuses = [
+        {
+            'name': 'New',
+            'value': 'NEW',
+        },
+        {
+            'name': 'Ist Authorised',
+            'value': '1ST_AUTHORISED',
+        },
+        {
+            'name': 'IInd Authorised',
+            'value': '2ND_AUTHORISED',
+        },
+        {
+            'name': 'Posted to GL',
+            'value': 'POSTED_TO_GL',
+        }
+    ];
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
@@ -32,8 +49,9 @@ export class OnMandateComponent implements OnInit {
     }
 
     refresh() {
-        this.searchForm = this.fb.group({
+        this.filterMandateForm = this.fb.group({
             'search': [''],
+            'status': [''],
         });
     }
 
@@ -50,6 +68,8 @@ export class OnMandateComponent implements OnInit {
         });
     }
 
-    search() {
+    filterMandate() {
+        this.getMandateList.getMadateList(this.filterMandateForm.value);
+        // console.log('filterMandateForm', this.filterMandateForm.value);
     }
 }

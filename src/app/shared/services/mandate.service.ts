@@ -27,6 +27,10 @@ export class MandateService extends BaseService {
     }
 
     update(id, data): Observable<any> {
-        return this.putRequest(AppUrl.CASHBOOKS(id), data);
+        return this.putRequest(AppUrl.MANDATE(id), data);
+    }
+
+    updateMandateStatus(data): Observable<any> {
+        return this.postRequest(AppUrl.UPDATE_MANDATE_STATUS(), data);
     }
 }

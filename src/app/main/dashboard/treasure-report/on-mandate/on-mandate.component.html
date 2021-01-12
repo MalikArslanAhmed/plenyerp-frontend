@@ -23,18 +23,29 @@
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
-                <form [formGroup]="searchForm">
-                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                        <mat-label>Search for Mandate</mat-label>
-                        <input formControlName="search"
-                               placeholder="Search"
-                               matInput (keyup)="search()">
+                <form [formGroup]="filterMandateForm">
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-label>Status</mat-label>
+                        <mat-select formControlName="status">
+                            <mat-option value="">ALL</mat-option>
+                            <mat-option [value]="status.value"
+                                        *ngFor="let status of statuses">{{status?.name}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-label>Search Mandate</mat-label>
+                        <input formControlName="search" matInput placeholder="Search for Mandate">
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="filterMandate()">
+                            Submit
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>
+                    </div>
                 </form>
             </div>
             <div class="content mt-20px">
                 <app-on-mandate-list></app-on-mandate-list>
-                <!--<app-cashbook-list></app-cashbook-list>-->
             </div>
         </div>
     </div>

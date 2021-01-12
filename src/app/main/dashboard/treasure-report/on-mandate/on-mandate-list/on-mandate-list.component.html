@@ -1,6 +1,19 @@
 <div class="voucherSource-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <ng-container *ngIf="statuses && statuses.length > 0">
+            <button mat-button class="update-report"
+                    *ngIf="selectedStatus && selectedStatus.length > 0 && selectedStatus[0].value !== 'ALL' && selectedStatus[0].value !== 'NEW'"
+                    (click)="updateStatus(selectedStatus[0].value)">
+                {{selectedStatus[0].name}}
+                <mat-icon class="material-icons cursor-pointer whiteColor">
+                    keyboard_arrow_right
+                </mat-icon>
+            </button>
+        </ng-container>
+    </div>
     <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
         <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+            <span class="mat-header-cell text-center" *ngIf="selectedStatus && selectedStatus.length > 0">#</span>
             <span class="mat-header-cell text-center">S.No.</span>
             <span class="mat-header-cell text-center">Ref No.</span>
             <span class="mat-header-cell text-center">Cashbook Account</span>
@@ -13,6 +26,13 @@
         </section>
         <mat-expansion-panel *ngFor="let reportData of onMandateList; let i = index">
             <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                <span class="mat-cell align-items-center" *ngIf="selectedStatus && selectedStatus.length > 0">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">
+                        <mat-checkbox (change)="checkPV(i, $event)"
+                                      (click)="$event.stopPropagation()"
+                                      [checked]="reportData.checked ? true : null"></mat-checkbox>
+                    </p>
+                </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
                 </span>
@@ -43,10 +63,10 @@
                     <button aria-label="Toggle star" mat-icon-button style="color: blue; margin-left: 20px" (click)="editModal(reportData, i)">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
-                    <button aria-label="Toggle star" mat-icon-button style="color: red">
-                        <mat-icon class="material-icons" (click)="delete(i)">delete
+                    <!--<button aria-label="Toggle star" mat-icon-button style="color: red">
+                        <mat-icon class="material-icons" (click)="delete(reportData.id)">delete
                         </mat-icon>
-                    </button>
+                    </button>-->
                 </span>
             </mat-expansion-panel-header>
             <div>
@@ -117,126 +137,13 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion>
+    <mat-paginator #paginator *ngIf="onMandateList.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="pageEvent = onPageChange($event)"
+    >
+    </mat-paginator>
 </div>
-<!--<mat-table [@animateStagger]="{value:'50'}" [dataSource]="onMandateList">
-    <ng-container matColumnDef="sno">
-        <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
-        <mat-cell *matCellDef="let mandate">
-            &lt;!&ndash;<p class="email text-truncate">
-                {{((pagination.page - 1) * pagination.perpage) + mandate?.sno}}.
-            </p>&ndash;&gt;
-            <p class="email text-truncate">
-                {{mandate?.id}}
-            </p>
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="beneficiery">
-        <mat-header-cell *matHeaderCellDef>Beneficiery</mat-header-cell>
-        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-            <p class="phone text-truncate cursor-pointer">
-                {{mandate?.beneficery}}
-            </p>
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="bank">
-        <mat-header-cell *matHeaderCellDef>Bank</mat-header-cell>
-        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-            <p class="phone text-truncate cursor-pointer">
-                {{mandate?.bank}}
-            </p>
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="branch">
-        <mat-header-cell *matHeaderCellDef>Branch</mat-header-cell>
-        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-            <p class="phone text-truncate cursor-pointer">
-                {{mandate?.branch}}
-            </p>
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="account_number">
-        <mat-header-cell *matHeaderCellDef>Account Number</mat-header-cell>
-        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-            <p class="phone text-truncate cursor-pointer">
-                {{mandate?.accountNumber}}
-            </p>
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="type">
-        <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
-        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-            <p class="phone text-truncate cursor-pointer">
-                {{mandate?.type}}
-            </p>
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="amount">
-        <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
-        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-            <p class="phone text-truncate cursor-pointer">
-                {{mandate?.amount}}
-            </p>
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="tax">
-        <mat-header-cell *matHeaderCellDef>Tax</mat-header-cell>
-        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-            <p class="phone text-truncate cursor-pointer">
-                {{mandate?.tax}}
-            </p>
-        </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="purpose">
-        <mat-header-cell *matHeaderCellDef>Purpose</mat-header-cell>
-        <mat-cell *matCellDef="let mandate" class="cursor-pointer">
-            <p class="phone text-truncate cursor-pointer">
-                {{mandate?.purpose}}
-            </p>
-        </mat-cell>
-    </ng-container>
-
-    &lt;!&ndash;<ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Action</div>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let mandate">
-            <div fxFlex="row" fxLayoutAlign="end center">
-                <div>
-                    <button mat-icon-button aria-label="Toggle star" (click)="editCashbook(mandate)"
-                            style="color: blue; margin-left: 1rem">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                </div>
-                <div>
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModel(mandate)"
-                            style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
-                </div>
-            </div>
-        </mat-cell>
-    </ng-container>&ndash;&gt;
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let mandate; columns: displayedColumns;" class="contact"
-             [@animate]="{value:'*',params:{y:'100%'}}">
-    </mat-row>
-</mat-table>
-<mat-paginator #paginator *ngIf="onMandateList.length > 0"
-               [length]="pagination.total"
-               [pageSize]="pagination.perpage"
-               [pageIndex]="pagination.page-1"
-               (page)="pageEvent = onPageChange($event)"
->
-</mat-paginator>-->
-<!--</div>-->
 
 

@@ -46,10 +46,11 @@ export class OnMandateCreateComponent implements OnInit {
                 private alertService: AlertService,
                 private mandateService: MandateService) {
         this.action = _data.action;
+        // console.log('_data', _data);
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Mandate';
-            if (_data.voucher) {
-                this.updateData = _data;
+            if (_data.report) {
+                this.updateData = _data.report;
             }
         } else {
             this.dialogTitle = 'Create Mandate';
@@ -58,7 +59,6 @@ export class OnMandateCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.checkForUpdate();
         this.getcashbookList();
         this.getPaymentVouchers();
     }
@@ -68,9 +68,6 @@ export class OnMandateCreateComponent implements OnInit {
             cashBookAccountId: [''],
             batchNumber: [''],
             treasuryNumber: [''],
-            // longName: [''],
-            // shortName: [''],
-            // nextRvIndexNumber: [''],
             valueDate: [''],
             instructionToBank: [''],
             preparedBy: [{value: '', disabled: true}],
@@ -79,24 +76,10 @@ export class OnMandateCreateComponent implements OnInit {
             istAuthorizedDate: [{value: '', disabled: true}],
             secondAuthorizedBy: [{value: '', disabled: true}],
             secondAuthorizedDate: [{value: '', disabled: true}],
-            // checkingOfficerId: [{value: '', disabled: true}],
-            // payingOfficerId: [{value: '', disabled: true}],
-            // financialControllerId: [{value: '', disabled: true}],
-            // retirementId: [''],
-            // reverseVoucherId: [''],
-            // revalidationId: [''],
-            // taxVoucherId: [''],
-            // isPersonalAdvanceUnit: [false],
         });
         this.onMandateForm.get('cashBookAccountId').valueChanges.subscribe(val => {
             this.cashbookItem();
         });
-        /*this.voucherSourceUnitForm.patchValue({
-            'retirementId': 11,
-            'reverseVoucherId': 10,
-            'revalidationId': 19
-        });
-        this.getDefaultSettingVoucherInfo();*/
     }
 
     getcashbookList() {
@@ -121,39 +104,33 @@ export class OnMandateCreateComponent implements OnInit {
 
     checkForUpdate() {
         if (this.updateData) {
-            if (this.updateData.voucher.financialControllerId && this.updateData.voucher.financialController) {
-                this.financialControllers = [{
-                    'id': this.updateData.voucher.financialController.id,
-                    'name': this.updateData.voucher.financialController.firstName + ' ' + this.updateData.voucher.financialController.lastName
-                }];
-            }
-            if (this.updateData.voucher.payingOfficerId && this.updateData.voucher.payingOfficer) {
-                this.payingOfficers = [{
-                    'id': this.updateData.voucher.payingOfficer.id,
-                    'name': this.updateData.voucher.payingOfficer.firstName + ' ' + this.updateData.voucher.payingOfficer.lastName
-                }];
-            }
-            if (this.updateData.voucher.checkingOfficerId && this.updateData.voucher.checkingOfficer) {
-                this.checkingOfficers = [{
-                    'id': this.updateData.voucher.checkingOfficer.id,
-                    'name': this.updateData.voucher.checkingOfficer.firstName + ' ' + this.updateData.voucher.checkingOfficer.lastName
-                }];
-            }
             this.onMandateForm.patchValue({
-                longName: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.longName : '',
-                shortName: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.shortName : '',
-                nextPvIndexNumber: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.nextPvIndexNumber : '',
-                nextRvIndexNumber: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.nextRvIndexNumber : '',
-                honourCertificate: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.honourCertificate : '',
-                checkingOfficerId: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.checkingOfficerId : '',
-                payingOfficerId: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.payingOfficerId : '',
-                financialControllerId: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.financialControllerId : '',
-                retirementId: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.retirementId : '',
-                reverseVoucherId: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.reverseVoucherId : '',
-                revalidationId: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.revalidationId : '',
-                taxVoucherId: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.taxVoucherId : '',
-                isPersonalAdvanceUnit: (this.updateData && this.updateData.voucher) ? this.updateData.voucher.isPersonalAdvanceUnit : false,
+                cashBookAccountId: this.updateData.cashbookId ? this.updateData.cashbookId : '',
+                batchNumber: this.updateData.batchNumber ? this.updateData.batchNumber : '',
+                treasuryNumber: this.updateData.treasuryNumber ? this.updateData.treasuryNumber : '',
+                valueDate: this.updateData.valueDate ? moment(this.updateData.valueDate).format('YYYY-MM-DD') : '',
+                instructionToBank: this.updateData.instructions ? this.updateData.instructions : '',
+                preparedBy: this.updateData.prepared ? this.updateData.prepared['firstName'] + " " + this.updateData.prepared['lastName'] : '',
+                preparedDate: this.updateData.preparedDate ? moment(this.updateData.preparedDate).format('YYYY-MM-DD') : '',
+                istAuthorizedBy: this.updateData.firstAuthorisedBy ? this.updateData.firstAuthorisedBy['firstName'] + " " + this.updateData.firstAuthorisedBy['lastName'] : '',
+                istAuthorizedDate: this.updateData.firstAuthorisedDate ? moment(this.updateData.firstAuthorisedDate).format('YYYY-MM-DD') : '',
+                secondAuthorizedBy: this.updateData.secondAuthorised ? this.updateData.secondAuthorised['firstName'] + " " + this.updateData.secondAuthorised['lastName'] : '',
+                secondAuthorizedDate: this.updateData.secondAuthorisedDate ? moment(this.updateData.secondAuthorisedDate).format('YYYY-MM-DD') : '',
             });
+            this.cashbookData = this.updateData.cashbook;
+            if (this.updateData['paymentVouchers'] && this.updateData['paymentVouchers'].length > 0) {
+                this.updateData['paymentVouchers'].forEach(paymentVoucher => {
+                    if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
+                        this.paymentVoucherData.forEach(pv => {
+                            if (parseInt(pv.id) === parseInt(paymentVoucher.id)) {
+                                pv['checked'] = true
+                            }
+                        });
+                    }
+                });
+            }
+            /*console.log('this.onMandateForm', this.onMandateForm.value);
+            console.log('this.paymentVoucherData', this.paymentVoucherData);*/
         }
     }
 
@@ -182,10 +159,24 @@ export class OnMandateCreateComponent implements OnInit {
     }
 
     updateMandate() {
-        if (!this.onMandateForm.valid) {
-            return;
+        let params = {
+            'cashbookId': this.onMandateForm.getRawValue().cashBookAccountId ? this.onMandateForm.getRawValue().cashBookAccountId : '',
+            'batchNumber': this.onMandateForm.getRawValue().batchNumber ? this.onMandateForm.getRawValue().batchNumber : '',
+            'treasuryNumber': this.onMandateForm.getRawValue().treasuryNumber ? this.onMandateForm.getRawValue().treasuryNumber : '',
+            'valueDate': this.onMandateForm.getRawValue().valueDate ? moment(this.onMandateForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
+            'instructions': this.onMandateForm.getRawValue().instructionToBank ? this.onMandateForm.getRawValue().instructionToBank : '',
+        };
+        let paymentVouchers = [];
+        if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
+            this.paymentVoucherData.forEach(pv => {
+                if (pv && pv.checked) {
+                    paymentVouchers.push(pv.id);
+                }
+            });
         }
-        this.treasureReportService.update(this.updateData.voucher.id, this.onMandateForm.getRawValue()).subscribe(data => {
+        params['paymentVouchers'] = (paymentVouchers && paymentVouchers.length > 0) ? JSON.stringify(paymentVouchers) : '';
+
+        this.mandateService.update(this.updateData.id, params).subscribe(data => {
             this.updateData = undefined;
             this.matDialogRef.close(this.onMandateForm);
             this.onMandateForm.reset();
@@ -263,6 +254,7 @@ export class OnMandateCreateComponent implements OnInit {
                 });
                 this.panelOpenState = !this.panelOpenState;
             }
+            this.checkForUpdate();
         });
     }
 
@@ -279,15 +271,9 @@ export class OnMandateCreateComponent implements OnInit {
                 }
             });
         }
-        console.log('paymentVouchers', paymentVouchers);
+        // console.log('paymentVouchers', paymentVouchers);
         this.moveToSelectedTab('CHOOSE PAYMENT VOUCHER');
         this.tabName = 'CHOOSE PAYMENT VOUCHER';
-        /*if (paymentVouchers && paymentVouchers.length > 0) {
-            this.moveToSelectedTab('CHOOSE PAYMENT VOUCHER');
-            this.tabName = 'CHOOSE PAYMENT VOUCHER';
-        } else {
-            this.alertService.showErrors('Please choose payment vouchers to prooceed');
-        }*/
     }
 
     tabClick(event) {
@@ -302,38 +288,4 @@ export class OnMandateCreateComponent implements OnInit {
             }
         }
     }
-
-    /*getDefaultSettingVoucherInfo() {
-        this.defaultSettingVoucherInfoService.detail().subscribe(data => {
-            if (data && data.checkingOfficer && data.checkingOfficerId) {
-                this.checkingOfficers = [{
-                    'name': data['checkingOfficer'].firstName + ' ' + data['checkingOfficer'].lastName,
-                    'id': data['checkingOfficer'].id
-                }];
-                this.voucherSourceUnitForm.patchValue({
-                    'checkingOfficerId': data.checkingOfficerId ? data.checkingOfficerId : ''
-                });
-            }
-
-            if (data && data.payingOfficer && data.payingOfficerId) {
-                this.payingOfficers = [{
-                    'name': data['payingOfficer'].firstName + ' ' + data['payingOfficer'].lastName,
-                    'id': data['payingOfficer'].id
-                }];
-                this.voucherSourceUnitForm.patchValue({
-                    'payingOfficerId': data.payingOfficerId ? data.payingOfficerId : ''
-                });
-            }
-
-            if (data && data.financialController && data.financialControllerId) {
-                this.financialControllers = [{
-                    'name': data['financialController'].firstName + ' ' + data['financialController'].lastName,
-                    'id': data['financialController'].id
-                }];
-                this.voucherSourceUnitForm.patchValue({
-                    'financialControllerId': data.financialControllerId ? data.financialControllerId : '',
-                });
-            }
-        });
-    }*/
 }

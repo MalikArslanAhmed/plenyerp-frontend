@@ -1248,6 +1248,10 @@ export class AppUrl {
         }
     }
 
+    static UPDATE_MANDATE_STATUS(): string {
+        return AppUrl.API_URL + `treasury/mandate-update`;
+    }
+
     static DEFAULT_SETTING_VOUCHER_INFO(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/default-settings/` + id;
