@@ -78,7 +78,6 @@ export class OnMandateListComponent implements OnInit {
                     }
                     i++
                 });
-                // console.log('this.selectedStatus', this.selectedStatus);
             }
         }
 
@@ -90,6 +89,22 @@ export class OnMandateListComponent implements OnInit {
             if (this.onMandateList && this.onMandateList.length > 0) {
                 let i = 1;
                 this.onMandateList.forEach(val => {
+                    let totalAmount = [];
+                    let totalTax = [];
+                    if (val && val['paymentVouchers'] && val['paymentVouchers'].length > 0) {
+                        val['paymentVouchers'].forEach(pv => {
+                            if (pv && pv['payeeVouchers'] && pv['payeeVouchers'].length > 0) {
+                                pv['payeeVouchers'].forEach(payee => {
+                                    if (payee && payee['netAmount'] && payee['totalTax']) {
+                                        totalAmount.push(parseFloat(payee['netAmount']));
+                                        totalTax.push(parseFloat(payee['totalTax']));
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    val['totalAmount'] = totalAmount.reduce((a, b) => a + b, 0);
+                    val['totalTax'] = totalTax.reduce((a, b) => a + b, 0);
                     val['valueDate'] = moment(val['valueDate']).format('YYYY-MM-DD');
                     val['sno'] = i;
                     i++;
