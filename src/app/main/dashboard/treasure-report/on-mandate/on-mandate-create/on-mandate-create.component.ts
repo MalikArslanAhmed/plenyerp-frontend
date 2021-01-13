@@ -245,6 +245,7 @@ export class OnMandateCreateComponent implements OnInit {
             ...params,
             page: -1
         };
+        param['status'] = 'AUDITED';
         this.paymentVoucherService.get(param).subscribe(data => {
             this.paymentVoucherData = data.items;
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
