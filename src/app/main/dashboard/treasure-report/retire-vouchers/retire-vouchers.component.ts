@@ -173,7 +173,7 @@ export class RetireVouchersComponent implements OnInit {
                 }
             });
             const params = {
-                status: status,
+                retireStatus: status,
                 paymentVoucherIds: paymentVoucherId ? JSON.stringify(paymentVoucherId) : ''
             };
             this.retireVoucherService.updateRetireStatus(params).subscribe(data => {
