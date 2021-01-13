@@ -76,14 +76,14 @@
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <ng-container *ngIf="statuses && statuses.length > 0">
                         <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
-                                *ngIf="status !== 'ALL' && status !== 'PAID' && status !== 'NEW'">
+                                *ngIf="status !== 'ALL' && status !== 'PAID' && status !== 'NEW' && status !== 'ON_MANDATE' && status !== 'CLOSED' && status !== 'POSTED_TO_GL'">
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_left
                             </mat-icon>
                             {{statuses[0].name}}
                         </button>
                         <button mat-button class="update-report"
-                                *ngIf="status !== 'ALL' && selectedStatus && selectedStatus.length > 0"
+                                *ngIf="status !== 'ALL' && status !== 'ON_MANDATE' && status !== 'CLOSED' && status !== 'POSTED_TO_GL' && selectedStatus && selectedStatus.length > 0"
                                 (click)="updateStatus( selectedStatus[0].value)">
                             {{selectedStatus[0].name}}
                             <mat-icon class="material-icons cursor-pointer whiteColor">
@@ -383,7 +383,8 @@
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.economicSegment?.combinedCode}} - {{data?.economicSegment?.name}}
+                                                        {{data?.economicSegment?.combinedCode}}
+                                                        - {{data?.economicSegment?.name}}
                                                     </div>
                                                 </td>
                                                 <td>
