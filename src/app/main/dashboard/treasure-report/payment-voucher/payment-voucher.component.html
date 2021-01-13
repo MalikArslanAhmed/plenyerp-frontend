@@ -117,7 +117,7 @@
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}.</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
@@ -411,7 +411,7 @@
                 <mat-paginator #paginator *ngIf="paymentVoucherData.length > 0"
                                [length]="pagination.total"
                                [pageSize]="pagination.perpage"
-                               [pageIndex]="pagination.page-1"
+                               [pageIndex]="pagination.page - 1"
                                (page)="pageEvent = onPageChange($event)"
                 >
                 </mat-paginator>

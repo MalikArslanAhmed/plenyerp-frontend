@@ -76,6 +76,8 @@ export class ReceiptVouchersComponent implements OnInit {
         };
         this.receiptVoucherService.get(param).subscribe(data => {
             this.receiptVoucherData = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.receiptVoucherData && this.receiptVoucherData.length > 0) {
                 this.receiptVoucherData.forEach(d => {
                     d['checked'] = false;

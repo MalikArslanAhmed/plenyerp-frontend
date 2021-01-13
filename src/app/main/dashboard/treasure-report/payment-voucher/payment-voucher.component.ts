@@ -78,6 +78,8 @@ export class PaymentVoucherComponent implements OnInit {
         };
         this.paymentVoucherService.get(param).subscribe(data => {
             this.paymentVoucherData = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
                 this.paymentVoucherData.forEach(d => {
                     d['checked'] = false;

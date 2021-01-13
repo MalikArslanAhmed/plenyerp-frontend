@@ -66,8 +66,10 @@ export class RetireVouchersComponent implements OnInit {
             page: this.pagination.page
         };
         this.retireVoucherService.get(param).subscribe(data => {
-            console.log('data', data);
+            // console.log('data', data);
             this.retireVoucherData = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.retireVoucherData && this.retireVoucherData.length > 0) {
                 this.retireVoucherData.forEach(d => {
                     d['checked'] = false;

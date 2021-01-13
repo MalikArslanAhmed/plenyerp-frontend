@@ -47,7 +47,7 @@ export class OnMandateCreateComponent implements OnInit {
                 private alertService: AlertService,
                 private mandateService: MandateService) {
         this.action = _data.action;
-        // console.log('_data', _data);
+        console.log('_data', _data);
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Mandate';
             if (_data.report) {
@@ -113,7 +113,7 @@ export class OnMandateCreateComponent implements OnInit {
                 instructionToBank: this.updateData.instructions ? this.updateData.instructions : '',
                 preparedBy: this.updateData.prepared ? this.updateData.prepared['firstName'] + " " + this.updateData.prepared['lastName'] : '',
                 preparedDate: this.updateData.preparedDate ? moment(this.updateData.preparedDate).format('YYYY-MM-DD') : '',
-                istAuthorizedBy: this.updateData.firstAuthorisedBy ? this.updateData.firstAuthorisedBy['firstName'] + " " + this.updateData.firstAuthorisedBy['lastName'] : '',
+                istAuthorizedBy: this.updateData.firstAuthorisedBy ? this.updateData.firstAuthorised['firstName'] + " " + this.updateData.firstAuthorised['lastName'] : '',
                 istAuthorizedDate: this.updateData.firstAuthorisedDate ? moment(this.updateData.firstAuthorisedDate).format('YYYY-MM-DD') : '',
                 secondAuthorizedBy: this.updateData.secondAuthorised ? this.updateData.secondAuthorised['firstName'] + " " + this.updateData.secondAuthorised['lastName'] : '',
                 secondAuthorizedDate: this.updateData.secondAuthorisedDate ? moment(this.updateData.secondAuthorisedDate).format('YYYY-MM-DD') : '',
