@@ -68,7 +68,7 @@
                 </div>
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-                        <!--<span class="mat-header-cell text-center" *ngIf="status !== 'ALL' && status !== 'PAID'">#</span>-->
+                        <span class="mat-header-cell text-center" *ngIf="status !== 'ALL' && status !== 'PAID'">#</span>
                         <span class="mat-header-cell text-center">S.No.</span>
                         <span class="mat-header-cell text-center">Year</span>
                         <span class="mat-header-cell text-center">Deptal No.</span>
@@ -82,14 +82,14 @@
                     <mat-expansion-panel *ngFor="let reportData of retireVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
-                            <!--<span class="mat-cell align-items-center"
+                            <span class="mat-cell align-items-center"
                                   *ngIf="status !== 'ALL' && status !== 'PAID'">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">
                                     <mat-checkbox (change)="checkPV(i, $event)"
                                                   (click)="$event.stopPropagation()"
                                                   [checked]="reportData.checked ? true : null"></mat-checkbox>
                                 </p>
-                            </span>-->
+                            </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}.</p>
                             </span>

@@ -6,9 +6,6 @@ import {AlertService} from "../../../../shared/services/alert.service";
 import {PaymentVoucherService} from "../../../../shared/services/payment-voucher.service";
 import {TreasureReportService} from "../../../../shared/services/treasure-report.service";
 import * as moment from "moment";
-import {SchedulePayeeEmployeeComponent} from "../payment-voucher/schedule-payee-employee/schedule-payee-employee.component";
-import {SchedulePayeeCustomerComponent} from "../payment-voucher/schedule-payee-customer/schedule-payee-customer.component";
-import {ScheduleEconomicCodesComponent} from "../payment-voucher/schedule-economic-codes/schedule-economic-codes.component";
 import {LiabilitiesComponent} from "./liabilities/liabilities.component";
 import {RetireVoucherService} from "../../../../shared/services/retire-voucher.service";
 
@@ -91,48 +88,10 @@ export class RetireVouchersComponent implements OnInit {
         }
     }
 
-    scheduleEmployee(data) {
-        this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {pv: data}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-            this.getChildReportData(data);
-        });
-    }
-
     editLiabilities(data) {
         this.dialogRef = this._matDialog.open(LiabilitiesComponent, {
             panelClass: 'contact-form-dialog',
             data: {pv: data}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-        });
-    }
-
-    scheduleCustomers(data) {
-        this.dialogRef = this._matDialog.open(SchedulePayeeCustomerComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {pv: data}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-            this.getChildReportData(data);
-        });
-    }
-
-    scheduleEconomicCodes(report, data) {
-        this.dialogRef = this._matDialog.open(ScheduleEconomicCodesComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {pv: data, report: report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -159,8 +118,26 @@ export class RetireVouchersComponent implements OnInit {
         });
     }
 
-    /*checkPV(index, event) {
+    checkPV(index, event) {
         this.retireVoucherData[index].checked = event.checked;
+    }
+
+    /*updateStatus(status: string) {
+        const mandateIds = [];
+        if (this.onMandateList && this.onMandateList.length > 0) {
+            this.onMandateList.forEach(item => {
+                if (item.checked === true) {
+                    mandateIds.push(item.id);
+                }
+            });
+            const params = {
+                status: status,
+                mandateIds: mandateIds ? JSON.stringify(mandateIds) : ''
+            };
+            this.mandateService.updateMandateStatus(params).subscribe(data => {
+                console.log(data);
+            });
+        }
     }*/
 
     paymentVoucherStatus(status) {
@@ -189,7 +166,7 @@ export class RetireVouchersComponent implements OnInit {
 
     updateStatus(status: string) {
         const paymentVoucherId = [];
-        if (this.retireVoucherData && this.retireVoucherData.length) {
+        if (this.retireVoucherData && this.retireVoucherData.length > 0) {
             this.retireVoucherData.forEach(item => {
                 if (item.checked === true) {
                     paymentVoucherId.push(item.id);
@@ -197,9 +174,9 @@ export class RetireVouchersComponent implements OnInit {
             });
             const params = {
                 status: status,
-                paymentVoucherIds: paymentVoucherId
+                paymentVoucherIds: paymentVoucherId ? JSON.stringify(paymentVoucherId) : ''
             };
-            this.paymentVoucherService.getUpdateStatus(params).subscribe(data => {
+            this.retireVoucherService.updateRetireStatus(params).subscribe(data => {
                 // console.log(data);
             });
         }
