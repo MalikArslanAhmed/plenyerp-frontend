@@ -47,7 +47,7 @@ export class OnMandateCreateComponent implements OnInit {
                 private alertService: AlertService,
                 private mandateService: MandateService) {
         this.action = _data.action;
-        console.log('_data', _data);
+        // console.log('_data', _data);
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Mandate';
             if (_data.report) {
