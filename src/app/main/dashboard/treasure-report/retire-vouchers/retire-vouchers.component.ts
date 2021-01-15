@@ -140,7 +140,7 @@ export class RetireVouchersComponent implements OnInit {
         }
     }*/
 
-    paymentVoucherStatus(status, param) {
+    paymentVoucherStatus(status, param?) {
         this.selectedStatus = [];
         if (this.statuses && this.statuses.length) {
             this.statuses.forEach(val => {
