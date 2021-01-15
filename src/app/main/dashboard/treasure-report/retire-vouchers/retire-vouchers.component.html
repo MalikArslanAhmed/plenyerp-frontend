@@ -19,7 +19,7 @@
                 <form [formGroup]="filterPaymentVoucherForm">
                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
                         <mat-label>Voucher Source Unit</mat-label>
-                        <mat-select formControlName="sourceUnit">
+                        <mat-select formControlName="voucherSourceUnitId">
                             <mat-option value="">Choose Source</mat-option>
                             <mat-option [value]="source.id"
                                         *ngFor="let source of sourceUnit">{{source?.longName}}</mat-option>
@@ -50,7 +50,7 @@
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <ng-container *ngIf="statuses && statuses.length > 0">
                         <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
-                                *ngIf="status !== 'ALL' && status !== 'PAID' && status !== 'NEW'">
+                                *ngIf="status !== 'ALL' && status !== 'CLOSED' && status !== 'POSTED_TO_GL' && status !== 'NEW'">
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_left
                             </mat-icon>

@@ -53,7 +53,7 @@ export class RetireVouchersComponent implements OnInit {
         this.filterPaymentVoucherForm = this.fb.group({
             'status': ['ALL'],
             'search': [''],
-            'sourceUnit': ['']
+            'voucherSourceUnitId': ['']
         });
     }
 
@@ -106,9 +106,9 @@ export class RetireVouchersComponent implements OnInit {
             params['status'] = this.filterPaymentVoucherForm.value.status;
         }
         this.status = this.filterPaymentVoucherForm.value.status;
-        params['sourceUnit'] = this.filterPaymentVoucherForm.value.sourceUnit;
+        params['voucherSourceUnitId'] = this.filterPaymentVoucherForm.value.voucherSourceUnitId;
         params['search'] = this.filterPaymentVoucherForm.value.search;
-        this.paymentVoucherStatus(this.status);
+        this.paymentVoucherStatus(this.status, params);
     }
 
     getVoucherSourceUnitList() {
@@ -140,7 +140,7 @@ export class RetireVouchersComponent implements OnInit {
         }
     }*/
 
-    paymentVoucherStatus(status) {
+    paymentVoucherStatus(status, param) {
         this.selectedStatus = [];
         if (this.statuses && this.statuses.length) {
             this.statuses.forEach(val => {
@@ -155,7 +155,7 @@ export class RetireVouchersComponent implements OnInit {
             });
         }
 
-        const params = {};
+        const params = {...param};
         if (status !== 'ALL') {
             params['status'] = status;
         }
