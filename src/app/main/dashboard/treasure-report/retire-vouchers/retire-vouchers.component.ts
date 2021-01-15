@@ -63,7 +63,6 @@ export class RetireVouchersComponent implements OnInit {
             page: this.pagination.page
         };
         this.retireVoucherService.get(param).subscribe(data => {
-            // console.log('data', data);
             this.retireVoucherData = data.items;
             this.pagination.page = data.page;
             this.pagination.total = data.total;
@@ -71,7 +70,6 @@ export class RetireVouchersComponent implements OnInit {
                 this.retireVoucherData.forEach(d => {
                     d['checked'] = false;
                     d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
-                    // this.getChildReportData(d);
                 });
                 this.panelOpenState = !this.panelOpenState;
             }
@@ -108,7 +106,8 @@ export class RetireVouchersComponent implements OnInit {
         this.status = this.filterPaymentVoucherForm.value.status;
         params['voucherSourceUnitId'] = this.filterPaymentVoucherForm.value.voucherSourceUnitId;
         params['search'] = this.filterPaymentVoucherForm.value.search;
-        this.paymentVoucherStatus(this.status, params);
+        // this.paymentVoucherStatus(this.status);
+        this.getRetireVoucher(params);
     }
 
     getVoucherSourceUnitList() {
@@ -140,7 +139,7 @@ export class RetireVouchersComponent implements OnInit {
         }
     }*/
 
-    paymentVoucherStatus(status, param?) {
+    paymentVoucherStatus(status) {
         this.selectedStatus = [];
         if (this.statuses && this.statuses.length) {
             this.statuses.forEach(val => {
@@ -155,7 +154,7 @@ export class RetireVouchersComponent implements OnInit {
             });
         }
 
-        const params = {...param};
+        const params = {};
         if (status !== 'ALL') {
             params['status'] = status;
         }
