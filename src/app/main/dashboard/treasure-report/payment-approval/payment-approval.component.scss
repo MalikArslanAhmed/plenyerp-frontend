@@ -1,0 +1,51 @@
+app-payment-approval {
+    @import "../../../../../@fuse/scss/fuse";
+
+    .width-200px {
+        width: 200px;
+    }
+
+    .background-white {
+        background-color: white;
+    }
+
+    .ml-20px {
+        margin-left: 20px;
+    }
+
+    .mt-20px {
+        margin-top: 20px;
+    }
+
+    .color-white {
+        color: white;
+    }
+
+    .p-20px {
+        padding: 20px;
+    }
+
+    .p-10px {
+        padding: 10px;
+    }
+
+    .mt-10px {
+        margin-top: 10px;
+    }
+
+    .mt-13px {
+        margin-top: 13px;
+    }
+
+    #add-button {
+        background-color: white !important;
+        color: #106CC8 !important;
+    }
+
+    .submit-report {
+        background-color: #039be5 !important;
+        color: #fff !important;
+        height: 55px;
+        margin-top: 6px;
+    }
+}

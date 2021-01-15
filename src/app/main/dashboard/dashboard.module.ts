@@ -257,6 +257,9 @@ import { LiabilitiesComponent } from './treasure-report/retire-vouchers/liabilit
 import { OnMandateComponent } from './treasure-report/on-mandate/on-mandate.component';
 import { OnMandateListComponent } from './treasure-report/on-mandate/on-mandate-list/on-mandate-list.component';
 import { OnMandateCreateComponent } from './treasure-report/on-mandate/on-mandate-create/on-mandate-create.component';
+import {PaymentApprovalCreateComponent} from './treasure-report/payment-approval/payment-approval-create/payment-approval-create.component';
+import {PaymentApprovalListComponent} from './treasure-report/payment-approval/payment-approval-list/payment-approval-list.component';
+import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
 
 @NgModule({
     declarations: [
@@ -492,7 +495,10 @@ import { OnMandateCreateComponent } from './treasure-report/on-mandate/on-mandat
         LiabilitiesComponent,
         OnMandateComponent,
         OnMandateListComponent,
-        OnMandateCreateComponent
+        OnMandateCreateComponent,
+        PaymentApprovalCreateComponent,
+        PaymentApprovalListComponent,
+        PaymentApprovalComponent,
     ],
     imports: [
         CommonModule,

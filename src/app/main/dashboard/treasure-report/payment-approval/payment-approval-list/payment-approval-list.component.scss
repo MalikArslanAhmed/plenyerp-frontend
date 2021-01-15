@@ -1,0 +1,107 @@
+app-payment-approval-list {
+    @import "../../../../../../@fuse/scss/fuse";
+
+    .userRole-list {
+        display: flex;
+        flex: 1 1 auto;
+        width: 100%;
+
+        .mat-table {
+            width: 100%;
+            background: transparent;
+            box-shadow: none;
+
+            .mat-column-checkbox {
+                flex: 0 1 64px;
+                padding-left: 18px;
+            }
+
+            .mat-column-avatar {
+                flex: 0 1 64px;
+            }
+
+            .mat-column-buttons {
+                flex: 0 1 80px;
+            }
+
+            .mat-row {
+                position: relative;
+                cursor: pointer;
+                padding: 8px;
+
+                .mat-cell {
+                    min-width: 0;
+
+                    &.mat-column-detail-button {
+                        flex: 0 1 auto;
+                        padding: 0 24px 0 0;
+
+                        @include media-breakpoint('gt-md') {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .blueColor {
+        color: blue;
+    }
+
+    .accordion-table .accordion-row {
+        padding-left: 1.5rem;
+        padding-right: 2rem;
+        border-bottom: none;
+    }
+
+    .expansion-header.expansion-row {
+        border-bottom: none;
+    }
+
+    $mat-header-row-height: 80px;
+    $mat-row-height: 68px;
+    $mat-row-horizontal-padding: 24px;
+
+    .accordion-table {
+        display: block;
+    }
+
+    .accordion-row {
+        min-height: $mat-header-row-height;
+    }
+
+    .expansion-row {
+        min-height: $mat-row-height;
+    }
+
+    .expansion-row, .accordion-row {
+        display: flex;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        align-items: center;
+        padding: 0 $mat-row-horizontal-padding;
+        box-sizing: border-box;
+
+        // Workaround for https://goo.gl/pFmjJD in IE 11. Adds a pseudo
+        // element that will stretch the row the correct height. See:
+        // https://connect.microsoft.com/IE/feedback/details/802625
+        &::after {
+            display: inline-block;
+            min-height: inherit;
+            content: '';
+        }
+    }
+
+    .mat-cell, .mat-header-cell {
+        flex: 1;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+
+    .update-report {
+        margin-left: 10px;
+        background-color: #039be5 !important;
+        color: #fff !important;
+    }
+}

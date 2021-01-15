@@ -839,6 +839,16 @@ export const navigation: FuseNavigation[] = [
                 permissions: []
             },
             {
+                id: 'payment-approval',
+                title: 'Payment Approval',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'payment',
+                url: '/dashboard/payment-approval',
+                permissions: []
+            },
+            {
                 id: 'default-setting',
                 title: 'Default Setting (Voucher Info)',
                 roles: [],

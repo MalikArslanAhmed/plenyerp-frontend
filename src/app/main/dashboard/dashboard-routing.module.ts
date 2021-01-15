@@ -87,6 +87,7 @@ import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-
 import {IfrNotesMasterComponent} from "./ifr-notes-master/ifr-notes-master.component";
 import {RetireVouchersComponent} from "./treasure-report/retire-vouchers/retire-vouchers.component";
 import {OnMandateComponent} from "./treasure-report/on-mandate/on-mandate.component";
+import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
 
 const routes: Routes = [
     {
@@ -835,6 +836,13 @@ const routes: Routes = [
         component: OnMandateComponent,
         data: {
             title: 'On Mandate'
+        }
+    },
+    {
+        path: 'payment-approval',
+        component: PaymentApprovalComponent,
+        data: {
+            title: 'Payment Approval'
         }
     },
 ];

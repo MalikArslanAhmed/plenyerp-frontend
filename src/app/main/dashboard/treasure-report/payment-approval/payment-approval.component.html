@@ -1,0 +1,52 @@
+<div id="cashbook" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">payment
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Payment Approval
+                </span>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div appPermissionBind [permission]="permissionAddRoles">
+                <button mat-fab class="accent" id="add-button" aria-label="add cashbook details"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addPaymentApproval()">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content">
+                <form [formGroup]="filterPaymentApprovalForm">
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-label>Status</mat-label>
+                        <mat-select formControlName="status">
+                            <mat-option value="">ALL</mat-option>
+                            <mat-option [value]="status.value"
+                                        *ngFor="let status of statuses">{{status?.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-label>Search Payment Approval</mat-label>
+                        <input formControlName="search" matInput placeholder="Search for Payment Approval">
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="filterPaymentApproval()">
+                            Submit
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="content mt-20px">
+                <app-payment-approval-list></app-payment-approval-list>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1256,6 +1256,18 @@ export class AppUrl {
         return AppUrl.API_URL + `treasury/retire-voucher-update`;
     }
 
+    static PAYMENT_APPROVAL(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/payment-approval/` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/payment-approval`;
+        }
+    }
+
+    static UPDATE_PAYMENT_APPROVAL_STATUS(): string {
+        return AppUrl.API_URL + `treasury/payment-approval`;
+    }
+
     static DEFAULT_SETTING_VOUCHER_INFO(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/default-settings/` + id;

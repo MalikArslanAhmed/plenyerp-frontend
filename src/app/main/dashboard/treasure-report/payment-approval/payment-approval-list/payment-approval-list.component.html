@@ -1,0 +1,149 @@
+<div class="voucherSource-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <ng-container *ngIf="statuses && statuses.length > 0">
+            <button mat-button class="update-report"
+                    *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL' && selectedStatus && selectedStatus.length > 0"
+                    (click)="updateStatus(selectedStatus[0].value)">
+                {{selectedStatus[0].name}}
+                <mat-icon class="material-icons cursor-pointer whiteColor">
+                    keyboard_arrow_right
+                </mat-icon>
+            </button>
+        </ng-container>
+    </div>
+    <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
+        <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+            <span class="mat-header-cell text-center"
+                  *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'POSTED_TO_GL'">#</span>
+            <span class="mat-header-cell text-center">S.No.</span>
+            <span class="mat-header-cell text-center">Ref No.</span>
+            <span class="mat-header-cell text-center">Value Date</span>
+            <span class="mat-header-cell text-center">Remark</span>
+            <span class="mat-header-cell text-center">Amount (Net)</span>
+            <span class="mat-header-cell text-center">Action</span>
+        </section>
+        <mat-expansion-panel *ngFor="let reportData of paymentApprovalList; let i = index">
+            <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                <span class="mat-cell align-items-center"
+                      *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'POSTED_TO_GL'">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">
+                        <mat-checkbox (change)="checkPV(i, $event)"
+                                      (click)="$event.stopPropagation()"
+                                      [checked]="reportData.checked ? true : null"></mat-checkbox>
+                    </p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + + (pagination.page - 1) * (pagination.perpage)}}.</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.id}}.</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.valueDate}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.remark}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center"
+                       *ngIf="reportData.amount">{{reportData.amount}}</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.amount">-</p>
+                </span>
+                <span class="mat-cell align-items-center text-center">
+                    <button aria-label="Toggle star" mat-icon-button style="color: blue; margin-left: 20px"
+                            (click)="editModal(reportData, i)">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <!--<button aria-label="Toggle star" mat-icon-button style="color: red">
+                        <mat-icon class="material-icons" (click)="deleteMandate(reportData.id)">delete
+                        </mat-icon>
+                    </button>-->
+                </span>
+            </mat-expansion-panel-header>
+            <div>
+                <div mat-dialog-content class="items-data" fusePerfectScrollbar style="overflow-x: scroll !important;">
+                    <table class="simple invoice-table">
+                        <thead>
+                        <tr>
+                            <!--<th>
+                                <div class="title">S.No.</div>
+                            </th>-->
+                            <th>
+                                <div class="title">Beneficiery</div>
+                            </th>
+                            <th>
+                                <div class="title">Bank</div>
+                            </th>
+                            <th>
+                                <div class="title">Branch</div>
+                            </th>
+                            <th>
+                                <div class="title">Account</div>
+                            </th>
+                            <th>
+                                <div class="title">Sort Code</div>
+                            </th>
+                            <th>
+                                <div class="title">Amount</div>
+                            </th>
+                            <th>
+                                <div class="title">Tax</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf="reportData['paymentVouchers'] && reportData['paymentVouchers'].length > 0">
+                        <ng-container *ngFor="let payee of reportData['paymentVouchers']">
+                            <tr *ngFor="let benef of payee['payeeVouchers']">
+                                <td>
+                                    <span *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.name}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef?.employee?.firstName + ' ' + benef?.employee?.lastName}}</span>
+                                </td>
+                                <td>
+                                    <span
+                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankId}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches']['hrBank'].name}}</span>
+                                </td>
+                                <td>
+                                    <span
+                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankBranch?.name}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches'].name}}</span>
+                                </td>
+                                <td>
+                                    <span
+                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankAccountNumber}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank'].number}}</span>
+                                </td>
+                                <td>
+                                    <span
+                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankBranch?.sortCode}}</span>
+                                    <span
+                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches'].sortCode}}</span>
+                                </td>
+                                <td>
+                                    <span>{{benef?.netAmount}}</span>
+                                </td>
+                                <td>
+                                    <span>{{benef?.totalTax}}</span>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <mat-paginator #paginator *ngIf="paymentApprovalList.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="pageEvent = onPageChange($event)"
+    >
+    </mat-paginator>
+</div>
+
+

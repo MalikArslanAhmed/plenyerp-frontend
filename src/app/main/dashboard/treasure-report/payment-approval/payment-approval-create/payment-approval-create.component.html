@@ -1,0 +1,67 @@
+<div class="dialog-content-wrapper" id="payment-approval-create">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-10px pb-0 m-0" fusePerfectScrollbar>
+        <div>
+            <form [formGroup]="paymentApprovalForm" style="margin-top: 20px">
+
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 15px">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Ref. No.</mat-label>
+                        <input matInput placeholder="Batch No." formControlName="batchNumber" type="number">
+                    </mat-form-field>
+                    <div class="paying-checkbox">
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Paying for contract?</mat-checkbox>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Today is:</mat-label>
+                        <input (click)="todayDate.open()" (focus)="todayDate.open()" [matDatepicker]="todayDate"
+                               formControlName="valueDate"
+                               matInput>
+                        <mat-datepicker-toggle [for]="todayDate"
+                                               matSuffix></mat-datepicker-toggle>
+                        <mat-datepicker #todayDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Remark</mat-label>
+                        <textarea matInput placeholder="Instruction to Bank" formControlName="instructionToBank"
+                                  style="resize: none"></textarea>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Value Date</mat-label>
+                        <input (click)="valDate.open()" (focus)="valDate.open()" [matDatepicker]="valDate"
+                               formControlName="valueDate"
+                               matInput>
+                        <mat-datepicker-toggle [for]="valDate"
+                                               matSuffix></mat-datepicker-toggle>
+                        <mat-datepicker #valDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close();"
+                aria-label="Cancel">CANCEL
+        </button>
+        <button mat-button class="save-button" *ngIf="!this.updateData"
+                (click)="saveMandate()" aria-label="Save">SAVE
+        </button>
+        <button mat-button class="save-button" *ngIf="this.updateData"
+                (click)="updateMandate()" aria-label="Save">UPDATE
+        </button>
+    </div>
+</div>
