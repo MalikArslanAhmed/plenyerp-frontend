@@ -101,7 +101,7 @@ export class RetireVouchersComponent implements OnInit {
     filterRetireVoucher() {
         let params = {};
         if (this.filterPaymentVoucherForm.value.status !== 'ALL') {
-            params['status'] = this.filterPaymentVoucherForm.value.status;
+            params['retireStatus'] = this.filterPaymentVoucherForm.value.status;
         }
         this.status = this.filterPaymentVoucherForm.value.status;
         params['voucherSourceUnitId'] = this.filterPaymentVoucherForm.value.voucherSourceUnitId;
