@@ -58,7 +58,7 @@
                         </button>
                         <button mat-button class="update-report"
                                 *ngIf="status !== 'ALL' && selectedStatus && selectedStatus.length > 0"
-                                (click)="updateStatus( selectedStatus[0].value)">
+                                (click)="updateStatus(selectedStatus[0].value)">
                             {{selectedStatus[0].name}}
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_right

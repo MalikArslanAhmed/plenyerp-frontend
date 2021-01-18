@@ -106,7 +106,7 @@ export class RetireVouchersComponent implements OnInit {
         this.status = this.filterPaymentVoucherForm.value.status;
         params['voucherSourceUnitId'] = this.filterPaymentVoucherForm.value.voucherSourceUnitId;
         params['search'] = this.filterPaymentVoucherForm.value.search;
-        // this.paymentVoucherStatus(this.status);
+        this.paymentVoucherStatus(this.status);
         this.getRetireVoucher(params);
     }
 
@@ -176,7 +176,11 @@ export class RetireVouchersComponent implements OnInit {
                 paymentVoucherIds: paymentVoucherId ? JSON.stringify(paymentVoucherId) : ''
             };
             this.retireVoucherService.updateRetireStatus(params).subscribe(data => {
-                // console.log(data);
+                this.getRetireVoucher({
+                    'retireStatus': this.filterPaymentVoucherForm.value.status,
+                    'voucherSourceUnitId': this.filterPaymentVoucherForm.value.voucherSourceUnitId,
+                    'search': this.filterPaymentVoucherForm.value.search,
+                });
             });
         }
     }
