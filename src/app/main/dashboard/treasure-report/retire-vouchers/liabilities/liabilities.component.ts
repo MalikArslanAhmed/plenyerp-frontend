@@ -99,6 +99,7 @@ export class LiabilitiesComponent implements OnInit {
                             liabilityData.push({
                                 'economicSegmentId': item.economicSegmentId,
                                 'economicName': item['economicSegment'].name,
+                                'liabilityValueDate': item.liabilityValueDate,
                                 'details': item.details,
                                 'amount': item.amount
                             });
