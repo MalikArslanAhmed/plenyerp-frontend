@@ -14,6 +14,7 @@ import {CurrencyService} from '../../../../../shared/services/currency.service';
 import {AdminSegmentSelectComponent} from '../../../journal-voucher/admin-segment-select/admin-segment-select.component';
 import {FundSegmentSelectComponent} from '../../../journal-voucher/fund-segment-select/fund-segment-select.component';
 import {EconomicSegmentSelectComponent} from '../../../journal-voucher/economic-segment-select/economic-segment-select.component';
+import {PaymentApprovalService} from "../../../../../shared/services/payment-approval.service";
 
 @Component({
     selector: 'app-payment-approval-create',
@@ -46,6 +47,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
     adminSegments = [];
     fundSegments = [];
     economicSegments = [];
+
     constructor(public matDialogRef: MatDialogRef<PaymentApprovalCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -56,6 +58,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 private paymentVoucherService: PaymentVoucherService,
                 private alertService: AlertService,
                 private currencyService: CurrencyService,
+                private paymentApprovalService: PaymentApprovalService,
                 private mandateService: MandateService) {
         this.action = _data.action;
         // console.log('_data', _data);
@@ -79,10 +82,10 @@ export class PaymentApprovalCreateComponent implements OnInit {
             valueDate: [''],
             valueDateName: [{value: '', disabled: true}],
             refNumber: [''],
-            checkPayingForContract: [''],
-            todayDate: [''],
+            //checkPayingForContract: [''],
+            //todayDate: [''],
             order_number: [''],
-            ref_number: [''],
+            //ref_number: [''],
             awarded_data: [''],
             total_amount: [''],
             other_approval: [''],
@@ -107,7 +110,6 @@ export class PaymentApprovalCreateComponent implements OnInit {
             fundSegmentId: [''],
             economicSegmentCode: [{value: '', disabled: true}],
             economicSegmentId: [''],
-
         });
     }
 
@@ -394,6 +396,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
             this.currencies = data.items;
         });
     }
+
     selectCurrency(event) {
         if (this.currencies && this.currencies.length > 0) {
             let currencyName = '';
@@ -406,5 +409,31 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 'currency': currencyName
             });
         }
+    }
+
+    savePaymentApproval() {
+        let params = {
+            'adminSegmentId': this.paymentApprovalForm.getRawValue().adminSegmentId ? this.paymentApprovalForm.getRawValue().adminSegmentId : '',
+            'fundSegmentId': this.paymentApprovalForm.getRawValue().fundSegmentId ? this.paymentApprovalForm.getRawValue().fundSegmentId : '',
+            'economicSegmentId': this.paymentApprovalForm.getRawValue().economicSegmentId ? this.paymentApprovalForm.getRawValue().economicSegmentId : '',
+            'currencyId': this.paymentApprovalForm.getRawValue().currencyId ? this.paymentApprovalForm.getRawValue().currencyId : '',
+            'valueDate': this.paymentApprovalForm.getRawValue().valueDate ? this.paymentApprovalForm.getRawValue().valueDate : '',
+            'authorisedDate': this.paymentApprovalForm.getRawValue().authorizedDate ? this.paymentApprovalForm.getRawValue().authorizedDate : '',
+            'remark': this.paymentApprovalForm.getRawValue().remark ? this.paymentApprovalForm.getRawValue().remark : '',
+            'amount': this.paymentApprovalForm.getRawValue().amount ? this.paymentApprovalForm.getRawValue().amount : ''
+        };
+        /*let paymentVouchers = [];
+        if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
+            this.paymentVoucherData.forEach(pv => {
+                if (pv && pv.checked) {
+                    paymentVouchers.push(pv.id);
+                }
+            });
+        }
+        params['paymentVouchers'] = (paymentVouchers && paymentVouchers.length > 0) ? JSON.stringify(paymentVouchers) : '';*/
+        this.paymentApprovalService.save(params).subscribe(data => {
+            this.matDialogRef.close(this.paymentApprovalForm);
+            this.paymentApprovalForm.reset();
+        });
     }
 }

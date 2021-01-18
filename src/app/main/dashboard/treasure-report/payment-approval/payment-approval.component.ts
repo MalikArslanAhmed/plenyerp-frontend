@@ -71,12 +71,12 @@ export class PaymentApprovalComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getMandateList.getMadateList();
+            this.getMandateList.getPaymentApprovalList();
         });
     }
 
     filterPaymentApproval() {
-        this.getMandateList.getMadateList(this.filterPaymentApprovalForm.value);
+        this.getMandateList.getPaymentApprovalList(this.filterPaymentApprovalForm.value);
         // console.log('filterPaymentApprovalForm', this.filterPaymentApprovalForm.value);
     }
 }

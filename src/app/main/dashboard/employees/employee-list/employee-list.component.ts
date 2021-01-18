@@ -77,6 +77,7 @@ export class EmployeeListComponent implements OnInit {
             this.pagination.total = data.total;
         });
     }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getEmployees();

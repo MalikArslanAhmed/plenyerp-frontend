@@ -72,11 +72,13 @@ app-payment-approval-create {
     .w-40-per {
         width: 40% !important;
     }
-    .paying-checkbox{
+
+    .paying-checkbox {
         display: flex;
         justify-content: center;
         align-items: center;
     }
+
     .mat-radio-button ~ .mat-radio-button {
         margin-left: 16px;
     }

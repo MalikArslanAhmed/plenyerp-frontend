@@ -8,6 +8,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {PaymentApprovalCreateComponent} from '../payment-approval-create/payment-approval-create.component';
 import * as moment from 'moment';
 import {PaymentApprovalService} from '../../../../../shared/services/payment-approval.service';
+import {EmployeeService} from "../../../../../shared/services/employee.service";
 
 @Component({
     selector: 'app-payment-approval-list',
@@ -52,14 +53,15 @@ export class PaymentApprovalListComponent implements OnInit {
     constructor(private cashbookService: CashbookService,
                 private router: Router,
                 private _matDialog: MatDialog,
-                private paymentApprovalService: PaymentApprovalService) {
+                private paymentApprovalService: PaymentApprovalService,
+                private employeesService: EmployeeService) {
     }
 
     ngOnInit(): void {
-        this.getMadateList();
+        this.getPaymentApprovalList();
     }
 
-    getMadateList(data?) {
+    getPaymentApprovalList(data?) {
         let params = {
             page: this.pagination.page
         };
@@ -83,11 +85,12 @@ export class PaymentApprovalListComponent implements OnInit {
 
         this.paymentApprovalList = [];
         this.paymentApprovalService.list(params).subscribe(data => {
+            console.log('data', data);
             this.paymentApprovalList = data.items;
             console.log('--->>payment Approval', data.items);
             this.pagination.page = data.page;
             this.pagination.total = data.total;
-            if (this.paymentApprovalList && this.paymentApprovalList.length > 0) {
+            /*if (this.paymentApprovalList && this.paymentApprovalList.length > 0) {
                 let i = 1;
                 this.paymentApprovalList.forEach(val => {
                     let totalAmount = [];
@@ -110,7 +113,7 @@ export class PaymentApprovalListComponent implements OnInit {
                     val['sno'] = i;
                     i++;
                 });
-            }
+            }*/
         });
     }
 
@@ -127,7 +130,7 @@ export class PaymentApprovalListComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getMadateList();
+            this.getPaymentApprovalList();
         });
     }
 
@@ -152,13 +155,30 @@ export class PaymentApprovalListComponent implements OnInit {
     // deleteMandate(mandateId) {
     //     this.paymentApprovalService.delete(mandateId).subscribe(data => {
     //         if (data) {
-    //             this.getMadateList();
+    //             this.getPaymentApprovalList();
     //         }
     //     });
     // }
 
+    /*getEmployees(): void {
+        this.employees = [];
+        this.employeesService.getEmployees({page: this.pagination.page}).subscribe(data => {
+            this.employees = data.items;
+
+            if (this.employees && this.employees.length > 0) {
+                let i = 1;
+                this.employees.forEach(category => {
+                    category['sno'] = i;
+                    i++;
+                });
+            }
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+        });
+    }*/
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
-        this.getMadateList();
+        this.getPaymentApprovalList();
     }
 }
