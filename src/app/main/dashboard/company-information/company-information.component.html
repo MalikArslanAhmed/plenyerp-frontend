@@ -29,12 +29,11 @@
                     <span class="value" *ngIf="!element.isSelected; else editPlace">
                         {{element.value}}
                     </span>
-                    <button mat-icon-button aria-label="Toggle star" *ngIf="i!==2 && !element.isSelected"
+                    <button mat-icon-button aria-label="Toggle star" *ngIf="i! == 2 && !element.isSelected && i! == 3"
                             (click)="editSetting(element)"
                             style="color: blue">
                         <mat-icon class="editicon material-icons">edit</mat-icon>
                     </button>
-
                     <ng-template #editPlace>
                         <div class="editPlace">
                             <mat-select name="local" [(ngModel)]="local">
@@ -47,9 +46,13 @@
                             </button>
                         </div>
                     </ng-template>
-                    <ng-container *ngIf="i===2">
+                    <ng-container *ngIf="i === 2">
                         <mat-slide-toggle class="toggle" [(ngModel)]="dataSetting[2].value"
                                           (change)="autoPostJV($event)"></mat-slide-toggle>
+                    </ng-container>
+                    <ng-container *ngIf="i === 3">
+                        <mat-slide-toggle class="toggle" [(ngModel)]="dataSetting[3].value"
+                                          (change)="paymentApprovalRequired($event)"></mat-slide-toggle>
                     </ng-container>
                 </td>
             </ng-container>
