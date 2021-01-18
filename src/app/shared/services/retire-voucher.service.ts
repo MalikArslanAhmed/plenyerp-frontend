@@ -34,6 +34,10 @@ export class RetireVoucherService extends BaseService {
         return this.postRequest(AppUrl.LIABILITIES(), data);
     }
 
+    getLiabilities(id, data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LIABILITIES(id), data);
+    }
+
     getRetireVoucherStatus(data): Observable<any> {
         return this.getRequest(AppUrl.GET_RETIRE_VOUCHER_STATUS(), data);
     }

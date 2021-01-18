@@ -566,6 +566,10 @@ export class AppUrl {
         return AppUrl.API_URL + `treasury/retire-voucher`;
     }
 
+    static GET_LIABILITIES(id) {
+        return AppUrl.API_URL + `treasury/retire-voucher/` + id + `/liabilities`;
+    }
+
     static RV_SCHEDULE_ECONOMIC(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-payees/` + id + `/schedule-economic`;

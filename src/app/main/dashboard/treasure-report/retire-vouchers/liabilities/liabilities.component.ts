@@ -35,9 +35,12 @@ export class LiabilitiesComponent implements OnInit {
         private alertService: AlertService,
         private paymentVoucherService: PaymentVoucherService,
         private retireVoucherService: RetireVoucherService) {
-        // console.log('_data', _data);
         this.reportData = _data.report;
         this.payeeData = _data.pv;
+
+        if (this.payeeData['id']) {
+            this.getLiabilities(this.payeeData['id']);
+        }
     }
 
     ngOnInit(): void {
@@ -50,30 +53,18 @@ export class LiabilitiesComponent implements OnInit {
             deptalId: [{value: '', disabled: true}],
             lastActioned: [{value: '', disabled: true}],
             grossAmount: [{value: '', disabled: true}],
-            // payeeName: [{value: '', disabled: true}],
             economicSegmentId: [{value: '', disabled: true}],
             economicName: [{value: '', disabled: true}],
             liability: [''],
             amount: [''],
             details: [''],
         });
-        /*let payeeName = '';
-        if (this._data && this._data['pv'] && this._data['pv']['adminCompany']) {
-            payeeName = this._data['pv']['adminCompany'].name;
-        } else if (this._data && this._data['pv'] && this._data['pv']['employee']) {
-            payeeName = this._data['pv']['employee'].firstName + ' ' + this._data['pv']['employee'].lastName;
-        }
-        console.log('aaaaaaa', this._data['pv']);*/
-        // console.log('acccvvvvvv', this._data['pv'].totalAmount);
         this.liabilityForm.patchValue({
             'year': this._data['pv'].year,
             'deptalId': this._data['pv'].deptalId,
             'lastActioned': this._data['pv'].lastActioned,
-            'grossAmount': (this._data['pv'].totalAmount.amount && this._data['pv'].totalTax.tax) ? parseInt(this._data['pv'].totalAmount.amount) + parseInt(this._data['pv'].totalTax.tax) : 0,
-            // 'grossAmount': this._data['pv'].totalAmount ? parseInt(this._data['pv'].totalAmount) : 0,
-            // 'payeeName': payeeName
+            'grossAmount': (this._data['pv'].totalAmount.amount && this._data['pv'].totalTax.tax) ? parseInt(this._data['pv'].totalAmount.amount) + parseInt(this._data['pv'].totalTax.tax) : 0
         });
-        // this.getPayeeEconomicCode();
     }
 
     economicSegmentSelect() {
@@ -95,21 +86,29 @@ export class LiabilitiesComponent implements OnInit {
         });
     }
 
-    /*getPayeeEconomicCode() {
-        this.paymentVoucherService.getScheduleEconomic(this.reportData.id, {payeeVoucherId: this.payeeData.id}).subscribe(data => {
+    getLiabilities(retireVoucherId) {
+        let params = {
+            'page': -1
+        };
+        this.retireVoucherService.getLiabilities(retireVoucherId, params).subscribe(data => {
             let liabilityData = [];
-            if (data && data.items && data.items.length > 0) {
-                data.items.forEach(item => {
-                    liabilityData.push({
-                        'economicSegmentId': item.economicSegmentId,
-                        'economicName': item['economicSegment'].name,
-                        'amount': item.amount
-                    });
+            if (data && data.length > 0) {
+                data.forEach(retire => {
+                    if (retire && retire['retireLiabilities'] && retire['retireLiabilities'].length > 0) {
+                        retire['retireLiabilities'].forEach(item => {
+                            liabilityData.push({
+                                'economicSegmentId': item.economicSegmentId,
+                                'economicName': item['economicSegment'].name,
+                                'details': item.details,
+                                'amount': item.amount
+                            });
+                        });
+                    }
                 });
                 this.liabilityData = liabilityData;
             }
         });
-    }*/
+    }
 
     addLiablity() {
         if (!this.liabilityForm.getRawValue().economicSegmentId) {
