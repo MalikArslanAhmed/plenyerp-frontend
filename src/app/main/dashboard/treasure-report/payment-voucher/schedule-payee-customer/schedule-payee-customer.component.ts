@@ -29,6 +29,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     payeeData: any;
     banks = [];
     payeeBankId: any;
+    taxIds = [];
 
     constructor(public matDialogRef: MatDialogRef<SchedulePayeeCustomerComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -91,7 +92,8 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 'totalTax': this.schedulePayeeCustomerForm.getRawValue().totalTax,
                 'year': this.schedulePayeeCustomerForm.getRawValue().year,
                 'details': this.schedulePayeeCustomerForm.getRawValue().details,
-                'payeeBankId': this.payeeBankId ? this.payeeBankId : ''
+                'payeeBankId': this.payeeBankId ? this.payeeBankId : '',
+                'taxIds': this.taxIds ? JSON.stringify(this.taxIds) : ''
             };
             this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
                 this.schedulePayeeCustomerForm.reset();
@@ -117,6 +119,14 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
                 return;
+            }
+            this.taxIds = [];
+            if (response['taxes'] && response['taxes'].length > 0) {
+                response['taxes'].forEach(tax => {
+                    if (tax.checked) {
+                        this.taxIds.push(tax.id);
+                    }
+                });
             }
             this.schedulePayeeCustomerForm.patchValue({
                 'totalTax': response['totalTaxes'],
