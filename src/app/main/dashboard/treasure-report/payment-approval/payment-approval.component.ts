@@ -18,7 +18,7 @@ import {ActivatedRoute} from '@angular/router';
 export class PaymentApprovalComponent implements OnInit {
     dialogRef: any;
     filterPaymentApprovalForm: FormGroup;
-    @ViewChild(PaymentApprovalListComponent) getMandateList: PaymentApprovalListComponent;
+    @ViewChild(PaymentApprovalListComponent) getPaymentApproval: PaymentApprovalListComponent;
     permissionAddRoles = [PermissionConstant.ROLES_ADD];
     statuses = [
         {
@@ -75,12 +75,11 @@ export class PaymentApprovalComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getMandateList.getPaymentApprovalList();
+            this.getPaymentApproval.getPaymentApprovalList();
         });
     }
 
     filterPaymentApproval() {
-        this.getMandateList.getPaymentApprovalList(this.filterPaymentApprovalForm.value);
-        // console.log('filterPaymentApprovalForm', this.filterPaymentApprovalForm.value);
+        this.getPaymentApproval.getPaymentApprovalList(this.filterPaymentApprovalForm.value);
     }
 }

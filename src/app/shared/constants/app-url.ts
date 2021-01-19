@@ -1275,7 +1275,7 @@ export class AppUrl {
     }
 
     static UPDATE_PAYMENT_APPROVAL_STATUS(): string {
-        return AppUrl.API_URL + `treasury/payment-approval`;
+        return AppUrl.API_URL + `treasury/payment-approval-update`;
     }
 
     static DEFAULT_SETTING_VOUCHER_INFO(id?): string {

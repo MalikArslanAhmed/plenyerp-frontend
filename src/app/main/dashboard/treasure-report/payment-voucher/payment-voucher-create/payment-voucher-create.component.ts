@@ -16,6 +16,9 @@ import {PaymentVoucherService} from 'app/shared/services/payment-voucher.service
 import {DefaultSettingVoucherInfoService} from '../../../../../shared/services/default-setting-voucher-info';
 import {AlertService} from '../../../../../shared/services/alert.service';
 import {SelectAieComponent} from '../select-aie/select-aie.component';
+import {PaymentApprovalService} from "../../../../../shared/services/payment-approval.service";
+import {CompanyInformationService} from "../../../../../shared/services/company-information.service";
+import {MatTabGroup} from "@angular/material/tabs";
 
 @Component({
     selector: 'app-payment-voucher-create',
@@ -42,9 +45,14 @@ export class PaymentVoucherCreateComponent implements OnInit {
     financialControllers = [];
     header: any;
     sources = [];
+    paymentApprovals = [];
     currencies = [];
     aies = [];
     sourceType;
+    isPaymentApproval: any = false;
+    paymentApprovalSelected: any;
+    tab = 'CREATE PV FORM';
+
     constructor(public matDialogRef: MatDialogRef<PaymentVoucherCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -53,7 +61,9 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 private treasureReportService: TreasureReportService,
                 private paymentVoucherService: PaymentVoucherService,
                 private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService,
-                private alertService: AlertService) {
+                private alertService: AlertService,
+                private paymentApprovalService: PaymentApprovalService,
+                private companyInformationService: CompanyInformationService) {
         this.header = _data.header;
         this.sourceType = _data.type;
         this.sources = _data.source;
@@ -61,7 +71,9 @@ export class PaymentVoucherCreateComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getCompanySetting();
         this.getCurrencies();
+        this.getPaymentApproval({'inUse': 1});
         this.refresh();
     }
 
@@ -69,6 +81,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
         this.schedulePayeeEmployeeForm = this.fb.group({
             sourceUnit: [{value: '', disabled: true}],
             valueDate: [''],
+            paymentApprovalId: [''],
             payee: ['EMPLOYEE'],
             currencyId: [''],
             currency: [{value: '', disabled: true}],
@@ -108,6 +121,179 @@ export class PaymentVoucherCreateComponent implements OnInit {
         this.currencyService.getCurrency({page: -1}).subscribe(data => {
             this.currencies = data.items;
         });
+    }
+
+    getPaymentApproval(data) {
+        this.paymentApprovals = [];
+        this.paymentApprovalService.list({page: -1, ...data}).subscribe(data => {
+            this.paymentApprovals = data.items;
+        });
+    }
+
+    getCompanySetting() {
+        this.companyInformationService.getCompanySetting().subscribe(data => {
+            if (data.items && data.items.length > 0) {
+                this.isPaymentApproval = data.items[0].isPaymentApproval;
+            }
+        })
+    }
+
+    savePaymentVoucher() {
+        this.isSubmitted = true;
+        if (!this.schedulePayeeEmployeeForm.getRawValue().sourceUnit) {
+            this.alertService.showErrors('Please Fill Source unit');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().valueDate) {
+            this.alertService.showErrors('Please Fill Value Date');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().payee) {
+            this.alertService.showErrors('Please Fill Payee');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().paymentApprovalId) {
+            this.alertService.showErrors('Please Choose Payment Approval Id');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().currencyId) {
+            this.alertService.showErrors('Please Fill Currency');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().paymentDescription) {
+            this.alertService.showErrors('Please Fill Being Payed For');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().xRate) {
+            this.alertService.showErrors('Please Fill X Rate');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().officialXRate) {
+            this.alertService.showErrors('Please Fill Official X Rate International');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().aieId) {
+            this.alertService.showErrors('Please Fill AIE No.');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId) {
+            this.alertService.showErrors('Please Fill Admin Segment');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId) {
+            this.alertService.showErrors('Please Fill Fund Segment');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId) {
+            this.alertService.showErrors('Please Fill Economic Segment');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().programSegmentId) {
+            this.alertService.showErrors('Please Fill Programme Segment');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId) {
+            this.alertService.showErrors('Please Fill Functional Segment');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId) {
+            this.alertService.showErrors('Please Fill Geo Code Segment');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId) {
+            this.alertService.showErrors('Please Fill Checking Officer');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId) {
+            this.alertService.showErrors('Please Fill Paying Officer');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.getRawValue().financialControllerId) {
+            this.alertService.showErrors('Please Fill Financial Controller');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (!this.schedulePayeeEmployeeForm.valid) {
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.isSubmitted) {
+            let params = {
+                'sourceUnit': this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.sources[0].name : '',
+                'voucherSourceUnitId': this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.schedulePayeeEmployeeForm.getRawValue().sourceUnit : '',
+                'valueDate': moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') ? moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
+                'paymentApproveId': this.schedulePayeeEmployeeForm.getRawValue().paymentApprovalId ? this.schedulePayeeEmployeeForm.getRawValue().paymentApprovalId : '',
+                'payee': this.schedulePayeeEmployeeForm.getRawValue().payee ? this.schedulePayeeEmployeeForm.getRawValue().payee : '',
+                'currencyId': this.schedulePayeeEmployeeForm.getRawValue().currencyId ? this.schedulePayeeEmployeeForm.getRawValue().currencyId : '',
+                'paymentDescription': this.schedulePayeeEmployeeForm.getRawValue().paymentDescription ? this.schedulePayeeEmployeeForm.getRawValue().paymentDescription : '',
+                'xRate': this.schedulePayeeEmployeeForm.getRawValue().xRate ? this.schedulePayeeEmployeeForm.getRawValue().xRate : '',
+                'officialXRate': this.schedulePayeeEmployeeForm.getRawValue().officialXRate ? this.schedulePayeeEmployeeForm.getRawValue().officialXRate : '',
+                'aieId': this.schedulePayeeEmployeeForm.getRawValue().aieId ? this.schedulePayeeEmployeeForm.getRawValue().aieId : '',
+                'adminSegmentId': this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId : '',
+                'fundSegmentId': this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId : '',
+                'economicSegmentId': this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId : '',
+                'programSegmentId': this.schedulePayeeEmployeeForm.getRawValue().programSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().programSegmentId : '',
+                'functionalSegmentId': this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId : '',
+                'geoCodeSegmentId': this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId : '',
+                'checkingOfficerId': this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId : '',
+                'payingOfficerId': this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId : '',
+                'financialControllerId': this.schedulePayeeEmployeeForm.getRawValue().financialControllerId ? this.schedulePayeeEmployeeForm.getRawValue().financialControllerId : '',
+            };
+            params['type'] = this.sourceType;
+            if (this.paymentApprovalSelected && this.paymentApprovalSelected['paymentApprovalPayees']) {
+                let payeeIds = [];
+                this.paymentApprovalSelected['paymentApprovalPayees'].forEach(pA => {
+                    if (pA['checked']) {
+                        payeeIds.push({
+                            'id': pA.id,
+                            'amount': pA.amount
+                        });
+                    }
+                });
+                params['payees'] = payeeIds;
+            }
+            this.paymentVoucherService.save(params).subscribe(data => {
+                this.schedulePayeeEmployeeForm.reset();
+                this.isSubmitted = false;
+                this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+            });
+        }
     }
 
     savePayeeEmployee() {
@@ -250,6 +436,9 @@ export class PaymentVoucherCreateComponent implements OnInit {
     }
 
     adminSegmentSelect() {
+        if (this.isPaymentApproval) {
+            return;
+        }
         this.dialogRef = this._matDialog.open(AdminSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -270,6 +459,9 @@ export class PaymentVoucherCreateComponent implements OnInit {
     }
 
     fundSegmentSelect() {
+        if (this.isPaymentApproval) {
+            return;
+        }
         this.dialogRef = this._matDialog.open(FundSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -290,6 +482,9 @@ export class PaymentVoucherCreateComponent implements OnInit {
     }
 
     economicSegmentSelect() {
+        if (this.isPaymentApproval) {
+            return;
+        }
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -429,6 +624,60 @@ export class PaymentVoucherCreateComponent implements OnInit {
         }
     }
 
+    selectPaymentApproval(event) {
+        if (this.paymentApprovals && this.paymentApprovals.length > 0) {
+            let paymentApproval = {};
+            this.paymentApprovals.forEach(pA => {
+                if (parseInt(pA.id) === parseInt(event.value)) {
+                    paymentApproval = pA;
+                }
+            });
+            this.paymentApprovalSelected = paymentApproval;
+            if (paymentApproval) {
+                this.adminSegments = [{
+                    'name': paymentApproval['adminSegment'].name,
+                    'id': paymentApproval['adminSegment'].id
+                }];
+                this.economicSegments = [{
+                    'name': paymentApproval['economicSegment'].name,
+                    'id': paymentApproval['economicSegment'].id
+                }];
+                this.fundSegments = [{
+                    'name': paymentApproval['fundSegment'].name,
+                    'id': paymentApproval['fundSegment'].id
+                }];
+                this.schedulePayeeEmployeeForm.patchValue({
+                    adminSegmentId: paymentApproval['adminSegment'].id,
+                    adminSegmentCode: paymentApproval['adminSegment'].id,
+                    disabled: true
+                });
+                this.schedulePayeeEmployeeForm.patchValue({
+                    economicSegmentId: paymentApproval['economicSegment'].id,
+                    economicSegmentCode: paymentApproval['economicSegment'].id,
+                    disabled: true
+                });
+                this.schedulePayeeEmployeeForm.patchValue({
+                    fundSegmentId: paymentApproval['fundSegment'].id,
+                    fundSegmentCode: paymentApproval['fundSegment'].id,
+                    disabled: true
+                });
+                this.schedulePayeeEmployeeForm.patchValue({
+                    'payee': (paymentApproval && paymentApproval['employeeCustomer']) ? paymentApproval['employeeCustomer'] : '',
+                    'currencyId': (paymentApproval && paymentApproval['currencyId'] ? paymentApproval['currencyId'] : ''),
+                    'currency': (paymentApproval && paymentApproval['currency'] && paymentApproval['currency']['singularCurrencyName'] ? paymentApproval['currency']['singularCurrencyName'] : ''),
+                    'valueDate': (paymentApproval && paymentApproval['valueDate']) ? moment(paymentApproval['valueDate']).format('YYYY-MM-DD') : '',
+                });
+                this.schedulePayeeEmployeeForm.controls['valueDate'].disable();
+                this.schedulePayeeEmployeeForm.controls['payee'].disable();
+                this.schedulePayeeEmployeeForm.controls['currency'].disable();
+                this.schedulePayeeEmployeeForm.controls['currencyId'].disable();
+                this.schedulePayeeEmployeeForm.controls['adminSegmentId'].disable();
+                this.schedulePayeeEmployeeForm.controls['economicSegmentId'].disable();
+                this.schedulePayeeEmployeeForm.controls['fundSegmentId'].disable();
+            }
+        }
+    }
+
     getDefaultSettingVoucherInfo() {
         this.defaultSettingVoucherInfoService.detail().subscribe(data => {
             if (data && data.adminSegment && data.adminSegmentId) {
@@ -559,5 +808,19 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 'aieId': response.id
             });
         });
+    }
+
+    tabChange(event) {
+        this.tab = event['tab'].textLabel;
+    }
+
+    goToNextTab(tabGroup: MatTabGroup) {
+        this.goToNextTabIndex(tabGroup);
+    }
+
+    goToNextTabIndex(tabGroup: MatTabGroup) {
+        if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
+        const tabCount = tabGroup._tabs.length;
+        tabGroup.selectedIndex = (tabGroup.selectedIndex + 1) % tabCount;
     }
 }

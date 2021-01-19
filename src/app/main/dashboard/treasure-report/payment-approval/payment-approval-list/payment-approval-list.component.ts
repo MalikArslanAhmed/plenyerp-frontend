@@ -91,33 +91,26 @@ export class PaymentApprovalListComponent implements OnInit {
 
         this.paymentApprovalList = [];
         this.paymentApprovalService.list(params).subscribe(data => {
-            console.log('data', data);
             this.paymentApprovalList = data.items;
-            // console.log('--->>payment Approval', data.items);
             this.pagination.page = data.page;
             this.pagination.total = data.total;
             if (this.paymentApprovalList && this.paymentApprovalList.length > 0) {
                 let i = 1;
                 this.paymentApprovalList.forEach(val => {
-                    val['valueDate'] = moment(val['valueDate']).format('YYYY-MM-DD');
-                    /*let totalAmount = [];
+                    let totalAmount = [];
                     let totalTax = [];
-                    if (val && val['paymentVouchers'] && val['paymentVouchers'].length > 0) {
-                        val['paymentVouchers'].forEach(pv => {
-                            if (pv && pv['payeeVouchers'] && pv['payeeVouchers'].length > 0) {
-                                pv['payeeVouchers'].forEach(payee => {
-                                    if (payee && payee['netAmount'] && payee['totalTax']) {
-                                        totalAmount.push(parseFloat(payee['netAmount']));
-                                        totalTax.push(parseFloat(payee['totalTax']));
-                                    }
-                                });
+                    if (val && val['paymentApprovalPayees'] && val['paymentApprovalPayees'].length > 0) {
+                        val['paymentApprovalPayees'].forEach(pv => {
+                            if (pv && pv['netAmount'] && pv['totalTax']) {
+                                totalAmount.push(parseFloat(pv['netAmount']));
+                                totalTax.push(parseFloat(pv['totalTax']));
                             }
                         });
                     }
                     val['totalAmount'] = totalAmount.reduce((a, b) => a + b, 0);
                     val['totalTax'] = totalTax.reduce((a, b) => a + b, 0);
                     val['valueDate'] = moment(val['valueDate']).format('YYYY-MM-DD');
-                    val['sno'] = i;*/
+                    val['sno'] = i;
                     i++;
                 });
             }
@@ -142,19 +135,19 @@ export class PaymentApprovalListComponent implements OnInit {
     }
 
     updateStatus(status: string) {
-        const mandateIds = [];
+        const paymentApprovalIds = [];
         if (this.paymentApprovalList && this.paymentApprovalList.length > 0) {
             this.paymentApprovalList.forEach(item => {
                 if (item.checked === true) {
-                    mandateIds.push(item.id);
+                    paymentApprovalIds.push(item.id);
                 }
             });
             const params = {
                 status: status,
-                mandateIds: mandateIds ? JSON.stringify(mandateIds) : ''
+                paymentApprovalIds: paymentApprovalIds ? JSON.stringify(paymentApprovalIds) : ''
             };
-            this.paymentApprovalService.updateMandateStatus(params).subscribe(data => {
-                console.log(data);
+            this.paymentApprovalService.updatePaymentApprovalStatus(params).subscribe(data => {
+                this.getPaymentApprovalList({});
             });
         }
     }
@@ -185,7 +178,6 @@ export class PaymentApprovalListComponent implements OnInit {
     }*/
 
     scheduleEmployee(data) {
-        console.log('data', data);
         this.dialogRef = this._matDialog.open(SchedulePaymentApprovalEmployeeComponent, {
             panelClass: 'contact-form-dialog',
             data: {pv: data}
@@ -194,7 +186,6 @@ export class PaymentApprovalListComponent implements OnInit {
             if (!response) {
                 return;
             }
-            // console.log('response', response);
             this.getChildReportData(data);
         });
     }

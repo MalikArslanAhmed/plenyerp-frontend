@@ -9,7 +9,7 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-10px pb-0 m-0 items-data" fusePerfectScrollbar>
-        <mat-tab-group dynamicHeight>
+        <mat-tab-group dynamicHeight (selectedTabChange)="tabChange($event)" #tabGroup>
             <mat-tab label="CREATE PV FORM">
                 <form [formGroup]="schedulePayeeEmployeeForm" style="margin-top: 20px">
                     <div fxLayout="row" fxLayoutAlign="start">
@@ -21,6 +21,18 @@
                                         <mat-option value="">Choose Source Unit</mat-option>
                                         <mat-option [value]="source.value"
                                                     *ngFor="let source of sources">{{source.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" *ngIf="isPaymentApproval">
+                                <mat-form-field appearance="outline" fxFlex>
+                                    <mat-label>Payment Approval</mat-label>
+                                    <mat-select formControlName="paymentApprovalId"
+                                                (selectionChange)="selectPaymentApproval($event)">
+                                        <mat-option value="">Choose Payment Approval</mat-option>
+                                        <mat-option [value]="paymentApproval.id"
+                                                    *ngFor="let paymentApproval of paymentApprovals">{{paymentApproval?.id}}
+                                            - {{paymentApproval?.remark}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -247,15 +259,159 @@
                     </div>
                 </form>
             </mat-tab>
-            <mat-tab label="OTHER INFO">
-                <h6>No data to show</h6>
+            <mat-tab label="CHOOSE PAYEES" *ngIf="isPaymentApproval">
+                <table class="simple invoice-table">
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="title">#</div>
+                        </th>
+                        <th>
+                            <div class="title">Payee Id</div>
+                        </th>
+                        <th>
+                            <div class="title">Payee Name</div>
+                        </th>
+                        <th>
+                            <div class="title">Net Amount</div>
+                        </th>
+                        <th>
+                            <div class="title">Taxes</div>
+                        </th>
+                        <th>
+                            <div class="title">Total Amount</div>
+                        </th>
+                        <th>
+                            <div class="title">Amount</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody
+                        *ngIf="paymentApprovalSelected && paymentApprovalSelected['paymentApprovalPayees'] && paymentApprovalSelected['paymentApprovalPayees'].length > 0; else noChildToShow">
+                    <tr *ngFor="let data of paymentApprovalSelected['paymentApprovalPayees']; let i = index">
+                        <td>
+                            <mat-checkbox class="mt-24" [(ngModel)]="data['checked']"></mat-checkbox>
+                        </td>
+                        <td>
+                            <div class="title" *ngIf="data && data.employee">
+                                {{data?.employee?.id}}
+                            </div>
+                            <div class="title" *ngIf="data && data.companyId">
+                                {{data.companyId}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title" *ngIf="data && data.employee">
+                                {{data?.employee?.firstName}} {{data?.employee?.lastName}}
+                            </div>
+                            <div class="title" *ngIf="data && data.company">
+                                {{data?.company?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{data?.netAmount}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{data?.totalTax}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                {{(data?.netAmount + data?.totalTax) | number}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title">
+                                <input matInput type="number" [(ngModel)]="data.amount" placeholder="Amount"
+                                       class="amount"/>
+                            </div>
+                        </td>
+                        <!--<td>
+                            <div class="title"
+                                 *ngIf="data && data.employee && data.employee.employeeBank">
+                                {{data?.employee?.employeeBank?.title}}
+                            </div>
+                            <div class="title"
+                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                {{data?.adminCompany?.companyBank?.title}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title"
+                                 *ngIf="data && data.employee && data.employee.employeeBank">
+                                {{data?.employee?.employeeBank?.number}}
+                            </div>
+                            <div class="title"
+                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                {{data?.adminCompany?.companyBank?.bankAccountNumber}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title"
+                                 *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.type">
+                                {{data?.employee?.employeeBank?.type}}
+                            </div>
+                            <div class="title"
+                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank && data.adminCompany.companyBank.typeOfBankAccount">
+                                {{data?.adminCompany?.companyBank?.typeOfBankAccount}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title"
+                                 *ngIf="data && data.employee && data.employee.employeeBank">
+                                {{data?.employee?.employeeBank?.bank?.name}}
+                            </div>
+                            <div class="title"
+                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                {{data?.adminCompany?.companyBank?.bank?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title"
+                                 *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
+                                {{data?.employee?.employeeBank?.branches?.name}}
+                            </div>
+                            <div class="title"
+                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                {{data?.adminCompany?.companyBank?.bankBranch?.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="title"
+                                 *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
+                                {{data?.employee?.employeeBank?.branches?.sortCode}}
+                            </div>
+                            <div class="title"
+                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
+                                {{data?.adminCompany?.companyBank?.bankBranch?.sortCode}}
+                            </div>
+                        </td>-->
+                    </tr>
+                    </tbody>
+                    <ng-template #noChildToShow>
+                        <tbody>
+                        <tr>
+                            <td class="text-center" colspan="15">No data to show</td>
+                        </tr>
+                        </tbody>
+                    </ng-template>
+                </table>
             </mat-tab>
         </mat-tab-group>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save"
+                *ngIf="isPaymentApproval && tab === 'CREATE PV FORM'" (click)="goToNextTab(tabGroup)">NEXT
+        </button>
+        <button mat-button class="save-button" aria-label="Save" *ngIf="isPaymentApproval && tab === 'CHOOSE PAYEES'"
+                (click)="savePaymentVoucher()">ADD
+        </button>
         <button mat-button class="save-button"
                 (click)="savePayeeEmployee()"
-                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save">ADD
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="!isPaymentApproval">ADD
         </button>
     </div>
 </div>
