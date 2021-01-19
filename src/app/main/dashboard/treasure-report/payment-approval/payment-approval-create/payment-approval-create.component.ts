@@ -15,6 +15,7 @@ import {AdminSegmentSelectComponent} from '../../../journal-voucher/admin-segmen
 import {FundSegmentSelectComponent} from '../../../journal-voucher/fund-segment-select/fund-segment-select.component';
 import {EconomicSegmentSelectComponent} from '../../../journal-voucher/economic-segment-select/economic-segment-select.component';
 import {PaymentApprovalService} from "../../../../../shared/services/payment-approval.service";
+import {GlobalService} from "../../../../../shared/services/global.service";
 
 @Component({
     selector: 'app-payment-approval-create',
@@ -38,15 +39,15 @@ export class PaymentApprovalCreateComponent implements OnInit {
     cashbookData: any;
     paymentVoucherData = [];
     panelOpenState: boolean = false;
+    currentDate: any = moment(new Date()).format('YYYY-MM-DD');
     tabName = 'DETAILS';
     selectedPaymentVocuherIds = [];
-
-
     checked;
     currencies = [];
     adminSegments = [];
     fundSegments = [];
     economicSegments = [];
+    user: any;
 
     constructor(public matDialogRef: MatDialogRef<PaymentApprovalCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -59,8 +60,10 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 private alertService: AlertService,
                 private currencyService: CurrencyService,
                 private paymentApprovalService: PaymentApprovalService,
+                private globalService: GlobalService,
                 private mandateService: MandateService) {
         this.action = _data.action;
+        this.user = this.globalService.getSelf();
         // console.log('_data', _data);
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Payment Approval';
@@ -79,37 +82,26 @@ export class PaymentApprovalCreateComponent implements OnInit {
 
     refresh() {
         this.paymentApprovalForm = this.fb.group({
-            valueDate: [''],
+            valueDate: [{value: '', disabled: true}],
             valueDateName: [{value: '', disabled: true}],
             refNumber: [''],
-            //checkPayingForContract: [''],
-            //todayDate: [''],
-            order_number: [''],
-            //ref_number: [''],
-            awarded_data: [''],
-            total_amount: [''],
-            other_approval: [''],
-            bal_before_this: [''],
-            certificate_no: [''],
-            invoice_no: [''],
-            details: [''],
-            contractor: [''],
-            employee_customer_radio: [''],
-            employee_customer_id: [''],
-            employee_customer_full_name: [''],
+            employeeCustomer: [''],
             currencyId: [''],
-            currency: [''],
-            amount: [''],
-            amount_details: [''],
+            currency: [{value: '', disabled: true}],
             remark: [''],
-            authorizedDate: [''],
-            authorizedName: [{value: '', disabled: true}],
+            authorisedDate: [{value: '', disabled: true}],
+            authorisedName: [{value: '', disabled: true}],
             adminSegmentCode: [{value: '', disabled: true}],
             adminSegmentId: [''],
             fundSegmentCode: [{value: '', disabled: true}],
             fundSegmentId: [''],
             economicSegmentCode: [{value: '', disabled: true}],
             economicSegmentId: [''],
+        });
+        console.log('this.user', this.user['name']);
+        this.paymentApprovalForm.patchValue({
+            'valueDate': this.currentDate,
+            'valueDateName': this.user.name
         });
     }
 
@@ -418,9 +410,11 @@ export class PaymentApprovalCreateComponent implements OnInit {
             'economicSegmentId': this.paymentApprovalForm.getRawValue().economicSegmentId ? this.paymentApprovalForm.getRawValue().economicSegmentId : '',
             'currencyId': this.paymentApprovalForm.getRawValue().currencyId ? this.paymentApprovalForm.getRawValue().currencyId : '',
             'valueDate': this.paymentApprovalForm.getRawValue().valueDate ? this.paymentApprovalForm.getRawValue().valueDate : '',
-            'authorisedDate': this.paymentApprovalForm.getRawValue().authorizedDate ? this.paymentApprovalForm.getRawValue().authorizedDate : '',
+            'valueDateName': this.paymentApprovalForm.getRawValue().valueDateName ? this.paymentApprovalForm.getRawValue().valueDateName : '',
+            'authorisedDate': this.paymentApprovalForm.getRawValue().authorisedDate ? this.paymentApprovalForm.getRawValue().authorisedDate : '',
+            'authorisedName': this.paymentApprovalForm.getRawValue().authorisedName ? this.paymentApprovalForm.getRawValue().authorisedName : '',
+            'employeeCustomer': this.paymentApprovalForm.getRawValue().employeeCustomer ? this.paymentApprovalForm.getRawValue().employeeCustomer : '',
             'remark': this.paymentApprovalForm.getRawValue().remark ? this.paymentApprovalForm.getRawValue().remark : '',
-            'amount': this.paymentApprovalForm.getRawValue().amount ? this.paymentApprovalForm.getRawValue().amount : ''
         };
         /*let paymentVouchers = [];
         if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {

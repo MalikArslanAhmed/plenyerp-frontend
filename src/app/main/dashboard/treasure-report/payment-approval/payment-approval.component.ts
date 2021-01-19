@@ -26,16 +26,20 @@ export class PaymentApprovalComponent implements OnInit {
             'value': 'NEW',
         },
         {
-            'name': 'Ist Authorised',
-            'value': '1ST_AUTHORISED',
+            'name': 'Checked',
+            'value': 'CHECKED',
         },
         {
-            'name': 'IInd Authorised',
-            'value': '2ND_AUTHORISED',
+            'name': 'Approved and Ready',
+            'value': 'APPROVED_AND_READY',
         },
         {
-            'name': 'Posted to GL',
-            'value': 'POSTED_TO_GL',
+            'name': 'Ready for PV',
+            'value': 'READY_FOR_PV',
+        },
+        {
+            'name': 'Full Used',
+            'value': 'FULLY_USED',
         }
     ];
     queryParams: any = {};

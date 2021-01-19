@@ -11,101 +11,15 @@
     <div class="p-10px pb-0 m-0" fusePerfectScrollbar mat-dialog-content>
         <div>
             <form [formGroup]="paymentApprovalForm" style="margin-top: 20px">
-                <!--<div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 15px">
-                    <mat-form-field appearance="outline" fxFlex>
-                        <mat-label>Ref. No.</mat-label>
-                        <input formControlName="refNumber" matInput placeholder="Ref. No." type="number">
-                    </mat-form-field>
-                    <div class="paying-checkbox">
-                        <mat-checkbox [(ngModel)]="checked" formControlName="checkPayingForContract"
-                                      name="checkPayingForContract" class="example-margin">Paying for contract?
-                        </mat-checkbox>
-                    </div>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                    <mat-form-field appearance="outline" fxFlex>
-                        <mat-label>Today is:</mat-label>
-                        <input (click)="todayDate.open()" (focus)="todayDate.open()" [matDatepicker]="todayDate"
-                               formControlName="todayDate"
-                               matInput>
-                        <mat-datepicker-toggle [for]="todayDate"
-                                               matSuffix></mat-datepicker-toggle>
-                        <mat-datepicker #todayDate></mat-datepicker>
-                    </mat-form-field>
-                </div>-->
                 <div fxLayout="column">
-                    <p>Contract/Order(if approval is for paying for a contract registerred in the system.)</p>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Contract / Order No.</mat-label>
-                            <input formControlName="order_number" matInput placeholder="Contract / Order No."
-                                   type="number">
-                        </mat-form-field>
-                        <!--<mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Ref No:</mat-label>
-                            <input formControlName="ref_number" matInput placeholder="Ref No." type="number">
-                        </mat-form-field>-->
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Date Awarded</mat-label>
-                            <input (click)="awardedDate.open()" (focus)="awardedDate.open()"
-                                   [matDatepicker]="awardedDate"
-                                   formControlName="awarded_data"
-                                   matInput>
-                            <mat-datepicker-toggle [for]="awardedDate"
-                                                   matSuffix></mat-datepicker-toggle>
-                            <mat-datepicker #awardedDate></mat-datepicker>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Total Amount (by fee)</mat-label>
-                            <input formControlName="total_amount" matInput placeholder="Total Amount" type="number">
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Total Other approvals:</mat-label>
-                            <input formControlName="other_approval" matInput placeholder="Total Other approvals"
-                                   type="text">
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Bal. before this:</mat-label>
-                            <input formControlName="bal_before_this" matInput placeholder="Bal. before this"
-                                   type="number">
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Certificate No:</mat-label>
-                            <input formControlName="certificate_no" matInput placeholder="Certificate No." type="text">
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Invoice No:</mat-label>
-                            <input formControlName="invoice_no" matInput placeholder="Invoice No" type="number">
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Contractor</mat-label>
-                            <input formControlName="contractor" matInput placeholder="contractor" type="number">
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px">
-                        <mat-form-field appearance="outline" class="mb-0" fxFlex>
-                            <mat-label>Details</mat-label>
-                            <textarea formControlName="details" matInput placeholder="Details"
-                                      style="resize: none"></textarea>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <hr/>
-                <div fxLayout="column">
-                    <p>Payee</p>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-bottom: 1rem">
-                        <mat-radio-group aria-label="Select an option" formControlName="employee_customer_radio">
-                            <mat-radio-button value="employee">Employee</mat-radio-button>
-                            <mat-radio-button value="customer">Customer</mat-radio-button>
+                        <mat-label>Payee</mat-label>
+                        <mat-radio-group class="example-radio-group" formControlName="employeeCustomer">
+                            <mat-radio-button value="EMPLOYEE">Employee</mat-radio-button>
+                            <mat-radio-button value="CUSTOMER">Customer</mat-radio-button>
                         </mat-radio-group>
                     </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <!--<div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline" fxFlex>
                             <mat-label>ID</mat-label>
                             <input formControlName="employee_customer_id" matInput placeholder="ID"
@@ -116,7 +30,7 @@
                             <input formControlName="employee_customer_full_name" matInput placeholder="Full Name"
                                    type="text">
                         </mat-form-field>
-                    </div>
+                    </div>-->
                 </div>
                 <hr/>
                 <div fxLayout="column">
@@ -135,7 +49,7 @@
                             <input formControlName="currency" matInput placeholder="Currency">
                         </mat-form-field>
                     </div>
-                    <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <!--<div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline" class="mb-0" fxFlex>
                             <mat-label>Amount</mat-label>
                             <input formControlName="amount" matInput placeholder="Amount" type="number">
@@ -144,7 +58,7 @@
                             <textarea formControlName="amount_details" matInput placeholder="Amount-detail"
                                       style="resize: none"></textarea>
                         </mat-form-field>
-                    </div>
+                    </div>-->
                 </div>
                 <hr/>
                 <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" class="mt--20px">
@@ -202,7 +116,6 @@
                 </div>
                 <hr/>
                 <div fxLayout="column">
-                    <!--<p>Prepared</p>-->
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline" fxFlex>
                             <mat-label>Prepared Date</mat-label>
@@ -223,7 +136,7 @@
                             <mat-label>Authorized Date</mat-label>
                             <input (click)="authorizeDate.open()" (focus)="authorizeDate.open()"
                                    [matDatepicker]="authorizeDate"
-                                   formControlName="authorizedDate"
+                                   formControlName="authorisedDate"
                                    matInput>
                             <mat-datepicker-toggle [for]="authorizeDate"
                                                    matSuffix></mat-datepicker-toggle>
@@ -231,7 +144,7 @@
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex class="mb-0">
                             <mat-label>Authorized By</mat-label>
-                            <input matInput formControlName="authorizedName">
+                            <input matInput formControlName="authorisedName">
                         </mat-form-field>
                     </div>
                 </div>

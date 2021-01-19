@@ -9,6 +9,8 @@ import {PaymentApprovalCreateComponent} from '../payment-approval-create/payment
 import * as moment from 'moment';
 import {PaymentApprovalService} from '../../../../../shared/services/payment-approval.service';
 import {EmployeeService} from "../../../../../shared/services/employee.service";
+import {SchedulePaymentApprovalEmployeeComponent} from "../schedule-payment-approval-employee/schedule-payment-approval-employee.component";
+import {SchedulePaymentApprovalCustomerComponent} from "../schedule-payment-approval-customer/schedule-payment-approval-customer.component";
 
 @Component({
     selector: 'app-payment-approval-list',
@@ -35,16 +37,20 @@ export class PaymentApprovalListComponent implements OnInit {
             'value': 'NEW',
         },
         {
-            'name': 'Ist Authorised',
-            'value': '1ST_AUTHORISED',
+            'name': 'Checked',
+            'value': 'CHECKED',
         },
         {
-            'name': 'IInd Authorised',
-            'value': '2ND_AUTHORISED',
+            'name': 'Approved and Ready',
+            'value': 'APPROVED_AND_READY',
         },
         {
-            'name': 'Posted to GL',
-            'value': 'POSTED_TO_GL',
+            'name': 'Ready for PV',
+            'value': 'READY_FOR_PV',
+        },
+        {
+            'name': 'Full Used',
+            'value': 'FULLY_USED',
         }
     ];
     status = 'ALL';
@@ -87,13 +93,14 @@ export class PaymentApprovalListComponent implements OnInit {
         this.paymentApprovalService.list(params).subscribe(data => {
             console.log('data', data);
             this.paymentApprovalList = data.items;
-            console.log('--->>payment Approval', data.items);
+            // console.log('--->>payment Approval', data.items);
             this.pagination.page = data.page;
             this.pagination.total = data.total;
-            /*if (this.paymentApprovalList && this.paymentApprovalList.length > 0) {
+            if (this.paymentApprovalList && this.paymentApprovalList.length > 0) {
                 let i = 1;
                 this.paymentApprovalList.forEach(val => {
-                    let totalAmount = [];
+                    val['valueDate'] = moment(val['valueDate']).format('YYYY-MM-DD');
+                    /*let totalAmount = [];
                     let totalTax = [];
                     if (val && val['paymentVouchers'] && val['paymentVouchers'].length > 0) {
                         val['paymentVouchers'].forEach(pv => {
@@ -110,10 +117,10 @@ export class PaymentApprovalListComponent implements OnInit {
                     val['totalAmount'] = totalAmount.reduce((a, b) => a + b, 0);
                     val['totalTax'] = totalTax.reduce((a, b) => a + b, 0);
                     val['valueDate'] = moment(val['valueDate']).format('YYYY-MM-DD');
-                    val['sno'] = i;
+                    val['sno'] = i;*/
                     i++;
                 });
-            }*/
+            }
         });
     }
 
@@ -176,6 +183,45 @@ export class PaymentApprovalListComponent implements OnInit {
             this.pagination.total = data.total;
         });
     }*/
+
+    scheduleEmployee(data) {
+        console.log('data', data);
+        this.dialogRef = this._matDialog.open(SchedulePaymentApprovalEmployeeComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {pv: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // console.log('response', response);
+            this.getChildReportData(data);
+        });
+    }
+
+    scheduleCustomers(data) {
+        this.dialogRef = this._matDialog.open(SchedulePaymentApprovalCustomerComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {pv: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // console.log('response', response);
+            this.getChildReportData(data);
+        });
+    }
+
+    getChildReportData(item) {
+        const params = {};
+        if (item && item.id) {
+            params['parentId'] = item.id;
+            this.paymentApprovalService.getSchedulePayee(item.id, {page: -1}).subscribe(data => {
+                item['payees'] = data.items;
+            });
+        }
+    }
 
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;

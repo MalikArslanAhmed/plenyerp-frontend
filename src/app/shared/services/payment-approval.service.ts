@@ -33,4 +33,12 @@ export class PaymentApprovalService extends BaseService {
     updateMandateStatus(data): Observable<any> {
         return this.postRequest(AppUrl.UPDATE_PAYMENT_APPROVAL_STATUS(), data);
     }
+
+    schedulePayee(id, data): Observable<any> {
+        return this.postRequest(AppUrl.SCHEDULE_PAYEES_PAYMENT_APPROVAL(id), data);
+    }
+
+    getSchedulePayee(id, data): Observable<any> {
+        return this.getRequest(AppUrl.SCHEDULE_PAYEES_PAYMENT_APPROVAL(id), data);
+    }
 }

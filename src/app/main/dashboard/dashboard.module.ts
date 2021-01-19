@@ -260,6 +260,8 @@ import { OnMandateCreateComponent } from './treasure-report/on-mandate/on-mandat
 import {PaymentApprovalCreateComponent} from './treasure-report/payment-approval/payment-approval-create/payment-approval-create.component';
 import {PaymentApprovalListComponent} from './treasure-report/payment-approval/payment-approval-list/payment-approval-list.component';
 import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
+import { SchedulePaymentApprovalEmployeeComponent } from './treasure-report/payment-approval/schedule-payment-approval-employee/schedule-payment-approval-employee.component';
+import { SchedulePaymentApprovalCustomerComponent } from './treasure-report/payment-approval/schedule-payment-approval-customer/schedule-payment-approval-customer.component';
 
 @NgModule({
     declarations: [
@@ -499,6 +501,8 @@ import {PaymentApprovalComponent} from './treasure-report/payment-approval/payme
         PaymentApprovalCreateComponent,
         PaymentApprovalListComponent,
         PaymentApprovalComponent,
+        SchedulePaymentApprovalEmployeeComponent,
+        SchedulePaymentApprovalCustomerComponent,
     ],
     imports: [
         CommonModule,
