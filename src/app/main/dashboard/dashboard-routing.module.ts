@@ -88,6 +88,7 @@ import {IfrNotesMasterComponent} from "./ifr-notes-master/ifr-notes-master.compo
 import {RetireVouchersComponent} from "./treasure-report/retire-vouchers/retire-vouchers.component";
 import {OnMandateComponent} from "./treasure-report/on-mandate/on-mandate.component";
 import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
+import {PreviousYearAdvancesComponent} from "./treasure-report/previous-year-advances/previous-year-advances.component";
 
 const routes: Routes = [
     {
@@ -717,6 +718,13 @@ const routes: Routes = [
         component: PaymentVoucherComponent,
         data: {
             title: 'Payment Voucher'
+        }
+    },
+    {
+        path: 'previous-year-advance',
+        component: PreviousYearAdvancesComponent,
+        data: {
+            title: 'Previous Year Advances'
         }
     },
     {

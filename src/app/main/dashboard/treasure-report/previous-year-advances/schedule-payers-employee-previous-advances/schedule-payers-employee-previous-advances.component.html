@@ -1,0 +1,99 @@
+<div class="dialog-content-wrapper" id="schedule-items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar>
+        <form [formGroup]="schedulePayersEmployeeForm">
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Voucher Year</mat-label>
+                    <input matInput placeholder="Year" formControlName="year">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Deptal No.</mat-label>
+                    <input matInput placeholder="Deptal No." formControlName="departmentalNo">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Details</mat-label>
+                    <input matInput placeholder="Details" formControlName="details">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex (click)="selectAdminEmployee('Select Payeer Employee')">
+                    <mat-label>Payee Id</mat-label>
+                    <mat-select formControlName="employeeId">
+                        <mat-option value="">Choose Employee</mat-option>
+                        <mat-option [value]="payingOfficer.id"
+                                    *ngFor="let payingOfficer of payingOfficers">{{payingOfficer?.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Payer Name</mat-label>
+                    <input matInput placeholder="Payee Name" formControlName="payerName">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Amount</mat-label>
+                    <input matInput placeholder="Amount" formControlName="amount" type="number"
+                           (change)="totalAmountWords($event.target.value)">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Total Amount (in words)</mat-label>
+                    <input matInput placeholder="Total Amount (in words)" formControlName="totalAmountInWords">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Line Details</mat-label>
+                    <input matInput placeholder="Line Details" formControlName="lineDetail">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 10px; margin-bottom: 10px">
+                <span style="margin-top: 4px">Pay Mode</span>
+                <span>
+                    <mat-radio-button (change)="selectRadio('CASH')"></mat-radio-button>Cash
+                </span>
+                <span>
+                    <mat-radio-button (change)="selectRadio('DIRECT_PAYMENT')"></mat-radio-button>Direct Payment
+                </span>
+                <span>
+                    <mat-radio-button (change)="selectRadio('INSTRUMENTS')"></mat-radio-button>Instruments (Cheque, Drafts etc.)
+                </span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 20px" *ngIf="this.payMode === 'INSTRUMENTS'">
+                <h4>Instruments' Details</h4>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" *ngIf="this.payMode === 'INSTRUMENTS'">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Number</mat-label>
+                    <input matInput placeholder="Number" formControlName="instrumentNumber" type="number">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Type</mat-label>
+                    <input matInput placeholder="Type" formControlName="instrumentType">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Teller No.</mat-label>
+                    <input matInput placeholder="Teller No." formControlName="instrumentTellerNumber" type="number">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Issued By</mat-label>
+                    <input matInput placeholder="Issued By" formControlName="instrumentIssuedBy">
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button"
+                (click)="savePayersEmployee()"
+                [disabled]="schedulePayersEmployeeForm.invalid" aria-label="Save">ADD
+        </button>
+    </div>
+</div>

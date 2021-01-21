@@ -1,0 +1,142 @@
+<div class="dialog-content-wrapper" id="schedule-economic-code">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{'Schedule Economic Code - RV'}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar>
+        <form [formGroup]="economicCodeForm">
+            <div class="border-1px-solid" style="padding: 1rem; margin-bottom: 2.5rem; background-color: #f9f9f9">
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <span class=voucher_title>Voucher Details</span>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Year</mat-label>
+                        <input matInput formControlName="year">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Full Deptal No</mat-label>
+                        <input matInput formControlName="deptalId">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Eco Code</mat-label>
+                        <input matInput formControlName="economicCode">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Eco Code Name</mat-label>
+                        <input matInput formControlName="economicSegmentName" placeholder="Title">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Gross Amount</mat-label>
+                        <input matInput formControlName="grossAmount">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Payee Names</mat-label>
+                        <input matInput formControlName="payeeName">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex (click)="economicSegmentSelect()">
+                    <mat-label>Select Economic Code</mat-label>
+                    <mat-select formControlName="economicSegmentId" required>
+                        <mat-option [value]="eco.id"
+                                    *ngFor="let eco of economicSegments">{{eco?.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Economic Code Name</mat-label>
+                    <input matInput formControlName="economicName">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Amount</mat-label>
+                    <input matInput formControlName="amount" type="number">
+                </mat-form-field>
+                <div fxFlex>
+                    <button mat-button class="add-row" aria-label="Save" (click)="addLedger()">ADD</button>
+                </div>
+            </div>
+        </form>
+        <div fxLayout="row" fxLayoutAlign="center">
+            <table class="simple invoice-table">
+                <thead>
+                <tr>
+                    <th>
+                        <div class="title">S.No</div>
+                    </th>
+                    <th>
+                        <div class="title">Account</div>
+                    </th>
+                    <th>
+                        <div class="title">Amount</div>
+                    </th>
+                    <th>
+                        <div class="title">Action</div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody *ngIf="ledgers && ledgers.length > 0; else noBankFound">
+                <tr *ngFor="let ledger of ledgers; let i = index">
+                    <td>
+                        <div class="title">
+                            {{i + 1}}.
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title">
+                            {{ledger?.economicSegmentId}} - {{ledger?.economicName}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title">
+                            {{ledger?.amount}}
+                        </div>
+                    </td>
+                    <td>
+                        <div fxLayout="row" fxLayoutAlign="center">
+                            <button aria-label="Toggle star" mat-icon-button style="color: red"
+                                    (click)="deleteLedger(i)">
+                                <mat-icon class="material-icons">delete</mat-icon>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+                <ng-template #noBankFound>
+                    <tbody>
+                    <tr>
+                        <td colspan="4">
+                            <div class="title text-center">
+                                No data to show
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </ng-template>
+            </table>
+        </div>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button"
+                (click)="matDialogRef.close(economicCodeForm);"
+                aria-label="Save">Cancel
+        </button>
+        <button mat-button class="save-button"
+                (click)="saveEconomicCode()"
+                [disabled]="economicCodeForm.invalid" aria-label="Save">SAVE
+        </button>
+    </div>
+</div>

@@ -253,15 +253,20 @@ import {SummaryAdminSegmentSelectComponent} from './summary-admin-segment-select
 import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
 import {IfrNotesMasterComponent} from './ifr-notes-master/ifr-notes-master.component';
 import {RetireVouchersComponent} from './treasure-report/retire-vouchers/retire-vouchers.component';
-import { LiabilitiesComponent } from './treasure-report/retire-vouchers/liabilities/liabilities.component';
-import { OnMandateComponent } from './treasure-report/on-mandate/on-mandate.component';
-import { OnMandateListComponent } from './treasure-report/on-mandate/on-mandate-list/on-mandate-list.component';
-import { OnMandateCreateComponent } from './treasure-report/on-mandate/on-mandate-create/on-mandate-create.component';
+import {LiabilitiesComponent} from './treasure-report/retire-vouchers/liabilities/liabilities.component';
+import {OnMandateComponent} from './treasure-report/on-mandate/on-mandate.component';
+import {OnMandateListComponent} from './treasure-report/on-mandate/on-mandate-list/on-mandate-list.component';
+import {OnMandateCreateComponent} from './treasure-report/on-mandate/on-mandate-create/on-mandate-create.component';
 import {PaymentApprovalCreateComponent} from './treasure-report/payment-approval/payment-approval-create/payment-approval-create.component';
 import {PaymentApprovalListComponent} from './treasure-report/payment-approval/payment-approval-list/payment-approval-list.component';
 import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
-import { SchedulePaymentApprovalEmployeeComponent } from './treasure-report/payment-approval/schedule-payment-approval-employee/schedule-payment-approval-employee.component';
-import { SchedulePaymentApprovalCustomerComponent } from './treasure-report/payment-approval/schedule-payment-approval-customer/schedule-payment-approval-customer.component';
+import {SchedulePaymentApprovalEmployeeComponent} from './treasure-report/payment-approval/schedule-payment-approval-employee/schedule-payment-approval-employee.component';
+import {SchedulePaymentApprovalCustomerComponent} from './treasure-report/payment-approval/schedule-payment-approval-customer/schedule-payment-approval-customer.component';
+import {PreviousYearAdvancesComponent} from './treasure-report/previous-year-advances/previous-year-advances.component';
+import { PreviousYearAdvancesCreateComponent } from './treasure-report/previous-year-advances/previous-year-advances-create/previous-year-advances-create.component';
+import { SchedulePayersEmployeePreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component';
+import { SchedulePayersCustomerPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component';
+import { ScheduleEconomicCodesReceiptPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-economic-codes-receipt-previous-advances/schedule-economic-codes-receipt-previous-advances.component';
 
 @NgModule({
     declarations: [
@@ -503,6 +508,11 @@ import { SchedulePaymentApprovalCustomerComponent } from './treasure-report/paym
         PaymentApprovalComponent,
         SchedulePaymentApprovalEmployeeComponent,
         SchedulePaymentApprovalCustomerComponent,
+        PreviousYearAdvancesComponent,
+        PreviousYearAdvancesCreateComponent,
+        SchedulePayersEmployeePreviousAdvancesComponent,
+        SchedulePayersCustomerPreviousAdvancesComponent,
+        ScheduleEconomicCodesReceiptPreviousAdvancesComponent,
     ],
     imports: [
         CommonModule,

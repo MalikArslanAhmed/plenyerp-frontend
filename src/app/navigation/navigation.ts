@@ -849,6 +849,16 @@ export const navigation: FuseNavigation[] = [
                 permissions: []
             },
             {
+                id: 'previous-year-advances',
+                title: 'Previous Year Advances',
+                roles: [],
+                // translate: 'NAV.CALENDAR',
+                type: 'item',
+                icon: 'payment',
+                url: '/dashboard/previous-year-advance',
+                permissions: []
+            },
+            {
                 id: 'default-setting',
                 title: 'Default Setting (Voucher Info)',
                 roles: [],
