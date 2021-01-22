@@ -31,7 +31,7 @@ export class PreviousYearAdvancesService extends BaseService {
     }
 
     getUpdateStatus(data): Observable<any> {
-        return this.postRequest(AppUrl.RV_VOUCHER_STATUS(), data);
+        return this.postRequest(AppUrl.PREVIOUS_YEAR_VOUCHER_STATUS(), data);
     }
 
     schedulePayer(id, data): Observable<any> {
@@ -43,7 +43,7 @@ export class PreviousYearAdvancesService extends BaseService {
     }
 
     getSchedulePayee(id, data): Observable<any> {
-        return this.getRequest(AppUrl.RV_SCHEDULE_PAYEES(id), data);
+        return this.getRequest(AppUrl.SCHEDULE_PAYEES(id), data);
     }
 
     getScheduleEconomic(id, data?): Observable<any> {

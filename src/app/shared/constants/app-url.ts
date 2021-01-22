@@ -552,6 +552,10 @@ export class AppUrl {
         return AppUrl.API_URL + `treasury/receipt-vouchers/update-status`;
     }
 
+    static PREVIOUS_YEAR_VOUCHER_STATUS(): string {
+        return AppUrl.API_URL + `treasury/payment-vouchers/previous-advances-update`;
+    }
+
     static RV_SCHEDULE_PAYEES(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-vouchers/` + id + `/schedule-payees`;

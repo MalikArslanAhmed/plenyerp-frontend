@@ -213,19 +213,19 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title" *ngIf="data && data.lineDetail">
-                                                        {{data?.lineDetail}}
+                                                    <div class="title" *ngIf="data && data.details">
+                                                        {{data?.details}}
                                                     </div>
-                                                    <div class="title" *ngIf="!data || !data.lineDetail">
+                                                    <div class="title" *ngIf="!data || !data.details">
                                                         -
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title" *ngIf="data && data.totalAmount">
-                                                        {{data?.totalAmount}}
+                                                    <div class="title" *ngIf="data && data.netAmount">
+                                                        {{data?.netAmount}}
                                                     </div>
-                                                    <div class="title" *ngIf="!data || !data.totalAmount">
-                                                        {{data?.totalAmount}}
+                                                    <div class="title" *ngIf="!data || !data.netAmount">
+                                                        {{data?.netAmount}}
                                                     </div>
                                                 </td>
                                                 <td>

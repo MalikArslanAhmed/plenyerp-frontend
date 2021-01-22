@@ -97,7 +97,7 @@ export class SchedulePayersCustomerPreviousAdvancesComponent implements OnInit {
         if (this.isSubmitted) {
             let params = {
                 'companyId': this.schedulePayersCustomerForm.getRawValue().companyId ? this.schedulePayersCustomerForm.getRawValue().companyId : '',
-                'totalAmount': this.schedulePayersCustomerForm.getRawValue().amount ? this.schedulePayersCustomerForm.getRawValue().amount : '',
+                'netAmount': this.schedulePayersCustomerForm.getRawValue().amount ? this.schedulePayersCustomerForm.getRawValue().amount : '',
                 'year': this.schedulePayersCustomerForm.getRawValue().year ? this.schedulePayersCustomerForm.getRawValue().year : '',
                 'details': this.schedulePayersCustomerForm.getRawValue().details ? this.schedulePayersCustomerForm.getRawValue().details : '',
                 'payMode': this.payMode ? this.payMode : '',

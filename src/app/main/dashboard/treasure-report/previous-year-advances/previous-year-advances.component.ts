@@ -236,7 +236,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
             });
             const params = {
                 status: status,
-                receiptVoucherIds: receiptVoucherId
+                paymentVoucherIds: JSON.stringify(receiptVoucherId)
             };
             this.previousYearAdvanceService.getUpdateStatus(params).subscribe(data => {
                 // console.log(data);
