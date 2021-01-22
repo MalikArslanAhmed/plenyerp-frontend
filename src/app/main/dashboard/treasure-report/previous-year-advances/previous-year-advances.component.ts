@@ -4,12 +4,13 @@ import {MatDialog} from "@angular/material/dialog";
 import {AlertService} from "../../../../shared/services/alert.service";
 import {TreasureReportService} from "../../../../shared/services/treasure-report.service";
 import * as moment from "moment";
-import {SchedulePayersEmployeeComponent} from "../receipt-vouchers/schedule-payers-employee/schedule-payers-employee.component";
-import {SchedulePayersCustomerComponent} from "../receipt-vouchers/schedule-payers-customer/schedule-payers-customer.component";
 import {ScheduleEconomicCodesReceiptComponent} from "../receipt-vouchers/schedule-economic-codes-receipt/schedule-economic-codes-receipt.component";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {PreviousYearAdvancesCreateComponent} from "./previous-year-advances-create/previous-year-advances-create.component";
 import {PreviousYearAdvancesService} from "../../../../shared/services/previous-year-advances.service";
+import {PaymentVoucherService} from "../../../../shared/services/payment-voucher.service";
+import {SchedulePayersEmployeePreviousAdvancesComponent} from "./schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component";
+import {SchedulePayersCustomerPreviousAdvancesComponent} from "./schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component";
 
 @Component({
     selector: 'app-previous-year-advances',
@@ -21,7 +22,7 @@ import {PreviousYearAdvancesService} from "../../../../shared/services/previous-
 export class PreviousYearAdvancesComponent implements OnInit {
     filterReceiptVoucherForm: FormGroup;
     createReceiptVoucherForm: FormGroup;
-    receiptVoucherData = [];
+    previousYearAdvancesData = [];
     panelOpenState: boolean = false;
     sourceUnit = [];
     statuses = [];
@@ -40,7 +41,8 @@ export class PreviousYearAdvancesComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
                 private previousYearAdvanceService: PreviousYearAdvancesService,
-                private treasureReportService: TreasureReportService) {
+                private treasureReportService: TreasureReportService,
+                private paymentVoucherService: PaymentVoucherService) {
     }
 
     ngOnInit(): void {
@@ -75,11 +77,11 @@ export class PreviousYearAdvancesComponent implements OnInit {
             page: this.pagination.page
         };
         this.previousYearAdvanceService.get(param).subscribe(data => {
-            this.receiptVoucherData = data.items;
+            this.previousYearAdvancesData = data.items;
             this.pagination.page = data.page;
             this.pagination.total = data.total;
-            if (this.receiptVoucherData && this.receiptVoucherData.length > 0) {
-                this.receiptVoucherData.forEach(d => {
+            if (this.previousYearAdvancesData && this.previousYearAdvancesData.length > 0) {
+                this.previousYearAdvancesData.forEach(d => {
                     d['checked'] = false;
                     d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
                     // this.getChildReportData(d);
@@ -100,7 +102,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     }
 
     scheduleEmployee(data) {
-        this.dialogRef = this._matDialog.open(SchedulePayersEmployeeComponent, {
+        this.dialogRef = this._matDialog.open(SchedulePayersEmployeePreviousAdvancesComponent, {
             panelClass: 'contact-form-dialog',
             data: {rv: data}
         });
@@ -113,7 +115,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     }
 
     scheduleCustomers(data) {
-        this.dialogRef = this._matDialog.open(SchedulePayersCustomerComponent, {
+        this.dialogRef = this._matDialog.open(SchedulePayersCustomerPreviousAdvancesComponent, {
             panelClass: 'contact-form-dialog',
             data: {rv: data}
         });
@@ -197,7 +199,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     }
 
     checkPV(index, event) {
-        this.receiptVoucherData[index].checked = event.checked;
+        this.previousYearAdvancesData[index].checked = event.checked;
     }
 
     receiptVoucherStatus(status) {
@@ -226,8 +228,8 @@ export class PreviousYearAdvancesComponent implements OnInit {
 
     updateStatus(status: string) {
         const receiptVoucherId = [];
-        if (this.receiptVoucherData && this.receiptVoucherData.length) {
-            this.receiptVoucherData.forEach(item => {
+        if (this.previousYearAdvancesData && this.previousYearAdvancesData.length) {
+            this.previousYearAdvancesData.forEach(item => {
                 if (item.checked === true) {
                     receiptVoucherId.push(item.id);
                 }
@@ -256,9 +258,11 @@ export class PreviousYearAdvancesComponent implements OnInit {
 
     getTypeData(sourceUnitId) {
         if (sourceUnitId) {
-            this.previousYearAdvanceService.typeData(sourceUnitId).subscribe(data => {
-                this.types = data.type;
-            });
+            if (sourceUnitId) {
+                this.paymentVoucherService.typeData(sourceUnitId).subscribe(data => {
+                    this.types = data.type;
+                });
+            }
         }
     }
 

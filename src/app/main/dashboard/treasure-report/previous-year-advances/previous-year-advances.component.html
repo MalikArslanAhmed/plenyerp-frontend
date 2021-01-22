@@ -110,7 +110,7 @@
                         <span
                             class="mat-header-cell text-center">Other COA Segments</span>
                     </section>
-                    <mat-expansion-panel *ngFor="let reportData of receiptVoucherData; let i = index">
+                    <mat-expansion-panel *ngFor="let reportData of previousYearAdvancesData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)" [collapsedHeight]="'80px'"
                                                     [expandedHeight]="'80px'">
@@ -196,9 +196,9 @@
                                                 <th>
                                                     <div class="title">Money Instrument Issuer</div>
                                                 </th>
-                                                <th *ngIf="reportData.status === 'NEW'">
+                                                <!--<th *ngIf="reportData.status === 'NEW'">
                                                     <div class="title">Schedule Economic Code</div>
-                                                </th>
+                                                </th>-->
                                             </tr>
                                             </thead>
                                             <tbody
@@ -278,12 +278,12 @@
                                                         -
                                                     </div>
                                                 </td>
-                                                <td *ngIf="reportData.status ==='NEW'">
+                                                <!--<td *ngIf="reportData.status ==='NEW'">
                                                     <button mat-button class="payee-report"
                                                             (click)="scheduleEconomicCodes(reportData, data)">Schedule
                                                         Economic Codes
                                                     </button>
-                                                </td>
+                                                </td>-->
                                             </tr>
                                             </tbody>
                                             <tbody *ngIf="reportData.status ==='NEW'">
@@ -311,7 +311,7 @@
                                             </ng-template>
                                         </table>
                                     </mat-tab>
-                                    <mat-tab label="Economic Codes">
+                                    <!--<mat-tab label="Economic Codes">
                                         <table class="simple invoice-table">
                                             <thead>
                                             <tr>
@@ -381,13 +381,13 @@
                                                 </tbody>
                                             </ng-template>
                                         </table>
-                                    </mat-tab>
+                                    </mat-tab>-->
                                 </mat-tab-group>
                             </div>
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
-                <mat-paginator #paginator *ngIf="receiptVoucherData.length > 0"
+                <mat-paginator #paginator *ngIf="previousYearAdvancesData.length > 0"
                                [length]="pagination.total"
                                [pageSize]="pagination.perpage"
                                [pageIndex]="pagination.page - 1"

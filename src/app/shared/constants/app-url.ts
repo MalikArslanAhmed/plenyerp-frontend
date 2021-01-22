@@ -536,6 +536,14 @@ export class AppUrl {
         }
     }
 
+    static PREVIOUS_YEAR_ADANCES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/payment-vouchers/previous-advances/` + id;
+        } else {
+            return AppUrl.API_URL + `treasury/payment-vouchers/previous-advances`;
+        }
+    }
+
     static RV_SOURCE_UNIT_TYPE(id): string {
         return AppUrl.API_URL + `treasury/source-units/${id}/rv-types`;
     }

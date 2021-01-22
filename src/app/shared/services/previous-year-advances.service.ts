@@ -15,11 +15,11 @@ export class PreviousYearAdvancesService extends BaseService {
     }
 
     save(data): Observable<any> {
-        return this.postRequest(AppUrl.RECEIPT_VOUCHER(), data);
+        return this.postRequest(AppUrl.PREVIOUS_YEAR_ADANCES(), data);
     }
 
     get(data): Observable<any> {
-        return this.getRequest(AppUrl.RECEIPT_VOUCHER(), data);
+        return this.getRequest(AppUrl.PREVIOUS_YEAR_ADANCES(), data);
     }
 
     delete(id): Observable<any> {
@@ -35,7 +35,7 @@ export class PreviousYearAdvancesService extends BaseService {
     }
 
     schedulePayer(id, data): Observable<any> {
-        return this.postRequest(AppUrl.RV_SCHEDULE_PAYEES(id), data);
+        return this.postRequest(AppUrl.SCHEDULE_PAYEES(id), data);
     }
 
     scheduleEconomic(id, data): Observable<any> {

@@ -52,7 +52,7 @@
                             </div>
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <mat-form-field appearance="outline" fxFlex>
-                                    <mat-label>Being Receipt For</mat-label>
+                                    <mat-label>Being Payment For</mat-label>
                                     <input matInput placeholder="Payment Description"
                                            formControlName="paymentDescription">
                                 </mat-form-field>
@@ -124,6 +124,34 @@
                                                     *ngFor="let cashbook of cashbookAccountList">{{cashbook?.title}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
+                                <div *ngIf="cashbookData">
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div fxLayout="row" fxFlex="50">
+                                            <span style="font-weight: 600">Title of Acct.:</span>&nbsp;
+                                            <span>{{cashbookData.title}}</span>
+                                        </div>
+                                        <div fxLayout="row" fxFlex="50">
+                                            <span style="font-weight: 600">Domiciled at.:</span>&nbsp;
+                                            <span>{{cashbookData?.bank?.name}}</span>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div fxLayout="row" fxFlex="50">
+                                            <span style="font-weight: 600">Acct. Number:</span>&nbsp;
+                                            <span>{{cashbookData?.bankAccountNumber}}</span>
+                                        </div>
+                                        <div fxLayout="row" fxFlex="50">
+                                            <span style="font-weight: 600">Currency:</span>&nbsp;
+                                            <span>{{cashbookData.currency?.codeCurrency}}</span>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div fxLayout="row" fxFlex="50">
+                                            <span style="font-weight: 600">Curr. Balance:</span>&nbsp;
+                                            <span>{{cashbookData?.cashbook}}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div fxLayout="column" style="width: 50%">
@@ -285,36 +313,6 @@
                                                 *ngFor="let cashbook of cashbookAccountList">{{cashbook?.title}}</mat-option>
                                 </mat-select>
                             </mat-form-field>-->
-
-
-                            <div *ngIf="cashbookData">
-                                <div fxLayout="row" fxLayoutGap="10px">
-                                    <div fxLayout="row" fxFlex="50">
-                                        <span style="font-weight: 600">Title of Acct.:</span>&nbsp;
-                                        <span>{{cashbookData.title}}</span>
-                                    </div>
-                                    <div fxLayout="row" fxFlex="50">
-                                        <span style="font-weight: 600">Domiciled at.:</span>&nbsp;
-                                        <span>{{cashbookData?.bank?.name}}</span>
-                                    </div>
-                                </div>
-                                <div fxLayout="row" fxLayoutGap="10px">
-                                    <div fxLayout="row" fxFlex="50">
-                                        <span style="font-weight: 600">Acct. Number:</span>&nbsp;
-                                        <span>{{cashbookData?.bankAccountNumber}}</span>
-                                    </div>
-                                    <div fxLayout="row" fxFlex="50">
-                                        <span style="font-weight: 600">Currency:</span>&nbsp;
-                                        <span>{{cashbookData.currency?.codeCurrency}}</span>
-                                    </div>
-                                </div>
-                                <div fxLayout="row" fxLayoutGap="10px">
-                                    <div fxLayout="row" fxFlex="50">
-                                        <span style="font-weight: 600">Curr. Balance:</span>&nbsp;
-                                        <span>{{cashbookData?.cashbook}}</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </form>
