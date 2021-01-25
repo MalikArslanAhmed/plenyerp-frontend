@@ -117,7 +117,8 @@
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}.</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}
+                                    .</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
@@ -310,13 +311,13 @@
                                                 <td colspan="15">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
                                                             (click)="scheduleEmployee(reportData)"
-                                                            *ngIf="reportData && reportData.payee === 'EMPLOYEE'">
+                                                            *ngIf="reportData && reportData.payee === 'EMPLOYEE' && !reportData.isPaymentApproval">
                                                         Schedule Payee
                                                         Employees
                                                     </button>
                                                     <button mat-button class="payee-report"
                                                             (click)="scheduleCustomers(reportData)"
-                                                            *ngIf="reportData && reportData.payee === 'CUSTOMER'">
+                                                            *ngIf="reportData && reportData.payee === 'CUSTOMER' && !reportData.isPaymentApproval">
                                                         Schedule Payee
                                                         Customers
                                                     </button>
