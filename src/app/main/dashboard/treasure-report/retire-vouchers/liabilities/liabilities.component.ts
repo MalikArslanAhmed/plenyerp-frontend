@@ -63,7 +63,7 @@ export class LiabilitiesComponent implements OnInit {
             'year': this._data['pv'].year,
             'deptalId': this._data['pv'].deptalId,
             'lastActioned': this._data['pv'].lastActioned,
-            'grossAmount': (this._data['pv'].totalAmount.amount && this._data['pv'].totalTax.tax) ? parseInt(this._data['pv'].totalAmount.amount) + parseInt(this._data['pv'].totalTax.tax) : 0
+            'grossAmount': (this._data['pv'].totalAmount && this._data['pv'].totalTax && this._data['pv'].totalAmount.amount && this._data['pv'].totalTax.tax) ? parseInt(this._data['pv'].totalAmount.amount) + parseInt(this._data['pv'].totalTax.tax) : 0
         });
     }
 
