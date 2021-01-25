@@ -193,7 +193,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
 
     getVoucherSourceUnitList() {
         this.sourceUnit = [];
-        this.treasureReportService.list({page: -1}).subscribe(data => {
+        this.treasureReportService.list({page: -1, isPersonalAdvanceUnit: 1}).subscribe(data => {
             this.sourceUnit = data.items;
         });
     }

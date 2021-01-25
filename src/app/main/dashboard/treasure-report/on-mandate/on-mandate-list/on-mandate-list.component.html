@@ -15,7 +15,7 @@
         <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
             <span class="mat-header-cell text-center"
                   *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'POSTED_TO_GL'">#</span>
-            <span class="mat-header-cell text-center">S.No.</span>
+            <!--<span class="mat-header-cell text-center">S.No.</span>-->
             <span class="mat-header-cell text-center">Ref No.</span>
             <span class="mat-header-cell text-center">Cashbook Account</span>
             <span class="mat-header-cell text-center">Batch No.</span>
@@ -35,12 +35,12 @@
                                       [checked]="reportData.checked ? true : null"></mat-checkbox>
                     </p>
                 </span>
-                <span class="mat-cell align-items-center">
+                <!--<span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}
                         .</p>
-                </span>
+                </span>-->
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.id}}.</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center ml--30px">{{reportData?.id}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.cashbook?.title}}</p>

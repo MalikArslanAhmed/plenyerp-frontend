@@ -2,7 +2,7 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <ng-container *ngIf="statuses && statuses.length > 0">
             <button mat-button class="update-report"
-                    *ngIf="status !== 'ALL' && status !== 'FULLY_USED' && selectedStatus && selectedStatus.length > 0"
+                    *ngIf="status !== 'ALL' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !=='READY_FOR_PV' && selectedStatus && selectedStatus.length > 0"
                     (click)="updateStatus(selectedStatus[0].value)">
                 {{selectedStatus[0].name}}
                 <mat-icon class="material-icons cursor-pointer whiteColor">
@@ -14,8 +14,8 @@
     <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
         <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
             <span class="mat-header-cell text-center"
-                  *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'FULLY_USED'">#</span>
-            <span class="mat-header-cell text-center">S.No.</span>
+                  *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !=='READY_FOR_PV'">#</span>
+            <!--<span class="mat-header-cell text-center">S.No.</span>-->
             <span class="mat-header-cell text-center">Ref No.</span>
             <span class="mat-header-cell text-center">Prepared Date</span>
             <span class="mat-header-cell text-center">Payee Type</span>
@@ -28,19 +28,19 @@
             <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                         (click)="getChildReportData(reportData)">
                 <span class="mat-cell align-items-center"
-                      *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'FULLY_USED'">
+                      *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !=='READY_FOR_PV'">
                     <p class="text-truncate cursor-pointer mt-10px text-center">
                         <mat-checkbox (change)="checkPV(i, $event)"
                                       (click)="$event.stopPropagation()"
                                       [checked]="reportData.checked ? true : null"></mat-checkbox>
                     </p>
                 </span>
-                <span class="mat-cell align-items-center">
+                <!--<span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}
                         .</p>
-                </span>
+                </span>-->
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.id}}.</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center ml--30px">{{reportData?.id}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.valueDate}}</p>

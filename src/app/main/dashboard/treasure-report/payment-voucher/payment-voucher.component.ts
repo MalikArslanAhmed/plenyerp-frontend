@@ -200,8 +200,37 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    checkPV(index, event) {
-        this.paymentVoucherData[index].checked = event.checked;
+    checkPV(index, event, reportData) {
+        if (this.filterPaymentVoucherForm.value && this.filterPaymentVoucherForm.value.status === 'AUDITED') {
+            let paymentVoucherTypes = [];
+            if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
+                this.paymentVoucherData.forEach(paymentVoucher => {
+                    if (paymentVoucher['checked']) {
+                        paymentVoucherTypes.push(paymentVoucher['type']);
+                    }
+                });
+                if (paymentVoucherTypes && paymentVoucherTypes.length > 0) {
+                    if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['type'] === 'PERSONAL_ADVANCES_VOUCHER') {
+                        this.paymentVoucherData[index].checked = event.checked;
+                        this.selectedStatus[0] = this.statuses[6];
+                    } else if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['type'] !== 'PERSONAL_ADVANCES_VOUCHER') {
+                        this.alertService.showErrors('Please choose only personnel advances payment vouchers');
+                        event['source'].checked = false;
+                    } else if (!paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['type'] !== 'PERSONAL_ADVANCES_VOUCHER') {
+                        this.paymentVoucherData[index].checked = event.checked;
+                        this.selectedStatus[0] = this.statuses[7];
+                    } else if (!paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['type'] === 'PERSONAL_ADVANCES_VOUCHER') {
+                        this.alertService.showErrors('Personnel advances payment vouchers can\'t be choose here');
+                        event['source'].checked = false;
+                    }
+                } else {
+                    this.paymentVoucherData[index].checked = event.checked;
+                    this.selectedStatus[0] = this.statuses[6];
+                }
+            }
+        } else {
+            this.paymentVoucherData[index].checked = event.checked;
+        }
     }
 
     paymentVoucherStatus(status) {

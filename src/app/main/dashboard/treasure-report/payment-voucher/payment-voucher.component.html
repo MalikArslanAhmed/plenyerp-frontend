@@ -84,7 +84,7 @@
                         </button>
                         <button mat-button class="update-report"
                                 *ngIf="status !== 'ALL' && status !== 'ON_MANDATE' && status !== 'CLOSED' && status !== 'POSTED_TO_GL' && selectedStatus && selectedStatus.length > 0"
-                                (click)="updateStatus( selectedStatus[0].value)">
+                                (click)="updateStatus(selectedStatus[0].value)">
                             {{selectedStatus[0].name}}
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_right
@@ -111,7 +111,8 @@
                             <span class="mat-cell align-items-center"
                                   *ngIf="status !== 'ALL' && status !== 'PAID'">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">
-                                    <mat-checkbox (change)="checkPV(i, $event)"
+                                    <mat-checkbox [(ngModel)]="reportData.checked"
+                                                  (change)="checkPV(i, $event, reportData)"
                                                   (click)="$event.stopPropagation()"
                                                   [checked]="reportData.checked ? true : null"></mat-checkbox>
                                 </p>

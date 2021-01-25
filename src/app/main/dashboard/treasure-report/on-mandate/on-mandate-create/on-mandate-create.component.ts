@@ -47,7 +47,6 @@ export class OnMandateCreateComponent implements OnInit {
                 private alertService: AlertService,
                 private mandateService: MandateService) {
         this.action = _data.action;
-        // console.log('_data', _data);
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Mandate';
             if (_data.report) {
@@ -246,6 +245,7 @@ export class OnMandateCreateComponent implements OnInit {
             page: -1
         };
         param['status'] = 'AUDITED';
+        param['isPersonalAdvanceUnit'] = false;
         this.paymentVoucherService.get(param).subscribe(data => {
             this.paymentVoucherData = data.items;
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {

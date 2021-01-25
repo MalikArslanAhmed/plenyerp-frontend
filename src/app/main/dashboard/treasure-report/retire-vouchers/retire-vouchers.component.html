@@ -50,7 +50,7 @@
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <ng-container *ngIf="statuses && statuses.length > 0">
                         <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
-                                *ngIf="status !== 'ALL' && status !== 'CLOSED' && status !== 'POSTED_TO_GL' && status !== 'NEW'">
+                                *ngIf="status !== 'ALL' && status !== 'CLOSED' && status !== 'POSTED_TO_GL' && status !== 'EDIT_LIABILITY'">
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_left
                             </mat-icon>
@@ -91,7 +91,8 @@
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}.</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}
+                                    .</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData?.year : '-'}}</p>
@@ -115,7 +116,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.status ? reportData?.status : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData['retireVoucher'] && reportData['retireVoucher'].status ? reportData['retireVoucher'].status : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData['retireVoucher'] && reportData['retireVoucher'].status ? reportData['retireVoucher'].status : 'Edit Liability'}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div>
@@ -273,12 +274,12 @@
                                                 </td>
                                             </tr>
                                             </tbody>
-                                            <tbody>
+                                            <tbody *ngIf="reportData && !reportData['retireVoucher']">
                                             <tr>
                                                 <td colspan="15">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
                                                             (click)="editLiabilities(reportData)">
-                                                        Edit Liablities
+                                                        Edit Liability
                                                     </button>
                                                 </td>
                                             </tr>

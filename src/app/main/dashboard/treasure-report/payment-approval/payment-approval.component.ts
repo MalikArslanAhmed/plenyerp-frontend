@@ -34,7 +34,7 @@ export class PaymentApprovalComponent implements OnInit {
             'value': 'APPROVED_AND_READY',
         },
         {
-            'name': 'Ready for PV',
+            'name': 'Ready for PV (Part Used)',
             'value': 'READY_FOR_PV',
         },
         {
