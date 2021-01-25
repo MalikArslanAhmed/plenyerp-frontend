@@ -36,7 +36,8 @@
                     </p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + + (pagination.page - 1) * (pagination.perpage)}}.</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}
+                        .</p>
                 </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.id}}.</p>
@@ -63,7 +64,7 @@
                        *ngIf="reportData.totalTax">{{reportData?.totalTax}}</p>
                     <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalTax">-</p>
                 </span>
-                <span class="mat-cell align-items-center text-center">
+                <span class="mat-cell align-items-center text-center" *ngIf="reportData['status'] === 'NEW'">
                     <button aria-label="Toggle star" mat-icon-button style="color: blue; margin-left: 20px"
                             (click)="editModal(reportData, i)">
                         <mat-icon class="material-icons">edit</mat-icon>
@@ -72,6 +73,9 @@
                         <mat-icon class="material-icons" (click)="deleteMandate(reportData.id)">delete
                         </mat-icon>
                     </button>-->
+                </span>
+                <span class="mat-cell align-items-center text-center" *ngIf="reportData['status'] !== 'NEW'">
+                    -
                 </span>
             </mat-expansion-panel-header>
             <div>
