@@ -288,6 +288,9 @@
                             <div class="title">Total Amount</div>
                         </th>
                         <th>
+                            <div class="title">Remaining Amount</div>
+                        </th>
+                        <th>
                             <div class="title">Amount</div>
                         </th>
                     </tr>
@@ -330,71 +333,16 @@
                             </div>
                         </td>
                         <td>
+                            <duv class="title">
+                                {{data?.remainingAmount | number}}
+                            </duv>
+                        </td>
+                        <td>
                             <div class="title">
                                 <input matInput type="number" [(ngModel)]="data.amount" placeholder="Amount"
                                        class="amount"/>
                             </div>
                         </td>
-                        <!--<td>
-                            <div class="title"
-                                 *ngIf="data && data.employee && data.employee.employeeBank">
-                                {{data?.employee?.employeeBank?.title}}
-                            </div>
-                            <div class="title"
-                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
-                                {{data?.adminCompany?.companyBank?.title}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title"
-                                 *ngIf="data && data.employee && data.employee.employeeBank">
-                                {{data?.employee?.employeeBank?.number}}
-                            </div>
-                            <div class="title"
-                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
-                                {{data?.adminCompany?.companyBank?.bankAccountNumber}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title"
-                                 *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.type">
-                                {{data?.employee?.employeeBank?.type}}
-                            </div>
-                            <div class="title"
-                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank && data.adminCompany.companyBank.typeOfBankAccount">
-                                {{data?.adminCompany?.companyBank?.typeOfBankAccount}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title"
-                                 *ngIf="data && data.employee && data.employee.employeeBank">
-                                {{data?.employee?.employeeBank?.bank?.name}}
-                            </div>
-                            <div class="title"
-                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
-                                {{data?.adminCompany?.companyBank?.bank?.name}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title"
-                                 *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
-                                {{data?.employee?.employeeBank?.branches?.name}}
-                            </div>
-                            <div class="title"
-                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
-                                {{data?.adminCompany?.companyBank?.bankBranch?.name}}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="title"
-                                 *ngIf="data && data.employee && data.employee.employeeBank && data.employee.employeeBank.branches">
-                                {{data?.employee?.employeeBank?.branches?.sortCode}}
-                            </div>
-                            <div class="title"
-                                 *ngIf="data && data.adminCompany && data.adminCompany.companyBank">
-                                {{data?.adminCompany?.companyBank?.bankBranch?.sortCode}}
-                            </div>
-                        </td>-->
                     </tr>
                     </tbody>
                     <ng-template #noChildToShow>
@@ -412,12 +360,23 @@
         <button mat-button class="save-button" [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save"
                 *ngIf="isPaymentApproval && tab === 'CREATE PV FORM'" (click)="goToNextTab(tabGroup)">NEXT
         </button>
-        <button mat-button class="save-button" aria-label="Save" *ngIf="isPaymentApproval && tab === 'CHOOSE PAYEES'"
+        <button mat-button class="save-button" aria-label="Save"
+                *ngIf="isPaymentApproval && tab === 'CHOOSE PAYEES' && !this.updatedData"
                 (click)="savePaymentVoucher()">ADD
         </button>
         <button mat-button class="save-button"
                 (click)="savePayeeEmployee()"
-                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="!isPaymentApproval">ADD
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save"
+                *ngIf="!isPaymentApproval && !this.updatedData">ADD
+        </button>
+        <button mat-button class="save-button" aria-label="Save"
+                *ngIf="isPaymentApproval && tab === 'CHOOSE PAYEES' && this.updatedData"
+                (click)="savePaymentVoucher()">UPDATE
+        </button>
+        <button mat-button class="save-button"
+                (click)="savePayeeEmployee()"
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save"
+                *ngIf="!isPaymentApproval && this.updatedData">UPDATE
         </button>
     </div>
 </div>

@@ -18,6 +18,10 @@ export class PaymentVoucherService extends BaseService {
         return this.postRequest(AppUrl.PAYMENT_VOUCHER(), data);
     }
 
+    updatePaymentVoucher(id, data): Observable<any> {
+        return this.putRequest(AppUrl.PAYMENT_VOUCHER(id), data);
+    }
+
     get(data): Observable<any> {
         return this.getRequest(AppUrl.PAYMENT_VOUCHER(), data);
     }

@@ -32,7 +32,6 @@ export class PaymentVoucherCreateComponent implements OnInit {
     schedulePayeeEmployeeForm: FormGroup;
     isSubmitted = false;
     salaryScales: any = [];
-    updateData: any;
     adminSegments = [];
     dialogRef: any;
     fundSegments = [];
@@ -67,7 +66,6 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 private companyInformationService: CompanyInformationService) {
         if (_data.action === 'EDIT') {
             this.header = _data['item']['types'].name;
-            console.log('this.header', this.header);
             this.sourceType = _data['item'].type;
             this.sources = [{
                 'name': _data['item']['voucherSourceUnit'].id + ' - ' + _data['item']['voucherSourceUnit'].longName,
@@ -154,7 +152,6 @@ export class PaymentVoucherCreateComponent implements OnInit {
     }
 
     patchForm() {
-        console.log('data', this.updatedData);
         this.isPaymentApproval = (this.updatedData && this.updatedData['isPaymentApproval']) ? this.updatedData['isPaymentApproval'] : false;
 
         this.aies = [{
@@ -173,7 +170,18 @@ export class PaymentVoucherCreateComponent implements OnInit {
             'name': (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].name : '',
             'id': (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].id : ''
         }];
-
+        this.checkingOfficers = [{
+            'name': (this.updatedData && this.updatedData['checkingOfficer']) ? this.updatedData['checkingOfficer'].firstName + ' ' + this.updatedData['checkingOfficer'].lastName : '',
+            'id': (this.updatedData && this.updatedData['checkingOfficer']) ? this.updatedData['checkingOfficer'].id : ''
+        }];
+        this.payingOfficers = [{
+            'name': (this.updatedData && this.updatedData['payingOfficer']) ? this.updatedData['payingOfficer'].firstName + ' ' + this.updatedData['payingOfficer'].lastName : '',
+            'id': (this.updatedData && this.updatedData['payingOfficer']) ? this.updatedData['payingOfficer'].id : ''
+        }];
+        this.financialControllers = [{
+            'name': (this.updatedData && this.updatedData['financialController']) ? this.updatedData['financialController'].firstName + ' ' + this.updatedData['financialController'].lastName : '',
+            'id': (this.updatedData && this.updatedData['financialController']) ? this.updatedData['financialController'].id : ''
+        }];
         this.schedulePayeeEmployeeForm.patchValue({
             valueDate: (this.updatedData && this.updatedData['valueDate']) ? this.updatedData['valueDate'] : '',
             paymentApprovalId: (this.updatedData && this.updatedData['paymentApproveId'] && this.isPaymentApproval) ? this.updatedData['paymentApproveId'] : '',
@@ -196,37 +204,23 @@ export class PaymentVoucherCreateComponent implements OnInit {
             functionalSegmentId: (this.updatedData && this.updatedData['functionalSegmentId']) ? this.updatedData['functionalSegmentId'] : '',
             functionalSegmentCode: (this.updatedData && this.updatedData['functionalSegment']) ? this.updatedData['functionalSegment'].id : '',
             geoCodeSegmentId: (this.updatedData && this.updatedData['geoCodeSegmentId']) ? this.updatedData['geoCodeSegmentId'] : '',
-            geoCodeSegmentCode: (this.updatedData && this.updatedData['geoCodeSegment']) ? this.updatedData['geoCodeSegment'].id : ''
+            geoCodeSegmentCode: (this.updatedData && this.updatedData['geoCodeSegment']) ? this.updatedData['geoCodeSegment'].id : '',
+            checkingOfficerId: (this.updatedData && this.updatedData['checkingOfficerId']) ? this.updatedData['checkingOfficerId'] : '',
+            payingOfficerId: (this.updatedData && this.updatedData['payingOfficerId']) ? this.updatedData['payingOfficerId'] : '',
+            financialControllerId: (this.updatedData && this.updatedData['financialControllerId']) ? this.updatedData['financialControllerId'] : '',
         });
 
-        /*this.schedulePayeeEmployeeForm = this.fb.group({
-            sourceUnit: [{value: '', disabled: true}],
-            valueDate: [''],
-            paymentApprovalId: [''],
-            payee: ['EMPLOYEE'],
-            currencyId: [''],
-            currency: [{value: '', disabled: true}],
-            paymentDescription: [''],
-            xRate: [''],
-            xRateCurrency: [{value: '', disabled: true}],
-            officialXRate: [''],
-            aieId: [''],
-            adminSegmentCode: [{value: '', disabled: true}],
-            adminSegmentId: [''],
-            fundSegmentCode: [{value: '', disabled: true}],
-            fundSegmentId: [''],
-            economicSegmentCode: [{value: '', disabled: true}],
-            economicSegmentId: [''],
-            programmeSegmentCode: [{value: '', disabled: true}],
-            programSegmentId: [''],
-            functionalSegmentCode: [{value: '', disabled: true}],
-            functionalSegmentId: [''],
-            geoCodeSegmentCode: [{value: '', disabled: true}],
-            geoCodeSegmentId: [''],
-            checkingOfficerId: [{value: '', disabled: true}],
-            payingOfficerId: [{value: '', disabled: true}],
-            financialControllerId: [{value: '', disabled: true}]
-        });*/
+        if (this.isPaymentApproval) {
+            this.schedulePayeeEmployeeForm.controls['valueDate'].disable();
+            this.schedulePayeeEmployeeForm.controls['payee'].disable();
+            this.schedulePayeeEmployeeForm.controls['currency'].disable();
+            this.schedulePayeeEmployeeForm.controls['currencyId'].disable();
+            this.schedulePayeeEmployeeForm.controls['adminSegmentId'].disable();
+            this.schedulePayeeEmployeeForm.controls['economicSegmentId'].disable();
+            this.schedulePayeeEmployeeForm.controls['fundSegmentId'].disable();
+            this.paymentApprovalSelected = (this.updatedData && this.updatedData['paymentApproval']) ? this.updatedData['paymentApproval'] : '';
+            console.log('this.paymentApprovalSelected', this.paymentApprovalSelected);
+        }
     }
 
     savePaymentVoucher() {
@@ -379,11 +373,19 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 });
                 params['payees'] = payeeIds;
             }
-            this.paymentVoucherService.save(params).subscribe(data => {
-                this.schedulePayeeEmployeeForm.reset();
-                this.isSubmitted = false;
-                this.matDialogRef.close(this.schedulePayeeEmployeeForm);
-            });
+            if (!this.updatedData) {
+                this.paymentVoucherService.save(params).subscribe(data => {
+                    this.schedulePayeeEmployeeForm.reset();
+                    this.isSubmitted = false;
+                    this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+                });
+            } else {
+                this.paymentVoucherService.updatePaymentVoucher(this.updatedData.id, params).subscribe(data => {
+                    this.schedulePayeeEmployeeForm.reset();
+                    this.isSubmitted = false;
+                    this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+                });
+            }
         }
     }
 
