@@ -205,9 +205,9 @@ export class PaymentVoucherComponent implements OnInit {
             let paymentVoucherTypes = [];
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
                 this.paymentVoucherData.forEach(paymentVoucher => {
-                    if (paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit) {
+                    if (paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit && paymentVoucher['checked']) {
                         paymentVoucherTypes.push("PERSONAL_ADVANCES_VOUCHER");
-                    } else {
+                    } else if (!paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit && paymentVoucher['checked']) {
                         paymentVoucherTypes.push("NON_PERSONAL_ADVANCES_VOUCHER");
                     }
                 });
