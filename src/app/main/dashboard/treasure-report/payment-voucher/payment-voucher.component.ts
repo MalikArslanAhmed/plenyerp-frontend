@@ -205,23 +205,30 @@ export class PaymentVoucherComponent implements OnInit {
             let paymentVoucherTypes = [];
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
                 this.paymentVoucherData.forEach(paymentVoucher => {
-                    if (paymentVoucher['checked']) {
-                        paymentVoucherTypes.push(paymentVoucher['type']);
+                    if (paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit) {
+                        paymentVoucherTypes.push("PERSONAL_ADVANCES_VOUCHER");
+                    } else {
+                        paymentVoucherTypes.push("NON_PERSONAL_ADVANCES_VOUCHER");
                     }
                 });
+
                 if (paymentVoucherTypes && paymentVoucherTypes.length > 0) {
-                    if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['type'] === 'PERSONAL_ADVANCES_VOUCHER') {
+                    if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
                         this.paymentVoucherData[index].checked = event.checked;
                         this.selectedStatus[0] = this.statuses[6];
-                    } else if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['type'] !== 'PERSONAL_ADVANCES_VOUCHER') {
-                        this.alertService.showErrors('Please choose only personnel advances payment vouchers');
+                    } else if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && !reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+                        reportData.checked = false;
+                        event['checked'] = false;
                         event['source'].checked = false;
-                    } else if (!paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['type'] !== 'PERSONAL_ADVANCES_VOUCHER') {
+                        this.alertService.showErrors('Please choose only personnel advances payment vouchers');
+                    } else if (!paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && !reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
                         this.paymentVoucherData[index].checked = event.checked;
                         this.selectedStatus[0] = this.statuses[7];
-                    } else if (!paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['type'] === 'PERSONAL_ADVANCES_VOUCHER') {
-                        this.alertService.showErrors('Personnel advances payment vouchers can\'t be choose here');
+                    } else if (!paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+                        reportData.checked = false;
+                        event['checked'] = false;
                         event['source'].checked = false;
+                        this.alertService.showErrors('Personnel advances payment vouchers can\'t be choose here');
                     }
                 } else {
                     this.paymentVoucherData[index].checked = event.checked;
