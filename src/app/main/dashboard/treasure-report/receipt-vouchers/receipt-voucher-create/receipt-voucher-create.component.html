@@ -253,15 +253,19 @@
                     </div>
                 </form>
             </mat-tab>
-            <mat-tab label="OTHER INFO">
+            <!--<mat-tab label="OTHER INFO">
                 <h6>No data to show</h6>
-            </mat-tab>
+            </mat-tab>-->
         </mat-tab-group>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
                 (click)="savePayeeEmployee()"
-                [disabled]="receiptVoucherCreateForm.invalid" aria-label="Save">ADD
+                [disabled]="receiptVoucherCreateForm.invalid" aria-label="Save" *ngIf="!this.updatedData">ADD
+        </button>
+        <button mat-button class="save-button"
+                (click)="savePayeeEmployee()"
+                [disabled]="receiptVoucherCreateForm.invalid" aria-label="Save" *ngIf="this.updatedData">UPDATE
         </button>
     </div>
 </div>

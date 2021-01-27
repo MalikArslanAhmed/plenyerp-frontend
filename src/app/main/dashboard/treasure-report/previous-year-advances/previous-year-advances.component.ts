@@ -11,6 +11,7 @@ import {PreviousYearAdvancesService} from "../../../../shared/services/previous-
 import {PaymentVoucherService} from "../../../../shared/services/payment-voucher.service";
 import {SchedulePayersEmployeePreviousAdvancesComponent} from "./schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component";
 import {SchedulePayersCustomerPreviousAdvancesComponent} from "./schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component";
+import {ReceiptVoucherCreateComponent} from "../receipt-vouchers/receipt-voucher-create/receipt-voucher-create.component";
 
 @Component({
     selector: 'app-previous-year-advances',
@@ -264,6 +265,23 @@ export class PreviousYearAdvancesComponent implements OnInit {
                 });
             }
         }
+    }
+
+    editPreviousYearVoucher(data) {
+        this.dialogRef = this._matDialog.open(PreviousYearAdvancesCreateComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'item': data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getPreviousYearAdvances({});
+        });
+    }
+
+    deletePreviousYearVoucher(data) {
+        console.log('data', data);
     }
 
     onPageChange(page) {

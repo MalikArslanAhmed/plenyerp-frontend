@@ -22,7 +22,7 @@
             <span class="mat-header-cell text-center">Remark</span>
             <span class="mat-header-cell text-center">Amount (Net)</span>
             <span class="mat-header-cell text-center">Total Tax</span>
-            <!--<span class="mat-header-cell text-center">Action</span>-->
+            <span class="mat-header-cell text-center">Action</span>
         </section>
         <mat-expansion-panel *ngFor="let reportData of paymentApprovalList; let i = index">
             <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
@@ -61,6 +61,23 @@
                        *ngIf="reportData.totalTax">{{reportData.totalTax}}</p>
                     <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalTax">-</p>
                 </span>
+                <span class="mat-cell align-items-center">
+                    <button mat-icon-button aria-label="Toggle star"
+                            (click)="editPaymentApproval(reportData); $event.stopPropagation()"
+                            style="color: blue; margin-left: 80px; margin-top: 3px">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star"
+                            (click)="deletePaymentApproval(reportData); $event.stopPropagation()"
+                            style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </span>
+                <!--<span class="mat-cell align-items-center" *ngIf="reportData['status'] !== 'NEW'">
+                    <p class="material-icons" style="margin-top: 10px; margin-left: 115px">
+                        -
+                    </p>
+                </span>-->
                 <!--<span class="mat-cell align-items-center text-center">
                     <button aria-label="Toggle star" mat-icon-button style="color: blue; margin-left: 20px"
                             (click)="editModal(reportData, i)">

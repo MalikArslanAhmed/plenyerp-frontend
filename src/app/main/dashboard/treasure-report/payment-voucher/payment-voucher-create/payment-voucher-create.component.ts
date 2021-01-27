@@ -219,7 +219,6 @@ export class PaymentVoucherCreateComponent implements OnInit {
             this.schedulePayeeEmployeeForm.controls['economicSegmentId'].disable();
             this.schedulePayeeEmployeeForm.controls['fundSegmentId'].disable();
             this.paymentApprovalSelected = (this.updatedData && this.updatedData['paymentApproval']) ? this.updatedData['paymentApproval'] : '';
-            console.log('this.paymentApprovalSelected', this.paymentApprovalSelected);
         }
     }
 

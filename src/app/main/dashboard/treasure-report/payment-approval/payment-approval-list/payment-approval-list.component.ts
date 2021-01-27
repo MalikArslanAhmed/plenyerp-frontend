@@ -11,6 +11,7 @@ import {PaymentApprovalService} from '../../../../../shared/services/payment-app
 import {EmployeeService} from "../../../../../shared/services/employee.service";
 import {SchedulePaymentApprovalEmployeeComponent} from "../schedule-payment-approval-employee/schedule-payment-approval-employee.component";
 import {SchedulePaymentApprovalCustomerComponent} from "../schedule-payment-approval-customer/schedule-payment-approval-customer.component";
+import {PaymentVoucherCreateComponent} from "../../payment-voucher/payment-voucher-create/payment-voucher-create.component";
 
 @Component({
     selector: 'app-payment-approval-list',
@@ -212,6 +213,23 @@ export class PaymentApprovalListComponent implements OnInit {
                 item['payees'] = data.items;
             });
         }
+    }
+
+    editPaymentApproval(report) {
+        this.dialogRef = this._matDialog.open(PaymentApprovalCreateComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'EDIT', report: report},
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getPaymentApprovalList({});
+        });
+    }
+
+    deletePaymentApproval(data) {
+        console.log('data', data);
     }
 
     onPageChange(page) {

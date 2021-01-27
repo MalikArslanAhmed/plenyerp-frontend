@@ -10,6 +10,7 @@ import {ReceiptVoucherCreateComponent} from "./receipt-voucher-create/receipt-vo
 import {SchedulePayersCustomerComponent} from './schedule-payers-customer/schedule-payers-customer.component';
 import {SchedulePayersEmployeeComponent} from './schedule-payers-employee/schedule-payers-employee.component';
 import {ScheduleEconomicCodesReceiptComponent} from "./schedule-economic-codes-receipt/schedule-economic-codes-receipt.component";
+import {PaymentVoucherCreateComponent} from "../payment-voucher/payment-voucher-create/payment-voucher-create.component";
 
 @Component({
     selector: 'app-receipt-vouchers',
@@ -260,6 +261,23 @@ export class ReceiptVouchersComponent implements OnInit {
                 this.types = data.type;
             });
         }
+    }
+
+    editReceiptVoucher(data) {
+        this.dialogRef = this._matDialog.open(ReceiptVoucherCreateComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'item': data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getReceiptVoucher({});
+        });
+    }
+
+    deleteReceiptVoucher(data) {
+        console.log('data', data);
     }
 
     onPageChange(page) {

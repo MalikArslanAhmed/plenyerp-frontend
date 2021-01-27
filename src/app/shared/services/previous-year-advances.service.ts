@@ -18,6 +18,10 @@ export class PreviousYearAdvancesService extends BaseService {
         return this.postRequest(AppUrl.PREVIOUS_YEAR_ADANCES(), data);
     }
 
+    updatePreviousYearAdvances(id, data): Observable<any> {
+        return this.putRequest(AppUrl.PREVIOUS_YEAR_ADANCES(id), data);
+    }
+
     get(data): Observable<any> {
         return this.getRequest(AppUrl.PREVIOUS_YEAR_ADANCES(), data);
     }

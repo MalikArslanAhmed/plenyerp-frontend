@@ -307,7 +307,6 @@ export class PaymentVoucherComponent implements OnInit {
     }
 
     editPaymentVoucher(data) {
-        console.log('data', data);
         this.dialogRef = this._matDialog.open(PaymentVoucherCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {'action': 'EDIT', 'item': data}

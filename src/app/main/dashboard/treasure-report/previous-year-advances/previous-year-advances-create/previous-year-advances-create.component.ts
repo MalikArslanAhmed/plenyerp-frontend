@@ -51,6 +51,7 @@ export class PreviousYearAdvancesCreateComponent implements OnInit {
     currentDate: any = moment(new Date()).format('YYYY-MM-DD');
     user: any;
     type: any;
+    updatedData: any;
 
     constructor(public matDialogRef: MatDialogRef<PreviousYearAdvancesCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -63,9 +64,19 @@ export class PreviousYearAdvancesCreateComponent implements OnInit {
                 private defaultSettingVoucherInfoService: DefaultSettingVoucherInfoService,
                 private alertService: AlertService,
                 private globalService: GlobalService) {
-        this.header = _data.header;
-        this.sources = _data.source;
-        this.type = _data.type;
+        if (_data.action === 'EDIT') {
+            this.header = _data['item']['types'].name;
+            this.type = _data['item'].type;
+            this.sources = [{
+                'name': _data['item']['voucherSourceUnit'].id + ' - ' + _data['item']['voucherSourceUnit'].longName,
+                'value': _data['item']['voucherSourceUnit'].id
+            }];
+            this.updatedData = _data['item'];
+        } else {
+            this.header = _data.header;
+            this.type = _data.type;
+            this.sources = _data.source;
+        }
         this.dialogTitle = this.header + ' - Previous Year Advances';
     }
 
@@ -73,6 +84,9 @@ export class PreviousYearAdvancesCreateComponent implements OnInit {
         this.getCurrencies();
         this.refresh();
         this.getcashbookList();
+        if (this.updatedData) {
+            this.patchForm();
+        }
     }
 
     refresh() {
@@ -133,6 +147,85 @@ export class PreviousYearAdvancesCreateComponent implements OnInit {
         this.currencyService.getCurrency({page: -1}).subscribe(data => {
             this.currencies = data.items;
         });
+    }
+
+    patchForm() {
+        this.aies = [{
+            id: (this.updatedData && this.updatedData['aie']) ? this.updatedData['aie'].id : '',
+            name: (this.updatedData && this.updatedData['aie']) ? this.updatedData['aie'].aieNumber : ''
+        }];
+        this.adminSegments = [{
+            'name': (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegment'].name : '',
+            'id': (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegment'].id : '',
+        }];
+        this.economicSegments = [{
+            'name': (this.updatedData && ['economicSegment']) ? this.updatedData['economicSegment'].name : '',
+            'id': (this.updatedData && ['economicSegment']) ? this.updatedData['economicSegment'].id : ''
+        }];
+        this.fundSegments = [{
+            'name': (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].name : '',
+            'id': (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].id : ''
+        }];
+        this.receivingOfficers = [{
+            'name': (this.updatedData && this.updatedData['receivingOfficer']) ? this.updatedData['receivingOfficer'].firstName + ' ' + this.updatedData['receivingOfficer'].lastName : '',
+            'id': (this.updatedData && this.updatedData['receivingOfficer']) ? this.updatedData['receivingOfficer'].id : ''
+        }];
+        this.checkingOfficers = [{
+            'name': (this.updatedData && this.updatedData['checkingOfficer']) ? this.updatedData['checkingOfficer'].firstName + ' ' + this.updatedData['checkingOfficer'].lastName : '',
+            'id': (this.updatedData && this.updatedData['checkingOfficer']) ? this.updatedData['checkingOfficer'].id : ''
+        }];
+        this.payingOfficers = [{
+            'name': (this.updatedData && this.updatedData['payingOfficer']) ? this.updatedData['payingOfficer'].firstName + ' ' + this.updatedData['payingOfficer'].lastName : '',
+            'id': (this.updatedData && this.updatedData['payingOfficer']) ? this.updatedData['payingOfficer'].id : ''
+        }];
+        this.financialControllers = [{
+            'name': (this.updatedData && this.updatedData['financialController']) ? this.updatedData['financialController'].firstName + ' ' + this.updatedData['financialController'].lastName : '',
+            'id': (this.updatedData && this.updatedData['financialController']) ? this.updatedData['financialController'].id : ''
+        }];
+        this.previousYearAdvancesCreateForm.patchValue({
+            valueDate: (this.updatedData && this.updatedData['valueDate']) ? this.updatedData['valueDate'] : '',
+            closedDate: (this.updatedData && this.updatedData['closedDate']) ? this.updatedData['closedDate'] : '',
+            payee: (this.updatedData && this.updatedData['payee']) ? this.updatedData['payee'] : '',
+            paymentDescription: (this.updatedData && this.updatedData['paymentDescription']) ? this.updatedData['paymentDescription'] : '',
+            xRate: (this.updatedData && this.updatedData['xRate']) ? this.updatedData['xRate'] : '',
+            officialXRate: (this.updatedData && this.updatedData['officialXRate']) ? this.updatedData['officialXRate'] : '',
+            aieId: (this.updatedData && this.updatedData['aieId']) ? this.updatedData['aieId'] : '',
+            adminSegmentId: (this.updatedData && this.updatedData['adminSegmentId']) ? this.updatedData['adminSegmentId'] : '',
+            adminSegmentCode: (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegmentId'].id : '',
+            fundSegmentId: (this.updatedData && this.updatedData['fundSegmentId']) ? this.updatedData['fundSegmentId'] : '',
+            fundSegmentCode: (this.updatedData && this.updatedData['fundSegment']) ? this.updatedData['fundSegment'].id : '',
+            economicSegmentId: (this.updatedData && this.updatedData['economicSegmentId']) ? this.updatedData['economicSegmentId'] : '',
+            economicSegmentCode: (this.updatedData && this.updatedData['economicSegment']) ? this.updatedData['economicSegment'].id : '',
+            programSegmentId: (this.updatedData && this.updatedData['programSegmentId']) ? this.updatedData['programSegmentId'] : '',
+            programmeSegmentCode: (this.updatedData && this.updatedData['programmeSegment']) ? this.updatedData['programmeSegment'].id : '',
+            functionalSegmentId: (this.updatedData && this.updatedData['functionalSegmentId']) ? this.updatedData['functionalSegmentId'] : '',
+            functionalSegmentCode: (this.updatedData && this.updatedData['functionalSegment']) ? this.updatedData['functionalSegment'].id : '',
+            geoCodeSegmentId: (this.updatedData && this.updatedData['geoCodeSegmentId']) ? this.updatedData['geoCodeSegmentId'] : '',
+            geoCodeSegmentCode: (this.updatedData && this.updatedData['geoCodeSegment']) ? this.updatedData['geoCodeSegment'].id : '',
+            receivingOfficerId: (this.updatedData && this.updatedData['receivingOfficerId']) ? this.updatedData['receivingOfficerId'] : '',
+            cashBookAccountId: (this.updatedData && this.updatedData['cashbookId']) ? this.updatedData['cashbookId'] : '',
+            checkingOfficerId: (this.updatedData && this.updatedData['checkingOfficerId']) ? this.updatedData['checkingOfficerId'] : '',
+            payingOfficerId: (this.updatedData && this.updatedData['payingOfficerId']) ? this.updatedData['payingOfficerId'] : '',
+            financialControllerId: (this.updatedData && this.updatedData['financialControllerId']) ? this.updatedData['financialControllerId'] : '',
+        });
+
+        if (this.updatedData['cashbookId']) {
+            this.cashbookAccountList = [];
+            this.cashbookService.list({}).subscribe(data => {
+                this.cashbookAccountList = data.items;
+
+                let cashbookData = '';
+                const selectedCashbookId = this.updatedData['cashbookId'];
+                if (this.cashbookAccountList && this.cashbookAccountList.length > 0) {
+                    this.cashbookAccountList.forEach(val => {
+                        if (val.id === selectedCashbookId) {
+                            cashbookData = val
+                        }
+                    });
+                }
+                this.cashbookData = cashbookData;
+            });
+        }
     }
 
     savePreviousYearAdvances() {
@@ -258,11 +351,19 @@ export class PreviousYearAdvancesCreateComponent implements OnInit {
                 'payingOfficerId': this.previousYearAdvancesCreateForm.getRawValue().payingOfficerId ? this.previousYearAdvancesCreateForm.getRawValue().payingOfficerId : '',
                 'financialControllerId': this.previousYearAdvancesCreateForm.getRawValue().financialControllerId ? this.previousYearAdvancesCreateForm.getRawValue().financialControllerId : '',
             };
-            this.previousYearAdvanceService.save(params).subscribe(data => {
-                this.previousYearAdvancesCreateForm.reset();
-                this.isSubmitted = false;
-                this.matDialogRef.close(this.previousYearAdvancesCreateForm);
-            });
+            if (this.updatedData) {
+                this.previousYearAdvanceService.save(params).subscribe(data => {
+                    this.previousYearAdvancesCreateForm.reset();
+                    this.isSubmitted = false;
+                    this.matDialogRef.close(this.previousYearAdvancesCreateForm);
+                });
+            } else {
+                this.previousYearAdvanceService.updatePreviousYearAdvances(this.updatedData.id, params).subscribe(data => {
+                    this.previousYearAdvancesCreateForm.reset();
+                    this.isSubmitted = false;
+                    this.matDialogRef.close(this.previousYearAdvancesCreateForm);
+                });
+            }
         }
     }
 

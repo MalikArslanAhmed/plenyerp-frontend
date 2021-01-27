@@ -18,6 +18,10 @@ export class ReceiptVoucherService extends BaseService {
         return this.postRequest(AppUrl.RECEIPT_VOUCHER(), data);
     }
 
+    updateReceiptVoucher(id, data): Observable<any> {
+        return this.postRequest(AppUrl.RECEIPT_VOUCHER(id), data);
+    }
+
     get(data): Observable<any> {
         return this.getRequest(AppUrl.RECEIPT_VOUCHER(), data);
     }

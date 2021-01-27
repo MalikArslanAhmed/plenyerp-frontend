@@ -325,7 +325,11 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
                 (click)="savePreviousYearAdvances()"
-                [disabled]="previousYearAdvancesCreateForm.invalid" aria-label="Save">ADD
+                [disabled]="previousYearAdvancesCreateForm.invalid" aria-label="Save" *ngIf="!this.updatedData">ADD
+        </button>
+        <button mat-button class="save-button"
+                (click)="savePreviousYearAdvances()"
+                [disabled]="previousYearAdvancesCreateForm.invalid" aria-label="Save" *ngIf="this.updatedData">UPDATE
         </button>
     </div>
 </div>

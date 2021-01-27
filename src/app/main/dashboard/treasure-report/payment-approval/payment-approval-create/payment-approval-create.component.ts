@@ -64,7 +64,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 private mandateService: MandateService) {
         this.action = _data.action;
         this.user = this.globalService.getSelf();
-        // console.log('_data', _data);
+        //console.log('_data', _data);
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Payment Approval';
             if (_data.report) {
@@ -78,6 +78,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.getCurrencies();
+        this.checkForUpdate();
     }
 
     refresh() {
@@ -98,228 +99,44 @@ export class PaymentApprovalCreateComponent implements OnInit {
             economicSegmentCode: [{value: '', disabled: true}],
             economicSegmentId: [''],
         });
-        console.log('this.user', this.user['name']);
+        //console.log('this.user', this.user['name']);
         this.paymentApprovalForm.patchValue({
             'valueDate': this.currentDate,
             'valueDateName': this.user.name
         });
     }
 
-    // getcashbookList() {
-    //     this.cashbookAccountList = [];
-    //     this.cashbookService.list({}).subscribe(data => {
-    //         this.cashbookAccountList = data.items;
-    //     });
-    // }
-    //
-    // cashbookItem() {
-    //     let cashbookData = '';
-    //     const selectedCashbookId = this.paymentApprovalForm.get('cashBookAccountId').value;
-    //     if (this.cashbookAccountList && this.cashbookAccountList.length > 0) {
-    //         this.cashbookAccountList.forEach(val => {
-    //             if (val.id === selectedCashbookId) {
-    //                 cashbookData = val;
-    //             }
-    //         });
-    //     }
-    //     this.cashbookData = cashbookData;
-    // }
-    //
-    // checkForUpdate() {
-    //     if (this.updateData) {
-    //         this.paymentApprovalForm.patchValue({
-    //             cashBookAccountId: this.updateData.cashbookId ? this.updateData.cashbookId : '',
-    //             batchNumber: this.updateData.batchNumber ? this.updateData.batchNumber : '',
-    //             treasuryNumber: this.updateData.treasuryNumber ? this.updateData.treasuryNumber : '',
-    //             valueDate: this.updateData.valueDate ? moment(this.updateData.valueDate).format('YYYY-MM-DD') : '',
-    //             instructionToBank: this.updateData.instructions ? this.updateData.instructions : '',
-    //             preparedBy: this.updateData.prepared ? this.updateData.prepared['firstName'] + ' ' + this.updateData.prepared['lastName'] : '',
-    //             preparedDate: this.updateData.preparedDate ? moment(this.updateData.preparedDate).format('YYYY-MM-DD') : '',
-    //             istAuthorizedBy: this.updateData.firstAuthorisedBy ? this.updateData.firstAuthorised['firstName'] + ' ' + this.updateData.firstAuthorised['lastName'] : '',
-    //             istAuthorizedDate: this.updateData.firstAuthorisedDate ? moment(this.updateData.firstAuthorisedDate).format('YYYY-MM-DD') : '',
-    //             secondAuthorizedBy: this.updateData.secondAuthorised ? this.updateData.secondAuthorised['firstName'] + ' ' + this.updateData.secondAuthorised['lastName'] : '',
-    //             secondAuthorizedDate: this.updateData.secondAuthorisedDate ? moment(this.updateData.secondAuthorisedDate).format('YYYY-MM-DD') : '',
-    //         });
-    //         // this.cashbookData = this.updateData.cashbook;
-    //         // if (this.updateData['paymentVouchers'] && this.updateData['paymentVouchers'].length > 0) {
-    //         //     this.updateData['paymentVouchers'].forEach(paymentVoucher => {
-    //         //         if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
-    //         //             this.paymentVoucherData.forEach(pv => {
-    //         //                 if (parseInt(pv.id) === parseInt(paymentVoucher.id)) {
-    //         //                     pv['checked'] = true;
-    //         //                 }
-    //         //             });
-    //         //         }
-    //         //     });
-    //         // }
-    //         /*console.log('this.paymentApprovalForm', this.paymentApprovalForm.value);
-    //         console.log('this.paymentVoucherData', this.paymentVoucherData);*/
-    //     }
-    // }
-    //
-    // saveMandate() {
-    //     let params = {
-    //         'cashbookId': this.paymentApprovalForm.getRawValue().cashBookAccountId ? this.paymentApprovalForm.getRawValue().cashBookAccountId : '',
-    //         'batchNumber': this.paymentApprovalForm.getRawValue().batchNumber ? this.paymentApprovalForm.getRawValue().batchNumber : '',
-    //         'treasuryNumber': this.paymentApprovalForm.getRawValue().treasuryNumber ? this.paymentApprovalForm.getRawValue().treasuryNumber : '',
-    //         'valueDate': this.paymentApprovalForm.getRawValue().valueDate ? moment(this.paymentApprovalForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
-    //         'instructions': this.paymentApprovalForm.getRawValue().instructionToBank ? this.paymentApprovalForm.getRawValue().instructionToBank : '',
-    //     };
-    //     let paymentVouchers = [];
-    //     if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
-    //         this.paymentVoucherData.forEach(pv => {
-    //             if (pv && pv.checked) {
-    //                 paymentVouchers.push(pv.id);
-    //             }
-    //         });
-    //     }
-    //     params['paymentVouchers'] = (paymentVouchers && paymentVouchers.length > 0) ? JSON.stringify(paymentVouchers) : '';
-    //
-    //     this.mandateService.save(params).subscribe(data => {
-    //         this.matDialogRef.close(this.paymentApprovalForm);
-    //         this.paymentApprovalForm.reset();
-    //     });
-    // }
-    //
-    // updateMandate() {
-    //     let params = {
-    //         'cashbookId': this.paymentApprovalForm.getRawValue().cashBookAccountId ? this.paymentApprovalForm.getRawValue().cashBookAccountId : '',
-    //         'batchNumber': this.paymentApprovalForm.getRawValue().batchNumber ? this.paymentApprovalForm.getRawValue().batchNumber : '',
-    //         'treasuryNumber': this.paymentApprovalForm.getRawValue().treasuryNumber ? this.paymentApprovalForm.getRawValue().treasuryNumber : '',
-    //         'valueDate': this.paymentApprovalForm.getRawValue().valueDate ? moment(this.paymentApprovalForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
-    //         'instructions': this.paymentApprovalForm.getRawValue().instructionToBank ? this.paymentApprovalForm.getRawValue().instructionToBank : '',
-    //     };
-    //     let paymentVouchers = [];
-    //     if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
-    //         this.paymentVoucherData.forEach(pv => {
-    //             if (pv && pv.checked) {
-    //                 paymentVouchers.push(pv.id);
-    //             }
-    //         });
-    //     }
-    //     params['paymentVouchers'] = (paymentVouchers && paymentVouchers.length > 0) ? JSON.stringify(paymentVouchers) : '';
-    //
-    //     this.mandateService.update(this.updateData.id, params).subscribe(data => {
-    //         this.updateData = undefined;
-    //         this.matDialogRef.close(this.paymentApprovalForm);
-    //         this.paymentApprovalForm.reset();
-    //     });
-    // }
-    //
-    // getChildReportData(item) {
-    //     const params = {};
-    //     if (item && item.id) {
-    //         params['parentId'] = item.id;
-    //         this.paymentVoucherService.getSchedulePayee(item.id, {page: -1}).subscribe(data => {
-    //             item['payees'] = data.items;
-    //         });
-    //     }
-    // }
-    //
-    // selectAdminEmployee(type) {
-    //     let allowType: any = 'BOTH';
-    //     let node: any = undefined;
-    //     if (type === 'Select Checking Officer' || type === 'Select Paying Officer' || type === 'Select Financial Control') {
-    //         allowType = 'BOTH';
-    //     }
-    //
-    //     this.dialogRef = this._matDialog.open(AdminSegmentEmployeeSelectComponent, {
-    //         panelClass: 'transaction-items-form-dialog',
-    //         data: {head: type, allow: allowType, node: node}
-    //     });
-    //     this.dialogRef.afterClosed().subscribe((response) => {
-    //         if (!response) {
-    //             return;
-    //         }
-    //         if (type === 'Select Checking Officer') {
-    //             this.checkingOfficers = [{
-    //                 'name': response['empData'].firstName + ' ' + response['empData'].lastName,
-    //                 'id': response['empData'].id
-    //             }];
-    //             this.paymentApprovalForm.patchValue({
-    //                 checkingOfficerId: response['empData'].id,
-    //                 disabled: true
-    //             });
-    //         } else if (type === 'Select Paying Officer') {
-    //             this.payingOfficers = [{
-    //                 'name': response['empData'].firstName + ' ' + response['empData'].lastName,
-    //                 'id': response['empData'].id
-    //             }];
-    //             this.paymentApprovalForm.patchValue({
-    //                 payingOfficerId: response['empData'].id,
-    //                 disabled: true
-    //             });
-    //         } else if (type === 'Select Financial Control') {
-    //             this.financialControllers = [{
-    //                 'name': response['empData'].firstName + ' ' + response['empData'].lastName,
-    //                 'id': response['empData'].id
-    //             }];
-    //             this.paymentApprovalForm.patchValue({
-    //                 financialControllerId: response['empData'].id,
-    //                 disabled: true
-    //             });
-    //         }
-    //     });
-    // }
-    //
-    // getPaymentVouchers(params?) {
-    //     let param = {
-    //         ...params,
-    //         page: -1
-    //     };
-    //     param['status'] = 'AUDITED';
-    //     this.paymentVoucherService.get(param).subscribe(data => {
-    //         this.paymentVoucherData = data.items;
-    //         if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
-    //             this.paymentVoucherData.forEach(d => {
-    //                 d['checked'] = false;
-    //                 d['lastActioned'] = moment(d['updatedAt']).format('YYYY-MM-DD');
-    //
-    //                 if (this._data['paymentVoucherIds']) {
-    //                     let paymentVoucherIds = JSON.parse(this._data['paymentVoucherIds']);
-    //                     paymentVoucherIds.forEach(pvId => {
-    //                         if (parseInt(d.id) === parseInt(pvId)) {
-    //                             d['checked'] = true;
-    //                         }
-    //                     });
-    //                 }
-    //             });
-    //             this.panelOpenState = !this.panelOpenState;
-    //         }
-    //         this.checkForUpdate();
-    //     });
-    // }
-    //
-    // checkPV(index, event) {
-    //     this.paymentVoucherData[index].checked = event.checked;
-    // }
-    //
-    // addPV() {
-    //     let paymentVouchers = [];
-    //     if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
-    //         this.paymentVoucherData.forEach(pv => {
-    //             if (pv && pv.checked) {
-    //                 paymentVouchers.push(pv.id);
-    //             }
-    //         });
-    //     }
-    //     // console.log('paymentVouchers', paymentVouchers);
-    //     this.moveToSelectedTab('CHOOSE PAYMENT VOUCHER');
-    //     this.tabName = 'CHOOSE PAYMENT VOUCHER';
-    // }
-    //
-    // tabClick(event) {
-    //     this.tabName = event['tab'].textLabel;
-    //     // this.addPV(event);
-    // }
-    //
-    // moveToSelectedTab(tabName: string) {
-    //     for (let i = 0; i < document.querySelectorAll('.mat-tab-label-content').length; i++) {
-    //         if ((<HTMLElement> document.querySelectorAll('.mat-tab-label-content')[i]).innerText == tabName) {
-    //             (<HTMLElement> document.querySelectorAll('.mat-tab-label')[i]).click();
-    //         }
-    //     }
-    // }
+    checkForUpdate() {
+        if (this.updateData) {
+            this.adminSegments = [{
+                'name': (this.updateData && this.updateData['adminSegment']) ? this.updateData['adminSegment'].name : '',
+                'id': (this.updateData && this.updateData['adminSegment']) ? this.updateData['adminSegment'].id : '',
+            }];
+            this.economicSegments = [{
+                'name': (this.updateData && ['economicSegment']) ? this.updateData['economicSegment'].name : '',
+                'id': (this.updateData && ['economicSegment']) ? this.updateData['economicSegment'].id : ''
+            }];
+            this.fundSegments = [{
+                'name': (this.updateData && ['fundSegment']) ? this.updateData['fundSegment'].name : '',
+                'id': (this.updateData && ['fundSegment']) ? this.updateData['fundSegment'].id : ''
+            }];
+            this.paymentApprovalForm.patchValue({
+                employeeCustomer: (this.updateData && this.updateData.employeeCustomer) ? this.updateData.employeeCustomer : '',
+                currencyId: (this.updateData && this.updateData.currencyId) ? this.updateData.currencyId : '',
+                currency: (this.updateData && this.updateData.currency['singularCurrencyName']) ? this.updateData.currency['singularCurrencyName'] : '',
+                adminSegmentId: (this.updateData && this.updateData['adminSegmentId']) ? this.updateData['adminSegmentId'] : '',
+                adminSegmentCode: (this.updateData && this.updateData['adminSegment']) ? this.updateData['adminSegmentId'].id : '',
+                fundSegmentId: (this.updateData && this.updateData['fundSegmentId']) ? this.updateData['fundSegmentId'] : '',
+                fundSegmentCode: (this.updateData && this.updateData['fundSegment']) ? this.updateData['fundSegment'].id : '',
+                economicSegmentId: (this.updateData && this.updateData['economicSegmentId']) ? this.updateData['economicSegmentId'] : '',
+                economicSegmentCode: (this.updateData && this.updateData['economicSegment']) ? this.updateData['economicSegment'].id : '',
+                remark: (this.updateData && this.updateData['remark']) ? this.updateData['remark'] : '',
+                authorisedDate: (this.updateData && this.updateData['authorisedDate']) ? this.updateData['authorisedDate'] : '',
+                authorisedName: (this.updateData && this.updateData['authorisedBy'] && this.updateData['authorisedBy'].name) ? this.updateData['authorisedBy'].name : '',
+            });
+            this.cashbookData = this.updateData.cashbook;
+        }
+    }
 
     adminSegmentSelect() {
         this.dialogRef = this._matDialog.open(AdminSegmentSelectComponent, {
@@ -416,18 +233,17 @@ export class PaymentApprovalCreateComponent implements OnInit {
             'employeeCustomer': this.paymentApprovalForm.getRawValue().employeeCustomer ? this.paymentApprovalForm.getRawValue().employeeCustomer : '',
             'remark': this.paymentApprovalForm.getRawValue().remark ? this.paymentApprovalForm.getRawValue().remark : '',
         };
-        /*let paymentVouchers = [];
-        if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
-            this.paymentVoucherData.forEach(pv => {
-                if (pv && pv.checked) {
-                    paymentVouchers.push(pv.id);
-                }
+
+        if (this.updateData) {
+            this.paymentApprovalService.save(params).subscribe(data => {
+                this.matDialogRef.close(this.paymentApprovalForm);
+                this.paymentApprovalForm.reset();
+            });
+        } else {
+            this.paymentApprovalService.updatePaymentApproval(this.updateData.id, params).subscribe(data => {
+                this.matDialogRef.close(this.paymentApprovalForm);
+                this.paymentApprovalForm.reset();
             });
         }
-        params['paymentVouchers'] = (paymentVouchers && paymentVouchers.length > 0) ? JSON.stringify(paymentVouchers) : '';*/
-        this.paymentApprovalService.save(params).subscribe(data => {
-            this.matDialogRef.close(this.paymentApprovalForm);
-            this.paymentApprovalForm.reset();
-        });
     }
 }

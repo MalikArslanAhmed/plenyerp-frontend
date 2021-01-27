@@ -109,6 +109,8 @@
                             class="mat-header-cell text-center">COA admin, fund, eco, programme, functional, geo</span>-->
                         <span
                             class="mat-header-cell text-center">Other COA Segments</span>
+                        <span
+                            class="mat-header-cell text-center">Actions</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of previousYearAdvancesData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
@@ -159,6 +161,23 @@
                                    +reportData['programSegment'].combinedCode+' - '+reportData['programSegment'].name +', '
                                    +reportData['functionalSegment'].combinedCode+' - '+reportData['functionalSegment'].name+', '
                                    +reportData['geoCodeSegment'].combinedCode+' - '+reportData['geoCodeSegment'].name">info</p>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="reportData['status'] === 'NEW'">
+                                <button mat-icon-button aria-label="Toggle star"
+                                        (click)="editPreviousYearVoucher(reportData); $event.stopPropagation()"
+                                        style="color: blue; margin-left: 52px; margin-top: 15px">
+                                        <mat-icon class="material-icons">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button aria-label="Toggle star"
+                                        (click)="deletePreviousYearVoucher(reportData); $event.stopPropagation()"
+                                        style="color: red">
+                                    <mat-icon class="material-icons">delete</mat-icon>
+                                </button>
+                            </span>
+                            <span class="mat-cell align-items-center" *ngIf="reportData['status'] !== 'NEW'">
+                                <p class="material-icons" style="margin-top: 28px; margin-left: 80px">
+                                    -
+                                </p>
                             </span>
                         </mat-expansion-panel-header>
                         <div>
