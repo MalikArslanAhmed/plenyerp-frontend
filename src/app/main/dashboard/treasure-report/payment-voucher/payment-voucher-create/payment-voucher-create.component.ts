@@ -52,6 +52,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
     isPaymentApproval: any = false;
     paymentApprovalSelected: any;
     tab = 'CREATE PV FORM';
+    updatedData: any;
 
     constructor(public matDialogRef: MatDialogRef<PaymentVoucherCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -64,9 +65,20 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 private alertService: AlertService,
                 private paymentApprovalService: PaymentApprovalService,
                 private companyInformationService: CompanyInformationService) {
-        this.header = _data.header;
-        this.sourceType = _data.type;
-        this.sources = _data.source;
+        if (_data.action === 'EDIT') {
+            this.header = _data['item']['types'].name;
+            console.log('this.header', this.header);
+            this.sourceType = _data['item'].type;
+            this.sources = [{
+                'name': _data['item']['voucherSourceUnit'].id + ' - ' + _data['item']['voucherSourceUnit'].longName,
+                'value': _data['item']['voucherSourceUnit'].id
+            }];
+            this.updatedData = _data['item'];
+        } else {
+            this.header = _data.header;
+            this.sourceType = _data.type;
+            this.sources = _data.source;
+        }
         this.dialogTitle = this.header + ' - Payment Voucher';
     }
 
@@ -75,6 +87,9 @@ export class PaymentVoucherCreateComponent implements OnInit {
         this.getCurrencies();
         this.getPaymentApproval({'inUse': 1});
         this.refresh();
+        if (this.updatedData) {
+            this.patchForm();
+        }
     }
 
     refresh() {
@@ -136,6 +151,82 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 this.isPaymentApproval = data.items[0].isPaymentApproval;
             }
         })
+    }
+
+    patchForm() {
+        console.log('data', this.updatedData);
+        this.isPaymentApproval = (this.updatedData && this.updatedData['isPaymentApproval']) ? this.updatedData['isPaymentApproval'] : false;
+
+        this.aies = [{
+            id: (this.updatedData && this.updatedData['aie']) ? this.updatedData['aie'].id : '',
+            name: (this.updatedData && this.updatedData['aie']) ? this.updatedData['aie'].aieNumber : ''
+        }];
+        this.adminSegments = [{
+            'name': (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegment'].name : '',
+            'id': (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegment'].id : '',
+        }];
+        this.economicSegments = [{
+            'name': (this.updatedData && ['economicSegment']) ? this.updatedData['economicSegment'].name : '',
+            'id': (this.updatedData && ['economicSegment']) ? this.updatedData['economicSegment'].id : ''
+        }];
+        this.fundSegments = [{
+            'name': (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].name : '',
+            'id': (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].id : ''
+        }];
+
+        this.schedulePayeeEmployeeForm.patchValue({
+            valueDate: (this.updatedData && this.updatedData['valueDate']) ? this.updatedData['valueDate'] : '',
+            paymentApprovalId: (this.updatedData && this.updatedData['paymentApproveId'] && this.isPaymentApproval) ? this.updatedData['paymentApproveId'] : '',
+            payee: (this.updatedData && this.updatedData['payee']) ? this.updatedData['payee'] : '',
+            currencyId: (this.updatedData && this.updatedData['currencyId']) ? this.updatedData['currencyId'] : '',
+            currency: (this.updatedData && this.updatedData['currency']) ? this.updatedData['currency'].singularCurrencyName : '',
+            paymentDescription: (this.updatedData && this.updatedData['paymentDescription']) ? this.updatedData['paymentDescription'] : '',
+            xRate: (this.updatedData && this.updatedData['xRate']) ? this.updatedData['xRate'] : '',
+            xRateCurrency: (this.updatedData && this.updatedData['xRate'] && this.updatedData['currency'].singularCurrencyName) ? this.updatedData['xRate'] + ' ' + this.updatedData['currency'].singularCurrencyName : '',
+            officialXRate: (this.updatedData && this.updatedData['officialXRate']) ? this.updatedData['officialXRate'] : '',
+            aieId: (this.updatedData && this.updatedData['aieId']) ? this.updatedData['aieId'] : '',
+            adminSegmentId: (this.updatedData && this.updatedData['adminSegmentId']) ? this.updatedData['adminSegmentId'] : '',
+            adminSegmentCode: (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegmentId'].id : '',
+            fundSegmentId: (this.updatedData && this.updatedData['fundSegmentId']) ? this.updatedData['fundSegmentId'] : '',
+            fundSegmentCode: (this.updatedData && this.updatedData['fundSegment']) ? this.updatedData['fundSegment'].id : '',
+            economicSegmentId: (this.updatedData && this.updatedData['economicSegmentId']) ? this.updatedData['economicSegmentId'] : '',
+            economicSegmentCode: (this.updatedData && this.updatedData['economicSegment']) ? this.updatedData['economicSegment'].id : '',
+            programSegmentId: (this.updatedData && this.updatedData['programSegmentId']) ? this.updatedData['programSegmentId'] : '',
+            programmeSegmentCode: (this.updatedData && this.updatedData['programmeSegment']) ? this.updatedData['programmeSegment'].id : '',
+            functionalSegmentId: (this.updatedData && this.updatedData['functionalSegmentId']) ? this.updatedData['functionalSegmentId'] : '',
+            functionalSegmentCode: (this.updatedData && this.updatedData['functionalSegment']) ? this.updatedData['functionalSegment'].id : '',
+            geoCodeSegmentId: (this.updatedData && this.updatedData['geoCodeSegmentId']) ? this.updatedData['geoCodeSegmentId'] : '',
+            geoCodeSegmentCode: (this.updatedData && this.updatedData['geoCodeSegment']) ? this.updatedData['geoCodeSegment'].id : ''
+        });
+
+        /*this.schedulePayeeEmployeeForm = this.fb.group({
+            sourceUnit: [{value: '', disabled: true}],
+            valueDate: [''],
+            paymentApprovalId: [''],
+            payee: ['EMPLOYEE'],
+            currencyId: [''],
+            currency: [{value: '', disabled: true}],
+            paymentDescription: [''],
+            xRate: [''],
+            xRateCurrency: [{value: '', disabled: true}],
+            officialXRate: [''],
+            aieId: [''],
+            adminSegmentCode: [{value: '', disabled: true}],
+            adminSegmentId: [''],
+            fundSegmentCode: [{value: '', disabled: true}],
+            fundSegmentId: [''],
+            economicSegmentCode: [{value: '', disabled: true}],
+            economicSegmentId: [''],
+            programmeSegmentCode: [{value: '', disabled: true}],
+            programSegmentId: [''],
+            functionalSegmentCode: [{value: '', disabled: true}],
+            functionalSegmentId: [''],
+            geoCodeSegmentCode: [{value: '', disabled: true}],
+            geoCodeSegmentId: [''],
+            checkingOfficerId: [{value: '', disabled: true}],
+            payingOfficerId: [{value: '', disabled: true}],
+            financialControllerId: [{value: '', disabled: true}]
+        });*/
     }
 
     savePaymentVoucher() {

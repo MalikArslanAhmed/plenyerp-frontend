@@ -104,6 +104,7 @@
                         <span class="mat-header-cell text-center">Taxes</span>
                         <span class="mat-header-cell text-center">Last Actioned</span>
                         <span class="mat-header-cell text-center">Status</span>
+                        <!--<span class="mat-header-cell text-center">Action</span>-->
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
@@ -142,6 +143,20 @@
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.status ? reportData?.status : '-'}}</p>
                             </span>
+                            <!--<span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">
+                                    <button mat-icon-button aria-label="Toggle star"
+                                            (click)="editPaymentVoucher(reportData); $event.stopPropagation()"
+                                            style="color: blue">
+                                        <mat-icon class="material-icons">edit</mat-icon>
+                                    </button>
+                                    <button mat-icon-button aria-label="Toggle star"
+                                            (click)="deletePaymentVoucher(reportData); $event.stopPropagation()"
+                                            style="color: red">
+                                        <mat-icon class="material-icons">delete</mat-icon>
+                                    </button>
+                                </p>
+                            </span>-->
                         </mat-expansion-panel-header>
                         <div>
                             <div mat-dialog-content class="items-data" fusePerfectScrollbar

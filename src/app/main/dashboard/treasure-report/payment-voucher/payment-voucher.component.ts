@@ -211,20 +211,19 @@ export class PaymentVoucherComponent implements OnInit {
                         paymentVoucherTypes.push("NON_PERSONAL_ADVANCES_VOUCHER");
                     }
                 });
-
                 if (paymentVoucherTypes && paymentVoucherTypes.length > 0) {
-                    if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+                    if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && !paymentVoucherTypes.includes("NON_PERSONAL_ADVANCES_VOUCHER") && reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
                         this.paymentVoucherData[index].checked = event.checked;
-                        this.selectedStatus[0] = this.statuses[6];
-                    } else if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && !reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+                        this.selectedStatus[0] = this.statuses[7];
+                    } else if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && paymentVoucherTypes.includes("NON_PERSONAL_ADVANCES_VOUCHER") && !reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
                         reportData.checked = false;
                         event['checked'] = false;
                         event['source'].checked = false;
                         this.alertService.showErrors('Please choose only personnel advances payment vouchers');
-                    } else if (!paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && !reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+                    } else if (!paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && paymentVoucherTypes.includes("NON_PERSONAL_ADVANCES_VOUCHER") && !reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
                         this.paymentVoucherData[index].checked = event.checked;
-                        this.selectedStatus[0] = this.statuses[7];
-                    } else if (!paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+                        this.selectedStatus[0] = this.statuses[6];
+                    } else if (paymentVoucherTypes.includes("PERSONAL_ADVANCES_VOUCHER") && paymentVoucherTypes.includes("NON_PERSONAL_ADVANCES_VOUCHER") && reportData['voucherSourceUnit'].isPersonalAdvanceUnit) {
                         reportData.checked = false;
                         event['checked'] = false;
                         event['source'].checked = false;
@@ -305,6 +304,24 @@ export class PaymentVoucherComponent implements OnInit {
                 this.types = data.type;
             });
         }
+    }
+
+    editPaymentVoucher(data) {
+        console.log('data', data);
+        this.dialogRef = this._matDialog.open(PaymentVoucherCreateComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'item': data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getPyamentVoucher({});
+        });
+    }
+
+    deletePaymentVoucher(data) {
+        console.log('data', data);
     }
 
     onPageChange(page) {
