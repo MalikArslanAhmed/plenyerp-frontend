@@ -41,11 +41,16 @@
                                 <mat-radio-group aria-labelledby="example-radio-group-label"
                                                  class="example-radio-group" formControlName="payee">
                                     <mat-radio-button class="example-radio-button" value="EMPLOYEE"
-                                                      [style.marginLeft.px]="40" [style.marginTop.px]="20">
+                                                      [style.marginLeft.px]="40" [style.marginTop.px]="20"
+                                                      *ngIf="header === 'DEPOSIT RECEIVED VOUCHER' || header === 'NON PERSONAL ADVANCES RECEIVED VOUCHER' ||
+                                                      header === 'SPECIAL IMPREST RECEIVED VOUCHER' || header === 'SPECIAL IMPREST RECEIVED VOUCHER' ||
+                                                      header === 'STANDING IMPREST RECEIVED VOUCHER' || header === 'REMITTANCE RECEIVED VOUCHER' ||
+                                                      header === 'REVENUE DEBIT VOUCHER' || header === 'REVENUE VOUCHER'">
                                         Employee
                                     </mat-radio-button>
                                     <mat-radio-button class="example-radio-button" value="CUSTOMER"
-                                                      [style.marginLeft.px]="40" [style.marginTop.px]="20">
+                                                      [style.marginLeft.px]="40" [style.marginTop.px]="20"
+                                                      *ngIf="header === 'REVENUE DEBIT VOUCHER' || header === 'REVENUE VOUCHER'">
                                         Customer
                                     </mat-radio-button>
                                 </mat-radio-group>

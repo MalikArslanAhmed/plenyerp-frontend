@@ -206,6 +206,9 @@
                                                 <th>
                                                     <div class="title">Status</div>
                                                 </th>
+                                                <!--<th>
+                                                    <div class="title">Actions</div>
+                                                </th>-->
                                                 <th *ngIf="reportData.status === 'NEW'">
                                                     <div class="title">Schedule Economic Code</div>
                                                 </th>
@@ -315,6 +318,21 @@
                                                         {{data?.status}}
                                                     </div>
                                                 </td>
+                                                <!--<td>
+                                                    <button mat-icon-button aria-label="Toggle star"
+                                                            (click)="editSchedulePayee(data, reportData); $event.stopPropagation()"
+                                                            style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW'">
+                                                        <mat-icon class="material-icons">edit</mat-icon>
+                                                    </button>
+                                                    <button mat-icon-button aria-label="Toggle star"
+                                                            (click)="deleteSchedulePayee(data); $event.stopPropagation()"
+                                                            style="color: red" *ngIf="reportData.status === 'NEW'">
+                                                        <mat-icon class="material-icons">delete</mat-icon>
+                                                    </button>
+                                                    <span *ngIf="reportData.status !== 'NEW'">
+                                                        <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">-</p>
+                                                    </span>
+                                                </td>-->
                                                 <td *ngIf="reportData.status ==='NEW'">
                                                     <button mat-button class="payee-report"
                                                             (click)="scheduleEconomicCodes(reportData, data)">Schedule

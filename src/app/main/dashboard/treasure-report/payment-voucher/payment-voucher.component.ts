@@ -323,6 +323,23 @@ export class PaymentVoucherComponent implements OnInit {
         console.log('data', data);
     }
 
+    editSchedulePayee(data, report) {
+        this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'pv': data, 'report': report}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getPyamentVoucher({});
+        });
+    }
+
+    deleteSchedulePayee(data) {
+        console.log('data', data);
+    }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getPyamentVoucher();

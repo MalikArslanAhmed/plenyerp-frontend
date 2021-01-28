@@ -20,6 +20,7 @@ export class PaymentVoucherTaxesComponent implements OnInit {
     taxes = [];
     grossAmount: any;
     totalTaxes = 0;
+    taxArray = [];
 
     constructor(public matDialogRef: MatDialogRef<PaymentVoucherTaxesComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -29,8 +30,11 @@ export class PaymentVoucherTaxesComponent implements OnInit {
             this.updateData = undefined;
             this.dialogTitle = 'Add Applicable Taxes';
         } else {
+            console.log('data');
+            this.taxArray = (_data.taxIds && _data.taxIds !== '') ? JSON.parse(_data.taxIds) : [];
             this.dialogTitle = 'Edit Applicable Taxes';
             this.updateData = _data;
+            this.checkedItemsId();
         }
     }
 
@@ -96,10 +100,11 @@ export class PaymentVoucherTaxesComponent implements OnInit {
         this.updateData = undefined;
     }
 
-    /*checkedItemsId() {
-        if (this.taxArray && this.taxArray.length) {
+    checkedItemsId() {
+        console.log('this.taxArray', this.taxArray);
+        if (this.taxArray && this.taxArray.length > 0) {
             this.taxArray.map(val => {
-                if (this.taxes && this.taxes.length) {
+                if (this.taxes && this.taxes.length > 0) {
                     this.taxes.forEach(v => {
                         if (v.id === val) {
                             v['checked'] = val;
@@ -108,5 +113,5 @@ export class PaymentVoucherTaxesComponent implements OnInit {
                 }
             });
         }
-    }*/
+    }
 }

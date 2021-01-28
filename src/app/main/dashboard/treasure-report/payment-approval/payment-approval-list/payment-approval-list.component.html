@@ -1,6 +1,13 @@
 <div class="voucherSource-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <ng-container *ngIf="statuses && statuses.length > 0">
+            <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
+                    *ngIf="status !== 'ALL' && status !== 'NEW' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !== 'READY_FOR_PV'">
+                <mat-icon class="material-icons cursor-pointer whiteColor">
+                    keyboard_arrow_left
+                </mat-icon>
+                {{statuses[0].name}}
+            </button>
             <button mat-button class="update-report"
                     *ngIf="status !== 'ALL' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !=='READY_FOR_PV' && selectedStatus && selectedStatus.length > 0"
                     (click)="updateStatus(selectedStatus[0].value)">

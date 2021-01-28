@@ -39,13 +39,22 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 private alertService: AlertService,
                 private employeesService: EmployeeService,
                 private paymentVoucherService: PaymentVoucherService) {
-        this.payeeData = _data.pv;
-        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | PV - Schedule Payees Employee' : '-';
+        console.log('data', _data);
+        if (_data.action === 'EDIT') {
+            this.updateData = _data;
+            this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | PV - Schedule Payees Employee' : '-';
+        } else {
+            this.payeeData = _data.pv;
+            this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | PV - Schedule Payees Employee' : '-';
+        }
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
+        if (this.updateData) {
+            this.patchForm();
+        }
     }
 
     refresh() {
@@ -71,6 +80,35 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
         this.schedulePayeeEmployeeForm.patchValue({
             'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
         });
+    }
+
+    patchForm() {
+        console.log('this.updatedData', this.updateData);
+        const numberToWords = new NumberToWordsPipe();
+        this.payingOfficers = [{
+            'id': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['employee'].id : '',
+            'name': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['employee'].id : '',
+        }];
+        this.schedulePayeeEmployeeForm.patchValue({
+            year: (this.updateData && this.updateData['report']) ? this.updateData['report'].year : '',
+            departmentalNo: (this.updateData && this.updateData['report']) ? this.updateData['report'].deptalId : '',
+            details: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].year : '',
+            employeeId: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].employeeId : '',
+            payeeName: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].employee.firstName + ' ' + this.updateData['pv'].employee.lastName : '',
+            netAmount: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].netAmount : '',
+            totalTax: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].totalTax : '',
+            totalAmount: (this.updateData && this.updateData['pv']) ? parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax) : '',
+            totalAmountInWords: numberToWords.transform(parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax))
+        });
+        /*year: [{'value': '', disabled: true}],
+        departmentalNo: [{'value': '', disabled: true}],
+        details: [''],
+        employeeId: [{'value': '', disabled: true}],
+        payeeName: [{'value': '', disabled: true}],
+        netAmount: [''],
+        totalTax: [{'value': '', disabled: true}],
+        totalAmount: [{'value': '', disabled: true}],
+        totalAmountInWords: [{'value': '', disabled: true}]*/
     }
 
     savePayeeEmployee() {
@@ -112,7 +150,8 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
         this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                action: 'CREATE',
+                action: (this.updateData) ? 'EDIT' : 'CREATE',
+                taxIds: (this.updateData && this.updateData['pv'] && this.updateData['pv'].taxIds) ? this.updateData['pv'].taxIds : '',
                 netAmount: this.schedulePayeeEmployeeForm.value.netAmount,
             }
         });
