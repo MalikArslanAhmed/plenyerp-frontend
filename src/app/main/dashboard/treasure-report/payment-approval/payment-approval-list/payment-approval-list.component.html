@@ -29,7 +29,8 @@
             <span class="mat-header-cell text-center">Remark</span>
             <span class="mat-header-cell text-center">Amount (Net)</span>
             <span class="mat-header-cell text-center">Total Tax</span>
-            <span class="mat-header-cell text-center">Action</span>
+            <span class="mat-header-cell text-center">Status</span>
+            <span class="mat-header-cell text-center">Actions</span>
         </section>
         <mat-expansion-panel *ngFor="let reportData of paymentApprovalList; let i = index">
             <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
@@ -67,6 +68,11 @@
                     <p class="text-truncate cursor-pointer mt-10px text-center"
                        *ngIf="reportData.totalTax">{{reportData.totalTax}}</p>
                     <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalTax">-</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-10px text-center"
+                       *ngIf="reportData.status">{{reportData?.status}}</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.status">-</p>
                 </span>
                 <span class="mat-cell align-items-center">
                     <button mat-icon-button aria-label="Toggle star"
@@ -136,6 +142,9 @@
                             </th>
                             <th>
                                 <div class="title">Status</div>
+                            </th>
+                            <th>
+                                <div class="title">Actions</div>
                             </th>
                             <!--<th *ngIf="reportData.status === 'NEW'">
                                 <div class="title">Schedule Economic Code</div>
@@ -246,6 +255,33 @@
                                     {{data?.status}}
                                 </div>
                             </td>
+                            <td>
+                                <span *ngIf="reportData.status === 'NEW'">
+                                    <button mat-icon-button aria-label="Toggle star"
+                                            (click)="editSchedulePayeeEmployee(data, reportData); $event.stopPropagation()"
+                                            style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
+                                        <mat-icon class="material-icons">edit</mat-icon>
+                                    </button>
+                                    <button mat-icon-button aria-label="Toggle star"
+                                            (click)="deleteSchedulePayeeEmployee(data); $event.stopPropagation()"
+                                            style="color: red" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
+                                        <mat-icon class="material-icons">delete</mat-icon>
+                                    </button>
+                                    <button mat-icon-button aria-label="Toggle star"
+                                            (click)="editSchedulePayeeCustomer(data, reportData); $event.stopPropagation()"
+                                            style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
+                                        <mat-icon class="material-icons">edit</mat-icon>
+                                    </button>
+                                    <button mat-icon-button aria-label="Toggle star"
+                                            (click)="deleteSchedulePayeeCustomer(data); $event.stopPropagation()"
+                                            style="color: red" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
+                                        <mat-icon class="material-icons">delete</mat-icon>
+                                    </button>
+                                </span>
+                                <span *ngIf="reportData.status !== 'NEW'">
+                                    <p class="text-truncate cursor-pointer mt-10px text-center ml--20px">-</p>
+                                </span>
+                            </td>
                             <!--<td *ngIf="reportData.status ==='NEW'">
                                 <button mat-button class="payee-report"
                                         (click)="scheduleEconomicCodes(reportData, data)">Schedule
@@ -282,94 +318,6 @@
                     </table>
                 </div>
             </div>
-            <!--<div>
-                <div mat-dialog-content class="items-data" fusePerfectScrollbar style="overflow-x: scroll !important;">
-                    <table class="simple invoice-table">
-                        <thead>
-                        <tr>
-                            &lt;!&ndash;<th>
-                                <div class="title">S.No.</div>
-                            </th>&ndash;&gt;
-                            <th>
-                                <div class="title">Beneficiery</div>
-                            </th>
-                            <th>
-                                <div class="title">Bank</div>
-                            </th>
-                            <th>
-                                <div class="title">Branch</div>
-                            </th>
-                            <th>
-                                <div class="title">Account</div>
-                            </th>
-                            <th>
-                                <div class="title">Sort Code</div>
-                            </th>
-                            <th>
-                                <div class="title">Amount</div>
-                            </th>
-                            <th>
-                                <div class="title">Tax</div>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody *ngIf="reportData['paymentVouchers'] && reportData['paymentVouchers'].length > 0">
-                        <ng-container *ngFor="let payee of reportData['paymentVouchers']">
-                            <tr *ngFor="let benef of payee['payeeVouchers']">
-                                <td>
-                                    <span *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.name}}</span>
-                                    <span
-                                        *ngIf="benef && benef['employee']">{{benef?.employee?.firstName + ' ' + benef?.employee?.lastName}}</span>
-                                </td>
-                                <td>
-                                    <span
-                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankId}}</span>
-                                    <span
-                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches']['hrBank'].name}}</span>
-                                </td>
-                                <td>
-                                    <span
-                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankBranch?.name}}</span>
-                                    <span
-                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches'].name}}</span>
-                                </td>
-                                <td>
-                                    <span
-                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankAccountNumber}}</span>
-                                    <span
-                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank'].number}}</span>
-                                </td>
-                                <td>
-                                    <span
-                                        *ngIf="benef && benef['adminCompany']">{{benef?.adminCompany?.companyBank?.bankBranch?.sortCode}}</span>
-                                    <span
-                                        *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches'].sortCode}}</span>
-                                </td>
-                                <td>
-                                    <span>{{benef?.netAmount}}</span>
-                                </td>
-                                <td>
-                                    <span>{{benef?.totalTax}}</span>
-                                </td>
-                            </tr>
-                        </ng-container>
-                        </tbody>
-                        <tbody>
-                        <tr>
-                            <td colspan="15">
-                                <button mat-button class="payee-report" style="margin-right: 10px"
-                                        (click)="scheduleEmployee(reportData)">
-                                    Schedule Payee Employees
-                                </button>
-                                <button mat-button class="payee-report" (click)="scheduleCustomers(reportData)">
-                                    Schedule Payee Customers
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>-->
         </mat-expansion-panel>
     </mat-accordion>
     <mat-paginator #paginator *ngIf="paymentApprovalList.length > 0"

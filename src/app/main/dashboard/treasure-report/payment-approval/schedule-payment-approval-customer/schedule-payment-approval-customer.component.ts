@@ -38,13 +38,20 @@ export class SchedulePaymentApprovalCustomerComponent implements OnInit {
                 private alertService: AlertService,
                 private employeesService: EmployeeService,
                 private paymentApprovalService: PaymentApprovalService) {
-        this.payeeData = _data.pv;
+        if (_data.action === 'EDIT') {
+            this.updateData = _data;
+        } else {
+            this.payeeData = _data.pv;
+        }
         this.dialogTitle = 'Schedule Payees Customer';
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
+        if (this.updateData) {
+            this.patchForm();
+        }
     }
 
     refresh() {
@@ -72,6 +79,27 @@ export class SchedulePaymentApprovalCustomerComponent implements OnInit {
         })*/
     }
 
+    patchForm() {
+        const numberToWords = new NumberToWordsPipe();
+        this.customers = [{
+            'id': (this.updateData && this.updateData['pv'] && this.updateData['pv']['company']) ? this.updateData['pv']['company'].id : '',
+            'name': (this.updateData && this.updateData['pv'] && this.updateData['pv']['company']) ? this.updateData['pv']['company'].id : '',
+        }];
+        this.getBanks(this.updateData['pv']['company'].id);
+        this.payeeBankId = this.updateData['pv']['company']['companyBank'].bankId;
+        this.schedulePayeeCustomerForm.patchValue({
+            year: (this.updateData && this.updateData['report']) ? this.updateData['report'].year : '',
+            departmentalNo: (this.updateData && this.updateData['report']) ? this.updateData['report'].deptalId : '',
+            details: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].details : '',
+            companyId: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].companyId : '',
+            payeeName: (this.updateData && this.updateData['pv']) ? this.updateData['pv']['company'].name : '',
+            netAmount: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].netAmount : '',
+            totalTax: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].totalTax : '',
+            totalAmount: (this.updateData && this.updateData['pv']) ? parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax) : '',
+            totalAmountInWords: numberToWords.transform(parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax))
+        });
+    }
+
     savePayeeCustomer() {
         this.isSubmitted = true;
         if (!this.schedulePayeeCustomerForm.valid) {
@@ -95,11 +123,19 @@ export class SchedulePaymentApprovalCustomerComponent implements OnInit {
                 'payeeBankId': this.payeeBankId ? this.payeeBankId : '',
                 'taxIds': this.taxIds ? JSON.stringify(this.taxIds) : ''
             };
-            this.paymentApprovalService.schedulePayee(this.payeeData.id, params).subscribe(data => {
-                this.schedulePayeeCustomerForm.reset();
-                this.matDialogRef.close(this.schedulePayeeCustomerForm);
-                this.isSubmitted = false;
-            });
+            if (!this.updateData) {
+                this.paymentApprovalService.schedulePayee(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayeeCustomerForm.reset();
+                    this.matDialogRef.close(this.schedulePayeeCustomerForm);
+                    this.isSubmitted = false;
+                });
+            } else {
+                this.paymentApprovalService.schedulePayeeUpdate(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayeeCustomerForm.reset();
+                    this.matDialogRef.close(this.schedulePayeeCustomerForm);
+                    this.isSubmitted = false;
+                });
+            }
         }
     }
 
@@ -111,7 +147,8 @@ export class SchedulePaymentApprovalCustomerComponent implements OnInit {
         this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                action: 'CREATE',
+                action: (this.updateData) ? 'EDIT' : 'CREATE',
+                taxIds: (this.updateData && this.updateData['pv'] && this.updateData['pv'].taxIds) ? this.updateData['pv'].taxIds : '',
                 netAmount: this.schedulePayeeCustomerForm.value.netAmount,
             }
         });

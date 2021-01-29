@@ -215,6 +215,9 @@
                                                 <th>
                                                     <div class="title">Money Instrument Issuer</div>
                                                 </th>
+                                                <th>
+                                                    <div class="title">Actions</div>
+                                                </th>
                                                 <!--<th *ngIf="reportData.status === 'NEW'">
                                                     <div class="title">Schedule Economic Code</div>
                                                 </th>-->
@@ -296,6 +299,33 @@
                                                     <div class="title" *ngIf="!data || !data.instrumentIssuedBy">
                                                         -
                                                     </div>
+                                                </td>
+                                                <td>
+                                                    <span *ngIf="reportData.status === 'NEW'">
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="editSchedulePayeeEmployee(data, reportData); $event.stopPropagation()"
+                                                                style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
+                                                            <mat-icon class="material-icons">edit</mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="deleteSchedulePayeeEmployee(data); $event.stopPropagation()"
+                                                                style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
+                                                            <mat-icon class="material-icons">delete</mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="editSchedulePayeeCustomer(data, reportData); $event.stopPropagation()"
+                                                                style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
+                                                            <mat-icon class="material-icons">edit</mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="deleteSchedulePayeeCustomer(data); $event.stopPropagation()"
+                                                                style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
+                                                            <mat-icon class="material-icons">delete</mat-icon>
+                                                        </button>
+                                                    </span>
+                                                    <span *ngIf="reportData.status !== 'NEW'">
+                                                        <p class="text-truncate cursor-pointer mt-10px text-center ml--20px">-</p>
+                                                    </span>
                                                 </td>
                                                 <!--<td *ngIf="reportData.status ==='NEW'">
                                                     <button mat-button class="payee-report"

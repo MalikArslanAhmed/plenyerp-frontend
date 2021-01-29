@@ -39,14 +39,21 @@ export class SchedulePaymentApprovalEmployeeComponent implements OnInit {
                 private alertService: AlertService,
                 private employeesService: EmployeeService,
                 private paymentApprovalService: PaymentApprovalService) {
-        this.payeeData = _data.pv;
-        // this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | PV - Schedule Payees Employee' : '-';
+        console.log('this.updateData', _data);
+        if (_data.action === 'EDIT') {
+            this.updateData = _data;
+        } else {
+            this.payeeData = _data.pv;
+        }
         this.dialogTitle = 'Schedule Payees Employee';
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
+        if (this.updateData) {
+            this.patchForm();
+        }
     }
 
     refresh() {
@@ -74,6 +81,27 @@ export class SchedulePaymentApprovalEmployeeComponent implements OnInit {
         });*/
     }
 
+    patchForm() {
+        const numberToWords = new NumberToWordsPipe();
+        this.payingOfficers = [{
+            'id': (this.updateData && this.updateData['pv'] && this.updateData['pv']['employee']) ? this.updateData['pv']['employee'].id : '',
+            'name': (this.updateData && this.updateData['pv'] && this.updateData['pv']['employee']) ? this.updateData['pv']['employee'].id : '',
+        }];
+        this.getBanks(this.updateData['pv']['employee'].id);
+        this.payeeBankId = this.updateData['pv']['employee']['employeeBank'].bankId;
+        this.schedulePayeeEmployeeForm.patchValue({
+            year: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].year : '',
+            departmentalNo: (this.updateData && this.updateData['report']) ? this.updateData['report'].deptalId : '',
+            details: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].details : '',
+            employeeId: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].employeeId : '',
+            payeeName: (this.updateData && this.updateData['pv']) ? this.updateData['pv']['employee'].firstName + ' ' + this.updateData['pv']['employee'].lastName : '',
+            netAmount: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].netAmount : '',
+            totalTax: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].totalTax : '',
+            totalAmount: (this.updateData && this.updateData['pv']) ? parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax) : '',
+            totalAmountInWords: numberToWords.transform(parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax))
+        });
+    }
+
     savePayeeEmployee() {
         this.isSubmitted = true;
         if (!this.schedulePayeeEmployeeForm.valid) {
@@ -97,11 +125,19 @@ export class SchedulePaymentApprovalEmployeeComponent implements OnInit {
                 'payeeBankId': this.payeeBankId ? this.payeeBankId : '',
                 'taxIds': this.taxIds ? JSON.stringify(this.taxIds) : ''
             };
-            this.paymentApprovalService.schedulePayee(this.payeeData.id, params).subscribe(data => {
-                this.schedulePayeeEmployeeForm.reset();
-                this.matDialogRef.close(this.schedulePayeeEmployeeForm);
-                this.isSubmitted = false;
-            });
+            if (!this.updateData) {
+                this.paymentApprovalService.schedulePayee(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayeeEmployeeForm.reset();
+                    this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+                    this.isSubmitted = false;
+                });
+            } else {
+                this.paymentApprovalService.schedulePayeeUpdate(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayeeEmployeeForm.reset();
+                    this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+                    this.isSubmitted = false;
+                });
+            }
         }
     }
 
@@ -113,7 +149,8 @@ export class SchedulePaymentApprovalEmployeeComponent implements OnInit {
         this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                action: 'CREATE',
+                action: (this.updateData) ? 'EDIT' : 'CREATE',
+                taxIds: (this.updateData && this.updateData['pv'] && this.updateData['pv'].taxIds) ? this.updateData['pv'].taxIds : '',
                 netAmount: this.schedulePayeeEmployeeForm.value.netAmount,
             }
         });

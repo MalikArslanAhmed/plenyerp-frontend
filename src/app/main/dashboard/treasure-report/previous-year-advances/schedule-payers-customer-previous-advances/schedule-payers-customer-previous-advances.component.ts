@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AlertService} from "../../../../../shared/services/alert.service";
 import {EmployeeService} from "../../../../../shared/services/employee.service";
-import {ReceiptVoucherService} from "../../../../../shared/services/receipt-voucher.service";
 import {GlobalService} from "../../../../../shared/services/global.service";
 import {NumberToWordsPipe} from "../../../../../shared/pipes/number-to-word.pipe";
 import {SelectPayersCustomerComponent} from "../../receipt-vouchers/select-payers-customer/select-payers-customer.component";
@@ -39,13 +38,21 @@ export class SchedulePayersCustomerPreviousAdvancesComponent implements OnInit {
                 private employeesService: EmployeeService,
                 private previousYearAdvanceService: PreviousYearAdvancesService,
                 private globalService: GlobalService) {
-        this.payeeData = _data.rv;
-        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | RV - Schedule Payers Company' : '-';
+        if (_data.action === 'EDIT') {
+            this.updateData = _data;
+            this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | RV - Schedule Payers Company' : '-';
+        } else {
+            this.payeeData = _data.rv;
+            this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | RV - Schedule Payers Company' : '-';
+        }
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
+        if (this.updateData) {
+            this.patchForm();
+        }
     }
 
     refresh() {
@@ -81,6 +88,31 @@ export class SchedulePayersCustomerPreviousAdvancesComponent implements OnInit {
         });
     }
 
+    patchForm() {
+        const numberToWords = new NumberToWordsPipe();
+        this.customers = [{
+            'id': (this.updateData && this.updateData['rv']) ? this.updateData['rv']['adminCompany'].id : '',
+            'name': (this.updateData && this.updateData['rv']) ? this.updateData['rv']['adminCompany'].id : '',
+        }];
+        this.payMode = (this.updateData && this.updateData['rv']) ? this.updateData['rv'].payMode : '';
+        this.schedulePayersCustomerForm.patchValue({
+            year: (this.updateData && this.updateData['report']) ? this.updateData['report'].year : '',
+            departmentalNo: (this.updateData && this.updateData['report']) ? this.updateData['report'].deptalId : '',
+            details: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].details : '',
+            companyId: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].companyId : '',
+            payerName: (this.updateData && this.updateData['rv']) ? this.updateData['rv']['adminCompany'].name : '',
+            amount: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].netAmount : '',
+            totalTax: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].totalTax : '',
+            totalAmount: (this.updateData && this.updateData['rv']) ? parseInt(this.updateData['rv'].netAmount) + parseInt(this.updateData['rv'].totalTax) : '',
+            totalAmountInWords: numberToWords.transform(parseInt(this.updateData['rv'].netAmount) + parseInt(this.updateData['rv'].totalTax)),
+            lineDetail: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].details : '',
+            instrumentNumber: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].instrumentNumber : '',
+            instrumentType: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].instrumentType : '',
+            instrumentTellerNumber: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].instrumentTellerNumber : '',
+            instrumentIssuedBy: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].instrumentIssuedBy : ''
+        });
+    }
+
     savePayersCustomer() {
         this.isSubmitted = true;
         if (!this.schedulePayersCustomerForm.valid) {
@@ -107,11 +139,19 @@ export class SchedulePayersCustomerPreviousAdvancesComponent implements OnInit {
                 'instrumentTellerNumber': this.schedulePayersCustomerForm.getRawValue().instrumentTellerNumber ? this.schedulePayersCustomerForm.getRawValue().instrumentTellerNumber : '',
                 'instrumentIssuedBy': this.schedulePayersCustomerForm.getRawValue().instrumentIssuedBy ? this.schedulePayersCustomerForm.getRawValue().instrumentIssuedBy : '',
             };
-            this.previousYearAdvanceService.schedulePayer(this.payeeData.id, params).subscribe(data => {
-                this.schedulePayersCustomerForm.reset();
-                this.matDialogRef.close(this.schedulePayersCustomerForm);
-                this.isSubmitted = false;
-            });
+            if (!this.updateData) {
+                this.previousYearAdvanceService.schedulePayer(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayersCustomerForm.reset();
+                    this.matDialogRef.close(this.schedulePayersCustomerForm);
+                    this.isSubmitted = false;
+                });
+            } else {
+                this.previousYearAdvanceService.schedulePayerUpdate(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayersCustomerForm.reset();
+                    this.matDialogRef.close(this.schedulePayersCustomerForm);
+                    this.isSubmitted = false;
+                });
+            }
         }
     }
 

@@ -39,7 +39,6 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 private alertService: AlertService,
                 private employeesService: EmployeeService,
                 private paymentVoucherService: PaymentVoucherService) {
-        console.log('data', _data);
         if (_data.action === 'EDIT') {
             this.updateData = _data;
             this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | PV - Schedule Payees Employee' : '-';
@@ -83,16 +82,17 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     }
 
     patchForm() {
-        console.log('this.updatedData', this.updateData);
         const numberToWords = new NumberToWordsPipe();
         this.payingOfficers = [{
             'id': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['employee'].id : '',
             'name': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['employee'].id : '',
         }];
+        this.getBanks(this.updateData['pv']['employee'].id);
+        this.payeeBankId = this.updateData['pv']['employee']['employeeBank'].bankId;
         this.schedulePayeeEmployeeForm.patchValue({
             year: (this.updateData && this.updateData['report']) ? this.updateData['report'].year : '',
             departmentalNo: (this.updateData && this.updateData['report']) ? this.updateData['report'].deptalId : '',
-            details: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].year : '',
+            details: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].details : '',
             employeeId: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].employeeId : '',
             payeeName: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].employee.firstName + ' ' + this.updateData['pv'].employee.lastName : '',
             netAmount: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].netAmount : '',
@@ -100,15 +100,6 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             totalAmount: (this.updateData && this.updateData['pv']) ? parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax) : '',
             totalAmountInWords: numberToWords.transform(parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax))
         });
-        /*year: [{'value': '', disabled: true}],
-        departmentalNo: [{'value': '', disabled: true}],
-        details: [''],
-        employeeId: [{'value': '', disabled: true}],
-        payeeName: [{'value': '', disabled: true}],
-        netAmount: [''],
-        totalTax: [{'value': '', disabled: true}],
-        totalAmount: [{'value': '', disabled: true}],
-        totalAmountInWords: [{'value': '', disabled: true}]*/
     }
 
     savePayeeEmployee() {
@@ -134,11 +125,19 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 'payeeBankId': this.payeeBankId ? this.payeeBankId : '',
                 'taxIds': this.taxIds ? JSON.stringify(this.taxIds) : ''
             };
-            this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
-                this.schedulePayeeEmployeeForm.reset();
-                this.matDialogRef.close(this.schedulePayeeEmployeeForm);
-                this.isSubmitted = false;
-            });
+            if (!this.updateData) {
+                this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayeeEmployeeForm.reset();
+                    this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+                    this.isSubmitted = false;
+                });
+            } else {
+                this.paymentVoucherService.updateSchedulePayee(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayeeEmployeeForm.reset();
+                    this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+                    this.isSubmitted = false;
+                });
+            }
         }
     }
 

@@ -11,6 +11,7 @@ import {SchedulePayersCustomerComponent} from './schedule-payers-customer/schedu
 import {SchedulePayersEmployeeComponent} from './schedule-payers-employee/schedule-payers-employee.component';
 import {ScheduleEconomicCodesReceiptComponent} from "./schedule-economic-codes-receipt/schedule-economic-codes-receipt.component";
 import {PaymentVoucherCreateComponent} from "../payment-voucher/payment-voucher-create/payment-voucher-create.component";
+import {SchedulePayeeEmployeeComponent} from "../payment-voucher/schedule-payee-employee/schedule-payee-employee.component";
 
 @Component({
     selector: 'app-receipt-vouchers',
@@ -277,7 +278,53 @@ export class ReceiptVouchersComponent implements OnInit {
     }
 
     deleteReceiptVoucher(data) {
-        console.log('data', data);
+        this.receiptVoucherService.delete(data.id).subscribe(data => {
+            this.getReceiptVoucher({});
+        });
+    }
+
+    editSchedulePayerEmployee(data, report) {
+        this.dialogRef = this._matDialog.open(SchedulePayersEmployeeComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'rv': data, 'report': report}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getChildReportData(data);
+        });
+    }
+
+    deleteSchedulePayerEmployee(data) {
+        this.receiptVoucherService.deleteSchedulePayerEmployee(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
+    }
+
+    editSchedulePayerCustomer(data, report) {
+        this.dialogRef = this._matDialog.open(SchedulePayersCustomerComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'rv': data, 'report': report}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getChildReportData(data);
+        });
+    }
+
+    deleteSchedulePayerCustomer(data) {
+        this.receiptVoucherService.deleteSchedulePayerCustomer(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
+    }
+
+    deleteEconomicCode(data) {
+        this.receiptVoucherService.deleteEconomicCode(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
     }
 
     onPageChange(page) {

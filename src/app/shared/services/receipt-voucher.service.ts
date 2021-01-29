@@ -27,7 +27,19 @@ export class ReceiptVoucherService extends BaseService {
     }
 
     delete(id): Observable<any> {
-        return this.deleteRequest(AppUrl.CURRENCIES(id));
+        return this.deleteRequest(AppUrl.RECEIPT_VOUCHER(id));
+    }
+
+    deleteSchedulePayerEmployee(id): Observable<any> {
+        return this.deleteRequest(AppUrl.RV_SCHEDULE_PAYEES(id));
+    }
+
+    deleteSchedulePayerCustomer(id): Observable<any> {
+        return this.deleteRequest(AppUrl.RV_SCHEDULE_PAYEES(id));
+    }
+
+    deleteEconomicCode(id): Observable<any> {
+        return this.deleteRequest(AppUrl.RV_SCHEDULE_ECONOMIC(id));
     }
 
     update(id, data): Observable<any> {
@@ -40,6 +52,10 @@ export class ReceiptVoucherService extends BaseService {
 
     schedulePayer(id, data): Observable<any> {
         return this.postRequest(AppUrl.RV_SCHEDULE_PAYEES(id), data);
+    }
+
+    updateSchedulePayer(id, data): Observable<any> {
+        return this.putRequest(AppUrl.RV_UPDATE_SCHEDULE_PAYEES(id), data);
     }
 
     scheduleEconomic(id, data): Observable<any> {

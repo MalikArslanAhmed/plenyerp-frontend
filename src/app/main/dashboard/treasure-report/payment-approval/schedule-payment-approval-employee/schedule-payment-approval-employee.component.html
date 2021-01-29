@@ -15,10 +15,6 @@
                     <mat-label>Voucher Year</mat-label>
                     <input matInput placeholder="Year" formControlName="year">
                 </mat-form-field>
-                <!--<mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Deptal No.</mat-label>
-                    <input matInput placeholder="Deptal No." formControlName="departmentalNo">
-                </mat-form-field>-->
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Details</mat-label>
                     <input matInput placeholder="Details" formControlName="details">
@@ -95,7 +91,8 @@
                     <tr *ngFor="let bank of banks; let i = index">
                         <td>
                             <div class="title">
-                                <mat-radio-button (change)="selectRadio(bank.id)"></mat-radio-button>
+                                <mat-radio-button [checked]="this.payeeBankId ? this.payeeBankId : null"
+                                                  (change)="selectRadio(bank.id)"></mat-radio-button>
                             </div>
                         </td>
                         <td>
@@ -153,7 +150,11 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
                 (click)="savePayeeEmployee()"
-                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save">ADD
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="!this.updateData">ADD
+        </button>
+        <button mat-button class="save-button"
+                (click)="savePayeeEmployee()"
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="this.updateData">UPDATE
         </button>
     </div>
 </div>

@@ -40,13 +40,21 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 private employeesService: EmployeeService,
                 private receiptVoucherService: ReceiptVoucherService,
                 private globalService: GlobalService) {
-        this.payeeData = _data.rv;
-        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | RV - Schedule Payers Employee' : '-';
+        if (_data.action === 'EDIT') {
+            this.updateData = _data;
+            this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | RV - Schedule Payers Employee' : '-';
+        } else {
+            this.payeeData = _data.rv;
+            this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | RV - Schedule Payers Employee' : '-';
+        }
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
+        if (this.updateData) {
+            this.patchForm();
+        }
     }
 
     refresh() {
@@ -82,6 +90,29 @@ export class SchedulePayersEmployeeComponent implements OnInit {
         });
     }
 
+    patchForm() {
+        const numberToWords = new NumberToWordsPipe();
+        this.payingOfficers = [{
+            'id': (this.updateData && this.updateData['rv'] && this.updateData['rv']['employee'] && this.updateData['rv']['employee'].id) ? this.updateData['rv']['employee'].id : '',
+            'name': (this.updateData && this.updateData['rv'] && this.updateData['rv']['employee'] && this.updateData['rv']['employee'].id) ? this.updateData['rv']['employee'].id : '',
+        }];
+        this.payMode = this.updateData['rv'].payMode;
+        this.schedulePayersEmployeeForm.patchValue({
+            year: (this.updateData && this.updateData['report']) ? this.updateData['report'].year : '',
+            departmentalNo: (this.updateData && this.updateData['report']) ? this.updateData['report'].deptalId : '',
+            details: (this.updateData && this.updateData['report']) ? this.updateData['report'].paymentDescription : '',
+            employeeId: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].employeeId : '',
+            payerName: (this.updateData && this.updateData['rv'] && this.updateData['rv']['employee']) ? this.updateData['rv']['employee'].firstName + ' ' + this.updateData['rv']['employee'].lastName : '',
+            amount: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].totalAmount : '',
+            totalAmountInWords: numberToWords.transform(parseInt(this.updateData['rv'].totalAmount)),
+            lineDetail: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].lineDetail : '',
+            instrumentNumber: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].instrumentNumber : '',
+            instrumentType: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].instrumentType : '',
+            instrumentTellerNumber: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].instrumentTellerNumber : '',
+            instrumentIssuedBy: (this.updateData && this.updateData['rv']) ? this.updateData['rv'].instrumentIssuedBy : ''
+        });
+    }
+
     savePayersEmployee() {
         this.isSubmitted = true;
         if (!this.schedulePayersEmployeeForm.valid) {
@@ -108,11 +139,19 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 'instrumentTellerNumber': this.schedulePayersEmployeeForm.getRawValue().instrumentTellerNumber ? this.schedulePayersEmployeeForm.getRawValue().instrumentTellerNumber : '',
                 'instrumentIssuedBy': this.schedulePayersEmployeeForm.getRawValue().instrumentIssuedBy ? this.schedulePayersEmployeeForm.getRawValue().instrumentIssuedBy : '',
             };
-            this.receiptVoucherService.schedulePayer(this.payeeData.id, params).subscribe(data => {
-                this.schedulePayersEmployeeForm.reset();
-                this.matDialogRef.close(this.schedulePayersEmployeeForm);
-                this.isSubmitted = false;
-            });
+            if (!this.updateData) {
+                this.receiptVoucherService.schedulePayer(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayersEmployeeForm.reset();
+                    this.matDialogRef.close(this.schedulePayersEmployeeForm);
+                    this.isSubmitted = false;
+                });
+            } else {
+                this.receiptVoucherService.updateSchedulePayer(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayersEmployeeForm.reset();
+                    this.matDialogRef.close(this.schedulePayersEmployeeForm);
+                    this.isSubmitted = false;
+                });
+            }
         }
     }
 

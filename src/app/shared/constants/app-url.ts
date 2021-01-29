@@ -562,15 +562,39 @@ export class AppUrl {
         }
     }
 
+    static RV_UPDATE_SCHEDULE_PAYEES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/receipt-vouchers/` + id + `/schedule-payees/update`;
+        }
+    }
+
     static SCHEDULE_PAYEES(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/payment-vouchers/` + id + `/schedule-payees`;
         }
     }
 
+    static SCHEDULE_PAYEES_UPDATE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + id + `/schedule-payees/update`;
+        }
+    }
+
+    static SCHEDULE_COMPANY_UPDATE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + id + `/schedule-company/update`;
+        }
+    }
+
     static SCHEDULE_PAYEES_PAYMENT_APPROVAL(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/payment-approval/` + id + `/schedule-payees`;
+        }
+    }
+
+    static SCHEDULE_PAYEES_PAYMENT_APPROVAL_UPDATE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + `treasury/payment-approval/` + id + `/schedule-payees/update`;
         }
     }
 

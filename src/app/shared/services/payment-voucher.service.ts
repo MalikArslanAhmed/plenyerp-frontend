@@ -22,12 +22,24 @@ export class PaymentVoucherService extends BaseService {
         return this.putRequest(AppUrl.PAYMENT_VOUCHER(id), data);
     }
 
+    deleteSchedulePayee(id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES(id));
+    }
+
+    deleteScheduleCustomer(id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES(id));
+    }
+
     get(data): Observable<any> {
         return this.getRequest(AppUrl.PAYMENT_VOUCHER(), data);
     }
 
     delete(id): Observable<any> {
-        return this.deleteRequest(AppUrl.CURRENCIES(id));
+        return this.deleteRequest(AppUrl.PAYMENT_VOUCHER(id));
+    }
+
+    deleteEconomicCode(id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_ECONOMIC(id));
     }
 
     update(id, data): Observable<any> {
@@ -40,6 +52,14 @@ export class PaymentVoucherService extends BaseService {
 
     schedulePayee(id, data): Observable<any> {
         return this.postRequest(AppUrl.SCHEDULE_PAYEES(id), data);
+    }
+
+    updateSchedulePayee(id, data): Observable<any> {
+        return this.postRequest(AppUrl.SCHEDULE_PAYEES_UPDATE(id), data);
+    }
+
+    updateScheduleCompany(id, data): Observable<any> {
+        return this.postRequest(AppUrl.SCHEDULE_COMPANY_UPDATE(id), data);
     }
 
     scheduleEconomic(id, data): Observable<any> {

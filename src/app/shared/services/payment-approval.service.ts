@@ -42,6 +42,18 @@ export class PaymentApprovalService extends BaseService {
         return this.postRequest(AppUrl.SCHEDULE_PAYEES_PAYMENT_APPROVAL(id), data);
     }
 
+    schedulePayeeUpdate(id, data): Observable<any> {
+        return this.putRequest(AppUrl.SCHEDULE_PAYEES_PAYMENT_APPROVAL_UPDATE(id), data);
+    }
+
+    deleteSchedulePayee(id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES_PAYMENT_APPROVAL(id));
+    }
+
+    deleteScheduleCustomer(id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES_PAYMENT_APPROVAL(id));
+    }
+
     getSchedulePayee(id, data): Observable<any> {
         return this.getRequest(AppUrl.SCHEDULE_PAYEES_PAYMENT_APPROVAL(id), data);
     }

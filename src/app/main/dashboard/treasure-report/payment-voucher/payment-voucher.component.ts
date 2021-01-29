@@ -139,6 +139,12 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
+    deleteEconomicCode(data) {
+        this.paymentVoucherService.deleteEconomicCode(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
+    }
+
     filterPaymentVoucher() {
         let params = {};
         if (this.filterPaymentVoucherForm.value.status !== 'ALL') {
@@ -320,10 +326,12 @@ export class PaymentVoucherComponent implements OnInit {
     }
 
     deletePaymentVoucher(data) {
-        console.log('data', data);
+        this.paymentVoucherService.delete(data.id).subscribe(data => {
+            this.getPyamentVoucher();
+        });
     }
 
-    editSchedulePayee(data, report) {
+    editSchedulePayeeEmployee(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
             panelClass: 'contact-form-dialog',
             data: {'action': 'EDIT', 'pv': data, 'report': report}
@@ -332,12 +340,33 @@ export class PaymentVoucherComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getPyamentVoucher({});
+            this.getChildReportData(data);
         });
     }
 
-    deleteSchedulePayee(data) {
-        console.log('data', data);
+    deleteSchedulePayeeEmployee(data) {
+        this.paymentVoucherService.deleteSchedulePayee(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
+    }
+
+    editSchedulePayeeCustomer(data, report) {
+        this.dialogRef = this._matDialog.open(SchedulePayeeCustomerComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'pv': data, 'report': report}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getChildReportData(data);
+        });
+    }
+
+    deleteSchedulePayeeCustomer(data) {
+        this.paymentVoucherService.deleteScheduleCustomer(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
     }
 
     onPageChange(page) {

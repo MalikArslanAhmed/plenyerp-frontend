@@ -234,7 +234,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
             'remark': this.paymentApprovalForm.getRawValue().remark ? this.paymentApprovalForm.getRawValue().remark : '',
         };
 
-        if (this.updateData) {
+        if (!this.updateData) {
             this.paymentApprovalService.save(params).subscribe(data => {
                 this.matDialogRef.close(this.paymentApprovalForm);
                 this.paymentApprovalForm.reset();

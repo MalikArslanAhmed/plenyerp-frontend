@@ -11,7 +11,6 @@ import {PreviousYearAdvancesService} from "../../../../shared/services/previous-
 import {PaymentVoucherService} from "../../../../shared/services/payment-voucher.service";
 import {SchedulePayersEmployeePreviousAdvancesComponent} from "./schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component";
 import {SchedulePayersCustomerPreviousAdvancesComponent} from "./schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component";
-import {ReceiptVoucherCreateComponent} from "../receipt-vouchers/receipt-voucher-create/receipt-voucher-create.component";
 
 @Component({
     selector: 'app-previous-year-advances',
@@ -281,7 +280,47 @@ export class PreviousYearAdvancesComponent implements OnInit {
     }
 
     deletePreviousYearVoucher(data) {
-        console.log('data', data);
+        this.previousYearAdvanceService.delete(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
+    }
+
+    editSchedulePayeeEmployee(data, report) {
+        this.dialogRef = this._matDialog.open(SchedulePayersEmployeePreviousAdvancesComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'pv': data, 'report': report}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getChildReportData(data);
+        });
+    }
+
+    deleteSchedulePayeeEmployee(data) {
+        this.previousYearAdvanceService.deleteSchedulePayee(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
+    }
+
+    editSchedulePayeeCustomer(data, report) {
+        this.dialogRef = this._matDialog.open(SchedulePayersCustomerPreviousAdvancesComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'rv': data, 'report': report}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getChildReportData(data);
+        });
+    }
+
+    deleteSchedulePayeeCustomer(data) {
+        this.previousYearAdvanceService.deleteSchedulePayee(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
     }
 
     onPageChange(page) {

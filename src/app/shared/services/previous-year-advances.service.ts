@@ -27,7 +27,11 @@ export class PreviousYearAdvancesService extends BaseService {
     }
 
     delete(id): Observable<any> {
-        return this.deleteRequest(AppUrl.CURRENCIES(id));
+        return this.deleteRequest(AppUrl.PREVIOUS_YEAR_ADANCES(id));
+    }
+
+    deleteSchedulePayee(id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES(id));
     }
 
     update(id, data): Observable<any> {
@@ -40,6 +44,10 @@ export class PreviousYearAdvancesService extends BaseService {
 
     schedulePayer(id, data): Observable<any> {
         return this.postRequest(AppUrl.SCHEDULE_PAYEES(id), data);
+    }
+
+    schedulePayerUpdate(id, data): Observable<any> {
+        return this.postRequest(AppUrl.SCHEDULE_PAYEES_UPDATE(id), data);
     }
 
     scheduleEconomic(id, data): Observable<any> {

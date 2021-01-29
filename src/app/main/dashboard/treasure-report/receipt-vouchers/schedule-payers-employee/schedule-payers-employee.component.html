@@ -58,13 +58,13 @@
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 10px; margin-bottom: 10px">
                 <span style="margin-top: 4px">Pay Mode</span>
                 <span>
-                    <mat-radio-button (change)="selectRadio('CASH')"></mat-radio-button>Cash
+                    <mat-radio-button [checked]="payMode === 'CASH'" (change)="selectRadio('CASH')"></mat-radio-button>Cash
                 </span>
                 <span>
-                    <mat-radio-button (change)="selectRadio('DIRECT_PAYMENT')"></mat-radio-button>Direct Payment
+                    <mat-radio-button [checked]="payMode === 'DIRECT_PAYMENT'" (change)="selectRadio('DIRECT_PAYMENT')"></mat-radio-button>Direct Payment
                 </span>
                 <span>
-                    <mat-radio-button (change)="selectRadio('INSTRUMENTS')"></mat-radio-button>Instruments (Cheque, Drafts etc.)
+                    <mat-radio-button [checked]="payMode === 'INSTRUMENTS'" (change)="selectRadio('INSTRUMENTS')"></mat-radio-button>Instruments (Cheque, Drafts etc.)
                 </span>
             </div>
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 20px" *ngIf="this.payMode === 'INSTRUMENTS'">
@@ -93,7 +93,11 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
                 (click)="savePayersEmployee()"
-                [disabled]="schedulePayersEmployeeForm.invalid" aria-label="Save">ADD
+                [disabled]="schedulePayersEmployeeForm.invalid" aria-label="Save" *ngIf="!this.updateData">ADD
+        </button>
+        <button mat-button class="save-button"
+                (click)="savePayersEmployee()"
+                [disabled]="schedulePayersEmployeeForm.invalid" aria-label="Save" *ngIf="this.updateData">UPDATE
         </button>
     </div>
 </div>

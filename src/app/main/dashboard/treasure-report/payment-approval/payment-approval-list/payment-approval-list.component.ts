@@ -11,7 +11,6 @@ import {PaymentApprovalService} from '../../../../../shared/services/payment-app
 import {EmployeeService} from "../../../../../shared/services/employee.service";
 import {SchedulePaymentApprovalEmployeeComponent} from "../schedule-payment-approval-employee/schedule-payment-approval-employee.component";
 import {SchedulePaymentApprovalCustomerComponent} from "../schedule-payment-approval-customer/schedule-payment-approval-customer.component";
-import {PaymentVoucherCreateComponent} from "../../payment-voucher/payment-voucher-create/payment-voucher-create.component";
 
 @Component({
     selector: 'app-payment-approval-list',
@@ -153,31 +152,6 @@ export class PaymentApprovalListComponent implements OnInit {
         }
     }
 
-    // deleteMandate(mandateId) {
-    //     this.paymentApprovalService.delete(mandateId).subscribe(data => {
-    //         if (data) {
-    //             this.getPaymentApprovalList();
-    //         }
-    //     });
-    // }
-
-    /*getEmployees(): void {
-        this.employees = [];
-        this.employeesService.getEmployees({page: this.pagination.page}).subscribe(data => {
-            this.employees = data.items;
-
-            if (this.employees && this.employees.length > 0) {
-                let i = 1;
-                this.employees.forEach(category => {
-                    category['sno'] = i;
-                    i++;
-                });
-            }
-            this.pagination.page = data.page;
-            this.pagination.total = data.total;
-        });
-    }*/
-
     scheduleEmployee(data) {
         this.dialogRef = this._matDialog.open(SchedulePaymentApprovalEmployeeComponent, {
             panelClass: 'contact-form-dialog',
@@ -229,7 +203,47 @@ export class PaymentApprovalListComponent implements OnInit {
     }
 
     deletePaymentApproval(data) {
-        console.log('data', data);
+        this.paymentApprovalService.delete(data.id).subscribe(data => {
+            this.getPaymentApprovalList({});
+        });
+    }
+
+    editSchedulePayeeEmployee(data, report) {
+        this.dialogRef = this._matDialog.open(SchedulePaymentApprovalEmployeeComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'pv': data, 'report': report}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getChildReportData(data);
+        });
+    }
+
+    deleteSchedulePayeeEmployee(data) {
+        this.paymentApprovalService.deleteSchedulePayee(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
+    }
+
+    editSchedulePayeeCustomer(data, report) {
+        this.dialogRef = this._matDialog.open(SchedulePaymentApprovalCustomerComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {'action': 'EDIT', 'pv': data, 'report': report}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getChildReportData(data);
+        });
+    }
+
+    deleteSchedulePayeeCustomer(data) {
+        this.paymentApprovalService.deleteScheduleCustomer(data.id).subscribe(data => {
+            this.getChildReportData(data);
+        });
     }
 
     onPageChange(page) {

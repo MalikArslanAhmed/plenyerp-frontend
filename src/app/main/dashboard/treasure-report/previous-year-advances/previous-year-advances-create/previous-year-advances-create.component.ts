@@ -351,7 +351,7 @@ export class PreviousYearAdvancesCreateComponent implements OnInit {
                 'payingOfficerId': this.previousYearAdvancesCreateForm.getRawValue().payingOfficerId ? this.previousYearAdvancesCreateForm.getRawValue().payingOfficerId : '',
                 'financialControllerId': this.previousYearAdvancesCreateForm.getRawValue().financialControllerId ? this.previousYearAdvancesCreateForm.getRawValue().financialControllerId : '',
             };
-            if (this.updatedData) {
+            if (!this.updatedData) {
                 this.previousYearAdvanceService.save(params).subscribe(data => {
                     this.previousYearAdvancesCreateForm.reset();
                     this.isSubmitted = false;

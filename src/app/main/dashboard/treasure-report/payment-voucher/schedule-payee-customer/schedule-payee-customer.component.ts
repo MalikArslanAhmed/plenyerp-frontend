@@ -38,13 +38,21 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 private alertService: AlertService,
                 private employeesService: EmployeeService,
                 private paymentVoucherService: PaymentVoucherService) {
-        this.payeeData = _data.pv;
-        this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | PV - Schedule Payees Customer' : '-';
+        if (_data.action === 'EDIT') {
+            this.updateData = _data;
+            this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | PV - Schedule Payees Customer' : '-';
+        } else {
+            this.payeeData = _data.pv;
+            this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | PV - Schedule Payees Customer' : '-';
+        }
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
+        if (this.updateData) {
+            this.patchForm();
+        }
     }
 
     refresh() {
@@ -72,6 +80,27 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         })
     }
 
+    patchForm() {
+        const numberToWords = new NumberToWordsPipe();
+        this.customers = [{
+            'id': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['adminCompany'].id : '',
+            'name': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['adminCompany'].id : '',
+        }];
+        this.getBanks(this.updateData['pv']['adminCompany'].id);
+        this.payeeBankId = this.updateData['pv']['adminCompany']['companyBank'].bankId;
+        this.schedulePayeeCustomerForm.patchValue({
+            year: (this.updateData && this.updateData['report']) ? this.updateData['report'].year : '',
+            departmentalNo: (this.updateData && this.updateData['report']) ? this.updateData['report'].deptalId : '',
+            details: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].details : '',
+            companyId: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].companyId : '',
+            payeeName: (this.updateData && this.updateData['pv']) ? this.updateData['pv']['adminCompany'].name : '',
+            netAmount: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].netAmount : '',
+            totalTax: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].totalTax : '',
+            totalAmount: (this.updateData && this.updateData['pv']) ? parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax) : '',
+            totalAmountInWords: numberToWords.transform(parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax))
+        });
+    }
+
     savePayeeCustomer() {
         this.isSubmitted = true;
         if (!this.schedulePayeeCustomerForm.valid) {
@@ -95,11 +124,19 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 'payeeBankId': this.payeeBankId ? this.payeeBankId : '',
                 'taxIds': this.taxIds ? JSON.stringify(this.taxIds) : ''
             };
-            this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
-                this.schedulePayeeCustomerForm.reset();
-                this.matDialogRef.close(this.schedulePayeeCustomerForm);
-                this.isSubmitted = false;
-            });
+            if (!this.updateData) {
+                this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayeeCustomerForm.reset();
+                    this.matDialogRef.close(this.schedulePayeeCustomerForm);
+                    this.isSubmitted = false;
+                });
+            } else {
+                this.paymentVoucherService.updateScheduleCompany(this.payeeData.id, params).subscribe(data => {
+                    this.schedulePayeeCustomerForm.reset();
+                    this.matDialogRef.close(this.schedulePayeeCustomerForm);
+                    this.isSubmitted = false;
+                });
+            }
         }
     }
 
@@ -111,7 +148,8 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                action: 'CREATE',
+                action: (this.updateData) ? 'EDIT' : 'CREATE',
+                taxIds: (this.updateData && this.updateData['pv'] && this.updateData['pv'].taxIds) ? this.updateData['pv'].taxIds : '',
                 netAmount: this.schedulePayeeCustomerForm.value.netAmount,
             }
         });

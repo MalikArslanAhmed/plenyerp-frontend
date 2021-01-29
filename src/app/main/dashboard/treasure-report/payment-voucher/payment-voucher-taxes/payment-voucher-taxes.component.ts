@@ -30,11 +30,9 @@ export class PaymentVoucherTaxesComponent implements OnInit {
             this.updateData = undefined;
             this.dialogTitle = 'Add Applicable Taxes';
         } else {
-            console.log('data');
             this.taxArray = (_data.taxIds && _data.taxIds !== '') ? JSON.parse(_data.taxIds) : [];
             this.dialogTitle = 'Edit Applicable Taxes';
             this.updateData = _data;
-            this.checkedItemsId();
         }
     }
 
@@ -53,8 +51,9 @@ export class PaymentVoucherTaxesComponent implements OnInit {
     getTaxes() {
         this.transactionService.getTaxes({'page': -1}).subscribe(data => {
             if (this.updateData) {
-                this.taxes = this.updateData.taxes;
+                this.taxes = data.items;
                 this.totalTaxes = this.updateData.totalTaxes;
+                this.checkedItemsId();
             } else {
                 this.taxes = data.items;
             }
@@ -101,17 +100,20 @@ export class PaymentVoucherTaxesComponent implements OnInit {
     }
 
     checkedItemsId() {
-        console.log('this.taxArray', this.taxArray);
         if (this.taxArray && this.taxArray.length > 0) {
+            let totalTaxes = [];
             this.taxArray.map(val => {
                 if (this.taxes && this.taxes.length > 0) {
                     this.taxes.forEach(v => {
                         if (v.id === val) {
                             v['checked'] = val;
+                            const taxVal = (parseFloat(v['tax']) * parseFloat(this.grossAmount)) / 100;
+                            totalTaxes.push(taxVal);
                         }
                     });
                 }
             });
+            this.totalTaxes = totalTaxes.reduce((a, b) => a + b, 0);
         }
     }
 }

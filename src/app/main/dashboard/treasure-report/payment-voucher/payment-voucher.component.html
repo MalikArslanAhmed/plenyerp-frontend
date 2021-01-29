@@ -104,7 +104,7 @@
                         <span class="mat-header-cell text-center">Taxes</span>
                         <span class="mat-header-cell text-center">Last Actioned</span>
                         <span class="mat-header-cell text-center">Status</span>
-                        <span class="mat-header-cell text-center">Action</span>
+                        <span class="mat-header-cell text-center">Actions</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of paymentVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
@@ -206,9 +206,9 @@
                                                 <th>
                                                     <div class="title">Status</div>
                                                 </th>
-                                                <!--<th>
+                                                <th>
                                                     <div class="title">Actions</div>
-                                                </th>-->
+                                                </th>
                                                 <th *ngIf="reportData.status === 'NEW'">
                                                     <div class="title">Schedule Economic Code</div>
                                                 </th>
@@ -318,21 +318,33 @@
                                                         {{data?.status}}
                                                     </div>
                                                 </td>
-                                                <!--<td>
-                                                    <button mat-icon-button aria-label="Toggle star"
-                                                            (click)="editSchedulePayee(data, reportData); $event.stopPropagation()"
-                                                            style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW'">
-                                                        <mat-icon class="material-icons">edit</mat-icon>
-                                                    </button>
-                                                    <button mat-icon-button aria-label="Toggle star"
-                                                            (click)="deleteSchedulePayee(data); $event.stopPropagation()"
-                                                            style="color: red" *ngIf="reportData.status === 'NEW'">
-                                                        <mat-icon class="material-icons">delete</mat-icon>
-                                                    </button>
-                                                    <span *ngIf="reportData.status !== 'NEW'">
-                                                        <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">-</p>
+                                                <td>
+                                                    <span *ngIf="reportData.status === 'NEW'">
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="editSchedulePayeeEmployee(data, reportData); $event.stopPropagation()"
+                                                                style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
+                                                            <mat-icon class="material-icons">edit</mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="deleteSchedulePayeeEmployee(data); $event.stopPropagation()"
+                                                                style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
+                                                            <mat-icon class="material-icons">delete</mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="editSchedulePayeeCustomer(data, reportData); $event.stopPropagation()"
+                                                                style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
+                                                            <mat-icon class="material-icons">edit</mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="deleteSchedulePayeeCustomer(data); $event.stopPropagation()"
+                                                                style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
+                                                            <mat-icon class="material-icons">delete</mat-icon>
+                                                        </button>
                                                     </span>
-                                                </td>-->
+                                                    <span *ngIf="reportData.status !== 'NEW'">
+                                                        <p class="text-truncate cursor-pointer mt-10px text-center ml--20px">-</p>
+                                                    </span>
+                                                </td>
                                                 <td *ngIf="reportData.status ==='NEW'">
                                                     <button mat-button class="payee-report"
                                                             (click)="scheduleEconomicCodes(reportData, data)">Schedule
@@ -387,6 +399,9 @@
                                                 <th>
                                                     <div class="title">Amount</div>
                                                 </th>
+                                                <th>
+                                                    <div class="title">Delete</div>
+                                                </th>
                                             </tr>
                                             </thead>
                                             <tbody
@@ -426,6 +441,15 @@
                                                 <td>
                                                     <div class="title">
                                                         {{data?.amount}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title">
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="deleteEconomicCode(data); $event.stopPropagation()"
+                                                                style="color: red">
+                                                            <mat-icon class="material-icons">delete</mat-icon>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
