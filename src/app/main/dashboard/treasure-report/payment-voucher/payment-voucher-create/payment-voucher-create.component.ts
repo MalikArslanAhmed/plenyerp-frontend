@@ -379,7 +379,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
                     this.matDialogRef.close(this.schedulePayeeEmployeeForm);
                 });
             } else {
-                this.paymentVoucherService.updatePaymentVoucher(this.updatedData.id, params).subscribe(data => {
+                this.paymentVoucherService.update(this.updatedData.id, params).subscribe(data => {
                     this.schedulePayeeEmployeeForm.reset();
                     this.isSubmitted = false;
                     this.matDialogRef.close(this.schedulePayeeEmployeeForm);

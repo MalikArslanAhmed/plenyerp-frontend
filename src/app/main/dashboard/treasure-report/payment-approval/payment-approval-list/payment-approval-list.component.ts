@@ -221,8 +221,8 @@ export class PaymentApprovalListComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayeeEmployee(data) {
-        this.paymentApprovalService.deleteSchedulePayee(data.id).subscribe(data => {
+    deleteSchedulePayeeEmployee(report, data) {
+        this.paymentApprovalService.deleteSchedulePayee(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }
@@ -240,8 +240,8 @@ export class PaymentApprovalListComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayeeCustomer(data) {
-        this.paymentApprovalService.deleteScheduleCustomer(data.id).subscribe(data => {
+    deleteSchedulePayeeCustomer(report, data) {
+        this.paymentApprovalService.deleteScheduleCustomer(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }

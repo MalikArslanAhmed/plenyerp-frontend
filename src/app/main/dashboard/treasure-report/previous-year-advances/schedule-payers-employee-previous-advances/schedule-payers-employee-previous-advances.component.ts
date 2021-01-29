@@ -42,6 +42,7 @@ export class SchedulePayersEmployeePreviousAdvancesComponent implements OnInit {
                 private globalService: GlobalService) {
         if (_data.action === 'EDIT') {
             this.updateData = _data;
+            this.payeeData = _data.rv;
             this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | RV - Schedule Payers Employee' : '-';
         } else {
             this.payeeData = _data.rv;
@@ -148,7 +149,7 @@ export class SchedulePayersEmployeePreviousAdvancesComponent implements OnInit {
                     this.isSubmitted = false;
                 });
             } else {
-                this.previousYearAdvanceService.schedulePayerUpdate(this.payeeData.id, params).subscribe(data => {
+                this.previousYearAdvanceService.schedulePayerUpdate(this.updateData['report'].id, this.payeeData.id, params).subscribe(data => {
                     this.schedulePayersEmployeeForm.reset();
                     this.matDialogRef.close(this.schedulePayersEmployeeForm);
                     this.isSubmitted = false;

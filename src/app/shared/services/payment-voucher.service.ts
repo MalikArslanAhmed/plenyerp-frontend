@@ -18,16 +18,16 @@ export class PaymentVoucherService extends BaseService {
         return this.postRequest(AppUrl.PAYMENT_VOUCHER(), data);
     }
 
-    updatePaymentVoucher(id, data): Observable<any> {
+    update(id, data): Observable<any> {
         return this.putRequest(AppUrl.PAYMENT_VOUCHER(id), data);
     }
 
-    deleteSchedulePayee(id): Observable<any> {
-        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES(id));
+    deleteSchedulePayee(reportId, id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES_DELETE(reportId, id));
     }
 
-    deleteScheduleCustomer(id): Observable<any> {
-        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES(id));
+    deleteScheduleCustomer(reportId, id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES_DELETE(reportId, id));
     }
 
     get(data): Observable<any> {
@@ -38,12 +38,8 @@ export class PaymentVoucherService extends BaseService {
         return this.deleteRequest(AppUrl.PAYMENT_VOUCHER(id));
     }
 
-    deleteEconomicCode(id): Observable<any> {
-        return this.deleteRequest(AppUrl.SCHEDULE_ECONOMIC(id));
-    }
-
-    update(id, data): Observable<any> {
-        return this.putRequest(AppUrl.CURRENCIES(id), data);
+    deleteEconomicCode(reportId, id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_ECONOMIC_DELETE(reportId, id));
     }
 
     getUpdateStatus(data): Observable<any> {
@@ -54,12 +50,12 @@ export class PaymentVoucherService extends BaseService {
         return this.postRequest(AppUrl.SCHEDULE_PAYEES(id), data);
     }
 
-    updateSchedulePayee(id, data): Observable<any> {
-        return this.postRequest(AppUrl.SCHEDULE_PAYEES_UPDATE(id), data);
+    updateSchedulePayee(reportId, id, data): Observable<any> {
+        return this.putRequest(AppUrl.SCHEDULE_PAYEES_UPDATE(reportId, id), data);
     }
 
-    updateScheduleCompany(id, data): Observable<any> {
-        return this.postRequest(AppUrl.SCHEDULE_COMPANY_UPDATE(id), data);
+    updateScheduleCompany(reportId, id, data): Observable<any> {
+        return this.putRequest(AppUrl.SCHEDULE_COMPANY_UPDATE(reportId, id), data);
     }
 
     scheduleEconomic(id, data): Observable<any> {

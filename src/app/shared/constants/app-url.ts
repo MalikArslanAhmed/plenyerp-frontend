@@ -506,7 +506,7 @@ export class AppUrl {
 
     static PAYMENT_VOUCHER(id?): string {
         if (id) {
-            return AppUrl.API_URL + `treasury/payment-vouchers` + id;
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + id;
         } else {
             return AppUrl.API_URL + `treasury/payment-vouchers`;
         }
@@ -530,7 +530,7 @@ export class AppUrl {
 
     static RECEIPT_VOUCHER(id?): string {
         if (id) {
-            return AppUrl.API_URL + `treasury/receipt-vouchers` + id;
+            return AppUrl.API_URL + `treasury/receipt-vouchers/` + id;
         } else {
             return AppUrl.API_URL + `treasury/receipt-vouchers`;
         }
@@ -556,15 +556,33 @@ export class AppUrl {
         return AppUrl.API_URL + `treasury/payment-vouchers/previous-advances-update`;
     }
 
+    static SCHEDULE_PAYEES_PREVIOUS_YEAR_UPDATE(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/previous-advances/` + reportId + `/schedule-payees/` + id + '/update';
+        }
+    }
+
+    static SCHEDULE_PAYEES_PREVIOUS_YEAR_DELETE(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/previous-advances/` + reportId + `/schedule-payees/` + id;
+        }
+    }
+
     static RV_SCHEDULE_PAYEES(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-vouchers/` + id + `/schedule-payees`;
         }
     }
 
-    static RV_UPDATE_SCHEDULE_PAYEES(id?): string {
-        if (id) {
-            return AppUrl.API_URL + `treasury/receipt-vouchers/` + id + `/schedule-payees/update`;
+    static RV_SCHEDULE_PAYEES_DELETE(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/receipt-vouchers/` + reportId + `/schedule-payees/` + id;
+        }
+    }
+
+    static RV_UPDATE_SCHEDULE_PAYEES(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/receipt-vouchers/` + reportId + `/schedule-payees/` + id + `/update`;
         }
     }
 
@@ -574,15 +592,21 @@ export class AppUrl {
         }
     }
 
-    static SCHEDULE_PAYEES_UPDATE(id?): string {
-        if (id) {
-            return AppUrl.API_URL + `treasury/payment-vouchers/` + id + `/schedule-payees/update`;
+    static SCHEDULE_PAYEES_DELETE(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-payees/` + id;
         }
     }
 
-    static SCHEDULE_COMPANY_UPDATE(id?): string {
-        if (id) {
-            return AppUrl.API_URL + `treasury/payment-vouchers/` + id + `/schedule-company/update`;
+    static SCHEDULE_PAYEES_UPDATE(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-payees/` + id + `/update`;
+        }
+    }
+
+    static SCHEDULE_COMPANY_UPDATE(reportId, id?): string {
+        if (reportId && id) {
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-company/` + id + `/update`;
         }
     }
 
@@ -592,15 +616,27 @@ export class AppUrl {
         }
     }
 
-    static SCHEDULE_PAYEES_PAYMENT_APPROVAL_UPDATE(id?): string {
-        if (id) {
-            return AppUrl.API_URL + `treasury/payment-approval/` + id + `/schedule-payees/update`;
+    static SCHEDULE_PAYEES_PAYMENT_APPROVAL_DELETE(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/payment-approval/` + reportId + `/schedule-payees/` + id;
+        }
+    }
+
+    static SCHEDULE_PAYEES_PAYMENT_APPROVAL_UPDATE(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/payment-approval/` + reportId + `/schedule-payees/` + id + `update`;
         }
     }
 
     static SCHEDULE_ECONOMIC(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/payee-vouchers/` + id + `/schedule-economic`;
+        }
+    }
+
+    static SCHEDULE_ECONOMIC_DELETE(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/payee-vouchers/` + reportId + `/schedule-economic/` + id;
         }
     }
 
@@ -615,6 +651,12 @@ export class AppUrl {
     static RV_SCHEDULE_ECONOMIC(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-payees/` + id + `/schedule-economic`;
+        }
+    }
+
+    static RV_SCHEDULE_ECONOMIC_DELETE(reportId?, id?): string {
+        if (id && reportId) {
+            return AppUrl.API_URL + `treasury/receipt-payees/` + reportId + `/schedule-economic/` + id;
         }
     }
 

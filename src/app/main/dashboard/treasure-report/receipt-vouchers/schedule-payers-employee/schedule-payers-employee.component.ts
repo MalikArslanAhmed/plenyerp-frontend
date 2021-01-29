@@ -42,6 +42,7 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                 private globalService: GlobalService) {
         if (_data.action === 'EDIT') {
             this.updateData = _data;
+            this.payeeData = _data.rv;
             this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | RV - Schedule Payers Employee' : '-';
         } else {
             this.payeeData = _data.rv;
@@ -146,7 +147,7 @@ export class SchedulePayersEmployeeComponent implements OnInit {
                     this.isSubmitted = false;
                 });
             } else {
-                this.receiptVoucherService.updateSchedulePayer(this.payeeData.id, params).subscribe(data => {
+                this.receiptVoucherService.updateSchedulePayer(this.updateData['report'].id, this.payeeData.id, params).subscribe(data => {
                     this.schedulePayersEmployeeForm.reset();
                     this.matDialogRef.close(this.schedulePayersEmployeeForm);
                     this.isSubmitted = false;

@@ -306,7 +306,7 @@
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
-                                                                (click)="deleteSchedulePayerEmployee(data); $event.stopPropagation()"
+                                                                (click)="deleteSchedulePayerEmployee(reportData, data); $event.stopPropagation()"
                                                                 style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>
@@ -316,7 +316,7 @@
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
-                                                                (click)="deleteSchedulePayerCustomer(data); $event.stopPropagation()"
+                                                                (click)="deleteSchedulePayerCustomer(reportData, data); $event.stopPropagation()"
                                                                 style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>
@@ -424,7 +424,7 @@
                                                 <td>
                                                     <div class="title">
                                                         <button mat-icon-button aria-label="Toggle star"
-                                                                (click)="deleteEconomicCode(data); $event.stopPropagation()"
+                                                                (click)="deleteEconomicCode(reportData, data); $event.stopPropagation()"
                                                                 style="color: red">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>

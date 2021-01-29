@@ -30,8 +30,8 @@ export class PreviousYearAdvancesService extends BaseService {
         return this.deleteRequest(AppUrl.PREVIOUS_YEAR_ADANCES(id));
     }
 
-    deleteSchedulePayee(id): Observable<any> {
-        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES(id));
+    deleteSchedulePayee(reportId, id): Observable<any> {
+        return this.deleteRequest(AppUrl.SCHEDULE_PAYEES_PREVIOUS_YEAR_DELETE(reportId, id));
     }
 
     update(id, data): Observable<any> {
@@ -46,8 +46,8 @@ export class PreviousYearAdvancesService extends BaseService {
         return this.postRequest(AppUrl.SCHEDULE_PAYEES(id), data);
     }
 
-    schedulePayerUpdate(id, data): Observable<any> {
-        return this.postRequest(AppUrl.SCHEDULE_PAYEES_UPDATE(id), data);
+    schedulePayerUpdate(reportId, id, data): Observable<any> {
+        return this.putRequest(AppUrl.SCHEDULE_PAYEES_PREVIOUS_YEAR_UPDATE(reportId, id), data);
     }
 
     scheduleEconomic(id, data): Observable<any> {

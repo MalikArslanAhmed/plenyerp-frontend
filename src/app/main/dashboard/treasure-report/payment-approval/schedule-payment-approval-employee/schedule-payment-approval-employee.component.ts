@@ -42,6 +42,7 @@ export class SchedulePaymentApprovalEmployeeComponent implements OnInit {
         console.log('this.updateData', _data);
         if (_data.action === 'EDIT') {
             this.updateData = _data;
+            this.payeeData = _data.pv;
         } else {
             this.payeeData = _data.pv;
         }
@@ -132,7 +133,7 @@ export class SchedulePaymentApprovalEmployeeComponent implements OnInit {
                     this.isSubmitted = false;
                 });
             } else {
-                this.paymentApprovalService.schedulePayeeUpdate(this.payeeData.id, params).subscribe(data => {
+                this.paymentApprovalService.schedulePayeeUpdate(this.updateData['report'].id, this.payeeData.id, params).subscribe(data => {
                     this.schedulePayeeEmployeeForm.reset();
                     this.matDialogRef.close(this.schedulePayeeEmployeeForm);
                     this.isSubmitted = false;

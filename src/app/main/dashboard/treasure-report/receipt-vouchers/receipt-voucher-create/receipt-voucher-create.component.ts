@@ -319,7 +319,7 @@ export class ReceiptVoucherCreateComponent implements OnInit {
                     this.matDialogRef.close(this.receiptVoucherCreateForm);
                 });
             } else {
-                this.receiptVoucherService.updateReceiptVoucher(this.updatedData.id, params).subscribe(data => {
+                this.receiptVoucherService.update(this.updatedData.id, params).subscribe(data => {
                     this.receiptVoucherCreateForm.reset();
                     this.isSubmitted = false;
                     this.matDialogRef.close(this.receiptVoucherCreateForm);

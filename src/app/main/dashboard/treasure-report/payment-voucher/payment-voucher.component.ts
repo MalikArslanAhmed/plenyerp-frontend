@@ -139,8 +139,8 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    deleteEconomicCode(data) {
-        this.paymentVoucherService.deleteEconomicCode(data.id).subscribe(data => {
+    deleteEconomicCode(report, data) {
+        this.paymentVoucherService.deleteEconomicCode(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }
@@ -344,8 +344,8 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayeeEmployee(data) {
-        this.paymentVoucherService.deleteSchedulePayee(data.id).subscribe(data => {
+    deleteSchedulePayeeEmployee(report, data) {
+        this.paymentVoucherService.deleteSchedulePayee(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }
@@ -363,8 +363,8 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayeeCustomer(data) {
-        this.paymentVoucherService.deleteScheduleCustomer(data.id).subscribe(data => {
+    deleteSchedulePayeeCustomer(report, data) {
+        this.paymentVoucherService.deleteScheduleCustomer(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }

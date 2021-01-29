@@ -18,8 +18,8 @@ export class ReceiptVoucherService extends BaseService {
         return this.postRequest(AppUrl.RECEIPT_VOUCHER(), data);
     }
 
-    updateReceiptVoucher(id, data): Observable<any> {
-        return this.postRequest(AppUrl.RECEIPT_VOUCHER(id), data);
+    update(id, data): Observable<any> {
+        return this.putRequest(AppUrl.RECEIPT_VOUCHER(id), data);
     }
 
     get(data): Observable<any> {
@@ -30,20 +30,16 @@ export class ReceiptVoucherService extends BaseService {
         return this.deleteRequest(AppUrl.RECEIPT_VOUCHER(id));
     }
 
-    deleteSchedulePayerEmployee(id): Observable<any> {
-        return this.deleteRequest(AppUrl.RV_SCHEDULE_PAYEES(id));
+    deleteSchedulePayerEmployee(reportId, id): Observable<any> {
+        return this.deleteRequest(AppUrl.RV_SCHEDULE_PAYEES_DELETE(reportId, id));
     }
 
-    deleteSchedulePayerCustomer(id): Observable<any> {
-        return this.deleteRequest(AppUrl.RV_SCHEDULE_PAYEES(id));
+    deleteSchedulePayerCustomer(reportId, id): Observable<any> {
+        return this.deleteRequest(AppUrl.RV_SCHEDULE_PAYEES_DELETE(reportId, id));
     }
 
-    deleteEconomicCode(id): Observable<any> {
-        return this.deleteRequest(AppUrl.RV_SCHEDULE_ECONOMIC(id));
-    }
-
-    update(id, data): Observable<any> {
-        return this.putRequest(AppUrl.CURRENCIES(id), data);
+    deleteEconomicCode(reportId, id): Observable<any> {
+        return this.deleteRequest(AppUrl.RV_SCHEDULE_ECONOMIC_DELETE(reportId, id));
     }
 
     getUpdateStatus(data): Observable<any> {
@@ -54,8 +50,8 @@ export class ReceiptVoucherService extends BaseService {
         return this.postRequest(AppUrl.RV_SCHEDULE_PAYEES(id), data);
     }
 
-    updateSchedulePayer(id, data): Observable<any> {
-        return this.putRequest(AppUrl.RV_UPDATE_SCHEDULE_PAYEES(id), data);
+    updateSchedulePayer(reportId, id, data): Observable<any> {
+        return this.putRequest(AppUrl.RV_UPDATE_SCHEDULE_PAYEES(reportId, id), data);
     }
 
     scheduleEconomic(id, data): Observable<any> {

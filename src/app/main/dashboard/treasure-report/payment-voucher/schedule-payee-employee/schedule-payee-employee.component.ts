@@ -41,6 +41,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 private paymentVoucherService: PaymentVoucherService) {
         if (_data.action === 'EDIT') {
             this.updateData = _data;
+            this.payeeData = _data.pv;
             this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | PV - Schedule Payees Employee' : '-';
         } else {
             this.payeeData = _data.pv;
@@ -132,7 +133,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                     this.isSubmitted = false;
                 });
             } else {
-                this.paymentVoucherService.updateSchedulePayee(this.payeeData.id, params).subscribe(data => {
+                this.paymentVoucherService.updateSchedulePayee(this.updateData['report'].id, this.payeeData.id, params).subscribe(data => {
                     this.schedulePayeeEmployeeForm.reset();
                     this.matDialogRef.close(this.schedulePayeeEmployeeForm);
                     this.isSubmitted = false;

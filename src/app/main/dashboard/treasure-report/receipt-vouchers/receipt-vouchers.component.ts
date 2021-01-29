@@ -296,8 +296,8 @@ export class ReceiptVouchersComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayerEmployee(data) {
-        this.receiptVoucherService.deleteSchedulePayerEmployee(data.id).subscribe(data => {
+    deleteSchedulePayerEmployee(report, data) {
+        this.receiptVoucherService.deleteSchedulePayerEmployee(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }
@@ -315,14 +315,14 @@ export class ReceiptVouchersComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayerCustomer(data) {
-        this.receiptVoucherService.deleteSchedulePayerCustomer(data.id).subscribe(data => {
+    deleteSchedulePayerCustomer(report, data) {
+        this.receiptVoucherService.deleteSchedulePayerCustomer(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }
 
-    deleteEconomicCode(data) {
-        this.receiptVoucherService.deleteEconomicCode(data.id).subscribe(data => {
+    deleteEconomicCode(report, data) {
+        this.receiptVoucherService.deleteEconomicCode(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }

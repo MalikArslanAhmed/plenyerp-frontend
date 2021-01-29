@@ -77,26 +77,20 @@
                 <span class="mat-cell align-items-center">
                     <button mat-icon-button aria-label="Toggle star"
                             (click)="editPaymentApproval(reportData); $event.stopPropagation()"
-                            style="color: blue; margin-left: 80px; margin-top: 3px">
+                            style="color: blue; margin-left: 80px; margin-top: 3px" *ngIf="reportData['status'] === 'NEW'">
                             <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                     <button mat-icon-button aria-label="Toggle star"
                             (click)="deletePaymentApproval(reportData); $event.stopPropagation()"
-                            style="color: red">
+                            style="color: red" *ngIf="reportData['status'] === 'NEW'">
                         <mat-icon class="material-icons">delete</mat-icon>
                     </button>
                 </span>
-                <!--<span class="mat-cell align-items-center" *ngIf="reportData['status'] !== 'NEW'">
+                <span class="mat-cell align-items-center" *ngIf="reportData['status'] !== 'NEW'">
                     <p class="material-icons" style="margin-top: 10px; margin-left: 115px">
                         -
                     </p>
-                </span>-->
-                <!--<span class="mat-cell align-items-center text-center">
-                    <button aria-label="Toggle star" mat-icon-button style="color: blue; margin-left: 20px"
-                            (click)="editModal(reportData, i)">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                </span>-->
+                </span>
             </mat-expansion-panel-header>
             <div>
                 <div mat-dialog-content class="items-data" fusePerfectScrollbar
@@ -263,7 +257,7 @@
                                         <mat-icon class="material-icons">edit</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
-                                            (click)="deleteSchedulePayeeEmployee(data); $event.stopPropagation()"
+                                            (click)="deleteSchedulePayeeEmployee(reportData, data); $event.stopPropagation()"
                                             style="color: red" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
                                         <mat-icon class="material-icons">delete</mat-icon>
                                     </button>
@@ -273,7 +267,7 @@
                                         <mat-icon class="material-icons">edit</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
-                                            (click)="deleteSchedulePayeeCustomer(data); $event.stopPropagation()"
+                                            (click)="deleteSchedulePayeeCustomer(reportData, data); $event.stopPropagation()"
                                             style="color: red" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
                                         <mat-icon class="material-icons">delete</mat-icon>
                                     </button>

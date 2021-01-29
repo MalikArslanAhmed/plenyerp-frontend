@@ -40,6 +40,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 private paymentVoucherService: PaymentVoucherService) {
         if (_data.action === 'EDIT') {
             this.updateData = _data;
+            this.payeeData = _data.pv;
             this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | PV - Schedule Payees Customer' : '-';
         } else {
             this.payeeData = _data.pv;
@@ -131,7 +132,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                     this.isSubmitted = false;
                 });
             } else {
-                this.paymentVoucherService.updateScheduleCompany(this.payeeData.id, params).subscribe(data => {
+                this.paymentVoucherService.updateScheduleCompany(this.updateData['report'].id, this.payeeData.id, params).subscribe(data => {
                     this.schedulePayeeCustomerForm.reset();
                     this.matDialogRef.close(this.schedulePayeeCustomerForm);
                     this.isSubmitted = false;

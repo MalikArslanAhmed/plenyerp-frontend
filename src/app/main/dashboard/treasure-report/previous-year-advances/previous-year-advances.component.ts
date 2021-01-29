@@ -288,7 +288,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     editSchedulePayeeEmployee(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayersEmployeePreviousAdvancesComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'pv': data, 'report': report}
+            data: {'action': 'EDIT', 'rv': data, 'report': report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -298,8 +298,8 @@ export class PreviousYearAdvancesComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayeeEmployee(data) {
-        this.previousYearAdvanceService.deleteSchedulePayee(data.id).subscribe(data => {
+    deleteSchedulePayeeEmployee(report, data) {
+        this.previousYearAdvanceService.deleteSchedulePayee(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }
@@ -317,8 +317,8 @@ export class PreviousYearAdvancesComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayeeCustomer(data) {
-        this.previousYearAdvanceService.deleteSchedulePayee(data.id).subscribe(data => {
+    deleteSchedulePayeeCustomer(report, data) {
+        this.previousYearAdvanceService.deleteSchedulePayee(report.id, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }

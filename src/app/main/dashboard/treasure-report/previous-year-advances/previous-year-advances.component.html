@@ -308,7 +308,7 @@
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
-                                                                (click)="deleteSchedulePayeeEmployee(data); $event.stopPropagation()"
+                                                                (click)="deleteSchedulePayeeEmployee(reportData, data); $event.stopPropagation()"
                                                                 style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>
@@ -318,7 +318,7 @@
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
-                                                                (click)="deleteSchedulePayeeCustomer(data); $event.stopPropagation()"
+                                                                (click)="deleteSchedulePayeeCustomer(reportData, data); $event.stopPropagation()"
                                                                 style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>
@@ -360,77 +360,6 @@
                                             </ng-template>
                                         </table>
                                     </mat-tab>
-                                    <!--<mat-tab label="Economic Codes">
-                                        <table class="simple invoice-table">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    <div class="title">S.No</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Payee Id</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Payee Name</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Account</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Amount</div>
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody
-                                                *ngIf="reportData && reportData['economic'] && reportData['economic'].length > 0; else noChildToShow">
-                                            <tr *ngFor="let data of reportData['economic']; let j = index">
-                                                <td>
-                                                    <div class="title">
-                                                        {{j + 1}}.
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title"
-                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['adminCompany']">
-                                                        {{data?.receiptPayee?.adminCompany?.id}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['employee']">
-                                                        {{data?.receiptPayee?.employee?.id}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title"
-                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['adminCompany']">
-                                                        {{data?.receiptPayee?.adminCompany?.name}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['employee']">
-                                                        {{data?.receiptPayee?.employee?.firstName}} {{data?.receiptPayee?.employee?.lastName}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title">
-                                                        {{data?.economicSegment?.combinedCode}}
-                                                        - {{data?.economicSegment?.name}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title">
-                                                        {{data?.amount}}
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                            <ng-template #noChildToShow>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="text-center" colspan="3">No data to show</td>
-                                                </tr>
-                                                </tbody>
-                                            </ng-template>
-                                        </table>
-                                    </mat-tab>-->
                                 </mat-tab-group>
                             </div>
                         </div>
