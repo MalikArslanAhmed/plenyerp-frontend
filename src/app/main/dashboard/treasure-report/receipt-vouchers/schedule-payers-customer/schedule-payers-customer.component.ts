@@ -138,7 +138,7 @@ export class SchedulePayersCustomerComponent implements OnInit {
                 'instrumentTellerNumber': this.schedulePayersCustomerForm.getRawValue().instrumentTellerNumber ? this.schedulePayersCustomerForm.getRawValue().instrumentTellerNumber : '',
                 'instrumentIssuedBy': this.schedulePayersCustomerForm.getRawValue().instrumentIssuedBy ? this.schedulePayersCustomerForm.getRawValue().instrumentIssuedBy : '',
             };
-            if (this.updateData) {
+            if (!this.updateData) {
                 this.receiptVoucherService.schedulePayer(this.payeeData.id, params).subscribe(data => {
                     this.schedulePayersCustomerForm.reset();
                     this.matDialogRef.close(this.schedulePayersCustomerForm);

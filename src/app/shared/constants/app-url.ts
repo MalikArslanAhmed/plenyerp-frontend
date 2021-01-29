@@ -558,13 +558,13 @@ export class AppUrl {
 
     static SCHEDULE_PAYEES_PREVIOUS_YEAR_UPDATE(reportId?, id?): string {
         if (id && reportId) {
-            return AppUrl.API_URL + `treasury/previous-advances/` + reportId + `/schedule-payees/` + id + '/update';
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-payees/` + id;
         }
     }
 
     static SCHEDULE_PAYEES_PREVIOUS_YEAR_DELETE(reportId?, id?): string {
         if (id && reportId) {
-            return AppUrl.API_URL + `treasury/previous-advances/` + reportId + `/schedule-payees/` + id;
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-payees/` + id;
         }
     }
 
@@ -582,7 +582,7 @@ export class AppUrl {
 
     static RV_UPDATE_SCHEDULE_PAYEES(reportId?, id?): string {
         if (id && reportId) {
-            return AppUrl.API_URL + `treasury/receipt-vouchers/` + reportId + `/schedule-payees/` + id + `/update`;
+            return AppUrl.API_URL + `treasury/receipt-vouchers/` + reportId + `/schedule-payees/` + id;
         }
     }
 
@@ -600,13 +600,13 @@ export class AppUrl {
 
     static SCHEDULE_PAYEES_UPDATE(reportId?, id?): string {
         if (id && reportId) {
-            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-payees/` + id + `/update`;
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-payees/` + id;
         }
     }
 
     static SCHEDULE_COMPANY_UPDATE(reportId, id?): string {
         if (reportId && id) {
-            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-company/` + id + `/update`;
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-company/` + id;
         }
     }
 
@@ -624,7 +624,7 @@ export class AppUrl {
 
     static SCHEDULE_PAYEES_PAYMENT_APPROVAL_UPDATE(reportId?, id?): string {
         if (id && reportId) {
-            return AppUrl.API_URL + `treasury/payment-approval/` + reportId + `/schedule-payees/` + id + `update`;
+            return AppUrl.API_URL + `treasury/payment-approval/` + reportId + `/schedule-payees/` + id;
         }
     }
 
@@ -747,23 +747,6 @@ export class AppUrl {
     static DELETE_STEP_LEVEL(id?): string {
         return AppUrl.API_URL + 'grade-levels-steps/' + id;
     }
-
-
-    // static GET_ALL_SEGMENTS(id?): string {
-    //     if (id) {
-    //         return AppUrl.API_URL + 'admin/' + id;
-    //     } else {
-    //         return AppUrl.API_URL + 'admin';
-    //     }
-    // }
-    //
-    // static ADD_SEGMENT(id?): string {
-    //     if (id) {
-    //         return AppUrl.API_URL + 'admin/' + id;
-    //     } else {
-    //         return AppUrl.API_URL + 'admin';
-    //     }
-    // }
 
     static SEGMENT(id?): string {
         const path = id ? 'admin/' + id : 'admin';
