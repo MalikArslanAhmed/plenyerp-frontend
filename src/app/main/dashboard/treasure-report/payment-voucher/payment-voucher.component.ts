@@ -139,8 +139,9 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    deleteEconomicCode(report, data) {
-        this.paymentVoucherService.deleteEconomicCode(report.id, data.id).subscribe(data => {
+    deleteEconomicCode(data) {
+        const payeeId = (data && data.payeeVoucher && data.payeeVoucher.adminCompany && data.payeeVoucher.adminCompany.id) ? data.payeeVoucher.adminCompany.id : data?.payeeVoucher?.employee?.id;
+        this.paymentVoucherService.deleteEconomicCode(payeeId, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }

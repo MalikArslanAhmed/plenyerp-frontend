@@ -10,8 +10,6 @@ import {ReceiptVoucherCreateComponent} from "./receipt-voucher-create/receipt-vo
 import {SchedulePayersCustomerComponent} from './schedule-payers-customer/schedule-payers-customer.component';
 import {SchedulePayersEmployeeComponent} from './schedule-payers-employee/schedule-payers-employee.component';
 import {ScheduleEconomicCodesReceiptComponent} from "./schedule-economic-codes-receipt/schedule-economic-codes-receipt.component";
-import {PaymentVoucherCreateComponent} from "../payment-voucher/payment-voucher-create/payment-voucher-create.component";
-import {SchedulePayeeEmployeeComponent} from "../payment-voucher/schedule-payee-employee/schedule-payee-employee.component";
 
 @Component({
     selector: 'app-receipt-vouchers',
@@ -321,8 +319,9 @@ export class ReceiptVouchersComponent implements OnInit {
         });
     }
 
-    deleteEconomicCode(report, data) {
-        this.receiptVoucherService.deleteEconomicCode(report.id, data.id).subscribe(data => {
+    deleteEconomicCode(data) {
+        const payeeId = (data && data.payeeVoucher && data.payeeVoucher.adminCompany && data.payeeVoucher.adminCompany.id) ? data.payeeVoucher.adminCompany.id : data?.payeeVoucher?.employee?.id;
+        this.receiptVoucherService.deleteEconomicCode(payeeId, data.id).subscribe(data => {
             this.getChildReportData(data);
         });
     }
