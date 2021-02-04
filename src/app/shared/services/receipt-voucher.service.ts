@@ -42,6 +42,10 @@ export class ReceiptVoucherService extends BaseService {
         return this.deleteRequest(AppUrl.RV_SCHEDULE_ECONOMIC_DELETE(reportId, id));
     }
 
+    downloadPDF(id): Observable<any> {
+        return this.getRequest(AppUrl.RV_VOUCHER_DOWNLOAD(id));
+    }
+
     getUpdateStatus(data): Observable<any> {
         return this.postRequest(AppUrl.RV_VOUCHER_STATUS(), data);
     }

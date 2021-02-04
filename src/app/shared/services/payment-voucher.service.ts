@@ -38,6 +38,14 @@ export class PaymentVoucherService extends BaseService {
         return this.deleteRequest(AppUrl.PAYMENT_VOUCHER(id));
     }
 
+    downloadPDF(id): Observable<any> {
+        return this.getRequest(AppUrl.PAYMENT_VOUCHER_DOWNLOAD(id));
+    }
+
+    downloadPDFTax(id): Observable<any> {
+        return this.getRequest(AppUrl.PAYMENT_VOUCHER_TAX_DOWNLOAD(id));
+    }
+
     deleteEconomicCode(reportId, id): Observable<any> {
         return this.deleteRequest(AppUrl.SCHEDULE_ECONOMIC_DELETE(reportId, id));
     }

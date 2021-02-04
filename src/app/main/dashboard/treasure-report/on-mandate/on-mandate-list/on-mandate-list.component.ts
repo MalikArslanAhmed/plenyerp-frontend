@@ -156,6 +156,18 @@ export class OnMandateListComponent implements OnInit {
         });
     }
 
+    downloadPDF(data, type) {
+        if (type === 'MANDATE') {
+            this.mandateService.downloadPDF(data.id).subscribe(data => {
+                window.open(data.url, '_blank');
+            });
+        } else if (type === 'MANDATE_CBN') {
+            this.mandateService.downloadPDFCBN(data.id).subscribe(data => {
+                window.open(data.url, '_blank');
+            });
+        }
+    }
+
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
         this.getMadateList();

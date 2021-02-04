@@ -146,13 +146,23 @@
                             <span class="mat-cell align-items-center" *ngIf="reportData.status === 'NEW'">
                                 <button mat-icon-button aria-label="Toggle star"
                                         (click)="editPaymentVoucher(reportData); $event.stopPropagation()"
-                                        style="color: blue; margin-left: 52px">
+                                        style="color: blue; margin-left: 10px">
                                         <mat-icon class="material-icons">edit</mat-icon>
                                 </button>
                                 <button mat-icon-button aria-label="Toggle star"
                                         (click)="deletePaymentVoucher(reportData); $event.stopPropagation()"
                                         style="color: red">
                                     <mat-icon class="material-icons">delete</mat-icon>
+                                </button>
+                                <button mat-icon-button aria-label="Toggle star"
+                                        (click)="downloadPDF(reportData, 'PAYMENT_VOUCHER'); $event.stopPropagation()"
+                                        title="Download Payment Voucher" style="color: green">
+                                    <mat-icon class="material-icons">picture_as_pdf</mat-icon>
+                                </button>
+                                <button mat-icon-button aria-label="Toggle star"
+                                        (click)="downloadPDF(reportData, 'PAYMENT_VOUCHER_TAX'); $event.stopPropagation()"
+                                        title="Download Payment Voucher" style="color: red">
+                                    <mat-icon class="material-icons">picture_as_pdf</mat-icon>
                                 </button>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="reportData.status !== 'NEW'">

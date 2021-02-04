@@ -512,6 +512,14 @@ export class AppUrl {
         }
     }
 
+    static PAYMENT_VOUCHER_DOWNLOAD(id?): string {
+        return AppUrl.API_URL + `treasury/payment-voucher/` + id + '/download';
+    }
+
+    static PAYMENT_VOUCHER_TAX_DOWNLOAD(id?): string {
+        return AppUrl.API_URL + `treasury/payment-voucher-tax/` + id + '/download';
+    }
+
     static RETIRE_VOUCHER(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/retire-voucher` + id;
@@ -550,6 +558,10 @@ export class AppUrl {
 
     static RV_VOUCHER_STATUS(): string {
         return AppUrl.API_URL + `treasury/receipt-vouchers/update-status`;
+    }
+
+    static RV_VOUCHER_DOWNLOAD(id): string {
+        return AppUrl.API_URL + `receipt-vouchers/` + id + '/download';
     }
 
     static PREVIOUS_YEAR_VOUCHER_STATUS(): string {
@@ -1317,6 +1329,14 @@ export class AppUrl {
         } else {
             return AppUrl.API_URL + `treasury/mandate`;
         }
+    }
+
+    static MANDATE_DOWNLOAD(id?): string {
+        return AppUrl.API_URL + `mandate/` + id + '/download';
+    }
+
+    static MANDATE_CBN_DOWNLOAD(id?): string {
+        return AppUrl.API_URL + `mandate-cbn/` + id + '/download';
     }
 
     static UPDATE_MANDATE_STATUS(): string {

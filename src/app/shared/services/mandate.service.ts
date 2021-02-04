@@ -26,6 +26,14 @@ export class MandateService extends BaseService {
         return this.deleteRequest(AppUrl.MANDATE(id));
     }
 
+    downloadPDF(id): Observable<any> {
+        return this.getRequest(AppUrl.MANDATE_DOWNLOAD(id));
+    }
+
+    downloadPDFCBN(id): Observable<any> {
+        return this.getRequest(AppUrl.MANDATE_CBN_DOWNLOAD(id));
+    }
+
     update(id, data): Observable<any> {
         return this.putRequest(AppUrl.MANDATE(id), data);
     }

@@ -320,9 +320,14 @@ export class ReceiptVouchersComponent implements OnInit {
     }
 
     deleteEconomicCode(data) {
-        const payeeId = (data && data.payeeVoucher && data.payeeVoucher.adminCompany && data.payeeVoucher.adminCompany.id) ? data.payeeVoucher.adminCompany.id : data?.payeeVoucher?.employee?.id;
-        this.receiptVoucherService.deleteEconomicCode(payeeId, data.id).subscribe(data => {
-            this.getChildReportData(data);
+        this.receiptVoucherService.deleteEconomicCode(data.payeeVoucherId, data.id).subscribe(data => {
+            this.receiptVoucherStatus({});
+        });
+    }
+
+    downloadPDF(data) {
+        this.receiptVoucherService.downloadPDF(data.id).subscribe(data => {
+            window.open(data.url, '_blank');
         });
     }
 

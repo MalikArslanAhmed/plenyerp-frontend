@@ -302,22 +302,26 @@
                                                     <span *ngIf="reportData.status === 'NEW'">
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="editSchedulePayerEmployee(data, reportData); $event.stopPropagation()"
-                                                                style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
+                                                                style="color: blue; margin-left: -13px"
+                                                                *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="deleteSchedulePayerEmployee(reportData, data); $event.stopPropagation()"
-                                                                style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
+                                                                style="color: red"
+                                                                *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="editSchedulePayerCustomer(data, reportData); $event.stopPropagation()"
-                                                                style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
+                                                                style="color: blue; margin-left: -13px"
+                                                                *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="deleteSchedulePayerCustomer(reportData, data); $event.stopPropagation()"
-                                                                style="color: red" *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
+                                                                style="color: red"
+                                                                *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>
                                                     </span>
@@ -427,6 +431,11 @@
                                                                 (click)="deleteEconomicCode(data); $event.stopPropagation()"
                                                                 style="color: red">
                                                             <mat-icon class="material-icons">delete</mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button aria-label="Toggle star"
+                                                                (click)="downloadPDF(reportData); $event.stopPropagation()"
+                                                                title="Download Payment Voucher" style="color: red">
+                                                            <mat-icon class="material-icons">picture_as_pdf</mat-icon>
                                                         </button>
                                                     </div>
                                                 </td>

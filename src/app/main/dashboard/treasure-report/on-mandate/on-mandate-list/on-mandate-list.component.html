@@ -69,10 +69,16 @@
                             (click)="editModal(reportData, i)">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
-                    <!--<button aria-label="Toggle star" mat-icon-button style="color: red">
-                        <mat-icon class="material-icons" (click)="deleteMandate(reportData.id)">delete
-                        </mat-icon>
-                    </button>-->
+                    <button mat-icon-button aria-label="Toggle star"
+                            (click)="downloadPDF(reportData, 'MANDATE'); $event.stopPropagation()" title="Download Mandate"
+                            style="color: green">
+                        <mat-icon class="material-icons">picture_as_pdf</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star"
+                            (click)="downloadPDF(reportData, 'MANDATE_CBN'); $event.stopPropagation()" title="Download Mandate CBN"
+                            style="color: red">
+                        <mat-icon class="material-icons">picture_as_pdf</mat-icon>
+                    </button>
                 </span>
                 <span class="mat-cell align-items-center text-center" *ngIf="reportData['status'] !== 'NEW'">
                     -

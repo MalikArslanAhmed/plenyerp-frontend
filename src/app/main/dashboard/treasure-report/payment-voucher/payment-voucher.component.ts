@@ -140,9 +140,8 @@ export class PaymentVoucherComponent implements OnInit {
     }
 
     deleteEconomicCode(data) {
-        const payeeId = (data && data.payeeVoucher && data.payeeVoucher.adminCompany && data.payeeVoucher.adminCompany.id) ? data.payeeVoucher.adminCompany.id : data?.payeeVoucher?.employee?.id;
-        this.paymentVoucherService.deleteEconomicCode(payeeId, data.id).subscribe(data => {
-            this.getChildReportData(data);
+        this.paymentVoucherService.deleteEconomicCode(data.payeeVoucherId, data.id).subscribe(data => {
+            this.getPyamentVoucher({});
         });
     }
 
@@ -328,8 +327,20 @@ export class PaymentVoucherComponent implements OnInit {
 
     deletePaymentVoucher(data) {
         this.paymentVoucherService.delete(data.id).subscribe(data => {
-            this.getPyamentVoucher();
+            this.getPyamentVoucher({});
         });
+    }
+
+    downloadPDF(data, type) {
+        if (type === 'PAYMENT_VOUCHER') {
+            this.paymentVoucherService.downloadPDF(data.id).subscribe(data => {
+                window.open(data.url, '_blank');
+            });
+        } else if (type === 'PAYMENT_VOUCHER_TAX') {
+            this.paymentVoucherService.downloadPDFTax(data.id).subscribe(data => {
+                window.open(data.url, '_blank');
+            });
+        }
     }
 
     editSchedulePayeeEmployee(data, report) {
