@@ -618,7 +618,7 @@ export class AppUrl {
 
     static SCHEDULE_COMPANY_UPDATE(reportId, id?): string {
         if (reportId && id) {
-            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-company/` + id;
+            return AppUrl.API_URL + `treasury/payment-vouchers/` + reportId + `/schedule-payees/` + id;
         }
     }
 

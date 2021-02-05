@@ -107,7 +107,7 @@
                         <!--<span
                             class="mat-header-cell text-center">COA admin, fund, eco, programme, functional, geo</span>-->
                         <span class="mat-header-cell text-center">Other COA Segments</span>
-                        <span class="mat-header-cell text-center">Actions</span>
+                        <span class="mat-header-cell"><p style="margin-left: 20px">Actions</p></span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of receiptVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
@@ -161,7 +161,13 @@
                                    +reportData['geoCodeSegment'].combinedCode+' - '+reportData['geoCodeSegment'].name">info</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="reportData['status'] === 'NEW'">
-                                <button mat-icon-button aria-label="Toggle star"
+                                <mat-icon class="material-icons"
+                                          (click)="editReceiptVoucher(reportData); $event.stopPropagation()"
+                                          style="color: blue; margin-left: 28px; margin-top: 26px">edit</mat-icon>
+                                <mat-icon class="material-icons"
+                                          (click)="deleteReceiptVoucher(reportData); $event.stopPropagation()"
+                                          style="color: red; margin-left: 10px">delete</mat-icon>
+                                <!--<button mat-icon-button aria-label="Toggle star"
                                         (click)="editReceiptVoucher(reportData); $event.stopPropagation()"
                                         style="color: blue; margin-left: 52px; margin-top: 15px">
                                         <mat-icon class="material-icons">edit</mat-icon>
@@ -170,7 +176,7 @@
                                         (click)="deleteReceiptVoucher(reportData); $event.stopPropagation()"
                                         style="color: red">
                                     <mat-icon class="material-icons">delete</mat-icon>
-                                </button>
+                                </button>-->
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="reportData['status'] !== 'NEW'">
                                 <p class="material-icons" style="margin-top: 28px; margin-left: 80px">
@@ -427,7 +433,16 @@
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        <button mat-icon-button aria-label="Toggle star"
+                                                        <mat-icon class="material-icons"
+                                                                  (click)="deleteEconomicCode(data); $event.stopPropagation()"
+                                                                  style="color: red">delete
+                                                        </mat-icon>
+                                                        <mat-icon class="material-icons"
+                                                                  (click)="downloadPDF(reportData); $event.stopPropagation()"
+                                                                  title="Download Payment Voucher" style="color: red">
+                                                            picture_as_pdf
+                                                        </mat-icon>
+                                                        <!--<button mat-icon-button aria-label="Toggle star"
                                                                 (click)="deleteEconomicCode(data); $event.stopPropagation()"
                                                                 style="color: red">
                                                             <mat-icon class="material-icons">delete</mat-icon>
@@ -436,7 +451,7 @@
                                                                 (click)="downloadPDF(reportData); $event.stopPropagation()"
                                                                 title="Download Payment Voucher" style="color: red">
                                                             <mat-icon class="material-icons">picture_as_pdf</mat-icon>
-                                                        </button>
+                                                        </button>-->
                                                     </div>
                                                 </td>
                                             </tr>
