@@ -64,9 +64,9 @@
                        *ngIf="reportData.totalTax">{{reportData?.totalTax}}</p>
                     <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalTax">-</p>
                 </span>
-                <span class="mat-cell align-items-center text-center" *ngIf="reportData['status'] === 'NEW'">
+                <span class="mat-cell align-items-center text-center">
                     <button aria-label="Toggle star" mat-icon-button style="color: blue; margin-left: 20px"
-                            (click)="editModal(reportData, i)">
+                            (click)="editModal(reportData, i)" *ngIf="reportData['status'] === 'NEW'">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                     <button mat-icon-button aria-label="Toggle star"
@@ -80,9 +80,9 @@
                         <mat-icon class="material-icons">picture_as_pdf</mat-icon>
                     </button>
                 </span>
-                <span class="mat-cell align-items-center text-center" *ngIf="reportData['status'] !== 'NEW'">
+                <!--<span class="mat-cell align-items-center text-center" *ngIf="reportData['status'] !== 'NEW'">
                     -
-                </span>
+                </span>-->
             </mat-expansion-panel-header>
             <div>
                 <div mat-dialog-content class="items-data" fusePerfectScrollbar style="overflow-x: scroll !important;">

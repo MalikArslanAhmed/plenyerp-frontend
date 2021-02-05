@@ -143,15 +143,15 @@
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.status ? reportData?.status : '-'}}</p>
                             </span>
-                            <span class="mat-cell align-items-center" *ngIf="reportData.status === 'NEW'">
+                            <span class="mat-cell align-items-center">
                                 <button mat-icon-button aria-label="Toggle star"
                                         (click)="editPaymentVoucher(reportData); $event.stopPropagation()"
-                                        style="color: blue; margin-left: 10px">
+                                        style="color: blue;" *ngIf="reportData.status === 'NEW'">
                                         <mat-icon class="material-icons">edit</mat-icon>
                                 </button>
                                 <button mat-icon-button aria-label="Toggle star"
                                         (click)="deletePaymentVoucher(reportData); $event.stopPropagation()"
-                                        style="color: red">
+                                        style="color: red" *ngIf="reportData.status === 'NEW'">
                                     <mat-icon class="material-icons">delete</mat-icon>
                                 </button>
                                 <button mat-icon-button aria-label="Toggle star"
@@ -165,9 +165,9 @@
                                     <mat-icon class="material-icons">picture_as_pdf</mat-icon>
                                 </button>
                             </span>
-                            <span class="mat-cell align-items-center" *ngIf="reportData.status !== 'NEW'">
+                            <!--<span class="mat-cell align-items-center" *ngIf="reportData.status !== 'NEW'">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">-</p>
-                            </span>
+                            </span>-->
                         </mat-expansion-panel-header>
                         <div>
                             <div mat-dialog-content class="items-data" fusePerfectScrollbar
