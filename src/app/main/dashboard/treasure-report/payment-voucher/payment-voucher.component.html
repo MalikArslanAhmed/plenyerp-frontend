@@ -346,7 +346,7 @@
                                                     <span *ngIf="reportData.status === 'NEW'">
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="editSchedulePayeeEmployee(data, reportData); $event.stopPropagation()"
-                                                                style="color: blue; margin-left: -13px"
+                                                                style="color: blue; margin-left: -22px; margin-right: -10px"
                                                                 *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>
@@ -358,7 +358,7 @@
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="editSchedulePayeeCustomer(data, reportData); $event.stopPropagation()"
-                                                                style="color: blue; margin-left: -13px"
+                                                                style="color: blue; margin-left: -22px; margin-right: -10px"
                                                                 *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>

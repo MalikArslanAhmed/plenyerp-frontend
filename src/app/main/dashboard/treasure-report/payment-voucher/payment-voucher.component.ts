@@ -377,7 +377,7 @@ export class PaymentVoucherComponent implements OnInit {
 
     deleteSchedulePayeeCustomer(report, data) {
         this.paymentVoucherService.deleteScheduleCustomer(report.id, data.id).subscribe(data => {
-            this.getChildReportData(data);
+            this.getPyamentVoucher();
         });
     }
 

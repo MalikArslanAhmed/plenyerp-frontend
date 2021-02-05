@@ -77,7 +77,7 @@
                 <span class="mat-cell align-items-center">
                     <button mat-icon-button aria-label="Toggle star"
                             (click)="editPaymentApproval(reportData); $event.stopPropagation()"
-                            style="color: blue; margin-left: 80px; margin-top: 3px" *ngIf="reportData['status'] === 'NEW'">
+                            style="color: blue; margin-left: 40px; margin-top: 3px" *ngIf="reportData['status'] === 'NEW'">
                             <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                     <button mat-icon-button aria-label="Toggle star"
@@ -253,7 +253,7 @@
                                 <span *ngIf="reportData.status === 'NEW'">
                                     <button mat-icon-button aria-label="Toggle star"
                                             (click)="editSchedulePayeeEmployee(data, reportData); $event.stopPropagation()"
-                                            style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
+                                            style="color: blue; margin-left: -21px; margin-right: -10px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
                                         <mat-icon class="material-icons">edit</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
@@ -263,7 +263,7 @@
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
                                             (click)="editSchedulePayeeCustomer(data, reportData); $event.stopPropagation()"
-                                            style="color: blue; margin-left: -13px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
+                                            style="color: blue; margin-left: -21px; margin-right: -10px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
                                         <mat-icon class="material-icons">edit</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
