@@ -47,7 +47,7 @@ export class PaymentVoucherComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.getPyamentVoucher({});
+        this.getPaymentVoucher({});
         this.getVoucherSourceUnitList();
         this.paymentVoucherStatus({});
     }
@@ -71,7 +71,7 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    getPyamentVoucher(params?) {
+    getPaymentVoucher(params?) {
         let param = {
             ...params,
             page: this.pagination.page
@@ -141,7 +141,7 @@ export class PaymentVoucherComponent implements OnInit {
 
     deleteEconomicCode(data) {
         this.paymentVoucherService.deleteEconomicCode(data.payeeVoucherId, data.id).subscribe(data => {
-            this.getPyamentVoucher({});
+            this.getPaymentVoucher({});
         });
     }
 
@@ -153,7 +153,7 @@ export class PaymentVoucherComponent implements OnInit {
         this.status = this.filterPaymentVoucherForm.value.status;
         params['sourceUnit'] = this.filterPaymentVoucherForm.value.sourceUnit;
         params['search'] = this.filterPaymentVoucherForm.value.search;
-        this.getPyamentVoucher(params);
+        this.getPaymentVoucher(params);
         this.paymentVoucherStatus(this.status);
     }
 
@@ -194,7 +194,7 @@ export class PaymentVoucherComponent implements OnInit {
                 if (!response) {
                     return;
                 }
-                this.getPyamentVoucher({});
+                this.getPaymentVoucher({});
             });
         }
     }
@@ -321,13 +321,13 @@ export class PaymentVoucherComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getPyamentVoucher({});
+            this.getPaymentVoucher({});
         });
     }
 
     deletePaymentVoucher(data) {
         this.paymentVoucherService.delete(data.id).subscribe(data => {
-            this.getPyamentVoucher({});
+            this.getPaymentVoucher({});
         });
     }
 
@@ -352,13 +352,13 @@ export class PaymentVoucherComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getChildReportData(data);
+            this.getPaymentVoucher({});
         });
     }
 
     deleteSchedulePayeeEmployee(report, data) {
         this.paymentVoucherService.deleteSchedulePayee(report.id, data.id).subscribe(data => {
-            this.getChildReportData(data);
+            this.getPaymentVoucher({});
         });
     }
 
@@ -371,18 +371,18 @@ export class PaymentVoucherComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getChildReportData(data);
+            this.getPaymentVoucher({});
         });
     }
 
     deleteSchedulePayeeCustomer(report, data) {
         this.paymentVoucherService.deleteScheduleCustomer(report.id, data.id).subscribe(data => {
-            this.getPyamentVoucher();
+            this.getPaymentVoucher({});
         });
     }
 
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
-        this.getPyamentVoucher();
+        this.getPaymentVoucher({});
     }
 }

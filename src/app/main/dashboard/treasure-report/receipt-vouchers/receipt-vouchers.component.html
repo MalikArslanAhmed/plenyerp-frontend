@@ -166,7 +166,10 @@
                                           style="color: blue; margin-left: 28px; margin-top: 26px">edit</mat-icon>
                                 <mat-icon class="material-icons"
                                           (click)="deleteReceiptVoucher(reportData); $event.stopPropagation()"
-                                          style="color: red; margin-left: 10px">delete</mat-icon>
+                                          style="color: red;">delete</mat-icon>
+                                <mat-icon class="material-icons"
+                                          (click)="downloadPDF(reportData); $event.stopPropagation()"
+                                          title="Download Payment Voucher" style="color: red; margin-left: 5px">picture_as_pdf</mat-icon>
                                 <!--<button mat-icon-button aria-label="Toggle star"
                                         (click)="editReceiptVoucher(reportData); $event.stopPropagation()"
                                         style="color: blue; margin-left: 52px; margin-top: 15px">
@@ -436,11 +439,6 @@
                                                         <mat-icon class="material-icons"
                                                                   (click)="deleteEconomicCode(data); $event.stopPropagation()"
                                                                   style="color: red">delete
-                                                        </mat-icon>
-                                                        <mat-icon class="material-icons"
-                                                                  (click)="downloadPDF(reportData); $event.stopPropagation()"
-                                                                  title="Download Payment Voucher" style="color: red">
-                                                            picture_as_pdf
                                                         </mat-icon>
                                                         <!--<button mat-icon-button aria-label="Toggle star"
                                                                 (click)="deleteEconomicCode(data); $event.stopPropagation()"

@@ -217,13 +217,13 @@ export class PaymentApprovalListComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getChildReportData(data);
+            this.getPaymentApprovalList({});
         });
     }
 
     deleteSchedulePayeeEmployee(report, data) {
         this.paymentApprovalService.deleteSchedulePayee(report.id, data.id).subscribe(data => {
-            this.getChildReportData(data);
+            this.getPaymentApprovalList({});
         });
     }
 
@@ -236,13 +236,13 @@ export class PaymentApprovalListComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getChildReportData(data);
+            this.getPaymentApprovalList({});
         });
     }
 
     deleteSchedulePayeeCustomer(report, data) {
         this.paymentApprovalService.deleteScheduleCustomer(report.id, data.id).subscribe(data => {
-            this.getChildReportData(data);
+            this.getPaymentApprovalList({});
         });
     }
 
