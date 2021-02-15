@@ -207,7 +207,7 @@ export class PaymentVoucherComponent implements OnInit {
     }
 
     checkPV(index, event, reportData) {
-        if (this.filterPaymentVoucherForm.value && this.filterPaymentVoucherForm.value.status === 'AUDITED') {
+        /*if (this.filterPaymentVoucherForm.value && this.filterPaymentVoucherForm.value.status === 'AUDITED') {
             let paymentVoucherTypes = [];
             if (this.paymentVoucherData && this.paymentVoucherData.length > 0) {
                 this.paymentVoucherData.forEach(paymentVoucher => {
@@ -241,6 +241,9 @@ export class PaymentVoucherComponent implements OnInit {
                 }
             }
         } else {
+            this.paymentVoucherData[index].checked = event.checked;
+        }*/
+        if (this.filterPaymentVoucherForm.value && this.filterPaymentVoucherForm.value.status === 'AUDITED') {
             this.paymentVoucherData[index].checked = event.checked;
         }
     }

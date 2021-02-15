@@ -24,6 +24,10 @@ export class JournalVoucherComponent implements OnInit {
         {
             'value': 'GENERAL_LEDGER',
             'name': 'General Ledger'
+        },
+        {
+            'value': 'E_VOUCHER_TREASURY',
+            'name': 'E-Voucher (Treasury)'
         }
     ];
     types = [
