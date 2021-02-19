@@ -102,6 +102,14 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         });
     }
 
+    resetTax() {
+        this.schedulePayeeCustomerForm.patchValue({
+            'totalTax': '',
+            'totalAmount': '',
+            'totalAmountInWords': '',
+        });
+    }
+
     savePayeeCustomer() {
         this.isSubmitted = true;
         if (!this.schedulePayeeCustomerForm.valid) {
@@ -111,6 +119,30 @@ export class SchedulePayeeCustomerComponent implements OnInit {
 
         if (!this.payeeBankId || this.payeeBankId === '') {
             this.alertService.showErrors('Please select payee bank');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.schedulePayeeCustomerForm.getRawValue().netAmount === '') {
+            this.alertService.showErrors('Please enter Net Amount');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.schedulePayeeCustomerForm.getRawValue().totalTax === '') {
+            this.alertService.showErrors('Please enter Tax Amount');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.schedulePayeeCustomerForm.getRawValue().totalAmount === '') {
+            this.alertService.showErrors('Please enter Total Amount');
+            this.isSubmitted = false;
+            return;
+        }
+
+        if (this.schedulePayeeCustomerForm.getRawValue().totalAmountInWords === '') {
+            this.alertService.showErrors('Please enter Total Amount (in Words)');
             this.isSubmitted = false;
             return;
         }

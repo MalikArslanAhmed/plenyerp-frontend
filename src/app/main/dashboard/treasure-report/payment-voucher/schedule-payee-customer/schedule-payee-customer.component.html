@@ -41,7 +41,7 @@
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Net Amount</mat-label>
-                    <input matInput placeholder="Net Amount" formControlName="netAmount" type="number">
+                    <input matInput placeholder="Net Amount" formControlName="netAmount" type="number" (change)="resetTax()">
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Taxes Amount</mat-label>
