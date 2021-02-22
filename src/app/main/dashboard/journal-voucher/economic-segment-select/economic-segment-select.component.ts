@@ -69,7 +69,6 @@ export class EconomicSegmentSelectComponent implements OnInit {
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);
     treeFlattener = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.children);
     dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
     dialogRef: any;
     segmentName: string;
     segmentId: number;
@@ -129,8 +128,12 @@ export class EconomicSegmentSelectComponent implements OnInit {
         });
     }
 
-    checkCombinedCode(combinedCode) {
+    checkCombinedCode(combinedCode, type) {
         let subString = combinedCode.substr(0, 4);
-        return subString === '02-3';
+        if (type === 'ASSET') {
+            return subString === '02-3';
+        } else if (type === 'ASSET_EXPENDITURE') {
+            return (subString === '02-3' || subString === '02-2');
+        }
     }
 }

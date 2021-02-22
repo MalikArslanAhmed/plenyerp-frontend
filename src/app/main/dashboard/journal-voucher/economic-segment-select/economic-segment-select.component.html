@@ -20,17 +20,29 @@
                     <!-- use a disabled button to provide padding for tree leaf -->
                     <button mat-icon-button disabled></button>
                     {{node.name}}
-                    <button mat-icon-button title="Choose" *ngIf="!node.isActive && !_data['allowAssetOnly']"
+                    <button mat-icon-button title="Choose"
+                            *ngIf="!node.isActive && !_data?.allowAssetOnly && !_data?.allowExpenditureAssetOnly"
+                            (click)="matDialogRef.close(node)">
+                        <mat-icon class="addBtn">check_circle</mat-icon>
+                    </button>
+
+                    <button mat-icon-button title="Choose"
+                            *ngIf="!node.isActive && _data?.allowAssetOnly && !_data?.allowExpenditureAssetOnly && checkCombinedCode(node['combinedCode'], 'ASSET')"
                             (click)="matDialogRef.close(node)">
                         <mat-icon class="addBtn">check_circle</mat-icon>
                     </button>
                     <button mat-icon-button title="Choose"
-                            *ngIf="!node.isActive && _data['allowAssetOnly'] && checkCombinedCode(node['combinedCode'])"
+                            *ngIf="!node.isActive && _data?.allowAssetOnly && !_data?.allowExpenditureAssetOnly && !checkCombinedCode(node['combinedCode'], 'ASSET')">
+                        <mat-icon class="greyBtn">check_circle</mat-icon>
+                    </button>
+
+                    <button mat-icon-button title="Choose"
+                            *ngIf="!node.isActive && !_data?.allowAssetOnly && _data?.allowExpenditureAssetOnly && checkCombinedCode(node['combinedCode'], 'ASSET_EXPENDITURE')"
                             (click)="matDialogRef.close(node)">
                         <mat-icon class="addBtn">check_circle</mat-icon>
                     </button>
                     <button mat-icon-button title="Choose"
-                            *ngIf="!node.isActive && _data['allowAssetOnly'] && !checkCombinedCode(node['combinedCode'])">
+                            *ngIf="!node.isActive && !_data?.allowAssetOnly && _data?.allowExpenditureAssetOnly && !checkCombinedCode(node['combinedCode'], 'ASSET_EXPENDITURE')">
                         <mat-icon class="greyBtn">check_circle</mat-icon>
                     </button>
                 </mat-tree-node>

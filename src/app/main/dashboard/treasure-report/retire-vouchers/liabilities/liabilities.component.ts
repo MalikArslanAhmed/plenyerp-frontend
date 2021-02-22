@@ -70,6 +70,9 @@ export class LiabilitiesComponent implements OnInit {
     economicSegmentSelect() {
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
+            data: {
+                allowExpenditureAssetOnly: true
+            }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
