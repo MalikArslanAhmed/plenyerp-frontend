@@ -20,8 +20,18 @@
                     <!-- use a disabled button to provide padding for tree leaf -->
                     <button mat-icon-button disabled></button>
                     {{node.name}}
-                    <button mat-icon-button title="Choose" *ngIf="!node.isActive" (click)="matDialogRef.close(node)">
+                    <button mat-icon-button title="Choose" *ngIf="!node.isActive && !_data['allowAssetOnly']"
+                            (click)="matDialogRef.close(node)">
                         <mat-icon class="addBtn">check_circle</mat-icon>
+                    </button>
+                    <button mat-icon-button title="Choose"
+                            *ngIf="!node.isActive && _data['allowAssetOnly'] && checkCombinedCode(node['combinedCode'])"
+                            (click)="matDialogRef.close(node)">
+                        <mat-icon class="addBtn">check_circle</mat-icon>
+                    </button>
+                    <button mat-icon-button title="Choose"
+                            *ngIf="!node.isActive && _data['allowAssetOnly'] && !checkCombinedCode(node['combinedCode'])">
+                        <mat-icon class="greyBtn">check_circle</mat-icon>
                     </button>
                 </mat-tree-node>
                 <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>

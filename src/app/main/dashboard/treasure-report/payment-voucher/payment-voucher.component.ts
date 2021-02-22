@@ -181,7 +181,8 @@ export class PaymentVoucherComponent implements OnInit {
                 if (source.id === this.createPaymentVoucherForm.value['sourceUnit']) {
                     selectedSource.push({
                         'name': source.id + ' - ' + source.longName,
-                        'value': source.id
+                        'value': source.id,
+                        'isPersonalAdvanceUnit': source.isPersonalAdvanceUnit
                     });
                 }
             });

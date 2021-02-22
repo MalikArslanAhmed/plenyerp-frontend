@@ -69,7 +69,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
             this.sourceType = _data['item'].type;
             this.sources = [{
                 'name': _data['item']['voucherSourceUnit'].id + ' - ' + _data['item']['voucherSourceUnit'].longName,
-                'value': _data['item']['voucherSourceUnit'].id
+                'value': _data['item']['voucherSourceUnit'].id,
+                'isPersonalAdvanceUnit': _data['item']['voucherSourceUnit'].isPersonalAdvanceUnit
             }];
             this.updatedData = _data['item'];
         } else {
@@ -579,6 +580,9 @@ export class PaymentVoucherCreateComponent implements OnInit {
         }
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
+            data: {
+                allowAssetOnly: (this.sourceType === 'PERSONAL_ADVANCES_VOUCHER')
+            }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {

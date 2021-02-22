@@ -81,7 +81,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
         });
 
-        if (this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+        if (this.payeeData && this.payeeData['voucherSourceUnit'] && this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
             this.schedulePayeeEmployeeForm.patchValue({
                 totalTax: 0
             });
@@ -116,7 +116,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             'totalAmountInWords': '',
         });
 
-        if (this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+        if (this.payeeData && this.payeeData['voucherSourceUnit'] && this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
             const numberToWords = new NumberToWordsPipe();
             this.schedulePayeeEmployeeForm.patchValue({
                 'totalTax': 0,

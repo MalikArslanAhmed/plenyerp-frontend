@@ -80,7 +80,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
         });
 
-        if (this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+        if (this.payeeData && this.payeeData['voucherSourceUnit'] && this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
             this.schedulePayeeCustomerForm.patchValue({
                 totalTax: 0
             });
@@ -115,7 +115,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             'totalAmountInWords': '',
         });
 
-        if (this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+        if (this.payeeData && this.payeeData['voucherSourceUnit'] && this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
             const numberToWords = new NumberToWordsPipe();
             this.schedulePayeeCustomerForm.patchValue({
                 'totalTax': 0,

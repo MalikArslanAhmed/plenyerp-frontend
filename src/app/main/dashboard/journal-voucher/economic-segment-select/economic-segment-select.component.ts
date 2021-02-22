@@ -128,4 +128,9 @@ export class EconomicSegmentSelectComponent implements OnInit {
             this.getSegmentList();
         });
     }
+
+    checkCombinedCode(combinedCode) {
+        let subString = combinedCode.substr(0, 4);
+        return subString === '02-3';
+    }
 }
