@@ -78,7 +78,13 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         }
         this.schedulePayeeCustomerForm.patchValue({
             'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
-        })
+        });
+
+        if (this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+            this.schedulePayeeCustomerForm.patchValue({
+                totalTax: 0
+            });
+        }
     }
 
     patchForm() {
@@ -108,6 +114,15 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             'totalAmount': '',
             'totalAmountInWords': '',
         });
+
+        if (this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+            const numberToWords = new NumberToWordsPipe();
+            this.schedulePayeeCustomerForm.patchValue({
+                'totalTax': 0,
+                'totalAmount': parseInt(this.schedulePayeeCustomerForm.value.netAmount),
+                'totalAmountInWords': numberToWords.transform(parseInt(this.schedulePayeeCustomerForm.value.netAmount))
+            });
+        }
     }
 
     savePayeeCustomer() {
