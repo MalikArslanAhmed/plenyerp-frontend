@@ -72,6 +72,9 @@ export class ScheduleEconomicCodesComponent implements OnInit {
     economicSegmentSelect() {
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
+            data: {
+                allowAssetOnly: true
+            }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {

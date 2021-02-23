@@ -52,6 +52,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
     paymentApprovalSelected: any;
     tab = 'CREATE PV FORM';
     updatedData: any;
+    currentDate: any = moment(new Date()).format('YYYY-MM-DD');
 
     constructor(public matDialogRef: MatDialogRef<PaymentVoucherCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -761,7 +762,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
                     'payee': (paymentApproval && paymentApproval['employeeCustomer']) ? paymentApproval['employeeCustomer'] : '',
                     'currencyId': (paymentApproval && paymentApproval['currencyId'] ? paymentApproval['currencyId'] : ''),
                     'currency': (paymentApproval && paymentApproval['currency'] && paymentApproval['currency']['singularCurrencyName'] ? paymentApproval['currency']['singularCurrencyName'] : ''),
-                    'valueDate': (paymentApproval && paymentApproval['valueDate']) ? moment(paymentApproval['valueDate']).format('YYYY-MM-DD') : '',
+                    'valueDate': (paymentApproval && this.currentDate) ? moment(this.currentDate).format('YYYY-MM-DD') : '',
                 });
                 this.schedulePayeeEmployeeForm.controls['valueDate'].disable();
                 this.schedulePayeeEmployeeForm.controls['payee'].disable();
