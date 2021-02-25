@@ -301,12 +301,12 @@
                                                 <th>
                                                     <div class="title">S.No</div>
                                                 </th>
-                                                <th>
+                                                <!--<th>
                                                     <div class="title">Payee Id</div>
                                                 </th>
                                                 <th>
                                                     <div class="title">Payee Name</div>
-                                                </th>
+                                                </th>-->
                                                 <th>
                                                     <div class="title">Account</div>
                                                 </th>
@@ -316,14 +316,14 @@
                                             </tr>
                                             </thead>
                                             <tbody
-                                                *ngIf="reportData && reportData['economic'] && reportData['economic'].length > 0; else noChildToShow">
-                                            <tr *ngFor="let data of reportData['economic']; let j = index">
+                                                *ngIf="reportData && reportData['retireVoucher'] && reportData['retireVoucher']['retireLiabilities'].length > 0; else noChildToShow">
+                                            <tr *ngFor="let data of reportData['retireVoucher']['retireLiabilities']; let j = index">
                                                 <td>
                                                     <div class="title">
                                                         {{j + 1}}.
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <!--<td>
                                                     <div class="title"
                                                          *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['adminCompany']">
                                                         {{data?.payeeVoucher?.adminCompany?.id}}
@@ -342,7 +342,7 @@
                                                          *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['employee']">
                                                         {{data?.payeeVoucher?.employee?.firstName}} {{data?.payeeVoucher?.employee?.lastName}}
                                                     </div>
-                                                </td>
+                                                </td>-->
                                                 <td>
                                                     <div class="title">
                                                         {{data?.economicSegment?.combinedCode}}

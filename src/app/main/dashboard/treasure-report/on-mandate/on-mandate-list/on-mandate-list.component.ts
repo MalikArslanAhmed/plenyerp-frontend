@@ -95,9 +95,16 @@ export class OnMandateListComponent implements OnInit {
                         val['paymentVouchers'].forEach(pv => {
                             if (pv && pv['payeeVouchers'] && pv['payeeVouchers'].length > 0) {
                                 pv['payeeVouchers'].forEach(payee => {
-                                    if (payee && payee['netAmount'] && payee['totalTax']) {
+                                    if (payee && payee['netAmount']) {
                                         totalAmount.push(parseFloat(payee['netAmount']));
+                                    } else {
+                                        totalAmount.push(0);
+                                    }
+
+                                    if (payee && payee['totalTax']) {
                                         totalTax.push(parseFloat(payee['totalTax']));
+                                    } else {
+                                        totalTax.push(0);
                                     }
                                 });
                             }
