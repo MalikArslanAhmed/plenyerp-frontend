@@ -275,7 +275,7 @@
                                                 </td>
                                             </tr>
                                             </tbody>
-                                            <tbody *ngIf="reportData && !reportData['retireVoucher']">
+                                            <tbody *ngIf="reportData && (!reportData['retireVoucher'] || reportData['retireVoucher'].status === 'EDIT_LIABILITY')">
                                             <tr>
                                                 <td colspan="15">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"

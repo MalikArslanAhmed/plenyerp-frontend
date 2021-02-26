@@ -73,7 +73,7 @@ export class ScheduleEconomicCodesComponent implements OnInit {
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                allowAssetOnly: true
+                allowAssetOnly: (this.reportData['voucherSourceUnit'].isPersonalAdvanceUnit === true)
             }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
