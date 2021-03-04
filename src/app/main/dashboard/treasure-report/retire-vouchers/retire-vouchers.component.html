@@ -273,9 +273,15 @@
                                                         {{data?.status}}
                                                     </div>
                                                 </td>
+                                                <td *ngIf="reportData && (!reportData['retireVoucher'] || reportData['retireVoucher'].status === 'EDIT_LIABILITY')">
+                                                    <button mat-button class="payee-report" style="margin-right: 10px"
+                                                            (click)="editLiabilities(reportData, data.companyId, data.employee?.id)">
+                                                        Edit Liability
+                                                    </button>
+                                                </td>
                                             </tr>
                                             </tbody>
-                                            <tbody *ngIf="reportData && (!reportData['retireVoucher'] || reportData['retireVoucher'].status === 'EDIT_LIABILITY')">
+                                            <!--<tbody *ngIf="reportData && (!reportData['retireVoucher'] || reportData['retireVoucher'].status === 'EDIT_LIABILITY')">
                                             <tr>
                                                 <td colspan="15">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
@@ -284,7 +290,7 @@
                                                     </button>
                                                 </td>
                                             </tr>
-                                            </tbody>
+                                            </tbody>-->
                                             <ng-template #noChildToShow>
                                                 <tbody>
                                                 <tr>

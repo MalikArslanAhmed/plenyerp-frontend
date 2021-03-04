@@ -58,6 +58,8 @@ export class LiabilitiesComponent implements OnInit {
             liability: [''],
             amount: [''],
             details: [''],
+            companyId: [this.payeeData.companyId],
+            employeeId: [this.payeeData.employeeId],
         });
         this.liabilityForm.patchValue({
             'year': this._data['pv'].year,

@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
-import {AlertService} from "../../../../shared/services/alert.service";
-import {PaymentVoucherService} from "../../../../shared/services/payment-voucher.service";
-import {TreasureReportService} from "../../../../shared/services/treasure-report.service";
-import * as moment from "moment";
-import {LiabilitiesComponent} from "./liabilities/liabilities.component";
-import {RetireVoucherService} from "../../../../shared/services/retire-voucher.service";
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {AlertService} from '../../../../shared/services/alert.service';
+import {PaymentVoucherService} from '../../../../shared/services/payment-voucher.service';
+import {TreasureReportService} from '../../../../shared/services/treasure-report.service';
+import * as moment from 'moment';
+import {LiabilitiesComponent} from './liabilities/liabilities.component';
+import {RetireVoucherService} from '../../../../shared/services/retire-voucher.service';
 
 @Component({
     selector: 'app-retire-vouchers',
@@ -86,7 +86,12 @@ export class RetireVouchersComponent implements OnInit {
         }
     }
 
-    editLiabilities(data) {
+    editLiabilities(data, companyId, employeeId) {
+        data = {
+            ...data,
+            companyId: companyId,
+            employeeId: employeeId || null
+        };
         this.dialogRef = this._matDialog.open(LiabilitiesComponent, {
             panelClass: 'contact-form-dialog',
             data: {pv: data}
