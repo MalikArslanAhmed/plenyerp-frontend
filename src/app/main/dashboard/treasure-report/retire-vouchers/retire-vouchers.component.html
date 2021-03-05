@@ -78,6 +78,7 @@
                         <span class="mat-header-cell text-center">Taxes</span>
                         <span class="mat-header-cell text-center">Last Actioned</span>
                         <span class="mat-header-cell text-center">PV Status</span>
+                        <span class="mat-header-cell text-center">PV Number</span>
                         <span class="mat-header-cell text-center">Retr. Status</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of retireVoucherData; let i = index">
@@ -115,6 +116,9 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.status ? reportData?.status : '-'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.voucherNumber ? reportData?.voucherNumber : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData['retireVoucher'] && reportData['retireVoucher'].status ? reportData['retireVoucher'].status : 'Edit Liability'}}</p>

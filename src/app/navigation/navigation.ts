@@ -895,7 +895,7 @@ export const navigation: FuseNavigation[] = [
                     },
                     {
                         id: 'summary-non-personal-advances',
-                        title: 'Non Personal Advances',
+                        title: 'Summary Non Personal Advances',
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-non-personal-advances',
@@ -903,7 +903,7 @@ export const navigation: FuseNavigation[] = [
                     },
                     {
                         id: 'summary-personal-advances',
-                        title: 'Personal Advances',
+                        title: 'Summary Personal Advances',
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-personal-advances',
@@ -911,7 +911,7 @@ export const navigation: FuseNavigation[] = [
                     },
                     {
                         id: 'summary-standing-imprest',
-                        title: 'Standing Imprest',
+                        title: 'Summary Standing Imprest',
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-standing-imprest',
@@ -919,7 +919,7 @@ export const navigation: FuseNavigation[] = [
                     },
                     {
                         id: 'summary-special-imprest',
-                        title: 'Special Imprest',
+                        title: 'Summary Special Imprest',
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-special-imprest',
@@ -927,7 +927,7 @@ export const navigation: FuseNavigation[] = [
                     },
                     {
                         id: 'advances-ledger-by-employee',
-                        title: 'Advances Ledger (By Employee)',
+                        title: 'Summary Advances Ledger (By Employee)',
                         roles: [],
                         type: 'item',
                         url: 'dashboard/advances-ledger-by-employee',
