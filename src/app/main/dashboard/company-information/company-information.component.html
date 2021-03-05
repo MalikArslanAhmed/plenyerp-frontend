@@ -54,6 +54,15 @@
                         <mat-slide-toggle class="toggle" [(ngModel)]="dataSetting[3].value"
                                           (change)="paymentApprovalRequired($event)"></mat-slide-toggle>
                     </ng-container>
+                    <ng-container *ngIf="i === 4">
+                        <mat-form-field appearance="fill">
+                            <select matNativeControl required [(ngModel)]="dataSetting[4].value" (change)="defaultStatusJv($event)">
+                                <option value="NEW">NEW</option>
+                                <option value="CHECKED">CHECKED</option>
+                                <option value="POSTED">POSTED</option>
+                            </select>
+                        </mat-form-field>
+                    </ng-container>
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="['titlename']"></tr>

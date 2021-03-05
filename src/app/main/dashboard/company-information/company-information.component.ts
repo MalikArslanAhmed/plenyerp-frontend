@@ -26,7 +26,8 @@ const settingKeys = [
     {prev: 'localCurrency', to: 'Home/Local Currency'},
     {prev: 'internationalCurrency', to: 'International Currency'},
     {prev: 'autoPost', to: 'Auto-Post JV?'},
-    {prev: 'isPaymentApproval', to: 'Payment Approval Required?'}
+    {prev: 'isPaymentApproval', to: 'Payment Approval Required?'},
+    {prev: 'defaultSetting', to: 'Default status of Auto Posted JV?'}
 ];
 
 @Component({
@@ -161,6 +162,17 @@ export class CompanyInformationComponent implements OnInit {
             }
         });
     }
+    defaultStatusJv(value) {
+        this.dialogRef = this._matDialog.open(UpdateListModelComponent, {
+            panelClass: 'update-items-dialog',
+            data: {data: value}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.updateDefaultStatusJv();
+            }
+        });
+    }
 
     updateAutoPostJV(value) {
         this.companyInformationService.updateCompanySetting(this.id, {autoPost: value}).subscribe((data) => {
@@ -170,6 +182,11 @@ export class CompanyInformationComponent implements OnInit {
 
     updatePaymentApproval(value) {
         this.companyInformationService.updateCompanySetting(this.id, {isPaymentApproval: value}).subscribe((data) => {
+            this.getCompanySetting();
+        })
+    }
+    updateDefaultStatusJv() {
+        this.companyInformationService.updateCompanySetting(this.id, {defaultStatus: this.dataSetting[4].value}).subscribe((data) => {
             this.getCompanySetting();
         })
     }
