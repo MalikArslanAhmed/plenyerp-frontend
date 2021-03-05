@@ -307,12 +307,12 @@
                                                 <th>
                                                     <div class="title">S.No</div>
                                                 </th>
-                                                <!--<th>
+                                                <th>
                                                     <div class="title">Payee Id</div>
                                                 </th>
                                                 <th>
                                                     <div class="title">Payee Name</div>
-                                                </th>-->
+                                                </th>
                                                 <th>
                                                     <div class="title">Account</div>
                                                 </th>
@@ -329,26 +329,26 @@
                                                         {{j + 1}}.
                                                     </div>
                                                 </td>
-                                                <!--<td>
+                                                <td>
                                                     <div class="title"
-                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['adminCompany']">
-                                                        {{data?.payeeVoucher?.adminCompany?.id}}
+                                                         *ngIf="data && data['company']">
+                                                        {{data?.company?.id}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['employee']">
-                                                        {{data?.payeeVoucher?.employee?.id}}
+                                                         *ngIf="data && data['employee']">
+                                                        {{data?.employee?.id}}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="title"
-                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['adminCompany']">
-                                                        {{data?.payeeVoucher?.adminCompany?.name}}
+                                                         *ngIf="data && data['company']">
+                                                        {{data?.company?.name}}
                                                     </div>
                                                     <div class="title"
-                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['employee']">
-                                                        {{data?.payeeVoucher?.employee?.firstName}} {{data?.payeeVoucher?.employee?.lastName}}
+                                                         *ngIf="data && data['employee']">
+                                                        {{data?.employee?.firstName}} {{data?.employee?.lastName}}
                                                     </div>
-                                                </td>-->
+                                                </td>
                                                 <td>
                                                     <div class="title">
                                                         {{data?.economicSegment?.combinedCode}}
