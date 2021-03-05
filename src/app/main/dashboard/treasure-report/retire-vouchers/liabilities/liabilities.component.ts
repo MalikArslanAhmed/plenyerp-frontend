@@ -147,7 +147,9 @@ export class LiabilitiesComponent implements OnInit {
             'economicSegmentId': this.liabilityForm.getRawValue().economicSegmentId ? this.liabilityForm.getRawValue().economicSegmentId : '',
             'economicName': this.liabilityForm.getRawValue().economicName ? this.liabilityForm.getRawValue().economicName : '',
             'details': this.liabilityForm.getRawValue().details ? this.liabilityForm.getRawValue().details : '',
-            'amount': this.liabilityForm.getRawValue().amount ? this.liabilityForm.getRawValue().amount : ''
+            'amount': this.liabilityForm.getRawValue().amount ? this.liabilityForm.getRawValue().amount : '',
+            companyId: this.liabilityForm.getRawValue().companyId,
+            employeeId: this.liabilityForm.getRawValue().employeeId
         });
         this.liabilityForm.patchValue({
             'liability': '',
