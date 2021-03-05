@@ -55,13 +55,13 @@
                                           (change)="paymentApprovalRequired($event)"></mat-slide-toggle>
                     </ng-container>
                     <ng-container *ngIf="i === 4">
-                        <mat-form-field appearance="fill">
-                            <select matNativeControl required [(ngModel)]="dataSetting[4].value" (change)="defaultStatusJv($event)">
-                                <option value="NEW">NEW</option>
-                                <option value="CHECKED">CHECKED</option>
-                                <option value="POSTED">POSTED</option>
-                            </select>
-                        </mat-form-field>
+                        <div fxLayout="row" fxLayoutAlign="start">
+                            <mat-select [(ngModel)]="dataSetting[4].value" (selectionChange)="defaultStatusJv($event)">
+                                <mat-option *ngFor="let status of ['NEW', 'CHECKED', 'POSTED']" [value]="status">
+                                    {{status}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
                     </ng-container>
                 </td>
             </ng-container>

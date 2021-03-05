@@ -27,7 +27,7 @@ const settingKeys = [
     {prev: 'internationalCurrency', to: 'International Currency'},
     {prev: 'autoPost', to: 'Auto-Post JV?'},
     {prev: 'isPaymentApproval', to: 'Payment Approval Required?'},
-    {prev: 'defaultSetting', to: 'Default status of Auto Posted JV?'}
+    {prev: 'defaultStatus', to: 'Default status of Auto Posted JV?'}
 ];
 
 @Component({
@@ -86,6 +86,7 @@ export class CompanyInformationComponent implements OnInit {
     getCompanySetting() {
         this.companyInformationService.getCompanySetting().subscribe(data => {
             this.dataSetting = data.items;
+
             let num: number = 1;
             const newData: DataSetting[] = [];
             for (const d of this.dataSetting) {
@@ -97,6 +98,7 @@ export class CompanyInformationComponent implements OnInit {
             this.dataSetting.forEach((value) => {
                 value['isSelected'] = false;
             })
+            console.log('yyyyyyyyy', this.dataSetting);
         })
     }
 
