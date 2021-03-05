@@ -820,7 +820,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'om-mandate',
-                title: 'On Mandate',
+                title: 'Mandate',
                 roles: [],
                 // translate: 'NAV.CALENDAR',
                 type: 'item',
