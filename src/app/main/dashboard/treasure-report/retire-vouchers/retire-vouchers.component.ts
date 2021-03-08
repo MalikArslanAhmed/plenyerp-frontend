@@ -86,12 +86,14 @@ export class RetireVouchersComponent implements OnInit {
         }
     }
 
-    editLiabilities(data, companyId, employeeId) {
+    editLiabilities(data, payee, companyId, employeeId) {
         data = {
             ...data,
+            payee,
             companyId: companyId,
             employeeId: employeeId || null
         };
+        console.log('-----', data);
         this.dialogRef = this._matDialog.open(LiabilitiesComponent, {
             panelClass: 'contact-form-dialog',
             data: {pv: data}

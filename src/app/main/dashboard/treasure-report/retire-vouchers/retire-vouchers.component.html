@@ -173,8 +173,7 @@
                                                 </th>
                                             </tr>
                                             </thead>
-                                            <tbody
-                                                *ngIf="reportData && reportData['payees'] && reportData['payees'].length > 0; else noChildToShow">
+                                            <tbody *ngIf="reportData && reportData['payees'] && reportData['payees'].length > 0; else noChildToShow">
                                             <tr *ngFor="let data of reportData['payees']; let i = index">
                                                 <td>
                                                     <div class="title" *ngIf="data && data.employee">
@@ -279,7 +278,7 @@
                                                 </td>
                                                 <td *ngIf="reportData && (!reportData['retireVoucher'] || reportData['retireVoucher'].status === 'EDIT_LIABILITY')">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
-                                                            (click)="editLiabilities(reportData, data.companyId, data.employee?.id)">
+                                                            (click)="editLiabilities(reportData, data, data.companyId, data.employee?.id)">
                                                         Edit Liability
                                                     </button>
                                                 </td>
