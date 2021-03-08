@@ -30,6 +30,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {NumberToWordsPipe} from './shared/pipes/number-to-word.pipe';
 import {UnderscoreSeparatePipe} from './shared/pipes/underscore-separate.pipe';
 import {RouteGuard} from './shared/guards/route.guard';
+import {AbsoluteNumberPipe} from './shared/pipes/absolute-number.pipe';
 
 const appRoutes: Routes = [
     {
@@ -51,7 +52,8 @@ const appRoutes: Routes = [
         AppComponent,
         MomentDatePipe,
         NumberToWordsPipe,
-        UnderscoreSeparatePipe
+        UnderscoreSeparatePipe,
+        AbsoluteNumberPipe
     ],
     imports: [
         BrowserModule,
