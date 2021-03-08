@@ -70,10 +70,10 @@
                         <td class="title">{{advanceLedgerReport?.valueDate}}</td>
                         <td class="title">{{advanceLedgerReport?.deptalId}}</td>
                         <td class="title">{{advanceLedgerReport?.narration}}</td>
-                        <td class="title">{{advanceLedgerReport?.debit}}</td>
-                        <td class="title">{{advanceLedgerReport?.credit}}</td>
-                        <td class="title"> {{advanceLedgerReport?.balance}}</td>
-                        <td class="title">{{advanceLedgerReport?.old_balance}}</td>
+                        <td class="title">{{advanceLedgerReport?.debit ? advanceLedgerReport?.debit : 0| absoluteAmount}}</td>
+                        <td class="title">{{advanceLedgerReport?.credit ? advanceLedgerReport?.credit: 0| absoluteAmount}}</td>
+                        <td class="title"> {{advanceLedgerReport?.balance ? advanceLedgerReport?.balance: 0| absoluteAmount}}</td>
+                        <td class="title">{{advanceLedgerReport?.old_balance ? advanceLedgerReport?.old_balance : 0 | absoluteAmount}}</td>
                         <td class="title">{{advanceLedgerReport?.comp_voucher_paid_year}}</td>
                         <td class="title">{{advanceLedgerReport?.deptal_no_of_complementary_voucher}}</td>
                     </tr>
