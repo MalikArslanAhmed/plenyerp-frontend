@@ -110,7 +110,7 @@
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                             <span class="mat-cell align-items-center"
-                                  *ngIf="status !== 'ALL' && status !== 'PAID'">
+                                  *ngIf="['ALL', 'PAID', 'ON_MANDATE', 'POSTED_TO_GL', 'CLOSED'].indexOf(status) === -1">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">
                                     <mat-checkbox [(ngModel)]="reportData.checked"
                                                   (change)="checkPV(i, $event, reportData)"
