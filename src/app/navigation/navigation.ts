@@ -781,7 +781,6 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
-                        icon: 'payment',
                         url: '/dashboard/payment-voucher',
                         permissions: []
                     },
@@ -791,7 +790,6 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
-                        icon: 'payment',
                         url: '/dashboard/receipt-voucher',
                         permissions: []
                     },
@@ -801,7 +799,6 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
-                        icon: 'payment',
                         url: '/dashboard/retire-vouchers',
                         permissions: []
                     },
@@ -811,7 +808,6 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
-                        icon: 'payment',
                         url: '/dashboard/payment-approval',
                         permissions: []
                     },
@@ -821,7 +817,6 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
-                        icon: 'payment',
                         url: '/dashboard/previous-year-advance',
                         permissions: []
                     },
