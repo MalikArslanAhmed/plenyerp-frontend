@@ -15,20 +15,15 @@ import {fuseConfig} from 'app/fuse-config';
 import {AppComponent} from 'app/app.component';
 import {LayoutModule} from 'app/layout/layout.module';
 import {SampleModule} from 'app/main/sample/sample.module';
-import {AuthService} from "./shared/services/auth.service";
+import {AuthService} from './shared/services/auth.service';
 import {GlobalService} from './shared/services/global.service';
-import {AppUrl} from "./shared/constants/app-url";
-import {AlertService} from "./shared/services/alert.service";
-import {SnotifyModule, SnotifyService, ToastDefaults} from "ng-snotify";
-import {HtpInterceptor} from "./shared/services/interceptor.service";
-import {MatStepperModule} from "@angular/material/stepper";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-// import {DashboardModule} from './main/dashboard/dashboard.module';
-import {MomentDatePipe} from "./shared/pipes/moment-date.pipe";
+import {AppUrl} from './shared/constants/app-url';
+import {AlertService} from './shared/services/alert.service';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import {HtpInterceptor} from './shared/services/interceptor.service';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {SharedModule} from './shared/shared.module';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {NumberToWordsPipe} from './shared/pipes/number-to-word.pipe';
-import {UnderscoreSeparatePipe} from './shared/pipes/underscore-separate.pipe';
 import {RouteGuard} from './shared/guards/route.guard';
 import {AbsoluteAmountPipe} from './shared/pipes/absolute-amount.pipe';
 
@@ -49,11 +44,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent,
-        MomentDatePipe,
-        NumberToWordsPipe,
-        UnderscoreSeparatePipe,
-        AbsoluteAmountPipe
+        AppComponent
     ],
     imports: [
         BrowserModule,
@@ -96,6 +87,9 @@ const appRoutes: Routes = [
         SnotifyService,
         HtpInterceptor,
         RouteGuard
+    ],
+    exports: [
+        AbsoluteAmountPipe
     ],
     bootstrap: [
         AppComponent

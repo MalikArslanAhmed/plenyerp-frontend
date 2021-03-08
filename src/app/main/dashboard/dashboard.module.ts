@@ -267,6 +267,7 @@ import { PreviousYearAdvancesCreateComponent } from './treasure-report/previous-
 import { SchedulePayersEmployeePreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component';
 import { SchedulePayersCustomerPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component';
 import { ScheduleEconomicCodesReceiptPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-economic-codes-receipt-previous-advances/schedule-economic-codes-receipt-previous-advances.component';
+import {AbsoluteAmountPipe} from '../../shared/pipes/absolute-amount.pipe';
 
 @NgModule({
     declarations: [
@@ -545,7 +546,10 @@ import { ScheduleEconomicCodesReceiptPreviousAdvancesComponent } from './treasur
         MatListModule,
         MatCardModule,
         MatExpansionModule,
-        MatSortModule,
+        MatSortModule
+    ],
+    providers: [
+
     ]
 })
 export class DashboardModule {
