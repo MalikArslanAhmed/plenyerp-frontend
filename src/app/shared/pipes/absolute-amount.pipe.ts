@@ -1,9 +1,9 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-    name: 'absolute-report'
+    name: 'absolute-amount'
 })
-export class AbsoluteNumberPipe implements PipeTransform {
+export class AbsoluteAmountPipe implements PipeTransform {
 
     transform(value: any): any {
 
