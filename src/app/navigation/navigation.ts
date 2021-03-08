@@ -657,25 +657,6 @@ export const navigation: FuseNavigation[] = [
                 permissions: []
             },
             {
-                id: 'journal',
-                title: 'Journal Voucher',
-                roles: [],
-                // translate: 'NAV.DASHBOARDS',
-                type: 'collapsable',
-                icon: 'money',
-                permissions: [PermissionConstant.LIST_GL_JV],
-                children: [
-                    {
-                        id: 'journal-voucher',
-                        title: 'Journal Voucher',
-                        roles: [],
-                        type: 'item',
-                        url: 'dashboard/journal-voucher',
-                        permissions: [PermissionConstant.LIST_GL_JV]
-                    }
-                ]
-            },
-            {
                 id: 'report',
                 title: 'Report - Financials',
                 roles: [],
@@ -779,6 +760,74 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
+                id: 'vouchers',
+                title: 'Vouchers',
+                roles: [],
+                type: 'collapsable',
+                icon: 'money',
+                permissions: [PermissionConstant.LIST_GL_JV],
+                children: [
+                    {
+                        id: 'journal-voucher',
+                        title: 'Journal Voucher',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/journal-voucher',
+                        permissions: [PermissionConstant.LIST_GL_JV]
+                    },
+                    {
+                        id: 'payment-voucher',
+                        title: 'Payment Voucher',
+                        roles: [],
+                        // translate: 'NAV.CALENDAR',
+                        type: 'item',
+                        icon: 'payment',
+                        url: '/dashboard/payment-voucher',
+                        permissions: []
+                    },
+                    {
+                        id: 'receipt-voucher',
+                        title: 'Receipt Voucher',
+                        roles: [],
+                        // translate: 'NAV.CALENDAR',
+                        type: 'item',
+                        icon: 'payment',
+                        url: '/dashboard/receipt-voucher',
+                        permissions: []
+                    },
+                    {
+                        id: 'retire-vouchers',
+                        title: 'Retire Vouchers',
+                        roles: [],
+                        // translate: 'NAV.CALENDAR',
+                        type: 'item',
+                        icon: 'payment',
+                        url: '/dashboard/retire-vouchers',
+                        permissions: []
+                    },
+                    {
+                        id: 'payment-approval',
+                        title: 'Payment Approval',
+                        roles: [],
+                        // translate: 'NAV.CALENDAR',
+                        type: 'item',
+                        icon: 'payment',
+                        url: '/dashboard/payment-approval',
+                        permissions: []
+                    },
+                    {
+                        id: 'previous-year-advances',
+                        title: 'Previous Year Advances',
+                        roles: [],
+                        // translate: 'NAV.CALENDAR',
+                        type: 'item',
+                        icon: 'payment',
+                        url: '/dashboard/previous-year-advance',
+                        permissions: []
+                    },
+                ]
+            },
+            {
                 id: 'voucher-source-unit',
                 title: 'Voucher Source Unit',
                 roles: [],
@@ -799,26 +848,6 @@ export const navigation: FuseNavigation[] = [
                 permissions: []
             },
             {
-                id: 'payment-voucher',
-                title: 'Payment Voucher',
-                roles: [],
-                // translate: 'NAV.CALENDAR',
-                type: 'item',
-                icon: 'payment',
-                url: '/dashboard/payment-voucher',
-                permissions: []
-            },
-            {
-                id: 'receipt-voucher',
-                title: 'Receipt Voucher',
-                roles: [],
-                // translate: 'NAV.CALENDAR',
-                type: 'item',
-                icon: 'payment',
-                url: '/dashboard/receipt-voucher',
-                permissions: []
-            },
-            {
                 id: 'om-mandate',
                 title: 'Mandate',
                 roles: [],
@@ -826,36 +855,6 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'payment',
                 url: '/dashboard/on-mandate',
-                permissions: []
-            },
-            {
-                id: 'retire-vouchers',
-                title: 'Retire Vouchers',
-                roles: [],
-                // translate: 'NAV.CALENDAR',
-                type: 'item',
-                icon: 'payment',
-                url: '/dashboard/retire-vouchers',
-                permissions: []
-            },
-            {
-                id: 'payment-approval',
-                title: 'Payment Approval',
-                roles: [],
-                // translate: 'NAV.CALENDAR',
-                type: 'item',
-                icon: 'payment',
-                url: '/dashboard/payment-approval',
-                permissions: []
-            },
-            {
-                id: 'previous-year-advances',
-                title: 'Previous Year Advances',
-                roles: [],
-                // translate: 'NAV.CALENDAR',
-                type: 'item',
-                icon: 'payment',
-                url: '/dashboard/previous-year-advance',
                 permissions: []
             },
             {
