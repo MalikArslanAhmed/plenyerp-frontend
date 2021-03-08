@@ -106,7 +106,9 @@ export class LiabilitiesComponent implements OnInit {
                                 'economicName': item['economicSegment'].name,
                                 'liabilityValueDate': item.liabilityValueDate,
                                 'details': item.details,
-                                'amount': item.amount
+                                'amount': item.amount,
+                                companyId: item.companyId,
+                                employeeId: item.employeeId
                             });
                         });
                     }
