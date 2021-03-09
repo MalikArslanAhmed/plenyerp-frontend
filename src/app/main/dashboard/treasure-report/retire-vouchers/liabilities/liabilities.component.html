@@ -85,6 +85,9 @@
                         <div class="title">S.No</div>
                     </th>
                     <th>
+                        <div class="title">Payee Id</div>
+                    </th>
+                    <th>
                         <div class="title">Full Code</div>
                     </th>
                     <th>
@@ -103,6 +106,11 @@
                     <td>
                         <div class="title">
                             {{i + 1}}.
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title">
+                            {{liab?.companyId ? liab?.companyId : liab?.employeeId}}
                         </div>
                     </td>
                     <td>

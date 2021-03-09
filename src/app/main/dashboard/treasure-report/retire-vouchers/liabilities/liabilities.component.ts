@@ -130,7 +130,7 @@ export class LiabilitiesComponent implements OnInit {
         let foundLedger = false;
         if (this.liabilityData.length > 0) {
             this.liabilityData.forEach(led => {
-                if (parseInt(led['economicSegmentId']) === parseInt(this.liabilityForm.getRawValue().economicSegmentId)) {
+                if (parseInt(led['economicSegmentId']) === parseInt(this.liabilityForm.getRawValue().economicSegmentId) && (parseInt(led['employeeId']) === parseInt(this.liabilityForm.getRawValue().employeeId) || parseInt(led['companyId']) === parseInt(this.liabilityForm.getRawValue().companyId))) {
                     foundLedger = true;
                 }
             })
