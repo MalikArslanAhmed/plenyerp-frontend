@@ -90,7 +90,7 @@ export class RetireVouchersComponent implements OnInit {
         data = {
             ...data,
             payee,
-            companyId: companyId,
+            companyId: companyId || null,
             employeeId: employeeId || null
         };
 

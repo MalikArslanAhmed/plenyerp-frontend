@@ -40,7 +40,7 @@ export class LiabilitiesComponent implements OnInit {
         this.payeeData = _data.pv;
 
         if (this.payeeData['id']) {
-            this.getLiabilities(this.payeeData['id']);
+            this.getLiabilities();
         }
     }
 
@@ -94,11 +94,13 @@ export class LiabilitiesComponent implements OnInit {
         });
     }
 
-    getLiabilities(retireVoucherId) {
+    getLiabilities() {
         let params = {
-            'page': -1
+            page: -1,
+            companyId: this.payeeData.companyId,
+            employeeId: this.payeeData.employeeId,
         };
-        this.retireVoucherService.getLiabilities(retireVoucherId, params).subscribe(data => {
+        this.retireVoucherService.getLiabilities(this.payeeData['id'], params).subscribe(data => {
             let liabilityData = [];
             if (data && data.length > 0) {
                 data.forEach(retire => {
