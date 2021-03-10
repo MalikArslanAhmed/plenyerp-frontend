@@ -97,8 +97,8 @@ export class LiabilitiesComponent implements OnInit {
     getLiabilities() {
         let params = {
             page: -1,
-            companyId: this.payeeData.companyId,
-            employeeId: this.payeeData.employeeId,
+            companyId: this.payeeData.companyId || '',
+            employeeId: this.payeeData.employeeId || '',
         };
         this.retireVoucherService.getLiabilities(this.payeeData['id'], params).subscribe(data => {
             let liabilityData = [];
