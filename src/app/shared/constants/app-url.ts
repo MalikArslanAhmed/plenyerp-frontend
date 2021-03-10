@@ -660,6 +660,11 @@ export class AppUrl {
         return AppUrl.API_URL + `treasury/retire-voucher/` + id + `/liabilities`;
     }
 
+    static DELETE_LIABILITIES(id?): string {
+        const url = id ? '/' + id : '';
+        return AppUrl.API_URL + `treasury/retire-liabilities` + url;
+    }
+
     static RV_SCHEDULE_ECONOMIC(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-payees/` + id + `/schedule-economic`;

@@ -47,7 +47,7 @@
                     <mat-label>Taxes Amount</mat-label>
                     <input matInput placeholder="Taxes Amount" formControlName="totalTax">
                 </mat-form-field>
-                <div fxLayout="row" fxLayoutAlign="center" *ngIf="!this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit">
+                <div fxLayout="row" fxLayoutAlign="center" *ngIf="this.payeeData['voucherSourceUnit'] && !this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit">
                     <button mat-button class="add-taxes" (click)="addApplicableTaxes()">Add Taxes</button>
                 </div>
                 <mat-form-field appearance="outline" fxFlex>

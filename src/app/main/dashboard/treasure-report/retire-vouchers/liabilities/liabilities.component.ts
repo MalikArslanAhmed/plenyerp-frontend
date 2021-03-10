@@ -1,12 +1,13 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {AlertService} from "../../../../../shared/services/alert.service";
-import {PaymentVoucherService} from "../../../../../shared/services/payment-voucher.service";
-import {fuseAnimations} from "../../../../../../@fuse/animations";
-import {EconomicSegmentSelectComponent} from "../../../journal-voucher/economic-segment-select/economic-segment-select.component";
-import {RetireVoucherService} from "../../../../../shared/services/retire-voucher.service";
-import * as moment from "moment";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {AlertService} from '../../../../../shared/services/alert.service';
+import {PaymentVoucherService} from '../../../../../shared/services/payment-voucher.service';
+import {fuseAnimations} from '../../../../../../@fuse/animations';
+import {EconomicSegmentSelectComponent} from '../../../journal-voucher/economic-segment-select/economic-segment-select.component';
+import {RetireVoucherService} from '../../../../../shared/services/retire-voucher.service';
+import * as moment from 'moment';
+import {getLiteralValue} from 'codelyzer/util/getLiteralValue';
 
 @Component({
     selector: 'app-liabilities',
@@ -49,6 +50,7 @@ export class LiabilitiesComponent implements OnInit {
 
     refresh() {
         this.liabilityForm = this.fb.group({
+            id: [''],
             year: [{value: '', disabled: true}],
             deptalId: [{value: '', disabled: true}],
             lastActioned: [{value: '', disabled: true}],
@@ -103,11 +105,12 @@ export class LiabilitiesComponent implements OnInit {
                     if (retire && retire['retireLiabilities'] && retire['retireLiabilities'].length > 0) {
                         retire['retireLiabilities'].forEach(item => {
                             liabilityData.push({
-                                'economicSegmentId': item.economicSegmentId,
-                                'economicName': item['economicSegment'].name,
-                                'liabilityValueDate': item.liabilityValueDate,
-                                'details': item.details,
-                                'amount': item.amount,
+                                id: item.id,
+                                economicSegmentId: item.economicSegmentId,
+                                economicName: item['economicSegment'].name,
+                                liabilityValueDate: item.liabilityValueDate,
+                                details: item.details,
+                                amount: item.amount,
                                 companyId: item.companyId,
                                 employeeId: item.employeeId
                             });
@@ -133,7 +136,7 @@ export class LiabilitiesComponent implements OnInit {
                 if (parseInt(led['economicSegmentId']) === parseInt(this.liabilityForm.getRawValue().economicSegmentId) && (parseInt(led['employeeId']) === parseInt(this.liabilityForm.getRawValue().employeeId) || parseInt(led['companyId']) === parseInt(this.liabilityForm.getRawValue().companyId))) {
                     foundLedger = true;
                 }
-            })
+            });
         }
         if (foundLedger) {
             this.alertService.showErrors('Economic Segment already exist');
@@ -146,11 +149,11 @@ export class LiabilitiesComponent implements OnInit {
         }*/
 
         this.liabilityData.push({
-            'liabilityValueDate': this.liabilityForm.getRawValue().liability ? moment(this.liabilityForm.getRawValue().liability).format('YYYY-MM-DD') : '',
-            'economicSegmentId': this.liabilityForm.getRawValue().economicSegmentId ? this.liabilityForm.getRawValue().economicSegmentId : '',
-            'economicName': this.liabilityForm.getRawValue().economicName ? this.liabilityForm.getRawValue().economicName : '',
-            'details': this.liabilityForm.getRawValue().details ? this.liabilityForm.getRawValue().details : '',
-            'amount': this.liabilityForm.getRawValue().amount ? this.liabilityForm.getRawValue().amount : '',
+            liabilityValueDate: this.liabilityForm.getRawValue().liability ? moment(this.liabilityForm.getRawValue().liability).format('YYYY-MM-DD') : '',
+            economicSegmentId: this.liabilityForm.getRawValue().economicSegmentId ? this.liabilityForm.getRawValue().economicSegmentId : '',
+            economicName: this.liabilityForm.getRawValue().economicName ? this.liabilityForm.getRawValue().economicName : '',
+            details: this.liabilityForm.getRawValue().details ? this.liabilityForm.getRawValue().details : '',
+            amount: this.liabilityForm.getRawValue().amount ? this.liabilityForm.getRawValue().amount : '',
             companyId: this.liabilityForm.getRawValue().companyId,
             employeeId: this.liabilityForm.getRawValue().employeeId
         });
@@ -164,7 +167,16 @@ export class LiabilitiesComponent implements OnInit {
     }
 
     deleteLedger(index) {
-        this.liabilityData.splice(index, 1);
+        const deletedLiability = this.liabilityData[index];
+        if (deletedLiability.id) {
+            this.retireVoucherService.deleteLiability(this.liabilityData[index].id).subscribe(
+                d => {
+                    this.liabilityData.splice(index, 1);
+                }
+            );
+        } else {
+            this.liabilityData.splice(index, 1);
+        }
     }
 
     saveLiabilities() {
@@ -175,9 +187,15 @@ export class LiabilitiesComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
+            const newLiabilityData = [];
+            this.liabilityData.forEach(liability => {
+                if (!liability.id) {
+                    newLiabilityData.push(liability);
+                }
+            });
             let params = {
                 'paymentVoucherId': this.payeeData.id,
-                'liabilities': this.liabilityData
+                'liabilities': newLiabilityData
             };
             this.retireVoucherService.liabilities(params).subscribe(data => {
                 this.liabilityForm.reset();

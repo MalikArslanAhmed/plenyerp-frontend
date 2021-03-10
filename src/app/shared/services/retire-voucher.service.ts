@@ -30,6 +30,10 @@ export class RetireVoucherService extends BaseService {
         return this.putRequest(AppUrl.CURRENCIES(id), data);
     }
 
+    deleteLiability(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LIABILITIES(id));
+    }
+
     liabilities(data): Observable<any> {
         return this.postRequest(AppUrl.LIABILITIES(), data);
     }

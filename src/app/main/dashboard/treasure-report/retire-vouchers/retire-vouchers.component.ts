@@ -93,12 +93,13 @@ export class RetireVouchersComponent implements OnInit {
             companyId: companyId,
             employeeId: employeeId || null
         };
-        console.log('-----', data);
+
         this.dialogRef = this._matDialog.open(LiabilitiesComponent, {
             panelClass: 'contact-form-dialog',
             data: {pv: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            this.getRetireVoucher();
             if (!response) {
                 return;
             }
