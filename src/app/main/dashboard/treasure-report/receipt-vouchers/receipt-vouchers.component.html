@@ -160,31 +160,23 @@
                                    +reportData['functionalSegment'].combinedCode+' - '+reportData['functionalSegment'].name+', '
                                    +reportData['geoCodeSegment'].combinedCode+' - '+reportData['geoCodeSegment'].name">info</p>
                             </span>
-                            <span class="mat-cell align-items-center" *ngIf="reportData['status'] !== 'NEW'">
-                                <mat-icon class="material-icons"
-                                          (click)="editReceiptVoucher(reportData); $event.stopPropagation()"
-                                          style="color: blue; margin-left: 28px; margin-top: 26px">edit</mat-icon>
-                                <mat-icon class="material-icons"
-                                          (click)="deleteReceiptVoucher(reportData); $event.stopPropagation()"
-                                          style="color: red;">delete</mat-icon>
-                                <mat-icon class="material-icons"
-                                          (click)="downloadPDF(reportData); $event.stopPropagation()"
-                                          title="Download Payment Voucher" style="color: red; margin-left: 5px">picture_as_pdf</mat-icon>
-                                <!--<button mat-icon-button aria-label="Toggle star"
-                                        (click)="editReceiptVoucher(reportData); $event.stopPropagation()"
-                                        style="color: blue; margin-left: 52px; margin-top: 15px">
-                                        <mat-icon class="material-icons">edit</mat-icon>
-                                </button>
-                                <button mat-icon-button aria-label="Toggle star"
-                                        (click)="deleteReceiptVoucher(reportData); $event.stopPropagation()"
-                                        style="color: red">
-                                    <mat-icon class="material-icons">delete</mat-icon>
-                                </button>-->
-                            </span>
-                            <span class="mat-cell align-items-center" *ngIf="reportData['status'] !== 'NEW'">
-                                <p class="material-icons" style="margin-top: 28px; margin-left: 80px">
+                            <span class="mat-cell align-items-center">
+                                <ng-container *ngIf="reportData['status'] !== 'NEW';else newStatus">
+                                    <mat-icon class="material-icons"
+                                                  (click)="editReceiptVoucher(reportData); $event.stopPropagation()"
+                                                  style="color: blue; margin-left: 20px; margin-top: 26px">edit</mat-icon>
+                                    <mat-icon class="material-icons"
+                                              (click)="deleteReceiptVoucher(reportData); $event.stopPropagation()"
+                                              style="color: red;">delete</mat-icon>
+                                    <mat-icon class="material-icons"
+                                              (click)="downloadPDF(reportData); $event.stopPropagation()"
+                                              title="Download Payment Voucher" style="color: red; margin-left: 5px">picture_as_pdf</mat-icon>
+                                </ng-container>
+                                <ng-template #newStatus>
+                                    <p class="material-icons" style="margin-top: 20px; margin-left: 80px" >
                                     -
-                                </p>
+                                    </p>
+                                </ng-template>
                             </span>
                         </mat-expansion-panel-header>
                         <div>

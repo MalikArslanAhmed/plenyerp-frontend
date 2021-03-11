@@ -89,14 +89,15 @@ export class ScheduleEconomicCodesReceiptComponent implements OnInit {
     }
 
     getPayeeEconomicCode() {
-        this.receiptVoucherService.getScheduleEconomic(this.reportData.id, {payeeVoucherId: this.payeeData.id}).subscribe(data => {
+        this.receiptVoucherService.getScheduleEconomic(this.reportData.id, {receiptPayeeId: this.payeeData.id}).subscribe(data => {
             let ledgers = [];
             if (data && data.items && data.items.length > 0) {
                 data.items.forEach(item => {
                     ledgers.push({
-                        'economicSegmentId': item.economicSegmentId,
-                        'economicName': item['economicSegment'].name,
-                        'amount': item.amount
+                        id: item.id,
+                        economicSegmentId: item.economicSegmentId,
+                        economicName: item['economicSegment'].name,
+                        amount: item.amount
                     });
                 });
                 this.ledgers = ledgers;
