@@ -1,13 +1,13 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {fuseAnimations} from "../../../../../../@fuse/animations";
-import {PaymentVoucherTaxesComponent} from "../payment-voucher-taxes/payment-voucher-taxes.component";
-import {NumberToWordsPipe} from "../../../../../shared/pipes/number-to-word.pipe";
-import {AlertService} from "../../../../../shared/services/alert.service";
-import {EmployeeService} from "../../../../../shared/services/employee.service";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {fuseAnimations} from '../../../../../../@fuse/animations';
+import {PaymentVoucherTaxesComponent} from '../payment-voucher-taxes/payment-voucher-taxes.component';
+import {NumberToWordsPipe} from '../../../../../shared/pipes/number-to-word.pipe';
+import {AlertService} from '../../../../../shared/services/alert.service';
+import {EmployeeService} from '../../../../../shared/services/employee.service';
 import {SelectPayeeCustomerComponent} from '../select-payee-customer/select-payee-customer.component';
-import {PaymentVoucherService} from "../../../../../shared/services/payment-voucher.service";
+import {PaymentVoucherService} from '../../../../../shared/services/payment-voucher.service';
 
 @Component({
     selector: 'app-schedule-payee-customer',
@@ -22,11 +22,11 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     schedulePayeeCustomerForm: FormGroup;
     isSubmitted = false;
     salaryScales: any = [];
-    updateData: any;
     dialogRef: any;
     employees = [];
     customers = [];
     payeeData: any;
+    paymentVoucher: any;
     banks = [];
     payeeBankId: any;
     taxIds = [];
@@ -39,19 +39,19 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 private employeesService: EmployeeService,
                 private paymentVoucherService: PaymentVoucherService) {
         if (_data.action === 'EDIT') {
-            this.updateData = _data;
-            this.payeeData = _data.pv;
-            this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | PV - Schedule Payees Customer' : '-';
+            this.payeeData = _data.schedule;
+            this.paymentVoucher = _data.pv;
+            this.dialogTitle = (_data && _data['pv'].types && _data['pv'].types.name) ? _data['pv'].types.name + ' | PV - Schedule Payees Customer' : '-';
         } else {
-            this.payeeData = _data.pv;
-            this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | PV - Schedule Payees Customer' : '-';
+            this.paymentVoucher = _data.pv;
+            this.dialogTitle = (this.paymentVoucher && this.paymentVoucher.types && this.paymentVoucher.types.name) ? this.paymentVoucher.types.name + ' | PV - Schedule Payees Customer' : '-';
         }
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
-        if (this.updateData) {
+        if (this.payeeData) {
             this.patchForm();
         }
     }
@@ -64,23 +64,23 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             companyId: [{'value': '', disabled: true}],
             payeeName: [{'value': '', disabled: true}],
             netAmount: [''],
-            totalTax: [{'value': '', disabled: true}],
+            totalTax: [{'value': 0, disabled: true}],
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}]
         });
-        if (this.payeeData && this.payeeData['valueDate']) {
-            let valArr1 = this.payeeData['valueDate'].split(" ");
-            let valArr2 = valArr1[0].split("-");
+        if (this.paymentVoucher && this.paymentVoucher['valueDate']) {
+            let valArr1 = this.paymentVoucher['valueDate'].split(' ');
+            let valArr2 = valArr1[0].split('-');
 
             this.schedulePayeeCustomerForm.patchValue({
                 'year': valArr2 && valArr2[0] ? valArr2[0] : ''
             });
         }
         this.schedulePayeeCustomerForm.patchValue({
-            'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
+            'departmentalNo': this.paymentVoucher && this.paymentVoucher.deptalId ? this.paymentVoucher.deptalId : ''
         });
 
-        if (this.payeeData && this.payeeData['voucherSourceUnit'] && this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+        if (this.paymentVoucher && this.paymentVoucher['voucherSourceUnit'] && this.paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit) {
             this.schedulePayeeCustomerForm.patchValue({
                 totalTax: 0
             });
@@ -90,21 +90,21 @@ export class SchedulePayeeCustomerComponent implements OnInit {
     patchForm() {
         const numberToWords = new NumberToWordsPipe();
         this.customers = [{
-            'id': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['adminCompany'].id : '',
-            'name': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['adminCompany'].id : '',
+            'id': this.payeeData['adminCompany'] ? this.payeeData['adminCompany'].id : '',
+            'name': this.payeeData['adminCompany'] ? this.payeeData['adminCompany'].id : '',
         }];
-        this.getBanks(this.updateData['pv']['adminCompany'].id);
-        this.payeeBankId = this.updateData['pv']['adminCompany']['companyBank'].bankId;
+        this.getBanks(this.payeeData['adminCompany'].id);
+        this.payeeBankId = this.payeeData['adminCompany']['companyBank'].bankId;
         this.schedulePayeeCustomerForm.patchValue({
-            year: (this.updateData && this.updateData['report']) ? this.updateData['report'].year : '',
-            departmentalNo: (this.updateData && this.updateData['report']) ? this.updateData['report'].deptalId : '',
-            details: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].details : '',
-            companyId: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].companyId : '',
-            payeeName: (this.updateData && this.updateData['pv']) ? this.updateData['pv']['adminCompany'].name : '',
-            netAmount: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].netAmount : '',
-            totalTax: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].totalTax : '',
-            totalAmount: (this.updateData && this.updateData['pv']) ? parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax) : '',
-            totalAmountInWords: numberToWords.transform(parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax))
+            year: this.paymentVoucher.year,
+            departmentalNo: this.paymentVoucher.deptalId,
+            details: this.payeeData.details,
+            companyId: this.payeeData.companyId,
+            payeeName: this.payeeData['adminCompany'].name,
+            netAmount: this.payeeData.netAmount,
+            totalTax: this.payeeData.totalTax,
+            totalAmount: parseInt(this.payeeData.netAmount) + parseInt(this.payeeData.totalTax),
+            totalAmountInWords: numberToWords.transform(parseInt(this.payeeData.netAmount) + parseInt(this.payeeData.totalTax))
         });
     }
 
@@ -115,7 +115,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             'totalAmountInWords': '',
         });
 
-        if (this.payeeData && this.payeeData['voucherSourceUnit'] && this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+        if (this.paymentVoucher && this.paymentVoucher['voucherSourceUnit'] && this.paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit) {
             const numberToWords = new NumberToWordsPipe();
             this.schedulePayeeCustomerForm.patchValue({
                 'totalTax': 0,
@@ -144,7 +144,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             return;
         }
 
-        if (this.schedulePayeeCustomerForm.getRawValue().totalTax === '') {
+        if (this.schedulePayeeCustomerForm.getRawValue().totalTax === '' && (this.paymentVoucher['voucherSourceUnit'] && !this.paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit)) {
             this.alertService.showErrors('Please enter Tax Amount');
             this.isSubmitted = false;
             return;
@@ -172,14 +172,14 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 'payeeBankId': this.payeeBankId ? this.payeeBankId : '',
                 'taxIds': this.taxIds ? JSON.stringify(this.taxIds) : ''
             };
-            if (!this.updateData) {
-                this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
+            if (!this.payeeData) {
+                this.paymentVoucherService.schedulePayee(this.paymentVoucher.id, params).subscribe(data => {
                     this.schedulePayeeCustomerForm.reset();
                     this.matDialogRef.close(this.schedulePayeeCustomerForm);
                     this.isSubmitted = false;
                 });
             } else {
-                this.paymentVoucherService.updateScheduleCompany(this.updateData['report'].id, this.payeeData.id, params).subscribe(data => {
+                this.paymentVoucherService.updateScheduleCompany(this.paymentVoucher.id, this.payeeData.id, params).subscribe(data => {
                     this.schedulePayeeCustomerForm.reset();
                     this.matDialogRef.close(this.schedulePayeeCustomerForm);
                     this.isSubmitted = false;
@@ -196,8 +196,8 @@ export class SchedulePayeeCustomerComponent implements OnInit {
         this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                action: (this.updateData) ? 'EDIT' : 'CREATE',
-                taxIds: (this.updateData && this.updateData['pv'] && this.updateData['pv'].taxIds) ? this.updateData['pv'].taxIds : '',
+                action: (this.payeeData) ? 'EDIT' : 'CREATE',
+                taxIds: (this.payeeData && this.payeeData && this.payeeData.taxIds) ? this.payeeData.taxIds : '',
                 netAmount: this.schedulePayeeCustomerForm.value.netAmount,
             }
         });
@@ -215,10 +215,19 @@ export class SchedulePayeeCustomerComponent implements OnInit {
                 });
             }
             this.schedulePayeeCustomerForm.patchValue({
-                'totalTax': response['totalTaxes'],
-                'totalAmount': parseInt(this.schedulePayeeCustomerForm.value.netAmount) + parseInt(response['totalTaxes']),
-                'totalAmountInWords': numberToWords.transform(parseInt(this.schedulePayeeCustomerForm.value.netAmount) + parseInt(response['totalTaxes']))
+                totalTax: response['totalTaxes'],
+                totalAmount: parseInt(this.schedulePayeeCustomerForm.value.netAmount) + parseInt(response['totalTaxes']),
+                totalAmountInWords: numberToWords.transform(parseInt(this.schedulePayeeCustomerForm.value.netAmount) + parseInt(response['totalTaxes']))
             });
+        });
+    }
+
+    calculateTotalAmount() {
+        const numberToWords = new NumberToWordsPipe();
+        const totalAmount = parseInt(this.schedulePayeeCustomerForm.value.netAmount) + parseInt(this.schedulePayeeCustomerForm.value.totalTax || 0);
+        this.schedulePayeeCustomerForm.patchValue({
+            totalAmount: totalAmount,
+            totalAmountInWords: numberToWords.transform(totalAmount)
         });
     }
 

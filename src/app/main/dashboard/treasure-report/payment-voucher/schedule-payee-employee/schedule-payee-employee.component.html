@@ -41,13 +41,13 @@
             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Net Amount</mat-label>
-                    <input matInput placeholder="Net Amount" formControlName="netAmount" type="number" (change)="resetTax()">
+                    <input matInput placeholder="Net Amount" formControlName="netAmount" type="number" (change)="resetTax()" (focusout)="calculateTotalAmount()">
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Taxes Amount</mat-label>
                     <input matInput placeholder="Taxes Amount" formControlName="totalTax">
                 </mat-form-field>
-                <div fxLayout="row" fxLayoutAlign="center" *ngIf="this.payeeData['voucherSourceUnit'] && !this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit">
+                <div fxLayout="row" fxLayoutAlign="center" *ngIf="this.paymentVoucher['voucherSourceUnit'] && !this.paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit">
                     <button mat-button class="add-taxes" (click)="addApplicableTaxes()">Add Taxes</button>
                 </div>
                 <mat-form-field appearance="outline" fxFlex>
@@ -154,11 +154,11 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button"
                 (click)="savePayeeEmployee()"
-                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="!this.updateData">ADD
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="!this.payeeData">ADD
         </button>
         <button mat-button class="save-button"
                 (click)="savePayeeEmployee()"
-                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="this.updateData">UPDATE
+                [disabled]="schedulePayeeEmployeeForm.invalid" aria-label="Save" *ngIf="this.payeeData">UPDATE
         </button>
     </div>
 </div>

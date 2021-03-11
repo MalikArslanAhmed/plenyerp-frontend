@@ -21,13 +21,13 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     schedulePayeeEmployeeForm: FormGroup;
     isSubmitted = false;
     salaryScales: any = [];
-    updateData: any;
     dialogRef: any;
     employees = [];
     payingOfficers = [];
     checkingOfficers = [];
     financialControllers = [];
     payeeData: any;
+    paymentVoucher: any;
     banks = [];
     payeeBankId: any;
     taxIds = [];
@@ -40,19 +40,19 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 private employeesService: EmployeeService,
                 private paymentVoucherService: PaymentVoucherService) {
         if (_data.action === 'EDIT') {
-            this.updateData = _data;
-            this.payeeData = _data.pv;
-            this.dialogTitle = (_data && _data['report'].types && _data['report'].types.name) ? _data['report'].types.name + ' | PV - Schedule Payees Employee' : '-';
+            this.payeeData = _data.schedule;
+            this.paymentVoucher = _data.pv;
+            this.dialogTitle = (_data && _data['pv'].types && _data['pv'].types.name) ? _data['pv'].types.name + ' | PV - Schedule Payees Employee' : '-';
         } else {
-            this.payeeData = _data.pv;
-            this.dialogTitle = (this.payeeData && this.payeeData.types && this.payeeData.types.name) ? this.payeeData.types.name + ' | PV - Schedule Payees Employee' : '-';
+            this.paymentVoucher = _data.pv;
+            this.dialogTitle = (this.paymentVoucher && this.paymentVoucher.types && this.paymentVoucher.types.name) ? this.paymentVoucher.types.name + ' | PV - Schedule Payees Employee' : '-';
         }
     }
 
     ngOnInit(): void {
         this.refresh();
         this.getEmployees();
-        if (this.updateData) {
+        if (this.payeeData) {
             this.patchForm();
         }
     }
@@ -65,12 +65,12 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             employeeId: [{'value': '', disabled: true}],
             payeeName: [{'value': '', disabled: true}],
             netAmount: [''],
-            totalTax: [{'value': '', disabled: true}],
+            totalTax: [{'value': 0, disabled: true}],
             totalAmount: [{'value': '', disabled: true}],
             totalAmountInWords: [{'value': '', disabled: true}]
         });
-        if (this.payeeData && this.payeeData['valueDate']) {
-            let valArr1 = this.payeeData['valueDate'].split(" ");
+        if (this.paymentVoucher && this.paymentVoucher['valueDate']) {
+            let valArr1 = this.paymentVoucher['valueDate'].split(" ");
             let valArr2 = valArr1[0].split("-");
 
             this.schedulePayeeEmployeeForm.patchValue({
@@ -78,10 +78,10 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             });
         }
         this.schedulePayeeEmployeeForm.patchValue({
-            'departmentalNo': this.payeeData && this.payeeData.deptalId ? this.payeeData.deptalId : ''
+            'departmentalNo': this.paymentVoucher && this.paymentVoucher.deptalId ? this.paymentVoucher.deptalId : ''
         });
 
-        if (this.payeeData && this.payeeData['voucherSourceUnit'] && this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+        if (this.paymentVoucher && this.paymentVoucher['voucherSourceUnit'] && this.paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit) {
             this.schedulePayeeEmployeeForm.patchValue({
                 totalTax: 0
             });
@@ -91,21 +91,21 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
     patchForm() {
         const numberToWords = new NumberToWordsPipe();
         this.payingOfficers = [{
-            'id': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['employee'].id : '',
-            'name': (this.updateData && this.updateData['pv']) ? this.updateData['pv']['employee'].id : '',
+            'id': this.payeeData['employee'] ? this.payeeData['employee'].id : '',
+            'name': this.payeeData['employee'] ? this.payeeData['employee'].id : '',
         }];
-        this.getBanks(this.updateData['pv']['employee'].id);
-        this.payeeBankId = this.updateData['pv']['employee']['employeeBank'].bankId;
+        this.getBanks(this.payeeData['employee'].id);
+        this.payeeBankId = this.payeeData['employee']['employeeBank'].bankId;
         this.schedulePayeeEmployeeForm.patchValue({
-            year: (this.updateData && this.updateData['report']) ? this.updateData['report'].year : '',
-            departmentalNo: (this.updateData && this.updateData['report']) ? this.updateData['report'].deptalId : '',
-            details: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].details : '',
-            employeeId: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].employeeId : '',
-            payeeName: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].employee.firstName + ' ' + this.updateData['pv'].employee.lastName : '',
-            netAmount: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].netAmount : '',
-            totalTax: (this.updateData && this.updateData['pv']) ? this.updateData['pv'].totalTax : '',
-            totalAmount: (this.updateData && this.updateData['pv']) ? parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax) : '',
-            totalAmountInWords: numberToWords.transform(parseInt(this.updateData['pv'].netAmount) + parseInt(this.updateData['pv'].totalTax))
+            year: this.paymentVoucher.year,
+            departmentalNo: this.paymentVoucher.deptalId,
+            details: this.payeeData.details,
+            employeeId: this.payeeData.employeeId,
+            payeeName: this.payeeData.employee.firstName + ' ' + this.payeeData.employee.lastName,
+            netAmount: this.payeeData.netAmount,
+            totalTax: this.payeeData.totalTax,
+            totalAmount: parseInt(this.payeeData.netAmount) + parseInt(this.payeeData.totalTax),
+            totalAmountInWords: numberToWords.transform(parseInt(this.payeeData.netAmount) + parseInt(this.payeeData.totalTax))
         });
     }
 
@@ -116,7 +116,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             'totalAmountInWords': '',
         });
 
-        if (this.payeeData && this.payeeData['voucherSourceUnit'] && this.payeeData['voucherSourceUnit'].isPersonalAdvanceUnit) {
+        if (this.paymentVoucher && this.paymentVoucher['voucherSourceUnit'] && this.paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit) {
             const numberToWords = new NumberToWordsPipe();
             this.schedulePayeeEmployeeForm.patchValue({
                 'totalTax': 0,
@@ -145,7 +145,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             return;
         }
 
-        if (this.schedulePayeeEmployeeForm.getRawValue().totalTax === '') {
+        if (this.schedulePayeeEmployeeForm.getRawValue().totalTax === '' && (this.paymentVoucher['voucherSourceUnit'] && !this.paymentVoucher['voucherSourceUnit'].isPersonalAdvanceUnit)) {
             this.alertService.showErrors('Please enter Tax Amount');
             this.isSubmitted = false;
             return;
@@ -173,14 +173,14 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 'payeeBankId': this.payeeBankId ? this.payeeBankId : '',
                 'taxIds': this.taxIds ? JSON.stringify(this.taxIds) : ''
             };
-            if (!this.updateData) {
-                this.paymentVoucherService.schedulePayee(this.payeeData.id, params).subscribe(data => {
+            if (!this.payeeData) {
+                this.paymentVoucherService.schedulePayee(this.paymentVoucher.id, params).subscribe(data => {
                     this.schedulePayeeEmployeeForm.reset();
                     this.matDialogRef.close(this.schedulePayeeEmployeeForm);
                     this.isSubmitted = false;
                 });
             } else {
-                this.paymentVoucherService.updateSchedulePayee(this.updateData['report'].id, this.payeeData.id, params).subscribe(data => {
+                this.paymentVoucherService.updateSchedulePayee(this.paymentVoucher.id, this.payeeData.id, params).subscribe(data => {
                     this.schedulePayeeEmployeeForm.reset();
                     this.matDialogRef.close(this.schedulePayeeEmployeeForm);
                     this.isSubmitted = false;
@@ -197,8 +197,8 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
         this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
-                action: (this.updateData) ? 'EDIT' : 'CREATE',
-                taxIds: (this.updateData && this.updateData['pv'] && this.updateData['pv'].taxIds) ? this.updateData['pv'].taxIds : '',
+                action: (this.payeeData) ? 'EDIT' : 'CREATE',
+                taxIds: (this.payeeData && this.payeeData && this.payeeData.taxIds) ? this.payeeData.taxIds : '',
                 netAmount: this.schedulePayeeEmployeeForm.value.netAmount,
             }
         });
@@ -216,10 +216,19 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
                 });
             }
             this.schedulePayeeEmployeeForm.patchValue({
-                'totalTax': response['totalTaxes'],
-                'totalAmount': parseInt(this.schedulePayeeEmployeeForm.value.netAmount) + parseInt(response['totalTaxes']),
-                'totalAmountInWords': numberToWords.transform(parseInt(this.schedulePayeeEmployeeForm.value.netAmount) + parseInt(response['totalTaxes']))
+                totalTax: response['totalTaxes'],
+                totalAmount: parseInt(this.schedulePayeeEmployeeForm.value.netAmount) + parseInt(response['totalTaxes']),
+                totalAmountInWords: numberToWords.transform(parseInt(this.schedulePayeeEmployeeForm.value.netAmount) + parseInt(response['totalTaxes']))
             });
+        });
+    }
+
+    calculateTotalAmount() {
+        const numberToWords = new NumberToWordsPipe();
+        const totalAmount = parseInt(this.schedulePayeeEmployeeForm.value.netAmount) + parseInt(this.schedulePayeeEmployeeForm.value.totalTax || 0);
+        this.schedulePayeeEmployeeForm.patchValue({
+            totalAmount: totalAmount,
+            totalAmountInWords: numberToWords.transform(totalAmount)
         });
     }
 

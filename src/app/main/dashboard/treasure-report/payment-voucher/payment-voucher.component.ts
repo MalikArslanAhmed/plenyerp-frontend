@@ -350,7 +350,7 @@ export class PaymentVoucherComponent implements OnInit {
     editSchedulePayeeEmployee(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'pv': data, 'report': report}
+            data: {'action': 'EDIT', 'pv': report, 'schedule': data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -369,7 +369,7 @@ export class PaymentVoucherComponent implements OnInit {
     editSchedulePayeeCustomer(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayeeCustomerComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'pv': data, 'report': report}
+            data: {'action': 'EDIT', 'pv': report, 'schedule': data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
