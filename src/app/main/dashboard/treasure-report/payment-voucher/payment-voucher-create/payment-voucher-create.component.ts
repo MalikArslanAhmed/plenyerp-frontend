@@ -521,11 +521,19 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 'financialControllerId': this.schedulePayeeEmployeeForm.getRawValue().financialControllerId ? this.schedulePayeeEmployeeForm.getRawValue().financialControllerId : '',
             };
             params['type'] = this.sourceType;
-            this.paymentVoucherService.save(params).subscribe(data => {
-                this.schedulePayeeEmployeeForm.reset();
-                this.isSubmitted = false;
-                this.matDialogRef.close(this.schedulePayeeEmployeeForm);
-            });
+            if (!this.updatedData) {
+                this.paymentVoucherService.save(params).subscribe(data => {
+                    this.schedulePayeeEmployeeForm.reset();
+                    this.isSubmitted = false;
+                    this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+                });
+            }else  {
+                this.paymentVoucherService.update(this.updatedData.id, params).subscribe(data => {
+                    this.schedulePayeeEmployeeForm.reset();
+                    this.isSubmitted = false;
+                    this.matDialogRef.close(this.schedulePayeeEmployeeForm);
+                });
+            }
         }
     }
 
