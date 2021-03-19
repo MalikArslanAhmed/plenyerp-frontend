@@ -140,7 +140,7 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
 
         this.addDetailForm.patchValue({
             'lineValue': (this.updateData && this.updateData.lineValue) ? this.updateData.lineValue : '',
-            'adminSegmentCode': (this.updateData && this.updateData.adminSegment) ? this.updateData.adminSegment.id : '',
+            'adminSegmentCode': (this.updateData && this.upd.valueateData.adminSegment) ? this.updateData.adminSegment.id : '',
             'adminSegmentId': (this.updateData && this.updateData.adminSegment) ? this.updateData.adminSegment.id : '',
             'currency': (this.updateData && this.updateData.currency) ? this.updateData.currency : '',
             'fundSegmentCode': (this.updateData && this.updateData.fundSegment) ? this.updateData.fundSegment.id : '',
@@ -299,7 +299,7 @@ export class JournalVoucherDetailCreateComponent implements OnInit {
             'functionalSegmentId': this.addDetailForm.value.functionalSegmentId ? this.addDetailForm.value.functionalSegmentId : '',
             'geoCodeSegmentId': this.addDetailForm.value.geoCodeSegmentId ? this.addDetailForm.value.geoCodeSegmentId : '',
             'lineValueType': this.addDetailForm.value.lineValueType ? this.addDetailForm.value.lineValueType : '',
-            'lvLineValue': this.addDetailForm.value.lvLineValue ? this.addDetailForm.value.lvLineValue : '',
+            'lvLineValue': this.addDetailForm.getRawValue().lvLineValue ? this.addDetailForm.getRawValue().lvLineValue : '',
             'adminSegmentName': this.adminSegments[0] && this.adminSegments[0].name ? this.adminSegments[0].name : '',
             'fundSegmentName': this.fundSegmentsAddDet[0] && this.fundSegmentsAddDet[0].name ? this.fundSegmentsAddDet[0].name : '',
             'economicSegmentName': this.economicSegments[0] && this.economicSegments[0].name ? this.economicSegments[0].name : '',
