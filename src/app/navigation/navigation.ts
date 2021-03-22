@@ -702,28 +702,32 @@ export const navigation: FuseNavigation[] = [
                         title: 'JV Ledger Sibling',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/jv-ledger-sibling'
+                        url: 'dashboard/jv-ledger-sibling',
+                        permissions: [PermissionConstant.REPORTS_FINANCE_JV_LEDGER_SIBLING_VIEW_REPORT]
                     },
                     {
                         id: 'statement-of-position',
                         title: 'Statement of Position Report',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/statement-of-position'
+                        url: 'dashboard/statement-of-position',
+                        permissions: [PermissionConstant.REPORTS_JV_LEDGER_REPORT_STATEMENT_OF_POSTION]
                     },
                     {
                         id: 'financial-performance',
                         title: 'Financial Performance',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/financial-performance'
+                        url: 'dashboard/financial-performance',
+                        permissions: [PermissionConstant.REPORTS_JV_LEDGER_REPORT_FINANCIAL_PERFORMANCE]
                     },
                     {
                         id: 'monthly-activity',
                         title: 'Monthly Activity',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/monthly-activity'
+                        url: 'dashboard/monthly-activity',
+                        permissions: [PermissionConstant.REPORTS_JV_LEDGER_MONTHLY_ACTIVITY]
                     },
                     {
                         id: 'ifr-notes-master',
@@ -731,7 +735,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/ifr-notes-master',
-                        permissions: []
+                        permissions: [PermissionConstant.REPORTS_FINANCE_IFR_NOTES_MASTER]
                     },
                     {
                         id: 'ifr-reports',
@@ -782,7 +786,7 @@ export const navigation: FuseNavigation[] = [
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
                         url: '/dashboard/payment-voucher',
-                        permissions: []
+                        permissions: [PermissionConstant.PV_VOUCHER_DETAILS_LIST]
                     },
                     {
                         id: 'receipt-voucher',
@@ -791,7 +795,7 @@ export const navigation: FuseNavigation[] = [
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
                         url: '/dashboard/receipt-voucher',
-                        permissions: []
+                        permissions: [PermissionConstant.RV_LIST]
                     },
                     {
                         id: 'retire-vouchers',
@@ -800,7 +804,7 @@ export const navigation: FuseNavigation[] = [
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
                         url: '/dashboard/retire-vouchers',
-                        permissions: []
+                        permissions: [PermissionConstant.PV_VOUCHER_DETAILS_LIST]
                     },
                     {
                         id: 'payment-approval',
@@ -809,7 +813,7 @@ export const navigation: FuseNavigation[] = [
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
                         url: '/dashboard/payment-approval',
-                        permissions: []
+                        permissions: [PermissionConstant.PAYMENT_APPROVAL_LIST]
                     },
                     {
                         id: 'previous-year-advances',
@@ -818,7 +822,7 @@ export const navigation: FuseNavigation[] = [
                         // translate: 'NAV.CALENDAR',
                         type: 'item',
                         url: '/dashboard/previous-year-advance',
-                        permissions: []
+                        permissions: [PermissionConstant.PYA_LIST]
                     },
                 ]
             },
@@ -830,7 +834,7 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'local_offer',
                 url: '/dashboard/voucher-source-unit',
-                permissions: []
+                permissions: [PermissionConstant.VSU_LIST]
             },
             {
                 id: 'cashbook',
@@ -840,7 +844,7 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'payment',
                 url: '/dashboard/cashbook-account',
-                permissions: []
+                permissions: [PermissionConstant.CASHBOOK_LIST]
             },
             {
                 id: 'om-mandate',
@@ -850,7 +854,7 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'payment',
                 url: '/dashboard/on-mandate',
-                permissions: []
+                permissions: [PermissionConstant.MANDATE_LIST]
             },
             {
                 id: 'default-setting',
@@ -860,7 +864,7 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'admin_panel_settings',
                 url: '/dashboard/default-setting-voucher-info',
-                permissions: []
+                permissions: [PermissionConstant.DEFAULT_SETTINGS_EDIT]
             },
             {
                 id: 'payment-report',
@@ -877,7 +881,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/pv-list',
-                        permissions: []
+                        permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
                     },
                     {
                         id: 'rv-reports',
@@ -885,7 +889,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/rv-list',
-                        permissions: []
+                        permissions: [PermissionConstant.REPORTS_TREASURY_RV_VIEW_REPORTS]
                     },
                     {
                         id: 'summary-non-personal-advances',
@@ -893,7 +897,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-non-personal-advances',
-                        permissions: []
+                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_NON_PERSONAL_ADVANCES_VIEW_DEPARTMENT_REPORT]
                     },
                     {
                         id: 'summary-personal-advances',
@@ -901,7 +905,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-personal-advances',
-                        permissions: []
+                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_PERSONAL_ADVANCES_VIEW_DEPARTMENT_REPORT]
                     },
                     {
                         id: 'summary-standing-imprest',
@@ -909,7 +913,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-standing-imprest',
-                        permissions: []
+                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_STANDING_IMPREST_VIEW_DEPARTMENT_REPORT]
                     },
                     {
                         id: 'summary-special-imprest',
@@ -917,7 +921,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-special-imprest',
-                        permissions: []
+                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_SPECIAL_IMPREST_VIEW_DEPARTMENT_REPORT]
                     },
                     {
                         id: 'advances-ledger-by-employee',
@@ -925,7 +929,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/advances-ledger-by-employee',
-                        permissions: []
+                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_ADVANCE_LEDGER_VIEW_REPORT]
                     }
                 ]
             },
