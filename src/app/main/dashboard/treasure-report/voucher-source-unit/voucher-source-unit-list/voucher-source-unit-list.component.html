@@ -65,6 +65,7 @@
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                     <button mat-icon-button aria-label="Toggle star" (click)="editVoucherSourceUnit(voucherSource)"
+                            appPermissionBind [permission]="permissionAddEdit"
                             style="color: blue; margin-right: 20px" *ngIf="voucherSource.isEditable">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>

@@ -6,6 +6,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {PageEvent} from '@angular/material/paginator';
 import {Router} from '@angular/router';
 import {TreasureReportService} from '../../../../../shared/services/treasure-report.service';
+import {PermissionConstant} from '../../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-voucher-source-unit-list',
@@ -16,6 +17,7 @@ import {TreasureReportService} from '../../../../../shared/services/treasure-rep
 })
 export class VoucherSourceUnitListComponent implements OnInit {
     voucherSourceUnitList = [];
+    permissionAddEdit = [ PermissionConstant.VSU_EDIT];
     displayedCountryColumns = ['sNo', 'refNo', 'long_name', 'short_name', 'next_pv_index_no', 'next_rv_index_no', 'actions'];
     dialogRef: any;
     selectIndex = 0;

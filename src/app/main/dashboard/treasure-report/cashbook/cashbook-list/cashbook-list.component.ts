@@ -7,6 +7,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {DeleteListModalComponent} from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import {Router} from '@angular/router';
 import {CashbookService} from '../../../../../shared/services/cashbook.service';
+import {PermissionConstant} from '../../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-cashbook-list',
@@ -26,6 +27,10 @@ export class CashbookListComponent implements OnInit {
         perpage: 15,
         pages: null
     };
+    permissionEditCashbook = [PermissionConstant.CASHBOOK_EDIT];
+    permissionDelCashbook = [PermissionConstant.CASHBOOK_DELETE];
+
+
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 

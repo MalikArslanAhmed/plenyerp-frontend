@@ -11,6 +11,7 @@ import {BudgetControlService} from 'app/shared/services/budget-control.service';
 import {DeleteListModalComponent} from '../delete-list-modal/delete-list-modal.component';
 import {EconomicSegmentSelectComponent} from '../journal-voucher/economic-segment-select/economic-segment-select.component';
 import {AlertService} from "../../../shared/services/alert.service";
+import {PermissionConstant} from '../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-budget-control',
@@ -20,6 +21,11 @@ import {AlertService} from "../../../shared/services/alert.service";
     animations: fuseAnimations
 })
 export class BudgetControlComponent implements OnInit {
+
+    permissionAddBud = [PermissionConstant.BUDGET_CONTROL_ECONOMIC_ADD];
+    permissionSearchBud = [PermissionConstant.BUDGET_CONTROL_ECONOMIC_DELETE];
+    permissionEditBud = [PermissionConstant.BUDGET_CONTROL_ECONOMIC_EDIT];
+    permissionDelBud = [PermissionConstant.BUDGET_CONTROL_ECONOMIC_VIEW_LIST];
     dialogRef: any;
     departments = [];
     departmentAllIds = [];

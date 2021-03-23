@@ -9,8 +9,10 @@ import {AlertService} from '../../../../shared/services/alert.service';
 import {PaymentVoucherService} from '../../../../shared/services/payment-voucher.service';
 import * as moment from 'moment';
 import {TreasureReportService} from '../../../../shared/services/treasure-report.service';
-import {ScheduleEconomicCodesComponent} from "./schedule-economic-codes/schedule-economic-codes.component";
-import {Router} from "@angular/router";
+import {ScheduleEconomicCodesComponent} from './schedule-economic-codes/schedule-economic-codes.component';
+import {Router} from '@angular/router';
+import {PermissionConstant} from '../../../../shared/constants/permission-constant';
+
 
 @Component({
     selector: 'app-payment-voucher',
@@ -23,13 +25,21 @@ export class PaymentVoucherComponent implements OnInit {
     filterPaymentVoucherForm: FormGroup;
     createPaymentVoucherForm: FormGroup;
     paymentVoucherData = [];
-    panelOpenState: boolean = false;
+    panelOpenState = false;
     sourceUnit = [];
     statuses = [];
     types = [];
     dialogRef: any;
     status = 'ALL';
     selectedStatus = [];
+    permissionAddPv = [PermissionConstant.PV_VOUCHER_DETAILS_ADD];
+    permissionEditPv = [PermissionConstant.PV_VOUCHER_EDIT];
+    permissionDelPv = [PermissionConstant.PV_VOUCHER_DELETE];
+    permissionPDFPv = [PermissionConstant.PV_VOUCHER_EXPORT_PDF];
+    permissionAddPayee = [PermissionConstant.PV_VOUCHER_SCHEDULE_PAYEE_EMPLOYEES_ADD];
+    permissionEditPayee = [PermissionConstant.PV_VOUCHER_SCHEDULE_PAYEE_ECONOMIC_CODES_ADD];
+    permissionAddSchCodes = [PermissionConstant.PV_VOUCHER_SCHEDULE_ECONOMIC_CODE_ADD];
+    permissionEditSchCodes = [PermissionConstant.PV_VOUCHER_SCHEDULE_PAYEE_ECONOMIC_CODES_ADD];
     pagination = {
         page: 1,
         total: null,
@@ -54,13 +64,13 @@ export class PaymentVoucherComponent implements OnInit {
 
     refresh() {
         this.filterPaymentVoucherForm = this.fb.group({
-            'status': ['ALL'],
-            'search': [''],
-            'sourceUnit': ['']
+            status: ['ALL'],
+            search: [''],
+            sourceUnit: ['']
         });
         this.createPaymentVoucherForm = this.fb.group({
-            'sourceUnit': [''],
-            'type': ['']
+            sourceUnit: [''],
+            type: ['']
         });
         this.createPaymentVoucherForm.get('sourceUnit').valueChanges.subscribe(val => {
             this.types = [];
@@ -72,7 +82,7 @@ export class PaymentVoucherComponent implements OnInit {
     }
 
     getPaymentVoucher(params?) {
-        let param = {
+        const param = {
             ...params,
             page: this.pagination.page
         };
@@ -146,7 +156,7 @@ export class PaymentVoucherComponent implements OnInit {
     }
 
     filterPaymentVoucher() {
-        let params = {};
+        const params = {};
         if (this.filterPaymentVoucherForm.value.status !== 'ALL') {
             params['status'] = this.filterPaymentVoucherForm.value.status;
         }
@@ -176,13 +186,13 @@ export class PaymentVoucherComponent implements OnInit {
                 }
             });
 
-            let selectedSource = [];
+            const selectedSource = [];
             this.sourceUnit.forEach(source => {
                 if (source.id === this.createPaymentVoucherForm.value['sourceUnit']) {
                     selectedSource.push({
-                        'name': source.id + ' - ' + source.longName,
-                        'value': source.id,
-                        'isPersonalAdvanceUnit': source.isPersonalAdvanceUnit
+                        name: source.id + ' - ' + source.longName,
+                        value: source.id,
+                        isPersonalAdvanceUnit: source.isPersonalAdvanceUnit
                     });
                 }
             });
@@ -319,7 +329,7 @@ export class PaymentVoucherComponent implements OnInit {
     editPaymentVoucher(data) {
         this.dialogRef = this._matDialog.open(PaymentVoucherCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'item': data}
+            data: {action: 'EDIT', item: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -350,7 +360,7 @@ export class PaymentVoucherComponent implements OnInit {
     editSchedulePayeeEmployee(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayeeEmployeeComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'pv': report, 'schedule': data}
+            data: {action: 'EDIT', pv: report, schedule: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -369,7 +379,7 @@ export class PaymentVoucherComponent implements OnInit {
     editSchedulePayeeCustomer(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayeeCustomerComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'pv': report, 'schedule': data}
+            data: {action: 'EDIT', pv: report, schedule: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {

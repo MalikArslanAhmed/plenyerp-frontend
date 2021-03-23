@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import {PaymentReportService} from '../../../shared/services/payment-report.service';
 import {RvReportListHeadersComponent} from './rv-report-list-headers/rv-report-list-headers.component';
 import {RvReportService} from '../../../shared/services/rv-report.service';
+import {PermissionConstant} from '../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-rv-report-list',
@@ -16,6 +17,10 @@ import {RvReportService} from '../../../shared/services/rv-report.service';
     animations: fuseAnimations
 })
 export class RvReportListComponent implements OnInit {
+
+    permissionAddColumn = [ PermissionConstant.REPORTS_TREASURY_RV_ADD_COLUMNS];
+    permissionOpenCloseAll = [ PermissionConstant.REPORTS_TREASURY_RV_CLOSE_OPEN_REPORTS];
+    permissionDownload = [ PermissionConstant.REPORTS_TREASURY_RV_DOWNLOAD_REPORT];
     dialogRef: any;
     rvPaymentReportForm: FormGroup;
     rvPaymentReportData = [];

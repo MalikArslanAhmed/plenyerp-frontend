@@ -11,6 +11,7 @@ import {PreviousYearAdvancesService} from "../../../../shared/services/previous-
 import {PaymentVoucherService} from "../../../../shared/services/payment-voucher.service";
 import {SchedulePayersEmployeePreviousAdvancesComponent} from "./schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component";
 import {SchedulePayersCustomerPreviousAdvancesComponent} from "./schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component";
+import {PermissionConstant} from '../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-previous-year-advances',
@@ -36,6 +37,12 @@ export class PreviousYearAdvancesComponent implements OnInit {
         perpage: 15,
         pages: null
     };
+
+    permissionPYAAdd = [PermissionConstant.PYA_ADD];
+    permissionPYAEdit = [PermissionConstant.PYA_EDIT];
+    permissionPYADelete = [PermissionConstant.PYA_DELETE];
+    permissionPYAClose = [PermissionConstant.PYA_CLOSE];
+    permissionPYAPost = [PermissionConstant.PYA_POST];
 
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,

@@ -35,6 +35,7 @@
                 <div fxFlex="row" fxLayoutAlign="end center">
                     <div>
                         <button mat-icon-button aria-label="Toggle star" (click)="editCashbook(cashbook)"
+                                appPermissionBind [permission]="permissionEditCashbook"
                                 style="color: blue; margin-left: 1rem">
                             <mat-icon class="material-icons">edit</mat-icon>
                         </button>
@@ -42,6 +43,7 @@
                     <div>
                         <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModel(cashbook)"
                                 style="color: red">
+                            appPermissionBind [permission]="permissionDelCashbook"
                             <mat-icon class="material-icons">delete</mat-icon>
                         </button>
                     </div>

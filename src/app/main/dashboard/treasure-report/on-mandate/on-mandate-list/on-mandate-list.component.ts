@@ -8,6 +8,7 @@ import {fuseAnimations} from "../../../../../../@fuse/animations";
 import {MandateService} from "../../../../../shared/services/mandate.service";
 import {OnMandateCreateComponent} from "../on-mandate-create/on-mandate-create.component";
 import * as moment from "moment";
+import {PermissionConstant} from '../../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-on-mandate-list',
@@ -26,6 +27,9 @@ export class OnMandateListComponent implements OnInit {
         perpage: 15,
         pages: null
     };
+
+    permissionUpdateMandate = [PermissionConstant.MANDATE_EDIT];
+    permissionChangeStatusMandate = [PermissionConstant.MANDATE_CHANGE_STATUS];
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
     statuses = [

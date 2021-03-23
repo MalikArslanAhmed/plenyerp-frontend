@@ -9,6 +9,7 @@ import {EconomicSegmentSelectComponent} from '../journal-voucher/economic-segmen
 import {PaymentReportService} from '../../../shared/services/payment-report.service';
 import {EmpListHeadersComponent} from '../employees/employee-list/emp-list-headers/emp-list-headers.component';
 import {ReportListHeadersComponent} from './report-list-headers/report-list-headers.component';
+import {PermissionConstant} from '../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-payment-report',
@@ -18,6 +19,9 @@ import {ReportListHeadersComponent} from './report-list-headers/report-list-head
     animations: fuseAnimations
 })
 export class PaymentReportComponent implements OnInit {
+    permissionAddColumn = [ PermissionConstant.REPORTS_TREASURY_PV_ADD_COLUMNS];
+    permissionOpenCloseAll = [ PermissionConstant.REPORTS_TREASURY_PV_CLOSE_OPEN_REPORTS];
+    permissionDownload = [ PermissionConstant.REPORTS_TREASURY_PV_DOWNLOAD_REPORT];
     dialogRef: any;
     paymentReportForm: FormGroup;
     paymentReportData = [];

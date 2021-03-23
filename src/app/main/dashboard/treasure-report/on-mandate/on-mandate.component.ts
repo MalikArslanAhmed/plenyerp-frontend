@@ -20,6 +20,7 @@ export class OnMandateComponent implements OnInit {
     filterMandateForm: FormGroup;
     @ViewChild(OnMandateListComponent) getMandateList: OnMandateListComponent;
     permissionAddRoles = [PermissionConstant.ROLES_ADD];
+    permissionAddMandate = [PermissionConstant.MANDATE_ADD];
     statuses = [
         {
             'name': 'New',

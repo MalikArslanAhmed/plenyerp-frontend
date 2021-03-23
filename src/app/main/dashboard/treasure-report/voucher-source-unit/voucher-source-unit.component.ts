@@ -17,7 +17,7 @@ import {PermissionConstant} from 'app/shared/constants/permission-constant';
 export class VoucherSourceUnitComponent implements OnInit {
     dialogRef: any;
     searchVoucherSourceForm: FormGroup;
-    permissionAddRoles = [PermissionConstant.ROLES_ADD];
+    permissionAddRoles = [PermissionConstant.ROLES_ADD, PermissionConstant.VSU_ADD];
     @ViewChild(VoucherSourceUnitListComponent) getUserRoleList: VoucherSourceUnitListComponent;
 
     constructor(

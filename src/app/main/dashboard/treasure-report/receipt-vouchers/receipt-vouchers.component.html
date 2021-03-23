@@ -33,7 +33,7 @@
                                         *ngFor="let type of types">{{type.name | titlecase}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <div fxFlex class="width-200px p-10px mt-13px">
+                    <div fxFlex class="width-200px p-10px mt-13px" appPermissionBind [permission]="permissionRvAdd">
                         <button mat-button class="submit-report" (click)="addReceiptVoucher()">
                             <mat-icon class="material-icons cursor-pointer whiteColor mr-10px">add_circle</mat-icon>
                             Receipt Voucher
@@ -83,6 +83,7 @@
                             {{statuses[0].name}}
                         </button>
                         <button mat-button class="update-report"
+                                appPermissionBind [permission]="permissionRvStatus"
                                 *ngIf="status !== 'ALL' && selectedStatus && selectedStatus.length > 0"
                                 (click)="updateStatus( selectedStatus[0].value)">
                             {{selectedStatus[0].name}}
@@ -163,12 +164,15 @@
                             <span class="mat-cell align-items-center">
                                 <ng-container *ngIf="reportData['status'] !== 'NEW';else newStatus">
                                     <mat-icon class="material-icons"
+                                              appPermissionBind [permission]="permissionRvDetailEdit" [customDisplaySetting]="'inline-block'"
                                                   (click)="editReceiptVoucher(reportData); $event.stopPropagation()"
                                                   style="color: blue; margin-left: 20px; margin-top: 26px">edit</mat-icon>
                                     <mat-icon class="material-icons"
+                                              appPermissionBind [permission]="permissionRvDelete" [customDisplaySetting]="'inline-block'"
                                               (click)="deleteReceiptVoucher(reportData); $event.stopPropagation()"
                                               style="color: red;">delete</mat-icon>
                                     <mat-icon class="material-icons"
+                                              appPermissionBind [permission]="permissionRvPdfDownload" [customDisplaySetting]="'inline-block'"
                                               (click)="downloadPDF(reportData); $event.stopPropagation()"
                                               title="Download Payment Voucher" style="color: red; margin-left: 5px">picture_as_pdf</mat-icon>
                                 </ng-container>
@@ -304,24 +308,28 @@
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="editSchedulePayerEmployee(data, reportData); $event.stopPropagation()"
                                                                 style="color: blue; margin-left: -13px"
+                                                                appPermissionBind [permission]="permissionRvPayeeEdit"
                                                                 *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="deleteSchedulePayerEmployee(reportData, data); $event.stopPropagation()"
                                                                 style="color: red"
+                                                                appPermissionBind [permission]="permissionRvPayeeEdit"
                                                                 *ngIf="reportData.status === 'NEW' && reportData.payee === 'EMPLOYEE'">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="editSchedulePayerCustomer(data, reportData); $event.stopPropagation()"
                                                                 style="color: blue; margin-left: -13px"
+                                                                appPermissionBind [permission]="permissionRvPayeeEdit"
                                                                 *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
                                                             <mat-icon class="material-icons">edit</mat-icon>
                                                         </button>
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 (click)="deleteSchedulePayerCustomer(reportData, data); $event.stopPropagation()"
                                                                 style="color: red"
+                                                                appPermissionBind [permission]="permissionRvPayeeEdit"
                                                                 *ngIf="reportData.status === 'NEW' && reportData.payee === 'CUSTOMER'">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>
@@ -332,6 +340,7 @@
                                                 </td>
                                                 <td *ngIf="reportData.status ==='NEW'">
                                                     <button mat-button class="payee-report"
+                                                            appPermissionBind [permission]="permissionRvSchedule"
                                                             (click)="scheduleEconomicCodes(reportData, data)">Schedule
                                                         Economic Codes
                                                     </button>
@@ -340,7 +349,7 @@
                                             </tbody>
                                             <tbody *ngIf="reportData.status ==='NEW'">
                                             <tr>
-                                                <td colspan="15">
+                                                <td colspan="15"   appPermissionBind [permission]="permissionRvPayee">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
                                                             (click)="scheduleEmployee(reportData)"
                                                             *ngIf="reportData && reportData.payee === 'EMPLOYEE'">

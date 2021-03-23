@@ -19,7 +19,7 @@ export class CashbookComponent implements OnInit {
     searchVoucherSourceForm: FormGroup;
     @ViewChild(CashbookListComponent) getUserRoleList: CashbookListComponent;
 
-    permissionAddRoles = [PermissionConstant.ROLES_ADD];
+    permissionAddRoles = [PermissionConstant.ROLES_ADD, PermissionConstant.CASHBOOK_ADD];
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,

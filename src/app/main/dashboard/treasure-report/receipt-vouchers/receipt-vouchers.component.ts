@@ -10,6 +10,7 @@ import {ReceiptVoucherCreateComponent} from "./receipt-voucher-create/receipt-vo
 import {SchedulePayersCustomerComponent} from './schedule-payers-customer/schedule-payers-customer.component';
 import {SchedulePayersEmployeeComponent} from './schedule-payers-employee/schedule-payers-employee.component';
 import {ScheduleEconomicCodesReceiptComponent} from "./schedule-economic-codes-receipt/schedule-economic-codes-receipt.component";
+import {PermissionConstant} from '../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-receipt-vouchers',
@@ -35,6 +36,16 @@ export class ReceiptVouchersComponent implements OnInit {
         perpage: 15,
         pages: null
     };
+
+    permissionRvAdd = [PermissionConstant.RV_ADD];
+    permissionRvDetailEdit = [PermissionConstant.RV_DETAILS_EDIT];
+    // permissionRvClose = [PermissionConstant.RV_CLOSE];
+    permissionRvStatus = [PermissionConstant.RV_POST, PermissionConstant.RV_CLOSE];
+    permissionRvDelete = [PermissionConstant.RV_DELETE];
+    permissionRvPdfDownload = [PermissionConstant.RV_PDF_DOWNLOAD];
+    permissionRvPayeeEdit = [PermissionConstant.RV_SCHEDULE_PAYER_EMPLOYEE_ECONOMIC_CODE_EDIT];
+    permissionRvPayee = [PermissionConstant.RV_SCHEDULE_PAYER_EMPLOYEE];
+    permissionRvSchedule = [PermissionConstant.RV_SCHEDULE_ECONOMIC_CODE];
 
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,

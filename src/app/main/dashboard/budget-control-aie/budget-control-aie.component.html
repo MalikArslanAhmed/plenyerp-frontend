@@ -138,6 +138,7 @@
                         <div fxLayout="row" fxLayoutGap="20px" style="margin-top: 1rem">
                             <button (click)="reset()" class="cancel_btn" mat-button> Cancel</button>
                             <button (click)="save()" class="save_btn"
+                                    appPermissionBind [permission]="permissionAddBudAie"
                                     mat-button>{{isUpdateAieTable ? 'Update' : 'Save'}}</button>
                         </div>
                     </div>
@@ -148,11 +149,15 @@
                         <div class="width-100-per" fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field appearance="outline" fxFlex>
                                 <mat-label>Search for AIE No</mat-label>
-                                <input matInput name="search_aie_no"  [(ngModel)]="aieNumberFilter">
+                                <input matInput name="search_aie_no" [(ngModel)]="aieNumberFilter">
                             </mat-form-field>
                             <div>
                                 <div fxLayout="row" fxLayoutGap="10px" style="align-items: center">
-                                    <button (click)="searchAieTable()" class="search_btn" mat-button> Search</button>
+                                    <button
+                                        appPermissionBind [permission]="permissionSearchBudAie"
+                                        (click)="searchAieTable()" class="search_btn" mat-button>
+                                        Search
+                                    </button>
                                 </div>
                             </div>
                         </div>

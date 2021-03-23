@@ -897,7 +897,10 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-non-personal-advances',
-                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_NON_PERSONAL_ADVANCES_VIEW_DEPARTMENT_REPORT]
+                        permissions: [
+                            PermissionConstant.REPORTS_TREASURY_SUMMARY_NON_PERSONAL_ADVANCES_VIEW_DEPARTMENT_REPORT,
+                            PermissionConstant.REPORTS_TREASURY_SUMMARY_NON_PERSONAL_ADVANCES_VIEW_EMPLOYEE_REPORT
+                        ]
                     },
                     {
                         id: 'summary-personal-advances',
@@ -905,7 +908,10 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-personal-advances',
-                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_PERSONAL_ADVANCES_VIEW_DEPARTMENT_REPORT]
+                        permissions: [
+                            PermissionConstant.REPORTS_TREASURY_SUMMARY_PERSONAL_ADVANCES_VIEW_DEPARTMENT_REPORT,
+                            PermissionConstant.REPORTS_TREASURY_SUMMARY_PERSONAL_ADVANCES_VIEW_EMPLOYEE_REPORT
+                        ]
                     },
                     {
                         id: 'summary-standing-imprest',
@@ -913,7 +919,10 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-standing-imprest',
-                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_STANDING_IMPREST_VIEW_DEPARTMENT_REPORT]
+                        permissions: [
+                            PermissionConstant.REPORTS_TREASURY_SUMMARY_STANDING_IMPREST_VIEW_DEPARTMENT_REPORT,
+                            PermissionConstant.REPORTS_TREASURY_SUMMARY_STANDING_IMPREST_VIEW_EMPLOYEE_REPORT
+                        ]
                     },
                     {
                         id: 'summary-special-imprest',
@@ -921,7 +930,10 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/summary-special-imprest',
-                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_SPECIAL_IMPREST_VIEW_DEPARTMENT_REPORT]
+                        permissions: [
+                            PermissionConstant.REPORTS_TREASURY_SUMMARY_SPECIAL_IMPREST_VIEW_DEPARTMENT_REPORT,
+                            PermissionConstant.REPORTS_TREASURY_SUMMARY_SPECIAL_IMPREST_VIEW_EMPLOYEE_REPORT
+                        ]
                     },
                     {
                         id: 'advances-ledger-by-employee',
@@ -929,7 +941,9 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/advances-ledger-by-employee',
-                        permissions: [PermissionConstant.REPORTS_TREASURY_SUMMARY_ADVANCE_LEDGER_VIEW_REPORT]
+                        permissions: [
+                            PermissionConstant.REPORTS_TREASURY_SUMMARY_ADVANCE_LEDGER_VIEW_REPORT
+                        ]
                     }
                 ]
             },

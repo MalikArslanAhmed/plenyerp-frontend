@@ -33,7 +33,7 @@
                                         *ngFor="let type of types">{{type.name | titlecase}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <div fxFlex class="width-200px p-10px mt-13px">
+                    <div fxFlex class="width-200px p-10px mt-13px"  appPermissionBind [permission]="permissionPYAAdd">
                         <button mat-button class="submit-report" (click)="addReceiptVoucher()">
                             <mat-icon class="material-icons cursor-pointer whiteColor mr-10px">add_circle</mat-icon>
                             Add Advances
@@ -83,6 +83,7 @@
                             {{statuses[0].name}}
                         </button>
                         <button mat-button class="update-report"
+                                appPermissionBind [permission]="permissionPYAPost"
                                 *ngIf="status !== 'ALL' && selectedStatus && selectedStatus.length > 0"
                                 (click)="updateStatus( selectedStatus[0].value)">
                             {{selectedStatus[0].name}}
@@ -164,11 +165,13 @@
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="reportData['status'] === 'NEW'">
                                 <button mat-icon-button aria-label="Toggle star"
+                                        appPermissionBind [permission]="permissionPYAEdit"
                                         (click)="editPreviousYearVoucher(reportData); $event.stopPropagation()"
                                         style="color: blue; margin-left: 17px; margin-top: 15px">
                                         <mat-icon class="material-icons">edit</mat-icon>
                                 </button>
                                 <button mat-icon-button aria-label="Toggle star"
+                                        appPermissionBind [permission]="permissionPYADelete"
                                         (click)="deletePreviousYearVoucher(reportData); $event.stopPropagation()"
                                         style="color: red">
                                     <mat-icon class="material-icons">delete</mat-icon>

@@ -14,6 +14,7 @@ import {AlertService} from "../../../../shared/services/alert.service";
 import {DefaultSettingVoucherInfoService} from "../../../../shared/services/default-setting-voucher-info";
 import {AdminSegmentSelectAccountHeadComponent} from './admin-segment-select-account-head/admin-segment-select-account-head.component';
 import {SubOrgranisationSelectComponent} from './sub-orgranisation-select/sub-orgranisation-select.component';
+import {PermissionConstant} from '../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-default-setting-voucher-info',
@@ -23,6 +24,8 @@ import {SubOrgranisationSelectComponent} from './sub-orgranisation-select/sub-or
     animations: fuseAnimations
 })
 export class DefaultSettingVoucherInfoComponent implements OnInit {
+
+    permissionDefaultSetting = [PermissionConstant.DEFAULT_SETTINGS_EDIT];
     voucherInfoForm: FormGroup;
     accountHeads = [];
     subOrganisations = [];

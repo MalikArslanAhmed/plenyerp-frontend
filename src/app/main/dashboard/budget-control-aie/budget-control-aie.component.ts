@@ -12,6 +12,7 @@ import {AlertService} from '../../../shared/services/alert.service';
 import * as moment from 'moment';
 import {CensuresCreateComponent} from '../censures/censures-create/censures-create.component';
 import {BudgetControlAieModalComponent} from './budget-control-aie-modal/budget-control-aie-modal.component';
+import {PermissionConstant} from '../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-budget-control-aie',
@@ -21,6 +22,11 @@ import {BudgetControlAieModalComponent} from './budget-control-aie-modal/budget-
     animations: fuseAnimations
 })
 export class BudgetControlAieComponent implements OnInit {
+
+    permissionAddBudAie = [PermissionConstant.BUDGET_CONTROL_AIE_ADD];
+    permissionSearchBudAie = [PermissionConstant.BUDGET_CONTROL_AIE_SEARCH];
+    permissionEditBudAie = [PermissionConstant.BUDGET_CONTROL_AIE_EDIT];
+    permissionDelBudAie = [PermissionConstant.BUDGET_CONTROL_AIE_DELETE];
     dialogRef: any;
     departments = [];
     departmentAllIds = [];

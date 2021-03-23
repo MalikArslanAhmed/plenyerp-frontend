@@ -2,6 +2,7 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <ng-container *ngIf="statuses && statuses.length > 0">
             <button mat-button class="update-report"
+                    appPermissionBind [permission]="permissionChangeStatusMandate"
                     *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL' && selectedStatus && selectedStatus.length > 0"
                     (click)="updateStatus(selectedStatus[0].value)">
                 {{selectedStatus[0].name}}
@@ -66,6 +67,7 @@
                 </span>
                 <span class="mat-cell align-items-center text-center">
                     <button aria-label="Toggle star" mat-icon-button style="color: blue; margin-left: 0px"
+                            appPermissionBind [permission]="permissionUpdateMandate" [customDisplaySetting]="'inline-block'"
                             (click)="editModal(reportData, i)" *ngIf="reportData['status'] === 'NEW'">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
