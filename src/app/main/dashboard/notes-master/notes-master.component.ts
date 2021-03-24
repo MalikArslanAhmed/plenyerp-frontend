@@ -17,6 +17,8 @@ import {NotesDeleteModalComponent} from './notes-delete-modal/notes-delete-modal
 })
 export class NotesMasterComponent implements OnInit {
     permissionAddNotes = [PermissionConstant.NOTES_MASTER_NOTE_ADD];
+    permissionDownloadNotes = [PermissionConstant.REPORTS_FINANCE_NOTES_MASTER_DOWNLOAD_REPORT];
+    permissionResetNotes = [PermissionConstant.REPORTS_FINANCE_NOTES_MASTER_RESET_NOTES];
     searchNotesMasterForm: FormGroup;
     notesMasterData = [];
     chileNotesData = [];

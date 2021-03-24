@@ -73,11 +73,15 @@
             <mat-cell *matCellDef="let currency">
                 <div fxFlex="row" fxLayoutAlign="end center">
                     <button (click)="editCurrency(currency)" aria-label="Toggle star" mat-icon-button
-                            style="color: blue">
+                            style="color: blue"
+                            appPermissionBind [permission]="permissionEditCur"
+                    >
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                     <button (click)="deleteItemModal(currency)" aria-label="Toggle star" mat-icon-button
-                            style="color: red">
+                            style="color: red"
+                            appPermissionBind [permission]="permissionDelCur"
+                    >
                         <mat-icon class="material-icons">delete</mat-icon>
                     </button>
                 </div>

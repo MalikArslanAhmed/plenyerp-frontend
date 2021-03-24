@@ -87,12 +87,13 @@ export const navigation: FuseNavigation[] = [
                 permissions: [PermissionConstant.COMPANIES_SETTING],
                 children: [
                     {
-                        id: 'company-info',
+                        id: '' +
+                            'company-info',
                         title: 'Company Information',
                         roles: [],
                         type: 'item',
                         url: 'dashboard/company-info',
-                        permissions: [PermissionConstant.COMPANIES_SETTING],
+                        permissions: [PermissionConstant.SETTINGS_COMPANY_INFO_VIEW],
                     }
                 ]
             },
@@ -671,7 +672,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/trial-balance',
-                        permissions: [PermissionConstant.TRAIL_BALANCE_LIST]
+                        permissions: [PermissionConstant.REPORTS_FINANCE_TRIAL_BALANCE_VIEW_REPORT]
                     },
                     /*{
                         id: 'others',
@@ -687,7 +688,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/notes-master',
-                        permissions: [PermissionConstant.NOTES_MASTER_LIST]
+                        permissions: [PermissionConstant.REPORTS_FINANCE_NOTES_MASTER_VIEW_REPORT]
                     },
                     {
                         id: 'jv-ledger-report',
@@ -695,7 +696,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/jv-ledger-report',
-                        permissions: [PermissionConstant.JV_LEDGER_LIST]
+                        permissions: [PermissionConstant.REPORTS_FINANCE_JV_LEDGER_VIEW_REPORT]
                     },
                     {
                         id: 'jv-ledger-sibling',

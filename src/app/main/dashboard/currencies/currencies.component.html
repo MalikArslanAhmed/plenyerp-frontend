@@ -13,6 +13,7 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <button mat-fab class="accent" id="add-button" aria-label="add categories"
+                    appPermissionBind [permission]="permissionAddCur"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addCurrency()">
                 <mat-icon>add_circle</mat-icon>
             </button>

@@ -159,6 +159,7 @@
                                         </mat-radio-button>
                                     </mat-radio-group>
                                     <button (click)="addRow()" class="add-row-btn" mat-button
+                                            appPermissionBind [permission]="permissionAddBud"
                                             [class.disabled]="isDisabled" [disabled]="isDisabled" *ngIf="!budgetId"> Add
                                         Row
                                     </button>
@@ -586,12 +587,16 @@
                                     </td>
                                     <td class="table-data">
                                         <div fxFlex="row" fxLayoutAlign="end center">
-                                            <button (click)="checkBudgetUpdate(budget)" aria-label="Toggle star"
+                                            <button (click)="checkBudgetUpdate(budget)"
+                                                    appPermissionBind [permission]="permissionEditBud"
+                                                    aria-label="Toggle star"
                                                     mat-icon-button
                                                     style="color: blue">
                                                 <mat-icon class="material-icons">edit</mat-icon>
                                             </button>
-                                            <button (click)="deleteItemModal(budget)" aria-label="Toggle star"
+                                            <button (click)="deleteItemModal(budget)"
+                                                    appPermissionBind [permission]="permissionDelBud"
+                                                    aria-label="Toggle star"
                                                     mat-icon-button
                                                     style="color: red">
                                                 <mat-icon class="material-icons">delete</mat-icon>

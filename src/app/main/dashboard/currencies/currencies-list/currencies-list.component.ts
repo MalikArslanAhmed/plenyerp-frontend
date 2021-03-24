@@ -6,6 +6,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../../@fuse/animations";
 import {CurrencyService} from "../../../../shared/services/currency.service";
 import {CurrenciesCreateComponent} from '../currencies-create/currencies-create.component';
+import {PermissionConstant} from '../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-currencies-list',
@@ -15,6 +16,9 @@ import {CurrenciesCreateComponent} from '../currencies-create/currencies-create.
     animations: fuseAnimations
 })
 export class CurrenciesListComponent implements OnInit {
+
+    permissionEditCur = [PermissionConstant.SETUP_CURRENCIES_EDIT];
+    permissionDelCur = [PermissionConstant.SETUP_CURRENCIES_DELETE];
     currencies = [];
     displayedColumns = ['id', 'code', 'currencyName', 'currencyChange', 'currentRate', 'sign', 'countryCode', 'actions'];
     dialogRef: any;

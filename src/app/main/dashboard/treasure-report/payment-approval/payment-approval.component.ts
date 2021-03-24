@@ -16,6 +16,7 @@ import {ActivatedRoute} from '@angular/router';
     animations: fuseAnimations
 })
 export class PaymentApprovalComponent implements OnInit {
+    permissionAddApproval = [PermissionConstant.SETTINGS_COMPANY_INFO_CHANGE_STATUS_AUTO_POSTED_JV];
     dialogRef: any;
     filterPaymentApprovalForm: FormGroup;
     @ViewChild(PaymentApprovalListComponent) getPaymentApproval: PaymentApprovalListComponent;

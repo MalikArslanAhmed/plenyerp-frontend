@@ -13,6 +13,7 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <button mat-fab class="accent" id="add-button" aria-label="add categories" (click)="addBanks()"
+                    appPermissionBind [permission]="permissionAddBank"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
                 <mat-icon>add_circle</mat-icon>
             </button>
@@ -67,10 +68,12 @@
                                 <mat-cell *matCellDef="let bank">
                                     <div fxFlex="row" fxLayoutAlign="start center">
                                         <button mat-icon-button aria-label="Toggle star" (click)="editBank(bank)"
+                                                appPermissionBind [permission]="permissionEditBank"
                                                 style="color: blue">
                                             <mat-icon class="material-icons">edit</mat-icon>
                                         </button>
                                         <button mat-icon-button aria-label="Toggle star" (click)="deleteBank(bank)"
+                                                appPermissionBind [permission]="permissionDelBank"
                                                 style="color: red">
                                             <mat-icon class="material-icons">delete</mat-icon>
                                         </button>
@@ -134,6 +137,7 @@
                             <ng-container matColumnDef="action">
                                 <mat-header-cell *matHeaderCellDef>Action
                                     <button mat-icon-button aria-label="Toggle star" (click)="addBranch()"
+                                            appPermissionBind [permission]="permissionAddBranch"
                                             style="color: #039be5;margin-left: 1rem" title="Add Branch">
                                         <mat-icon class="material-icons">add_circle</mat-icon>
                                     </button>
@@ -141,11 +145,15 @@
                                 <mat-cell *matCellDef="let branch">
                                     <div fxFlex="row" fxLayoutAlign="start center">
                                         <button mat-icon-button aria-label="Toggle star" (click)="editBranch(branch)"
-                                                style="color: blue">
+                                                style="color: blue"
+                                                appPermissionBind [permission]="permissionEditBranch"
+                                        >
                                             <mat-icon class="material-icons">edit</mat-icon>
                                         </button>
                                         <button mat-icon-button aria-label="Toggle star" (click)="deleteBranch(branch)"
-                                                style="color: red">
+                                                appPermissionBind [permission]="permissionDelBranch"
+                                                style="color: red"
+                                        >
                                             <mat-icon class="material-icons">delete</mat-icon>
                                         </button>
                                     </div>

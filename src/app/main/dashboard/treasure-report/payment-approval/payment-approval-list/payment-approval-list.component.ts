@@ -11,6 +11,7 @@ import {PaymentApprovalService} from '../../../../../shared/services/payment-app
 import {EmployeeService} from "../../../../../shared/services/employee.service";
 import {SchedulePaymentApprovalEmployeeComponent} from "../schedule-payment-approval-employee/schedule-payment-approval-employee.component";
 import {SchedulePaymentApprovalCustomerComponent} from "../schedule-payment-approval-customer/schedule-payment-approval-customer.component";
+import {PermissionConstant} from '../../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-payment-approval-list',
@@ -20,6 +21,13 @@ import {SchedulePaymentApprovalCustomerComponent} from "../schedule-payment-appr
     animations: fuseAnimations
 })
 export class PaymentApprovalListComponent implements OnInit {
+
+    permissionEditApproval = [PermissionConstant.SETTINGS_COMPANY_INFO_CHANGE_STATUS_AUTO_POSTED_JV];
+    permissionCheckApproval = [PermissionConstant.SETTINGS_COMPANY_INFO_CHANGE_STATUS_AUTO_POSTED_JV];
+    permissionApproval = [PermissionConstant.SETTINGS_COMPANY_INFO_CHANGE_STATUS_AUTO_POSTED_JV];
+    permissionEditPayee = [PermissionConstant.SETTINGS_COMPANY_INFO_CHANGE_STATUS_AUTO_POSTED_JV];
+    permissionDeletePayee = [PermissionConstant.SETTINGS_COMPANY_INFO_CHANGE_STATUS_AUTO_POSTED_JV];
+
     paymentApprovalList = [];
     dialogRef: any;
     selectIndex = 0;

@@ -12,7 +12,7 @@
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-            <div appPermissionBind [permission]="">
+            <div appPermissionBind [permission]="permissionDownloadNotes">
                 <button mat-button class="accent" id="add-button"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
                         (click)="downloadNoteMaster('Trail_balance')">
@@ -25,7 +25,7 @@
                     {{panelOpenState ? 'Close' : 'Open'}} All
                 </button>
             </div>
-            <div appPermissionBind [permission]="">
+            <div appPermissionBind [permission]="permissionResetNotes">
                 <button mat-button class="accent" id="reset-button"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}"
                         (click)="resetNoteMaster()" title="Reset Notes">

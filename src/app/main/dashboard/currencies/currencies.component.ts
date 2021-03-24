@@ -5,6 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {fuseAnimations} from "../../../../@fuse/animations";
 import {CurrenciesCreateComponent} from './currencies-create/currencies-create.component';
 import {CurrenciesListComponent} from './currencies-list/currencies-list.component';
+import {PermissionConstant} from '../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-currencies',
@@ -15,7 +16,7 @@ import {CurrenciesListComponent} from './currencies-list/currencies-list.compone
 })
 export class CurrenciesComponent implements OnInit {
     dialogRef: any;
-
+    permissionAddCur = [PermissionConstant.SETUP_CURRENCIES_ADD];
     @ViewChild(CurrenciesListComponent) getCurrency: CurrenciesListComponent;
 
     constructor(

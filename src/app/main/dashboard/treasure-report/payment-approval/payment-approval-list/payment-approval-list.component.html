@@ -2,6 +2,8 @@
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <ng-container *ngIf="statuses && statuses.length > 0">
             <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
+                    appPermissionBind [permission]="permissionApproval"
+                    [customDisplaySetting]="'inline-block'"
                     *ngIf="status !== 'ALL' && status !== 'NEW' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !== 'READY_FOR_PV'">
                 <mat-icon class="material-icons cursor-pointer whiteColor">
                     keyboard_arrow_left
@@ -10,6 +12,8 @@
             </button>
             <button mat-button class="update-report"
                     *ngIf="status !== 'ALL' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !=='READY_FOR_PV' && selectedStatus && selectedStatus.length > 0"
+                    appPermissionBind [permission]="permissionApproval"
+                    [customDisplaySetting]="'inline-block'"
                     (click)="updateStatus(selectedStatus[0].value)">
                 {{selectedStatus[0].name}}
                 <mat-icon class="material-icons cursor-pointer whiteColor">
@@ -39,6 +43,7 @@
                       *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !=='READY_FOR_PV'">
                     <p class="text-truncate cursor-pointer mt-10px text-center">
                         <mat-checkbox (change)="checkPV(i, $event)"
+                                      appPermissionBind [permission]="permissionCheckApproval"
                                       (click)="$event.stopPropagation()"
                                       [checked]="reportData.checked ? true : null"></mat-checkbox>
                     </p>
@@ -76,11 +81,15 @@
                 </span>
                 <span class="mat-cell align-items-center">
                     <button mat-icon-button aria-label="Toggle star"
+                            appPermissionBind [permission]="permissionEditApproval"
+                            [customDisplaySetting]="'inline-block'"
                             (click)="editPaymentApproval(reportData); $event.stopPropagation()"
                             style="color: blue; margin-left: 40px; margin-top: 3px" *ngIf="reportData['status'] === 'NEW'">
                             <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                     <button mat-icon-button aria-label="Toggle star"
+                            appPermissionBind [permission]="permissionEditApproval"
+                            [customDisplaySetting]="'inline-block'"
                             (click)="deletePaymentApproval(reportData); $event.stopPropagation()"
                             style="color: red" *ngIf="reportData['status'] === 'NEW'">
                         <mat-icon class="material-icons">delete</mat-icon>
@@ -252,21 +261,29 @@
                             <td>
                                 <span *ngIf="reportData.status === 'NEW'">
                                     <button mat-icon-button aria-label="Toggle star"
+                                            appPermissionBind [permission]="permissionEditPayee"
+                                            [customDisplaySetting]="'inline-block'"
                                             (click)="editSchedulePayeeEmployee(data, reportData); $event.stopPropagation()"
                                             style="color: blue; margin-left: -21px; margin-right: -10px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
                                         <mat-icon class="material-icons">edit</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
+                                            appPermissionBind [permission]="permissionDeletePayee"
+                                            [customDisplaySetting]="'inline-block'"
                                             (click)="deleteSchedulePayeeEmployee(reportData, data); $event.stopPropagation()"
                                             style="color: red" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
                                         <mat-icon class="material-icons">delete</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
+                                            appPermissionBind [permission]="permissionEditPayee"
+                                            [customDisplaySetting]="'inline-block'"
                                             (click)="editSchedulePayeeCustomer(data, reportData); $event.stopPropagation()"
                                             style="color: blue; margin-left: -21px; margin-right: -10px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
                                         <mat-icon class="material-icons">edit</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
+                                            appPermissionBind [permission]="permissionDeletePayee"
+                                            [customDisplaySetting]="'inline-block'"
                                             (click)="deleteSchedulePayeeCustomer(reportData, data); $event.stopPropagation()"
                                             style="color: red" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
                                         <mat-icon class="material-icons">delete</mat-icon>

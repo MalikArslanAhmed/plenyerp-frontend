@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {CompanyInformationService} from 'app/shared/services/company-information.service';
 import {CurrencyService} from 'app/shared/services/currency.service';
 import {UpdateListModelComponent} from '../update-list-model/update-list-model.component';
+import {PermissionConstant} from '../../../shared/constants/permission-constant';
 
 interface Data {
     key: string;
@@ -36,6 +37,10 @@ const settingKeys = [
     styleUrls: ['./company-information.component.scss']
 })
 export class CompanyInformationComponent implements OnInit {
+
+    permissionAutoPostJv = [PermissionConstant.SETTINGS_COMPANY_INFO_CHANGE_STATUS_AUTO_POSTED_JV];
+    permissionPaymentApproval = [PermissionConstant.SETTINGS_COMPANY_INFO_CHANGE_STATUS_PAYMENT_APPROVAL_REQUIRED];
+    permissionDefaultStatusJv = [PermissionConstant.SETTINGS_COMPANY_INFO_CHANGE_STATUS_DEFAULT_STATUS_AUTO_POSTED_JV];
     currencies = [];
     dataSource: Data[] = [];
     dialogRef: any;

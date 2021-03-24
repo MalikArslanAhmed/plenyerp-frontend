@@ -12,7 +12,7 @@
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-            <div appPermissionBind [permission]="">
+            <div>
                 <button mat-button class="accent" id="add-button" aria-label="add skill"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
                     {{panelOpenState ? 'Close' : 'Open'}} All

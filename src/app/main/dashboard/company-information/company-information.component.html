@@ -48,14 +48,16 @@
                     </ng-template>
                     <ng-container *ngIf="i === 2">
                         <mat-slide-toggle class="toggle" [(ngModel)]="dataSetting[2].value"
+                                          appPermissionBind [permission]="permissionAutoPostJv"
                                           (change)="autoPostJV($event)"></mat-slide-toggle>
                     </ng-container>
                     <ng-container *ngIf="i === 3">
                         <mat-slide-toggle class="toggle" [(ngModel)]="dataSetting[3].value"
+                                          appPermissionBind [permission]="permissionPaymentApproval"
                                           (change)="paymentApprovalRequired($event)"></mat-slide-toggle>
                     </ng-container>
                     <ng-container *ngIf="i === 4">
-                        <div fxLayout="row" fxLayoutAlign="start">
+                        <div fxLayout="row" fxLayoutAlign="start"  appPermissionBind [permission]="permissionDefaultStatusJv">
                             <mat-select [(ngModel)]="dataSetting[4].value" (selectionChange)="defaultStatusJv($event)">
                                 <mat-option *ngFor="let status of ['NEW', 'CHECKED', 'POSTED']" [value]="status">
                                     {{status}}

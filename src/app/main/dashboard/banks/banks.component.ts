@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {BankCreateComponent} from './bank-create/bank-create.component';
 import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {BranchCreateComponent} from './branch-create/branch-create.component';
+import {PermissionConstant} from '../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-banks',
@@ -16,6 +17,13 @@ import {BranchCreateComponent} from './branch-create/branch-create.component';
     animations: fuseAnimations
 })
 export class BanksComponent implements OnInit {
+
+    permissionAddBank = [PermissionConstant.SETUP_BANKS_ADD];
+    permissionEditBank = [PermissionConstant.SETUP_BANKS_EDIT];
+    permissionDelBank = [PermissionConstant.SETUP_BANKS_DELETE];
+    permissionAddBranch = [PermissionConstant.SETUP_BANKS_ADD_BRANCH];
+    permissionEditBranch = [PermissionConstant.SETUP_BANKS_EDIT_BRANCH];
+    permissionDelBranch = [PermissionConstant.SETUP_BANKS_DELETE_BRANCH];
     banks = [
         // {
         //     'sno': 1,
