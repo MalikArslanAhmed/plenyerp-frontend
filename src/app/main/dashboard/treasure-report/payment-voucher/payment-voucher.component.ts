@@ -120,7 +120,8 @@ export class PaymentVoucherComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getChildReportData(data);
+            // this.getChildReportData(data);
+            this.getPaymentVoucher();
         });
     }
 
@@ -133,7 +134,8 @@ export class PaymentVoucherComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getChildReportData(data);
+            // this.getChildReportData(data);
+            this.getPaymentVoucher();
         });
     }
 

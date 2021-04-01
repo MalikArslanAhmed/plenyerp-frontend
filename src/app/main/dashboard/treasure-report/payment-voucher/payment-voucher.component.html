@@ -146,20 +146,24 @@
                             <span class="mat-cell align-items-center" style="max-width: 120px; min-width: 120px">
                                 <mat-icon class="material-icons"
                                           (click)="editPaymentVoucher(reportData); $event.stopPropagation()"
-                                          appPermissionBind [permission]="permissionEditPv" [customDisplaySetting]="'inline-block'"
+                                          appPermissionBind [permission]="permissionEditPv"
+                                          [customDisplaySetting]="'inline-block'"
                                           style="color: blue; margin-left: 0; margin-top: 10px"
                                           *ngIf="reportData.status === 'NEW'">edit</mat-icon>
                                 <mat-icon class="material-icons"
                                           (click)="deletePaymentVoucher(reportData); $event.stopPropagation()"
-                                          appPermissionBind [permission]="permissionDelPv" [customDisplaySetting]="'inline-block'"
+                                          appPermissionBind [permission]="permissionDelPv"
+                                          [customDisplaySetting]="'inline-block'"
                                           style="color: red; margin-left: 5px" *ngIf="reportData.status === 'NEW'">delete</mat-icon>
                                 <mat-icon class="material-icons"
                                           (click)="downloadPDF(reportData, 'PAYMENT_VOUCHER'); $event.stopPropagation()"
-                                          appPermissionBind [permission]="permissionPDFPv" [customDisplaySetting]="'inline-block'"
+                                          appPermissionBind [permission]="permissionPDFPv"
+                                          [customDisplaySetting]="'inline-block'"
                                           title="Download Payment Voucher"
                                           style="color: green; margin-left: 5px">picture_as_pdf</mat-icon>
                                 <mat-icon class="material-icons"
-                                          appPermissionBind [permission]="permissionPDFPv" [customDisplaySetting]="'inline-block'"
+                                          appPermissionBind [permission]="permissionPDFPv"
+                                          [customDisplaySetting]="'inline-block'"
                                           (click)="downloadPDF(reportData, 'PAYMENT_VOUCHER_TAX'); $event.stopPropagation()"
                                           title="Download Payment Voucher" style="color: red; margin-left: 5px">picture_as_pdf</mat-icon>
                                 <!--<button mat-icon-button aria-label="Toggle star"
@@ -237,7 +241,9 @@
                                                 <th>
                                                     <div class="title">Actions</div>
                                                 </th>
-                                                <th *ngIf="reportData.status === 'NEW'" appPermissionBind [permission]="permissionAddSchCodes">
+                                                <th *ngIf="reportData.status === 'NEW'" appPermissionBind
+                                                    [permission]="permissionAddSchCodes"
+                                                    [customDisplaySetting]="'inline-block'">
                                                     <div class="title">Schedule Economic Code</div>
                                                 </th>
                                             </tr>
@@ -381,10 +387,11 @@
                                                         <p class="text-truncate cursor-pointer mt-10px text-center ml--20px">-</p>
                                                     </span>
                                                 </td>
-                                                <td *ngIf="reportData.status ==='NEW'">
+                                                <td *ngIf="reportData.status ==='NEW'" appPermissionBind
+                                                    [permission]="permissionAddSchCodes"  [customDisplaySetting]="'inline-block'">
                                                     <button mat-button class="payee-report"
-                                                            (click)="scheduleEconomicCodes(reportData, data)">Schedule
-                                                        Economic Codes
+                                                            (click)="scheduleEconomicCodes(reportData, data)">
+                                                        Schedule Economic Codes
                                                     </button>
                                                 </td>
                                             </tr>

@@ -51,6 +51,24 @@ export class AppComponent implements OnInit, OnDestroy {
     ) {
         // Get default navigation
         this.navigation = navigation;
+        this.navigation.forEach(nav => {
+            if (!nav.permissions) {
+                nav.permissions = [];
+            }
+            if (nav.hasOwnProperty('children')) {
+               nav.children.forEach(navChild => {
+                   if (!navChild.permissions) {
+                       navChild.permissions = [];
+                   }
+                   if (navChild.hasOwnProperty('children')) {
+                       navChild.children.forEach(child => {
+                           nav.permissions = nav.permissions.concat(child.permissions);
+                           navChild.permissions = navChild.permissions.concat(child.permissions);
+                       });
+                   }
+               });
+           }
+        });
 
         // Register the navigation to the service
         this._fuseNavigationService.register('main', this.navigation);

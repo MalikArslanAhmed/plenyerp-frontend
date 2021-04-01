@@ -19,7 +19,7 @@ export interface FuseNavigationItem
         fg?: string;
     };
     children?: FuseNavigationItem[];
-    roles: Array<number>;
+    roles?: Array<number>;
     canActivate?: any;
     data?: any;
     permissions?: Array<any>;

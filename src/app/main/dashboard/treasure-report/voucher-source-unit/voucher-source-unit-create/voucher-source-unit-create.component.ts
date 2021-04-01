@@ -5,6 +5,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {TreasureReportService} from '../../../../../shared/services/treasure-report.service';
 import {AdminSegmentEmployeeSelectComponent} from "../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component";
 import {DefaultSettingVoucherInfoService} from "../../../../../shared/services/default-setting-voucher-info";
+import {PermissionConstant} from '../../../../../shared/constants/permission-constant';
 
 @Component({
     selector: 'app-voucher-source-unit-create',
@@ -14,6 +15,7 @@ import {DefaultSettingVoucherInfoService} from "../../../../../shared/services/d
     animations: fuseAnimations
 })
 export class VoucherSourceUnitCreateComponent implements OnInit {
+    permissionConstant = PermissionConstant;
     action: any;
     dialogTitle: any;
     voucherSourceUnitForm: FormGroup;
