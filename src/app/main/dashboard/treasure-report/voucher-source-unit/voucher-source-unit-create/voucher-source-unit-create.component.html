@@ -51,7 +51,8 @@
                                     (click)="selectAdminEmployee('Select Checking Officer')">Select
                             </button>
                         </div>
-                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer" (click)="selectAdminEmployee('Select Checking Officer')">
+                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
+                                        (click)="selectAdminEmployee('Select Checking Officer')">
                             <mat-label>Checking Officer</mat-label>
                             <mat-select formControlName="checkingOfficerId">
                                 <mat-option value="">Checking Officer Name</mat-option>
@@ -62,9 +63,12 @@
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <div>
-                            <button mat-raised-button color="accent" style="margin-top: 14px" (click)="selectAdminEmployee('Select Paying Officer')">Select</button>
+                            <button mat-raised-button color="accent" style="margin-top: 14px"
+                                    (click)="selectAdminEmployee('Select Paying Officer')">Select
+                            </button>
                         </div>
-                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer" (click)="selectAdminEmployee('Select Paying Officer')">
+                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
+                                        (click)="selectAdminEmployee('Select Paying Officer')">
                             <mat-label>Paying Officer</mat-label>
                             <mat-select formControlName="payingOfficerId">
                                 <mat-option value="">Paying Officer Name</mat-option>
@@ -75,9 +79,12 @@
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <div>
-                            <button mat-raised-button color="accent" style="margin-top: 14px" (click)="selectAdminEmployee('Select Financial Control')">Select</button>
+                            <button mat-raised-button color="accent" style="margin-top: 14px"
+                                    (click)="selectAdminEmployee('Select Financial Control')">Select
+                            </button>
                         </div>
-                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer" (click)="selectAdminEmployee('Select Financial Control')">
+                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
+                                        (click)="selectAdminEmployee('Select Financial Control')">
                             <mat-label>Financial Controller</mat-label>
                             <mat-select formControlName="financialControllerId">
                                 <mat-option value="">Financial Controller Name</mat-option>
@@ -86,26 +93,33 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 24px" appPermissionBind [permission]="permissionConstant.VSU_MARKED_PERSONAL_ADVANCED_UNIT">
-                        <mat-slide-toggle formControlName="isPersonalAdvanceUnit">A Personal Adv. Unit ?</mat-slide-toggle>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-top: 24px">
+                        <mat-slide-toggle formControlName="isPersonalAdvanceUnit" appPermissionBind
+                                          [permission]="permissionConstant.VSU_MARKED_PERSONAL_ADVANCED_UNIT">
+                            A Personal Adv. Unit ?
+                        </mat-slide-toggle>
                     </div>
                 </div>
                 <div fxLayout="column" fxLayoutAlign="start" class="w-40-per">
                     <mat-form-field appearance="outline">
                         <mat-label>Retirement Ref No.</mat-label>
-                        <input matInput placeholder="Enter Retirement Ref. #" formControlName="retirementId" type="number">
+                        <input matInput placeholder="Enter Retirement Ref. #" formControlName="retirementId"
+                               type="number">
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Reverse V Ref No.</mat-label>
-                        <input matInput placeholder="Enter Reverse V Ref. #" formControlName="reverseVoucherId" type="number">
+                        <input matInput placeholder="Enter Reverse V Ref. #" formControlName="reverseVoucherId"
+                               type="number">
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Revalidation Ref No.</mat-label>
-                        <input matInput placeholder="Enter Revalidation Ref. #" formControlName="revalidationId" type="number">
+                        <input matInput placeholder="Enter Revalidation Ref. #" formControlName="revalidationId"
+                               type="number">
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Tax Voucher Ref No.</mat-label>
-                        <input matInput placeholder="Enter Text Voucher Ref. #" formControlName="taxVoucherId" type="number">
+                        <input matInput placeholder="Enter Text Voucher Ref. #" formControlName="taxVoucherId"
+                               type="number">
                     </mat-form-field>
                 </div>
             </div>
