@@ -1,10 +1,10 @@
-import {Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {TreasureReportService} from '../../../../../shared/services/treasure-report.service';
-import {AdminSegmentEmployeeSelectComponent} from "../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component";
-import {DefaultSettingVoucherInfoService} from "../../../../../shared/services/default-setting-voucher-info";
+import {AdminSegmentEmployeeSelectComponent} from '../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
+import {DefaultSettingVoucherInfoService} from '../../../../../shared/services/default-setting-voucher-info';
 import {PermissionConstant} from '../../../../../shared/constants/permission-constant';
 
 @Component({
