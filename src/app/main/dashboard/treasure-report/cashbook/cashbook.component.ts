@@ -31,9 +31,9 @@ export class CashbookComponent implements OnInit {
         this.refresh();
     }
 
-    refresh() {
+    refresh(): void {
         this.searchVoucherSourceForm = this.fb.group({
-            'searchVoucherSource': [''],
+            title: [''],
         });
     }
 
@@ -51,5 +51,6 @@ export class CashbookComponent implements OnInit {
     }
 
     search() {
+        this.getUserRoleList.getcashbookList(this.searchVoucherSourceForm.getRawValue());
     }
 }

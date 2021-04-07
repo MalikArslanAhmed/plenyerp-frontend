@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {FormGroup} from '@angular/forms';
 import {CashbookCreateComponent} from '../cashbook-create/cashbook-create.component';
@@ -43,9 +43,13 @@ export class CashbookListComponent implements OnInit {
         this.getcashbookList();
     }
 
-    getcashbookList() {
+    getcashbookList(params = {}): void {
+        params = {
+            ...params,
+            page: this.pagination.page
+        };
         this.cashbookAccountList = [];
-        this.cashbookService.list({page: this.pagination.page}).subscribe(data => {
+        this.cashbookService.list(params).subscribe(data => {
             this.cashbookAccountList = data.items;
             this.pagination.page = data.page;
             this.pagination.total = data.total;

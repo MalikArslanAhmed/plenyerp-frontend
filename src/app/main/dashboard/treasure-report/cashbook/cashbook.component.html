@@ -26,11 +26,17 @@
                 <form [formGroup]="searchVoucherSourceForm">
                     <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                         <mat-label>Search for Cashbook</mat-label>
-                        <input formControlName="searchVoucherSource"
+                        <input formControlName="title"
                                placeholder="Search for Cashbook ID or Title"
-                               matInput (keyup)="search()">
+                               matInput>
                     </mat-form-field>
                 </form>
+                <div fxFlex class="width-200px p-10px mt-13px">
+                    <button mat-button class="submit-report" (click)="search()">
+                        Submit
+                        <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                    </button>
+                </div>
             </div>
             <div class="content mt-20px">
                 <app-cashbook-list></app-cashbook-list>
