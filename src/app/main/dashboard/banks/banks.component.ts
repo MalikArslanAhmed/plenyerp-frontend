@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '../../../../@fuse/animations';
 import {BanksService} from '../../../shared/services/banks.service';
-import {CompaniesCreateComponent} from '../companies/companies-create/companies-create.component';
 import {FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {BankCreateComponent} from './bank-create/bank-create.component';
 import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {BranchCreateComponent} from './branch-create/branch-create.component';
 import {PermissionConstant} from '../../../shared/constants/permission-constant';
+import {DeleteListModalComponent} from '../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-banks',
@@ -94,7 +94,23 @@ export class BanksComponent implements OnInit {
         });
     }
 
-    deleteBank(bank) {
+    askForDelete(data, type): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                if (type === 'bank') {
+                    this.deleteBank(data);
+                } else if (type === 'branch') {
+                    this.deleteBranch(data);
+                }
+            }
+        });
+    }
+
+    deleteBank(bank): void {
         this.bankService.deleteBanks(bank.id).subscribe(item => {
             this.getBanksList();
             this.getBranches();
@@ -116,7 +132,10 @@ export class BanksComponent implements OnInit {
     }
 
     getBranches() {
-        this.bankService.getBranches(this.selectedBankId, {page: this.paginationBranches.page, perpage: this.pagination.perpage}).subscribe(data => {
+        this.bankService.getBranches(this.selectedBankId, {
+            page: this.paginationBranches.page,
+            perpage: this.pagination.perpage
+        }).subscribe(data => {
             this.bankBranch = data.items;
             this.paginationBranches.page = data.page;
             this.paginationBranches.total = data.total;

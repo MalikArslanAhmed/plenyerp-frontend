@@ -72,7 +72,7 @@
                                                 style="color: blue">
                                             <mat-icon class="material-icons">edit</mat-icon>
                                         </button>
-                                        <button mat-icon-button aria-label="Toggle star" (click)="deleteBank(bank)"
+                                        <button mat-icon-button aria-label="Toggle star" (click)="askForDelete(bank, 'bank')"
                                                 appPermissionBind [permission]="permissionDelBank"
                                                 style="color: red">
                                             <mat-icon class="material-icons">delete</mat-icon>
@@ -150,7 +150,7 @@
                                         >
                                             <mat-icon class="material-icons">edit</mat-icon>
                                         </button>
-                                        <button mat-icon-button aria-label="Toggle star" (click)="deleteBranch(branch)"
+                                        <button mat-icon-button aria-label="Toggle star" (click)="askForDelete(branch, 'branch')"
                                                 appPermissionBind [permission]="permissionDelBranch"
                                                 style="color: red"
                                         >

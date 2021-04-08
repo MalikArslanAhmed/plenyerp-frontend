@@ -87,7 +87,7 @@
                     <button mat-icon-button aria-label="Toggle star"
                             appPermissionBind [permission]="permissionEditApproval"
                             [customDisplaySetting]="'inline-block'"
-                            (click)="deletePaymentApproval(reportData); $event.stopPropagation()"
+                            (click)="askForDelete(reportData, 'paymentApproval'); $event.stopPropagation()"
                             style="color: red" *ngIf="reportData['status'] === 'NEW'">
                         <mat-icon class="material-icons">delete</mat-icon>
                     </button>

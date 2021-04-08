@@ -1,17 +1,18 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
-import {AlertService} from "../../../../shared/services/alert.service";
-import {TreasureReportService} from "../../../../shared/services/treasure-report.service";
-import * as moment from "moment";
-import {ScheduleEconomicCodesReceiptComponent} from "../receipt-vouchers/schedule-economic-codes-receipt/schedule-economic-codes-receipt.component";
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {PreviousYearAdvancesCreateComponent} from "./previous-year-advances-create/previous-year-advances-create.component";
-import {PreviousYearAdvancesService} from "../../../../shared/services/previous-year-advances.service";
-import {PaymentVoucherService} from "../../../../shared/services/payment-voucher.service";
-import {SchedulePayersEmployeePreviousAdvancesComponent} from "./schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component";
-import {SchedulePayersCustomerPreviousAdvancesComponent} from "./schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {AlertService} from '../../../../shared/services/alert.service';
+import {TreasureReportService} from '../../../../shared/services/treasure-report.service';
+import * as moment from 'moment';
+import {ScheduleEconomicCodesReceiptComponent} from '../receipt-vouchers/schedule-economic-codes-receipt/schedule-economic-codes-receipt.component';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {PreviousYearAdvancesCreateComponent} from './previous-year-advances-create/previous-year-advances-create.component';
+import {PreviousYearAdvancesService} from '../../../../shared/services/previous-year-advances.service';
+import {PaymentVoucherService} from '../../../../shared/services/payment-voucher.service';
+import {SchedulePayersEmployeePreviousAdvancesComponent} from './schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component';
+import {SchedulePayersCustomerPreviousAdvancesComponent} from './schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component';
 import {PermissionConstant} from '../../../../shared/constants/permission-constant';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-previous-year-advances',
@@ -24,7 +25,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     filterReceiptVoucherForm: FormGroup;
     createReceiptVoucherForm: FormGroup;
     previousYearAdvancesData = [];
-    panelOpenState: boolean = false;
+    panelOpenState = false;
     sourceUnit = [];
     statuses = [];
     types = [];
@@ -61,13 +62,13 @@ export class PreviousYearAdvancesComponent implements OnInit {
 
     refresh() {
         this.filterReceiptVoucherForm = this.fb.group({
-            'status': ['ALL'],
-            'search': [''],
-            'sourceUnit': ['']
+            status: ['ALL'],
+            search: [''],
+            sourceUnit: ['']
         });
         this.createReceiptVoucherForm = this.fb.group({
-            'sourceUnit': [''],
-            'type': ['']
+            sourceUnit: [''],
+            type: ['']
         });
         this.createReceiptVoucherForm.get('sourceUnit').valueChanges.subscribe(val => {
             this.types = [];
@@ -79,7 +80,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     }
 
     getPreviousYearAdvances(params?) {
-        let param = {
+        const param = {
             ...params,
             page: this.pagination.page
         };
@@ -147,7 +148,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     }
 
     filterReceiptVoucher() {
-        let params = {};
+        const params = {};
         if (this.filterReceiptVoucherForm.value.status !== 'ALL') {
             params['status'] = this.filterReceiptVoucherForm.value.status;
         }
@@ -175,12 +176,12 @@ export class PreviousYearAdvancesComponent implements OnInit {
                 }
             });
 
-            let selectedSource = [];
+            const selectedSource = [];
             this.sourceUnit.forEach(source => {
                 if (source.id === this.createReceiptVoucherForm.value['sourceUnit']) {
                     selectedSource.push({
-                        'name': source.id + ' - ' + source.longName,
-                        'value': source.id
+                        name: source.id + ' - ' + source.longName,
+                        value: source.id
                     });
                 }
             });
@@ -276,13 +277,25 @@ export class PreviousYearAdvancesComponent implements OnInit {
     editPreviousYearVoucher(data) {
         this.dialogRef = this._matDialog.open(PreviousYearAdvancesCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'item': data}
+            data: {action: 'EDIT', item: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
                 return;
             }
             this.getPreviousYearAdvances({});
+        });
+    }
+
+    askForDelete(data): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deletePreviousYearVoucher(data);
+            }
         });
     }
 
@@ -295,7 +308,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     editSchedulePayeeEmployee(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayersEmployeePreviousAdvancesComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'rv': data, 'report': report}
+            data: {action: 'EDIT', rv: data, report: report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -314,7 +327,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     editSchedulePayeeCustomer(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayersCustomerPreviousAdvancesComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'rv': data, 'report': report}
+            data: {action: 'EDIT', rv: data, report: report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {

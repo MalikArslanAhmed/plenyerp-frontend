@@ -6,12 +6,12 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormGroup} from '@angular/forms';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {PaymentApprovalCreateComponent} from '../payment-approval-create/payment-approval-create.component';
-import * as moment from 'moment';
 import {PaymentApprovalService} from '../../../../../shared/services/payment-approval.service';
-import {EmployeeService} from "../../../../../shared/services/employee.service";
-import {SchedulePaymentApprovalEmployeeComponent} from "../schedule-payment-approval-employee/schedule-payment-approval-employee.component";
-import {SchedulePaymentApprovalCustomerComponent} from "../schedule-payment-approval-customer/schedule-payment-approval-customer.component";
+import {EmployeeService} from '../../../../../shared/services/employee.service';
+import {SchedulePaymentApprovalEmployeeComponent} from '../schedule-payment-approval-employee/schedule-payment-approval-employee.component';
+import {SchedulePaymentApprovalCustomerComponent} from '../schedule-payment-approval-customer/schedule-payment-approval-customer.component';
 import {PermissionConstant} from '../../../../../shared/constants/permission-constant';
+import {DeleteListModalComponent} from '../../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-payment-approval-list',
@@ -207,6 +207,20 @@ export class PaymentApprovalListComponent implements OnInit {
                 return;
             }
             this.getPaymentApprovalList({});
+        });
+    }
+
+    askForDelete(data, type): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                if (type === 'paymentApproval') {
+                    this.deletePaymentApproval(data);
+                }
+            }
         });
     }
 

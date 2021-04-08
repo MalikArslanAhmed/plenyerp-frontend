@@ -4,7 +4,7 @@ import {AlertService} from './alert.service';
 import {GlobalService} from './global.service';
 import {Observable} from 'rxjs';
 import {AppUrl} from '../constants/app-url';
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +16,10 @@ export class JournalVoucherService extends BaseService {
 
     create(data): Observable<any> {
         return this.postRequest(AppUrl.JOURNAL_VOUCHER(), data);
+    }
+
+    deleteJv(jvId, data = {}): Observable<any> {
+        return this.deleteRequest(AppUrl.JOURNAL_VOUCHER(jvId), data);
     }
 
     journalVouchersUpdate(data): Observable<any> {
@@ -36,5 +40,9 @@ export class JournalVoucherService extends BaseService {
 
     updateDetails(jvId, detailId, data): Observable<any> {
         return this.putRequest(AppUrl.JOURNAL_VOUCHER_DETAILS(jvId, detailId), data);
+    }
+
+    deleteDetails(jvId, detailId, data = {}): Observable<any> {
+        return this.deleteRequest(AppUrl.JOURNAL_VOUCHER_DETAILS(jvId, detailId), data);
     }
 }

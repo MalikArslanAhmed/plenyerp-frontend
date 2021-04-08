@@ -1,13 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {PageEvent} from "@angular/material/paginator";
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {JournalVoucherService} from "../../../../shared/services/journal-voucher.service";
-import {FormGroup} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
+import {PageEvent} from '@angular/material/paginator';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {JournalVoucherService} from '../../../../shared/services/journal-voucher.service';
+import {FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
 import {JournalVoucherDetailCreateComponent} from '../journal-voucher-detail-create/journal-voucher-detail-create.component';
-import {JournalVoucherUpdateComponent} from "../journal-voucher-update/journal-voucher-update.component";
+import {JournalVoucherUpdateComponent} from '../journal-voucher-update/journal-voucher-update.component';
 import {PermissionConstant} from 'app/shared/constants/permission-constant';
-import {AlertService} from "../../../../shared/services/alert.service";
+import {AlertService} from '../../../../shared/services/alert.service';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-journal-voucher-list',
@@ -48,7 +49,7 @@ export class JournalVoucherListComponent implements OnInit {
         this.getJournalVoucherList();
     }
 
-    getJournalVoucherList(params?) {
+    getJournalVoucherList(params?): void {
         if (params) {
             this.status = params['status'];
         }
@@ -58,7 +59,7 @@ export class JournalVoucherListComponent implements OnInit {
         if (params) {
             param = {
                 ...params
-            }
+            };
         }
         this.journalVouchers = [];
         this.journalVoucherService.get(param).subscribe(data => {
@@ -123,7 +124,7 @@ export class JournalVoucherListComponent implements OnInit {
     }
 
     markAsChecked() {
-        let jvReferenceNumbers = [];
+        const jvReferenceNumbers = [];
         let i = 0;
         let postAllow = true;
         if (this.journalVouchers && this.journalVouchers.length > 0) {
@@ -158,8 +159,8 @@ export class JournalVoucherListComponent implements OnInit {
         if (postAllow) {
             if (i > 0) {
                 this.journalVoucherService.journalVouchersUpdate({
-                    'jvReferenceNumbers': jvReferenceNumbers,
-                    'status': 'CHECKED'
+                    jvReferenceNumbers: jvReferenceNumbers,
+                    status: 'CHECKED'
                 }).subscribe(data => {
                     console.log('data', data);
                 });
@@ -169,8 +170,8 @@ export class JournalVoucherListComponent implements OnInit {
         }
     }
 
-    markAsPosted() {
-        let jvReferenceNumbers = [];
+    markAsPosted(): void {
+        const jvReferenceNumbers = [];
         let i = 0;
         if (this.journalVouchers && this.journalVouchers.length > 0) {
             this.journalVouchers.forEach(journalVoucher => {
@@ -183,8 +184,8 @@ export class JournalVoucherListComponent implements OnInit {
 
         if (i > 0) {
             this.journalVoucherService.journalVouchersUpdate({
-                'jvReferenceNumbers': jvReferenceNumbers,
-                'status': 'POSTED'
+                jvReferenceNumbers: jvReferenceNumbers,
+                status: 'POSTED'
             }).subscribe(data => {
                 console.log('data', data);
             });
@@ -193,8 +194,8 @@ export class JournalVoucherListComponent implements OnInit {
         }
     }
 
-    markAsNew() {
-        let jvReferenceNumbers = [];
+    markAsNew(): void {
+        const jvReferenceNumbers = [];
         let i = 0;
         if (this.journalVouchers && this.journalVouchers.length > 0) {
             this.journalVouchers.forEach(journalVoucher => {
@@ -207,13 +208,45 @@ export class JournalVoucherListComponent implements OnInit {
 
         if (i > 0) {
             this.journalVoucherService.journalVouchersUpdate({
-                'jvReferenceNumbers': jvReferenceNumbers,
-                'status': 'RENEW'
+                jvReferenceNumbers: jvReferenceNumbers,
+                status: 'RENEW'
             }).subscribe(data => {
                 console.log('data', data);
             });
         } else {
             this.alertService.showErrors('Please choose voucher to Mark as New');
         }
+    }
+
+    askForDelete(data, type): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                if (type === 'journalVoucher') {
+                    this.deleteJournalVoucher(data);
+                } else if (type === 'journalVoucherDetail') {
+                    this.deleteJournalVoucherDetail(data);
+                }
+            }
+        });
+    }
+
+    deleteJournalVoucher(journalVoucher): void {
+        this.journalVoucherService.deleteJv(journalVoucher.id).subscribe(
+            data => {
+                this.getJournalVoucherList({});
+            }
+        );
+    }
+
+    deleteJournalVoucherDetail(journalVoucher): void {
+        this.journalVoucherService.deleteDetails(journalVoucher.journalVoucherId, journalVoucher.id).subscribe(
+            data => {
+                this.getJournalVoucherList({});
+            }
+        );
     }
 }

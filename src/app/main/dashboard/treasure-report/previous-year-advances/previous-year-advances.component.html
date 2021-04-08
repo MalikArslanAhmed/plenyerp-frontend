@@ -173,7 +173,7 @@
                                 </button>
                                 <button mat-icon-button aria-label="Toggle star"
                                         appPermissionBind [permission]="permissionPYADelete"
-                                        (click)="deletePreviousYearVoucher(reportData); $event.stopPropagation()"
+                                        (click)="askForDelete(reportData); $event.stopPropagation()"
                                         style="color: red">
                                     <mat-icon class="material-icons">delete</mat-icon>
                                 </button>

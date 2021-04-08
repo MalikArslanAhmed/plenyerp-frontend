@@ -1,5 +1,5 @@
-import {Component, Inject, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {fuseAnimations} from '../../../../@fuse/animations';
 
@@ -15,10 +15,11 @@ export class DeleteListModalComponent implements OnInit {
     dialogTitle: any;
     data: any;
     isDeleteItems = false;
+
     constructor(public matDialogRef: MatDialogRef<DeleteListModalComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
-               ) {
+    ) {
         this.data = _data.data;
 
     }
@@ -27,7 +28,8 @@ export class DeleteListModalComponent implements OnInit {
         this.refresh();
 
     }
-    refresh() {
+
+    refresh(): void {
 
     }
 

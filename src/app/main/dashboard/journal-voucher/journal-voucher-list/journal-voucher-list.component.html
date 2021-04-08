@@ -128,7 +128,8 @@
                                 </span>
                             </span>
                             <span appPermissionBind [permission]="permissionDeleteJV">
-                                <span class="material-icons ml-7px f_20 cursor-pointer redColor">
+                                <span class="material-icons ml-7px f_20 cursor-pointer redColor"
+                                      (click)="askForDelete(journalVoucher, 'journalVoucher')">
                                     delete
                                 </span>
                             </span>
@@ -258,6 +259,7 @@
                                     edit
                                 </span>
                             <span appPermissionBind [permission]="permissionDeleteJVDetails"
+                                  (click)="askForDelete(voucher, 'journalVoucherDetail')"
                                   class="material-icons f_20 cursor-pointer redColor">
                                     delete
                                 </span>
@@ -282,7 +284,7 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion>
-    <mat-paginator #paginator *ngIf ="journalVouchers.length > 0"
+    <mat-paginator #paginator *ngIf="journalVouchers.length > 0"
                    [length]="pagination.total"
                    [pageSize]="pagination.perpage"
                    [pageIndex]="pagination.page-1"

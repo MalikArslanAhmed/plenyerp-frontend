@@ -169,7 +169,7 @@
                                                   style="color: blue; margin-left: 20px; margin-top: 26px">edit</mat-icon>
                                     <mat-icon class="material-icons"
                                               appPermissionBind [permission]="permissionRvDelete" [customDisplaySetting]="'inline-block'"
-                                              (click)="deleteReceiptVoucher(reportData); $event.stopPropagation()"
+                                              (click)="askForDelete(reportData, 'receiptVoucher'); $event.stopPropagation()"
                                               style="color: red;">delete</mat-icon>
                                     <mat-icon class="material-icons"
                                               appPermissionBind [permission]="permissionRvPdfDownload" [customDisplaySetting]="'inline-block'"
@@ -438,7 +438,7 @@
                                                 <td>
                                                     <div class="title">
                                                         <mat-icon class="material-icons"
-                                                                  (click)="deleteEconomicCode(data); $event.stopPropagation()"
+                                                                  (click)="askForDelete(data, 'economicCode'); $event.stopPropagation()"
                                                                   style="color: red">delete
                                                         </mat-icon>
                                                         <!--<button mat-icon-button aria-label="Toggle star"

@@ -1,16 +1,17 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
-import {AlertService} from "../../../../shared/services/alert.service";
-import {TreasureReportService} from "../../../../shared/services/treasure-report.service";
-import * as moment from "moment";
-import {fuseAnimations} from "../../../../../@fuse/animations";
-import {ReceiptVoucherService} from "../../../../shared/services/receipt-voucher.service";
-import {ReceiptVoucherCreateComponent} from "./receipt-voucher-create/receipt-voucher-create.component";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {AlertService} from '../../../../shared/services/alert.service';
+import {TreasureReportService} from '../../../../shared/services/treasure-report.service';
+import * as moment from 'moment';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+import {ReceiptVoucherService} from '../../../../shared/services/receipt-voucher.service';
+import {ReceiptVoucherCreateComponent} from './receipt-voucher-create/receipt-voucher-create.component';
 import {SchedulePayersCustomerComponent} from './schedule-payers-customer/schedule-payers-customer.component';
 import {SchedulePayersEmployeeComponent} from './schedule-payers-employee/schedule-payers-employee.component';
-import {ScheduleEconomicCodesReceiptComponent} from "./schedule-economic-codes-receipt/schedule-economic-codes-receipt.component";
+import {ScheduleEconomicCodesReceiptComponent} from './schedule-economic-codes-receipt/schedule-economic-codes-receipt.component';
 import {PermissionConstant} from '../../../../shared/constants/permission-constant';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-receipt-vouchers',
@@ -23,7 +24,7 @@ export class ReceiptVouchersComponent implements OnInit {
     filterReceiptVoucherForm: FormGroup;
     createReceiptVoucherForm: FormGroup;
     receiptVoucherData = [];
-    panelOpenState: boolean = false;
+    panelOpenState = false;
     sourceUnit = [];
     statuses = [];
     types = [];
@@ -63,13 +64,13 @@ export class ReceiptVouchersComponent implements OnInit {
 
     refresh() {
         this.filterReceiptVoucherForm = this.fb.group({
-            'status': ['ALL'],
-            'search': [''],
-            'sourceUnit': ['']
+            status: ['ALL'],
+            search: [''],
+            sourceUnit: ['']
         });
         this.createReceiptVoucherForm = this.fb.group({
-            'sourceUnit': [''],
-            'type': ['']
+            sourceUnit: [''],
+            type: ['']
         });
         this.createReceiptVoucherForm.get('sourceUnit').valueChanges.subscribe(val => {
             this.types = [];
@@ -81,7 +82,7 @@ export class ReceiptVouchersComponent implements OnInit {
     }
 
     getReceiptVoucher(params?) {
-        let param = {
+        const param = {
             ...params,
             page: this.pagination.page
         };
@@ -149,7 +150,7 @@ export class ReceiptVouchersComponent implements OnInit {
     }
 
     filterReceiptVoucher() {
-        let params = {};
+        const params = {};
         if (this.filterReceiptVoucherForm.value.status !== 'ALL') {
             params['status'] = this.filterReceiptVoucherForm.value.status;
         }
@@ -177,12 +178,12 @@ export class ReceiptVouchersComponent implements OnInit {
                 }
             });
 
-            let selectedSource = [];
+            const selectedSource = [];
             this.sourceUnit.forEach(source => {
                 if (source.id === this.createReceiptVoucherForm.value['sourceUnit']) {
                     selectedSource.push({
-                        'name': source.id + ' - ' + source.longName,
-                        'value': source.id
+                        name: source.id + ' - ' + source.longName,
+                        value: source.id
                     });
                 }
             });
@@ -276,7 +277,7 @@ export class ReceiptVouchersComponent implements OnInit {
     editReceiptVoucher(data) {
         this.dialogRef = this._matDialog.open(ReceiptVoucherCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'item': data}
+            data: {action: 'EDIT', item: data}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -286,7 +287,23 @@ export class ReceiptVouchersComponent implements OnInit {
         });
     }
 
-    deleteReceiptVoucher(data) {
+    askForDelete(data, type): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                if (type === 'receiptVoucher') {
+                    this.deleteReceiptVoucher(data);
+                } else if (type === 'economicCode') {
+                    this.deleteEconomicCode(data);
+                }
+            }
+        });
+    }
+
+    deleteReceiptVoucher(data): void {
         this.receiptVoucherService.delete(data.id).subscribe(data => {
             this.getReceiptVoucher({});
         });
@@ -295,7 +312,7 @@ export class ReceiptVouchersComponent implements OnInit {
     editSchedulePayerEmployee(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayersEmployeeComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'rv': data, 'report': report}
+            data: {action: 'EDIT', rv: data, report: report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -305,16 +322,25 @@ export class ReceiptVouchersComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayerEmployee(report, data) {
-        this.receiptVoucherService.deleteSchedulePayerEmployee(report.id, data.id).subscribe(data => {
-            this.getChildReportData(data);
+    deleteSchedulePayerEmployee(report, data): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
         });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.receiptVoucherService.deleteSchedulePayerEmployee(report.id, data.id).subscribe(data => {
+                    this.getChildReportData(data);
+                });
+            }
+        });
+
     }
 
     editSchedulePayerCustomer(data, report) {
         this.dialogRef = this._matDialog.open(SchedulePayersCustomerComponent, {
             panelClass: 'contact-form-dialog',
-            data: {'action': 'EDIT', 'rv': data, 'report': report}
+            data: {action: 'EDIT', rv: data, report: report}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
@@ -325,8 +351,16 @@ export class ReceiptVouchersComponent implements OnInit {
     }
 
     deleteSchedulePayerCustomer(report, data) {
-        this.receiptVoucherService.deleteSchedulePayerCustomer(report.id, data.id).subscribe(data => {
-            this.getChildReportData(data);
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.receiptVoucherService.deleteSchedulePayerCustomer(report.id, data.id).subscribe(data => {
+                    this.getChildReportData(data);
+                });
+            }
         });
     }
 

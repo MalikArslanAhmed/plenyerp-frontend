@@ -151,7 +151,7 @@
                                           style="color: blue; margin-left: 0; margin-top: 10px"
                                           *ngIf="reportData.status === 'NEW'">edit</mat-icon>
                                 <mat-icon class="material-icons"
-                                          (click)="deletePaymentVoucher(reportData); $event.stopPropagation()"
+                                          (click)="askForDelete(reportData, 'paymentVoucher'); $event.stopPropagation()"
                                           appPermissionBind [permission]="permissionDelPv"
                                           [customDisplaySetting]="'inline-block'"
                                           style="color: red; margin-left: 5px" *ngIf="reportData.status === 'NEW'">delete</mat-icon>
@@ -492,7 +492,7 @@
                                                     <div class="title">
                                                         <button mat-icon-button aria-label="Toggle star"
                                                                 appPermissionBind [permission]="permissionAddSchCodes"
-                                                                (click)="deleteEconomicCode(data); $event.stopPropagation()"
+                                                                (click)="askForDelete(data, 'economicCode'); $event.stopPropagation()"
                                                                 style="color: red">
                                                             <mat-icon class="material-icons">delete</mat-icon>
                                                         </button>

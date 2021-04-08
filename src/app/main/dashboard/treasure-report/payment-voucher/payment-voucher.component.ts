@@ -12,6 +12,7 @@ import {TreasureReportService} from '../../../../shared/services/treasure-report
 import {ScheduleEconomicCodesComponent} from './schedule-economic-codes/schedule-economic-codes.component';
 import {Router} from '@angular/router';
 import {PermissionConstant} from '../../../../shared/constants/permission-constant';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 
 @Component({
@@ -147,6 +148,24 @@ export class PaymentVoucherComponent implements OnInit {
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {
                 return;
+            }
+        });
+    }
+
+    askForDelete(data, type): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                if (type === 'economicCode') {
+                    this.deleteEconomicCode(data);
+                } else if (type === 'paymentVoucher') {
+                    this.deletePaymentVoucher(data);
+                } else if (type === 'schedulePayeeEmployee') {
+
+                }
             }
         });
     }
@@ -372,9 +391,17 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayeeEmployee(report, data) {
-        this.paymentVoucherService.deleteSchedulePayee(report.id, data.id).subscribe(data => {
-            this.getPaymentVoucher({});
+    deleteSchedulePayeeEmployee(report, data): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.paymentVoucherService.deleteSchedulePayee(report.id, data.id).subscribe(data => {
+                    this.getPaymentVoucher({});
+                });
+            }
         });
     }
 
@@ -391,13 +418,21 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    deleteSchedulePayeeCustomer(report, data) {
-        this.paymentVoucherService.deleteScheduleCustomer(report.id, data.id).subscribe(data => {
-            this.getPaymentVoucher({});
+    deleteSchedulePayeeCustomer(report, data): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.paymentVoucherService.deleteScheduleCustomer(report.id, data.id).subscribe(data => {
+                    this.getPaymentVoucher({});
+                });
+            }
         });
     }
 
-    onPageChange(page) {
+    onPageChange(page): void {
         this.pagination.page = page.pageIndex + 1;
         this.getPaymentVoucher({});
     }
