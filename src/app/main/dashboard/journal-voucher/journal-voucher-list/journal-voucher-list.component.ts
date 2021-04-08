@@ -123,7 +123,25 @@ export class JournalVoucherListComponent implements OnInit {
         }
     }
 
-    markAsChecked() {
+    askForConfirmation(data, type): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                if (type === 'checked') {
+                    this.markAsChecked();
+                } else if (type === 'posted') {
+                    this.markAsPosted();
+                } else if (type === 'new') {
+                    this.markAsNew();
+                }
+            }
+        });
+    }
+
+    markAsChecked(): void {
         const jvReferenceNumbers = [];
         let i = 0;
         let postAllow = true;

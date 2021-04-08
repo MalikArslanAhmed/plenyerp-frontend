@@ -8,6 +8,7 @@ import {TreasureReportService} from '../../../../shared/services/treasure-report
 import * as moment from 'moment';
 import {LiabilitiesComponent} from './liabilities/liabilities.component';
 import {RetireVoucherService} from '../../../../shared/services/retire-voucher.service';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-retire-vouchers',
@@ -20,7 +21,7 @@ export class RetireVouchersComponent implements OnInit {
     filterPaymentVoucherForm: FormGroup;
     // retireVoucherData = [];
     retireVoucherData = [];
-    panelOpenState: boolean = false;
+    panelOpenState = false;
     sourceUnit = [];
     statuses = [];
     types = [];
@@ -51,14 +52,14 @@ export class RetireVouchersComponent implements OnInit {
 
     refresh() {
         this.filterPaymentVoucherForm = this.fb.group({
-            'status': ['ALL'],
-            'search': [''],
-            'voucherSourceUnitId': ['']
+            status: ['ALL'],
+            search: [''],
+            voucherSourceUnitId: ['']
         });
     }
 
     getRetireVoucher(params?) {
-        let param = {
+        const param = {
             ...params,
             page: this.pagination.page
         };
@@ -107,7 +108,7 @@ export class RetireVouchersComponent implements OnInit {
     }
 
     filterRetireVoucher() {
-        let params = {};
+        const params = {};
         if (this.filterPaymentVoucherForm.value.status !== 'ALL') {
             params['retireStatus'] = this.filterPaymentVoucherForm.value.status;
         }
@@ -171,7 +172,19 @@ export class RetireVouchersComponent implements OnInit {
         });
     }
 
-    updateStatus(status: string) {
+    askForConfirmation(data): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.updateStatus(data);
+            }
+        });
+    }
+
+    updateStatus(status: string): void {
         const paymentVoucherId = [];
         if (this.retireVoucherData && this.retireVoucherData.length > 0) {
             this.retireVoucherData.forEach(item => {
@@ -185,9 +198,9 @@ export class RetireVouchersComponent implements OnInit {
             };
             this.retireVoucherService.updateRetireStatus(params).subscribe(data => {
                 this.getRetireVoucher({
-                    'retireStatus': this.filterPaymentVoucherForm.value.status,
-                    'voucherSourceUnitId': this.filterPaymentVoucherForm.value.voucherSourceUnitId,
-                    'search': this.filterPaymentVoucherForm.value.search,
+                    retireStatus: this.filterPaymentVoucherForm.value.status,
+                    voucherSourceUnitId: this.filterPaymentVoucherForm.value.voucherSourceUnitId,
+                    search: this.filterPaymentVoucherForm.value.search,
                 });
             });
         }

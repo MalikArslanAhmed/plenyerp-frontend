@@ -9,14 +9,14 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
-       <div>Are You Sure ?</div>
+        <div>Are You Sure ?</div>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button color="accent"  (click)="matDialogRef.close(isDeleteItems = true)"
-                aria-label="Save">Yes
+        <button mat-button color="accent" (click)="matDialogRef.close(isDeleteItems = true)" aria-label="Save">
+            Yes
         </button>
-        <button mat-button color="warn"  (click)="matDialogRef.close(isDeleteItems = false);"
-               >No
+        <button mat-button color="warn" (click)="matDialogRef.close(isDeleteItems = false);">
+            No
         </button>
     </div>
 </div>

@@ -1,13 +1,14 @@
 <div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
     <div fxLayout="row" fxLayoutAlign="end center">
         <div>
-            <button mat-raised-button (click)="markAsChecked()" class="checked-btn justify-content-end"
+            <button mat-raised-button (click)="askForConfirmation({}, 'checked')"
+                    class="checked-btn justify-content-end"
                     *ngIf="this.status && this.status === 'NEW'">Mark as checked
             </button>
-            <button mat-raised-button (click)="markAsPosted()" class="checked-btn"
+            <button mat-raised-button (click)="askForConfirmation({}, 'posted')" class="checked-btn"
                     *ngIf="this.status && this.status === 'CHECKED'">Post JV
             </button>
-            <button mat-raised-button (click)="markAsNew()" class="checked-btn"
+            <button mat-raised-button (click)="askForConfirmation({}, 'new')" class="checked-btn"
                     *ngIf="this.status && this.status === 'CHECKED'">Mark as New
             </button>
         </div>

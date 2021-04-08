@@ -304,7 +304,19 @@ export class PaymentVoucherComponent implements OnInit {
         });
     }
 
-    updateStatus(status: string) {
+    askForConfirmation(data): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.updateStatus(data);
+            }
+        });
+    }
+
+    updateStatus(status: string): void {
         const paymentVoucherId = [];
         if (this.paymentVoucherData && this.paymentVoucherData.length) {
             this.paymentVoucherData.forEach(item => {

@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {FormGroup} from '@angular/forms';
 import {PublicHolidayCreateComponent} from '../public-holiday-create/public-holiday-create.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
-import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
-import { PermissionConstant } from 'app/shared/constants/permission-constant';
+import {DeleteListModalComponent} from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
+import {PermissionConstant} from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-public-holiday-list',
@@ -17,7 +17,7 @@ import { PermissionConstant } from 'app/shared/constants/permission-constant';
 export class PublicHolidayListComponent implements OnInit {
     publicHolidayList = [];
     displayedPublicHolidayListColumns = ['id', 'name', 'actions'];
-    dialogRef: any;    
+    dialogRef: any;
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
 
@@ -32,8 +32,8 @@ export class PublicHolidayListComponent implements OnInit {
         this.getPublicHolidayList();
     }
 
-    getPublicHolidayList() {
-        this.contactInfoService.getPublicHolidayList({'page': -1}).subscribe(data => {
+    getPublicHolidayList(): void {
+        this.contactInfoService.getPublicHolidayList({page: -1}).subscribe(data => {
             this.publicHolidayList = data.items;
 
             if (this.publicHolidayList && this.publicHolidayList.length > 0) {
@@ -46,7 +46,7 @@ export class PublicHolidayListComponent implements OnInit {
         });
     }
 
-    deleteItemModal(items) {
+    deleteItemModal(items): void {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
             data: {data: items}
@@ -56,8 +56,7 @@ export class PublicHolidayListComponent implements OnInit {
                 this.deletePublicHoliday(items.id);
             }
         });
-
-    } 
+    }
 
 
     deletePublicHoliday(id) {

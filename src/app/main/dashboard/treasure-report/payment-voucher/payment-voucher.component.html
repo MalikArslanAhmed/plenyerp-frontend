@@ -75,7 +75,7 @@
             <div class="content mt-20px">
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <ng-container *ngIf="statuses && statuses.length > 0">
-                        <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
+                        <button mat-button class="update-report" (click)="askForConfirmation(statuses[0].value)"
                                 *ngIf="status !== 'ALL' && status !== 'PAID' && status !== 'NEW' && status !== 'ON_MANDATE' && status !== 'CLOSED' && status !== 'POSTED_TO_GL'">
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_left
@@ -84,7 +84,7 @@
                         </button>
                         <button mat-button class="update-report"
                                 *ngIf="status !== 'ALL' && status !== 'ON_MANDATE' && status !== 'CLOSED' && status !== 'POSTED_TO_GL' && selectedStatus && selectedStatus.length > 0"
-                                (click)="updateStatus(selectedStatus[0].value)">
+                                (click)="askForConfirmation(selectedStatus[0].value)">
                             {{selectedStatus[0].name}}
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_right

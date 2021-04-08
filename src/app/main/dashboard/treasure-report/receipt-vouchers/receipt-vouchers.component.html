@@ -75,7 +75,7 @@
             <div class="content mt-20px">
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <ng-container *ngIf="statuses && statuses.length > 0">
-                        <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
+                        <button mat-button class="update-report" (click)="askForConfirmation(statuses[0].value)"
                                 *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL' && status !== 'NEW'">
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_left
@@ -85,7 +85,7 @@
                         <button mat-button class="update-report"
                                 appPermissionBind [permission]="permissionRvStatus"
                                 *ngIf="status !== 'ALL' && selectedStatus && selectedStatus.length > 0"
-                                (click)="updateStatus( selectedStatus[0].value)">
+                                (click)="askForConfirmation( selectedStatus[0].value)">
                             {{selectedStatus[0].name}}
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_right
@@ -162,22 +162,28 @@
                                    +reportData['geoCodeSegment'].combinedCode+' - '+reportData['geoCodeSegment'].name">info</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <ng-container *ngIf="reportData['status'] !== 'NEW';else newStatus">
+                                <ng-container *ngIf="reportData['status'] === 'NEW';else newStatus">
                                     <mat-icon class="material-icons"
-                                              appPermissionBind [permission]="permissionRvDetailEdit" [customDisplaySetting]="'inline-block'"
-                                                  (click)="editReceiptVoucher(reportData); $event.stopPropagation()"
-                                                  style="color: blue; margin-left: 20px; margin-top: 26px">edit</mat-icon>
+                                              appPermissionBind [permission]="permissionRvDetailEdit"
+                                              [customDisplaySetting]="'inline-block'"
+                                              (click)="editReceiptVoucher(reportData); $event.stopPropagation()"
+                                              style="color: blue; margin-left: 20px; margin-top: 26px">edit</mat-icon>
                                     <mat-icon class="material-icons"
-                                              appPermissionBind [permission]="permissionRvDelete" [customDisplaySetting]="'inline-block'"
+                                              appPermissionBind [permission]="permissionRvDelete"
+                                              [customDisplaySetting]="'inline-block'"
                                               (click)="askForDelete(reportData, 'receiptVoucher'); $event.stopPropagation()"
                                               style="color: red;">delete</mat-icon>
-                                    <mat-icon class="material-icons"
-                                              appPermissionBind [permission]="permissionRvPdfDownload" [customDisplaySetting]="'inline-block'"
-                                              (click)="downloadPDF(reportData); $event.stopPropagation()"
-                                              title="Download Payment Voucher" style="color: red; margin-left: 5px">picture_as_pdf</mat-icon>
                                 </ng-container>
                                 <ng-template #newStatus>
-                                    <p class="material-icons" style="margin-top: 20px; margin-left: 80px" >
+                                    <mat-icon class="material-icons" appPermissionBind
+                                              [permission]="permissionRvPdfDownload"
+                                              [customDisplaySetting]="'inline-block'"
+                                              (click)="downloadPDF(reportData); $event.stopPropagation()"
+                                              title="Download Payment Voucher"
+                                              style="color: red; margin-left: 20px; margin-top: 26px;">
+                                        picture_as_pdf
+                                    </mat-icon>
+                                    <p class="material-icons" style="margin-top: 20px; margin-left: 80px">
                                     -
                                     </p>
                                 </ng-template>
@@ -349,7 +355,7 @@
                                             </tbody>
                                             <tbody *ngIf="reportData.status ==='NEW'">
                                             <tr>
-                                                <td colspan="15"   appPermissionBind [permission]="permissionRvPayee">
+                                                <td colspan="15" appPermissionBind [permission]="permissionRvPayee">
                                                     <button mat-button class="payee-report" style="margin-right: 10px"
                                                             (click)="scheduleEmployee(reportData)"
                                                             *ngIf="reportData && reportData.payee === 'EMPLOYEE'">

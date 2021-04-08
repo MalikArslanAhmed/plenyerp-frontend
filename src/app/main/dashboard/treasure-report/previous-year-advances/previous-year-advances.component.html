@@ -75,7 +75,7 @@
             <div class="content mt-20px">
                 <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
                     <ng-container *ngIf="statuses && statuses.length > 0">
-                        <button mat-button class="update-report" (click)="updateStatus(statuses[0].value)"
+                        <button mat-button class="update-report" (click)="askForConfirmation(statuses[0].value)"
                                 appPermissionBind [permission]="permissionPYAAdd"
                                 *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL' && status !== 'NEW'">
                             <mat-icon class="material-icons cursor-pointer whiteColor">
@@ -86,7 +86,7 @@
                         <button mat-button class="update-report"
                                 appPermissionBind [permission]="permissionPYAClose"
                                 *ngIf="status !== 'ALL' && selectedStatus && selectedStatus.length > 0"
-                                (click)="updateStatus( selectedStatus[0].value)">
+                                (click)="askForConfirmation( selectedStatus[0].value)">
                             {{selectedStatus[0].name}}
                             <mat-icon class="material-icons cursor-pointer whiteColor">
                                 keyboard_arrow_right

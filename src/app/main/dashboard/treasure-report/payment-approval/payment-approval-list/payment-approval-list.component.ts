@@ -142,7 +142,19 @@ export class PaymentApprovalListComponent implements OnInit {
         });
     }
 
-    updateStatus(status: string) {
+    askForConfirmation(data): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.updateStatus(data);
+            }
+        });
+    }
+
+    updateStatus(status: string): void {
         const paymentApprovalIds = [];
         if (this.paymentApprovalList && this.paymentApprovalList.length > 0) {
             this.paymentApprovalList.forEach(item => {
