@@ -102,7 +102,7 @@ export class PaymentApprovalListComponent implements OnInit {
             this.paymentApprovalList = data.items;
             this.pagination.page = data.page;
             this.pagination.total = data.total;
-            if (this.paymentApprovalList && this.paymentApprovalList.length > 0) {
+            /*if (this.paymentApprovalList && this.paymentApprovalList.length > 0) {
                 let i = 1;
                 this.paymentApprovalList.forEach(val => {
                     let totalAmount = [];
@@ -121,7 +121,7 @@ export class PaymentApprovalListComponent implements OnInit {
                     val['sno'] = i;
                     i++;
                 });
-            }
+            }*/
         });
     }
 

@@ -12,9 +12,9 @@
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-            <div appPermissionBind [permission]="permissionAddRoles">
+            <div appPermissionBind [permission]="permissionAddRoles" >
                 <button mat-fab class="accent" id="add-button" aria-label="add cashbook details"
-                        appPermissionBind [permission]="permissionAddApproval"
+                        appPermissionBind [permission]="permissionAddApproval" [customDisplaySetting]="'inline-block'"
                         [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addPaymentApproval()">
                     <mat-icon>add_circle</mat-icon>
                 </button>
