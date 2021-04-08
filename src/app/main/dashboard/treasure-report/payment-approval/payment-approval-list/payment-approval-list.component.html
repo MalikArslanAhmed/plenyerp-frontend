@@ -48,10 +48,7 @@
                                       [checked]="reportData.checked ? true : null"></mat-checkbox>
                     </p>
                 </span>
-                <!--<span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}
-                        .</p>
-                </span>-->
+
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center ml--30px">{{reportData?.id}}</p>
                 </span>
@@ -66,12 +63,12 @@
                 </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center"
-                       *ngIf="reportData.totalAmount">{{reportData.totalAmount}}</p>
+                       *ngIf="reportData.totalAmount">{{reportData.totalAmount.netAmount}}</p>
                     <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalAmount">-</p>
                 </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center"
-                       *ngIf="reportData.totalTax">{{reportData.totalTax}}</p>
+                       *ngIf="reportData.totalTax">{{reportData.totalTax.totalTax}}</p>
                     <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalTax">-</p>
                 </span>
                 <span class="mat-cell align-items-center">
