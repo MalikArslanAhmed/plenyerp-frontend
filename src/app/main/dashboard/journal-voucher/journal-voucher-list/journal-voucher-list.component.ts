@@ -126,7 +126,7 @@ export class JournalVoucherListComponent implements OnInit {
     askForConfirmation(data, type): void {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: data, header: ' '}
+            data: {data: data, header: 'Mark as ' + type}
         });
         this.dialogRef.afterClosed().subscribe((response: boolean) => {
             if (response) {

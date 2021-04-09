@@ -175,7 +175,7 @@ export class RetireVouchersComponent implements OnInit {
     askForConfirmation(data): void {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: data, header: ' '}
+            data: {data: data, header: 'Mark as ' + data}
         });
         this.dialogRef.afterClosed().subscribe((response: boolean) => {
             if (response) {
