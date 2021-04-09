@@ -44,7 +44,7 @@ export class JournalVoucherListComponent implements OnInit {
         this.getJournalVoucherList();
     }
 
-    onPageChange(page) {
+    onPageChange(page): void {
         this.pagination.page = page.pageIndex + 1;
         this.getJournalVoucherList();
     }
@@ -76,7 +76,7 @@ export class JournalVoucherListComponent implements OnInit {
         });
     }
 
-    editJournalVoucher(journalVoucher) {
+    editJournalVoucher(journalVoucher): void {
         this.dialogRef = this._matDialog.open(JournalVoucherUpdateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', journalVoucher: journalVoucher},
@@ -89,7 +89,7 @@ export class JournalVoucherListComponent implements OnInit {
         });
     }
 
-    editJvDetail(journalVoucher, voucher) {
+    editJvDetail(journalVoucher, voucher): void {
         this.dialogRef = this._matDialog.open(JournalVoucherDetailCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', jvDetail: voucher, journalVoucherId: journalVoucher.id},
@@ -102,7 +102,7 @@ export class JournalVoucherListComponent implements OnInit {
         });
     }
 
-    createJvDetail(journalVoucher) {
+    createJvDetail(journalVoucher): void {
         this.dialogRef = this._matDialog.open(JournalVoucherDetailCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE', journalVoucherId: journalVoucher.id},
@@ -115,7 +115,7 @@ export class JournalVoucherListComponent implements OnInit {
         });
     }
 
-    checkJV(index, event) {
+    checkJV(index, event): void {
         if (this.status === 'NEW') {
             this.journalVouchers[index].checked = event.checked;
         } else if (this.status === 'CHECKED') {
@@ -126,7 +126,7 @@ export class JournalVoucherListComponent implements OnInit {
     askForConfirmation(data, type): void {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: data}
+            data: {data: data, header: ' '}
         });
         this.dialogRef.afterClosed().subscribe((response: boolean) => {
             if (response) {
@@ -151,14 +151,14 @@ export class JournalVoucherListComponent implements OnInit {
                     let creditValTotal = 0;
                     let debitValTotal = 0;
                     if (journalVoucher && journalVoucher['journalVoucherDetails'] && journalVoucher['journalVoucherDetails'].length > 0) {
-                        journalVoucher['journalVoucherDetails'].forEach(journalVoucher => {
-                            if (journalVoucher && journalVoucher['lineValueType'] === 'CREDIT') {
-                                creditValTotal += journalVoucher.lvLineValue;
+                        journalVoucher['journalVoucherDetails'].forEach(jv => {
+                            if (jv && jv['lineValueType'] === 'CREDIT') {
+                                creditValTotal += jv.lvLineValue;
                             }
                         });
-                        journalVoucher['journalVoucherDetails'].forEach(journalVoucher => {
-                            if (journalVoucher && journalVoucher['lineValueType'] === 'DEBIT') {
-                                debitValTotal += journalVoucher.lvLineValue;
+                        journalVoucher['journalVoucherDetails'].forEach(jv => {
+                            if (jv && jv['lineValueType'] === 'DEBIT') {
+                                debitValTotal += jv.lvLineValue;
                             }
                         });
                     }

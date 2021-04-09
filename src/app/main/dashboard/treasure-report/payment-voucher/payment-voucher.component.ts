@@ -307,7 +307,7 @@ export class PaymentVoucherComponent implements OnInit {
     askForConfirmation(data): void {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: data}
+            data: {data: data, header: ' '}
         });
         this.dialogRef.afterClosed().subscribe((response: boolean) => {
             if (response) {

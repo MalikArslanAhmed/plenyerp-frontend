@@ -15,12 +15,25 @@ export class DeleteListModalComponent implements OnInit {
     dialogTitle: any;
     data: any;
     isDeleteItems = false;
+    header: string;
+    message: string;
 
     constructor(public matDialogRef: MatDialogRef<DeleteListModalComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
     ) {
         this.data = _data.data;
+
+        if (_data.header) {
+            this.header = _data.header;
+        } else {
+            this.header = 'Delete';
+        }
+        if (_data.message) {
+            this.message = _data.message;
+        } else {
+            this.message = 'Are You Sure ?';
+        }
 
     }
 
