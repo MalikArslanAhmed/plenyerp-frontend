@@ -4,7 +4,7 @@
             <button mat-button class="update-report" (click)="askForConfirmation(statuses[0].value)"
                     appPermissionBind [permission]="permissionApproval"
                     [customDisplaySetting]="'inline-block'"
-                    *ngIf="status !== 'ALL' && status !== 'NEW' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !== 'READY_FOR_PV'">
+                    *ngIf="status !== 'ALL' && status !== 'NEW' && status !== 'FULLY_USED' && status !== 'READY_FOR_PV'">
                 <mat-icon class="material-icons cursor-pointer whiteColor">
                     keyboard_arrow_left
                 </mat-icon>
@@ -25,7 +25,7 @@
     <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
         <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
             <span class="mat-header-cell text-center"
-                  *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !=='READY_FOR_PV'">#</span>
+                  *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'FULLY_USED' && status !=='READY_FOR_PV'">#</span>
             <!--<span class="mat-header-cell text-center">S.No.</span>-->
             <span class="mat-header-cell text-center">Ref No.</span>
             <span class="mat-header-cell text-center">Prepared Date</span>
@@ -40,7 +40,7 @@
             <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                         (click)="getChildReportData(reportData)">
                 <span class="mat-cell align-items-center"
-                      *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'FULLY_USED' && status !== 'APPROVED_AND_READY' && status !=='READY_FOR_PV'">
+                      *ngIf="selectedStatus && selectedStatus.length > 0 && status !== 'ALL' && status !== 'FULLY_USED' && status !=='READY_FOR_PV'">
                     <p class="text-truncate cursor-pointer mt-10px text-center">
                         <mat-checkbox (change)="checkPV(i, $event)"
                                       appPermissionBind [permission]="permissionCheckApproval"
@@ -53,7 +53,7 @@
                     <p class="text-truncate cursor-pointer mt-10px text-center ml--30px">{{reportData?.id}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.valueDate}}</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.createdAt}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.employeeCustomer}}</p>
@@ -62,26 +62,27 @@
                     <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData?.remark}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center"
-                       *ngIf="reportData.totalAmount">{{reportData.totalAmount.netAmount}}</p>
-                    <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalAmount">-</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center">
+                        {{reportData.totalAmount ? reportData.totalAmount.netAmount : '-'}}
+                    </p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center"
-                       *ngIf="reportData.totalTax">{{reportData.totalTax.totalTax}}</p>
-                    <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalTax">-</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center">
+                        {{reportData.totalTax ? reportData.totalTax.totalTax : '-'}}
+                    </p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-10px text-center"
-                       *ngIf="reportData.status">{{reportData?.status}}</p>
-                    <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.status">-</p>
+                    <p class="text-truncate cursor-pointer mt-10px text-center">
+                        {{reportData.status ? reportData.status : '-'}}
+                    </p>
                 </span>
                 <span class="mat-cell align-items-center">
-                    <button mat-icon-button aria-label="Toggle star"
-                            appPermissionBind [permission]="permissionEditApproval"
-                            [customDisplaySetting]="'inline-block'"
-                            (click)="editPaymentApproval(reportData); $event.stopPropagation()"
-                            style="color: blue; margin-left: 40px; margin-top: 3px" *ngIf="reportData['status'] === 'NEW'">
+                    <ng-container *ngIf="reportData['status'] === 'NEW';else notNew">
+                        <button mat-icon-button aria-label="Toggle star"
+                                appPermissionBind [permission]="permissionEditApproval"
+                                [customDisplaySetting]="'inline-block'"
+                                (click)="editPaymentApproval(reportData); $event.stopPropagation()"
+                                style="color: blue; margin-left: 40px; margin-top: 3px">
                             <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                     <button mat-icon-button aria-label="Toggle star"
@@ -91,11 +92,12 @@
                             style="color: red" *ngIf="reportData['status'] === 'NEW'">
                         <mat-icon class="material-icons">delete</mat-icon>
                     </button>
-                </span>
-                <span class="mat-cell align-items-center" *ngIf="reportData['status'] !== 'NEW'">
-                    <p class="material-icons" style="margin-top: 10px; margin-left: 115px">
+                    </ng-container>
+                    <ng-template #notNew>
+                        <p class="material-icons" style="margin-top: 10px; margin-left: 115px">
                         -
                     </p>
+                    </ng-template>
                 </span>
             </mat-expansion-panel-header>
             <div>
@@ -261,28 +263,32 @@
                                             appPermissionBind [permission]="permissionEditPayee"
                                             [customDisplaySetting]="'inline-block'"
                                             (click)="editSchedulePayeeEmployee(data, reportData); $event.stopPropagation()"
-                                            style="color: blue; margin-left: -21px; margin-right: -10px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
+                                            style="color: blue; margin-left: -21px; margin-right: -10px"
+                                            *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
                                         <mat-icon class="material-icons">edit</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
                                             appPermissionBind [permission]="permissionDeletePayee"
                                             [customDisplaySetting]="'inline-block'"
                                             (click)="deleteSchedulePayeeEmployee(reportData, data); $event.stopPropagation()"
-                                            style="color: red" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
+                                            style="color: red"
+                                            *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'EMPLOYEE'">
                                         <mat-icon class="material-icons">delete</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
                                             appPermissionBind [permission]="permissionEditPayee"
                                             [customDisplaySetting]="'inline-block'"
                                             (click)="editSchedulePayeeCustomer(data, reportData); $event.stopPropagation()"
-                                            style="color: blue; margin-left: -21px; margin-right: -10px" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
+                                            style="color: blue; margin-left: -21px; margin-right: -10px"
+                                            *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
                                         <mat-icon class="material-icons">edit</mat-icon>
                                     </button>
                                     <button mat-icon-button aria-label="Toggle star"
                                             appPermissionBind [permission]="permissionDeletePayee"
                                             [customDisplaySetting]="'inline-block'"
                                             (click)="deleteSchedulePayeeCustomer(reportData, data); $event.stopPropagation()"
-                                            style="color: red" *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
+                                            style="color: red"
+                                            *ngIf="reportData.status === 'NEW' && reportData.employeeCustomer === 'CUSTOMER'">
                                         <mat-icon class="material-icons">delete</mat-icon>
                                     </button>
                                 </span>

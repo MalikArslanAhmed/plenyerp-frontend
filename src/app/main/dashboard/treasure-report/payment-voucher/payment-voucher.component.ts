@@ -63,7 +63,7 @@ export class PaymentVoucherComponent implements OnInit {
         this.paymentVoucherStatus({});
     }
 
-    refresh() {
+    refresh(): void {
         this.filterPaymentVoucherForm = this.fb.group({
             status: ['ALL'],
             search: [''],

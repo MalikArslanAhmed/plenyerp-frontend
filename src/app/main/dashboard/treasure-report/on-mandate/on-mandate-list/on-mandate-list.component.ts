@@ -1,14 +1,15 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {PageEvent} from "@angular/material/paginator";
-import {CashbookService} from "../../../../../shared/services/cashbook.service";
-import {Router} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
-import {FormGroup} from "@angular/forms";
-import {fuseAnimations} from "../../../../../../@fuse/animations";
-import {MandateService} from "../../../../../shared/services/mandate.service";
-import {OnMandateCreateComponent} from "../on-mandate-create/on-mandate-create.component";
-import * as moment from "moment";
+import {PageEvent} from '@angular/material/paginator';
+import {CashbookService} from '../../../../../shared/services/cashbook.service';
+import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+import {fuseAnimations} from '../../../../../../@fuse/animations';
+import {MandateService} from '../../../../../shared/services/mandate.service';
+import {OnMandateCreateComponent} from '../on-mandate-create/on-mandate-create.component';
+import * as moment from 'moment';
 import {PermissionConstant} from '../../../../../shared/constants/permission-constant';
+import {DeleteListModalComponent} from '../../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-on-mandate-list',
@@ -30,24 +31,25 @@ export class OnMandateListComponent implements OnInit {
 
     permissionUpdateMandate = [PermissionConstant.MANDATE_EDIT];
     permissionChangeStatusMandate = [PermissionConstant.MANDATE_CHANGE_STATUS];
+    permissionDeleteMandate = [PermissionConstant.MANDATE_DELETE];
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
     statuses = [
         {
-            'name': 'New',
-            'value': 'NEW',
+            name: 'New',
+            value: 'NEW',
         },
         {
-            'name': 'Ist Authorised',
-            'value': '1ST_AUTHORISED',
+            name: 'Ist Authorised',
+            value: '1ST_AUTHORISED',
         },
         {
-            'name': 'IInd Authorised',
-            'value': '2ND_AUTHORISED',
+            name: 'IInd Authorised',
+            value: '2ND_AUTHORISED',
         },
         {
-            'name': 'Posted to GL',
-            'value': 'POSTED_TO_GL',
+            name: 'Posted to GL',
+            value: 'POSTED_TO_GL',
         }
     ];
     status = 'ALL';
@@ -64,7 +66,7 @@ export class OnMandateListComponent implements OnInit {
     }
 
     getMadateList(data?) {
-        let params = {
+        const params = {
             page: this.pagination.page
         };
 
@@ -80,7 +82,7 @@ export class OnMandateListComponent implements OnInit {
                             this.selectedStatus = [this.statuses[i + 1]];
                         }
                     }
-                    i++
+                    i++;
                 });
             }
         }
@@ -93,8 +95,8 @@ export class OnMandateListComponent implements OnInit {
             if (this.onMandateList && this.onMandateList.length > 0) {
                 let i = 1;
                 this.onMandateList.forEach(val => {
-                    let totalAmount = [];
-                    let totalTax = [];
+                    const totalAmount = [];
+                    const totalTax = [];
                     if (val && val['paymentVouchers'] && val['paymentVouchers'].length > 0) {
                         val['paymentVouchers'].forEach(pv => {
                             if (pv && pv['payeeVouchers'] && pv['payeeVouchers'].length > 0) {
@@ -157,6 +159,18 @@ export class OnMandateListComponent implements OnInit {
                 console.log(data);
             });
         }
+    }
+
+    askForDelete(data): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteMandate(data);
+            }
+        });
     }
 
     deleteMandate(mandateId) {

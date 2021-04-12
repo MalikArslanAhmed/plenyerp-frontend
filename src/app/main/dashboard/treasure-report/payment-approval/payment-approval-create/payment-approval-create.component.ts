@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {TreasureReportService} from '../../../../../shared/services/treasure-report.service';
 import {DefaultSettingVoucherInfoService} from '../../../../../shared/services/default-setting-voucher-info';
-import {AdminSegmentEmployeeSelectComponent} from '../../default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {CashbookService} from '../../../../../shared/services/cashbook.service';
 import * as moment from 'moment';
@@ -14,8 +13,8 @@ import {CurrencyService} from '../../../../../shared/services/currency.service';
 import {AdminSegmentSelectComponent} from '../../../journal-voucher/admin-segment-select/admin-segment-select.component';
 import {FundSegmentSelectComponent} from '../../../journal-voucher/fund-segment-select/fund-segment-select.component';
 import {EconomicSegmentSelectComponent} from '../../../journal-voucher/economic-segment-select/economic-segment-select.component';
-import {PaymentApprovalService} from "../../../../../shared/services/payment-approval.service";
-import {GlobalService} from "../../../../../shared/services/global.service";
+import {PaymentApprovalService} from '../../../../../shared/services/payment-approval.service';
+import {GlobalService} from '../../../../../shared/services/global.service';
 
 @Component({
     selector: 'app-payment-approval-create',
@@ -38,7 +37,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
     dialogRef: any;
     cashbookData: any;
     paymentVoucherData = [];
-    panelOpenState: boolean = false;
+    panelOpenState = false;
     currentDate: any = moment(new Date()).format('YYYY-MM-DD');
     tabName = 'DETAILS';
     selectedPaymentVocuherIds = [];
@@ -64,7 +63,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 private mandateService: MandateService) {
         this.action = _data.action;
         this.user = this.globalService.getSelf();
-        //console.log('_data', _data);
+        // console.log('_data', _data);
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Payment Approval';
             if (_data.report) {
@@ -81,9 +80,9 @@ export class PaymentApprovalCreateComponent implements OnInit {
         this.checkForUpdate();
     }
 
-    refresh() {
+    refresh(): void {
         this.paymentApprovalForm = this.fb.group({
-            valueDate: [{value: '', disabled: true}],
+            valueDate: [''],
             valueDateName: [{value: '', disabled: true}],
             refNumber: [''],
             employeeCustomer: [''],
@@ -99,26 +98,26 @@ export class PaymentApprovalCreateComponent implements OnInit {
             economicSegmentCode: [{value: '', disabled: true}],
             economicSegmentId: [''],
         });
-        //console.log('this.user', this.user['name']);
+        // console.log('this.user', this.user['name']);
         this.paymentApprovalForm.patchValue({
-            'valueDate': this.currentDate,
-            'valueDateName': this.user.name
+            // valueDate: this.currentDate,
+            valueDateName: this.user.name
         });
     }
 
-    checkForUpdate() {
+    checkForUpdate(): void {
         if (this.updateData) {
             this.adminSegments = [{
-                'name': (this.updateData && this.updateData['adminSegment']) ? this.updateData['adminSegment'].name : '',
-                'id': (this.updateData && this.updateData['adminSegment']) ? this.updateData['adminSegment'].id : '',
+                name: (this.updateData && this.updateData['adminSegment']) ? this.updateData['adminSegment'].name : '',
+                id: (this.updateData && this.updateData['adminSegment']) ? this.updateData['adminSegment'].id : '',
             }];
             this.economicSegments = [{
-                'name': (this.updateData && ['economicSegment']) ? this.updateData['economicSegment'].name : '',
-                'id': (this.updateData && ['economicSegment']) ? this.updateData['economicSegment'].id : ''
+                name: (this.updateData && ['economicSegment']) ? this.updateData['economicSegment'].name : '',
+                id: (this.updateData && ['economicSegment']) ? this.updateData['economicSegment'].id : ''
             }];
             this.fundSegments = [{
-                'name': (this.updateData && ['fundSegment']) ? this.updateData['fundSegment'].name : '',
-                'id': (this.updateData && ['fundSegment']) ? this.updateData['fundSegment'].id : ''
+                name: (this.updateData && ['fundSegment']) ? this.updateData['fundSegment'].name : '',
+                id: (this.updateData && ['fundSegment']) ? this.updateData['fundSegment'].id : ''
             }];
             this.paymentApprovalForm.patchValue({
                 employeeCustomer: (this.updateData && this.updateData.employeeCustomer) ? this.updateData.employeeCustomer : '',
@@ -138,7 +137,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
         }
     }
 
-    adminSegmentSelect() {
+    adminSegmentSelect(): void {
         this.dialogRef = this._matDialog.open(AdminSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -147,8 +146,8 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 return;
             }
             this.adminSegments = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.paymentApprovalForm.patchValue({
                 adminSegmentId: response.id,
@@ -167,8 +166,8 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 return;
             }
             this.fundSegments = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.paymentApprovalForm.patchValue({
                 fundSegmentId: response.id,
@@ -187,8 +186,8 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 return;
             }
             this.economicSegments = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.paymentApprovalForm.patchValue({
                 economicSegmentId: response.id,
@@ -215,23 +214,23 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 }
             });
             this.paymentApprovalForm.patchValue({
-                'currency': currencyName
+                currency: currencyName
             });
         }
     }
 
     savePaymentApproval() {
-        let params = {
-            'adminSegmentId': this.paymentApprovalForm.getRawValue().adminSegmentId ? this.paymentApprovalForm.getRawValue().adminSegmentId : '',
-            'fundSegmentId': this.paymentApprovalForm.getRawValue().fundSegmentId ? this.paymentApprovalForm.getRawValue().fundSegmentId : '',
-            'economicSegmentId': this.paymentApprovalForm.getRawValue().economicSegmentId ? this.paymentApprovalForm.getRawValue().economicSegmentId : '',
-            'currencyId': this.paymentApprovalForm.getRawValue().currencyId ? this.paymentApprovalForm.getRawValue().currencyId : '',
-            'valueDate': this.paymentApprovalForm.getRawValue().valueDate ? this.paymentApprovalForm.getRawValue().valueDate : '',
-            'valueDateName': this.paymentApprovalForm.getRawValue().valueDateName ? this.paymentApprovalForm.getRawValue().valueDateName : '',
-            'authorisedDate': this.paymentApprovalForm.getRawValue().authorisedDate ? this.paymentApprovalForm.getRawValue().authorisedDate : '',
-            'authorisedName': this.paymentApprovalForm.getRawValue().authorisedName ? this.paymentApprovalForm.getRawValue().authorisedName : '',
-            'employeeCustomer': this.paymentApprovalForm.getRawValue().employeeCustomer ? this.paymentApprovalForm.getRawValue().employeeCustomer : '',
-            'remark': this.paymentApprovalForm.getRawValue().remark ? this.paymentApprovalForm.getRawValue().remark : '',
+        const params = {
+            adminSegmentId: this.paymentApprovalForm.getRawValue().adminSegmentId ? this.paymentApprovalForm.getRawValue().adminSegmentId : '',
+            fundSegmentId: this.paymentApprovalForm.getRawValue().fundSegmentId ? this.paymentApprovalForm.getRawValue().fundSegmentId : '',
+            economicSegmentId: this.paymentApprovalForm.getRawValue().economicSegmentId ? this.paymentApprovalForm.getRawValue().economicSegmentId : '',
+            currencyId: this.paymentApprovalForm.getRawValue().currencyId ? this.paymentApprovalForm.getRawValue().currencyId : '',
+            valueDate: this.paymentApprovalForm.getRawValue().valueDate ? this.paymentApprovalForm.getRawValue().valueDate : '',
+            valueDateName: this.paymentApprovalForm.getRawValue().valueDateName ? this.paymentApprovalForm.getRawValue().valueDateName : '',
+            authorisedDate: this.paymentApprovalForm.getRawValue().authorisedDate ? this.paymentApprovalForm.getRawValue().authorisedDate : '',
+            authorisedName: this.paymentApprovalForm.getRawValue().authorisedName ? this.paymentApprovalForm.getRawValue().authorisedName : '',
+            employeeCustomer: this.paymentApprovalForm.getRawValue().employeeCustomer ? this.paymentApprovalForm.getRawValue().employeeCustomer : '',
+            remark: this.paymentApprovalForm.getRawValue().remark ? this.paymentApprovalForm.getRawValue().remark : '',
         };
 
         if (!this.updateData) {

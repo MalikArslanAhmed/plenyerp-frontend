@@ -16,9 +16,9 @@ import {PaymentVoucherService} from 'app/shared/services/payment-voucher.service
 import {DefaultSettingVoucherInfoService} from '../../../../../shared/services/default-setting-voucher-info';
 import {AlertService} from '../../../../../shared/services/alert.service';
 import {SelectAieComponent} from '../select-aie/select-aie.component';
-import {PaymentApprovalService} from "../../../../../shared/services/payment-approval.service";
-import {CompanyInformationService} from "../../../../../shared/services/company-information.service";
-import {MatTabGroup} from "@angular/material/tabs";
+import {PaymentApprovalService} from '../../../../../shared/services/payment-approval.service';
+import {CompanyInformationService} from '../../../../../shared/services/company-information.service';
+import {MatTabGroup} from '@angular/material/tabs';
 
 @Component({
     selector: 'app-payment-voucher-create',
@@ -69,9 +69,9 @@ export class PaymentVoucherCreateComponent implements OnInit {
             this.header = _data['item']['types'].name;
             this.sourceType = _data['item'].type;
             this.sources = [{
-                'name': _data['item']['voucherSourceUnit'].id + ' - ' + _data['item']['voucherSourceUnit'].longName,
-                'value': _data['item']['voucherSourceUnit'].id,
-                'isPersonalAdvanceUnit': _data['item']['voucherSourceUnit'].isPersonalAdvanceUnit
+                name: _data['item']['voucherSourceUnit'].id + ' - ' + _data['item']['voucherSourceUnit'].longName,
+                value: _data['item']['voucherSourceUnit'].id,
+                isPersonalAdvanceUnit: _data['item']['voucherSourceUnit'].isPersonalAdvanceUnit
             }];
             this.updatedData = _data['item'];
         } else {
@@ -85,7 +85,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
     ngOnInit(): void {
         this.getCompanySetting();
         this.getCurrencies();
-        this.getPaymentApproval({'inUse': 1});
+        this.getPaymentApproval({inUse: 1});
         this.refresh();
         if (this.updatedData) {
             this.patchForm();
@@ -124,7 +124,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
 
         if (this.sources && this.sources.length > 0) {
             this.schedulePayeeEmployeeForm.patchValue({
-                'sourceUnit': this.sources[0].value
+                sourceUnit: this.sources[0].value
             });
         }
 
@@ -150,7 +150,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
             if (data.items && data.items.length > 0) {
                 this.isPaymentApproval = data.items[0].isPaymentApproval;
             }
-        })
+        });
     }
 
     patchForm() {
@@ -161,28 +161,28 @@ export class PaymentVoucherCreateComponent implements OnInit {
             name: (this.updatedData && this.updatedData['aie']) ? this.updatedData['aie'].aieNumber : ''
         }];
         this.adminSegments = [{
-            'name': (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegment'].name : '',
-            'id': (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegment'].id : '',
+            name: (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegment'].name : '',
+            id: (this.updatedData && this.updatedData['adminSegment']) ? this.updatedData['adminSegment'].id : '',
         }];
         this.economicSegments = [{
-            'name': (this.updatedData && ['economicSegment']) ? this.updatedData['economicSegment'].name : '',
-            'id': (this.updatedData && ['economicSegment']) ? this.updatedData['economicSegment'].id : ''
+            name: (this.updatedData && ['economicSegment']) ? this.updatedData['economicSegment'].name : '',
+            id: (this.updatedData && ['economicSegment']) ? this.updatedData['economicSegment'].id : ''
         }];
         this.fundSegments = [{
-            'name': (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].name : '',
-            'id': (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].id : ''
+            name: (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].name : '',
+            id: (this.updatedData && ['fundSegment']) ? this.updatedData['fundSegment'].id : ''
         }];
         this.checkingOfficers = [{
-            'name': (this.updatedData && this.updatedData['checkingOfficer']) ? this.updatedData['checkingOfficer'].firstName + ' ' + this.updatedData['checkingOfficer'].lastName : '',
-            'id': (this.updatedData && this.updatedData['checkingOfficer']) ? this.updatedData['checkingOfficer'].id : ''
+            name: (this.updatedData && this.updatedData['checkingOfficer']) ? this.updatedData['checkingOfficer'].firstName + ' ' + this.updatedData['checkingOfficer'].lastName : '',
+            id: (this.updatedData && this.updatedData['checkingOfficer']) ? this.updatedData['checkingOfficer'].id : ''
         }];
         this.payingOfficers = [{
-            'name': (this.updatedData && this.updatedData['payingOfficer']) ? this.updatedData['payingOfficer'].firstName + ' ' + this.updatedData['payingOfficer'].lastName : '',
-            'id': (this.updatedData && this.updatedData['payingOfficer']) ? this.updatedData['payingOfficer'].id : ''
+            name: (this.updatedData && this.updatedData['payingOfficer']) ? this.updatedData['payingOfficer'].firstName + ' ' + this.updatedData['payingOfficer'].lastName : '',
+            id: (this.updatedData && this.updatedData['payingOfficer']) ? this.updatedData['payingOfficer'].id : ''
         }];
         this.financialControllers = [{
-            'name': (this.updatedData && this.updatedData['financialController']) ? this.updatedData['financialController'].firstName + ' ' + this.updatedData['financialController'].lastName : '',
-            'id': (this.updatedData && this.updatedData['financialController']) ? this.updatedData['financialController'].id : ''
+            name: (this.updatedData && this.updatedData['financialController']) ? this.updatedData['financialController'].firstName + ' ' + this.updatedData['financialController'].lastName : '',
+            id: (this.updatedData && this.updatedData['financialController']) ? this.updatedData['financialController'].id : ''
         }];
         this.schedulePayeeEmployeeForm.patchValue({
             valueDate: (this.updatedData && this.updatedData['valueDate']) ? this.updatedData['valueDate'] : '',
@@ -213,7 +213,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
         });
 
         if (this.isPaymentApproval) {
-            this.schedulePayeeEmployeeForm.controls['valueDate'].disable();
+            // this.schedulePayeeEmployeeForm.controls['valueDate'].disable();
             this.schedulePayeeEmployeeForm.controls['payee'].disable();
             this.schedulePayeeEmployeeForm.controls['currency'].disable();
             this.schedulePayeeEmployeeForm.controls['currencyId'].disable();
@@ -340,35 +340,35 @@ export class PaymentVoucherCreateComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            let params = {
-                'sourceUnit': this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.sources[0].name : '',
-                'voucherSourceUnitId': this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.schedulePayeeEmployeeForm.getRawValue().sourceUnit : '',
-                'valueDate': moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') ? moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
-                'paymentApproveId': this.schedulePayeeEmployeeForm.getRawValue().paymentApprovalId ? this.schedulePayeeEmployeeForm.getRawValue().paymentApprovalId : '',
-                'payee': this.schedulePayeeEmployeeForm.getRawValue().payee ? this.schedulePayeeEmployeeForm.getRawValue().payee : '',
-                'currencyId': this.schedulePayeeEmployeeForm.getRawValue().currencyId ? this.schedulePayeeEmployeeForm.getRawValue().currencyId : '',
-                'paymentDescription': this.schedulePayeeEmployeeForm.getRawValue().paymentDescription ? this.schedulePayeeEmployeeForm.getRawValue().paymentDescription : '',
-                'xRate': this.schedulePayeeEmployeeForm.getRawValue().xRate ? this.schedulePayeeEmployeeForm.getRawValue().xRate : '',
-                'officialXRate': this.schedulePayeeEmployeeForm.getRawValue().officialXRate ? this.schedulePayeeEmployeeForm.getRawValue().officialXRate : '',
-                'aieId': this.schedulePayeeEmployeeForm.getRawValue().aieId ? this.schedulePayeeEmployeeForm.getRawValue().aieId : '',
-                'adminSegmentId': this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId : '',
-                'fundSegmentId': this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId : '',
-                'economicSegmentId': this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId : '',
-                'programSegmentId': this.schedulePayeeEmployeeForm.getRawValue().programSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().programSegmentId : '',
-                'functionalSegmentId': this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId : '',
-                'geoCodeSegmentId': this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId : '',
-                'checkingOfficerId': this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId : '',
-                'payingOfficerId': this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId : '',
-                'financialControllerId': this.schedulePayeeEmployeeForm.getRawValue().financialControllerId ? this.schedulePayeeEmployeeForm.getRawValue().financialControllerId : '',
+            const params = {
+                sourceUnit: this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.sources[0].name : '',
+                voucherSourceUnitId: this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.schedulePayeeEmployeeForm.getRawValue().sourceUnit : '',
+                valueDate: moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') ? moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
+                paymentApproveId: this.schedulePayeeEmployeeForm.getRawValue().paymentApprovalId ? this.schedulePayeeEmployeeForm.getRawValue().paymentApprovalId : '',
+                payee: this.schedulePayeeEmployeeForm.getRawValue().payee ? this.schedulePayeeEmployeeForm.getRawValue().payee : '',
+                currencyId: this.schedulePayeeEmployeeForm.getRawValue().currencyId ? this.schedulePayeeEmployeeForm.getRawValue().currencyId : '',
+                paymentDescription: this.schedulePayeeEmployeeForm.getRawValue().paymentDescription ? this.schedulePayeeEmployeeForm.getRawValue().paymentDescription : '',
+                xRate: this.schedulePayeeEmployeeForm.getRawValue().xRate ? this.schedulePayeeEmployeeForm.getRawValue().xRate : '',
+                officialXRate: this.schedulePayeeEmployeeForm.getRawValue().officialXRate ? this.schedulePayeeEmployeeForm.getRawValue().officialXRate : '',
+                aieId: this.schedulePayeeEmployeeForm.getRawValue().aieId ? this.schedulePayeeEmployeeForm.getRawValue().aieId : '',
+                adminSegmentId: this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId : '',
+                fundSegmentId: this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId : '',
+                economicSegmentId: this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId : '',
+                programSegmentId: this.schedulePayeeEmployeeForm.getRawValue().programSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().programSegmentId : '',
+                functionalSegmentId: this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId : '',
+                geoCodeSegmentId: this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId : '',
+                checkingOfficerId: this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId : '',
+                payingOfficerId: this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId : '',
+                financialControllerId: this.schedulePayeeEmployeeForm.getRawValue().financialControllerId ? this.schedulePayeeEmployeeForm.getRawValue().financialControllerId : '',
             };
             params['type'] = this.sourceType;
             if (this.paymentApprovalSelected && this.paymentApprovalSelected['paymentApprovalPayees']) {
-                let payeeIds = [];
+                const payeeIds = [];
                 this.paymentApprovalSelected['paymentApprovalPayees'].forEach(pA => {
                     if (pA['checked']) {
                         payeeIds.push({
-                            'id': pA.id,
-                            'amount': pA.amount
+                            id: pA.id,
+                            amount: pA.amount
                         });
                     }
                 });
@@ -500,25 +500,25 @@ export class PaymentVoucherCreateComponent implements OnInit {
         }
 
         if (this.isSubmitted) {
-            let params = {
-                'sourceUnit': this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.sources[0].name : '',
-                'voucherSourceUnitId': this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.schedulePayeeEmployeeForm.getRawValue().sourceUnit : '',
-                'valueDate': moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') ? moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
-                'payee': this.schedulePayeeEmployeeForm.getRawValue().payee ? this.schedulePayeeEmployeeForm.getRawValue().payee : '',
-                'currencyId': this.schedulePayeeEmployeeForm.getRawValue().currencyId ? this.schedulePayeeEmployeeForm.getRawValue().currencyId : '',
-                'paymentDescription': this.schedulePayeeEmployeeForm.getRawValue().paymentDescription ? this.schedulePayeeEmployeeForm.getRawValue().paymentDescription : '',
-                'xRate': this.schedulePayeeEmployeeForm.getRawValue().xRate ? this.schedulePayeeEmployeeForm.getRawValue().xRate : '',
-                'officialXRate': this.schedulePayeeEmployeeForm.getRawValue().officialXRate ? this.schedulePayeeEmployeeForm.getRawValue().officialXRate : '',
-                'aieId': this.schedulePayeeEmployeeForm.getRawValue().aieId ? this.schedulePayeeEmployeeForm.getRawValue().aieId : '',
-                'adminSegmentId': this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId : '',
-                'fundSegmentId': this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId : '',
-                'economicSegmentId': this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId : '',
-                'programSegmentId': this.schedulePayeeEmployeeForm.getRawValue().programSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().programSegmentId : '',
-                'functionalSegmentId': this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId : '',
-                'geoCodeSegmentId': this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId : '',
-                'checkingOfficerId': this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId : '',
-                'payingOfficerId': this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId : '',
-                'financialControllerId': this.schedulePayeeEmployeeForm.getRawValue().financialControllerId ? this.schedulePayeeEmployeeForm.getRawValue().financialControllerId : '',
+            const params = {
+                sourceUnit: this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.sources[0].name : '',
+                voucherSourceUnitId: this.schedulePayeeEmployeeForm.getRawValue().sourceUnit ? this.schedulePayeeEmployeeForm.getRawValue().sourceUnit : '',
+                valueDate: moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') ? moment(this.schedulePayeeEmployeeForm.getRawValue().valueDate).format('YYYY-MM-DD') : '',
+                payee: this.schedulePayeeEmployeeForm.getRawValue().payee ? this.schedulePayeeEmployeeForm.getRawValue().payee : '',
+                currencyId: this.schedulePayeeEmployeeForm.getRawValue().currencyId ? this.schedulePayeeEmployeeForm.getRawValue().currencyId : '',
+                paymentDescription: this.schedulePayeeEmployeeForm.getRawValue().paymentDescription ? this.schedulePayeeEmployeeForm.getRawValue().paymentDescription : '',
+                xRate: this.schedulePayeeEmployeeForm.getRawValue().xRate ? this.schedulePayeeEmployeeForm.getRawValue().xRate : '',
+                officialXRate: this.schedulePayeeEmployeeForm.getRawValue().officialXRate ? this.schedulePayeeEmployeeForm.getRawValue().officialXRate : '',
+                aieId: this.schedulePayeeEmployeeForm.getRawValue().aieId ? this.schedulePayeeEmployeeForm.getRawValue().aieId : '',
+                adminSegmentId: this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().adminSegmentId : '',
+                fundSegmentId: this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().fundSegmentId : '',
+                economicSegmentId: this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().economicSegmentId : '',
+                programSegmentId: this.schedulePayeeEmployeeForm.getRawValue().programSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().programSegmentId : '',
+                functionalSegmentId: this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().functionalSegmentId : '',
+                geoCodeSegmentId: this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId ? this.schedulePayeeEmployeeForm.getRawValue().geoCodeSegmentId : '',
+                checkingOfficerId: this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().checkingOfficerId : '',
+                payingOfficerId: this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId ? this.schedulePayeeEmployeeForm.getRawValue().payingOfficerId : '',
+                financialControllerId: this.schedulePayeeEmployeeForm.getRawValue().financialControllerId ? this.schedulePayeeEmployeeForm.getRawValue().financialControllerId : '',
             };
             params['type'] = this.sourceType;
             if (!this.updatedData) {
@@ -549,8 +549,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 return;
             }
             this.adminSegments = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.schedulePayeeEmployeeForm.patchValue({
                 adminSegmentId: response.id,
@@ -572,8 +572,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 return;
             }
             this.fundSegments = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.schedulePayeeEmployeeForm.patchValue({
                 fundSegmentId: response.id,
@@ -598,8 +598,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 return;
             }
             this.economicSegments = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.schedulePayeeEmployeeForm.patchValue({
                 economicSegmentId: response.id,
@@ -618,8 +618,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 return;
             }
             this.programmeSegments = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.schedulePayeeEmployeeForm.patchValue({
                 programSegmentId: response.id,
@@ -638,8 +638,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 return;
             }
             this.functionalSegments = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.schedulePayeeEmployeeForm.patchValue({
                 functionalSegmentId: response.id,
@@ -658,8 +658,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 return;
             }
             this.geoCodeSegments = [{
-                'name': response.name,
-                'id': response.id
+                name: response.name,
+                id: response.id
             }];
             this.schedulePayeeEmployeeForm.patchValue({
                 geoCodeSegmentCode: response.id,
@@ -671,7 +671,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
 
     selectAdminEmployee(type) {
         let allowType: any = 'BOTH';
-        let node: any = undefined;
+        let node: any;
         if (type === 'Select Checking Officer' || type === 'Select Paying Officer' || type === 'Select Financial Control') {
             allowType = 'BOTH';
         }
@@ -686,8 +686,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
             }
             if (type === 'Select Checking Officer') {
                 this.checkingOfficers = [{
-                    'name': response['empData'].firstName + ' ' + response['empData'].lastName,
-                    'id': response['empData'].id
+                    name: response['empData'].firstName + ' ' + response['empData'].lastName,
+                    id: response['empData'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
                     checkingOfficerId: response['empData'].id,
@@ -695,8 +695,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 });
             } else if (type === 'Select Paying Officer') {
                 this.payingOfficers = [{
-                    'name': response['empData'].firstName + ' ' + response['empData'].lastName,
-                    'id': response['empData'].id
+                    name: response['empData'].firstName + ' ' + response['empData'].lastName,
+                    id: response['empData'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
                     payingOfficerId: response['empData'].id,
@@ -704,8 +704,8 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 });
             } else if (type === 'Select Financial Control') {
                 this.financialControllers = [{
-                    'name': response['empData'].firstName + ' ' + response['empData'].lastName,
-                    'id': response['empData'].id
+                    name: response['empData'].firstName + ' ' + response['empData'].lastName,
+                    id: response['empData'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
                     financialControllerId: response['empData'].id,
@@ -724,7 +724,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 }
             });
             this.schedulePayeeEmployeeForm.patchValue({
-                'currency': currencyName
+                currency: currencyName
             });
         }
     }
@@ -740,16 +740,16 @@ export class PaymentVoucherCreateComponent implements OnInit {
             this.paymentApprovalSelected = paymentApproval;
             if (paymentApproval) {
                 this.adminSegments = [{
-                    'name': paymentApproval['adminSegment'].name,
-                    'id': paymentApproval['adminSegment'].id
+                    name: paymentApproval['adminSegment'].name,
+                    id: paymentApproval['adminSegment'].id
                 }];
                 this.economicSegments = [{
-                    'name': paymentApproval['economicSegment'].name,
-                    'id': paymentApproval['economicSegment'].id
+                    name: paymentApproval['economicSegment'].name,
+                    id: paymentApproval['economicSegment'].id
                 }];
                 this.fundSegments = [{
-                    'name': paymentApproval['fundSegment'].name,
-                    'id': paymentApproval['fundSegment'].id
+                    name: paymentApproval['fundSegment'].name,
+                    id: paymentApproval['fundSegment'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
                     adminSegmentId: paymentApproval['adminSegment'].id,
@@ -767,12 +767,12 @@ export class PaymentVoucherCreateComponent implements OnInit {
                     disabled: true
                 });
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'payee': (paymentApproval && paymentApproval['employeeCustomer']) ? paymentApproval['employeeCustomer'] : '',
-                    'currencyId': (paymentApproval && paymentApproval['currencyId'] ? paymentApproval['currencyId'] : ''),
-                    'currency': (paymentApproval && paymentApproval['currency'] && paymentApproval['currency']['singularCurrencyName'] ? paymentApproval['currency']['singularCurrencyName'] : ''),
-                    'valueDate': (paymentApproval && this.currentDate) ? moment(this.currentDate).format('YYYY-MM-DD') : '',
+                    payee: (paymentApproval && paymentApproval['employeeCustomer']) ? paymentApproval['employeeCustomer'] : '',
+                    currencyId: (paymentApproval && paymentApproval['currencyId'] ? paymentApproval['currencyId'] : ''),
+                    currency: (paymentApproval && paymentApproval['currency'] && paymentApproval['currency']['singularCurrencyName'] ? paymentApproval['currency']['singularCurrencyName'] : ''),
+                    valueDate: (paymentApproval && this.currentDate) ? moment(this.currentDate).format('YYYY-MM-DD') : '',
                 });
-                this.schedulePayeeEmployeeForm.controls['valueDate'].disable();
+                // this.schedulePayeeEmployeeForm.controls['valueDate'].disable();
                 this.schedulePayeeEmployeeForm.controls['payee'].disable();
                 this.schedulePayeeEmployeeForm.controls['currency'].disable();
                 this.schedulePayeeEmployeeForm.controls['currencyId'].disable();
@@ -787,99 +787,99 @@ export class PaymentVoucherCreateComponent implements OnInit {
         this.defaultSettingVoucherInfoService.detail().subscribe(data => {
             if (data && data.adminSegment && data.adminSegmentId) {
                 this.adminSegments = [{
-                    'name': data['adminSegment'].name,
-                    'id': data['adminSegment'].id
+                    name: data['adminSegment'].name,
+                    id: data['adminSegment'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'adminSegmentCode': data.adminSegmentId,
-                    'adminSegmentId': data.adminSegmentId,
+                    adminSegmentCode: data.adminSegmentId,
+                    adminSegmentId: data.adminSegmentId,
                 });
             }
             if (data && data.fundSegment && data.fundSegmentId) {
                 this.fundSegments = [{
-                    'name': data['fundSegment'].name,
-                    'id': data['fundSegment'].id
+                    name: data['fundSegment'].name,
+                    id: data['fundSegment'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'fundSegmentCode': data.fundSegmentId,
-                    'fundSegmentId': data.fundSegmentId,
+                    fundSegmentCode: data.fundSegmentId,
+                    fundSegmentId: data.fundSegmentId,
                 });
             }
             if (data && data.fundSegment && data.fundSegmentId) {
                 this.fundSegments = [{
-                    'name': data['fundSegment'].name,
-                    'id': data['fundSegment'].id
+                    name: data['fundSegment'].name,
+                    id: data['fundSegment'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'fundSegmentCode': data.fundSegmentId,
-                    'fundSegmentId': data.fundSegmentId,
+                    fundSegmentCode: data.fundSegmentId,
+                    fundSegmentId: data.fundSegmentId,
                 });
             }
             if (data && data.fundSegment && data.economicSegmentId) {
                 this.economicSegments = [{
-                    'name': data['economicSegment'].name,
-                    'id': data['economicSegment'].id
+                    name: data['economicSegment'].name,
+                    id: data['economicSegment'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'economicSegmentCode': data.economicSegmentId,
-                    'economicSegmentId': data.economicSegmentId,
+                    economicSegmentCode: data.economicSegmentId,
+                    economicSegmentId: data.economicSegmentId,
                 });
             }
             if (data && data.programSegment && data.programSegmentId) {
                 this.programmeSegments = [{
-                    'name': data['programSegment'].name,
-                    'id': data['programSegment'].id
+                    name: data['programSegment'].name,
+                    id: data['programSegment'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'programmeSegmentCode': data.programSegmentId,
-                    'programSegmentId': data.programSegmentId,
+                    programmeSegmentCode: data.programSegmentId,
+                    programSegmentId: data.programSegmentId,
                 });
             }
             if (data && data.functionalSegment && data.functionalSegmentId) {
                 this.functionalSegments = [{
-                    'name': data['functionalSegment'].name,
-                    'id': data['functionalSegment'].id
+                    name: data['functionalSegment'].name,
+                    id: data['functionalSegment'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'functionalSegmentCode': data.functionalSegmentId,
-                    'functionalSegmentId': data.functionalSegmentId,
+                    functionalSegmentCode: data.functionalSegmentId,
+                    functionalSegmentId: data.functionalSegmentId,
                 });
             }
             if (data && data.geoCodeSegment && data.geoCodeSegmentId) {
                 this.geoCodeSegments = [{
-                    'name': data['geoCodeSegment'].name,
-                    'id': data['geoCodeSegment'].id
+                    name: data['geoCodeSegment'].name,
+                    id: data['geoCodeSegment'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'geoCodeSegmentCode': data.geoCodeSegmentId,
-                    'geoCodeSegmentId': data.geoCodeSegmentId,
+                    geoCodeSegmentCode: data.geoCodeSegmentId,
+                    geoCodeSegmentId: data.geoCodeSegmentId,
                 });
             }
             if (data && data.checkingOfficer && data.checkingOfficerId) {
                 this.checkingOfficers = [{
-                    'name': data['checkingOfficer'].firstName + ' ' + data['checkingOfficer'].lastName,
-                    'id': data['checkingOfficer'].id
+                    name: data['checkingOfficer'].firstName + ' ' + data['checkingOfficer'].lastName,
+                    id: data['checkingOfficer'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'checkingOfficerId': data.checkingOfficerId ? data.checkingOfficerId : ''
+                    checkingOfficerId: data.checkingOfficerId ? data.checkingOfficerId : ''
                 });
             }
             if (data && data.payingOfficer && data.payingOfficerId) {
                 this.payingOfficers = [{
-                    'name': data['payingOfficer'].firstName + ' ' + data['payingOfficer'].lastName,
-                    'id': data['payingOfficer'].id
+                    name: data['payingOfficer'].firstName + ' ' + data['payingOfficer'].lastName,
+                    id: data['payingOfficer'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'payingOfficerId': data.payingOfficerId ? data.payingOfficerId : ''
+                    payingOfficerId: data.payingOfficerId ? data.payingOfficerId : ''
                 });
             }
             if (data && data.financialController && data.financialControllerId) {
                 this.financialControllers = [{
-                    'name': data['financialController'].firstName + ' ' + data['financialController'].lastName,
-                    'id': data['financialController'].id
+                    name: data['financialController'].firstName + ' ' + data['financialController'].lastName,
+                    id: data['financialController'].id
                 }];
                 this.schedulePayeeEmployeeForm.patchValue({
-                    'financialControllerId': data.financialControllerId ? data.financialControllerId : '',
+                    financialControllerId: data.financialControllerId ? data.financialControllerId : '',
                 });
             }
         });
@@ -888,7 +888,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
     setXRate() {
         if (this.schedulePayeeEmployeeForm.value && this.schedulePayeeEmployeeForm.value.xRate && this.schedulePayeeEmployeeForm.value && this.schedulePayeeEmployeeForm.getRawValue().currency) {
             this.schedulePayeeEmployeeForm.patchValue({
-                'xRateCurrency': this.schedulePayeeEmployeeForm.value.xRate + ' ' + this.schedulePayeeEmployeeForm.getRawValue().currency,
+                xRateCurrency: this.schedulePayeeEmployeeForm.value.xRate + ' ' + this.schedulePayeeEmployeeForm.getRawValue().currency,
             });
         } else if (!this.schedulePayeeEmployeeForm.getRawValue().currency) {
             this.alertService.showErrors('Please fill Currency');
@@ -910,7 +910,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
                 name: response.aieNumber,
             }];
             this.schedulePayeeEmployeeForm.patchValue({
-                'aieId': response.id
+                aieId: response.id
             });
         });
     }
@@ -924,7 +924,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
     }
 
     goToNextTabIndex(tabGroup: MatTabGroup) {
-        if (!tabGroup || !(tabGroup instanceof MatTabGroup)) return;
+        if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
         const tabCount = tabGroup._tabs.length;
         tabGroup.selectedIndex = (tabGroup.selectedIndex + 1) % tabCount;
     }
