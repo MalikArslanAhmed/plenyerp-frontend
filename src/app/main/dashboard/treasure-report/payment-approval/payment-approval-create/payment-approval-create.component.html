@@ -14,7 +14,7 @@
                 <div fxLayout="column">
                     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-bottom: 1rem">
                         <mat-label>Payee</mat-label>
-                        <mat-radio-group class="example-radio-group" formControlName="employeeCustomer">
+                        <mat-radio-group class="example-radio-group" formControlName="employeeCustomer" [disabled]="this.updateData">
                             <mat-radio-button value="EMPLOYEE">Employee</mat-radio-button>
                             <mat-radio-button value="CUSTOMER">Customer</mat-radio-button>
                         </mat-radio-group>

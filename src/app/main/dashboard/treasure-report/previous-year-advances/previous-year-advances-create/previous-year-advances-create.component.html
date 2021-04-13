@@ -39,7 +39,7 @@
                             <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                                 <h4>Payer</h4>
                                 <mat-radio-group aria-labelledby="example-radio-group-label"
-                                                 class="example-radio-group" formControlName="payee">
+                                                 class="example-radio-group" formControlName="payee" [disabled]="this.updatedData">
                                     <mat-radio-button class="example-radio-button" value="EMPLOYEE"
                                                       [style.marginLeft.px]="40" [style.marginTop.px]="20">
                                         Employee
