@@ -53,7 +53,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
     tab = 'CREATE PV FORM';
     updatedData: any;
     currentDate: any = moment(new Date()).format('YYYY-MM-DD');
-
+    isDefaultCurrency = false;
     constructor(public matDialogRef: MatDialogRef<PaymentVoucherCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -78,6 +78,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
             this.header = _data.header;
             this.sourceType = _data.type;
             this.sources = _data.source;
+            this.isDefaultCurrency = true;
         }
         this.dialogTitle = this.header + ' - Payment Voucher';
     }
@@ -149,6 +150,13 @@ export class PaymentVoucherCreateComponent implements OnInit {
         this.companyInformationService.getCompanySetting().subscribe(data => {
             if (data.items && data.items.length > 0) {
                 this.isPaymentApproval = data.items[0].isPaymentApproval;
+                const defaultCurrencyId = data.items[0].local && data.items[0].local.id ? data.items[0].local.id : '';
+                const defaultCurrencyName = data.items[0].local && data.items[0].local.singularCurrencyName ? data.items[0].local.singularCurrencyName : '';
+                if (this.isDefaultCurrency && defaultCurrencyId) {
+                    this.schedulePayeeEmployeeForm.get('currencyId').patchValue(defaultCurrencyId);
+                    this.schedulePayeeEmployeeForm.get('currency').patchValue(defaultCurrencyName);
+
+                }
             }
         });
     }

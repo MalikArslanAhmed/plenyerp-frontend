@@ -15,6 +15,7 @@ import {FundSegmentSelectComponent} from '../../../journal-voucher/fund-segment-
 import {EconomicSegmentSelectComponent} from '../../../journal-voucher/economic-segment-select/economic-segment-select.component';
 import {PaymentApprovalService} from '../../../../../shared/services/payment-approval.service';
 import {GlobalService} from '../../../../../shared/services/global.service';
+import {CompanyInformationService} from '../../../../../shared/services/company-information.service';
 
 @Component({
     selector: 'app-payment-approval-create',
@@ -47,7 +48,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
     fundSegments = [];
     economicSegments = [];
     user: any;
-
+    isDefaultCurrency = false;
     constructor(public matDialogRef: MatDialogRef<PaymentApprovalCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -60,6 +61,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 private currencyService: CurrencyService,
                 private paymentApprovalService: PaymentApprovalService,
                 private globalService: GlobalService,
+                private companyInformationService: CompanyInformationService,
                 private mandateService: MandateService) {
         this.action = _data.action;
         this.user = this.globalService.getSelf();
@@ -71,6 +73,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
             }
         } else {
             this.dialogTitle = 'Payment Approval';
+            this.isDefaultCurrency = true;
         }
     }
 
@@ -78,6 +81,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
         this.refresh();
         this.getCurrencies();
         this.checkForUpdate();
+        this.getCompanySetting();
     }
 
     refresh(): void {
@@ -104,7 +108,19 @@ export class PaymentApprovalCreateComponent implements OnInit {
             valueDateName: this.user.name
         });
     }
+    getCompanySetting() {
+        this.companyInformationService.getCompanySetting().subscribe(data => {
+            if (data.items && data.items.length > 0) {
+                const defaultCurrencyId = data.items[0].local && data.items[0].local.id ? data.items[0].local.id : '';
+                const defaultCurrencyName = data.items[0].local && data.items[0].local.singularCurrencyName ? data.items[0].local.singularCurrencyName : '';
+                if (this.isDefaultCurrency && defaultCurrencyId) {
+                    this.paymentApprovalForm.get('currencyId').patchValue(defaultCurrencyId);
+                    this.paymentApprovalForm.get('currency').patchValue(defaultCurrencyName);
 
+                }
+            }
+        });
+    }
     checkForUpdate(): void {
         if (this.updateData) {
             this.adminSegments = [{
