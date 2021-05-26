@@ -10,6 +10,7 @@ import {PaymentReportService} from '../../../shared/services/payment-report.serv
 import {EmpListHeadersComponent} from '../employees/employee-list/emp-list-headers/emp-list-headers.component';
 import {ReportListHeadersComponent} from './report-list-headers/report-list-headers.component';
 import {PermissionConstant} from '../../../shared/constants/permission-constant';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-payment-report',
@@ -28,7 +29,13 @@ export class PaymentReportComponent implements OnInit {
     economicSegments = [];
     displayedColumns = ['S.No.', 'PV Year', 'Deptal No.', 'Payee Names', 'Amount (Net)', 'Taxes', 'Total Amount', 'Payment Ref. (#)', 'Last Actioned', 'Status'];
     panelOpenState: boolean = false;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private paymentReportService: PaymentReportService,
                 private fb: FormBuilder,
                 private alertService: AlertService,
@@ -64,8 +71,12 @@ export class PaymentReportComponent implements OnInit {
     }
 
     getPyamentVoucher(params, openAll?) {
+        this.paymentReportData = [];
+        params['page'] = this.pagination.page;
         this.paymentReportService.get(params).subscribe(data => {
             this.paymentReportData = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.paymentReportData && this.paymentReportData.length > 0) {
                 this.paymentReportData.forEach(d => {
                     d['checked'] = false;
@@ -148,5 +159,8 @@ export class PaymentReportComponent implements OnInit {
         });
 
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getPyamentVoucher({});
+    }
 }

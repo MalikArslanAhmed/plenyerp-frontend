@@ -75,7 +75,7 @@
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
                              <span class="mat-cell align-items-center" *ngIf="getColumnData('S.No.')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1}}.</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{i + 1 + (pagination.page - 1) * (pagination.perpage)}}.</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('RV Year')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData.year : '-'}}</p>
@@ -447,6 +447,13 @@
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
+                <mat-paginator #paginator *ngIf="rvPaymentReportData.length > 0"
+                               [length]="pagination.total"
+                               [pageSize]="pagination.perpage"
+                               [pageIndex]="pagination.page-1"
+                               (page)="pageEvent = onPageChange($event)"
+                >
+                </mat-paginator>
             </div>
         </div>
     </div>

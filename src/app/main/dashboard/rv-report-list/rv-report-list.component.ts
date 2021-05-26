@@ -8,6 +8,7 @@ import {PaymentReportService} from '../../../shared/services/payment-report.serv
 import {RvReportListHeadersComponent} from './rv-report-list-headers/rv-report-list-headers.component';
 import {RvReportService} from '../../../shared/services/rv-report.service';
 import {PermissionConstant} from '../../../shared/constants/permission-constant';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
     selector: 'app-rv-report-list',
@@ -27,7 +28,13 @@ export class RvReportListComponent implements OnInit {
     economicSegments = [];
     displayedColumns = ['S.No.', 'RV Year', 'Deptal No.', 'Payee Names', 'Amount (Net)', 'Payment Ref. (#)', 'Last Actioned', 'Status'];
     panelOpenState: boolean = false;
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private rvReportService: RvReportService,
                 private fb: FormBuilder,
                 private alertService: AlertService,
@@ -63,8 +70,12 @@ export class RvReportListComponent implements OnInit {
     }
 
     getRvReportList(params, openAll?) {
+        this.rvPaymentReportData = [];
+        params['page'] = this.pagination.page;
         this.rvReportService.get(params).subscribe(data => {
             this.rvPaymentReportData = data.items;
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
             if (this.rvPaymentReportData && this.rvPaymentReportData.length > 0) {
                 this.rvPaymentReportData.forEach(d => {
                     d['checked'] = false;
@@ -136,5 +147,9 @@ export class RvReportListComponent implements OnInit {
             // console.log('-->>', data);
         });
 
+    }
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getRvReportList({});
     }
 }
