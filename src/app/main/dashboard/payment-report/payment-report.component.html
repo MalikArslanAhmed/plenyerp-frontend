@@ -87,7 +87,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{'-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Payee Names')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{'-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.payeeNames ? reportData?.payeeNames : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Amount (Net)')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.totalAmount && reportData.totalAmount.amount ? reportData.totalAmount.amount : '-'}}</p>
@@ -421,6 +421,12 @@
                                                     <div class="title">S.No</div>
                                                 </th>
                                                 <th>
+                                                    <div class="title">Payee Id</div>
+                                                </th>
+                                                <th>
+                                                    <div class="title">Payee Name</div>
+                                                </th>
+                                                <th>
                                                     <div class="title">Account</div>
                                                 </th>
                                                 <th>
@@ -437,8 +443,29 @@
                                                     </div>
                                                 </td>
                                                 <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['adminCompany']">
+                                                        {{data?.payeeVoucher?.adminCompany?.id}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['employee']">
+                                                        {{data?.payeeVoucher?.employee?.id}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['adminCompany']">
+                                                        {{data?.payeeVoucher?.adminCompany?.name}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data['payeeVoucher'] && data['payeeVoucher']['employee']">
+                                                        {{data?.payeeVoucher?.employee?.firstName}} {{data?.payeeVoucher?.employee?.lastName}}
+                                                    </div>
+                                                </td>
+                                                <td>
                                                     <div class="title">
-                                                        {{data?.economicSegmentId}}
+                                                        {{data?.economicSegment?.combinedCode}}
+                                                        - {{data?.economicSegment?.name}}
                                                     </div>
                                                 </td>
                                                 <td>

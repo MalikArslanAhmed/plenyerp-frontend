@@ -87,7 +87,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{'-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Payee Names')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{'-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.payeeNames ? reportData?.payeeNames : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Amount (Net)')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.totalAmount && reportData.totalAmount.amount ? reportData.totalAmount.amount : '-'}}</p>
@@ -243,43 +243,28 @@
                                                     <div class="title">Payee Id</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Payee Name</div>
+                                                    <div class="title">Line Details</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Amount Net</div>
+                                                    <div class="title">Amount</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Taxes</div>
+                                                    <div class="title">Pay Mode</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Total Amount</div>
+                                                    <div class="title">Payer Names</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Details</div>
+                                                    <div class="title">Money Instrument Type</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Bank A/C Title</div>
+                                                    <div class="title">Money Instrument Number</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Bank A/C #</div>
+                                                    <div class="title">Money Instrument Teller No.</div>
                                                 </th>
                                                 <th>
-                                                    <div class="title">Type of Bank A/C</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Bank</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Bank Branch</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Sort Code</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Payment Ref</div>
-                                                </th>
-                                                <th>
-                                                    <div class="title">Status</div>
+                                                    <div class="title">Money Instrument Issuer</div>
                                                 </th>
                                             </tr>
                                             </thead>
@@ -287,104 +272,77 @@
                                                 *ngIf="reportData && reportData['payees'] && reportData['payees'].length > 0; else noChildToShow">
                                             <tr *ngFor="let data of reportData['payees']; let i = index">
                                                 <td>
-                                                    <div class="title" *ngIf="data && data.employee">
-                                                        {{data?.employee?.id}}
+                                                    <div class="title" *ngIf="data && data.employeeId">
+                                                        {{data.employeeId ? data.employeeId : '-'}}
                                                     </div>
                                                     <div class="title" *ngIf="data && data.companyId">
-                                                        {{data.companyId}}
+                                                        {{data.companyId ? data.companyId : '-'}}
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title" *ngIf="data && data.employee">
+                                                    <div class="title" *ngIf="data && data.lineDetail">
+                                                        {{data?.lineDetail}}
+                                                    </div>
+                                                    <div class="title" *ngIf="!data || !data.lineDetail">
+                                                        -
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title" *ngIf="data && data.totalAmount">
+                                                        {{data?.totalAmount}}
+                                                    </div>
+                                                    <div class="title" *ngIf="!data || !data.totalAmount">
+                                                        {{data?.totalAmount}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title" *ngIf="data && data.payMode">
+                                                        {{data?.payMode}}
+                                                    </div>
+                                                    <div class="title" *ngIf="!data || !data.payMode">
+                                                        {{data?.payMode}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data.employee && data.employee.firstName">
                                                         {{data?.employee?.firstName}} {{data?.employee?.lastName}}
                                                     </div>
-                                                    <div class="title" *ngIf="data && data.adminCompany">
+                                                    <div class="title"
+                                                         *ngIf="data && data.adminCompany && data.adminCompany.name">
                                                         {{data?.adminCompany?.name}}
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title">
-                                                        {{data?.netAmount}}
+                                                    <div class="title" *ngIf="data && data.instrumentType">
+                                                        {{data?.instrumentType}}
+                                                    </div>
+                                                    <div class="title" *ngIf="!data || !data.instrumentType">
+                                                        -
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title">
-                                                        {{data?.totalTax}}
+                                                    <div class="title" *ngIf="data && data.instrumentNumber">
+                                                        {{data?.instrumentNumber}}
+                                                    </div>
+                                                    <div class="title" *ngIf="!data || !data.instrumentNumber">
+                                                        -
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title">
-                                                        {{(data?.netAmount + data?.totalTax) | number}}
+                                                    <div class="title" *ngIf="data && data.instrumentTellerNumber">
+                                                        {{data?.instrumentTellerNumber}}
+                                                    </div>
+                                                    <div class="title" *ngIf="!data || !data.instrumentTellerNumber">
+                                                        -
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="title">
-                                                        {{data?.details}}
+                                                    <div class="title" *ngIf="data && data.instrumentIssuedBy">
+                                                        {{data?.instrumentIssuedBy}}
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <!--<div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.title}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data.employee && data.employee.companyBanks">
-                                                        {{data?.employee?.companyBanks[0]?.title}}
-                                                    </div>-->
-                                                </td>
-                                                <td>
-                                                    <!--<div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.number}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bankAccountNumber}}
-                                                    </div>-->
-                                                </td>
-                                                <td>
-                                                    <!--<div class="title">
-                                                        {{data?.employee?.employeeBanks[0]?.type}}
-                                                    </div>-->
-                                                </td>
-                                                <td>
-                                                    <!--<div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.bank?.name}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bank?.name}}
-                                                    </div>-->
-                                                </td>
-                                                <td>
-                                                    <!--<div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.employee?.employeeBanks[0]?.bank?.branchName}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bankBranch?.name}}
-                                                    </div>-->
-                                                </td>
-                                                <td>
-                                                    <!--<div class="title"
-                                                         *ngIf="data && data.employee && data.employee.employeeBanks">
-                                                        {{data?.sortCode}}
-                                                    </div>
-                                                    <div class="title"
-                                                         *ngIf="data && data.adminCompany && data.adminCompany.companyBanks">
-                                                        {{data?.adminCompany?.companyBanks[0]?.bankBranch?.sortCode}}
-                                                    </div>-->
-                                                </td>
-                                                <td>
-                                                    <div class="title">
-                                                        {{data?.paymentRef}}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="title">
-                                                        {{data?.status}}
+                                                    <div class="title" *ngIf="!data || !data.instrumentIssuedBy">
+                                                        -
                                                     </div>
                                                 </td>
                                             </tr>
@@ -406,6 +364,12 @@
                                                     <div class="title">S.No</div>
                                                 </th>
                                                 <th>
+                                                    <div class="title">Payee Id</div>
+                                                </th>
+                                                <th>
+                                                    <div class="title">Payee Name</div>
+                                                </th>
+                                                <th>
                                                     <div class="title">Account</div>
                                                 </th>
                                                 <th>
@@ -422,8 +386,29 @@
                                                     </div>
                                                 </td>
                                                 <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['adminCompany']">
+                                                        {{data?.receiptPayee?.adminCompany?.id}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['employee']">
+                                                        {{data?.receiptPayee?.employee?.id}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="title"
+                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['adminCompany']">
+                                                        {{data?.receiptPayee?.adminCompany?.name}}
+                                                    </div>
+                                                    <div class="title"
+                                                         *ngIf="data && data['receiptPayee'] && data['receiptPayee']['employee']">
+                                                        {{data?.receiptPayee?.employee?.firstName}} {{data?.receiptPayee?.employee?.lastName}}
+                                                    </div>
+                                                </td>
+                                                <td>
                                                     <div class="title">
-                                                        {{data?.economicSegmentId}}
+                                                        {{data?.economicSegment?.combinedCode}}
+                                                        - {{data?.economicSegment?.name}}
                                                     </div>
                                                 </td>
                                                 <td>

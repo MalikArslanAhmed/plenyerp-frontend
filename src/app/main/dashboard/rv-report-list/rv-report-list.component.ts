@@ -53,7 +53,7 @@ export class RvReportListComponent implements OnInit {
         const params = {};
         if (item && item.id) {
             params['parentId'] = item.id;
-            this.rvReportService.getSchedulePayee(item.id, {page: -1}).subscribe(data => {
+            this.rvReportService.getRvSchedulePayee(item.id, {page: -1}).subscribe(data => {
                 item['payees'] = data.items;
             });
         }
