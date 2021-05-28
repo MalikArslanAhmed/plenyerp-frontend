@@ -146,10 +146,10 @@
                                     </td>
                                     <td>
                                         <div class="title" *ngIf="reportData.credit > reportData?.debit">
-                                            ({{(reportData?.debit - reportData?.credit) * -1}})
+                                            ({{data.balance}})
                                         </div>
                                         <div class="title"
-                                             *ngIf="reportData.credit <= reportData?.debit">{{reportData?.debit - reportData?.credit}}</div>
+                                             *ngIf="reportData.credit <= reportData?.debit">{{data.balance}}</div>
                                     </td>
                                     <td>
                                         <button appPermissionBind [permission]="permissionAddNotes"
