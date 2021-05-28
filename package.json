@@ -15,7 +15,7 @@
         "build-dev": "npm run prod-pull && node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --configuration=dev && cp ../prod_build/.htaccess.txt ../prod_build/dist/.htaccess && cd ../prod_build && git add . && git commit -m 'Dev Build' && git push origin master",
         "bp": "npm run build-prod",
         "bd": "npm run build-dev",
-        "bi": "npm run img",
+        "bi": "npm run build-img",
         "build-prod-stats": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --stats-json",
         "test": "ng test",
         "lint": "ng lint",
