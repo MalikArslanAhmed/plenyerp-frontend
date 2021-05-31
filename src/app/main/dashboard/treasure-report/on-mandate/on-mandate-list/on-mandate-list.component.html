@@ -57,7 +57,7 @@
                 </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center"
-                       *ngIf="reportData.totalAmount">{{reportData.totalAmount}}</p>
+                       *ngIf="reportData.totalAmount">{{reportData.totalAmount | number:'1.0':'en-US'}}</p>
                     <p class="text-truncate cursor-pointer mt-10px text-center" *ngIf="!reportData.totalAmount">-</p>
                 </span>
                 <span class="mat-cell align-items-center">
@@ -155,7 +155,7 @@
                                         *ngIf="benef && benef['employee']">{{benef['employee']['employeeBank']['branches'].sortCode}}</span>
                                 </td>
                                 <td>
-                                    <span>{{benef?.netAmount}}</span>
+                                    <span>{{benef?.netAmount | number:'1.0':'en-US'}}</span>
                                 </td>
                                 <td>
                                     <span>{{benef?.totalTax}}</span>

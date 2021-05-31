@@ -141,7 +141,7 @@
                                 <span class="text-truncate">{{item?.inQty}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.inUnitPrice}}</span>
+                                <span class="text-truncate">{{item?.inUnitPrice | number:'1.0':'en-US'}}</span>
                             </td>
                             <td>
                                 <span class="text-truncate">{{item?.inValue}}</span>
@@ -150,7 +150,7 @@
                                 <span class="text-truncate">{{item?.outQty}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.outUnitPrice}}</span>
+                                <span class="text-truncate">{{item?.outUnitPrice | number:'1.0':'en-US'}}</span>
                             </td>
                             <td>
                                 <span class="text-truncate">{{item?.outValue}}</span>
@@ -159,7 +159,7 @@
                                 <span class="text-truncate">{{item?.balanceQty}}</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.balanceUnitPrice}}</span>
+                                <span class="text-truncate">{{item?.balanceUnitPrice | number:'1.0':'en-US'}}</span>
                             </td>
                             <td>
                                 <span class="text-truncate">{{item?.balanceValue}}</span>

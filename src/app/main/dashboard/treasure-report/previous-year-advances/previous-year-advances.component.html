@@ -139,7 +139,7 @@
                                 <p class="text-truncate cursor-pointer mt-30px text-center">{{reportData && reportData.payee ? reportData?.payee : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-30px text-center">{{reportData && reportData['totalAmount'] && reportData['totalAmount'].amount ? reportData['totalAmount'].amount : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-30px text-center">{{reportData && reportData['totalAmount'] && reportData['totalAmount'].amount ? (reportData['totalAmount'].amount | number:'1.0':'en-US'): '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-30px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
@@ -248,10 +248,10 @@
                                                 </td>
                                                 <td>
                                                     <div class="title" *ngIf="data && data.netAmount">
-                                                        {{data?.netAmount}}
+                                                        {{data?.netAmount | number:'1.0':'en-US'}}
                                                     </div>
                                                     <div class="title" *ngIf="!data || !data.netAmount">
-                                                        {{data?.netAmount}}
+                                                        {{data?.netAmount | number:'1.0':'en-US'}}
                                                     </div>
                                                 </td>
                                                 <td>

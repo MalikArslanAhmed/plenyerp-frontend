@@ -5,6 +5,7 @@ import {MomentDatePipe} from './pipes/moment-date.pipe';
 import {NumberToWordsPipe} from './pipes/number-to-word.pipe';
 import {UnderscoreSeparatePipe} from './pipes/underscore-separate.pipe';
 import {AbsoluteAmountPipe} from './pipes/absolute-amount.pipe';
+import {IndianNumberPipe} from './pipes/indian-number.pipe';
 
 @NgModule({
     declarations: [
@@ -12,7 +13,8 @@ import {AbsoluteAmountPipe} from './pipes/absolute-amount.pipe';
         MomentDatePipe,
         NumberToWordsPipe,
         UnderscoreSeparatePipe,
-        AbsoluteAmountPipe
+        AbsoluteAmountPipe,
+        IndianNumberPipe
     ],
     imports: [
         CommonModule
@@ -22,7 +24,8 @@ import {AbsoluteAmountPipe} from './pipes/absolute-amount.pipe';
         MomentDatePipe,
         NumberToWordsPipe,
         UnderscoreSeparatePipe,
-        AbsoluteAmountPipe
+        AbsoluteAmountPipe,
+        IndianNumberPipe
     ]
 })
 export class SharedModule {

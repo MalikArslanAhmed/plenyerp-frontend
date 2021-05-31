@@ -51,7 +51,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{department && department.name ? department?.name : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{department && department.amount ? department?.amount : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{department && department.amount ? (department?.amount | number:'1.0':'en-US') : '-'}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div>
@@ -85,7 +85,7 @@
                                                    *ngIf="employee && employee.name">{{employee && employee.name ? employee?.name : '-'}}</p>
                                             </span>
                                             <span class="mat-cell align-items-center">
-                                                <p class="text-truncate cursor-pointer mt-10px text-center">{{employee && employee.amount ? employee?.amount : '-'}}</p>
+                                                <p class="text-truncate cursor-pointer mt-10px text-center">{{employee && employee.amount ? (employee?.amount | number:'1.0':'en-US') : '-'}}</p>
                                             </span>
                                         </mat-expansion-panel-header>
                                         <div>
@@ -159,7 +159,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="title">
-                                                                {{paymentVoucher && paymentVoucher.totalAmount.amount ? paymentVoucher.totalAmount.amount : '-'}}
+                                                                {{paymentVoucher && paymentVoucher.totalAmount.amount ? (paymentVoucher.totalAmount.amount | number:'1.0':'en-US') : '-'}}
                                                             </div>
                                                         </td>
                                                     </tr>

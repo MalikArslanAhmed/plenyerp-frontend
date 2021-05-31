@@ -144,7 +144,7 @@
                                 <span class="text-truncate" *ngIf="item.type !== 'OUT'">-</span>
                             </td>
                             <td>
-                                <span class="text-truncate">{{item?.balance}}</span>
+                                <span class="text-truncate">{{item?.balance | number:'1.0':'en-US'}}</span>
                             </td>
                         </tr>
                         <tr class="background-color-grey">

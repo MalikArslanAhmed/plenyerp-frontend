@@ -63,7 +63,7 @@
                 </span>
                 <span class="mat-cell align-items-center">
                     <p class="text-truncate cursor-pointer mt-10px text-center">
-                        {{reportData.totalAmount ? reportData.totalAmount.netAmount : '-'}}
+                        {{reportData.totalAmount ? (reportData.totalAmount.netAmount | number:'1.0':'en-US') : '-'}}
                     </p>
                 </span>
                 <span class="mat-cell align-items-center">
@@ -174,7 +174,7 @@
                             </td>
                             <td>
                                 <div class="title">
-                                    {{data?.netAmount}}
+                                    {{data?.netAmount | number:'1.0':'en-US'}}
                                 </div>
                             </td>
                             <td>
@@ -184,7 +184,7 @@
                             </td>
                             <td>
                                 <div class="title">
-                                    {{(data?.netAmount + data?.totalTax) | number}}
+                                    {{(data?.netAmount + data?.totalTax) | number:'1.0':'en-US'}}
                                 </div>
                             </td>
                             <td>

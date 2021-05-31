@@ -51,7 +51,7 @@
                 <mat-header-cell *matHeaderCellDef>Unit Price</mat-header-cell>
                 <mat-cell *matCellDef="let item">
                     <p class="phone text-truncate ml-1">
-                        {{item.unitPrice}}
+                        {{item.unitPrice | number:'1.0':'en-US'}}
                     </p>
                 </mat-cell>
             </ng-container>
