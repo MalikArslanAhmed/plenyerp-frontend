@@ -104,20 +104,20 @@
                                 </td>
                                 <td>
                                     <div class="title">
-                                        {{(jvDet.lineValueType && jvDet.lineValueType === 'DEBIT') ? jvDet?.lvLineValue : '-' }}
+                                        {{(jvDet.lineValueType && jvDet.lineValueType === 'DEBIT') ? (jvDet?.lvLineValue | number:'1.0':'en-US') : '-' }}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="title">
-                                        {{(jvDet.lineValueType && jvDet.lineValueType === 'CREDIT') ? jvDet?.lvLineValue : '-'}}
+                                        {{(jvDet.lineValueType && jvDet.lineValueType === 'CREDIT') ? (jvDet?.lvLineValue | number:'1.0':'en-US') : '-'}}
                                     </div>
                                 </td>
                                 <td>
                                     <div class="title" *ngIf="jvDet.lineValueType === 'DEBIT'">
-                                        {{jvDet?.lvLineValue}}
+                                        {{jvDet?.lvLineValue | number:'1.0':'en-US'}}
                                     </div>
                                     <div class="title" *ngIf="jvDet.lineValueType === 'CREDIT'">
-                                        ({{jvDet?.lvLineValue}})
+                                        ({{jvDet?.lvLineValue | number:'1.0':'en-US'}})
                                     </div>
                                 </td>
                             </tr>

@@ -86,17 +86,17 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.transactionDetails}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'DEBIT') ? reportData?.lvLineValue : '-' }}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'DEBIT') ? (reportData?.lvLineValue | number:'1.0':'en-US') : '-' }}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'CREDIT') ? reportData?.lvLineValue : '-' }}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{(reportData.lineValueType && reportData.lineValueType === 'CREDIT') ? (reportData?.lvLineValue | number:'1.0':'en-US') : '-' }}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px" *ngIf="reportData.lineValueType === 'DEBIT'">
-                                    {{reportData.lvLineValue}}
+                                    {{reportData.lvLineValue | number:'1.0':'en-US'}}
                                 </p>
                                 <p class="text-truncate cursor-pointer mt-10px" *ngIf="reportData.lineValueType === 'CREDIT'">
-                                    ({{reportData.lvLineValue}})
+                                    ({{reportData.lvLineValue | number:'1.0':'en-US'}})
                                 </p>
                             </span>
                         </mat-expansion-panel-header>
@@ -141,12 +141,12 @@
                                     </td>
                                     <td>
                                         <div class="title">
-                                            {{(data.lineValueType && data.lineValueType === 'DEBIT') ? data?.lvLineValue : '-' }}
+                                            {{(data.lineValueType && data.lineValueType === 'DEBIT') ? (data?.lvLineValue | number:'1.0':'en-US') : '-' }}
                                         </div>
                                     </td>                                   
                                     <td>
                                         <div class="title">
-                                            {{(data.lineValueType && data.lineValueType === 'CREDIT') ? data?.lvLineValue : '-' }}
+                                            {{(data.lineValueType && data.lineValueType === 'CREDIT') ? (data?.lvLineValue | number:'1.0':'en-US') : '-' }}
                                         </div>
                                     </td>
                                 </tr>

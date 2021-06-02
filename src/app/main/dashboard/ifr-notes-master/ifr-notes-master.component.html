@@ -64,19 +64,19 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer text-center">
-                                    {{reportData?.previousBudget}} <br>{{reportData?.previousActual}}
-                                    <br> {{reportData?.previousVariance}}
+                                    {{reportData?.previousBudget | number:'1.0':'en-US'}} <br>{{reportData?.previousActual | number:'1.0':'en-US'}}
+                                    <br> {{reportData?.previousVariance | number:'1.0':'en-US'}}
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer text-center">
-                                    {{reportData?.budget}} <br>{{reportData?.actual}} <br> {{reportData?.variance}}
+                                    {{reportData?.budget | number:'1.0':'en-US'}} <br>{{reportData?.actual | number:'1.0':'en-US'}} <br> {{reportData?.variance | number:'1.0':'en-US'}}
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer text-center">
-                                    {{reportData?.cumulativeBudget}} <br>{{reportData?.cumulativeActual}}
-                                    <br> {{reportData?.cumulativeVariance}}
+                                    {{reportData?.cumulativeBudget | number:'1.0':'en-US'}} <br>{{reportData?.cumulativeActual | number:'1.0':'en-US'}}
+                                    <br> {{reportData?.cumulativeVariance | number:'1.0':'en-US'}}
                                 </p>
                             </span>
                         </mat-expansion-panel-header>
@@ -103,16 +103,16 @@
                                             <td>{{childData?.name}}</td>
                                             <td>{{childData?.combinedCode}}</td>
                                             <td>
-                                                {{childData?.previousBudget}} <br>{{childData?.previousActual}}
-                                                <br> {{childData?.previousVariance}}
+                                                {{childData?.previousBudget | number:'1.0':'en-US'}} <br>{{childData?.previousActual | number:'1.0':'en-US'}}
+                                                <br> {{childData?.previousVariance | number:'1.0':'en-US'}}
                                             </td>
                                             <td>
-                                                {{childData?.budget}} <br>{{childData?.actual}}
-                                                <br> {{childData?.variance}}
+                                                {{childData?.budget | number:'1.0':'en-US'}} <br>{{childData?.actual | number:'1.0':'en-US'}}
+                                                <br> {{childData?.variance | number:'1.0':'en-US'}}
                                             </td>
                                             <td>
-                                                {{childData?.cumulativeBudget}} <br>{{childData?.cumulativeActual}}
-                                                <br> {{childData?.cumulativeVariance}}
+                                                {{childData?.cumulativeBudget | number:'1.0':'en-US'}} <br>{{childData?.cumulativeActual | number:'1.0':'en-US'}}
+                                                <br> {{childData?.cumulativeVariance | number:'1.0':'en-US'}}
                                             </td>
                                             <td>
                                                 <button class="border-bg-none" (click)="addNote(childData.id)">

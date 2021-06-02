@@ -72,8 +72,8 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{reportData?.name}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px" *ngIf="reportData.credit > reportData.debit">({{(reportData.debit - reportData.credit) * -1}})</p>
-                                <p class="text-truncate cursor-pointer mt-10px" *ngIf="reportData.credit <= reportData.debit">{{reportData.debit - reportData.credit}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px" *ngIf="reportData.credit > reportData.debit">({{((reportData.debit - reportData.credit) * -1) | number:'1.0':'en-US'}})</p>
+                                <p class="text-truncate cursor-pointer mt-10px" *ngIf="reportData.credit <= reportData.debit">{{(reportData.debit - reportData.credit) | number:'1.0':'en-US'}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -113,8 +113,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="title" *ngIf="reportData.credit > reportData.debit">({{(reportData.debit - reportData.credit) * -1}})</div>
-                                        <div class="title" *ngIf="reportData.credit <= reportData.debit">{{reportData.debit - reportData.credit}}</div>
+                                        <div class="title" *ngIf="reportData.credit > reportData.debit">({{((reportData.debit - reportData.credit) * -1) | number:'1.0':'en-US'}})</div>
+                                        <div class="title" *ngIf="reportData.credit <= reportData.debit">{{(reportData.debit - reportData.credit) | number:'1.0':'en-US'}}</div>
                                     </td>
                                 </tr>
                                 </tbody>

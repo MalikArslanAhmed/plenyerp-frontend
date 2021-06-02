@@ -74,40 +74,40 @@
                             <p class="text-truncate cursor-pointer mt-10px">{{item?.combinedCode}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month1 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month1 < 0 ? '(' + (-item?.month1 | number:'1.0':'en-US') + ')': (item?.month1 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month2 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month2 < 0 ? '(' + (-item?.month2 | number:'1.0':'en-US') + ')': (item?.month2 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month3 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month3 < 0 ? '(' + (-item?.month3 | number:'1.0':'en-US') + ')': (item?.month3 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month4 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month4 < 0 ? '(' + (-item?.month4 | number:'1.0':'en-US') + ')': (item?.month4 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month5 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month5 < 0 ? '(' + (-item?.month5 | number:'1.0':'en-US') + ')': (item?.month5 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month6 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month6 < 0 ? '(' + (-item?.month6 | number:'1.0':'en-US') + ')': (item?.month6 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month7 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month7 < 0 ? '(' + (-item?.month7 | number:'1.0':'en-US') + ')': (item?.month7 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month8 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month8 < 0 ? '(' + (-item?.month8 | number:'1.0':'en-US') + ')': (item?.month8 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month9 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month9 < 0 ? '(' + (-item?.month9 | number:'1.0':'en-US') + ')': (item?.month9 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month10 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month10 < 0 ? '(' + (-item?.month10 | number:'1.0':'en-US') + ')': (item?.month10 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month11 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month11 < 0 ? '(' + (-item?.month11 | number:'1.0':'en-US') + ')': (item?.month11 | number:'1.0':'en-US')}}</p>
                         </span>
                             <span class="mat-cell align-items-center">
-                            <p class="text-truncate cursor-pointer mt-10px">{{item?.month12 | absoluteAmount}}</p>
+                            <p class="text-truncate cursor-pointer mt-10px">{{ item?.month12 < 0 ? '(' + (-item?.month12 | number:'1.0':'en-US') + ')': (item?.month12 | number:'1.0':'en-US')}}</p>
                         </span>
                         </mat-expansion-panel-header>
                         <div *ngIf="item.child?.length">

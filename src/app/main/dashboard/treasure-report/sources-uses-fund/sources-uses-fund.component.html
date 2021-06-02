@@ -82,18 +82,18 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer text-center">
-                                    {{'$ ' + reportData?.actualLocal}} <br> {{'N ' + reportData?.actualInternational}}
+                                    {{'$ ' + (reportData?.actualLocal | number:'1.0':'en-US')}} <br> {{'N ' + (reportData?.actualInternational | number:'1.0':'en-US')}}
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer text-center ml-20px">
-                                    {{'$ ' + reportData?.cumulativeLocal}}
-                                    <br> {{'N ' + reportData?.cumulativeInternational}}
+                                    {{'$ ' + (reportData?.cumulativeLocal | number:'1.0':'en-US')}}
+                                    <br> {{'N ' + (reportData?.cumulativeInternational | number:'1.0':'en-US')}}
                                 </p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer text-center">
-                                    {{'$ ' + reportData?.futureLocal}} <br> {{'N ' + reportData?.futureInternational}}
+                                    {{'$ ' + (reportData?.futureLocal | number:'1.0':'en-US')}} <br> {{'N ' + (reportData?.futureInternational | number:'1.0':'en-US')}}
                                 </p>
                             </span>
                         </mat-expansion-panel-header>
@@ -118,16 +118,16 @@
                                             <td>{{reportData?.section}}</td>
                                             <td>{{childData?.name}}</td>
                                             <td>
-                                                {{'$ ' + childData?.actualLocal}}
-                                                <br> {{'N ' + childData?.actualInternational}}
+                                                {{'$ ' + (childData?.actualLocal | number:'1.0':'en-US')}}
+                                                <br> {{'N ' + (childData?.actualInternational | number:'1.0':'en-US')}}
                                             </td>
                                             <td>
-                                                {{'$ ' + childData?.cumulativeLocal}}
-                                                <br> {{'N ' + childData?.cumulativeInternational}}
+                                                {{'$ ' + (childData?.cumulativeLocal | number:'1.0':'en-US')}}
+                                                <br> {{'N ' + (childData?.cumulativeInternational | number:'1.0':'en-US')}}
                                             </td>
                                             <td>
-                                                {{'$ ' + childData?.futureLocal}}
-                                                <br> {{'N ' + childData?.futureInternational}}
+                                                {{'$ ' + (childData?.futureLocal | number:'1.0':'en-US')}}
+                                                <br> {{'N ' + (childData?.futureInternational | number:'1.0':'en-US')}}
                                             </td>
                                             <td class="text-center"
                                                 *ngIf="reportData.section !== 'Opening Bank Balance' && reportData.section !== 'Closing Bank Balance'">

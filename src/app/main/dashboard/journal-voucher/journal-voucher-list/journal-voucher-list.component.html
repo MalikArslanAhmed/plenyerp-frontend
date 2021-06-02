@@ -239,7 +239,7 @@
                         </td>
                         <td>
                             <div class="title" *ngIf="voucher.lineValueType === 'DEBIT'">
-                                {{voucher?.lvLineValue}}
+                                {{voucher?.lvLineValue | number:'1.0':'en-US'}}
                             </div>
                             <div class="title" *ngIf="voucher.lineValueType === 'CREDIT'">
                                 0.00
@@ -250,7 +250,7 @@
                                 0.00
                             </div>
                             <div class="title" *ngIf="voucher.lineValueType === 'CREDIT'">
-                                {{voucher?.lvLineValue}}
+                                {{voucher?.lvLineValue | number:'1.0':'en-US'}}
                             </div>
                         </td>
                         <td *ngIf="!journalVoucher.postedTransactionDate">

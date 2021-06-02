@@ -96,7 +96,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.totalTax && reportData.totalTax.tax ? reportData.totalTax.tax : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Total Amount')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{(reportData && reportData.totalAmount && reportData.totalAmount.amount) && (reportData && reportData.totalTax && reportData.totalTax.tax) ? totalAmount(reportData.totalAmount.amount , reportData.totalTax.tax): '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{(reportData && reportData.totalAmount && reportData.totalAmount.amount) && (reportData && reportData.totalTax && reportData.totalTax.tax) ? (totalAmount(reportData.totalAmount.amount , reportData.totalTax.tax) | number:'1.0':'en-US'): '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Payment Ref. (#)')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.paymentRef ? reportData?.paymentRef : '-'}}</p>
