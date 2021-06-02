@@ -16,6 +16,7 @@
         "bp": "npm run build-prod",
         "bd": "npm run build-dev",
         "bi": "npm run build-img",
+	"ba": "npm run bd && npm run bi && npm run bp",
         "build-prod-stats": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --stats-json",
         "test": "ng test",
         "lint": "ng lint",
