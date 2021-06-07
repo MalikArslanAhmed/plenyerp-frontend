@@ -81,7 +81,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.year ? reportData.year : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Deptal No.')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.deptalId ? reportData?.deptalId : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData  ? reportData?.deptalKey : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Payee Id')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{'-'}}</p>
@@ -93,7 +93,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.totalAmount && reportData.totalAmount.amount ? (reportData.totalAmount.amount | number:'1.0':'en-US') : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Payment Ref. (#)')">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.paymentRef ? reportData?.paymentRef : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData.mandate ? reportData?.mandate.id : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center" *ngIf="getColumnData('Last Actioned')">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
