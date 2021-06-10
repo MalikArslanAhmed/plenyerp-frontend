@@ -47,7 +47,7 @@ export class PaymentVoucherComponent implements OnInit {
         perpage: 15,
         pages: null
     };
-
+    selectedDateFromModal;
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
@@ -307,10 +307,11 @@ export class PaymentVoucherComponent implements OnInit {
     askForConfirmation(data): void {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: data, header: 'Mark as ' + data}
+            data: {data: data, header: 'Mark as ' + data, showUserNameAndDate: true}
         });
-        this.dialogRef.afterClosed().subscribe((response: boolean) => {
-            if (response) {
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (response && response.isDeleteItems) {
+                this.selectedDateFromModal = moment(response.date).format('YYYY-MM-DD');
                 this.updateStatus(data);
             }
         });
@@ -326,7 +327,8 @@ export class PaymentVoucherComponent implements OnInit {
             });
             const params = {
                 status: status,
-                paymentVoucherIds: paymentVoucherId
+                paymentVoucherIds: paymentVoucherId,
+                date: this.selectedDateFromModal
             };
             if (status === 'ON_MANDATE' && params['paymentVoucherIds'] && params['paymentVoucherIds'].length > 0) {
                 const url = '/dashboard/on-mandate?paymentVoucherIds=' + JSON.stringify(params['paymentVoucherIds']);

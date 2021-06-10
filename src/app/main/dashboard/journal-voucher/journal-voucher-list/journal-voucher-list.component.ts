@@ -9,7 +9,7 @@ import {JournalVoucherUpdateComponent} from '../journal-voucher-update/journal-v
 import {PermissionConstant} from 'app/shared/constants/permission-constant';
 import {AlertService} from '../../../../shared/services/alert.service';
 import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
-
+import * as moment from 'moment';
 @Component({
     selector: 'app-journal-voucher-list',
     templateUrl: './journal-voucher-list.component.html',
@@ -34,7 +34,7 @@ export class JournalVoucherListComponent implements OnInit {
     permissionAddJVDetails = [PermissionConstant.JV_DETAILS_ADD];
     permissionEditJVDetails = [PermissionConstant.JV_DETAILS_EDIT];
     permissionDeleteJVDetails = [PermissionConstant.JV_DETAILS_DELETE];
-
+    selectedDateFromModal;
     constructor(private journalVoucherService: JournalVoucherService,
                 private _matDialog: MatDialog,
                 private alertService: AlertService) {
@@ -126,10 +126,11 @@ export class JournalVoucherListComponent implements OnInit {
     askForConfirmation(data, type): void {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: data, header: 'Mark as ' + type}
+            data: {data: data, header: 'Mark as ' + type, showUserNameAndDate: true}
         });
-        this.dialogRef.afterClosed().subscribe((response: boolean) => {
-            if (response) {
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (response && response.isDeleteItems) {
+                this.selectedDateFromModal = moment(response.date).format('YYYY-MM-DD');
                 if (type === 'checked') {
                     this.markAsChecked();
                 } else if (type === 'posted') {
@@ -178,7 +179,8 @@ export class JournalVoucherListComponent implements OnInit {
             if (i > 0) {
                 this.journalVoucherService.journalVouchersUpdate({
                     jvReferenceNumbers: jvReferenceNumbers,
-                    status: 'CHECKED'
+                    status: 'CHECKED',
+                    date: this.selectedDateFromModal
                 }).subscribe(data => {
                     console.log('data', data);
                 });
@@ -203,7 +205,8 @@ export class JournalVoucherListComponent implements OnInit {
         if (i > 0) {
             this.journalVoucherService.journalVouchersUpdate({
                 jvReferenceNumbers: jvReferenceNumbers,
-                status: 'POSTED'
+                status: 'POSTED',
+                date: this.selectedDateFromModal
             }).subscribe(data => {
                 console.log('data', data);
             });
@@ -227,7 +230,8 @@ export class JournalVoucherListComponent implements OnInit {
         if (i > 0) {
             this.journalVoucherService.journalVouchersUpdate({
                 jvReferenceNumbers: jvReferenceNumbers,
-                status: 'RENEW'
+                status: 'RENEW',
+                date: this.selectedDateFromModal
             }).subscribe(data => {
                 console.log('data', data);
             });

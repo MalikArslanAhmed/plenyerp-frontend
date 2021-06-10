@@ -7,7 +7,7 @@
 .delete-items-dialog{
     .mat-dialog-container{
         width: 470px!important;
-        height: 230px !important;
+        min-height: 230px !important;
     }
 }
 

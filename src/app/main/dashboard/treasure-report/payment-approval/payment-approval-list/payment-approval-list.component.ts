@@ -12,6 +12,7 @@ import {SchedulePaymentApprovalEmployeeComponent} from '../schedule-payment-appr
 import {SchedulePaymentApprovalCustomerComponent} from '../schedule-payment-approval-customer/schedule-payment-approval-customer.component';
 import {PermissionConstant} from '../../../../../shared/constants/permission-constant';
 import {DeleteListModalComponent} from '../../../delete-list-modal/delete-list-modal.component';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-payment-approval-list',
@@ -63,7 +64,7 @@ export class PaymentApprovalListComponent implements OnInit {
     ];
     status = 'ALL';
     selectedStatus = [];
-
+    selectedDateFromModal;
     constructor(private cashbookService: CashbookService,
                 private router: Router,
                 private _matDialog: MatDialog,
@@ -145,10 +146,11 @@ export class PaymentApprovalListComponent implements OnInit {
     askForConfirmation(data): void {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: data, header: 'Mark as ' + data}
+            data: {data: data, header: 'Mark as ' + data, showUserNameAndDate: true}
         });
-        this.dialogRef.afterClosed().subscribe((response: boolean) => {
-            if (response) {
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (response && response.isDeleteItems) {
+                this.selectedDateFromModal = moment(response.date).format('YYYY-MM-DD');
                 this.updateStatus(data);
             }
         });
@@ -164,7 +166,8 @@ export class PaymentApprovalListComponent implements OnInit {
             });
             const params = {
                 status: status,
-                paymentApprovalIds: paymentApprovalIds ? JSON.stringify(paymentApprovalIds) : ''
+                paymentApprovalIds: paymentApprovalIds ? JSON.stringify(paymentApprovalIds) : '',
+                date: this.selectedDateFromModal
             };
             this.paymentApprovalService.updatePaymentApprovalStatus(params).subscribe(data => {
                 this.getPaymentApprovalList({});

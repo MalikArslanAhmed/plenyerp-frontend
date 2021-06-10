@@ -44,7 +44,7 @@ export class PreviousYearAdvancesComponent implements OnInit {
     permissionPYADelete = [PermissionConstant.PYA_DELETE];
     permissionPYAClose = [PermissionConstant.PYA_CLOSE];
     permissionPYAPost = [PermissionConstant.PYA_POST];
-
+    selectedDateFromModal;
     constructor(private fb: FormBuilder,
                 private _matDialog: MatDialog,
                 private alertService: AlertService,
@@ -237,10 +237,11 @@ export class PreviousYearAdvancesComponent implements OnInit {
     askForConfirmation(data): void {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: data, header: 'Mark as ' + data}
+            data: {data: data, header: 'Mark as ' + data, showUserNameAndDate: true}
         });
-        this.dialogRef.afterClosed().subscribe((response: boolean) => {
-            if (response) {
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (response && response.isDeleteItems) {
+                this.selectedDateFromModal = moment(response.date).format('YYYY-MM-DD');
                 this.updateStatus(data);
             }
         });
@@ -256,7 +257,8 @@ export class PreviousYearAdvancesComponent implements OnInit {
             });
             const params = {
                 status: status,
-                paymentVoucherIds: JSON.stringify(receiptVoucherId)
+                paymentVoucherIds: JSON.stringify(receiptVoucherId),
+                date: this.selectedDateFromModal
             };
             this.previousYearAdvanceService.getUpdateStatus(params).subscribe(data => {
                 // console.log(data);

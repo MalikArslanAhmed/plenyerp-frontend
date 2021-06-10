@@ -9,12 +9,38 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form *ngIf="isShowUserNameAndDate">
+           <div fxLayout="column">
+               <mat-form-field appearance="outline" fxFlex>
+                   <mat-label>User</mat-label>
+                   <input name="userName" [(ngModel)]="userName" matInput [disabled]="userName">
+               </mat-form-field>
+               <mat-form-field appearance="outline" fxFlex>
+                   <mat-label>Date</mat-label>
+                   <input matInput [matDatepicker]="jvValueDate" (click)="jvValueDate.open()"
+                          (focus)="jvValueDate.open()"
+                          name="date" [(ngModel)]="date">
+                   <mat-datepicker-toggle matSuffix
+                                          [for]="jvValueDate"></mat-datepicker-toggle>
+                   <mat-datepicker #jvValueDate></mat-datepicker>
+               </mat-form-field>
+           </div>
+
+        </form>
         <div>{{message}}</div>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button color="accent" (click)="matDialogRef.close(isDeleteItems = true)" aria-label="Save">
-            Yes
-        </button>
+        <ng-container *ngIf="isShowUserNameAndDate else notShowUSer">
+            <button mat-button color="accent" (click)="matDialogRef.close({isDeleteItems : true, date: this.date})" aria-label="Save">
+                Yes
+            </button>
+        </ng-container>
+        <ng-template #notShowUSer>
+            <button mat-button color="accent" (click)="matDialogRef.close(isDeleteItems = true)" aria-label="Save">
+                Yes
+            </button>
+        </ng-template>
+
         <button mat-button color="warn" (click)="matDialogRef.close(isDeleteItems = false);">
             No
         </button>
