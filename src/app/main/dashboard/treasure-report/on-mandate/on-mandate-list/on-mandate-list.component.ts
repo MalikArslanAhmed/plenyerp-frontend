@@ -143,6 +143,18 @@ export class OnMandateListComponent implements OnInit {
         });
     }
 
+    askForConfirmation(data, type): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: data, header: 'Mark as ' + type}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.updateStatus(type);
+            }
+        });
+    }
+
     updateStatus(status: string) {
         const mandateIds = [];
         if (this.onMandateList && this.onMandateList.length > 0) {

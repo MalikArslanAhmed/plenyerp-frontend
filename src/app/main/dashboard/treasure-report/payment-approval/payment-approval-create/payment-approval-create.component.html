@@ -12,12 +12,24 @@
         <div>
             <form [formGroup]="paymentApprovalForm" style="margin-top: 20px">
                 <div fxLayout="column">
-                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px" style="margin-bottom: 1rem">
-                        <mat-label>Payee</mat-label>
-                        <mat-radio-group class="example-radio-group" formControlName="employeeCustomer" [disabled]="this.updateData">
-                            <mat-radio-button value="EMPLOYEE">Employee</mat-radio-button>
-                            <mat-radio-button value="CUSTOMER">Customer</mat-radio-button>
-                        </mat-radio-group>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+                        <div class="width-50-per">
+                            <mat-label>Payee</mat-label>
+                            <mat-radio-group class="example-radio-group" formControlName="employeeCustomer" [disabled]="this.updateData">
+                                <mat-radio-button value="EMPLOYEE">Employee</mat-radio-button>
+                                <mat-radio-button value="CUSTOMER">Customer</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="width-50-per">
+                            <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                                <mat-label>Voucher Source Unit</mat-label>
+                                <mat-select formControlName="voucherSourceUnitId">
+                                    <mat-option value="">Choose Source</mat-option>
+                                    <mat-option [value]="source.id"
+                                                *ngFor="let source of sourceUnit">{{source?.longName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                     </div>
                     <!--<div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
                         <mat-form-field appearance="outline" fxFlex>

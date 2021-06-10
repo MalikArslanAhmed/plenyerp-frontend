@@ -49,6 +49,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
     economicSegments = [];
     user: any;
     isDefaultCurrency = false;
+    sourceUnit = [];
     constructor(public matDialogRef: MatDialogRef<PaymentApprovalCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private fb: FormBuilder,
@@ -82,6 +83,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
         this.getCurrencies();
         this.checkForUpdate();
         this.getCompanySetting();
+        this.getVoucherSourceUnitList();
     }
 
     refresh(): void {
@@ -101,6 +103,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
             fundSegmentId: [''],
             economicSegmentCode: [{value: '', disabled: true}],
             economicSegmentId: [''],
+            voucherSourceUnitId: [''],
         });
         // console.log('this.user', this.user['name']);
         this.paymentApprovalForm.patchValue({
@@ -108,6 +111,13 @@ export class PaymentApprovalCreateComponent implements OnInit {
             valueDateName: this.user.name
         });
     }
+    getVoucherSourceUnitList() {
+        this.sourceUnit = [];
+        this.treasureReportService.list({page: -1}).subscribe(data => {
+            this.sourceUnit = data.items;
+        });
+    }
+
     getCompanySetting() {
         this.companyInformationService.getCompanySetting().subscribe(data => {
             if (data.items && data.items.length > 0) {
@@ -146,6 +156,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
                 economicSegmentId: (this.updateData && this.updateData['economicSegmentId']) ? this.updateData['economicSegmentId'] : '',
                 economicSegmentCode: (this.updateData && this.updateData['economicSegment']) ? this.updateData['economicSegment'].id : '',
                 remark: (this.updateData && this.updateData['remark']) ? this.updateData['remark'] : '',
+                voucherSourceUnitId: (this.updateData && this.updateData['voucherSourceUnitId']) ? this.updateData['voucherSourceUnitId'] : '',
                 authorisedDate: (this.updateData && this.updateData['authorisedDate']) ? this.updateData['authorisedDate'] : '',
                 authorisedName: (this.updateData && this.updateData['authorisedBy'] && this.updateData['authorisedBy'].name) ? this.updateData['authorisedBy'].name : '',
             });
@@ -247,6 +258,7 @@ export class PaymentApprovalCreateComponent implements OnInit {
             authorisedName: this.paymentApprovalForm.getRawValue().authorisedName ? this.paymentApprovalForm.getRawValue().authorisedName : '',
             employeeCustomer: this.paymentApprovalForm.getRawValue().employeeCustomer ? this.paymentApprovalForm.getRawValue().employeeCustomer : '',
             remark: this.paymentApprovalForm.getRawValue().remark ? this.paymentApprovalForm.getRawValue().remark : '',
+            voucherSourceUnitId: this.paymentApprovalForm.getRawValue().voucherSourceUnitId ? this.paymentApprovalForm.getRawValue().voucherSourceUnitId : '',
         };
 
         if (!this.updateData) {

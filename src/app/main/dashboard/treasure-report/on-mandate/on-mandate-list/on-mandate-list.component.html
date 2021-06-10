@@ -1,10 +1,18 @@
 <div class="voucherSource-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <ng-container *ngIf="statuses && statuses.length > 0">
+            <button mat-button class="update-report" (click)="askForConfirmation({}, 'new')"
+                    appPermissionBind [permission]="permissionChangeStatusMandate"
+                    *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL' && status !== 'NEW'">
+                <mat-icon class="material-icons cursor-pointer whiteColor">
+                    keyboard_arrow_left
+                </mat-icon>
+                New
+            </button>
             <button mat-button class="update-report"
                     appPermissionBind [permission]="permissionChangeStatusMandate"
                     *ngIf="status !== 'ALL' && status !== 'POSTED_TO_GL' && selectedStatus && selectedStatus.length > 0"
-                    (click)="updateStatus(selectedStatus[0].value)">
+                    (click)="askForConfirmation({}, selectedStatus[0].value)">
                 {{selectedStatus[0].name}}
                 <mat-icon class="material-icons cursor-pointer whiteColor">
                     keyboard_arrow_right
