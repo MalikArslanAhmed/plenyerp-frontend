@@ -79,6 +79,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
             this.sourceType = _data.type;
             this.sources = _data.source;
             this.isDefaultCurrency = true;
+            console.log('--->>source', this.sources);
         }
         this.dialogTitle = this.header + ' - Payment Voucher';
     }
@@ -86,7 +87,7 @@ export class PaymentVoucherCreateComponent implements OnInit {
     ngOnInit(): void {
         this.getCompanySetting();
         this.getCurrencies();
-        this.getPaymentApproval({inUse: 1});
+        this.getPaymentApproval({inUse: 1, voucherSourceUnitId: this.sources[0].value});
         this.refresh();
         if (this.updatedData) {
             this.patchForm();
