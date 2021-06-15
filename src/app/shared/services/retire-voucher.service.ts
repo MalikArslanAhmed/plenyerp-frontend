@@ -49,4 +49,7 @@ export class RetireVoucherService extends BaseService {
     updateRetireStatus(data): Observable<any> {
         return this.postRequest(AppUrl.UPDATE_RETIRE_STATUS(), data);
     }
+    downloadPDFRetireVoucher(id): Observable<any> {
+        return this.getRequest(AppUrl.RETIRE_VOUCHER_DOWNLOAD(id));
+    }
 }

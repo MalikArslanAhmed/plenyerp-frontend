@@ -224,4 +224,9 @@ export class RetireVouchersComponent implements OnInit {
         this.pagination.page = page.pageIndex + 1;
         this.getRetireVoucher();
     }
+    downloadPDF(data) {
+        this.retireVoucherService.downloadPDFRetireVoucher(data.id).subscribe(data => {
+            window.open(data.url, '_blank');
+        });
+    }
 }

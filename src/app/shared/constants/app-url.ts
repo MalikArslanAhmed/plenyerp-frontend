@@ -527,7 +527,9 @@ export class AppUrl {
             return AppUrl.API_URL + `treasury/retire-voucher`;
         }
     }
-
+    static RETIRE_VOUCHER_DOWNLOAD(id?): string {
+        return AppUrl.API_URL + `retire-voucher/` + id + '/download';
+    }
     static RV_REPORT_DATA(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-vouchers` + id;

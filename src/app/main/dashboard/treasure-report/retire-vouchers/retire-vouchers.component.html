@@ -80,6 +80,7 @@
                         <span class="mat-header-cell text-center">PV Status</span>
                         <span class="mat-header-cell text-center">PV Number</span>
                         <span class="mat-header-cell text-center">Retr. Status</span>
+                        <span class="mat-header-cell text-center">Actions</span>
                     </section>
                     <mat-expansion-panel *ngFor="let reportData of retireVoucherData; let i = index">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
@@ -122,6 +123,14 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData['retireVoucher'] && reportData['retireVoucher'].status ? reportData['retireVoucher'].status : 'Edit Liability'}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center text-center">
+                                <mat-icon class="material-icons"
+                                          (click)="downloadPDF(reportData); $event.stopPropagation()"
+                                          [customDisplaySetting]="'inline-block'"
+                                          title="Download Payment Voucher"
+                                          style="color: green; margin-left: 20px; margin-top: 10px">picture_as_pdf</mat-icon>
+
                             </span>
                         </mat-expansion-panel-header>
                         <div>
@@ -173,7 +182,8 @@
                                                 </th>
                                             </tr>
                                             </thead>
-                                            <tbody *ngIf="reportData && reportData['payees'] && reportData['payees'].length > 0; else noChildToShow">
+                                            <tbody
+                                                *ngIf="reportData && reportData['payees'] && reportData['payees'].length > 0; else noChildToShow">
                                             <tr *ngFor="let data of reportData['payees']; let i = index">
                                                 <td>
                                                     <div class="title" *ngIf="data && data.employee">
