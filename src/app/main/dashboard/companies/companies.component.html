@@ -23,9 +23,45 @@
         </div>
     </div>
 
+<!--    <div class="content">-->
+<!--        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>-->
+<!--            <div class="content">-->
+<!--                <form [formGroup]="companyFiltersForm">-->
+<!--                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">-->
+<!--                        <mat-label>Search</mat-label>-->
+<!--                        <input formControlName="search" matInput placeholder="Search">-->
+<!--                    </mat-form-field>-->
+<!--                    <div fxFlex class="width-200px p-10px mt-13px">-->
+<!--                        <button mat-button class="submit-report" (click)="search()">-->
+<!--                            Submit-->
+<!--                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div class="content mt-20px">-->
+<!--                <app-companies-list></app-companies-list>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
     <div class="content">
-        <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
+                <form [formGroup]="companyFiltersForm">
+                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px">
+                        <mat-label>Search</mat-label>
+                        <input formControlName="search" matInput placeholder="Search">
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="search()">
+                            Submit
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="content mt-20px">
                 <app-companies-list></app-companies-list>
             </div>
         </div>

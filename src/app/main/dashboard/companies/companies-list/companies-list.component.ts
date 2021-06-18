@@ -5,7 +5,7 @@ import {CompaniesCreateComponent} from '../companies-create/companies-create.com
 import {MatDialog} from '@angular/material/dialog';
 import {PageEvent} from '@angular/material/paginator';
 import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {CompanyBankDetailsComponent} from '../company-bank-details/company-bank-details.component';
 import {PermissionConstant} from '../../../../shared/constants/permission-constant';
 
@@ -19,6 +19,7 @@ import {PermissionConstant} from '../../../../shared/constants/permission-consta
 export class CompaniesListComponent implements OnInit {
     displayedColumns: string[] = ['sno', 'companyId', 'companyName', 'companyAddress', 'actions'];
     companiesList = [];
+
     dialogRef: any;
     pagination = {
         page: 1,
@@ -30,6 +31,7 @@ export class CompaniesListComponent implements OnInit {
     permissionDelete = [PermissionConstant.COMPANIES_DELETE];
     permissionUpdate = [PermissionConstant.COMPANIES_UPDATE];
     permissionBankCreate = [PermissionConstant.COMPANIES_BANK_CREATE];
+
     constructor(private companiesService: CompaniesService,
                 private _matDialog: MatDialog) {
     }
@@ -41,7 +43,12 @@ export class CompaniesListComponent implements OnInit {
 
     getCompaniesList(params = {}): void {
         this.companiesList = [];
-        this.companiesService.getCompaniesList(params).subscribe(data => {
+        const param = {
+            ...params,
+            page: this.pagination.page,
+            perpage: this.pagination.perpage
+        };
+        this.companiesService.getCompaniesList(param).subscribe(data => {
             this.companiesList = data.items;
             this.pagination.page = data.page;
             this.pagination.total = data.total;
@@ -104,4 +111,5 @@ export class CompaniesListComponent implements OnInit {
             }
         });
     }
+
 }
