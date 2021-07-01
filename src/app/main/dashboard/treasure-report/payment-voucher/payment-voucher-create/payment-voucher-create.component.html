@@ -57,13 +57,13 @@
                                                       *ngIf="header === 'EXPENDITURE VOUCHER' || header === 'NON PERSONAL VOUCHER' ||
                                                       header === 'PERSONAL ADVANCES VOUCHER' || header === 'SPECIAL IMPREST VOUCHER' ||
                                                       header === 'STANDING IMPREST VOUCHER' || header === 'REMITTANCE VOUCHER' || header === 'DEPOSIT VOUCHER' ||
-                                                      header === 'EXPENDITURE VOUCHER'">
+                                                      header === 'CREDIT VOUCHER'">
                                         Employee
                                     </mat-radio-button>
                                     <mat-radio-button class="example-radio-button" value="CUSTOMER"
                                                       [style.marginLeft.px]="40" [style.marginTop.px]="20"
                                                       *ngIf="header === 'EXPENDITURE VOUCHER' || header === 'TRANSFER CASHBOOK VOUCHER' ||
-                                                      header === 'REMITTANCE VOUCHER' || header === 'DEPOSIT VOUCHER' || header === 'EXPENDITURE VOUCHER'">
+                                                      header === 'REMITTANCE VOUCHER' || header === 'DEPOSIT VOUCHER' || header === 'CREDIT VOUCHER'">
                                         Customer
                                     </mat-radio-button>
                                 </mat-radio-group>
