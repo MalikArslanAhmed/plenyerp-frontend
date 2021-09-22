@@ -234,7 +234,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
 
     getEmployees(): void {
         this.employees = [];
-        this.employeesService.getEmployees({page: -1}).subscribe(data => {
+        this.employeesService.getEmployees({page: -1, payee:'payees'}).subscribe(data => {
             this.employees = data.items;
         });
     }

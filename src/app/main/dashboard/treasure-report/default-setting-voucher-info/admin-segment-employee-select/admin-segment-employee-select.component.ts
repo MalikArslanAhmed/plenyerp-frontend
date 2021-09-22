@@ -127,6 +127,7 @@ export class AdminSegmentEmployeeSelectComponent implements OnInit {
 
     getEmployees(params): void {
         params['page'] = this.pagination.page;
+        params['payee'] = 'payee';
         this.employees = [];
         this.employeesService.getEmployees(params).subscribe(data => {
             this.employees = data.items;
