@@ -72,12 +72,13 @@
         <mat-cell *matCellDef="let tax">
             <div fxFlex="row" fxLayoutAlign="end center">
                 <div appPermissionBind [permission]="permissionUpdateTaxes">
-                    <button mat-icon-button aria-label="Toggle star" (click)="editTax(tax)" style="color: blue">
+                    <button mat-icon-button aria-label="Toggle star" (click)="editTax(tax)"
+                            style="color: blue">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                 </div>
                 <div appPermissionBind [permission]="permissionDeleteTaxes">
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(tax)"
+                    <button mat-icon-button aria-label="Toggle star" *ngIf="![1,2].includes(tax.id)" (click)="deleteItemModal(tax)"
                             style="color: red">
                         <mat-icon class="material-icons">delete</mat-icon>
                     </button>
