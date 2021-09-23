@@ -1,0 +1,33 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Employee Login Access</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form fxLayout="column" [formGroup]="employeeLoginAccessForm">
+            <ng-template matStepLabel>Employee</ng-template>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile colspan="2">
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password" required>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-raised-button type="button" color="accent" (click)="allowLoginAccess()">
+                    Allow Access
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>

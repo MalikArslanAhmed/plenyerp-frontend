@@ -972,6 +972,10 @@ export class AppUrl {
         return AppUrl.API_URL + `employee/` + empId + '/banks';
     }
 
+    static ADD_LOGIN_ACCESS(empId): string {
+        return AppUrl.API_URL + `employee-login-access/` + empId;
+    }
+
     static ADD_COMPANY_DETAILS(empId): string {
         return AppUrl.API_URL + `company/` + empId + '/bank';
     }

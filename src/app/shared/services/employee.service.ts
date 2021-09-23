@@ -93,6 +93,9 @@ export class EmployeeService extends BaseService {
     addBankDetails(empId, data): Observable<any> {
         return this.postRequest(AppUrl.ADD_BANK_DETAILS(empId), data);
     }
+    addLoginAcecss(empId, data): Observable<any> {
+        return this.postRequest(AppUrl.ADD_LOGIN_ACCESS(empId), data);
+    }
 
     addCompanyBankDetails(compId, data): Observable<any> {
         return this.postRequest(AppUrl.ADD_COMPANY_DETAILS(compId), data);

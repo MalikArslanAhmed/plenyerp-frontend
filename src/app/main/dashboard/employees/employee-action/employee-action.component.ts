@@ -21,6 +21,7 @@ import {EmployeeBankDetailsComponent} from './employee-bank-details/employee-ban
 import {EmployeeBackground} from '../employee-other-details/employee-background/employee-background';
 import {PageEvent} from '@angular/material/paginator';
 import {EmployeeProgressionHistoryComponent} from './employee-progression-history/employee-progression-history.component';
+import {EmployeeLoginAccessComponent} from './employee-login-access/employee-login-access.component';
 
 @Component({
     selector: 'app-employee-action',
@@ -234,6 +235,20 @@ export class EmployeeActionComponent implements OnInit {
         // console.log(previewEmp);
         this.dialogRef = this._matDialog.open(EmployeeProgressionHistoryComponent, {
             panelClass: 'employee-Progression-history-details-dialog',
+            data: {action: 'CREATE', selectedEmployee: previewEmp}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            // this.getAddressTypeList.getAddressTypeList();
+        });
+    }
+
+    employeeLoginAccess(previewEmp) {
+        // console.log(previewEmp);
+        this.dialogRef = this._matDialog.open(EmployeeLoginAccessComponent, {
+            panelClass: 'employee-login-access-dialog',
             data: {action: 'CREATE', selectedEmployee: previewEmp}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {

@@ -256,6 +256,12 @@
                                     <button mat-button color="accent" (click)="employeeProgression(previewEmp)">Employee Progression History</button>
                                 </div>
                             </div>
+                            <div class="custom-row" style="margin-top: 1rem">
+                                <div class="col p-0 d-flex">
+
+                                    <button mat-button color="accent" (click)="employeeLoginAccess(previewEmp)">Employee Login Access</button>
+                                </div>
+                            </div>
                             <div class="custom-row" style="margin-top: 1rem" *ngIf="exportOpen">
                                 <div class="col p-0 d-flex">
                                     <button mat-button color="accent" (click)="downloadSummary(previewEmp.id, 'extended')">Extended Summary</button>

@@ -268,6 +268,7 @@ import { SchedulePayersEmployeePreviousAdvancesComponent } from './treasure-repo
 import { SchedulePayersCustomerPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component';
 import { ScheduleEconomicCodesReceiptPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-economic-codes-receipt-previous-advances/schedule-economic-codes-receipt-previous-advances.component';
 import {AbsoluteAmountPipe} from '../../shared/pipes/absolute-amount.pipe';
+import { EmployeeLoginAccessComponent } from './employees/employee-action/employee-login-access/employee-login-access.component';
 
 @NgModule({
     declarations: [
@@ -514,6 +515,7 @@ import {AbsoluteAmountPipe} from '../../shared/pipes/absolute-amount.pipe';
         SchedulePayersEmployeePreviousAdvancesComponent,
         SchedulePayersCustomerPreviousAdvancesComponent,
         ScheduleEconomicCodesReceiptPreviousAdvancesComponent,
+        EmployeeLoginAccessComponent,
     ],
     imports: [
         CommonModule,
