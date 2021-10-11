@@ -210,7 +210,7 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             if (response['taxes'] && response['taxes'].length > 0) {
                 response['taxes'].forEach(tax => {
                     if (tax.checked) {
-                        this.taxIds.push(tax.id);
+                        this.taxIds.push(tax);
                     }
                 });
             }
