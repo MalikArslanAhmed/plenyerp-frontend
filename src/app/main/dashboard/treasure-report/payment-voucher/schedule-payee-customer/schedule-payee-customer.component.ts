@@ -193,11 +193,13 @@ export class SchedulePayeeCustomerComponent implements OnInit {
             this.alertService.showErrors('Net Amount can\'t be empty');
             return;
         }
+        console.log(this.payeeData);
         this.dialogRef = this._matDialog.open(PaymentVoucherTaxesComponent, {
             panelClass: 'contact-form-dialog',
             data: {
                 action: (this.payeeData) ? 'EDIT' : 'CREATE',
                 taxIds: (this.payeeData && this.payeeData && this.payeeData.taxIds) ? this.payeeData.taxIds : '',
+                payeeTaxes: (this.payeeData && this.payeeData && this.payeeData.payeeTaxes) ? this.payeeData.payeeTaxes : '',
                 netAmount: this.schedulePayeeCustomerForm.value.netAmount,
             }
         });

@@ -150,6 +150,7 @@ export class SchedulePaymentApprovalCustomerComponent implements OnInit {
             data: {
                 action: (this.updateData) ? 'EDIT' : 'CREATE',
                 taxIds: (this.updateData && this.updateData['pv'] && this.updateData['pv'].taxIds) ? this.updateData['pv'].taxIds : '',
+                payeeTaxes: (this.updateData && this.updateData['pv'] && this.updateData['pv'].payeeTaxes) ? this.updateData['pv'].payeeTaxes : '',
                 netAmount: this.schedulePayeeCustomerForm.value.netAmount,
             }
         });
@@ -162,7 +163,7 @@ export class SchedulePaymentApprovalCustomerComponent implements OnInit {
             if (response['taxes'] && response['taxes'].length > 0) {
                 response['taxes'].forEach(tax => {
                     if (tax.checked) {
-                        this.taxIds.push(tax.id);
+                        this.taxIds.push(tax);
                     }
                 });
             }

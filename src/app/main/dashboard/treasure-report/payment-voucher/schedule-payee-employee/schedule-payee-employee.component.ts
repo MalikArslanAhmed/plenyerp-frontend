@@ -199,6 +199,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             data: {
                 action: (this.payeeData) ? 'EDIT' : 'CREATE',
                 taxIds: (this.payeeData && this.payeeData && this.payeeData.taxIds) ? this.payeeData.taxIds : '',
+                payeeTaxes: (this.payeeData && this.payeeData && this.payeeData.payeeTaxes) ? this.payeeData.payeeTaxes : '',
                 netAmount: this.schedulePayeeEmployeeForm.value.netAmount,
             }
         });
@@ -211,7 +212,7 @@ export class SchedulePayeeEmployeeComponent implements OnInit {
             if (response['taxes'] && response['taxes'].length > 0) {
                 response['taxes'].forEach(tax => {
                     if (tax.checked) {
-                        this.taxIds.push(tax.id);
+                        this.taxIds.push(tax);
                     }
                 });
             }

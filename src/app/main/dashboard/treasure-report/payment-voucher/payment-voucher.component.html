@@ -135,7 +135,7 @@
                                 <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData['totalAmount'] && reportData['totalAmount'].amount ? (reportData['totalAmount'].amount | number:'1.0':'en-US') : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData['totalTax'] && reportData['totalTax'].tax ? reportData['totalTax'].tax : '-'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px text-center">{{reportData && reportData['totalTax'] && reportData['totalTax'].tax ? (reportData['totalTax'].tax | number:'1.0':'en-US') : '-'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px text-center ml-20px">{{reportData && reportData.lastActioned ? reportData.lastActioned : '-'}}</p>
@@ -274,7 +274,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="title">
-                                                        {{data?.totalTax}}
+                                                        {{data?.totalTax | number:'1.0':'en-US'}}
                                                     </div>
                                                 </td>
                                                 <td>
@@ -388,7 +388,8 @@
                                                     </span>
                                                 </td>
                                                 <td *ngIf="reportData.status ==='NEW'" appPermissionBind
-                                                    [permission]="permissionAddSchCodes"  [customDisplaySetting]="'inline-block'">
+                                                    [permission]="permissionAddSchCodes"
+                                                    [customDisplaySetting]="'inline-block'">
                                                     <button mat-button class="payee-report"
                                                             (click)="scheduleEconomicCodes(reportData, data)">
                                                         Schedule Economic Codes

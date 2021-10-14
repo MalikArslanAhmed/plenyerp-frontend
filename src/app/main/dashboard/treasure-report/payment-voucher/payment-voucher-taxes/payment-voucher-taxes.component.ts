@@ -30,7 +30,8 @@ export class PaymentVoucherTaxesComponent implements OnInit {
             this.updateData = undefined;
             this.dialogTitle = 'Add Applicable Taxes';
         } else {
-            this.taxArray = (_data.taxIds && _data.taxIds !== '') ? JSON.parse(_data.taxIds) : [];
+            console.log(_data);
+            this.taxArray = (_data.payeeTaxes && _data.payeeTaxes !== '') ? (_data.payeeTaxes) : {};
             this.dialogTitle = 'Edit Applicable Taxes';
             this.updateData = _data;
         }
@@ -100,14 +101,15 @@ export class PaymentVoucherTaxesComponent implements OnInit {
     }
 
     checkedItemsId() {
+
         if (this.taxArray && this.taxArray.length > 0) {
             let totalTaxes = [];
             this.taxArray.map(val => {
                 if (this.taxes && this.taxes.length > 0) {
                     this.taxes.forEach(v => {
-                        if (v.id === val) {
-                            v['checked'] = val;
-                            const taxVal = (parseFloat(v['tax']) * parseFloat(this.grossAmount)) / 100;
+                        if (v.id === val.taxId) {
+                            v['checked'] = val.taxId;
+                            const taxVal = (parseFloat(v['taxPercentage']) * parseFloat(this.grossAmount)) / 100;
                             totalTaxes.push(taxVal);
                         }
                     });
