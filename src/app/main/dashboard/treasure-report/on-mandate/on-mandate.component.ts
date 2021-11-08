@@ -27,11 +27,11 @@ export class OnMandateComponent implements OnInit {
             'value': 'NEW',
         },
         {
-            'name': 'Ist Authorised',
+            'name': '1st Authorised',
             'value': '1ST_AUTHORISED',
         },
         {
-            'name': 'IInd Authorised',
+            'name': '2nd Authorised',
             'value': '2ND_AUTHORISED',
         },
         {

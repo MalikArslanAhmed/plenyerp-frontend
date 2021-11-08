@@ -22,6 +22,7 @@ import {EmployeeBackground} from '../employee-other-details/employee-background/
 import {PageEvent} from '@angular/material/paginator';
 import {EmployeeProgressionHistoryComponent} from './employee-progression-history/employee-progression-history.component';
 import {EmployeeLoginAccessComponent} from './employee-login-access/employee-login-access.component';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 @Component({
     selector: 'app-employee-action',
@@ -262,6 +263,28 @@ export class EmployeeActionComponent implements OnInit {
     editEmployee(employee) {
         console.log(3);
         this.router.navigateByUrl('dashboard/employee/edit/' + employee.id);
+    }
+
+    deleteItemModal(items): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: items}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                console.log(items);
+                this.deleteEmployee(items.id);
+            }
+        });
+    }
+
+
+    deleteEmployee(employeeId) {
+        this.employeesService.deleteEmployees(employeeId).subscribe(data => {
+            if (data) {
+                this.getEmployees({});
+            }
+        });
     }
 
 

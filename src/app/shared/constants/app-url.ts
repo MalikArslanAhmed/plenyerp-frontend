@@ -415,6 +415,9 @@ export class AppUrl {
     static GET_EMPLOYEES(): string {
         return AppUrl.API_URL + `employees`;
     }
+    static DELETE_EMPLOYEES(id): string {
+        return AppUrl.API_URL + `employees/` + id;
+    }
 
     static GET_EMPLOYEES_DETAILS_DOWNLOAD(id): string {
         return AppUrl.API_URL + `employee/` + id + `/details-download`;

@@ -157,6 +157,11 @@
                                             (click)="editEmployee(employee)">
                                             <mat-icon class="material-icons">edit</mat-icon>
                                         </button>
+
+                                        <button mat-icon-button aria-label="Toggle star" style="color: blue;"
+                                            (click)="deleteItemModal(employee)">
+                                            <mat-icon class="material-icons">delete</mat-icon>
+                                        </button>
                                     </div>
                                 </mat-cell>
                             </ng-container>

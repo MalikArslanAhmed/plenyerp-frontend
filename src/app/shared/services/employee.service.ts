@@ -46,6 +46,10 @@ export class EmployeeService extends BaseService {
         return this.getRequest(AppUrl.GET_EMPLOYEES(), data);
     }
 
+    deleteEmployees(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_EMPLOYEES(id));
+    }
+
     getEmployeesDetailsDownload(id, data): Observable<any> {
         return this.getRequest(AppUrl.GET_EMPLOYEES_DETAILS_DOWNLOAD(id), data);
     }
