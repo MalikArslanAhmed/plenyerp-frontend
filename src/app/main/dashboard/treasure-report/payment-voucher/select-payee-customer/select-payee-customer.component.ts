@@ -3,7 +3,7 @@ import {fuseAnimations} from "../../../../../../@fuse/animations";
 import {CompaniesService} from "../../../../../shared/services/companies.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup} from "@angular/forms";
-
+import {PageEvent} from '@angular/material/paginator';
 @Component({
     selector: 'app-select-payee-customer',
     templateUrl: './select-payee-customer.component.html',
@@ -21,7 +21,7 @@ export class SelectPayeeCustomerComponent implements OnInit {
     };
     displayedColumns: string[] = ['sno', 'companyId', 'companyName', 'actions'];
     searchCustomerForm: FormGroup;
-
+    pageEvent: PageEvent;
     constructor(private companiesService: CompaniesService,
                 private _matDialog: MatDialog,
                 public matDialogRef: MatDialogRef<SelectPayeeCustomerComponent>,
@@ -43,7 +43,7 @@ export class SelectPayeeCustomerComponent implements OnInit {
         this.getCompaniesList({companyId: this.searchCustomerForm.value.search});
     }
 
-    getCompaniesList(params = {}): void {
+    getCompaniesList(params): void {
         this.companiesList = [];
         this.companiesService.getCompaniesList(params).subscribe(data => {
             this.companiesList = data.items;
@@ -61,6 +61,6 @@ export class SelectPayeeCustomerComponent implements OnInit {
 
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
-        this.getCompaniesList();
+        this.getCompaniesList({page: this.pagination.page});
     }
 }

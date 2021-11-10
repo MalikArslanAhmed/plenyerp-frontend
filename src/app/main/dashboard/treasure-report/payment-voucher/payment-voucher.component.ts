@@ -313,8 +313,10 @@ export class PaymentVoucherComponent implements OnInit {
             if (response && response.isDeleteItems) {
                 this.selectedDateFromModal = moment(response.date).format('YYYY-MM-DD');
                 this.updateStatus(data);
+                this.getPaymentVoucher({});
             }
         });
+
     }
 
     updateStatus(status: string): void {

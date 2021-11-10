@@ -8,7 +8,7 @@ import {FuseSidebarService} from "../../../../../../@fuse/components/sidebar/sid
 import {ActivatedRoute} from "@angular/router";
 import {AdminSegmentServices} from "../../../../../shared/services/admin-segment.services";
 import {EmployeesService} from "../../../../../shared/services/employees.service";
-
+import {PageEvent} from '@angular/material/paginator';
 interface SegmentNode {
     id: number;
     parentId: number;
@@ -54,13 +54,13 @@ export class AdminSegmentEmployeeSelectComponent implements OnInit {
             children: node.children,
             showDelete: node.children.length === 0
         };
-    };
+    }
     @ViewChild('tree') tree;
     employees = [];
     head: any;
     allowType: any = 'BOTH';
     nodeData = [];
-
+    pageEvent: PageEvent;
     constructor(public matDialogRef: MatDialogRef<AdminSegmentEmployeeSelectComponent>,
                 @Inject(MAT_DIALOG_DATA) private _data: any,
                 private _fuseSidebarService: FuseSidebarService,
@@ -122,7 +122,7 @@ export class AdminSegmentEmployeeSelectComponent implements OnInit {
 
     onPageChange(page) {
         this.pagination.page = page.pageIndex + 1;
-        this.getEmployees({});
+        this.getEmployees({page: this.pagination.page});
     }
 
     getEmployees(params): void {
