@@ -269,6 +269,12 @@ import { SchedulePayersCustomerPreviousAdvancesComponent } from './treasure-repo
 import { ScheduleEconomicCodesReceiptPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-economic-codes-receipt-previous-advances/schedule-economic-codes-receipt-previous-advances.component';
 import {AbsoluteAmountPipe} from '../../shared/pipes/absolute-amount.pipe';
 import { EmployeeLoginAccessComponent } from './employees/employee-action/employee-login-access/employee-login-access.component';
+import { FixedAssetsComponent } from './fixed-assets/fixed-assets.component';
+import { CreateFixedAssetsComponent } from './fixed-assets/create-fixed-assets/create-fixed-assets.component';
+import { FxaCategoriesComponent } from './fxa-categories/fxa-categories.component';
+import { CreateCategoryComponent } from './fxa-categories/create-category/create-category.component';
+import { CategoryListComponent } from './fxa-categories/category-list/category-list.component';
+import { FixedAssetsListComponent } from './fixed-assets/fixed-assets-list/fixed-assets-list.component';
 
 @NgModule({
     declarations: [
@@ -516,6 +522,12 @@ import { EmployeeLoginAccessComponent } from './employees/employee-action/employ
         SchedulePayersCustomerPreviousAdvancesComponent,
         ScheduleEconomicCodesReceiptPreviousAdvancesComponent,
         EmployeeLoginAccessComponent,
+        FixedAssetsComponent,
+        CreateFixedAssetsComponent,
+        FxaCategoriesComponent,
+        CreateCategoryComponent,
+        CategoryListComponent,
+        FixedAssetsListComponent,
     ],
     imports: [
         CommonModule,

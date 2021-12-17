@@ -1,0 +1,252 @@
+<div id="employees" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">person_add
+                </mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="content" fusePerfectScrollbar>
+        <div class="horizontal-stepper-wrapper hor-wrap">
+            <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true" #stepper>
+                <mat-step [stepControl]="assetsForm" [editable]="true">
+                    <form fxLayout="column" [formGroup]="assetsForm">
+                        <ng-template matStepLabel>Fixed Assets</ng-template>
+                        <mat-grid-list cols="3" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Asset Description</mat-label>
+                                        <input matInput formControlName="asset-description" required>
+                                        <mat-error>Asset Description is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>OEM Narcode</mat-label>
+                                        <input matInput formControlName="depreciationRate" required>
+                                        <mat-error>oem narcode is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Asset Current Location</mat-label>
+                                        <input matInput formControlName="depreciationMethod">
+                                        <mat-error>Asset Current Location is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Asset Category</mat-label>
+                                        <input matInput formControlName="assetNoPrefixLine" required>
+                                        <mat-error>Asset Category is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Date Manufactured No.</mat-label>
+                                        <input matInput formControlName="title" required>
+                                        <mat-error>Date Manufactured No. is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Deployment Status</mat-label>
+                                        <input matInput formControlName="depreciationRate" required>
+                                        <mat-error>Deployment Status is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Asset Manufacturer</mat-label>
+                                        <input matInput formControlName="depreciationMethod">
+                                        <mat-error>Asset Manufacturer is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Qty of Asset Supplied</mat-label>
+                                        <input matInput formControlName="assetNoPrefixLine" required>
+                                        <mat-error>Qty of Asset Supplied is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Custodian Staff ID</mat-label>
+                                        <input matInput formControlName="title" required>
+                                        <mat-error>Custodian Staff ID is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Asset Model</mat-label>
+                                        <input matInput formControlName="depreciationRate" required>
+                                        <mat-error>Asset Model is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Cost of Purchase/Supply</mat-label>
+                                        <input matInput formControlName="depreciationMethod">
+                                        <mat-error>Cost of Purchase/Supply is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Supplier Invoice</mat-label>
+                                        <input matInput formControlName="assetNoPrefixLine" required>
+                                        <mat-error>Supplier Invoice is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Asset Model Number</mat-label>
+                                        <input matInput formControlName="title" required>
+                                        <mat-error>Asset Model Number is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Date Acquired Number</mat-label>
+                                        <input matInput formControlName="depreciationRate" required>
+                                        <mat-error>Date Acquired Number is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Supplier Name</mat-label>
+                                        <input matInput formControlName="depreciationMethod">
+                                        <mat-error>Supplier Name is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Asset OEM Number</mat-label>
+                                        <input matInput formControlName="assetNoPrefixLine" required>
+                                        <mat-error>Asset OEM Number is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Depreciation Method</mat-label>
+                                        <input matInput formControlName="title" required>
+                                        <mat-error>Depreciation Method is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Supplier Contact Details</mat-label>
+                                        <input matInput formControlName="depreciationRate" required>
+                                        <mat-error>Supplier Contact Details is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Admin Segment Code</mat-label>
+                                        <input matInput formControlName="depreciationMethod">
+                                        <mat-error>Admin Segment Code is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Program Segment</mat-label>
+                                        <input matInput formControlName="assetNoPrefixLine" required>
+                                        <mat-error>Asset Number Prefix Line is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Functional Segment Code</mat-label>
+                                        <input matInput formControlName="title" required>
+                                        <mat-error>Functional Segment Code is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Economic Segment Code</mat-label>
+                                        <input matInput formControlName="depreciationRate" required>
+                                        <mat-error>Economic Segment Code is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Fund Segment Code</mat-label>
+                                        <input matInput formControlName="depreciationMethod">
+                                        <mat-error>Fund Segment Code is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Geo Segment Code</mat-label>
+                                        <input matInput formControlName="assetNoPrefixLine" required>
+                                        <mat-error>Geo Segment Code is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button type="button" color="accent"
+                                    (click)="saveCategories()" *ngIf="!this.selectedCategoryId">
+                                Save
+                            </button>
+                            <button mat-raised-button type="button" color="accent"
+                                    (click)="updateCategories()" *ngIf="this.selectedCategoryId">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>

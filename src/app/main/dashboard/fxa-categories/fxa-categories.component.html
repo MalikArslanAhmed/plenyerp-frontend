@@ -1,0 +1,33 @@
+<div id="journal-voucher" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                  Categories
+                </span>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div appPermissionBind [permission]="permissionAddJV">
+                <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addCategories()">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+    </div>
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+
+            <div class="content mt-20px">
+                <app-category-list></app-category-list>
+            </div>
+        </div>
+    </div>
+</div>

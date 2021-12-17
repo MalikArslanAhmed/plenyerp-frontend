@@ -1,0 +1,80 @@
+<div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+    <mat-accordion displayMode="flat" multi class="mat-table accordion-table">
+        <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+            <span class="mat-header-cell" mat-sort-header="id">S.No</span>
+            <span class="mat-header-cell" mat-sort-header="jvRef(#)">Manufacture</span>
+            <span class="mat-header-cell" mat-sort-header="jvRef">Model</span>
+            <span class="mat-header-cell" mat-sort-header="jvValueDate">Model No.</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Asset Description</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Salvage</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Supplier</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Supplied</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Inst</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Comm</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Depl</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Dcom</span>
+            <span class="mat-header-cell" mat-sort-header="narration">Scra</span>
+            <span class="mat-header-cell" mat-sort-header="action">
+                Action
+            </span>
+        </section>
+
+        <mat-expansion-panel *ngFor="let fixedAsset of fixedAssets; let i = index">
+            <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.sno}}.</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.title}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.depreciationRate}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.depreciationMethod}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.assetNoPrefixLine}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.sno}}.</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.title}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.depreciationRate}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.depreciationMethod}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.assetNoPrefixLine}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.assetNoPrefixLine}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.assetNoPrefixLine}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+                    <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.assetNoPrefixLine}}</p>
+                </span>
+                <span class="mat-cell align-items-center">
+<!--                select drop down-->
+                </span>
+
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <!--    <mat-paginator #paginator *ngIf="journalVouchers.length > 0"-->
+    <!--                   [length]="pagination.total"-->
+    <!--                   [pageSize]="pagination.perpage"-->
+    <!--                   [pageIndex]="pagination.page-1"-->
+    <!--                   (page)="pageEvent = onPageChange($event)"-->
+    <!--    >-->
+    <!--    </mat-paginator>-->
+</div>
+
+
+

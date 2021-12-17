@@ -1,0 +1,72 @@
+<div id="employees" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">person_add
+                </mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="content" fusePerfectScrollbar>
+        <div class="horizontal-stepper-wrapper hor-wrap">
+            <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true" #stepper>
+                <mat-step [stepControl]="categoryForm" [editable]="true">
+                    <form fxLayout="column" [formGroup]="categoryForm">
+                        <ng-template matStepLabel>Categories</ng-template>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Category Name</mat-label>
+                                        <input matInput formControlName="title" required>
+                                        <mat-error>Category Name is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Depreciation Rate</mat-label>
+                                        <input matInput formControlName="depreciationRate" required>
+                                        <mat-error>Depreciation Rate is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Depreciation Method</mat-label>
+                                        <input matInput formControlName="depreciationMethod">
+                                        <mat-error>Depreciation Method is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Asset Number Prefix Line</mat-label>
+                                        <input matInput formControlName="assetNoPrefixLine" required>
+                                        <mat-error>Asset Number Prefix Line is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button type="button" color="accent"
+                                    (click)="saveCategories()" *ngIf="!this.selectedCategoryId">
+                                Save
+                            </button>
+                            <button mat-raised-button type="button" color="accent"
+                                    (click)="updateCategories()" *ngIf="this.selectedCategoryId">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>

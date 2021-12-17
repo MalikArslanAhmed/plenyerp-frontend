@@ -948,6 +948,33 @@ export const navigation: FuseNavigation[] = [
                     }
                 ]
             },
+            {
+                id: 'fixed-assets',
+                title: 'Fixed - Assets',
+                roles: [],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'report',
+                permissions: [],
+                children: [
+                    {
+                        id: 'categories',
+                        title: 'Categories',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/fixed-assets-categories',
+                        permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
+                    },
+                    {
+                        id: 'fixed-assets',
+                        title: 'Fixed Assets',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/fixed-assets',
+                        permissions: [PermissionConstant.REPORTS_TREASURY_RV_VIEW_REPORTS]
+                    }
+                ]
+            },
         ]
     }
 ];

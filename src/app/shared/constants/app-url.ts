@@ -415,6 +415,7 @@ export class AppUrl {
     static GET_EMPLOYEES(): string {
         return AppUrl.API_URL + `employees`;
     }
+
     static DELETE_EMPLOYEES(id): string {
         return AppUrl.API_URL + `employees/` + id;
     }
@@ -530,9 +531,11 @@ export class AppUrl {
             return AppUrl.API_URL + `treasury/retire-voucher`;
         }
     }
+
     static RETIRE_VOUCHER_DOWNLOAD(id?): string {
         return AppUrl.API_URL + `retire-voucher/` + id + '/download';
     }
+
     static RV_REPORT_DATA(id?): string {
         if (id) {
             return AppUrl.API_URL + `treasury/receipt-vouchers` + id;
@@ -1232,6 +1235,23 @@ export class AppUrl {
             return AppUrl.API_URL + 'banks/' + id;
         } else {
             return AppUrl.API_URL + 'banks';
+        }
+    }
+
+
+    static FXA_CATEGORIES(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'banks/' + id;
+        } else {
+            return AppUrl.API_URL + 'banks';
+        }
+    }
+
+    static FXA_ASSETS(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'fxa/fixed-assets/' + id;
+        } else {
+            return AppUrl.API_URL + 'fxa/fixed-assets';
         }
     }
 

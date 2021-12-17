@@ -1,0 +1,41 @@
+:host {
+    .content {
+        form {
+            width: 100%;
+            //max-width: 800px !important;
+        }
+
+        .form-errors-model {
+            flex: 1;
+
+            code {
+                background: none !important;
+            }
+        }
+
+        .horizontal-stepper-wrapper,
+        .vertical-stepper-wrapper {
+            //max-width: 800px;
+        }
+    }
+}
+
+.hor-wrap {
+    width: 90%;
+    margin-left: 5% !important;
+    margin-top: 50px;
+}
+
+.p-10px {
+    padding: 10px !important;
+}
+
+.content {
+    overflow-y: scroll;
+}
+
+.mb-30px {
+    margin-bottom: 30px;
+}
+
+.mw-50{max-width: 50%;}
