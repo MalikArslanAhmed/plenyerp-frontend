@@ -1493,5 +1493,22 @@ export class AppUrl {
         }
     }
 
+    // Fixed Assets
+    static FIXED_ASSET_STATUSES(): string {
+        return AppUrl.API_URL + `fixed-assets/statuses`;
+    }
+
+    static FIXED_ASSET_DEPRECIATIONS(): string {
+        return AppUrl.API_URL + `fixed-assets/depreciations`;
+    }
+
+    static FIXED_ASSET_CATEGORIES(): string {
+        return AppUrl.API_URL + `fixed-assets/categories`;
+    }
+
+    static FIXED_ASSETS(): string {
+        return AppUrl.API_URL + `fixed-assets`;
+    }
+
 
 }

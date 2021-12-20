@@ -67,13 +67,12 @@
             </mat-expansion-panel-header>
         </mat-expansion-panel>
     </mat-accordion>
-    <!--    <mat-paginator #paginator *ngIf="journalVouchers.length > 0"-->
-    <!--                   [length]="pagination.total"-->
-    <!--                   [pageSize]="pagination.perpage"-->
-    <!--                   [pageIndex]="pagination.page-1"-->
-    <!--                   (page)="pageEvent = onPageChange($event)"-->
-    <!--    >-->
-    <!--    </mat-paginator>-->
+        <mat-paginator *ngIf="fixedAssets.length > 0"
+                       [length]="pagination.total"
+                       [pageSize]="pagination.perpage"
+                       [pageIndex]="pagination.page-1"
+                       (page)="onPageChange($event)">
+        </mat-paginator>
 </div>
 
 

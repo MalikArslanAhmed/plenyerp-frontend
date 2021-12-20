@@ -65,9 +65,9 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Deployment Status</mat-label>
-                                        <select matNativeControl formControlName="depreciationRate">
+                                        <select matNativeControl formControlName="fxaStatusId">
                                             <option value="">Select Deployment status</option>
-                                            <option value="1">1</option>
+                                            <option [value]="status.id" *ngFor="let status of faStatuses">{{status.name}}</option>
                                         </select>
                                         <mat-error>Deployment Status is required!</mat-error>
                                     </mat-form-field>
@@ -195,11 +195,6 @@
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <!--<mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Program Segment</mat-label>
-                                        <input matInput formControlName="assetNoPrefixLine" required>
-                                        <mat-error>Asset Number Prefix Line is required!</mat-error>
-                                    </mat-form-field>-->
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
                                                     (click)="programmeSegmentSelect()">
                                         <mat-label>Programme Segment Name</mat-label>
@@ -212,11 +207,6 @@
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <!--<mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Functional Segment Code</mat-label>
-                                        <input matInput formControlName="title" required>
-                                        <mat-error>Functional Segment Code is required!</mat-error>
-                                    </mat-form-field>-->
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
                                                     (click)="functionSegmentSelect()">
                                         <mat-label>Functional Segment Name</mat-label>
@@ -229,11 +219,6 @@
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <!--<mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Economic Segment Code</mat-label>
-                                        <input matInput formControlName="depreciationRate" required>
-                                        <mat-error>Economic Segment Code is required!</mat-error>
-                                    </mat-form-field>-->
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
                                                     (click)="economicSegmentSelect()">
                                         <mat-label>Economic Segment Name</mat-label>
@@ -246,11 +231,6 @@
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <!--<mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Fund Segment Code</mat-label>
-                                        <input matInput formControlName="depreciationMethod">
-                                        <mat-error>Fund Segment Code is required!</mat-error>
-                                    </mat-form-field>-->
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
                                                     (click)="fundSegmentSelectAddDetails()">
                                         <mat-label>Fund Segment Name</mat-label>
@@ -263,11 +243,6 @@
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <!--<mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Geo Segment Code</mat-label>
-                                        <input matInput formControlName="assetNoPrefixLine" required>
-                                        <mat-error>Geo Segment Code is required!</mat-error>
-                                    </mat-form-field>-->
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
                                                     (click)="geoCodeSegmentSelect()">
                                         <mat-label>Geo Code Segment Name</mat-label>

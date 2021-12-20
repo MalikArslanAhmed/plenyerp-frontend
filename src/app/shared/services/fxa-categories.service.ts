@@ -14,12 +14,24 @@ export class FxaCategoriesService extends BaseService {
         super(http, alertService, globalService);
     }
 
-    add(data): Observable<any> {
-        return this.postRequest(AppUrl.BANKS(), data);
+    getStatus(params): Observable<any> {
+        return this.getRequest(AppUrl.FIXED_ASSET_STATUSES(), params);
     }
 
-    get(data): Observable<any> {
-        return this.getRequest(AppUrl.BANKS(), data);
+    getDepreciation(params): Observable<any> {
+        return this.getRequest(AppUrl.FIXED_ASSET_DEPRECIATIONS(), params);
+    }
+
+    getCategories(params): Observable<any> {
+        return this.getRequest(AppUrl.FIXED_ASSET_CATEGORIES(), params);
+    }
+
+    get(params): Observable<any> {
+        return this.getRequest(AppUrl.FIXED_ASSETS(), params);
+    }
+
+    add(data): Observable<any> {
+        return this.postRequest(AppUrl.BANKS(), data);
     }
 
     delete(id): Observable<any> {

@@ -19,10 +19,12 @@ import {GeoCodeSegmentSelectComponent} from '../../journal-voucher/geo-code-segm
     styleUrls: ['./create-fixed-assets.component.scss']
 })
 export class CreateFixedAssetsComponent implements OnInit {
-
     selectedCategoryId: any;
     assetsForm: FormGroup;
     dialogRef: any;
+    faCategories = [];
+    faDepreciations = [];
+    faStatuses = [];
     adminSegments = [];
     economicSegments = [];
     programmeSegments = [];
@@ -43,9 +45,9 @@ export class CreateFixedAssetsComponent implements OnInit {
 
     }
 
-
     refresh() {
         this.assetsForm = this.fb.group({
+            fxaStatusId: ['', Validators.required],
             title: ['', Validators.required],
             depreciationRate: ['', Validators.required],
             depreciationMethod: ['', Validators.required],
@@ -61,8 +63,35 @@ export class CreateFixedAssetsComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
+        this.getCategories();
+        this.getDepreciation();
+        this.getStatus();
     }
 
+
+    getCategories(): void {
+        this.fxaCategoryService.getCategories({}).subscribe(
+            data => {
+                this.faCategories = data.items;
+            }
+        );
+    }
+
+    getDepreciation(): void {
+        this.fxaCategoryService.getDepreciation({}).subscribe(
+            data => {
+                this.faDepreciations = data.items;
+            }
+        );
+    }
+
+    getStatus(): void {
+        this.fxaCategoryService.getStatus({}).subscribe(
+            data => {
+                this.faStatuses = data.items;
+            }
+        );
+    }
 
     saveCategories() {
 
