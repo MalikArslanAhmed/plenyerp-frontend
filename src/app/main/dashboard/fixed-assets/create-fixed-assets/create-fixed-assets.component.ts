@@ -6,6 +6,12 @@ import {MatDialog} from '@angular/material/dialog';
 import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlertService} from '../../../../shared/services/alert.service';
+import {SummaryAdminSegmentSelectComponent} from '../../summary-admin-segment-select/summary-admin-segment-select.component';
+import {ProgrammingSegmentSelectComponent} from '../../journal-voucher/programming-segment-select/programming-segment-select.component';
+import {FunctionalSegmentSelectComponent} from '../../journal-voucher/functional-segment-select/functional-segment-select.component';
+import {EconomicSegmentSelectComponent} from '../../journal-voucher/economic-segment-select/economic-segment-select.component';
+import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-select/fund-segment-select.component';
+import {GeoCodeSegmentSelectComponent} from '../../journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
 
 @Component({
     selector: 'app-create-fixed-assets',
@@ -16,6 +22,13 @@ export class CreateFixedAssetsComponent implements OnInit {
 
     selectedCategoryId: any;
     assetsForm: FormGroup;
+    dialogRef: any;
+    adminSegments = [];
+    economicSegments = [];
+    programmeSegments = [];
+    functionSegments = [];
+    fundSegmentsAddDet = [];
+    geoCodeSegments = [];
 
     constructor(
         private structureService: StructureService,
@@ -36,7 +49,13 @@ export class CreateFixedAssetsComponent implements OnInit {
             title: ['', Validators.required],
             depreciationRate: ['', Validators.required],
             depreciationMethod: ['', Validators.required],
-            assetNoPrefixLine: ['', Validators.required]
+            assetNoPrefixLine: ['', Validators.required],
+            adminSegmentId: ['', Validators.required],
+            economicSegmentId: ['', Validators.required],
+            programmeSegmentId: ['', Validators.required],
+            functionalSegmentId: ['', Validators.required],
+            geoCodeSegmentId: ['', Validators.required],
+            fundSegmentId: ['', Validators.required],
         });
     }
 
@@ -51,5 +70,104 @@ export class CreateFixedAssetsComponent implements OnInit {
 
     updateCategories() {
 
+    }
+
+    adminSegmentSelect() {
+        this.dialogRef = this._matDialog.open(SummaryAdminSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.adminSegments = [];
+            this.adminSegments = [{
+                name: response.name,
+                id: response.id
+            }];
+            this.assetsForm.patchValue({
+                adminSegmentId: response.id,
+                disabled: true
+            });
+        });
+    }
+
+    programmeSegmentSelect() {
+        this.dialogRef = this._matDialog.open(ProgrammingSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.programmeSegments = [{name: response.name, id: response.id}];
+            this.assetsForm.patchValue({
+                programmeSegmentId: response.id,
+            });
+        });
+    }
+
+    functionSegmentSelect() {
+        this.dialogRef = this._matDialog.open(FunctionalSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.functionSegments = [{name: response.name, id: response.id}];
+            this.assetsForm.patchValue({
+                functionalSegmentId: response.id,
+                disabled: true
+            });
+        });
+    }
+
+    economicSegmentSelect(): void {
+        this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.economicSegments = [{name: response.name, id: response.id}];
+            this.assetsForm.patchValue({
+                economicSegmentId: response.id,
+                disabled: true
+            });
+        });
+    }
+
+    fundSegmentSelectAddDetails() {
+        this.dialogRef = this._matDialog.open(FundSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.fundSegmentsAddDet = [{name: response.name, id: response.id}];
+            this.assetsForm.patchValue({
+                fundSegmentId: response.id,
+                disabled: true
+            });
+        });
+    }
+
+    geoCodeSegmentSelect() {
+        this.dialogRef = this._matDialog.open(GeoCodeSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.geoCodeSegments = [{name: response.name, id: response.id}];
+            this.assetsForm.patchValue({
+                geoCodeSegmentId: response.id,
+                disabled: true
+            });
+        });
     }
 }

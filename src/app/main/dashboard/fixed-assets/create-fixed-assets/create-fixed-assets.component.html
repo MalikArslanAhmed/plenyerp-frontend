@@ -65,7 +65,10 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Deployment Status</mat-label>
-                                        <input matInput formControlName="depreciationRate" required>
+                                        <select matNativeControl formControlName="depreciationRate">
+                                            <option value="">Select Deployment status</option>
+                                            <option value="1">1</option>
+                                        </select>
                                         <mat-error>Deployment Status is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -180,55 +183,98 @@
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Admin Segment Code</mat-label>
-                                        <input matInput formControlName="depreciationMethod">
-                                        <mat-error>Admin Segment Code is required!</mat-error>
+                                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
+                                        <mat-label>Admin Segment</mat-label>
+                                        <mat-select formControlName="adminSegmentId" (click)="adminSegmentSelect()" [disabled]="true">
+                                            <mat-option value="">Choose Admin Segment</mat-option>
+                                            <mat-option [value]="admin.id"
+                                                        *ngFor="let admin of adminSegments">{{admin?.name}}</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
+                                    <!--<mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Program Segment</mat-label>
                                         <input matInput formControlName="assetNoPrefixLine" required>
                                         <mat-error>Asset Number Prefix Line is required!</mat-error>
+                                    </mat-form-field>-->
+                                    <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
+                                                    (click)="programmeSegmentSelect()">
+                                        <mat-label>Programme Segment Name</mat-label>
+                                        <mat-select formControlName="programmeSegmentId" [disabled]="true">
+                                            <mat-option [value]="programmeSegment.id"
+                                                        *ngFor="let programmeSegment of programmeSegments">{{programmeSegment.name}}</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
+                                    <!--<mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Functional Segment Code</mat-label>
                                         <input matInput formControlName="title" required>
                                         <mat-error>Functional Segment Code is required!</mat-error>
+                                    </mat-form-field>-->
+                                    <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
+                                                    (click)="functionSegmentSelect()">
+                                        <mat-label>Functional Segment Name</mat-label>
+                                        <mat-select formControlName="functionalSegmentId" [disabled]="true">
+                                            <mat-option [value]="functionSegment.id"
+                                                        *ngFor="let functionSegment of functionSegments">{{functionSegment.name}}</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
+                                    <!--<mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Economic Segment Code</mat-label>
                                         <input matInput formControlName="depreciationRate" required>
                                         <mat-error>Economic Segment Code is required!</mat-error>
+                                    </mat-form-field>-->
+                                    <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
+                                                    (click)="economicSegmentSelect()">
+                                        <mat-label>Economic Segment Name</mat-label>
+                                        <mat-select formControlName="economicSegmentId" [disabled]="true">
+                                            <mat-option [value]="economicSegment.id"
+                                                        *ngFor="let economicSegment of economicSegments">{{economicSegment.name}}</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
+                                    <!--<mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Fund Segment Code</mat-label>
                                         <input matInput formControlName="depreciationMethod">
                                         <mat-error>Fund Segment Code is required!</mat-error>
+                                    </mat-form-field>-->
+                                    <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
+                                                    (click)="fundSegmentSelectAddDetails()">
+                                        <mat-label>Fund Segment Name</mat-label>
+                                        <mat-select formControlName="fundSegmentId" [disabled]="true">
+                                            <mat-option [value]="fundSegment.id"
+                                                        *ngFor="let fundSegment of fundSegmentsAddDet">{{fundSegment.name}}</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
+                                    <!--<mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Geo Segment Code</mat-label>
                                         <input matInput formControlName="assetNoPrefixLine" required>
                                         <mat-error>Geo Segment Code is required!</mat-error>
+                                    </mat-form-field>-->
+                                    <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
+                                                    (click)="geoCodeSegmentSelect()">
+                                        <mat-label>Geo Code Segment Name</mat-label>
+                                        <mat-select formControlName="geoCodeSegmentId" [disabled]="true">
+                                            <mat-option [value]="geoCodeSegment.id"
+                                                        *ngFor="let geoCodeSegment of geoCodeSegments">{{geoCodeSegment.name}}</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
