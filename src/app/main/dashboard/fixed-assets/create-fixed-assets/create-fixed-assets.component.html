@@ -20,7 +20,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Asset Description</mat-label>
-                                        <input matInput formControlName="asset-description" required>
+                                        <input matInput formControlName="title" required>
                                         <mat-error>Asset Description is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -38,7 +38,12 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Asset Current Location</mat-label>
-                                        <input matInput formControlName="depreciationMethod">
+                                        <select matNativeControl formControlName="nmrlLocation">
+                                            <option value="">Select Asset Current Location</option>
+                                            <option [value]="faLocation.id" *ngFor="let faLocation of faLocations">
+                                                {{faLocation.name}}
+                                            </option>
+                                        </select>
                                         <mat-error>Asset Current Location is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -47,7 +52,12 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Asset Category</mat-label>
-                                        <input matInput formControlName="assetNoPrefixLine" required>
+                                        <select matNativeControl formControlName="assetNoPrefixLine">
+                                            <option value="">Select Deployment status</option>
+                                            <option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
+                                                {{faCategory.title}}
+                                            </option>
+                                        </select>
                                         <mat-error>Asset Category is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -56,7 +66,10 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Manufactured No.</mat-label>
-                                        <input matInput formControlName="title" required>
+                                        <input matInput [matDatepicker]="manufacturedDate" formControlName="dateManufactured">
+                                        <mat-datepicker-toggle matSuffix [for]="manufacturedDate">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #manufacturedDate></mat-datepicker>
                                         <mat-error>Date Manufactured No. is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -67,7 +80,7 @@
                                         <mat-label>Deployment Status</mat-label>
                                         <select matNativeControl formControlName="fxaStatusId">
                                             <option value="">Select Deployment status</option>
-                                            <option [value]="status.id" *ngFor="let status of faStatuses">{{status.name}}</option>
+                                            <option [value]="status.id" *ngFor="let status of faStatuses">{{status.title}}</option>
                                         </select>
                                         <mat-error>Deployment Status is required!</mat-error>
                                     </mat-form-field>
@@ -104,7 +117,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Asset Model</mat-label>
-                                        <input matInput formControlName="depreciationRate" required>
+                                        <input matInput formControlName="model" required>
                                         <mat-error>Asset Model is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -131,7 +144,7 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Asset Model Number</mat-label>
-                                        <input matInput formControlName="title" required>
+                                        <input matInput formControlName="modelNo" required>
                                         <mat-error>Asset Model Number is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -140,7 +153,10 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Acquired Number</mat-label>
-                                        <input matInput formControlName="depreciationRate" required>
+                                        <input matInput [matDatepicker]="acquiredDate" formControlName="dateAcquired">
+                                        <mat-datepicker-toggle matSuffix [for]="acquiredDate">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #acquiredDate></mat-datepicker>
                                         <mat-error>Date Acquired Number is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -167,7 +183,12 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Depreciation Method</mat-label>
-                                        <input matInput formControlName="title" required>
+                                        <select matNativeControl formControlName="depreciationMethod">
+                                            <option value="">Select Depreciation Method</option>
+                                            <option [value]="faDepreciation.id" *ngFor="let faDepreciation of faDepreciations">
+                                                {{faDepreciation.name}}
+                                            </option>
+                                        </select>
                                         <mat-error>Depreciation Method is required!</mat-error>
                                     </mat-form-field>
                                 </div>
@@ -256,11 +277,11 @@
                         </mat-grid-list>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button type="button" color="accent"
-                                    (click)="saveCategories()" *ngIf="!this.selectedCategoryId">
+                                    (click)="saveFixedAssets()" *ngIf="!this.fixedAssetId">
                                 Save
                             </button>
                             <button mat-raised-button type="button" color="accent"
-                                    (click)="updateCategories()" *ngIf="this.selectedCategoryId">
+                                    (click)="updateFixedAssets()" *ngIf="this.fixedAssetId">
                                 Update
                             </button>
                         </div>

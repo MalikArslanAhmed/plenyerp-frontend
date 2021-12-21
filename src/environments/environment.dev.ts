@@ -4,3 +4,4 @@ export const environment = {
     appUrl: 'http://api.erp.valuescale.co.in/',
     // appUrl: 'http://209.97.184.185/',
 };
+

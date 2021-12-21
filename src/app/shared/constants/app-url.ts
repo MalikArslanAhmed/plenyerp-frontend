@@ -1502,12 +1502,12 @@ export class AppUrl {
         return AppUrl.API_URL + `fixed-assets/depreciations`;
     }
 
-    static FIXED_ASSET_CATEGORIES(): string {
-        return AppUrl.API_URL + `fixed-assets/categories`;
+    static FIXED_ASSET_CATEGORIES(id?): string {
+        return AppUrl.API_URL + `fixed-assets/categories` + (id ? `/${id}` : '');
     }
 
-    static FIXED_ASSETS(): string {
-        return AppUrl.API_URL + `fixed-assets`;
+    static FIXED_ASSETS(id?): string {
+        return AppUrl.API_URL + `fixed-assets` + (id ? `/${id}` : '');
     }
 
 

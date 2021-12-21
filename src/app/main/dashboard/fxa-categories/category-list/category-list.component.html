@@ -1,47 +1,52 @@
 <div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
-    <mat-accordion displayMode="flat" multi class="mat-table accordion-table">
-        <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
-            <span class="mat-header-cell" mat-sort-header="id">S.No</span>
-            <span class="mat-header-cell" mat-sort-header="jvRef(#)">Category Name</span>
-            <span class="mat-header-cell" mat-sort-header="jvRef">Depreciation Rate</span>
-            <span class="mat-header-cell" mat-sort-header="jvValueDate">Depreciation Method</span>
-            <span class="mat-header-cell" mat-sort-header="narration">Prefix</span>
-            <span class="mat-header-cell" mat-sort-header="action">
-                Action
-            </span>
-        </section>
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="categories">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let category; let i = index">
+                <p class="email text-truncate">
+                    {{((pagination.page - 1) * pagination.perpage) + i + 1}}.
+                </p>
+            </mat-cell>
+        </ng-container>
 
-        <mat-expansion-panel *ngFor="let category of categories; let i = index">
-            <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row">
-                <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-32px">{{category?.sno}}.</p>
-                </span>
-                <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-32px">{{category?.title}}</p>
-                </span>
-                <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-32px">{{category?.depreciationRate}}</p>
-                </span>
-                <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-32px">{{category?.depreciationMethod}}</p>
-                </span>
-                <span class="mat-cell align-items-center">
-                    <p class="text-truncate cursor-pointer mt-32px">{{category?.assetNoPrefixLine}}</p>
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+            <mat-cell *matCellDef="let category">{{category.title}}</mat-cell>
+        </ng-container>
 
-                </span><span class="mat-cell align-items-center">
-<!--                select drop down-->
-                </span>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let category">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <!--<div>
+                        <button mat-icon-button aria-label="Toggle star" (click)="edit(qualification)"
+                                style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div>
+                        <button mat-icon-button aria-label="Toggle star" (click)="delete(qualification)"
+                                style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>-->
+                </div>
+            </mat-cell>
+        </ng-container>
 
-            </mat-expansion-panel-header>
-        </mat-expansion-panel>
-    </mat-accordion>
-<!--    <mat-paginator #paginator *ngIf="journalVouchers.length > 0"-->
-<!--                   [length]="pagination.total"-->
-<!--                   [pageSize]="pagination.perpage"-->
-<!--                   [pageIndex]="pagination.page-1"-->
-<!--                   (page)="pageEvent = onPageChange($event)"-->
-<!--    >-->
-<!--    </mat-paginator>-->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let category; columns: displayedColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator *ngIf="categories.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="onPageChange($event)">
+    </mat-paginator>
 </div>
 
 

@@ -1,12 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {PageEvent} from '@angular/material/paginator';
 import {fuseAnimations} from '../../../../../@fuse/animations';
-import {FormGroup} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
-import {PermissionConstant} from 'app/shared/constants/permission-constant';
-import {AlertService} from '../../../../shared/services/alert.service';
-import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
-import * as moment from 'moment';
+import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
 
 @Component({
     selector: 'app-category-list',
@@ -16,13 +10,38 @@ import * as moment from 'moment';
     animations: fuseAnimations
 })
 export class CategoryListComponent implements OnInit {
-
+    displayedColumns = ['id', 'title'];
     categories = [];
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
 
-    constructor() {
+    constructor(private fxaCategoryService: FxaCategoriesService) {
     }
 
     ngOnInit(): void {
+        this.getCategories();
+    }
+
+    getCategories(): void {
+        const param = {
+            page: this.pagination.page
+        };
+        this.fxaCategoryService.getCategories(param).subscribe(
+            data => {
+                this.categories = data.items;
+                this.pagination.page = data.page;
+                this.pagination.total = data.total;
+            }
+        );
+    }
+
+    onPageChange(page): void {
+        this.pagination.page = page.pageIndex + 1;
+        this.getCategories();
     }
 
 

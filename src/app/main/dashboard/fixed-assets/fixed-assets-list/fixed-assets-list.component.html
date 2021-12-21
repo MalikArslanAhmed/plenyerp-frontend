@@ -1,5 +1,5 @@
 <div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
-    <mat-accordion displayMode="flat" multi class="mat-table accordion-table">
+    <!--<mat-accordion displayMode="flat" multi class="mat-table accordion-table">
         <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
             <span class="mat-header-cell" mat-sort-header="id">S.No</span>
             <span class="mat-header-cell" mat-sort-header="jvRef(#)">Manufacture</span>
@@ -61,18 +61,91 @@
                     <p class="text-truncate cursor-pointer mt-32px">{{fixedAsset?.assetNoPrefixLine}}</p>
                 </span>
                 <span class="mat-cell align-items-center">
-<!--                select drop down-->
+&lt;!&ndash;                select drop down&ndash;&gt;
                 </span>
 
             </mat-expansion-panel-header>
         </mat-expansion-panel>
-    </mat-accordion>
-        <mat-paginator *ngIf="fixedAssets.length > 0"
-                       [length]="pagination.total"
-                       [pageSize]="pagination.perpage"
-                       [pageIndex]="pagination.page-1"
-                       (page)="onPageChange($event)">
-        </mat-paginator>
+    </mat-accordion>-->
+
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="fixedAssets">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let fixedAsset; let i = index">
+                <p class="email text-truncate">
+                    {{((pagination.page - 1) * pagination.perpage) + i + 1}}.
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="assetNo">
+            <mat-header-cell *matHeaderCellDef>Asset No</mat-header-cell>
+            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.assetNo}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.title}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="custodian">
+            <mat-header-cell *matHeaderCellDef>custodian</mat-header-cell>
+            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.custodian}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="model">
+            <mat-header-cell *matHeaderCellDef>Model</mat-header-cell>
+            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.model}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="modelNo">
+            <mat-header-cell *matHeaderCellDef>Model No</mat-header-cell>
+            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.modelNo}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dateManufactured">
+            <mat-header-cell *matHeaderCellDef>Manufactured Date</mat-header-cell>
+            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.dateManufactured | date}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dateAcquired">
+            <mat-header-cell *matHeaderCellDef>Acquired Date</mat-header-cell>
+            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.dateAcquired | date}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let fixedAsset">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <!--<div>
+                        <button mat-icon-button aria-label="Toggle star" (click)="edit(qualification)"
+                                style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div>
+                        <button mat-icon-button aria-label="Toggle star" (click)="delete(qualification)"
+                                style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>-->
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let fixedAsset; columns: displayedColumns;" class="contact"
+                 [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+    <mat-paginator *ngIf="fixedAssets.length > 0"
+                   [length]="pagination.total"
+                   [pageSize]="pagination.perpage"
+                   [pageIndex]="pagination.page-1"
+                   (page)="onPageChange($event)">
+    </mat-paginator>
 </div>
 
 

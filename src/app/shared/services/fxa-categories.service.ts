@@ -26,20 +26,28 @@ export class FxaCategoriesService extends BaseService {
         return this.getRequest(AppUrl.FIXED_ASSET_CATEGORIES(), params);
     }
 
+    saveCategories(data): Observable<any> {
+        return this.postRequest(AppUrl.FIXED_ASSET_CATEGORIES(), data);
+    }
+
+    updateCategories(categoryId, data): Observable<any> {
+        return this.postRequest(AppUrl.FIXED_ASSET_CATEGORIES(categoryId), data);
+    }
+
     get(params): Observable<any> {
         return this.getRequest(AppUrl.FIXED_ASSETS(), params);
     }
 
     add(data): Observable<any> {
-        return this.postRequest(AppUrl.BANKS(), data);
+        return this.postRequest(AppUrl.FIXED_ASSETS(), data);
     }
 
     delete(id): Observable<any> {
-        return this.deleteRequest(AppUrl.DELETE_BANKS(id));
+        return this.deleteRequest(AppUrl.FIXED_ASSETS(id));
     }
 
     update(id, data): Observable<any> {
-        return this.putRequest(AppUrl.BANKS(id), data);
+        return this.putRequest(AppUrl.FIXED_ASSETS(id), data);
     }
 
 }

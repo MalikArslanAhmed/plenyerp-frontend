@@ -12,6 +12,7 @@ import {FunctionalSegmentSelectComponent} from '../../journal-voucher/functional
 import {EconomicSegmentSelectComponent} from '../../journal-voucher/economic-segment-select/economic-segment-select.component';
 import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-select/fund-segment-select.component';
 import {GeoCodeSegmentSelectComponent} from '../../journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-create-fixed-assets',
@@ -19,11 +20,12 @@ import {GeoCodeSegmentSelectComponent} from '../../journal-voucher/geo-code-segm
     styleUrls: ['./create-fixed-assets.component.scss']
 })
 export class CreateFixedAssetsComponent implements OnInit {
-    selectedCategoryId: any;
+    fixedAssetId: any;
     assetsForm: FormGroup;
     dialogRef: any;
     faCategories = [];
     faDepreciations = [];
+    faLocations = [];
     faStatuses = [];
     adminSegments = [];
     economicSegments = [];
@@ -45,19 +47,30 @@ export class CreateFixedAssetsComponent implements OnInit {
 
     }
 
-    refresh() {
+    refresh(): void {
         this.assetsForm = this.fb.group({
-            fxaStatusId: ['', Validators.required],
-            title: ['', Validators.required],
-            depreciationRate: ['', Validators.required],
-            depreciationMethod: ['', Validators.required],
-            assetNoPrefixLine: ['', Validators.required],
-            adminSegmentId: ['', Validators.required],
-            economicSegmentId: ['', Validators.required],
-            programmeSegmentId: ['', Validators.required],
-            functionalSegmentId: ['', Validators.required],
-            geoCodeSegmentId: ['', Validators.required],
-            fundSegmentId: ['', Validators.required],
+            fxaStatusId: [''],
+            title: [''],
+            custodian: [''],
+            make: [''],
+            model: [''],
+            modelNo: [''],
+            oemSerialNo: [''],
+            oemBarCodeNo: [''],
+            dateManufactured: [''],
+            dateAcquired: [''],
+            acquisitionCost: [''],
+            nmrlLocation: [''],
+
+            depreciationRate: [''],
+            depreciationMethod: [''],
+            assetNoPrefixLine: [''],
+            adminSegmentId: [''],
+            economicSegmentId: [''],
+            programmeSegmentId: [''],
+            functionalSegmentId: [''],
+            geoCodeSegmentId: [''],
+            fundSegmentId: [''],
         });
     }
 
@@ -93,15 +106,33 @@ export class CreateFixedAssetsComponent implements OnInit {
         );
     }
 
-    saveCategories() {
+    saveFixedAssets(): void {
+        const reqData = this.assetsForm.value;
+        if (reqData.dateManufactured) {
+            reqData['dateManufactured'] = moment(reqData.dateManufactured).format('YYYY-MM-DD');
+        }
+        if (reqData.dateAcquired) {
+            reqData['dateAcquired'] = moment(reqData.dateAcquired).format('YYYY-MM-DD');
+        }
 
+        this.fxaCategoryService.add(reqData).subscribe(
+            data => {
+                this.faStatuses = data.items;
+                this.router.navigateByUrl(`/dashboard/fixed-assets`);
+            }
+        );
     }
 
-    updateCategories() {
-
+    updateFixedAssets(): void {
+        this.fxaCategoryService.update(this.fixedAssetId, this.assetsForm.value).subscribe(
+            data => {
+                this.faStatuses = data.items;
+                this.router.navigateByUrl(`/dashboard/fixed-assets`);
+            }
+        );
     }
 
-    adminSegmentSelect() {
+    adminSegmentSelect(): void {
         this.dialogRef = this._matDialog.open(SummaryAdminSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -121,7 +152,7 @@ export class CreateFixedAssetsComponent implements OnInit {
         });
     }
 
-    programmeSegmentSelect() {
+    programmeSegmentSelect(): void {
         this.dialogRef = this._matDialog.open(ProgrammingSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -136,7 +167,7 @@ export class CreateFixedAssetsComponent implements OnInit {
         });
     }
 
-    functionSegmentSelect() {
+    functionSegmentSelect(): void {
         this.dialogRef = this._matDialog.open(FunctionalSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -168,7 +199,7 @@ export class CreateFixedAssetsComponent implements OnInit {
         });
     }
 
-    fundSegmentSelectAddDetails() {
+    fundSegmentSelectAddDetails(): void {
         this.dialogRef = this._matDialog.open(FundSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -184,7 +215,7 @@ export class CreateFixedAssetsComponent implements OnInit {
         });
     }
 
-    geoCodeSegmentSelect() {
+    geoCodeSegmentSelect(): void {
         this.dialogRef = this._matDialog.open(GeoCodeSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
