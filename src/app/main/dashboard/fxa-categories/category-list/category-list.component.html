@@ -20,13 +20,13 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let category">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <!--<div>
-                        <button mat-icon-button aria-label="Toggle star" (click)="edit(qualification)"
+                   <div>
+                        <button mat-icon-button aria-label="Toggle star" (click)="navigateToDetail(category)"
                                 style="color: blue">
                             <mat-icon class="material-icons">edit</mat-icon>
                         </button>
                     </div>
-                    <div>
+                     <!--<div>
                         <button mat-icon-button aria-label="Toggle star" (click)="delete(qualification)"
                                 style="color: red">
                             <mat-icon class="material-icons">delete</mat-icon>

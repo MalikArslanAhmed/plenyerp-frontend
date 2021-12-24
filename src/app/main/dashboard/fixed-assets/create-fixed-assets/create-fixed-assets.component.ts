@@ -61,6 +61,8 @@ export class CreateFixedAssetsComponent implements OnInit {
             dateAcquired: [''],
             acquisitionCost: [''],
             nmrlLocation: [''],
+            SupplierName: [''],
+            supplierContact: [''],
 
             depreciationRate: [''],
             depreciationMethod: [''],

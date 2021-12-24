@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-category-list',
@@ -10,7 +11,7 @@ import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.s
     animations: fuseAnimations
 })
 export class CategoryListComponent implements OnInit {
-    displayedColumns = ['id', 'title'];
+    displayedColumns = ['id', 'title', 'actions'];
     categories = [];
     pagination = {
         page: 1,
@@ -19,7 +20,8 @@ export class CategoryListComponent implements OnInit {
         pages: null
     };
 
-    constructor(private fxaCategoryService: FxaCategoriesService) {
+    constructor(private fxaCategoryService: FxaCategoriesService,
+                private router: Router) {
     }
 
     ngOnInit(): void {
@@ -28,6 +30,7 @@ export class CategoryListComponent implements OnInit {
 
     getCategories(): void {
         const param = {
+            isParent: true,
             page: this.pagination.page
         };
         this.fxaCategoryService.getCategories(param).subscribe(
@@ -42,6 +45,10 @@ export class CategoryListComponent implements OnInit {
     onPageChange(page): void {
         this.pagination.page = page.pageIndex + 1;
         this.getCategories();
+    }
+
+    navigateToDetail(category): void {
+        this.router.navigateByUrl(`/dashboard/fxa-categories/${category.id}`);
     }
 
 

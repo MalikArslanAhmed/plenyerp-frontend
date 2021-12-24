@@ -93,6 +93,7 @@ import {FxaCategoriesComponent} from './fxa-categories/fxa-categories.component'
 import {FixedAssetsComponent} from './fixed-assets/fixed-assets.component';
 import {CreateCategoryComponent} from './fxa-categories/create-category/create-category.component';
 import {CreateFixedAssetsComponent} from './fixed-assets/create-fixed-assets/create-fixed-assets.component';
+import {FxaCategoryDetailComponent} from './fxa-categories/fxa-category-detail/fxa-category-detail.component';
 
 const routes: Routes = [
     {
@@ -867,6 +868,13 @@ const routes: Routes = [
     {
         path: 'fxa-categories-create',
         component: CreateCategoryComponent,
+        data: {
+            title: 'Fixed Asset Categories Create'
+        }
+    },
+    {
+        path: 'fxa-categories/:id',
+        component: FxaCategoryDetailComponent,
         data: {
             title: 'Fixed Asset Categories Create'
         }

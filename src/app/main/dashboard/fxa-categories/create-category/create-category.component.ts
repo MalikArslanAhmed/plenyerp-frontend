@@ -7,6 +7,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlertService} from '../../../../shared/services/alert.service';
 import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
+import {FlatTreeControl} from '@angular/cdk/tree';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import {AddCreateAdminSegmentsComponent} from '../../admin-segments/add-create-admin-segments/add-create-admin-segments.component';
 
 @Component({
     selector: 'app-create-category',
