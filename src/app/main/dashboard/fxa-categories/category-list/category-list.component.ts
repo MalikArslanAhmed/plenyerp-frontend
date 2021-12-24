@@ -1,7 +1,35 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
 import {Router} from '@angular/router';
+import {FlatTreeControl} from '@angular/cdk/tree';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import {CreateCategoryComponent} from '../create-category/create-category.component';
+import {FormGroup} from '@angular/forms';
+import {AddCreateAdminSegmentsComponent} from '../../admin-segments/add-create-admin-segments/add-create-admin-segments.component';
+import {MatDialog} from '@angular/material/dialog';
+
+interface SegmentNode {
+    id: number;
+    parentId: number;
+    title: string;
+    subCategories?: SegmentNode[];
+    createdAt?: string;
+    updatedAt?: string;
+    individualCode: string;
+    combinedCode: string;
+    maxLevel: number;
+    characterCount: number;
+    isActive: number;
+}
+
+const TREE_DATA: SegmentNode[] = [];
+
+interface ExampleFlatNode {
+    expandable: boolean;
+    name: string;
+    level: number;
+}
 
 @Component({
     selector: 'app-category-list',
@@ -11,16 +39,31 @@ import {Router} from '@angular/router';
     animations: fuseAnimations
 })
 export class CategoryListComponent implements OnInit {
-    displayedColumns = ['id', 'title', 'actions'];
+    @ViewChild('tree') tree;
     categories = [];
-    pagination = {
-        page: 1,
-        total: null,
-        perpage: 15,
-        pages: null
-    };
+    dialogRef: any;
+    levelConfig: any;
+    treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);
+    treeFlattener = new MatTreeFlattener((node: SegmentNode, level: number) => {
+        return {
+            expandable: !!node.subCategories && node.subCategories.length > 0,
+            name: node.title,
+            level: level,
+            id: node.id,
+            isActive: true,
+            parentId: node.parentId,
+            maxLevel: node.maxLevel,
+            individualCode: node.individualCode,
+            characterCount: node.characterCount,
+            combinedCode: node.combinedCode,
+            subCategories: node.subCategories,
+            showDelete: node.subCategories && node.subCategories.length === 0
+        };
+    }, node => node.level, node => node.expandable, node => node.subCategories);
+    dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
     constructor(private fxaCategoryService: FxaCategoriesService,
+                private _matDialog: MatDialog,
                 private router: Router) {
     }
 
@@ -28,28 +71,62 @@ export class CategoryListComponent implements OnInit {
         this.getCategories();
     }
 
+    hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+
     getCategories(): void {
         const param = {
-            isParent: true,
-            page: this.pagination.page
+            isParent: true
         };
         this.fxaCategoryService.getCategories(param).subscribe(
             data => {
-                this.categories = data.items;
-                this.pagination.page = data.page;
-                this.pagination.total = data.total;
+                const treeData: any = {
+                    id: 0,
+                    isChildEnabled: true,
+                    parentId: 0,
+                    title: 'Categories',
+                    subCategories: data.items
+                };
+                this.dataSource.data = [treeData];
+                this.tree.treeControl.expandAll();
             }
         );
     }
 
-    onPageChange(page): void {
-        this.pagination.page = page.pageIndex + 1;
-        this.getCategories();
+    addItem(node): void {
+        const data = {action: 'CREATE', node: node, levelConfig: this.levelConfig};
+        if (node.id) {
+            data['parent'] = node;
+        }
+        this.dialogRef = this._matDialog.open(CreateCategoryComponent, {
+            minWidth: 1200,
+            panelClass: 'contact-form-dialog',
+            data
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getCategories();
+        });
     }
 
-    navigateToDetail(category): void {
-        this.router.navigateByUrl(`/dashboard/fxa-categories/${category.id}`);
+    editItem(node): void {
+        this.dialogRef = this._matDialog.open(AddCreateAdminSegmentsComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'EDIT', node: node, levelConfig: this.levelConfig}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            console.log(response);
+            if (!response) {
+                return;
+            }
+            this.getCategories();
+        });
     }
 
-
+    deleteItem(node): void {
+        this.fxaCategoryService.deleteCategories(node.id).subscribe(data => {
+            this.getCategories();
+        });
+    }
 }

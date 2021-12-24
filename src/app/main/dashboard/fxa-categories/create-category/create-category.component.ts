@@ -1,15 +1,16 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructureService} from '../../../../shared/services/structure.service';
 import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
-import {MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlertService} from '../../../../shared/services/alert.service';
 import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {AddCreateAdminSegmentsComponent} from '../../admin-segments/add-create-admin-segments/add-create-admin-segments.component';
+import {SummaryAdminSegmentSelectComponent} from '../../summary-admin-segment-select/summary-admin-segment-select.component';
 
 @Component({
     selector: 'app-create-category',
@@ -19,17 +20,23 @@ import {AddCreateAdminSegmentsComponent} from '../../admin-segments/add-create-a
     animations: fuseAnimations
 })
 export class CreateCategoryComponent implements OnInit {
+    selectedCategory: any;
+    parentNode: any;
     categoryForm: FormGroup;
-    selectedCategoryId: any;
+    dialogRef: any;
+    adminSegments = [];
+
 
     constructor(private structureService: StructureService,
                 private _fuseSidebarService: FuseSidebarService,
                 private _matDialog: MatDialog,
                 private fb: FormBuilder,
                 private fxaCategoryService: FxaCategoriesService,
-                private router: Router,
-                private activatedRoute: ActivatedRoute,
-                private alertService: AlertService) {
+                @Inject(MAT_DIALOG_DATA) private _data: any,
+                private router: Router) {
+        if (_data.parent) {
+            this.parentNode = _data.parent;
+        }
     }
 
     ngOnInit(): void {
@@ -42,12 +49,19 @@ export class CreateCategoryComponent implements OnInit {
             title: ['', Validators.required],
             depreciationRate: [''],
             depreciationMethod: [''],
-            assetNoPrefixLine: ['']
+            assetNoPrefixLine: [''],
+            adminSegmentId: [''],
         });
     }
 
     saveCategories(): void {
-        this.fxaCategoryService.saveCategories(this.categoryForm.value).subscribe(
+        const reqObj = {
+            ...this.categoryForm.value
+        };
+        if (this.parentNode) {
+            reqObj['parent_id'] = this.parentNode.id;
+        }
+        this.fxaCategoryService.saveCategories(reqObj).subscribe(
             data => {
                 this.router.navigateByUrl('dashboard/fixed-assets-categories');
             }
@@ -55,11 +69,31 @@ export class CreateCategoryComponent implements OnInit {
     }
 
     updateCategories(): void {
-        this.fxaCategoryService.updateCategories(this.selectedCategoryId, this.categoryForm.value).subscribe(
+        this.fxaCategoryService.updateCategories(this.selectedCategory.id, this.categoryForm.value).subscribe(
             data => {
                 this.router.navigateByUrl('dashboard/fixed-assets-categories');
             }
         );
+    }
+
+    adminSegmentSelect(): void {
+        this.dialogRef = this._matDialog.open(SummaryAdminSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.adminSegments = [];
+            this.adminSegments = [{
+                name: response.name,
+                id: response.id
+            }];
+            this.categoryForm.patchValue({
+                adminSegmentId: response.id,
+                disabled: true
+            });
+        });
     }
 
 }

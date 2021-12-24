@@ -61,7 +61,7 @@ import {RouteGuard} from 'app/shared/guards/route.guard';
 import {UserRoleComponent} from './configurations/user-role/user-role.component';
 import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
 import {PermissionConstant} from 'app/shared/constants/permission-constant';
-import {TrialBalanceComponent} from "./trial-balance/trial-balance.component";
+import {TrialBalanceComponent} from './trial-balance/trial-balance.component';
 import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
 import {NotesMasterComponent} from './notes-master/notes-master.component';
 import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
@@ -71,29 +71,28 @@ import {MonthlyActivityComponent} from './monthly-activity/monthly-activity.comp
 import {VoucherSourceUnitComponent} from './treasure-report/voucher-source-unit/voucher-source-unit.component';
 import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
 import {PaymentVoucherComponent} from './treasure-report/payment-voucher/payment-voucher.component';
-import {DefaultSettingVoucherInfoComponent} from "./treasure-report/default-setting-voucher-info/default-setting-voucher-info.component";
+import {DefaultSettingVoucherInfoComponent} from './treasure-report/default-setting-voucher-info/default-setting-voucher-info.component';
 import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie.component';
 import {PaymentReportComponent} from './payment-report/payment-report.component';
-import {ReceiptVouchersComponent} from "./treasure-report/receipt-vouchers/receipt-vouchers.component";
+import {ReceiptVouchersComponent} from './treasure-report/receipt-vouchers/receipt-vouchers.component';
 import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
 import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
 import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
 import {SpecialAccountActivityReportComponent} from './treasure-report/special-account-activity-report/special-account-activity-report.component';
-import {SummaryReportNonPersonalAdvancesComponent} from "./summary-report-non-personal-advances/summary-report-non-personal-advances.component";
-import {SummaryReportPersonalAdvancesComponent} from "./summary-report-personal-advances/summary-report-personal-advances.component";
-import {SummaryReportStandingImprestComponent} from "./summary-report-standing-imprest/summary-report-standing-imprest.component";
-import {SummaryReportSpecialImprestComponent} from "./summary-report-special-imprest/summary-report-special-imprest.component";
+import {SummaryReportNonPersonalAdvancesComponent} from './summary-report-non-personal-advances/summary-report-non-personal-advances.component';
+import {SummaryReportPersonalAdvancesComponent} from './summary-report-personal-advances/summary-report-personal-advances.component';
+import {SummaryReportStandingImprestComponent} from './summary-report-standing-imprest/summary-report-standing-imprest.component';
+import {SummaryReportSpecialImprestComponent} from './summary-report-special-imprest/summary-report-special-imprest.component';
 import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
-import {IfrNotesMasterComponent} from "./ifr-notes-master/ifr-notes-master.component";
-import {RetireVouchersComponent} from "./treasure-report/retire-vouchers/retire-vouchers.component";
-import {OnMandateComponent} from "./treasure-report/on-mandate/on-mandate.component";
+import {IfrNotesMasterComponent} from './ifr-notes-master/ifr-notes-master.component';
+import {RetireVouchersComponent} from './treasure-report/retire-vouchers/retire-vouchers.component';
+import {OnMandateComponent} from './treasure-report/on-mandate/on-mandate.component';
 import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
-import {PreviousYearAdvancesComponent} from "./treasure-report/previous-year-advances/previous-year-advances.component";
+import {PreviousYearAdvancesComponent} from './treasure-report/previous-year-advances/previous-year-advances.component';
 import {FxaCategoriesComponent} from './fxa-categories/fxa-categories.component';
 import {FixedAssetsComponent} from './fixed-assets/fixed-assets.component';
 import {CreateCategoryComponent} from './fxa-categories/create-category/create-category.component';
 import {CreateFixedAssetsComponent} from './fixed-assets/create-fixed-assets/create-fixed-assets.component';
-import {FxaCategoryDetailComponent} from './fxa-categories/fxa-category-detail/fxa-category-detail.component';
 
 const routes: Routes = [
     {
@@ -868,13 +867,6 @@ const routes: Routes = [
     {
         path: 'fxa-categories-create',
         component: CreateCategoryComponent,
-        data: {
-            title: 'Fixed Asset Categories Create'
-        }
-    },
-    {
-        path: 'fxa-categories/:id',
-        component: FxaCategoryDetailComponent,
         data: {
             title: 'Fixed Asset Categories Create'
         }

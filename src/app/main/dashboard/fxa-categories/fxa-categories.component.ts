@@ -25,21 +25,4 @@ export class FxaCategoriesComponent implements OnInit {
     employeeForm: FormGroup;
     ngOnInit(): void {
     }
-
-    addCategories() {
-        this.router.navigateByUrl(`/dashboard/fxa-categories-create`);
-    }
-
-    addCategonries() {
-        this.dialogRef = this._matDialog.open(CreateCategoryComponent, {
-            panelClass: 'contact-form-dialog',
-            data: {action: 'CREATE'}
-        });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
-            // this.getJournalVoucherData.getJournalVoucherList();
-        });
-    }
 }
