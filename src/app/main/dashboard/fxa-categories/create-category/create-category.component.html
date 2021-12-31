@@ -46,11 +46,37 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
-                                        <mat-label>Admin Segment</mat-label>
-                                        <mat-select formControlName="adminSegmentId" (click)="adminSegmentSelect()" [disabled]="true">
-                                            <mat-option value="">Choose Admin Segment</mat-option>
+                                        <mat-label>Asset Acct.</mat-label>
+                                        <mat-select formControlName="fixedAssetAcctId" (click)="fixedAssetAcct('fixedAssetAcctId')" [disabled]="true">
+                                            <mat-option value="">Choose economic Segment</mat-option>
                                             <mat-option [value]="admin.id"
-                                                        *ngFor="let admin of adminSegments">{{admin?.name}}</mat-option>
+                                                        *ngFor="let admin of fixedAssetAcctAr">{{admin?.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
+                                        <mat-label>Acc. Depr. Acct.</mat-label>
+                                        <mat-select formControlName="accumDeprAcctId" (click)="accumDeprAcct('accumDeprAcctId')" [disabled]="true">
+                                            <mat-option value="">Choose economic Segment</mat-option>
+                                            <mat-option [value]="admin.id"
+                                                        *ngFor="let admin of accumDeprAcctAr">{{admin?.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
+                                        <mat-label>Depr. Exp. Acct.</mat-label>
+                                        <mat-select formControlName="deprExpsAcctId" (click)="deprExpsAcct('deprExpsAcctId')" [disabled]="true">
+                                            <mat-option value="">Choose economic Segment</mat-option>
+                                            <mat-option [value]="admin.id"
+                                                        *ngFor="let admin of deprExpsAcctAr">{{admin?.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
