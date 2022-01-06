@@ -61,8 +61,14 @@ export class CreateFixedAssetsComponent implements OnInit {
             dateAcquired: [''],
             acquisitionCost: [''],
             nmrlLocation: [''],
-            SupplierName: [''],
+            supplierInvoice: [''],
+            supplierName: [''],
             supplierContact: [''],
+            dateInstalled: [''],
+            dateCommissioned: [''],
+            dateDeCommissioned: [''],
+            dateDisposed: [''],
+            disposalPrice: [''],
 
             depreciationRate: [''],
             depreciationMethod: [''],
@@ -115,6 +121,18 @@ export class CreateFixedAssetsComponent implements OnInit {
         }
         if (reqData.dateAcquired) {
             reqData['dateAcquired'] = moment(reqData.dateAcquired).format('YYYY-MM-DD');
+        }
+        if (reqData.dateInstalled) {
+            reqData['dateInstalled'] = moment(reqData.dateInstalled).format('YYYY-MM-DD');
+        }
+        if (reqData.dateCommissioned) {
+            reqData['dateCommissioned'] = moment(reqData.dateCommissioned).format('YYYY-MM-DD');
+        }
+        if (reqData.dateDeCommissioned) {
+            reqData['dateDeCommissioned'] = moment(reqData.dateDeCommissioned).format('YYYY-MM-DD');
+        }
+        if (reqData.dateDisposed) {
+            reqData['dateDisposed'] = moment(reqData.dateDisposed).format('YYYY-MM-DD');
         }
 
         this.fxaCategoryService.add(reqData).subscribe(

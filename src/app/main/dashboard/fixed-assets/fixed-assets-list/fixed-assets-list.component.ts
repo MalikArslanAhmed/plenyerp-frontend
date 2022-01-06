@@ -10,7 +10,7 @@ import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.s
     animations: fuseAnimations
 })
 export class FixedAssetsListComponent implements OnInit {
-    displayedColumns = ['id', 'title', 'custodian', 'model', 'modelNo', 'dateManufactured', 'dateAcquired', 'actions'];
+    displayedColumns = ['id', 'title', 'model', 'modelNo', 'dateManufactured', 'dateAcquired', 'actions'];
     fixedAssets = [];
     pagination = {
         page: 1,

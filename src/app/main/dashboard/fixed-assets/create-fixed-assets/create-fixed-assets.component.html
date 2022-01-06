@@ -11,153 +11,148 @@
     </div>
     <div class="content" fusePerfectScrollbar>
         <div class="horizontal-stepper-wrapper hor-wrap">
-            <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true" #stepper>
-                <mat-step [stepControl]="assetsForm" [editable]="true">
-                    <form fxLayout="column" [formGroup]="assetsForm">
-                        <ng-template matStepLabel>Fixed Assets</ng-template>
+            <mat-card>
+                <form fxLayout="column" [formGroup]="assetsForm">
+                    <mat-grid-list cols="3" rowHeight="100px">
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Title</mat-label>
+                                    <input matInput formControlName="title" required>
+                                    <mat-error>Title is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Date Manufactured</mat-label>
+                                    <input matInput [matDatepicker]="manufacturedDate" formControlName="dateManufactured">
+                                    <mat-datepicker-toggle matSuffix [for]="manufacturedDate">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #manufacturedDate></mat-datepicker>
+                                    <mat-error>Date Manufactured is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Date Acquired</mat-label>
+                                    <input matInput [matDatepicker]="acquiredDate" formControlName="dateAcquired">
+                                    <mat-datepicker-toggle matSuffix [for]="acquiredDate">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #acquiredDate></mat-datepicker>
+                                    <mat-error>Date Acquired is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Make</mat-label>
+                                    <input matInput formControlName="make" required>
+                                    <mat-error>Make is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Model</mat-label>
+                                    <input matInput formControlName="model" required>
+                                    <mat-error>Model is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Asset Model Number</mat-label>
+                                    <input matInput formControlName="modelNo" required>
+                                    <mat-error>Asset Model Number is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>OEM Serial Number</mat-label>
+                                    <input matInput formControlName="oemSerialNo" required>
+                                    <mat-error>OEM Serial Number is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>OEM Barcode Number</mat-label>
+                                    <input matInput formControlName="oemBarCodeNo" required>
+                                    <mat-error>OEM Barcode Number is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Acquisition Cost</mat-label>
+                                    <input matInput formControlName="acquisitionCost" required>
+                                    <mat-error>Acquisition Cost is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Asset Category</mat-label>
+                                    <select matNativeControl formControlName="assetNoPrefixLine">
+                                        <option value="">Select Deployment status</option>
+                                        <option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
+                                            {{faCategory.title}}
+                                        </option>
+                                    </select>
+                                    <mat-error>Asset Category is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Deployment Status</mat-label>
+                                    <select matNativeControl formControlName="fxaStatusId">
+                                        <option value="">Select Deployment status</option>
+                                        <option [value]="status.id" *ngFor="let status of faStatuses">{{status.title}}</option>
+                                    </select>
+                                    <mat-error>Deployment Status is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Depreciation Method</mat-label>
+                                    <select matNativeControl formControlName="depreciationMethod">
+                                        <option value="">Select Depreciation Method</option>
+                                        <option [value]="faDepreciation.id" *ngFor="let faDepreciation of faDepreciations">
+                                            {{faDepreciation.title}}
+                                        </option>
+                                    </select>
+                                    <mat-error>Depreciation Method is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+
+                    </mat-grid-list>
+
+                    <fieldset>
+                        <legend>Supplier Details</legend>
                         <mat-grid-list cols="3" rowHeight="100px">
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Asset Description</mat-label>
-                                        <input matInput formControlName="title" required>
-                                        <mat-error>Asset Description is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>OEM Narcode</mat-label>
-                                        <input matInput formControlName="depreciationRate" required>
-                                        <mat-error>oem narcode is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Asset Current Location</mat-label>
-                                        <select matNativeControl formControlName="nmrlLocation">
-                                            <option value="">Select Asset Current Location</option>
-                                            <option [value]="faLocation.id" *ngFor="let faLocation of faLocations">
-                                                {{faLocation.name}}
-                                            </option>
-                                        </select>
-                                        <mat-error>Asset Current Location is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Asset Category</mat-label>
-                                        <select matNativeControl formControlName="assetNoPrefixLine">
-                                            <option value="">Select Deployment status</option>
-                                            <option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
-                                                {{faCategory.title}}
-                                            </option>
-                                        </select>
-                                        <mat-error>Asset Category is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Date Manufactured No.</mat-label>
-                                        <input matInput [matDatepicker]="manufacturedDate" formControlName="dateManufactured">
-                                        <mat-datepicker-toggle matSuffix [for]="manufacturedDate">
-                                        </mat-datepicker-toggle>
-                                        <mat-datepicker #manufacturedDate></mat-datepicker>
-                                        <mat-error>Date Manufactured No. is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Deployment Status</mat-label>
-                                        <select matNativeControl formControlName="fxaStatusId">
-                                            <option value="">Select Deployment status</option>
-                                            <option [value]="status.id" *ngFor="let status of faStatuses">{{status.title}}</option>
-                                        </select>
-                                        <mat-error>Deployment Status is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Asset Manufacturer</mat-label>
-                                        <input matInput formControlName="depreciationMethod">
-                                        <mat-error>Asset Manufacturer is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Qty of Asset Supplied</mat-label>
-                                        <input matInput formControlName="assetNoPrefixLine" required>
-                                        <mat-error>Qty of Asset Supplied is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Custodian Staff ID</mat-label>
-                                        <input matInput formControlName="title" required>
-                                        <mat-error>Custodian Staff ID is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Asset Model</mat-label>
-                                        <input matInput formControlName="model" required>
-                                        <mat-error>Asset Model is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Cost of Purchase/Supply</mat-label>
-                                        <input matInput formControlName="depreciationMethod">
-                                        <mat-error>Cost of Purchase/Supply is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Supplier Invoice</mat-label>
-                                        <input matInput formControlName="assetNoPrefixLine" required>
+                                        <mat-label>Supplier Invoice Number</mat-label>
+                                        <input matInput formControlName="supplierInvoice">
                                         <mat-error>Supplier Invoice is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Asset Model Number</mat-label>
-                                        <input matInput formControlName="modelNo" required>
-                                        <mat-error>Asset Model Number is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Date Acquired Number</mat-label>
-                                        <input matInput [matDatepicker]="acquiredDate" formControlName="dateAcquired">
-                                        <mat-datepicker-toggle matSuffix [for]="acquiredDate">
-                                        </mat-datepicker-toggle>
-                                        <mat-datepicker #acquiredDate></mat-datepicker>
-                                        <mat-error>Date Acquired Number is required!</mat-error>
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
@@ -173,29 +168,6 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Asset OEM Number</mat-label>
-                                        <input matInput formControlName="assetNoPrefixLine" required>
-                                        <mat-error>Asset OEM Number is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Depreciation Method</mat-label>
-                                        <select matNativeControl formControlName="depreciationMethod">
-                                            <option value="">Select Depreciation Method</option>
-                                            <option [value]="faDepreciation.id" *ngFor="let faDepreciation of faDepreciations">
-                                                {{faDepreciation.name}}
-                                            </option>
-                                        </select>
-                                        <mat-error>Depreciation Method is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Supplier Contact Details</mat-label>
                                         <input matInput formControlName="supplierContact" required>
                                         <mat-error>Supplier Contact Details is required!</mat-error>
@@ -204,36 +176,76 @@
                             </mat-grid-tile>
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Date Installed</mat-label>
+                                        <input matInput [matDatepicker]="dateInstalled" formControlName="dateInstalled">
+                                        <mat-datepicker-toggle matSuffix [for]="dateInstalled">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #dateInstalled></mat-datepicker>
+                                        <mat-error>Date Installed is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Date Commissioned</mat-label>
+                                        <input matInput [matDatepicker]="dateCommissioned" formControlName="dateCommissioned">
+                                        <mat-datepicker-toggle matSuffix [for]="dateCommissioned">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #dateCommissioned></mat-datepicker>
+                                        <mat-error>Date Commissioned is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Date Commissioned</mat-label>
+                                        <input matInput [matDatepicker]="dateDeCommissioned" formControlName="dateDeCommissioned">
+                                        <mat-datepicker-toggle matSuffix [for]="dateDeCommissioned">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #dateDeCommissioned></mat-datepicker>
+                                        <mat-error>Date Decommissioned is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Date Disposed</mat-label>
+                                        <input matInput [matDatepicker]="dateDisposed" formControlName="dateDisposed">
+                                        <mat-datepicker-toggle matSuffix [for]="dateDisposed">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #dateDisposed></mat-datepicker>
+                                        <mat-error>Date Disposed is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Disposal Price</mat-label>
+                                        <input matInput formControlName="disposalPrice" required>
+                                        <mat-error>Disposal Price is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+
+                        </mat-grid-list>
+                    </fieldset>
+
+                    <fieldset class="mt-8">
+                        <legend>Purchase Classification</legend>
+                        <mat-grid-list cols="3" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
                                         <mat-label>Admin Segment</mat-label>
                                         <mat-select formControlName="adminSegmentId" (click)="adminSegmentSelect()" [disabled]="true">
                                             <mat-option value="">Choose Admin Segment</mat-option>
                                             <mat-option [value]="admin.id"
                                                         *ngFor="let admin of adminSegments">{{admin?.name}}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
-                                                    (click)="programmeSegmentSelect()">
-                                        <mat-label>Programme Segment Name</mat-label>
-                                        <mat-select formControlName="programmeSegmentId" [disabled]="true">
-                                            <mat-option [value]="programmeSegment.id"
-                                                        *ngFor="let programmeSegment of programmeSegments">{{programmeSegment.name}}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
-                                                    (click)="functionSegmentSelect()">
-                                        <mat-label>Functional Segment Name</mat-label>
-                                        <mat-select formControlName="functionalSegmentId" [disabled]="true">
-                                            <mat-option [value]="functionSegment.id"
-                                                        *ngFor="let functionSegment of functionSegments">{{functionSegment.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -265,6 +277,30 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
+                                                    (click)="programmeSegmentSelect()">
+                                        <mat-label>Programme Segment Name</mat-label>
+                                        <mat-select formControlName="programmeSegmentId" [disabled]="true">
+                                            <mat-option [value]="programmeSegment.id"
+                                                        *ngFor="let programmeSegment of programmeSegments">{{programmeSegment.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
+                                                    (click)="functionSegmentSelect()">
+                                        <mat-label>Functional Segment Name</mat-label>
+                                        <mat-select formControlName="functionalSegmentId" [disabled]="true">
+                                            <mat-option [value]="functionSegment.id"
+                                                        *ngFor="let functionSegment of functionSegments">{{functionSegment.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
                                                     (click)="geoCodeSegmentSelect()">
                                         <mat-label>Geo Code Segment Name</mat-label>
                                         <mat-select formControlName="geoCodeSegmentId" [disabled]="true">
@@ -275,20 +311,19 @@
                                 </div>
                             </mat-grid-tile>
                         </mat-grid-list>
-                        <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-raised-button type="button" color="accent"
-                                    (click)="saveFixedAssets()" *ngIf="!this.fixedAssetId">
-                                Save
-                            </button>
-                            <button mat-raised-button type="button" color="accent"
-                                    (click)="updateFixedAssets()" *ngIf="this.fixedAssetId">
-                                Update
-                            </button>
-                        </div>
-                    </form>
-                </mat-step>
-
-            </mat-horizontal-stepper>
+                    </fieldset>
+                    <div fxLayout="row" fxLayoutAlign="right right" class="mt-8">
+                        <button mat-raised-button type="button" color="accent"
+                                (click)="saveFixedAssets()" *ngIf="!this.fixedAssetId">
+                            Save
+                        </button>
+                        <button mat-raised-button type="button" color="accent"
+                                (click)="updateFixedAssets()" *ngIf="this.fixedAssetId">
+                            Update
+                        </button>
+                    </div>
+                </form>
+            </mat-card>
         </div>
     </div>
 </div>
