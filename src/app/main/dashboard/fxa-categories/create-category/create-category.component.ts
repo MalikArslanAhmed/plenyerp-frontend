@@ -48,6 +48,10 @@ export class CreateCategoryComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh(this._data.action === 'EDIT' ? this._data.node : {});
+
+        if (this._data.action === 'EDIT') {
+            this.patchForm(this._data.node);
+        }
     }
 
 
@@ -62,6 +66,21 @@ export class CreateCategoryComponent implements OnInit {
             accumDeprAcctId: [data.accumDeprAcctId || ''],
             deprExpsAcctId: [data.deprExpsAcctId || ''],
         });
+    }
+
+    patchForm(updatedData): void {
+        this.fixedAssetAcctAr = [{
+            name: (updatedData && updatedData['fixedAssetAcct']) ? updatedData['fixedAssetAcct'].name : '',
+            id: (updatedData && updatedData['fixedAssetAcct']) ? updatedData['fixedAssetAcct'].id : '',
+        }];
+        this.accumDeprAcctAr = [{
+            name: (updatedData && updatedData['accumDeprAcct']) ? updatedData['accumDeprAcct'].name : '',
+            id: (updatedData && updatedData['accumDeprAcct']) ? updatedData['accumDeprAcct'].id : '',
+        }];
+        this.deprExpsAcctAr = [{
+            name: (updatedData && updatedData['deprExpsAcct']) ? updatedData['deprExpsAcct'].name : '',
+            id: (updatedData && updatedData['deprExpsAcct']) ? updatedData['deprExpsAcct'].id : '',
+        }];
     }
 
     saveCategories(): void {

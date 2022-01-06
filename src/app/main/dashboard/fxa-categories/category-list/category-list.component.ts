@@ -18,8 +18,11 @@ interface SegmentNode {
     depreciationMethod: string;
     assetNoPrefixLine: string;
     fixedAssetAcctId: string;
+    fixedAssetAcct: object;
     accumDeprAcctId: string;
+    accumDeprAcct: object;
     deprExpsAcctId: string;
+    deprExpsAcct: object;
     subCategories?: SegmentNode[];
     createdAt?: string;
     updatedAt?: string;
@@ -60,8 +63,11 @@ export class CategoryListComponent implements OnInit {
             depreciationMethod: node.depreciationMethod,
             assetNoPrefixLine: node.assetNoPrefixLine,
             fixedAssetAcctId: node.fixedAssetAcctId,
+            fixedAssetAcct: node.fixedAssetAcct,
             accumDeprAcctId: node.accumDeprAcctId,
+            accumDeprAcct: node.accumDeprAcct,
             deprExpsAcctId: node.deprExpsAcctId,
+            deprExpsAcct: node.deprExpsAcct,
             level: level,
             isActive: true,
             parentId: node.parentId,

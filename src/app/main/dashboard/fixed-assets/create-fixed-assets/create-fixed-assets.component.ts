@@ -114,6 +114,41 @@ export class CreateFixedAssetsComponent implements OnInit {
         );
     }
 
+    getDetail(): void {
+        this.fxaCategoryService.detail('').subscribe(
+            data => {
+                this.patchForm(data);
+            }
+        );
+    }
+
+    patchForm(updatedData): void {
+        this.adminSegments = [{
+            name: (updatedData && updatedData['adminSegments']) ? updatedData['adminSegments'].name : '',
+            id: (updatedData && updatedData['adminSegments']) ? updatedData['adminSegments'].id : '',
+        }];
+        this.economicSegments = [{
+            name: (updatedData && updatedData['economicSegments']) ? updatedData['economicSegments'].name : '',
+            id: (updatedData && updatedData['economicSegments']) ? updatedData['economicSegments'].id : '',
+        }];
+        this.programmeSegments = [{
+            name: (updatedData && updatedData['programmeSegments']) ? updatedData['programmeSegments'].name : '',
+            id: (updatedData && updatedData['programmeSegments']) ? updatedData['programmeSegments'].id : '',
+        }];
+        this.functionSegments = [{
+            name: (updatedData && updatedData['functionSegments']) ? updatedData['functionSegments'].name : '',
+            id: (updatedData && updatedData['functionSegments']) ? updatedData['functionSegments'].id : '',
+        }];
+        this.fundSegmentsAddDet = [{
+            name: (updatedData && updatedData['fundSegmentsAddDet']) ? updatedData['fundSegmentsAddDet'].name : '',
+            id: (updatedData && updatedData['fundSegmentsAddDet']) ? updatedData['fundSegmentsAddDet'].id : '',
+        }];
+        this.geoCodeSegments = [{
+            name: (updatedData && updatedData['geoCodeSegments']) ? updatedData['geoCodeSegments'].name : '',
+            id: (updatedData && updatedData['geoCodeSegments']) ? updatedData['geoCodeSegments'].id : '',
+        }];
+    }
+
     saveFixedAssets(): void {
         const reqData = this.assetsForm.value;
         if (reqData.dateManufactured) {
