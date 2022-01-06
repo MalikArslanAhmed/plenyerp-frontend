@@ -31,7 +31,7 @@ export class FxaCategoriesService extends BaseService {
     }
 
     updateCategories(categoryId, data): Observable<any> {
-        return this.postRequest(AppUrl.FIXED_ASSET_CATEGORIES(categoryId), data);
+        return this.putRequest(AppUrl.FIXED_ASSET_CATEGORIES(categoryId), data);
     }
 
     deleteCategories(categoryId, data = {}): Observable<any> {

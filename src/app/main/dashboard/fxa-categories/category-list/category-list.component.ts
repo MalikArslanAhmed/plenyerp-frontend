@@ -8,11 +8,18 @@ import {CreateCategoryComponent} from '../create-category/create-category.compon
 import {FormGroup} from '@angular/forms';
 import {AddCreateAdminSegmentsComponent} from '../../admin-segments/add-create-admin-segments/add-create-admin-segments.component';
 import {MatDialog} from '@angular/material/dialog';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
 
 interface SegmentNode {
     id: number;
     parentId: number;
     title: string;
+    depreciationRate: string;
+    depreciationMethod: string;
+    assetNoPrefixLine: string;
+    fixedAssetAcctId: string;
+    accumDeprAcctId: string;
+    deprExpsAcctId: string;
     subCategories?: SegmentNode[];
     createdAt?: string;
     updatedAt?: string;
@@ -27,7 +34,7 @@ const TREE_DATA: SegmentNode[] = [];
 
 interface ExampleFlatNode {
     expandable: boolean;
-    name: string;
+    title: string;
     level: number;
 }
 
@@ -47,9 +54,15 @@ export class CategoryListComponent implements OnInit {
     treeFlattener = new MatTreeFlattener((node: SegmentNode, level: number) => {
         return {
             expandable: !!node.subCategories && node.subCategories.length > 0,
-            name: node.title,
-            level: level,
             id: node.id,
+            title: node.title,
+            depreciationRate: node.depreciationRate,
+            depreciationMethod: node.depreciationMethod,
+            assetNoPrefixLine: node.assetNoPrefixLine,
+            fixedAssetAcctId: node.fixedAssetAcctId,
+            accumDeprAcctId: node.accumDeprAcctId,
+            deprExpsAcctId: node.deprExpsAcctId,
+            level: level,
             isActive: true,
             parentId: node.parentId,
             maxLevel: node.maxLevel,
@@ -103,25 +116,32 @@ export class CategoryListComponent implements OnInit {
             data
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            if (!response) {
-                return;
-            }
             this.getCategories();
         });
     }
 
     editItem(node): void {
-        this.dialogRef = this._matDialog.open(AddCreateAdminSegmentsComponent, {
+        this.dialogRef = this._matDialog.open(CreateCategoryComponent, {
+            minWidth: 1200,
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', node: node, levelConfig: this.levelConfig}
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            console.log(response);
-            if (!response) {
-                return;
-            }
             this.getCategories();
         });
+    }
+
+    deleteItemModal(node): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: node}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteItem(node);
+            }
+        });
+
     }
 
     deleteItem(node): void {

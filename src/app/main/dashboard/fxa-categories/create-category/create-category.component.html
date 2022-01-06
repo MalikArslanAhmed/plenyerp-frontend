@@ -1,103 +1,110 @@
-<div id="employees" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
-    <div class="content" fusePerfectScrollbar>
-        <div class="horizontal-stepper-wrapper hor-wrap">
-            <mat-horizontal-stepper class="mat-elevation-z4 mb-30px" [linear]="true" #stepper>
-                <mat-step [stepControl]="categoryForm" [editable]="true">
-                    <form fxLayout="column" [formGroup]="categoryForm">
-                        <ng-template matStepLabel>Categories</ng-template>
-                        <mat-grid-list cols="2" rowHeight="100px">
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Category Name</mat-label>
-                                        <input matInput formControlName="title" required>
-                                        <mat-error>Category Name is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Depreciation Rate</mat-label>
-                                        <input matInput formControlName="depreciationRate" required>
-                                        <mat-error>Depreciation Rate is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Depreciation Method</mat-label>
-                                        <input matInput formControlName="depreciationMethod">
-                                        <mat-error>Depreciation Method is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Asset Number Prefix Line</mat-label>
-                                        <input matInput formControlName="assetNoPrefixLine" required>
-                                        <mat-error>Asset Number Prefix Line is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
+<div class="dialog-content-wrapper" id="items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
 
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
-                                        <mat-label>Asset Acct.</mat-label>
-                                        <mat-select formControlName="fixedAssetAcctId" (click)="fixedAssetAcct('fixedAssetAcctId')" [disabled]="true">
-                                            <mat-option value="">Choose economic Segment</mat-option>
-                                            <mat-option [value]="admin.id"
-                                                        *ngFor="let admin of fixedAssetAcctAr">{{admin?.name}}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
+    <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar>
+        <form fxLayout="column" [formGroup]="categoryForm">
+            <ng-template matStepLabel>Categories</ng-template>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Category Name</mat-label>
+                            <input matInput formControlName="title" required>
+                            <mat-error>Category Name is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Depreciation Rate</mat-label>
+                            <input matInput formControlName="depreciationRate" required>
+                            <mat-error>Depreciation Rate is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Depreciation Method</mat-label>
+                            <input matInput formControlName="depreciationMethod">
+                            <mat-error>Depreciation Method is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Asset Number Prefix Line</mat-label>
+                            <input matInput formControlName="assetNoPrefixLine" required>
+                            <mat-error>Asset Number Prefix Line is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
 
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
-                                        <mat-label>Acc. Depr. Acct.</mat-label>
-                                        <mat-select formControlName="accumDeprAcctId" (click)="accumDeprAcct('accumDeprAcctId')" [disabled]="true">
-                                            <mat-option value="">Choose economic Segment</mat-option>
-                                            <mat-option [value]="admin.id"
-                                                        *ngFor="let admin of accumDeprAcctAr">{{admin?.name}}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
+                            <mat-label>Asset Acct.</mat-label>
+                            <mat-select formControlName="fixedAssetAcctId" (click)="fixedAssetAcct('fixedAssetAcctId')" [disabled]="true">
+                                <mat-option value="">Choose economic Segment</mat-option>
+                                <mat-option [value]="admin.id"
+                                            *ngFor="let admin of fixedAssetAcctAr">{{admin?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
 
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
-                                        <mat-label>Depr. Exp. Acct.</mat-label>
-                                        <mat-select formControlName="deprExpsAcctId" (click)="deprExpsAcct('deprExpsAcctId')" [disabled]="true">
-                                            <mat-option value="">Choose economic Segment</mat-option>
-                                            <mat-option [value]="admin.id"
-                                                        *ngFor="let admin of deprExpsAcctAr">{{admin?.name}}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                        <div fxLayout="row" fxLayoutAlign="center center">
-                            <ng-container *ngIf="!this.selectedCategory; else updateButton">
-                                <button mat-raised-button type="button" color="accent" (click)="saveCategories()">
-                                    Save
-                                </button>
-                            </ng-container>
-                            <ng-template #updateButton>
-                                <button mat-raised-button type="button" color="accent" (click)="updateCategories()">
-                                    Update
-                                </button>
-                            </ng-template>
-                        </div>
-                    </form>
-                </mat-step>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
+                            <mat-label>Acc. Depr. Acct.</mat-label>
+                            <mat-select formControlName="accumDeprAcctId" (click)="accumDeprAcct('accumDeprAcctId')" [disabled]="true">
+                                <mat-option value="">Choose economic Segment</mat-option>
+                                <mat-option [value]="admin.id"
+                                            *ngFor="let admin of accumDeprAcctAr">{{admin?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
 
-            </mat-horizontal-stepper>
-        </div>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
+                            <mat-label>Depr. Exp. Acct.</mat-label>
+                            <mat-select formControlName="deprExpsAcctId" (click)="deprExpsAcct('deprExpsAcctId')" [disabled]="true">
+                                <mat-option value="">Choose economic Segment</mat-option>
+                                <mat-option [value]="admin.id"
+                                            *ngFor="let admin of deprExpsAcctAr">{{admin?.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <!--<button mat-button class="save-button" (click)="updateJournalVoucher()"
+                [disabled]="journalVoucherCreateForm.invalid" aria-label="Update"
+                *ngIf="this.action === 'EDIT'">UPDATE
+        </button>-->
+
+        <ng-container *ngIf="!this.categoryForm.value.id; else updateButton">
+            <button mat-raised-button type="button" color="accent" (click)="saveCategories()">
+                Save
+            </button>
+        </ng-container>
+        <ng-template #updateButton>
+            <button mat-raised-button type="button" color="accent" (click)="updateCategories()">
+                Update
+            </button>
+        </ng-template>
     </div>
 </div>

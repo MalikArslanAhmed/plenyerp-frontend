@@ -7,7 +7,7 @@
                     <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
                         <!-- use a disabled button to provide padding for tree leaf -->
                         <button mat-icon-button disabled></button>
-                        {{node.name}}
+                        {{node.title}}
                         <button mat-icon-button title="Add" (click)="addItem(node)"
                                 *ngIf="node.isActive">
                             <mat-icon class="addBtn">add</mat-icon>
@@ -15,19 +15,19 @@
                         <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
                             <mat-icon class="editBtn">edit</mat-icon>
                         </button>
-                        <button mat-icon-button title="Delete" *ngIf="node.level !== 0" (click)="deleteItem(node)">
+                        <button mat-icon-button title="Delete" *ngIf="node.level !== 0" (click)="deleteItemModal(node)">
                             <mat-icon class="deleteBtn">delete</mat-icon>
                         </button>
                     </mat-tree-node>
                     <!-- This is the tree node template for expandable nodes -->
                     <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
                         <button mat-icon-button matTreeNodeToggle
-                                [attr.aria-label]="'toggle ' + node.name">
+                                [attr.aria-label]="'toggle ' + node.title">
                             <mat-icon class="mat-icon-rtl-mirror">
                                 {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                             </mat-icon>
                         </button>
-                        {{node.name}}
+                        {{node.title}}
                         <button mat-icon-button title="Add" (click)="addItem(node)"
                                 *ngIf="node.isActive">
                             <mat-icon class="addBtn">add</mat-icon>
@@ -35,7 +35,7 @@
                         <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
                             <mat-icon class="editBtn">edit</mat-icon>
                         </button>
-                        <button mat-icon-button title="Delete" *ngIf="node.showDelete" (click)="deleteItem(node)">
+                        <button mat-icon-button title="Delete" *ngIf="node.showDelete" (click)="deleteItemModal(node)">
                             <mat-icon class="deleteBtn">delete</mat-icon>
                         </button>
                     </mat-tree-node>
