@@ -1,6 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
+import {Router} from '@angular/router';
+import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
     selector: 'app-fixed-assets-list',
@@ -18,8 +21,11 @@ export class FixedAssetsListComponent implements OnInit {
         perpage: 15,
         pages: null
     };
+    dialogRef: any;
 
-    constructor(private fxaCategoryService: FxaCategoriesService,) {
+    constructor(private fxaCategoryService: FxaCategoriesService,
+                private _matDialog: MatDialog,
+                private router: Router) {
     }
 
     ngOnInit(): void {
@@ -44,4 +50,26 @@ export class FixedAssetsListComponent implements OnInit {
         this.getFixedAsset();
     }
 
+    editFixedAssets(fixedAsset): void {
+        this.router.navigateByUrl(`/dashboard/fixed-assets/` + fixedAsset.id);
+    }
+
+    deleteItemModal(fixedAsset): void {
+        this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
+            panelClass: 'delete-items-dialog',
+            data: {data: fixedAsset}
+        });
+        this.dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response) {
+                this.deleteItem(fixedAsset);
+            }
+        });
+
+    }
+
+    deleteItem(fixedAsset): void {
+        this.fxaCategoryService.delete(fixedAsset.id).subscribe(data => {
+            this.getFixedAsset();
+        });
+    }
 }

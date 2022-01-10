@@ -119,18 +119,18 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let fixedAsset">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <!--<div>
-                        <button mat-icon-button aria-label="Toggle star" (click)="edit(qualification)"
+                    <div>
+                        <button mat-icon-button aria-label="Toggle star" (click)="editFixedAssets(fixedAsset)"
                                 style="color: blue">
                             <mat-icon class="material-icons">edit</mat-icon>
                         </button>
                     </div>
                     <div>
-                        <button mat-icon-button aria-label="Toggle star" (click)="delete(qualification)"
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(fixedAsset)"
                                 style="color: red">
                             <mat-icon class="material-icons">delete</mat-icon>
                         </button>
-                    </div>-->
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>

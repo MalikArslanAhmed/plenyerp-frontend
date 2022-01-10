@@ -25,7 +25,7 @@ export class FixedAssetsComponent implements OnInit {
     }
 
 
-    addFixedAssets() {
-        this.router.navigateByUrl(`/dashboard/fxa-create`);
+    addFixedAssets(): void {
+        this.router.navigateByUrl(`/dashboard/fixed-assets/create`);
     }
 }

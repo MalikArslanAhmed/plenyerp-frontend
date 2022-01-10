@@ -886,14 +886,14 @@ const routes: Routes = [
         }
     },
     {
-        path: 'fxa-create',
+        path: 'fixed-assets/create',
         component: CreateFixedAssetsComponent,
         data: {
             title: 'Fixed Assets '
         }
     },
     {
-        path: 'fxa-edit/:id',
+        path: 'fixed-assets/:id',
         component: CreateFixedAssetsComponent,
         data: {
             title: 'Fixed Assets '

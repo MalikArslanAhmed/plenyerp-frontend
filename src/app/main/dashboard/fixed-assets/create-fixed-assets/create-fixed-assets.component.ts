@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {StructureService} from '../../../../shared/services/structure.service';
 import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -44,7 +44,13 @@ export class CreateFixedAssetsComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private alertService: AlertService
     ) {
+    }
 
+    ngOnInit(): void {
+        this.refresh();
+        this.getCategories();
+        this.getDepreciation();
+        this.getStatus();
     }
 
     refresh(): void {
@@ -69,24 +75,24 @@ export class CreateFixedAssetsComponent implements OnInit {
             dateDeCommissioned: [''],
             dateDisposed: [''],
             disposalPrice: [''],
-
-            depreciationRate: [''],
-            depreciationMethod: [''],
-            assetNoPrefixLine: [''],
             adminSegmentId: [''],
             economicSegmentId: [''],
             programmeSegmentId: [''],
             functionalSegmentId: [''],
             geoCodeSegmentId: [''],
             fundSegmentId: [''],
-        });
-    }
 
-    ngOnInit(): void {
-        this.refresh();
-        this.getCategories();
-        this.getDepreciation();
-        this.getStatus();
+            depreciationRate: [''],
+            depreciationMethod: [''],
+            assetNoPrefixLine: [''],
+        });
+
+
+        this.fixedAssetId = this.activatedRoute.snapshot.params.id;
+
+        if (this.fixedAssetId) {
+            this.getDetail();
+        }
     }
 
 
@@ -115,7 +121,7 @@ export class CreateFixedAssetsComponent implements OnInit {
     }
 
     getDetail(): void {
-        this.fxaCategoryService.detail('').subscribe(
+        this.fxaCategoryService.detail(this.fixedAssetId).subscribe(
             data => {
                 this.patchForm(data);
             }
@@ -123,29 +129,62 @@ export class CreateFixedAssetsComponent implements OnInit {
     }
 
     patchForm(updatedData): void {
+        this.assetsForm.patchValue({
+            fxaStatusId: updatedData.fxaStatusId,
+            title: updatedData.title,
+            custodian: updatedData.custodian,
+            make: updatedData.make,
+            model: updatedData.model,
+            modelNo: updatedData.modelNo,
+            oemSerialNo: updatedData.oemSerialNo,
+            oemBarCodeNo: updatedData.oemBarCodeNo,
+            dateManufactured: updatedData.dateManufactured,
+            dateAcquired: updatedData.dateAcquired,
+            acquisitionCost: updatedData.acquisitionCost,
+            nmrlLocation: updatedData.nmrlLocation,
+            supplierInvoice: updatedData.supplierInvoice,
+            supplierName: updatedData.supplierName,
+            supplierContact: updatedData.supplierContact,
+            dateInstalled: updatedData.dateInstalled,
+            dateCommissioned: updatedData.dateCommissioned,
+            dateDeCommissioned: updatedData.dateDeCommissioned,
+            dateDisposed: updatedData.dateDisposed,
+            disposalPrice: updatedData.disposalPrice,
+            adminSegmentId: updatedData.adminSegmentId,
+            economicSegmentId: updatedData.economicSegmentId,
+            programmeSegmentId: updatedData.programmeSegmentId,
+            functionalSegmentId: updatedData.functionalSegmentId,
+            geoCodeSegmentId: updatedData.geoCodeSegmentId,
+            fundSegmentId: updatedData.fundSegmentId,
+
+            depreciationRate: [''],
+            depreciationMethod: [''],
+            assetNoPrefixLine: [''],
+        });
+
         this.adminSegments = [{
-            name: (updatedData && updatedData['adminSegments']) ? updatedData['adminSegments'].name : '',
-            id: (updatedData && updatedData['adminSegments']) ? updatedData['adminSegments'].id : '',
+            name: (updatedData && updatedData['adminSegment']) ? updatedData['adminSegment'].name : '',
+            id: (updatedData && updatedData['adminSegment']) ? updatedData['adminSegment'].id : '',
         }];
         this.economicSegments = [{
-            name: (updatedData && updatedData['economicSegments']) ? updatedData['economicSegments'].name : '',
-            id: (updatedData && updatedData['economicSegments']) ? updatedData['economicSegments'].id : '',
+            name: (updatedData && updatedData['economicSegment']) ? updatedData['economicSegment'].name : '',
+            id: (updatedData && updatedData['economicSegment']) ? updatedData['economicSegment'].id : '',
         }];
         this.programmeSegments = [{
-            name: (updatedData && updatedData['programmeSegments']) ? updatedData['programmeSegments'].name : '',
-            id: (updatedData && updatedData['programmeSegments']) ? updatedData['programmeSegments'].id : '',
+            name: (updatedData && updatedData['programmeSegment']) ? updatedData['programmeSegment'].name : '',
+            id: (updatedData && updatedData['programmeSegment']) ? updatedData['programmeSegment'].id : '',
         }];
         this.functionSegments = [{
-            name: (updatedData && updatedData['functionSegments']) ? updatedData['functionSegments'].name : '',
-            id: (updatedData && updatedData['functionSegments']) ? updatedData['functionSegments'].id : '',
+            name: (updatedData && updatedData['functionSegment']) ? updatedData['functionSegment'].name : '',
+            id: (updatedData && updatedData['functionSegment']) ? updatedData['functionSegment'].id : '',
         }];
         this.fundSegmentsAddDet = [{
             name: (updatedData && updatedData['fundSegmentsAddDet']) ? updatedData['fundSegmentsAddDet'].name : '',
             id: (updatedData && updatedData['fundSegmentsAddDet']) ? updatedData['fundSegmentsAddDet'].id : '',
         }];
         this.geoCodeSegments = [{
-            name: (updatedData && updatedData['geoCodeSegments']) ? updatedData['geoCodeSegments'].name : '',
-            id: (updatedData && updatedData['geoCodeSegments']) ? updatedData['geoCodeSegments'].id : '',
+            name: (updatedData && updatedData['geoCodeSegment']) ? updatedData['geoCodeSegment'].name : '',
+            id: (updatedData && updatedData['geoCodeSegment']) ? updatedData['geoCodeSegment'].id : '',
         }];
     }
 
