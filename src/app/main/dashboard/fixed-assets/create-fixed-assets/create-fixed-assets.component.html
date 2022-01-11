@@ -141,9 +141,18 @@
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-
                     </mat-grid-list>
-
+                    <!--<mat-grid-list cols="12">
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Title</mat-label>
+                                    <input matInput formControlName="remark" required>
+                                    <mat-error>Title is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>-->
                     <fieldset>
                         <legend>Supplier Details</legend>
                         <mat-grid-list cols="3" rowHeight="100px">
@@ -235,6 +244,36 @@
                         </mat-grid-list>
                     </fieldset>
 
+                    <fieldset class="mt-8">
+                        <legend>Current Location</legend>
+                        <mat-grid-list cols="3" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
+                                                    (click)="selectAdminEmployee('Select Checking Officer')">
+                                        <mat-label>Checking Officer</mat-label>
+                                        <mat-select formControlName="custodianId">
+                                            <mat-option value="">Checking Officer Name</mat-option>
+                                            <mat-option [value]="checkingOfficer.id"
+                                                        *ngFor="let checkingOfficer of custodian">{{checkingOfficer?.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Date Manufactured</mat-label>
+                                        <input matInput [matDatepicker]="valueDate" formControlName="valueDate">
+                                        <mat-datepicker-toggle matSuffix [for]="valueDate">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #valueDate></mat-datepicker>
+                                        <mat-error>Value Date is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </fieldset>
                     <fieldset class="mt-8">
                         <legend>Purchase Classification</legend>
                         <mat-grid-list cols="3" rowHeight="100px">

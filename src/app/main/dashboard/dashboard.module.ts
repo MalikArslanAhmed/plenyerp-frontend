@@ -275,6 +275,7 @@ import { FxaCategoriesComponent } from './fxa-categories/fxa-categories.componen
 import { CreateCategoryComponent } from './fxa-categories/create-category/create-category.component';
 import { CategoryListComponent } from './fxa-categories/category-list/category-list.component';
 import { FixedAssetsListComponent } from './fixed-assets/fixed-assets-list/fixed-assets-list.component';
+import {FixedAssetCategorySelectComponent} from './fixed-assets/fixed-asset-category-select/fixed-asset-category-select.component';
 
 @NgModule({
     declarations: [
@@ -528,6 +529,7 @@ import { FixedAssetsListComponent } from './fixed-assets/fixed-assets-list/fixed
         CreateCategoryComponent,
         CategoryListComponent,
         FixedAssetsListComponent,
+        FixedAssetCategorySelectComponent,
     ],
     imports: [
         CommonModule,

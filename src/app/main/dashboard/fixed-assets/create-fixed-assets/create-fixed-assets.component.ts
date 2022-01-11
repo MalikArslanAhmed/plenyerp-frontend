@@ -13,6 +13,7 @@ import {EconomicSegmentSelectComponent} from '../../journal-voucher/economic-seg
 import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-select/fund-segment-select.component';
 import {GeoCodeSegmentSelectComponent} from '../../journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
 import * as moment from 'moment';
+import {AdminSegmentEmployeeSelectComponent} from '../../treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
 
 @Component({
     selector: 'app-create-fixed-assets',
@@ -33,6 +34,7 @@ export class CreateFixedAssetsComponent implements OnInit {
     functionSegments = [];
     fundSegmentsAddDet = [];
     geoCodeSegments = [];
+    custodian = [];
 
     constructor(
         private structureService: StructureService,
@@ -81,10 +83,13 @@ export class CreateFixedAssetsComponent implements OnInit {
             functionalSegmentId: [''],
             geoCodeSegmentId: [''],
             fundSegmentId: [''],
+            remark: [''],
 
             depreciationRate: [''],
             depreciationMethod: [''],
             assetNoPrefixLine: [''],
+            valueDate: [''],
+            custodianId: [''],
         });
 
 
@@ -320,6 +325,29 @@ export class CreateFixedAssetsComponent implements OnInit {
             this.geoCodeSegments = [{name: response.name, id: response.id}];
             this.assetsForm.patchValue({
                 geoCodeSegmentId: response.id,
+                disabled: true
+            });
+        });
+    }
+
+    selectAdminEmployee(type): void {
+        const allowType: any = 'BOTH';
+        const node: any = undefined;
+
+        this.dialogRef = this._matDialog.open(AdminSegmentEmployeeSelectComponent, {
+            panelClass: 'transaction-items-form-dialog',
+            data: {head: type, allow: allowType, node: node}
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.custodian = [{
+                name: response['empData'].firstName + ' ' + response['empData'].lastName,
+                id: response['empData'].id
+            }];
+            this.assetsForm.patchValue({
+                custodianId: response['empData'].id,
                 disabled: true
             });
         });

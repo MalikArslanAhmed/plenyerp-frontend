@@ -31,6 +31,7 @@ interface SegmentNode {
     maxLevel: number;
     characterCount: number;
     isActive: number;
+    isParent: boolean;
 }
 
 const TREE_DATA: SegmentNode[] = [];
@@ -59,6 +60,7 @@ export class CategoryListComponent implements OnInit {
             expandable: !!node.subCategories && node.subCategories.length > 0,
             id: node.id,
             title: node.title,
+            isParent: node.isParent,
             depreciationRate: node.depreciationRate,
             depreciationMethod: node.depreciationMethod,
             assetNoPrefixLine: node.assetNoPrefixLine,
@@ -101,6 +103,7 @@ export class CategoryListComponent implements OnInit {
                 const treeData: any = {
                     id: 0,
                     isChildEnabled: true,
+                    isParent: true,
                     parentId: 0,
                     title: 'Categories',
                     subCategories: data.items

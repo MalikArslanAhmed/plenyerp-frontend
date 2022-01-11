@@ -9,7 +9,7 @@
                         <button mat-icon-button disabled></button>
                         {{node.title}}
                         <button mat-icon-button title="Add" (click)="addItem(node)"
-                                *ngIf="node.isActive">
+                                *ngIf="node.isParent">
                             <mat-icon class="addBtn">add</mat-icon>
                         </button>
                         <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">
@@ -29,7 +29,7 @@
                         </button>
                         {{node.title}}
                         <button mat-icon-button title="Add" (click)="addItem(node)"
-                                *ngIf="node.isActive">
+                                *ngIf="node.isParent">
                             <mat-icon class="addBtn">add</mat-icon>
                         </button>
                         <button mat-icon-button title="Edit" (click)="editItem(node)" *ngIf="node.level !== 0">

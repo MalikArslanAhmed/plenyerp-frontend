@@ -4,13 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructureService} from '../../../../shared/services/structure.service';
 import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AlertService} from '../../../../shared/services/alert.service';
 import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {AddCreateAdminSegmentsComponent} from '../../admin-segments/add-create-admin-segments/add-create-admin-segments.component';
-import {SummaryAdminSegmentSelectComponent} from '../../summary-admin-segment-select/summary-admin-segment-select.component';
 import {EconomicSegmentSelectComponent} from '../../journal-voucher/economic-segment-select/economic-segment-select.component';
 
 @Component({
@@ -25,6 +19,7 @@ export class CreateCategoryComponent implements OnInit {
     parentNode: any;
     categoryForm: FormGroup;
     dialogRef: any;
+    depreciationMethods = [];
     adminSegments = [];
     fixedAssetAcctAr = [];
     accumDeprAcctAr = [];
@@ -36,8 +31,7 @@ export class CreateCategoryComponent implements OnInit {
                 private _matDialog: MatDialog,
                 private fb: FormBuilder,
                 private fxaCategoryService: FxaCategoriesService,
-                @Inject(MAT_DIALOG_DATA) private _data: any,
-                private router: Router) {
+                @Inject(MAT_DIALOG_DATA) private _data: any) {
         if (_data.parent) {
             this.parentNode = _data.parent;
         }
@@ -48,10 +42,8 @@ export class CreateCategoryComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh(this._data.action === 'EDIT' ? this._data.node : {});
-
-        if (this._data.action === 'EDIT') {
-            this.patchForm(this._data.node);
-        }
+        this.patchForm(this._data.action === 'EDIT' ? this._data.node : this.parentNode);
+        this.getDepreciation();
     }
 
 
@@ -60,12 +52,33 @@ export class CreateCategoryComponent implements OnInit {
             id: [data.id || ''],
             title: [data.title || '', Validators.required],
             depreciationRate: [data.depreciationRate || ''],
-            depreciationMethod: [data.depreciationMethod || ''],
-            assetNoPrefixLine: [data.assetNoPrefixLine || ''],
-            fixedAssetAcctId: [data.fixedAssetAcctId || ''],
-            accumDeprAcctId: [data.accumDeprAcctId || ''],
-            deprExpsAcctId: [data.deprExpsAcctId || ''],
+            depreciationMethodId: [data.depreciationMethodId || ''],
+            // assetNoPrefixLine: [data.assetNoPrefixLine || ''],
+            isParent: [data.isParent || false],
+            fixedAssetAcctId: [{
+                value: this.parentNode ? this.parentNode.fixedAssetAcctId : (data.fixedAssetAcctId || ''),
+                disabled: !!this.parentNode
+            }],
+            accumDeprAcctId: [{
+                value: this.parentNode ? this.parentNode.accumDeprAcctId : (data.accumDeprAcctId || ''),
+                disabled: !!this.parentNode
+            }],
+            deprExpsAcctId: [{
+                value: this.parentNode ? this.parentNode.deprExpsAcctId : (data.deprExpsAcctId || ''),
+                disabled: !!this.parentNode
+            }],
         });
+        if (data.id) {
+            this.categoryForm.controls['isParent'].disable();
+        }
+    }
+
+    getDepreciation(): void {
+        this.fxaCategoryService.getDepreciation({}).subscribe(
+            data => {
+                this.depreciationMethods = data.items;
+            }
+        );
     }
 
     patchForm(updatedData): void {

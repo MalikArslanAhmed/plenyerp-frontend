@@ -21,12 +21,26 @@
                         </mat-form-field>
                     </div>
                 </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Depreciation Method</mat-label>
+                            <select matNativeControl formControlName="depreciationMethodId">
+                                <option value="">Select Depreciation Method</option>
+                                <option [value]="depreciationMethod.id" *ngFor="let depreciationMethod of depreciationMethods">
+                                    {{depreciationMethod.title}}
+                                </option>
+                            </select>
+                            <mat-error>Depreciation Method is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
 
                 <mat-grid-tile>
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
-                            <mat-label>Asset Number Prefix Line</mat-label>
-                            <input matInput formControlName="assetNoPrefixLine" required>
+                            <mat-label>Depreciation Rate</mat-label>
+                            <input matInput formControlName="depreciationRate" required>
                             <mat-error>Asset Number Prefix Line is required!</mat-error>
                         </mat-form-field>
                     </div>
@@ -68,6 +82,13 @@
                                             *ngFor="let admin of deprExpsAcctAr">{{admin?.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-label style="margin-right: 20px">Is a parent</mat-label>
+                        <mat-slide-toggle formControlName="isParent"></mat-slide-toggle>
                     </div>
                 </mat-grid-tile>
             </mat-grid-list>
