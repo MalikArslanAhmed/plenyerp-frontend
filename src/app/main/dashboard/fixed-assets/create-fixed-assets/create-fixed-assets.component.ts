@@ -14,6 +14,7 @@ import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-sel
 import {GeoCodeSegmentSelectComponent} from '../../journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
 import * as moment from 'moment';
 import {AdminSegmentEmployeeSelectComponent} from '../../treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
+import {FixedAssetCategorySelectComponent} from '../fixed-asset-category-select/fixed-asset-category-select.component';
 
 @Component({
     selector: 'app-create-fixed-assets',
@@ -50,7 +51,6 @@ export class CreateFixedAssetsComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.getCategories();
         this.getDepreciation();
         this.getStatus();
     }
@@ -98,15 +98,6 @@ export class CreateFixedAssetsComponent implements OnInit {
         if (this.fixedAssetId) {
             this.getDetail();
         }
-    }
-
-
-    getCategories(): void {
-        this.fxaCategoryService.getCategories({}).subscribe(
-            data => {
-                this.faCategories = data.items;
-            }
-        );
     }
 
     getDepreciation(): void {
@@ -348,6 +339,26 @@ export class CreateFixedAssetsComponent implements OnInit {
             }];
             this.assetsForm.patchValue({
                 custodianId: response['empData'].id,
+                disabled: true
+            });
+        });
+    }
+
+    openFixedAssetCategory(): void {
+        this.dialogRef = this._matDialog.open(FixedAssetCategorySelectComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {}
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.faCategories = [{
+                title: response.title,
+                id: response.id
+            }];
+            this.assetsForm.patchValue({
+                assetNoPrefixLine: response.id,
                 disabled: true
             });
         });

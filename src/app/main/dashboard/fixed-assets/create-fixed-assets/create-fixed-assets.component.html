@@ -3,9 +3,7 @@
          fxLayoutAlign.gt-xs="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
             <div class="logo" fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="logo-icon mr-16"
-                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">person_add
-                </mat-icon>
+                Create Fixed Asset
             </div>
         </div>
     </div>
@@ -105,12 +103,13 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Asset Category</mat-label>
-                                    <select matNativeControl formControlName="assetNoPrefixLine">
-                                        <option value="">Select Deployment status</option>
-                                        <option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
+                                    <mat-select formControlName="assetNoPrefixLine" (click)="openFixedAssetCategory()"
+                                                [disabled]="true">
+                                        <mat-option value="">Choose Asset Category</mat-option>
+                                        <mat-option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
                                             {{faCategory.title}}
-                                        </option>
-                                    </select>
+                                        </mat-option>
+                                    </mat-select>
                                     <mat-error>Asset Category is required!</mat-error>
                                 </mat-form-field>
                             </div>

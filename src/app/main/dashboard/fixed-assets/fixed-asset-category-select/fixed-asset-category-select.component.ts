@@ -29,6 +29,7 @@ interface SegmentNode {
     maxLevel: number;
     characterCount: number;
     isActive: number;
+    isParent: boolean;
 }
 
 const TREE_DATA: SegmentNode[] = [];
@@ -54,6 +55,7 @@ export class FixedAssetCategorySelectComponent implements OnInit {
             expandable: !!node.subCategories && node.subCategories.length > 0,
             id: node.id,
             title: node.title,
+            isParent: node.isParent,
             depreciationRate: node.depreciationRate,
             depreciationMethod: node.depreciationMethod,
             assetNoPrefixLine: node.assetNoPrefixLine,
@@ -100,22 +102,18 @@ export class FixedAssetCategorySelectComponent implements OnInit {
     }
 
     getList(): void {
-        this.fxaCategoryService.getCategories({}).subscribe(
+        this.fxaCategoryService.getCategories({isParent: true}).subscribe(
             data => {
-                // console.log('data', data);
-                // this.segmentName = data.title;
-                // this.levelConfig = data.levelConfig;
-                this.dataSource.data = [data];
+                const treeData: any = {
+                    id: 0,
+                    isChildEnabled: true,
+                    isParent: true,
+                    parentId: 0,
+                    title: 'Categories',
+                    subCategories: data.items
+                };
+                this.dataSource.data = [treeData];
                 this.tree.treeControl.expandAll();
             });
-    }
-
-    checkCombinedCode(combinedCode, type): boolean {
-        const subString = combinedCode.substr(0, 4);
-        if (type === 'ASSET') {
-            return subString === '02-3';
-        } else if (type === 'ASSET_EXPENDITURE') {
-            return (subString === '02-3' || subString === '02-2');
-        }
     }
 }
