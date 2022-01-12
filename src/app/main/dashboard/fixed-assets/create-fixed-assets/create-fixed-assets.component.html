@@ -25,7 +25,8 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Date Manufactured</mat-label>
-                                    <input matInput [matDatepicker]="manufacturedDate" formControlName="dateManufactured">
+                                    <input matInput [matDatepicker]="manufacturedDate"
+                                           formControlName="dateManufactured">
                                     <mat-datepicker-toggle matSuffix [for]="manufacturedDate">
                                     </mat-datepicker-toggle>
                                     <mat-datepicker #manufacturedDate></mat-datepicker>
@@ -120,7 +121,8 @@
                                     <mat-label>Deployment Status</mat-label>
                                     <select matNativeControl formControlName="fxaStatusId">
                                         <option value="">Select Deployment status</option>
-                                        <option [value]="status.id" *ngFor="let status of faStatuses">{{status.title}}</option>
+                                        <option [value]="status.id"
+                                                *ngFor="let status of faStatuses">{{status.title}}</option>
                                     </select>
                                     <mat-error>Deployment Status is required!</mat-error>
                                 </mat-form-field>
@@ -132,7 +134,8 @@
                                     <mat-label>Depreciation Method</mat-label>
                                     <select matNativeControl formControlName="depreciationMethod">
                                         <option value="">Select Depreciation Method</option>
-                                        <option [value]="faDepreciation.id" *ngFor="let faDepreciation of faDepreciations">
+                                        <option [value]="faDepreciation.id"
+                                                *ngFor="let faDepreciation of faDepreciations">
                                             {{faDepreciation.title}}
                                         </option>
                                     </select>
@@ -198,7 +201,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Commissioned</mat-label>
-                                        <input matInput [matDatepicker]="dateCommissioned" formControlName="dateCommissioned">
+                                        <input matInput [matDatepicker]="dateCommissioned"
+                                               formControlName="dateCommissioned">
                                         <mat-datepicker-toggle matSuffix [for]="dateCommissioned">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #dateCommissioned></mat-datepicker>
@@ -210,7 +214,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Commissioned</mat-label>
-                                        <input matInput [matDatepicker]="dateDeCommissioned" formControlName="dateDeCommissioned">
+                                        <input matInput [matDatepicker]="dateDeCommissioned"
+                                               formControlName="dateDeCommissioned">
                                         <mat-datepicker-toggle matSuffix [for]="dateDeCommissioned">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #dateDeCommissioned></mat-datepicker>
@@ -244,43 +249,14 @@
                     </fieldset>
 
                     <fieldset class="mt-8">
-                        <legend>Current Location</legend>
-                        <mat-grid-list cols="3" rowHeight="100px">
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
-                                                    (click)="selectAdminEmployee('Select Checking Officer')">
-                                        <mat-label>Checking Officer</mat-label>
-                                        <mat-select formControlName="custodianId">
-                                            <mat-option value="">Checking Officer Name</mat-option>
-                                            <mat-option [value]="checkingOfficer.id"
-                                                        *ngFor="let checkingOfficer of custodian">{{checkingOfficer?.name}}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Date Manufactured</mat-label>
-                                        <input matInput [matDatepicker]="valueDate" formControlName="valueDate">
-                                        <mat-datepicker-toggle matSuffix [for]="valueDate">
-                                        </mat-datepicker-toggle>
-                                        <mat-datepicker #valueDate></mat-datepicker>
-                                        <mat-error>Value Date is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>
-                        </mat-grid-list>
-                    </fieldset>
-                    <fieldset class="mt-8">
                         <legend>Purchase Classification</legend>
                         <mat-grid-list cols="3" rowHeight="100px">
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
                                         <mat-label>Admin Segment</mat-label>
-                                        <mat-select formControlName="adminSegmentId" (click)="adminSegmentSelect()" [disabled]="true">
+                                        <mat-select formControlName="adminSegmentId" (click)="adminSegmentSelect()"
+                                                    [disabled]="true">
                                             <mat-option value="">Choose Admin Segment</mat-option>
                                             <mat-option [value]="admin.id"
                                                         *ngFor="let admin of adminSegments">{{admin?.name}}</mat-option>
@@ -350,6 +326,79 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                     </fieldset>
+
+                    <fieldset class="mt-8">
+                        <legend>Current Location</legend>
+                        <mat-grid-list cols="3" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
+                                                    (click)="selectAdminEmployee('Select Checking Officer')">
+                                        <mat-label>Custodian</mat-label>
+                                        <mat-select formControlName="custodianId" [disabled]="true">
+                                            <mat-option value="">Custodian Name</mat-option>
+                                            <mat-option [value]="custodian.id" *ngFor="let custodian of custodians">
+                                                {{custodian?.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Value Date</mat-label>
+                                        <input matInput [matDatepicker]="valueDate" formControlName="valueDate">
+                                        <mat-datepicker-toggle matSuffix [for]="valueDate">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #valueDate></mat-datepicker>
+                                        <mat-error>Value Date is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Location</mat-label>
+                                        <mat-select formControlName="locationId" required [disabled]="true"
+                                                    (click)="workLocationListSelect()">
+                                            <mat-option [value]="workLocation.id"
+                                                        *ngFor="let workLocation of workLocations">{{workLocation.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error>Location is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
+                                        <mat-label>Admin Segment</mat-label>
+                                        <mat-select formControlName="deploymentAdminSegmentId"
+                                                    (click)="deploymentAdminSegmentSelect()" [disabled]="true">
+                                            <mat-option value="">Choose Admin Segment</mat-option>
+                                            <mat-option [value]="admin.id" *ngFor="let admin of adminSegments">
+                                                {{admin?.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+
+                            <!--<mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Title</mat-label>
+                                        <input matInput formControlName="deploymentRemark" required>
+                                        <mat-error>Title is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>-->
+
+                            <!-- // todo Add remark text area -->
+                        </mat-grid-list>
+                    </fieldset>
+
                     <div fxLayout="row" fxLayoutAlign="right right" class="mt-8">
                         <button mat-raised-button type="button" color="accent"
                                 (click)="saveFixedAssets()" *ngIf="!this.fixedAssetId">

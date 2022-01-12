@@ -15,6 +15,7 @@ import {GeoCodeSegmentSelectComponent} from '../../journal-voucher/geo-code-segm
 import * as moment from 'moment';
 import {AdminSegmentEmployeeSelectComponent} from '../../treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
 import {FixedAssetCategorySelectComponent} from '../fixed-asset-category-select/fixed-asset-category-select.component';
+import {WorkLocationsListSelectComponent} from '../../employees/work-locations-list-select/work-locations-list-select.component';
 
 @Component({
     selector: 'app-create-fixed-assets',
@@ -30,12 +31,14 @@ export class CreateFixedAssetsComponent implements OnInit {
     faLocations = [];
     faStatuses = [];
     adminSegments = [];
+    deploymentAdminSegments = [];
     economicSegments = [];
     programmeSegments = [];
     functionSegments = [];
     fundSegmentsAddDet = [];
     geoCodeSegments = [];
-    custodian = [];
+    custodians = [];
+    workLocations = [];
 
     constructor(
         private structureService: StructureService,
@@ -88,8 +91,12 @@ export class CreateFixedAssetsComponent implements OnInit {
             depreciationRate: [''],
             depreciationMethod: [''],
             assetNoPrefixLine: [''],
+
             valueDate: [''],
             custodianId: [''],
+            locationId: [''],
+            deploymentRemark: [''],
+            deploymentAdminSegmentId: [''],
         });
 
 
@@ -153,9 +160,15 @@ export class CreateFixedAssetsComponent implements OnInit {
             geoCodeSegmentId: updatedData.geoCodeSegmentId,
             fundSegmentId: updatedData.fundSegmentId,
 
-            depreciationRate: [''],
-            depreciationMethod: [''],
-            assetNoPrefixLine: [''],
+            depreciationRate: '',
+            depreciationMethod: '',
+            assetNoPrefixLine: '',
+
+            valueDate: '',
+            custodianId: '',
+            locationId: '',
+            deploymentRemark: '',
+            deploymentAdminSegmentId: '',
         });
 
         this.adminSegments = [{
@@ -204,10 +217,12 @@ export class CreateFixedAssetsComponent implements OnInit {
         if (reqData.dateDisposed) {
             reqData['dateDisposed'] = moment(reqData.dateDisposed).format('YYYY-MM-DD');
         }
+        if (reqData.valueDate) {
+            reqData['valueDate'] = moment(reqData.valueDate).format('YYYY-MM-DD');
+        }
 
         this.fxaCategoryService.add(reqData).subscribe(
             data => {
-                this.faStatuses = data.items;
                 this.router.navigateByUrl(`/dashboard/fixed-assets`);
             }
         );
@@ -333,7 +348,7 @@ export class CreateFixedAssetsComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.custodian = [{
+            this.custodians = [{
                 name: response['empData'].firstName + ' ' + response['empData'].lastName,
                 id: response['empData'].id
             }];
@@ -359,6 +374,44 @@ export class CreateFixedAssetsComponent implements OnInit {
             }];
             this.assetsForm.patchValue({
                 assetNoPrefixLine: response.id,
+                disabled: true
+            });
+        });
+    }
+
+    workLocationListSelect(): void {
+        this.dialogRef = this._matDialog.open(WorkLocationsListSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.workLocations = [{
+                name: response.name,
+                id: response.id
+            }];
+            this.assetsForm.patchValue({
+                locationId: response.id,
+                disabled: true
+            });
+        });
+    }
+
+    deploymentAdminSegmentSelect(): void {
+        this.dialogRef = this._matDialog.open(SummaryAdminSegmentSelectComponent, {
+            panelClass: 'contact-form-dialog',
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.deploymentAdminSegments = [{
+                name: response.name,
+                id: response.id
+            }];
+            this.assetsForm.patchValue({
+                deploymentAdminSegmentId: response.id,
                 disabled: true
             });
         });
