@@ -144,17 +144,15 @@
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <!--<mat-grid-list cols="12">
-                        <mat-grid-tile>
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Title</mat-label>
-                                    <input matInput formControlName="remark" required>
-                                    <mat-error>Title is required!</mat-error>
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>
-                    </mat-grid-list>-->
+                    <mat-grid-list cols="12">
+                        <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Remark</mat-label>
+                                <textarea matInput formControlName="remark"></textarea>
+<!--                                <mat-error>Remark is required!</mat-error>-->
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-list>
                     <fieldset>
                         <legend>Supplier Details</legend>
                         <mat-grid-list cols="3" rowHeight="100px">
@@ -384,18 +382,15 @@
                                     </mat-form-field>
                                 </div>
                             </mat-grid-tile>
-
-                            <!--<mat-grid-tile>
-                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Title</mat-label>
-                                        <input matInput formControlName="deploymentRemark" required>
-                                        <mat-error>Title is required!</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </mat-grid-tile>-->
-
-                            <!-- // todo Add remark text area -->
+                        </mat-grid-list>
+                        <mat-grid-list cols="12">
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Remark</mat-label>
+                                    <textarea matInput formControlName="deploymentRemark"></textarea>
+<!--                                    <mat-error>Remark is required!</mat-error>-->
+                                </mat-form-field>
+                            </div>
                         </mat-grid-list>
                     </fieldset>
 
