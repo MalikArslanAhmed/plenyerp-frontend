@@ -61,6 +61,7 @@ export class CreateFixedAssetsComponent implements OnInit {
     refresh(): void {
         this.assetsForm = this.fb.group({
             fxaStatusId: [''],
+            assetNo: [''],
             title: [''],
             custodian: [''],
             make: [''],
@@ -134,6 +135,7 @@ export class CreateFixedAssetsComponent implements OnInit {
     patchForm(updatedData): void {
         this.assetsForm.patchValue({
             fxaStatusId: updatedData.fxaStatusId,
+            assetNo: updatedData.assetNo,
             title: updatedData.title,
             custodian: updatedData.custodian,
             make: updatedData.make,

@@ -16,6 +16,15 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Title</mat-label>
+                                    <input matInput formControlName="assetNo" required>
+                                    <mat-error>Asset Number is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Title</mat-label>
                                     <input matInput formControlName="title" required>
                                     <mat-error>Title is required!</mat-error>
                                 </mat-form-field>
