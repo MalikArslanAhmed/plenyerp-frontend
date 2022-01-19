@@ -1,1 +1,141 @@
-<p>fixed-asset-deployment works!</p>
+<div id="journal-voucher" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                   Asset Deployment
+                </span>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+           <!-- <div>
+                <button mat-button class="accent" id="add-button" aria-label="add skill"
+                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openAll()">
+                    {{panelOpenState ? 'Close' : 'Open'}} All
+                </button>
+            </div>-->
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <!--<div class="content">
+                <form [formGroup]="filterTrialBalanceReportForm">
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>From</mat-label>
+                        <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
+                               formControlName="from">
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="from"></mat-datepicker-toggle>
+                        <mat-datepicker #from></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>To</mat-label>
+                        <input matInput [matDatepicker]="to" (click)="to.open()" (focus)="to.open()"
+                               formControlName="to">
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="to"></mat-datepicker-toggle>
+                        <mat-datepicker #to></mat-datepicker>
+                    </mat-form-field>
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        &lt;!&ndash;<button mat-button class="submit-report" (click)="filterTrailBalance()">
+                            Submit
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>&ndash;&gt;
+                    </div>
+                </form>
+            </div>-->
+
+            <div class="content mt-20px">
+                <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
+                    <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                        <span class="mat-header-cell">Asset Number</span>
+                        <span class="mat-header-cell">Date of Deployment</span>
+                        <span class="mat-header-cell">Admin Segment</span>
+                        <span class="mat-header-cell">Work Location</span>
+                        <span class="mat-header-cell">Custodian</span>
+                        <span class="mat-header-cell">Remark</span>
+                    </section>
+                    <mat-expansion-panel *ngFor="let fixedAsset of fixedAssets; let i = index"
+                                         [expanded]="fixedAsset.isOpen">
+                        <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
+                                                    (click)="getDeployments(fixedAsset)">
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{i + 1}}.</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.assetNo}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment?.createdAt | date}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.adminSegment.name}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.workLocation.name}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.custodian.name}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.remark}}</p>
+                            </span>
+                        </mat-expansion-panel-header>
+                        <div class="mt-23px">
+                            <table class="simple invoice-table">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <div class="title">Date of Deployment</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Admin Segment</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Work Location</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Custodian</div>
+                                    </th>
+                                    <th>
+                                        <div class="title">Remark</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody
+                                    *ngIf="fixedAsset && fixedAsset['children'] && fixedAsset['children'].length > 0; else noChildToShow">
+                                <tr *ngFor="let child of fixedAsset['children']; let j = index">
+                                    <td>{{child.createdAt}}</td>
+                                    <td>{{child.adminSegment.name}}</td>
+                                    <td>{{child.workLocation.name}}</td>
+                                    <td>{{child.custodian.name}}</td>
+                                    <td>{{child.remark}}</td>
+                                </tr>
+                                </tbody>
+                                <ng-template #noChildToShow>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-center" colspan="7">No data to show</td>
+                                    </tr>
+                                    </tbody>
+                                </ng-template>
+                            </table>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+            <mat-paginator *ngIf="fixedAssets.length > 0"
+                           [length]="pagination.total"
+                           [pageSize]="pagination.perpage"
+                           [pageIndex]="pagination.page-1"
+                           (page)="onPageChange($event)">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

@@ -58,4 +58,8 @@ export class FxaCategoriesService extends BaseService {
         return this.putRequest(AppUrl.FIXED_ASSETS(id), data);
     }
 
+    getFixedAssetDeployments(fixedAssetId, params): Observable<any> {
+        return this.getRequest(AppUrl.FIXED_ASSETS_DEPLOYMENT(fixedAssetId), params);
+    }
+
 }

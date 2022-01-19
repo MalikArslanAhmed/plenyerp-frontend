@@ -29,6 +29,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FixedAssetDeploymentComponent } from './fixed-asset-deployment/fixed-asset-deployment.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -62,7 +64,9 @@ import { FixedAssetDeploymentComponent } from './fixed-asset-deployment/fixed-as
         MatDialogModule,
         MatStepperModule,
         MatInputModule,
-        MatCardModule
+        MatCardModule,
+        MatExpansionModule,
+        MatSortModule
     ]
 })
 export class FixedAssetsModule {

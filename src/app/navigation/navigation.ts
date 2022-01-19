@@ -970,7 +970,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Fixed Assets',
                         roles: [],
                         type: 'item',
-                        url: 'fixed-assets',
+                        url: 'fixed-assets/list',
                         permissions: [PermissionConstant.REPORTS_TREASURY_RV_VIEW_REPORTS]
                     }
                 ]

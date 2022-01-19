@@ -225,7 +225,7 @@ export class CreateFixedAssetsComponent implements OnInit {
 
         this.fxaCategoryService.add(reqData).subscribe(
             data => {
-                this.router.navigateByUrl(`/fixed-assets`);
+                this.router.navigateByUrl(`/fixed-assets/list`);
             }
         );
     }
@@ -234,7 +234,7 @@ export class CreateFixedAssetsComponent implements OnInit {
         this.fxaCategoryService.update(this.fixedAssetId, this.assetsForm.value).subscribe(
             data => {
                 this.faStatuses = data.items;
-                this.router.navigateByUrl(`/fixed-assets`);
+                this.router.navigateByUrl(`/fixed-assets/list`);
             }
         );
     }

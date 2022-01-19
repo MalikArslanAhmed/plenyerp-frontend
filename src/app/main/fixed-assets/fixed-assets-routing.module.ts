@@ -7,7 +7,7 @@ import {CreateFixedAssetsComponent} from './create-fixed-assets/create-fixed-ass
 import {FixedAssetDeploymentComponent} from './fixed-asset-deployment/fixed-asset-deployment.component';
 
 const routes: Routes = [
-    {path: '', component: FixedAssetsComponent, data: {title: 'Fixed Assets '}},
+    {path: 'list', component: FixedAssetsComponent, data: {title: 'Fixed Assets '}},
     {path: 'deployments', component: FixedAssetDeploymentComponent, data: {title: 'Fixed Assets '}},
     {
         path: 'fixed-assets-categories',
