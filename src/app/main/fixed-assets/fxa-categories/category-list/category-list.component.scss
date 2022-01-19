@@ -1,5 +1,5 @@
-app-fixed-assets-list {
-    @import "src/@fuse/scss/fuse";
+app-category-list {
+    @import "../../../../../@fuse/scss/fuse";
 
     .blueColor {
         color: blue;
@@ -139,5 +139,9 @@ app-fixed-assets-list {
 
     .pt-18px {
         padding-top: 18px;
+    }
+
+    .deleteBtn {
+        color: red;
     }
 }

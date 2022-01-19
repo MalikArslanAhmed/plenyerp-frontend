@@ -6,9 +6,8 @@ import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {CreateCategoryComponent} from '../create-category/create-category.component';
 import {FormGroup} from '@angular/forms';
-import {AddCreateAdminSegmentsComponent} from '../../admin-segments/add-create-admin-segments/add-create-admin-segments.component';
 import {MatDialog} from '@angular/material/dialog';
-import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
+import {DeleteListModalComponent} from '../../../dashboard/delete-list-modal/delete-list-modal.component';
 
 interface SegmentNode {
     id: number;

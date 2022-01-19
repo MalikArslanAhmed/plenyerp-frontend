@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
+import {FuseSidebarService} from '../../../@fuse/components/sidebar/sidebar.service';
 import {MatDialog} from '@angular/material/dialog';
 import {FormBuilder} from '@angular/forms';
-import {PermissionConstant} from '../../../shared/constants/permission-constant';
+import {PermissionConstant} from '../../shared/constants/permission-constant';
 import {Router} from '@angular/router';
 
 @Component({
@@ -26,6 +26,6 @@ export class FixedAssetsComponent implements OnInit {
 
 
     addFixedAssets(): void {
-        this.router.navigateByUrl(`/dashboard/fixed-assets/create`);
+        this.router.navigateByUrl(`/fixed-assets/create`);
     }
 }

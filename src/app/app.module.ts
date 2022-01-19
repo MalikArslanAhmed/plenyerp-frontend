@@ -33,6 +33,10 @@ const appRoutes: Routes = [
         loadChildren: () => import('./main/dashboard/dashboard.module').then(m => m.DashboardModule)
     },
     {
+        path: 'fixed-assets',
+        loadChildren: () => import('./main/fixed-assets/fixed-assets.module').then(m => m.FixedAssetsModule)
+    },
+    {
         path: 'auth',
         loadChildren: () => import('./main/authentication/authentication.module').then(m => m.AuthenticationModule)
     },

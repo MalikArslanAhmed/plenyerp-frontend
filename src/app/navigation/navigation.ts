@@ -950,7 +950,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'fixed-assets',
-                title: 'Fixed - Assets',
+                title: 'Fixed Asset - Setup',
                 roles: [],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
@@ -962,7 +962,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Categories',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/fixed-assets-categories',
+                        url: 'fixed-assets/fixed-assets-categories',
                         permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
                     },
                     {
@@ -970,11 +970,29 @@ export const navigation: FuseNavigation[] = [
                         title: 'Fixed Assets',
                         roles: [],
                         type: 'item',
-                        url: 'dashboard/fixed-assets',
+                        url: 'fixed-assets',
                         permissions: [PermissionConstant.REPORTS_TREASURY_RV_VIEW_REPORTS]
                     }
                 ]
             },
+            {
+                id: 'fixed-assets',
+                title: 'Fixed Asset - Processing',
+                roles: [],
+                type: 'collapsable',
+                icon: 'report',
+                permissions: [],
+                children: [
+                    {
+                        id: 'deployment',
+                        title: 'Deployment',
+                        roles: [],
+                        type: 'item',
+                        url: 'fixed-assets/deployments',
+                        permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
+                    },
+                ]
+            }
         ]
     }
 ];

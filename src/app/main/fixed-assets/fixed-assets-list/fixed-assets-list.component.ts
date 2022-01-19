@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from '../../../../../@fuse/animations';
-import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
 import {Router} from '@angular/router';
-import {DeleteListModalComponent} from '../../delete-list-modal/delete-list-modal.component';
+import {DeleteListModalComponent} from '../../dashboard/delete-list-modal/delete-list-modal.component';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
@@ -51,7 +51,7 @@ export class FixedAssetsListComponent implements OnInit {
     }
 
     editFixedAssets(fixedAsset): void {
-        this.router.navigateByUrl(`/dashboard/fixed-assets/` + fixedAsset.id);
+        this.router.navigateByUrl(`/fixed-assets/` + fixedAsset.id);
     }
 
     deleteItemModal(fixedAsset): void {

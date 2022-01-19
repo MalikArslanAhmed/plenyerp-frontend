@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from '../../../../../@fuse/animations';
+import {fuseAnimations} from '../../../../@fuse/animations';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
+import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {ActivatedRoute} from '@angular/router';
-import {AdminSegmentServices} from '../../../../shared/services/admin-segment.services';
+import {AdminSegmentServices} from '../../../shared/services/admin-segment.services';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
+import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
 
 interface SegmentNode {
     id: number;

@@ -5,7 +5,7 @@ import {StructureService} from '../../../../shared/services/structure.service';
 import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
-import {EconomicSegmentSelectComponent} from '../../journal-voucher/economic-segment-select/economic-segment-select.component';
+import {EconomicSegmentSelectComponent} from '../../../dashboard/journal-voucher/economic-segment-select/economic-segment-select.component';
 
 @Component({
     selector: 'app-create-category',

@@ -89,10 +89,6 @@ import {RetireVouchersComponent} from './treasure-report/retire-vouchers/retire-
 import {OnMandateComponent} from './treasure-report/on-mandate/on-mandate.component';
 import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
 import {PreviousYearAdvancesComponent} from './treasure-report/previous-year-advances/previous-year-advances.component';
-import {FxaCategoriesComponent} from './fxa-categories/fxa-categories.component';
-import {FixedAssetsComponent} from './fixed-assets/fixed-assets.component';
-import {CreateCategoryComponent} from './fxa-categories/create-category/create-category.component';
-import {CreateFixedAssetsComponent} from './fixed-assets/create-fixed-assets/create-fixed-assets.component';
 
 const routes: Routes = [
     {
@@ -855,48 +851,6 @@ const routes: Routes = [
         component: PaymentApprovalComponent,
         data: {
             title: 'Payment Approval'
-        }
-    },
-    {
-        path: 'fixed-assets-categories',
-        component: FxaCategoriesComponent,
-        data: {
-            title: 'Fixed Asset Categories'
-        }
-    },
-    {
-        path: 'fxa-categories-create',
-        component: CreateCategoryComponent,
-        data: {
-            title: 'Fixed Asset Categories Create'
-        }
-    },
-    {
-        path: 'fxa-categories/edit/:id',
-        component: CreateCategoryComponent,
-        data: {
-            title: 'Fixed Asset Categories Update'
-        }
-    },
-    {
-        path: 'fixed-assets',
-        component: FixedAssetsComponent,
-        data: {
-            title: 'Fixed Assets '
-        }
-    },
-    {
-        path: 'fixed-assets/create',
-        component: CreateFixedAssetsComponent,
-        data: {
-            title: 'Fixed Assets '
-        }
-    },
-    {
-        path: 'fixed-assets/:id',
-        component: CreateFixedAssetsComponent,
-        data: {
-            title: 'Fixed Assets '
         }
     },
 ];

@@ -263,19 +263,11 @@ import {PaymentApprovalComponent} from './treasure-report/payment-approval/payme
 import {SchedulePaymentApprovalEmployeeComponent} from './treasure-report/payment-approval/schedule-payment-approval-employee/schedule-payment-approval-employee.component';
 import {SchedulePaymentApprovalCustomerComponent} from './treasure-report/payment-approval/schedule-payment-approval-customer/schedule-payment-approval-customer.component';
 import {PreviousYearAdvancesComponent} from './treasure-report/previous-year-advances/previous-year-advances.component';
-import { PreviousYearAdvancesCreateComponent } from './treasure-report/previous-year-advances/previous-year-advances-create/previous-year-advances-create.component';
-import { SchedulePayersEmployeePreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component';
-import { SchedulePayersCustomerPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component';
-import { ScheduleEconomicCodesReceiptPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-economic-codes-receipt-previous-advances/schedule-economic-codes-receipt-previous-advances.component';
-import {AbsoluteAmountPipe} from '../../shared/pipes/absolute-amount.pipe';
-import { EmployeeLoginAccessComponent } from './employees/employee-action/employee-login-access/employee-login-access.component';
-import { FixedAssetsComponent } from './fixed-assets/fixed-assets.component';
-import { CreateFixedAssetsComponent } from './fixed-assets/create-fixed-assets/create-fixed-assets.component';
-import { FxaCategoriesComponent } from './fxa-categories/fxa-categories.component';
-import { CreateCategoryComponent } from './fxa-categories/create-category/create-category.component';
-import { CategoryListComponent } from './fxa-categories/category-list/category-list.component';
-import { FixedAssetsListComponent } from './fixed-assets/fixed-assets-list/fixed-assets-list.component';
-import {FixedAssetCategorySelectComponent} from './fixed-assets/fixed-asset-category-select/fixed-asset-category-select.component';
+import {PreviousYearAdvancesCreateComponent} from './treasure-report/previous-year-advances/previous-year-advances-create/previous-year-advances-create.component';
+import {SchedulePayersEmployeePreviousAdvancesComponent} from './treasure-report/previous-year-advances/schedule-payers-employee-previous-advances/schedule-payers-employee-previous-advances.component';
+import {SchedulePayersCustomerPreviousAdvancesComponent} from './treasure-report/previous-year-advances/schedule-payers-customer-previous-advances/schedule-payers-customer-previous-advances.component';
+import {ScheduleEconomicCodesReceiptPreviousAdvancesComponent} from './treasure-report/previous-year-advances/schedule-economic-codes-receipt-previous-advances/schedule-economic-codes-receipt-previous-advances.component';
+import {EmployeeLoginAccessComponent} from './employees/employee-action/employee-login-access/employee-login-access.component';
 
 @NgModule({
     declarations: [
@@ -522,14 +514,7 @@ import {FixedAssetCategorySelectComponent} from './fixed-assets/fixed-asset-cate
         SchedulePayersEmployeePreviousAdvancesComponent,
         SchedulePayersCustomerPreviousAdvancesComponent,
         ScheduleEconomicCodesReceiptPreviousAdvancesComponent,
-        EmployeeLoginAccessComponent,
-        FixedAssetsComponent,
-        CreateFixedAssetsComponent,
-        FxaCategoriesComponent,
-        CreateCategoryComponent,
-        CategoryListComponent,
-        FixedAssetsListComponent,
-        FixedAssetCategorySelectComponent,
+        EmployeeLoginAccessComponent
     ],
     imports: [
         CommonModule,
@@ -564,9 +549,7 @@ import {FixedAssetCategorySelectComponent} from './fixed-assets/fixed-asset-cate
         MatExpansionModule,
         MatSortModule
     ],
-    providers: [
-
-    ]
+    providers: []
 })
 export class DashboardModule {
 }

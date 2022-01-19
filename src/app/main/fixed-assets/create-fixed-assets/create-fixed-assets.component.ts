@@ -1,21 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {StructureService} from '../../../../shared/services/structure.service';
-import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
+import {StructureService} from '../../../shared/services/structure.service';
+import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {MatDialog} from '@angular/material/dialog';
-import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
+import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlertService} from '../../../../shared/services/alert.service';
-import {SummaryAdminSegmentSelectComponent} from '../../summary-admin-segment-select/summary-admin-segment-select.component';
-import {ProgrammingSegmentSelectComponent} from '../../journal-voucher/programming-segment-select/programming-segment-select.component';
-import {FunctionalSegmentSelectComponent} from '../../journal-voucher/functional-segment-select/functional-segment-select.component';
-import {EconomicSegmentSelectComponent} from '../../journal-voucher/economic-segment-select/economic-segment-select.component';
-import {FundSegmentSelectComponent} from '../../journal-voucher/fund-segment-select/fund-segment-select.component';
-import {GeoCodeSegmentSelectComponent} from '../../journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
+import {AlertService} from '../../../shared/services/alert.service';
+import {SummaryAdminSegmentSelectComponent} from '../../dashboard/summary-admin-segment-select/summary-admin-segment-select.component';
+import {ProgrammingSegmentSelectComponent} from '../../dashboard/journal-voucher/programming-segment-select/programming-segment-select.component';
+import {FunctionalSegmentSelectComponent} from '../../dashboard/journal-voucher/functional-segment-select/functional-segment-select.component';
+import {EconomicSegmentSelectComponent} from '../../dashboard/journal-voucher/economic-segment-select/economic-segment-select.component';
+import {FundSegmentSelectComponent} from '../../dashboard/journal-voucher/fund-segment-select/fund-segment-select.component';
+import {GeoCodeSegmentSelectComponent} from '../../dashboard/journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
 import * as moment from 'moment';
-import {AdminSegmentEmployeeSelectComponent} from '../../treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
+import {AdminSegmentEmployeeSelectComponent} from '../../dashboard/treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
 import {FixedAssetCategorySelectComponent} from '../fixed-asset-category-select/fixed-asset-category-select.component';
-import {WorkLocationsListSelectComponent} from '../../employees/work-locations-list-select/work-locations-list-select.component';
+import {WorkLocationsListSelectComponent} from '../../dashboard/employees/work-locations-list-select/work-locations-list-select.component';
 
 @Component({
     selector: 'app-create-fixed-assets',
@@ -225,7 +225,7 @@ export class CreateFixedAssetsComponent implements OnInit {
 
         this.fxaCategoryService.add(reqData).subscribe(
             data => {
-                this.router.navigateByUrl(`/dashboard/fixed-assets`);
+                this.router.navigateByUrl(`/fixed-assets`);
             }
         );
     }
@@ -234,7 +234,7 @@ export class CreateFixedAssetsComponent implements OnInit {
         this.fxaCategoryService.update(this.fixedAssetId, this.assetsForm.value).subscribe(
             data => {
                 this.faStatuses = data.items;
-                this.router.navigateByUrl(`/dashboard/fixed-assets`);
+                this.router.navigateByUrl(`/fixed-assets`);
             }
         );
     }
