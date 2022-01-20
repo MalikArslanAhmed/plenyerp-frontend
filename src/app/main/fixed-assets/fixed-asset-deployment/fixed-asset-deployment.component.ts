@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
+import {fuseAnimations} from "../../../../@fuse/animations";
 
 @Component({
     selector: 'app-fixed-asset-deployment',
     templateUrl: './fixed-asset-deployment.component.html',
-    styleUrls: ['./fixed-asset-deployment.component.scss']
+    styleUrls: ['./fixed-asset-deployment.component.scss'],
+    animations: fuseAnimations
 })
 export class FixedAssetDeploymentComponent implements OnInit {
     filterTrialBalanceReportForm: FormGroup;

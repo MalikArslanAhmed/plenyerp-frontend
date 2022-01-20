@@ -1,7 +1,6 @@
 @import "src/@fuse/scss/fuse";
 
-app-fixed-asset-deployment {
-    #journal-voucher {
+    #journal-voucher.fixed-asset-deployment-page {
         .header {
             #add-button {
                 background-color: white !important;
@@ -97,6 +96,7 @@ app-fixed-asset-deployment {
         background-color: #E0E0E0;
         margin-top: -20px;
     }
+
 
     .accordion-table .accordion-row {
         padding-left: 1.5rem;
@@ -205,4 +205,3 @@ app-fixed-asset-deployment {
     .no-click {
         pointer-events: none;
     }
-}
