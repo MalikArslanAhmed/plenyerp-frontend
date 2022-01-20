@@ -1,13 +1,13 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from '../../../../../@fuse/animations';
-import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {CreateCategoryComponent} from '../create-category/create-category.component';
-import {FormGroup} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
-import {DeleteListModalComponent} from '../../../dashboard/delete-list-modal/delete-list-modal.component';
+import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
+import {FixedAssetCategoryCreateComponent} from '../fixed-asset-category-create/fixed-asset-category-create.component';
+import {DeleteListModalComponent} from '../../dashboard/delete-list-modal/delete-list-modal.component';
+
 
 interface SegmentNode {
     id: number;
@@ -42,13 +42,11 @@ interface ExampleFlatNode {
 }
 
 @Component({
-    selector: 'app-category-list',
-    templateUrl: './category-list.component.html',
-    styleUrls: ['./category-list.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    animations: fuseAnimations
+    selector: 'app-fixed-asset-category-list',
+    templateUrl: './fixed-asset-category-list.component.html',
+    styleUrls: ['./fixed-asset-category-list.component.scss']
 })
-export class CategoryListComponent implements OnInit {
+export class FixedAssetCategoryListComponent implements OnInit {
     @ViewChild('tree') tree;
     categories = [];
     dialogRef: any;
@@ -118,7 +116,7 @@ export class CategoryListComponent implements OnInit {
         if (node.id) {
             data['parent'] = node;
         }
-        this.dialogRef = this._matDialog.open(CreateCategoryComponent, {
+        this.dialogRef = this._matDialog.open(FixedAssetCategoryCreateComponent, {
             minWidth: 1200,
             panelClass: 'contact-form-dialog',
             data
@@ -129,7 +127,7 @@ export class CategoryListComponent implements OnInit {
     }
 
     editItem(node): void {
-        this.dialogRef = this._matDialog.open(CreateCategoryComponent, {
+        this.dialogRef = this._matDialog.open(FixedAssetCategoryCreateComponent, {
             minWidth: 1200,
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', node: node, levelConfig: this.levelConfig}

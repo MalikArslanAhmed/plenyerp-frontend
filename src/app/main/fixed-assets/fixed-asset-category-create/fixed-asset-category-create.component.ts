@@ -1,20 +1,20 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {fuseAnimations} from '../../../../../@fuse/animations';
+import {fuseAnimations} from '../../../../@fuse/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {StructureService} from '../../../../shared/services/structure.service';
-import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
+import {StructureService} from '../../../shared/services/structure.service';
+import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {FxaCategoriesService} from '../../../../shared/services/fxa-categories.service';
-import {EconomicSegmentSelectComponent} from '../../../dashboard/journal-voucher/economic-segment-select/economic-segment-select.component';
+import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
+import {EconomicSegmentSelectComponent} from '../../dashboard/journal-voucher/economic-segment-select/economic-segment-select.component';
 
 @Component({
     selector: 'app-create-category',
-    templateUrl: './create-category.component.html',
-    styleUrls: ['./create-category.component.scss'],
+    templateUrl: './fixed-asset-category-create.component.html',
+    styleUrls: ['./fixed-asset-category-create.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class CreateCategoryComponent implements OnInit {
+export class FixedAssetCategoryCreateComponent implements OnInit {
     dialogTitle = 'Add Category';
     parentNode: any;
     categoryForm: FormGroup;
@@ -26,7 +26,7 @@ export class CreateCategoryComponent implements OnInit {
     deprExpsAcctAr = [];
 
     constructor(private structureService: StructureService,
-                public matDialogRef: MatDialogRef<CreateCategoryComponent>,
+                public matDialogRef: MatDialogRef<FixedAssetCategoryCreateComponent>,
                 private _fuseSidebarService: FuseSidebarService,
                 private _matDialog: MatDialog,
                 private fb: FormBuilder,

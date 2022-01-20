@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FxaCategoriesComponent } from './fxa-categories.component';
+import { FixedAssetCategoryListComponent } from './fixed-asset-category-list.component';
 
 describe('FxaCategoriesComponent', () => {
-  let component: FxaCategoriesComponent;
-  let fixture: ComponentFixture<FxaCategoriesComponent>;
+  let component: FixedAssetCategoryListComponent;
+  let fixture: ComponentFixture<FixedAssetCategoryListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FxaCategoriesComponent ]
+      declarations: [ FixedAssetCategoryListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FxaCategoriesComponent);
+    fixture = TestBed.createComponent(FixedAssetCategoryListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

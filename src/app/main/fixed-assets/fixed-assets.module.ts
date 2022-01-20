@@ -3,10 +3,6 @@ import {CommonModule} from '@angular/common';
 
 import {FixedAssetsRoutingModule} from './fixed-assets-routing.module';
 import {FixedAssetsComponent} from './fixed-assets.component';
-import {CreateFixedAssetsComponent} from './create-fixed-assets/create-fixed-assets.component';
-import {FxaCategoriesComponent} from './fxa-categories/fxa-categories.component';
-import {CreateCategoryComponent} from './fxa-categories/create-category/create-category.component';
-import {CategoryListComponent} from './fxa-categories/category-list/category-list.component';
 import {FixedAssetsListComponent} from './fixed-assets-list/fixed-assets-list.component';
 import {FixedAssetCategorySelectComponent} from './fixed-asset-category-select/fixed-asset-category-select.component';
 import {SharedModule} from '../../shared/shared.module';
@@ -27,20 +23,21 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { FixedAssetDeploymentComponent } from './fixed-asset-deployment/fixed-asset-deployment.component';
+import {FixedAssetDeploymentComponent} from './fixed-asset-deployment/fixed-asset-deployment.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSortModule} from '@angular/material/sort';
-import { FixedAssetReDeploymentComponent } from './fixed-asset-re-deployment/fixed-asset-re-deployment.component';
+import {FixedAssetReDeploymentComponent} from './fixed-asset-re-deployment/fixed-asset-re-deployment.component';
+import {FixedAssetCategoryListComponent} from './fixed-asset-category-list/fixed-asset-category-list.component';
+import {FixedAssetCategoryCreateComponent} from './fixed-asset-category-create/fixed-asset-category-create.component';
+import {FixedAssetCreateComponent} from './fixed-asset-create/fixed-asset-create.component';
 
 
 @NgModule({
     declarations: [
         FixedAssetsComponent,
-        CreateFixedAssetsComponent,
-        FxaCategoriesComponent,
-        CreateCategoryComponent,
-        CategoryListComponent,
+        FixedAssetCreateComponent,
+        FixedAssetCategoryListComponent,
+        FixedAssetCategoryCreateComponent,
         FixedAssetsListComponent,
         FixedAssetCategorySelectComponent,
         FixedAssetDeploymentComponent,

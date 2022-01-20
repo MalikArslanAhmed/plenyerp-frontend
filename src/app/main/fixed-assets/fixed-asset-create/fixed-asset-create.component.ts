@@ -19,10 +19,10 @@ import {WorkLocationsListSelectComponent} from '../../dashboard/employees/work-l
 
 @Component({
     selector: 'app-create-fixed-assets',
-    templateUrl: './create-fixed-assets.component.html',
-    styleUrls: ['./create-fixed-assets.component.scss']
+    templateUrl: './fixed-asset-create.component.html',
+    styleUrls: ['./fixed-asset-create.component.scss']
 })
-export class CreateFixedAssetsComponent implements OnInit {
+export class FixedAssetCreateComponent implements OnInit {
     fixedAssetId: any;
     assetsForm: FormGroup;
     dialogRef: any;

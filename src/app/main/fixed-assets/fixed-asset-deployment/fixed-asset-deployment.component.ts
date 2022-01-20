@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
 import {fuseAnimations} from '../../../../@fuse/animations';
-import {AdminSegmentEmployeeSelectComponent} from '../../dashboard/treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
 import {MatDialog} from '@angular/material/dialog';
 import {FixedAssetReDeploymentComponent} from '../fixed-asset-re-deployment/fixed-asset-re-deployment.component';
 
