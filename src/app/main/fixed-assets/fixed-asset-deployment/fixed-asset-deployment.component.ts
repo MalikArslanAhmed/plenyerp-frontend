@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
-import {fuseAnimations} from "../../../../@fuse/animations";
+import {fuseAnimations} from '../../../../@fuse/animations';
+import {AdminSegmentEmployeeSelectComponent} from '../../dashboard/treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
+import {MatDialog} from '@angular/material/dialog';
+import {FixedAssetReDeploymentComponent} from '../fixed-asset-re-deployment/fixed-asset-re-deployment.component';
 
 @Component({
     selector: 'app-fixed-asset-deployment',
@@ -11,6 +14,7 @@ import {fuseAnimations} from "../../../../@fuse/animations";
 })
 export class FixedAssetDeploymentComponent implements OnInit {
     filterTrialBalanceReportForm: FormGroup;
+    dialogRef: any;
     fixedAssets = [];
     pagination = {
         page: 1,
@@ -19,7 +23,8 @@ export class FixedAssetDeploymentComponent implements OnInit {
         pages: null
     };
 
-    constructor(private fxaCategoryService: FxaCategoriesService) {
+    constructor(private fxaCategoryService: FxaCategoriesService,
+                private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -50,6 +55,19 @@ export class FixedAssetDeploymentComponent implements OnInit {
                 fixedAsset['children'] = data.items;
             }
         );
+    }
+
+    deploy(fixedAsset): void {
+        this.dialogRef = this._matDialog.open(FixedAssetReDeploymentComponent, {
+            minWidth: 1200,
+            panelClass: 'contact-form-dialog',
+            data: {fixedAsset: fixedAsset.latestDeployment}
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+        });
     }
 
 }

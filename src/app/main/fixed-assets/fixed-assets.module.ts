@@ -31,6 +31,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FixedAssetDeploymentComponent } from './fixed-asset-deployment/fixed-asset-deployment.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSortModule} from '@angular/material/sort';
+import { FixedAssetReDeploymentComponent } from './fixed-asset-re-deployment/fixed-asset-re-deployment.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import {MatSortModule} from '@angular/material/sort';
         FixedAssetsListComponent,
         FixedAssetCategorySelectComponent,
         FixedAssetDeploymentComponent,
+        FixedAssetReDeploymentComponent,
     ],
     imports: [
         CommonModule,

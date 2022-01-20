@@ -53,12 +53,14 @@
             <div class="content mt-20px">
                 <mat-accordion displayMode="flat" [multi]="true" class="mat-table accordion-table">
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
+                        <span class="mat-header-cell">S.No</span>
                         <span class="mat-header-cell">Asset Number</span>
                         <span class="mat-header-cell">Date of Deployment</span>
                         <span class="mat-header-cell">Admin Segment</span>
                         <span class="mat-header-cell">Work Location</span>
                         <span class="mat-header-cell">Custodian</span>
                         <span class="mat-header-cell">Remark</span>
+                        <span class="mat-header-cell">Action</span>
                     </section>
                     <mat-expansion-panel *ngFor="let fixedAsset of fixedAssets; let i = index"
                                          [expanded]="fixedAsset.isOpen">
@@ -84,6 +86,11 @@
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.remark}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px" (click)="deploy(fixedAsset)">
+                                    <mat-icon class="material-icons">edit</mat-icon>
+                                </p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">

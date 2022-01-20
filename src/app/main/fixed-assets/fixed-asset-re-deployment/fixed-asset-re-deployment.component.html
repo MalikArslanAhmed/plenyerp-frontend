@@ -1,0 +1,84 @@
+<div class="dialog-content-wrapper" id="items">
+    <mat-toolbar matDialogTitle class="mat-accent m-0 items-data">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Re Deploy</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0 items-data" fusePerfectScrollbar>
+        <form fxLayout="column" [formGroup]="deploymentForm">
+            <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
+                                        (click)="selectAdminEmployee('Select Checking Officer')">
+                            <mat-label>Custodian</mat-label>
+                            <mat-select formControlName="custodianId" [disabled]="true">
+                                <mat-option value="">Custodian Name</mat-option>
+                                <mat-option [value]="custodian.id" *ngFor="let custodian of custodians">
+                                    {{custodian?.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Value Date</mat-label>
+                            <input matInput [matDatepicker]="valueDate" formControlName="valueDate">
+                            <mat-datepicker-toggle matSuffix [for]="valueDate">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #valueDate></mat-datepicker>
+                            <mat-error>Value Date is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Location</mat-label>
+                            <mat-select formControlName="locationId" required [disabled]="true"
+                                        (click)="workLocationListSelect()">
+                                <mat-option [value]="workLocation.id"
+                                            *ngFor="let workLocation of workLocations">{{workLocation.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>Location is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
+                            <mat-label>Admin Segment</mat-label>
+                            <mat-select formControlName="adminSegmentId"
+                                        (click)="deploymentAdminSegmentSelect()" [disabled]="true">
+                                <mat-option value="">Choose Admin Segment</mat-option>
+                                <mat-option [value]="admin.id" *ngFor="let admin of adminSegments">
+                                    {{admin?.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="12">
+                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Remark</mat-label>
+                        <textarea matInput formControlName="remark"></textarea>
+                    </mat-form-field>
+                </div>
+            </mat-grid-list>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button type="button" color="accent" (click)="save()">
+            Save
+        </button>
+    </div>
+</div>

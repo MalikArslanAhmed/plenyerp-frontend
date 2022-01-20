@@ -1514,5 +1514,8 @@ export class AppUrl {
         return AppUrl.API_URL + `fixed-assets/${id}/deployments`;
     }
 
+    static FIXED_ASSETS_RE_DEPLOYMENT(): string {
+        return AppUrl.API_URL + `fixed-assets/re-deployments`;
+    }
 
 }
