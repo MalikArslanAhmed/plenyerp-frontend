@@ -12,7 +12,7 @@ import {FixedAssetReDeploymentComponent} from '../fixed-asset-re-deployment/fixe
     animations: fuseAnimations
 })
 export class FixedAssetDeploymentComponent implements OnInit {
-    filterTrialBalanceReportForm: FormGroup;
+    filterForm: FormGroup;
     selectedFixedAsset = {};
     dialogRef: any;
     fixedAssets = [];
@@ -60,22 +60,26 @@ export class FixedAssetDeploymentComponent implements OnInit {
     onAssetSelect(target, fixedAsset): void {
         console.log('tar', fixedAsset, target.checked);
         if (target.checked) {
-            this.selectedFixedAsset[fixedAsset.fixedAssetId] = fixedAsset;
+            this.selectedFixedAsset[fixedAsset.id] = fixedAsset;
         } else {
-            delete this.selectedFixedAsset[fixedAsset.fixedAssetId];
+            delete this.selectedFixedAsset[fixedAsset.id];
         }
     }
 
     deploy(): void {
+        console.log('=====', Object.keys(this.selectedFixedAsset));
         this.dialogRef = this._matDialog.open(FixedAssetReDeploymentComponent, {
             minWidth: 1200,
             panelClass: 'contact-form-dialog',
-            data: {fixedAssetId: Object.keys(this.selectedFixedAsset)}
+            data: {fixedAssetIds: Object.keys(this.selectedFixedAsset)}
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
                 return;
             }
+            this.fixedAssets.forEach(fixedAsset => {
+                fixedAsset.isOpen = false;
+            });
         });
     }
 

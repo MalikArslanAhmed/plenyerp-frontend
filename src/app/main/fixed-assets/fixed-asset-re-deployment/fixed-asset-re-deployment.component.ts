@@ -103,7 +103,7 @@ export class FixedAssetReDeploymentComponent implements OnInit {
 
     save(): void {
         const reqData = {
-            fixedAssetIds: this._data.fixedAsset,
+            fixedAssetIds: this._data.fixedAssetIds,
             ...this.deploymentForm.value
         };
 
