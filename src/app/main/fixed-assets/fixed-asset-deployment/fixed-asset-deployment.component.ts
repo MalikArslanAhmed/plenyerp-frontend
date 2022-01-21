@@ -13,6 +13,7 @@ import {FixedAssetReDeploymentComponent} from '../fixed-asset-re-deployment/fixe
 })
 export class FixedAssetDeploymentComponent implements OnInit {
     filterTrialBalanceReportForm: FormGroup;
+    selectedFixedAsset = {};
     dialogRef: any;
     fixedAssets = [];
     pagination = {
@@ -56,11 +57,20 @@ export class FixedAssetDeploymentComponent implements OnInit {
         );
     }
 
-    deploy(fixedAsset): void {
+    onAssetSelect(target, fixedAsset): void {
+        console.log('tar', fixedAsset, target.checked);
+        if (target.checked) {
+            this.selectedFixedAsset[fixedAsset.fixedAssetId] = fixedAsset;
+        } else {
+            delete this.selectedFixedAsset[fixedAsset.fixedAssetId];
+        }
+    }
+
+    deploy(): void {
         this.dialogRef = this._matDialog.open(FixedAssetReDeploymentComponent, {
             minWidth: 1200,
             panelClass: 'contact-form-dialog',
-            data: {fixedAsset: fixedAsset.latestDeployment}
+            data: {fixedAssetId: Object.keys(this.selectedFixedAsset)}
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {

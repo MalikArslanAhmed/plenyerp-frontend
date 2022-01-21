@@ -30,6 +30,7 @@ import {FixedAssetReDeploymentComponent} from './fixed-asset-re-deployment/fixed
 import {FixedAssetCategoryListComponent} from './fixed-asset-category-list/fixed-asset-category-list.component';
 import {FixedAssetCategoryCreateComponent} from './fixed-asset-category-create/fixed-asset-category-create.component';
 import {FixedAssetCreateComponent} from './fixed-asset-create/fixed-asset-create.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import {FixedAssetCreateComponent} from './fixed-asset-create/fixed-asset-create
         MatInputModule,
         MatCardModule,
         MatExpansionModule,
-        MatSortModule
+        MatSortModule,
+        MatSlideToggleModule
     ]
 })
 export class FixedAssetsModule {

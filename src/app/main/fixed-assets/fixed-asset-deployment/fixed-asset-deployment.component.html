@@ -67,7 +67,10 @@
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getDeployments(fixedAsset)">
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{i + 1}}.</p>
+                                <p class="text-truncate cursor-pointer mt-10px">
+                                    <input type="checkbox" (click)="onAssetSelect($event.target, fixedAsset)">
+                                    {{i + 1}}.
+                                </p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.assetNo}}</p>
@@ -82,13 +85,13 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.workLocation.name}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.custodian.name}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.custodian.firstName}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.remark}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px" (click)="deploy(fixedAsset)">
+                                <p class="text-truncate cursor-pointer mt-10px" (click)="deploy()">
                                     <mat-icon class="material-icons">edit</mat-icon>
                                 </p>
                             </span>

@@ -96,7 +96,7 @@ export class FixedAssetCreateComponent implements OnInit {
             valueDate: [''],
             custodianId: [''],
             locationId: [''],
-            deploymentRemark: [''],
+            deploymentRemark: [{value: '', disabled: this.fixedAssetId}],
             deploymentAdminSegmentId: [''],
         });
 
@@ -165,12 +165,6 @@ export class FixedAssetCreateComponent implements OnInit {
             depreciationRate: '',
             depreciationMethod: '',
             assetNoPrefixLine: '',
-
-            valueDate: '',
-            custodianId: '',
-            locationId: '',
-            deploymentRemark: '',
-            deploymentAdminSegmentId: '',
         });
 
         this.adminSegments = [{
@@ -197,6 +191,31 @@ export class FixedAssetCreateComponent implements OnInit {
             name: (updatedData && updatedData['geoCodeSegment']) ? updatedData['geoCodeSegment'].name : '',
             id: (updatedData && updatedData['geoCodeSegment']) ? updatedData['geoCodeSegment'].id : '',
         }];
+
+        if (updatedData['latestDeployment']) {
+            this.assetsForm.patchValue({
+                valueDate: updatedData.latestDeployment.valueDate,
+                custodianId: updatedData.latestDeployment.custodianId,
+                locationId: updatedData.latestDeployment.locationId,
+                deploymentRemark: updatedData.latestDeployment.remark,
+                deploymentAdminSegmentId: {value: updatedData.latestDeployment.adminSegmentId, disabled: true},
+            });
+            this.deploymentAdminSegments = [{
+                name: (updatedData['latestDeployment']['adminSegment']) ? updatedData['latestDeployment']['adminSegment'].name : '',
+                id: (updatedData['latestDeployment']['adminSegment']) ? updatedData['latestDeployment']['adminSegment'].id : '',
+            }];
+
+            this.workLocations = [{
+                name: (updatedData['latestDeployment']['workLocation']) ? updatedData['latestDeployment']['workLocation'].name : '',
+                id: (updatedData['latestDeployment']['workLocation']) ? updatedData['latestDeployment']['workLocation'].id : '',
+            }];
+
+            this.custodians = [{
+                // tslint:disable-next-line:max-line-length
+                name: (updatedData['latestDeployment']['custodian']) ? updatedData['latestDeployment']['custodian'].firstName + ' ' + updatedData['latestDeployment']['custodian'].lastName : '',
+                id: (updatedData['latestDeployment']['custodian']) ? updatedData['latestDeployment']['custodian'].id : '',
+            }];
+        }
     }
 
     saveFixedAssets(): void {
@@ -339,6 +358,10 @@ export class FixedAssetCreateComponent implements OnInit {
     }
 
     selectAdminEmployee(type): void {
+        // restrict on edit
+        if (this.fixedAssetId) {
+            return;
+        }
         const allowType: any = 'BOTH';
         const node: any = undefined;
 
@@ -382,6 +405,10 @@ export class FixedAssetCreateComponent implements OnInit {
     }
 
     workLocationListSelect(): void {
+        // restrict on edit
+        if (this.fixedAssetId) {
+            return;
+        }
         this.dialogRef = this._matDialog.open(WorkLocationsListSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -401,6 +428,10 @@ export class FixedAssetCreateComponent implements OnInit {
     }
 
     deploymentAdminSegmentSelect(): void {
+        // restrict on edit
+        if (this.fixedAssetId) {
+            return;
+        }
         this.dialogRef = this._matDialog.open(SummaryAdminSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });

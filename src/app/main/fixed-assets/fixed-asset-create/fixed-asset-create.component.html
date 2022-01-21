@@ -15,7 +15,7 @@
                         <mat-grid-tile>
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Title</mat-label>
+                                    <mat-label>Asset No</mat-label>
                                     <input matInput formControlName="assetNo" required>
                                     <mat-error>Asset Number is required!</mat-error>
                                 </mat-form-field>
@@ -384,7 +384,7 @@
                                         <mat-select formControlName="deploymentAdminSegmentId"
                                                     (click)="deploymentAdminSegmentSelect()" [disabled]="true">
                                             <mat-option value="">Choose Admin Segment</mat-option>
-                                            <mat-option [value]="admin.id" *ngFor="let admin of adminSegments">
+                                            <mat-option [value]="admin.id" *ngFor="let admin of deploymentAdminSegments">
                                                 {{admin?.name}}
                                             </mat-option>
                                         </mat-select>

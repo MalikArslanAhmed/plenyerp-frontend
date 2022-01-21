@@ -27,12 +27,11 @@ export class FixedAssetReDeploymentComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.initialize(this._data.fixedAsset);
+        this.initialize();
     }
 
-    initialize(fixedAsset): void {
+    initialize(): void {
         this.deploymentForm = this.fb.group({
-            fxaAssetId: [fixedAsset.fxaAssetId || ''],
             valueDate: ['', Validators.required],
             custodianId: ['', Validators.required],
             locationId: ['', Validators.required],
@@ -103,7 +102,11 @@ export class FixedAssetReDeploymentComponent implements OnInit {
     }
 
     save(): void {
-        const reqData = this.deploymentForm.value;
+        const reqData = {
+            fixedAssetIds: this._data.fixedAsset,
+            ...this.deploymentForm.value
+        };
+
         if (reqData.valueDate) {
             reqData['valueDate'] = moment(reqData.valueDate).format('YYYY-MM-DD');
         }
