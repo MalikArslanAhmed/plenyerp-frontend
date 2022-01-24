@@ -220,7 +220,7 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Date Commissioned</mat-label>
+                                        <mat-label>Date De-Commissioned</mat-label>
                                         <input matInput [matDatepicker]="dateDeCommissioned"
                                                formControlName="dateDeCommissioned">
                                         <mat-datepicker-toggle matSuffix [for]="dateDeCommissioned">
@@ -340,7 +340,7 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
-                                                    (click)="selectAdminEmployee('Select Checking Officer')">
+                                                    (click)="selectAdminEmployee('Select Custodian')">
                                         <mat-label>Custodian</mat-label>
                                         <mat-select formControlName="custodianId" [disabled]="true">
                                             <mat-option value="">Custodian Name</mat-option>

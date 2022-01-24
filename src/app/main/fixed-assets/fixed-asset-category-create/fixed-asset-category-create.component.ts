@@ -51,8 +51,14 @@ export class FixedAssetCategoryCreateComponent implements OnInit {
         this.categoryForm = this.fb.group({
             id: [data.id || ''],
             title: [data.title || '', Validators.required],
-            depreciationRate: [data.depreciationRate || ''],
-            depreciationMethodId: [data.depreciationMethodId || ''],
+            depreciationRate: [{
+                value: this.parentNode ? this.parentNode.depreciationRate : (data.depreciationRate || ''),
+                disabled: !!this.parentNode
+            }],
+            depreciationMethodId: [{
+                value: this.parentNode ? this.parentNode.depreciationMethodId : (data.depreciationMethodId || ''),
+                disabled: !!this.parentNode
+            }],
             // assetNoPrefixLine: [data.assetNoPrefixLine || ''],
             isParent: [data.isParent || false],
             fixedAssetAcctId: [{
@@ -98,14 +104,14 @@ export class FixedAssetCategoryCreateComponent implements OnInit {
 
     saveCategories(): void {
         const reqObj = {
-            ...this.categoryForm.value
+            ...this.categoryForm.getRawValue()
         };
         if (this.parentNode) {
             reqObj['parent_id'] = this.parentNode.id;
         }
         this.fxaCategoryService.saveCategories(reqObj).subscribe(
             data => {
-                this.matDialogRef.close();
+                this.matDialogRef.close({doRefresh: true});
             }
         );
     }
@@ -113,12 +119,15 @@ export class FixedAssetCategoryCreateComponent implements OnInit {
     updateCategories(): void {
         this.fxaCategoryService.updateCategories(this.categoryForm.value.id, this.categoryForm.value).subscribe(
             data => {
-                this.matDialogRef.close();
+                this.matDialogRef.close({doRefresh: true});
             }
         );
     }
 
     fixedAssetAcct(type): void {
+        if (!!this.parentNode) {
+            return;
+        }
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -139,6 +148,9 @@ export class FixedAssetCategoryCreateComponent implements OnInit {
     }
 
     accumDeprAcct(type): void {
+        if (!!this.parentNode) {
+            return;
+        }
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });
@@ -161,6 +173,9 @@ export class FixedAssetCategoryCreateComponent implements OnInit {
     }
 
     deprExpsAcct(type): void {
+        if (!!this.parentNode) {
+            return;
+        }
         this.dialogRef = this._matDialog.open(EconomicSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
         });

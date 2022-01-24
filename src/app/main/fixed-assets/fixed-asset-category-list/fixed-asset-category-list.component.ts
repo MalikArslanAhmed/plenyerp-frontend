@@ -15,6 +15,7 @@ interface SegmentNode {
     title: string;
     depreciationRate: string;
     depreciationMethod: string;
+    depreciationMethodId: string;
     assetNoPrefixLine: string;
     fixedAssetAcctId: string;
     fixedAssetAcct: object;
@@ -59,7 +60,7 @@ export class FixedAssetCategoryListComponent implements OnInit {
             title: node.title,
             isParent: node.isParent,
             depreciationRate: node.depreciationRate,
-            depreciationMethod: node.depreciationMethod,
+            depreciationMethodId: node.depreciationMethodId,
             assetNoPrefixLine: node.assetNoPrefixLine,
             fixedAssetAcctId: node.fixedAssetAcctId,
             fixedAssetAcct: node.fixedAssetAcct,
@@ -95,6 +96,7 @@ export class FixedAssetCategoryListComponent implements OnInit {
         const param = {
             isParent: true
         };
+        this.dataSource.data = [];
         this.fxaCategoryService.getCategories(param).subscribe(
             data => {
                 const treeData: any = {
@@ -121,8 +123,10 @@ export class FixedAssetCategoryListComponent implements OnInit {
             panelClass: 'contact-form-dialog',
             data
         });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            this.getCategories();
+        this.dialogRef.afterClosed().subscribe((response: any) => {
+            if (response && response.doRefresh) {
+                this.getCategories();
+            }
         });
     }
 
@@ -132,8 +136,10 @@ export class FixedAssetCategoryListComponent implements OnInit {
             panelClass: 'contact-form-dialog',
             data: {action: 'EDIT', node: node, levelConfig: this.levelConfig}
         });
-        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
-            this.getCategories();
+        this.dialogRef.afterClosed().subscribe((response: any) => {
+            if (response && response.doRefresh) {
+                this.getCategories();
+            }
         });
     }
 
