@@ -29,7 +29,7 @@
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Value Date</mat-label>
-                            <input matInput [matDatepicker]="valueDate" formControlName="valueDate">
+                            <input matInput [matDatepicker]="valueDate" formControlName="valueDate" [max]="todayDate">
                             <mat-datepicker-toggle matSuffix [for]="valueDate">
                             </mat-datepicker-toggle>
                             <mat-datepicker #valueDate></mat-datepicker>

@@ -13,7 +13,7 @@ import {MatDialog} from '@angular/material/dialog';
     animations: fuseAnimations
 })
 export class FixedAssetsListComponent implements OnInit {
-    displayedColumns = ['id', 'assetNo', 'title', 'model', 'modelNo', 'dateManufactured', 'dateAcquired', 'actions'];
+    displayedColumns = ['id', 'assetNo', 'title', 'model', 'dateManufactured', 'dateAcquired', 'actions'];
     fixedAssets = [];
     pagination = {
         page: 1,

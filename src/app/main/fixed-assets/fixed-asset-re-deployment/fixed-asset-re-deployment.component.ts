@@ -18,6 +18,7 @@ export class FixedAssetReDeploymentComponent implements OnInit {
     custodians = [];
     workLocations = [];
     adminSegments = [];
+    todayDate = moment();
 
     constructor(private fb: FormBuilder,
                 private fxaCategoryService: FxaCategoriesService,

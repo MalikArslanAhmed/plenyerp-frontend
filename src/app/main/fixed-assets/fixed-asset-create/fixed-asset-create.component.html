@@ -34,7 +34,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Date Manufactured</mat-label>
-                                    <input matInput [matDatepicker]="manufacturedDate"
+                                    <input matInput [matDatepicker]="manufacturedDate" [max]="maxManufactureDate"
                                            formControlName="dateManufactured">
                                     <mat-datepicker-toggle matSuffix [for]="manufacturedDate">
                                     </mat-datepicker-toggle>
@@ -47,7 +47,8 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Date Acquired</mat-label>
-                                    <input matInput [matDatepicker]="acquiredDate" formControlName="dateAcquired">
+                                    <input matInput [matDatepicker]="acquiredDate" [max]="todayDate"
+                                           (dateChange)="onDateAcquiredChange($event)" formControlName="dateAcquired">
                                     <mat-datepicker-toggle matSuffix [for]="acquiredDate">
                                     </mat-datepicker-toggle>
                                     <mat-datepicker #acquiredDate></mat-datepicker>
@@ -76,9 +77,27 @@
                         <mat-grid-tile>
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Asset Model Number</mat-label>
-                                    <input matInput formControlName="modelNo" required>
-                                    <mat-error>Asset Model Number is required!</mat-error>
+                                    <mat-label>Salvage Value</mat-label>
+                                    <input matInput formControlName="salvageValue" required>
+                                    <mat-error>Salvage value is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Expected Life</mat-label>
+                                    <input matInput formControlName="expectedLife" required>
+                                    <mat-error>Expected Life is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Begin Accum Depr</mat-label>
+                                    <input matInput formControlName="beginAccumDepr" required>
+                                    <mat-error>Begin Accum Depr is required!</mat-error>
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
@@ -113,7 +132,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Asset Category</mat-label>
-                                    <mat-select formControlName="assetNoPrefixLine" (click)="openFixedAssetCategory()"
+                                    <mat-select formControlName="fxaCategoryId" (click)="openFixedAssetCategory()"
                                                 [disabled]="true">
                                         <mat-option value="">Choose Asset Category</mat-option>
                                         <mat-option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
@@ -141,7 +160,7 @@
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Depreciation Method</mat-label>
-                                    <select matNativeControl formControlName="depreciationMethod">
+                                    <select matNativeControl formControlName="fxaDepreciationMethodId">
                                         <option value="">Select Depreciation Method</option>
                                         <option [value]="faDepreciation.id"
                                                 *ngFor="let faDepreciation of faDepreciations">
@@ -158,7 +177,7 @@
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Remark</mat-label>
                                 <textarea matInput formControlName="remark"></textarea>
-<!--                                <mat-error>Remark is required!</mat-error>-->
+                                <!--                                <mat-error>Remark is required!</mat-error>-->
                             </mat-form-field>
                         </div>
                     </mat-grid-list>
@@ -355,7 +374,8 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Value Date</mat-label>
-                                        <input matInput [matDatepicker]="valueDate" formControlName="valueDate">
+                                        <input matInput [matDatepicker]="valueDate" [max]="todayDate"
+                                               formControlName="valueDate">
                                         <mat-datepicker-toggle matSuffix [for]="valueDate">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #valueDate></mat-datepicker>
@@ -384,7 +404,8 @@
                                         <mat-select formControlName="deploymentAdminSegmentId"
                                                     (click)="deploymentAdminSegmentSelect()" [disabled]="true">
                                             <mat-option value="">Choose Admin Segment</mat-option>
-                                            <mat-option [value]="admin.id" *ngFor="let admin of deploymentAdminSegments">
+                                            <mat-option [value]="admin.id"
+                                                        *ngFor="let admin of deploymentAdminSegments">
                                                 {{admin?.name}}
                                             </mat-option>
                                         </mat-select>
@@ -397,21 +418,25 @@
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Remark</mat-label>
                                     <textarea matInput formControlName="deploymentRemark"></textarea>
-<!--                                    <mat-error>Remark is required!</mat-error>-->
+                                    <!--                                    <mat-error>Remark is required!</mat-error>-->
                                 </mat-form-field>
                             </div>
                         </mat-grid-list>
                     </fieldset>
 
                     <div fxLayout="row" fxLayoutAlign="right right" class="mt-8">
-                        <button mat-raised-button type="button" color="accent"
-                                (click)="saveFixedAssets()" *ngIf="!this.fixedAssetId">
-                            Save
-                        </button>
-                        <button mat-raised-button type="button" color="accent"
-                                (click)="updateFixedAssets()" *ngIf="this.fixedAssetId">
-                            Update
-                        </button>
+                        <ng-container *ngIf="this.fixedAssetId; else saveButton">
+                            <button mat-raised-button type="button" color="accent" (click)="updateFixedAssets()"
+                                    [disabled]="assetsForm.invalid">
+                                Update
+                            </button>
+                        </ng-container>
+                        <ng-template #saveButton>
+                            <button mat-raised-button type="button" color="accent" (click)="saveFixedAssets()"
+                                    [disabled]="assetsForm.invalid">
+                                Save
+                            </button>
+                        </ng-template>
                     </div>
                 </form>
             </mat-card>

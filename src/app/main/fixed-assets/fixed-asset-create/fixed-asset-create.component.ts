@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructureService} from '../../../shared/services/structure.service';
 import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -39,6 +39,8 @@ export class FixedAssetCreateComponent implements OnInit {
     geoCodeSegments = [];
     custodians = [];
     workLocations = [];
+    todayDate = moment();
+    maxManufactureDate = moment();
 
     constructor(
         private structureService: StructureService,
@@ -61,14 +63,15 @@ export class FixedAssetCreateComponent implements OnInit {
     refresh(): void {
         this.assetsForm = this.fb.group({
             fxaStatusId: [''],
-            assetNo: [''],
-            title: [''],
-            custodian: [''],
-            make: [''],
-            model: [''],
+            fxaDepreciationMethodId: [''],
+            fxaCategoryId: [''],
+            assetNo: ['', Validators.required],
+            title: ['', Validators.required],
+            make: ['', Validators.required],
+            model: ['', Validators.required],
             modelNo: [''],
-            oemSerialNo: [''],
-            oemBarCodeNo: [''],
+            oemSerialNo: ['', Validators.required],
+            oemBarCodeNo: ['', Validators.required],
             dateManufactured: [''],
             dateAcquired: [''],
             acquisitionCost: [''],
@@ -88,10 +91,16 @@ export class FixedAssetCreateComponent implements OnInit {
             geoCodeSegmentId: [''],
             fundSegmentId: [''],
             remark: [''],
+            custodian: [''],
 
             depreciationRate: [''],
             depreciationMethod: [''],
             assetNoPrefixLine: [''],
+
+            // quantity: [{value: 1, disabled: true}],
+            salvageValue: ['', Validators.required],
+            expectedLife: ['', Validators.required],
+            beginAccumDepr: ['', Validators.required],
 
             valueDate: [''],
             custodianId: [''],
@@ -135,6 +144,8 @@ export class FixedAssetCreateComponent implements OnInit {
     patchForm(updatedData): void {
         this.assetsForm.patchValue({
             fxaStatusId: updatedData.fxaStatusId,
+            fxaDepreciationMethodId: updatedData.fxaDepreciationMethodId,
+            fxaCategoryId: updatedData.fxaCategoryId,
             assetNo: updatedData.assetNo,
             title: updatedData.title,
             custodian: updatedData.custodian,
@@ -161,6 +172,10 @@ export class FixedAssetCreateComponent implements OnInit {
             functionalSegmentId: updatedData.functionalSegmentId,
             geoCodeSegmentId: updatedData.geoCodeSegmentId,
             fundSegmentId: updatedData.fundSegmentId,
+            remark: updatedData.remark,
+            salvageValue: updatedData.salvageValue,
+            expectedLife: updatedData.expectedLife,
+            beginAccumDepr: updatedData.beginAccumDepr,
 
             depreciationRate: '',
             depreciationMethod: '',
@@ -191,6 +206,10 @@ export class FixedAssetCreateComponent implements OnInit {
             name: (updatedData && updatedData['geoCodeSegment']) ? updatedData['geoCodeSegment'].name : '',
             id: (updatedData && updatedData['geoCodeSegment']) ? updatedData['geoCodeSegment'].id : '',
         }];
+        this.faCategories = [{
+            title: (updatedData && updatedData['category']) ? updatedData['category'].title : '',
+            id: (updatedData && updatedData['category']) ? updatedData['category'].id : '',
+        }];
 
         if (updatedData['latestDeployment']) {
             this.assetsForm.patchValue({
@@ -198,7 +217,7 @@ export class FixedAssetCreateComponent implements OnInit {
                 custodianId: updatedData.latestDeployment.custodianId,
                 locationId: updatedData.latestDeployment.locationId,
                 deploymentRemark: updatedData.latestDeployment.remark,
-                deploymentAdminSegmentId: {value: updatedData.latestDeployment.adminSegmentId, disabled: true},
+                deploymentAdminSegmentId: updatedData.latestDeployment.adminSegmentId,
             });
             this.deploymentAdminSegments = [{
                 name: (updatedData['latestDeployment']['adminSegment']) ? updatedData['latestDeployment']['adminSegment'].name : '',
@@ -218,8 +237,15 @@ export class FixedAssetCreateComponent implements OnInit {
         }
     }
 
-    saveFixedAssets(): void {
-        const reqData = this.assetsForm.value;
+    onDateAcquiredChange(event): void {
+        if (event.value) {
+            this.maxManufactureDate = event.value;
+        } else {
+            this.maxManufactureDate = this.todayDate;
+        }
+    }
+
+    parseFormData(reqData): any {
         if (reqData.dateManufactured) {
             reqData['dateManufactured'] = moment(reqData.dateManufactured).format('YYYY-MM-DD');
         }
@@ -241,6 +267,11 @@ export class FixedAssetCreateComponent implements OnInit {
         if (reqData.valueDate) {
             reqData['valueDate'] = moment(reqData.valueDate).format('YYYY-MM-DD');
         }
+        return reqData;
+    }
+
+    saveFixedAssets(): void {
+        const reqData = this.parseFormData(this.assetsForm.value);
 
         this.fxaCategoryService.add(reqData).subscribe(
             data => {
@@ -250,7 +281,8 @@ export class FixedAssetCreateComponent implements OnInit {
     }
 
     updateFixedAssets(): void {
-        this.fxaCategoryService.update(this.fixedAssetId, this.assetsForm.value).subscribe(
+        const reqData = this.parseFormData(this.assetsForm.value);
+        this.fxaCategoryService.update(this.fixedAssetId, reqData).subscribe(
             data => {
                 this.faStatuses = data.items;
                 this.router.navigateByUrl(`/fixed-assets/list`);
@@ -398,7 +430,7 @@ export class FixedAssetCreateComponent implements OnInit {
                 id: response.id
             }];
             this.assetsForm.patchValue({
-                assetNoPrefixLine: response.id,
+                fxaCategoryId: response.id,
                 disabled: true
             });
         });
