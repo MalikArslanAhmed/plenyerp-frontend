@@ -69,16 +69,16 @@ export class FixedAssetCreateComponent implements OnInit {
             title: ['', Validators.required],
             make: ['', Validators.required],
             model: ['', Validators.required],
+            dateManufactured: [''],
+            dateAcquired: [''],
             modelNo: [''],
             oemSerialNo: ['', Validators.required],
             oemBarCodeNo: ['', Validators.required],
-            dateManufactured: [''],
-            dateAcquired: [''],
-            acquisitionCost: [''],
+            acquisitionCost: ['', Validators.required],
             nmrlLocation: [''],
             supplierInvoice: [''],
             supplierName: [''],
-            supplierContact: [''],
+            supplierContact: ['', Validators.required],
             dateInstalled: [''],
             dateCommissioned: [''],
             dateDeCommissioned: [''],
@@ -191,16 +191,16 @@ export class FixedAssetCreateComponent implements OnInit {
             id: (updatedData && updatedData['economicSegment']) ? updatedData['economicSegment'].id : '',
         }];
         this.programmeSegments = [{
-            name: (updatedData && updatedData['programmeSegment']) ? updatedData['programmeSegment'].name : '',
-            id: (updatedData && updatedData['programmeSegment']) ? updatedData['programmeSegment'].id : '',
+            name: (updatedData && updatedData['programSegment']) ? updatedData['programSegment'].name : '',
+            id: (updatedData && updatedData['programSegment']) ? updatedData['programSegment'].id : '',
         }];
         this.functionSegments = [{
-            name: (updatedData && updatedData['functionSegment']) ? updatedData['functionSegment'].name : '',
-            id: (updatedData && updatedData['functionSegment']) ? updatedData['functionSegment'].id : '',
+            name: (updatedData && updatedData['functionalSegment']) ? updatedData['functionalSegment'].name : '',
+            id: (updatedData && updatedData['functionalSegment']) ? updatedData['functionalSegment'].id : '',
         }];
         this.fundSegmentsAddDet = [{
-            name: (updatedData && updatedData['fundSegmentsAddDet']) ? updatedData['fundSegmentsAddDet'].name : '',
-            id: (updatedData && updatedData['fundSegmentsAddDet']) ? updatedData['fundSegmentsAddDet'].id : '',
+            name: (updatedData && updatedData['fundSegment']) ? updatedData['fundSegment'].name : '',
+            id: (updatedData && updatedData['fundSegment']) ? updatedData['fundSegment'].id : '',
         }];
         this.geoCodeSegments = [{
             name: (updatedData && updatedData['geoCodeSegment']) ? updatedData['geoCodeSegment'].name : '',
