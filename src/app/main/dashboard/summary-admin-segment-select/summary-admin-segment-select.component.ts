@@ -78,10 +78,10 @@ export class SummaryAdminSegmentSelectComponent implements OnInit {
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
     ngOnInit(): void {
-        this.route.paramMap.subscribe(params => {
-            this.segmentId = 1;
-            // console.log('this.segmentId', this.segmentId);
-        });
+        this.segmentId = 1;
+        if (this._data && this._data.segmentId) {
+            this.segmentId = this._data.segmentId;
+        }
         this.getSegmentList();
     }
 

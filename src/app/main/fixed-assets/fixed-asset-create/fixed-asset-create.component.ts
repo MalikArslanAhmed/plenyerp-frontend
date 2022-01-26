@@ -464,8 +464,13 @@ export class FixedAssetCreateComponent implements OnInit {
         if (this.fixedAssetId) {
             return;
         }
+        const data = {};
+        if (this.assetsForm.value.adminSegmentId) {
+            data['segmentId'] = this.assetsForm.value.adminSegmentId;
+        }
         this.dialogRef = this._matDialog.open(SummaryAdminSegmentSelectComponent, {
             panelClass: 'contact-form-dialog',
+            data
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
