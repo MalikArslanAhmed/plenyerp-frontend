@@ -93,6 +93,10 @@ export class FixedAssetCreateComponent implements OnInit {
             remark: [''],
             custodian: [''],
 
+            isInstalled: [false],
+            isCommissioned: [false],
+            isDateCommissioned: [false],
+
             depreciationRate: [''],
             depreciationMethod: [''],
             assetNoPrefixLine: [''],

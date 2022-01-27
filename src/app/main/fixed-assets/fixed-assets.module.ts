@@ -31,6 +31,7 @@ import {FixedAssetCategoryListComponent} from './fixed-asset-category-list/fixed
 import {FixedAssetCategoryCreateComponent} from './fixed-asset-category-create/fixed-asset-category-create.component';
 import {FixedAssetCreateComponent} from './fixed-asset-create/fixed-asset-create.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
         MatCardModule,
         MatExpansionModule,
         MatSortModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatCheckboxModule
     ]
 })
 export class FixedAssetsModule {
