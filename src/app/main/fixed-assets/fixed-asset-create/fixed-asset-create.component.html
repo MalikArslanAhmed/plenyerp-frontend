@@ -215,8 +215,10 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Installed</mat-label>
-                                        <mat-checkbox matPrefix color="accent" formControlName="isInstalled">
-                                        </mat-checkbox>
+                                        <div matPrefix class="date-checkbox-container">
+                                            <mat-checkbox color="accent" formControlName="isInstalled">
+                                            </mat-checkbox>
+                                        </div>
                                         <input matInput [matDatepicker]="dateInstalled" formControlName="dateInstalled">
                                         <mat-datepicker-toggle matSuffix [for]="dateInstalled">
                                         </mat-datepicker-toggle>
@@ -229,8 +231,10 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Commissioned</mat-label>
-                                        <mat-checkbox matPrefix color="accent" formControlName="isDateCommissioned">
-                                        </mat-checkbox>
+                                        <div matPrefix class="date-checkbox-container">
+                                            <mat-checkbox color="accent" formControlName="isCommissioned">
+                                            </mat-checkbox>
+                                        </div>
                                         <input matInput [matDatepicker]="dateCommissioned"
                                                formControlName="dateCommissioned">
                                         <mat-datepicker-toggle matSuffix [for]="dateCommissioned">
@@ -244,8 +248,10 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date De-Commissioned</mat-label>
-                                        <mat-checkbox matPrefix color="accent" formControlName="isDateDeCommissioned">
-                                        </mat-checkbox>
+                                        <div matPrefix class="date-checkbox-container">
+                                            <mat-checkbox color="accent" formControlName="isDecommissioned">
+                                            </mat-checkbox>
+                                        </div>
                                         <input matInput [matDatepicker]="dateDeCommissioned"
                                                formControlName="dateDeCommissioned">
                                         <mat-datepicker-toggle matSuffix [for]="dateDeCommissioned">
@@ -259,8 +265,10 @@
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Disposed</mat-label>
-                                        <mat-checkbox matPrefix color="accent" formControlName="isDateDisposed">
-                                        </mat-checkbox>
+                                        <div matPrefix class="date-checkbox-container">
+                                            <mat-checkbox color="accent" formControlName="isDisposed">
+                                            </mat-checkbox>
+                                        </div>
                                         <input matInput [matDatepicker]="dateDisposed" formControlName="dateDisposed">
                                         <mat-datepicker-toggle matSuffix [for]="dateDisposed">
                                         </mat-datepicker-toggle>

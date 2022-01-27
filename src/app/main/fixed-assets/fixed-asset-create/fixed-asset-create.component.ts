@@ -95,7 +95,8 @@ export class FixedAssetCreateComponent implements OnInit {
 
             isInstalled: [false],
             isCommissioned: [false],
-            isDateCommissioned: [false],
+            isDecommissioned: [false],
+            isDisposed: [false],
 
             depreciationRate: [''],
             depreciationMethod: [''],
@@ -165,10 +166,6 @@ export class FixedAssetCreateComponent implements OnInit {
             supplierInvoice: updatedData.supplierInvoice,
             supplierName: updatedData.supplierName,
             supplierContact: updatedData.supplierContact,
-            dateInstalled: updatedData.dateInstalled,
-            dateCommissioned: updatedData.dateCommissioned,
-            dateDeCommissioned: updatedData.dateDeCommissioned,
-            dateDisposed: updatedData.dateDisposed,
             disposalPrice: updatedData.disposalPrice,
             adminSegmentId: updatedData.adminSegmentId,
             economicSegmentId: updatedData.economicSegmentId,
@@ -180,6 +177,15 @@ export class FixedAssetCreateComponent implements OnInit {
             salvageValue: updatedData.salvageValue,
             expectedLife: updatedData.expectedLife,
             beginAccumDepr: updatedData.beginAccumDepr,
+
+            dateInstalled: updatedData.dateInstalled,
+            isInstalled: updatedData.isInstalled,
+            dateCommissioned: updatedData.dateCommissioned,
+            isCommissioned: updatedData.isCommissioned,
+            dateDeCommissioned: updatedData.dateDeCommissioned,
+            isDecommissioned: updatedData.isDecommissioned,
+            dateDisposed: updatedData.dateDisposed,
+            isDisposed: updatedData.isDisposed,
 
             depreciationRate: '',
             depreciationMethod: '',

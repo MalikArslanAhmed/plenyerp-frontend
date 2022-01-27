@@ -38,10 +38,16 @@
     margin-bottom: 30px;
 }
 
-.mw-50{max-width: 50%;}
+.mw-50 {
+    max-width: 50%;
+}
 
 legend {
     background-color: #000;
     color: #fff;
     padding: 3px 6px;
+}
+
+.date-checkbox-container {
+    margin-right: 4px;
 }
