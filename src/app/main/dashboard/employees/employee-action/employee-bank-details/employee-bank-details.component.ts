@@ -68,10 +68,10 @@ export class EmployeeBankDetailsComponent implements OnInit {
         }
     }
 
-    getBanksName() {
-        this.employeesService.getBanksName().subscribe(data => {
+    getBanksName(): void {
+        this.employeesService.getBanksName({page: -1}).subscribe(data => {
             this.banksName = data.items;
-        })
+        });
     }
 
     getBankBranchName(bankId) {
@@ -79,7 +79,7 @@ export class EmployeeBankDetailsComponent implements OnInit {
             this.selectedBankBranchName = data.items;
         })
     }
- 
+
     getBankDetailsList(empId) {
         this.employeesService.getBankDetailsList(empId, {'page': -1}).subscribe(data => {
             this.bankList = data.items;
