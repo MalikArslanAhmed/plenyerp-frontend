@@ -98,7 +98,7 @@
                   "fileReplacements": [
                       {
                           "replace": "src/environments/environment.ts",
-                          "with": "src/environments/environment.img.ts"
+                          "with": "src/environments/environment.nhis.ts"
                       }
                   ],
                   "optimization": true,
