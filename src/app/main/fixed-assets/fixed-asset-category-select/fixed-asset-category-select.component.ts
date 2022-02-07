@@ -13,7 +13,10 @@ interface SegmentNode {
     title: string;
     depreciationRate: string;
     depreciationMethod: string;
-    assetNoPrefixLine: string;
+    individualCode: string;
+    combinedCode: string;
+    nextAssetNo: string;
+
     fixedAssetAcctId: string;
     fixedAssetAcct: object;
     accumDeprAcctId: string;
@@ -23,8 +26,6 @@ interface SegmentNode {
     subCategories?: SegmentNode[];
     createdAt?: string;
     updatedAt?: string;
-    individualCode: string;
-    combinedCode: string;
     maxLevel: number;
     characterCount: number;
     isActive: number;
@@ -57,7 +58,6 @@ export class FixedAssetCategorySelectComponent implements OnInit {
             isParent: node.isParent,
             depreciationRate: node.depreciationRate,
             depreciationMethod: node.depreciationMethod,
-            assetNoPrefixLine: node.assetNoPrefixLine,
             fixedAssetAcctId: node.fixedAssetAcctId,
             fixedAssetAcct: node.fixedAssetAcct,
             accumDeprAcctId: node.accumDeprAcctId,
@@ -69,8 +69,9 @@ export class FixedAssetCategorySelectComponent implements OnInit {
             parentId: node.parentId,
             maxLevel: node.maxLevel,
             individualCode: node.individualCode,
-            characterCount: node.characterCount,
             combinedCode: node.combinedCode,
+            nextAssetNo: node.nextAssetNo,
+            characterCount: node.characterCount,
             subCategories: node.subCategories,
             showDelete: node.subCategories && node.subCategories.length === 0
         };

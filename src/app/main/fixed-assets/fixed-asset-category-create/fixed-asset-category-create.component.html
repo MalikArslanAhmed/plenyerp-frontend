@@ -24,6 +24,37 @@
                 <mat-grid-tile>
                     <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                         <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Next Asset Number</mat-label>
+                            <input matInput formControlName="nextAssetNo" required>
+                            <mat-error>Category Name is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label></mat-label>
+                            <input matInput formControlName="combinedCode" required>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Asset Number Prefix</mat-label>
+                            <input matInput formControlName="individualCode" required>
+                            <mat-error>Category Name is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile>
+                    <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                        <mat-form-field appearance="outline" fxFlex="100">
                             <mat-label>Depreciation Method</mat-label>
                             <select matNativeControl formControlName="depreciationMethodId">
                                 <option value="">Select Depreciation Method</option>

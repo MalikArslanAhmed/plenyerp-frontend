@@ -59,7 +59,15 @@ export class FixedAssetCategoryCreateComponent implements OnInit {
                 value: this.parentNode ? this.parentNode.depreciationMethodId : (data.depreciationMethodId || ''),
                 disabled: !!this.parentNode
             }],
-            // assetNoPrefixLine: [data.assetNoPrefixLine || ''],
+            individualCode: [{
+                value: data.individualCode,
+                disabled: this._data.action === 'EDIT'
+            }],
+            nextAssetNo: [data.nextAssetNo || 1],
+            combinedCode: [{
+                value: this.parentNode ? this.parentNode.combinedCode : (data.combinedCode || ''),
+                disabled: true
+            }],
             isParent: [data.isParent || false],
             fixedAssetAcctId: [{
                 value: this.parentNode ? this.parentNode.fixedAssetAcctId : (data.fixedAssetAcctId || ''),
@@ -107,7 +115,7 @@ export class FixedAssetCategoryCreateComponent implements OnInit {
             ...this.categoryForm.getRawValue()
         };
         if (this.parentNode) {
-            reqObj['parent_id'] = this.parentNode.id;
+            reqObj['parentId'] = this.parentNode.id;
         }
         this.fxaCategoryService.saveCategories(reqObj).subscribe(
             data => {

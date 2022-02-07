@@ -11,6 +11,21 @@
         <div class="horizontal-stepper-wrapper hor-wrap">
             <mat-card>
                 <form fxLayout="column" [formGroup]="assetsForm">
+                    <mat-grid-list cols="12">
+                        <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Asset Category</mat-label>
+                                <mat-select formControlName="fxaCategoryId" (click)="openFixedAssetCategory()"
+                                            [disabled]="true">
+                                    <mat-option value="">Choose Asset Category</mat-option>
+                                    <mat-option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
+                                        {{faCategory.title}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Asset Category is required!</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-list>
                     <mat-grid-list cols="3" rowHeight="100px">
                         <mat-grid-tile>
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
@@ -131,21 +146,6 @@
                         <mat-grid-tile>
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Asset Category</mat-label>
-                                    <mat-select formControlName="fxaCategoryId" (click)="openFixedAssetCategory()"
-                                                [disabled]="true">
-                                        <mat-option value="">Choose Asset Category</mat-option>
-                                        <mat-option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
-                                            {{faCategory.title}}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-error>Asset Category is required!</mat-error>
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Deployment Status</mat-label>
                                     <select matNativeControl formControlName="fxaStatusId">
                                         <option value="">Select Deployment status</option>
@@ -177,7 +177,6 @@
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Remark</mat-label>
                                 <textarea matInput formControlName="remark"></textarea>
-                                <!--                                <mat-error>Remark is required!</mat-error>-->
                             </mat-form-field>
                         </div>
                     </mat-grid-list>

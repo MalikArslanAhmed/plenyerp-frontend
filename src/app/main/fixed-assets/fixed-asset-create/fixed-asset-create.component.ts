@@ -65,7 +65,7 @@ export class FixedAssetCreateComponent implements OnInit {
             fxaStatusId: [''],
             fxaDepreciationMethodId: [''],
             fxaCategoryId: [''],
-            assetNo: ['', Validators.required],
+            assetNo: [{value: '', disabled: true}],
             title: ['', Validators.required],
             make: ['', Validators.required],
             model: ['', Validators.required],
@@ -443,6 +443,11 @@ export class FixedAssetCreateComponent implements OnInit {
                 fxaCategoryId: response.id,
                 disabled: true
             });
+            if (!this.fixedAssetId) {
+                this.assetsForm.patchValue({
+                    assetNo: response.combinedCode + '\\' + response.nextAssetNo
+                });
+            }
         });
     }
 
