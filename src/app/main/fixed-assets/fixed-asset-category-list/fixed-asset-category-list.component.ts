@@ -16,22 +16,24 @@ interface SegmentNode {
     depreciationRate: string;
     depreciationMethod: string;
     depreciationMethodId: string;
-    assetNoPrefixLine: string;
+    nextAssetNo: string;
+    individualCode: string;
+    combinedCode: string;
+    isParent: boolean;
     fixedAssetAcctId: string;
-    fixedAssetAcct: object;
     accumDeprAcctId: string;
-    accumDeprAcct: object;
     deprExpsAcctId: string;
+
+    assetNoPrefixLine: string;
+    fixedAssetAcct: object;
+    accumDeprAcct: object;
     deprExpsAcct: object;
     subCategories?: SegmentNode[];
     createdAt?: string;
     updatedAt?: string;
-    individualCode: string;
-    combinedCode: string;
     maxLevel: number;
     characterCount: number;
     isActive: number;
-    isParent: boolean;
 }
 
 const TREE_DATA: SegmentNode[] = [];
@@ -58,23 +60,25 @@ export class FixedAssetCategoryListComponent implements OnInit {
             expandable: !!node.subCategories && node.subCategories.length > 0,
             id: node.id,
             title: node.title,
-            isParent: node.isParent,
             depreciationRate: node.depreciationRate,
             depreciationMethodId: node.depreciationMethodId,
-            assetNoPrefixLine: node.assetNoPrefixLine,
+            nextAssetNo: node.nextAssetNo,
+            individualCode: node.individualCode,
+            combinedCode: node.combinedCode,
+            isParent: node.isParent,
             fixedAssetAcctId: node.fixedAssetAcctId,
-            fixedAssetAcct: node.fixedAssetAcct,
             accumDeprAcctId: node.accumDeprAcctId,
-            accumDeprAcct: node.accumDeprAcct,
             deprExpsAcctId: node.deprExpsAcctId,
+
+            assetNoPrefixLine: node.assetNoPrefixLine,
+            fixedAssetAcct: node.fixedAssetAcct,
+            accumDeprAcct: node.accumDeprAcct,
             deprExpsAcct: node.deprExpsAcct,
             level: level,
             isActive: true,
             parentId: node.parentId,
             maxLevel: node.maxLevel,
-            individualCode: node.individualCode,
             characterCount: node.characterCount,
-            combinedCode: node.combinedCode,
             subCategories: node.subCategories,
             showDelete: node.subCategories && node.subCategories.length === 0
         };
@@ -134,7 +138,7 @@ export class FixedAssetCategoryListComponent implements OnInit {
         this.dialogRef = this._matDialog.open(FixedAssetCategoryCreateComponent, {
             minWidth: 1200,
             panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', node: node, levelConfig: this.levelConfig}
+            data: {action: 'EDIT', node: node, levelConfig: this.levelConfig, parent: node}
         });
         this.dialogRef.afterClosed().subscribe((response: any) => {
             if (response && response.doRefresh) {
