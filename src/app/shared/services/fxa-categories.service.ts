@@ -66,4 +66,8 @@ export class FxaCategoriesService extends BaseService {
         return this.postRequest(AppUrl.FIXED_ASSETS_RE_DEPLOYMENT(), data);
     }
 
+    deprications(data): Observable<any> {
+        return this.postRequest(AppUrl.FIXED_ASSETS_DEPRECIATION(), data);
+    }
+
 }

@@ -1518,4 +1518,9 @@ export class AppUrl {
         return AppUrl.API_URL + `fixed-assets/re-deployments`;
     }
 
+    static FIXED_ASSETS_DEPRECIATION(): string {
+        return AppUrl.API_URL + `fixed-assets/depreciations`;
+    }
+
+
 }

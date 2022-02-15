@@ -1,0 +1,207 @@
+@import "src/@fuse/scss/fuse";
+
+#journal-voucher.fixed-asset-deployment-page {
+    .header {
+        #add-button {
+            background-color: white !important;
+            color: #106CC8 !important;
+
+            mat-label {
+                color: black !important;
+            }
+        }
+    }
+
+    .content {
+        overflow: hidden;
+
+        .sidebar {
+            &:not(.locked-open) {
+                background: white;
+            }
+        }
+    }
+}
+
+.width-200px {
+    width: 200px;
+}
+
+.background-white {
+    background-color: white;
+}
+
+.ml-20px {
+    margin-left: 20px;
+}
+
+.mt-20px {
+    margin-top: 20px;
+}
+
+.color-white {
+    color: white;
+}
+
+.p-20px {
+    padding: 20px;
+}
+
+.p-10px {
+    padding: 10px;
+}
+
+.mt-10px {
+    margin-top: 10px;
+}
+
+.mt-13px {
+    margin-top: 13px;
+}
+
+::ng-deep .mat-datepicker {
+    background-color: white;
+}
+
+::ng-deep .mat-form-field-underline {
+    background: white;
+}
+
+.submit-report {
+    background-color: #039be5 !important;
+    color: #fff !important;
+    height: 55px;
+    margin-top: 6px;
+}
+
+@import "src/@fuse/scss/fuse";
+
+.blueColor {
+    color: blue;
+}
+
+.redColor {
+    color: red;
+}
+
+.ml-7px {
+    margin-left: 7px;
+}
+
+.f_20 {
+    font-size: 20px;
+}
+
+.invoice-table {
+    background-color: #E0E0E0;
+    margin-top: -20px;
+}
+
+
+.accordion-table .accordion-row {
+    padding-left: 1.5rem;
+    padding-right: 2rem;
+    border-bottom: none;
+}
+
+.expansion-header.expansion-row {
+    border-bottom: none;
+}
+
+$mat-header-row-height: 80px;
+$mat-row-height: 68px;
+$mat-row-horizontal-padding: 24px;
+
+.accordion-table {
+    display: block;
+}
+
+.accordion-row {
+    min-height: $mat-header-row-height;
+}
+
+.expansion-row {
+    min-height: $mat-row-height;
+}
+
+.expansion-row, .accordion-row {
+    display: flex;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    align-items: center;
+    padding: 0 $mat-row-horizontal-padding;
+    box-sizing: border-box;
+
+    // Workaround for https://goo.gl/pFmjJD in IE 11. Adds a pseudo
+    // element that will stretch the row the correct height. See:
+    // https://connect.microsoft.com/IE/feedback/details/802625
+    &::after {
+        display: inline-block;
+        min-height: inherit;
+        content: '';
+    }
+}
+
+.mat-cell, .mat-header-cell {
+    flex: 1;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.mt-32px {
+    margin-top: 32px;
+}
+
+.mt-23px {
+    margin-top: 23px;
+}
+
+.mt-28px {
+    margin-top: 28px;
+}
+
+.checked-btn {
+    background-color: #0066ff !important;
+    color: white !important;
+    margin: 10px;
+    width: 200px;
+}
+
+.journal-voucher-data {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+
+    .mat-table {
+        width: 100%;
+        max-width: 100%;
+        display: table;
+        border-collapse: collapse;
+        margin: 0;
+    }
+
+    .mat-row,
+    .mat-header-row {
+        display: table-row;
+    }
+
+    .mat-cell,
+    .mat-header-cell {
+        word-wrap: initial;
+        display: table-cell;
+        padding: 0 5px;
+        line-break: unset;
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+}
+
+.border-bg-none {
+    border: none !important;
+    background-color: transparent !important;
+}
+.no-click {
+    pointer-events: none;
+}

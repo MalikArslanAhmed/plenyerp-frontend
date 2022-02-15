@@ -5,10 +5,12 @@ import {FixedAssetDeploymentComponent} from './fixed-asset-deployment/fixed-asse
 import {FixedAssetCategoryListComponent} from './fixed-asset-category-list/fixed-asset-category-list.component';
 import {FixedAssetCategoryCreateComponent} from './fixed-asset-category-create/fixed-asset-category-create.component';
 import {FixedAssetCreateComponent} from './fixed-asset-create/fixed-asset-create.component';
+import {FixedAssetsDepreciationComponent} from './fixed-assets-depriciation/fixed-assets-depreciation.component';
 
 const routes: Routes = [
     {path: 'list', component: FixedAssetsComponent, data: {title: 'Fixed Assets '}},
     {path: 'deployments', component: FixedAssetDeploymentComponent, data: {title: 'Fixed Assets '}},
+    {path: 'deprecation', component: FixedAssetsDepreciationComponent, data: {title: 'Fixed Assets '}},
     {
         path: 'fixed-assets-categories',
         component: FixedAssetCategoryListComponent,

@@ -32,6 +32,7 @@ import {FixedAssetCategoryCreateComponent} from './fixed-asset-category-create/f
 import {FixedAssetCreateComponent} from './fixed-asset-create/fixed-asset-create.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FixedAssetsDepreciationComponent } from './fixed-assets-depriciation/fixed-assets-depreciation.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         FixedAssetCategorySelectComponent,
         FixedAssetDeploymentComponent,
         FixedAssetReDeploymentComponent,
+        FixedAssetsDepreciationComponent,
     ],
     imports: [
         CommonModule,

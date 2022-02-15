@@ -991,6 +991,14 @@ export const navigation: FuseNavigation[] = [
                         url: 'fixed-assets/deployments',
                         permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
                     },
+                    {
+                        id: 'deprecation',
+                        title: 'Deprecation',
+                        roles: [],
+                        type: 'item',
+                        url: 'fixed-assets/deprecation',
+                        permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
+                    },
                 ]
             }
         ]
