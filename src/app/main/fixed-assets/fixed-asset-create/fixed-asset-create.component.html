@@ -156,7 +156,7 @@
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile>
+                        <!--<mat-grid-tile>
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Depreciation Method</mat-label>
@@ -170,7 +170,7 @@
                                     <mat-error>Depreciation Method is required!</mat-error>
                                 </mat-form-field>
                             </div>
-                        </mat-grid-tile>
+                        </mat-grid-tile>-->
                     </mat-grid-list>
                     <mat-grid-list cols="12">
                         <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
@@ -215,7 +215,8 @@
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Installed</mat-label>
                                         <div matPrefix class="date-checkbox-container">
-                                            <mat-checkbox color="accent" formControlName="isInstalled">
+                                            <mat-checkbox color="accent" formControlName="isInstalled"
+                                                          (change)="onIsInstalled($event)">
                                             </mat-checkbox>
                                         </div>
                                         <input matInput [matDatepicker]="dateInstalled" formControlName="dateInstalled">
@@ -231,7 +232,8 @@
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Commissioned</mat-label>
                                         <div matPrefix class="date-checkbox-container">
-                                            <mat-checkbox color="accent" formControlName="isCommissioned">
+                                            <mat-checkbox color="accent" formControlName="isCommissioned"
+                                                          (change)="onIsCommissioned($event)">
                                             </mat-checkbox>
                                         </div>
                                         <input matInput [matDatepicker]="dateCommissioned"
@@ -248,7 +250,8 @@
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date De-Commissioned</mat-label>
                                         <div matPrefix class="date-checkbox-container">
-                                            <mat-checkbox color="accent" formControlName="isDecommissioned">
+                                            <mat-checkbox color="accent" formControlName="isDecommissioned"
+                                                          (change)="onIsDecommissioned($event)">
                                             </mat-checkbox>
                                         </div>
                                         <input matInput [matDatepicker]="dateDeCommissioned"
@@ -265,7 +268,8 @@
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Date Disposed</mat-label>
                                         <div matPrefix class="date-checkbox-container">
-                                            <mat-checkbox color="accent" formControlName="isDisposed">
+                                            <mat-checkbox color="accent" formControlName="isDisposed"
+                                                          (change)="onIsDisposed($event)">
                                             </mat-checkbox>
                                         </div>
                                         <input matInput [matDatepicker]="dateDisposed" formControlName="dateDisposed">

@@ -79,10 +79,17 @@ export class FixedAssetCreateComponent implements OnInit {
             supplierInvoice: [''],
             supplierName: [''],
             supplierContact: ['', Validators.required],
-            dateInstalled: [''],
-            dateCommissioned: [''],
-            dateDeCommissioned: [''],
-            dateDisposed: [''],
+
+            // Supplier details
+            dateInstalled: [{value: '', disabled: true}],
+            dateCommissioned: [{value: '', disabled: true}],
+            dateDeCommissioned: [{value: '', disabled: true}],
+            dateDisposed: [{value: '', disabled: true}],
+            isInstalled: [false],
+            isCommissioned: [false],
+            isDecommissioned: [false],
+            isDisposed: [false],
+
             disposalPrice: [''],
             adminSegmentId: [''],
             economicSegmentId: [''],
@@ -92,11 +99,6 @@ export class FixedAssetCreateComponent implements OnInit {
             fundSegmentId: [''],
             remark: [''],
             custodian: [''],
-
-            isInstalled: [false],
-            isCommissioned: [false],
-            isDecommissioned: [false],
-            isDisposed: [false],
 
             depreciationRate: [''],
             depreciationMethod: [''],
@@ -191,6 +193,10 @@ export class FixedAssetCreateComponent implements OnInit {
             depreciationMethod: '',
             assetNoPrefixLine: '',
         });
+        this.onIsInstalled({checked: updatedData.isInstalled});
+        this.onIsCommissioned({checked: updatedData.isCommissioned});
+        this.onIsDecommissioned({checked: updatedData.isDecommissioned});
+        this.onIsDisposed({checked: updatedData.isDisposed});
 
         this.adminSegments = [{
             name: (updatedData && updatedData['adminSegment']) ? updatedData['adminSegment'].name : '',
@@ -229,6 +235,8 @@ export class FixedAssetCreateComponent implements OnInit {
                 deploymentRemark: updatedData.latestDeployment.remark,
                 deploymentAdminSegmentId: updatedData.latestDeployment.adminSegmentId,
             });
+            this.assetsForm.controls['deploymentRemark'].disable();
+
             this.deploymentAdminSegments = [{
                 name: (updatedData['latestDeployment']['adminSegment']) ? updatedData['latestDeployment']['adminSegment'].name : '',
                 id: (updatedData['latestDeployment']['adminSegment']) ? updatedData['latestDeployment']['adminSegment'].id : '',
@@ -244,6 +252,46 @@ export class FixedAssetCreateComponent implements OnInit {
                 name: (updatedData['latestDeployment']['custodian']) ? updatedData['latestDeployment']['custodian'].firstName + ' ' + updatedData['latestDeployment']['custodian'].lastName : '',
                 id: (updatedData['latestDeployment']['custodian']) ? updatedData['latestDeployment']['custodian'].id : '',
             }];
+        }
+    }
+
+    onIsInstalled(event): void {
+        if (event.checked) {
+            this.assetsForm.controls['dateInstalled'].enable();
+            this.assetsForm.controls['dateInstalled'].setValidators([Validators.required]);
+        } else {
+            this.assetsForm.controls['dateInstalled'].disable();
+            this.assetsForm.controls['dateInstalled'].clearValidators();
+        }
+    }
+
+    onIsCommissioned(event): void {
+        if (event.checked) {
+            this.assetsForm.controls['dateCommissioned'].enable();
+            this.assetsForm.controls['dateCommissioned'].setValidators([Validators.required]);
+        } else {
+            this.assetsForm.controls['dateCommissioned'].disable();
+            this.assetsForm.controls['dateCommissioned'].clearValidators();
+        }
+    }
+
+    onIsDecommissioned(event): void {
+        if (event.checked) {
+            this.assetsForm.controls['dateDeCommissioned'].enable();
+            this.assetsForm.controls['dateDeCommissioned'].setValidators([Validators.required]);
+        } else {
+            this.assetsForm.controls['dateDeCommissioned'].disable();
+            this.assetsForm.controls['dateDeCommissioned'].clearValidators();
+        }
+    }
+
+    onIsDisposed(event): void {
+        if (event.checked) {
+            this.assetsForm.controls['dateDisposed'].enable();
+            this.assetsForm.controls['dateDisposed'].setValidators([Validators.required]);
+        } else {
+            this.assetsForm.controls['dateDisposed'].disable();
+            this.assetsForm.controls['dateDisposed'].clearValidators();
         }
     }
 
