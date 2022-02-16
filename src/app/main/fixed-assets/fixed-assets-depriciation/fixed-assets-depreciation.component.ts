@@ -57,4 +57,8 @@ export class FixedAssetsDepreciationComponent implements OnInit {
             }
         );
     }
+
+    getDepreciationDetails(fixedAsset) : void{
+
+    }
 }

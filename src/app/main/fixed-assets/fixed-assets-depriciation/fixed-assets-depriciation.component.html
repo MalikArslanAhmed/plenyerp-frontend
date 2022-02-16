@@ -55,20 +55,19 @@
                     <section matSort class="mat-elevation-z2 mat-header-row accordion-row">
                         <span class="mat-header-cell">S.No</span>
                         <span class="mat-header-cell">Asset Number</span>
-                        <span class="mat-header-cell">Date of Deployment</span>
-                        <span class="mat-header-cell">Deprecated Acquisition cost</span>
-                        <span class="mat-header-cell">Admin Segment</span>
-                        <span class="mat-header-cell">Work Location</span>
-                        <span class="mat-header-cell">Custodian</span>
-                        <span class="mat-header-cell">Remark</span>
+                        <span class="mat-header-cell">Title</span>
+                        <span class="mat-header-cell">Category</span>
+                        <span class="mat-header-cell">Asset Acquision Cost </span>
+                        <span class="mat-header-cell">Total Depreciation </span>
+                        <span class="mat-header-cell">Current Book Value</span>
+
                     </section>
                     <mat-expansion-panel *ngFor="let fixedAsset of fixedAssets; let i = index"
                                          [expanded]="fixedAsset.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
-                                                    (click)="getDeployments(fixedAsset)">
-                            <span class="mat-cell align-items-center">
+                                                    (click)="getDepreciationDetails(fixedAsset)">
+                                <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">
-                                    <input type="checkbox" (click)="onAssetSelect($event.target, fixedAsset)">
                                     {{i + 1}}.
                                 </p>
                             </span>
@@ -76,22 +75,19 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.assetNo}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment?.valueDate | date}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.title}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.category.title}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCost}}</p>
+                            </span>
+                            <span class="mat-cell align-items-center">
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCost - fixedAsset.acquisitionCostDeprecated}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCostDeprecated}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.adminSegment.name}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.workLocation.name}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.custodian.firstName}}</p>
-                            </span>
-                            <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.latestDeployment.remark}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -99,30 +95,27 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        <div class="title">Date of Deployment</div>
+                                        <div class="title">Date of Depreciation</div>
                                     </th>
                                     <th>
-                                        <div class="title">Admin Segment</div>
+                                        <div class="title">Opening Book Value</div>
                                     </th>
                                     <th>
-                                        <div class="title">Work Location</div>
+                                        <div class="title">Depreciation Amount</div>
                                     </th>
                                     <th>
-                                        <div class="title">Custodian</div>
-                                    </th>
-                                    <th>
-                                        <div class="title">Remark</div>
+                                        <div class="title">Closing Book Value</div>
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody
-                                    *ngIf="fixedAsset && fixedAsset['children'] && fixedAsset['children'].length > 0; else noChildToShow">
-                                <tr *ngFor="let child of fixedAsset['children']; let j = index">
-                                    <td>{{child.valueDate | date}}</td>
-                                    <td>{{child.adminSegment.name}}</td>
-                                    <td>{{child.workLocation.name}}</td>
-                                    <td>{{child.custodian.firstName}}</td>
-                                    <td>{{child.remark}}</td>
+
+                                    *ngIf="fixedAsset && fixedAsset.depreciationDetails && fixedAsset.depreciationDetails.length > 0; else noChildToShow">
+                                <tr *ngFor="let child of fixedAsset.depreciationDetails; let j = index">
+                                    <td>{{child.createdAt | date}}</td>
+                                    <td>{{child.openingBalance}}</td>
+                                    <td>{{child.amount}}</td>
+                                    <td>{{child.closingBalance}}</td>
                                 </tr>
                                 </tbody>
                                 <ng-template #noChildToShow>
