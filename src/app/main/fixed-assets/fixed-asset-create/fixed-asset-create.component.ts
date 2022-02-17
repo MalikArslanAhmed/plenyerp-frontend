@@ -106,7 +106,6 @@ export class FixedAssetCreateComponent implements OnInit {
 
             // quantity: [{value: 1, disabled: true}],
             salvageValue: ['', Validators.required],
-            expectedLife: ['', Validators.required],
             beginAccumDepr: ['', Validators.required],
 
             valueDate: [''],
@@ -177,7 +176,6 @@ export class FixedAssetCreateComponent implements OnInit {
             fundSegmentId: updatedData.fundSegmentId,
             remark: updatedData.remark,
             salvageValue: updatedData.salvageValue,
-            expectedLife: updatedData.expectedLife,
             beginAccumDepr: updatedData.beginAccumDepr,
 
             dateInstalled: updatedData.dateInstalled,
