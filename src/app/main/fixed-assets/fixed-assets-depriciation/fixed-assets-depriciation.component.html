@@ -81,13 +81,13 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.category.title}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCost}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCost | number:'1.0':'en-US'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCost - fixedAsset.acquisitionCostDeprecated}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.totalDepreciation | number:'1.0':'en-US'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCostDeprecated}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCostDeprecated | number:'1.0':'en-US'}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
@@ -113,9 +113,9 @@
                                     *ngIf="fixedAsset && fixedAsset.depreciationDetails && fixedAsset.depreciationDetails.length > 0; else noChildToShow">
                                 <tr *ngFor="let child of fixedAsset.depreciationDetails; let j = index">
                                     <td>{{child.createdAt | date}}</td>
-                                    <td>{{child.openingBalance}}</td>
-                                    <td>{{child.amount}}</td>
-                                    <td>{{child.closingBalance}}</td>
+                                    <td>{{child.openingBalance | number:'1.0':'en-US'}}</td>
+                                    <td>{{child.amount | number:'1.0':'en-US'}}</td>
+                                    <td>{{child.closingBalance | number:'1.0':'en-US'}}</td>
                                 </tr>
                                 </tbody>
                                 <ng-template #noChildToShow>
