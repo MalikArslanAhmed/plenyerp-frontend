@@ -24,6 +24,7 @@ import {WorkLocationsListSelectComponent} from '../../dashboard/employees/work-l
 })
 export class FixedAssetCreateComponent implements OnInit {
     fixedAssetId: any;
+    isEditable: false;
     assetsForm: FormGroup;
     dialogRef: any;
     faCategories = [];
@@ -74,7 +75,7 @@ export class FixedAssetCreateComponent implements OnInit {
             modelNo: [''],
             oemSerialNo: ['', Validators.required],
             oemBarCodeNo: ['', Validators.required],
-            acquisitionCost: ['', Validators.required],
+            acquisitionCost: [{value: '', disabled: this.isEditable}],
             nmrlLocation: [''],
             supplierInvoice: [''],
             supplierName: [''],
@@ -105,13 +106,13 @@ export class FixedAssetCreateComponent implements OnInit {
             assetNoPrefixLine: [''],
 
             // quantity: [{value: 1, disabled: true}],
-            salvageValue: ['', Validators.required],
-            beginAccumDepr: ['', Validators.required],
+            salvageValue: [{value: '', disabled: this.isEditable}, Validators.required],
+            beginAccumDepr: [{value: '', disabled: this.isEditable}, Validators.required],
 
             valueDate: [''],
             custodianId: [''],
             locationId: [''],
-            deploymentRemark: [{value: '', disabled: this.fixedAssetId}],
+            deploymentRemark: [{value: '', disabled: this.isEditable}],
             deploymentAdminSegmentId: [''],
         });
 
