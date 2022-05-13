@@ -12,8 +12,8 @@
         <form [formGroup]="leavesTypeForm">
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Long Name</mat-label>
-                    <input matInput placeholder="Long Name" formControlName="name" name="name" required cdk-focus-start>
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Title" formControlName="title" name="title" required cdk-focus-start>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start">
@@ -23,24 +23,24 @@
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-                <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
-                <mat-label>Is Active</mat-label>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-                <mat-slide-toggle formControlName="autoCreate"></mat-slide-toggle>
-                <mat-label>Auto create in leave ?</mat-label>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-                <mat-slide-toggle formControlName="isCarryOverUnusedLeave"></mat-slide-toggle>
-                <mat-label>Carry over unused leave ?</mat-label>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
                 <mat-slide-toggle formControlName="isPaidLeave"></mat-slide-toggle>
                 <mat-label>Paid leave ?</mat-label>
             </div>
             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
                 <mat-slide-toggle formControlName="isCalenderDays"></mat-slide-toggle>
                 <mat-label>Calender days ?</mat-label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="rollOverUnusedLeave"></mat-slide-toggle>
+                <mat-label>Roll over unused leave ?</mat-label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="entitledAnnually"></mat-slide-toggle>
+                <mat-label>Entitled anually ?</mat-label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="isActive"></mat-slide-toggle>
+                <mat-label>Is Active</mat-label>
             </div>
         </form>
     </div>
