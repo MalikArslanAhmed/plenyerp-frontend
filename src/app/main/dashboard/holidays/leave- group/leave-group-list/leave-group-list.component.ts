@@ -15,7 +15,7 @@ import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/d
 })
 export class LeaveGroupListComponent implements OnInit {
     leaveGroupList = [];
-    displayedLeaveGroupColumns = ['id', 'name', 'status', 'actions'];
+    displayedLeaveGroupColumns = ['id', 'title', 'status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
