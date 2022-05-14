@@ -108,6 +108,20 @@ export class ContactInfoService extends BaseService {
     deleteLeavesGroup(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_LEAVES_GROUP(id));
     }
+    //
+    getLeaveGroupMemberList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_GROUP_MEMBER_LIST(), data);
+    }
+    addLeaveGroupMember(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_GROUP_MEMBER(), data);
+    }
+    updateLeaveGroupMember(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_GROUP_MEMBER(id), data);
+    }
+    deleteLeaveGroupMember(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_GROUP_MEMBER(id));
+    }
+    //
 
     getPublicHolidayList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_PUBLIC_HOLIDAY_LIST(), data);

@@ -843,6 +843,24 @@ export class AppUrl {
     static DELETE_LEAVES_GROUP(id?): string {
         return AppUrl.API_URL + 'leave-groups/' + id;
     }
+    
+    //
+    static GET_LEAVE_GROUP_MEMBER_LIST(): string {
+        return AppUrl.API_URL + `leave-group-members`;
+    }
+
+    static LEAVE_GROUP_MEMBER(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-group-members/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-group-members';
+        }
+    }
+
+    static DELETE_LEAVE_GROUP_MEMBER(id?): string {
+        return AppUrl.API_URL + 'leave-group-members/' + id;
+    }
+    //
 
     static GET_PUBLIC_HOLIDAY_LIST(): string {
         return AppUrl.API_URL + `public-holidays`;

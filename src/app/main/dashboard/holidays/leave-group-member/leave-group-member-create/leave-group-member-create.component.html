@@ -1,0 +1,44 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="leaveGroupMemberForm">
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px"
+                    (click)="selectAdminEmployee('Select Employee')" fxFlex>
+                    <mat-label>Select Staff</mat-label>
+                    <mat-select formControlName="staffId">
+                        <mat-option value="">Choose Employee</mat-option>
+                        <mat-option *ngFor="let employee of selectedEmployee" [value]="employee.id">{{employee?.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Select Leave Group</mat-label>
+                    <mat-select formControlName="leaveGroupId" required>
+                        <mat-option [value]="leaveGroup.id" *ngFor="let leaveGroup of leaveGroupList">
+                            {{leaveGroup.title}}</mat-option>
+                    </mat-select>
+                    <mat-error>Leave Group is required!</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close(leaveGroupMemberForm); saveLeaves()"
+            [disabled]="leaveGroupMemberForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(leaveGroupMemberForm); updateLeaves()"
+            [disabled]="leaveGroupMemberForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

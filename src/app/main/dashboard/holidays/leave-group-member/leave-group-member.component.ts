@@ -1,0 +1,40 @@
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {FuseSidebarService} from '../../../../../@fuse/components/sidebar/sidebar.service';
+import {MatDialog} from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
+import {LeaveGroupMemberCreateComponent} from './leave-group-member-create/leave-group-member-create.component';
+import {LeaveGroupMemberListComponent} from './leave-group-member-list/leave-group-member-list.component';
+import {fuseAnimations} from '../../../../../@fuse/animations';
+
+@Component({
+    selector: 'app-leave-group-member',
+    templateUrl: './leave-group-member.component.html',
+    styleUrls: ['./leave-group-member.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    animations: fuseAnimations
+})
+export class LeaveGroupMemberComponent implements OnInit {
+    dialogRef: any;
+    @ViewChild(LeaveGroupMemberListComponent) getLeaveGroupMemberList: LeaveGroupMemberListComponent;
+
+    constructor(
+        private _fuseSidebarService: FuseSidebarService,
+        private _matDialog: MatDialog) {
+    }
+
+    ngOnInit(): void {
+    }
+
+    addLeaveGroupMember() {
+        this.dialogRef = this._matDialog.open(LeaveGroupMemberCreateComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {action: 'CREATE'}
+        });
+        this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
+            if (!response) {
+                return;
+            }
+            this.getLeaveGroupMemberList.getLeaveGroupMemberList();
+        });
+    }
+}

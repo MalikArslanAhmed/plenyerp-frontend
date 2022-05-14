@@ -269,6 +269,10 @@ import { SchedulePayersCustomerPreviousAdvancesComponent } from './treasure-repo
 import { ScheduleEconomicCodesReceiptPreviousAdvancesComponent } from './treasure-report/previous-year-advances/schedule-economic-codes-receipt-previous-advances/schedule-economic-codes-receipt-previous-advances.component';
 import {AbsoluteAmountPipe} from '../../shared/pipes/absolute-amount.pipe';
 import { EmployeeLoginAccessComponent } from './employees/employee-action/employee-login-access/employee-login-access.component';
+import { LeaveGroupMemberListComponent } from './holidays/leave-group-member/leave-group-member-list/leave-group-member-list.component';
+import { LeaveGroupMemberCreateComponent } from './holidays/leave-group-member/leave-group-member-create/leave-group-member-create.component';
+import { LeaveGroupMemberComponent } from './holidays/leave-group-member/leave-group-member.component';
+import { EmployeeSelectComponent } from './holidays/employee-select/employee-select.component';
 
 @NgModule({
     declarations: [
@@ -343,6 +347,9 @@ import { EmployeeLoginAccessComponent } from './employees/employee-action/employ
         LeaveTypeComponent,
         LeaveTypeCreateComponent,
         LeaveTypeListComponent,
+        LeaveGroupMemberComponent,
+        LeaveGroupMemberCreateComponent,
+        LeaveGroupMemberListComponent,
         LeaveGroupComponent,
         LeaveGroupCreateComponent,
         LeaveGroupListComponent,
@@ -498,6 +505,7 @@ import { EmployeeLoginAccessComponent } from './employees/employee-action/employ
         SummaryReportStandingImprestComponent,
         SummaryReportSpecialImprestComponent,
         SummaryAdminSegmentSelectComponent,
+        EmployeeSelectComponent,
         AdvancesLedgerEmployeeReportComponent,
         IfrNotesMasterComponent,
         RetireVouchersComponent,

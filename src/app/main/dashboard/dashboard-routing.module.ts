@@ -89,6 +89,7 @@ import {RetireVouchersComponent} from "./treasure-report/retire-vouchers/retire-
 import {OnMandateComponent} from "./treasure-report/on-mandate/on-mandate.component";
 import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
 import {PreviousYearAdvancesComponent} from "./treasure-report/previous-year-advances/previous-year-advances.component";
+import { LeaveGroupMemberComponent } from './holidays/leave-group-member/leave-group-member.component';
 
 const routes: Routes = [
     {
@@ -377,6 +378,15 @@ const routes: Routes = [
         data: {
             title: 'Type of leaves',
             permissions: [PermissionConstant.TYPES_OF_LEAVES_LIST]
+        },
+    },
+    {
+        path: 'leave-group-member',
+        component: LeaveGroupMemberComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave group members',
+            permissions: [PermissionConstant.LEAVE_GROUP_MEMBER_LIST]
         },
     },
     {

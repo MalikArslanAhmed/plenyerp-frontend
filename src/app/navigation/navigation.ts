@@ -299,6 +299,14 @@ export const navigation: FuseNavigation[] = [
                         permissions: [PermissionConstant.TYPES_OF_LEAVES_LIST]
                     },
                     {
+                        id: 'leave-group-member',
+                        title: 'Leave group members',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-group-member',
+                        permissions: [PermissionConstant.TYPES_OF_LEAVES_LIST]
+                    },
+                    {
                         id: 'leave-group',
                         title: 'Leave Group',
                         roles: [],
