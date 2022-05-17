@@ -1,5 +1,5 @@
-import {environment} from '../../../environments/environment';
-import {Injectable} from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AppUrl {
@@ -843,7 +843,7 @@ export class AppUrl {
     static DELETE_LEAVES_GROUP(id?): string {
         return AppUrl.API_URL + 'leave-groups/' + id;
     }
-    
+
     //
     static GET_LEAVE_GROUP_MEMBER_LIST(): string {
         return AppUrl.API_URL + `leave-group-members`;
@@ -861,7 +861,25 @@ export class AppUrl {
         return AppUrl.API_URL + 'leave-group-members/' + id;
     }
     //
+    //leave group Entitlements 
+    //
+    static GET_LEAVE_GROUP_Entitlement_LIST(): string {
+        return AppUrl.API_URL + `leave-group-entitlements`;
+    }
 
+    static LEAVE_GROUP_Entitlement(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-group-entitlements/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-group-entitlements';
+        }
+    }
+
+    static DELETE_LEAVE_GROUP_Entitlement(id?): string {
+        return AppUrl.API_URL + 'leave-group-entitlements/' + id;
+    }
+    //
+    //
     static GET_PUBLIC_HOLIDAY_LIST(): string {
         return AppUrl.API_URL + `public-holidays`;
     }

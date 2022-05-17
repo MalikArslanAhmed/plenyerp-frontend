@@ -174,6 +174,12 @@ export class PermissionConstant {
     static LEAVE_GROUP_MEMBER_LIST = 'LEAVE.GROUP.MEMBER.LIST';
     static LEAVE_GROUP_MEMBER_DELETE = 'LEAVE.GROUP.MEMBER.DELETE';
 
+    
+    static LEAVE_GROUP_Entitlement_ADD = 'LEAVE.GROUP.Entitlement.ADD';
+    static LEAVE_GROUP_Entitlement_EDIT = 'LEAVE.GROUP.Entitlement.EDIT';
+    static LEAVE_GROUP_Entitlement_LIST = 'LEAVE.GROUP.Entitlement.LIST';
+    static LEAVE_GROUP_Entitlement_DELETE = 'LEAVE.GROUP.Entitlement.DELETE';
+
 
     static PUBLIC_HOLIDAYS_ADD = 'PUBLIC.HOLIDAYS.ADD';
     static PUBLIC_HOLIDAYS_EDIT = 'PUBLIC.HOLIDAYS.EDIT';

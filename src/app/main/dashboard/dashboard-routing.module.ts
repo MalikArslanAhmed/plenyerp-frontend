@@ -90,6 +90,7 @@ import {OnMandateComponent} from "./treasure-report/on-mandate/on-mandate.compon
 import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
 import {PreviousYearAdvancesComponent} from "./treasure-report/previous-year-advances/previous-year-advances.component";
 import { LeaveGroupMemberComponent } from './holidays/leave-group-member/leave-group-member.component';
+import { LeaveGroupEntitlementComponent } from './holidays/leave-group-entitlement/leave-group-entitlement.component';
 
 const routes: Routes = [
     {
@@ -386,6 +387,15 @@ const routes: Routes = [
         canActivate: [RouteGuard],
         data: {
             title: 'Leave group members',
+            permissions: [PermissionConstant.LEAVE_GROUP_MEMBER_LIST]
+        },
+    },
+    {
+        path: 'leave-group-entitlement',
+        component: LeaveGroupEntitlementComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave group entitlements',
             permissions: [PermissionConstant.LEAVE_GROUP_MEMBER_LIST]
         },
     },

@@ -122,6 +122,20 @@ export class ContactInfoService extends BaseService {
         return this.deleteRequest(AppUrl.DELETE_LEAVE_GROUP_MEMBER(id));
     }
     //
+    //Group Entitlement calls
+    getLeaveGroupEntitlementList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_GROUP_Entitlement_LIST(), data);
+    }
+    addLeaveGroupEntitlement(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_GROUP_Entitlement(), data);
+    }
+    updateLeaveGroupEntitlement(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_GROUP_Entitlement(id), data);
+    }
+    deleteLeaveGroupEntitlement(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_GROUP_Entitlement(id));
+    }
+    //Group entitlements calls end
 
     getPublicHolidayList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_PUBLIC_HOLIDAY_LIST(), data);
