@@ -17,7 +17,50 @@
                 </p>
             </mat-cell>
         </ng-container>
-
+        <ng-container matColumnDef="eAnually">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Entitled Anually</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaves">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaves.entitled_annually">Yes</p>
+                    <p *ngIf="!leaves.entitled_annually">No</p>
+                </div>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pLeave">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Paid Leave</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaves">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaves.is_paid_leave">Yes</p>
+                    <p *ngIf="!leaves.is_paid_leave">No</p>
+                </div>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cDays">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Calender Days</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaves">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaves.is_calender_days">Yes</p>
+                    <p *ngIf="!leaves.is_calender_days">No</p>
+                </div>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="rLeaves">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Rollover unused leave</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaves">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaves.roll_over_unused_leave">Yes</p>
+                    <p *ngIf="!leaves.roll_over_unused_leave">No</p>
+                </div>
+            </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef>
                 <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>

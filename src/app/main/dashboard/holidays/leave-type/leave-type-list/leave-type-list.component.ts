@@ -15,7 +15,7 @@ import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/d
 })
 export class LeaveTypeListComponent implements OnInit {
     leavesList = [];
-    displayedLeavesTypeColumns = ['id', 'name', 'status', 'actions'];
+    displayedLeavesTypeColumns = ['id', 'name','eAnually','pLeave','cDays','rLeaves', 'status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
