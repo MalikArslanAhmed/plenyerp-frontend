@@ -1,0 +1,26 @@
+.employees-selected-wrapper p{
+    font-size: 10px;
+}
+
+.employees-selected-container {
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    gap             : 4px;
+    background-color: #2E7D32;
+    padding         : 4px;
+    margin          : 0;
+}
+
+.employees-selected-container p {
+    color    : white;
+    margin   : 0;
+    font-size: 11px;
+}
+
+.employees-selected-container span {
+    font-size: 11px;
+    color    : red;
+    margin   : 0;
+    cursor   : pointer;
+}

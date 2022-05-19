@@ -17,20 +17,19 @@
                             <button mat-icon-button disabled></button>
                             {{node.name}}
                             <button mat-icon-button title="Choose" (click)="setAdminSegment(node)"
-                                    *ngIf="allowType === 'BOTH' || allowType === 'CHILD'">
+                                *ngIf="allowType === 'BOTH' || allowType === 'CHILD'">
                                 <mat-icon class="addBtn">check_circle</mat-icon>
                             </button>
                         </mat-tree-node>
                         <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
-                            <button mat-icon-button matTreeNodeToggle
-                                    [attr.aria-label]="'toggle ' + node.name">
+                            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
                                 <mat-icon class="mat-icon-rtl-mirror">
                                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                                 </mat-icon>
                             </button>
                             {{node.name}}
                             <button mat-icon-button title="Choose" (click)="setAdminSegment(node)"
-                                    *ngIf="allowType === 'BOTH' || allowType === 'PARENT'">
+                                *ngIf="allowType === 'BOTH' || allowType === 'PARENT'">
                                 <mat-icon class="addBtn">check_circle</mat-icon>
                             </button>
                         </mat-tree-node>
@@ -46,7 +45,7 @@
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Search</mat-label>
                                 <input matInput formControlName="search" name="search"
-                                       (keyup)="getItemsBySearch({'search': this.adminSegmentSearchForm.value.search})">
+                                    (keyup)="getItemsBySearch({'search': this.adminSegmentSearchForm.value.search})">
                             </mat-form-field>
                             <button mat-button class="save-button reset-btn" (click)="resetTransFilter()">Reset</button>
                         </div>
@@ -57,8 +56,25 @@
                         <mat-icon (click)="resetSelection()">close</mat-icon>
                     </button>
                 </div>
+
+                <div class="show-btn">
+                    <button *ngIf="selectedTab === 'table'" class="done-button reset-btn "
+                        (click)="selectedTab = 'emp'">Show Selected
+                        Employees</button>
+
+                    <button *ngIf="selectedTab === 'emp'" (click)="selectedTab = 'table'">Show
+                        Table</button>
+
+                    <mat-checkbox class="example-margin" [checked]="employees.length === selectedEmployees.length"
+                        (change)="setAll($event.checked)"
+                        [indeterminate]="employees.length !== selectedEmployees.length && selectedEmployees.length>0">
+                        All
+                    </mat-checkbox>
+
+                </div>
                 <div class="p-5px">
-                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees">
+                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="employees"
+                        *ngIf="selectedTab === 'table'">
                         <ng-container matColumnDef="Staff ID">
                             <mat-header-cell *matHeaderCellDef>Staff ID</mat-header-cell>
                             <mat-cell *matCellDef="let employee">
@@ -92,10 +108,14 @@
                             </mat-header-cell>
                             <mat-cell *matCellDef="let employee">
                                 <div fxFlex="row" fxLayoutAlign="end center">
-                                    <button (click)="matDialogRef.close({empData: employee, node: choosenNode})"
-                                            aria-label="Toggle star"
-                                            mat-icon-button
-                                            style="color: green">
+                                    <button *ngIf="updateAddCircleClass(employee) === -1"
+                                        (click)="updatedSelectedEmployees(employee)" aria-label="Toggle star"
+                                        mat-icon-button style="color: black;">
+                                        <mat-icon class="material-icons">check_circle</mat-icon>
+                                    </button>
+                                    <button *ngIf="updateAddCircleClass(employee) > -1"
+                                        (click)="updatedSelectedEmployees(employee)" aria-label="Toggle star"
+                                        mat-icon-button style="color: #2E7D32;">
                                         <mat-icon class="material-icons">check_circle</mat-icon>
                                     </button>
                                 </div>
@@ -104,18 +124,25 @@
 
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let employee; columns: displayedColumns;" class="contact"
-                                 [@animate]="{value:'*',params:{y:'100%'}}">
+                            [@animate]="{value:'*',params:{y:'100%'}}">
                         </mat-row>
                     </mat-table>
+                    <div class="employees-selected-wrapper" *ngIf="selectedTab === 'emp'">
+                        <div class="employees-selected-container" *ngFor="let emp of selectedEmployees">
+                            <p>{{emp.firstName}}</p>
+                            <span (click)="deleteSelectedEmployee(emp.id)">X</span>
+                        </div>
+                        <p *ngIf="selectedEmployees.length === 0"><b>No Selected Employee yet</b></p>
+                    </div>
                 </div>
                 <div *ngIf="employees.length > 0" fxFlex="100">
-                    <mat-paginator #paginator
-                                   (page)="pageEvent = onPageChange($event)"
-                                   [length]="pagination.total"
-                                   [pageIndex]="pagination.page-1"
-                                   [pageSize]="pagination.perpage"
-                    >
+                    <mat-paginator #paginator (page)="pageEvent = onPageChange($event)" [length]="pagination.total"
+                        [pageIndex]="pagination.page-1" [pageSize]="pagination.perpage">
                     </mat-paginator>
+                </div>
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-button class="done-button reset-btn "
+                        (click)="matDialogRef.close({empData: selectedEmployees})">Done</button>
                 </div>
             </div>
         </div>

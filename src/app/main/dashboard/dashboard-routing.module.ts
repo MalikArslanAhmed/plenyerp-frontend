@@ -377,12 +377,12 @@ const routes: Routes = [
         component: LeaveTypeComponent,
         canActivate: [RouteGuard],
         data: {
-            title: 'Type of leaves',
+            title: 'Types of leave',
             permissions: [PermissionConstant.TYPES_OF_LEAVES_LIST]
         },
     },
     {
-        path: 'leave-group-member',
+        path: 'leave-group-member/:leaveGroupId',
         component: LeaveGroupMemberComponent,
         canActivate: [RouteGuard],
         data: {

@@ -292,7 +292,7 @@ export const navigation: FuseNavigation[] = [
                 children: [
                     {
                         id: 'leaves-type',
-                        title: 'Type of leaves',
+                        title: 'Types of leave',
                         roles: [],
                         type: 'item',
                         url: 'dashboard/leaves-type',
@@ -306,14 +306,14 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/leave-group',
                         permissions: [PermissionConstant.LEAVE_GROUP_LIST]
                     },
-                    {
-                        id: 'leave-group-member',
-                        title: 'Leave group members',
-                        roles: [],
-                        type: 'item',
-                        url: 'dashboard/leave-group-member',
-                        permissions: [PermissionConstant.TYPES_OF_LEAVES_LIST]
-                    },
+                    // {
+                    //     id: 'leave-group-member',
+                    //     title: 'Leave group members',
+                    //     roles: [],
+                    //     type: 'item',
+                    //     url: 'dashboard/leave-group-member',
+                    //     permissions: [PermissionConstant.TYPES_OF_LEAVES_LIST]
+                    // },
                     {
                         id: 'leave-group-entitlement',
                         title: 'Leave group entitlements',

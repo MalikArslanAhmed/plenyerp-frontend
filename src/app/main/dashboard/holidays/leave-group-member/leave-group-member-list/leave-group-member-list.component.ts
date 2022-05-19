@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {FormGroup} from '@angular/forms';
-import {LeaveGroupMemberCreateComponent} from '../leave-group-member-create/leave-group-member-create.component';
-import {fuseAnimations} from '../../../../../../@fuse/animations';
-import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Output, EventEmitter, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FormGroup } from '@angular/forms';
+import { LeaveGroupMemberCreateComponent } from '../leave-group-member-create/leave-group-member-create.component';
+import { fuseAnimations } from '../../../../../../@fuse/animations';
+import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 
 @Component({
@@ -15,13 +15,13 @@ import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/d
 })
 export class LeaveGroupMemberListComponent implements OnInit {
     leaveGroupMemberList = [];
-    displayedLeavesTypeColumns = ['id', 'staffFN','staffLN','groupName', 'actions'];
+    displayedLeavesTypeColumns = ['id','fileNo', 'staffFN', 'staffLN', 'groupName', 'actions'];
     dialogRef: any;
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
-
-    constructor(private contactInfoService: ContactInfoService,
-                private _matDialog: MatDialog) {
+    @Input() leaveGroupId
+        constructor(private contactInfoService: ContactInfoService,
+            private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -29,9 +29,9 @@ export class LeaveGroupMemberListComponent implements OnInit {
     }
 
     getLeaveGroupMemberList() {
-        this.contactInfoService.getLeaveGroupMemberList({'page': -1}).subscribe(data => {
-            this.leaveGroupMemberList = data.items;
-
+        this.contactInfoService.getLeaveGroupMemberList({'page': -1,leaveGroupId:this.leaveGroupId}).subscribe(data => {
+            this.leaveGroupMemberList =data.items;
+            
             if (this.leaveGroupMemberList && this.leaveGroupMemberList.length > 0) {
                 let i = 1;
                 this.leaveGroupMemberList.forEach(val => {
@@ -45,7 +45,7 @@ export class LeaveGroupMemberListComponent implements OnInit {
     deleteItemModal(items) {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: items}
+            data: { data: items }
         });
         this.dialogRef.afterClosed().subscribe((response: boolean) => {
             if (response) {
@@ -53,7 +53,7 @@ export class LeaveGroupMemberListComponent implements OnInit {
             }
         });
 
-    } 
+    }
     deleteLeaveGroupMember(id) {
         this.contactInfoService.deleteLeaveGroupMember(id).subscribe(data => {
             if (data) {
@@ -65,7 +65,7 @@ export class LeaveGroupMemberListComponent implements OnInit {
     editLeave(leaveGroupMember) {
         this.dialogRef = this._matDialog.open(LeaveGroupMemberCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', leaveGroupMember: leaveGroupMember},
+            data: { action: 'EDIT', leaveGroupMember: leaveGroupMember },
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {

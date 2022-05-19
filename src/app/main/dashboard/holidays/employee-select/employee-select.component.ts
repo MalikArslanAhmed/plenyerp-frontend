@@ -1,9 +1,9 @@
-import {Component, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FlatTreeControl} from "@angular/cdk/tree";
-import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {ActivatedRoute} from "@angular/router";
+import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FlatTreeControl } from "@angular/cdk/tree";
+import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { ActivatedRoute } from "@angular/router";
 import { fuseAnimations } from '@fuse/animations';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { AdminSegmentServices } from 'app/shared/services/admin-segment.services';
@@ -60,18 +60,23 @@ export class EmployeeSelectComponent implements OnInit {
     head: any;
     allowType: any = 'BOTH';
     nodeData = [];
-
+    selectedEmployees = []
+    selectedTab = 'table'
     constructor(public matDialogRef: MatDialogRef<EmployeeSelectComponent>,
-                @Inject(MAT_DIALOG_DATA) private _data: any,
-                private route: ActivatedRoute,
-                private adminSegmentServices: AdminSegmentServices,
-                private employeesService: EmployeesService,
-                private fb: FormBuilder) {
+        @Inject(MAT_DIALOG_DATA) private _data: any,
+        private route: ActivatedRoute,
+        private adminSegmentServices: AdminSegmentServices,
+        private employeesService: EmployeesService,
+        private fb: FormBuilder) {
         this.dataSource.data = TREE_DATA;
         if (_data.node) {
             this.nodeData = [_data.node];
         } else {
             this.nodeData = [];
+        }
+        if (_data.leaveGroupMember) {
+            this.selectedEmployees = [...this.selectedEmployees, ..._data.leaveGroupMember]
+
         }
         this.head = _data.head;
         this.allowType = _data.allow;
@@ -105,6 +110,32 @@ export class EmployeeSelectComponent implements OnInit {
         });
         this.getSegmentList();
         this.getEmployees({});
+    }
+
+    setAll(event) {
+        console.log(event);
+        if (event) {
+            this.selectedEmployees = [...this.employees]
+        } else {
+            this.selectedEmployees = []
+        }
+    }
+
+    updatedSelectedEmployees(employee) {
+        const index = this.selectedEmployees.findIndex(resp => resp.id === employee.id)
+        if (index > -1) {
+            this.selectedEmployees.splice(index, 1)
+        } else {
+            this.selectedEmployees.push(employee)
+        }
+    }
+    deleteSelectedEmployee(id) {
+        const index = this.selectedEmployees.findIndex(resp => resp.id === id)
+        this.selectedEmployees.splice(index, 1)
+    }
+    updateAddCircleClass(employee) {
+        const index = this.selectedEmployees.findIndex(resp => resp.id === employee.id)
+        return index
     }
 
     getSegmentList() {
@@ -160,7 +191,7 @@ export class EmployeeSelectComponent implements OnInit {
         this.adminSegmentAllIds.push(node.id);
         this.findAllIds(node);
         this.selectedCategory = node.name;
-        this.getEmployees({adminSegmentIds: JSON.stringify(this.adminSegmentAllIds)});
+        this.getEmployees({ adminSegmentIds: JSON.stringify(this.adminSegmentAllIds) });
     }
 
     findAllIds(data) {

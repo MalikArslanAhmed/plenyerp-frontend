@@ -36,12 +36,16 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let leaveGroup">
                 <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-icon-button aria-label="Toggle star" matTooltip="Group Members"
+                        matTooltipPosition="left" (click)="addGroupMember(leaveGroup)" style="color: #000000">
+                        <mat-icon class="material-icons">person</mat-icon>
+                    </button>
                     <button mat-icon-button aria-label="Toggle star" (click)="editLeaveGroup(leaveGroup)"
-                            style="color: blue">
+                        style="color: blue">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
                     <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveGroup)"
-                            style="color: red">
+                        style="color: red">
                         <mat-icon class="material-icons">delete</mat-icon>
                     </button>
                 </div>
@@ -50,10 +54,7 @@
 
         <mat-header-row *matHeaderRowDef="displayedLeaveGroupColumns"></mat-header-row>
         <mat-row *matRowDef="let leaveGroup; columns: displayedLeaveGroupColumns;" class="contact"
-                 [@animate]="{value:'*',params:{y:'100%'}}">
+            [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
 </div>
-
-
-

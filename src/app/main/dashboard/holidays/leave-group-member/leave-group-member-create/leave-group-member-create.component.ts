@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { AdminSegmentEmployeeSelectComponent } from 'app/main/dashboard/treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
 import { EmployeesService } from 'app/shared/services/employees.service';
+import { forkJoin } from 'rxjs';
 import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { EmployeeSelectComponent } from '../../employee-select/employee-select.component';
@@ -24,7 +25,7 @@ export class LeaveGroupMemberCreateComponent implements OnInit {
     dialogRef: any;
     stores = [];
     donationsForm: FormGroup;
-    selectedEmployee: any;
+    selectedEmployee: any = [];
     leaveGroupList = []
     employeeList = []
     constructor(public matDialogRef: MatDialogRef<LeaveGroupMemberCreateComponent>,
@@ -38,7 +39,8 @@ export class LeaveGroupMemberCreateComponent implements OnInit {
         if (this.action === 'EDIT') {
             this.dialogTitle = 'Edit Leave Group Member';
             if (_data.leaveGroupMember) {
-                this.updateData = _data;
+                this.updateData = _data
+                this.selectedEmployee.push(_data.leaveGroupMember)
             }
         } else {
             this.dialogTitle = 'Add Group Member';
@@ -47,7 +49,6 @@ export class LeaveGroupMemberCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.getGroupList()
         this.getEmployeeList()
     }
     getEmployeeList() {
@@ -58,19 +59,11 @@ export class LeaveGroupMemberCreateComponent implements OnInit {
     }
     refresh() {
         this.leaveGroupMemberForm = this.fb.group({
-            leaveGroupId: ['', Validators.required],
-            staffId: ['', Validators.required]
-        });
-    }
-    getGroupList() {
-        this.contactInfoService.getLeavesGroupList({}).subscribe(data => {
-            this.leaveGroupList = data.items;
+            leaveGroupId: [this._data.leaveGroupId, Validators.required]
         });
     }
 
     checkForUpdate() {
-        console.log('updated',this.updateData);
-        
         if (this.updateData) {
             let index = this.employeeList.findIndex(resp => resp.id === this.updateData.leaveGroupMember.staffId)
             if (index > -1) {
@@ -80,27 +73,38 @@ export class LeaveGroupMemberCreateComponent implements OnInit {
                 }];
             }
             this.leaveGroupMemberForm.patchValue({
-                leaveGroupId: this.updateData.leaveGroupMember.leaveGroupId,
-                staffId: this.updateData.leaveGroupMember.staffId
+                leaveGroupId: this.updateData.leaveGroupMember.leaveGroupId
             });
         }
     }
 
+    deleteSelectedEmployee(id) {
+        const index = this.selectedEmployee.findIndex(resp => resp.id === id)
+        this.selectedEmployee.splice(index, 1)
+    }
+
     saveLeaves() {
         this.isSubmitted = true;
-        if (!this.leaveGroupMemberForm.valid) {
+        if (!this.leaveGroupMemberForm.valid || this.selectedEmployee.length === 0) {
             this.isSubmitted = false;
             return;
         }
+        let callsArray = []
+        this.selectedEmployee.forEach((resp: any) => {
+            console.log('sd', this.leaveGroupMemberForm.value);
+            const data = {
+                leaveGroupId: this.leaveGroupMemberForm.value.leaveGroupId,
+                staffId: resp.id
+            }
+
+            callsArray.push(this.contactInfoService.addLeaveGroupMember(data))
+        })
 
         if (this.isSubmitted) {
-            // console.log(this.leaveGroupMemberForm.value);
-            this.contactInfoService.addLeaveGroupMember(this.leaveGroupMemberForm.value).subscribe(data => {
+            forkJoin(callsArray).subscribe((resp: any) => {
                 this.leaveGroupMemberForm.reset();
                 this.isSubmitted = false;
-            });
-
-
+            })
         }
     }
 
@@ -126,20 +130,18 @@ export class LeaveGroupMemberCreateComponent implements OnInit {
         if (type === 'Select Employee') {
             allowType = 'BOTH';
         }
-
         this.dialogRef = this._matDialog.open(EmployeeSelectComponent, {
             panelClass: 'transaction-items-form-dialog',
-            data: { head: type, allow: allowType, node: node }
+            data: { head: type, allow: allowType, node: node, leaveGroupMember: this.selectedEmployee }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
                 return;
             }
-            if (type === 'Select Employee') {
-                this.selectedEmployee = [{
-                    'name': response['empData'].firstName + ' ' + response['empData'].lastName,
-                    'id': response['empData'].id
-                }];
+            if (type === 'Select Employees') {
+                console.log('response', response);
+
+                this.selectedEmployee = response.empData
                 this.leaveGroupMemberForm.patchValue({
                     staffId: response['empData'].id
                 });
