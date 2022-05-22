@@ -91,6 +91,7 @@ import {PaymentApprovalComponent} from './treasure-report/payment-approval/payme
 import {PreviousYearAdvancesComponent} from "./treasure-report/previous-year-advances/previous-year-advances.component";
 import { LeaveGroupMemberComponent } from './holidays/leave-group-member/leave-group-member.component';
 import { LeaveGroupEntitlementComponent } from './holidays/leave-group-entitlement/leave-group-entitlement.component';
+import { LeaveYearComponent } from './holidays/leave-year/leave-year.component';
 
 const routes: Routes = [
     {
@@ -397,6 +398,15 @@ const routes: Routes = [
         data: {
             title: 'Leave group entitlements',
             permissions: [PermissionConstant.LEAVE_GROUP_MEMBER_LIST]
+        },
+    },
+    {
+        path: 'leave-year',
+        component: LeaveYearComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Years',
+            permissions: [PermissionConstant.LEAVE_YEAR_LIST]
         },
     },
     {

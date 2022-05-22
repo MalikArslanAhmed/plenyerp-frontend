@@ -136,7 +136,21 @@ export class ContactInfoService extends BaseService {
         return this.deleteRequest(AppUrl.DELETE_LEAVE_GROUP_Entitlement(id));
     }
     //Group entitlements calls end
-
+   
+    // Leave Year start
+    getLeaveYearList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_YEAR_LIST(), data);
+    }
+    addLeaveYear(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_YEAR(), data);
+    }
+    updateLeaveYear(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_YEAR(id), data);
+    }
+    deleteLeaveYear(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_YEAR(id));
+    }
+    //Leave year apis end
     getPublicHolidayList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_PUBLIC_HOLIDAY_LIST(), data);
     }

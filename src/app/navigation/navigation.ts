@@ -306,14 +306,6 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/leave-group',
                         permissions: [PermissionConstant.LEAVE_GROUP_LIST]
                     },
-                    // {
-                    //     id: 'leave-group-member',
-                    //     title: 'Leave group members',
-                    //     roles: [],
-                    //     type: 'item',
-                    //     url: 'dashboard/leave-group-member',
-                    //     permissions: [PermissionConstant.TYPES_OF_LEAVES_LIST]
-                    // },
                     {
                         id: 'leave-group-entitlement',
                         title: 'Leave group entitlements',
@@ -321,6 +313,14 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/leave-group-entitlement',
                         permissions: [PermissionConstant.LEAVE_GROUP_Entitlement_LIST]
+                    },
+                    {
+                        id: 'leave-year',
+                        title: 'Leave years',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-year',
+                        permissions: [PermissionConstant.LEAVE_YEAR_LIST]
                     },
                     {
                         id: 'public-holiday',

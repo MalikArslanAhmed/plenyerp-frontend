@@ -276,6 +276,9 @@ import { EmployeeSelectComponent } from './holidays/employee-select/employee-sel
 import { LeaveGroupEntitlementComponent } from './holidays/leave-group-entitlement/leave-group-entitlement.component';
 import { LeaveGroupEntitlementCreateComponent } from './holidays/leave-group-entitlement/leave-group-entitlement-create/leave-group-entitlement-create.component';
 import { LeaveGroupEntitlementListComponent } from './holidays/leave-group-entitlement/leave-group-entitlement-list/leave-group-entitlement-list.component';
+import { LeaveYearComponent } from './holidays/leave-year/leave-year.component';
+import { LeaveYearCreateComponent } from './holidays/leave-year/leave-year-create/leave-year-create.component';
+import { LeaveYearListComponent } from './holidays/leave-year/leave-year-list/leave-year-list.component';
 
 @NgModule({
     declarations: [
@@ -356,6 +359,9 @@ import { LeaveGroupEntitlementListComponent } from './holidays/leave-group-entit
         LeaveGroupEntitlementComponent,
         LeaveGroupEntitlementCreateComponent,
         LeaveGroupEntitlementListComponent,
+        LeaveYearComponent,
+        LeaveYearCreateComponent,
+        LeaveYearListComponent,
         LeaveGroupComponent,
         LeaveGroupCreateComponent,
         LeaveGroupListComponent,

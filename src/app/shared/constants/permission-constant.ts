@@ -180,6 +180,10 @@ export class PermissionConstant {
     static LEAVE_GROUP_Entitlement_LIST = 'LEAVE.GROUP.Entitlement.LIST';
     static LEAVE_GROUP_Entitlement_DELETE = 'LEAVE.GROUP.Entitlement.DELETE';
 
+    static LEAVE_YEAR_ADD = 'LEAVE.YEAR.ADD';
+    static LEAVE_YEAR_EDIT = 'LEAVE.YEAR.EDIT';
+    static LEAVE_YEAR_LIST = 'LEAVE.YEAR.LIST';
+    static LEAVE_YEAR_DELETE = 'LEAVE.YEAR.DELETE';
 
     static PUBLIC_HOLIDAYS_ADD = 'PUBLIC.HOLIDAYS.ADD';
     static PUBLIC_HOLIDAYS_EDIT = 'PUBLIC.HOLIDAYS.EDIT';

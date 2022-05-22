@@ -879,7 +879,23 @@ export class AppUrl {
         return AppUrl.API_URL + 'leave-group-entitlements/' + id;
     }
     //
-    //
+    //Leave Year
+    static GET_LEAVE_YEAR_LIST(): string {
+        return AppUrl.API_URL + `leave-years`;
+    }
+
+    static LEAVE_YEAR(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-years/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-years';
+        }
+    }
+
+    static DELETE_LEAVE_YEAR(id?): string {
+        return AppUrl.API_URL + 'leave-years/' + id;
+    }
+    //Leave Year Ended
     static GET_PUBLIC_HOLIDAY_LIST(): string {
         return AppUrl.API_URL + `public-holidays`;
     }
