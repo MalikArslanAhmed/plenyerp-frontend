@@ -1,10 +1,10 @@
-import {BaseService} from './base.service';
-import {HttpClient} from '@angular/common/http';
-import {AlertService} from './alert.service';
-import {GlobalService} from './global.service';
-import {Observable} from 'rxjs';
-import {AppUrl} from '../constants/app-url';
-import {Injectable} from '@angular/core';
+import { BaseService } from './base.service';
+import { HttpClient } from '@angular/common/http';
+import { AlertService } from './alert.service';
+import { GlobalService } from './global.service';
+import { Observable } from 'rxjs';
+import { AppUrl } from '../constants/app-url';
+import { Injectable } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
@@ -136,7 +136,7 @@ export class ContactInfoService extends BaseService {
         return this.deleteRequest(AppUrl.DELETE_LEAVE_GROUP_Entitlement(id));
     }
     //Group entitlements calls end
-   
+
     // Leave Year start
     getLeaveYearList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_LEAVE_YEAR_LIST(), data);
@@ -151,6 +151,21 @@ export class ContactInfoService extends BaseService {
         return this.deleteRequest(AppUrl.DELETE_LEAVE_YEAR(id));
     }
     //Leave year apis end
+
+    // Hr Information start
+    getInformationList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_HR_INFORMATION_LIST(), data);
+    }
+    addInformation(data): Observable<any> {
+        return this.postRequest(AppUrl.HR_INFORMATION(), data);
+    }
+    updateInformation(id, data): Observable<any> {
+        return this.putRequest(AppUrl.HR_INFORMATION(id), data);
+    }
+    deleteInformation(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_HR_INFORMATION(id));
+    }
+    //Hr Information apis end
     getPublicHolidayList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_PUBLIC_HOLIDAY_LIST(), data);
     }

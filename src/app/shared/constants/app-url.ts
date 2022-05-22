@@ -896,6 +896,24 @@ export class AppUrl {
         return AppUrl.API_URL + 'leave-years/' + id;
     }
     //Leave Year Ended
+
+      //Hr Information
+      static GET_HR_INFORMATION_LIST(): string {
+        return AppUrl.API_URL + `hr-informations`;
+    }
+
+    static HR_INFORMATION(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'hr-informations/' + id;
+        } else {
+            return AppUrl.API_URL + 'hr-informations';
+        }
+    }
+
+    static DELETE_HR_INFORMATION(id?): string {
+        return AppUrl.API_URL + 'hr-informations/' + id;
+    }
+    //Hr Information Ended
     static GET_PUBLIC_HOLIDAY_LIST(): string {
         return AppUrl.API_URL + `public-holidays`;
     }

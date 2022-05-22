@@ -92,6 +92,7 @@ import {PreviousYearAdvancesComponent} from "./treasure-report/previous-year-adv
 import { LeaveGroupMemberComponent } from './holidays/leave-group-member/leave-group-member.component';
 import { LeaveGroupEntitlementComponent } from './holidays/leave-group-entitlement/leave-group-entitlement.component';
 import { LeaveYearComponent } from './holidays/leave-year/leave-year.component';
+import { InformationComponent } from './information/information/information.component';
 
 const routes: Routes = [
     {
@@ -407,6 +408,15 @@ const routes: Routes = [
         data: {
             title: 'Leave Years',
             permissions: [PermissionConstant.LEAVE_YEAR_LIST]
+        },
+    },
+    {
+        path: 'hr-information',
+        component: InformationComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Hr Information',
+            permissions: [PermissionConstant.INFORMATION_LIST]
         },
     },
     {

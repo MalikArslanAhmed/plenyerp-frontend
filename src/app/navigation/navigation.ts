@@ -333,6 +333,25 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
+                id: 'information',
+                title: 'Hr Information',
+                roles: [AppConstants.ROLE_ID_HR],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'calendar_today',
+                permissions: [PermissionConstant.INFORMATION_LIST],
+                children: [
+                    {
+                        id: 'info',
+                        title: 'Information',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/hr-information',
+                        permissions: [PermissionConstant.INFORMATION_LIST]
+                    },
+                ]
+            },
+            {
                 id: 'qualifications',
                 title: 'Qualifications',
                 roles: [AppConstants.ROLE_ID_HR],
