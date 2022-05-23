@@ -393,7 +393,7 @@ const routes: Routes = [
         },
     },
     {
-        path: 'leave-group-entitlement',
+        path: 'leave-group-entitlement/:leaveGroupId',
         component: LeaveGroupEntitlementComponent,
         canActivate: [RouteGuard],
         data: {

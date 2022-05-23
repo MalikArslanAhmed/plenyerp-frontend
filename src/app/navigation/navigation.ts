@@ -307,14 +307,6 @@ export const navigation: FuseNavigation[] = [
                         permissions: [PermissionConstant.LEAVE_GROUP_LIST]
                     },
                     {
-                        id: 'leave-group-entitlement',
-                        title: 'Leave group entitlements',
-                        roles: [],
-                        type: 'item',
-                        url: 'dashboard/leave-group-entitlement',
-                        permissions: [PermissionConstant.LEAVE_GROUP_Entitlement_LIST]
-                    },
-                    {
                         id: 'leave-year',
                         title: 'Leave years',
                         roles: [],

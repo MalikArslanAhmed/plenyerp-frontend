@@ -34,6 +34,10 @@ export class LeaveGroupListComponent implements OnInit {
     addGroupMember(leaveGroup) {
         this.router.navigateByUrl('dashboard/leave-group-member/' + leaveGroup.id);
     }
+
+    addGroupEntitlement(leaveGroup) {
+        this.router.navigateByUrl('dashboard/leave-group-entitlement/' + leaveGroup.id);
+    }
     
     getLeaveGroupList() {
         this.contactInfoService.getLeavesGroupList({ 'page': -1 }).subscribe(data => {

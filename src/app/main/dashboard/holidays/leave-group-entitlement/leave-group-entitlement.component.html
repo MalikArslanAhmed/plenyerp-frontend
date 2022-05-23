@@ -7,7 +7,7 @@
                           [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">calendar_today
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                   Leave Group Entitlements
+                    {{leaveGroupData.title}} Entitlements
                 </span>
             </div>
         </div>
@@ -21,7 +21,7 @@
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
-                <leave-group-entitlement-list></leave-group-entitlement-list>
+                <leave-group-entitlement-list [leaveGroupId]="leaveGroupId"></leave-group-entitlement-list>
             </div>
         </div>
     </div>

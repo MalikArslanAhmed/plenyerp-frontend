@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation, Output, EventEmitter, Input} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {FormGroup} from '@angular/forms';
 import {fuseAnimations} from '../../../../../../@fuse/animations';
@@ -15,10 +15,11 @@ import { LeaveGroupEntitlementCreateComponent } from '../leave-group-entitlement
 })
 export class LeaveGroupEntitlementListComponent implements OnInit {
     leaveGroupEntitlementList = [];
-    displayedLeaveGroupEntitlementColumns = ['id','leaveType','groupName','dueDays', 'actions'];
+    displayedLeaveGroupEntitlementColumns = ['id','leaveType','dueDays', 'actions'];
     dialogRef: any;
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
+    @Input() leaveGroupId
 
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {
@@ -29,7 +30,7 @@ export class LeaveGroupEntitlementListComponent implements OnInit {
     }
 
     getLeaveGroupEntitlementList() {
-        this.contactInfoService.getLeaveGroupEntitlementList({'page': -1}).subscribe(data => {
+        this.contactInfoService.getLeaveGroupEntitlementList({'page': -1,leaveGroupId:this.leaveGroupId}).subscribe(data => {
             this.leaveGroupEntitlementList = data.items;
 
             if (this.leaveGroupEntitlementList && this.leaveGroupEntitlementList.length > 0) {

@@ -36,6 +36,10 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let leaveGroup">
                 <div fxFlex="row" fxLayoutAlign="end center">
+                    <button mat-icon-button aria-label="Toggle star" matTooltip="Group Entitlements"
+                        matTooltipPosition="left" (click)="addGroupEntitlement(leaveGroup)" style="color: #000000">
+                        <mat-icon class="material-icons">credit_card</mat-icon>
+                    </button>
                     <button mat-icon-button aria-label="Toggle star" matTooltip="Group Members"
                         matTooltipPosition="left" (click)="addGroupMember(leaveGroup)" style="color: #000000">
                         <mat-icon class="material-icons">person</mat-icon>

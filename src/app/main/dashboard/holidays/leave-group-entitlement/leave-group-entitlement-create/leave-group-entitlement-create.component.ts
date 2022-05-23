@@ -54,7 +54,7 @@ export class LeaveGroupEntitlementCreateComponent implements OnInit {
     }
     refresh() {
         this.leaveGroupEntitlementForm = this.fb.group({
-            leaveGroupId: ['', Validators.required],
+            leaveGroupId: [this._data.leaveGroupId, Validators.required],
             leaveTypeId: ['', Validators.required],
             dueDays: [0, Validators.required]
         });

@@ -16,14 +16,6 @@
                 </p>
             </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="groupName">
-            <mat-header-cell *matHeaderCellDef>Leave Group Name</mat-header-cell>
-            <mat-cell *matCellDef="let leaveGroupEntitlement" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{leaveGroupEntitlement.leaveGroup.title}}
-                </p>
-            </mat-cell>
-        </ng-container>
         <ng-container matColumnDef="dueDays">
             <mat-header-cell *matHeaderCellDef>Due Days</mat-header-cell>
             <mat-cell *matCellDef="let leaveGroupEntitlement" class="cursor-pointer">
