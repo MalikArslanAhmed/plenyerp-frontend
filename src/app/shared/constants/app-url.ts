@@ -897,6 +897,24 @@ export class AppUrl {
     }
     //Leave Year Ended
 
+  //Leave Credit
+  static GET_LEAVE_CREDIT_LIST(): string {
+    return AppUrl.API_URL + `leave-credits`;
+}
+
+static LEAVE_CREDIT(id?): string {
+    if (id) {
+        return AppUrl.API_URL + 'leave-credits/' + id;
+    } else {
+        return AppUrl.API_URL + 'leave-credits';
+    }
+}
+
+static DELETE_LEAVE_CREDIT(id?): string {
+    return AppUrl.API_URL + 'leave-credits/' + id;
+}
+//Leave Credit Ended
+
       //Hr Information
       static GET_HR_INFORMATION_LIST(): string {
         return AppUrl.API_URL + `hr-informations`;

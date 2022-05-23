@@ -282,6 +282,9 @@ import { LeaveYearListComponent } from './holidays/leave-year/leave-year-list/le
 import { InformationComponent } from './information/information/information.component';
 import { InformationCreateComponent } from './information/information/information-create/information-create.component';
 import { InformationListComponent } from './information/information/information-list/information-list.component';
+import { LeaveCreditComponent } from './holidays/leave-credit/leave-credit.component';
+import { LeaveCreditCreateComponent } from './holidays/leave-credit/leave-credit-create/leave-credit-create.component';
+import { LeaveCreditListComponent } from './holidays/leave-credit/leave-credit-list/leave-credit-list.component';
 
 @NgModule({
     declarations: [
@@ -371,6 +374,9 @@ import { InformationListComponent } from './information/information/information-
         InformationComponent,
         InformationCreateComponent,
         InformationListComponent,
+        LeaveCreditComponent,
+        LeaveCreditCreateComponent,
+        LeaveCreditListComponent,
         PublicHolidayCreateComponent,
         PublicHolidaysComponent,
         PublicHolidayListComponent,

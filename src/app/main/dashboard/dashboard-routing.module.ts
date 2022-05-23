@@ -411,6 +411,15 @@ const routes: Routes = [
         },
     },
     {
+        path: 'leave-credit',
+        component: LeaveYearComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Credits',
+            permissions: [PermissionConstant.LEAVE_CREDIT_LIST]
+        },
+    },
+    {
         path: 'hr-information',
         component: InformationComponent,
         canActivate: [RouteGuard],

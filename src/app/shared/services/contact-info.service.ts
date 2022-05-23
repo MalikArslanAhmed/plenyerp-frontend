@@ -152,6 +152,21 @@ export class ContactInfoService extends BaseService {
     }
     //Leave year apis end
 
+    // Leave Credit start
+    getLeaveCreditList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_CREDIT_LIST(), data);
+    }
+    addLeaveCredit(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_CREDIT(), data);
+    }
+    updateLeaveCredit(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_CREDIT(id), data);
+    }
+    deleteLeaveCredit(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_CREDIT(id));
+    }
+    //Leave credit apis end
+
     // Hr Information start
     getInformationList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_HR_INFORMATION_LIST(), data);

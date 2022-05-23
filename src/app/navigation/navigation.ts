@@ -323,6 +323,14 @@ export const navigation: FuseNavigation[] = [
                         permissions: [PermissionConstant.LEAVE_YEAR_LIST]
                     },
                     {
+                        id: 'leave-credit',
+                        title: 'Leave Credits',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-credit',
+                        permissions: [PermissionConstant.LEAVE_CREDIT_LIST]
+                    },
+                    {
                         id: 'public-holiday',
                         title: 'Public Holidays ',
                         roles: [],
