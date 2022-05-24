@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {FormGroup} from '@angular/forms';
-import {fuseAnimations} from '../../../../../../@fuse/animations';
-import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FormGroup } from '@angular/forms';
+import { fuseAnimations } from '../../../../../../@fuse/animations';
+import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveCreditCreateComponent } from '../leave-credit-create/leave-credit-create.component';
 
@@ -15,11 +15,11 @@ import { LeaveCreditCreateComponent } from '../leave-credit-create/leave-credit-
 })
 export class LeaveCreditListComponent implements OnInit {
     leaveCreditList = [];
-    displayedLeaveCreditColumns = ['id','leaveYear', 'actions'];
+    displayedLeaveCreditColumns = ['id', 'pStaff', 'staff','leaveType','dueDays','leaveYear','pVDate','pTDate' ,'actions'];
     dialogRef: any;
 
     constructor(private contactInfoService: ContactInfoService,
-                private _matDialog: MatDialog) {
+        private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -27,7 +27,7 @@ export class LeaveCreditListComponent implements OnInit {
     }
 
     getLeaveCreditList() {
-        this.contactInfoService.getLeaveCreditList({'page': -1}).subscribe(data => {
+        this.contactInfoService.getLeaveCreditList({ 'page': -1 }).subscribe(data => {
             this.leaveCreditList = data.items;
 
             if (this.leaveCreditList && this.leaveCreditList.length > 0) {
@@ -43,7 +43,7 @@ export class LeaveCreditListComponent implements OnInit {
     deleteItemModal(items) {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',
-            data: {data: items}
+            data: { data: items }
         });
         this.dialogRef.afterClosed().subscribe((response: boolean) => {
             if (response) {
@@ -51,7 +51,7 @@ export class LeaveCreditListComponent implements OnInit {
             }
         });
 
-    } 
+    }
     deleteLeaveCredit(id) {
         this.contactInfoService.deleteLeaveCredit(id).subscribe(data => {
             if (data) {
@@ -63,7 +63,7 @@ export class LeaveCreditListComponent implements OnInit {
     editLeaveCredit(leaveCredit) {
         this.dialogRef = this._matDialog.open(LeaveCreditCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: {action: 'EDIT', leaveCredit: leaveCredit},
+            data: { action: 'EDIT', leaveCredit: leaveCredit },
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {

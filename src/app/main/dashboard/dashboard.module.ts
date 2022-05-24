@@ -285,6 +285,7 @@ import { InformationListComponent } from './information/information/information-
 import { LeaveCreditComponent } from './holidays/leave-credit/leave-credit.component';
 import { LeaveCreditCreateComponent } from './holidays/leave-credit/leave-credit-create/leave-credit-create.component';
 import { LeaveCreditListComponent } from './holidays/leave-credit/leave-credit-list/leave-credit-list.component';
+import { EmployeeSelectSingleComponent } from './holidays/employee-select-single/employee-select-single.component';
 
 @NgModule({
     declarations: [
@@ -530,6 +531,7 @@ import { LeaveCreditListComponent } from './holidays/leave-credit/leave-credit-l
         SummaryReportSpecialImprestComponent,
         SummaryAdminSegmentSelectComponent,
         EmployeeSelectComponent,
+        EmployeeSelectSingleComponent,
         AdvancesLedgerEmployeeReportComponent,
         IfrNotesMasterComponent,
         RetireVouchersComponent,

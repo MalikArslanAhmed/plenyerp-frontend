@@ -93,6 +93,7 @@ import { LeaveGroupMemberComponent } from './holidays/leave-group-member/leave-g
 import { LeaveGroupEntitlementComponent } from './holidays/leave-group-entitlement/leave-group-entitlement.component';
 import { LeaveYearComponent } from './holidays/leave-year/leave-year.component';
 import { InformationComponent } from './information/information/information.component';
+import { LeaveCreditComponent } from './holidays/leave-credit/leave-credit.component';
 
 const routes: Routes = [
     {
@@ -412,7 +413,7 @@ const routes: Routes = [
     },
     {
         path: 'leave-credit',
-        component: LeaveYearComponent,
+        component: LeaveCreditComponent,
         canActivate: [RouteGuard],
         data: {
             title: 'Leave Credits',

@@ -8,11 +8,59 @@
                 </p>
             </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="leaveCredit">
+        <ng-container matColumnDef="pStaff">
+            <mat-header-cell *matHeaderCellDef>P Staff</mat-header-cell>
+            <mat-cell *matCellDef="let leaveCredit" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    <!-- {{leaveCredit.year}} -->1
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="staff">
+            <mat-header-cell *matHeaderCellDef>Staff</mat-header-cell>
+            <mat-cell *matCellDef="let leaveCredit" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveCredit.employee.firstName}} {{leaveCredit.employee.lastName}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="leaveType">
+            <mat-header-cell *matHeaderCellDef>Leave Type</mat-header-cell>
+            <mat-cell *matCellDef="let leaveCredit" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveCredit.leave.title}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="dueDays">
+            <mat-header-cell *matHeaderCellDef>Due Days</mat-header-cell>
+            <mat-cell *matCellDef="let leaveCredit" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveCredit.dueDays}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="leaveYear">
             <mat-header-cell *matHeaderCellDef>Leave Year</mat-header-cell>
             <mat-cell *matCellDef="let leaveCredit" class="cursor-pointer">
                 <p class="phone text-truncate cursor-pointer">
-                    {{leaveCredit.year}}
+                    {{leaveCredit.leaveYear.year}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pVDate">
+            <mat-header-cell *matHeaderCellDef>P.V Date</mat-header-cell>
+            <mat-cell *matCellDef="let leaveCredit" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveCredit.preparedVDate}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pTDate">
+            <mat-header-cell *matHeaderCellDef>P.T Date</mat-header-cell>
+            <mat-cell *matCellDef="let leaveCredit" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveCredit.preparedTDate}}
                 </p>
             </mat-cell>
         </ng-container>

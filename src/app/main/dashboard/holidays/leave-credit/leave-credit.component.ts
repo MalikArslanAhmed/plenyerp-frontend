@@ -25,7 +25,7 @@ export class LeaveCreditComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    addLeaveYear() {
+    addLeaveCredit() {
         this.dialogRef = this._matDialog.open(LeaveCreditCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: {action: 'CREATE'}
