@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PermissionConstant {
@@ -174,11 +174,15 @@ export class PermissionConstant {
     static LEAVE_GROUP_MEMBER_LIST = 'LEAVE.GROUP.MEMBER.LIST';
     static LEAVE_GROUP_MEMBER_DELETE = 'LEAVE.GROUP.MEMBER.DELETE';
 
-    
     static LEAVE_GROUP_Entitlement_ADD = 'LEAVE.GROUP.Entitlement.ADD';
     static LEAVE_GROUP_Entitlement_EDIT = 'LEAVE.GROUP.Entitlement.EDIT';
     static LEAVE_GROUP_Entitlement_LIST = 'LEAVE.GROUP.Entitlement.LIST';
     static LEAVE_GROUP_Entitlement_DELETE = 'LEAVE.GROUP.Entitlement.DELETE';
+
+    static LEAVE_ENTITLEMENT_SALARY_SCALE_ADD = 'LEAVE.ENTITLEMENT.SALARY.SCALE.ADD';
+    static LEAVE_ENTITLEMENT_SALARY_SCALE_EDIT = 'LEAVE.ENTITLEMENT.SALARY.SCALE.EDIT';
+    static LEAVE_ENTITLEMENT_SALARY_SCALE_LIST = 'LEAVE.ENTITLEMENT.SALARY.SCALE.LIST';
+    static LEAVE_ENTITLEMENT_SALARY_SCALE_DELETE = 'LEAVE.ENTITLEMENT.SALARY.SCALE.DELETE';
 
     static LEAVE_YEAR_ADD = 'LEAVE.YEAR.ADD';
     static LEAVE_YEAR_EDIT = 'LEAVE.YEAR.EDIT';

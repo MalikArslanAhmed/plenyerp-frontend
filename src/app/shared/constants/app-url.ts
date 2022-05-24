@@ -897,26 +897,44 @@ export class AppUrl {
     }
     //Leave Year Ended
 
-  //Leave Credit
-  static GET_LEAVE_CREDIT_LIST(): string {
-    return AppUrl.API_URL + `leave-credits`;
-}
-
-static LEAVE_CREDIT(id?): string {
-    if (id) {
-        return AppUrl.API_URL + 'leave-credits/' + id;
-    } else {
-        return AppUrl.API_URL + 'leave-credits';
+    //Leave Entitlement Salary Scale
+    static GET_LEAVE_ENTITLEMENT_SALARY_SCALE_LIST(): string {
+        return AppUrl.API_URL + `leave-entitlement-salary-scales`;
     }
-}
 
-static DELETE_LEAVE_CREDIT(id?): string {
-    return AppUrl.API_URL + 'leave-credits/' + id;
-}
-//Leave Credit Ended
+    static LEAVE_ENTITLEMENT_SALARY_SCALE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-entitlement-salary-scales/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-entitlement-salary-scales';
+        }
+    }
 
-      //Hr Information
-      static GET_HR_INFORMATION_LIST(): string {
+    static DELETE_LEAVE_ENTITLEMENT_SALARY_SCALE(id?): string {
+        return AppUrl.API_URL + 'leave-entitlement-salary-scales/' + id;
+    }
+    //Leave Entitlement Salary Scale
+
+    //Leave Credit
+    static GET_LEAVE_CREDIT_LIST(): string {
+        return AppUrl.API_URL + `leave-credits`;
+    }
+
+    static LEAVE_CREDIT(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-credits/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-credits';
+        }
+    }
+
+    static DELETE_LEAVE_CREDIT(id?): string {
+        return AppUrl.API_URL + 'leave-credits/' + id;
+    }
+    //Leave Credit Ended
+
+    //Hr Information
+    static GET_HR_INFORMATION_LIST(): string {
         return AppUrl.API_URL + `hr-informations`;
     }
 

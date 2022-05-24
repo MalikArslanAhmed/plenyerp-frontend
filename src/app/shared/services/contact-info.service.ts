@@ -184,6 +184,22 @@ export class ContactInfoService extends BaseService {
     getPublicHolidayList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_PUBLIC_HOLIDAY_LIST(), data);
     }
+
+    // Leave Year start
+    getLeaveEntitlementSalaryScaleList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_ENTITLEMENT_SALARY_SCALE_LIST(), data);
+    }
+    addLeaveEntitlementSalaryScale(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_ENTITLEMENT_SALARY_SCALE(), data);
+    }
+    updateLeaveEntitlementSalaryScale(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_ENTITLEMENT_SALARY_SCALE(id), data);
+    }
+    deleteLeaveEntitlementSalaryScale(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_ENTITLEMENT_SALARY_SCALE(id));
+    }
+    //Leave year apis end
+
     addPublicHoliday(data): Observable<any> {
         return this.postRequest(AppUrl.PUBLIC_HOLIDAY(), data);
     }

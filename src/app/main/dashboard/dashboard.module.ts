@@ -286,6 +286,9 @@ import { LeaveCreditComponent } from './holidays/leave-credit/leave-credit.compo
 import { LeaveCreditCreateComponent } from './holidays/leave-credit/leave-credit-create/leave-credit-create.component';
 import { LeaveCreditListComponent } from './holidays/leave-credit/leave-credit-list/leave-credit-list.component';
 import { EmployeeSelectSingleComponent } from './holidays/employee-select-single/employee-select-single.component';
+import { LeaveEntitlementSalaryScaleComponent } from './holidays/leave-entitlement-salary-scale/leave-entitlement-salary-scale.component';
+import { LeaveEntitlementSalaryScaleListComponent } from './holidays/leave-entitlement-salary-scale/leave-entitlement-salary-scale-list/leave-entitlement-salary-scale-list.component';
+import { LeaveEntitlementSalaryScaleCreateComponent } from './holidays/leave-entitlement-salary-scale/leave-entitlement-salary-scale-create/leave-entitlement-salary-scale-create.component';
 
 @NgModule({
     declarations: [
@@ -366,6 +369,9 @@ import { EmployeeSelectSingleComponent } from './holidays/employee-select-single
         LeaveGroupEntitlementComponent,
         LeaveGroupEntitlementCreateComponent,
         LeaveGroupEntitlementListComponent,
+        LeaveEntitlementSalaryScaleComponent,
+        LeaveEntitlementSalaryScaleCreateComponent,
+        LeaveEntitlementSalaryScaleListComponent,
         LeaveYearComponent,
         LeaveYearCreateComponent,
         LeaveYearListComponent,
