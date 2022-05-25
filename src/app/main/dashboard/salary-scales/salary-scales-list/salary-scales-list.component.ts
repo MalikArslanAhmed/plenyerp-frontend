@@ -107,6 +107,10 @@ export class SalaryScalesListComponent implements OnInit {
         this.router.navigateByUrl('dashboard/leave-entitlement-salary-scales/' + salaryScale.id);
     }
 
+    addEntitlementGradeLevel(gradeLevel) {
+        this.router.navigateByUrl('dashboard/leave-entitlement-grade-levels/' + gradeLevel.id);
+    }
+
     deleteItemModalSalaryScale(items) {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',

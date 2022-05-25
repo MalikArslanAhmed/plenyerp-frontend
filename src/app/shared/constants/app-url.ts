@@ -915,6 +915,24 @@ export class AppUrl {
     }
     //Leave Entitlement Salary Scale
 
+    //Leave Entitlement Grade Level
+    static GET_LEAVE_ENTITLEMENT_GRADE_LEVEL_LIST(): string {
+        return AppUrl.API_URL + `leave-entitlement-grade-levels`;
+    }
+
+    static LEAVE_ENTITLEMENT_GRADE_LEVEL(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-entitlement-grade-levels/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-entitlement-grade-levels';
+        }
+    }
+
+    static DELETE_LEAVE_ENTITLEMENT_GRADE_LEVEL(id?): string {
+        return AppUrl.API_URL + 'leave-entitlement-grade-levels/' + id;
+    }
+    //Leave Entitlement Grade Level
+
     //Leave Credit
     static GET_LEAVE_CREDIT_LIST(): string {
         return AppUrl.API_URL + `leave-credits`;

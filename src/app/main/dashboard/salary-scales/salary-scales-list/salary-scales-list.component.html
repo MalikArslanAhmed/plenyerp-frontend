@@ -27,7 +27,7 @@
                 <mat-cell *matCellDef="let salaryScale">
                     <div fxFlex="row" fxLayoutAlign="end center">
                         <div appPermissionBind [permission]="permissionEditSalaryScales">
-                            <button mat-icon-button aria-label="Toggle star" matTooltip="Group Entitlements"
+                            <button mat-icon-button aria-label="Toggle star" matTooltip="Salary Scale Entitlements"
                                 matTooltipPosition="left" (click)="addEntitlementSalaryScale(salaryScale)"
                                 style="color: #000000">
                                 <mat-icon class="material-icons">credit_card</mat-icon>
@@ -133,6 +133,11 @@
                         </mat-header-cell>
                         <mat-cell *matCellDef="let gradeLevel">
                             <div fxFlex="row" fxLayoutAlign="end center">
+                                <button mat-icon-button aria-label="Toggle star" matTooltip="Grade Level Entitlements"
+                                    matTooltipPosition="left" (click)="addEntitlementGradeLevel(gradeLevel)"
+                                    style="color: #000000">
+                                    <mat-icon class="material-icons">credit_card</mat-icon>
+                                </button>
                                 <button mat-icon-button aria-label="Toggle star" (click)="editGradeLevel(gradeLevel)"
                                     style="color: blue">
                                     <mat-icon class="material-icons">edit</mat-icon>

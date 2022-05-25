@@ -185,7 +185,7 @@ export class ContactInfoService extends BaseService {
         return this.getRequest(AppUrl.GET_PUBLIC_HOLIDAY_LIST(), data);
     }
 
-    // Leave Year start
+    // Leave Entitlement Salary Scale  Starts
     getLeaveEntitlementSalaryScaleList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_LEAVE_ENTITLEMENT_SALARY_SCALE_LIST(), data);
     }
@@ -198,8 +198,22 @@ export class ContactInfoService extends BaseService {
     deleteLeaveEntitlementSalaryScale(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_LEAVE_ENTITLEMENT_SALARY_SCALE(id));
     }
-    //Leave year apis end
+    //Leave Entitlement Salary Scale  apis end
 
+    // Leave Entitlement Grade Level Starts
+    getLeaveEntitlementGradeLevelList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_ENTITLEMENT_GRADE_LEVEL_LIST(), data);
+    }
+    addLeaveEntitlementGradeLevel(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_ENTITLEMENT_GRADE_LEVEL(), data);
+    }
+    updateLeaveEntitlementGradeLevel(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_ENTITLEMENT_GRADE_LEVEL(id), data);
+    }
+    deleteLeaveEntitlementGradeLevel(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_ENTITLEMENT_GRADE_LEVEL(id));
+    }
+    //Leave Entitlement Grade Level apis end
     addPublicHoliday(data): Observable<any> {
         return this.postRequest(AppUrl.PUBLIC_HOLIDAY(), data);
     }

@@ -95,6 +95,7 @@ import { LeaveYearComponent } from './holidays/leave-year/leave-year.component';
 import { InformationComponent } from './information/information/information.component';
 import { LeaveCreditComponent } from './holidays/leave-credit/leave-credit.component';
 import { LeaveEntitlementSalaryScaleComponent } from './holidays/leave-entitlement-salary-scale/leave-entitlement-salary-scale.component';
+import { LeaveEntitlementGradeLevelComponent } from './holidays/leave-entitlement-grade-level/leave-entitlement-grade-level.component';
 
 const routes: Routes = [
     {
@@ -410,6 +411,15 @@ const routes: Routes = [
         data: {
             title: 'Leave entitlement salary scale',
             permissions: [PermissionConstant.LEAVE_ENTITLEMENT_SALARY_SCALE_LIST]
+        },
+    },
+    {
+        path: 'leave-entitlement-grade-levels/:leaveEntitlementGradeLevelId',
+        component: LeaveEntitlementGradeLevelComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave entitlement grade levels',
+            permissions: [PermissionConstant.LEAVE_ENTITLEMENT_GRADE_LEVEL_LIST]
         },
     },
     {
