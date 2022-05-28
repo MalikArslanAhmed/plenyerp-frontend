@@ -1,0 +1,82 @@
+<div class="leaves-list">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="leaveRequestList">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest">
+                <p class="email text-truncate">
+                    {{leaveRequest.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="staffID">
+            <mat-header-cell *matHeaderCellDef>Staff Name</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.staff.firstName}} {{leaveRequest.staff.lastName}} 
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="startDate">
+            <mat-header-cell *matHeaderCellDef>Start Date</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.startDate | date:shortDate}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="duration">
+            <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.duration}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="preparedVDate">
+            <mat-header-cell *matHeaderCellDef>P.V Date</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.preparedVDate | date:shortDate}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="reliefOfficerStaffId">
+            <mat-header-cell *matHeaderCellDef>Releif Officer</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.reliefOfficer.firstName}} {{leaveRequest.reliefOfficer.lastName}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pLoginId">
+            <mat-header-cell *matHeaderCellDef>P. Login</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.staff.user.username}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <button *ngIf="!leaveRequest.requestClosed && !leaveRequest.approvedHod && !leaveRequest.approvedHr" mat-icon-button aria-label="Toggle star" (click)="editLeave(leaveRequest)"
+                        style="color: blue">
+                        <mat-icon class="material-icons">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveRequest)"
+                        style="color: red">
+                        <mat-icon class="material-icons">delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedLeaveRequestColumns"></mat-header-row>
+        <mat-row *matRowDef="let leaveRequest; columns: displayedLeaveRequestColumns;" class="contact"
+            [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+</div>

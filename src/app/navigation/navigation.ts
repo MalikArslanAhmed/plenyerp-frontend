@@ -288,7 +288,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'calendar_today',
-                permissions: [PermissionConstant.PUBLIC_HOLIDAYS_LIST, PermissionConstant.LEAVE_GROUP_LIST, PermissionConstant.TYPES_OF_LEAVES_LIST],
+                // permissions: [PermissionConstant.PUBLIC_HOLIDAYS_LIST, PermissionConstant.LEAVE_GROUP_LIST, PermissionConstant.TYPES_OF_LEAVES_LIST],
                 children: [
                     {
                         id: 'leaves-type',
@@ -321,6 +321,14 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/leave-credit',
                         permissions: [PermissionConstant.LEAVE_CREDIT_LIST]
+                    },
+                    {
+                        id: 'leave-requests',
+                        title: 'Leave Requests',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-request',
+                        // permissions: [PermissionConstant.LEAVE_CREDIT_LIST]
                     },
                     {
                         id: 'public-holiday',

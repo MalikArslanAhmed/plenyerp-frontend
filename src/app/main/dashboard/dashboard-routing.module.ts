@@ -96,6 +96,7 @@ import { InformationComponent } from './information/information/information.comp
 import { LeaveCreditComponent } from './holidays/leave-credit/leave-credit.component';
 import { LeaveEntitlementSalaryScaleComponent } from './holidays/leave-entitlement-salary-scale/leave-entitlement-salary-scale.component';
 import { LeaveEntitlementGradeLevelComponent } from './holidays/leave-entitlement-grade-level/leave-entitlement-grade-level.component';
+import { LeaveRequestComponent } from './holidays/leave-request/leave-request.component';
 
 const routes: Routes = [
     {
@@ -429,6 +430,15 @@ const routes: Routes = [
         data: {
             title: 'Leave Years',
             permissions: [PermissionConstant.LEAVE_YEAR_LIST]
+        },
+    },
+    {
+        path: 'leave-request',
+        component: LeaveRequestComponent,
+        // canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Requests',
+            // permissions: [PermissionConstant.LEAVE_YEAR_LIST]
         },
     },
     {

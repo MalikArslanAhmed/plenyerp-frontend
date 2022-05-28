@@ -899,7 +899,26 @@ export class AppUrl {
     static DELETE_LEAVE_YEAR(id?): string {
         return AppUrl.API_URL + 'leave-years/' + id;
     }
-    
+
+    //Leave Year Ended
+
+    //Leave Year
+    static GET_LEAVE_REQUEST_LIST(): string {
+        return AppUrl.API_URL + `leave-requests`;
+    }
+
+    static LEAVE_REQUEST(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-requests/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-requests';
+        }
+    }
+
+    static DELETE_LEAVE_REQUEST(id?): string {
+        return AppUrl.API_URL + 'leave-requests/' + id;
+    }
+
     //Leave Year Ended
 
     //Leave Entitlement Salary Scale
