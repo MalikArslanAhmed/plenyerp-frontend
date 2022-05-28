@@ -9,9 +9,9 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
-        <div fxLayout="row" fxLayoutAlign="start">
-            <form [formGroup]="informationForm">
-                <mat-form-field appearance="outline" fxFlex="100">
+        <form [formGroup]="informationForm">
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Select Current Year</mat-label>
                     <mat-select formControlName="currentLeaveYearId" required>
                         <mat-option [value]="information.id" *ngFor="let information of informationList">
@@ -19,8 +19,8 @@
                     </mat-select>
                     <mat-error>Current Year is required!</mat-error>
                 </mat-form-field>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-button class="save-button" (click)="matDialogRef.close(informationForm); saveInformation()"

@@ -165,6 +165,10 @@ export class ContactInfoService extends BaseService {
     deleteLeaveCredit(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_LEAVE_CREDIT(id));
     }
+
+    getLeaveCreditViewList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_CREDIT_VIEW_LIST(), data);
+    }
     //Leave credit apis end
 
     // Hr Information start

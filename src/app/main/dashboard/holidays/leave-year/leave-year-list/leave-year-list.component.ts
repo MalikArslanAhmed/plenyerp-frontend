@@ -15,7 +15,7 @@ import { LeaveYearCreateComponent } from '../leave-year-create/leave-year-create
 })
 export class LeaveYearListComponent implements OnInit {
     leaveYearList = [];
-    displayedLeaveYearColumns = ['id','leaveYear', 'actions'];
+    displayedLeaveYearColumns = ['id','leaveYear','status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;

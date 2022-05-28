@@ -5,7 +5,8 @@ import { GlobalService } from 'app/shared/services/global.service';
 import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { EmployeeSelectSingleComponent } from '../../employee-select-single/employee-select-single.component';
-
+import * as moment from 'moment'
+import { forkJoin } from 'rxjs';
 @Component({
     selector: 'leave-credit-create',
     templateUrl: './leave-credit-create.component.html',
@@ -14,6 +15,7 @@ import { EmployeeSelectSingleComponent } from '../../employee-select-single/empl
     animations: fuseAnimations
 })
 export class LeaveCreditCreateComponent implements OnInit {
+    moment = moment
     action: any;
     dialogTitle: any;
     leaveCreditForm: FormGroup;
@@ -21,10 +23,10 @@ export class LeaveCreditCreateComponent implements OnInit {
     updateData: any;
     dialogRef: any;
     groupTypeList = []
-    informationList = []
+    activeYearsList = []
     selectedEmployee: any = ''
     constructor(public matDialogRef: MatDialogRef<LeaveCreditCreateComponent>,
-        @Inject(MAT_DIALOG_DATA) private _data: any,
+        @Inject(MAT_DIALOG_DATA) public _data: any,
         private fb: FormBuilder,
         private _matDialog: MatDialog,
         private contactInfoService: ContactInfoService,
@@ -35,7 +37,11 @@ export class LeaveCreditCreateComponent implements OnInit {
             this.dialogTitle = 'Edit Leave Credit';
             if (_data.leaveCredit) {
                 this.updateData = _data;
-                this.selectedEmployee = _data.leaveGroupMember
+                console.log('updated data', _data);
+                this.selectedEmployee = [{
+                    'name': _data.leaveCredit.employee.firstName + ' ' + _data.leaveCredit.employee.lastName,
+                    'id': _data.leaveCredit.employee.id
+                }];
             }
         } else {
             this.dialogTitle = 'Add Leave Credit';
@@ -44,12 +50,33 @@ export class LeaveCreditCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.getleaveTypeList()
-        this.getYearList()
-        this.checkForUpdate();
-        console.log(this.gService.self.value.id);
+        if (!this._data.bulkUploadData) {
+            this.getleaveTypeList()
+            this.getYearList()
+            this.checkForUpdate();
+        }
     }
-
+    bulkUpload() {
+        let bulkCallsList: any = []
+        this._data.bulkUploadData.leaveCreditViewList.forEach((resp: any) => {
+            if (resp.repeatEveryYear) {
+                let data = {
+                    preparedLoginId: this.gService.self.value.id,
+                    staffId: resp.empID,
+                    leaveTypeId: resp.LeaveTypeID,
+                    dueDays: resp.dueDays,
+                    leaveYearId: this._data.bulkUploadData.currentYear.currentLeaveYearId,
+                    preparedVDate: moment(this.leaveCreditForm.controls.preparedVDate.value).format('YYYY-MM-DD HH:mm:ss'),
+                    preparedTDate: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                }
+                bulkCallsList.push(this.contactInfoService.addLeaveCredit(data))
+            }
+        })
+        forkJoin(bulkCallsList).subscribe((resp: any) => {
+            this.leaveCreditForm.reset();
+            this.isSubmitted = false;
+        })
+    }
     getleaveTypeList() {
         this.contactInfoService.getLeavesTypeList({}).subscribe(data => {
             this.groupTypeList = data.items
@@ -57,43 +84,51 @@ export class LeaveCreditCreateComponent implements OnInit {
     }
 
     getYearList() {
-        this.contactInfoService.getLeaveYearList({}).subscribe(data => {
-            this.informationList = data.items;
+        this.contactInfoService.getLeaveYearList({ 'page': -1, isActive: 1 }).subscribe(data => {
+            this.activeYearsList = data.items;
         });
     }
 
     refresh() {
-        const currentDate = new Date()
-        this.leaveCreditForm = this.fb.group({
-            preparedLoginId: [this.gService.self.value.id, Validators.required],
-            staffId: [22, Validators.required],
-            leaveTypeId: ['', Validators.required],
-            dueDays: ['', Validators.required],
-            leaveYearId: ['', Validators.required],
-            preparedVDate: ['', Validators.required],
-            preparedTDate: [currentDate, Validators.required],
-        });
+        const currentDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+        if (this._data.bulkUploadData) {
+            this.leaveCreditForm = this.fb.group({
+                preparedVDate: ['', Validators.required],
+            });
+        } else {
+            this.leaveCreditForm = this.fb.group({
+                preparedLoginId: [this.gService.self.value.id, Validators.required],
+                staffId: ['', Validators.required],
+                leaveTypeId: ['', Validators.required],
+                dueDays: ['', Validators.required],
+                leaveYearId: ['', Validators.required],
+                preparedVDate: ['', Validators.required],
+                preparedTDate: [currentDate, Validators.required],
+            });
+        }
     }
 
     selectAdminEmployee(type) {
         let allowType: any = 'BOTH';
         let node: any = undefined;
-        if (type === 'Select Employee') {
+        if (type === 'Select Paying Employee') {
             allowType = 'BOTH';
         }
+
         this.dialogRef = this._matDialog.open(EmployeeSelectSingleComponent, {
             panelClass: 'transaction-items-form-dialog',
-            data: { head: type, allow: allowType, node: node, leaveGroupMember: this.selectedEmployee }
+            data: { head: type, allow: allowType, node: node }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {
                 return;
             }
-            if (type === 'Select Employees') {
-                console.log('response', response);
-
-                this.selectedEmployee = response.empData
-                this.leaveCreditForm.controls.staffId.setValue(this.selectedEmployee)
+            if (type === 'Select Employee') {
+                this.selectedEmployee = [{
+                    'name': response['empData'].firstName + ' ' + response['empData'].lastName,
+                    'id': response['empData'].id
+                }];
+                this.leaveCreditForm.controls.staffId.setValue(response.empData.id)
             }
         });
     }
@@ -118,9 +153,8 @@ export class LeaveCreditCreateComponent implements OnInit {
             this.isSubmitted = false;
             return;
         }
+        this.leaveCreditForm.value.preparedVDate = moment(this.leaveCreditForm.value.preparedVDate).format('YYYY-MM-DD HH:mm:ss')
         console.log('form values', this.leaveCreditForm.value);
-
-        return
         if (this.isSubmitted) {
             // console.log(this.leaveCreditForm.value);
             this.contactInfoService.addLeaveCredit(this.leaveCreditForm.value).subscribe(data => {
@@ -138,6 +172,7 @@ export class LeaveCreditCreateComponent implements OnInit {
             this.isSubmitted = false;
             return;
         }
+        this.leaveCreditForm.value.preparedVDate = moment(this.leaveCreditForm.value.preparedVDate).format('YYYY-MM-DD HH:mm:ss')
         if (this.isSubmitted) {
             this.contactInfoService.updateLeaveCredit(this.updateData.leaveCredit.id, this.leaveCreditForm.value).subscribe(data => {
                 this.updateData = undefined;

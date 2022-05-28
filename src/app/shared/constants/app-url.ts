@@ -416,6 +416,10 @@ export class AppUrl {
         return AppUrl.API_URL + `employees`;
     }
 
+    static GET_EMPLOYEE_JOB_PROFILE(): string {
+        return AppUrl.API_URL + `employees-job-profiles`;
+    }
+
     static GET_EMPLOYEES_DETAILS_DOWNLOAD(id): string {
         return AppUrl.API_URL + `employee/` + id + `/details-download`;
     }
@@ -895,6 +899,7 @@ export class AppUrl {
     static DELETE_LEAVE_YEAR(id?): string {
         return AppUrl.API_URL + 'leave-years/' + id;
     }
+    
     //Leave Year Ended
 
     //Leave Entitlement Salary Scale
@@ -948,6 +953,10 @@ export class AppUrl {
 
     static DELETE_LEAVE_CREDIT(id?): string {
         return AppUrl.API_URL + 'leave-credits/' + id;
+    }
+
+    static GET_LEAVE_CREDIT_VIEW_LIST(): string {
+        return AppUrl.API_URL + `leave-credits-view`;
     }
     //Leave Credit Ended
 

@@ -33,4 +33,8 @@ export class EmployeesService extends BaseService {
     downloadReport(data): Observable<any> {
         return this.getRequest(AppUrl.DOWNLOAD_REPORT(), data);
     }
+
+    getemployeeJobProfilesList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_EMPLOYEE_JOB_PROFILE(), data);
+    }
 }

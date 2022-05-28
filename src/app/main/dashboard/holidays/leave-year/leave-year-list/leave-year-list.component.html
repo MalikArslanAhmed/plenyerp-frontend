@@ -16,6 +16,17 @@
                 </p>
             </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaveYear">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaveYear.isActive">Active</p>
+                    <p *ngIf="!leaveYear.isActive">Inactive</p>
+                </div>
+            </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef>
                 <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>

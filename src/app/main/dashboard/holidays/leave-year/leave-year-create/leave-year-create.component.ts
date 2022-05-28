@@ -48,6 +48,7 @@ export class LeaveYearCreateComponent implements OnInit {
     refresh() {
         this.leaveYearForm = this.fb.group({
             year: ['', Validators.required],
+            isActive: [true, Validators.required],
         });
     }
 
@@ -55,6 +56,8 @@ export class LeaveYearCreateComponent implements OnInit {
         if (this.updateData) {
             this.leaveYearForm.patchValue({
                 year: this.updateData.leaveYear.year,
+                isActive: this.updateData.leaveYear.isActive,
+
             });
         }
     }
