@@ -11,6 +11,7 @@
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
         <form [formGroup]="leaveRequestForm">
             <div>
+                <p><b>Leave Type</b> {{updateData.leaveRequest.leaveCredit.leave.title}} </p>
                 <p><b>Staff Name:</b> {{updateData.leaveRequest.staff.firstName}}
                     {{updateData.leaveRequest.staff.lastName}} </p>
                 <p><b>Start Date:</b> {{updateData.leaveRequest.startDate | date: 'shortDate'}} </p>
@@ -53,6 +54,10 @@
                         <mat-option value="rejected">Rejected</mat-option>
                     </mat-select>
                 </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="requestReady"></mat-slide-toggle>
+                <mat-label>Request Ready</mat-label>
             </div>
         </form>
     </div>

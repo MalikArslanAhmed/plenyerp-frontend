@@ -8,6 +8,14 @@
                 </p>
             </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="leaveType">
+            <mat-header-cell *matHeaderCellDef>Leave type</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.leaveCredit.leave.title}}
+                </p>
+            </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="staffID">
             <mat-header-cell *matHeaderCellDef>Staff Name</mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
@@ -64,18 +72,26 @@
                 </p>
             </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="reqClosed">
+            <mat-header-cell *matHeaderCellDef>Request Closed</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.requestClosed?'Yes':'No'}}
+                </p>
+            </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef>
                 <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
             </mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button 
-                        mat-icon-button aria-label="Toggle star" (click)="editLeave(leaveRequest)" style="color: blue">
+                    <button *ngIf="leaveRequest.approvedHod == 'pending'" mat-icon-button aria-label="Toggle star"
+                        (click)="editLeave(leaveRequest)" style="color: blue">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveRequest)"
-                        style="color: red">
+                    <button *ngIf="leaveRequest.approvedHod !== 'approved'" mat-icon-button aria-label="Toggle star"
+                        (click)="deleteItemModal(leaveRequest)" style="color: red">
                         <mat-icon class="material-icons">delete</mat-icon>
                     </button>
                 </div>

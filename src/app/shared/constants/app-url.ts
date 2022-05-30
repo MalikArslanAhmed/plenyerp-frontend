@@ -902,7 +902,7 @@ export class AppUrl {
 
     //Leave Year Ended
 
-    //Leave Year
+    //Leave Request
     static GET_LEAVE_REQUEST_LIST(): string {
         return AppUrl.API_URL + `leave-requests`;
     }
@@ -919,7 +919,26 @@ export class AppUrl {
         return AppUrl.API_URL + 'leave-requests/' + id;
     }
 
-    //Leave Year Ended
+    //Leave Request Ended
+
+    //Leave Request Closed
+    static GET_LEAVE_REQUEST_CLOSED_LIST(): string {
+        return AppUrl.API_URL + `leave-requests-closed`;
+    }
+
+    static LEAVE_REQUEST_CLOSED(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-requests-closed/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-requests-closed';
+        }
+    }
+
+    static DELETE_LEAVE_REQUEST_CLOSED(id?): string {
+        return AppUrl.API_URL + 'leave-requests-closed/' + id;
+    }
+
+    //Leave Request Closed Ended
 
     //Leave Entitlement Salary Scale
     static GET_LEAVE_ENTITLEMENT_SALARY_SCALE_LIST(): string {

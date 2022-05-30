@@ -8,14 +8,14 @@
                 </p>
             </mat-cell>
         </ng-container>
-        <!-- <ng-container matColumnDef="staffID">
-            <mat-header-cell *matHeaderCellDef>Staff Name</mat-header-cell>
+        <ng-container matColumnDef="leaveType">
+            <mat-header-cell *matHeaderCellDef>Leave type</mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
                 <p class="phone text-truncate cursor-pointer">
-                    {{leaveRequest.staff.firstName}} {{leaveRequest.staff.lastName}}
+                    {{leaveRequest.leaveCredit.leave.title}}
                 </p>
             </mat-cell>
-        </ng-container> -->
+        </ng-container>
         <ng-container matColumnDef="startDate">
             <mat-header-cell *matHeaderCellDef>Start Date</mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
@@ -40,22 +40,6 @@
                 </p>
             </mat-cell>
         </ng-container>
-        <!-- <ng-container matColumnDef="reliefOfficerStaffId">
-            <mat-header-cell *matHeaderCellDef>Releif Officer</mat-header-cell>
-            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{leaveRequest.reliefOfficer.firstName}} {{leaveRequest.reliefOfficer.lastName}}
-                </p>
-            </mat-cell>
-        </ng-container> -->
-        <!-- <ng-container matColumnDef="pLoginId">
-            <mat-header-cell *matHeaderCellDef>P. Login</mat-header-cell>
-            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
-                <p class="phone text-truncate cursor-pointer">
-                    {{leaveRequest.staff.personnelFileNumber}}
-                </p>
-            </mat-cell>
-        </ng-container> -->
         <ng-container matColumnDef="readyRequest">
             <mat-header-cell *matHeaderCellDef>Request Ready</mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
@@ -68,7 +52,8 @@
             <mat-header-cell *matHeaderCellDef>HOD Approval</mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
                 <p class="phone text-truncate cursor-pointer">
-                    {{leaveRequest.approvedHodStaff.firstName |titlecase}}  {{leaveRequest.approvedHodStaff.lastName |titlecase}}
+                    {{leaveRequest.approvedHodStaff.firstName |titlecase}} {{leaveRequest.approvedHodStaff.lastName
+                    |titlecase}}
                 </p>
             </mat-cell>
         </ng-container>
@@ -88,6 +73,14 @@
                 </p>
             </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="reqClosed">
+            <mat-header-cell *matHeaderCellDef>Request Closed</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.requestClosed?'Yes':'No'}}
+                </p>
+            </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef>
                 <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
@@ -95,11 +88,11 @@
             <mat-cell *matCellDef="let leaveRequest">
                 <div fxFlex="row" fxLayoutAlign="end center">
                     <button
-                        *ngIf="!leaveRequest.requestClosed && leaveRequest.approvedHod=='pending' && leaveRequest.approvedHr=='pending'"
+                        *ngIf="!leaveRequest.requestReady"
                         mat-icon-button aria-label="Toggle star" (click)="editLeave(leaveRequest)" style="color: blue">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveRequest)"
+                    <button *ngIf="!leaveRequest.requestReady" mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveRequest)"
                         style="color: red">
                         <mat-icon class="material-icons">delete</mat-icon>
                     </button>

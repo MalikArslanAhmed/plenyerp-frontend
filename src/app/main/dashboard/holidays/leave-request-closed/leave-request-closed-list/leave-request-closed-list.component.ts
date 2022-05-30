@@ -4,19 +4,19 @@ import { FormGroup } from '@angular/forms';
 import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
-import { LeaveRequestApprovedCreateComponent } from '../leave-request-approved-create/leave-request-approved-create.component';
+import { LeaveRequestClosedCreateComponent } from '../leave-request-closed-create/leave-request-closed-create.component';
 
 @Component({
-    selector: 'leave-request-approved-list',
-    templateUrl: './leave-request-approved-list.component.html',
-    styleUrls: ['./leave-request-approved-list.component.scss'],
+    selector: 'leave-request-closed-list',
+    templateUrl: './leave-request-closed-list.component.html',
+    styleUrls: ['./leave-request-closed-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LeaveRequestApprovedListComponent implements OnInit {
+export class LeaveRequestClosedListComponent implements OnInit {
     leaveRequestList = [];
     displayedLeaveRequestColumns = [
-        'id','leaveType', 'staffID', 'duration', 'approvalHr', 'hodApproved', 'hrApproved', 'approvedHodVDate', 'pLoginId', 'reqClosed', 'actions'
+        'id', 'startDate', 'duration', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;
@@ -28,11 +28,11 @@ export class LeaveRequestApprovedListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getLeaveRequestList(this.employeeDetail);
+        this.getLeaveRequestClosedList(this.employeeDetail);
     }
 
-    getLeaveRequestList(employeeDetail?) {
-        this.contactInfoService.getLeaveRequestList({ 'page': -1, hodStaffId: employeeDetail.id, requestReady: 1 }).subscribe(data => {
+    getLeaveRequestClosedList(employeeDetail?) {
+        this.contactInfoService.getLeaveRequestClosedList({ 'page': -1, staffId: employeeDetail.id }).subscribe(data => {
             this.leaveRequestList = data.items;
 
             if (this.leaveRequestList && this.leaveRequestList.length > 0) {
@@ -52,21 +52,21 @@ export class LeaveRequestApprovedListComponent implements OnInit {
         });
         this.dialogRef.afterClosed().subscribe((response: boolean) => {
             if (response) {
-                this.deleteLeaveRequest(items.id);
+                this.deleteLeaveRequestClosed(items.id);
             }
         });
 
     }
-    deleteLeaveRequest(id) {
-        this.contactInfoService.deleteLeaveRequest(id).subscribe(data => {
+    deleteLeaveRequestClosed(id) {
+        this.contactInfoService.deleteLeaveRequestClosed(id).subscribe(data => {
             if (data) {
-                this.getLeaveRequestList(this.employeeDetail);
+                this.getLeaveRequestClosedList(this.employeeDetail);
             }
         });
     }
 
     editLeave(leaveRequest) {
-        this.dialogRef = this._matDialog.open(LeaveRequestApprovedCreateComponent, {
+        this.dialogRef = this._matDialog.open(LeaveRequestClosedCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: { action: 'EDIT', leaveRequest: leaveRequest, employeeDetail: this.employeeDetail },
         });
@@ -74,7 +74,7 @@ export class LeaveRequestApprovedListComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getLeaveRequestList(this.employeeDetail);
+            this.getLeaveRequestClosedList(this.employeeDetail);
         });
     }
 

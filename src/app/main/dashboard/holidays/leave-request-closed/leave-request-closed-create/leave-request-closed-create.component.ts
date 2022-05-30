@@ -9,13 +9,13 @@ import { ContactInfoService } from '../../../../../shared/services/contact-info.
 import { EmployeeSelectSingleComponent } from '../../employee-select-single/employee-select-single.component';
 
 @Component({
-    selector: 'leave-request-approved-create',
-    templateUrl: './leave-request-approved-create.component.html',
-    styleUrls: ['./leave-request-approved-create.component.scss'],
+    selector: 'leave-request-closed-create',
+    templateUrl: './leave-request-closed-create.component.html',
+    styleUrls: ['./leave-request-closed-create.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LeaveRequestApprovedCreateComponent implements OnInit {
+export class LeaveRequestClosedCreateComponent implements OnInit {
     moment = moment
     action: any;
     dialogTitle: any;
@@ -29,8 +29,8 @@ export class LeaveRequestApprovedCreateComponent implements OnInit {
     groupTypeList = []
     leaveCreditList = []
     selectedreliefOfficerStaff: any = ''
-    selectedhrStaff: any = ''
-    constructor(public matDialogRef: MatDialogRef<LeaveRequestApprovedCreateComponent>,
+    selectedhodStaff: any = ''
+    constructor(public matDialogRef: MatDialogRef<LeaveRequestClosedCreateComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private fb: FormBuilder,
         private contactInfoService: ContactInfoService,
@@ -42,12 +42,15 @@ export class LeaveRequestApprovedCreateComponent implements OnInit {
             this.dialogTitle = 'Edit Leave Request';
             if (_data.leaveRequest) {
                 this.updateData = _data;
-                if (_data.leaveRequest.approvedHrStaff) {
-                    this.selectedhrStaff = [{
-                        'name': _data.leaveRequest.approvedHrStaff.firstName + ' ' + _data.leaveRequest.approvedHrStaff.lastName,
-                        'id': _data.leaveRequest.approvedHrStaff.id
-                    }];
-                }
+                this.selectedreliefOfficerStaff = [{
+                    'name': _data.leaveRequest.reliefOfficer.firstName + ' ' + _data.leaveRequest.reliefOfficer.lastName,
+                    'id': _data.leaveRequest.reliefOfficer.id
+                }];
+                this.selectedhodStaff = [{
+                    'name': _data.leaveRequest.hod.firstName + ' ' + _data.leaveRequest.hod.lastName,
+                    'id': _data.leaveRequest.hod.id
+                }];
+                this.getLeaveCreditList(_data.leaveRequest.reliefOfficerStaffId)
             }
         } else {
             this.dialogTitle = 'Add Leave Request';
@@ -57,11 +60,17 @@ export class LeaveRequestApprovedCreateComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.checkForUpdate();
+        this.getLeaveCreditList(this._data.employeeDetail.id)
+    }
+
+    getLeaveCreditList(id) {
+        this.contactInfoService.getLeaveCreditList({ 'page': -1, staffId: id }).subscribe(data => {
+            this.leaveCreditList = data.items;
+        });
     }
 
     refresh() {
         this.leaveRequestForm = this.fb.group({
-            //Old
             staffId: [this._data.employeeDetail.id],
             leaveCreditId: ['', Validators.required],
             startDate: ['', Validators.required],
@@ -70,14 +79,8 @@ export class LeaveRequestApprovedCreateComponent implements OnInit {
             preparedVDate: ['', Validators.required],
             preparedTDate: [''],
             preparedLoginId: [this.gService.self.value.username, Validators.required],
-            requestReady: [false, Validators.required],
             hodStaffId: ['', Validators.required],
-            //New
-            approvedHod: ['pending', Validators.required],
-            approvedHodVDate: ['', Validators.required],
-            approvedHodTDate: [''],
-            approvedHodLoginId: [this.gService.self.value.username, Validators.required],
-            approvedHrStaffId: ['', Validators.required],
+            requestReady: [false, Validators.required],
         });
     }
 
@@ -97,12 +100,19 @@ export class LeaveRequestApprovedCreateComponent implements OnInit {
             if (!response) {
                 return;
             }
-            if (type === 'Select HR Staff') {
-                this.selectedhrStaff = [{
+            if (type === 'relief Officer Staff') {
+                this.selectedreliefOfficerStaff = [{
                     'name': response['empData'].firstName + ' ' + response['empData'].lastName,
                     'id': response['empData'].id
                 }];
-                this.leaveRequestForm.controls.approvedHrStaffId.setValue(response.empData.id)
+                this.leaveRequestForm.controls.reliefOfficerStaffId.setValue(response.empData.id)
+                this.getLeaveCreditList(response.empData.id)
+            } else if (type === 'Select HOD Staff') {
+                this.selectedhodStaff = [{
+                    'name': response['empData'].firstName + ' ' + response['empData'].lastName,
+                    'id': response['empData'].id
+                }];
+                this.leaveRequestForm.controls.hodStaffId.setValue(response.empData.id)
             }
         });
     }
@@ -120,12 +130,6 @@ export class LeaveRequestApprovedCreateComponent implements OnInit {
                 preparedLoginId: this.updateData.leaveRequest.preparedLoginId,
                 hodStaffId: this.updateData.leaveRequest.hodStaffId,
                 requestReady: this.updateData.leaveRequest.requestReady,
-                //New
-                approvedHod: this.updateData.leaveRequest.approvedHod,
-                approvedHodVDate: this.updateData.leaveRequest.approvedHodVDate,
-                approvedHodTDate: this.updateData.leaveRequest.approvedHodTDate,
-                approvedHodLoginId: this.gService.self.value.username,
-                approvedHrStaffId: this.updateData.leaveRequest.approvedHrStaffId,
             });
         }
     }
@@ -137,8 +141,9 @@ export class LeaveRequestApprovedCreateComponent implements OnInit {
             return;
         }
         let data = this.leaveRequestForm.value
-        data.approvedHodVDate = moment(data.approvedHodVDate).format('YYYY-MM-DD HH:mm:ss')
-        data.approvedHodTDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+        data.startDate = moment(data.startDate).format('YYYY-MM-DD HH:mm:ss')
+        data.preparedVDate = moment(data.preparedVDate).format('YYYY-MM-DD HH:mm:ss')
+        data.preparedTDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
         if (this.isSubmitted) {
             this.contactInfoService.addLeaveRequest(data).subscribe(data => {
                 this.leaveRequestForm.reset();
@@ -155,11 +160,9 @@ export class LeaveRequestApprovedCreateComponent implements OnInit {
         }
         if (this.isSubmitted) {
             let data = this.leaveRequestForm.value
-            data.approvedHodVDate = moment(data.approvedHodVDate).format('YYYY-MM-DD HH:mm:ss')
-            data.approvedHodTDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-            if (data.approvedHod == 'rejected') {
-                data.requestClosed = true
-            }
+            data.startDate = moment(data.startDate).format('YYYY-MM-DD HH:mm:ss')
+            data.preparedVDate = moment(data.preparedVDate).format('YYYY-MM-DD HH:mm:ss')
+            data.preparedTDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             this.contactInfoService.updateLeaveRequest(this.updateData.leaveRequest.id, data).subscribe(data => {
                 this.updateData = undefined;
                 this.leaveRequestForm.reset();

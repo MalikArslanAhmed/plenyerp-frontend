@@ -16,7 +16,7 @@ import { HrLeaveRequestApprovedCreateComponent } from '../hr-leave-request-appro
 export class HrLeaveRequestApprovedListComponent implements OnInit {
     leaveRequestList = [];
     displayedLeaveRequestColumns = [
-        'id', 'staffID','approvalHOD', 'hodApproved','hrApproved', 'pLoginId', 'actions'
+        'id', 'staffID','approvalHOD', 'hodApproved','hrApproved', 'pLoginId','reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;

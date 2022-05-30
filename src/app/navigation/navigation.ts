@@ -347,6 +347,14 @@ export const navigation: FuseNavigation[] = [
                         permissions: [PermissionConstant.HR_LEAVE_REQUEST_APPROVED_LIST]
                     },
                     {
+                        id: 'leave-requests-closed',
+                        title: 'Leave Requests Closed',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-request-closed',
+                        // permissions: [PermissionConstant.LEAVE_CREDIT_LIST]
+                    },
+                    {
                         id: 'public-holiday',
                         title: 'Public Holidays ',
                         roles: [],

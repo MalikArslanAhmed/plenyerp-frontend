@@ -152,7 +152,7 @@ export class ContactInfoService extends BaseService {
     }
     //Leave year apis end
 
-    // Leave Year start
+    // Leave Request start
     getLeaveRequestList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_LEAVE_REQUEST_LIST(), data);
     }
@@ -165,7 +165,22 @@ export class ContactInfoService extends BaseService {
     deleteLeaveRequest(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_LEAVE_REQUEST(id));
     }
-    //Leave year apis end
+    //Leave Request apis end
+
+    // Leave Request Closed start
+    getLeaveRequestClosedList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_REQUEST_CLOSED_LIST(), data);
+    }
+    addLeaveRequestClosed(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_REQUEST_CLOSED(), data);
+    }
+    updateLeaveRequestClosed(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_REQUEST_CLOSED(id), data);
+    }
+    deleteLeaveRequestClosed(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_REQUEST_CLOSED(id));
+    }
+    //Leave Request Closed apis end
 
     // Leave Credit start
     getLeaveCreditList(data): Observable<any> {

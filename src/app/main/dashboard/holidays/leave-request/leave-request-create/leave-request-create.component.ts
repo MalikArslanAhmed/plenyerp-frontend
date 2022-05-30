@@ -47,8 +47,8 @@ export class LeaveRequestCreateComponent implements OnInit {
                     'id': _data.leaveRequest.reliefOfficer.id
                 }];
                 this.selectedhodStaff = [{
-                    'name': _data.leaveRequest.hod.firstName + ' ' + _data.leaveRequest.hod.lastName,
-                    'id': _data.leaveRequest.hod.id
+                    'name': _data.leaveRequest.approvedHodStaff.firstName + ' ' + _data.leaveRequest.approvedHodStaff.lastName,
+                    'id': _data.leaveRequest.approvedHodStaff.id
                 }];
                 this.getLeaveCreditList(_data.leaveRequest.reliefOfficerStaffId)
             }

@@ -11,6 +11,7 @@
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
         <form [formGroup]="leaveRequestForm">
             <div>
+                <p><b>Leave Type</b> {{updateData.leaveRequest.leaveCredit.leave.title}} </p>
                 <p><b>Staff Name:</b> {{updateData.leaveRequest.staff.firstName}}
                     {{updateData.leaveRequest.staff.lastName}} </p>
                 <p><b>Start Date:</b> {{updateData.leaveRequest.startDate | date: 'shortDate'}} </p>
@@ -34,10 +35,19 @@
                     <mat-datepicker #pickerPVDate></mat-datepicker>
                 </mat-form-field>
             </div>
-
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px" fxFlex>
-                    <mat-label>Approval Status</mat-label>
+                    <mat-label>HOD Approval Status</mat-label>
+                    <mat-select formControlName="approvedHod">
+                        <mat-option value="pending">Pending</mat-option>
+                        <mat-option value="approved">Approved</mat-option>
+                        <mat-option value="rejected">Rejected</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px" fxFlex>
+                    <mat-label>HR Approval Status</mat-label>
                     <mat-select formControlName="approvedHr">
                         <mat-option value="pending">Pending</mat-option>
                         <mat-option value="approved">Approved</mat-option>

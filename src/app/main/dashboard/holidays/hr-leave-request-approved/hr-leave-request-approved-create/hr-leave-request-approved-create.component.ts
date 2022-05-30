@@ -173,6 +173,9 @@ export class HrLeaveRequestApprovedCreateComponent implements OnInit {
             let data = this.leaveRequestForm.value
             data.approvedHrVDate = moment(data.approvedHrVDate).format('YYYY-MM-DD HH:mm:ss')
             data.approvedHrTDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+            if (data.approvedHr == 'rejected') {
+                data.requestClosed = true
+            }
             this.contactInfoService.updateLeaveRequest(this.updateData.leaveRequest.id, data).subscribe(data => {
                 this.updateData = undefined;
                 this.leaveRequestForm.reset();

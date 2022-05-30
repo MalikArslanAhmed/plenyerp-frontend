@@ -16,7 +16,7 @@ import { LeaveRequestCreateComponent } from '../leave-request-create/leave-reque
 export class LeaveRequestListComponent implements OnInit {
     leaveRequestList = [];
     displayedLeaveRequestColumns = [
-        'id', 'startDate', 'duration', 'preparedVDate', 'readyRequest','hodApprovedStaff','hodApproved', 'hrApproved', 'actions'
+        'id','leaveType', 'startDate', 'duration', 'preparedVDate', 'readyRequest','hodApprovedStaff','hodApproved', 'hrApproved', 'reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;

@@ -99,6 +99,7 @@ import { LeaveEntitlementGradeLevelComponent } from './holidays/leave-entitlemen
 import { LeaveRequestComponent } from './holidays/leave-request/leave-request.component';
 import { LeaveRequestApprovedComponent } from './holidays/leave-request-approved/leave-request-approved.component';
 import { HrLeaveRequestApprovedComponent } from './holidays/hr-leave-request-approved/hr-leave-request-approved.component';
+import { LeaveRequestClosedComponent } from './holidays/leave-request-closed/leave-request-closed.component';
 
 const routes: Routes = [
     {
@@ -459,6 +460,15 @@ const routes: Routes = [
         data: {
             title: 'HR Leave Requests Approval',
             permissions: [PermissionConstant.HR_LEAVE_REQUEST_APPROVED_LIST]
+        },
+    },
+    {
+        path: 'leave-request-closed',
+        component: LeaveRequestClosedComponent,
+        // canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Requests Closed',
+            // permissions: [PermissionConstant.LEAVE_YEAR_LIST]
         },
     },
     {
