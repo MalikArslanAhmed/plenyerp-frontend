@@ -295,6 +295,12 @@ import { LeaveEntitlementGradeLevelComponent } from './holidays/leave-entitlemen
 import { LeaveRequestComponent } from './holidays/leave-request/leave-request.component';
 import { LeaveRequestCreateComponent } from './holidays/leave-request/leave-request-create/leave-request-create.component';
 import { LeaveRequestListComponent } from './holidays/leave-request/leave-request-list/leave-request-list.component';
+import { LeaveRequestApprovedComponent } from './holidays/leave-request-approved/leave-request-approved.component';
+import { LeaveRequestApprovedCreateComponent } from './holidays/leave-request-approved/leave-request-approved-create/leave-request-approved-create.component';
+import { LeaveRequestApprovedListComponent } from './holidays/leave-request-approved/leave-request-approved-list/leave-request-approved-list.component';
+import { HrLeaveRequestApprovedComponent } from './holidays/hr-leave-request-approved/hr-leave-request-approved.component';
+import { HrLeaveRequestApprovedCreateComponent } from './holidays/hr-leave-request-approved/hr-leave-request-approved-create/hr-leave-request-approved-create.component';
+import { HrLeaveRequestApprovedListComponent } from './holidays/hr-leave-request-approved/hr-leave-request-approved-list/hr-leave-request-approved-list.component';
 
 @NgModule({
     declarations: [
@@ -387,6 +393,12 @@ import { LeaveRequestListComponent } from './holidays/leave-request/leave-reques
         LeaveRequestComponent,
         LeaveRequestCreateComponent,
         LeaveRequestListComponent,
+        LeaveRequestApprovedComponent,
+        LeaveRequestApprovedCreateComponent,
+        LeaveRequestApprovedListComponent,
+        HrLeaveRequestApprovedComponent,
+        HrLeaveRequestApprovedCreateComponent,
+        HrLeaveRequestApprovedListComponent,
         LeaveGroupComponent,
         LeaveGroupCreateComponent,
         LeaveGroupListComponent,

@@ -4,19 +4,19 @@ import { FormGroup } from '@angular/forms';
 import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
-import { LeaveRequestCreateComponent } from '../leave-request-create/leave-request-create.component';
+import { LeaveRequestApprovedCreateComponent } from '../leave-request-approved-create/leave-request-approved-create.component';
 
 @Component({
-    selector: 'leave-request-list',
-    templateUrl: './leave-request-list.component.html',
-    styleUrls: ['./leave-request-list.component.scss'],
+    selector: 'leave-request-approved-list',
+    templateUrl: './leave-request-approved-list.component.html',
+    styleUrls: ['./leave-request-approved-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LeaveRequestListComponent implements OnInit {
+export class LeaveRequestApprovedListComponent implements OnInit {
     leaveRequestList = [];
     displayedLeaveRequestColumns = [
-        'id', 'startDate', 'duration', 'preparedVDate', 'readyRequest','hodApprovedStaff','hodApproved', 'hrApproved', 'actions'
+        'id', 'staffID',  'duration','approvalHr','hodApproved','hrApproved', 'approvedHodVDate', 'pLoginId', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;
@@ -32,7 +32,7 @@ export class LeaveRequestListComponent implements OnInit {
     }
 
     getLeaveRequestList(employeeDetail?) {
-        this.contactInfoService.getLeaveRequestList({ 'page': -1, staffId: employeeDetail.id }).subscribe(data => {
+        this.contactInfoService.getLeaveRequestList({ 'page': -1, hodStaffId: employeeDetail.id, requestReady: 1 }).subscribe(data => {
             this.leaveRequestList = data.items;
 
             if (this.leaveRequestList && this.leaveRequestList.length > 0) {
@@ -66,7 +66,7 @@ export class LeaveRequestListComponent implements OnInit {
     }
 
     editLeave(leaveRequest) {
-        this.dialogRef = this._matDialog.open(LeaveRequestCreateComponent, {
+        this.dialogRef = this._matDialog.open(LeaveRequestApprovedCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: { action: 'EDIT', leaveRequest: leaveRequest, employeeDetail: this.employeeDetail },
         });

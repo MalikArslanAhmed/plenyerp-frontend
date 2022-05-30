@@ -3,21 +3,21 @@ import { FuseSidebarService } from '../../../../../@fuse/components/sidebar/side
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { fuseAnimations } from '../../../../../@fuse/animations';
-import { LeaveRequestCreateComponent } from './leave-request-create/leave-request-create.component';
-import { LeaveRequestListComponent } from './leave-request-list/leave-request-list.component';
 import { EmployeesService } from 'app/shared/services/employees.service';
 import { GlobalService } from 'app/shared/services/global.service';
+import { LeaveRequestApprovedListComponent } from './leave-request-approved-list/leave-request-approved-list.component';
+import { LeaveRequestApprovedCreateComponent } from './leave-request-approved-create/leave-request-approved-create.component';
 
 @Component({
-    selector: 'app-leave-request',
-    templateUrl: './leave-request.component.html',
-    styleUrls: ['./leave-request.component.scss'],
+    selector: 'app-leave-request-approved',
+    templateUrl: './leave-request-approved.component.html',
+    styleUrls: ['./leave-request-approved.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LeaveRequestComponent implements OnInit {
+export class LeaveRequestApprovedComponent implements OnInit {
     dialogRef: any;
-    @ViewChild(LeaveRequestListComponent) getLeaveRequestList: LeaveRequestListComponent;
+    @ViewChild(LeaveRequestApprovedListComponent) getLeaveRequestList: LeaveRequestApprovedListComponent;
     employeeDetail: any = {}
     isFetching = true
     constructor(
@@ -39,7 +39,7 @@ export class LeaveRequestComponent implements OnInit {
         })
     }
     addLeaveRequest() {
-        this.dialogRef = this._matDialog.open(LeaveRequestCreateComponent, {
+        this.dialogRef = this._matDialog.open(LeaveRequestApprovedCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: { action: 'CREATE', employeeDetail: this.employeeDetail }
         });

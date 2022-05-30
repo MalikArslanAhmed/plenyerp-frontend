@@ -7,21 +7,21 @@
                           [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">calendar_today
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                   Leave Requests
+                   HOD Leave Requests Approval
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center">
+        <!-- <div fxLayout="row" fxLayoutAlign="end center">
             <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addLeaveRequest()">
                 <mat-icon>add_circle</mat-icon>
             </button>
-        </div>
+        </div> -->
     </div>
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
-                <leave-request-list *ngIf="!isFetching" [employeeDetail]="employeeDetail"></leave-request-list>
+                <leave-request-approved-list *ngIf="!isFetching" [employeeDetail]="employeeDetail"></leave-request-approved-list>
             </div>
         </div>
     </div>

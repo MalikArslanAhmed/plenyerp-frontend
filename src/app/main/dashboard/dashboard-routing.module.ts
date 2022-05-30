@@ -97,6 +97,8 @@ import { LeaveCreditComponent } from './holidays/leave-credit/leave-credit.compo
 import { LeaveEntitlementSalaryScaleComponent } from './holidays/leave-entitlement-salary-scale/leave-entitlement-salary-scale.component';
 import { LeaveEntitlementGradeLevelComponent } from './holidays/leave-entitlement-grade-level/leave-entitlement-grade-level.component';
 import { LeaveRequestComponent } from './holidays/leave-request/leave-request.component';
+import { LeaveRequestApprovedComponent } from './holidays/leave-request-approved/leave-request-approved.component';
+import { HrLeaveRequestApprovedComponent } from './holidays/hr-leave-request-approved/hr-leave-request-approved.component';
 
 const routes: Routes = [
     {
@@ -439,6 +441,24 @@ const routes: Routes = [
         data: {
             title: 'Leave Requests',
             // permissions: [PermissionConstant.LEAVE_YEAR_LIST]
+        },
+    },
+    {
+        path: 'hod-leave-request-approved',
+        component: LeaveRequestApprovedComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'HOD Leave Requests Approval',
+            permissions: [PermissionConstant.HOD_LEAVE_REQUEST_APPROVED_LIST]
+        },
+    },
+    {
+        path: 'hr-leave-request-approved',
+        component: HrLeaveRequestApprovedComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'HR Leave Requests Approval',
+            permissions: [PermissionConstant.HR_LEAVE_REQUEST_APPROVED_LIST]
         },
     },
     {

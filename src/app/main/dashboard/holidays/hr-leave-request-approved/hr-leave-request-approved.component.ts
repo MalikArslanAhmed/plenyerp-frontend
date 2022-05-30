@@ -3,21 +3,21 @@ import { FuseSidebarService } from '../../../../../@fuse/components/sidebar/side
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { fuseAnimations } from '../../../../../@fuse/animations';
-import { LeaveRequestCreateComponent } from './leave-request-create/leave-request-create.component';
-import { LeaveRequestListComponent } from './leave-request-list/leave-request-list.component';
 import { EmployeesService } from 'app/shared/services/employees.service';
 import { GlobalService } from 'app/shared/services/global.service';
+import { HrLeaveRequestApprovedListComponent } from './hr-leave-request-approved-list/hr-leave-request-approved-list.component';
+import { LeaveRequestApprovedCreateComponent } from '../leave-request-approved/leave-request-approved-create/leave-request-approved-create.component';
 
 @Component({
-    selector: 'app-leave-request',
-    templateUrl: './leave-request.component.html',
-    styleUrls: ['./leave-request.component.scss'],
+    selector: 'app-hr-leave-request-approved',
+    templateUrl: './hr-leave-request-approved.component.html',
+    styleUrls: ['./hr-leave-request-approved.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LeaveRequestComponent implements OnInit {
+export class HrLeaveRequestApprovedComponent implements OnInit {
     dialogRef: any;
-    @ViewChild(LeaveRequestListComponent) getLeaveRequestList: LeaveRequestListComponent;
+    @ViewChild(HrLeaveRequestApprovedListComponent) getLeaveRequestList: HrLeaveRequestApprovedListComponent;
     employeeDetail: any = {}
     isFetching = true
     constructor(
@@ -39,7 +39,7 @@ export class LeaveRequestComponent implements OnInit {
         })
     }
     addLeaveRequest() {
-        this.dialogRef = this._matDialog.open(LeaveRequestCreateComponent, {
+        this.dialogRef = this._matDialog.open(LeaveRequestApprovedCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: { action: 'CREATE', employeeDetail: this.employeeDetail }
         });

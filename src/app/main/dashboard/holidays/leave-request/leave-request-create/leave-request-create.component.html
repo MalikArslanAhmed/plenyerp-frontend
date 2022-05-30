@@ -10,7 +10,7 @@
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
         <form [formGroup]="leaveRequestForm">
-            <div fxLayout="row" fxLayoutAlign="start">
+            <!-- <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px"
                     (click)="selectAdminEmployee('relief Officer Staff')" fxFlex>
                     <mat-label>Select Staff</mat-label>
@@ -21,7 +21,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
+            </div> -->
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Select Leave Credit</mat-label>
@@ -72,6 +72,10 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="requestReady"></mat-slide-toggle>
+                <mat-label>Request Ready</mat-label>
             </div>
         </form>
     </div>
