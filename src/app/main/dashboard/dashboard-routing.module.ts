@@ -100,6 +100,8 @@ import { LeaveRequestComponent } from './holidays/leave-request/leave-request.co
 import { LeaveRequestApprovedComponent } from './holidays/leave-request-approved/leave-request-approved.component';
 import { HrLeaveRequestApprovedComponent } from './holidays/hr-leave-request-approved/hr-leave-request-approved.component';
 import { LeaveRequestClosedComponent } from './holidays/leave-request-closed/leave-request-closed.component';
+import { HodLeaveRequestClosedApprovedComponent } from './holidays/hod-leave-request-closed-approved/hod-leave-request-closed-approved.component';
+import { HrLeaveRequestClosedApprovedComponent } from './holidays/hr-leave-request-closed-approved/hr-leave-request-closed-approved.component';
 
 const routes: Routes = [
     {
@@ -469,6 +471,24 @@ const routes: Routes = [
         data: {
             title: 'Leave Requests Closed',
             // permissions: [PermissionConstant.LEAVE_YEAR_LIST]
+        },
+    },
+    {
+        path: 'hod-leave-request-closed-approved',
+        component: HodLeaveRequestClosedApprovedComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'HOD Leave Requests Closed Approval',
+            permissions: [PermissionConstant.HOD_LEAVE_REQUEST_CLOSED_APPROVED_LIST]
+        },
+    },
+    {
+        path: 'hr-leave-request-closed-approved',
+        component: HrLeaveRequestClosedApprovedComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'HR Leave Requests Closed Approval',
+            permissions: [PermissionConstant.HR_LEAVE_REQUEST_CLOSED_APPROVED_LIST]
         },
     },
     {

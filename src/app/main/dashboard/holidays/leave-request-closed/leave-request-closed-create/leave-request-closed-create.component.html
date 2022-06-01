@@ -10,43 +10,20 @@
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
         <form [formGroup]="leaveRequestForm">
-            <!-- <div fxLayout="row" fxLayoutAlign="start">
-                <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px"
-                    (click)="selectAdminEmployee('relief Officer Staff')" fxFlex>
-                    <mat-label>Select Staff</mat-label>
-                    <mat-select formControlName="reliefOfficerStaffId">
-                        <mat-option value="">Choose Relief Officer</mat-option>
-                        <mat-option *ngFor="let employee of selectedreliefOfficerStaff" [value]="employee.id">
-                            {{employee?.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div> -->
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Select Leave Credit</mat-label>
-                    <mat-select formControlName="leaveCreditId" required>
-                        <mat-option [value]="leaveCredit.id" *ngFor="let leaveCredit of leaveCreditList">
-                            {{leaveCredit.leave.title}} ({{leaveCredit.dueDays}}Day's)</mat-option>
+                    <mat-label>Select Leave Request</mat-label>
+                    <mat-select formControlName="leaveRequestId" required>
+                        <mat-option [value]="leaveRequest.id" *ngFor="let leaveRequest of leaveRequestList">
+                            {{leaveRequest.leaveCredit.leave.title}} ({{leaveRequest.leaveCredit.dueDays}}Day's)</mat-option>
                     </mat-select>
-                    <mat-error>Leave Credit is required!</mat-error>
-                </mat-form-field>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="start">
-                <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Start Date</mat-label>
-                    <input matInput [matDatepicker]="pickerSDate" formControlName="startDate"
-                        placeholder="Start Date">
-                    <mat-datepicker-toggle matSuffix [for]="pickerSDate">
-                        <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #pickerSDate></mat-datepicker>
+                    <mat-error>Leave Request is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Duration</mat-label>
-                    <input matInput placeholder="Duration" type="number" formControlName="duration" name="duration"
+                    <mat-label>Days spent</mat-label>
+                    <input matInput placeholder="Days Spent" type="number" formControlName="daysSpent" name="daysSpent"
                         required cdk-focus-start>
                 </mat-form-field>
             </div>
@@ -80,10 +57,10 @@
         </form>
     </div>
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-button class="save-button" (click)="matDialogRef.close(leaveRequestForm); saveLeaveRequest()"
+        <button mat-button class="save-button" (click)="matDialogRef.close(leaveRequestForm); saveLeaveRequestClosed()"
             [disabled]="leaveRequestForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
         </button>
-        <button mat-button class="save-button" (click)="matDialogRef.close(leaveRequestForm); updateLeaveRequest()"
+        <button mat-button class="save-button" (click)="matDialogRef.close(leaveRequestForm); updateLeaveRequestClosed()"
             [disabled]="leaveRequestForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
         </button>
     </div>

@@ -304,6 +304,12 @@ import { HrLeaveRequestApprovedListComponent } from './holidays/hr-leave-request
 import { LeaveRequestClosedComponent } from './holidays/leave-request-closed/leave-request-closed.component';
 import { LeaveRequestClosedCreateComponent } from './holidays/leave-request-closed/leave-request-closed-create/leave-request-closed-create.component';
 import { LeaveRequestClosedListComponent } from './holidays/leave-request-closed/leave-request-closed-list/leave-request-closed-list.component';
+import { HodLeaveRequestClosedApprovedComponent } from './holidays/hod-leave-request-closed-approved/hod-leave-request-closed-approved.component';
+import { HodLeaveRequestClosedApprovedCreateComponent } from './holidays/hod-leave-request-closed-approved/hod-leave-request-closed-approved-create/hod-leave-request-closed-approved-create.component';
+import { HodLeaveRequestClosedApprovedListComponent } from './holidays/hod-leave-request-closed-approved/hod-leave-request-closed-approved-list/hod-leave-request-closed-approved-list.component';
+import { HrLeaveRequestClosedApprovedComponent } from './holidays/hr-leave-request-closed-approved/hr-leave-request-closed-approved.component';
+import { HrLeaveRequestClosedApprovedCreateComponent } from './holidays/hr-leave-request-closed-approved/hr-leave-request-closed-approved-create/hr-leave-request-closed-approved-create.component';
+import { HrLeaveRequestClosedApprovedListComponent } from './holidays/hr-leave-request-closed-approved/hr-leave-request-closed-approved-list/hr-leave-request-closed-approved-list.component';
 
 @NgModule({
     declarations: [
@@ -399,6 +405,12 @@ import { LeaveRequestClosedListComponent } from './holidays/leave-request-closed
         LeaveRequestApprovedComponent,
         LeaveRequestApprovedCreateComponent,
         LeaveRequestApprovedListComponent,
+        HodLeaveRequestClosedApprovedComponent,
+        HodLeaveRequestClosedApprovedCreateComponent,
+        HodLeaveRequestClosedApprovedListComponent,
+        HrLeaveRequestClosedApprovedComponent,
+        HrLeaveRequestClosedApprovedCreateComponent,
+        HrLeaveRequestClosedApprovedListComponent,
         HrLeaveRequestApprovedComponent,
         HrLeaveRequestApprovedCreateComponent,
         HrLeaveRequestApprovedListComponent,

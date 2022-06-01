@@ -4,19 +4,19 @@ import { FormGroup } from '@angular/forms';
 import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
-import { LeaveRequestClosedCreateComponent } from '../leave-request-closed-create/leave-request-closed-create.component';
+import { HrLeaveRequestClosedApprovedCreateComponent } from '../hr-leave-request-closed-approved-create/hr-leave-request-closed-approved-create.component';
 
 @Component({
-    selector: 'leave-request-closed-list',
-    templateUrl: './leave-request-closed-list.component.html',
-    styleUrls: ['./leave-request-closed-list.component.scss'],
+    selector: 'hr-leave-request-closed-approved-list',
+    templateUrl: './hr-leave-request-closed-approved-list.component.html',
+    styleUrls: ['./hr-leave-request-closed-approved-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LeaveRequestClosedListComponent implements OnInit {
-    leaveRequestClosedList = [];
+export class HrLeaveRequestClosedApprovedListComponent implements OnInit {
+    leaveRequestList = [];
     displayedLeaveRequestColumns = [
-        'id','leaveType', 'startDate', 'duration', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
+        'id', 'staffID','approvalHOD', 'hodApproved','hrApproved', 'pLoginId','reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;
@@ -28,16 +28,16 @@ export class LeaveRequestClosedListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getLeaveRequestClosedList(this.employeeDetail);
+        this.getLeaveRequestList(this.employeeDetail);
     }
 
-    getLeaveRequestClosedList(employeeDetail?) {
-        this.contactInfoService.getLeaveRequestClosedList({ 'page': -1, staffId: employeeDetail.id }).subscribe(data => {
-            this.leaveRequestClosedList = data.items;
+    getLeaveRequestList(employeeDetail?) {
+        this.contactInfoService.getLeaveRequestClosedList({ 'page': -1, approvedHrStaffId: employeeDetail.id, approvedHod: 'approved' }).subscribe(data => {
+            this.leaveRequestList = data.items;
 
-            if (this.leaveRequestClosedList && this.leaveRequestClosedList.length > 0) {
+            if (this.leaveRequestList && this.leaveRequestList.length > 0) {
                 let i = 1;
-                this.leaveRequestClosedList.forEach(val => {
+                this.leaveRequestList.forEach(val => {
                     val['sno'] = i;
                     i++;
                 });
@@ -52,21 +52,21 @@ export class LeaveRequestClosedListComponent implements OnInit {
         });
         this.dialogRef.afterClosed().subscribe((response: boolean) => {
             if (response) {
-                this.deleteLeaveRequestClosed(items.id);
+                this.deleteLeaveRequest(items.id);
             }
         });
 
     }
-    deleteLeaveRequestClosed(id) {
+    deleteLeaveRequest(id) {
         this.contactInfoService.deleteLeaveRequestClosed(id).subscribe(data => {
             if (data) {
-                this.getLeaveRequestClosedList(this.employeeDetail);
+                this.getLeaveRequestList(this.employeeDetail);
             }
         });
     }
 
     editLeave(leaveRequest) {
-        this.dialogRef = this._matDialog.open(LeaveRequestClosedCreateComponent, {
+        this.dialogRef = this._matDialog.open(HrLeaveRequestClosedApprovedCreateComponent, {
             panelClass: 'contact-form-dialog',
             data: { action: 'EDIT', leaveRequest: leaveRequest, employeeDetail: this.employeeDetail },
         });
@@ -74,7 +74,7 @@ export class LeaveRequestClosedListComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getLeaveRequestClosedList(this.employeeDetail);
+            this.getLeaveRequestList(this.employeeDetail);
         });
     }
 
