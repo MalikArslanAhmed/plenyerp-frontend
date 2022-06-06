@@ -11,11 +11,15 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center">
-            <button class="bulk-upload" *ngIf="dataLoaded.length === 2" (click)="getData()">
+        <div class="warning-txt" *ngIf="gs.bulkUpload" >
+            <p class="green-txt">Bulk upload in progress....</p>
+            <p class="yellow-txt">Please dont leave this screen till bulk upload completes to avoid data loss....</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" >
+            <button class="bulk-upload" *ngIf="dataLoaded.length === 2 && !gs.bulkUpload" (click)="getData()">
                 Bulk Upload
             </button>
-            <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
+            <button *ngIf="!gs.bulkUpload" mat-fab class="accent" id="add-button" aria-label="add salary scales"
                 [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addLeaveCredit()">
                 <mat-icon>add_circle</mat-icon>
             </button>

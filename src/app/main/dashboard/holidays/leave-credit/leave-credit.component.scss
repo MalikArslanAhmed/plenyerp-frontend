@@ -10,8 +10,20 @@
 }
 
 .bulk-upload:hover {
-//     color        : #039be5;
-// background-color: ;
+    //     color        : #039be5;
+    // background-color: ;
+}
+
+.warning-txt {
+    background-color: green;
+    border-radius: 13px;
+    padding: 5px 12px;
+    p {
+        text-align: center;
+    }
+    .yellow-txt {
+        color           : yellow;
+    }
 }
 
 #skills {

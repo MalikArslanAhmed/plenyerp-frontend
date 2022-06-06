@@ -77,7 +77,7 @@ export class LeaveRequestApprovedCreateComponent implements OnInit {
             approvedHodVDate: ['', Validators.required],
             approvedHodTDate: [''],
             approvedHodLoginId: [this.gService.self.value.username, Validators.required],
-            approvedHrStaffId: ['', Validators.required],
+            approvedHrStaffId: [''],
         });
     }
 

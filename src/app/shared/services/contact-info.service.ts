@@ -186,6 +186,9 @@ export class ContactInfoService extends BaseService {
     getLeaveCreditList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_LEAVE_CREDIT_LIST(), data);
     }
+    bulkUploadLeaveCredit(data): Observable<any> {
+        return this.postRequest(AppUrl.BULK_UPLOAD_LEAVE_CREDIT(), data);
+    }
     addLeaveCredit(data): Observable<any> {
         return this.postRequest(AppUrl.LEAVE_CREDIT(), data);
     }

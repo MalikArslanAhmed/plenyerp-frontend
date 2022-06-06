@@ -988,6 +988,9 @@ export class AppUrl {
             return AppUrl.API_URL + 'leave-credits';
         }
     }
+    static BULK_UPLOAD_LEAVE_CREDIT(): string {
+        return AppUrl.API_URL + 'bulk-upload-leave-credits';
+    }
 
     static DELETE_LEAVE_CREDIT(id?): string {
         return AppUrl.API_URL + 'leave-credits/' + id;

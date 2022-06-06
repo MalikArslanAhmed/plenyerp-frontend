@@ -15,9 +15,9 @@ import { LeaveCreditCreateComponent } from '../leave-credit-create/leave-credit-
 })
 export class LeaveCreditListComponent implements OnInit {
     leaveCreditList = [];
-    displayedLeaveCreditColumns = ['id', 'pStaff', 'staff','leaveType','dueDays','leaveYear','pVDate','pTDate' ,'actions'];
+    displayedLeaveCreditColumns = ['id', 'pStaff', 'staff', 'leaveType', 'dueDays', 'leaveYear', 'pVDate', 'pTDate', 'actions'];
     dialogRef: any;
-
+    dataFetching = false
     constructor(private contactInfoService: ContactInfoService,
         private _matDialog: MatDialog) {
     }
@@ -27,6 +27,7 @@ export class LeaveCreditListComponent implements OnInit {
     }
 
     getLeaveCreditList() {
+        this.dataFetching = true
         this.contactInfoService.getLeaveCreditList({ 'page': -1 }).subscribe(data => {
             this.leaveCreditList = data.items;
 
@@ -37,6 +38,7 @@ export class LeaveCreditListComponent implements OnInit {
                     i++;
                 });
             }
+            this.dataFetching = false
         });
     }
 

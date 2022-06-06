@@ -37,7 +37,8 @@ export class LeaveCreditComponent implements OnInit {
     dataLoaded = []
     constructor(
         private _matDialog: MatDialog,
-        private contactInfoService: ContactInfoService
+        private contactInfoService: ContactInfoService,
+        public gs: GlobalService
     ) {
     }
 
@@ -77,7 +78,7 @@ export class LeaveCreditComponent implements OnInit {
     addLeaveCredit(data?) {
         this.dialogRef = this._matDialog.open(LeaveCreditCreateComponent, {
             panelClass: 'contact-form-dialog',
-            data: data ?{ action: 'CREATE BULK UPLOAD', bulkUploadData: data }: { action: 'CREATE' }
+            data: data ? { action: 'CREATE BULK UPLOAD', bulkUploadData: data, } : { action: 'CREATE' }
         });
         this.dialogRef.afterClosed().subscribe((response: FormGroup) => {
             if (!response) {

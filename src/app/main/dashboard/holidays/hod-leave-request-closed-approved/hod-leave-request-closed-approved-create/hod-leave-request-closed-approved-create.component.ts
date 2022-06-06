@@ -74,7 +74,7 @@ export class HodLeaveRequestClosedApprovedCreateComponent implements OnInit {
             approvedHodVDate: ['', Validators.required],
             approvedHodTDate: [''],
             approvedHodLoginId: [this.gService.self.value.username, Validators.required],
-            approvedHrStaffId: ['', Validators.required],
+            approvedHrStaffId: [''],
         });
     }
 
@@ -152,7 +152,13 @@ export class HodLeaveRequestClosedApprovedCreateComponent implements OnInit {
             data.approvedHodVDate = moment(data.approvedHodVDate).format('YYYY-MM-DD HH:mm:ss')
             data.approvedHodTDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             if (data.approvedHod == 'rejected') {
-                data.requestClosed = true
+                let leaveRequestData = this.updateData.leaveRequest.leaveRequest
+                leaveRequestData.requestClosed = true
+                this.contactInfoService.updateLeaveRequest(this.updateData.leaveRequest.leaveRequest.id, leaveRequestData).subscribe(data => {
+                    this.updateData = undefined;
+                    this.leaveRequestForm.reset();
+                    this.isSubmitted = false;
+                });
             }
             this.contactInfoService.updateLeaveRequestClosed(this.updateData.leaveRequest.id, data).subscribe(data => {
                 this.updateData = undefined;

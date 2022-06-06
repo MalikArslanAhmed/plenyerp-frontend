@@ -57,7 +57,8 @@ export class LeaveCreditCreateComponent implements OnInit {
         }
     }
     bulkUpload() {
-        let bulkCallsList: any = []
+        this.gService.bulkUpload = true
+        let bulkuploadData: any = []
         this._data.bulkUploadData.leaveCreditViewList.forEach((resp: any) => {
             if (resp.repeatEveryYear) {
                 let data = {
@@ -69,13 +70,13 @@ export class LeaveCreditCreateComponent implements OnInit {
                     preparedVDate: moment(this.leaveCreditForm.controls.preparedVDate.value).format('YYYY-MM-DD HH:mm:ss'),
                     preparedTDate: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
                 }
-                bulkCallsList.push(this.contactInfoService.addLeaveCredit(data))
+                bulkuploadData.push(data)
             }
         })
-        forkJoin(bulkCallsList).subscribe((resp: any) => {
-            this.leaveCreditForm.reset();
-            this.isSubmitted = false;
-        })
+        this.contactInfoService.bulkUploadLeaveCredit(bulkuploadData).subscribe((resp: any) => {
+            this.gService.bulkUpload = false
+        }
+        )
     }
     getleaveTypeList() {
         this.contactInfoService.getLeavesTypeList({}).subscribe(data => {

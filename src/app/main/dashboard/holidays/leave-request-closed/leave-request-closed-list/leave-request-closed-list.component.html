@@ -77,7 +77,7 @@
             <mat-header-cell *matHeaderCellDef>Request Closed</mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
                 <p class="phone text-truncate cursor-pointer">
-                    {{leaveRequest.requestClosed?'Yes':'No'}}
+                    {{leaveRequest.leaveRequest.requestClosed?'Yes':'No'}}
                 </p>
             </mat-cell>
         </ng-container>
