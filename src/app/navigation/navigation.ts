@@ -328,7 +328,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/leave-request',
-                        // permissions: [PermissionConstant.LEAVE_CREDIT_LIST]
+                        permissions: [PermissionConstant.LEAVE_REQUESTS_LIST]
                     },
                     {
                         id: 'hod-leave-request-approved',
@@ -352,7 +352,7 @@ export const navigation: FuseNavigation[] = [
                         roles: [],
                         type: 'item',
                         url: 'dashboard/leave-request-closed',
-                        // permissions: [PermissionConstant.LEAVE_CREDIT_LIST]
+                        permissions: [PermissionConstant.LEAVE_REQUESTS_CLOSED_LIST]
                     },
                     {
                         id: 'hod-leave-request-closed-approved',
