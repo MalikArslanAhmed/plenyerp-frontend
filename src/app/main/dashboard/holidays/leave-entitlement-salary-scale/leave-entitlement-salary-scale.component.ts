@@ -8,6 +8,7 @@ import { ContactInfoService } from 'app/shared/services/contact-info.service';
 import { LeaveEntitlementSalaryScaleCreateComponent } from './leave-entitlement-salary-scale-create/leave-entitlement-salary-scale-create.component';
 import { LeaveEntitlementSalaryScaleListComponent } from './leave-entitlement-salary-scale-list/leave-entitlement-salary-scale-list.component';
 import { SalaryScalesService } from 'app/shared/services/salary-scales.service';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-entitlement-salary-scale',
@@ -21,6 +22,7 @@ export class LeaveEntitlementSalaryScaleComponent implements OnInit {
     @ViewChild(LeaveEntitlementSalaryScaleListComponent) getLeaveGroupEntitlementList: LeaveEntitlementSalaryScaleListComponent;
     leaveEntitlementSalaryScaleId
     leaveSalaryScaleData: any = {}
+    permissionAdd = [PermissionConstant.LEAVE_ENTITLEMENT_SALARY_SCALE_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private route: ActivatedRoute,

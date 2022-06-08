@@ -6,6 +6,7 @@ import { ContactInfoService } from '../../../../../shared/services/contact-info.
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveCreditCreateComponent } from '../leave-credit-create/leave-credit-create.component';
 import { PageEvent } from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'leave-credit-list',
@@ -26,6 +27,8 @@ export class LeaveCreditListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    permissionEdit = [PermissionConstant.LEAVE_CREDIT_EDIT];
+    permissionDelete = [PermissionConstant.LEAVE_CREDIT_DELETE];
     constructor(private contactInfoService: ContactInfoService,
         private _matDialog: MatDialog) {
     }

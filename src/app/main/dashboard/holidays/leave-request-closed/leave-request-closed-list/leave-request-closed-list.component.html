@@ -87,17 +87,18 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button
-                        *ngIf="!leaveRequest.requestReady"
-                        mat-icon-button aria-label="Toggle star" (click)="editLeave(leaveRequest)" style="color: blue">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                    <button 
-                    *ngIf="!leaveRequest.requestReady"
-                    mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveRequest)"
-                        style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
+                    <div appPermissionBind [permission]="permissionEdit">
+                        <button *ngIf="!leaveRequest.requestReady" mat-icon-button aria-label="Toggle star"
+                            (click)="editLeave(leaveRequest)" style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDelete">
+                        <button *ngIf="!leaveRequest.requestReady" mat-icon-button aria-label="Toggle star"
+                            (click)="deleteItemModal(leaveRequest)" style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>
@@ -107,7 +108,7 @@
             [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
-    <mat-paginator #paginator *ngIf="leaveRequestClosedList.length > 0" [length]="pagination.total" [pageSize]="pagination.perpage"
-        [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
+    <mat-paginator #paginator *ngIf="leaveRequestClosedList.length > 0" [length]="pagination.total"
+        [pageSize]="pagination.perpage" [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
     </mat-paginator>
 </div>

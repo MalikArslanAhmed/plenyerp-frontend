@@ -36,22 +36,30 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let leaveGroup">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button mat-icon-button aria-label="Toggle star" matTooltip="Group Entitlements"
-                        matTooltipPosition="left" (click)="addGroupEntitlement(leaveGroup)" style="color: #000000">
-                        <mat-icon class="material-icons">credit_card</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star" matTooltip="Group Members"
-                        matTooltipPosition="left" (click)="addGroupMember(leaveGroup)" style="color: #000000">
-                        <mat-icon class="material-icons">person</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="editLeaveGroup(leaveGroup)"
-                        style="color: blue">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveGroup)"
-                        style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
+                    <div appPermissionBind [permission]="permissionListGroupEntitlement">
+                        <button mat-icon-button aria-label="Toggle star" matTooltip="Group Entitlements"
+                            matTooltipPosition="left" (click)="addGroupEntitlement(leaveGroup)" style="color: #000000">
+                            <mat-icon class="material-icons">credit_card</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionListGroupMember">
+                        <button mat-icon-button aria-label="Toggle star" matTooltip="Group Members"
+                            matTooltipPosition="left" (click)="addGroupMember(leaveGroup)" style="color: #000000">
+                            <mat-icon class="material-icons">person</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionEdit">
+                        <button mat-icon-button aria-label="Toggle star" (click)="editLeaveGroup(leaveGroup)"
+                            style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDelete">
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveGroup)"
+                            style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>
@@ -61,7 +69,7 @@
             [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
-    <mat-paginator #paginator *ngIf="leaveGroupList.length > 0" [length]="pagination.total" [pageSize]="pagination.perpage"
-        [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
+    <mat-paginator #paginator *ngIf="leaveGroupList.length > 0" [length]="pagination.total"
+        [pageSize]="pagination.perpage" [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
     </mat-paginator>
 </div>

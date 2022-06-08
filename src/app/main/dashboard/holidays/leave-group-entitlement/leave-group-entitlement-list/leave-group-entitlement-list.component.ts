@@ -6,6 +6,7 @@ import {ContactInfoService} from '../../../../../shared/services/contact-info.se
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveGroupEntitlementCreateComponent } from '../leave-group-entitlement-create/leave-group-entitlement-create.component';
 import { PageEvent } from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'leave-group-entitlement-list',
@@ -28,6 +29,8 @@ export class LeaveGroupEntitlementListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    permissionEdit = [PermissionConstant.LEAVE_GROUP_Entitlement_EDIT];
+    permissionDelete = [PermissionConstant.LEAVE_GROUP_Entitlement_DELETE];
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {
     }

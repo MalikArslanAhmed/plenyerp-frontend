@@ -6,6 +6,7 @@ import {ContactInfoService} from '../../../../../shared/services/contact-info.se
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveYearCreateComponent } from '../leave-year-create/leave-year-create.component';
 import { PageEvent } from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'leave-year-list',
@@ -15,6 +16,7 @@ import { PageEvent } from '@angular/material/paginator';
     animations: fuseAnimations
 })
 export class LeaveYearListComponent implements OnInit {
+    @Output() selectedIndexChange: EventEmitter<number>;
     leaveYearList = [];
     displayedLeaveYearColumns = ['id','leaveYear','status', 'actions'];
     dialogRef: any;
@@ -26,8 +28,8 @@ export class LeaveYearListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
-    @Output() selectedIndexChange: EventEmitter<number>;
-
+    permissionEdit = [PermissionConstant.LEAVE_YEAR_EDIT];
+    permissionDelete = [PermissionConstant.LEAVE_YEAR_DELETE];
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {
     }

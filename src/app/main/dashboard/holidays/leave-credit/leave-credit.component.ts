@@ -10,6 +10,7 @@ import { EmployeesService } from 'app/shared/services/employees.service';
 import { SalaryScalesService } from 'app/shared/services/salary-scales.service';
 import { GlobalService } from 'app/shared/services/global.service';
 import * as moment from 'moment'
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-credit',
@@ -35,6 +36,8 @@ export class LeaveCreditComponent implements OnInit {
     activeYearsList = []
     leaveCreditViewList = []
     dataLoaded = []
+    permissionAdd = [PermissionConstant.LEAVE_CREDIT_ADD]
+
     constructor(
         private _matDialog: MatDialog,
         private contactInfoService: ContactInfoService,

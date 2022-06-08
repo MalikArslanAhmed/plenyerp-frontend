@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {LeaveGroupCreateComponent} from './leave-group-create/leave-group-create.component';
 import {LeaveGroupListComponent} from './leave-group-list/leave-group-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-group',
@@ -14,8 +15,9 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
     animations: fuseAnimations
 })
 export class LeaveGroupComponent implements OnInit {
-    dialogRef: any;
     @ViewChild(LeaveGroupListComponent) getLeaveGroupList: LeaveGroupListComponent;
+    dialogRef: any;
+    permissionAdd = [PermissionConstant.LEAVE_GROUP_ADD]
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,

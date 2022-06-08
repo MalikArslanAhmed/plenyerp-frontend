@@ -738,7 +738,8 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'monetization_on',
                 url: '/dashboard/budget-controls/AIE',
-                permissions: []
+                // permissions: []
+                permissions: [PermissionConstant.BUDGET_CONTROL_AIE_SEARCH]
             },
             {
                 id: 'report',

@@ -7,6 +7,7 @@ import { LeaveGroupEntitlementListComponent } from './leave-group-entitlement-li
 import { LeaveGroupEntitlementCreateComponent } from './leave-group-entitlement-create/leave-group-entitlement-create.component';
 import { ActivatedRoute } from '@angular/router';
 import { ContactInfoService } from 'app/shared/services/contact-info.service';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-group-entitlement',
@@ -20,6 +21,8 @@ export class LeaveGroupEntitlementComponent implements OnInit {
     @ViewChild(LeaveGroupEntitlementListComponent) getLeaveGroupEntitlementList: LeaveGroupEntitlementListComponent;
     leaveGroupId
     leaveGroupData: any = {}
+    permissionAdd = [PermissionConstant.LEAVE_GROUP_Entitlement_ADD]
+    
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private route: ActivatedRoute,

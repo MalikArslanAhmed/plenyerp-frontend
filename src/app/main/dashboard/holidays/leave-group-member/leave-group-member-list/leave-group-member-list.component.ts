@@ -6,6 +6,7 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { PageEvent } from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'leave-group-member-list',
@@ -28,6 +29,8 @@ export class LeaveGroupMemberListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
+    permissionEdit = [PermissionConstant.LEAVE_GROUP_MEMBER_EDIT];
+    permissionDelete = [PermissionConstant.LEAVE_GROUP_MEMBER_DELETE];
         constructor(private contactInfoService: ContactInfoService,
             private _matDialog: MatDialog) {
     }

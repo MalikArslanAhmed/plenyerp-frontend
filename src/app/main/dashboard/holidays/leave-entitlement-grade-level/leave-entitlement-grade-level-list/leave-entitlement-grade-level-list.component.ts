@@ -5,6 +5,8 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveEntitlementGradeLevelCreateComponent } from '../leave-entitlement-grade-level-create/leave-entitlement-grade-level-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'leave-entitlement-grade-level-list',
@@ -19,7 +21,15 @@ export class LeaveEntitlementGradeLevelListComponent implements OnInit {
     dialogRef: any;
     selectIndex = 0;
     @Input() leaveEntitlementGradeLevelId
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
+    permissionEdit = [PermissionConstant.LEAVE_ENTITLEMENT_GRADE_LEVEL_EDIT];
+    permissionDelete = [PermissionConstant.LEAVE_ENTITLEMENT_GRADE_LEVEL_DELETE];
     constructor(private contactInfoService: ContactInfoService,
         private _matDialog: MatDialog) {
     }
@@ -29,9 +39,11 @@ export class LeaveEntitlementGradeLevelListComponent implements OnInit {
     }
 
     getLeaveEntitlementGradeLevelList() {
-        this.contactInfoService.getLeaveEntitlementGradeLevelList({ 'page': -1, gradeId: this.leaveEntitlementGradeLevelId }).subscribe(data => {
+        this.contactInfoService.getLeaveEntitlementGradeLevelList({ ...this.pagination, gradeId: this.leaveEntitlementGradeLevelId }).subscribe(data => {
             this.leaveEntitlementGradeLevelList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveEntitlementGradeLevelList && this.leaveEntitlementGradeLevelList.length > 0) {
                 let i = 1;
                 this.leaveEntitlementGradeLevelList.forEach(val => {
@@ -71,8 +83,10 @@ export class LeaveEntitlementGradeLevelListComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getLeaveEntitlementGradeLevelList();
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveEntitlementGradeLevelList();
+    }
 }

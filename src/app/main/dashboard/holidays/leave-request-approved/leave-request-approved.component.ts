@@ -7,6 +7,7 @@ import { EmployeesService } from 'app/shared/services/employees.service';
 import { GlobalService } from 'app/shared/services/global.service';
 import { LeaveRequestApprovedListComponent } from './leave-request-approved-list/leave-request-approved-list.component';
 import { LeaveRequestApprovedCreateComponent } from './leave-request-approved-create/leave-request-approved-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-request-approved',
@@ -20,6 +21,7 @@ export class LeaveRequestApprovedComponent implements OnInit {
     @ViewChild(LeaveRequestApprovedListComponent) getLeaveRequestList: LeaveRequestApprovedListComponent;
     employeeDetail: any = {}
     isFetching = true
+    permissionAdd = [PermissionConstant.HOD_LEAVE_REQUEST_APPROVED_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog,

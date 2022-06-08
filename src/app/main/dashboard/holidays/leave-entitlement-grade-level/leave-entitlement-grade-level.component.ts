@@ -8,6 +8,7 @@ import { ContactInfoService } from 'app/shared/services/contact-info.service';
 import { SalaryScalesService } from 'app/shared/services/salary-scales.service';
 import { LeaveEntitlementGradeLevelListComponent } from './leave-entitlement-grade-level-list/leave-entitlement-grade-level-list.component';
 import { LeaveEntitlementGradeLevelCreateComponent } from './leave-entitlement-grade-level-create/leave-entitlement-grade-level-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-entitlement-grade-level',
@@ -21,6 +22,7 @@ export class LeaveEntitlementGradeLevelComponent implements OnInit {
     @ViewChild(LeaveEntitlementGradeLevelListComponent) getLeaveEntitlementGradeLevelList: LeaveEntitlementGradeLevelListComponent;
     leaveEntitlementGradeLevelId
     leaveGradeLevelData: any = {}
+    permissionAdd = [PermissionConstant.LEAVE_ENTITLEMENT_GRADE_LEVEL_ADD]
     constructor(
         private route: ActivatedRoute,
         private _matDialog: MatDialog,

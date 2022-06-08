@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {fuseAnimations} from '../../../../../@fuse/animations';
 import { LeaveYearListComponent } from './leave-year-list/leave-year-list.component';
 import { LeaveYearCreateComponent } from './leave-year-create/leave-year-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-year',
@@ -16,6 +17,7 @@ import { LeaveYearCreateComponent } from './leave-year-create/leave-year-create.
 export class LeaveYearComponent implements OnInit {
     dialogRef: any;
     @ViewChild(LeaveYearListComponent) getLeaveYearList: LeaveYearListComponent;
+    permissionAdd = [PermissionConstant.LEAVE_YEAR_ADD]
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,

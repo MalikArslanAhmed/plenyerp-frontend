@@ -7,6 +7,7 @@ import { LeaveGroupMemberListComponent } from './leave-group-member-list/leave-g
 import { fuseAnimations } from '../../../../../@fuse/animations';
 import { ActivatedRoute } from '@angular/router';
 import { ContactInfoService } from 'app/shared/services/contact-info.service';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-group-member',
@@ -20,6 +21,7 @@ export class LeaveGroupMemberComponent implements OnInit {
     @ViewChild(LeaveGroupMemberListComponent) getLeaveGroupMemberList: LeaveGroupMemberListComponent;
     leaveGroupId
     leaveGroupData:any = {}
+    permissionAdd = [PermissionConstant.LEAVE_GROUP_MEMBER_ADD]
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private route: ActivatedRoute,

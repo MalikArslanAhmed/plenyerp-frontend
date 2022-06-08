@@ -50,23 +50,22 @@
                             style="color: blue">
                         <mat-icon class="material-icons">edit</mat-icon>
                     </button> -->
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveGroupMember)"
+                    <div appPermissionBind [permission]="permissionDelete">
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveGroupMember)"
                             style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedLeavesTypeColumns"></mat-header-row>
         <mat-row *matRowDef="let leaveGroupMember; columns: displayedLeavesTypeColumns;" class="contact"
-                 [@animate]="{value:'*',params:{y:'100%'}}">
+            [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
-    <mat-paginator #paginator *ngIf="leaveGroupMemberList.length > 0" [length]="pagination.total" [pageSize]="pagination.perpage"
-        [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
+    <mat-paginator #paginator *ngIf="leaveGroupMemberList.length > 0" [length]="pagination.total"
+        [pageSize]="pagination.perpage" [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
     </mat-paginator>
 </div>
-
-
-

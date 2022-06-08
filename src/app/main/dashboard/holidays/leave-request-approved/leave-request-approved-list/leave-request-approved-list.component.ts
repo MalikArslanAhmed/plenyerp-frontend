@@ -6,6 +6,7 @@ import { ContactInfoService } from '../../../../../shared/services/contact-info.
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveRequestApprovedCreateComponent } from '../leave-request-approved-create/leave-request-approved-create.component';
 import { PageEvent } from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'leave-request-approved-list',
@@ -15,6 +16,8 @@ import { PageEvent } from '@angular/material/paginator';
     animations: fuseAnimations
 })
 export class LeaveRequestApprovedListComponent implements OnInit {
+    @Output() selectedIndexChange: EventEmitter<number>;
+    @Input() employeeDetail
     leaveRequestList = [];
     displayedLeaveRequestColumns = [
         'id','leaveType', 'staffID', 'duration', 'approvalHr', 'hodApproved', 'hrApproved', 'approvedHodVDate', 'pLoginId', 'reqClosed', 'actions'
@@ -28,9 +31,8 @@ export class LeaveRequestApprovedListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
-    @Output() selectedIndexChange: EventEmitter<number>;
-    @Input() employeeDetail
-
+    permissionEdit = [PermissionConstant.HOD_LEAVE_REQUEST_APPROVED_EDIT];
+    permissionDelete = [PermissionConstant.HOD_LEAVE_REQUEST_APPROVED_DELETE];
     constructor(private contactInfoService: ContactInfoService,
         private _matDialog: MatDialog) {
     }

@@ -5,6 +5,8 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveEntitlementSalaryScaleCreateComponent } from '../leave-entitlement-salary-scale-create/leave-entitlement-salary-scale-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'leave-entitlement-salary-scale-list',
@@ -14,13 +16,21 @@ import { LeaveEntitlementSalaryScaleCreateComponent } from '../leave-entitlement
     animations: fuseAnimations
 })
 export class LeaveEntitlementSalaryScaleListComponent implements OnInit {
+    @Output() selectedIndexChange: EventEmitter<number>;
+    @Input() leaveEntitlementSalaryScaleId
     leaveEntitlementSalaryScaleList = [];
     displayedLeaveEntitlementSalaryScaleColumns = ['id', 'leaveType', 'dueDays', 'actions'];
     dialogRef: any;
     selectIndex = 0;
-    @Output() selectedIndexChange: EventEmitter<number>;
-    @Input() leaveEntitlementSalaryScaleId
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
+    permissionEdit = [PermissionConstant.LEAVE_ENTITLEMENT_SALARY_SCALE_EDIT];
+    permissionDelete = [PermissionConstant.LEAVE_ENTITLEMENT_SALARY_SCALE_DELETE];
     constructor(private contactInfoService: ContactInfoService,
         private _matDialog: MatDialog) {
     }
@@ -30,9 +40,11 @@ export class LeaveEntitlementSalaryScaleListComponent implements OnInit {
     }
 
     getLeaveEntitlementSalaryScaleList() {
-        this.contactInfoService.getLeaveEntitlementSalaryScaleList({ 'page': -1, salaryId: this.leaveEntitlementSalaryScaleId }).subscribe(data => {
+        this.contactInfoService.getLeaveEntitlementSalaryScaleList({ ...this.pagination, salaryId: this.leaveEntitlementSalaryScaleId }).subscribe(data => {
             this.leaveEntitlementSalaryScaleList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveEntitlementSalaryScaleList && this.leaveEntitlementSalaryScaleList.length > 0) {
                 let i = 1;
                 this.leaveEntitlementSalaryScaleList.forEach(val => {
@@ -72,8 +84,10 @@ export class LeaveEntitlementSalaryScaleListComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.getLeaveEntitlementSalaryScaleList();
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveEntitlementSalaryScaleList();
+    }
 }

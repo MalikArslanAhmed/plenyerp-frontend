@@ -7,6 +7,7 @@ import { ContactInfoService } from '../../../../../shared/services/contact-info.
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'leave-group-list',
@@ -16,6 +17,7 @@ import { PageEvent } from '@angular/material/paginator';
     animations: fuseAnimations
 })
 export class LeaveGroupListComponent implements OnInit {
+    @Output() selectedIndexChange: EventEmitter<number>;
     leaveGroupList = [];
     displayedLeaveGroupColumns = ['id', 'title', 'status', 'actions'];
     dialogRef: any;
@@ -27,8 +29,10 @@ export class LeaveGroupListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
-    @Output() selectedIndexChange: EventEmitter<number>;
-
+    permissionEdit = [PermissionConstant.LEAVE_GROUP_EDIT];
+    permissionDelete = [PermissionConstant.LEAVE_GROUP_DELETE];
+    permissionListGroupMember = [PermissionConstant.LEAVE_GROUP_MEMBER_LIST];
+    permissionListGroupEntitlement = [PermissionConstant.LEAVE_GROUP_Entitlement_LIST];
     constructor(private contactInfoService: ContactInfoService,
         private _matDialog: MatDialog,
         private router: Router

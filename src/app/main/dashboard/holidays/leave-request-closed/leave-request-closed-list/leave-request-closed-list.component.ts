@@ -6,6 +6,7 @@ import { ContactInfoService } from '../../../../../shared/services/contact-info.
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveRequestClosedCreateComponent } from '../leave-request-closed-create/leave-request-closed-create.component';
 import { PageEvent } from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'leave-request-closed-list',
@@ -15,6 +16,8 @@ import { PageEvent } from '@angular/material/paginator';
     animations: fuseAnimations
 })
 export class LeaveRequestClosedListComponent implements OnInit {
+    @Output() selectedIndexChange: EventEmitter<number>;
+    @Input() employeeDetail
     leaveRequestClosedList = [];
     displayedLeaveRequestColumns = [
         'id', 'leaveType', 'startDate', 'duration', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
@@ -28,9 +31,8 @@ export class LeaveRequestClosedListComponent implements OnInit {
         pages: null
     };
     pageEvent: PageEvent;
-    @Output() selectedIndexChange: EventEmitter<number>;
-    @Input() employeeDetail
-
+    permissionEdit = [PermissionConstant.LEAVE_REQUESTS_CLOSED_EDIT];
+    permissionDelete = [PermissionConstant.LEAVE_REQUESTS_CLOSED_DELETE];
     constructor(private contactInfoService: ContactInfoService,
         private _matDialog: MatDialog) {
     }

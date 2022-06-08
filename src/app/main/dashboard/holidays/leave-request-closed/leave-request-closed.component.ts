@@ -7,6 +7,7 @@ import { EmployeesService } from 'app/shared/services/employees.service';
 import { GlobalService } from 'app/shared/services/global.service';
 import { LeaveRequestClosedListComponent } from './leave-request-closed-list/leave-request-closed-list.component';
 import { LeaveRequestClosedCreateComponent } from './leave-request-closed-create/leave-request-closed-create.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-request-closed',
@@ -20,6 +21,8 @@ export class LeaveRequestClosedComponent implements OnInit {
     @ViewChild(LeaveRequestClosedListComponent) getLeaveRequestClosedList: LeaveRequestClosedListComponent;
     employeeDetail: any = {}
     isFetching = true
+    permissionAdd = [PermissionConstant.LEAVE_REQUESTS_CLOSED_ADD]
+
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         private _matDialog: MatDialog,

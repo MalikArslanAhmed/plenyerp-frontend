@@ -6,6 +6,7 @@ import { ContactInfoService } from '../../../../../shared/services/contact-info.
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { HrLeaveRequestClosedApprovedCreateComponent } from '../hr-leave-request-closed-approved-create/hr-leave-request-closed-approved-create.component';
 import { PageEvent } from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'hr-leave-request-closed-approved-list',
@@ -30,7 +31,8 @@ export class HrLeaveRequestClosedApprovedListComponent implements OnInit {
     pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
     @Input() employeeDetail
-
+    permissionEdit = [PermissionConstant.HR_LEAVE_REQUEST_CLOSED_APPROVED_EDIT];
+    permissionDelete = [PermissionConstant.HR_LEAVE_REQUEST_CLOSED_APPROVED_DELETE];
     constructor(private contactInfoService: ContactInfoService,
         private _matDialog: MatDialog) {
     }

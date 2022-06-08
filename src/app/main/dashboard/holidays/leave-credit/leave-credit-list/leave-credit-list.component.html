@@ -70,28 +70,29 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let leaveCredit">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button mat-icon-button aria-label="Toggle star" (click)="editLeaveCredit(leaveCredit)"
+                    <div appPermissionBind [permission]="permissionEdit">
+                        <button mat-icon-button aria-label="Toggle star" (click)="editLeaveCredit(leaveCredit)"
                             style="color: blue">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveCredit)"
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDelete">
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveCredit)"
                             style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedLeaveCreditColumns"></mat-header-row>
         <mat-row *matRowDef="let leaveCredit; columns: displayedLeaveCreditColumns;" class="contact"
-                 [@animate]="{value:'*',params:{y:'100%'}}">
+            [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
     <h1 class="loading-data" *ngIf="dataFetching">Data is being load. Please wait....</h1>
-    <mat-paginator #paginator *ngIf="leaveCreditList.length > 0" [length]="pagination.total" [pageSize]="pagination.perpage"
-        [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
+    <mat-paginator #paginator *ngIf="leaveCreditList.length > 0" [length]="pagination.total"
+        [pageSize]="pagination.perpage" [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
     </mat-paginator>
 </div>
-
-
-
