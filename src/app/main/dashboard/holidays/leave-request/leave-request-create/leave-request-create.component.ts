@@ -30,6 +30,8 @@ export class LeaveRequestCreateComponent implements OnInit {
     leaveCreditList = []
     selectedreliefOfficerStaff: any = ''
     selectedhodStaff: any = ''
+    leaveRequestList: any = []
+    selectedCredit: any = 0
     constructor(public matDialogRef: MatDialogRef<LeaveRequestCreateComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private fb: FormBuilder,
@@ -50,7 +52,7 @@ export class LeaveRequestCreateComponent implements OnInit {
                     'name': _data.leaveRequest.approvedHodStaff.firstName + ' ' + _data.leaveRequest.approvedHodStaff.lastName,
                     'id': _data.leaveRequest.approvedHodStaff.id
                 }];
-                this.getLeaveCreditList(_data.leaveRequest.reliefOfficerStaffId)
+                // this.getLeaveCreditList(_data.employeeDetail.id)
             }
         } else {
             this.dialogTitle = 'Add Leave Request';
@@ -59,13 +61,33 @@ export class LeaveRequestCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.refresh();
-        this.checkForUpdate();
         this.getLeaveCreditList(this._data.employeeDetail.id)
     }
 
     getLeaveCreditList(id) {
+        this.leaveCreditList = []
         this.contactInfoService.getLeaveCreditList({ 'page': -1, staffId: id }).subscribe(data => {
-            this.leaveCreditList = data.items;
+            let creditsTempList = data.items;
+            this.contactInfoService.getLeaveRequestList({ page: -1, staffId: this._data.employeeDetail.id }).subscribe(data => {
+                this.leaveRequestList = data.items;
+                creditsTempList.forEach((credit: any) => {
+                    let totalCreditLeft = credit.dueDays
+                    this.leaveRequestList.forEach((leaveRequest: any) => {
+                        if (this.action !== 'EDIT' && leaveRequest.leaveCreditId === credit.id) {
+                            totalCreditLeft = totalCreditLeft - +leaveRequest.duration
+                        }
+                        if (this.action === 'EDIT' && leaveRequest.leaveCreditId === credit.id && leaveRequest.id !== this._data.leaveRequest.id) {
+                            totalCreditLeft = totalCreditLeft - +leaveRequest.duration
+                        }
+                    })
+                    if (totalCreditLeft > 0) {
+                        credit.totalCreditLeft = totalCreditLeft
+                        this.leaveCreditList.push(credit)
+                    }
+                })
+                this.checkForUpdate();
+
+            })
         });
     }
 
@@ -82,6 +104,15 @@ export class LeaveRequestCreateComponent implements OnInit {
             hodStaffId: ['', Validators.required],
             requestReady: [false, Validators.required],
         });
+        this.leaveRequestForm.get('leaveCreditId').valueChanges.subscribe((resp: any) => {
+            let index = this.leaveCreditList.findIndex(item => item.id === this.leaveRequestForm.controls.leaveCreditId.value)
+            console.log('called index',index);
+            
+            if (index > -1) {
+                this.selectedCredit = this.leaveCreditList[index]
+                this.leaveRequestForm.controls.duration.setValidators([Validators.required, Validators.max(this.selectedCredit.totalCreditLeft)])
+            }
+        })
     }
 
 

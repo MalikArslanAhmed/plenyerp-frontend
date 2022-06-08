@@ -18,7 +18,7 @@ import { PermissionConstant } from 'app/shared/constants/permission-constant';
 export class HrLeaveRequestClosedApprovedListComponent implements OnInit {
     leaveRequestList = [];
     displayedLeaveRequestColumns = [
-        'id', 'staffID','approvalHOD', 'releifOfficer','hodApproved','hrApproved', 'pLoginId','reqClosed', 'actions'
+        'id', 'staffID','daysSpent','approvalHOD', 'releifOfficer','hodApproved','hrApproved', 'pLoginId','reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;

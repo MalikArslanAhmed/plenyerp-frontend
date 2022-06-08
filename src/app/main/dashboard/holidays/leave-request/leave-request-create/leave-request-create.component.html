@@ -35,19 +35,20 @@
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Start Date</mat-label>
-                    <input matInput [matDatepicker]="pickerSDate" formControlName="startDate"
-                        placeholder="Start Date">
+                    <input matInput [matDatepicker]="pickerSDate" formControlName="startDate" placeholder="Start Date">
                     <mat-datepicker-toggle matSuffix [for]="pickerSDate">
                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                     </mat-datepicker-toggle>
                     <mat-datepicker #pickerSDate></mat-datepicker>
                 </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start">
+            <div *ngIf="leaveRequestForm.controls.leaveCreditId.value" fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Duration</mat-label>
-                    <input matInput placeholder="Duration" type="number" formControlName="duration" name="duration"
+                    <input matInput placeholder="Duration" type="number" min="0" formControlName="duration" name="duration"
                         required cdk-focus-start>
+                    <mat-error *ngIf="leaveRequestForm.controls.duration.errors?.max">You have only  {{selectedCredit.totalCreditLeft}} Credit's left</mat-error>
+
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start">

@@ -20,7 +20,7 @@ export class LeaveRequestClosedListComponent implements OnInit {
     @Input() employeeDetail
     leaveRequestClosedList = [];
     displayedLeaveRequestColumns = [
-        'id', 'leaveType', 'startDate', 'duration', 'releifOfficer', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
+        'id', 'leaveType', 'startDate', 'duration','daysSpent', 'releifOfficer', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;

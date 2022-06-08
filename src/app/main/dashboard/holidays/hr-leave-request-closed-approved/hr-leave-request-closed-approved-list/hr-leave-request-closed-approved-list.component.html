@@ -16,6 +16,14 @@
                 </p>
             </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="daysSpent">
+            <mat-header-cell *matHeaderCellDef>Days Spent</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.daysSpent}}
+                </p>
+            </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="approvalHOD">
             <mat-header-cell *matHeaderCellDef>Approval HOD</mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
