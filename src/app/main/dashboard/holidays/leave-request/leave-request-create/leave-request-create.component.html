@@ -52,9 +52,9 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>P.V Date</mat-label>
+                    <mat-label>Value Date</mat-label>
                     <input matInput [matDatepicker]="pickerPVDate" formControlName="preparedVDate"
-                        placeholder="P.V Date">
+                        placeholder="Value Date">
                     <mat-datepicker-toggle matSuffix [for]="pickerPVDate">
                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                     </mat-datepicker-toggle>
@@ -64,10 +64,22 @@
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px"
                     (click)="selectAdminEmployee('Select HOD Staff')" fxFlex>
-                    <mat-label>Select Staff</mat-label>
+                    <mat-label>Select HOD</mat-label>
                     <mat-select formControlName="hodStaffId">
                         <mat-option value="">Choose HOD</mat-option>
                         <mat-option *ngFor="let employee of selectedhodStaff" [value]="employee.id">
+                            {{employee?.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px"
+                    (click)="selectAdminEmployee('relief Officer Staff')" fxFlex>
+                    <mat-label>Select Releif Officer</mat-label>
+                    <mat-select formControlName="reliefOfficerStaffId">
+                        <mat-option value="">Releif Officer</mat-option>
+                        <mat-option *ngFor="let employee of selectedreliefOfficerStaff" [value]="employee.id">
                             {{employee?.name}}
                         </mat-option>
                     </mat-select>

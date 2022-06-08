@@ -24,6 +24,15 @@
                 </p>
             </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="releifOfficer">
+            <mat-header-cell *matHeaderCellDef>Releif Officer</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.leaveRequest.reliefOfficer.firstName |titlecase}} {{leaveRequest.leaveRequest.reliefOfficer.lastName
+                    |titlecase}}
+                </p>
+            </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="hodApproved">
             <mat-header-cell *matHeaderCellDef>HOD Approval Status</mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
@@ -41,7 +50,7 @@
             </mat-cell>
         </ng-container>
         <ng-container matColumnDef="approvedHodVDate">
-            <mat-header-cell *matHeaderCellDef>HR P.V Date</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>HR Value Date</mat-header-cell>
             <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
                 <p class="phone text-truncate cursor-pointer">
                     {{leaveRequest.approvedHodVDate | date:shortDate}}

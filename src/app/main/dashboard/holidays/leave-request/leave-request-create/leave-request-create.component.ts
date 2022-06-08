@@ -74,7 +74,7 @@ export class LeaveRequestCreateComponent implements OnInit {
             staffId: [this._data.employeeDetail.id],
             leaveCreditId: ['', Validators.required],
             startDate: ['', Validators.required],
-            reliefOfficerStaffId: [this._data.employeeDetail.id],
+            reliefOfficerStaffId: ['', Validators.required],
             duration: ['', Validators.required],
             preparedVDate: ['', Validators.required],
             preparedTDate: [''],
@@ -106,7 +106,7 @@ export class LeaveRequestCreateComponent implements OnInit {
                     'id': response['empData'].id
                 }];
                 this.leaveRequestForm.controls.reliefOfficerStaffId.setValue(response.empData.id)
-                this.getLeaveCreditList(response.empData.id)
+                // this.getLeaveCreditList(response.empData.id)
             } else if (type === 'Select HOD Staff') {
                 this.selectedhodStaff = [{
                     'name': response['empData'].firstName + ' ' + response['empData'].lastName,

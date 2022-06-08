@@ -16,16 +16,16 @@
                     {{updateData.leaveRequest.staff.lastName}} </p>
                 <p><b>Start Date:</b> {{updateData.leaveRequest.startDate | date: 'shortDate'}} </p>
                 <p><b>Duration:</b> {{updateData.leaveRequest.duration}}</p>
-                <p><b>Staff P.V Date</b> {{updateData.leaveRequest.preparedVDate | date: 'shortDate'}}</p>
+                <p><b>Staff Value Date</b> {{updateData.leaveRequest.preparedVDate | date: 'shortDate'}}</p>
                 <p><b>Releif Officer:</b> {{updateData.leaveRequest.reliefOfficer.firstName}}
                     {{updateData.leaveRequest.reliefOfficer.lastName}}</p>
                 <p><b>P. Login:</b> {{updateData.leaveRequest.preparedLoginId}} </p>
             </div>
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
-                    <mat-label>Approved P.V Date</mat-label>
+                    <mat-label>Approved Value Date</mat-label>
                     <input matInput [matDatepicker]="pickerPVDate" formControlName="approvedHodVDate"
-                        placeholder="P.V Date">
+                        placeholder="Value Date">
                     <mat-datepicker-toggle matSuffix [for]="pickerPVDate">
                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                     </mat-datepicker-toggle>
