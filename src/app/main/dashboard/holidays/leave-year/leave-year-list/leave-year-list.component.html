@@ -50,6 +50,9 @@
                  [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
+    <mat-paginator #paginator *ngIf="leaveYearList.length > 0" [length]="pagination.total" [pageSize]="pagination.perpage"
+        [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
+    </mat-paginator>
 </div>
 
 

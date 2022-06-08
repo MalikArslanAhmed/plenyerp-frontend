@@ -88,6 +88,9 @@
         </mat-row>
     </mat-table>
     <h1 class="loading-data" *ngIf="dataFetching">Data is being load. Please wait....</h1>
+    <mat-paginator #paginator *ngIf="leaveCreditList.length > 0" [length]="pagination.total" [pageSize]="pagination.perpage"
+        [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
+    </mat-paginator>
 </div>
 
 

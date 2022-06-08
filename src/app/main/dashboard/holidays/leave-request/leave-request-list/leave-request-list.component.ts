@@ -5,6 +5,7 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveRequestCreateComponent } from '../leave-request-create/leave-request-create.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'leave-request-list',
@@ -16,10 +17,17 @@ import { LeaveRequestCreateComponent } from '../leave-request-create/leave-reque
 export class LeaveRequestListComponent implements OnInit {
     leaveRequestList = [];
     displayedLeaveRequestColumns = [
-        'id','leaveType', 'startDate', 'duration', 'preparedVDate', 'readyRequest','hodApprovedStaff','hodApproved', 'hrApproved', 'reqClosed', 'actions'
+        'id', 'leaveType', 'startDate', 'duration', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
     @Input() employeeDetail
 
@@ -32,9 +40,11 @@ export class LeaveRequestListComponent implements OnInit {
     }
 
     getLeaveRequestList(employeeDetail?) {
-        this.contactInfoService.getLeaveRequestList({ 'page': -1, staffId: employeeDetail.id }).subscribe(data => {
+        this.contactInfoService.getLeaveRequestList({ ...this.pagination, staffId: employeeDetail.id }).subscribe(data => {
             this.leaveRequestList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveRequestList && this.leaveRequestList.length > 0) {
                 let i = 1;
                 this.leaveRequestList.forEach(val => {
@@ -77,5 +87,8 @@ export class LeaveRequestListComponent implements OnInit {
             this.getLeaveRequestList(this.employeeDetail);
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1
+        this.getLeaveRequestList(this.employeeDetail)
+    }
 }

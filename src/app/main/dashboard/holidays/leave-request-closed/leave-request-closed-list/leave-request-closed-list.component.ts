@@ -5,6 +5,7 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveRequestClosedCreateComponent } from '../leave-request-closed-create/leave-request-closed-create.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'leave-request-closed-list',
@@ -16,10 +17,17 @@ import { LeaveRequestClosedCreateComponent } from '../leave-request-closed-creat
 export class LeaveRequestClosedListComponent implements OnInit {
     leaveRequestClosedList = [];
     displayedLeaveRequestColumns = [
-        'id','leaveType', 'startDate', 'duration', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
+        'id', 'leaveType', 'startDate', 'duration', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
     @Input() employeeDetail
 
@@ -32,9 +40,11 @@ export class LeaveRequestClosedListComponent implements OnInit {
     }
 
     getLeaveRequestClosedList(employeeDetail?) {
-        this.contactInfoService.getLeaveRequestClosedList({ 'page': -1, staffId: employeeDetail.id }).subscribe(data => {
+        this.contactInfoService.getLeaveRequestClosedList({ ...this.pagination, staffId: employeeDetail.id }).subscribe(data => {
             this.leaveRequestClosedList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveRequestClosedList && this.leaveRequestClosedList.length > 0) {
                 let i = 1;
                 this.leaveRequestClosedList.forEach(val => {
@@ -78,4 +88,8 @@ export class LeaveRequestClosedListComponent implements OnInit {
         });
     }
 
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveRequestClosedList(this.employeeDetail);
+    }
 }

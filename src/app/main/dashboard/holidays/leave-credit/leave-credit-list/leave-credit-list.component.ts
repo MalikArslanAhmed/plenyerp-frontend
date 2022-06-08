@@ -5,6 +5,7 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveCreditCreateComponent } from '../leave-credit-create/leave-credit-create.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'leave-credit-list',
@@ -18,6 +19,13 @@ export class LeaveCreditListComponent implements OnInit {
     displayedLeaveCreditColumns = ['id', 'pStaff', 'staff', 'leaveType', 'dueDays', 'leaveYear', 'pVDate', 'pTDate', 'actions'];
     dialogRef: any;
     dataFetching = false
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private contactInfoService: ContactInfoService,
         private _matDialog: MatDialog) {
     }
@@ -28,9 +36,11 @@ export class LeaveCreditListComponent implements OnInit {
 
     getLeaveCreditList() {
         this.dataFetching = true
-        this.contactInfoService.getLeaveCreditList({ 'page': -1 }).subscribe(data => {
+        this.contactInfoService.getLeaveCreditList(this.pagination).subscribe(data => {
             this.leaveCreditList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveCreditList && this.leaveCreditList.length > 0) {
                 let i = 1;
                 this.leaveCreditList.forEach(val => {
@@ -74,5 +84,8 @@ export class LeaveCreditListComponent implements OnInit {
             this.getLeaveCreditList();
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveCreditList();
+    }
 }

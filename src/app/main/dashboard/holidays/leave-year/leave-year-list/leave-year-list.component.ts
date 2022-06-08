@@ -5,6 +5,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveYearCreateComponent } from '../leave-year-create/leave-year-create.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'leave-year-list',
@@ -18,6 +19,13 @@ export class LeaveYearListComponent implements OnInit {
     displayedLeaveYearColumns = ['id','leaveYear','status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private contactInfoService: ContactInfoService,
@@ -29,9 +37,11 @@ export class LeaveYearListComponent implements OnInit {
     }
 
     getLeaveYearList() {
-        this.contactInfoService.getLeaveYearList({'page': -1}).subscribe(data => {
+        this.contactInfoService.getLeaveYearList(this.pagination).subscribe(data => {
             this.leaveYearList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveYearList && this.leaveYearList.length > 0) {
                 let i = 1;
                 this.leaveYearList.forEach(val => {
@@ -74,5 +84,8 @@ export class LeaveYearListComponent implements OnInit {
             this.getLeaveYearList();
         });
     }
-
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveYearList();
+    }
 }

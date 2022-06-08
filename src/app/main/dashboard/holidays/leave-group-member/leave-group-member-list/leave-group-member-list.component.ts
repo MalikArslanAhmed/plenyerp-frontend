@@ -5,6 +5,7 @@ import { LeaveGroupMemberCreateComponent } from '../leave-group-member-create/le
 import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'leave-group-member-list',
@@ -20,6 +21,13 @@ export class LeaveGroupMemberListComponent implements OnInit {
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
     @Input() leaveGroupId
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
         constructor(private contactInfoService: ContactInfoService,
             private _matDialog: MatDialog) {
     }
@@ -29,9 +37,11 @@ export class LeaveGroupMemberListComponent implements OnInit {
     }
 
     getLeaveGroupMemberList() {
-        this.contactInfoService.getLeaveGroupMemberList({'page': -1,leaveGroupId:this.leaveGroupId}).subscribe(data => {
+        this.contactInfoService.getLeaveGroupMemberList({...this.pagination,leaveGroupId:this.leaveGroupId}).subscribe(data => {
             this.leaveGroupMemberList =data.items;
-            
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveGroupMemberList && this.leaveGroupMemberList.length > 0) {
                 let i = 1;
                 this.leaveGroupMemberList.forEach(val => {
@@ -73,6 +83,12 @@ export class LeaveGroupMemberListComponent implements OnInit {
             }
             this.getLeaveGroupMemberList();
         });
+    }
+
+    
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveGroupMemberList();
     }
 
 }

@@ -6,6 +6,7 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'leave-group-list',
@@ -19,6 +20,13 @@ export class LeaveGroupListComponent implements OnInit {
     displayedLeaveGroupColumns = ['id', 'title', 'status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
 
     constructor(private contactInfoService: ContactInfoService,
@@ -40,9 +48,11 @@ export class LeaveGroupListComponent implements OnInit {
     }
     
     getLeaveGroupList() {
-        this.contactInfoService.getLeavesGroupList({ 'page': -1 }).subscribe(data => {
+        this.contactInfoService.getLeavesGroupList(this.pagination).subscribe(data => {
             this.leaveGroupList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveGroupList && this.leaveGroupList.length > 0) {
                 let i = 1;
                 this.leaveGroupList.forEach(val => {
@@ -87,4 +97,8 @@ export class LeaveGroupListComponent implements OnInit {
         });
     }
 
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveGroupList();
+    }
 }

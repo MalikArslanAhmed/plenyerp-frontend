@@ -5,6 +5,7 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { HrLeaveRequestClosedApprovedCreateComponent } from '../hr-leave-request-closed-approved-create/hr-leave-request-closed-approved-create.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'hr-leave-request-closed-approved-list',
@@ -20,6 +21,13 @@ export class HrLeaveRequestClosedApprovedListComponent implements OnInit {
     ];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
     @Input() employeeDetail
 
@@ -32,9 +40,11 @@ export class HrLeaveRequestClosedApprovedListComponent implements OnInit {
     }
 
     getLeaveRequestList(employeeDetail?) {
-        this.contactInfoService.getLeaveRequestClosedList({ 'page': -1, approvedHrStaffId: employeeDetail.id, approvedHod: 'approved' }).subscribe(data => {
+        this.contactInfoService.getLeaveRequestClosedList({ ...this.pagination, approvedHrStaffId: employeeDetail.id, approvedHod: 'approved' }).subscribe(data => {
             this.leaveRequestList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveRequestList && this.leaveRequestList.length > 0) {
                 let i = 1;
                 this.leaveRequestList.forEach(val => {
@@ -76,6 +86,11 @@ export class HrLeaveRequestClosedApprovedListComponent implements OnInit {
             }
             this.getLeaveRequestList(this.employeeDetail);
         });
+    }
+
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveRequestList(this.employeeDetail);
     }
 
 }

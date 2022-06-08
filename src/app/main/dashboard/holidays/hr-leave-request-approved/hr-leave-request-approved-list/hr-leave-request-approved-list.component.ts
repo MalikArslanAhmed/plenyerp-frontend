@@ -5,6 +5,7 @@ import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { HrLeaveRequestApprovedCreateComponent } from '../hr-leave-request-approved-create/hr-leave-request-approved-create.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'hr-leave-request-approved-list',
@@ -16,10 +17,17 @@ import { HrLeaveRequestApprovedCreateComponent } from '../hr-leave-request-appro
 export class HrLeaveRequestApprovedListComponent implements OnInit {
     leaveRequestList = [];
     displayedLeaveRequestColumns = [
-        'id', 'staffID','approvalHOD', 'hodApproved','hrApproved', 'pLoginId','reqClosed', 'actions'
+        'id', 'staffID', 'approvalHOD', 'hodApproved', 'hrApproved', 'pLoginId', 'reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
     @Input() employeeDetail
 
@@ -32,9 +40,11 @@ export class HrLeaveRequestApprovedListComponent implements OnInit {
     }
 
     getLeaveRequestList(employeeDetail?) {
-        this.contactInfoService.getLeaveRequestList({ 'page': -1, approvedHrStaffId: employeeDetail.id, approvedHod: 'approved' }).subscribe(data => {
+        this.contactInfoService.getLeaveRequestList({ ...this.pagination, approvedHrStaffId: employeeDetail.id, approvedHod: 'approved' }).subscribe(data => {
             this.leaveRequestList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveRequestList && this.leaveRequestList.length > 0) {
                 let i = 1;
                 this.leaveRequestList.forEach(val => {
@@ -76,6 +86,11 @@ export class HrLeaveRequestApprovedListComponent implements OnInit {
             }
             this.getLeaveRequestList(this.employeeDetail);
         });
+    }
+
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveRequestList(this.employeeDetail);
     }
 
 }

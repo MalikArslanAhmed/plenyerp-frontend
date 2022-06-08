@@ -5,6 +5,7 @@ import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
 import { LeaveGroupEntitlementCreateComponent } from '../leave-group-entitlement-create/leave-group-entitlement-create.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'leave-group-entitlement-list',
@@ -20,7 +21,13 @@ export class LeaveGroupEntitlementListComponent implements OnInit {
     selectIndex = 0;
     @Output() selectedIndexChange: EventEmitter<number>;
     @Input() leaveGroupId
-
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {
     }
@@ -30,9 +37,11 @@ export class LeaveGroupEntitlementListComponent implements OnInit {
     }
 
     getLeaveGroupEntitlementList() {
-        this.contactInfoService.getLeaveGroupEntitlementList({'page': -1,leaveGroupId:this.leaveGroupId}).subscribe(data => {
+        this.contactInfoService.getLeaveGroupEntitlementList({...this.pagination,leaveGroupId:this.leaveGroupId}).subscribe(data => {
             this.leaveGroupEntitlementList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leaveGroupEntitlementList && this.leaveGroupEntitlementList.length > 0) {
                 let i = 1;
                 this.leaveGroupEntitlementList.forEach(val => {
@@ -76,4 +85,8 @@ export class LeaveGroupEntitlementListComponent implements OnInit {
         });
     }
 
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeaveGroupEntitlementList();
+    }
 }
