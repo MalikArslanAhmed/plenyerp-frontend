@@ -465,7 +465,7 @@ const routes: Routes = [
         },
     },
     {
-        path: 'leave-request-closed',
+        path: 'leave-request/:leaveRequestId/leave-request-closed',
         component: LeaveRequestClosedComponent,
         // canActivate: [RouteGuard],
         data: {

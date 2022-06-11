@@ -30,6 +30,11 @@ export class LeaveRequestClosedCreateComponent implements OnInit {
     leaveRequestList = []
     selectedreliefOfficerStaff: any = ''
     selectedhodStaff: any = ''
+    datesCheck = {
+        valueMinDate: null,
+        valueMaxDate: null,
+    }
+    currentYear = null
     constructor(public matDialogRef: MatDialogRef<LeaveRequestClosedCreateComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private fb: FormBuilder,
@@ -67,7 +72,7 @@ export class LeaveRequestClosedCreateComponent implements OnInit {
 
     refresh() {
         this.leaveRequestForm = this.fb.group({
-            leaveRequestId: ['', Validators.required],
+            leaveRequestId: [this._data.leaveRequestData.id, Validators.required],
             daysSpent: ['', Validators.required],
             preparedVDate: ['', Validators.required],
             preparedTDate: [''],
@@ -75,6 +80,11 @@ export class LeaveRequestClosedCreateComponent implements OnInit {
             hodStaffId: ['', Validators.required],
             requestReady: [false, Validators.required],
         });
+        this.currentYear = new Date(this._data.leaveRequestData.approvedHrVDate).getFullYear()
+        this.datesCheck = {
+            valueMinDate: new Date(this._data.leaveRequestData.approvedHrVDate),
+            valueMaxDate: new Date(`12-31-${this.currentYear}`)
+        }
     }
 
 

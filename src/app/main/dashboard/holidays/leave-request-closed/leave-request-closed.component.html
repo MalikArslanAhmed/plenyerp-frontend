@@ -1,4 +1,4 @@
-<div id="skills" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+<div id="skills" class="page-layout simple left-sidebar inner-sidebar inner-scroll"  *ngIf="!isFetching && leaveRequestData">
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
         fxLayoutAlign.gt-xs="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
@@ -11,7 +11,7 @@
                 </span>
             </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center">
+        <div fxLayout="row" fxLayoutAlign="end center" *ngIf="showAdd">
             <div appPermissionBind [permission]="permissionAdd">
                 <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addLeaveRequestClosed()">
@@ -23,7 +23,7 @@
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
-                <leave-request-closed-list *ngIf="!isFetching" [employeeDetail]="employeeDetail">
+                <leave-request-closed-list (showAdd)="setValue($event)" [employeeDetail]="employeeDetail" [leaveRequestData]="leaveRequestData">
                 </leave-request-closed-list>
             </div>
         </div>

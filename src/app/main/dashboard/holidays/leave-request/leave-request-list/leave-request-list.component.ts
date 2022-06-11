@@ -7,6 +7,7 @@ import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/d
 import { LeaveRequestCreateComponent } from '../leave-request-create/leave-request-create.component';
 import { PageEvent } from '@angular/material/paginator';
 import { PermissionConstant } from 'app/shared/constants/permission-constant';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'leave-request-list',
@@ -20,7 +21,7 @@ export class LeaveRequestListComponent implements OnInit {
     @Input() employeeDetail
     leaveRequestList = [];
     displayedLeaveRequestColumns = [
-        'id', 'leaveType', 'startDate', 'duration', 'preparedVDate', 'readyRequest', 'hodApprovedStaff','releifOfficer', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
+        'id', 'leaveType', 'startDate', 'duration', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'releifOfficer', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;
@@ -32,10 +33,15 @@ export class LeaveRequestListComponent implements OnInit {
     };
     pageEvent: PageEvent;
 
+    permissionLeaveRequestClosed = [PermissionConstant.LEAVE_REQUESTS_CLOSED_LIST];
     permissionEdit = [PermissionConstant.LEAVE_REQUESTS_EDIT];
     permissionDelete = [PermissionConstant.LEAVE_REQUESTS_DELETE];
-    constructor(private contactInfoService: ContactInfoService,
-        private _matDialog: MatDialog) {
+    constructor(
+        private contactInfoService: ContactInfoService,
+        private _matDialog: MatDialog,
+        private router: Router
+
+    ) {
     }
 
     ngOnInit(): void {
@@ -57,7 +63,9 @@ export class LeaveRequestListComponent implements OnInit {
             }
         });
     }
-
+    leaveRequestClosed(leaveRequest) {
+        this.router.navigateByUrl('dashboard/leave-request/' + leaveRequest.id + '/leave-request-closed');
+    }
     deleteItemModal(items) {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',

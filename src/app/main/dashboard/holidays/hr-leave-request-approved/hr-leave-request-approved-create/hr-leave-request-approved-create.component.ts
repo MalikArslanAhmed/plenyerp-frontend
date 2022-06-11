@@ -30,6 +30,11 @@ export class HrLeaveRequestApprovedCreateComponent implements OnInit {
     leaveCreditList = []
     selectedreliefOfficerStaff: any = ''
     selectedhrStaff: any = ''
+    currentYear = null
+    datesCheck = {
+        valueMinDate: null,
+        valueMaxDate: null
+    }
     constructor(public matDialogRef: MatDialogRef<HrLeaveRequestApprovedCreateComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private fb: FormBuilder,
@@ -42,6 +47,11 @@ export class HrLeaveRequestApprovedCreateComponent implements OnInit {
             this.dialogTitle = 'Edit Leave Request';
             if (_data.leaveRequest) {
                 this.updateData = _data;
+                this.currentYear = new Date(this.updateData.leaveRequest.preparedVDate).getFullYear()
+                this.datesCheck = {
+                    valueMinDate: new Date(this.updateData.leaveRequest.approvedHodVDate),
+                    valueMaxDate: new Date(`12-31-${this.currentYear}`)
+                }
                 if (_data.leaveRequest.approvedHrStaff) {
                     this.selectedhrStaff = [{
                         'name': _data.leaveRequest.approvedHrStaff.firstName + ' ' + _data.leaveRequest.approvedHrStaff.lastName,
@@ -67,6 +77,7 @@ export class HrLeaveRequestApprovedCreateComponent implements OnInit {
             startDate: ['', Validators.required],
             reliefOfficerStaffId: [this._data.employeeDetail.id],
             duration: ['', Validators.required],
+            daysSpent: [''],
             preparedVDate: ['', Validators.required],
             preparedTDate: [''],
             preparedLoginId: [this.gService.self.value.username, Validators.required],
@@ -123,6 +134,7 @@ export class HrLeaveRequestApprovedCreateComponent implements OnInit {
                 startDate: this.updateData.leaveRequest.startDate,
                 reliefOfficerStaffId: this.updateData.leaveRequest.reliefOfficerStaffId,
                 duration: this.updateData.leaveRequest.duration,
+                daysSpent: this.updateData.leaveRequest.daysSpent,
                 preparedVDate: this.updateData.leaveRequest.preparedVDate,
                 preparedTDate: this.updateData.leaveRequest.preparedTDate,
                 preparedLoginId: this.updateData.leaveRequest.preparedLoginId,
@@ -175,6 +187,8 @@ export class HrLeaveRequestApprovedCreateComponent implements OnInit {
             data.approvedHrTDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             if (data.approvedHr == 'rejected') {
                 data.requestClosed = true
+                data.daysSpent = 0
+
             }
             this.contactInfoService.updateLeaveRequest(this.updateData.leaveRequest.id, data).subscribe(data => {
                 this.updateData = undefined;

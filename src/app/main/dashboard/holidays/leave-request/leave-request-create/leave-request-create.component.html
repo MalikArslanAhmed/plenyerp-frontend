@@ -32,34 +32,44 @@
                     <mat-error>Leave Credit is required!</mat-error>
                 </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start">
+            <div *ngIf="currentYear" fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Start Date</mat-label>
-                    <input matInput [matDatepicker]="pickerSDate" formControlName="startDate" placeholder="Start Date">
+                    <input matInput [matDatepicker]="pickerSDate" [min]="dateChecks.startMinDate"
+                        [max]="dateChecks.startMaxDate" formControlName="startDate" placeholder="Start Date">
                     <mat-datepicker-toggle matSuffix [for]="pickerSDate">
                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                     </mat-datepicker-toggle>
                     <mat-datepicker #pickerSDate></mat-datepicker>
+                    <mat-error *ngIf="leaveRequestForm.controls.startDate.errors?.matDatepickerMin ">Date cant be
+                        less then Value date</mat-error>
+                    <mat-error *ngIf="leaveRequestForm.controls.startDate.errors?.matDatepickerMax ">Date cant exceed
+                        (31-12-{{currentYear}})</mat-error>
+
                 </mat-form-field>
             </div>
             <div *ngIf="leaveRequestForm.controls.leaveCreditId.value" fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Duration</mat-label>
-                    <input matInput placeholder="Duration" type="number" min="0" formControlName="duration" name="duration"
-                        required cdk-focus-start>
-                    <mat-error *ngIf="leaveRequestForm.controls.duration.errors?.max">You have only  {{selectedCredit.totalCreditLeft}} Credit's left</mat-error>
+                    <input matInput placeholder="Duration" type="number" min="0" formControlName="duration"
+                        name="duration" required cdk-focus-start>
+                    <mat-error *ngIf="leaveRequestForm.controls.duration.errors?.max">You have only
+                        {{selectedCredit.totalCreditLeft}} Credit's left</mat-error>
 
                 </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start">
+            <div *ngIf="currentYear" fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Value Date</mat-label>
                     <input matInput [matDatepicker]="pickerPVDate" formControlName="preparedVDate"
-                        placeholder="Value Date">
+                        [min]="dateChecks.valueMinDate" [max]="dateChecks.valueMaxDate" placeholder="Value Date">
                     <mat-datepicker-toggle matSuffix [for]="pickerPVDate">
                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                     </mat-datepicker-toggle>
                     <mat-datepicker #pickerPVDate></mat-datepicker>
+                    <mat-error *ngIf="leaveRequestForm.controls.preparedVDate.errors?.matDatepickerMin ">Date cant be
+                        less then  (1-1-{{currentYear}})</mat-error>
+                    <mat-error *ngIf="leaveRequestForm.controls.preparedVDate.errors?.matDatepickerMax ">Date cant be greater then Start date</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start">

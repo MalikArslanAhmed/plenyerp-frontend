@@ -10,7 +10,7 @@
 
     <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
         <form [formGroup]="leaveRequestForm">
-            <div fxLayout="row" fxLayoutAlign="start">
+            <!-- <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Select Leave Request</mat-label>
                     <mat-select formControlName="leaveRequestId" required>
@@ -19,7 +19,7 @@
                     </mat-select>
                     <mat-error>Leave Request is required!</mat-error>
                 </mat-form-field>
-            </div>
+            </div> -->
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Days spent</mat-label>
@@ -30,12 +30,16 @@
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Value Date</mat-label>
-                    <input matInput [matDatepicker]="pickerPVDate" formControlName="preparedVDate"
+                    <input matInput [matDatepicker]="pickerPVDate" formControlName="preparedVDate" [min]="datesCheck.valueMinDate" [max]="datesCheck.valueMaxDate"
                         placeholder="Value Date">
                     <mat-datepicker-toggle matSuffix [for]="pickerPVDate">
                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                     </mat-datepicker-toggle>
                     <mat-datepicker #pickerPVDate></mat-datepicker>
+                    <mat-error *ngIf="leaveRequestForm.controls.preparedVDate.errors?.matDatepickerMin ">Date cant be
+                        less then HR Leave Request Value date</mat-error>
+                    <mat-error *ngIf="leaveRequestForm.controls.preparedVDate.errors?.matDatepickerMax ">Date cant exceed
+                        (31-12-{{currentYear}})</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start">

@@ -32,6 +32,13 @@ export class LeaveRequestCreateComponent implements OnInit {
     selectedhodStaff: any = ''
     leaveRequestList: any = []
     selectedCredit: any = 0
+    currentYear = null
+    dateChecks = {
+        startMinDate: null,
+        startMaxDate: null,
+        valueMinDate: null,
+        valueMaxDate: null,
+    }
     constructor(public matDialogRef: MatDialogRef<LeaveRequestCreateComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private fb: FormBuilder,
@@ -62,8 +69,19 @@ export class LeaveRequestCreateComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
         this.getLeaveCreditList(this._data.employeeDetail.id)
-    }
+        this.getLeaveYear()
 
+    }
+    getLeaveYear(): void {
+        this.contactInfoService.getInformationList({ 'page': -1 }).subscribe(data => {
+            this.currentYear = data.items[0].leaveYear.year;
+            this.dateChecks.startMaxDate = new Date(`12-31-${this.currentYear}`)
+            this.dateChecks.startMinDate = new Date(`1-1-${this.currentYear}`)
+            this.dateChecks.valueMaxDate = new Date(`12-31-${this.currentYear}`)
+            this.dateChecks.valueMinDate = new Date(`1-1-${this.currentYear}`)
+            console.log('dates',this.dateChecks);
+        })
+    }
     getLeaveCreditList(id) {
         this.leaveCreditList = []
         this.contactInfoService.getLeaveCreditList({ 'page': -1, staffId: id }).subscribe(data => {
@@ -74,10 +92,10 @@ export class LeaveRequestCreateComponent implements OnInit {
                     let totalCreditLeft = credit.dueDays
                     this.leaveRequestList.forEach((leaveRequest: any) => {
                         if (this.action !== 'EDIT' && leaveRequest.leaveCreditId === credit.id) {
-                            totalCreditLeft = totalCreditLeft - +leaveRequest.duration
+                            totalCreditLeft = totalCreditLeft - +leaveRequest.daysSpent
                         }
                         if (this.action === 'EDIT' && leaveRequest.leaveCreditId === credit.id && leaveRequest.id !== this._data.leaveRequest.id) {
-                            totalCreditLeft = totalCreditLeft - +leaveRequest.duration
+                            totalCreditLeft = totalCreditLeft - +leaveRequest.daysSpent
                         }
                     })
                     if (totalCreditLeft > 0) {
@@ -98,6 +116,7 @@ export class LeaveRequestCreateComponent implements OnInit {
             startDate: ['', Validators.required],
             reliefOfficerStaffId: ['', Validators.required],
             duration: ['', Validators.required],
+            daysSpent: [''],
             preparedVDate: ['', Validators.required],
             preparedTDate: [''],
             preparedLoginId: [this.gService.self.value.username, Validators.required],
@@ -106,12 +125,17 @@ export class LeaveRequestCreateComponent implements OnInit {
         });
         this.leaveRequestForm.get('leaveCreditId').valueChanges.subscribe((resp: any) => {
             let index = this.leaveCreditList.findIndex(item => item.id === this.leaveRequestForm.controls.leaveCreditId.value)
-            console.log('called index',index);
-            
             if (index > -1) {
                 this.selectedCredit = this.leaveCreditList[index]
                 this.leaveRequestForm.controls.duration.setValidators([Validators.required, Validators.max(this.selectedCredit.totalCreditLeft)])
             }
+        })
+        this.leaveRequestForm.get('startDate').valueChanges.subscribe((resp: any) => {
+        this.dateChecks.valueMaxDate = new Date(this.leaveRequestForm.controls.startDate.value)
+        })
+        this.leaveRequestForm.get('preparedVDate').valueChanges.subscribe((resp: any) => {
+            this.dateChecks.startMinDate = new Date(this.leaveRequestForm.controls.preparedVDate.value)
+        
         })
     }
 
@@ -156,6 +180,7 @@ export class LeaveRequestCreateComponent implements OnInit {
                 startDate: this.updateData.leaveRequest.startDate,
                 reliefOfficerStaffId: this.updateData.leaveRequest.reliefOfficerStaffId,
                 duration: this.updateData.leaveRequest.duration,
+                daysSpent: this.updateData.leaveRequest.daysSpent,
                 preparedVDate: this.updateData.leaveRequest.preparedVDate,
                 preparedTDate: this.updateData.leaveRequest.preparedTDate,
                 preparedLoginId: this.updateData.leaveRequest.preparedLoginId,
@@ -175,6 +200,7 @@ export class LeaveRequestCreateComponent implements OnInit {
         data.startDate = moment(data.startDate).format('YYYY-MM-DD HH:mm:ss')
         data.preparedVDate = moment(data.preparedVDate).format('YYYY-MM-DD HH:mm:ss')
         data.preparedTDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+        data.daysSpent = data.duration
         if (this.isSubmitted) {
             this.contactInfoService.addLeaveRequest(data).subscribe(data => {
                 this.leaveRequestForm.reset();
@@ -194,6 +220,7 @@ export class LeaveRequestCreateComponent implements OnInit {
             data.startDate = moment(data.startDate).format('YYYY-MM-DD HH:mm:ss')
             data.preparedVDate = moment(data.preparedVDate).format('YYYY-MM-DD HH:mm:ss')
             data.preparedTDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+            data.daysSpent = data.duration
             this.contactInfoService.updateLeaveRequest(this.updateData.leaveRequest.id, data).subscribe(data => {
                 this.updateData = undefined;
                 this.leaveRequestForm.reset();

@@ -17,10 +17,12 @@ import { PermissionConstant } from 'app/shared/constants/permission-constant';
 })
 export class LeaveRequestClosedListComponent implements OnInit {
     @Output() selectedIndexChange: EventEmitter<number>;
+    @Output() showAdd = new EventEmitter;
     @Input() employeeDetail
+    @Input() leaveRequestData
     leaveRequestClosedList = [];
     displayedLeaveRequestColumns = [
-        'id', 'leaveType', 'startDate', 'duration','daysSpent', 'releifOfficer', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
+        'id', 'leaveType', 'startDate', 'duration', 'daysSpent', 'releifOfficer', 'preparedVDate', 'readyRequest', 'hodApprovedStaff', 'hodApproved', 'hrApproved', 'reqClosed', 'actions'
     ];
     dialogRef: any;
     selectIndex = 0;
@@ -47,6 +49,8 @@ export class LeaveRequestClosedListComponent implements OnInit {
             this.pagination.page = data.page;
             this.pagination.total = data.total;
             this.pagination.pages = data.pages;
+            this.showHideAddButton()
+
             if (this.leaveRequestClosedList && this.leaveRequestClosedList.length > 0) {
                 let i = 1;
                 this.leaveRequestClosedList.forEach(val => {
@@ -56,7 +60,23 @@ export class LeaveRequestClosedListComponent implements OnInit {
             }
         });
     }
-
+    showHideAddButton() {
+        if (this.leaveRequestClosedList.length == 0) {
+            this.showAdd.emit(true)
+        } else if (this.leaveRequestClosedList.length > 0) {
+            let checkToshow = false
+            let count = []
+            this.leaveRequestClosedList.forEach((resp: any) => {
+                if (resp.approvedHod == 'rejected' || resp.approvedHr == 'rejected') {
+                    count.push(count.length + 1)
+                }
+            })
+            if (count.length === this.leaveRequestClosedList.length) {
+                checkToshow = true
+            }
+            this.showAdd.emit(checkToshow)
+        }
+    }
     deleteItemModal(items) {
         this.dialogRef = this._matDialog.open(DeleteListModalComponent, {
             panelClass: 'delete-items-dialog',

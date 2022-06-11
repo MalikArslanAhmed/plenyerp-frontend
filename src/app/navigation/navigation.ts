@@ -346,14 +346,14 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/hr-leave-request-approved',
                         permissions: [PermissionConstant.HR_LEAVE_REQUEST_APPROVED_LIST]
                     },
-                    {
-                        id: 'leave-requests-closed',
-                        title: 'Leave Requests Closed',
-                        roles: [],
-                        type: 'item',
-                        url: 'dashboard/leave-request-closed',
-                        permissions: [PermissionConstant.LEAVE_REQUESTS_CLOSED_LIST]
-                    },
+                    // {
+                    //     id: 'leave-requests-closed',
+                    //     title: 'Leave Requests Closed',
+                    //     roles: [],
+                    //     type: 'item',
+                    //     url: 'dashboard/leave-request-closed',
+                    //     permissions: [PermissionConstant.LEAVE_REQUESTS_CLOSED_LIST]
+                    // },
                     {
                         id: 'hod-leave-request-closed-approved',
                         title: 'HOD Leave Requests Closed Approval',

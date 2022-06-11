@@ -17,12 +17,14 @@
                     {{updateData.leaveRequest.leaveRequest.staff.lastName}} </p>
                 <p><b>Start Date:</b> {{updateData.leaveRequest.leaveRequest.startDate | date: 'shortDate'}} </p>
                 <p><b>Duration:</b> {{updateData.leaveRequest.leaveRequest.duration}}</p>
-                <p><b>Staff Value Date</b> {{updateData.leaveRequest.leaveRequest.preparedVDate | date: 'shortDate'}}</p>
+                <p><b>Staff Value Date</b> {{updateData.leaveRequest.leaveRequest.preparedVDate | date: 'shortDate'}}
+                </p>
                 <p><b>Releif Officer:</b> {{updateData.leaveRequest.leaveRequest.reliefOfficer.firstName}}
                     {{updateData.leaveRequest.leaveRequest.reliefOfficer.lastName}}</p>
                 <p><b>P. Login:</b> {{updateData.leaveRequest.leaveRequest.preparedLoginId}} </p>
                 <p><b>HOD Approved:</b> {{updateData.leaveRequest.leaveRequest.approvedHod | titlecase}} </p>
-                <p><b>HOD Value Date:</b> {{updateData.leaveRequest.leaveRequest.approvedHodVDate | date:'shortDate'}} </p>
+                <p><b>HOD Value Date:</b> {{updateData.leaveRequest.leaveRequest.approvedHodVDate | date:'shortDate'}}
+                </p>
                 <p><b>HOD P.Login:</b> {{updateData.leaveRequest.leaveRequest.approvedHodLoginId}} </p>
                 <h1>Leave Request Closed Details</h1>
                 <p><b>Spent Days:</b> {{updateData.leaveRequest.daysSpent}}</p>
@@ -36,11 +38,16 @@
                 <mat-form-field appearance="outline" fxFlex="100">
                     <mat-label>Approved Value Date</mat-label>
                     <input matInput [matDatepicker]="pickerPVDate" formControlName="approvedHrVDate"
-                        placeholder="Value Date">
+                        [min]="datesCheck.valueMinDate" [max]="datesCheck.valueMaxDate" placeholder="Value Date">
                     <mat-datepicker-toggle matSuffix [for]="pickerPVDate">
                         <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
                     </mat-datepicker-toggle>
                     <mat-datepicker #pickerPVDate></mat-datepicker>
+                    <mat-error *ngIf="leaveRequestForm.controls.approvedHrVDate.errors?.matDatepickerMin ">Date cant be
+                        less then HOD Value date</mat-error>
+                    <mat-error *ngIf="leaveRequestForm.controls.approvedHrVDate.errors?.matDatepickerMax ">Date cant
+                        exceed
+                        (31-12-{{currentYear}})</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start">
