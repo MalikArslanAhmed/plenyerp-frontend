@@ -283,7 +283,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'holiday',
-                title: 'Holidays',
+                title: 'Leave',
                 roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',

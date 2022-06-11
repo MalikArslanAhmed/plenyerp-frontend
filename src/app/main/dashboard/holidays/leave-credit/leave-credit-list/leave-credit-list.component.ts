@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '../../../../../../@fuse/animations';
 import { ContactInfoService } from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
@@ -16,6 +16,7 @@ import { PermissionConstant } from 'app/shared/constants/permission-constant';
     animations: fuseAnimations
 })
 export class LeaveCreditListComponent implements OnInit {
+    @Output() leaveCreditListsParent = new EventEmitter
     leaveCreditList = [];
     displayedLeaveCreditColumns = ['id', 'pStaff', 'staff', 'leaveType', 'dueDays', 'leaveYear', 'pVDate', 'pTDate', 'actions'];
     dialogRef: any;
@@ -29,18 +30,21 @@ export class LeaveCreditListComponent implements OnInit {
     pageEvent: PageEvent;
     permissionEdit = [PermissionConstant.LEAVE_CREDIT_EDIT];
     permissionDelete = [PermissionConstant.LEAVE_CREDIT_DELETE];
-    constructor(private contactInfoService: ContactInfoService,
-        private _matDialog: MatDialog) {
+    constructor(
+        private contactInfoService: ContactInfoService,
+        private _matDialog: MatDialog,
+    ) {
     }
 
     ngOnInit(): void {
         this.getLeaveCreditList();
     }
 
-    getLeaveCreditList() {
+    getLeaveCreditList(params?) {
         this.dataFetching = true
-        this.contactInfoService.getLeaveCreditList(this.pagination).subscribe(data => {
+        this.contactInfoService.getLeaveCreditList({ ...this.pagination, ...params }).subscribe(data => {
             this.leaveCreditList = data.items;
+            this.leaveCreditListsParent.emit(data.items);
             this.pagination.page = data.page;
             this.pagination.total = data.total;
             this.pagination.pages = data.pages;

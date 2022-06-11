@@ -995,7 +995,9 @@ export class AppUrl {
     static DELETE_LEAVE_CREDIT(id?): string {
         return AppUrl.API_URL + 'leave-credits/' + id;
     }
-
+    static DELETE_ALL_LEAVE_CREDIT(id?): string {
+        return AppUrl.API_URL + 'delete-all-leave-credits';
+    }
     static GET_LEAVE_CREDIT_VIEW_LIST(): string {
         return AppUrl.API_URL + `leave-credits-view`;
     }

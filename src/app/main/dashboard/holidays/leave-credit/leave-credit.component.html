@@ -16,6 +16,11 @@
             <p class="yellow-txt">Please dont leave this screen till bulk upload completes to avoid data loss....</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
+            <div appPermissionBind [permission]="permissionDelete">
+                <button class="delete-all" *ngIf="leaveCreditList.length > 0" (click)="deleteAllLeaveCredits()">
+                    Delete All
+                </button>
+            </div>
             <div appPermissionBind [permission]="permissionAdd">
                 <button class="bulk-upload" *ngIf="dataLoaded.length === 2 && !gs.bulkUpload" (click)="getData()">
                     Bulk Upload
@@ -31,9 +36,28 @@
     </div>
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content my-form">
+                <form [formGroup]="leaveCreditForm">
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>Staff Id</mat-label>
+                        <input matInput placeholder="Staff Id" type="text" formControlName="staffId">
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>Staff Name</mat-label>
+                        <input matInput placeholder="Staff Name" type="text" formControlName="staffName">
+                    </mat-form-field> -->
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="search()">
+                            Search
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
             <div class="content">
-                <leave-credit-list></leave-credit-list>
+                <leave-credit-list (leaveCreditListsParent)="updateList($event)"></leave-credit-list>
             </div>
         </div>
     </div>
+
 </div>

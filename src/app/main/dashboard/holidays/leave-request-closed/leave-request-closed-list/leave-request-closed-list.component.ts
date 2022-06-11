@@ -44,7 +44,7 @@ export class LeaveRequestClosedListComponent implements OnInit {
     }
 
     getLeaveRequestClosedList(employeeDetail?) {
-        this.contactInfoService.getLeaveRequestClosedList({ ...this.pagination, preparedLoginId: employeeDetail.personnelFileNumber }).subscribe(data => {
+        this.contactInfoService.getLeaveRequestClosedList({ ...this.pagination, preparedLoginId: employeeDetail.personnelFileNumber,leaveRequestId:this.leaveRequestData.id }).subscribe(data => {
             this.leaveRequestClosedList = data.items;
             this.pagination.page = data.page;
             this.pagination.total = data.total;

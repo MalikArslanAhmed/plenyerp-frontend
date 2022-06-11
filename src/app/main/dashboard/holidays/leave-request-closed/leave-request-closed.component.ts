@@ -27,7 +27,7 @@ export class LeaveRequestClosedComponent implements OnInit {
     leaveRequestId = null
     leaveRequestData = {}
     showAdd = false
-
+    dataFetching = false
     constructor(
         private contactInfoService: ContactInfoService,
         private _fuseSidebarService: FuseSidebarService,
@@ -41,8 +41,10 @@ export class LeaveRequestClosedComponent implements OnInit {
     ngOnInit(): void {
         this.route.params.subscribe(d => {
             this.leaveRequestId = d.leaveRequestId;
+            this.dataFetching = true
             this.contactInfoService.getLeaveRequestList({ 'page': -1, id: this.leaveRequestId }).subscribe(data => {
                 this.leaveRequestData = data.items[0];
+                this.dataFetching = false
             });
         })
         this.getEmployeeDetails()
@@ -51,7 +53,7 @@ export class LeaveRequestClosedComponent implements OnInit {
     setValue(value) {
         this.showAdd = value
     }
-    
+
     getEmployeeDetails() {
         this.employeesService.getEmployees({ page: -1, personnelFileNumber: this.gService.self.value.username }).subscribe(data => {
             this.employeeDetail = data.items[0]

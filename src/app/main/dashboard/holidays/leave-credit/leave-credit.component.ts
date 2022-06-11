@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FuseSidebarService } from '../../../../../@fuse/components/sidebar/sidebar.service';
 import { MatDialog } from '@angular/material/dialog';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { fuseAnimations } from '../../../../../@fuse/animations';
 import { LeaveCreditListComponent } from './leave-credit-list/leave-credit-list.component';
 import { LeaveCreditCreateComponent } from './leave-credit-create/leave-credit-create.component';
@@ -23,33 +23,48 @@ export class LeaveCreditComponent implements OnInit {
     moment = moment
     dialogRef: any;
     @ViewChild(LeaveCreditListComponent) getLeaveCreditList: LeaveCreditListComponent;
-    leaveGroupMembersList = []
-    leaveGroupEntitlementList = []
-    leavetypeList = []
-    employeeJobProfilesList = []
-    leaveEntitlementSalaryScaleList = []
-    leaveEntitlementgradeLevelList = []
-    gradeLevelList = []
-    salaryScalesList = []
     currentYear: any = {}
     employeesList = []
     activeYearsList = []
     leaveCreditViewList = []
     dataLoaded = []
     permissionAdd = [PermissionConstant.LEAVE_CREDIT_ADD]
-
+    permissionDelete = [PermissionConstant.LEAVE_CREDIT_DELETE];
+    leaveCreditList = []
+    leaveCreditForm: FormGroup;
     constructor(
         private _matDialog: MatDialog,
         private contactInfoService: ContactInfoService,
-        public gs: GlobalService
+        public gs: GlobalService,
+        private fb: FormBuilder,
+
     ) {
     }
 
     ngOnInit(): void {
+        this.refresh();
         this.getCurrentYear()
         this.getLeaveCreditViewList()
     }
+    refresh() {
+        this.leaveCreditForm = this.fb.group({
+            staffId: [''],
+            // staffName: [''],
+        });
+    }
+    search(){
+        let data = this.leaveCreditForm.value
+        this.getLeaveCreditList.getLeaveCreditList({staffId:data.staffId});
 
+    }
+    updateList(items) {
+        this.leaveCreditList = items
+    }
+    deleteAllLeaveCredits() {
+        this.contactInfoService.deleteAllLeaveCredit().subscribe(data => {
+            this.getLeaveCreditList.getLeaveCreditList();
+        });
+    }
     getCurrentYear() {
         this.contactInfoService.getInformationList({ 'page': -1 }).subscribe(data => {
             this.currentYear = data.items[0];

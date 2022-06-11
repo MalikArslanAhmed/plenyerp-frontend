@@ -86,6 +86,14 @@ export class HodLeaveRequestClosedApprovedCreateComponent implements OnInit {
             approvedHodLoginId: [this.gService.self.value.username, Validators.required],
             approvedHrStaffId: [''],
         });
+        this.leaveRequestForm.get('approvedHod').valueChanges.subscribe((resp: any) => {
+            if (resp !== 'pending') {
+                this.leaveRequestForm.controls.approvedHrStaffId.setValidators([Validators.required])
+            } else {
+                this.leaveRequestForm.controls.approvedHrStaffId.clearValidators()
+            }
+            this.leaveRequestForm.controls.approvedHrStaffId.updateValueAndValidity()
+        }) 
     }
 
 

@@ -9,6 +9,31 @@
     cursor       : pointer;
 }
 
+.my-form {
+    padding: 10px 10px;
+    margin : 0 0 10px 0;
+
+    mat-form-field {
+        margin: 0 10px;
+    }
+}
+
+.delete-all {
+    color        : red;
+    margin-right : 13px;
+    border       : none;
+    padding      : 12px;
+    border-radius: 5px;
+    cursor       : pointer;
+}
+
+.submit-report {
+    background-color: #039be5 !important;
+    color           : #fff !important;
+    height          : 55px;
+    margin-top      : 6px;
+}
+
 .bulk-upload:hover {
     //     color        : #039be5;
     // background-color: ;
@@ -16,13 +41,15 @@
 
 .warning-txt {
     background-color: green;
-    border-radius: 13px;
-    padding: 5px 12px;
+    border-radius   : 13px;
+    padding         : 5px 12px;
+
     p {
         text-align: center;
     }
+
     .yellow-txt {
-        color           : yellow;
+        color: yellow;
     }
 }
 
