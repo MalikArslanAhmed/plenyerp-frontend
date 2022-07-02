@@ -381,6 +381,25 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
+            id: 'leave-reports',
+            title: 'Leave Reports',
+            roles: [AppConstants.ROLE_ID_HR],
+            // translate: 'NAV.DASHBOARDS',
+            type: 'collapsable',
+            icon: 'calendar_today',
+            permissions: [PermissionConstant.LEAVE_BALANCE_LIST],
+            children: [
+                {
+                    id: 'leave-balance',
+                    title: 'Leave Balance',
+                    roles: [],
+                    type: 'item',
+                    url: 'dashboard/leave-report/leave-balance',
+                    permissions: [PermissionConstant.LEAVE_BALANCE_LIST]
+                },
+            ]
+        },
+            {
                 id: 'information',
                 title: 'Hr Information',
                 roles: [AppConstants.ROLE_ID_HR],
