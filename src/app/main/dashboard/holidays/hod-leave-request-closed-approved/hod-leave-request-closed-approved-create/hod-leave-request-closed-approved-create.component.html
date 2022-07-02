@@ -26,6 +26,7 @@
                 <p><b>Spent Days:</b> {{updateData.leaveRequest.daysSpent}}</p>
                 <p><b>Staff Value Date</b> {{updateData.leaveRequest.preparedVDate | date: 'shortDate'}}</p>
                 <p><b>Staff P. Login:</b> {{updateData.leaveRequest.preparedLoginId}} </p>
+                <p><b>Staff Remarks:</b> {{updateData.leaveRequest.userRemarks}} </p>
             </div>
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
@@ -68,6 +69,13 @@
             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
                 <mat-slide-toggle formControlName="requestReady"></mat-slide-toggle>
                 <mat-label>Request Ready</mat-label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Remarks</mat-label>
+                    <textarea matInput name="" id="" cols="30" rows="10" formControlName="hodRemarks">
+                        </textarea>
+                </mat-form-field> 
             </div>
         </form>
     </div>

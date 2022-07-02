@@ -79,7 +79,6 @@ export class LeaveRequestCreateComponent implements OnInit {
             this.dateChecks.startMinDate = new Date(`1-1-${this.currentYear}`)
             this.dateChecks.valueMaxDate = new Date(`12-31-${this.currentYear}`)
             this.dateChecks.valueMinDate = new Date(`1-1-${this.currentYear}`)
-            console.log('dates',this.dateChecks);
         })
     }
     getLeaveCreditList(id) {
@@ -122,6 +121,7 @@ export class LeaveRequestCreateComponent implements OnInit {
             preparedLoginId: [this.gService.self.value.username, Validators.required],
             hodStaffId: ['', Validators.required],
             requestReady: [false, Validators.required],
+            userRemarks: [''],
         });
         this.leaveRequestForm.get('leaveCreditId').valueChanges.subscribe((resp: any) => {
             let index = this.leaveCreditList.findIndex(item => item.id === this.leaveRequestForm.controls.leaveCreditId.value)
@@ -131,11 +131,11 @@ export class LeaveRequestCreateComponent implements OnInit {
             }
         })
         this.leaveRequestForm.get('startDate').valueChanges.subscribe((resp: any) => {
-        this.dateChecks.valueMaxDate = new Date(this.leaveRequestForm.controls.startDate.value)
+            this.dateChecks.valueMaxDate = new Date(this.leaveRequestForm.controls.startDate.value)
         })
         this.leaveRequestForm.get('preparedVDate').valueChanges.subscribe((resp: any) => {
             this.dateChecks.startMinDate = new Date(this.leaveRequestForm.controls.preparedVDate.value)
-        
+
         })
     }
 
@@ -186,6 +186,7 @@ export class LeaveRequestCreateComponent implements OnInit {
                 preparedLoginId: this.updateData.leaveRequest.preparedLoginId,
                 hodStaffId: this.updateData.leaveRequest.hodStaffId,
                 requestReady: this.updateData.leaveRequest.requestReady,
+                userRemarks: this.updateData.leaveRequest.userRemarks,
             });
         }
     }

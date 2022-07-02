@@ -79,6 +79,7 @@ export class LeaveRequestClosedCreateComponent implements OnInit {
             preparedLoginId: [this.gService.self.value.username, Validators.required],
             hodStaffId: ['', Validators.required],
             requestReady: [false, Validators.required],
+            userRemarks: [''],
         });
         this.currentYear = new Date(this._data.leaveRequestData.approvedHrVDate).getFullYear()
         this.datesCheck = {
@@ -130,6 +131,8 @@ export class LeaveRequestClosedCreateComponent implements OnInit {
                 preparedLoginId: this.updateData.leaveRequest.preparedLoginId,
                 hodStaffId: this.updateData.leaveRequest.hodStaffId,
                 requestReady: this.updateData.leaveRequest.requestReady,
+                userRemarks: this.updateData.leaveRequest.userRemarks,
+
             });
         }
     }

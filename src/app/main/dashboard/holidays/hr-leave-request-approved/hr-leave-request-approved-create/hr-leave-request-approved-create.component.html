@@ -20,9 +20,12 @@
                 <p><b>Releif Officer:</b> {{updateData.leaveRequest.reliefOfficer.firstName}}
                     {{updateData.leaveRequest.reliefOfficer.lastName}}</p>
                 <p><b>P. Login:</b> {{updateData.leaveRequest.preparedLoginId}} </p>
+                <p><b>Staff remarks:</b> {{updateData.leaveRequest.userRemarks}} </p>
                 <p><b>HOD Approved:</b> {{updateData.leaveRequest.approvedHod | titlecase}} </p>
                 <p><b>HOD Value Date:</b> {{updateData.leaveRequest.approvedHodVDate | date:'shortDate'}} </p>
                 <p><b>HOD P.Login:</b> {{updateData.leaveRequest.approvedHodLoginId}} </p>
+                <p><b>HOD remarks:</b> {{updateData.leaveRequest.hodRemarks}} </p>
+
             </div>
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" fxFlex="100">
@@ -39,7 +42,7 @@
                         exceed
                         (31-12-{{currentYear}})</mat-error>
                 </mat-form-field>
-            </div>
+            </div> 
             <div fxLayout="row" fxLayoutAlign="start">
                 <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px" fxFlex>
                     <mat-label>HOD Approval Status</mat-label>
@@ -58,6 +61,13 @@
                         <mat-option value="approved">Approved</mat-option>
                         <mat-option value="rejected">Rejected</mat-option>
                     </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Remarks</mat-label>
+                    <textarea matInput name="" id="" cols="30" rows="10" formControlName="hrRemarks">
+                        </textarea>
                 </mat-form-field>
             </div>
         </form>

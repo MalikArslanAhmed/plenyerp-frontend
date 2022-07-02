@@ -96,7 +96,7 @@ export class HrLeaveRequestApprovedCreateComponent implements OnInit {
             approvedHrVDate: ['', Validators.required],
             approvedHrTDate: [''],
             approvedHrLoginId: [this.gService.self.value.username, Validators.required],
-            hrRemarks: [''],
+            hrRemarks: [''], 
         });
     }
 

@@ -47,7 +47,7 @@
                     (click)="selectAdminEmployee('Select HOD Staff')" fxFlex>
                     <mat-label>Select Staff</mat-label>
                     <mat-select formControlName="hodStaffId">
-                        <mat-option value="">Choose HOD</mat-option>
+                        <mat-option value="">Choose HOD</mat-option> 
                         <mat-option *ngFor="let employee of selectedhodStaff" [value]="employee.id">
                             {{employee?.name}}
                         </mat-option>
@@ -57,6 +57,13 @@
             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
                 <mat-slide-toggle formControlName="requestReady"></mat-slide-toggle>
                 <mat-label>Request Ready</mat-label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Remarks</mat-label>
+                    <textarea matInput name="" id="" cols="30" rows="10" formControlName="userRemarks">
+                        </textarea>
+                </mat-form-field>
             </div>
         </form>
     </div>

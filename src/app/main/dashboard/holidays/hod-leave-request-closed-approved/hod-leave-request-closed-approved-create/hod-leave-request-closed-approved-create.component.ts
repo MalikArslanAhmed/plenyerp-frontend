@@ -85,6 +85,8 @@ export class HodLeaveRequestClosedApprovedCreateComponent implements OnInit {
             approvedHodTDate: [''],
             approvedHodLoginId: [this.gService.self.value.username, Validators.required],
             approvedHrStaffId: [''],
+            hodRemarks: [''],
+
         });
         this.leaveRequestForm.get('approvedHod').valueChanges.subscribe((resp: any) => {
             if (resp !== 'pending') {
@@ -138,6 +140,7 @@ export class HodLeaveRequestClosedApprovedCreateComponent implements OnInit {
                 approvedHodTDate: this.updateData.leaveRequest.approvedHodTDate,
                 approvedHodLoginId: this.gService.self.value.username,
                 approvedHrStaffId: this.updateData.leaveRequest.approvedHrStaffId,
+                hodRemarks: this.updateData.leaveRequest.hodRemarks,
             });
         }
     }
