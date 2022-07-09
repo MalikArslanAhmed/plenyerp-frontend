@@ -1,7 +1,7 @@
-import {FuseNavigation} from '@fuse/types';
-import {RouteGuard} from 'app/shared/guards/route.guard';
-import {AppConstants} from '../shared/constants/app-constants';
-import {PermissionConstant} from '../shared/constants/permission-constant';
+import { FuseNavigation } from '@fuse/types';
+import { RouteGuard } from 'app/shared/guards/route.guard';
+import { AppConstants } from '../shared/constants/app-constants';
+import { PermissionConstant } from '../shared/constants/permission-constant';
 
 export const navigation: FuseNavigation[] = [
     {
@@ -381,24 +381,40 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
-            id: 'leave-reports',
-            title: 'Leave Reports',
-            roles: [AppConstants.ROLE_ID_HR],
-            // translate: 'NAV.DASHBOARDS',
-            type: 'collapsable',
-            icon: 'calendar_today',
-            permissions: [PermissionConstant.LEAVE_BALANCE_LIST],
-            children: [
-                {
-                    id: 'leave-balance',
-                    title: 'Leave Balance',
-                    roles: [],
-                    type: 'item',
-                    url: 'dashboard/leave-report/leave-balance',
-                    permissions: [PermissionConstant.LEAVE_BALANCE_LIST]
-                },
-            ]
-        },
+                id: 'leave-reports',
+                title: 'Leave Reports',
+                roles: [AppConstants.ROLE_ID_HR],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'calendar_today',
+                permissions: [PermissionConstant.LEAVE_BALANCE_LIST, PermissionConstant.LEAVE_SCHEDULE_LIST,PermissionConstant.LEAVE_REQUEST_REPORT_LIST],
+                children: [
+                    {
+                        id: 'leave-balance',
+                        title: 'Leave Balance',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-report/leave-balance',
+                        permissions: [PermissionConstant.LEAVE_BALANCE_LIST]
+                    },
+                    {
+                        id: 'leave-schedule',
+                        title: 'Leave Schedule',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-report/leave-schedule',
+                        permissions: [PermissionConstant.LEAVE_SCHEDULE_LIST]
+                    },
+                    {
+                        id: 'leave-request',
+                        title: 'Leave Request',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-report/leave-request',
+                        permissions: [PermissionConstant.LEAVE_REQUEST_REPORT_LIST]
+                    },
+                ]
+            },
             {
                 id: 'information',
                 title: 'Hr Information',

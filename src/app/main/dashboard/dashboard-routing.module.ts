@@ -103,6 +103,8 @@ import { LeaveRequestClosedComponent } from './holidays/leave-request-closed/lea
 import { HodLeaveRequestClosedApprovedComponent } from './holidays/hod-leave-request-closed-approved/hod-leave-request-closed-approved.component';
 import { HrLeaveRequestClosedApprovedComponent } from './holidays/hr-leave-request-closed-approved/hr-leave-request-closed-approved.component';
 import { LeaveBalanceComponent } from './holidays/reports/leave-balance/leave-balance.component';
+import { LeaveScheduleComponent } from './holidays/reports/leave-schedule/leave-schedule.component';
+import { LeaveRequestReportComponent } from './holidays/reports/leave-request-report/leave-request-report.component';
 
 const routes: Routes = [
     {
@@ -463,6 +465,24 @@ const routes: Routes = [
         data: {
             title: 'Leave Balance',
             permissions: [PermissionConstant.LEAVE_BALANCE_LIST]
+        },
+    },
+    {
+        path: 'leave-report/leave-schedule',
+        component: LeaveScheduleComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Schedule',
+            permissions: [PermissionConstant.LEAVE_SCHEDULE_LIST]
+        },
+    },
+    {
+        path: 'leave-report/leave-request',
+        component: LeaveRequestReportComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Request',
+            permissions: [PermissionConstant.LEAVE_REQUEST_REPORT_LIST]
         },
     },
     {

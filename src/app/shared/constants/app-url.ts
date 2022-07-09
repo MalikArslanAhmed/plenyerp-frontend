@@ -864,7 +864,18 @@ export class AppUrl {
     static DELETE_LEAVE_GROUP_MEMBER(id?): string {
         return AppUrl.API_URL + 'leave-group-members/' + id;
     }
-    //
+    //Leave reports URLS
+    static GET_LEAVE_BALANCE_REPORT_LIST(): string {
+        return AppUrl.API_URL + `leave-balance-report`;
+    }
+
+    static GET_LEAVE_SCHEDULE_REPORT_LIST(): string {
+        return AppUrl.API_URL + `leave-schedule-report`;
+    }
+    
+    static GET_LEAVE_REQUEST_REPORT_LIST(): string {
+        return AppUrl.API_URL + `leave-request-report`;
+    }
     //leave group Entitlements 
     //
     static GET_LEAVE_GROUP_Entitlement_LIST(): string {

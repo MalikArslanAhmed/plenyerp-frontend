@@ -122,6 +122,18 @@ export class ContactInfoService extends BaseService {
         return this.deleteRequest(AppUrl.DELETE_LEAVE_GROUP_MEMBER(id));
     }
     //
+    //Leave Reports calls
+    getLeaveBalanceReportList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_BALANCE_REPORT_LIST(), data);
+    }
+
+    getLeaveScheduleReportList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_SCHEDULE_REPORT_LIST(), data);
+    }
+
+    getLeaveRequestReportList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_REQUEST_REPORT_LIST(), data);
+    }
     //Group Entitlement calls
     getLeaveGroupEntitlementList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_LEAVE_GROUP_Entitlement_LIST(), data);

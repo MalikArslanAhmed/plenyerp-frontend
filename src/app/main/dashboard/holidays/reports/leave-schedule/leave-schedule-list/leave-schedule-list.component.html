@@ -92,16 +92,8 @@
                                 </p>
                             </mat-cell>
                         </ng-container>
-                        <!-- <ng-container matColumnDef="leave credit">
-                            <mat-header-cell *matHeaderCellDef>Leave Credit</mat-header-cell>
-                            <mat-cell *matCellDef="let leaveRequest">
-                                <p class="phone text-truncate">
-                                    {{leaveRequest.staff.firstName}} {{leaveRequest.staff.lastName}}
-                                </p>
-                            </mat-cell>
-                        </ng-container> -->
-                        <ng-container matColumnDef="due days">
-                            <mat-header-cell *matHeaderCellDef>Due Days</mat-header-cell>
+                        <ng-container matColumnDef="exp start date">
+                            <mat-header-cell *matHeaderCellDef>E.S Date</mat-header-cell>
                             <mat-cell *matCellDef="let leaveRequest">
                                 <p class="phone text-truncate">
                                     {{leaveRequest.dueDays}}

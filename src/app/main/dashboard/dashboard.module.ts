@@ -312,6 +312,10 @@ import { HrLeaveRequestClosedApprovedCreateComponent } from './holidays/hr-leave
 import { HrLeaveRequestClosedApprovedListComponent } from './holidays/hr-leave-request-closed-approved/hr-leave-request-closed-approved-list/hr-leave-request-closed-approved-list.component';
 import { LeaveBalanceComponent } from './holidays/reports/leave-balance/leave-balance.component';
 import { LeaveBalanceListComponent } from './holidays/reports/leave-balance/leave-balance-list/leave-balance-list.component';
+import { LeaveScheduleComponent } from './holidays/reports/leave-schedule/leave-schedule.component';
+import { LeaveScheduleListComponent } from './holidays/reports/leave-schedule/leave-schedule-list/leave-schedule-list.component';
+import { LeaveRequestReportComponent } from './holidays/reports/leave-request-report/leave-request-report.component';
+import { LeaveRequestReportListComponent } from './holidays/reports/leave-request-report/leave-request-report-list/leave-request-report-list.component';
 
 @NgModule({
     declarations: [
@@ -388,6 +392,10 @@ import { LeaveBalanceListComponent } from './holidays/reports/leave-balance/leav
         LeaveTypeListComponent,
         LeaveBalanceComponent,
         LeaveBalanceListComponent,
+        LeaveScheduleComponent,
+        LeaveScheduleListComponent,
+        LeaveRequestReportComponent,
+        LeaveRequestReportListComponent,
         LeaveGroupMemberComponent,
         LeaveGroupMemberCreateComponent,
         LeaveGroupMemberListComponent,

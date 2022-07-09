@@ -31,13 +31,13 @@ interface ExampleFlatNode {
 }
 
 @Component({
-    selector: 'leave-balance-list',
-    templateUrl: './leave-balance-list.component.html',
-    styleUrls: ['./leave-balance-list.component.scss'],
+    selector: 'leave-schedule-list',
+    templateUrl: './leave-schedule-list.component.html',
+    styleUrls: ['./leave-schedule-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LeaveBalanceListComponent implements OnInit {
+export class LeaveScheduleListComponent implements OnInit {
     private _transformer = (node: SegmentNode, level: number) => {
         return {
             expandable: !!node.children && node.children.length > 0,
@@ -67,7 +67,7 @@ export class LeaveBalanceListComponent implements OnInit {
     segmentId: number;
     levelConfig: any;
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
-    displayedColumns = ['id', 'File No', 'Employee Name', 'leave type', 'due days', 'days utilised', 'balance due'];
+    displayedColumns = ['id', 'File No', 'Employee Name', 'leave type', 'exp start date', 'days utilised', 'balance due'];
     pagination = {
         page: 1,
         total: null,
@@ -113,7 +113,7 @@ export class LeaveBalanceListComponent implements OnInit {
     }
     getLeaveRequests(params) {
         params['page'] = this.pagination.page;
-        this.contactInfoService.getLeaveBalanceReportList(params).subscribe(data => {
+        this.contactInfoService.getLeaveScheduleReportList(params).subscribe(data => {
             this.leaveRequestList = data.items;
             this.pagination.page = data.page;
             this.pagination.total = data.total;
