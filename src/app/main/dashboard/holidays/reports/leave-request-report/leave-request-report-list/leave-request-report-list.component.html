@@ -34,20 +34,51 @@
                 <div fxFlex="100" style="padding: 1rem">
                     <form [formGroup]="adminSegmentSearchForm">
                         <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                            <mat-label>Type of Selection</mat-label>
-                            <mat-select formControlName="leaveType" (selectionChange)="selectOption($event.value)">
+                            <mat-label>From</mat-label>
+                            <input matInput [matDatepicker]="from" formControlName="fromDate"
+                                [min]="dateChecks.fromMinDate" [max]="dateChecks.fromMaxDate"
+                                (dateChange)="fromDateChange()">
+                            <mat-datepicker-toggle matSuffix [for]="from">
+                                <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #from></mat-datepicker>
+                            <!-- <mat-error *ngIf="adminSegmentSearchForm.controls.from.errors?.matDatepickerMin ">Date cant be
+                                    less then (1-1-{{currentYear}})</mat-error> -->
+                            <mat-error *ngIf="adminSegmentSearchForm.controls.fromDate.errors?.matDatepickerMax ">Date
+                                cant be
+                                greater then To date</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>To</mat-label>
+                            <input matInput [matDatepicker]="to" formControlName="toDate" [min]="dateChecks.toMinDate"
+                                [max]="dateChecks.toMaxDate" (dateChange)="toDateChange()">
+                            <mat-datepicker-toggle matSuffix [for]="to">
+                                <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #to></mat-datepicker>
+                            <mat-error *ngIf="adminSegmentSearchForm.controls.toDate.errors?.matDatepickerMin ">Date
+                                cant be
+                                less then From Date</mat-error>
+                            <!-- <mat-error *ngIf="adminSegmentSearchForm.controls.preparedVDate.errors?.matDatepickerMax ">Date cant be
+                                    greater then Start date</mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="status" (selectionChange)="selectOption($event.value)">
                                 <mat-option value="">Choose Type</mat-option>
-                                <mat-option [value]="leaveType.id" *ngFor="let leaveType of leaveTypesList">
-                                    {{leaveType.title}}</mat-option>
+                                    <mat-option value="hodpending">HOD Pending</mat-option>
+                                    <mat-option value="hodapproved">HOD Approved</mat-option>
+                                    <mat-option value="hrpending">HR Pending</mat-option>
+                                    <mat-option value="hrapproved">HR Approved</mat-option>
+
                             </mat-select>
                         </mat-form-field>
-
                         <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                             <mat-label>Search</mat-label>
                             <input matInput formControlName="search" name="search"
                                 (keyup)="getItemsBySearch(this.adminSegmentSearchForm.value.search)">
                         </mat-form-field>
-                        <button mat-button class="save-button reset-btn" (click)="resetTransFilter()">Reset</button>
+                        <!-- <button mat-button class="save-button reset-btn" (click)="resetTransFilter()">Reset</button> -->
                     </form>
                 </div>
                 <div fxFlex="100" *ngIf="selectedCategory" style="margin-top: -20px">
@@ -96,24 +127,42 @@
                             <mat-header-cell *matHeaderCellDef>E.S Date</mat-header-cell>
                             <mat-cell *matCellDef="let leaveRequest">
                                 <p class="phone text-truncate">
-                                    {{leaveRequest.dueDays}}
+                                    {{leaveRequest.expectedStartDate | date: 'shortDate'}}
                                 </p>
                             </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="days utilised">
-                            <mat-header-cell *matHeaderCellDef>Day Utilised</mat-header-cell>
+                        <ng-container matColumnDef="e duration">
+                            <mat-header-cell *matHeaderCellDef>E. Duration</mat-header-cell>
                             <mat-cell *matCellDef="let leaveRequest">
                                 <p class="phone text-truncate">
-                                    {{leaveRequest.leaveCreditDaysUtilised}}
+                                    {{leaveRequest.expectedDuration}}
                                 </p>
                             </mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="balance due">
-                            <mat-header-cell *matHeaderCellDef>Day Utilised</mat-header-cell>
+                        <ng-container matColumnDef="exp end date">
+                            <mat-header-cell *matHeaderCellDef>E.E Date</mat-header-cell>
                             <mat-cell *matCellDef="let leaveRequest">
                                 <p class="phone text-truncate">
-                                    {{leaveRequest.leaveCreditBalanceDue}}
+                                    {{moment(leaveRequest.expectedStartDate).add(leaveRequest.expectedDuration,'days') |
+                                    date: 'shortDate'}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="HOD Leave">
+                            <mat-header-cell *matHeaderCellDef>HOD Leave</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{leaveRequest.approvedHOD}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="HR Leave">
+                            <mat-header-cell *matHeaderCellDef>Hr Leave</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{leaveRequest.approvedHR}}
                                 </p>
                             </mat-cell>
                         </ng-container>

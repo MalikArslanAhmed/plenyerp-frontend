@@ -34,7 +34,7 @@
                 <div fxFlex="100" style="padding: 1rem">
                     <form [formGroup]="adminSegmentSearchForm">
                         <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                            <mat-label>Type of Selection</mat-label>
+                            <mat-label>Leave Type</mat-label>
                             <mat-select formControlName="leaveType" (selectionChange)="selectOption($event.value)">
                                 <mat-option value="">Choose Type</mat-option>
                                 <mat-option [value]="leaveType.id" *ngFor="let leaveType of leaveTypesList">

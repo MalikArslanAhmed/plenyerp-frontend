@@ -7,7 +7,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { AdminSegmentServices } from 'app/shared/services/admin-segment.services';
 import { EmployeesService } from 'app/shared/services/employees.service';
 import { ContactInfoService } from 'app/shared/services/contact-info.service';
-
+import * as moment from 'moment'
 interface SegmentNode {
     id: number;
     parentId: number;
@@ -38,6 +38,7 @@ interface ExampleFlatNode {
     animations: fuseAnimations
 })
 export class LeaveRequestReportListComponent implements OnInit {
+    moment = moment
     private _transformer = (node: SegmentNode, level: number) => {
         return {
             expandable: !!node.children && node.children.length > 0,
@@ -67,24 +68,30 @@ export class LeaveRequestReportListComponent implements OnInit {
     segmentId: number;
     levelConfig: any;
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
-    displayedColumns = ['id', 'File No', 'Employee Name', 'leave type', 'exp start date', 'days utilised', 'balance due'];
+    displayedColumns = ['id', 'File No', 'Employee Name', 'leave type', 'exp start date', 'e duration', 'exp end date', 'HOD Leave', 'HR Leave'];
     pagination = {
         page: 1,
         total: null,
         perpage: 15,
         pages: null
     };
-    paramsTosend = {
+    paramsTosend: any = {
         search: '',
-        leaveType: ''
+        fromDate: '',
+        toDate: '',
+        status: ''
     }
     adminSegmentSearchForm: FormGroup;
     selectedCategory: any;
     adminSegmentAllIds = [];
     choosenNode: any;
-
-    leaveTypesList = []
     leaveRequestList = []
+    dateChecks = {
+        fromMinDate: null,
+        fromMaxDate: null,
+        toMinDate: null,
+        toMaxDate: null,
+    }
     constructor(
         private contactInfoService: ContactInfoService,
         private route: ActivatedRoute,
@@ -96,21 +103,43 @@ export class LeaveRequestReportListComponent implements OnInit {
 
     ngOnInit(): void {
         this.adminSegmentSearchForm = this.fb.group({
-            leaveType: [''],
+            fromDate: [''],
+            toDate: [''],
             search: [''],
+            status: [''],
         });
         this.route.paramMap.subscribe(params => {
             this.segmentId = 1;
         });
         this.getSegmentList();
         this.getLeaveRequests({});
-        this.getLeavesTypeList();
+        this.adminSegmentSearchForm.get('fromDate').valueChanges.subscribe((resp: any) => {
+            this.dateChecks.toMinDate = new Date(this.adminSegmentSearchForm.controls.fromDate.value)
+
+        })
+        this.adminSegmentSearchForm.get('toDate').valueChanges.subscribe((resp: any) => {
+            this.dateChecks.fromMaxDate = new Date(this.adminSegmentSearchForm.controls.toDate.value)
+
+        })
     }
-    getLeavesTypeList() {
-        this.contactInfoService.getLeavesTypeList({ page: -1 }).subscribe(data => {
-            this.leaveTypesList = data.items;
-        });
+    selectOption(item) {
+        this.paramsTosend.status = item
+        this.getLeaveRequests(this.paramsTosend)
     }
+    fromDateChange() {
+        this.paramsTosend.fromDate = moment(this.adminSegmentSearchForm.controls.fromDate.value).format("YYYY-MM-DD HH:mm:ss")
+        if (this.adminSegmentSearchForm.controls.fromDate.value && this.adminSegmentSearchForm.controls.toDate.value) {
+            this.getLeaveRequests(this.paramsTosend);
+        }
+    }
+
+    toDateChange() {
+        this.paramsTosend.toDate = moment(this.adminSegmentSearchForm.controls.toDate.value).format("YYYY-MM-DD HH:mm:ss")
+        if (this.adminSegmentSearchForm.controls.toDate.value && this.adminSegmentSearchForm.controls.fromDate.value) {
+            this.getLeaveRequests(this.paramsTosend);
+        }
+    }
+
     getLeaveRequests(params) {
         params['page'] = this.pagination.page;
         this.contactInfoService.getLeaveRequestReportList(params).subscribe(data => {
@@ -126,11 +155,7 @@ export class LeaveRequestReportListComponent implements OnInit {
             }
         })
     }
-    selectOption(item) {
-        console.log("item=", item);
-        this.paramsTosend.leaveType = item
-        this.getLeaveRequests(this.paramsTosend)
-    }
+
     getSegmentList() {
         this.adminSegmentServices.getAllSegments(this.segmentId).subscribe(data => {
             if (this.nodeData && this.nodeData.length > 0) {
@@ -156,11 +181,17 @@ export class LeaveRequestReportListComponent implements OnInit {
     resetTransFilter() {
         this.adminSegmentSearchForm.patchValue({
             'search': '',
-            'leaveType': '',
+            'fromDate': '',
+            'toDate': '',
+            'status': ''
         });
         this.selectedCategory = undefined;
-        this.paramsTosend.search = ''
-        this.paramsTosend.leaveType = ''
+        this.paramsTosend = {
+            'search': '',
+            'fromDate': '',
+            'toDate': '',
+            'status': ''
+        }
         this.getLeaveRequests({});
     }
 
