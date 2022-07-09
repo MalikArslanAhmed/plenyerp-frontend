@@ -92,7 +92,7 @@
                             <mat-header-cell *matHeaderCellDef>Emp ID</mat-header-cell>
                             <mat-cell *matCellDef="let leaveRequest">
                                 <p class="email text-truncate">
-                                    {{leaveRequest.empID}}
+                                    {{leaveRequest.empId}}
                                 </p>
                             </mat-cell>
                         </ng-container>
@@ -153,7 +153,7 @@
                             <mat-header-cell *matHeaderCellDef>HOD Leave</mat-header-cell>
                             <mat-cell *matCellDef="let leaveRequest">
                                 <p class="phone text-truncate">
-                                    {{leaveRequest.approvedHOD}}
+                                    {{leaveRequest.approvedHod}}
                                 </p>
                             </mat-cell>
                         </ng-container>
@@ -162,11 +162,34 @@
                             <mat-header-cell *matHeaderCellDef>Hr Leave</mat-header-cell>
                             <mat-cell *matCellDef="let leaveRequest">
                                 <p class="phone text-truncate">
-                                    {{leaveRequest.approvedHR}}
+                                    {{leaveRequest.approvedHr}}
                                 </p>
                             </mat-cell>
                         </ng-container>
-
+                        <ng-container matColumnDef="R.O FileNo">
+                            <mat-header-cell *matHeaderCellDef>R.O FileNo</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="email text-truncate">
+                                    {{leaveRequest.reliefOfficerFileNumber}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="HOD FileNo">
+                            <mat-header-cell *matHeaderCellDef>HOD FileNo</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="email text-truncate">
+                                    {{leaveRequest.unitApprovingOfficerrFileNumber}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="HR FileNo">
+                            <mat-header-cell *matHeaderCellDef>HR FileNo</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="email text-truncate">
+                                    {{leaveRequest.hrApprovingOfficerFileNumber}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let leaveRequest; columns: displayedColumns;" class="contact"
                             [@animate]="{value:'*',params:{y:'100%'}}">

@@ -387,7 +387,7 @@ export const navigation: FuseNavigation[] = [
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'calendar_today',
-                permissions: [PermissionConstant.LEAVE_BALANCE_LIST, PermissionConstant.LEAVE_SCHEDULE_LIST,PermissionConstant.LEAVE_REQUEST_REPORT_LIST],
+                permissions: [PermissionConstant.LEAVE_BALANCE_LIST, PermissionConstant.LEAVE_SCHEDULE_LIST,PermissionConstant.LEAVE_REQUEST_REPORT_LIST,PermissionConstant.LEAVE_ON_LIST],
                 children: [
                     {
                         id: 'leave-balance',
@@ -412,6 +412,14 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         url: 'dashboard/leave-report/leave-request',
                         permissions: [PermissionConstant.LEAVE_REQUEST_REPORT_LIST]
+                    },
+                    {
+                        id: 'leave-on',
+                        title: 'Leave On',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-report/leave-on',
+                        permissions: [PermissionConstant.LEAVE_ON_LIST]
                     },
                 ]
             },

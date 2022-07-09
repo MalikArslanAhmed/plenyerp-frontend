@@ -31,13 +31,13 @@ interface ExampleFlatNode {
 }
 
 @Component({
-    selector: 'leave-schedule-list',
-    templateUrl: './leave-schedule-list.component.html',
-    styleUrls: ['./leave-schedule-list.component.scss'],
+    selector: 'leave-on-list',
+    templateUrl: './leave-on-list.component.html',
+    styleUrls: ['./leave-on-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations
 })
-export class LeaveScheduleListComponent implements OnInit {
+export class LeaveOnListComponent implements OnInit {
     moment = moment
     private _transformer = (node: SegmentNode, level: number) => {
         return {
@@ -141,7 +141,7 @@ export class LeaveScheduleListComponent implements OnInit {
 
     getLeaveRequests(params) {
         params['page'] = this.pagination.page;
-        this.contactInfoService.getLeaveRequestReportList({ ...params, approvedHod: 'approved', approvedHr: 'pending'}).subscribe(data => {
+        this.contactInfoService.getLeaveRequestReportList({ ...params, approvedHod: 'approved', approvedHr: 'approved'}).subscribe(data => {
             this.leaveRequestList = data.items;
             this.pagination.page = data.page;
             this.pagination.total = data.total;

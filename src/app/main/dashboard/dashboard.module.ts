@@ -316,6 +316,8 @@ import { LeaveScheduleComponent } from './holidays/reports/leave-schedule/leave-
 import { LeaveScheduleListComponent } from './holidays/reports/leave-schedule/leave-schedule-list/leave-schedule-list.component';
 import { LeaveRequestReportComponent } from './holidays/reports/leave-request-report/leave-request-report.component';
 import { LeaveRequestReportListComponent } from './holidays/reports/leave-request-report/leave-request-report-list/leave-request-report-list.component';
+import { LeaveOnListComponent } from './holidays/reports/leave-on/leave-on-list/leave-on-list.component';
+import { LeaveOnComponent } from './holidays/reports/leave-on/leave-on.component';
 
 @NgModule({
     declarations: [
@@ -394,6 +396,8 @@ import { LeaveRequestReportListComponent } from './holidays/reports/leave-reques
         LeaveBalanceListComponent,
         LeaveScheduleComponent,
         LeaveScheduleListComponent,
+        LeaveOnComponent,
+        LeaveOnListComponent,
         LeaveRequestReportComponent,
         LeaveRequestReportListComponent,
         LeaveGroupMemberComponent,

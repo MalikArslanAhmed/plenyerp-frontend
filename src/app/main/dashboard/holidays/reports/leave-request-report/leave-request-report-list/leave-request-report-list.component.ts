@@ -68,7 +68,7 @@ export class LeaveRequestReportListComponent implements OnInit {
     segmentId: number;
     levelConfig: any;
     hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
-    displayedColumns = ['id', 'File No', 'Employee Name', 'leave type', 'exp start date', 'e duration', 'exp end date', 'HOD Leave', 'HR Leave'];
+    displayedColumns = ['id', 'File No', 'Employee Name', 'leave type', 'exp start date', 'e duration', 'exp end date', 'HOD Leave', 'HR Leave','R.O FileNo','HOD FileNo','HR FileNo'];
     pagination = {
         page: 1,
         total: null,

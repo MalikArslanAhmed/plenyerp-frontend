@@ -1,9 +1,13 @@
 leave-request-report-list {
     #items-list-select-component {
-        width: 1000px !important;
-        height: auto !important;
+        width     : 1000px !important;
+        height    : auto !important;
         overflow-y: scroll;
         min-height: 800px !important;
+    }
+
+    .text-truncate {
+        white-space: unset;
     }
 
     .addBtn {
@@ -28,7 +32,7 @@ leave-request-report-list {
 
     .filter-title {
         font-weight: bold;
-        font-size: 1.5rem;
+        font-size  : 1.5rem;
     }
 
     .border-2px-solid {
@@ -45,15 +49,15 @@ leave-request-report-list {
 
     .reset-btn {
         background-color: #106cc8 !important;
-        color: white !important;
-        margin-left: 10px;
-        height: 40px;
-        width: 100px;
-        margin-top: 10px;
+        color           : white !important;
+        margin-left     : 10px;
+        height          : 40px;
+        width           : 100px;
+        margin-top      : 10px;
     }
 
     .save-button {
         background-color: #106CC8 !important;
-        color: white !important;
+        color           : white !important;
     }
 }

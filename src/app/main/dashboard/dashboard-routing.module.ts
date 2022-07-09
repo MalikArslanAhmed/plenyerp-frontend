@@ -105,6 +105,7 @@ import { HrLeaveRequestClosedApprovedComponent } from './holidays/hr-leave-reque
 import { LeaveBalanceComponent } from './holidays/reports/leave-balance/leave-balance.component';
 import { LeaveScheduleComponent } from './holidays/reports/leave-schedule/leave-schedule.component';
 import { LeaveRequestReportComponent } from './holidays/reports/leave-request-report/leave-request-report.component';
+import { LeaveOnComponent } from './holidays/reports/leave-on/leave-on.component';
 
 const routes: Routes = [
     {
@@ -474,6 +475,15 @@ const routes: Routes = [
         data: {
             title: 'Leave Schedule',
             permissions: [PermissionConstant.LEAVE_SCHEDULE_LIST]
+        },
+    },
+    {
+        path: 'leave-report/leave-on',
+        component: LeaveOnComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Schedule',
+            permissions: [PermissionConstant.LEAVE_ON_LIST]
         },
     },
     {
