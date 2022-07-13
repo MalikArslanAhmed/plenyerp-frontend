@@ -1,94 +1,111 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {DashboardComponent} from './dashboard.component';
-import {QualificationComponent} from './qualification/qualification.component';
-import {SkillsComponent} from './skills/skills.component';
-import {WorkLocationsComponent} from './work-locations/work-locations.component';
-import {LanguagesComponent} from './languages/languages.component';
-import {ScheduleComponent} from './schedule/schedule.component';
-import {AcademicMajorComponent} from './academic-major/academic-major.component';
-import {RelationshipComponent} from './relationship/relationship.component';
-import {CategoriesComponent} from './categories/categories.component';
-import {StatusComponent} from './status/status.component';
-import {DisengagementComponent} from './disengagement/disengagement.component';
-import {CensuresComponent} from './censures/censures.component';
-import {ArmOfServiceComponent} from './arm-of-service/arm-of-service.component';
-import {MembershipComponent} from './membership/membership.component';
-import {SalaryScalesComponent} from './salary-scales/salary-scales.component';
-import {AdminSegmentsComponent} from './admin-segments/admin-segments.component';
-import {SegmentDetailsComponent} from './admin-segments/segment-details/segment-details.component';
-import {EmployeesComponent} from './employees/employees.component';
-import {EmployeeAddComponent} from './employees/employee-add/employee-add.component';
-import {CountryComponent} from './contact-info/country/country.component';
-import {RegionComponent} from './contact-info/region/region.component';
-import {StatesComponent} from './contact-info/states/states.component';
-import {LgaComponent} from './contact-info/lga/lga.component';
-import {AddressTypeComponent} from './contact-info/address-type/address-type.component';
-import {PhoneTypeComponent} from './contact-info/phone-type/phone-type.component';
-import {StructureComponent} from './structure/structure.component';
-import {DepartmentsComponent} from './departments/departments.component';
-import {LeaveTypeComponent} from './holidays/leave-type/leave-type.component';
-import {LeaveGroupComponent} from './holidays/leave- group/leave-group.component';
-import {PublicHolidaysComponent} from './holidays/public-holidays/public-holidays.component';
-import {DesignationComponent} from './designation/designation.component';
-import {UserProfileComponent} from './user-profile/user-profile.component';
-import {ManagersComponent} from './managers/managers.component';
-import {RolesComponent} from './managers/roles/roles.component';
-import {EmployeeActionComponent} from './employees/employee-action/employee-action.component';
-import {StoreSetupItemsComponent} from './store-setup-items/store-setup-items.component';
-import {StoreSetupCategoriesComponent} from './store-setup-categories/store-setup-categories.component';
-import {StoreSetupStoresComponent} from './store-setup-stores/store-setup-stores.component';
-import {StoreSetupUnitOfMeasuresComponent} from './store-setup-unit-of-measures/store-setup-unit-of-measures.component';
-import {TransactionSrvPurchaseInvoiceComponent} from './transaction-srv-purchase-invoice/transaction-srv-purchase-invoice.component';
-import {TransactionSrvPurchaseReturnComponent} from './transaction-srv-purchase-return/transaction-srv-purchase-return.component';
-import {TransactionSalesInvoiceComponent} from './transaction-sales-invoice/transaction-sales-invoice.component';
-import {TransactionSalesReturnByCustomerComponent} from './transaction-sales-return-by-customer/transaction-sales-return-by-customer.component';
-import {TransactionStvStoreTransferComponent} from './transaction-stv-store-transfer/transaction-stv-store-transfer.component';
-import {TransactionStoreAdjustmentComponent} from './transaction-store-adjustment/transaction-store-adjustment.component';
-import {TransactionDonationsComponent} from './transaction-donations/transaction-donations.component';
-import {TaxesComponent} from './taxes/taxes.component';
-import {CompaniesComponent} from './companies/companies.component';
-import {ReportBinCardComponent} from './report-bin-card/report-bin-card.component';
-import {ReportInventoryLedgerComponent} from './report-inventory-ledger/report-inventory-ledger.component';
-import {ReportQuantityBalanceComponent} from './report-quantity-balance/report-quantity-balance.component';
-import {ReportOffLevelComponent} from './report-off-level/report-off-level.component';
-import {JournalVoucherComponent} from './journal-voucher/journal-voucher.component';
-import {BudgetControlComponent} from './budget-control/budget-control.component';
-import {CurrenciesComponent} from './currencies/currencies.component';
-import {BanksComponent} from './banks/banks.component';
-import {CompanyInformationComponent} from './company-information/company-information.component';
-import {RouteGuard} from 'app/shared/guards/route.guard';
-import {UserRoleComponent} from './configurations/user-role/user-role.component';
-import {UserRolePermissionComponent} from './configurations/user-role-permission/user-role-permission.component';
-import {PermissionConstant} from 'app/shared/constants/permission-constant';
-import {TrialBalanceComponent} from './trial-balance/trial-balance.component';
-import {JournalVoucherLedgerReportComponent} from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
-import {NotesMasterComponent} from './notes-master/notes-master.component';
-import {JvLedgerSiblingComponent} from './jv-ledger-sibling/jv-ledger-sibling.component';
-import {StatementOfPositionComponent} from './statement-of-position/statement-of-position.component';
-import {FinancialPerformanceReportComponent} from './financial-performance-report/financial-performance-report.component';
-import {MonthlyActivityComponent} from './monthly-activity/monthly-activity.component';
-import {VoucherSourceUnitComponent} from './treasure-report/voucher-source-unit/voucher-source-unit.component';
-import {CashbookComponent} from './treasure-report/cashbook/cashbook.component';
-import {PaymentVoucherComponent} from './treasure-report/payment-voucher/payment-voucher.component';
-import {DefaultSettingVoucherInfoComponent} from './treasure-report/default-setting-voucher-info/default-setting-voucher-info.component';
-import {BudgetControlAieComponent} from './budget-control-aie/budget-control-aie.component';
-import {PaymentReportComponent} from './payment-report/payment-report.component';
-import {ReceiptVouchersComponent} from './treasure-report/receipt-vouchers/receipt-vouchers.component';
-import {RvReportListComponent} from './rv-report-list/rv-report-list.component';
-import {ApplicationFundReportsComponent} from './treasure-report/application-fund-reports/application-fund-reports.component';
-import {SourcesUsesFundComponent} from './treasure-report/sources-uses-fund/sources-uses-fund.component';
-import {SpecialAccountActivityReportComponent} from './treasure-report/special-account-activity-report/special-account-activity-report.component';
-import {SummaryReportNonPersonalAdvancesComponent} from './summary-report-non-personal-advances/summary-report-non-personal-advances.component';
-import {SummaryReportPersonalAdvancesComponent} from './summary-report-personal-advances/summary-report-personal-advances.component';
-import {SummaryReportStandingImprestComponent} from './summary-report-standing-imprest/summary-report-standing-imprest.component';
-import {SummaryReportSpecialImprestComponent} from './summary-report-special-imprest/summary-report-special-imprest.component';
-import {AdvancesLedgerEmployeeReportComponent} from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
-import {IfrNotesMasterComponent} from './ifr-notes-master/ifr-notes-master.component';
-import {RetireVouchersComponent} from './treasure-report/retire-vouchers/retire-vouchers.component';
-import {OnMandateComponent} from './treasure-report/on-mandate/on-mandate.component';
-import {PaymentApprovalComponent} from './treasure-report/payment-approval/payment-approval.component';
-import {PreviousYearAdvancesComponent} from './treasure-report/previous-year-advances/previous-year-advances.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard.component';
+import { QualificationComponent } from './qualification/qualification.component';
+import { SkillsComponent } from './skills/skills.component';
+import { WorkLocationsComponent } from './work-locations/work-locations.component';
+import { LanguagesComponent } from './languages/languages.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { AcademicMajorComponent } from './academic-major/academic-major.component';
+import { RelationshipComponent } from './relationship/relationship.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { StatusComponent } from './status/status.component';
+import { DisengagementComponent } from './disengagement/disengagement.component';
+import { CensuresComponent } from './censures/censures.component';
+import { ArmOfServiceComponent } from './arm-of-service/arm-of-service.component';
+import { MembershipComponent } from './membership/membership.component';
+import { SalaryScalesComponent } from './salary-scales/salary-scales.component';
+import { AdminSegmentsComponent } from './admin-segments/admin-segments.component';
+import { SegmentDetailsComponent } from './admin-segments/segment-details/segment-details.component';
+import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeAddComponent } from './employees/employee-add/employee-add.component';
+import { CountryComponent } from './contact-info/country/country.component';
+import { RegionComponent } from './contact-info/region/region.component';
+import { StatesComponent } from './contact-info/states/states.component';
+import { LgaComponent } from './contact-info/lga/lga.component';
+import { AddressTypeComponent } from './contact-info/address-type/address-type.component';
+import { PhoneTypeComponent } from './contact-info/phone-type/phone-type.component';
+import { StructureComponent } from './structure/structure.component';
+import { DepartmentsComponent } from './departments/departments.component';
+import { LeaveTypeComponent } from './holidays/leave-type/leave-type.component';
+import { LeaveGroupComponent } from './holidays/leave- group/leave-group.component';
+import { PublicHolidaysComponent } from './holidays/public-holidays/public-holidays.component';
+import { DesignationComponent } from './designation/designation.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ManagersComponent } from './managers/managers.component';
+import { RolesComponent } from './managers/roles/roles.component';
+import { EmployeeActionComponent } from './employees/employee-action/employee-action.component';
+import { StoreSetupItemsComponent } from './store-setup-items/store-setup-items.component';
+import { StoreSetupCategoriesComponent } from './store-setup-categories/store-setup-categories.component';
+import { StoreSetupStoresComponent } from './store-setup-stores/store-setup-stores.component';
+import { StoreSetupUnitOfMeasuresComponent } from './store-setup-unit-of-measures/store-setup-unit-of-measures.component';
+import { TransactionSrvPurchaseInvoiceComponent } from './transaction-srv-purchase-invoice/transaction-srv-purchase-invoice.component';
+import { TransactionSrvPurchaseReturnComponent } from './transaction-srv-purchase-return/transaction-srv-purchase-return.component';
+import { TransactionSalesInvoiceComponent } from './transaction-sales-invoice/transaction-sales-invoice.component';
+import { TransactionSalesReturnByCustomerComponent } from './transaction-sales-return-by-customer/transaction-sales-return-by-customer.component';
+import { TransactionStvStoreTransferComponent } from './transaction-stv-store-transfer/transaction-stv-store-transfer.component';
+import { TransactionStoreAdjustmentComponent } from './transaction-store-adjustment/transaction-store-adjustment.component';
+import { TransactionDonationsComponent } from './transaction-donations/transaction-donations.component';
+import { TaxesComponent } from './taxes/taxes.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { ReportBinCardComponent } from './report-bin-card/report-bin-card.component';
+import { ReportInventoryLedgerComponent } from './report-inventory-ledger/report-inventory-ledger.component';
+import { ReportQuantityBalanceComponent } from './report-quantity-balance/report-quantity-balance.component';
+import { ReportOffLevelComponent } from './report-off-level/report-off-level.component';
+import { JournalVoucherComponent } from './journal-voucher/journal-voucher.component';
+import { BudgetControlComponent } from './budget-control/budget-control.component';
+import { CurrenciesComponent } from './currencies/currencies.component';
+import { BanksComponent } from './banks/banks.component';
+import { CompanyInformationComponent } from './company-information/company-information.component';
+import { RouteGuard } from 'app/shared/guards/route.guard';
+import { UserRoleComponent } from './configurations/user-role/user-role.component';
+import { UserRolePermissionComponent } from './configurations/user-role-permission/user-role-permission.component';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
+import { TrialBalanceComponent } from "./trial-balance/trial-balance.component";
+import { JournalVoucherLedgerReportComponent } from './journal-voucher-ledger-report/journal-voucher-ledger-report.component';
+import { NotesMasterComponent } from './notes-master/notes-master.component';
+import { JvLedgerSiblingComponent } from './jv-ledger-sibling/jv-ledger-sibling.component';
+import { StatementOfPositionComponent } from './statement-of-position/statement-of-position.component';
+import { FinancialPerformanceReportComponent } from './financial-performance-report/financial-performance-report.component';
+import { MonthlyActivityComponent } from './monthly-activity/monthly-activity.component';
+import { VoucherSourceUnitComponent } from './treasure-report/voucher-source-unit/voucher-source-unit.component';
+import { CashbookComponent } from './treasure-report/cashbook/cashbook.component';
+import { PaymentVoucherComponent } from './treasure-report/payment-voucher/payment-voucher.component';
+import { DefaultSettingVoucherInfoComponent } from "./treasure-report/default-setting-voucher-info/default-setting-voucher-info.component";
+import { BudgetControlAieComponent } from './budget-control-aie/budget-control-aie.component';
+import { PaymentReportComponent } from './payment-report/payment-report.component';
+import { ReceiptVouchersComponent } from "./treasure-report/receipt-vouchers/receipt-vouchers.component";
+import { RvReportListComponent } from './rv-report-list/rv-report-list.component';
+import { ApplicationFundReportsComponent } from './treasure-report/application-fund-reports/application-fund-reports.component';
+import { SourcesUsesFundComponent } from './treasure-report/sources-uses-fund/sources-uses-fund.component';
+import { SpecialAccountActivityReportComponent } from './treasure-report/special-account-activity-report/special-account-activity-report.component';
+import { SummaryReportNonPersonalAdvancesComponent } from "./summary-report-non-personal-advances/summary-report-non-personal-advances.component";
+import { SummaryReportPersonalAdvancesComponent } from "./summary-report-personal-advances/summary-report-personal-advances.component";
+import { SummaryReportStandingImprestComponent } from "./summary-report-standing-imprest/summary-report-standing-imprest.component";
+import { SummaryReportSpecialImprestComponent } from "./summary-report-special-imprest/summary-report-special-imprest.component";
+import { AdvancesLedgerEmployeeReportComponent } from './treasure-report/advances-ledger-employee-report/advances-ledger-employee-report.component';
+import { IfrNotesMasterComponent } from "./ifr-notes-master/ifr-notes-master.component";
+import { RetireVouchersComponent } from "./treasure-report/retire-vouchers/retire-vouchers.component";
+import { OnMandateComponent } from "./treasure-report/on-mandate/on-mandate.component";
+import { PaymentApprovalComponent } from './treasure-report/payment-approval/payment-approval.component';
+import { PreviousYearAdvancesComponent } from "./treasure-report/previous-year-advances/previous-year-advances.component";
+import { LeaveGroupMemberComponent } from './holidays/leave-group-member/leave-group-member.component';
+import { LeaveGroupEntitlementComponent } from './holidays/leave-group-entitlement/leave-group-entitlement.component';
+import { LeaveYearComponent } from './holidays/leave-year/leave-year.component';
+import { InformationComponent } from './information/information/information.component';
+import { LeaveCreditComponent } from './holidays/leave-credit/leave-credit.component';
+import { LeaveEntitlementSalaryScaleComponent } from './holidays/leave-entitlement-salary-scale/leave-entitlement-salary-scale.component';
+import { LeaveEntitlementGradeLevelComponent } from './holidays/leave-entitlement-grade-level/leave-entitlement-grade-level.component';
+import { LeaveRequestComponent } from './holidays/leave-request/leave-request.component';
+import { LeaveRequestApprovedComponent } from './holidays/leave-request-approved/leave-request-approved.component';
+import { HrLeaveRequestApprovedComponent } from './holidays/hr-leave-request-approved/hr-leave-request-approved.component';
+import { LeaveRequestClosedComponent } from './holidays/leave-request-closed/leave-request-closed.component';
+import { HodLeaveRequestClosedApprovedComponent } from './holidays/hod-leave-request-closed-approved/hod-leave-request-closed-approved.component';
+import { HrLeaveRequestClosedApprovedComponent } from './holidays/hr-leave-request-closed-approved/hr-leave-request-closed-approved.component';
+import { LeaveBalanceComponent } from './holidays/reports/leave-balance/leave-balance.component';
+import { LeaveScheduleComponent } from './holidays/reports/leave-schedule/leave-schedule.component';
+import { LeaveRequestReportComponent } from './holidays/reports/leave-request-report/leave-request-report.component';
+import { LeaveOnComponent } from './holidays/reports/leave-on/leave-on.component';
 
 const routes: Routes = [
     {
@@ -375,8 +392,161 @@ const routes: Routes = [
         component: LeaveTypeComponent,
         canActivate: [RouteGuard],
         data: {
-            title: 'Type of leaves',
+            title: 'Types of leave',
             permissions: [PermissionConstant.TYPES_OF_LEAVES_LIST]
+        },
+    },
+    {
+        path: 'leave-group-member/:leaveGroupId',
+        component: LeaveGroupMemberComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave group members',
+            permissions: [PermissionConstant.LEAVE_GROUP_MEMBER_LIST]
+        },
+    },
+    {
+        path: 'leave-group-entitlement/:leaveGroupId',
+        component: LeaveGroupEntitlementComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave group entitlements',
+            permissions: [PermissionConstant.LEAVE_GROUP_MEMBER_LIST]
+        },
+    },
+    {
+        path: 'leave-entitlement-salary-scales/:leaveEntitlementSalaryScaleId',
+        component: LeaveEntitlementSalaryScaleComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave entitlement salary scale',
+            permissions: [PermissionConstant.LEAVE_ENTITLEMENT_SALARY_SCALE_LIST]
+        },
+    },
+    {
+        path: 'leave-entitlement-grade-levels/:leaveEntitlementGradeLevelId',
+        component: LeaveEntitlementGradeLevelComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave entitlement grade levels',
+            permissions: [PermissionConstant.LEAVE_ENTITLEMENT_GRADE_LEVEL_LIST]
+        },
+    },
+    {
+        path: 'leave-year',
+        component: LeaveYearComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Years',
+            permissions: [PermissionConstant.LEAVE_YEAR_LIST]
+        },
+    },
+    {
+        path: 'leave-request',
+        component: LeaveRequestComponent,
+        // canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Requests',
+            // permissions: [PermissionConstant.LEAVE_YEAR_LIST]
+        },
+    },
+    {
+        path: 'hod-leave-request-approved',
+        component: LeaveRequestApprovedComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'HOD Leave Requests Approval',
+            permissions: [PermissionConstant.HOD_LEAVE_REQUEST_APPROVED_LIST]
+        },
+    },
+    {
+        path: 'leave-report/leave-balance',
+        component: LeaveBalanceComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Balance',
+            permissions: [PermissionConstant.LEAVE_BALANCE_LIST]
+        },
+    },
+    {
+        path: 'leave-report/leave-schedule',
+        component: LeaveScheduleComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Schedule',
+            permissions: [PermissionConstant.LEAVE_SCHEDULE_LIST]
+        },
+    },
+    {
+        path: 'leave-report/leave-on',
+        component: LeaveOnComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Schedule',
+            permissions: [PermissionConstant.LEAVE_ON_LIST]
+        },
+    },
+    {
+        path: 'leave-report/leave-request',
+        component: LeaveRequestReportComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Request',
+            permissions: [PermissionConstant.LEAVE_REQUEST_REPORT_LIST]
+        },
+    },
+    {
+        path: 'hr-leave-request-approved',
+        component: HrLeaveRequestApprovedComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'HR Leave Requests Approval',
+            permissions: [PermissionConstant.HR_LEAVE_REQUEST_APPROVED_LIST]
+        },
+    },
+    {
+        path: 'leave-request/:leaveRequestId/leave-request-closed',
+        component: LeaveRequestClosedComponent,
+        // canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Requests Closed',
+            // permissions: [PermissionConstant.LEAVE_YEAR_LIST]
+        },
+    },
+    {
+        path: 'hod-leave-request-closed-approved',
+        component: HodLeaveRequestClosedApprovedComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'HOD Leave Requests Closed Approval',
+            permissions: [PermissionConstant.HOD_LEAVE_REQUEST_CLOSED_APPROVED_LIST]
+        },
+    },
+    {
+        path: 'hr-leave-request-closed-approved',
+        component: HrLeaveRequestClosedApprovedComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'HR Leave Requests Closed Approval',
+            permissions: [PermissionConstant.HR_LEAVE_REQUEST_CLOSED_APPROVED_LIST]
+        },
+    },
+    {
+        path: 'leave-credit',
+        component: LeaveCreditComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Leave Credits',
+            permissions: [PermissionConstant.LEAVE_CREDIT_LIST]
+        },
+    },
+    {
+        path: 'hr-information',
+        component: InformationComponent,
+        canActivate: [RouteGuard],
+        data: {
+            title: 'Hr Information',
+            permissions: [PermissionConstant.INFORMATION_LIST]
         },
     },
     {

@@ -1,0 +1,63 @@
+<div id="skills" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+        fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    calendar_today
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Leave Credit
+                </span>
+            </div>
+        </div>
+        <div class="warning-txt" *ngIf="gs.bulkUpload">
+            <p class="green-txt">Bulk upload in progress....</p>
+            <p class="yellow-txt">Please dont leave this screen till bulk upload completes to avoid data loss....</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div appPermissionBind [permission]="permissionDelete">
+                <button class="delete-all" *ngIf="leaveCreditList.length > 0" (click)="deleteAllLeaveCredits()">
+                    Delete All
+                </button>
+            </div>
+            <div appPermissionBind [permission]="permissionAdd">
+                <button class="bulk-upload" *ngIf="dataLoaded.length === 2 && !gs.bulkUpload" (click)="getData()">
+                    Bulk Upload
+                </button>
+            </div>
+            <div appPermissionBind [permission]="permissionAdd">
+                <button *ngIf="!gs.bulkUpload" mat-fab class="accent" id="add-button" aria-label="add salary scales"
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addLeaveCredit()">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content my-form">
+                <form [formGroup]="leaveCreditForm">
+                    <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>Staff Id</mat-label>
+                        <input matInput placeholder="Staff Id" type="text" formControlName="staffId">
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                        <mat-label>Staff Name</mat-label>
+                        <input matInput placeholder="Staff Name" type="text" formControlName="staffName">
+                    </mat-form-field> -->
+                    <div fxFlex class="width-200px p-10px mt-13px">
+                        <button mat-button class="submit-report" (click)="search()">
+                            Search
+                            <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="content">
+                <leave-credit-list (leaveCreditListsParent)="updateList($event)"></leave-credit-list>
+            </div>
+        </div>
+    </div>
+
+</div>

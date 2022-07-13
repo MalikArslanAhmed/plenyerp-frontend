@@ -1,5 +1,5 @@
-import {environment} from '../../../environments/environment';
-import {Injectable} from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AppUrl {
@@ -418,6 +418,10 @@ export class AppUrl {
 
     static DELETE_EMPLOYEES(id): string {
         return AppUrl.API_URL + `employees/` + id;
+    }
+
+    static GET_EMPLOYEE_JOB_PROFILE(): string {
+        return AppUrl.API_URL + `employees-job-profiles`;
     }
 
     static GET_EMPLOYEES_DETAILS_DOWNLOAD(id): string {
@@ -850,6 +854,189 @@ export class AppUrl {
         return AppUrl.API_URL + 'leave-groups/' + id;
     }
 
+    //
+    static GET_LEAVE_GROUP_MEMBER_LIST(): string {
+        return AppUrl.API_URL + `leave-group-members`;
+    }
+
+    static LEAVE_GROUP_MEMBER(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-group-members/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-group-members';
+        }
+    }
+
+    static DELETE_LEAVE_GROUP_MEMBER(id?): string {
+        return AppUrl.API_URL + 'leave-group-members/' + id;
+    }
+    //Leave reports URLS
+    static GET_LEAVE_BALANCE_REPORT_LIST(): string {
+        return AppUrl.API_URL + `leave-balance-report`;
+    }
+
+    static GET_LEAVE_SCHEDULE_REPORT_LIST(): string {
+        return AppUrl.API_URL + `leave-schedule-report`;
+    }
+
+    static GET_LEAVE_REQUEST_REPORT_LIST(): string {
+        return AppUrl.API_URL + `leave-request-report`;
+    }
+    //leave group Entitlements
+    //
+    static GET_LEAVE_GROUP_Entitlement_LIST(): string {
+        return AppUrl.API_URL + `leave-group-entitlements`;
+    }
+
+    static LEAVE_GROUP_Entitlement(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-group-entitlements/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-group-entitlements';
+        }
+    }
+
+    static DELETE_LEAVE_GROUP_Entitlement(id?): string {
+        return AppUrl.API_URL + 'leave-group-entitlements/' + id;
+    }
+    //
+    //Leave Year
+    static GET_LEAVE_YEAR_LIST(): string {
+        return AppUrl.API_URL + `leave-years`;
+    }
+
+    static LEAVE_YEAR(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-years/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-years';
+        }
+    }
+
+    static DELETE_LEAVE_YEAR(id?): string {
+        return AppUrl.API_URL + 'leave-years/' + id;
+    }
+
+    //Leave Year Ended
+
+    //Leave Request
+    static GET_LEAVE_REQUEST_LIST(): string {
+        return AppUrl.API_URL + `leave-requests`;
+    }
+
+    static LEAVE_REQUEST(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-requests/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-requests';
+        }
+    }
+
+    static DELETE_LEAVE_REQUEST(id?): string {
+        return AppUrl.API_URL + 'leave-requests/' + id;
+    }
+
+    //Leave Request Ended
+
+    //Leave Request Closed
+    static GET_LEAVE_REQUEST_CLOSED_LIST(): string {
+        return AppUrl.API_URL + `leave-requests-closed`;
+    }
+
+    static LEAVE_REQUEST_CLOSED(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-requests-closed/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-requests-closed';
+        }
+    }
+
+    static DELETE_LEAVE_REQUEST_CLOSED(id?): string {
+        return AppUrl.API_URL + 'leave-requests-closed/' + id;
+    }
+
+    //Leave Request Closed Ended
+
+    //Leave Entitlement Salary Scale
+    static GET_LEAVE_ENTITLEMENT_SALARY_SCALE_LIST(): string {
+        return AppUrl.API_URL + `leave-entitlement-salary-scales`;
+    }
+
+    static LEAVE_ENTITLEMENT_SALARY_SCALE(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-entitlement-salary-scales/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-entitlement-salary-scales';
+        }
+    }
+
+    static DELETE_LEAVE_ENTITLEMENT_SALARY_SCALE(id?): string {
+        return AppUrl.API_URL + 'leave-entitlement-salary-scales/' + id;
+    }
+    //Leave Entitlement Salary Scale
+
+    //Leave Entitlement Grade Level
+    static GET_LEAVE_ENTITLEMENT_GRADE_LEVEL_LIST(): string {
+        return AppUrl.API_URL + `leave-entitlement-grade-levels`;
+    }
+
+    static LEAVE_ENTITLEMENT_GRADE_LEVEL(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-entitlement-grade-levels/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-entitlement-grade-levels';
+        }
+    }
+
+    static DELETE_LEAVE_ENTITLEMENT_GRADE_LEVEL(id?): string {
+        return AppUrl.API_URL + 'leave-entitlement-grade-levels/' + id;
+    }
+    //Leave Entitlement Grade Level
+
+    //Leave Credit
+    static GET_LEAVE_CREDIT_LIST(): string {
+        return AppUrl.API_URL + `leave-credits`;
+    }
+
+    static LEAVE_CREDIT(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'leave-credits/' + id;
+        } else {
+            return AppUrl.API_URL + 'leave-credits';
+        }
+    }
+    static BULK_UPLOAD_LEAVE_CREDIT(): string {
+        return AppUrl.API_URL + 'bulk-upload-leave-credits';
+    }
+
+    static DELETE_LEAVE_CREDIT(id?): string {
+        return AppUrl.API_URL + 'leave-credits/' + id;
+    }
+    static DELETE_ALL_LEAVE_CREDIT(id?): string {
+        return AppUrl.API_URL + 'delete-all-leave-credits';
+    }
+    static GET_LEAVE_CREDIT_VIEW_LIST(): string {
+        return AppUrl.API_URL + `leave-credits-view`;
+    }
+    //Leave Credit Ended
+
+    //Hr Information
+    static GET_HR_INFORMATION_LIST(): string {
+        return AppUrl.API_URL + `hr-informations`;
+    }
+
+    static HR_INFORMATION(id?): string {
+        if (id) {
+            return AppUrl.API_URL + 'hr-informations/' + id;
+        } else {
+            return AppUrl.API_URL + 'hr-informations';
+        }
+    }
+
+    static DELETE_HR_INFORMATION(id?): string {
+        return AppUrl.API_URL + 'hr-informations/' + id;
+    }
+    //Hr Information Ended
     static GET_PUBLIC_HOLIDAY_LIST(): string {
         return AppUrl.API_URL + `public-holidays`;
     }
@@ -1521,6 +1708,5 @@ export class AppUrl {
     static FIXED_ASSETS_DEPRECIATION(): string {
         return AppUrl.API_URL + `fixed-assets/depreciations`;
     }
-
 
 }

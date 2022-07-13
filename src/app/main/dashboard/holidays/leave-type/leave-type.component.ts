@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {LeaveTypeCreateComponent} from './leave-type-create/leave-type-create.component';
 import {LeaveTypeListComponent} from './leave-type-list/leave-type-list.component';
 import {fuseAnimations} from '../../../../../@fuse/animations';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'app-leave-type',
@@ -16,6 +17,7 @@ import {fuseAnimations} from '../../../../../@fuse/animations';
 export class LeaveTypeComponent implements OnInit {
     dialogRef: any;
     @ViewChild(LeaveTypeListComponent) getLeavesTypeList: LeaveTypeListComponent;
+    permissionAddTypeOfLeave = [PermissionConstant.TYPES_OF_LEAVES_ADD]
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,

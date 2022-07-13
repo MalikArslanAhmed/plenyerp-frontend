@@ -13,7 +13,8 @@
             <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
                 <mat-cell *matCellDef="let salaryScale" class="cursor-pointer" (click)="goToGradeLevel(salaryScale)">
-                    <p class="phone text-truncate cursor-pointer" [ngClass]=" salaryScale['isSelected'] ? 'blueColor' : ''" >
+                    <p class="phone text-truncate cursor-pointer"
+                        [ngClass]=" salaryScale['isSelected'] ? 'blueColor' : ''">
                         {{salaryScale.name}}
                     </p>
                 </mat-cell>
@@ -26,14 +27,19 @@
                 <mat-cell *matCellDef="let salaryScale">
                     <div fxFlex="row" fxLayoutAlign="end center">
                         <div appPermissionBind [permission]="permissionEditSalaryScales">
+                            <button mat-icon-button aria-label="Toggle star" matTooltip="Salary Scale Entitlements"
+                                matTooltipPosition="left" (click)="addEntitlementSalaryScale(salaryScale)"
+                                style="color: #000000">
+                                <mat-icon class="material-icons">credit_card</mat-icon>
+                            </button>
                             <button mat-icon-button aria-label="Toggle star" (click)="editSalaryScales(salaryScale)"
-                                    style="color: blue">
+                                style="color: blue">
                                 <mat-icon class="material-icons">edit</mat-icon>
                             </button>
                         </div>
                         <div appPermissionBind [permission]="permissionDeleteSalaryScales">
-                            <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModalSalaryScale(salaryScale)"
-                                    style="color: red">
+                            <button mat-icon-button aria-label="Toggle star"
+                                (click)="deleteItemModalSalaryScale(salaryScale)" style="color: red">
                                 <mat-icon class="material-icons">delete</mat-icon>
                             </button>
                         </div>
@@ -43,110 +49,116 @@
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let skill; columns: displayedColumns;" class="contact"
-                     [@animate]="{value:'*',params:{y:'100%'}}">
+                [@animate]="{value:'*',params:{y:'100%'}}">
             </mat-row>
         </mat-table>
     </div>
 
 
     <div class="salary-scales-list grade-levels">
-        <button mat-icon-button  aria-label="button with a plus one icon"
-                *ngIf="selectTab === 0 && salaryScales && salaryScales.length"
-                class="add-grade-level-btn" (click)="addGradeLevel()">
+        <button mat-icon-button aria-label="button with a plus one icon"
+            *ngIf="selectTab === 0 && salaryScales && salaryScales.length" class="add-grade-level-btn"
+            (click)="addGradeLevel()">
             <mat-icon color="accent">add_circle</mat-icon>
         </button>
-        <button mat-icon-button  aria-label="button with a plus one icon"
-                *ngIf="selectTab === 1 && gradeLevels && gradeLevels.length"
-                class="add-grade-level-btn" (click)="addStepLevel()">
+        <button mat-icon-button aria-label="button with a plus one icon"
+            *ngIf="selectTab === 1 && gradeLevels && gradeLevels.length" class="add-grade-level-btn"
+            (click)="addStepLevel()">
             <mat-icon color="accent">add_circle</mat-icon>
         </button>
 
-        <mat-tab-group animationDuration="0ms"  color="accent" [(selectedIndex)]="selectTab">
+        <mat-tab-group animationDuration="0ms" color="accent" [(selectedIndex)]="selectTab">
             <mat-tab label="Grade Level">
-               <mat-table [dataSource]="gradeLevels" style="margin: -8px 1rem 0 1rem">
-                   <ng-container matColumnDef="id">
-                       <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
-                       <mat-cell *matCellDef="let gradeLevel">
-                           <p class="email text-truncate">
-                               {{gradeLevel.sno}}.
-                           </p>
-                       </mat-cell>
-                   </ng-container>
-                   <ng-container matColumnDef="name">
-                       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-                       <mat-cell *matCellDef="let gradeLevel" class="cursor-pointer" (click)="goToStepLevel(gradeLevel)">
-                           <p class="phone text-truncate" [ngClass]=" gradeLevel['isSelected'] ? 'blueColor' : ''">
-                               {{gradeLevel.name}}
-                           </p>
-                       </mat-cell>
-                   </ng-container>
-                   <ng-container matColumnDef="incrementDue">
-                       <mat-header-cell *matHeaderCellDef>Increment Due(Months)</mat-header-cell>
-                       <mat-cell *matCellDef="let gradeLevel">
-                           <p class="phone text-truncate">
-                               {{gradeLevel.incrementDue}}
-                           </p>
-                       </mat-cell>
-                   </ng-container>
-                   <ng-container matColumnDef="promotionDue">
-                       <mat-header-cell *matHeaderCellDef>Promotion Due(Months)</mat-header-cell>
-                       <mat-cell *matCellDef="let gradeLevel">
-                           <p class="phone text-truncate">
-                               {{gradeLevel.promotionDue}}
-                           </p>
-                       </mat-cell>
-                   </ng-container>
-                   <ng-container matColumnDef="confirmAfter">
-                       <mat-header-cell *matHeaderCellDef>Confirm After(Months)</mat-header-cell>
-                       <mat-cell *matCellDef="let gradeLevel">
-                           <p class="phone text-truncate">
-                               {{gradeLevel.confirmAfter}}
-                           </p>
-                       </mat-cell>
-                   </ng-container>
-                   <ng-container matColumnDef="retireAfter">
-                       <mat-header-cell *matHeaderCellDef>Retire After(Years)</mat-header-cell>
-                       <mat-cell *matCellDef="let gradeLevel">
-                           <p class="phone text-truncate">
-                               {{gradeLevel.retireAfter}}
-                           </p>
-                       </mat-cell>
-                   </ng-container>
-                   <ng-container matColumnDef="retireType">
-                       <mat-header-cell *matHeaderCellDef>Retire Type</mat-header-cell>
-                       <mat-cell *matCellDef="let gradeLevel">
-                           <p class="phone text-truncate">
-                               {{gradeLevel.retireType}}
-                           </p>
-                       </mat-cell>
-                   </ng-container>
-                   <ng-container matColumnDef="actions">
-                       <mat-header-cell *matHeaderCellDef>
-                           <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
-                       </mat-header-cell>
-                       <mat-cell *matCellDef="let gradeLevel">
-                           <div fxFlex="row" fxLayoutAlign="end center">
-                               <button mat-icon-button aria-label="Toggle star" (click)="editGradeLevel(gradeLevel)"
-                                       style="color: blue">
-                                   <mat-icon class="material-icons">edit</mat-icon>
-                               </button>
-                               <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModalGradeLevel(gradeLevel)"
-                                       style="color: red">
-                                   <mat-icon class="material-icons">delete</mat-icon>
-                               </button>
-                           </div>
-                       </mat-cell>
-                   </ng-container>
-                   <mat-header-row *matHeaderRowDef="displayedGradeLevelColumns"></mat-header-row>
-                   <mat-row *matRowDef="let row; columns: displayedGradeLevelColumns;" class="contact"
-                            [@animate]="{value:'*',params:{y:'100%'}}">
-                   </mat-row>
-               </mat-table>
+                <mat-table [dataSource]="gradeLevels" style="margin: -8px 1rem 0 1rem">
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                        <mat-cell *matCellDef="let gradeLevel">
+                            <p class="email text-truncate">
+                                {{gradeLevel.sno}}.
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let gradeLevel" class="cursor-pointer"
+                            (click)="goToStepLevel(gradeLevel)">
+                            <p class="phone text-truncate" [ngClass]=" gradeLevel['isSelected'] ? 'blueColor' : ''">
+                                {{gradeLevel.name}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="incrementDue">
+                        <mat-header-cell *matHeaderCellDef>Increment Due(Months)</mat-header-cell>
+                        <mat-cell *matCellDef="let gradeLevel">
+                            <p class="phone text-truncate">
+                                {{gradeLevel.incrementDue}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="promotionDue">
+                        <mat-header-cell *matHeaderCellDef>Promotion Due(Months)</mat-header-cell>
+                        <mat-cell *matCellDef="let gradeLevel">
+                            <p class="phone text-truncate">
+                                {{gradeLevel.promotionDue}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="confirmAfter">
+                        <mat-header-cell *matHeaderCellDef>Confirm After(Months)</mat-header-cell>
+                        <mat-cell *matCellDef="let gradeLevel">
+                            <p class="phone text-truncate">
+                                {{gradeLevel.confirmAfter}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="retireAfter">
+                        <mat-header-cell *matHeaderCellDef>Retire After(Years)</mat-header-cell>
+                        <mat-cell *matCellDef="let gradeLevel">
+                            <p class="phone text-truncate">
+                                {{gradeLevel.retireAfter}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="retireType">
+                        <mat-header-cell *matHeaderCellDef>Retire Type</mat-header-cell>
+                        <mat-cell *matCellDef="let gradeLevel">
+                            <p class="phone text-truncate">
+                                {{gradeLevel.retireType}}
+                            </p>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef>
+                            <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let gradeLevel">
+                            <div fxFlex="row" fxLayoutAlign="end center">
+                                <button mat-icon-button aria-label="Toggle star" matTooltip="Grade Level Entitlements"
+                                    matTooltipPosition="left" (click)="addEntitlementGradeLevel(gradeLevel)"
+                                    style="color: #000000">
+                                    <mat-icon class="material-icons">credit_card</mat-icon>
+                                </button>
+                                <button mat-icon-button aria-label="Toggle star" (click)="editGradeLevel(gradeLevel)"
+                                    style="color: blue">
+                                    <mat-icon class="material-icons">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button aria-label="Toggle star"
+                                    (click)="deleteItemModalGradeLevel(gradeLevel)" style="color: red">
+                                    <mat-icon class="material-icons">delete</mat-icon>
+                                </button>
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedGradeLevelColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedGradeLevelColumns;" class="contact"
+                        [@animate]="{value:'*',params:{y:'100%'}}">
+                    </mat-row>
+                </mat-table>
             </mat-tab>
             <mat-tab label="GL Step">
                 <mat-table [dataSource]="stepsLevels" style="margin: -8px 1rem 0 1rem">
                     <ng-container matColumnDef="id">
-                        <mat-header-cell *matHeaderCellDef >S.No</mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
                         <mat-cell *matCellDef="let stepsLevel">
                             <p class="email text-truncate">
                                 {{stepsLevel.sno}}.
@@ -168,11 +180,11 @@
                         <mat-cell *matCellDef="let stepsLevel">
                             <div fxFlex="row" fxLayoutAlign="end center">
                                 <button mat-icon-button aria-label="Toggle star" (click)="editStepLevel(stepsLevel)"
-                                        style="color: blue">
+                                    style="color: blue">
                                     <mat-icon class="material-icons">edit</mat-icon>
                                 </button>
-                                <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModalStepLevel(stepsLevel)"
-                                        style="color: red">
+                                <button mat-icon-button aria-label="Toggle star"
+                                    (click)="deleteItemModalStepLevel(stepsLevel)" style="color: red">
                                     <mat-icon class="material-icons">delete</mat-icon>
                                 </button>
                             </div>
@@ -180,7 +192,7 @@
                     </ng-container>
                     <mat-header-row *matHeaderRowDef="displayedStepsLevelColumns"></mat-header-row>
                     <mat-row *matRowDef="let row; columns: displayedStepsLevelColumns;" class="contact"
-                             [@animate]="{value:'*',params:{y:'100%'}}">
+                        [@animate]="{value:'*',params:{y:'100%'}}">
                     </mat-row>
                 </mat-table>
             </mat-tab>
@@ -189,4 +201,3 @@
     </div>
 
 </div>
-

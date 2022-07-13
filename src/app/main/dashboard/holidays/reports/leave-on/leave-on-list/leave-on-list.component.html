@@ -1,0 +1,215 @@
+<div class="page-layout simple left-sidebar inner-sidebar inner-scroll" id="items-list-select-component">
+    <div fxFlex="100" fxLayout="row" class="mt-20px">
+        <div class="margin-top-1rem" fxFlex="25">
+            <div class="center p-5px pb-56" fusePerfectScrollbar>
+                <div class="filter-title">Filter Employees by Department</div>
+                <div class="content">
+                    <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
+                        <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
+                            <button mat-icon-button disabled></button>
+                            {{node.name}}
+                            <button mat-icon-button title="Choose" (click)="setAdminSegment(node)"
+                                *ngIf="allowType === 'BOTH' || allowType === 'CHILD'">
+                                <mat-icon class="addBtn">check_circle</mat-icon>
+                            </button>
+                        </mat-tree-node>
+                        <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
+                            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+                                <mat-icon class="mat-icon-rtl-mirror">
+                                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                </mat-icon>
+                            </button>
+                            {{node.name}}
+                            <button mat-icon-button title="Choose" (click)="setAdminSegment(node)"
+                                *ngIf="allowType === 'BOTH' || allowType === 'PARENT'">
+                                <mat-icon class="addBtn">check_circle</mat-icon>
+                            </button>
+                        </mat-tree-node>
+                    </mat-tree>
+                </div>
+            </div>
+        </div>
+        <div class="margin-top-1rem pl-1rem" fxFlex="75">
+            <div fxLayout="column" fxLayoutGap="20px">
+                <div fxFlex="100" style="padding: 1rem">
+                    <form [formGroup]="adminSegmentSearchForm">
+                        <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>From</mat-label>
+                            <input matInput [matDatepicker]="from" formControlName="fromDate"
+                                [min]="dateChecks.fromMinDate" [max]="dateChecks.fromMaxDate"
+                                (dateChange)="fromDateChange()">
+                            <mat-datepicker-toggle matSuffix [for]="from">
+                                <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #from></mat-datepicker>
+                            <!-- <mat-error *ngIf="adminSegmentSearchForm.controls.from.errors?.matDatepickerMin ">Date cant be
+                                    less then (1-1-{{currentYear}})</mat-error> -->
+                            <mat-error *ngIf="adminSegmentSearchForm.controls.fromDate.errors?.matDatepickerMax ">Date
+                                cant be
+                                greater then To date</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>To</mat-label>
+                            <input matInput [matDatepicker]="to" formControlName="toDate" [min]="dateChecks.toMinDate"
+                                [max]="dateChecks.toMaxDate" (dateChange)="toDateChange()">
+                            <mat-datepicker-toggle matSuffix [for]="to">
+                                <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #to></mat-datepicker>
+                            <mat-error *ngIf="adminSegmentSearchForm.controls.toDate.errors?.matDatepickerMin ">Date
+                                cant be
+                                less then From Date</mat-error>
+                            <!-- <mat-error *ngIf="adminSegmentSearchForm.controls.preparedVDate.errors?.matDatepickerMax ">Date cant be
+                                    greater then Start date</mat-error> -->
+                        </mat-form-field>
+                        <!-- <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="status" (selectionChange)="selectOption($event.value)">
+                                <mat-option value="">Choose Type</mat-option>
+                                    <mat-option value="hodpending">HOD Pending</mat-option>
+                                    <mat-option value="hodapproved">HOD Approved</mat-option>
+                                    <mat-option value="hrpending">HR Pending</mat-option>
+                                    <mat-option value="hrapproved">HR Approved</mat-option>
+
+                            </mat-select>
+                        </mat-form-field> -->
+                        <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                            <mat-label>Search</mat-label>
+                            <input matInput formControlName="search" name="search"
+                                (keyup)="getItemsBySearch(this.adminSegmentSearchForm.value.search)">
+                        </mat-form-field>
+                        <!-- <button mat-button class="save-button reset-btn" (click)="resetTransFilter()">Reset</button> -->
+                    </form>
+                </div>
+                <div fxFlex="100" *ngIf="selectedCategory" style="margin-top: -20px">
+                    <button mat-button aria-label="Save" class="save-button">{{selectedCategory}}
+                        <mat-icon (click)="resetSelection()">close</mat-icon>
+                    </button>
+                </div>
+                <div class="p-5px">
+                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="leaveRequestList">
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef>Emp ID</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="email text-truncate">
+                                    {{leaveRequest.empId}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Employee Name">
+                            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{leaveRequest.fullName}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="File No">
+                            <mat-header-cell *matHeaderCellDef>File No</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="email text-truncate">
+                                    {{leaveRequest.personnelFileNumber}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="leave type">
+                            <mat-header-cell *matHeaderCellDef>Leave Type</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{leaveRequest.leave?.title}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="exp start date">
+                            <mat-header-cell *matHeaderCellDef>E.S Date</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{leaveRequest.expectedStartDate | date: 'shortDate'}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="e duration">
+                            <mat-header-cell *matHeaderCellDef>E. Duration</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{leaveRequest.expectedDuration}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="exp end date">
+                            <mat-header-cell *matHeaderCellDef>E.E Date</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{moment(leaveRequest.expectedStartDate).add(leaveRequest.expectedDuration,'days') |
+                                    date: 'shortDate'}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="req closed">
+                            <mat-header-cell *matHeaderCellDef>Req Closed</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{leaveRequest.requestClosed}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <!-- <ng-container matColumnDef="HOD Leave">
+                            <mat-header-cell *matHeaderCellDef>HOD Leave</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{leaveRequest.approvedHOD}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="HR Leave">
+                            <mat-header-cell *matHeaderCellDef>Hr Leave</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="phone text-truncate">
+                                    {{leaveRequest.approvedHR}}
+                                </p>
+                            </mat-cell>
+                        </ng-container> -->
+                        <ng-container matColumnDef="R.O FileNo">
+                            <mat-header-cell *matHeaderCellDef>R.O FileNo</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="email text-truncate">
+                                    {{leaveRequest.reliefOfficerFileNumber}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="HOD FileNo">
+                            <mat-header-cell *matHeaderCellDef>HOD FileNo</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="email text-truncate">
+                                    {{leaveRequest.unitApprovingOfficerrFileNumber}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="HR FileNo">
+                            <mat-header-cell *matHeaderCellDef>HR FileNo</mat-header-cell>
+                            <mat-cell *matCellDef="let leaveRequest">
+                                <p class="email text-truncate">
+                                    {{leaveRequest.hrApprovingOfficerFileNumber}}
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let leaveRequest; columns: displayedColumns;" class="contact"
+                            [@animate]="{value:'*',params:{y:'100%'}}">
+                        </mat-row>
+                    </mat-table>
+                </div>
+                <div *ngIf="leaveRequestList.length > 0" fxFlex="100">
+                    <mat-paginator #paginator (page)="pageEvent = onPageChange($event)" [length]="pagination.total"
+                        [pageIndex]="pagination.page-1" [pageSize]="pagination.perpage">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

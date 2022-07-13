@@ -1,0 +1,92 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="leaveRequestForm">
+            <div>
+                <h1>Leave Request Details</h1>
+                <p><b>Leave Type</b> {{updateData.leaveRequest.leaveRequest.leaveCredit.leave.title}} </p>
+                <p><b>Staff Name:</b> {{updateData.leaveRequest.leaveRequest.staff.firstName}}
+                    {{updateData.leaveRequest.leaveRequest.staff.lastName}} </p>
+                <p><b>Start Date:</b> {{updateData.leaveRequest.leaveRequest.startDate | date: 'shortDate'}} </p>
+                <p><b>Duration:</b> {{updateData.leaveRequest.leaveRequest.duration}}</p>
+                <p><b>Staff Value Date</b> {{updateData.leaveRequest.leaveRequest.preparedVDate | date: 'shortDate'}}
+                </p>
+                <p><b>Releif Officer:</b> {{updateData.leaveRequest.leaveRequest.reliefOfficer.firstName}}
+                    {{updateData.leaveRequest.leaveRequest.reliefOfficer.lastName}}</p>
+                <p><b>P. Login:</b> {{updateData.leaveRequest.leaveRequest.preparedLoginId}} </p>
+                <p><b>HOD Approved:</b> {{updateData.leaveRequest.leaveRequest.approvedHod | titlecase}} </p>
+                <p><b>HOD Value Date:</b> {{updateData.leaveRequest.leaveRequest.approvedHodVDate | date:'shortDate'}}
+                </p>
+                <p><b>HOD P.Login:</b> {{updateData.leaveRequest.leaveRequest.approvedHodLoginId}} </p>
+                <h1>Leave Request Closed Details</h1>
+                <p><b>Spent Days:</b> {{updateData.leaveRequest.daysSpent}}</p>
+                <p><b>Staff Value Date</b> {{updateData.leaveRequest.preparedVDate | date: 'shortDate'}}</p>
+                <p><b>Staff P.Login:</b> {{updateData.leaveRequest.preparedLoginId}} </p>
+                <p><b>Staff remarks:</b> {{updateData.leaveRequest.userRemarks}} </p>
+                <p><b>HOD Approved:</b> {{updateData.leaveRequest.approvedHod | titlecase}} </p>
+                <p><b>HOD Value Date:</b> {{updateData.leaveRequest.approvedHodVDate | date:'shortDate'}} </p>
+                <p><b>HOD P.Login:</b> {{updateData.leaveRequest.approvedHodLoginId}} </p>
+                <p><b>HOD remarks:</b> {{updateData.leaveRequest.hodRemarks}} </p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Approved Value Date</mat-label>
+                    <input matInput [matDatepicker]="pickerPVDate" formControlName="approvedHrVDate"
+                        [min]="datesCheck.valueMinDate" [max]="datesCheck.valueMaxDate" placeholder="Value Date">
+                    <mat-datepicker-toggle matSuffix [for]="pickerPVDate">
+                        <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #pickerPVDate></mat-datepicker>
+                    <mat-error *ngIf="leaveRequestForm.controls.approvedHrVDate.errors?.matDatepickerMin ">Date cant be
+                        less then HOD Value date</mat-error>
+                    <mat-error *ngIf="leaveRequestForm.controls.approvedHrVDate.errors?.matDatepickerMax ">Date cant
+                        exceed
+                        (31-12-{{currentYear}})</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px" fxFlex>
+                    <mat-label>HOD Approval Status</mat-label>
+                    <mat-select formControlName="approvedHod">
+                        <mat-option value="pending">Pending</mat-option>
+                        <mat-option value="approved">Approved</mat-option>
+                        <mat-option value="rejected">Rejected</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px" fxFlex>
+                    <mat-label>HR Approval Status</mat-label>
+                    <mat-select formControlName="approvedHr">
+                        <mat-option value="pending">Pending</mat-option>
+                        <mat-option value="approved">Approved</mat-option>
+                        <mat-option value="rejected">Rejected</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Remarks</mat-label>
+                    <textarea matInput name="" id="" cols="30" rows="10" formControlName="hrRemarks">
+                        </textarea>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close(leaveRequestForm); saveLeaveRequest()"
+            [disabled]="leaveRequestForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(leaveRequestForm); updateLeaveRequest()"
+            [disabled]="leaveRequestForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+leave-request-report-list {
+    #items-list-select-component {
+        width     : 1000px !important;
+        height    : auto !important;
+        overflow-y: scroll;
+        min-height: 800px !important;
+    }
+
+    .text-truncate {
+        white-space: unset;
+    }
+
+    .addBtn {
+        color: #2E7D32 !important;
+    }
+
+    .ml-3 {
+        margin-left: 10px;
+    }
+
+    .p-5px {
+        padding: 5px;
+    }
+
+    .mt-20px {
+        margin-top: 20px;
+    }
+
+    .pl-1rem {
+        padding-left: 1rem;
+    }
+
+    .filter-title {
+        font-weight: bold;
+        font-size  : 1.5rem;
+    }
+
+    .border-2px-solid {
+        border: 2px solid #e0e0e0;
+    }
+
+    .p-2px {
+        padding: 2px;
+    }
+
+    .cancel-btn {
+        width: 120px;
+    }
+
+    .reset-btn {
+        background-color: #106cc8 !important;
+        color           : white !important;
+        margin-left     : 10px;
+        height          : 40px;
+        width           : 100px;
+        margin-top      : 10px;
+    }
+
+    .save-button {
+        background-color: #106CC8 !important;
+        color           : white !important;
+    }
+}

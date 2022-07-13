@@ -5,6 +5,8 @@ import {LeaveTypeCreateComponent} from '../leave-type-create/leave-type-create.c
 import {fuseAnimations} from '../../../../../../@fuse/animations';
 import {ContactInfoService} from '../../../../../shared/services/contact-info.service';
 import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/delete-list-modal.component';
+import { PageEvent } from '@angular/material/paginator';
+import { PermissionConstant } from 'app/shared/constants/permission-constant';
 
 @Component({
     selector: 'leave-type-list',
@@ -15,11 +17,19 @@ import { DeleteListModalComponent } from 'app/main/dashboard/delete-list-modal/d
 })
 export class LeaveTypeListComponent implements OnInit {
     leavesList = [];
-    displayedLeavesTypeColumns = ['id', 'name', 'status', 'actions'];
+    displayedLeavesTypeColumns = ['id', 'name','eAnually','pLeave','cDays','rLeaves', 'status', 'actions'];
     dialogRef: any;
     selectIndex = 0;
+    pagination = {
+        page: 1,
+        total: null,
+        perpage: 15,
+        pages: null
+    };
+    pageEvent: PageEvent;
     @Output() selectedIndexChange: EventEmitter<number>;
-
+    permissionEditTypeOfLeave = [PermissionConstant.TYPES_OF_LEAVES_EDIT];
+    permissionDeleteTypeOfLeave = [PermissionConstant.TYPES_OF_LEAVES_DELETE];
     constructor(private contactInfoService: ContactInfoService,
                 private _matDialog: MatDialog) {
     }
@@ -29,9 +39,11 @@ export class LeaveTypeListComponent implements OnInit {
     }
 
     getLeavesTypeList() {
-        this.contactInfoService.getLeavesTypeList({'page': -1}).subscribe(data => {
+        this.contactInfoService.getLeavesTypeList(this.pagination).subscribe(data => {
             this.leavesList = data.items;
-
+            this.pagination.page = data.page;
+            this.pagination.total = data.total;
+            this.pagination.pages = data.pages;
             if (this.leavesList && this.leavesList.length > 0) {
                 let i = 1;
                 this.leavesList.forEach(val => {
@@ -75,4 +87,8 @@ export class LeaveTypeListComponent implements OnInit {
         });
     }
 
+    onPageChange(page) {
+        this.pagination.page = page.pageIndex + 1;
+        this.getLeavesTypeList();
+    }
 }

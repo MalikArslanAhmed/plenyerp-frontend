@@ -1,21 +1,23 @@
 <div id="skills" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
-         fxLayoutAlign.gt-xs="space-between center">
+        fxLayoutAlign.gt-xs="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
             <div class="logo" fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="logo-icon mr-16"
-                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">calendar_today
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    calendar_today
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                   Type of leaves
+                    Types of leave
                 </span>
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-            <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
+            <div appPermissionBind [permission]="permissionAddTypeOfLeave">
+                <button mat-fab class="accent" id="add-button" aria-label="add salary scales"
                     [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="addLeaveType()">
-                <mat-icon>add_circle</mat-icon>
-            </button>
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
         </div>
         <!-- SEARCH -->
         <!--<div class="ml-sm-32" fxLayout="row" fxLayoutAlign="center center" fxFlex>

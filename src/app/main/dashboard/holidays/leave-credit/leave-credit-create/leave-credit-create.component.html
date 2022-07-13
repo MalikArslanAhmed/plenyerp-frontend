@@ -1,0 +1,82 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="leaveCreditForm">
+            <ng-container *ngIf="!_data.bulkUploadData">
+                <div fxLayout="row" fxLayoutAlign="start">
+                    <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px"
+                        (click)="selectAdminEmployee('Select Employee')" fxFlex>
+                        <mat-label>Select Staff</mat-label>
+                        <mat-select formControlName="staffId">
+                            <mat-option value="">Choose Employees</mat-option>
+                            <mat-option *ngFor="let employee of selectedEmployee" [value]="employee.id">
+                                {{employee?.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start">
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Select Leave Type</mat-label>
+                        <mat-select formControlName="leaveTypeId" required>
+                            <mat-option [value]="groupType.id" *ngFor="let groupType of groupTypeList">
+                                {{groupType.title}}</mat-option>
+                        </mat-select>
+                        <mat-error>Leave Type is required!</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start">
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Due Days</mat-label>
+                        <input matInput placeholder="Due Days" type="number" formControlName="dueDays" name="dueDays"
+                            required cdk-focus-start>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start">
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Select Year</mat-label>
+                        <mat-select formControlName="leaveYearId" required>
+                            <mat-option [value]="activeYear.id" *ngFor="let activeYear of activeYearsList">
+                                {{activeYear.year}}</mat-option>
+                        </mat-select>
+                        <mat-error>Year is required!</mat-error>
+                    </mat-form-field>
+                </div>
+            </ng-container>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>P.V Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="preparedVDate"
+                        placeholder="preparedVDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button *ngIf="!_data.bulkUploadData && this.action !== 'EDIT'" mat-button class="save-button" (click)="matDialogRef.close(leaveCreditForm); saveLeaveCredit()"
+            [disabled]="leaveCreditForm.invalid" aria-label="Save">ADD
+        </button>
+        <button *ngIf="_data.bulkUploadData" mat-button class="save-button" (click)="matDialogRef.close(leaveCreditForm); bulkUpload()"
+            [disabled]="leaveCreditForm.invalid" aria-label="Save">Bulk Upload
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(leaveCreditForm); updateLeaveCredit()"
+            [disabled]="leaveCreditForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

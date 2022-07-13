@@ -10,6 +10,7 @@ import {MatTabChangeEvent, MatTabGroup} from '@angular/material/tabs';
 import {StepLevelCreateComponent} from '../step-level-create/step-level-create.component';
 import { DeleteListModalComponent } from '../../delete-list-modal/delete-list-modal.component';
 import { PermissionConstant } from 'app/shared/constants/permission-constant';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-salary-scales-list',
@@ -44,7 +45,9 @@ export class SalaryScalesListComponent implements OnInit {
     permissionDeleteSalaryScales = [PermissionConstant.SALARYSCALES_DELETE];
 
     constructor(private salaryScalesService: SalaryScalesService,
-                private _matDialog: MatDialog) {
+                private _matDialog: MatDialog,
+                private router:Router
+                ) {
     }
 
     ngOnInit(): void {
@@ -98,6 +101,14 @@ export class SalaryScalesListComponent implements OnInit {
                 this.goToGradeLevel(this.salaryScales[this.selectIndex]);
             }
         });
+    }
+
+    addEntitlementSalaryScale(salaryScale) {
+        this.router.navigateByUrl('dashboard/leave-entitlement-salary-scales/' + salaryScale.id);
+    }
+
+    addEntitlementGradeLevel(gradeLevel) {
+        this.router.navigateByUrl('dashboard/leave-entitlement-grade-levels/' + gradeLevel.id);
     }
 
     deleteItemModalSalaryScale(items) {

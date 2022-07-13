@@ -1,10 +1,10 @@
-import {BaseService} from './base.service';
-import {HttpClient} from '@angular/common/http';
-import {AlertService} from './alert.service';
-import {GlobalService} from './global.service';
-import {Observable} from 'rxjs';
-import {AppUrl} from '../constants/app-url';
-import {Injectable} from '@angular/core';
+import { BaseService } from './base.service';
+import { HttpClient } from '@angular/common/http';
+import { AlertService } from './alert.service';
+import { GlobalService } from './global.service';
+import { Observable } from 'rxjs';
+import { AppUrl } from '../constants/app-url';
+import { Injectable } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
@@ -108,10 +108,163 @@ export class ContactInfoService extends BaseService {
     deleteLeavesGroup(id): Observable<any> {
         return this.deleteRequest(AppUrl.DELETE_LEAVES_GROUP(id));
     }
+    //
+    getLeaveGroupMemberList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_GROUP_MEMBER_LIST(), data);
+    }
+    addLeaveGroupMember(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_GROUP_MEMBER(), data);
+    }
+    updateLeaveGroupMember(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_GROUP_MEMBER(id), data);
+    }
+    deleteLeaveGroupMember(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_GROUP_MEMBER(id));
+    }
+    //
+    //Leave Reports calls
+    getLeaveBalanceReportList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_BALANCE_REPORT_LIST(), data);
+    }
 
+    getLeaveScheduleReportList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_SCHEDULE_REPORT_LIST(), data);
+    }
+
+    getLeaveRequestReportList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_REQUEST_REPORT_LIST(), data);
+    }
+    //Group Entitlement calls
+    getLeaveGroupEntitlementList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_GROUP_Entitlement_LIST(), data);
+    }
+    addLeaveGroupEntitlement(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_GROUP_Entitlement(), data);
+    }
+    updateLeaveGroupEntitlement(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_GROUP_Entitlement(id), data);
+    }
+    deleteLeaveGroupEntitlement(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_GROUP_Entitlement(id));
+    }
+    //Group entitlements calls end
+
+    // Leave Year start
+    getLeaveYearList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_YEAR_LIST(), data);
+    }
+    addLeaveYear(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_YEAR(), data);
+    }
+    updateLeaveYear(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_YEAR(id), data);
+    }
+    deleteLeaveYear(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_YEAR(id));
+    }
+    //Leave year apis end
+
+    // Leave Request start
+    getLeaveRequestList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_REQUEST_LIST(), data);
+    }
+    addLeaveRequest(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_REQUEST(), data);
+    }
+    updateLeaveRequest(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_REQUEST(id), data);
+    }
+    deleteLeaveRequest(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_REQUEST(id));
+    }
+    //Leave Request apis end
+
+    // Leave Request Closed start
+    getLeaveRequestClosedList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_REQUEST_CLOSED_LIST(), data);
+    }
+    addLeaveRequestClosed(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_REQUEST_CLOSED(), data);
+    }
+    updateLeaveRequestClosed(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_REQUEST_CLOSED(id), data);
+    }
+    deleteLeaveRequestClosed(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_REQUEST_CLOSED(id));
+    }
+    //Leave Request Closed apis end
+
+    // Leave Credit start
+    getLeaveCreditList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_CREDIT_LIST(), data);
+    }
+    bulkUploadLeaveCredit(data): Observable<any> {
+        return this.postRequest(AppUrl.BULK_UPLOAD_LEAVE_CREDIT(), data);
+    }
+    addLeaveCredit(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_CREDIT(), data);
+    }
+    updateLeaveCredit(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_CREDIT(id), data);
+    }
+    deleteLeaveCredit(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_CREDIT(id));
+    }
+    deleteAllLeaveCredit(): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_ALL_LEAVE_CREDIT());
+    }
+    getLeaveCreditViewList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_CREDIT_VIEW_LIST(), data);
+    }
+    //Leave credit apis end
+
+    // Hr Information start
+    getInformationList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_HR_INFORMATION_LIST(), data);
+    }
+    addInformation(data): Observable<any> {
+        return this.postRequest(AppUrl.HR_INFORMATION(), data);
+    }
+    updateInformation(id, data): Observable<any> {
+        return this.putRequest(AppUrl.HR_INFORMATION(id), data);
+    }
+    deleteInformation(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_HR_INFORMATION(id));
+    }
+    //Hr Information apis end
     getPublicHolidayList(data): Observable<any> {
         return this.getRequest(AppUrl.GET_PUBLIC_HOLIDAY_LIST(), data);
     }
+
+    // Leave Entitlement Salary Scale  Starts
+    getLeaveEntitlementSalaryScaleList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_ENTITLEMENT_SALARY_SCALE_LIST(), data);
+    }
+    addLeaveEntitlementSalaryScale(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_ENTITLEMENT_SALARY_SCALE(), data);
+    }
+    updateLeaveEntitlementSalaryScale(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_ENTITLEMENT_SALARY_SCALE(id), data);
+    }
+    deleteLeaveEntitlementSalaryScale(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_ENTITLEMENT_SALARY_SCALE(id));
+    }
+    //Leave Entitlement Salary Scale  apis end
+
+    // Leave Entitlement Grade Level Starts
+    getLeaveEntitlementGradeLevelList(data): Observable<any> {
+        return this.getRequest(AppUrl.GET_LEAVE_ENTITLEMENT_GRADE_LEVEL_LIST(), data);
+    }
+    addLeaveEntitlementGradeLevel(data): Observable<any> {
+        return this.postRequest(AppUrl.LEAVE_ENTITLEMENT_GRADE_LEVEL(), data);
+    }
+    updateLeaveEntitlementGradeLevel(id, data): Observable<any> {
+        return this.putRequest(AppUrl.LEAVE_ENTITLEMENT_GRADE_LEVEL(id), data);
+    }
+    deleteLeaveEntitlementGradeLevel(id): Observable<any> {
+        return this.deleteRequest(AppUrl.DELETE_LEAVE_ENTITLEMENT_GRADE_LEVEL(id));
+    }
+    //Leave Entitlement Grade Level apis end
     addPublicHoliday(data): Observable<any> {
         return this.postRequest(AppUrl.PUBLIC_HOLIDAY(), data);
     }

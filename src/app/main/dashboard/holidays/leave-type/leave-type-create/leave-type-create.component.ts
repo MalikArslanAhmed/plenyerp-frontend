@@ -40,26 +40,26 @@ export class LeaveTypeCreateComponent implements OnInit {
 
     refresh() {
         this.leavesTypeForm = this.fb.group({
-            name: ['', Validators.required],
+            title: ['', Validators.required],
             shortName: ['', Validators.required],
-            isCarryOverUnusedLeave: [false, Validators.required],
             isPaidLeave: [false, Validators.required],
             isCalenderDays: [false, Validators.required],
+            entitledAnnually: [false, Validators.required],
+            rollOverUnusedLeave: [false, Validators.required],
             isActive: [true, Validators.required],
-            autoCreate: [false, Validators.required]
         });
     }
 
     checkForUpdate() {
         if (this.updateData) {
             this.leavesTypeForm.patchValue({
-                name: this.updateData.leave.name,
+                title: this.updateData.leave.title,
                 shortName: this.updateData.leave.shortName,
-                isCarryOverUnusedLeave: this.updateData.leave.isCarryOverUnusedLeave,
                 isPaidLeave: this.updateData.leave.isPaidLeave,
                 isCalenderDays: this.updateData.leave.isCalenderDays,
+                entitledAnnually: this.updateData.leave.entitledAnnually,
+                rollOverUnusedLeave: this.updateData.leave.rollOverUnusedLeave,
                 isActive: this.updateData.leave.isActive,
-                autoCreate: this.updateData.leave.autoCreate,
             });
         }
     }

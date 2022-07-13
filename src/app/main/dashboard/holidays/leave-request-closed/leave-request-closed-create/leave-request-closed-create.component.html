@@ -1,0 +1,78 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="leaveRequestForm">
+            <!-- <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Select Leave Request</mat-label>
+                    <mat-select formControlName="leaveRequestId" required>
+                        <mat-option [value]="leaveRequest.id" *ngFor="let leaveRequest of leaveRequestList">
+                            {{leaveRequest.leaveCredit.leave.title}} ({{leaveRequest.leaveCredit.dueDays}}Day's)</mat-option>
+                    </mat-select>
+                    <mat-error>Leave Request is required!</mat-error>
+                </mat-form-field>
+            </div> -->
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Days spent</mat-label>
+                    <input matInput placeholder="Days Spent" type="number" formControlName="daysSpent" name="daysSpent"
+                        required cdk-focus-start>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Value Date</mat-label>
+                    <input matInput [matDatepicker]="pickerPVDate" formControlName="preparedVDate" [min]="datesCheck.valueMinDate" [max]="datesCheck.valueMaxDate"
+                        placeholder="Value Date">
+                    <mat-datepicker-toggle matSuffix [for]="pickerPVDate">
+                        <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #pickerPVDate></mat-datepicker>
+                    <mat-error *ngIf="leaveRequestForm.controls.preparedVDate.errors?.matDatepickerMin ">Date cant be
+                        less then HR Leave Request Value date</mat-error>
+                    <mat-error *ngIf="leaveRequestForm.controls.preparedVDate.errors?.matDatepickerMax ">Date cant exceed
+                        (31-12-{{currentYear}})</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" class="width-256px p-10px mt-13px mb--15px"
+                    (click)="selectAdminEmployee('Select HOD Staff')" fxFlex>
+                    <mat-label>Select Staff</mat-label>
+                    <mat-select formControlName="hodStaffId">
+                        <mat-option value="">Choose HOD</mat-option> 
+                        <mat-option *ngFor="let employee of selectedhodStaff" [value]="employee.id">
+                            {{employee?.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                <mat-slide-toggle formControlName="requestReady"></mat-slide-toggle>
+                <mat-label>Request Ready</mat-label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Remarks</mat-label>
+                    <textarea matInput name="" id="" cols="30" rows="10" formControlName="userRemarks">
+                        </textarea>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button class="save-button" (click)="matDialogRef.close(leaveRequestForm); saveLeaveRequestClosed()"
+            [disabled]="leaveRequestForm.invalid" aria-label="Save" *ngIf="this.action !== 'EDIT'">ADD
+        </button>
+        <button mat-button class="save-button" (click)="matDialogRef.close(leaveRequestForm); updateLeaveRequestClosed()"
+            [disabled]="leaveRequestForm.invalid" aria-label="Update" *ngIf="this.action === 'EDIT'">UPDATE
+        </button>
+    </div>
+</div>

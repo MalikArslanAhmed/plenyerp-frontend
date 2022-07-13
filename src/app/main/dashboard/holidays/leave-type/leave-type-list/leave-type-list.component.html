@@ -10,14 +10,57 @@
         </ng-container>
 
         <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
             <mat-cell *matCellDef="let leaves" class="cursor-pointer">
                 <p class="phone text-truncate cursor-pointer">
-                    {{leaves.name}}
+                    {{leaves.title}}
                 </p>
             </mat-cell>
         </ng-container>
-
+        <ng-container matColumnDef="eAnually">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Entitled Anually</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaves">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaves.entitledAnnually">Yes</p>
+                    <p *ngIf="!leaves.entitledAnnually">No</p>
+                </div>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pLeave">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Paid Leave</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaves">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaves.isPaidLeave">Yes</p>
+                    <p *ngIf="!leaves.isPaidLeave">No</p>
+                </div>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cDays">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Calender Days</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaves">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaves.isCalenderDays">Yes</p>
+                    <p *ngIf="!leaves.isCalenderDays">No</p>
+                </div>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="rLeaves">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Rollover unused leave</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaves">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaves.rollOverUnusedLeave">Yes</p>
+                    <p *ngIf="!leaves.rollOverUnusedLeave">No</p>
+                </div>
+            </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef>
                 <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
@@ -36,24 +79,28 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let leaves">
                 <div fxFlex="row" fxLayoutAlign="end center">
-                    <button mat-icon-button aria-label="Toggle star" (click)="editLeave(leaves)"
+                    <div appPermissionBind [permission]="permissionEditTypeOfLeave">
+                        <button mat-icon-button aria-label="Toggle star" (click)="editLeave(leaves)"
                             style="color: blue">
-                        <mat-icon class="material-icons">edit</mat-icon>
-                    </button>
-                    <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaves)"
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDeleteTypeOfLeave">
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaves)"
                             style="color: red">
-                        <mat-icon class="material-icons">delete</mat-icon>
-                    </button>
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedLeavesTypeColumns"></mat-header-row>
         <mat-row *matRowDef="let leaves; columns: displayedLeavesTypeColumns;" class="contact"
-                 [@animate]="{value:'*',params:{y:'100%'}}">
+            [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
     </mat-table>
+    <mat-paginator #paginator *ngIf="leavesList.length > 0" [length]="pagination.total" [pageSize]="pagination.perpage"
+        [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
+    </mat-paginator>
 </div>
-
-
-

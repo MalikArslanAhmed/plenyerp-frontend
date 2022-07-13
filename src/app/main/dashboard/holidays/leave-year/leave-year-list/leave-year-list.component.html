@@ -1,0 +1,60 @@
+<div class="leaves-list">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="leaveYearList">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let leaveYear">
+                <p class="email text-truncate">
+                    {{leaveYear.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="leaveYear">
+            <mat-header-cell *matHeaderCellDef>Leave Year</mat-header-cell>
+            <mat-cell *matCellDef="let leaveYear" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveYear.year}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 10px">Status</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaveYear">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <p *ngIf="leaveYear.isActive">Active</p>
+                    <p *ngIf="!leaveYear.isActive">Inactive</p>
+                </div>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaveYear">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <div appPermissionBind [permission]="permissionEdit">
+                        <button mat-icon-button aria-label="Toggle star" (click)="editLeave(leaveYear)"
+                            style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDelete">
+                        <button mat-icon-button aria-label="Toggle star" (click)="deleteItemModal(leaveYear)"
+                            style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedLeaveYearColumns"></mat-header-row>
+        <mat-row *matRowDef="let leaveYear; columns: displayedLeaveYearColumns;" class="contact"
+            [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator *ngIf="leaveYearList.length > 0" [length]="pagination.total"
+        [pageSize]="pagination.perpage" [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
+    </mat-paginator>
+</div>

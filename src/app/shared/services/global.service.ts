@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {StorageService} from './storage.service';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { StorageService } from './storage.service';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import * as moment from 'moment';
 // import {StaticEventsService} from './static.event.service';
 // import {PubNubAngular} from 'pubnub-angular2';
 // import {ROUTES} from '../sidebar/sidebar-routes.config';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 
 declare var $: any;
@@ -22,7 +22,7 @@ export class GlobalService {
     // public notification = new BehaviorSubject(undefined);
     // viewRefresh$ = this.viewRefresh.asObservable();
     self$ = this.self.asObservable();
-
+    bulkUpload = false
     constructor() {
         if (StorageService.getItem('accessToken')) {
             this.setAccessToken(StorageService.getItem('accessToken'));

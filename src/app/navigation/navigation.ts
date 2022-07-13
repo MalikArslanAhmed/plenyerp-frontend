@@ -1,7 +1,7 @@
-import {FuseNavigation} from '@fuse/types';
-import {RouteGuard} from 'app/shared/guards/route.guard';
-import {AppConstants} from '../shared/constants/app-constants';
-import {PermissionConstant} from '../shared/constants/permission-constant';
+import { FuseNavigation } from '@fuse/types';
+import { RouteGuard } from 'app/shared/guards/route.guard';
+import { AppConstants } from '../shared/constants/app-constants';
+import { PermissionConstant } from '../shared/constants/permission-constant';
 
 export const navigation: FuseNavigation[] = [
     {
@@ -283,16 +283,16 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'holiday',
-                title: 'Holidays',
+                title: 'Leave',
                 roles: [AppConstants.ROLE_ID_HR],
                 // translate: 'NAV.DASHBOARDS',
                 type: 'collapsable',
                 icon: 'calendar_today',
-                permissions: [PermissionConstant.PUBLIC_HOLIDAYS_LIST, PermissionConstant.LEAVE_GROUP_LIST, PermissionConstant.TYPES_OF_LEAVES_LIST],
+                // permissions: [PermissionConstant.PUBLIC_HOLIDAYS_LIST, PermissionConstant.LEAVE_GROUP_LIST, PermissionConstant.TYPES_OF_LEAVES_LIST],
                 children: [
                     {
                         id: 'leaves-type',
-                        title: 'Type of leaves',
+                        title: 'Types of leave',
                         roles: [],
                         type: 'item',
                         url: 'dashboard/leaves-type',
@@ -307,6 +307,70 @@ export const navigation: FuseNavigation[] = [
                         permissions: [PermissionConstant.LEAVE_GROUP_LIST]
                     },
                     {
+                        id: 'leave-year',
+                        title: 'Leave years',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-year',
+                        permissions: [PermissionConstant.LEAVE_YEAR_LIST]
+                    },
+                    {
+                        id: 'leave-credit',
+                        title: 'Leave Credits',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-credit',
+                        permissions: [PermissionConstant.LEAVE_CREDIT_LIST]
+                    },
+                    {
+                        id: 'leave-requests',
+                        title: 'Leave Requests',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-request',
+                        permissions: [PermissionConstant.LEAVE_REQUESTS_LIST]
+                    },
+                    {
+                        id: 'hod-leave-request-approved',
+                        title: 'HOD Leave Requests Approval',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/hod-leave-request-approved',
+                        permissions: [PermissionConstant.HOD_LEAVE_REQUEST_APPROVED_LIST]
+                    },
+                    {
+                        id: 'hr-leave-request-approved',
+                        title: 'HR Leave Requests Approval',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/hr-leave-request-approved',
+                        permissions: [PermissionConstant.HR_LEAVE_REQUEST_APPROVED_LIST]
+                    },
+                    // {
+                    //     id: 'leave-requests-closed',
+                    //     title: 'Leave Requests Closed',
+                    //     roles: [],
+                    //     type: 'item',
+                    //     url: 'dashboard/leave-request-closed',
+                    //     permissions: [PermissionConstant.LEAVE_REQUESTS_CLOSED_LIST]
+                    // },
+                    {
+                        id: 'hod-leave-request-closed-approved',
+                        title: 'HOD Leave Requests Closed Approval',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/hod-leave-request-closed-approved',
+                        permissions: [PermissionConstant.HOD_LEAVE_REQUEST_CLOSED_APPROVED_LIST]
+                    },
+                    {
+                        id: 'hr-leave-request-closed-approved',
+                        title: 'HR Leave Requests Closed Approval',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/hr-leave-request-closed-approved',
+                        permissions: [PermissionConstant.HR_LEAVE_REQUEST_CLOSED_APPROVED_LIST]
+                    },
+                    {
                         id: 'public-holiday',
                         title: 'Public Holidays ',
                         roles: [],
@@ -314,6 +378,68 @@ export const navigation: FuseNavigation[] = [
                         url: 'dashboard/public-holiday',
                         permissions: [PermissionConstant.PUBLIC_HOLIDAYS_LIST],
                     }
+                ]
+            },
+            {
+                id: 'leave-reports',
+                title: 'Leave Reports',
+                roles: [AppConstants.ROLE_ID_HR],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'calendar_today',
+                permissions: [PermissionConstant.LEAVE_BALANCE_LIST, PermissionConstant.LEAVE_SCHEDULE_LIST,PermissionConstant.LEAVE_REQUEST_REPORT_LIST,PermissionConstant.LEAVE_ON_LIST],
+                children: [
+                    {
+                        id: 'leave-balance',
+                        title: 'Leave Balance',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-report/leave-balance',
+                        permissions: [PermissionConstant.LEAVE_BALANCE_LIST]
+                    },
+                    {
+                        id: 'leave-schedule',
+                        title: 'Leave Schedule',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-report/leave-schedule',
+                        permissions: [PermissionConstant.LEAVE_SCHEDULE_LIST]
+                    },
+                    {
+                        id: 'leave-request',
+                        title: 'Leave Request',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-report/leave-request',
+                        permissions: [PermissionConstant.LEAVE_REQUEST_REPORT_LIST]
+                    },
+                    {
+                        id: 'leave-on',
+                        title: 'Leave On',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/leave-report/leave-on',
+                        permissions: [PermissionConstant.LEAVE_ON_LIST]
+                    },
+                ]
+            },
+            {
+                id: 'information',
+                title: 'Hr Information',
+                roles: [AppConstants.ROLE_ID_HR],
+                // translate: 'NAV.DASHBOARDS',
+                type: 'collapsable',
+                icon: 'calendar_today',
+                permissions: [PermissionConstant.INFORMATION_LIST],
+                children: [
+                    {
+                        id: 'info',
+                        title: 'Information',
+                        roles: [],
+                        type: 'item',
+                        url: 'dashboard/hr-information',
+                        permissions: [PermissionConstant.INFORMATION_LIST]
+                    },
                 ]
             },
             {
@@ -655,7 +781,8 @@ export const navigation: FuseNavigation[] = [
                 type: 'item',
                 icon: 'monetization_on',
                 url: '/dashboard/budget-controls/AIE',
-                permissions: []
+                // permissions: []
+                permissions: [PermissionConstant.BUDGET_CONTROL_AIE_SEARCH]
             },
             {
                 id: 'report',

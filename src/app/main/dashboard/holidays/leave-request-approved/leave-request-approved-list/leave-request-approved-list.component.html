@@ -1,0 +1,122 @@
+<div class="leaves-list">
+    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="leaveRequestList">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest">
+                <p class="email text-truncate">
+                    {{leaveRequest.sno}}.
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="leaveType">
+            <mat-header-cell *matHeaderCellDef>Leave type</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.leaveCredit.leave.title}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="staffID">
+            <mat-header-cell *matHeaderCellDef>Staff Name</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.staff.firstName}} {{leaveRequest.staff.lastName}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="duration">
+            <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.duration}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="releifOfficer">
+            <mat-header-cell *matHeaderCellDef>Releif Officer</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.reliefOfficer.firstName |titlecase}} {{leaveRequest.reliefOfficer.lastName
+                    |titlecase}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="approvalHr">
+            <mat-header-cell *matHeaderCellDef>Approval HR</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.approvedHrStaff?.firstName}} {{leaveRequest.approvedHrStaff?.lastName}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="hodApproved">
+            <mat-header-cell *matHeaderCellDef>HOD Approval Status</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.approvedHod | titlecase}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="hrApproved">
+            <mat-header-cell *matHeaderCellDef>HR Approval Status</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.approvedHr | titlecase}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="approvedHodVDate">
+            <mat-header-cell *matHeaderCellDef>HOD Value Date</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.approvedHodVDate | date:shortDate}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pLoginId">
+            <mat-header-cell *matHeaderCellDef>P. Login</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.staff.personnelFileNumber}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="reqClosed">
+            <mat-header-cell *matHeaderCellDef>Request Closed</mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest" class="cursor-pointer">
+                <p class="phone text-truncate cursor-pointer">
+                    {{leaveRequest.requestClosed?'Yes':'No'}}
+                </p>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <div fxFlex="row" fxLayoutAlign="end center" style="margin-right: 28px">Actions</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let leaveRequest">
+                <div fxFlex="row" fxLayoutAlign="end center">
+                    <div appPermissionBind [permission]="permissionEdit">
+                        <button *ngIf="leaveRequest.approvedHod == 'pending'" mat-icon-button aria-label="Toggle star"
+                            (click)="editLeave(leaveRequest)" style="color: blue">
+                            <mat-icon class="material-icons">edit</mat-icon>
+                        </button>
+                    </div>
+                    <div appPermissionBind [permission]="permissionDelete">
+                        <button *ngIf="leaveRequest.approvedHod !== 'approved'" mat-icon-button aria-label="Toggle star"
+                            (click)="deleteItemModal(leaveRequest)" style="color: red">
+                            <mat-icon class="material-icons">delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedLeaveRequestColumns"></mat-header-row>
+        <mat-row *matRowDef="let leaveRequest; columns: displayedLeaveRequestColumns;" class="contact"
+            [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+    <mat-paginator #paginator *ngIf="leaveRequestList.length > 0" [length]="pagination.total"
+        [pageSize]="pagination.perpage" [pageIndex]="pagination.page-1" (page)="pageEvent = onPageChange($event)">
+    </mat-paginator>
+</div>

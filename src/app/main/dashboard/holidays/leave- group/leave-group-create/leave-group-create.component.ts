@@ -41,7 +41,7 @@ export class LeaveGroupCreateComponent implements OnInit {
 
     refresh() {
         this.leaveGroup = this.fb.group({
-            name: ['', Validators.required],
+            title: ['', Validators.required],
             isActive: [true, Validators.required],
         });
     }
@@ -49,7 +49,7 @@ export class LeaveGroupCreateComponent implements OnInit {
     checkForUpdate() {
         if (this.updateData) {
             this.leaveGroup.patchValue({
-                name: this.updateData.leaveGroup.name,
+                title: this.updateData.leaveGroup.title,
                 isActive: this.updateData.leaveGroup.isActive,
             });
         }
