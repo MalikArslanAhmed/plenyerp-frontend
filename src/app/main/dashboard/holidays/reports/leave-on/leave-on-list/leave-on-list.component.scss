@@ -1,9 +1,38 @@
 leave-on-list {
     #items-list-select-component {
-        width     : 1000px !important;
+        width     : 1000px !important; 
         height    : auto !important;
         overflow-y: scroll;
         min-height: 800px !important;
+    }
+
+    .navbar-admin-segment {
+        position: relative;
+    }
+
+    .arrow-admin-segment {
+        position: absolute;
+        right   : 0;
+        top     : -15px;
+
+        .arrow-button {
+            cursor : pointer;
+            z-index: 99;
+            color  : #106CC8;
+        }
+    }
+
+    .collapse-admin-segment,
+    .uncollapse-admin-segment {
+        transition: width 2s;
+    }
+
+    .collapse-admin-segment {
+        width: 11%;
+    }
+
+    .uncollapse-admin-segment {
+        width: 100%;
     }
 
     .addBtn {

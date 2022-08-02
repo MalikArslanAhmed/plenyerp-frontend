@@ -92,6 +92,8 @@ export class LeaveRequestReportListComponent implements OnInit {
         toMinDate: null,
         toMaxDate: null,
     }
+    collapseAdminSegment = true
+
     constructor(
         private contactInfoService: ContactInfoService,
         private route: ActivatedRoute,
