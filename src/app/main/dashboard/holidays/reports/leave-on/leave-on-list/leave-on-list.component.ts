@@ -92,6 +92,7 @@ export class LeaveOnListComponent implements OnInit {
         toMinDate: null,
         toMaxDate: null,
     }
+    collapseAdminSegment = true
     constructor(
         private contactInfoService: ContactInfoService,
         private route: ActivatedRoute,

@@ -1,6 +1,13 @@
 <div class="page-layout simple left-sidebar inner-sidebar inner-scroll" id="items-list-select-component">
     <div fxFlex="100" fxLayout="row" class="mt-20px">
-        <div class="margin-top-1rem" fxFlex="25">
+        <div class="margin-top-1rem navbar-admin-segment"
+            [ngClass]="{'collapse-admin-segment': collapseAdminSegment, 'uncollapse-admin-segment': !collapseAdminSegment}">
+            <div class="arrow-admin-segment">
+                <mat-icon class="arrow-button" *ngIf="collapseAdminSegment" (click)="collapseAdminSegment = !collapseAdminSegment">
+                    keyboard_arrow_right</mat-icon>
+                <mat-icon class="arrow-button" *ngIf="!collapseAdminSegment" (click)="collapseAdminSegment = !collapseAdminSegment">
+                    keyboard_arrow_left</mat-icon>
+            </div>
             <div class="center p-5px pb-56" fusePerfectScrollbar>
                 <div class="filter-title">Filter Employees by Department</div>
                 <div class="content">
@@ -29,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="margin-top-1rem pl-1rem" fxFlex="75">
+        <div class="margin-top-1rem pl-1rem" fxFlex="100">
             <div fxLayout="column" fxLayoutGap="20px">
                 <div fxFlex="100" style="padding: 1rem">
                     <form [formGroup]="adminSegmentSearchForm">

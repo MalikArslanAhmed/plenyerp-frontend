@@ -59,7 +59,7 @@ export class LeaveBalanceListComponent implements OnInit {
     head: any;
     allowType: any = 'BOTH';
     nodeData = [];
-
+    collapseAdminSegment = true
     treeControl = new FlatTreeControl<ExampleFlatNode>(node => node.level, node => node.expandable);
     treeFlattener = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.children);
     dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
