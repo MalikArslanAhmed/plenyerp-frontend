@@ -46,7 +46,7 @@
                         <button mat-button class="submit-report" (click)="filterStatementOfPosition()">
                             Submit
                             <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
-                        </button>                       
+                        </button>
                     </div>
                 </form>
             </div>
@@ -58,7 +58,7 @@
                         <span class="mat-header-cell">Line Code</span>
                         <span class="mat-header-cell">Acc. Title </span>
                         <span class="mat-header-cell">Balance</span>
-                    </section> 
+                    </section>
                     <mat-expansion-panel *ngFor="let reportData of statmentPositionData" [expanded]="reportData.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
                                                     (click)="getChildReportData(reportData)">
@@ -113,8 +113,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="title" *ngIf="reportData.credit > reportData.debit">({{((reportData.debit - reportData.credit) * -1) | number:'1.0':'en-US'}})</div>
-                                        <div class="title" *ngIf="reportData.credit <= reportData.debit">{{(reportData.debit - reportData.credit) | number:'1.0':'en-US'}}</div>
+                                        <div class="title" *ngIf="data.credit > data.debit">({{((data.debit - data.credit) * -1) | number:'1.0':'en-US'}})</div>
+                                        <div class="title" *ngIf="data.credit <= data.debit">{{(data.debit - data.credit) | number:'1.0':'en-US'}}</div>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -126,7 +126,7 @@
                                     </tbody>
                                 </ng-template>
                             </table>
-                        </div> 
+                        </div>
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>
