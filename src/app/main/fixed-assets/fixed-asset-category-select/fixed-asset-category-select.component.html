@@ -1,6 +1,6 @@
 <div id="segment-details-component" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
-         fxLayoutAlign.gt-xs="space-between center">
+        fxLayoutAlign.gt-xs="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
             <div class="logo" fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">place
@@ -19,19 +19,24 @@
                     <!-- use a disabled button to provide padding for tree leaf -->
                     <button mat-icon-button disabled></button>
                     {{node.title}}
-                    <button mat-icon-button title="Choose" *ngIf="!node.isParent" (click)="matDialogRef.close(node)">
+                    <!-- <button mat-icon-button title="Choose" *ngIf="!node.isParent" (click)="matDialogRef.close(node)">
+                        <mat-icon class="greyBtn">check_circle</mat-icon>
+                    </button> -->
+                    <button mat-icon-button title="Choose" (click)="matDialogRef.close(node)">
                         <mat-icon class="greyBtn">check_circle</mat-icon>
                     </button>
                 </mat-tree-node>
                 <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
-                    <button mat-icon-button matTreeNodeToggle
-                            [attr.aria-label]="'toggle ' + node.title">
+                    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.title">
                         <mat-icon class="mat-icon-rtl-mirror">
                             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                         </mat-icon>
                     </button>
                     {{node.title}}
-                    <button mat-icon-button title="Choose" *ngIf="!node.isActive" (click)="matDialogRef.close(node)">
+                    <!-- <button mat-icon-button title="Choose" *ngIf="!node.isActive" (click)="matDialogRef.close(node)">
+                        <mat-icon class="addBtn">check_circle</mat-icon>
+                    </button> -->
+                    <button mat-icon-button title="Choose" (click)="matDialogRef.close(node)">
                         <mat-icon class="addBtn">check_circle</mat-icon>
                     </button>
                 </mat-tree-node>
