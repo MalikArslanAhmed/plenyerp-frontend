@@ -33,6 +33,7 @@ import {FixedAssetCreateComponent} from './fixed-asset-create/fixed-asset-create
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FixedAssetsDepreciationComponent } from './fixed-assets-depriciation/fixed-assets-depreciation.component';
+import { AssetsDepreciationModalComponent } from './fixed-assets-depriciation/assets-depreciation-modal/assets-depreciation-modal.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { FixedAssetsDepreciationComponent } from './fixed-assets-depriciation/fi
         FixedAssetDeploymentComponent,
         FixedAssetReDeploymentComponent,
         FixedAssetsDepreciationComponent,
+        AssetsDepreciationModalComponent,
     ],
     imports: [
         CommonModule,

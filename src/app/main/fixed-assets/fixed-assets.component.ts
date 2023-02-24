@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 @Component({
     selector: 'app-fixed-assets',
     templateUrl: './fixed-assets.component.html',
-    styleUrls: ['./fixed-assets.component.scss']
+    styleUrls: ['./fixed-assets.component.scss'],
 })
 export class FixedAssetsComponent implements OnInit {
 

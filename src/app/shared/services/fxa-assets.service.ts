@@ -30,4 +30,7 @@ export class FxaAssetsService extends BaseService {
         return this.putRequest(AppUrl.BANKS(id), data);
     }
 
+    depreciateAssets(data): Observable<any> {
+        return this.postRequest(AppUrl.ASSETS_DEPRECIATION(), data);
+    }
 }

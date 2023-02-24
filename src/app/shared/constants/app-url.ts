@@ -1037,6 +1037,11 @@ export class AppUrl {
         return AppUrl.API_URL + 'hr-informations/' + id;
     }
     //Hr Information Ended
+
+    static ASSETS_DEPRECIATION(): string {
+        return AppUrl.API_URL + `fixed-assets/asset-depreciation`;
+    }
+
     static GET_PUBLIC_HOLIDAY_LIST(): string {
         return AppUrl.API_URL + `public-holidays`;
     }

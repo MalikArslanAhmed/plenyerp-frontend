@@ -1,6 +1,6 @@
 <div id="employees" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
-         fxLayoutAlign.gt-xs="space-between center">
+        fxLayoutAlign.gt-xs="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
             <div class="logo" fxLayout="row" fxLayoutAlign="start center">
                 Create Fixed Asset
@@ -16,7 +16,7 @@
                             <mat-form-field appearance="outline" fxFlex="100">
                                 <mat-label>Asset Category</mat-label>
                                 <mat-select formControlName="fxaCategoryId" (click)="openFixedAssetCategory()"
-                                            [disabled]="true">
+                                    [disabled]="true">
                                     <mat-option value="">Choose Asset Category</mat-option>
                                     <mat-option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
                                         {{faCategory.title}}
@@ -50,7 +50,7 @@
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Date Manufactured</mat-label>
                                     <input matInput [matDatepicker]="manufacturedDate" [max]="maxManufactureDate"
-                                           formControlName="dateManufactured">
+                                        formControlName="dateManufactured">
                                     <mat-datepicker-toggle matSuffix [for]="manufacturedDate">
                                     </mat-datepicker-toggle>
                                     <mat-datepicker #manufacturedDate></mat-datepicker>
@@ -63,7 +63,7 @@
                                 <mat-form-field appearance="outline" fxFlex="100">
                                     <mat-label>Date Acquired</mat-label>
                                     <input matInput [matDatepicker]="acquiredDate" [max]="todayDate"
-                                           (dateChange)="onDateAcquiredChange($event)" formControlName="dateAcquired">
+                                        (dateChange)="onDateAcquiredChange($event)" formControlName="dateAcquired">
                                     <mat-datepicker-toggle matSuffix [for]="acquiredDate">
                                     </mat-datepicker-toggle>
                                     <mat-datepicker #acquiredDate></mat-datepicker>
@@ -98,15 +98,7 @@
                                 </mat-form-field>
                             </div>
                         </mat-grid-tile>
-                        <mat-grid-tile>
-                            <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Begin Accum Depr</mat-label>
-                                    <input matInput formControlName="beginAccumDepr" required>
-                                    <mat-error>Begin Accum Depr is required!</mat-error>
-                                </mat-form-field>
-                            </div>
-                        </mat-grid-tile>
+
                         <mat-grid-tile>
                             <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                 <mat-form-field appearance="outline" fxFlex="100">
@@ -140,8 +132,8 @@
                                     <mat-label>Deployment Status</mat-label>
                                     <select matNativeControl formControlName="fxaStatusId">
                                         <option value="">Select Deployment status</option>
-                                        <option [value]="status.id"
-                                                *ngFor="let status of faStatuses">{{status.title}}</option>
+                                        <option [value]="status.id" *ngFor="let status of faStatuses">{{status.title}}
+                                        </option>
                                     </select>
                                     <mat-error>Deployment Status is required!</mat-error>
                                 </mat-form-field>
@@ -207,7 +199,7 @@
                                         <mat-label>Date Installed</mat-label>
                                         <div matPrefix class="date-checkbox-container">
                                             <mat-checkbox color="accent" formControlName="isInstalled"
-                                                          (change)="onIsInstalled($event)">
+                                                (change)="onIsInstalled($event)">
                                             </mat-checkbox>
                                         </div>
                                         <input matInput [matDatepicker]="dateInstalled" formControlName="dateInstalled">
@@ -224,11 +216,11 @@
                                         <mat-label>Date Commissioned</mat-label>
                                         <div matPrefix class="date-checkbox-container">
                                             <mat-checkbox color="accent" formControlName="isCommissioned"
-                                                          (change)="onIsCommissioned($event)">
+                                                (change)="onIsCommissioned($event)">
                                             </mat-checkbox>
                                         </div>
                                         <input matInput [matDatepicker]="dateCommissioned"
-                                               formControlName="dateCommissioned">
+                                            formControlName="dateCommissioned">
                                         <mat-datepicker-toggle matSuffix [for]="dateCommissioned">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #dateCommissioned></mat-datepicker>
@@ -242,11 +234,11 @@
                                         <mat-label>Date De-Commissioned</mat-label>
                                         <div matPrefix class="date-checkbox-container">
                                             <mat-checkbox color="accent" formControlName="isDecommissioned"
-                                                          (change)="onIsDecommissioned($event)">
+                                                (change)="onIsDecommissioned($event)">
                                             </mat-checkbox>
                                         </div>
                                         <input matInput [matDatepicker]="dateDeCommissioned"
-                                               formControlName="dateDeCommissioned">
+                                            formControlName="dateDeCommissioned">
                                         <mat-datepicker-toggle matSuffix [for]="dateDeCommissioned">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #dateDeCommissioned></mat-datepicker>
@@ -260,7 +252,7 @@
                                         <mat-label>Date Disposed</mat-label>
                                         <div matPrefix class="date-checkbox-container">
                                             <mat-checkbox color="accent" formControlName="isDisposed"
-                                                          (change)="onIsDisposed($event)">
+                                                (change)="onIsDisposed($event)">
                                             </mat-checkbox>
                                         </div>
                                         <input matInput [matDatepicker]="dateDisposed" formControlName="dateDisposed">
@@ -292,10 +284,10 @@
                                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
                                         <mat-label>Admin Segment</mat-label>
                                         <mat-select formControlName="adminSegmentId" (click)="adminSegmentSelect()"
-                                                    [disabled]="true">
+                                            [disabled]="true">
                                             <mat-option value="">Choose Admin Segment</mat-option>
                                             <mat-option [value]="admin.id"
-                                                        *ngFor="let admin of adminSegments">{{admin?.name}}</mat-option>
+                                                *ngFor="let admin of adminSegments">{{admin?.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -303,11 +295,11 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
-                                                    (click)="economicSegmentSelect()">
+                                        (click)="economicSegmentSelect()">
                                         <mat-label>Economic Segment Name</mat-label>
                                         <mat-select formControlName="economicSegmentId" [disabled]="true">
                                             <mat-option [value]="economicSegment.id"
-                                                        *ngFor="let economicSegment of economicSegments">{{economicSegment.name}}</mat-option>
+                                                *ngFor="let economicSegment of economicSegments">{{economicSegment.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -315,11 +307,11 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
-                                                    (click)="fundSegmentSelectAddDetails()">
+                                        (click)="fundSegmentSelectAddDetails()">
                                         <mat-label>Fund Segment Name</mat-label>
                                         <mat-select formControlName="fundSegmentId" [disabled]="true">
                                             <mat-option [value]="fundSegment.id"
-                                                        *ngFor="let fundSegment of fundSegmentsAddDet">{{fundSegment.name}}</mat-option>
+                                                *ngFor="let fundSegment of fundSegmentsAddDet">{{fundSegment.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -327,11 +319,11 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
-                                                    (click)="programmeSegmentSelect()">
+                                        (click)="programmeSegmentSelect()">
                                         <mat-label>Programme Segment Name</mat-label>
                                         <mat-select formControlName="programmeSegmentId" [disabled]="true">
                                             <mat-option [value]="programmeSegment.id"
-                                                        *ngFor="let programmeSegment of programmeSegments">{{programmeSegment.name}}</mat-option>
+                                                *ngFor="let programmeSegment of programmeSegments">{{programmeSegment.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -339,11 +331,11 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
-                                                    (click)="functionSegmentSelect()">
+                                        (click)="functionSegmentSelect()">
                                         <mat-label>Functional Segment Name</mat-label>
                                         <mat-select formControlName="functionalSegmentId" [disabled]="true">
                                             <mat-option [value]="functionSegment.id"
-                                                        *ngFor="let functionSegment of functionSegments">{{functionSegment.name}}</mat-option>
+                                                *ngFor="let functionSegment of functionSegments">{{functionSegment.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -351,11 +343,11 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field class="cursor-pointer" appearance="outline" fxFlex="100"
-                                                    (click)="geoCodeSegmentSelect()">
+                                        (click)="geoCodeSegmentSelect()">
                                         <mat-label>Geo Code Segment Name</mat-label>
                                         <mat-select formControlName="geoCodeSegmentId" [disabled]="true">
                                             <mat-option [value]="geoCodeSegment.id"
-                                                        *ngFor="let geoCodeSegment of geoCodeSegments">{{geoCodeSegment.name}}</mat-option>
+                                                *ngFor="let geoCodeSegment of geoCodeSegments">{{geoCodeSegment.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -369,7 +361,7 @@
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
                                     <mat-form-field appearance="outline" class="w-100-per cursor-pointer"
-                                                    (click)="selectAdminEmployee('Select Custodian')">
+                                        (click)="selectAdminEmployee('Select Custodian')">
                                         <mat-label>Custodian</mat-label>
                                         <mat-select formControlName="custodianId" [disabled]="true">
                                             <mat-option value="">Custodian Name</mat-option>
@@ -385,7 +377,7 @@
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Value Date</mat-label>
                                         <input matInput [matDatepicker]="valueDate" [max]="todayDate"
-                                               formControlName="valueDate">
+                                            formControlName="valueDate">
                                         <mat-datepicker-toggle matSuffix [for]="valueDate">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #valueDate></mat-datepicker>
@@ -398,9 +390,9 @@
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Location</mat-label>
                                         <mat-select formControlName="locationId" required [disabled]="true"
-                                                    (click)="workLocationListSelect()">
+                                            (click)="workLocationListSelect()">
                                             <mat-option [value]="workLocation.id"
-                                                        *ngFor="let workLocation of workLocations">{{workLocation.name}}</mat-option>
+                                                *ngFor="let workLocation of workLocations">{{workLocation.name}}</mat-option>
                                         </mat-select>
                                         <mat-error>Location is required!</mat-error>
                                     </mat-form-field>
@@ -412,10 +404,10 @@
                                     <mat-form-field appearance="outline" fxFlex class="p-10px mt-13px mt--5px">
                                         <mat-label>Admin Segment</mat-label>
                                         <mat-select formControlName="deploymentAdminSegmentId"
-                                                    (click)="deploymentAdminSegmentSelect()" [disabled]="true">
+                                            (click)="deploymentAdminSegmentSelect()" [disabled]="true">
                                             <mat-option value="">Choose Admin Segment</mat-option>
                                             <mat-option [value]="admin.id"
-                                                        *ngFor="let admin of deploymentAdminSegments">
+                                                *ngFor="let admin of deploymentAdminSegments">
                                                 {{admin?.name}}
                                             </mat-option>
                                         </mat-select>
@@ -434,10 +426,61 @@
                         </mat-grid-list>
                     </fieldset>
 
+                    <fieldset class="mt-8">
+                        <legend>Depreciation Details</legend>
+                        <mat-grid-list cols="2" rowHeight="100px">
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>PV Year</mat-label>
+                                        <input matInput [matDatepicker]="pvYearCalender" mode="YEAR"
+                                            [max]="maxManufactureDate" formControlName="pvYear" required>
+                                        <mat-datepicker-toggle matSuffix [for]="pvYearCalender">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #pvYearCalender startView="multi-year"
+                                            (yearSelected)="chosenYearHandler($event, pvYearCalender)"></mat-datepicker>
+                                        <mat-error>PV Year is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>PV Deptal. No</mat-label>
+                                        <input matInput formControlName="pvDepatalNo" required>
+                                        <mat-error>PV Deptal. No is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Begin Accum Depr</mat-label>
+                                        <input matInput formControlName="beginAccumDepr" required>
+                                        <mat-error>Begin Accum Depr is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Next Depr. Period</mat-label>
+                                        <mat-select formControlName="nextDepreciationPeriod" required>
+                                            <mat-option value="" >Select Month</mat-option>
+                                            <mat-option [value]="month.value" *ngFor="let month of months">
+                                                {{month.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Next Depr. Period is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </fieldset>
                     <div fxLayout="row" fxLayoutAlign="right right" class="mt-8">
                         <ng-container *ngIf="this.fixedAssetId; else saveButton">
                             <button mat-raised-button type="button" color="accent" (click)="updateFixedAssets()"
-                                    [disabled]="assetsForm.invalid">
+                                [disabled]="assetsForm.invalid">
                                 Update
                             </button>
                         </ng-container>

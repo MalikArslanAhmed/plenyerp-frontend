@@ -1,0 +1,71 @@
+<div id="segment-details-component" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+        fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">place
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Select Category and Depreciation Period
+                </span>
+            </div>
+        </div>
+    </div>
+    <div fxFlex="100" *ngIf="selectedCategory">
+        <button mat-button aria-label="Save" class="save-button">{{selectedCategory}}
+            <mat-icon (click)="resetSelection()">close</mat-icon>
+        </button>
+    </div>
+    <div class="content-container">
+
+        <div class="content">
+
+            <div class="center p-2  pr-sm-92" fusePerfectScrollbar>
+                <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
+                    <!-- This is the tree node template for leaf nodes -->
+                    <mat-tree-node *matTreeNodeDef="let node; let i = index" matTreeNodePadding>
+                        <!-- use a disabled button to provide padding for tree leaf -->
+                        <button mat-icon-button disabled></button>
+                        {{node.title}}
+                        <button mat-icon-button type="button" title="Choose" (click)="setCategoryIds(node)">
+                            <mat-icon class="greyBtn">check_circle</mat-icon>
+                        </button>
+                    </mat-tree-node>
+                    <mat-tree-node *matTreeNodeDef="let node; let i = index; when: hasChild" matTreeNodePadding>
+                        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.title">
+                            <mat-icon class="mat-icon-rtl-mirror">
+                                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                            </mat-icon>
+                        </button>
+                        {{node.title}}
+                        <button mat-icon-button type="button" title="Choose" (click)="setCategoryIds(node)">
+                            <mat-icon class="addBtn">check_circle</mat-icon>
+                        </button>
+                    </mat-tree-node>
+                </mat-tree>
+            </div>
+        </div>
+        <div class="dep-per-container">
+            <h1>Depreciation Period</h1>
+            <div class="mt-8">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Depr. Period</mat-label>
+                    <mat-select required [(ngModel)]="selectedMonth">
+                        <mat-option value="">Select Month</mat-option>
+                        <mat-option [value]="month.value" *ngFor="let month of months">
+                            {{month.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+
+                <button mat-raised-button type="button" color="accent"
+                    [disabled]="!categoriesAllIds.length|| !selectedMonth" (click)="proceedDepreciation()">
+                    Proceed
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

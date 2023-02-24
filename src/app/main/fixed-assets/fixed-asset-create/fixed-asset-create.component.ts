@@ -1,28 +1,66 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {StructureService} from '../../../shared/services/structure.service';
-import {FuseSidebarService} from '../../../../@fuse/components/sidebar/sidebar.service';
-import {MatDialog} from '@angular/material/dialog';
-import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AlertService} from '../../../shared/services/alert.service';
-import {SummaryAdminSegmentSelectComponent} from '../../dashboard/summary-admin-segment-select/summary-admin-segment-select.component';
-import {ProgrammingSegmentSelectComponent} from '../../dashboard/journal-voucher/programming-segment-select/programming-segment-select.component';
-import {FunctionalSegmentSelectComponent} from '../../dashboard/journal-voucher/functional-segment-select/functional-segment-select.component';
-import {EconomicSegmentSelectComponent} from '../../dashboard/journal-voucher/economic-segment-select/economic-segment-select.component';
-import {FundSegmentSelectComponent} from '../../dashboard/journal-voucher/fund-segment-select/fund-segment-select.component';
-import {GeoCodeSegmentSelectComponent} from '../../dashboard/journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StructureService } from '../../../shared/services/structure.service';
+import { FuseSidebarService } from '../../../../@fuse/components/sidebar/sidebar.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FxaCategoriesService } from '../../../shared/services/fxa-categories.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../../shared/services/alert.service';
+import { SummaryAdminSegmentSelectComponent } from '../../dashboard/summary-admin-segment-select/summary-admin-segment-select.component';
+import { ProgrammingSegmentSelectComponent } from '../../dashboard/journal-voucher/programming-segment-select/programming-segment-select.component';
+import { FunctionalSegmentSelectComponent } from '../../dashboard/journal-voucher/functional-segment-select/functional-segment-select.component';
+import { EconomicSegmentSelectComponent } from '../../dashboard/journal-voucher/economic-segment-select/economic-segment-select.component';
+import { FundSegmentSelectComponent } from '../../dashboard/journal-voucher/fund-segment-select/fund-segment-select.component';
+import { GeoCodeSegmentSelectComponent } from '../../dashboard/journal-voucher/geo-code-segment-select/geo-code-segment-select.component';
 import * as moment from 'moment';
-import {AdminSegmentEmployeeSelectComponent} from '../../dashboard/treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
-import {FixedAssetCategorySelectComponent} from '../fixed-asset-category-select/fixed-asset-category-select.component';
-import {WorkLocationsListSelectComponent} from '../../dashboard/employees/work-locations-list-select/work-locations-list-select.component';
-
+import { AdminSegmentEmployeeSelectComponent } from '../../dashboard/treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
+import { FixedAssetCategorySelectComponent } from '../fixed-asset-category-select/fixed-asset-category-select.component';
+import { WorkLocationsListSelectComponent } from '../../dashboard/employees/work-locations-list-select/work-locations-list-select.component';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
+export const MY_FORMATS = {
+    parse: {
+        dateInput: 'YYYY',
+    },
+    display: {
+        dateInput: 'YYYY',
+        monthYearLabel: 'YYYY',
+        monthYearA11yLabel: 'YYYY',
+    },
+};
 @Component({
     selector: 'app-create-fixed-assets',
     templateUrl: './fixed-asset-create.component.html',
-    styleUrls: ['./fixed-asset-create.component.scss']
+    styleUrls: ['./fixed-asset-create.component.scss'],
+    providers: [
+        {
+            provide: DateAdapter,
+            useClass: MomentDateAdapter,
+            deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+        },
+        {
+            provide: MAT_DATE_FORMATS, useValue: MY_FORMATS
+        },
+    ]
 })
 export class FixedAssetCreateComponent implements OnInit {
+    @ViewChild('pvYearCalender', { static: false })
+    private picker!: MatDatepicker<Date>;
+    months = [
+        {value:1,name:'January'},
+        {value:2,name:'February'},
+        {value:3,name:'March'},
+        {value:4,name:'April'},
+        {value:5,name:'May'},
+        {value:6,name:'June'},
+        {value:7,name:'July'},
+        {value:8,name:'August'},
+        {value:9,name:'September'},
+        {value:10,name:'October'},
+        {value:11,name:'November'},
+        {value:12,name:'December'},
+    ]
     fixedAssetId: any;
     assetsForm: FormGroup;
     dialogRef: any;
@@ -59,13 +97,17 @@ export class FixedAssetCreateComponent implements OnInit {
         this.getDepreciation();
         this.getStatus();
     }
-
+    chosenYearHandler(ev, input) {
+        let { _d } = ev;
+        this.assetsForm.controls.pvYear.setValue(_d);
+        this.picker.close()
+    }
     refresh(): void {
         this.assetsForm = this.fb.group({
             fxaStatusId: [''],
             fxaDepreciationMethodId: [''],
             fxaCategoryId: [''],
-            assetNo: [{value: '', disabled: true}],
+            assetNo: [{ value: '', disabled: true }],
             title: ['', Validators.required],
             make: ['', Validators.required],
             model: ['', Validators.required],
@@ -81,10 +123,10 @@ export class FixedAssetCreateComponent implements OnInit {
             supplierContact: ['', Validators.required],
 
             // Supplier details
-            dateInstalled: [{value: '', disabled: true}],
-            dateCommissioned: [{value: '', disabled: true}],
-            dateDeCommissioned: [{value: '', disabled: true}],
-            dateDisposed: [{value: '', disabled: true}],
+            dateInstalled: [{ value: '', disabled: true }],
+            dateCommissioned: [{ value: '', disabled: true }],
+            dateDeCommissioned: [{ value: '', disabled: true }],
+            dateDisposed: [{ value: '', disabled: true }],
             isInstalled: [false],
             isCommissioned: [false],
             isDecommissioned: [false],
@@ -111,8 +153,13 @@ export class FixedAssetCreateComponent implements OnInit {
             valueDate: [''],
             custodianId: [''],
             locationId: [''],
-            deploymentRemark: [{value: '', disabled: this.fixedAssetId}],
+            deploymentRemark: [{ value: '', disabled: this.fixedAssetId }],
             deploymentAdminSegmentId: [''],
+
+            //depreciation details
+            pvYear: [''],
+            pvDepatalNo: [''],
+            nextDepreciationPeriod: [''],
         });
 
 
@@ -195,11 +242,15 @@ export class FixedAssetCreateComponent implements OnInit {
             depreciationRate: '',
             depreciationMethod: '',
             assetNoPrefixLine: '',
+
+            pvYear: new Date(updatedData.pvYear),
+            nextDepreciationPeriod: updatedData.nextDepreciationPeriod,
+            pvDepatalNo: updatedData.pvDepatalNo,
         });
-        this.onIsInstalled({checked: updatedData.isInstalled});
-        this.onIsCommissioned({checked: updatedData.isCommissioned});
-        this.onIsDecommissioned({checked: updatedData.isDecommissioned});
-        this.onIsDisposed({checked: updatedData.isDisposed});
+        this.onIsInstalled({ checked: updatedData.isInstalled });
+        this.onIsCommissioned({ checked: updatedData.isCommissioned });
+        this.onIsDecommissioned({ checked: updatedData.isDecommissioned });
+        this.onIsDisposed({ checked: updatedData.isDisposed });
 
         this.adminSegments = [{
             name: (updatedData && updatedData['adminSegment']) ? updatedData['adminSegment'].name : '',
@@ -328,12 +379,16 @@ export class FixedAssetCreateComponent implements OnInit {
         if (reqData.valueDate) {
             reqData['valueDate'] = moment(reqData.valueDate).format('YYYY-MM-DD');
         }
+        if (reqData.pvYear) {
+            reqData['pvYear'] = moment(reqData.pvYear).year();
+        }
         return reqData;
     }
 
-    saveFixedAssets(): void {
+    saveFixedAssets(): void|boolean {
         const reqData = this.parseFormData(this.assetsForm.value);
-
+        console.log('data', reqData)
+        return false
         this.fxaCategoryService.add(reqData).subscribe(
             data => {
                 this.router.navigateByUrl(`/fixed-assets/list`);
@@ -379,7 +434,7 @@ export class FixedAssetCreateComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.programmeSegments = [{name: response.name, id: response.id}];
+            this.programmeSegments = [{ name: response.name, id: response.id }];
             this.assetsForm.patchValue({
                 programmeSegmentId: response.id,
             });
@@ -394,7 +449,7 @@ export class FixedAssetCreateComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.functionSegments = [{name: response.name, id: response.id}];
+            this.functionSegments = [{ name: response.name, id: response.id }];
             this.assetsForm.patchValue({
                 functionalSegmentId: response.id,
                 disabled: true
@@ -410,7 +465,7 @@ export class FixedAssetCreateComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.economicSegments = [{name: response.name, id: response.id}];
+            this.economicSegments = [{ name: response.name, id: response.id }];
             this.assetsForm.patchValue({
                 economicSegmentId: response.id,
                 disabled: true
@@ -426,7 +481,7 @@ export class FixedAssetCreateComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.fundSegmentsAddDet = [{name: response.name, id: response.id}];
+            this.fundSegmentsAddDet = [{ name: response.name, id: response.id }];
             this.assetsForm.patchValue({
                 fundSegmentId: response.id,
                 disabled: true
@@ -442,7 +497,7 @@ export class FixedAssetCreateComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.geoCodeSegments = [{name: response.name, id: response.id}];
+            this.geoCodeSegments = [{ name: response.name, id: response.id }];
             this.assetsForm.patchValue({
                 geoCodeSegmentId: response.id,
                 disabled: true
@@ -460,7 +515,7 @@ export class FixedAssetCreateComponent implements OnInit {
 
         this.dialogRef = this._matDialog.open(AdminSegmentEmployeeSelectComponent, {
             panelClass: 'transaction-items-form-dialog',
-            data: {head: type, allow: allowType, node: node}
+            data: { head: type, allow: allowType, node: node }
         });
         this.dialogRef.afterClosed().subscribe((response) => {
             if (!response) {

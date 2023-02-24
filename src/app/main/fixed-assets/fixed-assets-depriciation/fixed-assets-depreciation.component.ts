@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {FxaCategoriesService} from '../../../shared/services/fxa-categories.service';
-import {MatDialog} from '@angular/material/dialog';
-import {FixedAssetReDeploymentComponent} from '../fixed-asset-re-deployment/fixed-asset-re-deployment.component';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FxaCategoriesService } from '../../../shared/services/fxa-categories.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FixedAssetReDeploymentComponent } from '../fixed-asset-re-deployment/fixed-asset-re-deployment.component';
+import { AssetsDepreciationModalComponent } from './assets-depreciation-modal/assets-depreciation-modal.component';
 
 @Component({
     selector: 'app-fixed-assets-depriciation',
@@ -10,7 +11,7 @@ import {FixedAssetReDeploymentComponent} from '../fixed-asset-re-deployment/fixe
     styleUrls: ['./fixed-assets-depriciation.component.scss']
 })
 export class FixedAssetsDepreciationComponent implements OnInit {
-
+    // faCategories = [];
     filterForm: FormGroup;
     selectedFixedAsset = {};
     dialogRef: any;
@@ -23,7 +24,7 @@ export class FixedAssetsDepreciationComponent implements OnInit {
     };
 
     constructor(private fxaCategoryService: FxaCategoriesService,
-                private _matDialog: MatDialog) {
+        private _matDialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -51,14 +52,40 @@ export class FixedAssetsDepreciationComponent implements OnInit {
     }
 
     deprecate(): void {
-        this.fxaCategoryService.deprications({}).subscribe(
-            data => {
-                this.getFixedAsset();
-            }
-        );
+        // this.fxaCategoryService.deprications({}).subscribe(
+        //     data => {
+        //         this.getFixedAsset();
+        //     }
+        // );
+
     }
 
-    getDepreciationDetails(fixedAsset) : void{
+    openDeprecateModal(): void {
+        this.dialogRef = this._matDialog.open(AssetsDepreciationModalComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {}
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            console.log(response)
+            // this.faCategories = [{
+            //     title: response.title,
+            //     id: response.id
+            // }];
+            // this.assetsForm.patchValue({
+            //     fxaCategoryId: response.id,
+            //     disabled: true
+            // });
+            // if (!this.fixedAssetId) {
+            //     this.assetsForm.patchValue({
+            //         assetNo: response.combinedCode + '\\' + response.nextAssetNo
+            //     });
+            // }
+        });
+    }
+    getDepreciationDetails(fixedAsset): void {
 
     }
 }
