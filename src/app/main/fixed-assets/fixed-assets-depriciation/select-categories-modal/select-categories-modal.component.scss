@@ -1,0 +1,65 @@
+#segment-details-component {
+    max-height: 90vh;
+    display   : flex;
+    gap       : 20px;
+
+    // mat-form-field {
+    //     margin-right: 4px;
+    // }
+
+    .content-container {
+        display: flex;
+        gap: 20px;
+        overflow: scroll !important;
+        max-height: calc(80vh - 24px) !important;
+    }
+
+    .deleteBtn {
+        font-size : 17px;
+        margin-top: -3px;
+        color     : red;
+    }
+
+    .addBtn {
+        font-size : 17px;
+        margin-top: -3px;
+        color     : #2E7D32 !important;
+    }
+
+    .greyBtn {
+        font-size : 17px;
+        margin-top: -3px;
+        color     : #A0A0A0 !important;
+    }
+
+    .editBtn {
+        font-size : 17px;
+        margin-top: -3px;
+        color     : blue;
+    }
+
+    /*.mat-grid-tile .mat-figure {
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+    }*/
+
+    .grid-tree {
+        box-shadow: 0 0 1px 1px #e0e0e0 !important;
+    }
+
+    .mt-30px {
+        margin-top: 30px;
+    }
+
+    .p-10px {
+        padding: 10px;
+    }
+}
+
+.contact-form-dialog {
+    max-height: 80vh;
+}
+.save-button {
+    background-color: #106CC8 !important;
+    color           : white !important;
+}

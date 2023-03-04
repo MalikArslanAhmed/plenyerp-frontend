@@ -1,20 +1,20 @@
-<div id="journal-voucher" class="page-layout simple left-sidebar inner-sidebar inner-scroll fixed-asset-deployment-page">
+<div id="journal-voucher"
+    class="page-layout simple left-sidebar inner-sidebar inner-scroll fixed-asset-deployment-page">
     <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
-         fxLayoutAlign.gt-xs="space-between center">
+        fxLayoutAlign.gt-xs="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
             <div class="logo" fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="logo-icon mr-16"
-                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                   Asset Depreciation
+                    Asset Depreciation
                 </span>
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
             <div>
                 <button mat-button class="accent" id="add-button" aria-label="add skill"
-                        [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openDeprecateModal()">
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openDeprecateModal()">
                     Depreciate
                 </button>
             </div>
@@ -24,30 +24,29 @@
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
             <div class="content">
-                <!--                <form [formGroup]="filterForm">-->
-                <!--<mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                    <mat-label>From</mat-label>
-                    <input matInput [matDatepicker]="from" (click)="from.open()" (focus)="from.open()"
-                           formControlName="from">
-                    <mat-datepicker-toggle matSuffix
-                                           [for]="from"></mat-datepicker-toggle>
-                    <mat-datepicker #from></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
-                    <mat-label>To</mat-label>
-                    <input matInput [matDatepicker]="to" (click)="to.open()" (focus)="to.open()"
-                           formControlName="to">
-                    <mat-datepicker-toggle matSuffix
-                                           [for]="to"></mat-datepicker-toggle>
-                    <mat-datepicker #to></mat-datepicker>
-                </mat-form-field>-->
+
                 <div fxFlex class="width-200px p-10px mt-13px">
-                    <!--<button mat-button class="submit-report" (click)="filterTrailBalance()">
-                        Submit
-                        <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
-                    </button>-->
+                    <form fxLayout="column" [formGroup]="assetsForm">
+                        <mat-grid-list cols="1">
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Asset Category</mat-label>
+                                    <mat-select formControlName="fxaCategoryId" (click)="openFixedAssetCategory()"
+                                        [disabled]="true">
+                                        <mat-option value="">Choose Asset Category</mat-option>
+                                        <mat-option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
+                                            {{faCategory.title}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Asset Category is required!</mat-error>
+                                </mat-form-field>
+
+                                <button [disabled]="!faCategories.length || fetching" mat-button class="submit-report" (click)="getFixedAsset()">
+                                    Submit
+                                    <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                                </button>
+                        </mat-grid-list>
+                    </form>
                 </div>
-                <!--                </form>-->
             </div>
 
             <div class="content mt-20px">
@@ -63,10 +62,10 @@
 
                     </section>
                     <mat-expansion-panel *ngFor="let fixedAsset of fixedAssets; let i = index"
-                                         [expanded]="fixedAsset.isOpen">
+                        [expanded]="fixedAsset.isOpen">
                         <mat-expansion-panel-header class="mat-row align-items-center expansion-header expansion-row"
-                                                    (click)="getDepreciationDetails(fixedAsset)">
-                                <span class="mat-cell align-items-center">
+                            (click)="getDepreciationDetails(fixedAsset)">
+                            <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">
                                     {{i + 1}}.
                                 </p>
@@ -81,48 +80,50 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.category.title}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCost | number:'1.0':'en-US'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCost |
+                                    number:'1.0':'en-US'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.totalDepreciation | number:'1.0':'en-US'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.totalDepreciation |
+                                    number:'1.0':'en-US'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCostDeprecated | number:'1.0':'en-US'}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCostDeprecated |
+                                    number:'1.0':'en-US'}}</p>
                             </span>
                         </mat-expansion-panel-header>
                         <div class="mt-23px">
                             <table class="simple invoice-table">
                                 <thead>
-                                <tr>
-                                    <th>
-                                        <div class="title">Date of Depreciation</div>
-                                    </th>
-                                    <th>
-                                        <div class="title">Opening Book Value</div>
-                                    </th>
-                                    <th>
-                                        <div class="title">Depreciation Amount</div>
-                                    </th>
-                                    <th>
-                                        <div class="title">Closing Book Value</div>
-                                    </th>
-                                </tr>
+                                    <tr>
+                                        <th>
+                                            <div class="title">Date of Depreciation</div>
+                                        </th>
+                                        <th>
+                                            <div class="title">Opening Book Value</div>
+                                        </th>
+                                        <th>
+                                            <div class="title">Depreciation Amount</div>
+                                        </th>
+                                        <th>
+                                            <div class="title">Closing Book Value</div>
+                                        </th>
+                                    </tr>
                                 </thead>
                                 <tbody
-
                                     *ngIf="fixedAsset && fixedAsset.depreciationDetails && fixedAsset.depreciationDetails.length > 0; else noChildToShow">
-                                <tr *ngFor="let child of fixedAsset.depreciationDetails; let j = index">
-                                    <td>{{child.createdAt | date}}</td>
-                                    <td>{{child.openingBalance | number:'1.0':'en-US'}}</td>
-                                    <td>{{child.amount | number:'1.0':'en-US'}}</td>
-                                    <td>{{child.closingBalance | number:'1.0':'en-US'}}</td>
-                                </tr>
+                                    <tr *ngFor="let child of fixedAsset.depreciationDetails; let j = index">
+                                        <td>{{child.createdAt | date}}</td>
+                                        <td>{{child.openingBalance | number:'1.0':'en-US'}}</td>
+                                        <td>{{child.amount | number:'1.0':'en-US'}}</td>
+                                        <td>{{child.closingBalance | number:'1.0':'en-US'}}</td>
+                                    </tr>
                                 </tbody>
                                 <ng-template #noChildToShow>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-center" colspan="7">No data to show</td>
-                                    </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="7">No data to show</td>
+                                        </tr>
                                     </tbody>
                                 </ng-template>
                             </table>
@@ -131,11 +132,8 @@
                 </mat-accordion>
             </div>
 
-            <mat-paginator *ngIf="fixedAssets.length > 0"
-                           [length]="pagination.total"
-                           [pageSize]="pagination.perpage"
-                           [pageIndex]="pagination.page-1"
-                           (page)="onPageChange($event)">
+            <mat-paginator *ngIf="fixedAssets.length > 0" [length]="pagination.total" [pageSize]="pagination.perpage"
+                [pageIndex]="pagination.page-1" (page)="onPageChange($event)">
             </mat-paginator>
         </div>
     </div>
