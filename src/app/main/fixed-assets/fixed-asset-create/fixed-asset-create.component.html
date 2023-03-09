@@ -431,7 +431,7 @@
                         <mat-grid-list cols="2" rowHeight="100px">
                             <mat-grid-tile>
                                 <div class="p-10px" fxFlex="1 0 auto" fxLayout="column">
-                                    <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-form-field dateFormatYear appearance="outline" fxFlex="100">
                                         <mat-label>PV Year</mat-label>
                                         <input matInput [matDatepicker]="pvYearCalender" mode="YEAR"
                                             [max]="maxManufactureDate" formControlName="pvYear" required>
@@ -466,7 +466,7 @@
                                     <mat-form-field appearance="outline" fxFlex="100">
                                         <mat-label>Next Depr. Period</mat-label>
                                         <mat-select formControlName="nextDepreciationPeriod" required>
-                                            <mat-option value="" >Select Month</mat-option>
+                                            <mat-option value="">Select Month</mat-option>
                                             <mat-option [value]="month.value" *ngFor="let month of months">
                                                 {{month.name}}
                                             </mat-option>
@@ -485,8 +485,12 @@
                             </button>
                         </ng-container>
                         <ng-template #saveButton>
-                            <button mat-raised-button type="button" color="accent" (click)="saveFixedAssets()"
+                            <!-- <button mat-raised-button type="button" color="accent" (click)="saveFixedAssets()"
                                     [disabled]="assetsForm.invalid">
+                                Save
+                            </button> -->
+                            <button mat-raised-button type="button" color="accent" (click)="saveFixedAssets()"
+                                >
                                 Save
                             </button>
                         </ng-template>

@@ -16,33 +16,12 @@ import * as moment from 'moment';
 import { AdminSegmentEmployeeSelectComponent } from '../../dashboard/treasure-report/default-setting-voucher-info/admin-segment-employee-select/admin-segment-employee-select.component';
 import { FixedAssetCategorySelectComponent } from '../fixed-asset-category-select/fixed-asset-category-select.component';
 import { WorkLocationsListSelectComponent } from '../../dashboard/employees/work-locations-list-select/work-locations-list-select.component';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
-export const MY_FORMATS = {
-    parse: {
-        dateInput: 'YYYY',
-    },
-    display: {
-        dateInput: 'YYYY',
-        monthYearLabel: 'YYYY',
-        monthYearA11yLabel: 'YYYY',
-    },
-};
+
 @Component({
     selector: 'app-create-fixed-assets',
     templateUrl: './fixed-asset-create.component.html',
     styleUrls: ['./fixed-asset-create.component.scss'],
-    providers: [
-        {
-            provide: DateAdapter,
-            useClass: MomentDateAdapter,
-            deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-        },
-        {
-            provide: MAT_DATE_FORMATS, useValue: MY_FORMATS
-        },
-    ]
 })
 export class FixedAssetCreateComponent implements OnInit {
     @ViewChild('pvYearCalender', { static: false })
@@ -99,6 +78,7 @@ export class FixedAssetCreateComponent implements OnInit {
     }
     chosenYearHandler(ev, input) {
         let { _d } = ev;
+        console.log(ev)
         this.assetsForm.controls.pvYear.setValue(_d);
         this.picker.close()
     }
@@ -387,8 +367,6 @@ export class FixedAssetCreateComponent implements OnInit {
 
     saveFixedAssets(): void|boolean {
         const reqData = this.parseFormData(this.assetsForm.value);
-        console.log('data', reqData)
-        return false
         this.fxaCategoryService.add(reqData).subscribe(
             data => {
                 this.router.navigateByUrl(`/fixed-assets/list`);

@@ -6,6 +6,7 @@ import {NumberToWordsPipe} from './pipes/number-to-word.pipe';
 import {UnderscoreSeparatePipe} from './pipes/underscore-separate.pipe';
 import {AbsoluteAmountPipe} from './pipes/absolute-amount.pipe';
 import {IndianNumberPipe} from './pipes/indian-number.pipe';
+import { DatePickerFormatDirective } from './directives/date-picker-format.directive';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import {IndianNumberPipe} from './pipes/indian-number.pipe';
         NumberToWordsPipe,
         UnderscoreSeparatePipe,
         AbsoluteAmountPipe,
-        IndianNumberPipe
+        IndianNumberPipe,
+        DatePickerFormatDirective
     ],
     imports: [
         CommonModule
@@ -25,7 +27,8 @@ import {IndianNumberPipe} from './pipes/indian-number.pipe';
         NumberToWordsPipe,
         UnderscoreSeparatePipe,
         AbsoluteAmountPipe,
-        IndianNumberPipe
+        IndianNumberPipe,
+        DatePickerFormatDirective
     ]
 })
 export class SharedModule {
