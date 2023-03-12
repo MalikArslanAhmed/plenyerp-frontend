@@ -61,13 +61,13 @@ export class FixedAssetsReportComponent implements OnInit {
     }
 
     getWorkLocation() {
-        this.workLocationService.getWorkLocations({ page: null }).subscribe(data => {
+        this.workLocationService.getWorkLocations({ page: -1 }).subscribe(data => {
             this.workLocationsData = data;
             console.log('work data data', this.workLocationsData);
         });
     }
     getStatus() {
-        this.fxaCategoryService.getStatus({ page: null }).subscribe(data => {
+        this.fxaCategoryService.getStatus({ page: -1 }).subscribe(data => {
             this.statusData = data.items;
             console.log('sattus data', this.statusData);
 
@@ -132,6 +132,7 @@ export class FixedAssetsReportComponent implements OnInit {
         
         </head><body>
         <h1>Fixed Assets Report</h1>
+        <h1>${this.companyData.name}</h1>
         <table>
   <tr>
     <th>S.No</th>

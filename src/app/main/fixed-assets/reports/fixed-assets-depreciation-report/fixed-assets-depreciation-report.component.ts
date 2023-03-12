@@ -61,13 +61,13 @@ export class FixedAssetsDepreciaitonReportComponent implements OnInit {
         });
     }
     getWorkLocation() {
-        this.workLocationService.getWorkLocations({ page: null }).subscribe(data => {
+        this.workLocationService.getWorkLocations({ page: -1 }).subscribe(data => {
             this.workLocationsData = data;
             console.log('work data data', this.workLocationsData);
         });
     }
     getStatus() {
-        this.fxaCategoryService.getStatus({ page: null }).subscribe(data => {
+        this.fxaCategoryService.getStatus({ page: -1 }).subscribe(data => {
             this.statusData = data.items;
             console.log('sattus data', this.statusData);
 
