@@ -1041,7 +1041,9 @@ export class AppUrl {
     static ASSETS_DEPRECIATION(): string {
         return AppUrl.API_URL + `fixed-assets/asset-depreciation`;
     }
-
+    static FIXED_ASSETS_REPORT(): string {
+        return AppUrl.API_URL + `fixed-assets/register-of-assets`;
+    }
     static GET_PUBLIC_HOLIDAY_LIST(): string {
         return AppUrl.API_URL + `public-holidays`;
     }

@@ -1127,6 +1127,32 @@ export const navigation: FuseNavigation[] = [
                         permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
                     },
                 ]
+            },
+                        {
+                id: 'fixed-assets-reports',
+                title: 'Fixed Asset - Reports',
+                roles: [],
+                type: 'collapsable',
+                icon: 'report',
+                permissions: [],
+                children: [
+                    {
+                        id: 'register-of-assets',
+                        title: 'Fixed Assets Report',
+                        roles: [],
+                        type: 'item',
+                        url: 'fixed-assets/report',
+                        permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
+                    },
+                    {
+                        id: 'deprecation-report',
+                        title: 'Deprecation Report',
+                        roles: [],
+                        type: 'item',
+                        url: 'fixed-assets/deprecation-report',
+                        permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
+                    },
+                ]
             }
         ]
     }

@@ -1,0 +1,124 @@
+<div id="journal-voucher"
+    class="page-layout simple left-sidebar inner-sidebar inner-scroll fixed-asset-deployment-page">
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-xs="row"
+        fxLayoutAlign.gt-xs="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Fixed Assets Report
+                </span>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div>
+                <button mat-button class="accent" id="add-button" aria-label="add skill"
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}" (click)="openDeprecateModal()">
+                    Generate Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="center p-24 pb-56" fusePerfectScrollbar>
+            <div class="content" *ngIf="faCategories">
+
+                <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                    <mat-label>Location</mat-label>
+                    <input matInput [(ngModel)]="location">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                    <mat-label>Asset No</mat-label>
+                    <input matInput [(ngModel)]="assetNo">
+                </mat-form-field>
+                <div fxFlex class="width-200px p-10px mt-13px">
+                    <button type="button" [disabled]="(!location && !assetNo) || fetching" mat-button
+                        class="submit-report width-200px p-10px mr-8" (click)="getFixedAssetReport()">
+                        Submit
+                        <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                    </button>
+                    <button type="button" mat-button class="submit-report width-200px p-10px" (click)="printPage()">
+                        Print
+                        <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="content mt-20px" id="printable-area">
+                <div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+
+                    <mat-table [@animateStagger]="{value:'50'}" [dataSource]="fixedAssetsReport">
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef>S.No</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset; let i = index">
+                                <p class="email text-truncate">
+                                    {{((pagination.page - 1) * pagination.perpage) + i + 1}}.
+                                </p>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="assetNo">
+                            <mat-header-cell *matHeaderCellDef>Asset No</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.assetNo}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="title">
+                            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.title}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="pvYEar">
+                            <mat-header-cell *matHeaderCellDef>PV Year</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.pvyear}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="pvDepartNo">
+                            <mat-header-cell *matHeaderCellDef>PV Depart No</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.pvDeptalNo}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="currentLocation">
+                            <mat-header-cell *matHeaderCellDef>Current Location</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.location}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="acquistionCost">
+                            <mat-header-cell *matHeaderCellDef>Acquistion Cost</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="depreciationDate">
+                            <mat-header-cell *matHeaderCellDef>Depreciation Date</mat-header-cell>
+                            <!-- <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.dateAcquired | date}}</mat-cell> -->
+                            <mat-cell *matCellDef="let fixedAsset">tbd</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="netBookValue">
+                            <mat-header-cell *matHeaderCellDef>Net Book Value</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">tbd</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="make">
+                            <mat-header-cell *matHeaderCellDef>Make</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.make}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.status}}</mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let fixedAsset; columns: displayedColumns;" class="contact"
+                            [@animate]="{value:'*',params:{y:'100%'}}">
+                        </mat-row>
+                    </mat-table>
+                    <mat-paginator *ngIf="fixedAssetsReport.length > 0" [length]="pagination.total"
+                        [pageSize]="pagination.perpage" [pageIndex]="pagination.page-1" (page)="onPageChange($event)">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

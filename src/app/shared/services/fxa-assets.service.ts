@@ -33,4 +33,8 @@ export class FxaAssetsService extends BaseService {
     depreciateAssets(data): Observable<any> {
         return this.postRequest(AppUrl.ASSETS_DEPRECIATION(), data);
     }
+
+    fixedAssetsReport(data): Observable<any> {
+        return this.postRequest(AppUrl.FIXED_ASSETS_REPORT(), data);
+    }
 }
