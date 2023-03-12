@@ -28,22 +28,23 @@
                 <div fxFlex class="width-200px p-10px mt-13px">
                     <form fxLayout="column" [formGroup]="assetsForm">
                         <mat-grid-list cols="1">
-                                <mat-form-field appearance="outline" fxFlex="100">
-                                    <mat-label>Asset Category</mat-label>
-                                    <mat-select formControlName="fxaCategoryId" (click)="openFixedAssetCategory()"
-                                        [disabled]="true">
-                                        <mat-option value="">Choose Asset Category</mat-option>
-                                        <mat-option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
-                                            {{faCategory.title}}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-error>Asset Category is required!</mat-error>
-                                </mat-form-field>
+                            <mat-form-field appearance="outline" fxFlex="100">
+                                <mat-label>Asset Category</mat-label>
+                                <mat-select formControlName="fxaCategoryId" (click)="openFixedAssetCategory()"
+                                    [disabled]="true">
+                                    <mat-option value="">Choose Asset Category</mat-option>
+                                    <mat-option [value]="faCategory.id" *ngFor="let faCategory of faCategories">
+                                        {{faCategory.title}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>Asset Category is required!</mat-error>
+                            </mat-form-field>
 
-                                <button [disabled]="!faCategories.length || fetching" mat-button class="submit-report" (click)="getFixedAsset()">
-                                    Submit
-                                    <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
-                                </button>
+                            <button [disabled]="fetching" mat-button class="submit-report"
+                                (click)="getFixedAsset()">
+                                Submit
+                                <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                            </button>
                         </mat-grid-list>
                     </form>
                 </div>
@@ -77,18 +78,18 @@
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.title}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.category.title}}</p>
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.category}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
                                 <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCost |
                                     number:'1.0':'en-US'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.totalDepreciation |
+                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.beginAccumDepr +  fixedAsset.currYrDepr |
                                     number:'1.0':'en-US'}}</p>
                             </span>
                             <span class="mat-cell align-items-center">
-                                <p class="text-truncate cursor-pointer mt-10px">{{fixedAsset.acquisitionCostDeprecated |
+                                <p class="text-truncate cursor-pointer mt-10px">{{(fixedAsset.acquisitionCost - (fixedAsset.beginAccumDepr +  fixedAsset.currYrDepr)) |
                                     number:'1.0':'en-US'}}</p>
                             </span>
                         </mat-expansion-panel-header>

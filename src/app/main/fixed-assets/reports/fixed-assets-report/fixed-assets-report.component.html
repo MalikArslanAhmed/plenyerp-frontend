@@ -48,8 +48,8 @@
                     </mat-select>
                 </mat-form-field>
                 <div fxFlex class="width-200px p-10px mt-13px">
-                    <button type="button" [disabled]="fetching" mat-button
-                        class="submit-report width-200px p-10px mr-8" (click)="getFixedAssetReport()">
+                    <button type="button" [disabled]="fetching" mat-button class="submit-report width-200px p-10px mr-8"
+                        (click)="getFixedAssetReport()">
                         Submit
                         <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
                     </button>
@@ -102,18 +102,22 @@
                         </ng-container>
                         <ng-container matColumnDef="acquistionCost">
                             <mat-header-cell *matHeaderCellDef>Acquistion Cost</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost}}</mat-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost |
+                                number:'1.0':'en-US'}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="depreciationDate">
                             <mat-header-cell *matHeaderCellDef>Depreciation To Date</mat-header-cell>
                             <!-- <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.dateAcquired | date}}</mat-cell> -->
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.beginAccumDepr + fixedAsset.currYrDepr}}</mat-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.beginAccumDepr + fixedAsset.currYrDepr |
+                                number:'1.0':'en-US'}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="netBookValue">
                             <mat-header-cell *matHeaderCellDef>Net Book Value</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost - (fixedAsset.beginAccumDepr + fixedAsset.currYrDepr)}}</mat-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost -
+                                (fixedAsset.beginAccumDepr + fixedAsset.currYrDepr )|
+                                number:'1.0':'en-US'}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="make">

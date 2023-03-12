@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FixedAssetReDeploymentComponent } from '../fixed-asset-re-deployment/fixed-asset-re-deployment.component';
 import { AssetsDepreciationModalComponent } from './assets-depreciation-modal/assets-depreciation-modal.component';
 import { SelectCategoriesModalComponent } from './select-categories-modal/select-categories-modal.component';
+import { FxaAssetsService } from 'app/shared/services/fxa-assets.service';
 
 @Component({
     selector: 'app-fixed-assets-depriciation',
@@ -24,13 +25,17 @@ export class FixedAssetsDepreciationComponent implements OnInit {
         pages: null
     };
     assetsForm: FormGroup;
-    faCategories = [];
+    faCategories: any = [{ id: 0 }];
     fixedAssetId: any;
     fetching = false
+    assetNo = ''
+    location = ''
+    status = ''
     constructor(
         private fxaCategoryService: FxaCategoriesService,
         private _matDialog: MatDialog,
         private fb: FormBuilder,
+        private fxaAssetsService: FxaAssetsService,
 
     ) {
     }
@@ -67,16 +72,21 @@ export class FixedAssetsDepreciationComponent implements OnInit {
     getFixedAsset(): void {
         let params = {
             page: this.pagination.page,
+            categoriesAllIds: this.faCategories[0].id,
+            dep_month: 12
         };
-        if (this.faCategories.length) {
-            let catIds = this.faCategories.map(item => { return item.id })
-            params['fxaCategoryId'] = JSON.stringify(catIds)
-        }
         this.fetching = true
-        this.fxaCategoryService.get(params).subscribe(
+        this.fxaAssetsService.fixedAssetsReport(params).subscribe(
             data => {
-                this.fixedAssets = data.items;
-                this.pagination.page = data.page;
+                this.fixedAssets = data.data.map(item => {
+                    return {
+                        ...item,
+                        acquisitionCost: +item['acquisitionCost'],
+                        beginAccumDepr: +item['beginAccumDepr'],
+                        currYrDepr: +item['currYrDepr'],
+                    }
+                });
+                this.pagination.page = data.currentPage;
                 this.pagination.total = data.total;
                 this.fetching = false
             }
@@ -88,14 +98,6 @@ export class FixedAssetsDepreciationComponent implements OnInit {
         this.getFixedAsset();
     }
 
-    deprecate(): void {
-        // this.fxaCategoryService.deprications({}).subscribe(
-        //     data => {
-        //         this.getFixedAsset();
-        //     }
-        // );
-
-    }
 
     openDeprecateModal(): void {
         this.dialogRef = this._matDialog.open(AssetsDepreciationModalComponent, {
@@ -107,19 +109,6 @@ export class FixedAssetsDepreciationComponent implements OnInit {
                 return;
             }
             console.log(response)
-            // this.faCategories = [{
-            //     title: response.title,
-            //     id: response.id
-            // }];
-            // this.assetsForm.patchValue({
-            //     fxaCategoryId: response.id,
-            //     disabled: true
-            // });
-            // if (!this.fixedAssetId) {
-            //     this.assetsForm.patchValue({
-            //         assetNo: response.combinedCode + '\\' + response.nextAssetNo
-            //     });
-            // }
         });
     }
     getDepreciationDetails(fixedAsset): void {

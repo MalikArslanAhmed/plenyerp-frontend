@@ -61,7 +61,7 @@ export class FixedAssetsDepreciaitonReportComponent implements OnInit {
         });
     }
     getWorkLocation() {
-        this.workLocationService.getWorkLocations({ page: -1 }).subscribe(data => {
+        this.workLocationService.getAllWorkLocations({ page: -1 }).subscribe(data => {
             this.workLocationsData = data;
             console.log('work data data', this.workLocationsData);
         });
@@ -100,7 +100,7 @@ export class FixedAssetsDepreciaitonReportComponent implements OnInit {
                         ...item,
                         acquisitionCost: +item['acquisitionCost'],
                         beginAccumDepr: +item['beginAccumDepr'],
-                        icurrYrDepr: +item['currYrDepr'],
+                        currYrDepr: +item['currYrDepr'],
                     }
                 })
                 this.print()

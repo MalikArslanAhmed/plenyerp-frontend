@@ -153,6 +153,10 @@ export class AppUrl {
         return AppUrl.API_URL + `work-locations`;
     }
 
+    static GET_ALL_WORK_LOCATIONS(): string {
+        return AppUrl.API_URL + `work-locations/all`;
+    }
+
     static GET_STORE_SETUP_CATEGORIES(): string {
         return AppUrl.API_URL + `inventory-categories`;
     }

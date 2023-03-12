@@ -84,24 +84,28 @@
 
                         <ng-container matColumnDef="acquistionCost">
                             <mat-header-cell *matHeaderCellDef>Acquisition Cost</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost}}</mat-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost |
+                                number:'1.0':'en-US'}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="depreciation">
                             <mat-header-cell *matHeaderCellDef>Depreciation</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.currYrDepr}}</mat-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.currYrDepr |
+                                number:'1.0':'en-US'}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="accDepreciaition">
                             <mat-header-cell *matHeaderCellDef>Accumulated Depreciation</mat-header-cell>
                             <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.beginAccumDepr +
-                                fixedAsset.currYrDepr}}</mat-cell>
+                                fixedAsset.currYrDepr |
+                                number:'1.0':'en-US'}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="netBookValue">
                             <mat-header-cell *matHeaderCellDef>Net Book Value</mat-header-cell>
                             <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost -
-                                (fixedAsset.beginAccumDepr + fixedAsset.currYrDepr)}}</mat-cell>
+                                (fixedAsset.beginAccumDepr + fixedAsset.currYrDepr) |
+                                number:'1.0':'en-US'}}</mat-cell>
                         </ng-container>
 
 
