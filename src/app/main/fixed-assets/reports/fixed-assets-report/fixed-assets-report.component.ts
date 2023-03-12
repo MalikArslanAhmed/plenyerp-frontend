@@ -6,12 +6,12 @@ import { FxaCategoriesService } from 'app/shared/services/fxa-categories.service
 import { FixedAssetsReportModalComponent } from './fixed-assets-report-modal/fixed-assets-report-modal.component';
 
 @Component({
-  selector: 'app-fixed-assets-report',
-  templateUrl: './fixed-assets-report.component.html',
-  styleUrls: ['./fixed-assets-report.component.scss']
+    selector: 'app-fixed-assets-report',
+    templateUrl: './fixed-assets-report.component.html',
+    styleUrls: ['./fixed-assets-report.component.scss']
 })
 export class FixedAssetsReportComponent implements OnInit {
-    displayedColumns = ['id', 'assetNo', 'title', 'pvYEar', 'pvDepartNo', 'currentLocation','acquisationDate','acquistionCost', 'depreciationDate','netBookValue','make','status'];
+    displayedColumns = ['id', 'assetNo', 'title', 'pvYEar', 'pvDepartNo', 'currentLocation', 'acquisationDate', 'acquistionCost', 'depreciationDate', 'netBookValue', 'make', 'status'];
 
     dialogRef: any;
     fixedAssetsReport = [];
@@ -23,11 +23,12 @@ export class FixedAssetsReportComponent implements OnInit {
     };
     assetsForm: FormGroup;
     faCategories = '';
-    depMonth:number = null;
+    depMonth: number = null;
     fixedAssetId: any;
     fetching = false
     assetNo = ''
     location = ''
+    status = ''
     constructor(
         private fxaCategoryService: FxaCategoriesService,
         private _matDialog: MatDialog,
@@ -36,9 +37,9 @@ export class FixedAssetsReportComponent implements OnInit {
 
     ) {
     }
-printPage(){
-    window.print()
-}
+    printPage() {
+        window.print()
+    }
     ngOnInit(): void {
         this.refresh();
     }
@@ -53,18 +54,20 @@ printPage(){
             page: this.pagination.page,
             categoriesAllIds: this.faCategories,
             dep_month: this.depMonth,
-            location:this.location,
-            assetNo:this.assetNo,
+            location: this.location,
+            assetNo: this.assetNo,
+            status: this.status,
         };
 
         this.fetching = true
         this.fxaAssetsService.fixedAssetsReport(params).subscribe(
             data => {
-                this.fixedAssetsReport = data.data.map(item=>{
-                    return {...item,
-                        acquisitionCost:+item['acquisitionCost'],
-                        beginAccumDepr:+item['beginAccumDepr'],
-                        icurrYrDepr:+item['currYrDepr'],
+                this.fixedAssetsReport = data.data.map(item => {
+                    return {
+                        ...item,
+                        acquisitionCost: +item['acquisitionCost'],
+                        beginAccumDepr: +item['beginAccumDepr'],
+                        icurrYrDepr: +item['currYrDepr'],
                     }
                 });
                 this.pagination.page = data.currentPage;
@@ -89,14 +92,17 @@ printPage(){
             if (!response) {
                 return;
             }
-            console.log('data',response);
+            this.location = ''
+            this.assetNo = ''
+            this.status = ''
             this.faCategories = response.categoriesAllIds
             this.depMonth = response.dep_month
-            this.fixedAssetsReport = response.data.data.map(item=>{
-                return {...item,
-                    acquisitionCost:+item['acquisitionCost'],
-                    beginAccumDepr:+item['beginAccumDepr'],
-                    currYrDepr:+item['currYrDepr'],
+            this.fixedAssetsReport = response.data.data.map(item => {
+                return {
+                    ...item,
+                    acquisitionCost: +item['acquisitionCost'],
+                    beginAccumDepr: +item['beginAccumDepr'],
+                    currYrDepr: +item['currYrDepr'],
                 }
             })
             this.pagination.page = response.data.currentPage;

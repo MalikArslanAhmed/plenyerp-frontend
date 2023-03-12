@@ -33,6 +33,10 @@
                     <mat-label>Asset No</mat-label>
                     <input matInput [(ngModel)]="assetNo">
                 </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
+                    <mat-label>Status</mat-label>
+                    <input matInput [(ngModel)]="status">
+                </mat-form-field>
                 <div fxFlex class="width-200px p-10px mt-13px">
                     <button type="button" [disabled]="fetching" mat-button
                         class="submit-report width-200px p-10px mr-8" (click)="getFixedAssetReport()">

@@ -28,6 +28,7 @@ export class FixedAssetsDepreciaitonReportComponent implements OnInit {
     fetching = false
     assetNo = ''
     location = ''
+    status= ''
     constructor(
         private fxaCategoryService: FxaCategoriesService,
         private _matDialog: MatDialog,
@@ -55,6 +56,7 @@ printPage(){
             dep_month: this.depMonth,
             location:this.location,
             assetNo:this.assetNo,
+            status:this.status,
         };
 
         this.fetching = true
@@ -89,7 +91,9 @@ printPage(){
             if (!response) {
                 return;
             }
-            console.log('data',response);
+            this.location = ''
+            this.assetNo = ''
+            this.status = ''
             this.faCategories = response.categoriesAllIds
             this.depMonth = response.dep_month
             this.fixedAssetsReport = response.data.data.map(item=>{
