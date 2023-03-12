@@ -37,6 +37,8 @@ import { AssetsDepreciationModalComponent } from './fixed-assets-depriciation/as
 import { SelectCategoriesModalComponent } from './fixed-assets-depriciation/select-categories-modal/select-categories-modal.component';
 import { FixedAssetsReportComponent } from './reports/fixed-assets-report/fixed-assets-report.component';
 import { FixedAssetsReportModalComponent } from './reports/fixed-assets-report/fixed-assets-report-modal/fixed-assets-report-modal.component';
+import { FixedAssetsDepreciaitonReportComponent } from './reports/fixed-assets-depreciation-report/fixed-assets-depreciation-report.component';
+import { FixedAssetsDepreciationReportModalComponent } from './reports/fixed-assets-depreciation-report/fixed-assets-depreciation-report-modal/fixed-assets-depreciation-report-modal.component';
 
 
 @NgModule({
@@ -53,7 +55,9 @@ import { FixedAssetsReportModalComponent } from './reports/fixed-assets-report/f
         AssetsDepreciationModalComponent,
         SelectCategoriesModalComponent,
         FixedAssetsReportComponent,
-        FixedAssetsReportModalComponent
+        FixedAssetsReportModalComponent,
+        FixedAssetsDepreciaitonReportComponent,
+        FixedAssetsDepreciationReportModalComponent
     ],
     imports: [
         CommonModule,

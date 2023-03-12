@@ -7,7 +7,7 @@
                 <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Fixed Assets Report
+                    Fixed Assets Depreciation Report
                 </span>
             </div>
         </div>
@@ -64,36 +64,22 @@
                         </ng-container>
 
                         <ng-container matColumnDef="title">
-                            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>Asset Name</mat-header-cell>
                             <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.title}}</mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="pvYEar">
-                            <mat-header-cell *matHeaderCellDef>PV Year</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.pvyear}}</mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="pvDepartNo">
-                            <mat-header-cell *matHeaderCellDef>PV Depart No</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.pvDeptalNo}}</mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="currentLocation">
-                            <mat-header-cell *matHeaderCellDef>Current Location</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.location}}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="acquisationDate">
-                            <mat-header-cell *matHeaderCellDef>Acquisition Date</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.dateAcquired | date}}</mat-cell>
-                        </ng-container>
                         <ng-container matColumnDef="acquistionCost">
-                            <mat-header-cell *matHeaderCellDef>Acquistion Cost</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>Acquisition Cost</mat-header-cell>
                             <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost}}</mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="depreciationDate">
-                            <mat-header-cell *matHeaderCellDef>Depreciation To Date</mat-header-cell>
-                            <!-- <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.dateAcquired | date}}</mat-cell> -->
+                        <ng-container matColumnDef="depreciation">
+                            <mat-header-cell *matHeaderCellDef>Depreciation</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.currYrDepr}}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="accDepreciaition">
+                            <mat-header-cell *matHeaderCellDef>Accumulated Depreciation</mat-header-cell>
                             <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.beginAccumDepr + fixedAsset.currYrDepr}}</mat-cell>
                         </ng-container>
 
@@ -102,14 +88,10 @@
                             <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost - (fixedAsset.beginAccumDepr + fixedAsset.currYrDepr)}}</mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="make">
-                            <mat-header-cell *matHeaderCellDef>Make</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.make}}</mat-cell>
-                        </ng-container>
 
-                        <ng-container matColumnDef="status">
-                            <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.status}}</mat-cell>
+                        <ng-container matColumnDef="remark">
+                            <mat-header-cell *matHeaderCellDef>Remark</mat-header-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.remark}}</mat-cell>
                         </ng-container>
 
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

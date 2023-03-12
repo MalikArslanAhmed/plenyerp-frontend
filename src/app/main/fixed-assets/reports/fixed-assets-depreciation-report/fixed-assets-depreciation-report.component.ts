@@ -3,15 +3,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { FxaAssetsService } from 'app/shared/services/fxa-assets.service';
 import { FxaCategoriesService } from 'app/shared/services/fxa-categories.service';
-import { FixedAssetsReportModalComponent } from './fixed-assets-report-modal/fixed-assets-report-modal.component';
+import { FixedAssetsDepreciationReportModalComponent } from './fixed-assets-depreciation-report-modal/fixed-assets-depreciation-report-modal.component';
 
 @Component({
-  selector: 'app-fixed-assets-report',
-  templateUrl: './fixed-assets-report.component.html',
-  styleUrls: ['./fixed-assets-report.component.scss']
+  selector: 'app-fixed-assets-depreciation-report',
+  templateUrl: './fixed-assets-depreciation-report.component.html',
+  styleUrls: ['./fixed-assets-depreciation-report.component.scss']
 })
-export class FixedAssetsReportComponent implements OnInit {
-    displayedColumns = ['id', 'assetNo', 'title', 'pvYEar', 'pvDepartNo', 'currentLocation','acquisationDate','acquistionCost', 'depreciationDate','netBookValue','make','status'];
+export class FixedAssetsDepreciaitonReportComponent implements OnInit {
+    displayedColumns = ['id', 'assetNo', 'title', 'acquistionCost','depreciation', 'accDepreciaition', 'netBookValue','remark'];
 
     dialogRef: any;
     fixedAssetsReport = [];
@@ -64,7 +64,7 @@ printPage(){
                     return {...item,
                         acquisitionCost:+item['acquisitionCost'],
                         beginAccumDepr:+item['beginAccumDepr'],
-                        icurrYrDepr:+item['currYrDepr'],
+                        currYrDepr:+item['currYrDepr'],
                     }
                 });
                 this.pagination.page = data.currentPage;
@@ -81,7 +81,7 @@ printPage(){
 
 
     openDeprecateModal(): void {
-        this.dialogRef = this._matDialog.open(FixedAssetsReportModalComponent, {
+        this.dialogRef = this._matDialog.open(FixedAssetsDepreciationReportModalComponent, {
             panelClass: 'contact-form-dialog',
             data: {}
         });
@@ -98,7 +98,7 @@ printPage(){
                     beginAccumDepr:+item['beginAccumDepr'],
                     currYrDepr:+item['currYrDepr'],
                 }
-            })
+            });
             this.pagination.page = response.data.currentPage;
             this.pagination.total = response.data.total;
             this.fetching = false
