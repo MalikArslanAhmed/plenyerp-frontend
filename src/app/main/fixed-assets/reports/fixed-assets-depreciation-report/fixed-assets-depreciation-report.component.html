@@ -27,7 +27,12 @@
 
                 <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                     <mat-label>Location</mat-label>
-                    <input matInput [(ngModel)]="location">
+                    <mat-select [(ngModel)]="location">
+                        <mat-option value="">Choose Location</mat-option>
+                        <mat-option [value]="loc.id" *ngFor="let loc of workLocationsData">
+                            {{loc.name}}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                     <mat-label>Asset No</mat-label>
@@ -35,11 +40,16 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                     <mat-label>Status</mat-label>
-                    <input matInput [(ngModel)]="status">
+                    <mat-select [(ngModel)]="status">
+                        <mat-option value="">Choose Status</mat-option>
+                        <mat-option [value]="status.id" *ngFor="let status of statusData">
+                            {{status.title}}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <div fxFlex class="width-200px p-10px mt-13px">
-                    <button type="button" [disabled]="fetching" mat-button
-                        class="submit-report width-200px p-10px mr-8" (click)="getFixedAssetReport()">
+                    <button type="button" [disabled]="fetching" mat-button class="submit-report width-200px p-10px mr-8"
+                        (click)="getFixedAssetReport()">
                         Submit
                         <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
                     </button>
@@ -84,12 +94,14 @@
 
                         <ng-container matColumnDef="accDepreciaition">
                             <mat-header-cell *matHeaderCellDef>Accumulated Depreciation</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.beginAccumDepr + fixedAsset.currYrDepr}}</mat-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.beginAccumDepr +
+                                fixedAsset.currYrDepr}}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="netBookValue">
                             <mat-header-cell *matHeaderCellDef>Net Book Value</mat-header-cell>
-                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost - (fixedAsset.beginAccumDepr + fixedAsset.currYrDepr)}}</mat-cell>
+                            <mat-cell *matCellDef="let fixedAsset">{{fixedAsset.acquisitionCost -
+                                (fixedAsset.beginAccumDepr + fixedAsset.currYrDepr)}}</mat-cell>
                         </ng-container>
 
 

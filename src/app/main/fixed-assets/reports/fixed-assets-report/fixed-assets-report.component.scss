@@ -1,10 +1,19 @@
 @import "src/@fuse/scss/fuse";
 
+mat-table {
+    overflow-x: scroll;
+}
+
+mat-header-cell,
+mat-cell {
+    min-width: 140px;
+}
+
 #journal-voucher.fixed-asset-deployment-page {
     .header {
         #add-button {
             background-color: white !important;
-            color: #106CC8 !important;
+            color           : #106CC8 !important;
 
             mat-label {
                 color: black !important;
@@ -22,7 +31,8 @@
         }
     }
 }
-.custom-modal-class{
+
+.custom-modal-class {
     max-height: 80vh;
 }
 
@@ -72,9 +82,9 @@
 
 .submit-report {
     background-color: #039be5 !important;
-    color: #fff !important;
-    height: 55px;
-    margin-top: 6px;
+    color           : #fff !important;
+    height          : 55px;
+    margin-top      : 6px;
 }
 
 @import "src/@fuse/scss/fuse";
@@ -97,12 +107,12 @@
 
 .invoice-table {
     background-color: #E0E0E0;
-    margin-top: -20px;
+    margin-top      : -20px;
 }
 
 
 .accordion-table .accordion-row {
-    padding-left: 1.5rem;
+    padding-left : 1.5rem;
     padding-right: 2rem;
     border-bottom: none;
 }
@@ -111,8 +121,8 @@
     border-bottom: none;
 }
 
-$mat-header-row-height: 80px;
-$mat-row-height: 68px;
+$mat-header-row-height     : 80px;
+$mat-row-height            : 68px;
 $mat-row-horizontal-padding: 24px;
 
 .accordion-table {
@@ -127,27 +137,29 @@ $mat-row-horizontal-padding: 24px;
     min-height: $mat-row-height;
 }
 
-.expansion-row, .accordion-row {
-    display: flex;
+.expansion-row,
+.accordion-row {
+    display            : flex;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    align-items: center;
-    padding: 0 $mat-row-horizontal-padding;
-    box-sizing: border-box;
+    align-items        : center;
+    padding            : 0 $mat-row-horizontal-padding;
+    box-sizing         : border-box;
 
     // Workaround for https://goo.gl/pFmjJD in IE 11. Adds a pseudo
     // element that will stretch the row the correct height. See:
     // https://connect.microsoft.com/IE/feedback/details/802625
     &::after {
-        display: inline-block;
+        display   : inline-block;
         min-height: inherit;
-        content: '';
+        content   : '';
     }
 }
 
-.mat-cell, .mat-header-cell {
-    flex: 1;
-    overflow: hidden;
+.mat-cell,
+.mat-header-cell {
+    flex     : 1;
+    overflow : hidden;
     word-wrap: break-word;
 }
 
@@ -165,22 +177,22 @@ $mat-row-horizontal-padding: 24px;
 
 .checked-btn {
     background-color: #0066ff !important;
-    color: white !important;
-    margin: 10px;
-    width: 200px;
+    color           : white !important;
+    margin          : 10px;
+    width           : 200px;
 }
 
 .journal-voucher-data {
-    display: block;
-    width: 100%;
+    display   : block;
+    width     : 100%;
     overflow-x: auto;
 
     .mat-table {
-        width: 100%;
-        max-width: 100%;
-        display: table;
+        width          : 100%;
+        max-width      : 100%;
+        display        : table;
         border-collapse: collapse;
-        margin: 0;
+        margin         : 0;
     }
 
     .mat-row,
@@ -190,21 +202,22 @@ $mat-row-horizontal-padding: 24px;
 
     .mat-cell,
     .mat-header-cell {
-        word-wrap: initial;
-        display: table-cell;
-        padding: 0 5px;
-        line-break: unset;
-        width: auto;
-        white-space: nowrap;
-        overflow: hidden;
+        word-wrap     : initial;
+        display       : table-cell;
+        padding       : 0 5px;
+        line-break    : unset;
+        width         : auto;
+        white-space   : nowrap;
+        overflow      : hidden;
         vertical-align: middle;
     }
 }
 
 .border-bg-none {
-    border: none !important;
+    border          : none !important;
     background-color: transparent !important;
 }
+
 .no-click {
     pointer-events: none;
 }

@@ -27,7 +27,12 @@
 
                 <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                     <mat-label>Location</mat-label>
-                    <input matInput [(ngModel)]="location">
+                    <mat-select [(ngModel)]="location">
+                        <mat-option value="">Choose Location</mat-option>
+                        <mat-option [value]="loc.id" *ngFor="let loc of workLocationsData">
+                            {{loc.name}}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                     <mat-label>Asset No</mat-label>
@@ -35,7 +40,12 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                     <mat-label>Status</mat-label>
-                    <input matInput [(ngModel)]="status">
+                    <mat-select [(ngModel)]="status">
+                        <mat-option value="">Choose Status</mat-option>
+                        <mat-option [value]="status.id" *ngFor="let status of statusData">
+                            {{status.title}}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <div fxFlex class="width-200px p-10px mt-13px">
                     <button type="button" [disabled]="fetching" mat-button
@@ -50,7 +60,7 @@
                 </div>
             </div>
             <div class="content mt-20px" id="printable-area">
-                <div class="country-list" fxLayout="column" fxLayoutGap="20px" fxFlex="100">
+                <div class="country-list" fxLayout="column" fxLayoutGap="40px" fxFlex="100">
 
                     <mat-table [@animateStagger]="{value:'50'}" [dataSource]="fixedAssetsReport">
                         <ng-container matColumnDef="id">

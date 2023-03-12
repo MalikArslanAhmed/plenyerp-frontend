@@ -1,4 +1,12 @@
 @import "src/@fuse/scss/fuse";
+mat-table {
+    overflow-x: scroll;
+}
+
+mat-header-cell,
+mat-cell {
+    min-width: 140px;
+}
 
 #journal-voucher.fixed-asset-deployment-page {
     .header {
