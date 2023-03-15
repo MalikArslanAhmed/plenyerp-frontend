@@ -25,7 +25,7 @@ export class FixedAssetsDepreciaitonReportComponent implements OnInit {
         pages: null
     };
     assetsForm: FormGroup;
-    faCategories = '';
+    faCategories: number = null;
     depMonth: number = null;
     fixedAssetId: any;
     fetching = false

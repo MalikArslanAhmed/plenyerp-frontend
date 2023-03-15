@@ -24,7 +24,7 @@ export class FixedAssetsReportComponent implements OnInit {
         pages: null
     };
     assetsForm: FormGroup;
-    faCategories = '';
+    faCategories: number = null;
     depMonth: number = null;
     fixedAssetId: any;
     fetching = false
@@ -63,21 +63,17 @@ export class FixedAssetsReportComponent implements OnInit {
     getWorkLocation() {
         this.workLocationService.getAllWorkLocations({ page: -1 }).subscribe(data => {
             this.workLocationsData = data;
-            console.log('work data data', this.workLocationsData);
         });
     }
     getStatus() {
         this.fxaCategoryService.getStatus({ page: -1 }).subscribe(data => {
             this.statusData = data.items;
-            console.log('sattus data', this.statusData);
 
         });
     }
     getCompanyInformation() {
         this.companyInformationService.getCompaniesInformationList().subscribe(data => {
             this.companyData = data.items[0];
-            console.log('companyData data', this.companyData);
-
         });
     }
 
@@ -95,7 +91,6 @@ export class FixedAssetsReportComponent implements OnInit {
         this.fetching = true
         this.fxaAssetsService.fixedAssetsReport(params).subscribe(
             data => {
-                console.log(data);
                 this.printData = data.map(item => {
                     return {
                         ...item,
