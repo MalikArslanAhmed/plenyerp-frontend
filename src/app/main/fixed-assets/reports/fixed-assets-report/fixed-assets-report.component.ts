@@ -113,6 +113,7 @@ export class FixedAssetsReportComponent implements OnInit {
                     }
                 })
                 this.print()
+                this.fetching = false
             }
         );
     }
@@ -150,7 +151,7 @@ export class FixedAssetsReportComponent implements OnInit {
                             <h1>${this.companyData.name}</h1>
                         </div>
                         <div>
-                            <p><b>Category:</b> ${this.faCategories.title}</p>
+                            <p><b>Category:</b> ${this.faCategories.id !== 0?this.faCategories.title:'All Categories'}</p>
                             <p><b>Report Period:</b> ${this.depMonth.name} - ${moment().year()}</p>
                         </div>
                     </div>

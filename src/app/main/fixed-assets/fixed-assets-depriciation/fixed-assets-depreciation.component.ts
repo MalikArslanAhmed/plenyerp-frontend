@@ -27,7 +27,7 @@ export class FixedAssetsDepreciationComponent implements OnInit {
         pages: null
     };
     assetsForm: FormGroup;
-    faCategories: any = [{ id: 0 }];
+    faCategories: any = [{ id: 0, title: 'All Categories' }];
     fixedAssetId: any;
     fetching = false
     printData: any = [];
@@ -81,7 +81,7 @@ export class FixedAssetsDepreciationComponent implements OnInit {
     getDataForPrint() {
         let params = {
             page: this.pagination.page,
-            categoriesAllIds: 0,
+            categoriesAllIds: this.faCategories[0].id,
             dep_month: 12,
             print: true
         };
@@ -98,6 +98,8 @@ export class FixedAssetsDepreciationComponent implements OnInit {
                     }
                 })
                 this.print()
+                this.fetching = false
+
             }
         );
     }
@@ -135,7 +137,7 @@ export class FixedAssetsDepreciationComponent implements OnInit {
                             <h1>${this.companyData.name}</h1>
                         </div>
                         <div>
-                            <p><b>Category:</b> All Categories</p>
+                            <p><b>Category:</b> ${this.faCategories[0].id !== 0 ? this.faCategories[0].title : 'All Categories'}</p>
                             <p><b>Report Period:</b> December - ${moment().year()}</p>
                         </div>
                     </div>
