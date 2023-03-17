@@ -69,7 +69,8 @@ export class FixedAssetsReportComponent implements OnInit {
             if (!response) {
                 return;
             }
-            this.workLocationsData.push(response.location)
+            
+            this.workLocationsData = [response.location]
             this.location = this.workLocationsData[0].id
         });
     }
