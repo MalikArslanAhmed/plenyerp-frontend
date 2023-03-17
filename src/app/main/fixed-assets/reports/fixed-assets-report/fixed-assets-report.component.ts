@@ -5,8 +5,9 @@ import { CompanyInformationService } from 'app/shared/services/company-informati
 import { FxaAssetsService } from 'app/shared/services/fxa-assets.service';
 import { FxaCategoriesService } from 'app/shared/services/fxa-categories.service';
 import { WorkLocationService } from 'app/shared/services/work-location.service';
+import { FixedAssetsLocationSelectModalComponent } from '../fixed-assets-location-select-modal/fixed-assets-location-select-modal.component';
 import { FixedAssetsReportModalComponent } from './fixed-assets-report-modal/fixed-assets-report-modal.component';
-
+import * as moment from 'moment';
 @Component({
     selector: 'app-fixed-assets-report',
     templateUrl: './fixed-assets-report.component.html',
@@ -24,8 +25,11 @@ export class FixedAssetsReportComponent implements OnInit {
         pages: null
     };
     assetsForm: FormGroup;
-    faCategories: number = null;
-    depMonth: number = null;
+    faCategories: any = {
+        id: -1,
+        name: ""
+    };
+    depMonth: any = null;
     fixedAssetId: any;
     fetching = false
     assetNo = ''
@@ -41,30 +45,39 @@ export class FixedAssetsReportComponent implements OnInit {
         private fb: FormBuilder,
         private fxaAssetsService: FxaAssetsService,
         private companyInformationService: CompanyInformationService,
-        private workLocationService: WorkLocationService
-
     ) {
     }
-    printPage() {
-        this.getDataForPrint()
-    }
+
     ngOnInit(): void {
         this.refresh();
     }
+
     refresh(): void {
         this.getCompanyInformation();
         this.getStatus();
-        this.getWorkLocation();
         this.assetsForm = this.fb.group({
             fxaCategoryId: [''],
         });
     }
 
-    getWorkLocation() {
-        this.workLocationService.getAllWorkLocations({ page: -1 }).subscribe(data => {
-            this.workLocationsData = data;
+    openFixedAssetLocation(): void {
+        this.dialogRef = this._matDialog.open(FixedAssetsLocationSelectModalComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {}
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.workLocationsData.push(response.location)
+            this.location = this.workLocationsData[0].id
         });
     }
+
+    printPage() {
+        this.getDataForPrint()
+    }
+
     getStatus() {
         this.fxaCategoryService.getStatus({ page: -1 }).subscribe(data => {
             this.statusData = data.items;
@@ -80,8 +93,8 @@ export class FixedAssetsReportComponent implements OnInit {
     getDataForPrint() {
         let params = {
             page: this.pagination.page,
-            categoriesAllIds: this.faCategories,
-            dep_month: this.depMonth,
+            categoriesAllIds: this.faCategories.id,
+            dep_month: this.depMonth.value,
             location: this.location,
             assetNo: this.assetNo,
             status: this.status,
@@ -108,44 +121,57 @@ export class FixedAssetsReportComponent implements OnInit {
         );
         const htmlData = `<html><head>
              <style>
-            table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-            }
+                table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+                }
 
-            td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-            }
+                td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+                }
 
-            tr:nth-child(even) {
-            background-color: #dddddd;
-            }
+                tr:nth-child(even) {
+                background-color: #dddddd;
+                }
+                .print-table-header{
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                }
             </style>
         
-        </head><body>
-        <h1>Fixed Assets Report</h1>
-        <h1>${this.companyData.name}</h1>
-        <table>
-  <tr>
-    <th>S.No</th>
-    <th>Asset No</th>
-    <th>Title</th>
-    <th>PV Year</th>
-    <th>PV Depart No</th>
-    <th>Current Location</th>
-    <th>Acquisition Date</th>
-    <th>Acquistion Cost</th>
-    <th>Depreciation To Date</th>
-    <th>Net Book Value</th>
-    <th>Make</th>
-    <th>Status</th>
-  </tr>
-${this.getAllRowsData()}
-</table>
-        </body></html>`;
+            </head><body>
+                    <div class="print-table-header">
+                        <div>
+                            <h1>Fixed Assets Report</h1>
+                            <h1>${this.companyData.name}</h1>
+                        </div>
+                        <div>
+                            <p><b>Category:</b> ${this.faCategories.title}</p>
+                            <p><b>Report Period:</b> ${this.depMonth.name} - ${moment().year()}</p>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Asset No</th>
+                            <th>Title</th>
+                            <th>PV Year</th>
+                            <th>PV Depart No</th>
+                            <th>Current Location</th>
+                            <th>Acquisition Date</th>
+                            <th>Acquistion Cost</th>
+                            <th>Depreciation To Date</th>
+                            <th>Net Book Value</th>
+                            <th>Make</th>
+                            <th>Status</th>
+                        </tr>
+                        ${this.getAllRowsData()}
+                    </table>
+                    </body></html>`;
 
         WindowObject.document.writeln(htmlData);
         WindowObject.document.close();
@@ -178,8 +204,8 @@ ${this.getAllRowsData()}
     getFixedAssetReport(): void {
         let params = {
             page: this.pagination.page,
-            categoriesAllIds: this.faCategories,
-            dep_month: this.depMonth,
+            categoriesAllIds: this.faCategories.id,
+            dep_month: this.depMonth.value,
             location: this.location,
             assetNo: this.assetNo,
             status: this.status,

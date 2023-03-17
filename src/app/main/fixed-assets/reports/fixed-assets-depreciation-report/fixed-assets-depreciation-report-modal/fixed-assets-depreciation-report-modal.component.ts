@@ -138,31 +138,23 @@ export class FixedAssetsDepreciationReportModalComponent implements OnInit {
             });
     }
     setCategoryIds(node) {
-        // this.choosenNode = node;
-        // this.categoriesAllIds = [];
-        // this.categoriesAllIds.push(node.id);
-
-        // this.findAllIds(node);
-        // this.selectedCategory = node.title;
-        // console.log('node', this.categoriesAllIds);
         this.choosenNode = node;
         this.categoriesAllIds = [];
-        this.categoriesAllIds.push(node.id);
+        this.categoriesAllIds.push(node);
         this.selectedCategory = node.title;
     }
     proceedDepreciation() {
-        this.fxaAssetsService.fixedAssetsReport({ categoriesAllIds: this.categoriesAllIds[0], dep_month: this.selectedMonth }).subscribe(data => {
-            this.matDialogRef.close({data:data,categoriesAllIds :this.categoriesAllIds[0],dep_month: this.selectedMonth})
+        this.fxaAssetsService.fixedAssetsReport({ categoriesAllIds: this.categoriesAllIds[0].id, dep_month: this.selectedMonth }).subscribe(data => {
+            this.matDialogRef.close({data:data,categoriesAllIds :this.categoriesAllIds[0],dep_month:  this.months.find(item => item.value == +this.selectedMonth)})
         })
-        // this.fxaAssetsService.fixedAssetsReport({ categoriesAllIds: JSON.stringify(this.categoriesAllIds), dep_month: this.selectedMonth }).subscribe(data => {
-        //     this.matDialogRef.close({data:data,categoriesAllIds :JSON.stringify(this.categoriesAllIds),dep_month: this.selectedMonth})
-        // })
     }
+
     resetSelection() {
         this.choosenNode = undefined;
         this.categoriesAllIds = [];
         this.selectedCategory = undefined;
     }
+
     findAllIds(data) {
         data.subCategories.forEach(item => {
             if (item.subCategories && item.subCategories.length > 0) {

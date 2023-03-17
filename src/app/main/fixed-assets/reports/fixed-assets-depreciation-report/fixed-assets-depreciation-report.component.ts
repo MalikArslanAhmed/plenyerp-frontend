@@ -6,7 +6,9 @@ import { FxaAssetsService } from 'app/shared/services/fxa-assets.service';
 import { FxaCategoriesService } from 'app/shared/services/fxa-categories.service';
 import { StatusService } from 'app/shared/services/status.service';
 import { WorkLocationService } from 'app/shared/services/work-location.service';
+import { FixedAssetsLocationSelectModalComponent } from '../fixed-assets-location-select-modal/fixed-assets-location-select-modal.component';
 import { FixedAssetsDepreciationReportModalComponent } from './fixed-assets-depreciation-report-modal/fixed-assets-depreciation-report-modal.component';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-fixed-assets-depreciation-report',
@@ -25,8 +27,11 @@ export class FixedAssetsDepreciaitonReportComponent implements OnInit {
         pages: null
     };
     assetsForm: FormGroup;
-    faCategories: number = null;
-    depMonth: number = null;
+    faCategories: any = {
+        id: -1,
+        name: ""
+    };
+    depMonth: any = null;
     fixedAssetId: any;
     fetching = false
     assetNo = ''
@@ -51,40 +56,42 @@ export class FixedAssetsDepreciaitonReportComponent implements OnInit {
     ngOnInit(): void {
         this.refresh();
     }
+    openFixedAssetLocation(): void {
+        this.dialogRef = this._matDialog.open(FixedAssetsLocationSelectModalComponent, {
+            panelClass: 'contact-form-dialog',
+            data: {}
+        });
+        this.dialogRef.afterClosed().subscribe((response) => {
+            if (!response) {
+                return;
+            }
+            this.workLocationsData.push(response.location)
+            this.location = this.workLocationsData[0].id
+        });
+    }
     refresh(): void {
         this.getCompanyInformation();
         this.getStatus();
-        this.getWorkLocation();
-
         this.assetsForm = this.fb.group({
             fxaCategoryId: [''],
         });
     }
-    getWorkLocation() {
-        this.workLocationService.getAllWorkLocations({ page: -1 }).subscribe(data => {
-            this.workLocationsData = data;
-            console.log('work data data', this.workLocationsData);
-        });
-    }
+
     getStatus() {
         this.fxaCategoryService.getStatus({ page: -1 }).subscribe(data => {
             this.statusData = data.items;
-            console.log('sattus data', this.statusData);
-
         });
     }
     getCompanyInformation() {
         this.companyInformationService.getCompaniesInformationList().subscribe(data => {
             this.companyData = data.items[0];
-            console.log('companyData data', this.companyData);
-
         });
     }
     getDataForPrint() {
         let params = {
             page: this.pagination.page,
-            categoriesAllIds: this.faCategories,
-            dep_month: this.depMonth,
+            categoriesAllIds: this.faCategories.id,
+            dep_month: this.depMonth.value,
             location: this.location,
             assetNo: this.assetNo,
             status: this.status,
@@ -127,11 +134,24 @@ export class FixedAssetsDepreciaitonReportComponent implements OnInit {
             tr:nth-child(even) {
             background-color: #dddddd;
             }
+            .print-table-header{
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            }
             </style>
         
         </head><body>
-        <h1>Fixed Assets Report</h1>
-        <h1>${this.companyData.name}</h1>
+        <div class="print-table-header">
+        <div>
+            <h1>Fixed Assets Depreciation Report</h1>
+            <h1>${this.companyData.name}</h1>
+        </div>
+        <div>
+            <p><b>Category:</b> ${this.faCategories.title}</p>
+            <p><b>Report Period:</b> ${this.depMonth.name} - ${moment().year()}</p>
+        </div>
+    </div>
         <table>
   <tr>
     <th>S.No</th>
@@ -174,8 +194,8 @@ ${this.getAllRowsData()}
     getFixedAssetReport(): void {
         let params = {
             page: this.pagination.page,
-            categoriesAllIds: this.faCategories,
-            dep_month: this.depMonth,
+            categoriesAllIds: this.faCategories.id,
+            dep_month: this.depMonth.value,
             location: this.location,
             assetNo: this.assetNo,
             status: this.status,

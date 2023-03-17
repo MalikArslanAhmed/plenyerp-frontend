@@ -23,11 +23,10 @@
 
     <div class="content">
         <div class="center p-24 pb-56" fusePerfectScrollbar>
-            <div class="content" *ngIf="faCategories > -1">
-
+            <div class="content" *ngIf="faCategories.id > -1">
                 <mat-form-field appearance="outline" fxFlex class="width-200px p-10px mt-13px">
                     <mat-label>Location</mat-label>
-                    <mat-select [(ngModel)]="location">
+                    <mat-select [(ngModel)]="location" (click)="openFixedAssetLocation()" [disabled]="true">
                         <mat-option value="">Choose Location</mat-option>
                         <mat-option [value]="loc.id" *ngFor="let loc of workLocationsData">
                             {{loc.name}}

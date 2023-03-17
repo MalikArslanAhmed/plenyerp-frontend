@@ -14,7 +14,7 @@ const routes: Routes = [
     {path: 'deployments', component: FixedAssetDeploymentComponent, data: {title: 'Fixed Assets '}},
     {path: 'deprecation', component: FixedAssetsDepreciationComponent, data: {title: 'Fixed Assets '}},
     {path: 'report', component: FixedAssetsReportComponent, data: {title: 'Fixed Assets Report'}},
-    {path: 'deprecation-report', component: FixedAssetsDepreciaitonReportComponent, data: {title: 'Fixed Assets Depreciation Report'}},
+    {path: 'depreciation-report', component: FixedAssetsDepreciaitonReportComponent, data: {title: 'Fixed Assets Depreciation Report'}},
     {
         path: 'fixed-assets-categories',
         component: FixedAssetCategoryListComponent,

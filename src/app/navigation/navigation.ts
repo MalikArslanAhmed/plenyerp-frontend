@@ -1146,10 +1146,10 @@ export const navigation: FuseNavigation[] = [
                     },
                     {
                         id: 'deprecation-report',
-                        title: 'Deprecation Report',
+                        title: 'Depreciation Report',
                         roles: [],
                         type: 'item',
-                        url: 'fixed-assets/deprecation-report',
+                        url: 'fixed-assets/depreciation-report',
                         permissions: [PermissionConstant.REPORTS_TREASURY_PV_VIEW_REPORTS]
                     },
                 ]
