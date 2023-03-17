@@ -7,7 +7,7 @@
                 <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">money
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Asset Depreciation
+                    Asset Depreciation Logs
                 </span>
             </div>
         </div>
@@ -40,9 +40,13 @@
                                 <mat-error>Asset Category is required!</mat-error>
                             </mat-form-field>
 
-                            <button [disabled]="fetching" mat-button class="submit-report"
+                            <button [disabled]="fetching" mat-button class="submit-report width-200px p-10px mr-8"
                                 (click)="getFixedAsset()">
                                 Submit
+                                <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
+                            </button>
+                            <button type="button" mat-button class="submit-report width-200px p-10px" (click)="printPage()">
+                                Print
                                 <mat-icon class="material-icons cursor-pointer whiteColor">play_arrow</mat-icon>
                             </button>
                         </mat-grid-list>
@@ -57,7 +61,7 @@
                         <span class="mat-header-cell">Asset Number</span>
                         <span class="mat-header-cell">Title</span>
                         <span class="mat-header-cell">Category</span>
-                        <span class="mat-header-cell">Asset Acquision Cost </span>
+                        <span class="mat-header-cell">Asset Acquisition Cost </span>
                         <span class="mat-header-cell">Total Depreciation </span>
                         <span class="mat-header-cell">Current Book Value</span>
 

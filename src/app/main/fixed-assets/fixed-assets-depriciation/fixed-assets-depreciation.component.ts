@@ -6,6 +6,8 @@ import { FixedAssetReDeploymentComponent } from '../fixed-asset-re-deployment/fi
 import { AssetsDepreciationModalComponent } from './assets-depreciation-modal/assets-depreciation-modal.component';
 import { SelectCategoriesModalComponent } from './select-categories-modal/select-categories-modal.component';
 import { FxaAssetsService } from 'app/shared/services/fxa-assets.service';
+import { CompanyInformationService } from 'app/shared/services/company-information.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-fixed-assets-depriciation',
@@ -28,20 +30,22 @@ export class FixedAssetsDepreciationComponent implements OnInit {
     faCategories: any = [{ id: 0 }];
     fixedAssetId: any;
     fetching = false
-    assetNo = ''
-    location = ''
-    status = ''
+    printData: any = [];
+    companyData: any = {}
+
     constructor(
         private fxaCategoryService: FxaCategoriesService,
         private _matDialog: MatDialog,
         private fb: FormBuilder,
         private fxaAssetsService: FxaAssetsService,
+        private companyInformationService: CompanyInformationService,
 
     ) {
     }
 
     ngOnInit(): void {
         this.refresh();
+        this.getCompanyInformation();
         this.getFixedAsset();
     }
     refresh(): void {
@@ -59,8 +63,6 @@ export class FixedAssetsDepreciationComponent implements OnInit {
             if (!response) {
                 return;
             }
-            console.log('selected cat', response);
-
             this.faCategories = response
             this.assetsForm.patchValue({
                 fxaCategoryId: response[0].id,
@@ -68,7 +70,112 @@ export class FixedAssetsDepreciationComponent implements OnInit {
             });
         });
     }
+    getCompanyInformation() {
+        this.companyInformationService.getCompaniesInformationList().subscribe(data => {
+            this.companyData = data.items[0];
+        });
+    }
+    printPage() {
+        this.getDataForPrint()
+    }
+    getDataForPrint() {
+        let params = {
+            page: this.pagination.page,
+            categoriesAllIds: 0,
+            dep_month: 12,
+            print: true
+        };
 
+        this.fetching = true
+        this.fxaAssetsService.fixedAssetsReport(params).subscribe(
+            data => {
+                this.printData = data.map(item => {
+                    return {
+                        ...item,
+                        acquisitionCost: +item['acquisitionCost'],
+                        beginAccumDepr: +item['beginAccumDepr'],
+                        currYrDepr: +item['currYrDepr'],
+                    }
+                })
+                this.print()
+            }
+        );
+    }
+    print() {
+        const WindowObject = window.open('', 'PrintWindow', 'width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes'
+        );
+        const htmlData = `<html><head>
+             <style>
+                table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+                }
+
+                td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+                }
+
+                tr:nth-child(even) {
+                background-color: #dddddd;
+                }
+                .print-table-header{
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                }
+            </style>
+        
+            </head><body>
+                    <div class="print-table-header">
+                        <div>
+                            <h1>Assets Depreciation Logs</h1>
+                            <h1>${this.companyData.name}</h1>
+                        </div>
+                        <div>
+                            <p><b>Category:</b> All Categories</p>
+                            <p><b>Report Period:</b> December - ${moment().year()}</p>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Asset Number</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Asset Acquisition Cost</th>
+                            <th>Total Depreciation</th>
+                            <th>Current Book Value</th>
+                        </tr>
+                        ${this.getAllRowsData()}
+                    </table>
+                    </body></html>`;
+
+        WindowObject.document.writeln(htmlData);
+        WindowObject.document.close();
+        WindowObject.focus();
+        WindowObject.print()
+        setTimeout(() => {
+            WindowObject.close();
+        }, 0.5);
+    };
+    getAllRowsData() {
+        let rowDataString = ''
+        this.printData.forEach((item, index) => {
+            rowDataString += `<tr>
+            <td>${index + 1}</td>
+            <td>${item.assetNo}</td>
+            <td>${item.title}</td>
+            <td>${item.category}</td>
+            <td>${item.acquisitionCost}</td>
+            <td>${item.beginAccumDepr + item.currYrDepr}</td>
+            <td>${(item.acquisitionCost - (item.beginAccumDepr + item.currYrDepr))}</td>
+            </tr>`
+        });
+        return rowDataString
+    }
     getFixedAsset(): void {
         let params = {
             page: this.pagination.page,
